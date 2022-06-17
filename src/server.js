@@ -9,7 +9,9 @@ class server {
         this.raknet = new RakNetServer(
             new InternetAddress(config.host, config.port, Data.bind_version), Data.magicnumber
         );
+        this.handle()
     }
+
     handle() {
         let interval = setInterval(() => {
             if (this.raknet.isRunning === true) {
