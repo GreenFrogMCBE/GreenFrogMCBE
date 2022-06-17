@@ -1,0 +1,21 @@
+{
+    "name": "bluebird",
+    "description": "A server software for MCBE",
+    "main": "index.js",
+    "scripts": {
+        "start": "node start.js"
+    },
+    "dependencies": {
+        "bbmc-binarystream": "^1.0.0",
+        "bbmc-raknet": "^1.0.2"
+    },
+    "author": "All people from our repo",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andriycraft/KinashServerMCBE"
+    },
+    "keywords": [
+        "mcpe",
+        "mcpe server"
+    ]
+}
