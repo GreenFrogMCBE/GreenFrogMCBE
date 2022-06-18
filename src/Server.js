@@ -14,7 +14,7 @@ function handle() {
 	console.log('handle')
 	setInterval(() => {
 		if (raknet.isRunning) {
-			raknet.message = `${Config.edition};${Config.motd};${Data.protocol};${Data.version};0;${Data.maxplayers};${raknet.serverGUID.toString()};`;
+			raknet.message = `MCPE;${Config.motd};${Data.protocol};${Data.version};0;${Data.maxplayers};${raknet.serverGUID.toString()};`;
 		}
 	});
 	raknet.on('connect', (connection) => {
