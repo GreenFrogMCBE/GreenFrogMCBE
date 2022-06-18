@@ -1,7 +1,6 @@
 {
     "host": "0.0.0.0",
     "port": 19132,
-    "edition": "MCPE",
     "motd": "Powered by KSMCPE",
     "maxplayers": 5
 }
