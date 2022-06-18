@@ -2,7 +2,7 @@
 /** @author andriycraft */
 
 const { RakNetServer, InternetAddress } = require("bbmc-raknet");
-const Data = require('./data')
+const Data = require('./Utils/Data')
 const config = require('../../config.json')
 //const Logger = require('')
 
