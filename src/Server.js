@@ -21,13 +21,23 @@ const raknet = new RakNetServer(new InternetAddress(Config.host, Config.port, Da
 function handle() {
 	Logger.prototype.info('Raknet handler started')
 	setInterval(() => {
-		if (raknet.isRunning) {
-			raknet.message = `MCPE;${Config.motd};${Data.protocol};${Data.version};0;${Data.maxplayers};${raknet.serverGUID.toString()};`;
-		}
-	});
-	raknet.on('connect', (connection) => {
-		console.log('connect')
-	});
+	        raknet.message = `MCPE;${Config.motd};${Data.protocol};${Data.version};0;${Data.maxplayers};${raknet.serverGUID.toString()};`;
+	}, 1)
 }
+
+raknet.socket.on('message', (msg, rinfo) => {
+	if(rinfo.size == 33) {
+		Logger.prototype.info(`Your server got pinged by ${rinfo.address}:${rinfo.port}`)
+		return;
+	}
+	Logger.prototype.info(`Got a packet from ${rinfo.address}:${rinfo.port}, with size ${rinfo.size}, and version ${rinfo.family}`)
+})
+
+raknet.socket.on('open', (msg, rinfo) => {
+	Logger.prototype.info(`Connection opened by someone`)
+})
+raknet.on('packet', (connection) => {
+	console.log('connect')
+});
 
 handle()
