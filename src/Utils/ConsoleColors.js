@@ -1,3 +1,5 @@
+
+
 class ConsoleColors {
     constructor() {
         static black = "\x1b[30m"
