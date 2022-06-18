@@ -3,8 +3,8 @@
 
 const { RakNetServer, InternetAddress } = require("bbmc-raknet");
 const Data = require('./Utils/Data')
-const config = require('../../config.json')
 const Logger = require('./Utils/Logger')
+const config = require('../../config.json')
 
 
 const raknet = new RakNetServer(new InternetAddress(config.host, config.port, Data.bind_version), Data.magicnumber);
