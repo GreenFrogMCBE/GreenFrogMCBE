@@ -4,7 +4,7 @@
 const Color = require('./ConsoleColors')
 
 class Logger {
-   constructor() {}
+   constructor() { }
 
    info (message) {
    	console.log(`${Color.cyan} Info ${Color.white} - ${message}`)
