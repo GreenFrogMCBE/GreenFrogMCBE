@@ -7,3 +7,5 @@ class Data {
     static protocol = 527;
     static version = "1.19.0"
 }
+
+module.exports = Data;
