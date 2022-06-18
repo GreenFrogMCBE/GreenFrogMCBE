@@ -21,7 +21,7 @@ const raknet = new RakNetServer(new InternetAddress(Config.host, Config.port, Da
 function handle() {
 	Logger.prototype.info('Raknet handler started')
 	setInterval(() => {
-	        raknet.message = `MCPE;${Config.motd};${Data.protocol};${Data.version};0;${Data.maxplayers};${raknet.serverGUID.toString()};`;
+	        raknet.message = `MCPE;${Config.motd};${Data.protocol};${Data.version};0;${Config.maxplayers};${raknet.serverGUID.toString()};`;
 	}, 1)
 }
 
