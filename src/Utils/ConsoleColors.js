@@ -1,4 +1,5 @@
-
+/** @author KinashServerMCBE */
+/** @author andriycraft */
 
 class ConsoleColors {
     constructor() {
