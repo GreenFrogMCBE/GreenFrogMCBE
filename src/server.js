@@ -13,7 +13,7 @@ console.log('ha')
 function handle() {
 	console.log('handle')
 	setInterval(() => {
-		if (raknet.isRunning === true) {
+		if (raknet.isRunning) {
 			raknet.message = `MCPE;Motd;${Data.protocol};${Data.version};0;5;${raknet.serverGUID.toString()};`;
 		}
 	});
