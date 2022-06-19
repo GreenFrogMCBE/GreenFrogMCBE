@@ -4,6 +4,7 @@
 const { RakNetServer, InternetAddress } = require("bbmc-raknet");
 const Data = require('./Utils/Data')
 const Logger = require('./Utils/Logger')
+const PacketHandler = require('./Packets/Handler')
 
 Logger.prototype.info('Loading server...')
 Logger.prototype.info('Loading config.json')
@@ -26,11 +27,7 @@ function handle() {
 }
 
 raknet.socket.on('message', (msg, rinfo) => {
-	if(rinfo.size == 33) {
-		Logger.prototype.info(`Your server got pinged by ${rinfo.address}:${rinfo.port}`)
-		return;
-	}
-	Logger.prototype.info(`Got a packet from ${rinfo.address}:${rinfo.port}, with size ${rinfo.size}, and version ${rinfo.family}`)
+	PacketHandler.prototype.handle(raknet, msg, rinfo)
 })
 
 raknet.socket.on('open', (msg, rinfo) => {
