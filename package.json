@@ -1,12 +1,9 @@
 {
-    "name": "ksmsbe"
+    "name": "greenfrogmcbe",
     "description": "A server software for MCBE",
     "main": "index.js",
-    "scripts": {
-        "start": "node start.js"
-    },
+    "author": "andriycraft",
     "dependencies": {
-        "bbmc-binarystream": "^1.0.0",
-        "bbmc-raknet": "^1.0.2"
+        "bedrock-protocol": "1.0.0"
     }
 }
