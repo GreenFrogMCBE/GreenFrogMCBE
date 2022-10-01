@@ -1,3 +1,3 @@
 ## GreenFrogMCBE 
 
-A good Node.JS MCBE server software
+The worst Node.JS MCBE server software
