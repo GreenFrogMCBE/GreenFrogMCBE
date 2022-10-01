@@ -1,0 +1,184 @@
+{
+  "rules": [
+    {
+      "name": "commandblockoutput",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "dodaylightcycle",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "doentitydrops",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "dofiretick",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "domobloot",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "domobspawning",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "dotiledrops",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "doweathercycle",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "drowningdamage",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "falldamage",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "firedamage",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "keepinventory",
+      "editable": true,
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "mobgriefing",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "pvp",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "showcoordinates",
+      "editable": true,
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "naturalregeneration",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "tntexplodes",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "sendcommandfeedback",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "maxcommandchainlength",
+      "editable": true,
+      "type": "int",
+      "value": 65535
+    },
+    {
+      "name": "doinsomnia",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "commandblocksenabled",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "randomtickspeed",
+      "editable": true,
+      "type": "int",
+      "value": 1
+    },
+    {
+      "name": "doimmediaterespawn",
+      "editable": true,
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "showdeathmessages",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "functioncommandlimit",
+      "editable": true,
+      "type": "int",
+      "value": 10000
+    },
+    {
+      "name": "spawnradius",
+      "editable": true,
+      "type": "int",
+      "value": 5
+    },
+    {
+      "name": "showtags",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "freezedamage",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "respawnblocksexplode",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "showbordereffect",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    }
+  ]
+}

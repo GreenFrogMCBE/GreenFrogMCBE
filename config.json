@@ -1,6 +1,8 @@
 {
     "host": "0.0.0.0",
     "port": 19132,
-    "motd": "Powered by KSMCPE",
-    "maxplayers": 5
+    "motd": "GreenFrogMCBE server",
+    "maxplayers": 20,
+    "version": "1.19.30",
+    "offlinemode": true
 }

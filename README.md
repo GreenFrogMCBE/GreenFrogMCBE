@@ -1,3 +1,7 @@
 ## GreenFrogMCBE 
 
-The worst Node.JS MCBE server software
+The worst Node.JS MCBE server software ever made
+
+do not use
+
+it uses some stuff from ac bedrock 
