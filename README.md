@@ -1,5 +1,7 @@
 ## GreenFrogMCBE 
 
+WARNING: It sometimes crashes when player joins
+
 The worst Node.JS MCBE server software ever made
 
 do not use
