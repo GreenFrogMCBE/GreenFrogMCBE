@@ -19,11 +19,18 @@ const get = (packetName) => require(`./pks/${packetName}.json`)
 
 process.env.DEBUG = 'bedrock-protocol'
 
-console.log(`Listening on port /${config.host}:${config.port}`)
+function log(message, type) {
+    if (!type) {
+        type = 'info'
+    }
+    console.log(`${type}: ${message}`)
+}
+
+log(`Listening on port /${config.host}:${config.port}`, 'info')
 
 server.on('connect', client => {
     client.on('join', () => {
-        console.log(`${client.getUserData().displayName} joined`)
+        log(`${client.getUserData().displayName} joined`, 'info')
 
         client.write('resource_packs_info', {
             must_accept: false,
@@ -37,18 +44,17 @@ server.on('connect', client => {
 
     function handlepk(client, packet) {
         try {
-            console.log('%o', packet)
             if (packet.data.name == 'resource_pack_client_response') {
                 switch (packet.data.params.response_status) {
                     case 'none': {
-                        console.log(`${client.username} does not have resource packs installed`)
+                        log(`${client.username} does not have resource packs installed`)
                     }
                     case 'refused': {
-                        console.log(`${client.username} refused resource packs`)
+                        log(`${client.username} refused resource packs`)
                         client.disconnect('Resource packs refused')
                     }
                     case 'have_all_packs': {
-                        console.log(`${client.getUserData().displayName} does have all resource packs installed `)
+                        log(`${client.getUserData().displayName} does have all resource packs installed `)
 
                         client.write('resource_pack_stack', {
                             must_accept: false,
@@ -61,7 +67,7 @@ server.on('connect', client => {
                         break
                     }
                     case 'completed': {
-                        console.log(`${client.getUserData().displayName} completed login process, writing packets`)
+                        log(`${client.getUserData().displayName} completed login process, writing packets`)
                         client.write('network_settings', { compression_threshold: 1 })
 
 
@@ -75,7 +81,7 @@ server.on('connect', client => {
                         client.queue('biome_definition_list', get('biome_definition_list'))
                         client.queue('available_entity_identifiers', get('available_entity_identifiers'))
                         client.queue('creative_content', get('creative_content'))
-                        console.log(`${client.getUserData().displayName} done writing packets`)
+                        log(`${client.getUserData().displayName} done writing packets`)
 
                         client.chat = function (msg) {
                             client.write('text', {
@@ -90,7 +96,7 @@ server.on('connect', client => {
 
 
                         setTimeout(() => {
-                            console.log(`${client.getUserData().displayName} spawned`)
+                            log(`${client.getUserData().displayName} spawned`)
                             client.write('play_status', {
                                 status: 'player_spawn'
                             })
@@ -116,7 +122,7 @@ server.on('connect', client => {
             } else if (packet.data.name === 'text') {
                 try {
                     if (data.params.message.includes("§") || data.params.message.length == 0 || data.params.message > 255) {
-                        console.log(`${client.username} sent a illegal message`)
+                        log(`${client.username} sent a illegal message. (message content was: ${data.params.message.length}`, 'warning')
                         client.disconnect(`Illegal message in chat`)
                         return
                     }
@@ -129,7 +135,7 @@ server.on('connect', client => {
                 }
             } else if (packet.data.name === 'command_request') {
                 let cmd = data.params.command.toLowerCase();
-                console.log(`${client.getUserData().displayName} executed command: ${cmd}`)
+                log(`${client.getUserData().displayName} executed command: ${cmd}`)
                 switch (cmd) {
                     case '/ver':
                     case '/version':
@@ -150,7 +156,7 @@ server.on('connect', client => {
                 }
             }
             else {
-                console.warn('Warning: Unhandled packet ')
+                log('Warning: Unhandled packet ', 'warning')
                 console.log('%o', packet)
             }
         } catch (e) {}
@@ -161,7 +167,7 @@ server.on('connect', client => {
             handlepk(client, packet)
         } catch (e) {
             client.disconnect('Internal server error')
-            console.error(e)
+            log(e, 'error')
         }
     })
 })
