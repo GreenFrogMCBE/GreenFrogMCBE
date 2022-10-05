@@ -103,38 +103,33 @@ server.on('connect', client => {
                         }, 6000)
 
 
-                        try {
-                            for (let i = 0; i < clients.length; i++) {
-                                clients[i].chat(`§e${client.getUserData().displayName} joined the game`)
-                            }
-                        } catch (e) {
-                            // best code ever
-                            // just ignore the error
+                        for (let i = 0; i < clients.length; i++) {
+                            clients[i].chat(`§e${client.getUserData().displayName} joined the game`)
                         }
+
                         break
                     }
                     default: {
                         console.warn('Warning: Unhandled packet data: ' + packet.data.params.response_status)
                     }
                 }
-            } else if (packet.data.name === 'client_to_server_handshake' || packet.data.name === 'client_cache_status') {
+            } else if (packet.data.name === 'client_to_server_handshake' || packet.data.name === 'request_chunk_radius' || packet.data.name === 'set_local_player_as_initialized' || packet.data.name === 'tick_sync' || packet.data.name === 'set_player_game_type' || packet.data.name === 'client_cache_status') {
                 return
             } else if (packet.data.name === 'text') {
-                try {
-                    if (data.params.message.includes("§") || data.params.message.length == 0 || data.params.message > 255) {
-                        log(`${client.username} sent a illegal message. (message content was: ${data.params.message.length}`, 'warning')
-                        client.disconnect(`Illegal message in chat`)
-                        return
-                    }
-                    for (let i = 0; i < clients.length; i++) {
-                        clients[i].chat(`<${client.getUserData().displayName}> ${data.params.message}`)
-                    }
-                } catch (e) {
-                    // best code ever
-                    // just ignore the error
+                let msg = packet.data.params.message;
+                let fullmsg = `<${client.getUserData().displayName}> ${msg}`;
+                log(`(chat message) ` + fullmsg)
+                if (msg.includes("§") || msg.length == 0 || msg > 255) {
+                    log(`${client.getUserData().displayName} sent a illegal message. (message content was: ${msg.length}`, 'warning')
+                    client.disconnect(`Illegal message in chat`)
+                    return
+                }
+                client.chat(`${fullmsg}`)
+                for (let i = 0; i < clients.length; i++) {
+                    if (clients[i] == !client) { clients[i].chat(`${fullmsg}`) }
                 }
             } else if (packet.data.name === 'command_request') {
-                let cmd = data.params.command.toLowerCase();
+                let cmd = packet.data.params.command.toLowerCase();
                 log(`${client.getUserData().displayName} executed command: ${cmd}`)
                 switch (cmd) {
                     case '/ver':
@@ -156,18 +151,20 @@ server.on('connect', client => {
                 }
             }
             else {
-                log('Warning: Unhandled packet ', 'warning')
+                log('Unhandled packet ', 'warning')
                 console.log('%o', packet)
             }
-        } catch (e) {}
+        } catch (e) {
+            log(`Exception in task 'Chat handling': ${e}`, 'error')
+        }
     }
-    
+
     client.on('packet', (packet) => {
         try {
             handlepk(client, packet)
         } catch (e) {
             client.disconnect('Internal server error')
-            log(e, 'error')
+            log(`Exception in task 'Packet handling': ${e}`, 'error')
         }
     })
 })
