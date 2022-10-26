@@ -9,7 +9,7 @@ const server = bedrock.createServer({
     maxPlayers: config.maxplayers,
     motd: {
         motd: config.motd,
-        levelName: 'greenfrogmcbe'
+        levelName: 'GreenFrogMCBE'
     }
 })
 
