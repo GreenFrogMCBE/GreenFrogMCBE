@@ -13,6 +13,7 @@ try {
     const config = require('../config.json')
 } catch (e) {
     log(`Failed to load config`, 'error')
+    process.exit(1)
 }
 
 const config = require('../config.json')
