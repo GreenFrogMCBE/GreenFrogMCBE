@@ -15,9 +15,7 @@ const server = bedrock.createServer({
 
 let clients = []
 
-const get = (packetName) => require(`./pks/${packetName}.json`)
-
-process.env.DEBUG = 'bedrock-protocol'
+const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
 function log(message, type) {
     if (!type) {
@@ -30,7 +28,7 @@ log(`Listening on port /${config.host}:${config.port}`, 'info')
 
 server.on('connect', client => {
     client.on('join', () => {
-        log(`${client.getUserData().displayName} joined`, 'info')
+        log(`Player ${client.getUserData().displayName} joined`, 'info')
 
         client.write('resource_packs_info', {
             must_accept: false,
