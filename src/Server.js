@@ -1,4 +1,20 @@
+function log(message, type) {
+    if (!type) {
+        type = 'info'
+    }
+    console.log(`${type}: ${message}`)
+}
+
 const bedrock = require('bedrock-protocol')
+
+log('Loading server')
+
+try {
+    const config = require('../config.json')
+} catch (e) {
+    log(`Failed to load config`, 'error')
+}
+
 const config = require('../config.json')
 const server = bedrock.createServer({
     host: config.host,
@@ -13,16 +29,10 @@ const server = bedrock.createServer({
     }
 })
 
+
 let clients = []
 
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
-
-function log(message, type) {
-    if (!type) {
-        type = 'info'
-    }
-    console.log(`${type}: ${message}`)
-}
 
 log(`Listening on port /${config.host}:${config.port}`, 'info')
 
