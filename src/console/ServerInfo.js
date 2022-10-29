@@ -13,7 +13,7 @@ class ServerInfo {
     }
 
     getConfig () {
-        return this.players;
+        return this.config;
     }
 
 }
