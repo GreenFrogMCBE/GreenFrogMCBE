@@ -1,7 +1,7 @@
 const bedrock = require('bedrock-protocol')
 const Logger = require('../src/console/Logger')
 const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
-const ServerInfo = require('../src/console/ServerInfo')
+const ServerInfo = require('../src/api/ServerInfo')
 
 Logger.prototype.log('Loading server')
 
@@ -196,3 +196,4 @@ server.on('connect', client => {
         }
     })
 })
+

@@ -2,7 +2,6 @@ class ServerInfo {
     constructor() {
         this.players = []
         this.config = require("../../config.json")
-        // this class file will be used soon
     }
 
     setPlayers (players) {
@@ -14,6 +13,7 @@ class ServerInfo {
     }
 
     getConfig () {
+        // This function will be used soon.
         return this.config;
     }
 
