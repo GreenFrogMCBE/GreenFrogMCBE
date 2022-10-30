@@ -1,6 +1,6 @@
 const rl = require('readline')
 const Logger = require('./Logger')
-const ServerInfo = require('./ServerInfo');
+const ServerInfo = require('../api/ServerInfo');
 
 class ConsoleCommandSender {
     constructor() { }
