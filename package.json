@@ -4,6 +4,6 @@
     "main": "index.js",
     "author": "andriycraft",
     "dependencies": {
-        "bedrock-protocol": "3.20"
+        "bedrock-protocol": "3.21.0"
     }
 }
