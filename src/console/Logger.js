@@ -1,13 +1,10 @@
 class Logger {
-    constructor() {}
+    constructor() { }
 
-    log(message, type) {
-        if (!type) {
-            type = 'info'
-        }
+    log(message, type = 'info') {
         console.log(`${type}: ${message}`)
     }
-    
+
 }
 
 module.exports = Logger;
