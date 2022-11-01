@@ -154,7 +154,7 @@ server.on('connect', client => {
             }
         } else if (packet.data.name === 'command_request') {
             let cmd = packet.data.params.command.toLowerCase();
-            Logger.prototype.log(`${client.getUserData().displayName} executed command: ${cmd}`)
+            Logger.prototype.log(`${client.getUserData().displayName} executed a server command: ${cmd}`)
             switch (cmd) {
                 case '/ver':
                 case '/version':
@@ -173,10 +173,7 @@ server.on('connect', client => {
                     client.chat(`§cUnknown command. Type /commands for a list of command`)
                     break
             }
-        } else if (packet.data.name === 'disconnect') {
-            Logger.prototype.log(`Player ${client.username} disconnected`, 'info')
-        }
-        else {
+        } else {
             Logger.prototype.log('Unhandled packet', 'warning')
             console.log('%o', packet)
         }
@@ -187,7 +184,7 @@ server.on('connect', client => {
             handlepk(client, packet)
         } catch (e) {
             client.disconnect(config.internal_server_error)
-            Logger.prototype.log(`Exception in task 'Packet handling': ${e}`, 'error')
+            Logger.prototype.log(`Exception while trying to handle packet from ${client.username}: ${e}`, 'error')
         }
     })
 })
