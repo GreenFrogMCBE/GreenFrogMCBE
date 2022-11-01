@@ -109,7 +109,9 @@ class ConsoleCommandSender {
                     for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
                         ServerInfo.prototype.getPlayers()[i].disconnect(require('../../lang.json').kick__servershutdown)
                     }
-                    process.exit(0)
+                    setTimeout(() => {
+                        process.exit(0)
+                    }, 1000) // give some time for the server to disconnect clients
                 case 'kick':
                     Logger.prototype.log('Usage: /kick [player] [reason]', 'info')
                     break;
