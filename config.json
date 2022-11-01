@@ -7,7 +7,7 @@
     "offlinemode": true,
     "blockinvalidmessages": true,
     "invalid_chat_message_kick": "§cInvalid message in chat",
-    "resource_packs_refushed": "§cYou must accept resource packs to join this server",
+    "resource_packs_refused": "§cYou must accept resource packs to join this server",
     "invalid_username_kick": "§cInvalid username",
     "internal_server_error": "§cInternal server error"
 }

@@ -60,8 +60,8 @@ server.on('connect', client => {
                     Logger.prototype.log(`${client.username} does not have resource packs installed`)
                 }
                 case 'refused': {
-                    Logger.prototype.log(`${client.username} refushed resource packs`)
-                    client.disconnect(config.resource_packs_refushed)
+                    Logger.prototype.log(`${client.username} refused resource packs`)
+                    client.disconnect(config.resource_packs_refused)
                 }
                 case 'have_all_packs': {
                     Logger.prototype.log(`${client.getUserData().displayName} does have all resource packs installed `)
