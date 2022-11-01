@@ -1,0 +1,10 @@
+{
+    "kick__invalid_chat_message": "§cInvalid message in chat",
+    "kick__resource_packs_refused": "§cYou must accept resource packs to join this server",
+    "kick__username_is_too_short": "§cInvalid username: Your username is too long",
+    "kick__username_is_too_long": "§cInvalid username: Your username is too short",
+    "kick__internal_server_error": "§cInternal server error",
+    "kick__servershutdown": "§cServer shutdown",
+    "chat__chatformat": "§7<%username%> %message%",
+    "chat__saycommand_format": "[Server] %message%"
+}

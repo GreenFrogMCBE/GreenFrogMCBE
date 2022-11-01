@@ -3,7 +3,7 @@ const Logger = require('./Logger')
 const ServerInfo = require('../api/ServerInfo');
 
 class ConsoleCommandSender {
-    constructor() { }
+    constructor() {}
 
     start() {
 
@@ -16,6 +16,60 @@ class ConsoleCommandSender {
         r.prompt(true)
 
         r.on('line', (data) => {
+            if (data.startsWith('time ')) {
+                const time = parseInt(data.split(" ")[1])
+                if (time === NaN) {
+                    Logger.prototype.log('Invalid time')
+                    return
+                }
+
+                if (ServerInfo.prototype.getPlayers() === undefined) {
+                    Logger.prototype.log(`There are no players online`)
+                    return
+                }
+
+                for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
+                    let client = ServerInfo.prototype.getPlayers()[i]
+                    client.write('set_time', { time: time })
+                }
+
+                Logger.prototype.log(`Time set to day`)
+                return
+            }
+
+            if (data.startsWith('say ')) {
+
+                const msg = data.split(" ")[1]
+                if (msg.length < 1) {
+                    Logger.prototype.log('Your message is empty')
+                    return
+                }
+
+                if (ServerInfo.prototype.getPlayers() === undefined) {
+                    Logger.prototype.log(`There are no players online`)
+                    return
+                }
+
+                let msg1 = require('../../lang.json').chat__saycommand_format.replace(`%message%`, msg)
+
+                for (let i = 1; i < ServerInfo.prototype.getPlayers().length; i++) {
+                    let client = ServerInfo.prototype.getPlayers()[i]
+                   
+                    client.write('text', {
+                        type: 'announcement',
+                        needs_translation: false,
+                        source_name: '',
+                        message: msg1,
+                        xuid: '',
+                        platform_chat_id: ''
+                    })
+
+                }
+
+                Logger.prototype.log(msg1)
+                return
+            }
+
             if (data.startsWith('kick ')) {
                 const player = data.split(" ")[1]
                 let reason = ""
@@ -26,9 +80,14 @@ class ConsoleCommandSender {
                         reason = reason + " " + data.split(" ")[i]
                     }
                 }
+
                 if (!reason) {
-                    Logger.prototype.log('Setting reason to "No reason"', 'debug')
                     reason = "No reason"
+                }
+
+                if (ServerInfo.prototype.getPlayers() === undefined) {
+                    Logger.prototype.log(`There are no players online`)
+                    return
                 }
 
                 for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
@@ -47,6 +106,9 @@ class ConsoleCommandSender {
                 case 'shutdown':
                 case 'stop':
                     Logger.prototype.log('Stopping server...', 'info')
+                    for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
+                        ServerInfo.prototype.getPlayers()[i].disconnect(require('../../lang.json').kick__servershutdown)
+                    }
                     process.exit(0)
                 case 'kick':
                     Logger.prototype.log('Usage: /kick [player] [reason]', 'info')
@@ -54,6 +116,9 @@ class ConsoleCommandSender {
                 case 'ver':
                 case 'version':
                     Logger.prototype.log('This server uses GreenFrogMCBE', 'info')
+                    break;
+                case 'time':
+                    Logger.prototype.log('Usage: /time [time]', 'info')
                     break;
                 case '?':
                 case 'help':
@@ -65,6 +130,7 @@ class ConsoleCommandSender {
                     Logger.prototype.log('/? - Same as /help')
                     Logger.prototype.log('/version - Shows server version');
                     Logger.prototype.log('/ver - Shows server version');
+                    Logger.prototype.log('/time - Set time for all players');
                     break;
                 default:
                     Logger.prototype.log('Unknown command. Type "help" for help')

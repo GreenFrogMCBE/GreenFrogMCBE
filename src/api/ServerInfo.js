@@ -2,6 +2,7 @@ class ServerInfo {
     constructor() {
         this.players = []
         this.config = require("../../config.json")
+        this.lang = require("../../lang.json")
     }
 
     setPlayers (players) {
@@ -13,10 +14,12 @@ class ServerInfo {
     }
 
     getConfig () {
-        // This function will be used soon.
         return this.config;
     }
 
+    getLang () {
+        return this.lang;
+    }
 }
 
 module.exports = ServerInfo;

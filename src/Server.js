@@ -1,44 +1,47 @@
-const bedrock = require('bedrock-protocol')
+const Bedrock = require('bedrock-protocol')
 const Logger = require('../src/console/Logger')
 const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
 const ServerInfo = require('../src/api/ServerInfo')
+const ValidateConfig = require('../src/server/ValidateConfig')
+let clients = []
 
 Logger.prototype.log('Loading server')
 
-try {
-    const config = require('../config.json')
-} catch (e) {
-    Logger.prototype.log(`Failed to load config`, 'error')
-    process.exit(-1)
-}
+ValidateConfig.prototype.ValidateConfig()
+ValidateConfig.prototype.ValidateLangFile()
 
 const config = require('../config.json')
-const server = bedrock.createServer({
-    host: config.host,
-    port: config.port,
-    version: config.version,
-    conLog: true,
-    offline: config.offlinemode,
-    maxPlayers: config.maxplayers,
-    motd: {
-        motd: config.motd,
-        levelName: 'GreenFrogMCBE'
-    }
-})
+const lang = require('../lang.json')
 
-
-let clients = []
 
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
-Logger.prototype.log(`Listening on port /${config.host}:${config.port}`, 'info')
-Logger.prototype.log(`Console command handler started`, 'info')
-ConsoleCommandSender.prototype.start()
+let server
+try {
+    server = Bedrock.createServer({
+        host: config.host,
+        port: config.port,
+        version: config.version,
+        conLog: true,
+        offline: config.offlinemode,
+        maxPlayers: config.maxplayers,
+        motd: {
+            motd: config.motd,
+            levelName: 'GreenFrogMCBE'
+        }
+    })
+    Logger.prototype.log(`Listening on port /${config.host}:${config.port}`)
+} catch (e) {
+    Logger.prototype.log(`Failed to to listen /${config.host}:${config.port} | Error: ${e}`, 'error')
+    process.exit(-1)
+}
 
+Logger.prototype.log(`Console command handler started`)
+ConsoleCommandSender.prototype.start()
 
 server.on('connect', client => {
     client.on('join', () => {
-        Logger.prototype.log(`Player ${client.getUserData().displayName} connected`, 'info')
+        Logger.prototype.log(`Player ${client.getUserData().displayName} connected`)
 
         client.write('resource_packs_info', {
             must_accept: false,
@@ -59,7 +62,7 @@ server.on('connect', client => {
                 }
                 case 'refused': {
                     Logger.prototype.log(`${client.username} refused resource packs`)
-                    client.disconnect(config.resource_packs_refused)
+                    client.disconnect(lang.kick__resource_packs_refused)
                 }
                 case 'have_all_packs': {
                     Logger.prototype.log(`${client.getUserData().displayName} does have all resource packs installed`)
@@ -76,28 +79,27 @@ server.on('connect', client => {
                 }
                 case 'completed': {
                     if (client.getUserData().displayName.length < 3) {
-                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because of invalid name`, `warning`)
-                        client.disconnect(config.invalid_username_kick)
+                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because his username is too short`, `warning`)
+                        client.disconnect(config.kick__username_is_too_short)
                         return
                     }
 
                     if (client.getUserData().displayName.length > 12) {
                         if (!config.offlinemode) return
-                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because of invalid name`, `warning`)
-                        client.disconnect(config.invalid_username_kick)
+                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because his username is too long`, `warning`)
+                        client.disconnect(lang.kick__username_is_too_long)
                         return
                     }
 
                     if (client.getUserData().displayName.length > 16) {
                         if (config.offlinemode) return
-                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because of invalid name`, `warning`)
-                        client.disconnect(config.invalid_username_kick)
+                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because his username is too long`, `warning`)
+                        client.disconnect(lang.kick__username_is_too_long)
                         return
                     }
 
                     Logger.prototype.log(`Player ${client.getUserData().displayName} completed login process`)
                     client.write('network_settings', { compression_threshold: 1 })
-
 
                     client.queue('player_list', get('player_list'))
                     client.queue('start_game', get('start_game'))
@@ -122,9 +124,11 @@ server.on('connect', client => {
 
 
                     Logger.prototype.log(`Player ${client.getUserData().displayName} spawned`)
-                    client.write('play_status', {
-                        status: 'player_spawn'
-                    })
+                    setTimeout(() => {
+                        client.write('play_status', {
+                            status: 'player_spawn'
+                        })
+                    }, 2000)
 
 
                     for (let i = 0; i < clients.length; i++) {
@@ -141,11 +145,11 @@ server.on('connect', client => {
             return
         } else if (packet.data.name === 'text') {
             let msg = packet.data.params.message;
-            let fullmsg = `<${client.getUserData().displayName}> ${msg}`;
+            let fullmsg = lang.chat__chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
             Logger.prototype.log(`(chat message) ` + fullmsg)
             if (msg.includes("§") || msg.length == 0 || msg > 255 && config.blockinvalidmessages) {
                 Logger.prototype.log(`${client.getUserData().displayName} sent a illegal message. (Message content was: ${msg.length}`, 'warning')
-                client.disconnect(config.invalid_chat_message_kick)
+                client.disconnect(lang.kick__invalid_chat_message)
                 return
             }
             client.chat(`${fullmsg}`)
@@ -183,7 +187,7 @@ server.on('connect', client => {
         try {
             handlepk(client, packet)
         } catch (e) {
-            client.disconnect(config.internal_server_error)
+            client.disconnect(config.kick__internal_server_error)
             Logger.prototype.log(`Exception while trying to handle packet from ${client.username}: ${e}`, 'error')
         }
     })
