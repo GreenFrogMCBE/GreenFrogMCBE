@@ -9,7 +9,7 @@ try {
     const config = require('../config.json')
 } catch (e) {
     Logger.prototype.log(`Failed to load config`, 'error')
-    process.exit(1)
+    process.exit(-1)
 }
 
 const config = require('../config.json')
@@ -20,7 +20,6 @@ const server = bedrock.createServer({
     conLog: true,
     offline: config.offlinemode,
     maxPlayers: config.maxplayers,
-    encryption: false, // only for now, bedrock-protocol needs to be fixed
     motd: {
         motd: config.motd,
         levelName: 'GreenFrogMCBE'
@@ -30,17 +29,16 @@ const server = bedrock.createServer({
 
 let clients = []
 
-
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
-
 Logger.prototype.log(`Listening on port /${config.host}:${config.port}`, 'info')
+Logger.prototype.log(`Console command handler started`, 'info')
 ConsoleCommandSender.prototype.start()
 
 
 server.on('connect', client => {
     client.on('join', () => {
-        Logger.prototype.log(`Player ${client.getUserData().displayName} joined`, 'info')
+        Logger.prototype.log(`Player ${client.getUserData().displayName} connected`, 'info')
 
         client.write('resource_packs_info', {
             must_accept: false,
@@ -64,7 +62,7 @@ server.on('connect', client => {
                     client.disconnect(config.resource_packs_refused)
                 }
                 case 'have_all_packs': {
-                    Logger.prototype.log(`${client.getUserData().displayName} does have all resource packs installed `)
+                    Logger.prototype.log(`${client.getUserData().displayName} does have all resource packs installed`)
 
                     client.write('resource_pack_stack', {
                         must_accept: false,
@@ -77,26 +75,27 @@ server.on('connect', client => {
                     break
                 }
                 case 'completed': {
-                    Logger.prototype.log(`Kicked ${client.getUserData().displayName} because he has invalid name`, `warning`)
-
                     if (client.getUserData().displayName.length < 3) {
+                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because of invalid name`, `warning`)
                         client.disconnect(config.invalid_username_kick)
                         return
                     }
 
                     if (client.getUserData().displayName.length > 12) {
                         if (!config.offlinemode) return
+                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because of invalid name`, `warning`)
                         client.disconnect(config.invalid_username_kick)
                         return
                     }
 
                     if (client.getUserData().displayName.length > 16) {
                         if (config.offlinemode) return
+                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because of invalid name`, `warning`)
                         client.disconnect(config.invalid_username_kick)
                         return
                     }
 
-                    Logger.prototype.log(`${client.getUserData().displayName} completed login process, writing packets`)
+                    Logger.prototype.log(`Player ${client.getUserData().displayName} completed login process`)
                     client.write('network_settings', { compression_threshold: 1 })
 
 
@@ -104,8 +103,6 @@ server.on('connect', client => {
                     client.queue('start_game', get('start_game'))
                     client.queue('item_component', { entries: [] })
                     client.queue('set_spawn_position', get('set_spawn_position'))
-                    client.queue('set_time', { time: 0 })
-                    client.queue('set_difficulty', { difficulty: 0 })
                     client.queue('set_commands_enabled', { enabled: true })
                     client.queue('biome_definition_list', get('biome_definition_list'))
                     client.queue('available_entity_identifiers', get('available_entity_identifiers'))
@@ -124,12 +121,10 @@ server.on('connect', client => {
                     }
 
 
-                    setTimeout(() => {
-                        Logger.prototype.log(`${client.getUserData().displayName} spawned`)
-                        client.write('play_status', {
-                            status: 'player_spawn'
-                        })
-                    }, 6000)
+                    Logger.prototype.log(`Player ${client.getUserData().displayName} spawned`)
+                    client.write('play_status', {
+                        status: 'player_spawn'
+                    })
 
 
                     for (let i = 0; i < clients.length; i++) {
@@ -149,7 +144,7 @@ server.on('connect', client => {
             let fullmsg = `<${client.getUserData().displayName}> ${msg}`;
             Logger.prototype.log(`(chat message) ` + fullmsg)
             if (msg.includes("§") || msg.length == 0 || msg > 255 && config.blockinvalidmessages) {
-                Logger.prototype.log(`${client.getUserData().displayName} sent a illegal message. (message content was: ${msg.length}`, 'warning')
+                Logger.prototype.log(`${client.getUserData().displayName} sent a illegal message. (Message content was: ${msg.length}`, 'warning')
                 client.disconnect(config.invalid_chat_message_kick)
                 return
             }
