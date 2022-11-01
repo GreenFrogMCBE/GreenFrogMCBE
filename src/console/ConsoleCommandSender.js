@@ -37,7 +37,7 @@ class ConsoleCommandSender {
                 return
             }
 
-            if (data.startsWith('say ')) {
+            /* if (data.startsWith('say ')) {
 
                 const msg = data.split(" ")[1]
                 if (msg.length < 1) {
@@ -68,7 +68,7 @@ class ConsoleCommandSender {
 
                 Logger.prototype.log(msg1)
                 return
-            }
+            } */
 
             if (data.startsWith('kick ')) {
                 const player = data.split(" ")[1]
