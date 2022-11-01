@@ -101,14 +101,16 @@ server.on('connect', client => {
                     Logger.prototype.log(`Player ${client.getUserData().displayName} completed login process`)
                     client.write('network_settings', { compression_threshold: 1 })
 
-                    client.queue('player_list', get('player_list'))
-                    client.queue('start_game', get('start_game'))
-                    client.queue('item_component', { entries: [] })
-                    client.queue('set_spawn_position', get('set_spawn_position'))
-                    client.queue('set_commands_enabled', { enabled: true })
-                    client.queue('biome_definition_list', get('biome_definition_list'))
-                    client.queue('available_entity_identifiers', get('available_entity_identifiers'))
-                    client.queue('creative_content', get('creative_content'))
+
+                    client.write('player_list', get('player_list'))
+                    client.write('start_game', get('start_game'))
+                    client.write('set_spawn_position', get('set_spawn_position'))
+                    client.write('set_commands_enabled', { enabled: true })
+                    client.write('biome_definition_list', get('biome_definition_list'))
+                    client.write('available_entity_identifiers', get('available_entity_identifiers'))
+                    client.write('creative_content', get('creative_content'))
+
+
                     Logger.prototype.log(`${client.getUserData().displayName} done writing packets`)
 
                     client.chat = function (msg) {
