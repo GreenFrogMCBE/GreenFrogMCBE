@@ -6,5 +6,7 @@
     "kick__internal_server_error": "§cInternal server error",
     "kick__servershutdown": "§cServer shutdown",
     "chat__chatformat": "<%username%> %message%",
-    "chat__saycommand_format": "[Server] %message%"
+    "chat__saycommand_format": "[Server] %message%",
+    "no_player_online": "There are no players playing right now!",
+    "unknown_command": "Unknown command was provided please use '/help'."
 }
