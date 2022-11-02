@@ -1,6 +1,7 @@
 const rl = require('readline')
 const Logger = require('./Logger')
 const ServerInfo = require('../api/ServerInfo');
+const lang = require('../../lang.json')
 
 class ConsoleCommandSender {
     constructor() {}
@@ -50,7 +51,7 @@ class ConsoleCommandSender {
                     return
                 }
 
-                let msg1 = require('../../lang.json').chat__saycommand_format.replace(`%message%`, msg)
+                let msg1 = lang.chat__saycommand_format.replace(`%message%`, msg)
 
                 for (let i = 1; i < ServerInfo.prototype.getPlayers().length; i++) {
                     let client = ServerInfo.prototype.getPlayers()[i]
@@ -86,7 +87,7 @@ class ConsoleCommandSender {
                 }
 
                 if (ServerInfo.prototype.getPlayers() === undefined) {
-                    Logger.prototype.log(`There are no players online`)
+                    Logger.prototype.log(lang.no_player_online)
                     return
                 }
 
@@ -107,7 +108,7 @@ class ConsoleCommandSender {
                 case 'stop':
                     Logger.prototype.log('Stopping server...', 'info')
                     for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
-                        ServerInfo.prototype.getPlayers()[i].disconnect(require('../../lang.json').kick__servershutdown)
+                        ServerInfo.prototype.getPlayers()[i].disconnect(lang.kick__servershutdown)
                     }
                     setTimeout(() => {
                         process.exit(0)
@@ -135,7 +136,7 @@ class ConsoleCommandSender {
                     Logger.prototype.log('/time - Set time for all players');
                     break;
                 default:
-                    Logger.prototype.log('Unknown command. Type "help" for help')
+                    Logger.prototype.log(lang.unknown_command)
                     break
             }
             r.prompt(true)
