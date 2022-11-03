@@ -8,5 +8,5 @@
     "chat__chatformat": "<%username%> %message%",
     "chat__saycommand_format": "[Server] %message%",
     "no_player_online": "There are no players playing right now!",
-    "unknown_command": "Unknown command was provided please use '/help'."
+    "unknown_command": "Unknown command. Type \"help\" for help"
 }
