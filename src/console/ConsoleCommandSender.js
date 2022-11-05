@@ -125,8 +125,8 @@ class ConsoleCommandSender {
                     Logger.prototype.log(`${lang.command_usage_time}`, 'info')
                     break;
                 case '?':
-                case `${lanf.command_help}`:
-                    Logger.prototype.log('Command list:');
+                case `${lang.command_help}`:
+                    Logger.prototype.log(lang.commandlist);
                     Logger.prototype.log(`${lang.kick_help}`);
                     Logger.prototype.log(`${lang.shutdown_help}`);
                     Logger.prototype.log(`${lang.stop_help}`);
