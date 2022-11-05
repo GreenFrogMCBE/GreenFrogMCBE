@@ -7,20 +7,17 @@
     "kick__servershutdown": "§cServerio perkrovimas!",
     "chat__chatformat": "<%username%> %message%",
     "chat__saycommand_format": "[Server] %message%",
-    "no_player_online": "Šitu laiku nėra jokių žaidėjų",
+    "no_players_online": "Šitu laiku nėra jokių žaidėjų",
     "unknown_command": "NeŽinoma komandą.Rašikite \"help\" jeigu reikia pagalbos",
     "listening_on": "Klausyma porto",
     "listening_failed": "Nepavyko klausytis",
     "cchs": "Pradėtas konsolės komandų tvarkytuvas",
-
-
     "stopping_server": "Išjungiamas serveris!",
     "invalid_time": "§cNetinkama laikas!",
     "time_set_day": "Laikas nustatytas į dieną!",
     "empty_message": "Jūsu Žinutė yra tusčia!",
     "no_reason": "jokios priežasties",
     "command_list": "Visos komandos",
-
     "kick_help": "/išmesti [žaidėjas] [priežastis] - išmesti žaidėja",
     "shutdown_help": "/išjungti - Išjungia serverį",
     "stop_help": "/baigti - Išjungia serverį",
@@ -29,8 +26,6 @@
     "ver_help": "Parodo serverio versija",
     "version_help": "Parodo serverio versija",
     "time_help": "Nustatykite laiką visiems žaidėjams",
-
-
     "command_time": "laikas",
     "command_say": "pasakyti",
     "command_kick": "išmesti",
@@ -39,8 +34,6 @@
     "command_ver": "ver",
     "command_version": "versija",
     "command_help": "pagalba",
-
-
     "command_usage_kick": "Naudojimas: / kick [žaidėjas] [priežastis]",
     "command_usage_ver": "Šis serveris naudoja GreenFrogMCBE",
     "command_usage_time": "Naudojimas: /laikas [laikas]"
