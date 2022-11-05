@@ -39,5 +39,6 @@
     "command_usage_time": "Usage: time [time]",
     "kicked_prefix": "You were kicked for: ",
     "commandlist": "Command list: ",
-    "kicked_consolemsg": "Kicked %player% for: %reason%"
+    "kicked_consolemsg": "Kicked %player% for: %reason%",
+    "loadingserver": "Loading server"
 }
