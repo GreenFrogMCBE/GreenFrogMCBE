@@ -107,7 +107,7 @@ class ConsoleCommandSender {
                     break
                 case `${lang.command_shutdown}`:
                 case `${land.command_stop}`:
-                    Logger.prototype.log(`${lang.stopping_server}...`, 'info')
+                    Logger.prototype.log(`${lang.stopping_server}`, 'info')
                     for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
                         ServerInfo.prototype.getPlayers()[i].disconnect(lang.kick__servershutdown)
                     }
