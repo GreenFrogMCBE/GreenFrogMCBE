@@ -11,7 +11,7 @@ ValidateConfig.prototype.ValidateConfig()
 ValidateConfig.prototype.ValidateLangFile()
 
 const config = require('../config.json')
-const lang = require(`./Lang/${config.lang}.json`)
+const lang = require(`./lang/${config.lang}.json`)
 
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
