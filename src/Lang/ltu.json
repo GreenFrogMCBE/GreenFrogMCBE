@@ -36,5 +36,6 @@
     "command_help": "pagalba",
     "command_usage_kick": "Naudojimas: /kick [žaidėjas] [priežastis]",
     "command_usage_ver": "Šis serveris naudoja GreenFrogMCBE",
-    "command_usage_time": "Naudojimas: /laikas [laikas]"
+    "command_usage_time": "Naudojimas: /laikas [laikas]",
+    "kicked_prefix": "You were kicked for: "
 }
