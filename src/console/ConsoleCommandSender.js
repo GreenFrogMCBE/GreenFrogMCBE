@@ -103,10 +103,10 @@ class ConsoleCommandSender {
                 return
             }
             switch (data.toLowerCase()) {
-                case ``:
+                case '':
                     break
                 case `${lang.command_shutdown}`:
-                case `${land.command_stop}`:
+                case `${lang.command_stop}`:
                     Logger.prototype.log(`${lang.stopping_server}`, 'info')
                     for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
                         ServerInfo.prototype.getPlayers()[i].disconnect(lang.kick__servershutdown)
@@ -114,18 +114,18 @@ class ConsoleCommandSender {
                     setTimeout(() => {
                         process.exit(0)
                     }, 1000) // give some time for the server to disconnect clients
-                case `${lang.command_kick}`:
-                    Logger.prototype.log(`${lang.command_usage_kick}`, 'info')
+                case lang.command_kick:
+                    Logger.prototype.log(lang.command_usage_kick, 'info')
                     break;
-                case `${lang.command_ver}`:
-                    case `${lang.command_version}`:
-                    Logger.prototype.log(`${lang.command_usage_ver}`, 'info')
+                case lang.command_ver:
+                case lang.command_version:
+                    Logger.prototype.log(lang.command_usage_ver, 'info')
                     break;
-                case `${lang.command_time}`:
-                    Logger.prototype.log(`${lang.command_usage_time}`, 'info')
+                case lang.command_time:
+                    Logger.prototype.log(lang.command_usage_time, 'info')
                     break;
                 case '?':
-                case `${lang.command_help}`:
+                case lang.command_help:
                     Logger.prototype.log(lang.commandlist);
                     Logger.prototype.log(lang.kick_help);
                     Logger.prototype.log(lang.shutdown_help);
