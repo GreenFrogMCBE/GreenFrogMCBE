@@ -127,14 +127,14 @@ class ConsoleCommandSender {
                 case '?':
                 case `${lang.command_help}`:
                     Logger.prototype.log(lang.commandlist);
-                    Logger.prototype.log(`${lang.kick_help}`);
-                    Logger.prototype.log(`${lang.shutdown_help}`);
-                    Logger.prototype.log(`${lang.stop_help}`);
-                    Logger.prototype.log(`${lang.help_help}`);
-                    Logger.prototype.log(`${lang.qm_help}`)
-                    Logger.prototype.log(`${lang.version_help}`);
-                    Logger.prototype.log(`${lang.ver_help}`);
-                    Logger.prototype.log(`${lang.time_help}`);
+                    Logger.prototype.log(lang.kick_help);
+                    Logger.prototype.log(lang.shutdown_help);
+                    Logger.prototype.log(lang.stop_help);
+                    Logger.prototype.log(lang.help_help);
+                    Logger.prototype.log(lang.qm_help)
+                    Logger.prototype.log(lang.version_help);
+                    Logger.prototype.log(lang.ver_help);
+                    Logger.prototype.log(lang.time_help);
                     break;
                 default:
                     Logger.prototype.log(lang.unknown_command)
