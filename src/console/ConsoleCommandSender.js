@@ -2,8 +2,7 @@ const rl = require('readline')
 const Logger = require('./Logger')
 const ServerInfo = require('../api/ServerInfo');
 const config = require("../../config.json");
-const { Agent } = require('http');
-const lang = require(`../Lang/${config.lang}.json`)
+const lang = require(`../lang/${config.lang}.json`)
 
 class ConsoleCommandSender {
     constructor() {}
