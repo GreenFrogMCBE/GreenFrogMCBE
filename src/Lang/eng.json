@@ -36,6 +36,6 @@
     "command_help": "help",
     "command_usage_kick": "Usage: kick [player] [reason]",
     "command_usage_ver": "This server uses GreenFrogMCBE",
-    "command_usage_time": "Usage: time [time]"
+    "command_usage_time": "Usage: time [time]",
     "kicked_prefix": "You were kicked for: "
 }
