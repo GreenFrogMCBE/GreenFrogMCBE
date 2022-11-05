@@ -88,18 +88,18 @@ class ConsoleCommandSender {
                 }
 
                 if (ServerInfo.prototype.getPlayers() === undefined) {
-                    Logger.prototype.log(lang.no_player_online)
+                    Logger.prototype.log(lang.no_players_online)
                     return
                 }
 
                 for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
                     let client = ServerInfo.prototype.getPlayers()[i]
                     if (client.getUserData().displayName == player) {
-                        client.disconnect("You were kicked for: " + reason)
+                        client.disconnect(lang.kicked_prefix + reason)
                     }
                 }
 
-                Logger.prototype.log(`Išmestė ${player} dėl: ${reason}`, 'info')
+                Logger.prototype.log(`Kicked ${player} for: ${reason}`, 'info')
                 return
             }
             switch (data.toLowerCase()) {
