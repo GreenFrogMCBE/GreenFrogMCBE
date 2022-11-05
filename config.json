@@ -5,5 +5,8 @@
     "maxplayers": 20,
     "version": "1.19.40",
     "offlinemode": true,
-    "blockinvalidmessages": true
+    "blockinvalidmessages": true,
+
+    "lang": "eng"
+
 }

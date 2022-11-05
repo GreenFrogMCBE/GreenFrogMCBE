@@ -11,8 +11,7 @@ ValidateConfig.prototype.ValidateConfig()
 ValidateConfig.prototype.ValidateLangFile()
 
 const config = require('../config.json')
-const lang = require('../lang.json')
-
+const lang = require(`./Lang/${config.lang}.json`)
 
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
@@ -30,13 +29,13 @@ try {
             levelName: 'GreenFrogMCBE'
         }
     })
-    Logger.prototype.log(`Listening on port /${config.host}:${config.port}`)
+    Logger.prototype.log(`${lang.listening_on} /${config.host}:${config.port}`)
 } catch (e) {
-    Logger.prototype.log(`Failed to to listen /${config.host}:${config.port} | Error: ${e}`, 'error')
+    Logger.prototype.log(`${lang.listening_failed} /${config.host}:${config.port} | Error: ${e}`, 'error')
     process.exit(-1)
 }
 
-Logger.prototype.log(`Console command handler started`)
+Logger.prototype.log(`${lang.cchs}`)
 ConsoleCommandSender.prototype.start()
 
 server.on('connect', client => {

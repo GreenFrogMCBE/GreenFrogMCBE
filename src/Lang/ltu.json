@@ -1,0 +1,47 @@
+{
+    "kick__invalid_chat_message": "§cNetinkama Žinutė!",
+    "kick__resource_packs_refused": "§cTu privalai priimti `resource pack` kad galėtumete te Žaisti! ",
+    "kick__username_is_too_short": "§cNetinkamas vardas: jūsų vardas yra per ilgas",
+    "kick__username_is_too_long": "§cNetinkamas vardas: jūsų vardas yra per trumpas",
+    "kick__internal_server_error": "§cVidinė serverio klaida!",
+    "kick__servershutdown": "§cServerio perkrovimas!",
+    "chat__chatformat": "<%username%> %message%",
+    "chat__saycommand_format": "[Server] %message%",
+    "no_player_online": "Šitu laiku nėra jokių žaidėjų",
+    "unknown_command": "NeŽinoma komandą.Rašikite \"help\" jeigu reikia pagalbos",
+    "listening_on": "Klausyma porto",
+    "listening_failed": "Nepavyko klausytis",
+    "cchs": "Pradėtas konsolės komandų tvarkytuvas",
+
+
+    "stopping_server": "Išjungiamas serveris!",
+    "invalid_time": "§cNetinkama laikas!",
+    "time_set_day": "Laikas nustatytas į dieną!",
+    "empty_message": "Jūsu Žinutė yra tusčia!",
+    "no_reason": "jokios priežasties",
+    "command_list": "Visos komandos",
+
+    "kick_help": "/išmesti [žaidėjas] [priežastis] - išmesti žaidėja",
+    "shutdown_help": "/išjungti - Išjungia serverį",
+    "stop_help": "/baigti - Išjungia serverį",
+    "help_help": "pagalba - šiuo metu žiūrite šią komandą",
+    "qm_help": "Vienodai kaip /pagalba",
+    "ver_help": "Parodo serverio versija",
+    "version_help": "Parodo serverio versija",
+    "time_help": "Nustatykite laiką visiems žaidėjams",
+
+
+    "command_time": "laikas",
+    "command_say": "pasakyti",
+    "command_kick": "išmesti",
+    "command_shutdown": "išjungti",
+    "command_stop": "baigti",
+    "command_ver": "ver",
+    "command_version": "versija",
+    "command_help": "pagalba",
+
+
+    "command_usage_kick": "Naudojimas: / kick [žaidėjas] [priežastis]",
+    "command_usage_ver": "Šis serveris naudoja GreenFrogMCBE",
+    "command_usage_time": "Naudojimas: /laikas [laikas]"
+}
