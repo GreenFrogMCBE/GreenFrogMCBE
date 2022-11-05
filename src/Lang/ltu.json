@@ -9,7 +9,7 @@
     "chat__saycommand_format": "[Server] %message%",
     "no_player_online": "Šitu laiku nėra jokių žaidėjų",
     "unknown_command": "NeŽinoma komandą.Rašikite \"help\" jeigu reikia pagalbos",
-    "listening_on": "Klausymas port",
+    "listening_on": "Klausyma porto",
     "listening_failed": "Nepavyko klausytis",
     "cchs": "Pradėtas konsolės komandų tvarkytuvas",
 
