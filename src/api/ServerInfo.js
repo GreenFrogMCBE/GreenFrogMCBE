@@ -3,7 +3,7 @@ class ServerInfo {
     constructor() {
         this.players = []
         this.config = require("../../config.json")
-        this.lang = require(`../../${config.lang}.json`)
+        this.lang = require(`../../lang/${config.lang}.json`)
     }
 
     setPlayers (players) {
