@@ -1,0 +1,1 @@
+Edit lang at: /src/lang/(your server language).json
