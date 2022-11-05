@@ -7,20 +7,17 @@
     "kick__servershutdown": "§cServer shutdown",
     "chat__chatformat": "<%username%> %message%",
     "chat__saycommand_format": "[Server] %message%",
-    "no_player_online": "There are no players playing right now!",
+    "no_players_online": "There are no players playing right now!",
     "unknown_command": "Unknown command. Type \"help\" for help",
-
     "listening_on": "Listening on port",
     "listening_failed": "Listening has failed",
     "cchs": "Console command handler has started",
-
     "stopping_server": "Stopping the server!",
     "invalid_time": "§cInvalid time!",
     "time_set_day": "Time set day!",
     "empty_message": "Empty message was provided!",
     "no_reason": "No reason",
     "command_list": "All commands",
-
     "kick_help": "/kick [player] [reason] - kick player",
     "shutdown_help": "/shutdown - Stops the server",
     "stop_help": "/stop - Stops the server",
@@ -29,9 +26,6 @@
     "ver_help": "Shows the servers version",
     "version_help": "Shows the server version",
     "time_help": "Set the time for all players",
-
-
-    
     "command_time": "time",
     "command_say": "say",
     "command_kick": "kick",
@@ -40,13 +34,8 @@
     "command_ver": "ver",
     "command_version": "version",
     "command_help": "help",
-
-
     "command_usage_kick": "Usage: / kick [player] [reason]",
     "command_usage_ver": "This server uses GreenFrogMCBE",
     "command_usage_time": "Usage: /time [time]"
-
-
-
-
+    "kicked_prefix": "You were kicked for: "
 }
