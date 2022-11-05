@@ -14,7 +14,7 @@
     "cchs": "Console command handler has started",
     "stopping_server": "Stopping the server!",
     "invalid_time": "Invalid time!",
-    "time_set_day": "Time set day!",
+    "time_updated": "Time updated!",
     "empty_message": "Empty message was provided!",
     "no_reason": "No reason",
     "command_list": "All commands",
@@ -38,5 +38,6 @@
     "command_usage_ver": "This server uses GreenFrogMCBE",
     "command_usage_time": "Usage: time [time]",
     "kicked_prefix": "You were kicked for: ",
-    "commandlist": "Command list: "
+    "commandlist": "Command list: ",
+    "kicked_consolemsg": "Kicked %player% for: %reason%"
 }
