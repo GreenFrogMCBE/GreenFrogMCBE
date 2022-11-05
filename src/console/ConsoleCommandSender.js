@@ -1,7 +1,9 @@
 const rl = require('readline')
 const Logger = require('./Logger')
 const ServerInfo = require('../api/ServerInfo');
-const lang = require('../../lang.json')
+const config = require("../../config.json");
+const { Agent } = require('http');
+const lang = require(`../Lang/${config.lang}.json`)
 
 class ConsoleCommandSender {
     constructor() {}
@@ -17,15 +19,15 @@ class ConsoleCommandSender {
         r.prompt(true)
 
         r.on('line', (data) => {
-            if (data.startsWith('time ')) {
+            if (data.startsWith(`${lang.command_time} `)) {
                 const time = parseInt(data.split(" ")[1])
                 if (time === NaN) {
-                    Logger.prototype.log('Invalid time')
+                    Logger.prototype.log(lang.invalid_time)
                     return
                 }
 
                 if (ServerInfo.prototype.getPlayers() === undefined) {
-                    Logger.prototype.log(`There are no players online`)
+                    Logger.prototype.log(lang.no_player_online)
                     return
                 }
 
@@ -34,20 +36,20 @@ class ConsoleCommandSender {
                     client.write('set_time', { time: time })
                 }
 
-                Logger.prototype.log(`Time set to day`)
+                Logger.prototype.log(lang.time_set_day)
                 return
             }
 
-            if (data.startsWith('say ')) {
+            if (data.startsWith(`${lang.command_say} `)) {
 
                 const msg = data.split(" ")[1]
                 if (msg.length < 1) {
-                    Logger.prototype.log('Your message is empty')
+                    Logger.prototype.log(lang.empty_message)
                     return
                 }
 
                 if (ServerInfo.prototype.getPlayers() === undefined) {
-                    Logger.prototype.log(`There are no players online`)
+                    Logger.prototype.log(lang.no_player_online)
                     return
                 }
 
@@ -71,7 +73,7 @@ class ConsoleCommandSender {
                 return
             }
 
-            if (data.startsWith('kick ')) {
+            if (data.startsWith(`${lang.command_kick} `)) {
                 const player = data.split(" ")[1]
                 let reason = ""
                 for (let i = 2; i < data.split(" ").length; i++) {
@@ -83,7 +85,7 @@ class ConsoleCommandSender {
                 }
 
                 if (!reason) {
-                    reason = "No reason"
+                    reason = `${lang.no_reason}`
                 }
 
                 if (ServerInfo.prototype.getPlayers() === undefined) {
@@ -98,42 +100,42 @@ class ConsoleCommandSender {
                     }
                 }
 
-                Logger.prototype.log(`Kicked ${player} for: ${reason}`, 'info')
+                Logger.prototype.log(`Išmestė ${player} dėl: ${reason}`, 'info')
                 return
             }
             switch (data.toLowerCase()) {
-                case '':
+                case ``:
                     break
-                case 'shutdown':
-                case 'stop':
-                    Logger.prototype.log('Stopping server...', 'info')
+                case `${lang.command_shutdown}`:
+                case `${land.command_stop}`:
+                    Logger.prototype.log(`${lang.stopping_server}...`, 'info')
                     for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
                         ServerInfo.prototype.getPlayers()[i].disconnect(lang.kick__servershutdown)
                     }
                     setTimeout(() => {
                         process.exit(0)
                     }, 1000) // give some time for the server to disconnect clients
-                case 'kick':
-                    Logger.prototype.log('Usage: /kick [player] [reason]', 'info')
+                case `${lang.command_kick}`:
+                    Logger.prototype.log(`${lang.command_usage_kick}`, 'info')
                     break;
-                case 'ver':
-                case 'version':
-                    Logger.prototype.log('This server uses GreenFrogMCBE', 'info')
+                case `${lang.command_ver}`:
+                    case `${lang.command_version}`:
+                    Logger.prototype.log(`${lang.command_usage_ver}`, 'info')
                     break;
-                case 'time':
-                    Logger.prototype.log('Usage: /time [time]', 'info')
+                case `${lang.command_time}`:
+                    Logger.prototype.log(`${lang.command_usage_time}`, 'info')
                     break;
                 case '?':
-                case 'help':
+                case `${lanf.command_help}`:
                     Logger.prototype.log('Command list:');
-                    Logger.prototype.log('/kick [player] [reason] - Kicks player');
-                    Logger.prototype.log('/shutdown - Shutdowns the server');
-                    Logger.prototype.log('/stop - Shutdowns the server');
-                    Logger.prototype.log('/help - You are looking at this command right now');
-                    Logger.prototype.log('/? - Same as /help')
-                    Logger.prototype.log('/version - Shows server version');
-                    Logger.prototype.log('/ver - Shows server version');
-                    Logger.prototype.log('/time - Set time for all players');
+                    Logger.prototype.log(`${lang.kick_help}`);
+                    Logger.prototype.log(`${lang.shutdown_help}`);
+                    Logger.prototype.log(`${lang.stop_help}`);
+                    Logger.prototype.log(`${lang.help_help}`);
+                    Logger.prototype.log(`${lang.qm_help}`)
+                    Logger.prototype.log(`${lang.version_help}`);
+                    Logger.prototype.log(`${lang.ver_help}`);
+                    Logger.prototype.log(`${lang.time_help}`);
                     break;
                 default:
                     Logger.prototype.log(lang.unknown_command)
