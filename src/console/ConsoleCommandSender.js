@@ -35,7 +35,7 @@ class ConsoleCommandSender {
                     client.write('set_time', { time: time })
                 }
 
-                Logger.prototype.log(lang.time_set_day)
+                Logger.prototype.log(lang.time_updated)
                 return
             }
 
@@ -99,7 +99,7 @@ class ConsoleCommandSender {
                     }
                 }
 
-                Logger.prototype.log(`Kicked ${player} for: ${reason}`, 'info')
+                Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', player).replace('%reason%', reason), 'info')
                 return
             }
             switch (data.toLowerCase()) {
