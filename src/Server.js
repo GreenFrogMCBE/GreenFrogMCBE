@@ -84,13 +84,6 @@ server.on('connect', client => {
                         return
                     }
 
-                    if (client.getUserData().displayName.length > 12) {
-                        if (!config.offlinemode) return
-                        Logger.prototype.log(lang.usernametoolong.replace('%player%', client.getUserData().displayName), `warning`)
-                        client.kick(lang.kick__username_is_too_long)
-                        return
-                    }
-
                     if (client.getUserData().displayName.length > 16) {
                         if (config.offlinemode) return
                         Logger.prototype.log(lang.usernametoolong.replace('%player%', client.getUserData().displayName), `warning`)
