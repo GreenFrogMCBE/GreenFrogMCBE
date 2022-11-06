@@ -5,7 +5,7 @@ const config = require("../../config.json");
 const lang = require(`../lang/${config.lang}.json`)
 
 class ConsoleCommandSender {
-    constructor() {}
+    constructor() { }
 
     start() {
 
@@ -26,7 +26,7 @@ class ConsoleCommandSender {
                 }
 
                 if (ServerInfo.prototype.getPlayers() === undefined) {
-                    Logger.prototype.log(lang.no_player_online)
+                    Logger.prototype.log(lang.no_players_online)
                     return
                 }
 
@@ -48,7 +48,7 @@ class ConsoleCommandSender {
                 }
 
                 if (ServerInfo.prototype.getPlayers() === undefined) {
-                    Logger.prototype.log(lang.no_player_online)
+                    Logger.prototype.log(lang.no_players_online)
                     return
                 }
 
@@ -56,7 +56,7 @@ class ConsoleCommandSender {
 
                 for (let i = 1; i < ServerInfo.prototype.getPlayers().length; i++) {
                     let client = ServerInfo.prototype.getPlayers()[i]
-                   
+
                     client.write('text', {
                         type: 'announcement',
                         needs_translation: false,
@@ -108,12 +108,15 @@ class ConsoleCommandSender {
                 case lang.command_shutdown:
                 case lang.command_stop:
                     Logger.prototype.log(lang.stopping_server, 'info')
-                    for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
-                        ServerInfo.prototype.getPlayers()[i].disconnect(lang.kick__servershutdown)
-                    }
+                    try {
+                        for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
+                            ServerInfo.prototype.getPlayers()[i].disconnect(lang.kick__servershutdown)
+                        }
+                    } catch (e) { }
                     setTimeout(() => {
                         process.exit(0)
                     }, 1000) // give some time for the server to disconnect clients
+                    break
                 case lang.command_kick:
                     Logger.prototype.log(lang.command_usage_kick, 'info')
                     break;

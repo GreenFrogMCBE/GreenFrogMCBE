@@ -5,13 +5,14 @@ const ServerInfo = require('../src/api/ServerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
 let clients = []
 
-Logger.prototype.log('Loading server')
 
 ValidateConfig.prototype.ValidateConfig()
 ValidateConfig.prototype.ValidateLangFile()
 
 const config = require('../config.json')
 const lang = require(`./lang/${config.lang}.json`)
+
+Logger.prototype.log(lang.loadingserver)
 
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
@@ -29,9 +30,9 @@ try {
             levelName: 'GreenFrogMCBE'
         }
     })
-    Logger.prototype.log(`${lang.listening_on.replace(`%string%`, `/${config.host}:${config.port}`)}`)
+    Logger.prototype.log(`${lang.listening_on.replace(`%ipport%`, `/${config.host}:${config.port}`)}`)
 } catch (e) {
-    Logger.prototype.log(`${lang.listening_on.replace(`%string%`, `/${config.host}:${config.port}`).replace('%error%', e)}`, 'error')
+    Logger.prototype.log(`${lang.listening_on.replace(`%ipport%`, `/${config.host}:${config.port}`).replace('%error%', e)}`, 'error')
     process.exit(-1)
 }
 
