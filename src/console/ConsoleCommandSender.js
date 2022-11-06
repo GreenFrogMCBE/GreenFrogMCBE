@@ -119,7 +119,7 @@ class ConsoleCommandSender {
                     break;
                 case lang.command_ver:
                 case lang.command_version:
-                    Logger.prototype.log(lang.command_usage_ver, 'info')
+                    Logger.prototype.log(lang.command_ver_info, 'info')
                     break;
                 case lang.command_time:
                     Logger.prototype.log(lang.command_usage_time, 'info')
