@@ -23,7 +23,7 @@
     "stop_help": "stop - Зупиняє сервер",
     "help_help": "help - Показує це повідомлення",
     "qm_help": "? - Таке саме як /help",
-    "ver_help": "ver - Показує версію сервера",
+    "ver_help": "ver - Таке саме як /version",
     "version_help": "version - Показує версію сервера",
     "time_help": "time - Встановлює час для всіх гравців",
     "command_time": "time",
