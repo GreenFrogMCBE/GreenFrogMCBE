@@ -38,6 +38,6 @@
     "command_usage_ver": "Šis serveris naudoja GreenFrogMCBE",
     "command_usage_time": "Naudojimas: /laikas [laikas]",
     "kicked_prefix": "You were kicked for: ",
-    "commandlist": "Command list: ",
-    "loadingserver": "Loading server"
+    "commandlist": "Visos komandos: ",
+    "loadingserver": "Ruošiamas serveris"
 }
