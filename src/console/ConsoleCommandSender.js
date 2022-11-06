@@ -103,11 +103,11 @@ class ConsoleCommandSender {
                 return
             }
             switch (data.toLowerCase()) {
-                case '':
+                case lang.empty:
                     break
-                case `${lang.command_shutdown}`:
-                case `${lang.command_stop}`:
-                    Logger.prototype.log(`${lang.stopping_server}`, 'info')
+                case lang.command_shutdown:
+                case lang.command_stop:
+                    Logger.prototype.log(lang.stopping_server, 'info')
                     for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
                         ServerInfo.prototype.getPlayers()[i].disconnect(lang.kick__servershutdown)
                     }

@@ -29,9 +29,9 @@ try {
             levelName: 'GreenFrogMCBE'
         }
     })
-    Logger.prototype.log(`${lang.listening_on} /${config.host}:${config.port}`)
+    Logger.prototype.log(`${lang.listening_on.replace(`%string%`, `/${config.host}:${config.port}`)}`)
 } catch (e) {
-    Logger.prototype.log(`${lang.listening_failed} /${config.host}:${config.port} | Error: ${e}`, 'error')
+    Logger.prototype.log(`${lang.listening_on.replace(`%string%`, `/${config.host}:${config.port}`).replace('%error%', e)}`, 'error')
     process.exit(-1)
 }
 
@@ -40,7 +40,7 @@ ConsoleCommandSender.prototype.start()
 
 server.on('connect', client => {
     client.on('join', () => {
-        Logger.prototype.log(`Player ${client.getUserData().displayName} connected`)
+        Logger.prototype.log(lang.playerconnected.replace('%player%', client.getUserData().displayName))
 
         client.write('resource_packs_info', {
             must_accept: false,
@@ -57,14 +57,14 @@ server.on('connect', client => {
         if (packet.data.name == 'resource_pack_client_response') {
             switch (packet.data.params.response_status) {
                 case 'none': {
-                    Logger.prototype.log(`${client.username} does not have resource packs installed`)
+                    Logger.prototype.log(lang.norpsinstalled.replace('%player%', client.getUserData().displayName))
                 }
                 case 'refused': {
-                    Logger.prototype.log(`${client.username} refused resource packs`)
+                    Logger.prototype.log(lang.rpsrefused.replace('%player%', client.getUserData().displayName))
                     client.disconnect(lang.kick__resource_packs_refused)
                 }
                 case 'have_all_packs': {
-                    Logger.prototype.log(`${client.getUserData().displayName} does have all resource packs installed`)
+                    Logger.prototype.log(lang.rpsinstalled.replace('%player%', client.getUserData().displayName))
 
                     client.write('resource_pack_stack', {
                         must_accept: false,
@@ -78,26 +78,26 @@ server.on('connect', client => {
                 }
                 case 'completed': {
                     if (client.getUserData().displayName.length < 3) {
-                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because his username is too short`, `warning`)
+                        Logger.prototype.log(lang.usernametooshort.replace('%player%', client.getUserData().displayName), `warning`)
                         client.disconnect(config.kick__username_is_too_short)
                         return
                     }
 
                     if (client.getUserData().displayName.length > 12) {
                         if (!config.offlinemode) return
-                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because his username is too long`, `warning`)
+                        Logger.prototype.log(lang.usernametoolong.replace('%player%', client.getUserData().displayName), `warning`)
                         client.disconnect(lang.kick__username_is_too_long)
                         return
                     }
 
                     if (client.getUserData().displayName.length > 16) {
                         if (config.offlinemode) return
-                        Logger.prototype.log(`Kicked ${client.getUserData().displayName} because his username is too long`, `warning`)
+                        Logger.prototype.log(lang.usernametoolong.replace('%player%', client.getUserData().displayName), `warning`)
                         client.disconnect(lang.kick__username_is_too_long)
                         return
                     }
 
-                    Logger.prototype.log(`Player ${client.getUserData().displayName} completed login process`)
+                    Logger.prototype.log(lang.joined.replace('%player%', client.getUserData().displayName))
                     client.write('network_settings', { compression_threshold: 1 })
 
 
@@ -108,9 +108,6 @@ server.on('connect', client => {
                     client.write('biome_definition_list', get('biome_definition_list'))
                     client.write('available_entity_identifiers', get('available_entity_identifiers'))
                     client.write('creative_content', get('creative_content'))
-
-
-                    Logger.prototype.log(`${client.getUserData().displayName} done writing packets`)
 
                     client.chat = function (msg) {
                         client.write('text', {
@@ -124,7 +121,7 @@ server.on('connect', client => {
                     }
 
 
-                    Logger.prototype.log(`Player ${client.getUserData().displayName} spawned`)
+                    Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
                     setTimeout(() => {
                         client.write('play_status', {
                             status: 'player_spawn'
@@ -133,13 +130,13 @@ server.on('connect', client => {
 
 
                     for (let i = 0; i < clients.length; i++) {
-                        clients[i].chat(`§e${client.getUserData().displayName} joined the game`)
+                        clients[i].chat(lang.joinedthegame.replace('%username%', client.getUserData().displayName))
                     }
 
                     break
                 }
                 default: {
-                    console.warn('Warning: Unhandled packet data: ' + packet.data.params.response_status)
+                    console.warn(lang.unhandledpacketdata.replace('%data%', packet.data.params.response_status))
                 }
             }
         } else if (packet.data.name === 'client_to_server_handshake' || packet.data.name === 'request_chunk_radius' || packet.data.name === 'set_local_player_as_initialized' || packet.data.name === 'tick_sync' || packet.data.name === 'set_player_game_type' || packet.data.name === 'client_cache_status') {
@@ -147,9 +144,10 @@ server.on('connect', client => {
         } else if (packet.data.name === 'text') {
             let msg = packet.data.params.message;
             let fullmsg = lang.chat__chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
-            Logger.prototype.log(`(chat message) ` + fullmsg)
+            Logger.prototype.log(lang.chatmessage + fullmsg)
             if (msg.includes("§") || msg.length == 0 || msg > 255 && config.blockinvalidmessages) {
-                Logger.prototype.log(`${client.getUserData().displayName} sent a illegal message. (Message content was: ${msg.length}`, 'warning')
+                lang.illegalmessage.replace('%msg%', msg).replace('%player%', player)
+                Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
                 client.disconnect(lang.kick__invalid_chat_message)
                 return
             }
@@ -159,8 +157,8 @@ server.on('connect', client => {
             }
         } else if (packet.data.name === 'command_request') {
             let cmd = packet.data.params.command.toLowerCase();
-            Logger.prototype.log(`${client.getUserData().displayName} executed a server command: ${cmd}`)
-            switch (cmd) {
+            Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
+            switch (cmd) { // TODO: Translate chat
                 case '/ver':
                 case '/version':
                     client.chat(`§7This server uses GreenFrogMCBE`)
@@ -179,7 +177,7 @@ server.on('connect', client => {
                     break
             }
         } else {
-            Logger.prototype.log('Unhandled packet', 'warning')
+            Logger.prototype.log(lang.unhandledpacket, 'warning')
             console.log('%o', packet)
         }
     }
@@ -189,7 +187,7 @@ server.on('connect', client => {
             handlepk(client, packet)
         } catch (e) {
             client.disconnect(config.kick__internal_server_error)
-            Logger.prototype.log(`Exception while trying to handle packet from ${client.username}: ${e}`, 'error')
+            Logger.prototype.log(lang.handlepacketexception.replace('%player%', client.getUserData().displayName).replace('%error%', e), 'error')
         }
     })
 })
