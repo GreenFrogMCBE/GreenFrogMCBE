@@ -61,7 +61,7 @@ server.on('connect', client => {
                 }
                 case 'refused': {
                     Logger.prototype.log(lang.rpsrefused.replace('%player%', client.getUserData().displayName))
-                    client.disconnect(lang.kick__resource_packs_refused)
+                    client.kick(lang.kick__resource_packs_refused)
                 }
                 case 'have_all_packs': {
                     Logger.prototype.log(lang.rpsinstalled.replace('%player%', client.getUserData().displayName))
@@ -79,21 +79,21 @@ server.on('connect', client => {
                 case 'completed': {
                     if (client.getUserData().displayName.length < 3) {
                         Logger.prototype.log(lang.usernametooshort.replace('%player%', client.getUserData().displayName), `warning`)
-                        client.disconnect(config.kick__username_is_too_short)
+                        client.kick(config.kick__username_is_too_short)
                         return
                     }
 
                     if (client.getUserData().displayName.length > 12) {
                         if (!config.offlinemode) return
                         Logger.prototype.log(lang.usernametoolong.replace('%player%', client.getUserData().displayName), `warning`)
-                        client.disconnect(lang.kick__username_is_too_long)
+                        client.kick(lang.kick__username_is_too_long)
                         return
                     }
 
                     if (client.getUserData().displayName.length > 16) {
                         if (config.offlinemode) return
                         Logger.prototype.log(lang.usernametoolong.replace('%player%', client.getUserData().displayName), `warning`)
-                        client.disconnect(lang.kick__username_is_too_long)
+                        client.kick(lang.kick__username_is_too_long)
                         return
                     }
 
@@ -118,6 +118,12 @@ server.on('connect', client => {
                             xuid: '',
                             platform_chat_id: ''
                         })
+                    }
+
+                    
+                    client.kick = function (msg) {
+                        Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
+                        client.disconnect(msg)
                     }
 
 
@@ -146,9 +152,8 @@ server.on('connect', client => {
             let fullmsg = lang.chat__chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
             Logger.prototype.log(lang.chatmessage + fullmsg)
             if (msg.includes("§") || msg.length == 0 || msg > 255 && config.blockinvalidmessages) {
-                lang.illegalmessage.replace('%msg%', msg).replace('%player%', player)
                 Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
-                client.disconnect(lang.kick__invalid_chat_message)
+                client.kick(lang.kick__invalid_chat_message)
                 return
             }
             client.chat(`${fullmsg}`)
@@ -186,7 +191,7 @@ server.on('connect', client => {
         try {
             handlepk(client, packet)
         } catch (e) {
-            client.disconnect(config.kick__internal_server_error)
+            client.kick(config.kick__internal_server_error)
             Logger.prototype.log(lang.handlepacketexception.replace('%player%', client.getUserData().displayName).replace('%error%', e), 'error')
         }
     })
