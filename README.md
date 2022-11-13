@@ -19,7 +19,7 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 2. You are not allowed to change you fork license
 
-3. Credit me somewhere
+3. Credit me and GreenFrogMCBE somewhere
 
 ## Servers that run this software
 
