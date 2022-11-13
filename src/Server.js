@@ -14,6 +14,21 @@ const lang = require(`./lang/${config.lang}.json`)
 
 Logger.prototype.log(lang.loadingserver)
 
+process.on('uncaughtException', function (err) {
+    Logger.prototype.log('Server error: ', 'error')
+    process.exit(-1)
+})
+
+process.on('uncaughtExceptionMonitor', function (err) {
+    Logger.prototype.log('Server error: ', 'error')
+    process.exit(-1)
+})
+
+process.on('unhandledRejection', function (err) {
+    Logger.prototype.log('Server error: ', 'error')
+    process.exit(-1)
+})
+
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
 let server
@@ -114,7 +129,7 @@ server.on('connect', client => {
                         })
                     }
 
-                    
+
                     client.kick = function (msg) {
                         Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
                         client.disconnect(msg)
@@ -190,4 +205,3 @@ server.on('connect', client => {
         }
     })
 })
-
