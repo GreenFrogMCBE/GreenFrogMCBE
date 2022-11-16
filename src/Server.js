@@ -31,6 +31,10 @@ process.on('unhandledRejection', function (err) {
 
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
+
+Logger.prototype.log(`${lang.scch}`)
+setTimeout(() => { ConsoleCommandSender.prototype.start() }, 100)
+
 let server
 try {
     server = Bedrock.createServer({
@@ -50,9 +54,6 @@ try {
     Logger.prototype.log(`${lang.listening_failed.replace(`%ipport%`, `/${config.host}:${config.port}`).replace('%error%', e)}`, 'error')
     process.exit(-1)
 }
-
-Logger.prototype.log(`${lang.cchs}`)
-ConsoleCommandSender.prototype.start()
 
 server.on('connect', client => {
     client.on('join', () => {
@@ -107,7 +108,6 @@ server.on('connect', client => {
                     Logger.prototype.log(lang.joined.replace('%player%', client.getUserData().displayName))
                     client.write('network_settings', { compression_threshold: 1 })
 
-
                     client.write('player_list', get('player_list'))
                     client.write('start_game', get('start_game'))
                     client.write('set_spawn_position', get('set_spawn_position'))
@@ -132,7 +132,6 @@ server.on('connect', client => {
                         Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
                         client.disconnect(msg)
                     }
-
 
                     Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
                     setTimeout(() => {

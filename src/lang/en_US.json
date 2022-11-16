@@ -11,7 +11,7 @@
     "unknown_command": "Unknown command. Type \"help\" for help",
     "listening_on": "Listening on port %ipport%",
     "listening_failed": "Failed to listen on %ipport% | Error: %error%",
-    "cchs": "Console command handler has started",
+    "scch": "Starting console command handler...",
     "stopping_server": "Stopping server...",
     "invalid_time": "Invalid time!",
     "time_updated": "Time updated!",
