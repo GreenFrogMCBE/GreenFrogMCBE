@@ -13,6 +13,11 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 3. Done
 
+## Configuration tutorial
+
+- You can edit your config in config.json
+- You can edit your server language in /src/lang/(server language).json
+
 ## Forking Rules
 
 1. You are not allowed to sell your fork
