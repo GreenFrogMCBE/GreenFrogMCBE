@@ -201,7 +201,7 @@ server.on('connect', client => {
             handlepk(client, packet)
         } catch (e) {
             client.kick(config.kick__internal_server_error)
-            Logger.prototype.log(lang.handlepacketexception.replace('%player%', client.getUserData().displayName).replace('%error%', e), 'error')
+            Logger.prototype.log(lang.handlepacketexception.replace('%player%', client.getUserData().displayName).replace('%error%', e.stack), 'error')
         }
     })
 })
