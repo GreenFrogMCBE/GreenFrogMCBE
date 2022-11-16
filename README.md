@@ -24,4 +24,5 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 ## Servers that run this software
 
-- none
+- 159.65.55.27 | Testing server for GreenFrog
+- 67.207.68.250 | Second testing server for GreenFrog
