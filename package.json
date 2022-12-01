@@ -3,7 +3,8 @@
     "description": "A server software for MCBE",
     "main": "index.js",
     "author": "andriycraft",
+    "license": "BSD 3-Clause",
     "dependencies": {
-        "bedrock-protocol": "3.21.0"
+        "bedrock-protocol": "git+https://github.com/PrismarineJS/bedrock-protocol"
     }
 }
