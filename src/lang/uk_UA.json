@@ -40,7 +40,7 @@
     "kicked_prefix": "Вас було кікнуто: ",
     "commandlist": "Список команд: ",
     "kicked_consolemsg": "Кікнуто %player% за: %reason%",
-    "loadingserver": "Завантаження сервера",
+    "loadingserver": "Завантаження сервера...",
     "failedfindconfig": "Невдалося знайти config.json | Помилка: %e%",
     "failedparseconfig": "Невдалося пропарсити config.json | Помилка: %e%",
     "failedfindlang": "Невдалося знайти lang.json | Помилка: %e%",

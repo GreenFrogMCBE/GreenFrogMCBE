@@ -3,8 +3,8 @@ const Logger = require('../src/console/Logger')
 const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
 const ServerInfo = require('../src/api/ServerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
+const Loader = require('../src/plugins/Loader')
 let clients = []
-
 
 ValidateConfig.prototype.ValidateConfig()
 ValidateConfig.prototype.ValidateLangFile()
@@ -32,8 +32,9 @@ process.on('unhandledRejection', function (err) {
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
 
+Loader.prototype.loadPlugins()
 Logger.prototype.log(`${lang.scch}`)
-setTimeout(() => { ConsoleCommandSender.prototype.start() }, 100)
+setTimeout(() => { ConsoleCommandSender.prototype.start()}, 100)
 
 let server
 try {

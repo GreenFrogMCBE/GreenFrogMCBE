@@ -40,7 +40,7 @@
     "kicked_prefix": "You were kicked for: ",
     "commandlist": "Command list: ",
     "kicked_consolemsg": "Kicked %player% for: %reason%",
-    "loadingserver": "Loading server",
+    "loadingserver": "Loading server...",
     "failedfindconfig": "Failed to find config.json | Error: %e%",
     "failedparseconfig": "Failed to parse config.json | Error: %e%",
     "failedfindlang": "Failed to find lang.json | Error: %e%",
