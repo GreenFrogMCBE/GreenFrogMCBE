@@ -15,17 +15,17 @@ const lang = require(`./lang/${config.lang}.json`)
 Logger.prototype.log(lang.loadingserver)
 
 process.on('uncaughtException', function (err) {
-    Logger.prototype.log('Server error: ' + err, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
     process.exit(-1)
 })
 
 process.on('uncaughtExceptionMonitor', function (err) {
-    Logger.prototype.log('Server error: ' + err, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
     process.exit(-1)
 })
 
 process.on('unhandledRejection', function (err) {
-    Logger.prototype.log('Server error: ' + err, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
     process.exit(-1)
 })
 

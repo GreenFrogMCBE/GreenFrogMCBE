@@ -57,5 +57,6 @@
     "illegalmessage": "%player% sent an illegal message. Message content was: %msg%",
     "executedcmd": "%player% executed a server command: %cmd%",
     "unhandledpacket": "Unhandled packet",
-    "handlepacketexception": "Exception while trying to handle packet from %player%: %error%"
+    "handlepacketexception": "Exception while trying to handle packet from %player%: %error%",
+    "servererror": "Server error"
 }
