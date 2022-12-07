@@ -4,6 +4,7 @@ const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
 const ServerInfo = require('../src/api/ServerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
+const fs = require('fs')
 let clients = []
 
 ValidateConfig.prototype.ValidateConfig()
@@ -15,17 +16,17 @@ const lang = require(`./lang/${config.lang}.json`)
 Logger.prototype.log(lang.loadingserver)
 
 process.on('uncaughtException', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
     process.exit(-1)
 })
 
 process.on('uncaughtExceptionMonitor', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
     process.exit(-1)
 })
 
 process.on('unhandledRejection', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
     process.exit(-1)
 })
 
@@ -70,9 +71,9 @@ server.on('connect', client => {
         fs.readdir("./plugins", (err, plugins) => {
             plugins.forEach(plugin => {
                 try {
-                    require(`../../plugins/${plugin}`).prototype.onResourcePackInfoSent(server, client)
+                    require(`../plugins/${plugin}`).prototype.onResourcePackInfoSent(server, client)
                 } catch (e) {
-                    Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                    Logger.prototype.log(`Failed to execute onResourcePackInfoSent() event for plugin "${plugin}". The error was: ${e}`, 'error')
                 }
             });
         });
@@ -89,9 +90,9 @@ server.on('connect', client => {
                     fs.readdir("./plugins", (err, plugins) => {
                         plugins.forEach(plugin => {
                             try {
-                                require(`../../plugins/${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(server, client)
+                                require(`../plugins/${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(server, client)
                             } catch (e) {
-                                Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                                Logger.prototype.log(`Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                             }
                         });
                     });
@@ -100,9 +101,9 @@ server.on('connect', client => {
                     fs.readdir("./plugins", (err, plugins) => {
                         plugins.forEach(plugin => {
                             try {
-                                require(`../../plugins/${plugin}`).prototype.onResourcePacksRefused(server, client)
+                                require(`../plugins/${plugin}`).prototype.onResourcePacksRefused(server, client)
                             } catch (e) {
-                                Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                                Logger.prototype.log(`Failed to execute onResourcePacksRefused(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                             }
                         });
                     });
@@ -113,9 +114,9 @@ server.on('connect', client => {
                     fs.readdir("./plugins", (err, plugins) => {
                         plugins.forEach(plugin => {
                             try {
-                                require(`../../plugins/${plugin}`).prototype.onPlayerHaveAllPacks(server, client)
+                                require(`../plugins/${plugin}`).prototype.onPlayerHaveAllPacks(server, client)
                             } catch (e) {
-                                Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                                Logger.prototype.log(`Failed to execute onPlayerHaveAllPacks(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                             }
                         });
                     });
@@ -135,9 +136,9 @@ server.on('connect', client => {
                     fs.readdir("./plugins", (err, plugins) => {
                         plugins.forEach(plugin => {
                             try {
-                                require(`../../plugins/${plugin}`).prototype.onResourcePacksCompleted(server, client)
+                                require(`../plugins/${plugin}`).prototype.onResourcePacksCompleted(server, client)
                             } catch (e) {
-                                Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                                Logger.prototype.log(`Failed to execute onResourcePacksCompleted(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                             }
                         });
                     });
@@ -179,9 +180,9 @@ server.on('connect', client => {
                         fs.readdir("./plugins", (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
-                                    require(`../../plugins/${plugin}`).prototype.onKick(server, client, msg)
+                                    require(`../plugins/${plugin}`).prototype.onKick(server, client, msg)
                                 } catch (e) {
-                                    Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                                    Logger.prototype.log(`Failed to execute onKick(server, client, msg) event for plugin "${plugin}". The error was: ${e}`, 'error')
                                 }
                             });
                         });
@@ -197,9 +198,9 @@ server.on('connect', client => {
                         fs.readdir("./plugins", (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
-                                    require(`../../plugins/${plugin}`).prototype.onPlayerSpawn(server, client)
+                                    require(`../plugins/${plugin}`).prototype.onPlayerSpawn(server, client)
                                 } catch (e) {
-                                    Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                                    Logger.prototype.log(`Failed to execute onPlayerSpawn(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                                 }
                             });
                         });
@@ -224,9 +225,9 @@ server.on('connect', client => {
             fs.readdir("./plugins", (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {
-                        require(`../../plugins/${plugin}`).prototype.onChat(server, client, msg, fullmsg)
+                        require(`../plugins/${plugin}`).prototype.onChat(server, client, msg, fullmsg)
                     } catch (e) {
-                        Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                        Logger.prototype.log(`Failed to execute onChat(server, client, msg, fullmsg) event for plugin "${plugin}". The error was: ${e}`, 'error')
                     }
                 });
             });
@@ -244,9 +245,9 @@ server.on('connect', client => {
             fs.readdir("./plugins", (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {
-                        require(`../../plugins/${plugin}`).prototype.onCommand(server, client, command)
+                        require(`../plugins/${plugin}`).prototype.onCommand(server, client, command)
                     } catch (e) {
-                        Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                        Logger.prototype.log(`Failed to execute onCommand(server, client, command) event for plugin "${plugin}". The error was: ${e}`, 'error')
                     }
                 });
             });
@@ -284,9 +285,9 @@ server.on('connect', client => {
             fs.readdir("./plugins", (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {
-                        require(`../../plugins/${plugin}`).prototype.onInternalServerError(server, client, err)
+                        require(`../plugins/${plugin}`).prototype.onInternalServerError(server, client, err)
                     } catch (e) {
-                        Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                        Logger.prototype.log(`Failed to execute onInternalServerError(server, client, err) event for plugin "${plugin}". The error was: ${e}`, 'error')
                     }
                 });
             });

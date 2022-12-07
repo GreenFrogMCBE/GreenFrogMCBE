@@ -14,6 +14,7 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 ## Plugins available for public usage
 
 * Soon, if you have one feel free to open an issue
+* Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/exampleplugin.js
 
 ## Features
 

@@ -3,7 +3,7 @@ const Logger = require('../console/Logger')
 
 class Loader {
 
-    constructor() {}
+    constructor() { }
 
     loadPlugins() {
         try {
@@ -22,11 +22,10 @@ class Loader {
             plugins.forEach(plugin => {
                 Logger.prototype.log(`Loading ${plugin}...`)
                 try {
-                    Logger.prototype.log(`Loaded ${require(`../../plugins/${plugin}`).prototype.getName()}`)
+                    Logger.prototype.log(`Loaded ${require(`../../plugins/${plugin}`).prototype.getName()} (${require(`../../plugins/${plugin}`).name})`)
                     require(`../../plugins/${plugin}`).prototype.onLoad()
                 } catch (e) {
-                    console.log(e.stack)
-                    Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()}". The error was: ${e}`, 'error')
+                    Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()}". The error was: ${e.stack}`, 'error')
                 }
             });
             Logger.prototype.log(`All plugins loaded!`, 'info')
