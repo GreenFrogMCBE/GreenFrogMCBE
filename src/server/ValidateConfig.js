@@ -22,7 +22,7 @@ class ValidateConfig {
 
     ValidateLangFile() {
         try {
-            require("../../src/lang/LTU.json")
+            require("../../src/lang/lt_LT.json")
             require("../../src/lang/uk_UA.json")
             require("../../src/lang/en_US.json")
         } catch (e) {
