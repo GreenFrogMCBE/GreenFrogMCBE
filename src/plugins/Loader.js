@@ -3,7 +3,10 @@ const Logger = require('../console/Logger')
 
 class Loader {
 
-    constructor() { }
+    constructor() {
+        this.plugins = []
+        this.plugin = null
+    }
 
     loadPlugins() {
         try {
@@ -18,6 +21,17 @@ class Loader {
                 Logger.prototype.log(`Failed to create plugins folder, this is a fatal error, shutting down: ${e}`, 'error')
             }
         }
+        fs.readdir("./plugins", (err, plugins) => {
+            plugins.forEach(plugin => {
+                Logger.prototype.log(`Trying to load ${plugin}`)
+                try {
+                    this.plugin = require(`./plugins/${plugin}`)
+                    eval(plugin + ".prototype.onLoad()");
+                } catch (e) {
+                    Logger.prototype.error(`Failed to load ${plugin}: ${e}`)
+                }
+            });
+        });
     }
 
 }
