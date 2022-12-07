@@ -31,7 +31,7 @@ class ValidateConfig {
         }
 
         try {
-            JSON.parse(JSON.stringify(require("../../src/lang/LTU.json")))
+            JSON.parse(JSON.stringify(require("../../src/lang/lt_LT.json")))
             JSON.parse(JSON.stringify(require("../../src/lang/uk_UA.json")))
             JSON.parse(JSON.stringify(require("../../src/lang/en_US.json")))
         } catch (e) {

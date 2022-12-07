@@ -23,12 +23,12 @@ class Loader {
         }
         fs.readdir("./plugins", (err, plugins) => {
             plugins.forEach(plugin => {
-                Logger.prototype.log(`Trying to load ${plugin}`)
+                Logger.prototype.log(`Trying to load plugin "${plugin}"`)
                 try {
                     this.plugin = require(`./plugins/${plugin}`)
                     eval(plugin + ".prototype.onLoad()");
                 } catch (e) {
-                    Logger.prototype.error(`Failed to load ${plugin}: ${e}`)
+                    Logger.prototype.log(`Failed to load plugin "${plugin}". The error was: ${e}`, 'error')
                 }
             });
         });

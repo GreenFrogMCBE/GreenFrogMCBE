@@ -32,9 +32,9 @@ process.on('unhandledRejection', function (err) {
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
 
-Loader.prototype.loadPlugins()
 Logger.prototype.log(`${lang.scch}`)
-setTimeout(() => { ConsoleCommandSender.prototype.start()}, 100)
+Loader.prototype.loadPlugins()
+setTimeout(() => { ConsoleCommandSender.prototype.start()}, 900)
 
 let server
 try {
