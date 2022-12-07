@@ -26,7 +26,7 @@ class Loader {
                     require(`../../plugins/${plugin}`).prototype.onLoad()
                 } catch (e) {
                     console.log(e.stack)
-                    Logger.prototype.log(`Failed to load plugin "${plugin}". The error was: ${e}`, 'error')
+                    Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()}". The error was: ${e}`, 'error')
                 }
             });
             Logger.prototype.log(`All plugins loaded!`, 'info')

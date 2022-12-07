@@ -34,7 +34,7 @@ const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
 Logger.prototype.log(`${lang.scch}`)
 Loader.prototype.loadPlugins()
-setTimeout(() => { ConsoleCommandSender.prototype.start()}, 900)
+setTimeout(() => { ConsoleCommandSender.prototype.start() }, 900)
 
 let server
 try {
@@ -66,6 +66,16 @@ server.on('connect', client => {
             behaviour_packs: [],
             texture_packs: []
         })
+        
+        fs.readdir("./plugins", (err, plugins) => {
+            plugins.forEach(plugin => {
+                try {
+                    require(`../../plugins/${plugin}`).prototype.onResourcePackInfoSent(server, client)
+                } catch (e) {
+                    Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                }
+            });
+        });
 
         clients.push(client)
         ServerInfo.prototype.setPlayers(clients)
@@ -76,12 +86,39 @@ server.on('connect', client => {
             switch (packet.data.params.response_status) {
                 case 'none': {
                     Logger.prototype.log(lang.norpsinstalled.replace('%player%', client.getUserData().displayName))
+                    fs.readdir("./plugins", (err, plugins) => {
+                        plugins.forEach(plugin => {
+                            try {
+                                require(`../../plugins/${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(server, client)
+                            } catch (e) {
+                                Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                            }
+                        });
+                    });
                 }
                 case 'refused': {
+                    fs.readdir("./plugins", (err, plugins) => {
+                        plugins.forEach(plugin => {
+                            try {
+                                require(`../../plugins/${plugin}`).prototype.onResourcePacksRefused(server, client)
+                            } catch (e) {
+                                Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                            }
+                        });
+                    });
                     Logger.prototype.log(lang.rpsrefused.replace('%player%', client.getUserData().displayName))
                     client.kick(lang.kick__resource_packs_refused)
                 }
                 case 'have_all_packs': {
+                    fs.readdir("./plugins", (err, plugins) => {
+                        plugins.forEach(plugin => {
+                            try {
+                                require(`../../plugins/${plugin}`).prototype.onPlayerHaveAllPacks(server, client)
+                            } catch (e) {
+                                Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                            }
+                        });
+                    });
                     Logger.prototype.log(lang.rpsinstalled.replace('%player%', client.getUserData().displayName))
 
                     client.write('resource_pack_stack', {
@@ -95,6 +132,15 @@ server.on('connect', client => {
                     break
                 }
                 case 'completed': {
+                    fs.readdir("./plugins", (err, plugins) => {
+                        plugins.forEach(plugin => {
+                            try {
+                                require(`../../plugins/${plugin}`).prototype.onResourcePacksCompleted(server, client)
+                            } catch (e) {
+                                Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                            }
+                        });
+                    });
                     if (client.getUserData().displayName.length < 3) {
                         client.kick(lang.kick__username_is_too_short)
                         return
@@ -130,6 +176,15 @@ server.on('connect', client => {
 
 
                     client.kick = function (msg) {
+                        fs.readdir("./plugins", (err, plugins) => {
+                            plugins.forEach(plugin => {
+                                try {
+                                    require(`../../plugins/${plugin}`).prototype.onKick(server, client, msg)
+                                } catch (e) {
+                                    Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                                }
+                            });
+                        });
                         Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
                         client.disconnect(msg)
                     }
@@ -139,6 +194,15 @@ server.on('connect', client => {
                         client.write('play_status', {
                             status: 'player_spawn'
                         })
+                        fs.readdir("./plugins", (err, plugins) => {
+                            plugins.forEach(plugin => {
+                                try {
+                                    require(`../../plugins/${plugin}`).prototype.onPlayerSpawn(server, client)
+                                } catch (e) {
+                                    Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                                }
+                            });
+                        });
                     }, 2000)
 
 
@@ -157,6 +221,15 @@ server.on('connect', client => {
         } else if (packet.data.name === 'text') {
             let msg = packet.data.params.message;
             let fullmsg = lang.chat__chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
+            fs.readdir("./plugins", (err, plugins) => {
+                plugins.forEach(plugin => {
+                    try {
+                        require(`../../plugins/${plugin}`).prototype.onChat(server, client, msg, fullmsg)
+                    } catch (e) {
+                        Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                    }
+                });
+            });
             Logger.prototype.log(lang.chatmessage + fullmsg)
             if (msg.includes("§") || msg.length == 0 || msg > 255 && config.blockinvalidmessages) {
                 Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
@@ -168,6 +241,15 @@ server.on('connect', client => {
                 if (clients[i] == !client) { clients[i].chat(`${fullmsg}`) }
             }
         } else if (packet.data.name === 'command_request') {
+            fs.readdir("./plugins", (err, plugins) => {
+                plugins.forEach(plugin => {
+                    try {
+                        require(`../../plugins/${plugin}`).prototype.onCommand(server, client, command)
+                    } catch (e) {
+                        Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                    }
+                });
+            });
             let cmd = packet.data.params.command.toLowerCase();
             Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
             switch (cmd) { // TODO: Translate chat
@@ -199,6 +281,15 @@ server.on('connect', client => {
             handlepk(client, packet)
         } catch (e) {
             client.kick(config.kick__internal_server_error)
+            fs.readdir("./plugins", (err, plugins) => {
+                plugins.forEach(plugin => {
+                    try {
+                        require(`../../plugins/${plugin}`).prototype.onInternalServerError(server, client, err)
+                    } catch (e) {
+                        Logger.prototype.log(`Failed to execute onJoin event for plugin "${plugin}". The error was: ${err}`, 'error')
+                    }
+                });
+            });
             Logger.prototype.log(lang.handlepacketexception.replace('%player%', client.getUserData().displayName).replace('%error%', e.stack), 'error')
         }
     })
