@@ -11,6 +11,9 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 2. Then do 'node index.js'
 3. Done
 
+## Plugins available for public usage
+
+* Soon
 
 ## Features
 
@@ -23,7 +26,7 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 7. Support of new versions
 8. Basic moderation (/kick)
 9. Basic admin commands
-10. Plugin support. (not finished)
+10. Plugin support
 
 ## Language system
 Our language system currently supports those languages: English, Lithuanian, Ukrainian
