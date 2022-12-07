@@ -13,7 +13,7 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 ## Plugins available for public usage
 
-* Soon
+* Soon, if you have one feel free to open an issue
 
 ## Features
 
