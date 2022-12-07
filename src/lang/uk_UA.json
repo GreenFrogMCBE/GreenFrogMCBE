@@ -40,7 +40,7 @@
     "kicked_prefix": "Вас було кікнуто: ",
     "commandlist": "Список команд: ",
     "kicked_consolemsg": "Кікнуто %player% за: %reason%",
-    "loadingserver": "Завантаження сервера",
+    "loadingserver": "Завантаження сервера...",
     "failedfindconfig": "Невдалося знайти config.json | Помилка: %e%",
     "failedparseconfig": "Невдалося пропарсити config.json | Помилка: %e%",
     "failedfindlang": "Невдалося знайти lang.json | Помилка: %e%",
@@ -58,5 +58,6 @@
     "illegalmessage": "%player% надіслав недійсне повідомлення. Повідомлення було: %msg%",
     "executedcmd": "%player% використав команду: %cmd%",
     "unhandledpacket": "Необроблений пакет",
-    "handlepacketexception": "Невдалося обробити пакет від %player%: %error%"
+    "handlepacketexception": "Невдалося обробити пакет від %player%: %error%",
+    "servererror": "Помилка сервера"
 }

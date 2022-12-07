@@ -40,7 +40,7 @@
     "kicked_prefix": "You were kicked for: ",
     "commandlist": "Command list: ",
     "kicked_consolemsg": "Kicked %player% for: %reason%",
-    "loadingserver": "Loading server",
+    "loadingserver": "Loading server...",
     "failedfindconfig": "Failed to find config.json | Error: %e%",
     "failedparseconfig": "Failed to parse config.json | Error: %e%",
     "failedfindlang": "Failed to find lang.json | Error: %e%",
@@ -58,5 +58,6 @@
     "illegalmessage": "%player% sent an illegal message. Message content was: %msg%",
     "executedcmd": "%player% executed a server command: %cmd%",
     "unhandledpacket": "Unhandled packet",
-    "handlepacketexception": "Exception while trying to handle packet from %player%: %error%"
+    "handlepacketexception": "Exception while trying to handle packet from %player%: %error%",
+    "servererror": "Server error"
 }
