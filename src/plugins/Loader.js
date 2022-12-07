@@ -3,10 +3,7 @@ const Logger = require('../console/Logger')
 
 class Loader {
 
-    constructor() {
-        this.plugins = []
-        this.plugin = null
-    }
+    constructor() {}
 
     loadPlugins() {
         try {
@@ -23,14 +20,16 @@ class Loader {
         }
         fs.readdir("./plugins", (err, plugins) => {
             plugins.forEach(plugin => {
-                Logger.prototype.log(`Trying to load plugin "${plugin}"`)
+                Logger.prototype.log(`Loading ${plugin}...`)
                 try {
-                    this.plugin = require(`./plugins/${plugin}`)
-                    eval(plugin + ".prototype.onLoad()");
+                    Logger.prototype.log(`Loaded ${require(`../../plugins/${plugin}`).prototype.getName()}`)
+                    require(`../../plugins/${plugin}`).prototype.onLoad()
                 } catch (e) {
+                    console.log(e.stack)
                     Logger.prototype.log(`Failed to load plugin "${plugin}". The error was: ${e}`, 'error')
                 }
             });
+            Logger.prototype.log(`All plugins loaded!`, 'info')
         });
     }
 
