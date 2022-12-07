@@ -10,5 +10,5 @@ assignees: ''
 ## What is wrong?
 [type here]
 
-## What platform are u using?
+## What platform are you using?
 [type here]
