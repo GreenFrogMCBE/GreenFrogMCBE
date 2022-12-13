@@ -4,6 +4,7 @@ const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
 const ServerInfo = require('../src/api/ServerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
+const { loadWorld } = require('../src/chunks/ChunkLoader')
 const fs = require('fs')
 let clients = []
 
@@ -56,6 +57,11 @@ try {
     Logger.prototype.log(`${lang.listening_failed.replace(`%ipport%`, `/${config.host}:${config.port}`).replace('%error%', e)}`, 'error')
     process.exit(-1)
 }
+
+const respawnPacket = get('respawn')
+const world = await loadWorld(version)
+const chunks = await world.requestChunks(respawnPacket.x, respawnPacket.z, 2)
+
 
 server.on('connect', client => {
     client.on('join', () => {
@@ -164,6 +170,21 @@ server.on('connect', client => {
                     client.write('available_entity_identifiers', get('available_entity_identifiers'))
                     client.write('creative_content', get('creative_content'))
 
+                    for (const chunk of chunks) {
+                        client.queue('level_chunk', chunk)
+                    }
+                    
+                    setInterval(() => {
+                        client.write('network_chunk_publisher_update', { coordinates: { x: respawnPacket.x, y: 130, z: respawnPacket.z }, radius: 80 })
+                    }, 4500)
+                    
+                    client.on('tick_sync', (packet) => {
+                            client.queue('tick_sync', {
+                                request_time: packet.request_time,
+                                response_time: BigInt(Date.now())
+                            })
+                    })
+                    
                     client.chat = function (msg) {
                         client.write('text', {
                             type: 'announcement',
