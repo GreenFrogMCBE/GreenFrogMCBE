@@ -63,34 +63,49 @@ try {
 
 // chunk related hell
 
+Logger.prototype.log(`Loading world...`, 'info')
 const respawnPacket = get('respawn')
-const path = join(__dirname, `../world/db/`)
-const db = new LevelDB(path, { createIfMissing: false })
-db.open()
-const wp = new WorldProvider(db, { dimension: 0 })
-const chunks = []
-const cxStart = (respawnPacket.x >> 4) - radius
-const cxEnd = (respawnPacket.x >> 4) + radius
-const czStart = (respawnPacket.z >> 4) - radius
-const czEnd = (respawnPacket.z >> 4) + radius
-
-for (let cx = cxStart; cx < cxEnd; cx++) {
-  for (let cz = czStart; cz < czEnd; cz++) {
-    const cc = wp.load(cx, cz, true)
-    if (!cc) {
-      continue
-    }
-    const cbuf = cc.networkEncodeNoCache()
-    chunks.push({
-      x: cx,
-      z: cz,
-      sub_chunk_count: cc.sectionsLen,
-      cache_enabled: false,
-      blobs: [],
-      payload: cbuf
-    })
-  }
+const path = join(__dirname, `../world/`)
+const db = new LevelDB(path, { createIfMissing: true })
+Logger.prototype.log(`Closing old database...`, 'info')
+try {
+    db.close()
+    Logger.prototype.log(`Database closed`, 'info')
+} catch (e) {
+    Logger.prototype.log(`Failed to close database. This does not mean anything, you can just ignore this message`, 'info')
 }
+Logger.prototype.log(`Opening new database`, 'info')
+let wp;
+try {
+    wp = new WorldProvider(db, { dimension: 0 })
+} catch (e) {
+    Logger.prototype.log(`Failed to load database`, 'error')
+}
+const chunks = []
+const cxStart = (respawnPacket.x >> 4) - 2
+const cxEnd = (respawnPacket.x >> 4) + 2
+const czStart = (respawnPacket.z >> 4) - 2
+const czEnd = (respawnPacket.z >> 4) + 2
+
+async function loadChunks() {
+    for (let cx = cxStart; cx < cxEnd; cx++) {
+        for (let cz = czStart; cz < czEnd; cz++) {
+            const cc = await wp.load(cx, cz, true)
+            setTimeout(() => {
+                const cbuf = cc.networkEncodeNoCache()
+                chunks.push({
+                    x: cx,
+                    z: cz,
+                    sub_chunk_count: cc.sectionsLen,
+                    cache_enabled: false,
+                    blobs: [],
+                    payload: cbuf
+                })
+            }, 10000)
+        }
+    }
+}
+loadChunks()
 
 // end of my suffering
 
@@ -104,7 +119,7 @@ server.on('connect', client => {
             behaviour_packs: [],
             texture_packs: []
         })
-        
+
         fs.readdir("./plugins", (err, plugins) => {
             plugins.forEach(plugin => {
                 try {
@@ -204,18 +219,18 @@ server.on('connect', client => {
                     for (const chunk of chunks) {
                         client.queue('level_chunk', chunk)
                     }
-                    
+
                     setInterval(() => {
                         client.write('network_chunk_publisher_update', { coordinates: { x: respawnPacket.x, y: 130, z: respawnPacket.z }, radius: 80 })
                     }, 4500)
-                    
+
                     client.on('tick_sync', (packet) => {
-                            client.queue('tick_sync', {
-                                request_time: packet.request_time,
-                                response_time: BigInt(Date.now())
-                            })
+                        client.queue('tick_sync', {
+                            request_time: packet.request_time,
+                            response_time: BigInt(Date.now())
+                        })
                     })
-                    
+
                     client.chat = function (msg) {
                         client.write('text', {
                             type: 'announcement',
