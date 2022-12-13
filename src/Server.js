@@ -4,9 +4,6 @@ const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
 const ServerInfo = require('../src/api/ServerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
-const { WorldProvider } = require('bedrock-provider')
-const { LevelDB } = require('leveldb-zlib')
-const { join } = require('path')
 const fs = require('fs')
 let clients = []
 
@@ -61,53 +58,6 @@ try {
 }
 
 
-// chunk related hell
-
-Logger.prototype.log(`Loading world...`, 'info')
-const respawnPacket = get('respawn')
-const path = join(__dirname, `../world/`)
-const db = new LevelDB(path, { createIfMissing: true })
-Logger.prototype.log(`Closing old database...`, 'info')
-try {
-    db.close()
-    Logger.prototype.log(`Database closed`, 'info')
-} catch (e) {
-    Logger.prototype.log(`Failed to close database. This does not mean anything, you can just ignore this message`, 'info')
-}
-Logger.prototype.log(`Opening new database`, 'info')
-let wp;
-try {
-    wp = new WorldProvider(db, { dimension: 0 })
-} catch (e) {
-    Logger.prototype.log(`Failed to load database`, 'error')
-}
-const chunks = []
-const cxStart = (respawnPacket.x >> 4) - 2
-const cxEnd = (respawnPacket.x >> 4) + 2
-const czStart = (respawnPacket.z >> 4) - 2
-const czEnd = (respawnPacket.z >> 4) + 2
-
-async function loadChunks() {
-    for (let cx = cxStart; cx < cxEnd; cx++) {
-        for (let cz = czStart; cz < czEnd; cz++) {
-            const cc = await wp.load(cx, cz, true)
-            setTimeout(() => {
-                const cbuf = cc.networkEncodeNoCache()
-                chunks.push({
-                    x: cx,
-                    z: cz,
-                    sub_chunk_count: cc.sectionsLen,
-                    cache_enabled: false,
-                    blobs: [],
-                    payload: cbuf
-                })
-            }, 10000)
-        }
-    }
-}
-loadChunks()
-
-// end of my suffering
 
 server.on('connect', client => {
     client.on('join', () => {
@@ -216,16 +166,47 @@ server.on('connect', client => {
                     client.write('available_entity_identifiers', get('available_entity_identifiers'))
                     client.write('creative_content', get('creative_content'))
 
-                    for (const chunk of chunks) {
-                        client.queue('level_chunk', chunk)
-                    }
+function toBuffer(bufferString) {
+  const hex = bufferString.match(/\s[0-9a-fA-F]+/g).map((x) => x.trim());
+  return Buffer.from(hex.join(''), 'hex');
+}
+
+const buffer = '<Buffer 01 58 01 58 01 58 01 58 01 58 01 58 01 58 01 58 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 00>';
+const actualBuffer = toBuffer(buffer);
+
+
 
                     setInterval(() => {
-                        client.write('network_chunk_publisher_update', { coordinates: { x: respawnPacket.x, y: 130, z: respawnPacket.z }, radius: 80 })
-                    }, 4500)
+                        client.write('level_chunk', {
+                            x: 0,
+                            z: 0,
+                            sub_chunk_count: -1,
+                            cache_enabled: false,
+                            blobs: [],
+                            payload: buffer                 
+                        })
+                    client.write('update_block', {
+                        "position": {
+                            "x": 26,
+                            "y": 100,
+                            "z": 17
+                        },
+                        "block_runtime_id": 9807,
+                        "flags": {
+                            "_value": 3,
+                            "neighbors": true,
+                            "network": true,
+                            "no_graphic": false,
+                            "unused": false,
+                            "priority": false
+                        },
+                        "layer": 0
+                    })
+                    }, 1000)
+
 
                     client.on('tick_sync', (packet) => {
-                        client.queue('tick_sync', {
+                        client.write('tick_sync', {
                             request_time: packet.request_time,
                             response_time: BigInt(Date.now())
                         })
