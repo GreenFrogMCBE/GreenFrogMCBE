@@ -19,17 +19,17 @@ const lang = require(`./lang/${config.lang}.json`)
 Logger.prototype.log(lang.loadingserver)
 
 process.on('uncaughtException', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
     process.exit(-1)
 })
 
 process.on('uncaughtExceptionMonitor', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
     process.exit(-1)
 })
 
 process.on('unhandledRejection', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
     process.exit(-1)
 })
 
@@ -64,7 +64,6 @@ try {
 // chunk related hell
 
 const respawnPacket = get('respawn')
-const world = await loadWorld(version)
 const path = join(__dirname, `../world/db/`)
 const db = new LevelDB(path, { createIfMissing: false })
 db.open()
@@ -77,11 +76,11 @@ const czEnd = (z >> 4) + radius
 
 for (let cx = cxStart; cx < cxEnd; cx++) {
   for (let cz = czStart; cz < czEnd; cz++) {
-    const cc = await wp.load(cx, cz, true)
+    const cc = wp.load(cx, cz, true)
     if (!cc) {
       continue
     }
-    const cbuf = await cc.networkEncodeNoCache()
+    const cbuf = cc.networkEncodeNoCache()
     chunks.push({
       x: cx,
       z: cz,
