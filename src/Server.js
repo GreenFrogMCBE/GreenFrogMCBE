@@ -69,10 +69,10 @@ const db = new LevelDB(path, { createIfMissing: false })
 db.open()
 const wp = new WorldProvider(db, { dimension: 0 })
 const chunks = []
-const cxStart = (x >> 4) - radius
-const cxEnd = (x >> 4) + radius
-const czStart = (z >> 4) - radius
-const czEnd = (z >> 4) + radius
+const cxStart = (respawnPacket.x >> 4) - radius
+const cxEnd = (respawnPacket.x >> 4) + radius
+const czStart = (respawnPacket.z >> 4) - radius
+const czEnd = (respawnPacket.z >> 4) + radius
 
 for (let cx = cxStart; cx < cxEnd; cx++) {
   for (let cz = czStart; cz < czEnd; cz++) {
