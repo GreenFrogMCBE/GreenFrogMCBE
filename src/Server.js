@@ -163,23 +163,6 @@ server.on('connect', client => {
                     client.write('biome_definition_list', get('biome_definition_list'))
                     client.write('available_entity_identifiers', get('available_entity_identifiers'))
                     client.write('creative_content', get('creative_content'))
-                    client.write('update_block', {
-                        "position": {
-                            "x": 26,
-                            "y": 100,
-                            "z": 17
-                        },
-                        "block_runtime_id": 9807,
-                        "flags": {
-                            "_value": 3,
-                            "neighbors": true,
-                            "network": true,
-                            "no_graphic": false,
-                            "unused": false,
-                            "priority": false
-                        },
-                        "layer": 0
-                    })
 
                     client.chat = function (msg) {
                         client.write('text', {
