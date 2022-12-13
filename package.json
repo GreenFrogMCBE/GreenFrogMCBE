@@ -5,6 +5,8 @@
     "author": "andriycraft",
     "license": "BSD 3-Clause",
     "dependencies": {
-        "bedrock-protocol": "git+https://github.com/PrismarineJS/bedrock-protocol"
+        "bedrock-protocol": "git+https://github.com/PrismarineJS/bedrock-protocol",
+        "bedrock-provider": "3.0.0",
+        "leveldb-zlib": "1.2.0"
     }
 }
