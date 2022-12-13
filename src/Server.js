@@ -4,7 +4,9 @@ const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
 const ServerInfo = require('../src/api/ServerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
-const { loadWorld } = require('../src/chunks/ChunkLoader')
+const { WorldProvider } = require('bedrock-provider')
+const { LevelDB } = require('leveldb-zlib')
+const { join } = require('path')
 const fs = require('fs')
 let clients = []
 
@@ -58,10 +60,40 @@ try {
     process.exit(-1)
 }
 
+
+// chunk related hell
+
 const respawnPacket = get('respawn')
 const world = await loadWorld(version)
-const chunks = await world.requestChunks(respawnPacket.x, respawnPacket.z, 2)
+const path = join(__dirname, `../world/db/`)
+const db = new LevelDB(path, { createIfMissing: false })
+db.open()
+const wp = new WorldProvider(db, { dimension: 0 })
+const chunks = []
+const cxStart = (x >> 4) - radius
+const cxEnd = (x >> 4) + radius
+const czStart = (z >> 4) - radius
+const czEnd = (z >> 4) + radius
 
+for (let cx = cxStart; cx < cxEnd; cx++) {
+  for (let cz = czStart; cz < czEnd; cz++) {
+    const cc = await wp.load(cx, cz, true)
+    if (!cc) {
+      continue
+    }
+    const cbuf = await cc.networkEncodeNoCache()
+    chunks.push({
+      x: cx,
+      z: cz,
+      sub_chunk_count: cc.sectionsLen,
+      cache_enabled: false,
+      blobs: [],
+      payload: cbuf
+    })
+  }
+}
+
+// end of my suffering
 
 server.on('connect', client => {
     client.on('join', () => {
