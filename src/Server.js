@@ -88,7 +88,7 @@ server.on('connect', client => {
                 try {
                     require(`../plugins/${plugin}`).prototype.onResourcePackInfoSent(server, client)
                 } catch (e) {
-                    Logger.prototype.log(`Failed to execute onResourcePackInfoSent() event for plugin "${plugin}". The error was: ${e}`, 'error')
+                    Logger.prototype.log(`Failed to execute onResourcePackInfoSent(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                 }
             });
         });

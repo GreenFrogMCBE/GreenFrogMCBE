@@ -1,34 +1,55 @@
 const fs = require('fs')
 const Logger = require('../console/Logger')
+const CheckPluginFolder = require('./CheckPluginFolder')
+const ServerInfo = require('../api/ServerInfo')
 
 class Loader {
 
-    constructor() { }
+    constructor() {}
 
     loadPlugins() {
-        try {
-            Logger.prototype.log('Loading plugins...')
-            fs.readdirSync("./plugins")
-        } catch (e) {
-            Logger.prototype.log('Plugins folder not found. Creating it...')
-            try {
-                fs.mkdirSync("./plugins", { recursive: true })
-                Logger.prototype.log('Plugins folder created')
-            } catch (e) {
-                Logger.prototype.log(`Failed to create plugins folder, this is a fatal error, shutting down: ${e}`, 'error')
-            }
-        }
+
+        CheckPluginFolder.prototype.check()
+
         fs.readdir("./plugins", (err, plugins) => {
             plugins.forEach(plugin => {
                 Logger.prototype.log(`Loading ${plugin}...`)
                 try {
-                    Logger.prototype.log(`Loaded ${require(`../../plugins/${plugin}`).prototype.getName()} (${require(`../../plugins/${plugin}`).name})`)
+
+                    if (require(`../../plugins/${plugin}`).prototype.getName() === "") {
+                        throw new Error(`Empty plugin name! Source: ${plugin}`)
+                    }
+
+                    try {
+                        if (require(`../../plugins/${plugin}`).prototype.getServerVersion() === ServerInfo.prototype.getServerVersion()) {
+                            Logger.prototype.log(`Plugin ${plugin} supports your server version`)
+                        } else {
+                            Logger.prototype.log(`The plugin ${require(`../../plugins/${plugin}`).prototype.getName()} is made for ${require(`../../plugins/${plugin}`).prototype.getServerVersion()}. Your server is on ${ServerInfo.prototype.getServerVersion()}. This may cause unexpected issues or crashes`)
+                        }
+                    } catch (e) {
+                        throw new Error(`Plugin ${plugin} has no getServerVersion()`, 'warning')
+                    }
+
+
+                    let version = 'unknown'
+                    try {
+                        version = require(`../../plugins/${plugin}`).prototype.getVersion()
+                    } catch (e) {
+                        throw new Error(`Plugin ${plugin} has no getVersion()`, 'warning')
+                    }
+
+                    Logger.prototype.log(`Loaded plugin ${require(`../../plugins/${plugin}`).prototype.getName()} ${version}`)
+
                     require(`../../plugins/${plugin}`).prototype.onLoad()
                 } catch (e) {
-                    Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()}". The error was: ${e.stack}`, 'error')
+                    let version = 'unknown'
+                    try {
+                        version = require(`../../plugins/${plugin}`).prototype.getVersion()
+                    } catch (e) { }
+                    Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()} version: ${version}". The error was: ${e.stack}`, 'error')
                 }
             });
-            Logger.prototype.log(`All plugins loaded!`, 'info')
+            Logger.prototype.log(`All plugins are loaded!`, 'info')
         });
     }
 

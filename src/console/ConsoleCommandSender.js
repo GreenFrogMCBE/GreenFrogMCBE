@@ -3,6 +3,7 @@ const Logger = require('./Logger')
 const ServerInfo = require('../api/ServerInfo');
 const config = require("../../config.json");
 const lang = require(`../lang/${config.lang}.json`)
+const fs = require('fs')
 
 class ConsoleCommandSender {
     constructor() { }
@@ -18,6 +19,15 @@ class ConsoleCommandSender {
         r.prompt(true)
 
         r.on('line', (data) => {
+            fs.readdir("./plugins", (err, plugins) => {
+                plugins.forEach(plugin => {
+                    try {
+                        require(`../../plugins/${plugin}`).prototype.onConsoleCommand(data)
+                    } catch (e) {
+                        Logger.prototype.log(`Failed to execute onConsoleCommand(command) event for plugin "${plugin}". The error was: ${e}`, 'error')
+                    }
+                });
+            });
             if (data.startsWith(`${lang.command_time} `)) {
                 const time = parseInt(data.split(" ")[1])
                 if (time === NaN) {

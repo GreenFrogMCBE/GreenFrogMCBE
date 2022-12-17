@@ -21,6 +21,11 @@ class ServerInfo {
     getLang () {
         return this.lang;
     }
+
+    getServerVersion() {
+        return "1.1"
+    }
+
 }
 
 module.exports = ServerInfo;
