@@ -254,7 +254,7 @@ server.on('connect', client => {
                 return
             }
 
-		 Logger.prototype.log('msg length: ' + msg.replace(" ", '').length, 'debug')
+            Logger.prototype.log('msg length: ' + msg.replace(" ", '').length, 'debug')
 
             for (let i = 0; i < clients.length; i++) {
                 clients[i].chat(`${fullmsg}`)
