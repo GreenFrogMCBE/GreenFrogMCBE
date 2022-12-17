@@ -168,8 +168,6 @@ server.on('connect', client => {
                     }
 
                     Logger.prototype.log(lang.joined.replace('%player%', client.getUserData().displayName))
-                    client.write('network_settings', { compression_threshold: 1 })
-
                     client.write('player_list', get('player_list'))
                     client.write('start_game', get('start_game'))
                     client.write('set_spawn_position', get('set_spawn_position'))
