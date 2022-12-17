@@ -17,21 +17,34 @@ Logger.prototype.log(lang.loadingserver)
 
 process.on('uncaughtException', function (err) {
     Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
-    process.exit(-1)
+    if (!config.donotcrashoncriticalerrors) {
+        process.exit(-1)
+    }
 })
 
 process.on('uncaughtExceptionMonitor', function (err) {
     Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
-    process.exit(-1)
+    if (!config.donotcrashoncriticalerrors) {
+        process.exit(-1)
+    }
 })
 
 process.on('unhandledRejection', function (err) {
     Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
-    process.exit(-1)
+    if (!config.donotcrashoncriticalerrors) {
+        process.exit(-1)
+    }
 })
 
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
+if (config.donotcrashoncriticalerrors) {
+    Logger.prototype.log(`Donotcrashoncriticalerrors is enabled! This may make the server unstable`, 'warning')
+}
+
+if (config.debug) {
+    Logger.prototype.log(`Debugging is enabled! This may fill up your console with junk`, 'warning')
+}
 
 Logger.prototype.log(`${lang.scch}`)
 Loader.prototype.loadPlugins()
@@ -163,6 +176,7 @@ server.on('connect', client => {
                     client.write('biome_definition_list', get('biome_definition_list'))
                     client.write('available_entity_identifiers', get('available_entity_identifiers'))
                     client.write('creative_content', get('creative_content'))
+                    client.write('level_chunk', get('level_chunk'))
 
                     client.chat = function (msg) {
                         client.write('text', {

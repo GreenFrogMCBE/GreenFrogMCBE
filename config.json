@@ -6,5 +6,7 @@
     "version": "1.19.50",
     "offlinemode": true,
     "blockinvalidmessages": true,
-    "lang": "en_US"
+    "lang": "en_US",
+    "donocrashoncriticalerrors": true,
+    "debug": true
 }
