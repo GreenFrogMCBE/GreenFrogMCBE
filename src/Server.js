@@ -121,7 +121,7 @@ server.on('connect', client => {
                         });
                     });
                     Logger.prototype.log(lang.rpsrefused.replace('%player%', client.getUserData().displayName))
-                    client.kick(lang.kick__resource_packs_refused)
+                    client.kick(lang.resource_packs_refused)
                 }
                 case 'have_all_packs': {
                     fs.readdir("./plugins", (err, plugins) => {
@@ -156,13 +156,13 @@ server.on('connect', client => {
                         });
                     });
                     if (client.getUserData().displayName.length < 3) {
-                        client.kick(lang.kick__username_is_too_short)
+                        client.kick(lang.username_is_too_short)
                         return
                     }
 
                     if (client.getUserData().displayName.length > 16) {
                         if (config.offlinemode) return
-                        client.kick(lang.kick__username_is_too_long)
+                        client.kick(lang.username_is_too_long)
                         return
                     }
 
@@ -219,7 +219,6 @@ server.on('connect', client => {
                                 }
                             });
                         });
-                        client.write('level_chunk', get('level_chunk'))
                     }, 2000)
 
 
@@ -237,7 +236,7 @@ server.on('connect', client => {
             return
         } else if (packet.data.name === 'text') {
             let msg = packet.data.params.message;
-            let fullmsg = lang.chat__chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
+            let fullmsg = lang.chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
             fs.readdir("./plugins", (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {
@@ -247,14 +246,14 @@ server.on('connect', client => {
                     }
                 });
             });
-            Logger.prototype.log(lang.chatmessage + fullmsg)
+            Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg)
             if (msg.includes("§") || msg.length == 0 || msg > 255 && config.blockinvalidmessages) {
                 Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
-                client.kick(lang.kick__invalid_chat_message)
+                client.kick(lang.invalid_chat_message)
                 return
             }
 
-            Logger.prototype.log('msg length: ' + msg.replace(" ", '').length, 'debug')
+            Logger.prototype.log('Msg length: ' + msg.replace(" ", '').length, 'debug')
 
             for (let i = 0; i < clients.length; i++) {
                 clients[i].chat(`${fullmsg}`)
@@ -299,7 +298,7 @@ server.on('connect', client => {
         try {
             handlepk(client, packet)
         } catch (e) {
-            client.kick(config.kick__internal_server_error)
+            client.kick(config.internal_server_error)
             fs.readdir("./plugins", (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {
