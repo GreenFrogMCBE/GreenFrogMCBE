@@ -18,7 +18,7 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 If you have one feel free to open an issue
 
 * Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/main/docs/plugins/exampleplugin | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin | Author: GreenFrogMCBE
-* DonationReminder: https://github.com/andriycraft/GreenFrogMCBEdonations/ | Description: A plugin that adds that annoying donation message. Installed by default | Author: GreenFrogMCBE
+* DonationReminder: https://github.com/andriycraft/GreenFrogMCBEdonations/ | Description: A plugin that adds that annoying donation message. | Author: GreenFrogMCBE
 
 ## Plugin listing rules
 
