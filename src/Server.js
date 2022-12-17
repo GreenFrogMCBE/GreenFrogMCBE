@@ -246,7 +246,7 @@ server.on('connect', client => {
                     }
                 });
             });
-            Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg)
+            Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg))
             if (msg.includes("§") || msg.length == 0 || msg > 255 && config.blockinvalidmessages) {
                 Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
                 client.kick(lang.invalid_chat_message)
@@ -259,16 +259,16 @@ server.on('connect', client => {
                 clients[i].chat(`${fullmsg}`)
             }
         } else if (packet.data.name === 'command_request') {
+            let cmd = packet.data.params.command.toLowerCase();
             fs.readdir("./plugins", (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {
-                        require(`../plugins/${plugin}`).prototype.onCommand(server, client, command)
+                        require(`../plugins/${plugin}`).prototype.onCommand(server, client, cmd)
                     } catch (e) {
                         Logger.prototype.log(`Failed to execute onCommand(server, client, command) event for plugin "${plugin}". The error was: ${e}`, 'error')
                     }
                 });
             });
-            let cmd = packet.data.params.command.toLowerCase();
             Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
             switch (cmd) { // TODO: Translate chat
                 case '/ver':

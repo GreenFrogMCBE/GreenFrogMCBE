@@ -1,5 +1,5 @@
 const config = require('../../config.json')
-const lang = require(`../../lang/${config.lang}.json`)
+const lang = require(`../lang/${config.lang}.json`)
 
 class Logger {
     constructor() { }

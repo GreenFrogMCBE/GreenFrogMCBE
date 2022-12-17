@@ -39,7 +39,6 @@ If you want for your plugin to be listed on the 'Plugins available for public us
 8. Basic moderation (/kick)
 9. Basic admin commands
 10. Plugin support
-11. Many events for plugins
 
 ## Language system
 Our language system currently supports those languages: English, Lithuanian, Ukrainian
@@ -56,7 +55,7 @@ Our language system currently supports those languages: English, Lithuanian, Ukr
 
 ## Donations
 
-If you want you can donate: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
+I need money to maintain this project and keep it free: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
 ## Servers that run this software
 
