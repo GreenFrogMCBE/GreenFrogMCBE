@@ -1,4 +1,5 @@
 const config = require("../../config.json")
+
 class ServerInfo {
     constructor() {
         this.players = []
