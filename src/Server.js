@@ -18,21 +18,21 @@ Logger.prototype.log(lang.loadingserver)
 if (config.debug) { process.debug = 'minecraft-protocol' }
 
 process.on('uncaughtException', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
     if (!config.donotcrashoncriticalerrors) {
         process.exit(-1)
     }
 })
 
 process.on('uncaughtExceptionMonitor', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
     if (!config.donotcrashoncriticalerrors) {
         process.exit(-1)
     }
 })
 
 process.on('unhandledRejection', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
+    Logger.prototype.log(`${lang.servererror}: ${err}`, 'error')
     if (!config.donotcrashoncriticalerrors) {
         process.exit(-1)
     }
@@ -176,9 +176,13 @@ server.on('connect', client => {
                     client.write('biome_definition_list', get('biome_definition_list'))
                     client.write('available_entity_identifiers', get('available_entity_identifiers'))
                     client.write('creative_content', get('creative_content'))
-                    Logger.prototype.log(`sent respawn`, 'debug')
+                    Logger.prototype.log(`Sent respawn`, 'debug')
                     client.queue('respawn', get('respawn'))
-                    Logger.prototype.log(`sent chunks`, 'debug')
+                    Logger.prototype.log(`Sent chunks`, 'debug')
+
+                    setInterval(() => {
+                        client.write('network_chunk_publisher_update', { coordinates: { x: -5, y: 130, z: -6 }, radius: 80 })
+                    }, 4500)
 
                     client.write('level_chunk', get('level_chunk'))
 
