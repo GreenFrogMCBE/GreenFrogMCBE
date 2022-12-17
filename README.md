@@ -1,3 +1,5 @@
+<img src="https://cdn.discordapp.com/attachments/1027321168576925799/1053767928849383514/logo.png">
+
 ## GreenFrogMCBE 
 
 Server software for Minecraft Bedrock, written in Node js
@@ -39,11 +41,16 @@ Our language system currently supports those languages: English, Lithuanian, Ukr
 
 ## Forking Rules
 
-1. You are not allowed to sell your fork
-2. You are not allowed to change your fork license
-3. Credit me and GreenFrogMCBE somewhere
+1. You are not allowed to change your fork license
+2. Credit me and GreenFrogMCBE somewhere
+
+## Donation
+
+I need money to maintain this project and keep him free: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
 ## Servers that run this software
+
+If you have one fell free to open an issue!
 
 - 159.65.55.27 | Testing server for GreenFrog
 - 67.207.68.250 | Second testing server for GreenFrog
