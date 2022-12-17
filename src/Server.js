@@ -6,7 +6,6 @@ const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
 const fs = require('fs')
 let clients = []
-if (config.debug) { process.debug = 'minecraft-protocol' }
 
 ValidateConfig.prototype.ValidateConfig()
 ValidateConfig.prototype.ValidateLangFile()
@@ -15,6 +14,8 @@ const config = require('../config.json')
 const lang = require(`./lang/${config.lang}.json`)
 
 Logger.prototype.log(lang.loadingserver)
+
+if (config.debug) { process.debug = 'minecraft-protocol' }
 
 process.on('uncaughtException', function (err) {
     Logger.prototype.log(`${lang.servererror}: ${e}`, 'error')
@@ -175,6 +176,8 @@ server.on('connect', client => {
                     client.write('biome_definition_list', get('biome_definition_list'))
                     client.write('available_entity_identifiers', get('available_entity_identifiers'))
                     client.write('creative_content', get('creative_content'))
+                    Logger.prototype.log(`sent chunks`, 'debug')
+
                     client.write('level_chunk', get('level_chunk'))
 
                     client.chat = function (msg) {

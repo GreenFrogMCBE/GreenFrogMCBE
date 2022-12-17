@@ -1,7 +1,9 @@
+const config = require('../../config.json')
+
 class Logger {
     constructor() { }
 
-    log (message, type = 'info') {
+    log(message, type = 'info') {
         switch (type) {
             case 'info':
                 console.log(`\x1b[34mINFO\x1b[0m | ${message}`)
@@ -13,6 +15,11 @@ class Logger {
             case 'error':
             case 'err':
                 console.log(`\x1b[31mERROR\x1b[0m | ${message}`)
+                break
+            case 'debug':
+                if (config.debug) {
+                    console.log(`\x1b[37mDEBUG\\x1b[0m | ${message}`)
+                }
                 break
             default:
                 throw new Error(`Invalid log type: ${type}`)
