@@ -15,7 +15,7 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 ## Plugins available for public usage
 
-* Soon, if you have one feel free to open an issue
+* Soon, if you have one feel free to open an issue! :)
 * Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/exampleplugin.js
 
 ## Features
@@ -39,18 +39,18 @@ Our language system currently supports those languages: English, Lithuanian, Ukr
 - You can edit your config in config.json
 - You can edit your server language in /src/lang/(server language).json
 
-## Forking Rules
+## Forking rules
 
 1. You are not allowed to change your fork license
 2. Credit me and GreenFrogMCBE somewhere
 
-## Donation
+## Donations
 
 I need money to maintain this project and keep it free: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
 ## Servers that run this software
 
-If you have one fell free to open an issue!
+If you have one fell free to open an issue! :)
 
 - 159.65.55.27 | Testing server for GreenFrog
 - 67.207.68.250 | Second testing server for GreenFrog
