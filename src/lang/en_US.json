@@ -18,7 +18,7 @@
     "empty_message": "Empty message was provided!",
     "no_reason": "No reason",
     "command_list": "All commands",
-    "kick_help": "/kick [player] [reason] - kick player",
+    "kick_help": "kick [player] [reason] - kick player",
     "shutdown_help": "shutdown - Stops the server",
     "stop_help": "stop - Stops the server",
     "help_help": "help - Shows this message",

@@ -18,7 +18,7 @@
     "empty_message": "Jūsu Žinutė yra tusčia!",
     "no_reason": "jokios priežasties",
     "command_list": "Visos komandos",
-    "kick_help": "/išmesti [žaidėjas] [priežastis] - išmesti žaidėja",
+    "kick_help": "išmesti [žaidėjas] [priežastis] - išmesti žaidėja",
     "shutdown_help": "/išjungti - Išjungia serverį",
     "stop_help": "/baigti - Išjungia serverį",
     "help_help": "pagalba - šiuo metu žiūrite šią komandą",
