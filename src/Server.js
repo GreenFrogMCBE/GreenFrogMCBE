@@ -88,7 +88,7 @@ server.on('connect', client => {
                 try {
                     require(`../plugins/${plugin}`).prototype.onResourcePackInfoSent(server, client)
                 } catch (e) {
-                    Logger.prototype.log(`Failed to execute onResourcePackInfoSent() event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                    Logger.prototype.log(`Failed to execute onResourcePackInfoSent() event for plugin "${plugin}". The error was: ${e}`, 'error')
                 }
             });
         });
@@ -107,7 +107,7 @@ server.on('connect', client => {
                             try {
                                 require(`../plugins/${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(server, client)
                             } catch (e) {
-                                Logger.prototype.log(`Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                                Logger.prototype.log(`Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                             }
                         });
                     });
@@ -118,7 +118,7 @@ server.on('connect', client => {
                             try {
                                 require(`../plugins/${plugin}`).prototype.onResourcePacksRefused(server, client)
                             } catch (e) {
-                                Logger.prototype.log(`Failed to execute onResourcePacksRefused(server, client) event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                                Logger.prototype.log(`Failed to execute onResourcePacksRefused(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                             }
                         });
                     });
@@ -131,7 +131,7 @@ server.on('connect', client => {
                             try {
                                 require(`../plugins/${plugin}`).prototype.onPlayerHaveAllPacks(server, client)
                             } catch (e) {
-                                Logger.prototype.log(`Failed to execute onPlayerHaveAllPacks(server, client) event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                                Logger.prototype.log(`Failed to execute onPlayerHaveAllPacks(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                             }
                         });
                     });
@@ -153,7 +153,7 @@ server.on('connect', client => {
                             try {
                                 require(`../plugins/${plugin}`).prototype.onResourcePacksCompleted(server, client)
                             } catch (e) {
-                                Logger.prototype.log(`Failed to execute onResourcePacksCompleted(server, client) event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                                Logger.prototype.log(`Failed to execute onResourcePacksCompleted(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                             }
                         });
                     });
@@ -180,11 +180,6 @@ server.on('connect', client => {
                     client.queue('respawn', get('respawn'))
                     Logger.prototype.log(`Sent chunks`, 'debug')
 
-                    setInterval(() => {
-                        client.write('network_chunk_publisher_update', { coordinates: { x: -5, y: 130, z: -6 }, radius: 80 })
-                    }, 4500)
-
-                    client.write('level_chunk', get('level_chunk'))
 
                     client.chat = function (msg) {
                         client.write('text', {
@@ -204,7 +199,7 @@ server.on('connect', client => {
                                 try {
                                     require(`../plugins/${plugin}`).prototype.onKick(server, client, msg)
                                 } catch (e) {
-                                    Logger.prototype.log(`Failed to execute onKick(server, client, msg) event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                                    Logger.prototype.log(`Failed to execute onKick(server, client, msg) event for plugin "${plugin}". The error was: ${e}`, 'error')
                                 }
                             });
                         });
@@ -222,10 +217,11 @@ server.on('connect', client => {
                                 try {
                                     require(`../plugins/${plugin}`).prototype.onPlayerSpawn(server, client)
                                 } catch (e) {
-                                    Logger.prototype.log(`Failed to execute onPlayerSpawn(server, client) event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                                    Logger.prototype.log(`Failed to execute onPlayerSpawn(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
                                 }
                             });
                         });
+                        client.write('level_chunk', get('level_chunk'))
                     }, 2000)
 
 
@@ -249,7 +245,7 @@ server.on('connect', client => {
                     try {
                         require(`../plugins/${plugin}`).prototype.onChat(server, client, msg, fullmsg)
                     } catch (e) {
-                        Logger.prototype.log(`Failed to execute onChat(server, client, msg, fullmsg) event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                        Logger.prototype.log(`Failed to execute onChat(server, client, msg, fullmsg) event for plugin "${plugin}". The error was: ${e}`, 'error')
                     }
                 });
             });
@@ -259,9 +255,11 @@ server.on('connect', client => {
                 client.kick(lang.kick__invalid_chat_message)
                 return
             }
-            client.chat(`${fullmsg}`)
+
+		 Logger.prototype.log('msg length: ' + msg.replace(" ", '').length, 'debug')
+
             for (let i = 0; i < clients.length; i++) {
-                if (clients[i] == !client) { clients[i].chat(`${fullmsg}`) }
+                clients[i].chat(`${fullmsg}`)
             }
         } else if (packet.data.name === 'command_request') {
             fs.readdir("./plugins", (err, plugins) => {
@@ -269,7 +267,7 @@ server.on('connect', client => {
                     try {
                         require(`../plugins/${plugin}`).prototype.onCommand(server, client, command)
                     } catch (e) {
-                        Logger.prototype.log(`Failed to execute onCommand(server, client, command) event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                        Logger.prototype.log(`Failed to execute onCommand(server, client, command) event for plugin "${plugin}". The error was: ${e}`, 'error')
                     }
                 });
             });
@@ -290,7 +288,7 @@ server.on('connect', client => {
                     break
                 }
                 default:
-                    client.chat(`§cUnknown command. Type /commands for a list of command`)
+                    client.chat(`§cUnknown command. Type /commands for a list of commands`)
                     break
             }
         } else {
@@ -309,7 +307,7 @@ server.on('connect', client => {
                     try {
                         require(`../plugins/${plugin}`).prototype.onInternalServerError(server, client, err)
                     } catch (e) {
-                        Logger.prototype.log(`Failed to execute onInternalServerError(server, client, err) event for plugin "${plugin}". The error was: ${e.stack}`, 'error')
+                        Logger.prototype.log(`Failed to execute onInternalServerError(server, client, err) event for plugin "${plugin}". The error was: ${e}`, 'error')
                     }
                 });
             });
