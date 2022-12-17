@@ -176,6 +176,8 @@ server.on('connect', client => {
                     client.write('biome_definition_list', get('biome_definition_list'))
                     client.write('available_entity_identifiers', get('available_entity_identifiers'))
                     client.write('creative_content', get('creative_content'))
+                    Logger.prototype.log(`sent respawn`, 'debug')
+                    client.queue('respawn', get('respawn'))
                     Logger.prototype.log(`sent chunks`, 'debug')
 
                     client.write('level_chunk', get('level_chunk'))
