@@ -54,7 +54,7 @@
     "spawned": "%player% заспавнився",
     "joinedthegame": "§e%username% приєднався до гри",
     "unhandledpacketdata": "Попередження: Необроблені данні в пакеті: %data%",
-    "chatmessage": "(повідомлення в чаті) ",
+    "chatmessage": "(повідомлення в чаті) %message%",
     "illegalmessage": "%player% надіслав недійсне повідомлення. Повідомлення було: %msg%",
     "executedcmd": "%player% використав команду: %cmd%",
     "unhandledpacket": "Необроблений пакет",
