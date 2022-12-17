@@ -6,6 +6,7 @@ const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
 const fs = require('fs')
 let clients = []
+if (config.debug) { process.debug = 'minecraft-protocol' }
 
 ValidateConfig.prototype.ValidateConfig()
 ValidateConfig.prototype.ValidateLangFile()
