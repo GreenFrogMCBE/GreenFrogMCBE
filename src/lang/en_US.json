@@ -26,7 +26,7 @@
     "ver_help": "ver - Shows the server version",
     "version_help": "version - Shows the server version",
     "time_help": "time - Sets the time for all players",
-    "command_time"%message%: "time",
+    "command_time": "time",
     "command_say": "say",
     "command_kick": "kick",
     "command_shutdown": "shutdown",
