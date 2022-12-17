@@ -45,7 +45,7 @@ class ExamplePlugin {
 
     onInternalServerError(server, client, error) {
         // This code executes when there is an server error
-        console.log(`!!!! Server error: ${error}`)
+        console.log(`Oh no! Server error: ${error}`)
     }
 
 }
