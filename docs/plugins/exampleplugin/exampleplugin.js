@@ -26,16 +26,16 @@ class ExamplePlugin {
 
     onKick(server, client, msg) {
         // This code executes when player is kicked
-        console.log(`Oh no! Player got kicked: ${msg} | :skull:`)
+        console.log(`Oh no! Player got kicked: ${msg}`)
     }
 
     onPlayerSpawn(server, client) {
-        // This code executes when player is spawned (this event starts after onJoin() event)
+        // This code executes when player is spawned (this event triggers after onJoin() event)
     }
 
     onChat(server, client, msg, fullmsg) {
         // This code executes when player uses chat
-        console.log(`Client chated: ${msg}`)
+        console.log(`Client used chat: ${msg}`)
     }
 
     onCommand(server, client, command) {
@@ -45,7 +45,7 @@ class ExamplePlugin {
 
     onInternalServerError(server, client, error) {
         // This code executes when there is an server error
-        console.log(`Oh no! Server error: ${error}`)
+        console.log(`Oh no! There was an server error: ${error}`)
     }
 
 }
