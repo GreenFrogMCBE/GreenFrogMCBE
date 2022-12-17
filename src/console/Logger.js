@@ -23,7 +23,7 @@ class Logger {
                 }
                 break
             default:
-                throw new Error(`Invalid log type: ${type}`)
+                throw new Error(`${lang.invalid}`)
         }
     }
 }
