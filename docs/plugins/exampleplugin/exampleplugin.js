@@ -5,7 +5,7 @@ class ExamplePlugin {
     constructor() {}
 
     getName() {
-        return "Example plugin" // your plugin name
+        return "Example plugin" // Your plugin name
     }
 
     onLoad() {
