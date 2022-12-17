@@ -15,8 +15,6 @@ const lang = require(`./lang/${config.lang}.json`)
 
 Logger.prototype.log(lang.loadingserver)
 
-if (config.debug) { process.debug = 'minecraft-protocol' }
-
 process.on('uncaughtException', function (err) {
     Logger.prototype.log(`${lang.servererror}: ${err.stack}`, 'error')
     if (!config.donotcrashoncriticalerrors) {
