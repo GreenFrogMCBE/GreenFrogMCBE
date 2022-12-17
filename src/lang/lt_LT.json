@@ -53,7 +53,7 @@
     "spawned": "%player% spawned",
     "joinedthegame": "§e%username% joined the game",
     "unhandledpacketdata": "Warning: unhandled packet data: %data%",
-    "chatmessage": "(chat message) ",
+    "chatmessage": "(chat message) %message%",
     "illegalmessage": "%player% sent an illegal message. Message content was: %msg%",
     "executedcmd": "%player% executed a server command: %cmd%",
     "unhandledpacket": "Unhandled packet",
@@ -65,5 +65,5 @@
     "warning": "warning",
     "error": "error",
     "debug": "debug",
-    "invalid": "INVALID | The log type you/the plugin used is invalid. Valid log types are: info, warning, error, debug"
+    "invalid": "INVALID | The log type you/plugin used is invalid. Valid log types are: info, warning, error, debug"
 }
