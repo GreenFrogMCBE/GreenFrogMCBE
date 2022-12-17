@@ -15,8 +15,17 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 ## Plugins available for public usage
 
-* Soon, if you have one feel free to open an issue! :)
-* Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/exampleplugin.js
+If you have one feel free to open an issue
+
+* Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/main/docs/plugins/exampleplugin | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin | Author: GreenFrogMCBE
+* DonationReminder: https://github.com/andriycraft/GreenFrogMCBEdonations/ | Description: A plugin that adds that annoying donation message. Installed by default | Author: GreenFrogMCBE
+
+## Plugin listing rules
+
+If you want for your plugin to be listed on the 'Plugins available for public usage' section, you must follow this rules:
+
+* Your plugin must contain .gfmcp file in the root directory. Example here: https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/exampleplugin/.gfmcp
+* Thats all
 
 ## Features
 

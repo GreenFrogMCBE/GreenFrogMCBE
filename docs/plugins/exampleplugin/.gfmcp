@@ -1,0 +1,9 @@
+---- Info:
+This file is just for listing on the 'Plugins available for public usage' section in GreenFrogMCBE's README.md
+It will not affect the server anyway!
+If you understood this you can delete this text
+
+plugin-name: ExamplePlugin
+author: Your name
+repo: https://github.com/LinkToYourRepo
+description: Plugin description
