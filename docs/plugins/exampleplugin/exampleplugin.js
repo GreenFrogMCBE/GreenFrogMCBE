@@ -1,4 +1,4 @@
-// WARNING: Do not delete any function!
+// WARNING: Do not delete any functions! It will trigger an error!
 // This plugin contains all events and descriptions, so you can use this plugin as a docs
 
 class ExamplePlugin {
