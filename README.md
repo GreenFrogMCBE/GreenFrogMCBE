@@ -15,13 +15,13 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 If you have one feel free to open an issue
 
-* Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/exampleplugin.js | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin | Author: AndriyCraft
+* Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/exampleplugin/exampleplugin.js | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin | Author: AndriyCraft
 
 ## Plugin listing rules
 
 If you want for your plugin to be listed on the 'Plugins available for public usage' section, you must follow this rules:
 
-* Your plugin must contain .gfmcp file in the root directory. Example here: [https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/.gfmcp](https://github.com/andriycraft/GreenFrogMCBE/tree/main/docs/plugins/.gfmcp)
+* Your plugin must contain .gfmcp file in the root directory. Example here: https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/exampleplugin/.gfmcp
 * Thats all
 
 ## Features
