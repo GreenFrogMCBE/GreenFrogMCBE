@@ -18,7 +18,7 @@ class Logger {
                 break
             case 'debug':
                 if (config.debug) {
-                    console.log(`\x1b[37mDEBUG\\x1b[0m | ${message}`)
+                    console.log(`DEBUG | ${message}`)
                 }
                 break
             default:

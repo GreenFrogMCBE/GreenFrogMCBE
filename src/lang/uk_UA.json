@@ -59,5 +59,7 @@
     "executedcmd": "%player% використав команду: %cmd%",
     "unhandledpacket": "Необроблений пакет",
     "handlepacketexception": "Невдалося обробити пакет від %player%: %error%",
-    "servererror": "Помилка сервера"
+    "servererror": "Помилка сервера",
+    "unstablewarning": "Donotcrashoncriticalerrors увімкнено! Це може зробити ваш сервер не стабільним",
+    "debugwarning": "Режим налагодження увімкнений! Це може заспамити ваш консоль не потрібною інформацією"
 }

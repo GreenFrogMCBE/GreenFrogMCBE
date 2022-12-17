@@ -59,5 +59,7 @@
     "executedcmd": "%player% executed a server command: %cmd%",
     "unhandledpacket": "Unhandled packet",
     "handlepacketexception": "Exception while trying to handle packet from %player%: %error%",
-    "servererror": "Server error"
+    "servererror": "Server error",
+    "unstablewarning": "Donotcrashoncriticalerrors is enabled! This may make your server unstable",
+    "debugwarning": "Debug is enabled! This may fill your server console with junk"
 }

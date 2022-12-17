@@ -7,6 +7,6 @@
     "offlinemode": true,
     "blockinvalidmessages": true,
     "lang": "en_US",
-    "donotcrashoncriticalerrors": true,
-    "debug": true
+    "donotcrashoncriticalerrors": false,
+    "debug": false
 }

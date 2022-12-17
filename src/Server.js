@@ -41,11 +41,11 @@ process.on('unhandledRejection', function (err) {
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
 if (config.donotcrashoncriticalerrors) {
-    Logger.prototype.log(`Donotcrashoncriticalerrors is enabled! This may make the server unstable`, 'warning')
+    Logger.prototype.log(lang.unstablewarning, 'warning')
 }
 
 if (config.debug) {
-    Logger.prototype.log(`Debugging is enabled! This may fill up your console with junk`, 'warning')
+    Logger.prototype.log(lang.debugwarning, 'warning')
 }
 
 Logger.prototype.log(`${lang.scch}`)
