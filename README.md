@@ -21,10 +21,13 @@ If you have one feel free to open an issue
 
 If you want for your plugin to be listed on the 'Plugins available for public usage' section, you must follow this rules:
 
-* 1. Your plugin must contain .gfmcp file in the root directory: `
+* Your plugin must contain .gfmcp file in the root directory: `
 plugin-name: Your plugin name
+
 author: Your name
+
 repo: Repository of your plugin
+
 description: Description of your plugin
 `
 
