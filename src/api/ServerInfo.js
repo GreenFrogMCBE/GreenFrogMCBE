@@ -18,7 +18,7 @@ class ServerInfo {
     }
 
     getLang () {
-        return require(`../../lang/${config.lang}.json`);
+        return require(`../lang/${config.lang}.json`);
     }
 
     getServerVersion() {
