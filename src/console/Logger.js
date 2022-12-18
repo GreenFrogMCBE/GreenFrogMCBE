@@ -8,7 +8,7 @@ class Logger {
     log(message, type = 'info') {
         switch (type) {
             case 'info':
-                console.log(`${Colors.prototype.blue()}${lang.info.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
+                console.log(`${Colors.prototype.blue()}${lang.info.toUpperCase()}${Colors.prototype.reset()} | ${message}`)
                 break
             case 'warning':
             case 'warn':
