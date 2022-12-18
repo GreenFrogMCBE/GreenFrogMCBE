@@ -26,7 +26,6 @@ class ConsoleCommandSender {
                     }
                 });
             });
-            console.log(ServerInfo.prototype.getLang())
             if (data.startsWith(`${ServerInfo.prototype.getLang().command_time} `)) {
                 if (!ServerInfo.prototype.getCommands().console_time) { Logger.prototype.log(ServerInfo.prototype.getLang().unknown_command); return }
                 const time = parseInt(data.split(" ")[1])
