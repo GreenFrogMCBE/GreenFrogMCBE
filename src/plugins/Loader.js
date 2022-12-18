@@ -2,6 +2,7 @@ const fs = require('fs')
 const Logger = require('../console/Logger')
 const CheckPluginFolder = require('./CheckPluginFolder')
 const ServerInfo = require('../api/ServerInfo')
+const PluginManager = require('../api/PluginManager')
 
 class Loader {
 
