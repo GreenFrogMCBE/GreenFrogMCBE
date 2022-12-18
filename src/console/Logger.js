@@ -16,7 +16,7 @@ class Logger {
                 break
             case 'error':
             case 'err':
-                console.log(`${Colors.CONSOLE_RED}${lang.error.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
+                console.log(`${Colors.prototype.red()}${lang.error.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
                 break
             case 'debug':
                 if (config.debug) {
