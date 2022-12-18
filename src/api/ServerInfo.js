@@ -17,7 +17,7 @@ class ServerInfo {
     }
 
     getConfig () {
-        return this.config;
+        return require("../../config.json");
     }
 
     getLang () {
