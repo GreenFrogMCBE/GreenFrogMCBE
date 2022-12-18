@@ -4,6 +4,8 @@
     "console_command_stop": true,
     "console_command_version": true,
     "console_command_time": true,
+    "console_command_pl": true,
+    "console_command_plugins": true,
     "player_command_commands": true,
     "player_command_cmds": true,
     "player_command_version": true,
