@@ -282,14 +282,16 @@ server.on('connect', client => {
                             client.chat(`§cUnknown command. Type /commands for a list of commands`)
                             return
                         }
-                        client.chat(`§7This server runs GreenFrogMCBE v${ServerInfo.prototype.getServerVersion()}`)
+                        client.chat(`§7This server runs GreenFrogMCBE. Version ${ServerInfo.prototype.getServerVersion()}`)
+                        client.chat(`§7https://github.com/andriycraft/GreenFrogMCBE/`)
                         break
                     case '/version':
                         if (!ServerInfo.prototype.getCommands().player_command_ver) {
                             client.chat(`§cUnknown command. Type /commands for a list of commands`)
                             return
                         }
-                        client.chat(`§7This server runs GreenFrogMCBE v${ServerInfo.prototype.getServerVersion()}`)
+                        client.chat(`§7This server runs GreenFrogMCBE. Version ${ServerInfo.prototype.getServerVersion()}`)
+                        client.chat(`§7https://github.com/andriycraft/GreenFrogMCBE/`)
                         break
                     case '/cmds':
                         if (!ServerInfo.prototype.getCommands().player_command_cmds) {
