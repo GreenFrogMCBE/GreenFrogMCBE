@@ -143,6 +143,10 @@ class ConsoleCommandSender {
                     if (!commands.console_command_kick) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.command_usage_kick, 'info')
                     break;
+                case 'plugins':
+                case 'pl':
+                    Logger.prototype.log(`Plugins (${PluginManager.prototype.getPlugins().length}): PluginManager.prototype.getPlugins()`, 'info')
+                    break
                 case lang.command_ver:
                 case lang.command_version:
                     if (!commands.console_command_version) { Logger.prototype.log(lang.unknown_command); return; }
