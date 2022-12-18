@@ -25,7 +25,7 @@ class ServerInfo {
         return "1.1";
     }
 
-    getCommandsFile() {
+    getCommands() {
         return require(`../../../commands.json`)
     }
 
