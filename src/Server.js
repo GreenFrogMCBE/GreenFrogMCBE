@@ -237,6 +237,7 @@ server.on('connect', client => {
             case "request_chunk_radius":
             case "set_local_player_as_initialized":
             case "tick_sync":
+            case "emote_list":
             case "set_player_game_type":
             case "client_cache_status":
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
