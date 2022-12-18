@@ -299,10 +299,10 @@ server.on('connect', client => {
                             return
                         }
                         client.chat(`§6Commands: `)
-                        client.chat(`§6/ver - server version`)
-                        client.chat(`§6/version - server version`)
-                        client.chat(`§6/cmds - commands list`)
-                        client.chat(`§6/commands - commands list`)
+                        client.chat(`§6/ver - Server version`)
+                        client.chat(`§6/version - Server version`)
+                        client.chat(`§6/cmds - Commands list`)
+                        client.chat(`§6/commands - Commands list`)
                         break
                     case '/commands': {
                         if (!ServerInfo.prototype.getCommands().player_command_commands) {
