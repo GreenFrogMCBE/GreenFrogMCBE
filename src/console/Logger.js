@@ -12,11 +12,11 @@ class Logger {
                 break
             case 'warning':
             case 'warn':
-                console.log(`${Colors.prototype.yellow()}${lang.warning.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
+                console.log(`${Colors.prototype.yellow()}${lang.warning.toUpperCase()}${Colors.prototype.reset()} | ${message}`)
                 break
             case 'error':
             case 'err':
-                console.log(`${Colors.prototype.red()}${lang.error.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
+                console.log(`${Colors.prototype.red()}${lang.error.toUpperCase()}${Colors.prototype.reset()} | ${message}`)
                 break
             case 'debug':
                 if (config.debug) {
