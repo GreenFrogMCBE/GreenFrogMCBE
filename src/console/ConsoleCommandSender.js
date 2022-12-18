@@ -145,7 +145,7 @@ class ConsoleCommandSender {
                     break;
                 case lang.command_ver:
                 case lang.command_version:
-                    if (!commands.console_version) { Logger.prototype.log(lang.unknown_command); return; }
+                    if (!commands.console_command_version) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.command_ver_info, 'info')
                     break;
                 case lang.command_time:
