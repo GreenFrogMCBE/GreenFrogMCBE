@@ -152,7 +152,7 @@ class ConsoleCommandSender {
                     } else {
                         plugins = PluginManager.prototype.getPlugins().length
                     }
-                    Logger.prototype.log(`Plugins (${plugins}): ${Colors.CONSOLE_PL_GREEN}${PluginManager.prototype.getPlugins()} ${Colors.CONSOLE_RESET}`, 'info')
+                    Logger.prototype.log(`Plugins (${plugins}): ${Colors.CONSOLE_PL_GREEN}${PluginManager.prototype.getPlugins() ?? ''} ${Colors.CONSOLE_RESET}`, 'info')
                     break
                 case lang.command_ver:
                 case lang.command_version:
