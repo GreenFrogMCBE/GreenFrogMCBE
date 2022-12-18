@@ -20,6 +20,22 @@ class ValidateConfig {
         }
     }
 
+    ValidateCommands() {
+        try {
+            require("../../commands.json")
+        } catch (e) {
+            Logger.prototype.log(Lang.failedfindcommands.replace('%e%', e))
+            process.exit(-1)
+        }
+
+        try {
+            JSON.parse(JSON.stringify(require("../../commands.json")))            
+        } catch (e) {
+            Logger.prototype.log(Lang.failedparsecommands.replace('%e%', e))
+            process.exit(-1)
+        }
+    }
+
     ValidateLangFile() {
         try {
             require("../../src/lang/lt_LT.json")

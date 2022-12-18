@@ -1,8 +1,10 @@
 const rl = require('readline')
 const Logger = require('./Logger')
-const ServerInfo = require('../api/ServerInfo');
-const config = require("../../config.json");
+const PluginManager = require('../api/PluginManager')
+const Colors = require('../api/Colors')
+const config = require(`../../config.json`)
 const lang = require(`../lang/${config.lang}.json`)
+const commands = require(`../../commands.json`)
 const fs = require('fs')
 
 class ConsoleCommandSender {
@@ -24,11 +26,12 @@ class ConsoleCommandSender {
                     try {
                         require(`../../plugins/${plugin}`).prototype.onConsoleCommand(data)
                     } catch (e) {
-                        Logger.prototype.log(`Failed to execute onConsoleCommand(command) event for plugin "${plugin}". The error was: ${e}`, 'error')
+                        Logger.prototype.log(lang.failedtoexecuteonConsoleCommand().replace('%command%', command), 'error')
                     }
                 });
             });
             if (data.startsWith(`${lang.command_time} `)) {
+                if (!commands.console_command_time) { Logger.prototype.log(lang.unknown_command); return }
                 const time = parseInt(data.split(" ")[1])
                 if (time === NaN) {
                     Logger.prototype.log(lang.invalid_time)
@@ -50,6 +53,7 @@ class ConsoleCommandSender {
             }
 
             if (data.startsWith(`${lang.command_say} `)) {
+                if (!commands.console_command_say) { Logger.prototype.log(lang.unknown_command); return }
 
                 const msg = data.split(" ")[1]
                 if (msg.length < 1) {
@@ -62,7 +66,7 @@ class ConsoleCommandSender {
                     return
                 }
 
-                let msg1 = lang.chat__saycommand_format.replace(`%message%`, msg)
+                let msg1 = lang.saycommand_format.replace(`%message%`, msg)
 
                 for (let i = 1; i < ServerInfo.prototype.getPlayers().length; i++) {
                     let client = ServerInfo.prototype.getPlayers()[i]
@@ -82,9 +86,12 @@ class ConsoleCommandSender {
                 return
             }
 
-            if (data.startsWith(`${lang.command_kick} `)) {
+            if (data.startsWith(`${lang.console_command_kick} `)) {
+                if (!commands.console_command_kick) { Logger.prototype.log(lang.unknown_command); return }
+
                 const player = data.split(" ")[1]
                 let reason = ""
+                let playeroffline = true
                 for (let i = 2; i < data.split(" ").length; i++) {
                     if (reason.length < 1) {
                         reason = data.split(" ")[i]
@@ -106,10 +113,15 @@ class ConsoleCommandSender {
                     let client = ServerInfo.prototype.getPlayers()[i]
                     if (client.getUserData().displayName == player) {
                         client.disconnect(lang.kicked_prefix + reason)
+                        Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', player).replace('%reason%', reason), 'info')
+                        playeroffline = false
                     }
                 }
 
-                Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', player).replace('%reason%', reason), 'info')
+                if (playeroffline) {
+                    Logger.prototype.log(lang.playeroffline, 'info')
+                }
+
                 return
             }
             switch (data.toLowerCase()) {
@@ -117,6 +129,7 @@ class ConsoleCommandSender {
                     break
                 case lang.command_shutdown:
                 case lang.command_stop:
+                    if (!console_command_stop) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.stopping_server, 'info')
                     try {
                         for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
@@ -128,26 +141,43 @@ class ConsoleCommandSender {
                     }, 1000) // give some time for the server to disconnect clients
                     break
                 case lang.command_kick:
+                    if (!commands.console_command_kick) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.command_usage_kick, 'info')
                     break;
+                case lang.command_pl:
+                case lang.command_plugins:
+                    if (!commands.console_command_plugins) { Logger.prototype.log(lang.unknown_command); return; }
+                    let plugins;
+                    if (PluginManager.prototype.getPlugins() == null) {
+                        plugins = 0;
+                    } else {
+                        plugins = PluginManager.prototype.getPlugins().length
+                    }
+                    Logger.prototype.log(`${lang.plugins} (${plugins}): ${Colors.CONSOLE_PL_GREEN}${PluginManager.prototype.getPlugins() ?? ''} ${Colors.CONSOLE_RESET}`, 'info')
+                    break
                 case lang.command_ver:
                 case lang.command_version:
-                    Logger.prototype.log(lang.command_ver_info, 'info')
+                    if (!commands.console_command_version) { Logger.prototype.log(lang.unknown_command); return; }
+                    Logger.prototype.log(lang.command_ver_info.replace('%version%', ServerInfo.prototype.getServerVersion()), 'info')
                     break;
                 case lang.command_time:
+                    if (!commands.console_command_time) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.command_usage_time, 'info')
                     break;
                 case '?':
                 case lang.command_help:
+                    if (!commands.console_command_help) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.commandlist);
-                    Logger.prototype.log(lang.kick_help);
-                    Logger.prototype.log(lang.shutdown_help);
-                    Logger.prototype.log(lang.stop_help);
-                    Logger.prototype.log(lang.help_help);
-                    Logger.prototype.log(lang.qm_help)
-                    Logger.prototype.log(lang.version_help);
-                    Logger.prototype.log(lang.ver_help);
-                    Logger.prototype.log(lang.time_help);
+                    if (commands.console_command_kick) { Logger.prototype.log(lang.kick_help); }
+                    if (commands.console_command_time) { Logger.prototype.log(lang.time_help); }
+                    if (commands.console_command_stop) { Logger.prototype.log(lang.shutdown_help); }
+                    if (commands.console_command_stop) { Logger.prototype.log(lang.stop_help); }
+                    if (commands.console_command_help) { Logger.prototype.log(lang.help_help); }
+                    if (commands.console_command_help) { Logger.prototype.log(lang.qm_help) }
+                    if (commands.console_command_version) { Logger.prototype.log(lang.version_help); }
+                    if (commands.console_command_version) { Logger.prototype.log(lang.ver_help); }
+                    if (commands.console_command_pl) { Logger.prototype.log(lang.pl_help); }
+                    if (commands.console_command_plugins) { Logger.prototype.log(lang.plugins_help); }
                     break;
                 default:
                     Logger.prototype.log(lang.unknown_command)

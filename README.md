@@ -47,6 +47,7 @@ Our language system currently supports those languages: English, Lithuanian, Ukr
 
 - You can edit your config in config.json
 - You can edit your server language in /src/lang/(server language).json
+- You can disable or enable commands in commands.json. "true" means enabled. "false" means disabled.
 
 ## Forking rules
 

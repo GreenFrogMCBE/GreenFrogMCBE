@@ -4,7 +4,8 @@ class ServerInfo {
     constructor() {
         this.players = []
         this.config = require("../../config.json")
-        this.lang = require(`../../lang/${config.lang}.json`)
+        this.lang = require(`../lang/${config.lang}.json`)
+        this.commands = require(`../../commands.json`)
     }
 
     setPlayers (players) {
@@ -24,7 +25,11 @@ class ServerInfo {
     }
 
     getServerVersion() {
-        return "1.1"
+        return "1.1";
+    }
+
+    getCommands() {
+        return this.commands;
     }
 
 }

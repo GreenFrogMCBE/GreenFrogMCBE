@@ -2,6 +2,7 @@ const fs = require('fs')
 const Logger = require('../console/Logger')
 const CheckPluginFolder = require('./CheckPluginFolder')
 const ServerInfo = require('../api/ServerInfo')
+const PluginManager = require('../api/PluginManager')
 
 class Loader {
 
@@ -39,6 +40,8 @@ class Loader {
                     }
 
                     Logger.prototype.log(`Loaded plugin ${require(`../../plugins/${plugin}`).prototype.getName()} ${version}`)
+
+                    PluginManager.prototype.addPlugin(require(`../../plugins/${plugin}`).prototype.getName())
 
                     require(`../../plugins/${plugin}`).prototype.onLoad()
                 } catch (e) {

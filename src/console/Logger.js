@@ -1,4 +1,5 @@
 const config = require('../../config.json')
+const Colors = require('../api/Colors')
 const lang = require(`../lang/${config.lang}.json`)
 
 class Logger {
@@ -7,15 +8,15 @@ class Logger {
     log(message, type = 'info') {
         switch (type) {
             case 'info':
-                console.log(`\x1b[34m${lang.info.toUpperCase()}\x1b[0m | ${message}`)
+                console.log(`${Colors.CONSOLE_BLUE}${lang.info.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
                 break
             case 'warning':
             case 'warn':
-                console.log(`\x1b[33m${lang.warning.toUpperCase()}\x1b[0m | ${message}`)
+                console.log(`${Colors.CONSOLE_YELLOW}${lang.warning.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
                 break
             case 'error':
             case 'err':
-                console.log(`\x1b[31m${lang.error.toUpperCase()}\x1b[0m | ${message}`)
+                console.log(`${Colors.CONSOLE_RED}${lang.error.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
                 break
             case 'debug':
                 if (config.debug) {
