@@ -36,6 +36,8 @@
     "command_ver": "ver",
     "command_version": "version",
     "command_help": "help",
+    "command_pl": "pl",
+    "command_plugins": "plugins",
     "command_usage_kick": "Usage: kick [player] [reason]",
     "command_ver_info": "This server runs GreenFrogMCBE. Version: %version% \nhttps://github.com/andriycraft/GreenFrogMCBE",
     "command_usage_time": "Usage: time [time]",
