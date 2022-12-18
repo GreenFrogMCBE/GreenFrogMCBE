@@ -34,6 +34,8 @@
     "command_ver": "ver",
     "command_version": "versija",
     "command_help": "pagalba",
+    "command_pl": "pl",
+    "command_plugins": "plugins",
     "command_usage_kick": "Naudojimas: /kick [žaidėjas] [priežastis]",
     "command_usage_ver": "Šis serveris naudoja GreenFrogMCBE",
     "command_usage_time": "Naudojimas: /laikas [laikas]",
