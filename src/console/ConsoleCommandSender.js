@@ -48,7 +48,6 @@ class ConsoleCommandSender {
 
                 Logger.prototype.log(lang.time_updated)
                 return
-
             }
 
             if (data.startsWith(`${lang.command_say} `)) {
