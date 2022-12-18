@@ -3,7 +3,6 @@ const config = require("../../config.json")
 class ServerInfo {
     constructor() {
         this.players = []
-        this.lang = require(`../../lang/${config.lang}.json`)
         this.commands = require(`../../../commands.json`)
     }
 
@@ -20,7 +19,7 @@ class ServerInfo {
     }
 
     getLang () {
-        return this.lang;
+        return require(`../../lang/${config.lang}.json`);
     }
 
     getServerVersion() {
