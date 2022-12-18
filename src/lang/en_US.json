@@ -7,7 +7,7 @@
     "servershutdown": "§cServer shutdown",
     "chatformat": "<%username%> %message%",
     "saycommand_format": "[Server] %message%",
-    "no_players_online": "There are no players on the server right now. Nothing changed",
+    "no_players_online": "There are no players on the server right now.",
     "unknown_command": "Unknown command. Type \"help\" for help",
     "listening_on": "Listening on port %ipport%",
     "listening_failed": "Failed to listen on %ipport% | Error: %error%",
