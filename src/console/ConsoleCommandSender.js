@@ -86,7 +86,7 @@ class ConsoleCommandSender {
             }
 
             if (data.startsWith(`${lang.command_kick} `)) {
-                if (!commands.console_kick) { Logger.prototype.log(lang.unknown_command); return }
+                if (!commands.console_command_kick) { Logger.prototype.log(lang.unknown_command); return }
 
                 const player = data.split(" ")[1]
                 let reason = ""
