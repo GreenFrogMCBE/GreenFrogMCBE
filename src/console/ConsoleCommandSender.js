@@ -85,7 +85,7 @@ class ConsoleCommandSender {
                 return
             }
 
-            if (data.startsWith(`${lang.command_kick} `)) {
+            if (data.startsWith(`${lang.console_command_kick} `)) {
                 if (!commands.console_command_kick) { Logger.prototype.log(lang.unknown_command); return }
 
                 const player = data.split(" ")[1]
