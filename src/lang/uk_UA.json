@@ -80,6 +80,6 @@
     "failedtoexecuteonplayerhaveallpacks": "Failed to execute onPlayerHaveAllPacks(server, client) event for plugin %plugin%. The error was: %e%",
     "failedtoexecuteonresourcepackinfosent": "Failed to execute onResourcePackInfoSent(server, client) event for plugin \"%plugin%\". The error was: %e%",
     "failedtoexecuteonresourcepacksrefused": "Failed to execute onResourcePacksRefused(server, client) event for plugin \"%plugin%\". The error was: %e%",
-    "failedtoexecuteonplayerhasnoresourcepacksinstalled": "Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin \"%plugin%\". The error was: %e%"
-
+    "failedtoexecuteonplayerhasnoresourcepacksinstalled": "Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin \"%plugin%\". The error was: %e%",
+    "plugins": "Плагіни"
 }
