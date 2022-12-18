@@ -13,6 +13,10 @@ class Colors {
         return "\x1b[31m"
     }
 
+    reset() {
+        return "\x1b[0m"
+    }
+
 }
 
 module.exports = Colors;
