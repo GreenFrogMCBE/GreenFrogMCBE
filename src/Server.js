@@ -255,7 +255,7 @@ server.on('connect', client => {
                     });
                 });
                 Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg))
-                if (msg.includes("§") || msg.length == 0 || msg > 255 && config.blockinvalidmessages) {
+                if (msg.includes("§") || msg.length == 0 || msg.length > 255 && config.blockinvalidmessages) {
                     Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
                     client.kick(lang.invalid_chat_message)
                     return

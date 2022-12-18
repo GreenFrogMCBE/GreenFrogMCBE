@@ -6,7 +6,7 @@
     "version": "1.19.50",
     "offlinemode": true,
     "blockinvalidmessages": true,
-    "lang": "lt_LT",
+    "lang": "en_US",
     "donotcrashoncriticalerrors": false,
     "debug": false
 }
