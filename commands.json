@@ -6,5 +6,6 @@
     "console_command_time": true,
     "player_command_commands": true,
     "player_command_cmds": true,
+    "player_command_version": true,
     "player_command_ver": true
 }
