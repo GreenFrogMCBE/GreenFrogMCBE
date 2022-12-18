@@ -25,7 +25,7 @@
     "qm_help": "? - Таке саме як /help",
     "ver_help": "ver - Таке саме як /version",
     "version_help": "version - Показує версію сервера",
-    "time_help": "time - Встановлює час для всіх гравців",
+    "time_help": "time [час] - Встановлює час для всіх гравців",
     "command_time": "time",
     "command_say": "say",
     "command_kick": "kick",
