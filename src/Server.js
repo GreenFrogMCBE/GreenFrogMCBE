@@ -5,6 +5,7 @@ const ServerInfo = require('../src/api/ServerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
 const fs = require('fs')
+const commands = require(`../commands.json`)
 let clients = []
 
 ValidateConfig.prototype.ValidateConfig()
@@ -279,7 +280,7 @@ server.on('connect', client => {
                 Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
                 switch (cmd) { // TODO: Translate chat
                     case '/ver':
-                        if (!ServerInfo.prototype.getCommands().player_command_ver) {
+                        if (!commands.player_command_ver) {
                             client.chat(`§cUnknown command. Type /commands for a list of commands`)
                             return
                         }
@@ -287,7 +288,7 @@ server.on('connect', client => {
                         client.chat(`§7https://github.com/andriycraft/GreenFrogMCBE/`)
                         break
                     case '/version':
-                        if (!ServerInfo.prototype.getCommands().player_command_ver) {
+                        if (!commands.player_command_ver) {
                             client.chat(`§cUnknown command. Type /commands for a list of commands`)
                             return
                         }
@@ -295,7 +296,7 @@ server.on('connect', client => {
                         client.chat(`§7https://github.com/andriycraft/GreenFrogMCBE/`)
                         break
                     case '/cmds':
-                        if (!ServerInfo.prototype.getCommands().player_command_cmds) {
+                        if (!commands.player_command_cmds) {
                             client.chat(`§cUnknown command. Type /commands for a list of commands`)
                             return
                         }
@@ -306,7 +307,8 @@ server.on('connect', client => {
                         client.chat(`§6/commands - Commands list`)
                         break
                     case '/commands': {
-                        if (!ServerInfo.prototype.getCommands().player_command_commands) {
+                        console.log(ServerInfo.prototype)
+                        if (!commands.player_command_commands) {
                             client.chat(`§cUnknown command. Type /commands for a list of commands`)
                             return
                         }
@@ -332,7 +334,7 @@ server.on('connect', client => {
         try {
             handlepk(client, packet)
         } catch (e) {
-            client.kick(config.internal_server_error)
+            client.kick(lang.internal_server_error)
             fs.readdir("./plugins", (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {
