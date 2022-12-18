@@ -29,7 +29,7 @@ class ConsoleCommandSender {
                 });
             });
             if (data.startsWith(`${lang.command_time} `)) {
-                if (!commands.console_time) { Logger.prototype.log(lang.unknown_command); return }
+                if (commands.console_time == false) { Logger.prototype.log(lang.unknown_command); return }
                 const time = parseInt(data.split(" ")[1])
                 if (time === NaN) {
                     Logger.prototype.log(lang.invalid_time)
