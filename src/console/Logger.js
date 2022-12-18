@@ -12,7 +12,7 @@ class Logger {
                 break
             case 'warning':
             case 'warn':
-                console.log(`${Colors.CONSOLE_YELLOW}${lang.warning.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
+                console.log(`${Colors.prototype.yellow()}${lang.warning.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
                 break
             case 'error':
             case 'err':
