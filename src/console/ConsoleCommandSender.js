@@ -144,8 +144,8 @@ class ConsoleCommandSender {
                     if (!commands.console_command_kick) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.command_usage_kick, 'info')
                     break;
-                case 'plugins':
-                case 'pl':
+                case lang.command_pl:
+                case lang.command_plugins:
                     let plugins;
                     if (PluginManager.prototype.getPlugins() == null) {
                         plugins = 0;
