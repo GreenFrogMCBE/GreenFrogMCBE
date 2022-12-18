@@ -3,7 +3,6 @@ const config = require("../../config.json")
 class ServerInfo {
     constructor() {
         this.players = []
-        this.config = require("../../config.json")
         this.lang = require(`../../lang/${config.lang}.json`)
         this.commands = require(`../../../commands.json`)
     }
