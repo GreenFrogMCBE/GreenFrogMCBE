@@ -2,7 +2,7 @@ const rl = require('readline')
 const Logger = require('./Logger')
 const ServerInfo = require('../api/ServerInfo')
 const lang = ServerInfo.prototype.getLang()
-const config = require('../../config.json')
+const config = ServerInfo.prototype.getConfig()
 const commands = require('../../commands.json')
 const fs = require('fs')
 
