@@ -41,6 +41,8 @@ class Loader {
 
                     Logger.prototype.log(`Loaded plugin ${require(`../../plugins/${plugin}`).prototype.getName()} ${version}`)
 
+                    PluginManager.prototype.addPlugin(require(`../../plugins/${plugin}`).prototype.getName())
+
                     require(`../../plugins/${plugin}`).prototype.onLoad()
                 } catch (e) {
                     let version = 'unknown'
