@@ -128,7 +128,7 @@ class ConsoleCommandSender {
                     break
                 case lang.command_shutdown:
                 case lang.command_stop:
-                    if (!commands.console_stop) { Logger.prototype.log(lang.unknown_command); return; }
+                    if (!console_command_stop) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.stopping_server, 'info')
                     try {
                         for (let i = 0; i < ServerInfo.prototype.getPlayers().length; i++) {
