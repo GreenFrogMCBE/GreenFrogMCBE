@@ -65,5 +65,8 @@
     "warning": "warning",
     "error": "error",
     "debug": "debug",
-    "invalid": "INVALID | The log type you/plugin used is invalid. Valid log types are: info, warning, error, debug"
+    "invalid": "INVALID | The log type you/plugin used is invalid. Valid log types are: info, warning, error, debug",
+    "playeroffline": "Player not found",
+    "failedfindcommands": "Failed to find commands.json | Error: %e%",
+    "failedparsecommands": "Failed to parse commands.json | Error: %e%"
 }

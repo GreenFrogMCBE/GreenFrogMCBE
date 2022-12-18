@@ -66,5 +66,19 @@
     "warning": "warning",
     "error": "error",
     "debug": "debug",
-    "invalid": "INVALID | The log type you/plugin used is invalid. Valid log types are: info, warning, error, debug"
+    "invalid": "INVALID | The log type you/plugin used is invalid. Valid log types are: info, warning, error, debug",
+    "playeroffline": "Player not found",
+    "failedfindcommands": "Failed to find commands.json | Error: %e%",
+    "failedparsecommands": "Failed to parse commands.json | Error: %e%",
+    "failedtoexecuteoninternalservererror": "Failed to execute onInternalServerError(server, client, err) event for plugin \"%plugin%\". The error was: %e%",
+    "failedtoexecuteoncommand": "Failed to execute onCommand(server, client, command) event for plugin \"%plugin%\". The error was: %e%",
+    "ignoredpacket": "Ignored packet: %packet%",
+    "failedtoexecuteonchat": "Failed to execute onChat(server, client, msg, fullmsg) event for plugin \"%plugin%\". The error was: %e%",
+    "failedtoexecuteonplayerspawn": "Failed to execute onPlayerSpawn(server, client) event for plugin \"%plugin%\". The error was: %e%",
+    "failedtoexecuteonkick": "Failed to execute onKick(server, client, msg) event for plugin \"%plugin%\". The error was: %e%",
+    "failedtoexecuteonresourcepackscompleted": "Failed to execute onResourcePacksCompleted(server, client) event for plugin \"%plugin%\". The error was: %e%",
+    "failedtoexecuteonplayerhaveallpacks": "Failed to execute onPlayerHaveAllPacks(server, client) event for plugin %plugin%. The error was: %e%",
+    "failedtoexecuteonresourcepackinfosent": "Failed to execute onResourcePackInfoSent(server, client) event for plugin \"%plugin%\". The error was: %e%",
+    "failedtoexecuteonresourcepacksrefused": "Failed to execute onResourcePacksRefused(server, client) event for plugin \"%plugin%\". The error was: %e%",
+    "failedtoexecuteonplayerhasnoresourcepacksinstalled": "Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin \"%plugin%\". The error was: %e%"
 }
