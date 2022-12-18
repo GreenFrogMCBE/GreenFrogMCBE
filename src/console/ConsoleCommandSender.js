@@ -156,13 +156,13 @@ class ConsoleCommandSender {
                     if (!commands.console_command_help) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.commandlist);
                     if (commands.console_command_kick) { Logger.prototype.log(lang.kick_help); }
+                    if (commands.console_command_time) { Logger.prototype.log(lang.time_help); }
                     if (commands.console_command_stop) { Logger.prototype.log(lang.shutdown_help); }
                     if (commands.console_command_stop) { Logger.prototype.log(lang.stop_help); }
                     if (commands.console_command_help) { Logger.prototype.log(lang.help_help); }
                     if (commands.console_command_help) { Logger.prototype.log(lang.qm_help) }
                     if (commands.console_command_version) { Logger.prototype.log(lang.version_help); }
                     if (commands.console_command_version) { Logger.prototype.log(lang.ver_help); }
-                    if (commands.console_command_time) { Logger.prototype.log(lang.time_help); }
                     break;
                 default:
                     Logger.prototype.log(lang.unknown_command)
