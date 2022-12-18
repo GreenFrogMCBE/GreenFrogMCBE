@@ -140,7 +140,7 @@ class ConsoleCommandSender {
                     }, 1000) // give some time for the server to disconnect clients
                     break
                 case lang.command_kick:
-                    if (!commands.console_command_) { Logger.prototype.log(lang.unknown_command); return; }
+                    if (!commands.console_command_kick) { Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.command_usage_kick, 'info')
                     break;
                 case lang.command_ver:
