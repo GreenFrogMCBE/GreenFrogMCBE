@@ -149,7 +149,7 @@ class ConsoleCommandSender {
                     Logger.prototype.log(lang.command_ver_info, 'info')
                     break;
                 case lang.command_time:
-                    if (!commands.console_time) { Logger.prototype.log(lang.unknown_command); return; }
+                    if (!commands.console_time) { console.log(1) Logger.prototype.log(lang.unknown_command); return; }
                     Logger.prototype.log(lang.command_usage_time, 'info')
                     break;
                 case '?':
