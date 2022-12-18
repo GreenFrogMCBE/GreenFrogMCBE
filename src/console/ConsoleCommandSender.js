@@ -146,6 +146,7 @@ class ConsoleCommandSender {
                     break;
                 case lang.command_pl:
                 case lang.command_plugins:
+                    if (!commands.console_command_plugins) { Logger.prototype.log(lang.unknown_command); return; }
                     let plugins;
                     if (PluginManager.prototype.getPlugins() == null) {
                         plugins = 0;
