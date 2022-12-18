@@ -2,6 +2,7 @@ const rl = require('readline')
 const Logger = require('./Logger')
 const config = require('../../config.json')
 const commands = require('../../commands.json')
+const ServerInfo = require('../api/ServerInfo')
 const lang = require(`../lang/${config.lang}.json`)
 const fs = require('fs')
 
