@@ -26,7 +26,7 @@ class ServerInfo {
     }
 
     getCommands() {
-        return require(`../../../commands.json`)
+        return require(`../../commands.json`)
     }
 
 }
