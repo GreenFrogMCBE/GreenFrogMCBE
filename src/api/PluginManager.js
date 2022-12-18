@@ -1,14 +1,14 @@
+let plugins = []
+
 class PluginManager {
-    constructor() {
-        this.plugins = []
-    }
+    constructor() {}
 
     getPlugins() {
-        return this.plugins
+        return plugins
     }
 
     addPlugin(name) {
-        this.plugins.push(name)
+        plugins.push(name)
     }
 }
 
