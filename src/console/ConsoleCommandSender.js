@@ -65,7 +65,7 @@ class ConsoleCommandSender {
                     return
                 }
 
-                let msg1 = lang.chat__saycommand_format.replace(`%message%`, msg)
+                let msg1 = lang.saycommand_format.replace(`%message%`, msg)
 
                 for (let i = 1; i < ServerInfo.prototype.getPlayers().length; i++) {
                     let client = ServerInfo.prototype.getPlayers()[i]
