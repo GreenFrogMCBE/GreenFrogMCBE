@@ -1,6 +1,7 @@
 const rl = require('readline')
 const Logger = require('./Logger')
-const ServerInfo = require('../api/ServerInfo');
+const config = require('../../config.json')
+const lang = require(`../lang/${config.lang}.json`)
 const fs = require('fs')
 
 class ConsoleCommandSender {
