@@ -3,6 +3,9 @@ const config = require("../../config.json")
 class ServerInfo {
     constructor() {
         this.players = []
+        this.config = require("../../config.json")
+        this.lang = require(`../lang/${config.lang}.json`)
+        this.commands = require(`../../../commands.json`)
     }
 
     setPlayers (players) {
@@ -14,11 +17,11 @@ class ServerInfo {
     }
 
     getConfig () {
-        return require("../../config.json");
+        return this.config;
     }
 
     getLang () {
-        return require(`../lang/${config.lang}.json`);
+        return this.lang;
     }
 
     getServerVersion() {
@@ -26,7 +29,7 @@ class ServerInfo {
     }
 
     getCommands() {
-        return require(`../../commands.json`)
+        return this.commands;
     }
 
 }

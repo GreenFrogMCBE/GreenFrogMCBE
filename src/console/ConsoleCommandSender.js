@@ -1,10 +1,10 @@
 const rl = require('readline')
 const Logger = require('./Logger')
-const ServerInfo = require('../api/ServerInfo')
 const PluginManager = require('../api/PluginManager')
 const Colors = require('../api/Colors')
-const lang = ServerInfo.prototype.getLang()
-const commands = ServerInfo.prototype.getCommands()
+const config = require(`../../config.json`)
+const lang = require(`../lang/${config.lang}.json`)
+const commands = require(`../../commands.json`)
 const fs = require('fs')
 
 class ConsoleCommandSender {

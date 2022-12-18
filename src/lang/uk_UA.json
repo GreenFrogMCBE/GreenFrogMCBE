@@ -34,6 +34,8 @@
     "command_ver": "ver",
     "command_version": "version",
     "command_help": "help",
+    "command_pl": "pl",
+    "command_plugins": "plugins",
     "command_usage_kick": "Використання: kick [гравець] [причина]",
     "command_ver_info": "Цей сервер працює на GreenFrogMCBE. Версія %version%\nРепозиторія: https://github.com/andriycraft/GreenFrogMCBE",
     "command_usage_time": "Використання: time [час]",
@@ -81,5 +83,7 @@
     "failedtoexecuteonresourcepackinfosent": "Failed to execute onResourcePackInfoSent(server, client) event for plugin \"%plugin%\". The error was: %e%",
     "failedtoexecuteonresourcepacksrefused": "Failed to execute onResourcePacksRefused(server, client) event for plugin \"%plugin%\". The error was: %e%",
     "failedtoexecuteonplayerhasnoresourcepacksinstalled": "Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin \"%plugin%\". The error was: %e%",
-    "plugins": "Плагіни"
+    "plugins": "Плагіни",
+    "pl_help": "pl - Таке саме як /plugins",
+    "plugins_help": "plugins - Список плагінів"
 }

@@ -11,6 +11,7 @@
     "unknown_command": "NeŽinoma komandą.Rašikite \"help\" jeigu reikia pagalbos",
     "listening_on": "Klausyma porto",
     "listening_failed": "Nepavyko klausytis",
+    "scch": "Starting console command handler...",
     "cchs": "Pradėtas konsolės komandų tvarkytuvas",
     "stopping_server": "Išjungiamas serveris!",
     "invalid_time": "§cNetinkama laikas!",
@@ -19,8 +20,8 @@
     "no_reason": "jokios priežasties",
     "command_list": "Visos komandos",
     "kick_help": "išmesti [žaidėjas] [priežastis] - išmesti žaidėja",
-    "shutdown_help": "/išjungti - Išjungia serverį",
-    "stop_help": "/baigti - Išjungia serverį",
+    "shutdown_help": "išjungti - Išjungia serverį",
+    "stop_help": "baigti - Išjungia serverį",
     "help_help": "pagalba - šiuo metu žiūrite šią komandą",
     "qm_help": "Vienodai kaip /pagalba",
     "ver_help": "Parodo serverio versija",
@@ -82,5 +83,7 @@
     "failedtoexecuteonresourcepackinfosent": "Failed to execute onResourcePackInfoSent(server, client) event for plugin \"%plugin%\". The error was: %e%",
     "failedtoexecuteonresourcepacksrefused": "Failed to execute onResourcePacksRefused(server, client) event for plugin \"%plugin%\". The error was: %e%",
     "failedtoexecuteonplayerhasnoresourcepacksinstalled": "Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin \"%plugin%\". The error was: %e%",
-    "plugins": "Plugins"
+    "plugins": "Плагіни",
+    "pl_help": "pl - Same as /plugins",
+    "plugins_help": "plugins - Plugin list"
 }
