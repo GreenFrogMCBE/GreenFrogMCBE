@@ -1,14 +1,14 @@
 ---
 name: Feature request
 about: Suggest an idea
-title: 'Lang Update'
+title: ''
 labels: Feature request
 assignees: ''
 
 ---
 
 ## What feature?
-translating the untranslated words
+[type here]
 
 ## Why? 
-kotinash asked
+[type here]
