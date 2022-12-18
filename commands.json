@@ -1,10 +1,10 @@
 {
-    "console_command_help": false,
-    "console_command_kick": false,
-    "console_command_stop": false,
-    "console_command_version": false,
-    "console_command_time": false,
-    "player_command_commands": false,
-    "player_command_cmds": false,
-    "player_command_ver": false
+    "console_command_help": true,
+    "console_command_kick": true,
+    "console_command_stop": true,
+    "console_command_version": true,
+    "console_command_time": true,
+    "player_command_commands": true,
+    "player_command_cmds": true,
+    "player_command_ver": true
 }
