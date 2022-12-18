@@ -56,7 +56,7 @@ Our language system currently supports those languages: English, Lithuanian, Ukr
 
 ## Donations
 
-I need money to maintain this project and keep it free: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
+If you want to support this project, you can donate at: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
 ## Servers that run this software
 
