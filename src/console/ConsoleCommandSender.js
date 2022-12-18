@@ -175,6 +175,8 @@ class ConsoleCommandSender {
                     if (commands.console_command_help) { Logger.prototype.log(lang.qm_help) }
                     if (commands.console_command_version) { Logger.prototype.log(lang.version_help); }
                     if (commands.console_command_version) { Logger.prototype.log(lang.ver_help); }
+                    if (commands.console_command_pl) { Logger.prototype.log(lang.pl_help); }
+                    if (commands.console_command_plugins) { Logger.prototype.log(lang.plugins_help); }
                     break;
                 default:
                     Logger.prototype.log(lang.unknown_command)
