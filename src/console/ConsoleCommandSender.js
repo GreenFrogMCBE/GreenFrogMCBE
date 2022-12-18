@@ -146,7 +146,13 @@ class ConsoleCommandSender {
                     break;
                 case 'plugins':
                 case 'pl':
-                    Logger.prototype.log(`Plugins (${PluginManager.prototype.getPlugins().length}): ${Colors.CONSOLE_PL_GREEN}${PluginManager.prototype.getPlugins()}`, 'info')
+                    let plugins;
+                    if (PluginManager.prototype.getPlugins() == null) {
+                        plugins = 0;
+                    } else {
+                        plugins = PluginManager.prototype.getPlugins().length
+                    }
+                    Logger.prototype.log(`Plugins (${}): ${Colors.CONSOLE_PL_GREEN}${PluginManager.prototype.getPlugins()}`, 'info')
                     break
                 case lang.command_ver:
                 case lang.command_version:
