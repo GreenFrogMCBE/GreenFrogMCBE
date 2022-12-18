@@ -35,7 +35,7 @@
     "command_version": "version",
     "command_help": "help",
     "command_usage_kick": "Використання: kick [гравець] [причина]",
-    "command_ver_info": "Цей сервер використовує GreenFrogMCBE. Версія %version%\nРепозиторія: https://github.com/andriycraft/GreenFrogMCBE",
+    "command_ver_info": "Цей сервер працює на GreenFrogMCBE. Версія %version%\nРепозиторія: https://github.com/andriycraft/GreenFrogMCBE",
     "command_usage_time": "Використання: time [час]",
     "kicked_prefix": "Вас було кікнуто: ",
     "commandlist": "Список команд: ",
