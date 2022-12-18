@@ -52,7 +52,7 @@ class ConsoleCommandSender {
             }
 
             if (data.startsWith(`${lang.command_say} `)) {
-                if (!commands.console_say) { Logger.prototype.log(lang.unknown_command); return }
+                if (!commands.console_command_say) { Logger.prototype.log(lang.unknown_command); return }
 
                 const msg = data.split(" ")[1]
                 if (msg.length < 1) {
