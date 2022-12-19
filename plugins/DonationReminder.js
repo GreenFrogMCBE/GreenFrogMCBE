@@ -6,7 +6,7 @@ class DonationReminder {
     }
     
     getServerVersion() {
-        return "1.1"
+        return "1.2"
     }
     
     getVersion() {
