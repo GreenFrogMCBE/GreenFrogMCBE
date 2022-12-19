@@ -14,7 +14,7 @@ class ExamplePlugin {
     }
 
     getServerVersion() {
-        return "1.1" // The SERVER version that your plugin is made for
+        return "1.2" // The SERVER version that your plugin is made for
     }
 
     getVersion() {
