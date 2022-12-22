@@ -1,5 +1,7 @@
-// WARNING: Do not delete any functions! It will trigger an error!
-// This plugin contains all events and descriptions, so you can use this plugin as a docs
+const BasePlugin = require("../src/api/BasePlugin");
+
+// This plugin contains all list of events
+// Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
 
 class ExamplePlugin {
     constructor() { }
