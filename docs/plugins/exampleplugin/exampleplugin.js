@@ -1,4 +1,4 @@
-const BasePlugin = require("../src/api/BasePlugin");
+const BasePlugin = require("../src/plugins/BasePlugin");
 
 // This plugin contains all list of events
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
