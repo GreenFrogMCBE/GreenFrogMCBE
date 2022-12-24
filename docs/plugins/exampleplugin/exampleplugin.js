@@ -1,5 +1,6 @@
 const BasePlugin = require("../src/plugins/BasePlugin");
 
+// Unused events can be deleted
 // This plugin contains all list of events
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
 
