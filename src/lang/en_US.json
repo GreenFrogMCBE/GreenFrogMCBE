@@ -18,7 +18,7 @@
     "empty_message": "Empty message was provided!",
     "no_reason": "No reason",
     "command_list": "All commands",
-    "kick_help": "kick [player] [reason] - kick player",
+    "kick_help": "kick [player] [reason] - Kick player",
     "shutdown_help": "shutdown - Stops the server",
     "stop_help": "stop - Stops the server",
     "help_help": "help - Shows this message",
@@ -39,7 +39,7 @@
     "command_pl": "pl",
     "command_plugins": "plugins",
     "command_usage_kick": "Usage: kick [player] [reason]",
-    "command_ver_info": "This server runs GreenFrogMCBE. Version: %version% \nhttps://github.com/andriycraft/GreenFrogMCBE",
+    "command_ver_info": "This server runs GreenFrogMCBE. Version: %version% | Repo: https://github.com/andriycraft/GreenFrogMCBE",
     "command_usage_time": "Usage: time [time]",
     "kicked_prefix": "You were kicked for: ",
     "commandlist": "Command list: ",
@@ -85,5 +85,13 @@
     "failedtoexecuteonresourcepackinfosent": "Failed to execute onResourcePackInfoSent(server, client) event for plugin \"%plugin%\". The error was: %e%",
     "failedtoexecuteonresourcepacksrefused": "Failed to execute onResourcePacksRefused(server, client) event for plugin \"%plugin%\". The error was: %e%",
     "failedtoexecuteonplayerhasnoresourcepacksinstalled": "Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin \"%plugin%\". The error was: %e%",
-    "plugins": "Plugins"
+    "plugins": "Plugins",
+    "playerunknowncommand": "§cUnknown command. Type /commands for a list of commands",
+    "playervercommandline1": "§7This server runs GreenFrogMCBE. Version %version%",
+    "playervercommandline2": "§7https://github.com/andriycraft/GreenFrogMCBE/",
+    "commands": "§6Commands: ",
+    "commandsline1": "§6/ver - Shows server version",
+    "commandsline2": "§6/version - Shows server version",
+    "commandsline3": "§6/cmds - Shows commands list",
+    "commandsline4": "§6/commands - Shows commands list"
 }

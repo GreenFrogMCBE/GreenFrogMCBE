@@ -2,18 +2,19 @@ const Bedrock = require('bedrock-protocol')
 const Logger = require('../src/console/Logger')
 const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
 const ServerInfo = require('../src/api/ServerInfo')
+const PlayerInfo = require('../src/player/PlayerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
 const fs = require('fs')
-const commands = require(`../commands.json`)
 let clients = []
 
 ValidateConfig.prototype.ValidateConfig()
 ValidateConfig.prototype.ValidateLangFile()
 ValidateConfig.prototype.ValidateCommands()
 
-const config = require('../config.json')
-const lang = require(`./lang/${config.lang}.json`)
+const config = ServerInfo.config
+const lang = ServerInfo.lang
+const commands = ServerInfo.commands
 
 Logger.prototype.log(lang.loadingserver)
 
@@ -94,7 +95,7 @@ server.on('connect', client => {
         });
 
         clients.push(client)
-        ServerInfo.prototype.setPlayers(clients)
+        PlayerInfo.prototype.setPlayers(clients)
     })
 
     function handlepk(client, packet) {
@@ -279,49 +280,47 @@ server.on('connect', client => {
                     });
                 });
                 Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
-                switch (cmd) { // TODO: Translate chat
+                switch (cmd) { 
                     case '/ver':
                         if (!commands.player_command_ver) {
-                            client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                            client.chat(lang.playerunknowncommand)
                             return
                         }
-                        client.chat(`§7This server runs GreenFrogMCBE. Version ${ServerInfo.prototype.getServerVersion()}`)
-                        client.chat(`§7https://github.com/andriycraft/GreenFrogMCBE/`)
+                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                        client.chat(lang.playervercommandline2)
                         break
                     case '/version':
                         if (!commands.player_command_ver) {
-                            client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                            client.chat(lang.playerunknowncommand)
                             return
                         }
-                        client.chat(`§7This server runs GreenFrogMCBE. Version ${ServerInfo.prototype.getServerVersion()}`)
-                        client.chat(`§7https://github.com/andriycraft/GreenFrogMCBE/`)
+                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                        client.chat(lang.playervercommandline2)
                         break
                     case '/cmds':
                         if (!commands.player_command_cmds) {
-                            client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                            client.chat(lang.playerunknowncommand)
                             return
                         }
-                        client.chat(`§6Commands: `)
-                        client.chat(`§6/ver - Server version`)
-                        client.chat(`§6/version - Server version`)
-                        client.chat(`§6/cmds - Commands list`)
-                        client.chat(`§6/commands - Commands list`)
+                        client.chat(lang.commands)
+                        client.chat(lang.commandsline1)
+                        client.chat(lang.commandsline2)
+                        client.chat(lang.commandsline3)
+                        client.chat(lang.commandsline4)
                         break
                     case '/commands': {
-                        console.log(ServerInfo.prototype)
                         if (!commands.player_command_commands) {
-                            client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                            client.chat(lang.playerunknowncommand)
                             return
                         }
-                        client.chat(`§6Commands: `)
-                        client.chat(`§6/ver - Server version`)
-                        client.chat(`§6/version - Server version`)
-                        client.chat(`§6/cmds - Commands list`)
-                        client.chat(`§6/commands - Commands list`)
+                        client.chat(lang.commandsline1)
+                        client.chat(lang.commandsline2)
+                        client.chat(lang.commandsline3)
+                        client.chat(lang.commandsline4)
                         break
                     }
                     default:
-                        client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                        client.chat(lanf.playerunknowncommand)
                         break
                 }
                 break

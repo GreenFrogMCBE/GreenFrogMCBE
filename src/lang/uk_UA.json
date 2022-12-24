@@ -37,7 +37,7 @@
     "command_pl": "pl",
     "command_plugins": "plugins",
     "command_usage_kick": "Використання: kick [гравець] [причина]",
-    "command_ver_info": "Цей сервер працює на GreenFrogMCBE. Версія %version%\nРепозиторія: https://github.com/andriycraft/GreenFrogMCBE",
+    "command_ver_info": "Цей сервер працює на GreenFrogMCBE. Версія %version% | Репозиторій: https://github.com/andriycraft/GreenFrogMCBE",
     "command_usage_time": "Використання: time [час]",
     "kicked_prefix": "Вас було кікнуто: ",
     "commandlist": "Список команд: ",
@@ -85,5 +85,13 @@
     "failedtoexecuteonplayerhasnoresourcepacksinstalled": "Не вдалося виконати onPlayerHasNoResourcePacksInstalled(server, client) подія для плагіна \"%plugin%\". Помилка: %e%",
     "plugins": "Плагіни",
     "pl_help": "pl - Таке саме як /plugins",
-    "plugins_help": "plugins - Список плагінів"
+    "plugins_help": "plugins - Список плагінів",
+    "playerunknowncommand": "§cНевідома команда. Використовуйте /commands для допомоги",
+    "playervercommandline1": "§7Цей сервер працює на GreenFrogMCBE. Версія %version%",
+    "playervercommandline2": "§7https://github.com/andriycraft/GreenFrogMCBE/",
+    "commands": "§6Команди: ",
+    "commandsline1": "§6/ver - Показати версію сервера",
+    "commandsline2": "§6/version - Показати версію сервера",
+    "commandsline3": "§6/cmds - Показати список команд",
+    "commandsline4": "§6/commands - Показати список команд"
 }
