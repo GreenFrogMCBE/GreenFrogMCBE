@@ -5,6 +5,6 @@ class ServerInfo {}
 module.exports = {
     lang: require(`../lang/${require("../../config.json").lang}.json`),
     config: require("../../config.json"),
-    serverversion: "1.3",
+    serverversion: "1.4",
     commands: require(`../../commands.json`),
 };
