@@ -241,6 +241,7 @@ server.on('connect', client => {
             case "emote_list":
             case "set_player_game_type":
             case "client_cache_status":
+            case "move_player":
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
                 break
             case "text":
