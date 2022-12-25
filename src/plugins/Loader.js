@@ -48,8 +48,7 @@ class Loader {
                     let version = 'unknown'
                     try {
                         version = require(`../../plugins/${plugin}`).prototype.getVersion()
-                    } catch (e) { }
-                    Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()} version: ${version}". The error was: ${e.stack}`, 'error')
+                    } catch (e) { Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()} version: ${version}". The error was: ${e.stack}`, 'error') }
                 }
             });
             Logger.prototype.log(`All plugins are loaded!`, 'info')
