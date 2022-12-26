@@ -39,6 +39,8 @@ If you want for your plugin to be listed on the 'Plugins available for public us
 8. Basic moderation (/kick)
 9. Basic admin commands
 10. Plugin support
+11. Support of new versions
+12. Many events for plugin API
 
 ## Language system
 Our language system currently supports those languages: English, Lithuanian, Ukrainian
