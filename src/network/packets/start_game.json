@@ -3,9 +3,9 @@
   "runtime_entity_id": "1",
   "player_gamemode": "fallback",
   "player_position": {
-    "x": 26.5,
-    "y": 32769.62109375,
-    "z": 17.5
+    "x": 3,
+    "y": 50,
+    "z": -4
   },
   "rotation": {
     "x": 0,
@@ -23,7 +23,7 @@
   "difficulty": 0,
   "spawn_position": {
     "x": 26,
-    "y": 32767,
+    "y": 100,
     "z": 17
   },
   "achievements_disabled": true,
@@ -5926,7 +5926,7 @@
   ],
   "multiplayer_correlation_id": "fcdaae09-52d4-458f-9b42-668bf17b8f21",
   "server_authoritative_inventory": false,
-  "engine": "CustomBird",
+  "engine": "GreenFrogMCBE",
   "property_data": {
     "type": "compound",
     "name": "",

@@ -1,16 +1,26 @@
-// WARNING: Do not delete any function!
-// This plugin contains all events and descriptions, so you can use this plugin as a docs
+const BasePlugin = require("../src/plugins/BasePlugin");
+
+// This plugin contains all list of events
+// Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
 
 class ExamplePlugin {
-    constructor() {}
+    constructor() { }
 
     getName() {
-        return "Example plugin" // your plugin name
+        return "Example plugin" // Your plugin name
     }
 
     onLoad() {
         // This code executes when your plugin is loaded
         console.log(`I was loaded`)
+    }
+
+    getServerVersion() {
+        return "1.3" // The SERVER version that your plugin is made for
+    }
+
+    getVersion() {
+        return "1.0" // Your PLUGIN version
     }
 
     onJoin(server, client) {
@@ -26,16 +36,16 @@ class ExamplePlugin {
 
     onKick(server, client, msg) {
         // This code executes when player is kicked
-        console.log(`Oh no! Player got kicked: ${msg} | :skull:`)
+        console.log(`Oh no! Player got kicked: ${msg}`)
     }
 
     onPlayerSpawn(server, client) {
-        // This code executes when player is spawned (this event starts after onJoin() event)
+        // This code executes when player is spawned (this event triggers after onJoin() event)
     }
 
     onChat(server, client, msg, fullmsg) {
         // This code executes when player uses chat
-        console.log(`Client chated: ${msg}`)
+        console.log(`Client used chat: ${msg}`)
     }
 
     onCommand(server, client, command) {
@@ -43,11 +53,15 @@ class ExamplePlugin {
         console.log(`Client executed this command: ${command}`)
     }
 
-    onInternalServerError(server, client, error) {
-        // This code executes when there is an server error
-        console.log(`!!!! Server error: ${error}`)
+    onConsoleCommand(command) {
+        // This code executes when console executes a command
+        console.log(`Console executed this command: ${command}`)
     }
 
+    onInternalServerError(server, client, error) {
+        // This code executes when there is an server error
+        console.log(`Oh no! There was an server error: ${error}`)
+    }
 }
 
 module.exports = ExamplePlugin;

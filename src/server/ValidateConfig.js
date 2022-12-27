@@ -1,5 +1,7 @@
 const Logger = require('../console/Logger')
-const Lang = require(`../../src/lang/${require('../../config.json').lang}.json`)
+const ServerInfo = require('../api/ServerInfo')
+
+const lang = ServerInfo.lang
 
 class ValidateConfig {
     constructor() {}
@@ -8,14 +10,30 @@ class ValidateConfig {
         try {
             require("../../config.json")
         } catch (e) {
-            Logger.prototype.log(Lang.failedfindconfig.replace('%e%', e))
+            Logger.prototype.log(lang.failedfindconfig.replace('%e%', e))
             process.exit(-1)
         }
 
         try {
             JSON.parse(JSON.stringify(require("../../config.json")))            
         } catch (e) {
-            Logger.prototype.log(Lang.failedparseconfig.replace('%e%', e))
+            Logger.prototype.log(lang.failedparseconfig.replace('%e%', e))
+            process.exit(-1)
+        }
+    }
+
+    ValidateCommands() {
+        try {
+            require("../../commands.json")
+        } catch (e) {
+            Logger.prototype.log(lang.failedfindcommands.replace('%e%', e))
+            process.exit(-1)
+        }
+
+        try {
+            JSON.parse(JSON.stringify(require("../../commands.json")))            
+        } catch (e) {
+            Logger.prototype.log(lang.failedparsecommands.replace('%e%', e))
             process.exit(-1)
         }
     }
@@ -26,7 +44,7 @@ class ValidateConfig {
             require("../../src/lang/uk_UA.json")
             require("../../src/lang/en_US.json")
         } catch (e) {
-            Logger.prototype.log(Lang.failedparselang.replace('%e%', e))
+            Logger.prototype.log(lang.failedparselang.replace('%e%', e))
             process.exit(-1)
         }
 
@@ -35,7 +53,7 @@ class ValidateConfig {
             JSON.parse(JSON.stringify(require("../../src/lang/uk_UA.json")))
             JSON.parse(JSON.stringify(require("../../src/lang/en_US.json")))
         } catch (e) {
-            Logger.prototype.log(Lang.failedfindlang.replace('%e%', e))
+            Logger.prototype.log(lang.failedfindlang.replace('%e%', e))
             process.exit(-1)
         }
     }

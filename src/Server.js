@@ -2,6 +2,7 @@ const Bedrock = require('bedrock-protocol')
 const Logger = require('../src/console/Logger')
 const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
 const ServerInfo = require('../src/api/ServerInfo')
+const PlayerInfo = require('../src/player/PlayerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
 const fs = require('fs')
@@ -9,29 +10,44 @@ let clients = []
 
 ValidateConfig.prototype.ValidateConfig()
 ValidateConfig.prototype.ValidateLangFile()
+ValidateConfig.prototype.ValidateCommands()
 
-const config = require('../config.json')
-const lang = require(`./lang/${config.lang}.json`)
+const config = ServerInfo.config
+const lang = ServerInfo.lang
+const commands = ServerInfo.commands
 
 Logger.prototype.log(lang.loadingserver)
 
 process.on('uncaughtException', function (err) {
     Logger.prototype.log(`${lang.servererror}: ${err.stack}`, 'error')
-    process.exit(-1)
+    if (!config.donotcrashoncriticalerrors) {
+        process.exit(-1)
+    }
 })
 
 process.on('uncaughtExceptionMonitor', function (err) {
     Logger.prototype.log(`${lang.servererror}: ${err.stack}`, 'error')
-    process.exit(-1)
+    if (!config.donotcrashoncriticalerrors) {
+        process.exit(-1)
+    }
 })
 
 process.on('unhandledRejection', function (err) {
     Logger.prototype.log(`${lang.servererror}: ${err.stack}`, 'error')
-    process.exit(-1)
+    if (!config.donotcrashoncriticalerrors) {
+        process.exit(-1)
+    }
 })
 
 const get = (packetName) => require(`./network/packets/${packetName}.json`)
 
+if (config.donotcrashoncriticalerrors) {
+    Logger.prototype.log(lang.unstablewarning, 'warning')
+}
+
+if (config.debug) {
+    Logger.prototype.log(lang.debugwarning, 'warning')
+}
 
 Logger.prototype.log(`${lang.scch}`)
 Loader.prototype.loadPlugins()
@@ -57,8 +73,6 @@ try {
     process.exit(-1)
 }
 
-
-
 server.on('connect', client => {
     client.on('join', () => {
         Logger.prototype.log(lang.playerconnected.replace('%player%', client.getUserData().displayName))
@@ -75,253 +89,245 @@ server.on('connect', client => {
                 try {
                     require(`../plugins/${plugin}`).prototype.onResourcePackInfoSent(server, client)
                 } catch (e) {
-                    Logger.prototype.log(`Failed to execute onResourcePackInfoSent() event for plugin "${plugin}". The error was: ${e}`, 'error')
+                    Logger.prototype.log(lang.failedtoexecuteonresourcepackinfosent.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
                 }
             });
         });
 
         clients.push(client)
-        ServerInfo.prototype.setPlayers(clients)
+        PlayerInfo.prototype.setPlayers(clients)
     })
 
     function handlepk(client, packet) {
-        if (packet.data.name == 'resource_pack_client_response') {
-            switch (packet.data.params.response_status) {
-                case 'none': {
-                    Logger.prototype.log(lang.norpsinstalled.replace('%player%', client.getUserData().displayName))
-                    fs.readdir("./plugins", (err, plugins) => {
-                        plugins.forEach(plugin => {
-                            try {
-                                require(`../plugins/${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(server, client)
-                            } catch (e) {
-                                Logger.prototype.log(`Failed to execute onPlayerHasNoResourcePacksInstalled(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
-                            }
-                        });
-                    });
-                }
-                case 'refused': {
-                    fs.readdir("./plugins", (err, plugins) => {
-                        plugins.forEach(plugin => {
-                            try {
-                                require(`../plugins/${plugin}`).prototype.onResourcePacksRefused(server, client)
-                            } catch (e) {
-                                Logger.prototype.log(`Failed to execute onResourcePacksRefused(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
-                            }
-                        });
-                    });
-                    Logger.prototype.log(lang.rpsrefused.replace('%player%', client.getUserData().displayName))
-                    client.kick(lang.kick__resource_packs_refused)
-                }
-                case 'have_all_packs': {
-                    fs.readdir("./plugins", (err, plugins) => {
-                        plugins.forEach(plugin => {
-                            try {
-                                require(`../plugins/${plugin}`).prototype.onPlayerHaveAllPacks(server, client)
-                            } catch (e) {
-                                Logger.prototype.log(`Failed to execute onPlayerHaveAllPacks(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
-                            }
-                        });
-                    });
-                    Logger.prototype.log(lang.rpsinstalled.replace('%player%', client.getUserData().displayName))
-
-                    client.write('resource_pack_stack', {
-                        must_accept: false,
-                        behavior_packs: [],
-                        resource_packs: [],
-                        game_version: '',
-                        experiments: [],
-                        experiments_previously_used: false
-                    })
-                    break
-                }
-                case 'completed': {
-                    fs.readdir("./plugins", (err, plugins) => {
-                        plugins.forEach(plugin => {
-                            try {
-                                require(`../plugins/${plugin}`).prototype.onResourcePacksCompleted(server, client)
-                            } catch (e) {
-                                Logger.prototype.log(`Failed to execute onResourcePacksCompleted(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
-                            }
-                        });
-                    });
-                    if (client.getUserData().displayName.length < 3) {
-                        client.kick(lang.kick__username_is_too_short)
-                        return
-                    }
-
-                    if (client.getUserData().displayName.length > 16) {
-                        if (config.offlinemode) return
-                        client.kick(lang.kick__username_is_too_long)
-                        return
-                    }
-
-                    Logger.prototype.log(lang.joined.replace('%player%', client.getUserData().displayName))
-                    client.write('network_settings', { compression_threshold: 1 })
-
-                    client.write('player_list', get('player_list'))
-                    client.write('start_game', get('start_game'))
-                    client.write('set_spawn_position', get('set_spawn_position'))
-                    client.write('set_commands_enabled', { enabled: true })
-                    client.write('biome_definition_list', get('biome_definition_list'))
-                    client.write('available_entity_identifiers', get('available_entity_identifiers'))
-                    client.write('creative_content', get('creative_content'))
-
-function toBuffer(bufferString) {
-  const hex = bufferString.match(/\s[0-9a-fA-F]+/g).map((x) => x.trim());
-  return Buffer.from(hex.join(''), 'hex');
-}
-
-const buffer = '<Buffer 01 58 01 58 01 58 01 58 01 58 01 58 01 58 01 58 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 00>';
-const actualBuffer = toBuffer(buffer);
-
-
-
-                    setInterval(() => {
-                        client.write('level_chunk', {
-                            x: 0,
-                            z: 0,
-                            sub_chunk_count: -1,
-                            cache_enabled: false,
-                            blobs: [],
-                            payload: buffer                 
-                        })
-                    client.write('update_block', {
-                        "position": {
-                            "x": 26,
-                            "y": 100,
-                            "z": 17
-                        },
-                        "block_runtime_id": 9807,
-                        "flags": {
-                            "_value": 3,
-                            "neighbors": true,
-                            "network": true,
-                            "no_graphic": false,
-                            "unused": false,
-                            "priority": false
-                        },
-                        "layer": 0
-                    })
-                    }, 1000)
-
-
-                    client.on('tick_sync', (packet) => {
-                        client.write('tick_sync', {
-                            request_time: packet.request_time,
-                            response_time: BigInt(Date.now())
-                        })
-                    })
-
-                    client.chat = function (msg) {
-                        client.write('text', {
-                            type: 'announcement',
-                            needs_translation: false,
-                            source_name: '',
-                            message: msg,
-                            xuid: '',
-                            platform_chat_id: ''
-                        })
-                    }
-
-
-                    client.kick = function (msg) {
+        switch (packet.data.name) {
+            case "resource_pack_client_response":
+                switch (packet.data.params.response_status) {
+                    case 'none': {
+                        Logger.prototype.log(lang.norpsinstalled.replace('%player%', client.getUserData().displayName))
                         fs.readdir("./plugins", (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
-                                    require(`../plugins/${plugin}`).prototype.onKick(server, client, msg)
+                                    require(`../plugins/${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(server, client)
                                 } catch (e) {
-                                    Logger.prototype.log(`Failed to execute onKick(server, client, msg) event for plugin "${plugin}". The error was: ${e}`, 'error')
+                                    Logger.prototype.log(Logger.prototype.log(lang.failedtoexecuteonplayerhasnoresourcepacksinstalled.replace('%plugin%', plugin).replace('%e%', e.stack, 'error')), 'error')
                                 }
                             });
                         });
-                        Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
-                        client.disconnect(msg)
                     }
-
-                    Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
-                    setTimeout(() => {
-                        client.write('play_status', {
-                            status: 'player_spawn'
-                        })
+                    case 'refused': {
                         fs.readdir("./plugins", (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
-                                    require(`../plugins/${plugin}`).prototype.onPlayerSpawn(server, client)
+                                    require(`../plugins/${plugin}`).prototype.onResourcePacksRefused(server, client)
                                 } catch (e) {
-                                    Logger.prototype.log(`Failed to execute onPlayerSpawn(server, client) event for plugin "${plugin}". The error was: ${e}`, 'error')
+                                    Logger.prototype.log(lang.failedtoexecuteonresourcepacksrefused.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
                                 }
                             });
                         });
-                    }, 2000)
-
-
-                    for (let i = 0; i < clients.length; i++) {
-                        clients[i].chat(lang.joinedthegame.replace('%username%', client.getUserData().displayName))
+                        Logger.prototype.log(lang.rpsrefused.replace('%player%', client.getUserData().displayName))
+                        client.kick(lang.resource_packs_refused)
                     }
+                    case 'have_all_packs': {
+                        fs.readdir("./plugins", (err, plugins) => {
+                            plugins.forEach(plugin => {
+                                try {
+                                    require(`../plugins/${plugin}`).prototype.onPlayerHaveAllPacks(server, client)
+                                } catch (e) {
+                                    Logger.prototype.log(lang.failedtoexecuteonplayerhaveallpacks.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
+                                }
+                            });
+                        });
+                        Logger.prototype.log(lang.rpsinstalled.replace('%player%', client.getUserData().displayName))
 
-                    break
-                }
-                default: {
-                    console.warn(lang.unhandledpacketdata.replace('%data%', packet.data.params.response_status))
-                }
-            }
-        } else if (packet.data.name === 'client_to_server_handshake' || packet.data.name === 'request_chunk_radius' || packet.data.name === 'set_local_player_as_initialized' || packet.data.name === 'tick_sync' || packet.data.name === 'set_player_game_type' || packet.data.name === 'client_cache_status') {
-            return
-        } else if (packet.data.name === 'text') {
-            let msg = packet.data.params.message;
-            let fullmsg = lang.chat__chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
-            fs.readdir("./plugins", (err, plugins) => {
-                plugins.forEach(plugin => {
-                    try {
-                        require(`../plugins/${plugin}`).prototype.onChat(server, client, msg, fullmsg)
-                    } catch (e) {
-                        Logger.prototype.log(`Failed to execute onChat(server, client, msg, fullmsg) event for plugin "${plugin}". The error was: ${e}`, 'error')
+                        client.write('resource_pack_stack', {
+                            must_accept: false,
+                            behavior_packs: [],
+                            resource_packs: [],
+                            game_version: '',
+                            experiments: [],
+                            experiments_previously_used: false
+                        })
+                        break
                     }
+                    case 'completed': {
+                        fs.readdir("./plugins", (err, plugins) => {
+                            plugins.forEach(plugin => {
+                                try {
+                                    require(`../plugins/${plugin}`).prototype.onResourcePacksCompleted(server, client)
+                                } catch (e) {
+                                    Logger.prototype.log(lang.failedtoexecuteonresourcepackscompleted.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'))
+                                }
+                            });
+                        });
+                        if (client.getUserData().displayName.length < 3) {
+                            client.kick(lang.username_is_too_short)
+                            return
+                        }
+
+                        if (client.getUserData().displayName.length > 16) {
+                            if (config.offlinemode) return
+                            client.kick(lang.username_is_too_long)
+                            return
+                        }
+
+                        Logger.prototype.log(lang.joined.replace('%player%', client.getUserData().displayName))
+                        client.write('player_list', get('player_list'))
+                        client.write('start_game', get('start_game'))
+                        client.write('set_spawn_position', get('set_spawn_position'))
+                        client.write('set_commands_enabled', { enabled: true })
+                        client.write('biome_definition_list', get('biome_definition_list'))
+                        client.write('available_entity_identifiers', get('available_entity_identifiers'))
+                        client.write('creative_content', get('creative_content'))
+                        client.write('respawn', get('respawn'))
+
+                        setInterval(() => {
+                            client.write('level_chunk', get('level_chunk'))
+                        }, 1000)
+
+                        client.chat = function (msg) {
+                            client.write('text', {
+                                type: 'announcement',
+                                needs_translation: false,
+                                source_name: '',
+                                message: msg,
+                                xuid: '',
+                                platform_chat_id: ''
+                            })
+                        }
+                        client.kick = function (msg) {
+                            fs.readdir("./plugins", (err, plugins) => {
+                                plugins.forEach(plugin => {
+                                    try {
+                                        require(`../plugins/${plugin}`).prototype.onKick(server, client, msg)
+                                    } catch (e) {
+                                        Logger.prototype.log(lang.failedtoexecuteonkick.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
+                                    }
+                                });
+                            });
+                            Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
+                            client.disconnect(msg)
+                        }
+
+                        Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
+                        setTimeout(() => {
+                            client.write('play_status', {
+                                status: 'player_spawn'
+                            })
+                            fs.readdir("./plugins", (err, plugins) => {
+                                plugins.forEach(plugin => {
+                                    try {
+                                        require(`../plugins/${plugin}`).prototype.onPlayerSpawn(server, client)
+                                    } catch (e) {
+                                        Logger.prototype.log(lang.failedtoexecuteonplayerspawn.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
+                                    }
+                                });
+                            });
+                        }, 2000)
+
+
+                        for (let i = 0; i < clients.length; i++) {
+                            clients[i].chat(lang.joinedthegame.replace('%username%', client.getUserData().displayName))
+                        }
+
+                        break
+                    }
+                    default: {
+                        console.warn(lang.unhandledpacketdata.replace('%data%', packet.data.params.response_status))
+                    }
+                }
+                break
+            case "client_to_server_handshake":
+            case "request_chunk_radius":
+            case "set_local_player_as_initialized":
+            case "tick_sync":
+            case "emote_list":
+            case "set_player_game_type":
+            case "client_cache_status":
+            case "move_player":
+                Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
+                break
+            case "text":
+                let msg = packet.data.params.message;
+                let fullmsg = lang.chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
+                fs.readdir("./plugins", (err, plugins) => {
+                    plugins.forEach(plugin => {
+                        try {
+                            require(`../plugins/${plugin}`).prototype.onChat(server, client, msg, fullmsg)
+                        } catch (e) {
+                            Logger.prototype.log(lang.failedtoexecuteonchat.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
+                        }
+                    });
                 });
-            });
-            Logger.prototype.log(lang.chatmessage + fullmsg)
-            if (msg.includes("§") || msg.length == 0 || msg > 255 && config.blockinvalidmessages) {
-                Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
-                client.kick(lang.kick__invalid_chat_message)
-                return
-            }
-            client.chat(`${fullmsg}`)
-            for (let i = 0; i < clients.length; i++) {
-                if (clients[i] == !client) { clients[i].chat(`${fullmsg}`) }
-            }
-        } else if (packet.data.name === 'command_request') {
-            fs.readdir("./plugins", (err, plugins) => {
-                plugins.forEach(plugin => {
-                    try {
-                        require(`../plugins/${plugin}`).prototype.onCommand(server, client, command)
-                    } catch (e) {
-                        Logger.prototype.log(`Failed to execute onCommand(server, client, command) event for plugin "${plugin}". The error was: ${e}`, 'error')
-                    }
-                });
-            });
-            let cmd = packet.data.params.command.toLowerCase();
-            Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
-            switch (cmd) { // TODO: Translate chat
-                case '/ver':
-                case '/version':
-                    client.chat(`§7This server uses GreenFrogMCBE`)
-                    break
-                case '/cmds':
-                case '/commands': {
-                    client.chat(`§6Commands: `)
-                    client.chat(`§6/ver - server version`)
-                    client.chat(`§6/version - server version`)
-                    client.chat(`§6/cmds - commands list`)
-                    client.chat(`§6/commands - commands list`)
-                    break
+                Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg))
+                if (msg.includes("§") || msg.length == 0 || msg.length > 255 && config.blockinvalidmessages) {
+                    Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
+                    client.kick(lang.invalid_chat_message)
+                    return
                 }
-                default:
-                    client.chat(`§cUnknown command. Type /commands for a list of command`)
-                    break
-            }
-        } else {
-            Logger.prototype.log(lang.unhandledpacket, 'warning')
-            console.log('%o', packet)
+
+                for (let i = 0; i < clients.length; i++) {
+                    clients[i].chat(`${fullmsg}`)
+                }
+                break
+            case "command_request":
+                let cmd = packet.data.params.command.toLowerCase();
+                fs.readdir("./plugins", (err, plugins) => {
+                    plugins.forEach(plugin => {
+                        try {
+                            require(`../plugins/${plugin}`).prototype.onCommand(server, client, cmd)
+                        } catch (e) {
+                            Logger.prototype.log(lang.failedtoexecuteoncommand.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
+                        }
+                    });
+                });
+                Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
+                switch (cmd) {
+                    case '/ver':
+                        if (!commands.player_command_ver) {
+                            client.chat(lang.playerunknowncommand)
+                            return
+                        }
+                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                        client.chat(lang.playervercommandline2)
+                        break
+                    case '/version':
+                        if (!commands.player_command_ver) {
+                            client.chat(lang.playerunknowncommand)
+                            return
+                        }
+                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                        client.chat(lang.playervercommandline2)
+                        break
+                    case '/cmds':
+                        if (!commands.player_command_cmds) {
+                            client.chat(lang.playerunknowncommand)
+                            return
+                        }
+                        client.chat(lang.commands)
+                        client.chat(lang.commandsline1)
+                        client.chat(lang.commandsline2)
+                        client.chat(lang.commandsline3)
+                        client.chat(lang.commandsline4)
+                        break
+                    case '/commands': {
+                        if (!commands.player_command_commands) {
+                            client.chat(lang.playerunknowncommand)
+                            return
+                        }
+                        client.chat(lang.commandsline1)
+                        client.chat(lang.commandsline2)
+                        client.chat(lang.commandsline3)
+                        client.chat(lang.commandsline4)
+                        break
+                    }
+                    default:
+                        client.chat(lanf.playerunknowncommand)
+                        break
+                }
+                break
+            default:
+                Logger.prototype.log(lang.unhandledpacket, 'warning')
+                console.log('%o', packet)
         }
     }
 
@@ -329,13 +335,13 @@ const actualBuffer = toBuffer(buffer);
         try {
             handlepk(client, packet)
         } catch (e) {
-            client.kick(config.kick__internal_server_error)
+            client.kick(lang.internal_server_error)
             fs.readdir("./plugins", (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {
                         require(`../plugins/${plugin}`).prototype.onInternalServerError(server, client, err)
                     } catch (e) {
-                        Logger.prototype.log(`Failed to execute onInternalServerError(server, client, err) event for plugin "${plugin}". The error was: ${e}`, 'error')
+                        Logger.prototype.log(lang.failedtoexecuteoninternalservererror.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
                     }
                 });
             });
