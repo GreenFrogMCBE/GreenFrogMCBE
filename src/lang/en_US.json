@@ -56,7 +56,7 @@
     "rpsinstalled": "%player% has resource packs installed",
     "joined": "%player% joined",
     "spawned": "%player% spawned",
-    "joinedthegame": "§e%username% joined the game",
+    "joinedthegame": "",
     "unhandledpacketdata": "Warning: unhandled packet data: %data%",
     "chatmessage": "(chat message) %message%",
     "illegalmessage": "%player% sent an illegal message. Message content was: %msg%",

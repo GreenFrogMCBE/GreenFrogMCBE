@@ -25,7 +25,7 @@ class Loader {
                         if (require(`../../plugins/${plugin}`).prototype.getServerVersion() === ServerInfo.serverversion) {
                             Logger.prototype.log(`Plugin ${plugin} supports your server version`)
                         } else {
-                            Logger.prototype.log(`The plugin ${require(`../../plugins/${plugin}`).prototype.getName()} is made for ${require(`../../plugins/${plugin}`).serverversion}. Your server is on ${ServerInfo.serverversion}. This may cause unexpected issues or crashes`)
+                            Logger.prototype.log(`The plugin ${require(`../../plugins/${plugin}`).prototype.getName()} is made for ${require(`../../plugins/${plugin}`).prototype.getServerVersion()}. Your server is on ${ServerInfo.serverversion}. This may cause unexpected issues or crashes`)
                         }
                     } catch (e) {
                         throw new Error(`Plugin ${plugin} has no getServerVersion()`, 'warning')
