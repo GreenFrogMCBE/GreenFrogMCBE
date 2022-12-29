@@ -3,6 +3,7 @@ const Logger = require('./Logger')
 const PluginManager = require('../api/PluginManager')
 const ServerInfo = require('../api/ServerInfo')
 const PlayerInfo = require('../player/PlayerInfo')
+const Unloader = require('../plugins/Unloader')
 const Colors = require('../api/Colors')
 const fs = require('fs')
 
@@ -10,7 +11,7 @@ class ConsoleCommandSender {
     constructor() { }
 
     start() {
-
+        let closed = false
         const lang = ServerInfo.lang
         const commands = ServerInfo.commands
 
@@ -146,9 +147,8 @@ class ConsoleCommandSender {
                             PlayerInfo.prototype.getPlayers()[i].disconnect(lang.kick__servershutdown)
                         }
                     } catch (e) { }
-                    setTimeout(() => {
-                        process.exit(0)
-                    }, 1000) // give some time for the server to disconnect clients
+                    closed = true
+                    Unloader.prototype.shutdown();
                     break
                 case lang.command_kick.toLowerCase():
                     if (!commands.console_command_kick) { Logger.prototype.log(lang.unknown_command); return; }
@@ -193,7 +193,7 @@ class ConsoleCommandSender {
                     Logger.prototype.log(lang.unknown_command)
                     break
             }
-            r.prompt(true)
+            if (!closed) r.prompt(true)
         })
     }
 }

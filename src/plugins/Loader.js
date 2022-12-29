@@ -51,7 +51,7 @@ class Loader {
                     } catch (e) { Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()} version: ${version}". The error was: ${e.stack}`, 'error') }
                 }
             });
-            Logger.prototype.log(`All plugins are loaded!`, 'info')
+            Logger.prototype.log('All plugins are loaded!')
         });
     }
 

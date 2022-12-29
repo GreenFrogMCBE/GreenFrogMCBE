@@ -1,9 +1,7 @@
 class BasePlugin {
   constructor() { }
-  getName() { }
-  getServerVersion() { }
-  getVersion() { }
   onLoad() { }
+  onShutdown() { }
   onJoin() { }
   onResourcePackInfoSent() { }
   onPlayerHasNoResourcePacksInstalled() { }

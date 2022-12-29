@@ -10,6 +10,12 @@ class DonationReminder extends BasePlugin {
     return "1.4";
   }
 
+  onShutdown () {
+    Logger.prototype.log(
+      `[DonationReminder] https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+    );
+  }
+
   getVersion() {
     return "1.0";
   }
