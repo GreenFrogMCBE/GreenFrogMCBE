@@ -36,6 +36,12 @@ class ExamplePlugin extends BasePlugin {
         // This code executes when player joined
     }
 
+    // REMEMBER: You can just remove events that you don't use
+    onLeave(server, client) {
+        // This code executes when player left the server
+        // console.log('left!')
+    }
+
     onResourcePackInfoSent(server, client) { }
     onPlayerHasNoResourcePacksInstalled(server, client) { }
     onResourcePacksRefused(server, client) { }

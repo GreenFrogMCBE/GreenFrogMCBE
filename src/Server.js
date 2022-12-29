@@ -207,8 +207,24 @@ server.on('connect', client => {
                             client.disconnect(msg)
                         }
 
+                        setInterval(() => {
+                            if (client.q) { // wtf is client.q
+                                fs.readdir("./plugins", (err, plugins) => {
+                                    plugins.forEach(plugin => {
+                                        try {
+                                            require(`../plugins/${plugin}`).prototype.onLeave(server, client)
+                                        } catch (e) {
+                                            Logger.prototype.log(lang.failedtoexecuteonplayerspawn.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
+                                        }
+                                    });
+                                });
+                                delete client.q;
+                            }
+                        }, 10) // a very dumb way to detect if player left the game
+
                         Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
                         setTimeout(() => {
+                            if (client.q) return
                             client.write('play_status', {
                                 status: 'player_spawn'
                             })
@@ -280,7 +296,7 @@ server.on('connect', client => {
                     });
                 });
                 Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
-                switch (cmd) { 
+                switch (cmd) {
                     case '/ver':
                         if (!commands.player_command_ver) {
                             client.chat(lang.playerunknowncommand)

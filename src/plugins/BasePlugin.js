@@ -14,6 +14,7 @@ class BasePlugin {
   onCommand() { }
   onConsoleCommand() { }
   onInternalServerError() { }
+  onLeave() { }
 }
 
 module.exports = BasePlugin;
