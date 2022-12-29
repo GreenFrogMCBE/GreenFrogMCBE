@@ -1,6 +1,7 @@
-const config = require('../../config.json')
+const ServerInfo = require('../api/ServerInfo')
 const Colors = require('../api/Colors')
-const lang = require(`../lang/${config.lang}.json`)
+const lang = ServerInfo.lang
+const config = ServerInfo.config
 
 class Logger {
     constructor() { }

@@ -2,18 +2,19 @@ const Bedrock = require('bedrock-protocol')
 const Logger = require('../src/console/Logger')
 const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
 const ServerInfo = require('../src/api/ServerInfo')
+const PlayerInfo = require('../src/player/PlayerInfo')
 const ValidateConfig = require('../src/server/ValidateConfig')
 const Loader = require('../src/plugins/Loader')
 const fs = require('fs')
-const commands = require(`../commands.json`)
 let clients = []
 
 ValidateConfig.prototype.ValidateConfig()
 ValidateConfig.prototype.ValidateLangFile()
 ValidateConfig.prototype.ValidateCommands()
 
-const config = require('../config.json')
-const lang = require(`./lang/${config.lang}.json`)
+const config = ServerInfo.config
+const lang = ServerInfo.lang
+const commands = ServerInfo.commands
 
 Logger.prototype.log(lang.loadingserver)
 
@@ -94,7 +95,7 @@ server.on('connect', client => {
         });
 
         clients.push(client)
-        ServerInfo.prototype.setPlayers(clients)
+        PlayerInfo.prototype.setPlayers(clients)
     })
 
     function handlepk(client, packet) {
@@ -177,7 +178,7 @@ server.on('connect', client => {
                         client.write('biome_definition_list', get('biome_definition_list'))
                         client.write('available_entity_identifiers', get('available_entity_identifiers'))
                         client.write('creative_content', get('creative_content'))
-                        client.queue('respawn', get('respawn'))
+                        client.write('respawn', get('respawn'))
 
 
                         client.chat = function (msg) {
@@ -206,8 +207,24 @@ server.on('connect', client => {
                             client.disconnect(msg)
                         }
 
+                        setInterval(() => {
+                            if (client.q) { // wtf is client.q
+                                fs.readdir("./plugins", (err, plugins) => {
+                                    plugins.forEach(plugin => {
+                                        try {
+                                            require(`../plugins/${plugin}`).prototype.onLeave(server, client)
+                                        } catch (e) {
+                                            Logger.prototype.log(lang.failedtoexecuteonplayerspawn.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
+                                        }
+                                    });
+                                });
+                                delete client.q;
+                            }
+                        }, 10) // a very dumb way to detect if player left the game
+
                         Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
                         setTimeout(() => {
+                            if (client.q) return
                             client.write('play_status', {
                                 status: 'player_spawn'
                             })
@@ -241,6 +258,7 @@ server.on('connect', client => {
             case "emote_list":
             case "set_player_game_type":
             case "client_cache_status":
+            case "move_player":
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
                 break
             case "text":
@@ -278,49 +296,47 @@ server.on('connect', client => {
                     });
                 });
                 Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
-                switch (cmd) { // TODO: Translate chat
+                switch (cmd) {
                     case '/ver':
                         if (!commands.player_command_ver) {
-                            client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                            client.chat(lang.playerunknowncommand)
                             return
                         }
-                        client.chat(`§7This server runs GreenFrogMCBE. Version ${ServerInfo.prototype.getServerVersion()}`)
-                        client.chat(`§7https://github.com/andriycraft/GreenFrogMCBE/`)
+                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                        client.chat(lang.playervercommandline2)
                         break
                     case '/version':
                         if (!commands.player_command_ver) {
-                            client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                            client.chat(lang.playerunknowncommand)
                             return
                         }
-                        client.chat(`§7This server runs GreenFrogMCBE. Version ${ServerInfo.prototype.getServerVersion()}`)
-                        client.chat(`§7https://github.com/andriycraft/GreenFrogMCBE/`)
+                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                        client.chat(lang.playervercommandline2)
                         break
                     case '/cmds':
                         if (!commands.player_command_cmds) {
-                            client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                            client.chat(lang.playerunknowncommand)
                             return
                         }
-                        client.chat(`§6Commands: `)
-                        client.chat(`§6/ver - Server version`)
-                        client.chat(`§6/version - Server version`)
-                        client.chat(`§6/cmds - Commands list`)
-                        client.chat(`§6/commands - Commands list`)
+                        client.chat(lang.commands)
+                        client.chat(lang.commandsline1)
+                        client.chat(lang.commandsline2)
+                        client.chat(lang.commandsline3)
+                        client.chat(lang.commandsline4)
                         break
                     case '/commands': {
-                        console.log(ServerInfo.prototype)
                         if (!commands.player_command_commands) {
-                            client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                            client.chat(lang.playerunknowncommand)
                             return
                         }
-                        client.chat(`§6Commands: `)
-                        client.chat(`§6/ver - Server version`)
-                        client.chat(`§6/version - Server version`)
-                        client.chat(`§6/cmds - Commands list`)
-                        client.chat(`§6/commands - Commands list`)
+                        client.chat(lang.commandsline1)
+                        client.chat(lang.commandsline2)
+                        client.chat(lang.commandsline3)
+                        client.chat(lang.commandsline4)
                         break
                     }
                     default:
-                        client.chat(`§cUnknown command. Type /commands for a list of commands`)
+                        client.chat(lanf.playerunknowncommand)
                         break
                 }
                 break

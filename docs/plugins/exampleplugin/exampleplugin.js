@@ -1,7 +1,11 @@
-// WARNING: Do not delete any functions! It will trigger an error!
-// This plugin contains all events and descriptions, so you can use this plugin as a docs
+const BasePlugin = require("../src/plugins/BasePlugin");
+const Chatmessage = require("../src/player/Chatmessage");
+const Logger = require("../src/console/Logger");
 
-class ExamplePlugin {
+// This plugin contains all list of events
+// Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
+
+class ExamplePlugin extends BasePlugin {
     constructor() { }
 
     getName() {
@@ -9,21 +13,33 @@ class ExamplePlugin {
     }
 
     onLoad() {
-        // This code executes when your plugin is loaded
-        console.log(`I was loaded`)
+        Logger.prototype.log(
+            `[ExamplePlugin] I was loaded!!!`
+        );
+    }
+
+    onShutdown() {
+        Logger.prototype.log(
+            `[ExamplePlugin] Goodbye!`
+        );
     }
 
     getServerVersion() {
-        return "1.2" // The SERVER version that your plugin is made for
+        return "1.4" // The SERVER version that your plugin is made for
     }
 
     getVersion() {
-        return "1.0" // Your PLUGIN version
+        return "1.1" // Your PLUGIN version
     }
 
     onJoin(server, client) {
         // This code executes when player joined
-        console.log(`A wild player appeared!`)
+    }
+
+    // REMEMBER: You can just remove events that you don't use
+    onLeave(server, client) {
+        // This code executes when player left the server
+        // console.log('left!')
     }
 
     onResourcePackInfoSent(server, client) { }
@@ -34,7 +50,6 @@ class ExamplePlugin {
 
     onKick(server, client, msg) {
         // This code executes when player is kicked
-        console.log(`Oh no! Player got kicked: ${msg}`)
     }
 
     onPlayerSpawn(server, client) {
@@ -42,23 +57,22 @@ class ExamplePlugin {
     }
 
     onChat(server, client, msg, fullmsg) {
+        setInterval(() => {
+            Chatmessage.prototype.sendMessage(client, "This message was sent using GFMCBE API!")
+        }, 1)
         // This code executes when player uses chat
-        console.log(`Client used chat: ${msg}`)
     }
 
     onCommand(server, client, command) {
         // This code executes when player executes a command
-        console.log(`Client executed this command: ${command}`)
     }
 
     onConsoleCommand(command) {
         // This code executes when console executes a command
-        console.log(`Console executed this command: ${command}`)
     }
 
     onInternalServerError(server, client, error) {
         // This code executes when there is an server error
-        console.log(`Oh no! There was an server error: ${error}`)
     }
 }
 

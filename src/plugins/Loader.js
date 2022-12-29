@@ -22,10 +22,10 @@ class Loader {
                     }
 
                     try {
-                        if (require(`../../plugins/${plugin}`).prototype.getServerVersion() === ServerInfo.prototype.getServerVersion()) {
+                        if (require(`../../plugins/${plugin}`).prototype.getServerVersion() === ServerInfo.serverversion) {
                             Logger.prototype.log(`Plugin ${plugin} supports your server version`)
                         } else {
-                            Logger.prototype.log(`The plugin ${require(`../../plugins/${plugin}`).prototype.getName()} is made for ${require(`../../plugins/${plugin}`).prototype.getServerVersion()}. Your server is on ${ServerInfo.prototype.getServerVersion()}. This may cause unexpected issues or crashes`)
+                            Logger.prototype.log(`The plugin ${require(`../../plugins/${plugin}`).prototype.getName()} is made for ${require(`../../plugins/${plugin}`).prototype.getServerVersion()}. Your server is on ${ServerInfo.serverversion}. This may cause unexpected issues or crashes`)
                         }
                     } catch (e) {
                         throw new Error(`Plugin ${plugin} has no getServerVersion()`, 'warning')
@@ -48,11 +48,10 @@ class Loader {
                     let version = 'unknown'
                     try {
                         version = require(`../../plugins/${plugin}`).prototype.getVersion()
-                    } catch (e) { }
-                    Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()} version: ${version}". The error was: ${e.stack}`, 'error')
+                    } catch (e) { Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()} version: ${version}". The error was: ${e.stack}`, 'error') }
                 }
             });
-            Logger.prototype.log(`All plugins are loaded!`, 'info')
+            Logger.prototype.log('All plugins are loaded!')
         });
     }
 

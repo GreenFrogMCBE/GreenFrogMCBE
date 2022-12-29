@@ -19,7 +19,7 @@
     "empty_message": "Jūsu Žinutė yra tusčia!",
     "no_reason": "jokios priežasties",
     "command_list": "Visos komandos",
-    "kick_help": "išmesti [žaidėjas] [priežastis] - išmesti žaidėja",
+    "kick_help": "išmesti [žaidėjas] [priežastis] - Išmesti žaidėja",
     "shutdown_help": "išjungti - Išjungia serverį",
     "stop_help": "baigti - Išjungia serverį",
     "help_help": "pagalba - šiuo metu žiūrite šią komandą",
@@ -38,6 +38,7 @@
     "command_pl": "pl",
     "command_plugins": "plugins",
     "command_usage_kick": "Naudojimas: /kick [žaidėjas] [priežastis]",
+    "command_ver_info": "This server runs GreenFrogMCBE. Version: %version% | Repo: https://github.com/andriycraft/GreenFrogMCBE",
     "command_usage_ver": "Šis serveris naudoja GreenFrogMCBE",
     "command_usage_time": "Naudojimas: /laikas [laikas]",
     "kicked_prefix": "You were kicked for: ",
@@ -85,5 +86,13 @@
     "failedtoexecuteonplayerhasnoresourcepacksinstalled": "Nepavyko vykdyti papildinio įvykio onPlayerHasNoResourcePacksInstalled(server, client) \"%plugin%\". Klaida buvo: %e%",
     "plugins": "Įskiepių",
     "pl_help": "pl - Taip pat kaip /plugins",
-    "plugins_help": "plugins - Įskiepių sąrašas"
+    "plugins_help": "plugins - Įskiepių sąrašas",
+    "playerunknowncommand": "§cUnknown command. Type /commands for a list of commands",
+    "playervercommandline1": "§7This server runs GreenFrogMCBE. Version %version%",
+    "playervercommandline2": "§7https://github.com/andriycraft/GreenFrogMCBE/",
+    "commands": "§6Commands: ",
+    "commandsline1": "§6/ver - Server version",
+    "commandsline2": "§6/version - Server version",
+    "commandsline3": "§6/cmds - Commands list",
+    "commandsline4": "§6/commands - Commands list"
 }
