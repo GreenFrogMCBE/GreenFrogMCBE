@@ -1,6 +1,7 @@
 const BasePlugin = require("../src/plugins/BasePlugin");
 const Chatmessage = require("../src/player/Chatmessage");
 const Logger = require("../src/console/Logger");
+const Colors = require("../src/chat/Colors");
 
 // This plugin contains all list of events
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
@@ -33,7 +34,7 @@ class ExamplePlugin extends BasePlugin {
     }
 
     getServerVersion() {
-        return "1.4" // The SERVER version that your plugin is made for
+        return "1.5" // The SERVER version that your plugin is made for
     }
 
     getVersion() {
@@ -72,7 +73,9 @@ class ExamplePlugin extends BasePlugin {
     }
 
     onCommand(server, client, command) {
-        // This code executes when player executes a command
+        if (command === "/test") {
+            Chatmessage.prototype.sendMessage(client, Colors.black + "if u read this text then u are gay")
+        }
     }
 
     onConsoleCommand(command) {

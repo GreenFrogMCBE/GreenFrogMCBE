@@ -61,3 +61,15 @@ There are a few log levels:
 
 ### Sending messages
 
+Example 1: - Sending message to player
+
+`const Chatmessage = require("../src/player/Chatmessage");`
+
+`Chatmessage.prototype.sendMessage(client, "This message was sent using GFMCBE API!")`
+
+
+Example 2: - Broadcast
+
+`const Chatmessage = require("../src/player/Chatmessage");`
+
+`Chatmessage.prototype.broadcastMessage("This is broadcast")`

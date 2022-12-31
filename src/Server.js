@@ -341,7 +341,7 @@ server.on('connect', client => {
                         break
                     }
                     default:
-                        client.chat(lanf.playerunknowncommand)
+                        client.chat(lang.playerunknowncommand)
                         break
                 }
                 break
