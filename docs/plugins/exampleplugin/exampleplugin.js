@@ -13,14 +13,22 @@ class ExamplePlugin extends BasePlugin {
     }
 
     onLoad() {
-        Logger.prototype.log(
-            `[ExamplePlugin] I was loaded!!!`
+        Logger.prototype.pluginLog(
+            'info', // Log level. See API.md for docs
+            this.getName(), // Plugin name
+            'Hello, world', // Message
+            '[', // Prefix
+            ']' // Suffix
         );
     }
 
     onShutdown() {
-        Logger.prototype.log(
-            `[ExamplePlugin] Goodbye!`
+        Logger.prototype.pluginLog(
+            'info', // Log level. See API.md for docs
+            this.getName(), // Plugin name
+            'Goodbye', // Message
+            '[', // Prefix
+            ']' // Suffix
         );
     }
 
@@ -29,7 +37,7 @@ class ExamplePlugin extends BasePlugin {
     }
 
     getVersion() {
-        return "1.1" // Your PLUGIN version
+        return "1.2" // Your PLUGIN version
     }
 
     onJoin(server, client) {
@@ -37,9 +45,9 @@ class ExamplePlugin extends BasePlugin {
     }
 
     // REMEMBER: You can just remove events that you don't use
+
     onLeave(server, client) {
         // This code executes when player left the server
-        // console.log('left!')
     }
 
     onResourcePackInfoSent(server, client) { }
@@ -76,4 +84,4 @@ class ExamplePlugin extends BasePlugin {
     }
 }
 
-module.exports = ExamplePlugin;
+module.exports = ExamplePlugin

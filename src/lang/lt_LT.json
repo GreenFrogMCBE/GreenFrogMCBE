@@ -94,5 +94,16 @@
     "commandsline1": "§6/ver - Server version",
     "commandsline2": "§6/version - Server version",
     "commandsline3": "§6/cmds - Commands list",
-    "commandsline4": "§6/commands - Commands list"
+    "commandsline4": "§6/commands - Commands list",
+    "shuttingdownplugins": "Shutting down plugins...",
+    "tensecwarn": "The server has 10 seconds to shutdown the plugins. If the servers fails to do it in time - there may be some issues with plugin data",
+    "failedtoshutdownplugin": "Failed to shutdown plugin %plugin%. No plugin name!",
+    "doneshuttingdownplugins": "Done shutting down plugins",
+    "doneshuttingdown": "Done shutting down server",
+    "loadingplugins": "Loading plugins",
+    "plnf": "Plugins folder not found",
+    "pfc": "Plugin folder created!",
+    "ftcpf": "Failed to create a plugin folder: %error%",
+    "leftthegame": "§e%player% left the game",
+    "disconnected": "%player% disconnected"
 }

@@ -10,7 +10,6 @@ class PlayerInfo {
     getPlayers() {
         return this.players
     }
-
 }
 
 module.exports = PlayerInfo;

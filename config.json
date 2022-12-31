@@ -1,4 +1,5 @@
 {
+    "": "For tutorail go to /docs/config/config.json.tutorail",
     "host": "0.0.0.0",
     "port": 19132,
     "motd": "§6GreenFrogMCBE server",
@@ -8,5 +9,10 @@
     "blockinvalidmessages": true,
     "lang": "en_US",
     "donotcrashoncriticalerrors": false,
-    "debug": false
+    "debug": false,
+    "pluginsfolder": "./plugins",
+    "ddpluginsfolder": "../../plugins/",
+    "pluginsshutdowntime": 10000,
+    "crashstatuscode": -1,
+    "exitstatuscode": 0
 }

@@ -204,7 +204,7 @@ server.on('connect', client => {
                                 });
                             });
                             Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
-                            client.disconnect(msg)
+                            try { client.disconnect(msg) } catch (e) {}
                         }
 
                         setInterval(() => {
@@ -218,6 +218,11 @@ server.on('connect', client => {
                                         }
                                     });
                                 });
+                                client.kick("Player disconnected from the server")
+                                Logger.prototype.log(lang.disconnected.replace('%player%', client.getUserData().displayName))
+                                for (let i = 0; i < clients.length; i++) {
+                                    clients[i].chat(lang.leftthegame.replace('%username%', client.getUserData().displayName))
+                                }
                                 delete client.q;
                             }
                         }, 10) // a very dumb way to detect if player left the game

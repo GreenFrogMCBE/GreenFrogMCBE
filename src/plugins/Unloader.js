@@ -1,28 +1,33 @@
 const fs = require('fs')
 const Logger = require('../console/Logger')
+const ServerInfo = require('../api/ServerInfo')
 
 class Unloader {
 
     constructor() {}
 
     shutdown() {
-        fs.readdir("./plugins", (err, plugins) => {
-            Logger.prototype.log('Shutting down plugins...')
-            Logger.prototype.log('The server has 10 seconds to shutdown the plugins. If the servers fails to do it in time - there may be some issues with plugin data', 'warning')
+
+        const lang = ServerInfo.lang
+        const config = ServerInfo.config
+
+        fs.readdir(config.pluginsfolder, (err, plugins) => {
+            Logger.prototype.log(lang.shuttingdownplugins)
+            Logger.prototype.log(lang.tensecwarn, 'warning')
             plugins.forEach(plugin => {
-                    if (require(`../../plugins/${plugin}`).prototype.getName() === "") {
-                        throw new Error(`Failed to shutdown plugin ${plugin}. No plugin name!`)
+                    if (require(`${config.ddpluginsfolder}${plugin}`).prototype.getName() === "") {
+                        throw new Error(lang.failedtoshutdownplugin.replace('%plugin%', plugin))
                     }
 
                     // TODO: Somehow use await
-                    require(`../../plugins/${plugin}`).prototype.onShutdown()
+                    require(`${config.ddpluginsfolder}${plugin}`).prototype.onShutdown()
             });
-            Logger.prototype.log('Done shutting down plugins!')
+            Logger.prototype.log(lang.doneshuttingdownplugins)
         });
         setTimeout(() => {
-            Logger.prototype.log('Done')
-            process.exit(0)
-        }, 10000)
+            Logger.prototype.log(lang.doneshuttingdown)
+            process.exit(config.exitstatuscode)
+        }, config.pluginsshutdowntime)
     }
 
 }

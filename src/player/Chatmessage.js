@@ -1,3 +1,6 @@
+const PlayerInfo = require('../player/PlayerInfo')
+const Logger = require('../console/Logger')
+
 class Chatmessage {
 
     constructor() { }
@@ -14,6 +17,16 @@ class Chatmessage {
             xuid: '',
             platform_chat_id: ''
         })
+    }
+
+    broadcastMessage(msg) {
+        if (!msg) throw new Error("broadcastMessage(): No chat message!");
+
+        for (let i = 1; i < PlayerInfo.prototype.getPlayers().length; i++) {
+            let client = PlayerInfo.prototype.getPlayers()[i]
+            this.sendMessage(client, msg)
+        }
+        Logger.prototype.log(`(broadcast) ${msg}`)
     }
 
 }
