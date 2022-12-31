@@ -301,7 +301,7 @@ server.on('connect', client => {
                     });
                 });
                 Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
-                switch (cmd) {
+                switch (cmd.toLowerCase()) {
                     case '/ver':
                         if (!commands.player_command_ver) {
                             client.chat(lang.playerunknowncommand)

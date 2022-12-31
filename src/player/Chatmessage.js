@@ -6,8 +6,8 @@ class Chatmessage {
     constructor() { }
 
     sendMessage(client, msg) {
-        if (!msg) throw new Error("sendmessage(): No chat message")
-        if (!client) throw new Error("sendmessage(): No client!")
+        if (!msg) throw new Error("sendmessage(client, msg): No chat message")
+        if (!client) throw new Error("sendmessage(client, msg): No client!")
         
         client.write('text', {
             type: 'announcement',
@@ -20,9 +20,9 @@ class Chatmessage {
     }
 
     broadcastMessage(msg) {
-        if (!msg) throw new Error("broadcastMessage(): No chat message!");
+        if (!msg) throw new Error("broadcastMessage(msg): No chat message!");
 
-        for (let i = 1; i < PlayerInfo.prototype.getPlayers().length; i++) {
+        for (let i = 0; i < PlayerInfo.prototype.getPlayers().length; i++) {
             let client = PlayerInfo.prototype.getPlayers()[i]
             this.sendMessage(client, msg)
         }

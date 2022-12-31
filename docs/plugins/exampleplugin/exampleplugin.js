@@ -71,8 +71,9 @@ class ExamplePlugin extends BasePlugin {
     }
 
     onCommand(server, client, command) {
-        if (command === "/test") {
+        if (command.toLowerCase().startsWith("/test")) {
             Chatmessage.prototype.sendMessage(client, Colors.black + "if u read this text then u are gay")
+            Chatmessage.prototype.broadcastMessage("bruh")
         }
     }
 
