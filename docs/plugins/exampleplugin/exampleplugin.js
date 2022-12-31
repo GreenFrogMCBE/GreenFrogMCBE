@@ -66,9 +66,7 @@ class ExamplePlugin extends BasePlugin {
     }
 
     onChat(server, client, msg, fullmsg) {
-        setInterval(() => {
-            Chatmessage.prototype.sendMessage(client, "This message was sent using GFMCBE API!")
-        }, 1)
+        Chatmessage.prototype.sendMessage(client, "This message was sent using GFMCBE API!")
         // This code executes when player uses chat
     }
 
