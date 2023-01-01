@@ -4,6 +4,7 @@
     "username_is_too_short": "§cInvalid username: Your username is too long",
     "username_is_too_long": "§cInvalid username: Your username is too short",
     "internal_server_error": "§cInternal server error",
+    "player_disconnected_from_this_server": "Player disconnected from the server",
     "servershutdown": "§cServer shutdown",
     "chatformat": "<%username%> %message%",
     "saycommand_format": "[Server] %message%",
