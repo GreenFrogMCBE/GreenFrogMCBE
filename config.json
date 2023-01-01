@@ -1,5 +1,5 @@
 {
-    "": "For tutorail go to /docs/config/config.json.tutorail",
+    "": "For tutorial go to /docs/config/config.json.tutorial",
     "host": "0.0.0.0",
     "port": 19132,
     "motd": "§6GreenFrogMCBE server",
@@ -11,8 +11,11 @@
     "donotcrashoncriticalerrors": false,
     "debug": false,
     "pluginsfolder": "./plugins",
+    "dpluginsfolder": "../plugins/",
     "ddpluginsfolder": "../../plugins/",
     "pluginsshutdowntime": 10000,
     "crashstatuscode": -1,
-    "exitstatuscode": 0
+    "exitstatuscode": 0,
+    "clientloadtime": 2000,
+    "softwarename": "GreenFrogMCBE"
 }

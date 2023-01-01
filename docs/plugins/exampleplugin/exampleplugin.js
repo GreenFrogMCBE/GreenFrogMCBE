@@ -1,5 +1,6 @@
 const BasePlugin = require("../src/plugins/BasePlugin");
 const Chatmessage = require("../src/player/Chatmessage");
+const KickPlayer = require("../src/player/KickPlayer");
 const Logger = require("../src/console/Logger");
 const Colors = require("../src/chat/Colors");
 
@@ -74,6 +75,9 @@ class ExamplePlugin extends BasePlugin {
         if (command.toLowerCase().startsWith("/test")) {
             Chatmessage.prototype.sendMessage(client, Colors.black + "if u read this text then u are gay")
             Chatmessage.prototype.broadcastMessage("bruh")
+        }
+        if (command.toLowerCase().startsWith("/kickme")) {
+            KickPlayer.prototype.KickPlayer(Colors.red + "ok")
         }
     }
 

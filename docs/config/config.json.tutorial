@@ -10,6 +10,7 @@
     "donotcrashoncriticalerrors": false, // Do not shutdown the server on ciritical errors. Useful for debugging. This may make ur server unstable
     "debug": false, // Debug
     "pluginsfolder": "./plugins", // Plugins folder - do not change if u don't know what u are doing
+    "dpluginsfolder": "../plugins/", // Plugins folder - do not change if u don't know what u are doing
     "ddpluginsfolder": "../../plugins/", // Plugins folder - do not change if u don't know what u are doing
     "pluginsshutdowntime": 10000, // Time for plugins to shutdown
     "crashstatuscode": -1, // process exit status code on crash - do not change if u don't know what u are doing
