@@ -73,11 +73,11 @@ class ExamplePlugin extends BasePlugin {
 
     onCommand(server, client, command) {
         if (command.toLowerCase().startsWith("/test")) {
-            Chatmessage.prototype.sendMessage(client, Colors.black + "if u read this text then u are gay")
-            Chatmessage.prototype.broadcastMessage("bruh")
+            Chatmessage.prototype.sendMessage(client, Colors.red + "hi, this text was sent from line 76")
+            Chatmessage.prototype.broadcastMessage("this one was from 77")
         }
         if (command.toLowerCase().startsWith("/kickme")) {
-            KickPlayer.prototype.KickPlayer(Colors.red + "ok")
+            KickPlayer.prototype.kick(client, "goodbye")
         }
     }
 

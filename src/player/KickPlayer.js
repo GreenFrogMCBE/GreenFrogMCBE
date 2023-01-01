@@ -2,8 +2,7 @@ class KickPlayer {
 
     constructor() { }
 
-    kick(client, reason) {
-        if (!reason) throw new Error("kick(): No chat message")
+    kick(client, reason = 'You were disconnected') {
         if (!client) throw new Error("kick(): No client!")
         
         client.kick(reason)
