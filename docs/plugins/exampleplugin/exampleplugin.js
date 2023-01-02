@@ -1,6 +1,8 @@
 const BasePlugin = require("../src/plugins/BasePlugin");
 const Chatmessage = require("../src/player/Chatmessage");
+const KickPlayer = require("../src/player/KickPlayer");
 const Logger = require("../src/console/Logger");
+const Colors = require("../src/chat/Colors");
 
 // This plugin contains all list of events
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
@@ -13,23 +15,31 @@ class ExamplePlugin extends BasePlugin {
     }
 
     onLoad() {
-        Logger.prototype.log(
-            `[ExamplePlugin] I was loaded!!!`
+        Logger.prototype.pluginLog(
+            'info', // Log level. See API.md for docs
+            this.getName(), // Plugin name
+            'Hello, world', // Message
+            '[', // Prefix
+            ']' // Suffix
         );
     }
 
     onShutdown() {
-        Logger.prototype.log(
-            `[ExamplePlugin] Goodbye!`
+        Logger.prototype.pluginLog(
+            'info', // Log level. See API.md for docs
+            this.getName(), // Plugin name
+            'Goodbye', // Message
+            '[', // Prefix
+            ']' // Suffix
         );
     }
 
     getServerVersion() {
-        return "1.4" // The SERVER version that your plugin is made for
+        return "1.5" // The SERVER version that your plugin is made for
     }
 
     getVersion() {
-        return "1.1" // Your PLUGIN version
+        return "1.2" // Your PLUGIN version
     }
 
     onJoin(server, client) {
@@ -37,9 +47,9 @@ class ExamplePlugin extends BasePlugin {
     }
 
     // REMEMBER: You can just remove events that you don't use
+
     onLeave(server, client) {
         // This code executes when player left the server
-        // console.log('left!')
     }
 
     onResourcePackInfoSent(server, client) { }
@@ -57,14 +67,18 @@ class ExamplePlugin extends BasePlugin {
     }
 
     onChat(server, client, msg, fullmsg) {
-        setInterval(() => {
-            Chatmessage.prototype.sendMessage(client, "This message was sent using GFMCBE API!")
-        }, 1)
+        Chatmessage.prototype.sendMessage(client, "This message was sent using GFMCBE API!")
         // This code executes when player uses chat
     }
 
     onCommand(server, client, command) {
-        // This code executes when player executes a command
+        if (command.toLowerCase().startsWith("/test")) {
+            Chatmessage.prototype.sendMessage(client, Colors.red + "hi, this text was sent from line 76")
+            Chatmessage.prototype.broadcastMessage("this one was from 77")
+        }
+        if (command.toLowerCase().startsWith("/kickme")) {
+            KickPlayer.prototype.kick(client, "goodbye")
+        }
     }
 
     onConsoleCommand(command) {
@@ -76,4 +90,4 @@ class ExamplePlugin extends BasePlugin {
     }
 }
 
-module.exports = ExamplePlugin;
+module.exports = ExamplePlugin

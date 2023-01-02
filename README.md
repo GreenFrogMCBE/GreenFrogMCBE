@@ -9,9 +9,10 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 ## How to install
 
-1. Do 'npm i'
-2. Then do 'node index.js'
-3. Done
+1. Clone this repo
+2. Do 'npm i'
+3. Then do 'node index.js'
+4. Done
 
 ## Plugins available for public usage
 
@@ -25,7 +26,6 @@ If you have one feel free to open an issue
 If you want for your plugin to be listed on the 'Plugins available for public usage' section, you must follow this rules:
 
 * Your plugin must contain .gfmcp file in the root directory. Example here: https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/exampleplugin/.gfmcp
-* Thats all
 
 ## Features
 
@@ -43,7 +43,7 @@ If you want for your plugin to be listed on the 'Plugins available for public us
 12. Many events for plugin API
 
 ## Language system
-Our language system currently supports those languages: English, Lithuanian, Ukrainian
+Our language system currently supports those languages: English, Lithuanian, Ukrainian, French (in progress)
 
 ## Configuration tutorial
 
@@ -62,7 +62,7 @@ If you want to support this project, you can donate at: https://www.paypal.com/d
 
 ## Servers that run this software
 
-If you have one fell free to open an issue! :)
+If you have one fell free to open an issue!
 
 - 159.65.55.27 | Testing server for GreenFrog
 - 67.207.68.250 | Second testing server for GreenFrog

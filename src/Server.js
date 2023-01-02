@@ -64,7 +64,7 @@ try {
         maxPlayers: config.maxplayers,
         motd: {
             motd: config.motd,
-            levelName: 'GreenFrogMCBE'
+            levelName: config.softwarename
         }
     })
     Logger.prototype.log(`${lang.listening_on.replace(`%ipport%`, `/${config.host}:${config.port}`)}`)
@@ -84,10 +84,10 @@ server.on('connect', client => {
             texture_packs: []
         })
 
-        fs.readdir("./plugins", (err, plugins) => {
+        fs.readdir(config.pluginsfolder, (err, plugins) => {
             plugins.forEach(plugin => {
                 try {
-                    require(`../plugins/${plugin}`).prototype.onResourcePackInfoSent(server, client)
+                    require(`${config.dpluginsfolder}${plugin}`).prototype.onResourcePackInfoSent(server, client)
                 } catch (e) {
                     Logger.prototype.log(lang.failedtoexecuteonresourcepackinfosent.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
                 }
@@ -104,10 +104,10 @@ server.on('connect', client => {
                 switch (packet.data.params.response_status) {
                     case 'none': {
                         Logger.prototype.log(lang.norpsinstalled.replace('%player%', client.getUserData().displayName))
-                        fs.readdir("./plugins", (err, plugins) => {
+                        fs.readdir(config.pluginsfolder, (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
-                                    require(`../plugins/${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(server, client)
+                                    require(`${config.dpluginsfolder}${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(server, client)
                                 } catch (e) {
                                     Logger.prototype.log(Logger.prototype.log(lang.failedtoexecuteonplayerhasnoresourcepacksinstalled.replace('%plugin%', plugin).replace('%e%', e.stack, 'error')), 'error')
                                 }
@@ -115,10 +115,10 @@ server.on('connect', client => {
                         });
                     }
                     case 'refused': {
-                        fs.readdir("./plugins", (err, plugins) => {
+                        fs.readdir(config.pluginsfolder, (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
-                                    require(`../plugins/${plugin}`).prototype.onResourcePacksRefused(server, client)
+                                    require(`${config.dpluginsfolder}${plugin}`).prototype.onResourcePacksRefused(server, client)
                                 } catch (e) {
                                     Logger.prototype.log(lang.failedtoexecuteonresourcepacksrefused.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
                                 }
@@ -128,10 +128,10 @@ server.on('connect', client => {
                         client.kick(lang.resource_packs_refused)
                     }
                     case 'have_all_packs': {
-                        fs.readdir("./plugins", (err, plugins) => {
+                        fs.readdir(config.pluginsfolder, (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
-                                    require(`../plugins/${plugin}`).prototype.onPlayerHaveAllPacks(server, client)
+                                    require(`${config.dpluginsfolder}${plugin}`).prototype.onPlayerHaveAllPacks(server, client)
                                 } catch (e) {
                                     Logger.prototype.log(lang.failedtoexecuteonplayerhaveallpacks.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
                                 }
@@ -150,10 +150,10 @@ server.on('connect', client => {
                         break
                     }
                     case 'completed': {
-                        fs.readdir("./plugins", (err, plugins) => {
+                        fs.readdir(config.pluginsfolder, (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
-                                    require(`../plugins/${plugin}`).prototype.onResourcePacksCompleted(server, client)
+                                    require(`${config.dpluginsfolder}${plugin}`).prototype.onResourcePacksCompleted(server, client)
                                 } catch (e) {
                                     Logger.prototype.log(lang.failedtoexecuteonresourcepackscompleted.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'))
                                 }
@@ -194,30 +194,39 @@ server.on('connect', client => {
 
 
                         client.kick = function (msg) {
-                            fs.readdir("./plugins", (err, plugins) => {
+                            if (client.kicked) return
+                            fs.readdir(config.pluginsfolder, (err, plugins) => {
                                 plugins.forEach(plugin => {
                                     try {
-                                        require(`../plugins/${plugin}`).prototype.onKick(server, client, msg)
+                                        require(`${config.dpluginsfolder}${plugin}`).prototype.onKick(server, client, msg)
                                     } catch (e) {
                                         Logger.prototype.log(lang.failedtoexecuteonkick.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
                                     }
                                 });
                             });
+                            client.kicked = true
                             Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
-                            client.disconnect(msg)
+                            try { client.disconnect(msg) } catch (e) { }
                         }
 
                         setInterval(() => {
-                            if (client.q) { // wtf is client.q
-                                fs.readdir("./plugins", (err, plugins) => {
+                            if (client.q) {
+                                fs.readdir(config.pluginsfolder, (err, plugins) => {
                                     plugins.forEach(plugin => {
                                         try {
-                                            require(`../plugins/${plugin}`).prototype.onLeave(server, client)
+                                            require(`${config.dpluginsfolder}${plugin}`).prototype.onLeave(server, client)
                                         } catch (e) {
                                             Logger.prototype.log(lang.failedtoexecuteonplayerspawn.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
                                         }
                                     });
                                 });
+                                if (!client.kicked) {
+                                    client.kick(lang.player_disconnected_from_this_server)
+                                    Logger.prototype.log(lang.disconnected.replace('%player%', client.getUserData().displayName))
+                                }
+                                for (let i = 0; i < clients.length; i++) {
+                                    clients[i].chat(lang.leftthegame.replace('%username%', client.getUserData().displayName))
+                                }
                                 delete client.q;
                             }
                         }, 10) // a very dumb way to detect if player left the game
@@ -228,16 +237,16 @@ server.on('connect', client => {
                             client.write('play_status', {
                                 status: 'player_spawn'
                             })
-                            fs.readdir("./plugins", (err, plugins) => {
+                            fs.readdir(config.pluginsfolder, (err, plugins) => {
                                 plugins.forEach(plugin => {
                                     try {
-                                        require(`../plugins/${plugin}`).prototype.onPlayerSpawn(server, client)
+                                        require(`${config.dpluginsfolder}${plugin}`).prototype.onPlayerSpawn(server, client)
                                     } catch (e) {
                                         Logger.prototype.log(lang.failedtoexecuteonplayerspawn.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
                                     }
                                 });
                             });
-                        }, 2000)
+                        }, config.clientloadtime)
 
 
                         for (let i = 0; i < clients.length; i++) {
@@ -264,10 +273,10 @@ server.on('connect', client => {
             case "text":
                 let msg = packet.data.params.message;
                 let fullmsg = lang.chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
-                fs.readdir("./plugins", (err, plugins) => {
+                fs.readdir(config.pluginsfolder, (err, plugins) => {
                     plugins.forEach(plugin => {
                         try {
-                            require(`../plugins/${plugin}`).prototype.onChat(server, client, msg, fullmsg)
+                            require(`${config.dpluginsfolder}${plugin}`).prototype.onChat(server, client, msg, fullmsg)
                         } catch (e) {
                             Logger.prototype.log(lang.failedtoexecuteonchat.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
                         }
@@ -286,18 +295,18 @@ server.on('connect', client => {
                 break
             case "command_request":
                 let cmd = packet.data.params.command.toLowerCase();
-                fs.readdir("./plugins", (err, plugins) => {
+                fs.readdir(config.pluginsfolder, (err, plugins) => {
                     plugins.forEach(plugin => {
                         try {
-                            require(`../plugins/${plugin}`).prototype.onCommand(server, client, cmd)
+                            require(`${config.dpluginsfolder}${plugin}`).prototype.onCommand(server, client, cmd)
                         } catch (e) {
                             Logger.prototype.log(lang.failedtoexecuteoncommand.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
                         }
                     });
                 });
                 Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
-                switch (cmd) {
-                    case '/ver':
+                switch (cmd.toLowerCase()) {
+                    case lang.command_ver:
                         if (!commands.player_command_ver) {
                             client.chat(lang.playerunknowncommand)
                             return
@@ -305,7 +314,7 @@ server.on('connect', client => {
                         client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
                         client.chat(lang.playervercommandline2)
                         break
-                    case '/version':
+                    case lang.command_version:
                         if (!commands.player_command_ver) {
                             client.chat(lang.playerunknowncommand)
                             return
@@ -313,7 +322,7 @@ server.on('connect', client => {
                         client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
                         client.chat(lang.playervercommandline2)
                         break
-                    case '/cmds':
+                    case lang.command_cmds:
                         if (!commands.player_command_cmds) {
                             client.chat(lang.playerunknowncommand)
                             return
@@ -324,7 +333,7 @@ server.on('connect', client => {
                         client.chat(lang.commandsline3)
                         client.chat(lang.commandsline4)
                         break
-                    case '/commands': {
+                    case lang.command_commands: {
                         if (!commands.player_command_commands) {
                             client.chat(lang.playerunknowncommand)
                             return
@@ -336,7 +345,7 @@ server.on('connect', client => {
                         break
                     }
                     default:
-                        client.chat(lanf.playerunknowncommand)
+                        client.chat(lang.playerunknowncommand)
                         break
                 }
                 break
@@ -351,10 +360,10 @@ server.on('connect', client => {
             handlepk(client, packet)
         } catch (e) {
             client.kick(lang.internal_server_error)
-            fs.readdir("./plugins", (err, plugins) => {
+            fs.readdir(config.pluginsfolder, (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {
-                        require(`../plugins/${plugin}`).prototype.onInternalServerError(server, client, err)
+                        require(`${config.dpluginsfolder}${plugin}`).prototype.onInternalServerError(server, client, err)
                     } catch (e) {
                         Logger.prototype.log(lang.failedtoexecuteoninternalservererror.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
                     }

@@ -22,10 +22,10 @@ class Loader {
                     }
 
                     try {
-                        if (require(`../../plugins/${plugin}`).prototype.getServerVersion() === ServerInfo.serverversion) {
+                        if (require(`../../plugins/${plugin}`).prototype.getServerVersion() === ServerInfo.majorserverversion) {
                             Logger.prototype.log(`Plugin ${plugin} supports your server version`)
                         } else {
-                            Logger.prototype.log(`The plugin ${require(`../../plugins/${plugin}`).prototype.getName()} is made for ${require(`../../plugins/${plugin}`).prototype.getServerVersion()}. Your server is on ${ServerInfo.serverversion}. This may cause unexpected issues or crashes`)
+                            Logger.prototype.log(`The plugin ${require(`../../plugins/${plugin}`).prototype.getName()} is made for ${require(`../../plugins/${plugin}`).prototype.getServerVersion()}. Your server is on ${ServerInfo.majorserverversion}. This may cause unexpected issues or crashes`, 'warning')
                         }
                     } catch (e) {
                         throw new Error(`Plugin ${plugin} has no getServerVersion()`, 'warning')

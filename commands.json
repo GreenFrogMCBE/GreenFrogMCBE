@@ -1,4 +1,5 @@
 {
+    "": "For tutorial go to /docs/config/commands.json.tutorial",
     "console_command_help": true,
     "console_command_kick": true,
     "console_command_stop": true,

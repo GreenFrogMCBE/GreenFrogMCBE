@@ -7,24 +7,32 @@ class DonationReminder extends BasePlugin {
   }
 
   getServerVersion() {
-    return "1.4";
+    return "1.5";
   }
 
   getVersion() {
-    return "1.0";
+    return "1.1";
+  }
+
+  logMsg(msg) {
+    Logger.prototype.pluginLog(
+      'info',
+      this.getName(),
+      msg,
+      '[',
+      ']'
+    );
   }
 
   onLoad() {
-    Logger.prototype.log(
-      `[DonationReminder] Hi there! If you want to support GreenFrogMCBE you can donate at: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
-    );
-    Logger.prototype.log(
-      `[DonationReminder] You will also be listed in our Discord server!`
-    );
-    Logger.prototype.log(
-      `[DonationReminder] If you do not want to support us just delete the DonationPlugin.js from plugins folder`
-    );
+    this.logMsg(`Hi there! If you want to support GreenFrogMCBE you can donate at: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`);
+    this.logMsg(`You will also be listed in our Discord server!`);
+    this.logMsg(`If you do not want to support us just delete the DonationPlugin.js from plugins folder`);
+  }
+
+  onShutdown() {
+    this.logMsg(`Goodbye!`)
   }
 }
 
-module.exports = DonationReminder;
+module.exports = DonationReminder
