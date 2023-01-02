@@ -45,7 +45,7 @@
     "failedtoexecuteonresourcepacksrefused": "Не вдалося виконати onResourcePacksRefused(server, client) подія для плагіна \"%plugin%\". Помилка: %e%",
     "handlepacketexception": "Невдалося обробити пакет від %player%: %error%",
     "help_help": "help - Показує це повідомлення",
-    "ignoredpacket": "проігнорований пакет: %packet%",
+    "ignoredpacket": "Проігноровано пакет: %packet%",
     "illegalmessage": "%player% надіслав недійсне повідомлення. Повідомлення було: %msg%",
     "info": "інформація",
     "internal_server_error": "§cВнутрішня помилка сервера",
