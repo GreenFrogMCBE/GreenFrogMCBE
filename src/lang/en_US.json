@@ -93,5 +93,16 @@
     "username_is_too_short": "§cInvalid username: Your username is too long",
     "ver_help": "ver - Shows the server version",
     "version_help": "version - Shows the server version",
-    "warning": "warning"
+    "warning": "warning",
+    "shuttingdownplugins": "Shutting down plugins...",
+    "tensecwarn": "The server has 10 seconds to shutdown the plugins. If the server fails to do it in time - plugin data will be not saved",
+    "failedtoshutdownplugin": "Failed to shutdown plugin %plugin%. No plugin name!",
+    "doneshuttingdownplugins": "Done shutting down plugins",
+    "doneshuttingdown": "Done shutting down server",
+    "loadingplugins": "Loading plugins",
+    "plnf": "Plugins folder not found",
+    "pfc": "Plugin folder created!",
+    "ftcpf": "Failed to create a plugin folder: %error%",
+    "leftthegame": "§e%player% left the game",
+    "disconnected": "%player% disconnected"
 }
