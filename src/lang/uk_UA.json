@@ -1,5 +1,5 @@
 {
-    "cchs": "Запускається диспетчер консольних команд",
+    "cchs": "Обробник консольних команд запущений!",
     "chatformat": "<%username%> %message%",
     "chatmessage": "(повідомлення в чаті) %message%",
     "command_help": "help",
