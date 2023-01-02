@@ -53,7 +53,7 @@
     "invalid_chat_message": "§cInvalid message in chat",
     "invalid_time": "Invalid time!",
     "joined": "%player% joined",
-    "joinedthegame": "",
+    "joinedthegame": "§e%username% joined the game",
     "kick_help": "kick [player] [reason] - Kick player",
     "kicked_consolemsg": "Kicked %player% for: %reason%",
     "kicked_prefix": "You were kicked for: ",
