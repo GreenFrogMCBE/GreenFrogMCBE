@@ -44,6 +44,16 @@ If you want for your plugin to be listed on the 'Plugins available for public us
 
 ## Language system
 Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese, French (in progress)
+For English language select "language": "en_US"
+
+For Lithuanian language select "language": "lt_LT"
+
+For Ukrainian language select "language": "uk_UA"
+
+For Vietnamese language select "language": "vi_VN"
+
+For French language select "language": "fr_FR". Note: French language is not implemented yet. It will be implemented soon
+
 
 ## Configuration tutorial
 
