@@ -1,5 +1,18 @@
 <img src="https://cdn.discordapp.com/attachments/1027321168576925799/1053767928849383514/logo.png">
 
+<a href="https://github.com/andriycraft/GreenFrogMCBE/blob/master/LICENSE">
+  <img alt="License" src="https://img.shields.io/github/license/andriycraft/GreenFrogMCBE?style=flat-square">
+</a>
+<a href="https://github.com/andriycraft/GreenFrogMCBE/commits/dev">
+  <img alt="GitHub commit activity (dev)" src="https://img.shields.io/github/commit-activity/m/andriycraft/GreenFrogMCBE?color=%2387F4BC&style=flat-square">
+</a>
+<a href="https://github.com/andriycraft/GreenFrogMCBE/commits/main">
+  <img alt="GitHub commit activity (main)" src="https://img.shields.io/github/commit-activity/m/andriycraft/GreenFrogMCBE?color=%2387F4BC&style=flat-square">
+</a>
+<a href="https://github.com/andriycraft/GreenFrogMCBE/search?q=todo">
+  <img alt="TODO counter" src="https://img.shields.io/github/search/andriycraft/GreenFrogMCBE/todo?style=flat-square">
+</a>
+
 ## GreenFrogMCBE 
 
 Server software for Minecraft Bedrock, written in Node js
