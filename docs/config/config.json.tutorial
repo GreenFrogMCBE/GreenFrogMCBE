@@ -6,7 +6,7 @@
     "version": "1.19.50", // Version: Setting too old or too new version will crash the server
     "offlinemode": true, // xbox-auth
     "blockinvalidmessages": true, // Prevent players from sending empty messages and sending invalid chars in messages
-    "lang": "en_US", // Server language (en_US - English, lt_LT - Lithuanian, uk_UA - Ukrainian, fr_FR - French) 
+    "lang": "en_US", // Server language (en_US - English, lt_LT - Lithuanian, uk_UA - Ukrainian, fr_FR - French, vi_VN - Vietnamese) 
     "donotcrashoncriticalerrors": false, // Do not shutdown the server on ciritical errors. Useful for debugging. This may make ur server unstable
     "debug": false, // Debug
     "pluginsfolder": "./plugins", // Plugins folder - do not change if u don't know what u are doing
