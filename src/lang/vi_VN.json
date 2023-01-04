@@ -107,8 +107,10 @@
     "ver_help": "ver - Hiển thị phiên bản máy chủ",
     "version_help": "version - Hiển thị phiên bản máy chủ",
     "warning": "warning",
-    "apinochatmessage": "sendmessage(client, msg): No chat message",
+    "apinochatmessage": "sendmessage(client, msg): No chat message!",
     "apinoclient": "sendmessage(client, msg): No client!",
     "apibcmnochatmsg": "broadcastMessage(msg): No chat message!",
-    "bcmsg": "(broadcast) %msg%"
+    "bcmsg": "(broadcast) %msg%",
+    "youweredisconnected": "You were disconnected",
+    "apikicknoclient": "kick(client): No client!"
 }

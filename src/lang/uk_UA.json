@@ -107,8 +107,10 @@
     "ver_help": "ver - Таке саме як /version",
     "version_help": "version - Показує версію сервера",
     "warning": "попередження",
-    "apinochatmessage": "sendmessage(client, msg): No chat message",
-    "apinoclient": "sendmessage(client, msg): No client!",
-    "apibcmnochatmsg": "broadcastMessage(msg): No chat message!",
-    "bcmsg": "(broadcast) %msg%"
+    "apinochatmessage": "sendmessage(client, msg): Немає повідомлень у чаті!",
+    "apinoclient": "sendmessage(client, msg): Немає клієнта!",
+    "apibcmnochatmsg": "broadcastMessage(msg): Немає повідомлень у чаті!",
+    "bcmsg": "(онолошення) %msg%",
+    "youweredisconnected": "Ви були відключені",
+    "apikicknoclient": "kick(client): Немає клієнта!"
 }

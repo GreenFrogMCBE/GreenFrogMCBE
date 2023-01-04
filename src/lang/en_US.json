@@ -110,8 +110,10 @@
     "pcnf": "Plugins configs folder not found",
     "pcfc": "Plugins configs folder created!",
     "pcfcf": "Failed to create a config folder for plugins: %error%",
-    "apinochatmessage": "sendmessage(client, msg): No chat message",
+    "apinochatmessage": "sendmessage(client, msg): No chat message!",
     "apinoclient": "sendmessage(client, msg): No client!",
     "apibcmnochatmsg": "broadcastMessage(msg): No chat message!",
-    "bcmsg": "(broadcast) %msg%"
+    "bcmsg": "(broadcast) %msg%",
+    "youweredisconnected": "You were disconnected",
+    "apikicknoclient": "kick(client): No client!"
 }

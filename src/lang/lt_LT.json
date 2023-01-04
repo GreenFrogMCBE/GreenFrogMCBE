@@ -107,8 +107,10 @@
     "ver_help": "ver - Parodo serverio versija",
     "version_help": "version - Parodo serverio versija",
     "warning": "įspėjimas",
-    "apinochatmessage": "sendmessage(client, msg): No chat message",
-    "apinoclient": "sendmessage(client, msg): No client!",
-    "apibcmnochatmsg": "broadcastMessage(msg): No chat message!",
-    "bcmsg": "(broadcast) %msg%"
+    "apinochatmessage": "sendmessage(client, msg): Jokio pokalbio pranešimo!",
+    "apinoclient": "sendmessage(client, msg): Nėra kliento!",
+    "apibcmnochatmsg": "broadcastMessage(msg): Jokio pokalbio pranešimo!",
+    "bcmsg": "(transliacija) %msg%",
+    "youweredisconnected": "Buvai atjungtas",
+    "apikicknoclient": "kick(client): Nėra kliento!"
 }

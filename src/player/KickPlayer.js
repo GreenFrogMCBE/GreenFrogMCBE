@@ -1,9 +1,11 @@
+const lang = require('../api/ServerInfo').lang
+
 class KickPlayer {
 
     constructor() { }
 
-    kick(client, reason = 'You were disconnected') {
-        if (!client) throw new Error("kick(client): No client!")
+    kick(client, reason = lang.youweredisconnected) {
+        if (!client) throw new Error(lang.apikicknoclient)
         
         client.kick(reason)
     }
