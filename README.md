@@ -21,8 +21,9 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 1. Clone this repo
 2. Do 'npm i'
-3. Then do 'node index.js'
-4. Done
+3. If you on Windows do 'run.bat'
+4. If not do 'node index.js'
+5. Done
 
 ## Can't join locally
 
@@ -30,7 +31,7 @@ Run powershell as an admin
 
 Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
 
-Join via 172.0.0.1
+Join via 172.0.0.1 | Only if you are on Windows
 
 ## Plugins available for public usage
 
@@ -62,6 +63,7 @@ If you want for your plugin to be listed on the 'Plugins available for public us
 
 ## Language system
 Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese, French (in progress)
+
 For English language select "language": "en_US"
 
 For Lithuanian language select "language": "lt_LT"
