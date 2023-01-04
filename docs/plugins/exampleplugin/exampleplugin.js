@@ -1,8 +1,8 @@
-const BasePlugin = require("../src/plugins/BasePlugin");
-const Chatmessage = require("../src/player/Chatmessage");
-const KickPlayer = require("../src/player/KickPlayer");
-const Logger = require("../src/console/Logger");
-const Colors = require("../src/chat/Colors");
+const BasePlugin = require("./plugins/BasePlugin");
+const Chatmessage = require("./player/Chatmessage");
+const KickPlayer = require("./player/KickPlayer");
+const Logger = require("./console/Logger");
+const Colors = require("./chat/Colors");
 
 // This plugin contains all list of events
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
