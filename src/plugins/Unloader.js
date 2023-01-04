@@ -11,22 +11,22 @@ class Unloader {
         const lang = ServerInfo.lang
         const config = ServerInfo.config
 
-        fs.readdir(config.pluginsfolder, (err, plugins) => {
+        fs.readdir("./plugins", (err, plugins) => {
             Logger.prototype.log(lang.shuttingdownplugins)
             Logger.prototype.log(lang.tensecwarn, 'warning')
             plugins.forEach(plugin => {
-                    if (require(`${config.ddpluginsfolder}${plugin}`).prototype.getName() === "") {
+                    if (require(`../../plugins/${plugin}`).prototype.getName() === "") {
                         throw new Error(lang.failedtoshutdownplugin.replace('%plugin%', plugin))
                     }
 
                     // TODO: Somehow use await
-                    require(`${config.ddpluginsfolder}${plugin}`).prototype.onShutdown()
+                    require(`../../plugins/${plugin}`).prototype.onShutdown()
             });
             Logger.prototype.log(lang.doneshuttingdownplugins)
         });
         setTimeout(() => {
             Logger.prototype.log(lang.doneshuttingdown)
-            process.exit(config.exitstatuscode)
+            process.exit(config.exitstatuscode) // TODO: Not sure if this is useful (i mean the config for exit status code)
         }, config.pluginsshutdowntime)
     }
 

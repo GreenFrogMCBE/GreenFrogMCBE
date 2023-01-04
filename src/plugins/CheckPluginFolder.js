@@ -11,11 +11,11 @@ class CheckPluginFolder {
 
         Logger.prototype.log(lang.loadingplugins)
         try {
-            fs.readdirSync(config.pluginsfolder)
+            fs.readdirSync("./plugins/")
         } catch (e) {
             Logger.prototype.log(lang.plnf)
             try {
-                fs.mkdirSync(config.pluginsfolder, { recursive: true })
+                fs.mkdirSync("./plugins/", { recursive: true })
                 Logger.prototype.log(lang.pfc)
             } catch (e) {
                 Logger.prototype.log(lang.ftcpf.replace('%error%', e), 'error')
