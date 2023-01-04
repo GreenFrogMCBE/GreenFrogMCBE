@@ -17,8 +17,8 @@
     "command_ver": "ver",
     "command_ver_info": "This server runs GreenFrogMCBE. Version: %version% | Repository: https://github.com/andriycraft/GreenFrogMCBE",
     "command_version": "version",
-    "commandlist": "Command list: ",
-    "commands": "§6Commands: ",
+    "commandlist": "Command list:",
+    "commands": "§6Commands:",
     "commandsline1": "§6/ver - Shows server version",
     "commandsline2": "§6/version - Shows server version",
     "commandsline3": "§6/cmds - Shows commands list",
@@ -109,5 +109,9 @@
     "warning": "warning",
     "pcnf": "Plugins configs folder not found",
     "pcfc": "Plugins configs folder created!",
-    "pcfcf": "Failed to create a config folder for plugins: %error%"  
+    "pcfcf": "Failed to create a config folder for plugins: %error%",
+    "apinochatmessage": "sendmessage(client, msg): No chat message",
+    "apinoclient": "sendmessage(client, msg): No client!",
+    "apibcmnochatmsg": "broadcastMessage(msg): No chat message!",
+    "bcmsg": "(broadcast) %msg%"
 }

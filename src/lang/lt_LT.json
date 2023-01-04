@@ -17,8 +17,8 @@
     "command_ver": "ver",
     "command_ver_info": "Šiame serveryje veikia GreenFrogMCBE. Versija: %version% | Saugykla: https://github.com/andriycraft/GreenFrogMCBE",
     "command_version": "version",
-    "commandlist": "Visos komandos: ",
-    "commands": "§6Komandos: ",
+    "commandlist": "Visos komandos:",
+    "commands": "§6Komandos:",
     "commandsline1": "§6/ver - Serverio versija",
     "commandsline2": "§6/version - Serverio versija",
     "commandsline3": "§6/cmds - Komandų sąrašas",
@@ -106,5 +106,9 @@
     "username_is_too_short": "§cNetinkamas vardas: jūsų vardas yra per ilgas",
     "ver_help": "ver - Parodo serverio versija",
     "version_help": "version - Parodo serverio versija",
-    "warning": "įspėjimas"
+    "warning": "įspėjimas",
+    "apinochatmessage": "sendmessage(client, msg): No chat message",
+    "apinoclient": "sendmessage(client, msg): No client!",
+    "apibcmnochatmsg": "broadcastMessage(msg): No chat message!",
+    "bcmsg": "(broadcast) %msg%"
 }
