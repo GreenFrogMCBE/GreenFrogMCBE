@@ -107,10 +107,10 @@
     "ver_help": "ver - Hiển thị phiên bản máy chủ",
     "version_help": "version - Hiển thị phiên bản máy chủ",
     "warning": "warning",
-    "apinochatmessage": "sendmessage(client, msg): No chat message!",
-    "apinoclient": "sendmessage(client, msg): No client!",
-    "apibcmnochatmsg": "broadcastMessage(msg): No chat message!",
-    "bcmsg": "(broadcast) %msg%",
-    "youweredisconnected": "You were disconnected",
-    "apikicknoclient": "kick(client): No client!"
+    "apinochatmessage": "sendmessage(client, msg): Không có tin nhắn trò chuyện!",
+    "apinoclient": "sendmessage(client, msg): Không có khách hàng!",
+    "apibcmnochatmsg": "broadcastMessage(msg): Không có tin nhắn trò chuyện!",
+    "bcmsg": "(phát tin) %msg%",
+    "youweredisconnected": "Bạn đã bị ngắt kết nối",
+    "apikicknoclient": "kick(client): Không có khách hàng!"
 }
