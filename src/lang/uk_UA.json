@@ -28,7 +28,6 @@
     "disconnected": "%player% відключився",
     "doneshuttingdown": "Сервер вимкнений",
     "doneshuttingdownplugins": "Плагіни вимкнені",
-    "empty": "",
     "empty_message": "Вам треба вказати повідомлення!",
     "error": "помлка",
     "executedcmd": "%player% використав команду: %cmd%",
