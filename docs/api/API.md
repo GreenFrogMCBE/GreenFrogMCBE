@@ -101,10 +101,8 @@ light_purple: "§d",
 yellow: "§e",
 white: "§f",
 obfuscated: "§k",
-cursed: this.obfuscated,
+cursed: "§k",
 bold: "§l",
-// there is no strikethrough because bedrock does not support it
-// there is no underline because bedrock does not support it
 italic: "§o",
 reset: "§r",
 char: "§"`
