@@ -1,10 +1,10 @@
 const Bedrock = require('bedrock-protocol')
-const Logger = require('../src/console/Logger')
-const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
-const ServerInfo = require('../src/api/ServerInfo')
-const PlayerInfo = require('../src/player/PlayerInfo')
-const ValidateConfig = require('../src/server/ValidateConfig')
-const Loader = require('../src/plugins/Loader')
+const Logger = require('./console/Logger')
+const ConsoleCommandSender = require('./console/ConsoleCommandSender')
+const ServerInfo = require('./api/ServerInfo')
+const PlayerInfo = require('./player/PlayerInfo')
+const ValidateConfig = require('./src/server/ValidateConfig')
+const Loader = require('./plugins/Loader')
 const fs = require('fs')
 let clients = []
 
