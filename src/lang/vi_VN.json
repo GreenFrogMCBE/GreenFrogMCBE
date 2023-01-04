@@ -28,7 +28,6 @@
     "disconnected": "%player% đã ngắt kết nối",
     "doneshuttingdown": "Tắt máy chủ hoàn tất",
     "doneshuttingdownplugins": "Tắt các plugin hoàn tất",
-    "empty": "",
     "empty_message": "Thông báo trống đã được cung cấp!",
     "error": "error",
     "executedcmd": "%player% đã thực hiện một lệnh máy chủ: %cmd%",
