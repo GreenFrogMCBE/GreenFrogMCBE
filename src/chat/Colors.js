@@ -21,8 +21,6 @@ module.exports = {
     obfuscated: "§k",
     cursed: this.obfuscated,
     bold: "§l",
-    // there is no strikethrough because bedrock does not support it
-    // there is no underline because bedrock does not support it
     italic: "§o",
     reset: "§r",
     char: "§"
