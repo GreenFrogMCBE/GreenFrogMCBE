@@ -28,7 +28,6 @@
     "disconnected": "%player% disconnected",
     "doneshuttingdown": "Done shutting down server",
     "doneshuttingdownplugins": "Done shutting down plugins",
-    "empty": "",
     "empty_message": "Empty message was provided!",
     "error": "error",
     "executedcmd": "%player% executed a server command: %cmd%",
