@@ -6,7 +6,7 @@ const config = ServerInfo.config
 class Logger {
     constructor() { }
 
-    log(message, type = 'info') {
+    log (message, type = 'info') {
         switch (type) {
             case 'info':
                 console.log(`${Colors.CONSOLE_BLUE}${lang.info.toUpperCase()}${Colors.CONSOLE_RESET} | ${message}`)
@@ -25,12 +25,13 @@ class Logger {
                 }
                 break
             default:
+                console.log(lang.invalid)
                 break
         }
     }
 
     
-    pluginLog (type = 'info', plugin, message, prefix = '', suffix = '') {
+    pluginLog (type = 'info', plugin, message, prefix = '', suffix = '') { // This is for plugins
         switch (type) {
             case 'info':
                 console.log(`${Colors.CONSOLE_BLUE}${lang.info.toUpperCase()}${Colors.CONSOLE_RESET} | ${prefix}${plugin}${suffix} ${message}`)
@@ -49,7 +50,7 @@ class Logger {
                 }
                 break
             default:
-                throw new Error(`${lang.invalid}`)
+                throw new Error(`Invalid log level: ${type}`);
         }
     }
 }
