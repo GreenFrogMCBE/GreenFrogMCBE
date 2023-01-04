@@ -28,7 +28,6 @@
     "disconnected": "%player% atjungtas",
     "doneshuttingdown": "Serverio išjungimas baigtas",
     "doneshuttingdownplugins": "Baigta išjungti papildinius",
-    "empty": "",
     "empty_message": "Jūsu Žinutė yra tusčia!",
     "error": "klaida",
     "executedcmd": "%player% įvykdė serverio komandą: %cmd%",
