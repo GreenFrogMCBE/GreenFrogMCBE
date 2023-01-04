@@ -5,6 +5,6 @@
     "author": "andriycraft",
     "license": "MIT",
     "dependencies": {
-        "bedrock-protocol": "git+https://github.com/PrismarineJS/bedrock-protocol"
+        "bedrock-protocol": "^3.22.0"
     }
 }
