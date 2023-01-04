@@ -195,6 +195,7 @@ server.on('connect', client => {
 
                         client.kick = function (msg) {
                             if (client.kicked) return
+                            if (msg == null || msg == undefined) msg = lang.playerdisconnected
                             fs.readdir("./plugins", (err, plugins) => {
                                 plugins.forEach(plugin => {
                                     try {
@@ -229,7 +230,7 @@ server.on('connect', client => {
                                 }
                                 delete client.q;
                             }
-                        }, 10) 
+                        }, 10)
 
                         Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
                         setTimeout(() => {
@@ -306,53 +307,51 @@ server.on('connect', client => {
                     });
                 });
                 Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
-                switch (cmd.toLowerCase()) {
-                    case '/' + lang.command_ver.toLowerCase():
-                        if (!commands.player_command_ver) {
-                            client.chat(lang.playerunknowncommand)
-                            return
-                        }
-                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
-                        client.chat(lang.playervercommandline2)
-                        break
-                    case '/' + lang.command_version.toLowerCase():
-                        if (!commands.player_command_ver) {
-                            client.chat(lang.playerunknowncommand)
-                            return
-                        }
-                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
-                        client.chat(lang.playervercommandline2)
-                        break
-                    case '/' + lang.command_cmds.toLowerCase():
-                        if (!commands.player_command_cmds) {
-                            client.chat(lang.playerunknowncommand)
-                            return
-                        }
-                        client.chat(lang.commands)
-                        client.chat(lang.commandsline1)
-                        client.chat(lang.commandsline2)
-                        client.chat(lang.commandsline3)
-                        client.chat(lang.commandsline4)
-                        break
-                    case '/' + lang.command_commands.toLowerCase(): {
-                        if (!commands.player_command_commands) {
-                            client.chat(lang.playerunknowncommand)
-                            return
-                        }
-                        client.chat(lang.commandsline1)
-                        client.chat(lang.commandsline2)
-                        client.chat(lang.commandsline3)
-                        client.chat(lang.commandsline4)
-                        break
-                    }
-                    default:
+                if (cmd.toLowerCase().startsWith('/' + lang.command_ver.toLowerCase())) {
+                    if (!commands.player_command_ver) {
                         client.chat(lang.playerunknowncommand)
-                        break
+                        return
+                    }
+                    client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                    client.chat(lang.playervercommandline2)
+                    return
                 }
-                break
-            default:
+                if (cmd.toLowerCase().startsWith('/' + lang.command_version.toLowerCase())) {
+                    if (!commands.player_command_ver) {
+                        client.chat(lang.playerunknowncommand)
+                        return
+                    }
+                    client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                    client.chat(lang.playervercommandline2)
+                    return
+                }
+                if (cmd.toLowerCase().startsWith('/' + lang.command_cmds.toLowerCase())) {
+                    if (!commands.player_command_cmds) {
+                        client.chat(lang.playerunknowncommand)
+                        return
+                    }
+                    client.chat(lang.commands)
+                    client.chat(lang.commandsline1)
+                    client.chat(lang.commandsline2)
+                    client.chat(lang.commandsline3)
+                    client.chat(lang.commandsline4)
+                    return
+                }
+                if (cmd.toLowerCase().startsWith('/' + lang.command_commands.toLowerCase())) {
+                    if (!commands.player_command_commands) {
+                        client.chat(lang.playerunknowncommand)
+                        return
+                    }
+                    client.chat(lang.commandsline1)
+                    client.chat(lang.commandsline2)
+                    client.chat(lang.commandsline3)
+                    client.chat(lang.commandsline4)
+                    return
+                }
+                client.chat(lang.playerunknowncommand)
                 Logger.prototype.log(lang.unhandledpacket, 'warning')
                 console.log('%o', packet)
+                break
         }
     }
 

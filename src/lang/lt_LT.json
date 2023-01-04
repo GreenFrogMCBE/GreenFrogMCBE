@@ -114,5 +114,6 @@
     "apibcmnochatmsg": "broadcastMessage(msg): Jokio pokalbio pranešimo!",
     "bcmsg": "(transliacija) %msg%",
     "youweredisconnected": "Buvai atjungtas",
+    "playerdisconnected": "Grotuvas atjungtas",
     "apikicknoclient": "kick(client): Nėra kliento!"
 }

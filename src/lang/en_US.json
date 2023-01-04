@@ -117,5 +117,6 @@
     "apibcmnochatmsg": "broadcastMessage(msg): No chat message!",
     "bcmsg": "(broadcast) %msg%",
     "youweredisconnected": "You were disconnected",
+    "playerdisconnected": "Player disconnected",
     "apikicknoclient": "kick(client): No client!"
 }

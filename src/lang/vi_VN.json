@@ -114,5 +114,6 @@
     "apibcmnochatmsg": "broadcastMessage(msg): Không có tin nhắn trò chuyện!",
     "bcmsg": "(phát tin) %msg%",
     "youweredisconnected": "Bạn đã bị ngắt kết nối",
+    "playerdisconnected": "Trình phát bị ngắt kết nối",
     "apikicknoclient": "kick(client): Không có khách hàng!"
 }

@@ -114,5 +114,6 @@
     "apibcmnochatmsg": "broadcastMessage(msg): Немає повідомлень у чаті!",
     "bcmsg": "(онолошення) %msg%",
     "youweredisconnected": "Ви були відключені",
+    "playerdisconnected": "Гравець відключився",
     "apikicknoclient": "kick(client): Немає клієнта!"
 }
