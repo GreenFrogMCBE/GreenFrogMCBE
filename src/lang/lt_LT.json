@@ -105,7 +105,7 @@
     "unstablewarning": "\"Nesugadinkite dėl kritinių klaidų\" įjungta! Dėl to jūsų serveris gali tapti nestabilus",
     "username_is_too_long": "§cNetinkamas vardas: jūsų vardas yra per trumpas",
     "username_is_too_short": "§cNetinkamas vardas: jūsų vardas yra per ilgas",
-    "ver_help": "Parodo serverio versija",
-    "version_help": "Parodo serverio versija",
+    "ver_help": "ver - Parodo serverio versija",
+    "version_help": "version - Parodo serverio versija",
     "warning": "įspėjimas"
 }

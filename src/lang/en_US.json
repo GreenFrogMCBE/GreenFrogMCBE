@@ -67,7 +67,7 @@
     "leftthegame": "§e%player% left the game",
     "listening_failed": "Failed to listen on %ipport% | Error: %error%",
     "listening_on": "Listening on port %ipport%",
-    "loadingplugins": "Loading plugins",
+    "loadingplugins": "Loading plugins...",
     "loadingserver": "Loading server...",
     "no_players_online": "There are no players on the server right now.",
     "no_reason": "No reason",
@@ -107,5 +107,8 @@
     "username_is_too_short": "§cInvalid username: Your username is too short",
     "ver_help": "ver - Shows the server version",
     "version_help": "version - Shows the server version",
-    "warning": "warning"
+    "warning": "warning",
+    "pcnf": "Plugins configs folder not found",
+    "pcfc": "Plugins configs folder created!",
+    "pcfcf": "Failed to create a config folder for plugins: %error%"  
 }

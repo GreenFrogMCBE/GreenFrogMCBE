@@ -22,6 +22,19 @@ class CheckPluginFolder {
                 process.exit(config.crashstatuscode)
             }
         }
+
+        try {
+            fs.readdirSync("./pluginconfigs")
+        } catch (e) {
+            Logger.prototype.log(lang.pcnf)
+            try {
+                fs.mkdirSync("./pluginconfigs", { recursive: true })
+                Logger.prototype.log(lang.pcfc)
+            } catch (e) {
+                Logger.prototype.log(lang.pcfcf.replace('%error%', e), 'error')
+                process.exit(config.crashstatuscode)
+            }
+        }
     }
 }
 
