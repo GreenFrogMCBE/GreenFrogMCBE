@@ -260,14 +260,15 @@ server.on('connect', client => {
                     }
                 }
                 break
-            case "client_to_server_handshake":
-            case "request_chunk_radius":
-            case "set_local_player_as_initialized":
-            case "tick_sync":
-            case "emote_list":
-            case "set_player_game_type":
-            case "client_cache_status":
-            case "move_player":
+            case "client_to_server_handshake": // TODO: Handle this
+            case "request_chunk_radius": // TODO: Handle this
+            case "set_local_player_as_initialized":  // TODO: Handle this
+            case "tick_sync": // TODO: Handle this
+            case "emote_list": // TODO: Handle this
+            case "set_player_game_type": // TODO: Handle this
+            case "client_cache_status": // TODO: Handle this
+            case "move_player": // TODO: Handle this
+            case "player_action": // TODO: Handle this
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
                 break
             case "text":
@@ -306,7 +307,7 @@ server.on('connect', client => {
                 });
                 Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
                 switch (cmd.toLowerCase()) {
-                    case lang.command_ver:
+                    case '/' + lang.command_ver.toLowerCase():
                         if (!commands.player_command_ver) {
                             client.chat(lang.playerunknowncommand)
                             return
@@ -314,7 +315,7 @@ server.on('connect', client => {
                         client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
                         client.chat(lang.playervercommandline2)
                         break
-                    case lang.command_version:
+                    case '/' + lang.command_version.toLowerCase():
                         if (!commands.player_command_ver) {
                             client.chat(lang.playerunknowncommand)
                             return
@@ -322,7 +323,7 @@ server.on('connect', client => {
                         client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
                         client.chat(lang.playervercommandline2)
                         break
-                    case lang.command_cmds:
+                    case '/' + lang.command_cmds.toLowerCase():
                         if (!commands.player_command_cmds) {
                             client.chat(lang.playerunknowncommand)
                             return
@@ -333,7 +334,7 @@ server.on('connect', client => {
                         client.chat(lang.commandsline3)
                         client.chat(lang.commandsline4)
                         break
-                    case lang.command_commands: {
+                    case '/' + lang.command_commands.toLowerCase(): {
                         if (!commands.player_command_commands) {
                             client.chat(lang.playerunknowncommand)
                             return

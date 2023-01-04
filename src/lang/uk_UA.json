@@ -17,6 +17,8 @@
     "command_ver": "ver",
     "command_ver_info": "Цей сервер працює на GreenFrogMCBE. Версія %version% | Репозиторій: https://github.com/andriycraft/GreenFrogMCBE",
     "command_version": "version",
+    "command_commands": "commands",
+    "command_cmds": "cmds",
     "commandlist": "Список команд:",
     "commands": "§6Команди: ",
     "commandsline1": "§6/ver - Показати версію сервера",

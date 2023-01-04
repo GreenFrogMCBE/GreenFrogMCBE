@@ -17,6 +17,8 @@
     "command_ver": "ver",
     "command_ver_info": "This server runs GreenFrogMCBE. Version: %version% | Repository: https://github.com/andriycraft/GreenFrogMCBE",
     "command_version": "version",
+    "command_commands": "commands",
+    "command_cmds": "cmds",
     "commandlist": "Command list:",
     "commands": "§6Commands:",
     "commandsline1": "§6/ver - Shows server version",

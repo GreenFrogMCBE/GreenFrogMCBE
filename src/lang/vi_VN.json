@@ -17,6 +17,8 @@
     "command_ver": "ver",
     "command_ver_info": "TMáy chủ này đang chạy GreenFrogMCBE. Phiên bản: %version% | Kho: https://github.com/andriycraft/GreenFrogMCBE",
     "command_version": "version",
+    "command_commands": "commands",
+    "command_cmds": "cmds",
     "commandlist": "Danh sách lệnh:",
     "commands": "§6Các lệnh:",
     "commandsline1": "§6/ver - Hiển thị phiên bản máy chủ",
