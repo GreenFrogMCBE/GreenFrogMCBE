@@ -1,5 +1,5 @@
-const BasePlugin = require("../src/plugins/BasePlugin");
-const Logger = require("../src/console/Logger");
+const BasePlugin = require("./plugins/BasePlugin");
+const Logger = require("../console/Logger");
 
 class DonationReminder extends BasePlugin {
   getName() {
