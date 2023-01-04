@@ -74,6 +74,7 @@ Example 2: - Broadcast
 
 `Chatmessage.prototype.broadcastMessage("This is broadcast")`
 
+
 Example 3: - Chat message with colors
 
 `const Chatmessage = require("../src/player/Chatmessage");`
