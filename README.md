@@ -2,7 +2,7 @@
 
 
 <a href="https://github.com/andriycraft/GreenFrogMCBE/blob/master/LICENSE">
-  <img alt="License" src="https://img.shields.io/github/license/andriycraft/GreenFrogMCBE?style=flat-square">
+  <img alt="License" src="https://img.shields.io/github/license/andriycraft/GreenFrogMCBE">
 </a>
 <a href="https://github.com/andriycraft/GreenFrogMCBE/commits/main">
   <img alt="GitHub commit activity (main)" src="https://img.shields.io/github/commit-activity/m/andriycraft/GreenFrogMCBE?color=%2387F4BC&style=flat-square">
