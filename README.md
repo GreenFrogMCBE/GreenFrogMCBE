@@ -31,7 +31,7 @@ Run powershell as an admin
 
 Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
 
-Join via 172.0.0.1 | Only if you are on Windows
+Join via 172.0.0.1
 
 ## Plugins available for public usage
 
