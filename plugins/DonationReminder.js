@@ -32,6 +32,11 @@ class DonationReminder extends BasePlugin {
         this.logMsg(`You will also be marked as donator in our Discord server!`);
         this.logMsg(`If you do not want to support us just delete the DonationPlugin.js from plugins folder`);
         break;
+      case 'vi_VN':
+        this.logMsg(`Chào bạn! Nếu bạn muốn hỗ trợ GreenFrogMCBE, bạn có thể quyên góp tại: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`);
+        this.logMsg(`Bạn cũng sẽ được đánh dấu là người quyên góp trong máy chủ Discord của chúng tôi!`);
+        this.logMsg(`Nếu bạn không muốn hỗ trợ chúng tôi, chỉ cần xóa DonationPlugin.js khỏi thư mục plugin`);
+        break;
       case 'lt_LT':
         // WARNING: I used Google translate for this lang
         this.logMsg(`Sveiki! Jei norite paremti GreenFrogMCBE, galite aukoti adresu: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`);
