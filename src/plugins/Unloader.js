@@ -1,28 +1,35 @@
 const fs = require('fs')
 const Logger = require('../console/Logger')
+const ServerInfo = require('../api/ServerInfo')
 
 class Unloader {
 
-    constructor() {}
+    constructor() { }
 
     shutdown() {
-        // TODO: The if u have potato hosting then the plugins may not shutdown correctly. I warned you
+
+        const lang = ServerInfo.lang
+        const config = ServerInfo.config
+
         fs.readdir("./plugins", (err, plugins) => {
-            Logger.prototype.log('Shutting down plugins...')
-            Logger.prototype.log('The server has 10 sec to shutdown the plugins. If the servers fails to do it in time - there may be some issues with plugin data', 'warning')
-            plugins.forEach(plugin => {
-                    if (require(`../../plugins/${plugin}`).prototype.getName() === "") {
-                        throw new Error(`Failed to shutdown plugin ${plugin}. No plugin name!`)
+            Logger.prototype.log(lang.shuttingdownplugins)
+            try {
+                plugins.forEach(plugin => {
+                    try {
+                        require(`../../plugins/${plugin}`).prototype.getName()
+                    } catch (e) {
+                        Logger.prototype.log(lang.failedtoshutdownplugin.replace('%plugin%', plugin), 'error')
                     }
 
+
                     require(`../../plugins/${plugin}`).prototype.onShutdown()
-            });
-            Logger.prototype.log('Done shutting down plugins!')
+                });
+            } finally {
+                Logger.prototype.log(lang.doneshuttingdownplugins)
+                Logger.prototype.log(lang.doneshuttingdown)
+                process.exit(config.exitstatuscode)
+            }
         });
-        setTimeout(() => {
-            Logger.prototype.log('Done')
-            process.exit(0)
-        }, 10000)
     }
 
 }

@@ -136,7 +136,7 @@ class ConsoleCommandSender {
                 return
             }
             switch (data.toLowerCase()) {
-                case lang.empty.toLowerCase():
+                case "":
                     break
                 case lang.command_shutdown.toLowerCase():
                 case lang.command_stop.toLowerCase():

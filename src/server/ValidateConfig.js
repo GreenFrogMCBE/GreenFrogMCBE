@@ -40,18 +40,20 @@ class ValidateConfig {
 
     ValidateLangFile() {
         try {
+            require("../../src/lang/en_US.json")
             require("../../src/lang/lt_LT.json")
             require("../../src/lang/uk_UA.json")
-            require("../../src/lang/en_US.json")
+            require("../../src/lang/vi_VN.json")
         } catch (e) {
             Logger.prototype.log(lang.failedparselang.replace('%e%', e))
             process.exit(-1)
         }
 
         try {
-            JSON.parse(JSON.stringify(require("../../src/lang/lt_LT.json")))
-            JSON.parse(JSON.stringify(require("../../src/lang/uk_UA.json")))
             JSON.parse(JSON.stringify(require("../../src/lang/en_US.json")))
+            JSON.parse(JSON.stringify(require("../../src/lang/uk_UA.json")))
+            JSON.parse(JSON.stringify(require("../../src/lang/vi_VN.json")))
+            JSON.parse(JSON.stringify(require("../../src/lang/lt_LT.json")))
         } catch (e) {
             Logger.prototype.log(lang.failedfindlang.replace('%e%', e))
             process.exit(-1)

@@ -7,3 +7,4 @@ plugin-name: ExamplePlugin
 author: Your name
 repo: https://github.com/LinkToYourRepo
 description: Plugin description
+version: 1.3

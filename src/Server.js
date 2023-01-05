@@ -1,10 +1,10 @@
 const Bedrock = require('bedrock-protocol')
-const Logger = require('../src/console/Logger')
-const ConsoleCommandSender = require('../src/console/ConsoleCommandSender')
-const ServerInfo = require('../src/api/ServerInfo')
-const PlayerInfo = require('../src/player/PlayerInfo')
-const ValidateConfig = require('../src/server/ValidateConfig')
-const Loader = require('../src/plugins/Loader')
+const Logger = require('./console/Logger')
+const ConsoleCommandSender = require('./console/ConsoleCommandSender')
+const ServerInfo = require('./api/ServerInfo')
+const PlayerInfo = require('./player/PlayerInfo')
+const ValidateConfig = require('./server/ValidateConfig')
+const Loader = require('./plugins/Loader')
 const fs = require('fs')
 let clients = []
 
@@ -64,7 +64,7 @@ try {
         maxPlayers: config.maxplayers,
         motd: {
             motd: config.motd,
-            levelName: 'GreenFrogMCBE'
+            levelName: config.softwarename
         }
     })
     Logger.prototype.log(`${lang.listening_on.replace(`%ipport%`, `/${config.host}:${config.port}`)}`)
@@ -194,6 +194,8 @@ server.on('connect', client => {
 
 
                         client.kick = function (msg) {
+                            if (client.kicked) return
+                            if (msg == null || msg == undefined) msg = lang.playerdisconnected
                             fs.readdir("./plugins", (err, plugins) => {
                                 plugins.forEach(plugin => {
                                     try {
@@ -203,12 +205,13 @@ server.on('connect', client => {
                                     }
                                 });
                             });
+                            client.kicked = true
                             Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
-                            client.disconnect(msg)
+                            try { client.disconnect(msg) } catch (e) { }
                         }
 
                         setInterval(() => {
-                            if (client.q) { // wtf is client.q
+                            if (client.q) {
                                 fs.readdir("./plugins", (err, plugins) => {
                                     plugins.forEach(plugin => {
                                         try {
@@ -218,9 +221,16 @@ server.on('connect', client => {
                                         }
                                     });
                                 });
+                                if (!client.kicked) {
+                                    client.kick(lang.player_disconnected_from_this_server)
+                                    Logger.prototype.log(lang.disconnected.replace('%player%', client.getUserData().displayName))
+                                }
+                                for (let i = 0; i < clients.length; i++) {
+                                    clients[i].chat(lang.leftthegame.replace('%username%', client.getUserData().displayName))
+                                }
                                 delete client.q;
                             }
-                        }, 10) // a very dumb way to detect if player left the game
+                        }, 10)
 
                         Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
                         setTimeout(() => {
@@ -237,7 +247,7 @@ server.on('connect', client => {
                                     }
                                 });
                             });
-                        }, 2000)
+                        }, config.clientloadtime)
 
 
                         for (let i = 0; i < clients.length; i++) {
@@ -254,11 +264,12 @@ server.on('connect', client => {
             case "client_to_server_handshake":
             case "request_chunk_radius":
             case "set_local_player_as_initialized":
-            case "tick_sync":
-            case "emote_list":
-            case "set_player_game_type":
-            case "client_cache_status":
-            case "move_player":
+            case "tick_sync": // TODO: Handle this
+            case "emote_list": // TODO: Handle this
+            case "set_player_game_type": // TODO: Handle this
+            case "client_cache_status": // TODO: Handle this
+            case "move_player": // TODO: Handle this
+            case "player_action": // TODO: Handle this
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
                 break
             case "text":
@@ -273,12 +284,15 @@ server.on('connect', client => {
                         }
                     });
                 });
-                Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg))
                 if (msg.includes("§") || msg.length == 0 || msg.length > 255 && config.blockinvalidmessages) {
                     Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
                     client.kick(lang.invalid_chat_message)
                     return
                 }
+
+                if (!msg.replace(/\s/g, '').length) return
+
+                Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg))
 
                 for (let i = 0; i < clients.length; i++) {
                     clients[i].chat(`${fullmsg}`)
@@ -296,53 +310,51 @@ server.on('connect', client => {
                     });
                 });
                 Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
-                switch (cmd) {
-                    case '/ver':
-                        if (!commands.player_command_ver) {
-                            client.chat(lang.playerunknowncommand)
-                            return
-                        }
-                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
-                        client.chat(lang.playervercommandline2)
-                        break
-                    case '/version':
-                        if (!commands.player_command_ver) {
-                            client.chat(lang.playerunknowncommand)
-                            return
-                        }
-                        client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
-                        client.chat(lang.playervercommandline2)
-                        break
-                    case '/cmds':
-                        if (!commands.player_command_cmds) {
-                            client.chat(lang.playerunknowncommand)
-                            return
-                        }
-                        client.chat(lang.commands)
-                        client.chat(lang.commandsline1)
-                        client.chat(lang.commandsline2)
-                        client.chat(lang.commandsline3)
-                        client.chat(lang.commandsline4)
-                        break
-                    case '/commands': {
-                        if (!commands.player_command_commands) {
-                            client.chat(lang.playerunknowncommand)
-                            return
-                        }
-                        client.chat(lang.commandsline1)
-                        client.chat(lang.commandsline2)
-                        client.chat(lang.commandsline3)
-                        client.chat(lang.commandsline4)
-                        break
+                if (cmd.toLowerCase().startsWith('/' + lang.command_ver.toLowerCase())) {
+                    if (!commands.player_command_ver) {
+                        client.chat(lang.playerunknowncommand)
+                        return
                     }
-                    default:
-                        client.chat(lanf.playerunknowncommand)
-                        break
+                    client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                    client.chat(lang.playervercommandline2)
+                    return
                 }
-                break
-            default:
+                if (cmd.toLowerCase().startsWith('/' + lang.command_version.toLowerCase())) {
+                    if (!commands.player_command_ver) {
+                        client.chat(lang.playerunknowncommand)
+                        return
+                    }
+                    client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
+                    client.chat(lang.playervercommandline2)
+                    return
+                }
+                if (cmd.toLowerCase().startsWith('/' + lang.command_cmds.toLowerCase())) {
+                    if (!commands.player_command_cmds) {
+                        client.chat(lang.playerunknowncommand)
+                        return
+                    }
+                    client.chat(lang.commands)
+                    client.chat(lang.commandsline1)
+                    client.chat(lang.commandsline2)
+                    client.chat(lang.commandsline3)
+                    client.chat(lang.commandsline4)
+                    return
+                }
+                if (cmd.toLowerCase().startsWith('/' + lang.command_commands.toLowerCase())) {
+                    if (!commands.player_command_commands) {
+                        client.chat(lang.playerunknowncommand)
+                        return
+                    }
+                    client.chat(lang.commandsline1)
+                    client.chat(lang.commandsline2)
+                    client.chat(lang.commandsline3)
+                    client.chat(lang.commandsline4)
+                    return
+                }
+                client.chat(lang.playerunknowncommand)
                 Logger.prototype.log(lang.unhandledpacket, 'warning')
                 console.log('%o', packet)
+                break
         }
     }
 

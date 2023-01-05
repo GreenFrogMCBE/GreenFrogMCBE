@@ -3,55 +3,53 @@ const Logger = require('../console/Logger')
 const CheckPluginFolder = require('./CheckPluginFolder')
 const ServerInfo = require('../api/ServerInfo')
 const PluginManager = require('../api/PluginManager')
+const lang = ServerInfo.lang
 
 class Loader {
 
     constructor() {}
 
     loadPlugins() {
-
         CheckPluginFolder.prototype.check()
 
         fs.readdir("./plugins", (err, plugins) => {
             plugins.forEach(plugin => {
-                Logger.prototype.log(`Loading ${plugin}...`)
+                Logger.prototype.log(lang.loadingplugin.replace('%plugin%', plugin))
                 try {
-
-                    if (require(`../../plugins/${plugin}`).prototype.getName() === "") {
-                        throw new Error(`Empty plugin name! Source: ${plugin}`)
+                    try {
+                        require(`../../plugins/${plugin}`).prototype.getName()
+                    } catch (e) {
+                        throw new Error(lang.nopluginname.replace('%plugin%', plugin))
                     }
 
                     try {
-                        if (require(`../../plugins/${plugin}`).prototype.getServerVersion() === ServerInfo.serverversion) {
-                            Logger.prototype.log(`Plugin ${plugin} supports your server version`)
-                        } else {
-                            Logger.prototype.log(`The plugin ${require(`../../plugins/${plugin}`).prototype.getName()} is made for ${require(`../../plugins/${plugin}`).prototype.getServerVersion()}. Your server is on ${ServerInfo.serverversion}. This may cause unexpected issues or crashes`)
+                        if (require(`../../plugins/${plugin}`).prototype.getServerVersion() ==! ServerInfo.majorserverversion) {
+                            Logger.prototype.log(lang.tpismf.replace('%plugin%', require(`../../plugins/${plugin}`).prototype.getName()).replace('%psv%', require(`../../plugins/${plugin}`).prototype.getServerVersion()).replace('%msv%', ServerInfo.majorserverversion), 'warning')
                         }
                     } catch (e) {
-                        throw new Error(`Plugin ${plugin} has no getServerVersion()`, 'warning')
+                        Logger.prototype.log(lang.pluginhasnogetserverversion.replace('%plugin%', plugin), 'warning')
                     }
 
 
-                    let version = 'unknown'
+                    let version = lang.unknown
                     try {
                         version = require(`../../plugins/${plugin}`).prototype.getVersion()
                     } catch (e) {
-                        throw new Error(`Plugin ${plugin} has no getVersion()`, 'warning')
+                        Logger.prototype.log(lang.pluginhasnogetversion.replace('%plugin%', plugin), 'warning')
                     }
 
-                    Logger.prototype.log(`Loaded plugin ${require(`../../plugins/${plugin}`).prototype.getName()} ${version}`)
 
                     PluginManager.prototype.addPlugin(require(`../../plugins/${plugin}`).prototype.getName())
 
                     require(`../../plugins/${plugin}`).prototype.onLoad()
                 } catch (e) {
-                    let version = 'unknown'
+                    let version = lang.unknown
                     try {
                         version = require(`../../plugins/${plugin}`).prototype.getVersion()
-                    } catch (e) { Logger.prototype.log(`Failed to load plugin "${require(`../../plugins/${plugin}`).prototype.getName()} version: ${version}". The error was: ${e.stack}`, 'error') }
+                    } catch (e) { Logger.prototype.log(lang.failedtoloadplugin.replace('%errorstack%', e.stack).replace('%version%', version).replace('%name%', require(`../../plugins/${plugin}`).prototype.getName()), 'error') }
                 }
             });
-            Logger.prototype.log('All plugins are loaded!')
+            Logger.prototype.log(lang.allpluginsloaded)
         });
     }
 

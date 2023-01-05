@@ -1,21 +1,38 @@
 const fs = require('fs')
 const Logger = require('../console/Logger')
+const ServerInfo = require('../api/ServerInfo')
 
 class CheckPluginFolder {
     constructor () { }
 
     check() {
-        Logger.prototype.log("Loading plugins")
+        const lang = ServerInfo.lang
+        const config = ServerInfo.config
+
+        Logger.prototype.log(lang.loadingplugins)
         try {
-            fs.readdirSync("./plugins")
+            fs.readdirSync("./plugins/")
         } catch (e) {
-            Logger.prototype.log("Plugins folder not found")
+            Logger.prototype.log(lang.plnf)
             try {
-                fs.mkdirSync("./plugins", { recursive: true })
-                Logger.prototype.log("Plugin folder created!")
+                fs.mkdirSync("./plugins/", { recursive: true })
+                Logger.prototype.log(lang.pfc)
             } catch (e) {
-                Logger.prototype.log(`Failed to create a plugin folder: ${e}`, 'error')
-                process.exit(-1)
+                Logger.prototype.log(lang.ftcpf.replace('%error%', e), 'error')
+                process.exit(config.crashstatuscode)
+            }
+        }
+
+        try {
+            fs.readdirSync("./pluginconfigs")
+        } catch (e) {
+            Logger.prototype.log(lang.pcnf)
+            try {
+                fs.mkdirSync("./pluginconfigs", { recursive: true })
+                Logger.prototype.log(lang.pcfc)
+            } catch (e) {
+                Logger.prototype.log(lang.pcfcf.replace('%error%', e), 'error')
+                process.exit(config.crashstatuscode)
             }
         }
     }
