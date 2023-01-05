@@ -114,5 +114,13 @@
     "bcmsg": "(онолошення) %msg%",
     "youweredisconnected": "Ви були відключені",
     "playerdisconnected": "Гравець відключився",
-    "apikicknoclient": "kick(client): Немає клієнта!"
+    "apikicknoclient": "kick(client): Немає клієнта!",
+    "allpluginsloaded": "Усі плагіни завантажено!",
+    "unknown": "невідома",
+    "loadingplugin": "Завантаження %plugin%...",
+    "nopluginname": "Нема назви плагіна! %plugin%",
+    "pluginhasnogetserverversion": "Плагін %plugin% не має getServerVersion()",
+    "pluginhasnogetversion": "Плагін %plugin% не має getVersion()",
+    "tpismf": "Плагін %plugin% створено для %psv%. Ваш сервер знаходиться на %msv%. Це може спричинити несподівані проблеми або збої",
+    "failedtoloadplugin": "Плагін %plugin% створено для %psv%. Ваш сервер знаходиться на %msv%. Це може спричинити несподівані проблеми або збої"
 }

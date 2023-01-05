@@ -114,5 +114,13 @@
     "bcmsg": "(transliacija) %msg%",
     "youweredisconnected": "Buvai atjungtas",
     "playerdisconnected": "Grotuvas atjungtas",
-    "apikicknoclient": "kick(client): Nėra kliento!"
+    "apikicknoclient": "kick(client): Nėra kliento!",
+    "allpluginsloaded": "Įkelti visi papildiniai!",
+    "unknown": "nežinomas",
+    "loadingplugin": "Įkeliama %plugin%...",
+    "nopluginname": "Bet artojas! %plugin%",
+    "pluginhasnogetserverversion": "Papildinys %plugin% ištrinti getserverversion()",
+    "pluginhasnogetversion": "Įskiepis %plugin% ištrinti no getversion()",
+    "tpismf": "Plūgas %plugin% yra skirtas %psv%. Iur serveris įjungtas %msv%. Tys mai tsause unehpetsted jesus arba tsrashes",
+    "failedtoloadplugin": "Nepavyko įkelti papildinio \"%name%\" versijos: %version%. Klaida yra: %errorstack%"
 }

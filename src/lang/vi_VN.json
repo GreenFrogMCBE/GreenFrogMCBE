@@ -114,5 +114,13 @@
     "bcmsg": "(phát tin) %msg%",
     "youweredisconnected": "Bạn đã bị ngắt kết nối",
     "playerdisconnected": "Trình phát bị ngắt kết nối",
-    "apikicknoclient": "kick(client): Không có khách hàng!"
+    "apikicknoclient": "kick(client): Không có khách hàng!",
+    "allpluginsloaded": "Tất cả các plugin được tải!",
+    "unknown": "không xác định",
+    "loadingplugin": "Đang tải %plugin%...",
+    "nopluginname": "Không có tên plugin! %plugin%",
+    "pluginhasnogetserverversion": "Plugin %plugin% không có getServerVersion()",
+    "pluginhasnogetversion": "Plugin %plugin% không có getVersion()",
+    "tpismf": "Plugin %plugin% được tạo cho %psv%. Máy chủ của bạn đang ở trên %msv%. Điều này có thể gây ra sự cố hoặc sự cố không mong muốn",
+    "failedtoloadplugin": "Không tải được phiên bản plugin \"%name%\": %version%. Lỗi là: %errorstack%"
 }

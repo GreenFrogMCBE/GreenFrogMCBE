@@ -261,9 +261,9 @@ server.on('connect', client => {
                     }
                 }
                 break
-            case "client_to_server_handshake": // TODO: Handle this
-            case "request_chunk_radius": // TODO: Handle this
-            case "set_local_player_as_initialized":  // TODO: Handle this
+            case "client_to_server_handshake":
+            case "request_chunk_radius":
+            case "set_local_player_as_initialized":
             case "tick_sync": // TODO: Handle this
             case "emote_list": // TODO: Handle this
             case "set_player_game_type": // TODO: Handle this
@@ -284,12 +284,15 @@ server.on('connect', client => {
                         }
                     });
                 });
-                Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg))
                 if (msg.includes("§") || msg.length == 0 || msg.length > 255 && config.blockinvalidmessages) {
                     Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
                     client.kick(lang.invalid_chat_message)
                     return
                 }
+
+                if (!msg.replace(/\s/g, '').length) return
+
+                Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg))
 
                 for (let i = 0; i < clients.length; i++) {
                     clients[i].chat(`${fullmsg}`)

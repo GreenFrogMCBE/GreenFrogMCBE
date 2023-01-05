@@ -54,11 +54,11 @@
     "handlepacketexception": "Exception while trying to handle packet from %player%: %error%",
     "help_help": "help - Shows this message",
     "ignoredpacket": "Ignored packet: %packet%",
-    "illegalmessage": "%player% sent an illegal message. Message content was: %msg%",
+    "illegalmessage": "%player% sent an invalid message. Message content was: %msg%",
     "info": "info",
     "internal_server_error": "§cInternal server error",
     "invalid": "INVALID | The log type you/plugin used is invalid. Valid log types are: info, warning, error, debug",
-    "invalid_chat_message": "§cInvalid message in chat",
+    "invalid_chat_message": "§cInvalid message",
     "invalid_time": "Invalid time!",
     "joined": "%player% joined",
     "joinedthegame": "§e%username% joined the game",
@@ -117,5 +117,13 @@
     "bcmsg": "(broadcast) %msg%",
     "youweredisconnected": "You were disconnected",
     "playerdisconnected": "Player disconnected",
-    "apikicknoclient": "kick(client): No client!"
+    "apikicknoclient": "kick(client): No client!",
+    "allpluginsloaded": "All plugins loaded!",
+    "unknown": "unknown",
+    "loadingplugin": "Loading %plugin%...",
+    "nopluginname": "No plugin name! %plugin%",
+    "pluginhasnogetserverversion": "Plugin %plugin% has no getServerVersion()",
+    "pluginhasnogetversion": "Plugin %plugin% has no getVersion()",
+    "tpismf": "The plugin %plugin% is made for %psv%. Your server is on %msv%. This may cause unexpected issues or crashes",
+    "failedtoloadplugin": "Failed to load plugin \"%name%\" version: %version%. The error was: %errorstack%"
 }
