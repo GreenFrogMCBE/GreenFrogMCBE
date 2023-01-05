@@ -96,7 +96,6 @@
     "spawned": "%player% išneršta",
     "stop_help": "baigti - Išjungia serverį",
     "stopping_server": "Išjungiamas serveris!",
-    "tensecwarn": "Serveris turi 10 sekundžių, kad išjungtų papildinius. Jei serveris to nepadarys laiku – įskiepio duomenys nebus išsaugoti",
     "time_help": "Nustatykite laiką visiems žaidėjams",
     "time_set_day": "Laikas nustatytas į dieną!",
     "time_updated": "Laikas atnaujintas!",

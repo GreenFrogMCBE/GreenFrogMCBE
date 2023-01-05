@@ -96,7 +96,6 @@
     "spawned": "%player% spawned",
     "stop_help": "stop - Dừng máy chủ",
     "stopping_server": "Đang dừng máy chủ...",
-    "tensecwarn": "Máy chủ có 10 giây để tắt plugin. Nếu máy chủ không thực hiện kịp thời - có thể có một số vấn đề với dữ liệu plugin",
     "time_help": "time [thời gian] - Thiết lập thời gian cho tất cả người chơi",
     "time_set_day": "Thời gian được thiết lập cho đến ngày!",
     "time_updated": "Thời gian đã được cập nhật!",

@@ -96,7 +96,6 @@
     "spawned": "%player% spawned",
     "stop_help": "stop - Stops the server",
     "stopping_server": "Stopping server...",
-    "tensecwarn": "The server has 10 seconds to shutdown the plugins. If the servers fails to do it in time - there may be some issues with plugin data",
     "time_help": "time [time] - Sets the time for all players",
     "time_set_day": "The time is set to the day!",
     "time_updated": "Time updated!",
