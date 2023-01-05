@@ -2,9 +2,6 @@ const BasePlugin = require("../src/plugins/BasePlugin");
 const Logger = require("../src/console/Logger");
 
 class DonationReminder extends BasePlugin {
-  getName() {
-    return "DonationReminder";
-  }
 
   getServerVersion() {
     return "1.5";

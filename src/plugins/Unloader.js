@@ -15,10 +15,11 @@ class Unloader {
             Logger.prototype.log(lang.shuttingdownplugins)
             try {
                 plugins.forEach(plugin => {
-                    if (require(`../../plugins/${plugin}`).prototype.getName() === "") {
-                        throw new Error(lang.failedtoshutdownplugin.replace('%plugin%', plugin))
+                    try {
+                        require(`../../plugins/${plugin}`).prototype.getName()
+                    } catch (e) {
+                        Logger.prototype.log(lang.failedtoshutdownplugin.replace('%plugin%', plugin), 'error')
                     }
-
 
 
                     require(`../../plugins/${plugin}`).prototype.onShutdown()

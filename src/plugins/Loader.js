@@ -17,7 +17,7 @@ class Loader {
                 Logger.prototype.log(`Loading ${plugin}...`)
                 try {
 
-                    if (require(`../../plugins/${plugin}`).prototype.getName() === "") {
+                    if (require(`../../plugins/${plugin}`).prototype.getName() == null) {
                         throw new Error(`Empty plugin name! Source: ${plugin}`)
                     }
 
