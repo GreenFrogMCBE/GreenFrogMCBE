@@ -16,19 +16,18 @@ class Loader {
             plugins.forEach(plugin => {
                 Logger.prototype.log(`Loading ${plugin}...`)
                 try {
-
-                    if (require(`../../plugins/${plugin}`).prototype.getName() == null) {
-                        throw new Error(`Empty plugin name! Source: ${plugin}`)
+                    try {
+                        require(`../../plugins/${plugin}`).prototype.getName()
+                    } catch (e) {
+                        throw new Error(`No plugin name! ${plugin}`)
                     }
 
                     try {
-                        if (require(`../../plugins/${plugin}`).prototype.getServerVersion() === ServerInfo.majorserverversion) {
-                            Logger.prototype.log(`Plugin ${plugin} supports your server version`)
-                        } else {
+                        if (require(`../../plugins/${plugin}`).prototype.getServerVersion() ==! ServerInfo.majorserverversion) {
                             Logger.prototype.log(`The plugin ${require(`../../plugins/${plugin}`).prototype.getName()} is made for ${require(`../../plugins/${plugin}`).prototype.getServerVersion()}. Your server is on ${ServerInfo.majorserverversion}. This may cause unexpected issues or crashes`, 'warning')
                         }
                     } catch (e) {
-                        throw new Error(`Plugin ${plugin} has no getServerVersion()`, 'warning')
+                        Logger.prototype.log(`Plugin ${plugin} has no getServerVersion()`, 'warning')
                     }
 
 
@@ -36,10 +35,9 @@ class Loader {
                     try {
                         version = require(`../../plugins/${plugin}`).prototype.getVersion()
                     } catch (e) {
-                        throw new Error(`Plugin ${plugin} has no getVersion()`, 'warning')
+                        Logger.prototype.log(`Plugin ${plugin} has no getVersion()`, 'warning')
                     }
 
-                    Logger.prototype.log(`Loaded plugin ${require(`../../plugins/${plugin}`).prototype.getName()} ${version}`)
 
                     PluginManager.prototype.addPlugin(require(`../../plugins/${plugin}`).prototype.getName())
 
