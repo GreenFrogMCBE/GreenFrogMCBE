@@ -95,5 +95,4 @@ If you want to support this project, you can donate at: https://www.paypal.com/d
 
 If you have one fell free to open an issue!
 
-- 159.65.55.27 | Testing server for GreenFrog
-- 67.207.68.250 | Second testing server for GreenFrog
+- Currently none
