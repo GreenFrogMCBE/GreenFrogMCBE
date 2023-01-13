@@ -66,7 +66,7 @@ If you want for your plugin to be listed on the 'Plugins available for public us
 12. Many events for plugin API
 
 ## Language system
-Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese, French (in progress)
+Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese
 
 For English language select "language": "en_US"
 
