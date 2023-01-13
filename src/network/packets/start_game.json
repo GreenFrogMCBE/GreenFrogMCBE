@@ -1,33 +1,34 @@
 {
-  "entity_id": "-4294967295",
+  "entity_id": "-21474836479",
   "runtime_entity_id": "1",
   "player_gamemode": "fallback",
   "player_position": {
-    "x": 0.5,
-    "y": 0,
-    "z": 0.5
+    "x": -5,
+    "y": 50,
+    "z": -6
   },
   "rotation": {
     "x": 0,
     "z": 0
   },
   "seed": [
-    1773224668,
-    1031625076
+    1142725327,
+    2877310106
   ],
   "biome_type": 0,
-  "biome_name": "", 
+  "biome_name": "plains",
   "dimension": "overworld",
   "generator": 1,
-  "world_gamemode": "survival",
-  "difficulty": 1,
+  "world_gamemode": "adventure",
+  "difficulty": 0,
   "spawn_position": {
-    "x": 0,
-    "y": 0,
-    "z": 0
+    "x": 26,
+    "y": 100,
+    "z": 17
   },
   "achievements_disabled": true,
-  "day_cycle_stop_time": 17,
+  "editor_world": false,
+  "day_cycle_stop_time": 16,
   "edu_offer": 0,
   "edu_features_enabled": false,
   "edu_product_uuid": "",
@@ -36,8 +37,8 @@
   "has_confirmed_platform_locked_content": false,
   "is_multiplayer": true,
   "broadcast_to_lan": true,
-  "xbox_live_broadcast_mode": 0,
-  "platform_broadcast_mode": 0,
+  "xbox_live_broadcast_mode": 6,
+  "platform_broadcast_mode": 6,
   "enable_commands": true,
   "is_texturepacks_required": false,
   "gamerules": [
@@ -226,7 +227,7 @@
   "experiments_previously_used": false,
   "bonus_chest": false,
   "map_enabled": false,
-  "permission_level": 2,
+  "permission_level": 4,
   "server_chunk_tick_range": 4,
   "has_locked_behavior_pack": false,
   "has_locked_resource_pack": false,
@@ -235,6 +236,8 @@
   "is_from_world_template": false,
   "is_world_template_option_locked": false,
   "only_spawn_v1_villagers": false,
+  "persona_disabled": false,
+  "custom_skins_disabled": false,
   "game_version": "*",
   "limited_world_width": 16,
   "limited_world_length": 16,
@@ -244,8 +247,10 @@
     "link_uri": ""
   },
   "experimental_gameplay_override": false,
-  "level_id": "Bedrock level",
-  "world_name": "Bedrock level",
+  "chat_restriction_level": "none",
+  "disable_player_interactions": false,
+  "level_id": "GreenFrogMCBE",
+  "world_name": "GreenFrogMCBE",
   "premium_world_template_id": "00000000-0000-0000-0000-000000000000",
   "is_trial": false,
   "movement_authority": "client",
@@ -253,9 +258,9 @@
   "server_authoritative_block_breaking": false,
   "current_tick": [
     0,
-    17
+    16
   ],
-  "enchantment_seed": 1181593310,
+  "enchantment_seed": 47266868,
   "block_properties": [],
   "itemstates": [
     {
@@ -935,7 +940,7 @@
     },
     {
       "name": "minecraft:spawn_egg",
-      "runtime_id": 651,
+      "runtime_id": 652,
       "component_based": false
     },
     {
@@ -2020,7 +2025,7 @@
     },
     {
       "name": "minecraft:dye",
-      "runtime_id": 649,
+      "runtime_id": 650,
       "component_based": false
     },
     {
@@ -2159,13 +2164,13 @@
       "component_based": false
     },
     {
-      "name": "minecraft:camera",
-      "runtime_id": 593,
+      "name": "minecraft:lapis_lazuli",
+      "runtime_id": 414,
       "component_based": false
     },
     {
-      "name": "minecraft:chorus_fruit",
-      "runtime_id": 558,
+      "name": "minecraft:medium_amethyst_bud",
+      "runtime_id": -331,
       "component_based": false
     },
     {
@@ -2174,13 +2179,13 @@
       "component_based": false
     },
     {
-      "name": "minecraft:lapis_lazuli",
-      "runtime_id": 414,
+      "name": "minecraft:camera",
+      "runtime_id": 593,
       "component_based": false
     },
     {
-      "name": "minecraft:medium_amethyst_bud",
-      "runtime_id": -331,
+      "name": "minecraft:chorus_fruit",
+      "runtime_id": 558,
       "component_based": false
     },
     {
@@ -3759,6 +3764,16 @@
       "component_based": false
     },
     {
+      "name": "minecraft:trader_llama_spawn_egg",
+      "runtime_id": 648,
+      "component_based": false
+    },
+    {
+      "name": "minecraft:birch_trapdoor",
+      "runtime_id": -146,
+      "component_based": false
+    },
+    {
       "name": "minecraft:stone",
       "runtime_id": 1,
       "component_based": false
@@ -4600,17 +4615,17 @@
     },
     {
       "name": "minecraft:boat",
-      "runtime_id": 648,
+      "runtime_id": 649,
       "component_based": false
     },
     {
       "name": "minecraft:banner_pattern",
-      "runtime_id": 650,
+      "runtime_id": 651,
       "component_based": false
     },
     {
       "name": "minecraft:end_crystal",
-      "runtime_id": 652,
+      "runtime_id": 653,
       "component_based": false
     },
     {
@@ -4620,7 +4635,7 @@
     },
     {
       "name": "minecraft:glow_berries",
-      "runtime_id": 653,
+      "runtime_id": 654,
       "component_based": false
     },
     {
@@ -5549,11 +5564,6 @@
       "component_based": false
     },
     {
-      "name": "minecraft:birch_trapdoor",
-      "runtime_id": -146,
-      "component_based": false
-    },
-    {
       "name": "minecraft:item.bed",
       "runtime_id": 26,
       "component_based": false
@@ -5914,17 +5924,18 @@
       "component_based": false
     }
   ],
-  "multiplayer_correlation_id": "77804352-c5eb-4a76-82ae-6a61fef7f618",
-  "server_authoritative_inventory": true,
-  "engine": "1.19.1",
+  "multiplayer_correlation_id": "fcdaae09-52d4-458f-9b42-668bf17b8f21",
+  "server_authoritative_inventory": false,
+  "engine": "GreenFrogMCBE",
   "property_data": {
     "type": "compound",
     "name": "",
     "value": {}
   },
   "block_pallette_checksum": [
-    0,
-    0
+    2449166282,
+    1110860179
   ],
-  "world_template_id": "00000000-0000-0000-0000-000000000000"
+  "world_template_id": "00000000-0000-0000-0000-000000000000",
+  "client_side_generation": false
 }

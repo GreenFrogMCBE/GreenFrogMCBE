@@ -371,6 +371,28 @@
               },
               "id": {
                 "type": "string",
+                "value": "minecraft:trader_llama"
+              },
+              "rid": {
+                "type": "int",
+                "value": 157
+              },
+              "summonable": {
+                "type": "byte",
+                "value": 1
+              }
+            },
+            {
+              "bid": {
+                "type": "string",
+                "value": ""
+              },
+              "hasspawnegg": {
+                "type": "byte",
+                "value": 1
+              },
+              "id": {
+                "type": "string",
                 "value": "minecraft:llama"
               },
               "rid": {
