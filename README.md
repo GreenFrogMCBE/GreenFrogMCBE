@@ -17,6 +17,9 @@ Server software for Minecraft Bedrock, written in Node js
 
 Our Discord: https://discord.gg/UFqrnAbqjP
 
+#### development status > still maintained
+
+#### software status > not ready for production
 
 ## How to install
 
@@ -72,8 +75,6 @@ For Lithuanian language select "language": "lt_LT"
 For Ukrainian language select "language": "uk_UA"
 
 For Vietnamese language select "language": "vi_VN"
-
-For French language select "language": "fr_FR". Note: French language is not implemented yet. It will be implemented soon
 
 
 ## Configuration tutorial
