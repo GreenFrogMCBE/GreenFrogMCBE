@@ -63,7 +63,7 @@ server.on("connect", (client) => {
                         dy: 0,
                         dz: 0,
                         result: 6,
-                        payload: [], // empty
+                        payload: [],
                         heightmap_type: 0
                     }
                 })
@@ -73,15 +73,13 @@ server.on("connect", (client) => {
                 client.write("play_status", { status: "player_spawn" });
             }, 6000);
 
-            let loop = setInterval(
-                () =>
-                    client.write("network_chunk_publisher_update", {
-                        coordinates: { x: 0, y: 0, z: 0 },
-                        radius: 64,
-                        saved_chunks: [],
-                    }),
-                50
-            );
+            setInterval(() => {
+                client.write("network_chunk_publisher_update", {
+                    coordinates: { x: 0, y: 0, z: 0 },
+                    radius: 64,
+                    saved_chunks: [],
+                })
+            }, 50);
 
             client.on("tick_sync", (packet) => {
                 client.write("tick_sync", {
