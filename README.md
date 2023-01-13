@@ -17,6 +17,9 @@ Server software for Minecraft Bedrock, written in Node js
 
 Our Discord: https://discord.gg/UFqrnAbqjP
 
+#### development status > check chunks branch for updates
+
+#### software status > not ready for production
 
 ## How to install
 
@@ -63,7 +66,7 @@ If you want for your plugin to be listed on the 'Plugins available for public us
 12. Many events for plugin API
 
 ## Language system
-Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese, French (in progress)
+Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese
 
 For English language select "language": "en_US"
 
@@ -72,8 +75,6 @@ For Lithuanian language select "language": "lt_LT"
 For Ukrainian language select "language": "uk_UA"
 
 For Vietnamese language select "language": "vi_VN"
-
-For French language select "language": "fr_FR". Note: French language is not implemented yet. It will be implemented soon
 
 
 ## Configuration tutorial
