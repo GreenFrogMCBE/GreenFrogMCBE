@@ -1,0 +1,32 @@
+{
+  "flags": {
+    "_value": 32,
+    "world_immutable": false,
+    "no_pvp": false,
+    "auto_jump": true,
+    "allow_flight": false,
+    "no_clip": false,
+    "world_builder": false,
+    "flying": false,
+    "muted": false
+  },
+  "command_permission": "operator",
+  "action_permissions": {
+    "_value": 447,
+    "mine": false,
+    "doors_and_switches": false,
+    "open_containers": false,
+    "attack_players": false,
+    "attack_mobs": false,
+    "operator": false,
+    "teleport": false,
+    "build": false,
+    "default": false
+  },
+  "permission_level": "operator",
+  "custom_stored_permissions": 0,
+  "user_id": [
+    -1,
+    1
+  ]
+}

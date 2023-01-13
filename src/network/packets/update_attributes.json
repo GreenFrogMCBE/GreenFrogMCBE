@@ -1,0 +1,321 @@
+{
+  "runtime_entity_id": "1",
+  "attributes": [
+    {
+      "min": 0,
+      "max": 20,
+      "current": 20,
+      "default": 20,
+      "name": "minecraft:health"
+    },
+    {
+      "min": 0,
+      "max": 16,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:absorption"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.10000000149011612,
+      "default": 0.10000000149011612,
+      "name": "minecraft:movement"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.019999999552965164,
+      "default": 0.019999999552965164,
+      "name": "minecraft:underwater_movement"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.019999999552965164,
+      "default": 0.019999999552965164,
+      "name": "minecraft:lava_movement"
+    },
+    {
+      "min": -1024,
+      "max": 1024,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:luck"
+    },
+    {
+      "min": -1024,
+      "max": 1024,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:luck"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 20,
+      "default": 20,
+      "name": "minecraft:health"
+    },
+    {
+      "min": 0,
+      "max": 16,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:absorption"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.10000000149011612,
+      "default": 0.10000000149011612,
+      "name": "minecraft:movement"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.019999999552965164,
+      "default": 0.019999999552965164,
+      "name": "minecraft:underwater_movement"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.019999999552965164,
+      "default": 0.019999999552965164,
+      "name": "minecraft:lava_movement"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 20,
+      "default": 20,
+      "name": "minecraft:health"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 5,
+      "default": 5,
+      "name": "minecraft:player.saturation"
+    },
+    {
+      "min": 0,
+      "max": 24791,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.level"
+    },
+    {
+      "min": 0,
+      "max": 1,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.experience"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 20,
+      "default": 20,
+      "name": "minecraft:player.hunger"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.exhaustion"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.10000000149011612,
+      "default": 0.10000000149011612,
+      "name": "minecraft:movement"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.10000000149011612,
+      "default": 0.10000000149011612,
+      "name": "minecraft:movement"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.exhaustion"
+    },
+    {
+      "min": -1024,
+      "max": 1024,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:luck"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 20,
+      "default": 20,
+      "name": "minecraft:health"
+    },
+    {
+      "min": 0,
+      "max": 16,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:absorption"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.10000000149011612,
+      "default": 0.10000000149011612,
+      "name": "minecraft:movement"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.019999999552965164,
+      "default": 0.019999999552965164,
+      "name": "minecraft:underwater_movement"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.019999999552965164,
+      "default": 0.019999999552965164,
+      "name": "minecraft:lava_movement"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 20,
+      "default": 20,
+      "name": "minecraft:player.hunger"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.exhaustion"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 5,
+      "default": 5,
+      "name": "minecraft:player.saturation"
+    },
+    {
+      "min": 0,
+      "max": 24791,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.level"
+    },
+    {
+      "min": 0,
+      "max": 1,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.experience"
+    },
+    {
+      "min": -1024,
+      "max": 1024,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:luck"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 20,
+      "default": 20,
+      "name": "minecraft:health"
+    },
+    {
+      "min": 0,
+      "max": 16,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:absorption"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.10000000149011612,
+      "default": 0.10000000149011612,
+      "name": "minecraft:movement"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.019999999552965164,
+      "default": 0.019999999552965164,
+      "name": "minecraft:underwater_movement"
+    },
+    {
+      "min": 0,
+      "max": 3.4028234663852886e+38,
+      "current": 0.019999999552965164,
+      "default": 0.019999999552965164,
+      "name": "minecraft:lava_movement"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 20,
+      "default": 20,
+      "name": "minecraft:player.hunger"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.exhaustion"
+    },
+    {
+      "min": 0,
+      "max": 20,
+      "current": 5,
+      "default": 5,
+      "name": "minecraft:player.saturation"
+    },
+    {
+      "min": 0,
+      "max": 24791,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.level"
+    },
+    {
+      "min": 0,
+      "max": 1,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.experience"
+    },
+    {
+      "min": 0,
+      "max": 24791,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.level"
+    },
+    {
+      "min": 0,
+      "max": 1,
+      "current": 0,
+      "default": 0,
+      "name": "minecraft:player.experience"
+    }
+  ],
+  "tick": "0"
+}
