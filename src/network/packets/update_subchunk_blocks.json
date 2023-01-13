@@ -1,0 +1,30 @@
+{
+  "x": 0,
+  "y": 2147483640,
+  "z": 64,
+  "blocks": [
+    {
+      "position": {
+        "x": 15,
+        "y": -15,
+        "z": 70
+      },
+      "runtime_id": 7668,
+      "flags": 2,
+      "entity_unique_id": "-9223372036854775808",
+      "transition_type": "entity"
+    },
+    {
+      "position": {
+        "x": 14,
+        "y": -15,
+        "z": 71
+      },
+      "runtime_id": 7668,
+      "flags": 2,
+      "entity_unique_id": "-9223372036854775808",
+      "transition_type": "entity"
+    }
+  ],
+  "extra": []
+}
