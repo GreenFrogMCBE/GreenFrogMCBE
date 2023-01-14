@@ -189,8 +189,8 @@ server.on('connect', client => {
 
 
                         /*let client2 = bedrock.createClient({
-                            host: 'KinashProjectspOk7.aternos.me',   // optional
-                            port: 49107,         // optional, default 19132
+                            host: 'KinashProjectspOk7.aternos.me',   // i use this server for packet dumping
+                            port: 49107,
                             username: client.username
                         })
 
