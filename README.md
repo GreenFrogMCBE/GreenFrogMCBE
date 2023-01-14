@@ -29,6 +29,10 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 4. If not do 'node index.js'
 5. Done
 
+## Debugging
+
+Run node index.js --debug
+
 ## Can't join locally
 
 Run powershell as an admin

@@ -1,13 +1,13 @@
 process.env.DEBUG = process.argv.includes("--debug") ? "minecraft-protocol" : "";
 
-const Bedrock = require('bedrock-protocol')
+const bedrock = require('bedrock-protocol')
 const Logger = require('./console/Logger')
 const ConsoleCommandSender = require('./console/ConsoleCommandSender')
 const ServerInfo = require('./api/ServerInfo')
 const PlayerInfo = require('./player/PlayerInfo')
 const ValidateConfig = require('./server/ValidateConfig')
 const Loader = require('./plugins/Loader')
-const fs = require('fs')
+const fs = require('fs');
 let clients = []
 
 ValidateConfig.prototype.ValidateConfig()
@@ -57,7 +57,7 @@ setTimeout(() => { ConsoleCommandSender.prototype.start() }, 900)
 
 let server
 try {
-    server = Bedrock.createServer({
+    server = bedrock.createServer({
         host: config.host,
         port: config.port,
         version: config.version,
@@ -101,6 +101,7 @@ server.on('connect', client => {
     })
 
     function handlepk(client, packet) {
+        //console.log('%o', packet)
         switch (packet.data.name) {
             case "resource_pack_client_response":
                 switch (packet.data.params.response_status) {
@@ -152,12 +153,13 @@ server.on('connect', client => {
                         break
                     }
                     case 'completed': {
+                        //console.log(client)
                         fs.readdir("./plugins", (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
                                     require(`../plugins/${plugin}`).prototype.onResourcePacksCompleted(server, client)
                                 } catch (e) {
-                                    Logger.prototype.log(lang.failedtoexecuteonresourcepackscompleted.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'))
+                                    Logger.prototype.log(lang.failedtoexecuteonresourcepackscompleted.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
                                 }
                             });
                         });
@@ -173,21 +175,42 @@ server.on('connect', client => {
                         }
 
                         Logger.prototype.log(lang.joined.replace('%player%', client.getUserData().displayName))
-                        client.write('player_list', get('player_list'))
-                        client.write('start_game', get('start_game'))
-                        client.write('set_spawn_position', get('set_spawn_position'))
-                        client.write('set_commands_enabled', { enabled: true })
-                        client.write('biome_definition_list', get('biome_definition_list'))
-                        client.write('available_entity_identifiers', get('available_entity_identifiers'))
-                        client.write('creative_content', get('creative_content'))
-                        client.write('respawn', get('respawn'))
+                        client.queue('player_list', get('player_list'))
+                        client.queue('start_game', get('start_game'))
+                        client.queue('set_spawn_position', get('set_spawn_position'))
+                        client.queue('set_commands_enabled', { enabled: true })
+                        client.queue('biome_definition_list', get('biome_definition_list'))
+                        client.queue('available_entity_identifiers', get('available_entity_identifiers'))
+                        client.queue('creative_content', get('creative_content'))
+                        client.queue('respawn', get('respawn'))
+                        client.queue('client_cache_status', { enabled: false })
 
-                        client.write('level_chunk', { "x": 0, "z": 0, "sub_chunk_count": 4294967295, "cache_enabled": false, "payload": { "type": "Buffer", "data": [1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0] } })
+                        client.queue('level_chunk', { "x": 0, "z": 0, "sub_chunk_count": 0, "cache_enabled": false, "payload": { "type": "Buffer", "data": [1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0] } })
+
+
+                        /*let client2 = bedrock.createClient({
+                            host: 'KinashProjectspOk7.aternos.me',   // optional
+                            port: 49107,         // optional, default 19132
+                            username: client.username
+                        })
+
+                        client2.on('packet', (packet) => {
+                            switch (packet.data.name) {
+                                case "server_to_client_handshake":
+                                case "network_settings":
+                                case "player_list":
+                                    break
+                                default:
+                                    if (packet.data.name == 'level_chunk') return
+                                    if (!packet.data.name.includes('chunk')) return
+                                    client.queue(packet.data.name, packet.data.params)
+                            }
+                        }) */
 
                         client.on("subchunk_request", (data) => {
                             console.log("subchunk request:", data)
 
-                            client.write("subchunk", {
+                            client.queue("subchunk", {
                                 dimension: 0,
                                 x: 0,
                                 y: 0,
@@ -4507,7 +4530,6 @@ server.on('connect', client => {
                 }
                 break
             case "client_to_server_handshake":
-            case "request_chunk_radius":
             case "set_local_player_as_initialized":
             case "tick_sync": // TODO: Handle this
             case "emote_list": // TODO: Handle this
@@ -4516,6 +4538,9 @@ server.on('connect', client => {
             case "move_player": // TODO: Handle this
             case "player_action": // TODO: Handle this
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
+                break
+            case "request_chunk_radius":
+                client.queue('chunk_radius_update', { chunk_radius: 32 })
                 break
             case "text":
                 let msg = packet.data.params.message;
@@ -4597,6 +4622,7 @@ server.on('connect', client => {
                     return
                 }
                 client.chat(lang.playerunknowncommand)
+            default:
                 Logger.prototype.log(lang.unhandledpacket, 'warning')
                 console.log('%o', packet)
                 break
@@ -4607,7 +4633,7 @@ server.on('connect', client => {
         try {
             handlepk(client, packet)
         } catch (e) {
-            client.kick(lang.internal_server_error)
+            try { client.kick(lang.internal_server_error) } catch (e) { /* who cares? */ }
             fs.readdir("./plugins", (err, plugins) => {
                 plugins.forEach(plugin => {
                     try {

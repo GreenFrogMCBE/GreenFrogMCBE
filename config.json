@@ -4,7 +4,7 @@
     "port": 19132,
     "motd": "§6GreenFrogMCBE server",
     "maxplayers": 20,
-    "version": "1.19.50",
+    "version": "1.19.1",
     "offlinemode": true,
     "blockinvalidmessages": true,
     "lang": "en_US",

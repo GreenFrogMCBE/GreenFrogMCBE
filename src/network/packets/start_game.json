@@ -129,7 +129,7 @@
       "name": "showcoordinates",
       "editable": true,
       "type": "bool",
-      "value": false
+      "value": true
     },
     {
       "name": "naturalregeneration",
@@ -248,7 +248,7 @@
   "world_name": "Bedrock level",
   "premium_world_template_id": "00000000-0000-0000-0000-000000000000",
   "is_trial": false,
-  "movement_authority": "client",
+  "movement_authority": "server",
   "rewind_history_size": 20,
   "server_authoritative_block_breaking": false,
   "current_tick": [
