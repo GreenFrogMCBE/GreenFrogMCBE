@@ -41,7 +41,7 @@ process.on('unhandledRejection', function (err) {
     }
 })
 
-const get = (packetName) => require(`./network/packets/${packetName}.json`)
+const get = (packetName) => require(`./network/dumpedpackets/${packetName}.json`)
 
 if (config.donotcrashoncriticalerrors) {
     Logger.prototype.log(lang.unstablewarning, 'warning')
@@ -101,7 +101,6 @@ server.on('connect', client => {
     })
 
     function handlepk(client, packet) {
-        //console.log('%o', packet)
         switch (packet.data.name) {
             case "resource_pack_client_response":
                 switch (packet.data.params.response_status) {
@@ -153,7 +152,6 @@ server.on('connect', client => {
                         break
                     }
                     case 'completed': {
-                        //console.log(client)
                         fs.readdir("./plugins", (err, plugins) => {
                             plugins.forEach(plugin => {
                                 try {
