@@ -3,9 +3,9 @@
   "runtime_entity_id": "1",
   "player_gamemode": "fallback",
   "player_position": {
-    "x": 0.5,
-    "y": 0,
-    "z": 0.5
+    "x": 8,
+    "y": 112,
+    "z": 8
   },
   "rotation": {
     "x": 0,
@@ -16,15 +16,15 @@
     1031625076
   ],
   "biome_type": 0,
-  "biome_name": "", 
+  "biome_name": "plains", 
   "dimension": "overworld",
   "generator": 1,
-  "world_gamemode": "survival",
+  "world_gamemode": "creative",
   "difficulty": 1,
   "spawn_position": {
-    "x": 0,
-    "y": 0,
-    "z": 0
+    "x": 8,
+    "y": 112,
+    "z": 8
   },
   "achievements_disabled": true,
   "day_cycle_stop_time": 17,
@@ -244,8 +244,8 @@
     "link_uri": ""
   },
   "experimental_gameplay_override": false,
-  "level_id": "Bedrock level",
-  "world_name": "Bedrock level",
+  "level_id": "GreenFrog",
+  "world_name": "GreenFrog",
   "premium_world_template_id": "00000000-0000-0000-0000-000000000000",
   "is_trial": false,
   "movement_authority": "server",
