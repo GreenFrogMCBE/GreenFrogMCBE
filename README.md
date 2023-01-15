@@ -17,7 +17,7 @@ Server software for Minecraft Bedrock, written in Node js
 
 Our Discord: https://discord.gg/UFqrnAbqjP
 
-#### development status > check chunks branch for updates
+#### development status > well maintained
 
 #### software status > not ready for production
 
