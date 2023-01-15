@@ -191,8 +191,6 @@ server.on('connect', client => {
 
 
                         client.on("subchunk_request", (data) => {
-                            console.log("subchunk request:", data)
-
                             client.queue('subchunk', get('subchunk'))
                         })
 
@@ -276,9 +274,11 @@ server.on('connect', client => {
                         }, config.clientloadtime)
 
 
-                        for (let i = 0; i < clients.length; i++) {
-                            clients[i].chat(lang.joinedthegame.replace('%username%', client.getUserData().displayName))
-                        }
+                        setTimeout(() => {
+                            for (let i = 0; i < clients.length; i++) {
+                                clients[i].chat(lang.joinedthegame.replace('%username%', client.getUserData().displayName))
+                            }
+                        }, 1000)
 
                         break
                     }
