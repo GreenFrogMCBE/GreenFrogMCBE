@@ -2,18 +2,20 @@ process.env.DEBUG = process.argv.includes("--debug") ? "minecraft-protocol" : ""
 
 const bedrock = require('bedrock-protocol')
 const Logger = require('./console/Logger')
-const ServerInfo = require('./api/ServerInfo')
-const PlayerInfo = require('./player/PlayerInfo')
-const ValidateConfig = require('./server/ValidateConfig')
 const Loader = require('./plugins/Loader')
+const ServerInfo = require('./api/ServerInfo')
 const Text = require('./network/packets/Text')
+const PlayerInfo = require('./player/PlayerInfo')
 const Respawn = require('./network/packets/Respawn')
 const SubChunk = require('./network/packets/SubChunk')
 const StartGame = require('./network/packets/StartGame')
+const ValidateConfig = require('./server/ValidateConfig')
 const PlayerList = require('./network/packets/PlayerList')
 const LevelChunk = require('./network/packets/LevelChunk')
 const PlayStatus = require('./network/packets/PlayStatus')
 const UpdateBlock = require('./network/packets/UpdateBlock')
+const ContainerOpen = require('./network/packets/ContainerOpen')
+const ContainerClose = require('./network/packets/ContainerClose')
 const CreativeContent = require('./network/packets/CreativeContent')
 const ResponsePackInfo = require('./network/packets/ResponsePackInfo')
 const ResourcePackStack = require('./network/packets/ResourcePackStack')
@@ -277,6 +279,19 @@ server.on('connect', client => {
             case "move_player":
             case "player_action":
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
+                break
+            case "interact":
+                switch (packet.data.params.action_id) {
+                    case "open_inventory": {
+                        ContainerOpen.prototype.writePacket(client, 3)
+                    }
+                    default: {
+                        throw new Error("Not supported packet data: packet = open_inventory, action_id = " + packet.data.params.action_id)
+                    }
+                }
+                break
+            case "container_close":
+                ContainerClose.prototype.writePacket(client, 3)
                 break
             case "request_chunk_radius":
                 ChunkRadiusUpdate.prototype.writePacket(client, 32)
