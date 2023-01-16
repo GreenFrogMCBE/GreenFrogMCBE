@@ -180,14 +180,8 @@ server.on('connect', client => {
                         Respawn.prototype.writePacket(client)
                         ClientCacheStatus.prototype.writePacket(client)
 
-                        for (const file of fs.readdirSync(`../data/${server.options.version}/sample/chunks`)) {
-                            const buffer = fs.readFileSync(`../data/${server.options.version}/sample/chunks/` + file)
-                            console.log('Sending chunk', buffer)
-                            client.sendBuffer(buffer)
-                        }
 
-
-                        setTimeout(() => {
+                       setTimeout(() => {
                             UpdateBlock.prototype.writePacket(client, 0, 98, 0, 2)
                             for (let x = 0; x < 10; x++) {
                                 for (let z = 0; z < 10; z++) {
@@ -202,8 +196,9 @@ server.on('connect', client => {
                         })
 
                         setInterval(() => {
+                            if (client.q) return
                             NetworkChunkPublisherUpdate.prototype.writePacket(client)
-                        })
+                        }, 50)
 
                         client.chat = function (msg) {
                             Text.prototype.writePacket(client, msg)
