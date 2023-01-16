@@ -285,6 +285,10 @@ server.on('connect', client => {
                     case "open_inventory": {
                         ContainerOpen.prototype.writePacket(client, 3)
                     }
+                    case "mouse_over_entity": {
+                        // TODO. Pvp is not implemented
+                        break
+                    }
                     default: {
                         throw new Error("Not supported packet data: packet = open_inventory, action_id = " + packet.data.params.action_id)
                     }

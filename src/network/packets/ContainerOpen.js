@@ -7,10 +7,9 @@ class ContainerOpen extends require("./Packet") {
 
     validate(client) {
         if (!client) throw new Error("Packet processing error. Client is null")
-        if (window_id = null) throw new Error("Packet processing error. window_id is null")
     }
 
-    writePacket(client, window_id = null, cords = {
+    writePacket(client, window_id = -1, cords = {
         "x": 0,
         "y": 0,
         "z": 0
