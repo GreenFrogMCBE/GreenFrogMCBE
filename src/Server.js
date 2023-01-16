@@ -205,10 +205,6 @@ server.on('connect', client => {
                             NetworkChunkPublisherUpdate.prototype.writePacket(client)
                         })
 
-                        client.on("tick_sync", (packet) => {
-                            TickSync.prototype.writePacket(client, packet, BigInt(Date.now()))
-                        });
-
                         client.chat = function (msg) {
                             Text.prototype.writePacket(client, msg)
                         }
@@ -283,16 +279,17 @@ server.on('connect', client => {
                 break
             case "client_to_server_handshake":
             case "set_local_player_as_initialized":
+                // Already handled by bedrock-protocol
+                break
             case "tick_sync":
+                TickSync.prototype.writePacket(client, packet, BigInt(Date.now()))
+                break
             case "emote_list":
             case "set_player_game_type":
             case "client_cache_status":
+            case "move_player":
             case "player_action":
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
-                break
-            case "move_player":
-                //console.log(Math.floor(packet.data.params.position.x), Math.floor(packet.data.params.position.y), Math.floor(packet.data.params.position.z))
-                //UpdateBlock.prototype.writePacket(client, Math.floor(packet.data.params.position.x), Math.floor(packet.data.params.position.y), Math.floor(packet.data.params.position.z), 2)
                 break
             case "request_chunk_radius":
                 ChunkRadiusUpdate.prototype.writePacket(client, 32)
