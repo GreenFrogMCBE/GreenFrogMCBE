@@ -179,17 +179,15 @@ server.on('connect', client => {
                         Respawn.prototype.writePacket(client)
                         ClientCacheStatus.prototype.writePacket(client)
 
-                        setTimeout(() => {
-                            if (client.q) return
-                            UpdateBlock.prototype.writePacket(client, 0, 98, 0, 2)
-                            for (let x = 0; x < 100; x++) {
-                                for (let z = 0; z < 100; z++) {
-                                    UpdateBlock.prototype.writePacket(client, x, 98, z, 2)
-                                }
-                            }
-                        }, 10000)
                         LevelChunk.prototype.writePacket(client)
 
+                        UpdateBlock.prototype.writePacket(client, 0, 98, 0, 2)
+                        for (let x = 0; x < 10; x++) {
+                            for (let z = 0; z < 10; z++) {
+                                UpdateBlock.prototype.writePacket(client, x, 98, z, 2)
+                            }
+                        }
+                        
                         client.on("subchunk_request", () => {
                             if (client.q) return
                             SubChunk.prototype.writePacket(client)
