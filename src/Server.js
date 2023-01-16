@@ -261,6 +261,7 @@ server.on('connect', client => {
 
 
                         setTimeout(() => {
+                            if (client.q) return
                             for (let i = 0; i < clients.length; i++) {
                                 clients[i].chat(lang.joinedthegame.replace('%username%', client.getUserData().displayName))
                             }
