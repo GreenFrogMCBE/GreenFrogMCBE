@@ -106,6 +106,7 @@ server.on('connect', client => {
     })
 
     function handlepk(client, packet) {
+        if (client.q) throw new Error("An attempt to handle packet from offline player")
         switch (packet.data.name) {
             case "resource_pack_client_response":
                 switch (packet.data.params.response_status) {
@@ -187,11 +188,6 @@ server.on('connect', client => {
                                 UpdateBlock.prototype.writePacket(client, x, 98, z, 2)
                             }
                         }
-                        
-                        client.on("subchunk_request", () => {
-                            if (client.q) return
-                            SubChunk.prototype.writePacket(client)
-                        })
 
                         setInterval(() => {
                             if (client.q) return
@@ -310,6 +306,9 @@ server.on('connect', client => {
                 for (let i = 0; i < clients.length; i++) {
                     clients[i].chat(`${fullmsg}`)
                 }
+                break
+            case "subchunk_request":
+                SubChunk.prototype.writePacket(client)
                 break
             case "command_request":
                 let cmd = packet.data.params.command.toLowerCase();
