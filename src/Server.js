@@ -9,7 +9,6 @@ const Loader = require('./plugins/Loader')
 const Text = require('./network/packets/Text')
 const Respawn = require('./network/packets/Respawn')
 const SubChunk = require('./network/packets/SubChunk')
-const TickSync = require('./network/packets/TickSync')
 const StartGame = require('./network/packets/StartGame')
 const PlayerList = require('./network/packets/PlayerList')
 const LevelChunk = require('./network/packets/LevelChunk')
@@ -185,10 +184,10 @@ server.on('connect', client => {
                             UpdateBlock.prototype.writePacket(client, 0, 98, 0, 2)
                             for (let x = 0; x < 10; x++) {
                                 for (let z = 0; z < 10; z++) {
-                                    UpdateBlock.prototype.writePacket(client, x, 98, z, Math.floor(Math.random() * 1000))
+                                    UpdateBlock.prototype.writePacket(client, x, 98, z, 2)
                                 }
                             }
-                        }, 1000)
+                        }, 10000)
                         LevelChunk.prototype.writePacket(client)
 
                         client.on("subchunk_request", () => {
