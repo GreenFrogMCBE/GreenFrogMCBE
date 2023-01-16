@@ -182,6 +182,9 @@ server.on('connect', client => {
                         Respawn.prototype.writePacket(client)
                         ClientCacheStatus.prototype.writePacket(client)
 
+
+                        client.items = [];
+
                         LevelChunk.prototype.writePacket(client)
 
                         UpdateBlock.prototype.writePacket(client, 0, 98, 0, 2)
@@ -279,6 +282,48 @@ server.on('connect', client => {
             case "move_player":
             case "player_action":
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
+                break
+            case "item_stack_request":
+                let item = null
+                let runtime_id = null
+                let count = null
+                try {
+                    runtime_id = packet.data.params.requests[0].actions[1].result_items[0].block_runtime_id
+                } catch (e) {
+                    runtime_id = 0
+                }
+                try {
+                    count = packet.data.params.requests[0].actions[1].result_items[0].count
+                } catch (e) {
+                    count = 0
+                }
+                try {
+                    item = packet.data.params.requests[0].actions[1].result_items[0].network_id
+                } catch (e) {
+                    item = 0
+                }
+
+                client.write('inventory_slot', {
+                    "window_id": "inventory",
+                    "slot": client.itemslength,
+                    "item": {
+                        "network_id": item,
+                        "count": count,
+                        "metadata": 0,
+                        "has_stack_id": 1,
+                        "stack_id": 1,
+                        "block_runtime_id": runtime_id,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                })
+                client.items.push(item)
+                break
+            case "mob_equipment":
+                // TODO
                 break
             case "interact":
                 switch (packet.data.params.action_id) {
