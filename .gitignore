@@ -1,5 +1,5 @@
 !node_modules/bedrock-protocol
 node_modules/
 package-lock.json
-#plugins/
+plugins/
 plugin_data/
