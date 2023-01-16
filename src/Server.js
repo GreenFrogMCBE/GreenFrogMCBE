@@ -7,9 +7,24 @@ const ServerInfo = require('./api/ServerInfo')
 const PlayerInfo = require('./player/PlayerInfo')
 const ValidateConfig = require('./server/ValidateConfig')
 const Loader = require('./plugins/Loader')
+const Text = require('./network/packets/Text')
+const Respawn = require('./network/packets/Respawn')
+const SubChunk = require('./network/packets/SubChunk')
+const TickSync = require('./network/packets/TickSync')
+const StartGame = require('./network/packets/StartGame')
+const PlayerList = require('./network/packets/PlayerList')
+const LevelChunk = require('./network/packets/LevelChunk')
+const PlayStatus = require('./network/packets/PlayStatus')
+const UpdateBlock = require('./network/packets/UpdateBlock')
+const CreativeContent = require('./network/packets/CreativeContent')
 const ResponsePackInfo = require('./network/packets/ResponsePackInfo')
 const ResourcePackStack = require('./network/packets/ResourcePackStack')
-const Text = require('./network/packets/Text')
+const ChunkRadiusUpdate = require('./network/packets/ChunkRadiusUpdate')
+const ClientCacheStatus = require('./network/packets/ClientCacheStatus')
+const SetCommandsEnabled = require('./network/packets/SetCommandsEnabled')
+const BiomeDefinitionList = require('./network/packets/BiomeDefinitionList')
+const AvailableEntityIdentifiers = require('./network/packets/AvailableEntityIdentifiers')
+const NetworkChunkPublisherUpdate = require('./network/packets/NetworkChunkPublisherUpdate')
 const fs = require('fs');
 let clients = []
 
@@ -158,59 +173,42 @@ server.on('connect', client => {
                         }
 
                         Logger.prototype.log(lang.joined.replace('%player%', client.getUserData().displayName))
-                        client.queue('player_list', get('player_list'))
-                        client.queue('start_game', get('start_game'))
-                        client.queue('set_spawn_position', get('set_spawn_position'))
-                        client.queue('set_commands_enabled', { enabled: true })
-                        client.queue('biome_definition_list', get('biome_definition_list'))
-                        client.queue('available_entity_identifiers', get('available_entity_identifiers'))
-                        client.queue('creative_content', get('creative_content'))
-                        client.queue('respawn', get('respawn'))
-                        client.queue('client_cache_status', { enabled: false })
+                        PlayerList.prototype.writePacket(client, client.getUserData().displayName)
+                        StartGame.prototype.writePacket(client)
+                        SetCommandsEnabled.prototype.writePacket(client)
+                        BiomeDefinitionList.prototype.writePacket(client)
+                        AvailableEntityIdentifiers.prototype.writePacket(client)
+                        CreativeContent.prototype.writePacket(client)
+                        Respawn.prototype.writePacket(client)
+                        ClientCacheStatus.prototype.writePacket(client)
 
-                        setInterval(() => {
-                            client.queue('update_block', {
-                                "position": {
-                                    "x": 0,
-                                    "y": Math.floor(Math.random() * 900),
-                                    "z": 0
-                                },
-                                "block_runtime_id": Math.floor(Math.random() * 100),
-                                "flags": {
-                                    "_value": 2,
-                                    "neighbors": false,
-                                    "network": true,
-                                    "no_graphic": false,
-                                    "unused": false,
-                                    "priority": false
-                                },
-                                "layer": 0
-                            })
-                        }, 1)
-                        client.queue('level_chunk', { "x": 0, "z": 0, "sub_chunk_count": 0, "cache_enabled": false, "payload": { "type": "Buffer", "data": [1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0] } })
+                        for (const file of fs.readdirSync(`../data/${server.options.version}/sample/chunks`)) {
+                            const buffer = fs.readFileSync(`../data/${server.options.version}/sample/chunks/` + file)
+                            console.log('Sending chunk', buffer)
+                            client.sendBuffer(buffer)
+                        }
 
-
-                        client.on("subchunk_request", (data) => {
-                            client.queue('subchunk', get('subchunk'))
-                        })
 
                         setTimeout(() => {
-                            client.queue('play_status', get('play_status_spawn'))
-                        }, 6000);
+                            UpdateBlock.prototype.writePacket(client, 0, 98, 0, 2)
+                            for (let x = 0; x < 10; x++) {
+                                for (let z = 0; z < 10; z++) {
+                                    UpdateBlock.prototype.writePacket(client, x, 98, z, Math.floor(Math.random() * 1000))
+                                }
+                            }
+                        }, 1000)
+                        LevelChunk.prototype.writePacket(client)
 
-                        setInterval(() =>
-                            client.write("network_chunk_publisher_update", {
-                                coordinates: { x: 0, y: 0, z: 0 },
-                                radius: 64,
-                                saved_chunks: [],
-                            }, 50)
-                        )
+                        client.on("subchunk_request", () => {
+                            SubChunk.prototype.writePacket(client)
+                        })
+
+                        setInterval(() => {
+                            NetworkChunkPublisherUpdate.prototype.writePacket(client)
+                        })
 
                         client.on("tick_sync", (packet) => {
-                            client.write("tick_sync", {
-                                request_time: packet.request_time,
-                                response_time: BigInt(Date.now()),
-                            });
+                            TickSync.prototype.writePacket(client, packet, BigInt(Date.now()))
                         });
 
                         client.chat = function (msg) {
@@ -259,9 +257,7 @@ server.on('connect', client => {
                         Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
                         setTimeout(() => {
                             if (client.q) return
-                            client.write('play_status', {
-                                status: 'player_spawn'
-                            })
+                            PlayStatus.prototype.writePacket(client)
                             fs.readdir("./plugins", (err, plugins) => {
                                 plugins.forEach(plugin => {
                                     try {
@@ -289,16 +285,19 @@ server.on('connect', client => {
                 break
             case "client_to_server_handshake":
             case "set_local_player_as_initialized":
-            case "tick_sync": // TODO: Handle this
-            case "emote_list": // TODO: Handle this
-            case "set_player_game_type": // TODO: Handle this
-            case "client_cache_status": // TODO: Handle this
-            case "move_player": // TODO: Handle this
-            case "player_action": // TODO: Handle this
+            case "tick_sync":
+            case "emote_list":
+            case "set_player_game_type":
+            case "client_cache_status":
+            case "player_action":
                 Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
                 break
+            case "move_player":
+                //console.log(Math.floor(packet.data.params.position.x), Math.floor(packet.data.params.position.y), Math.floor(packet.data.params.position.z))
+                //UpdateBlock.prototype.writePacket(client, Math.floor(packet.data.params.position.x), Math.floor(packet.data.params.position.y), Math.floor(packet.data.params.position.z), 2)
+                break
             case "request_chunk_radius":
-                client.queue('chunk_radius_update', { chunk_radius: 32 })
+                ChunkRadiusUpdate.prototype.writePacket(client, 32)
                 break
             case "text":
                 let msg = packet.data.params.message;
@@ -381,8 +380,8 @@ server.on('connect', client => {
                 }
                 client.chat(lang.playerunknowncommand)
             default:
-                //Logger.prototype.log(lang.unhandledpacket, 'warning')
-                //console.log('%o', packet)
+                Logger.prototype.log(lang.unhandledpacket, 'warning')
+                console.log('%o', packet)
                 break
         }
     }

@@ -5,8 +5,6 @@
     "author": "andriycraft",
     "license": "MIT",
     "dependencies": {
-        "bedrock-protocol": "^3.22.0",
-        "bedrock-provider": "^3.0.0",
-        "leveldb-zlib": "^1.2.0"
+        "bedrock-protocol": "^3.22.0"
     }
 }
