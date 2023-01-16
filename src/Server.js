@@ -1,6 +1,5 @@
 const Bedrock = require('bedrock-protocol')
 const Logger = require('./console/Logger')
-const ConsoleCommandSender = require('./console/ConsoleCommandSender')
 const ServerInfo = require('./api/ServerInfo')
 const PlayerInfo = require('./player/PlayerInfo')
 const ValidateConfig = require('./server/ValidateConfig')
@@ -51,7 +50,6 @@ if (config.debug) {
 
 Logger.prototype.log(`${lang.scch}`)
 Loader.prototype.loadPlugins()
-setTimeout(() => { ConsoleCommandSender.prototype.start() }, 900)
 
 let server
 try {
