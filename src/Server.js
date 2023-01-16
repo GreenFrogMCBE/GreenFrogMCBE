@@ -15,6 +15,7 @@ const LevelChunk = require('./network/packets/LevelChunk')
 const PlayStatus = require('./network/packets/PlayStatus')
 const UpdateBlock = require('./network/packets/UpdateBlock')
 const ContainerOpen = require('./network/packets/ContainerOpen')
+const InventorySlot = require('./network/packets/InventorySlot');
 const ContainerClose = require('./network/packets/ContainerClose')
 const CreativeContent = require('./network/packets/CreativeContent')
 const ResponsePackInfo = require('./network/packets/ResponsePackInfo')
@@ -303,23 +304,7 @@ server.on('connect', client => {
                     item = 0
                 }
 
-                client.write('inventory_slot', {
-                    "window_id": "inventory",
-                    "slot": client.itemslength,
-                    "item": {
-                        "network_id": item,
-                        "count": count,
-                        "metadata": 0,
-                        "has_stack_id": 1,
-                        "stack_id": 1,
-                        "block_runtime_id": runtime_id,
-                        "extra": {
-                            "has_nbt": 0,
-                            "can_place_on": [],
-                            "can_destroy": []
-                        }
-                    }
-                })
+                InventorySlot.prototype.writePacket(client, client.items.length, item, count, runtime_id)
                 client.items.push(item)
                 break
             case "mob_equipment":
