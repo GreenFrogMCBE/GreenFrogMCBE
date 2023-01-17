@@ -24742,6 +24742,370 @@ class CreativeContent extends require("./Packet") {
                             "can_destroy": []
                         }
                     }
+                },
+                {
+                    "entry_id": 1450,
+                    "item": {
+                        "network_id": 68,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1451,
+                    "item": {
+                        "network_id": 74,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1452,
+                    "item": {
+                        "network_id": 75,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1453,
+                    "item": {
+                        "network_id": 76,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1454,
+                    "item": {
+                        "network_id": 95,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1455,
+                    "item": {
+                        "network_id": 137,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1456,
+                    "item": {
+                        "network_id": 141,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1457,
+                    "item": {
+                        "network_id": 142,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1458,
+                    "item": {
+                        "network_id": 188,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1459,
+                    "item": {
+                        "network_id": 189,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1460,
+                    "item": {
+                        "network_id": 192,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1461,
+                    "item": {
+                        "network_id": 192,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1462,
+                    "item": {
+                        "network_id": 209,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1463,
+                    "item": {
+                        "network_id": 210,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1464,
+                    "item": {
+                        "network_id": 211,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1465,
+                    "item": {
+                        "network_id": 212,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1466,
+                    "item": {
+                        "network_id": 217,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1467,
+                    "item": {
+                        "network_id": 244,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1468,
+                    "item": {
+                        "network_id": 245,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1469,
+                    "item": {
+                        "network_id": 246,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1470,
+                    "item": {
+                        "network_id": 247,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1471,
+                    "item": {
+                        "network_id": 248,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1472,
+                    "item": {
+                        "network_id": 249,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1473,
+                    "item": {
+                        "network_id": 250,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1474,
+                    "item": {
+                        "network_id": 252,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
+                },
+                {
+                    "entry_id": 1475,
+                    "item": {
+                        "network_id": 255,
+                        "count": 1,
+                        "metadata": 0,
+                        "block_runtime_id": 0,
+                        "extra": {
+                            "has_nbt": 0,
+                            "can_place_on": [],
+                            "can_destroy": []
+                        }
+                    }
                 }
             ]
         })

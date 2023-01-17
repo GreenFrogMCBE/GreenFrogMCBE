@@ -1,4 +1,4 @@
-class Packet {
+class ClientPacket {
     constructor() { }
 
     name() {
@@ -7,7 +7,7 @@ class Packet {
 
     validate() { }
 
-    writePacket() { }
+    handlePacket() { }
 }
 
-module.exports = Packet;
+module.exports = ClientPacket;

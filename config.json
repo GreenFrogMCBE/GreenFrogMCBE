@@ -13,6 +13,5 @@
     "pluginsshutdowntime": 10000,
     "crashstatuscode": -1,
     "exitstatuscode": 0,
-    "clientloadtime": 2000,
     "softwarename": "GreenFrogMCBE"
 }

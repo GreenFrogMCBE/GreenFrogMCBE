@@ -14,16 +14,17 @@ const PlayerList = require('./network/packets/PlayerList')
 const LevelChunk = require('./network/packets/LevelChunk')
 const PlayStatus = require('./network/packets/PlayStatus')
 const UpdateBlock = require('./network/packets/UpdateBlock')
-const ContainerOpen = require('./network/packets/ContainerOpen')
-const InventorySlot = require('./network/packets/InventorySlot');
-const ContainerClose = require('./network/packets/ContainerClose')
+const InventorySlot = require('./network/packets/InventorySlot')
+const ClientInteract = require('./network/packets/ClientInteract')
 const CreativeContent = require('./network/packets/CreativeContent')
+const ClientUnhandled = require('./network/packets/ClientUnhandled')
 const ResponsePackInfo = require('./network/packets/ResponsePackInfo')
 const ResourcePackStack = require('./network/packets/ResourcePackStack')
 const ChunkRadiusUpdate = require('./network/packets/ChunkRadiusUpdate')
 const ClientCacheStatus = require('./network/packets/ClientCacheStatus')
 const SetCommandsEnabled = require('./network/packets/SetCommandsEnabled')
 const BiomeDefinitionList = require('./network/packets/BiomeDefinitionList')
+const ClientContainerClose = require('./network/packets/ClientContainerClose')
 const AvailableEntityIdentifiers = require('./network/packets/AvailableEntityIdentifiers')
 const NetworkChunkPublisherUpdate = require('./network/packets/NetworkChunkPublisherUpdate')
 const fs = require('fs');
@@ -256,7 +257,7 @@ server.on('connect', client => {
                                     }
                                 });
                             });
-                        }, config.clientloadtime)
+                        }, 2000)
 
 
                         setTimeout(() => {
@@ -274,15 +275,13 @@ server.on('connect', client => {
                 }
                 break
             case "client_to_server_handshake":
-            case "set_local_player_as_initialized":
-                // Already handled by bedrock-protocol
-                break
             case "emote_list":
             case "set_player_game_type":
-            case "client_cache_status":
             case "move_player":
+            case "set_local_player_as_initialized":
             case "player_action":
-                Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
+            case "mob_equipment":
+                ClientUnhandled.prototype.handlePacket(packet)
                 break
             case "item_stack_request":
                 let item = null
@@ -307,25 +306,11 @@ server.on('connect', client => {
                 InventorySlot.prototype.writePacket(client, client.items.length, item, count, runtime_id)
                 client.items.push(item)
                 break
-            case "mob_equipment":
-                // TODO
-                break
             case "interact":
-                switch (packet.data.params.action_id) {
-                    case "open_inventory": {
-                        ContainerOpen.prototype.writePacket(client, 3)
-                    }
-                    case "mouse_over_entity": {
-                        // TODO. Pvp is not implemented
-                        break
-                    }
-                    default: {
-                        throw new Error("Not supported packet data: packet = open_inventory, action_id = " + packet.data.params.action_id)
-                    }
-                }
+                ClientInteract.prototype.handlePacket(packet, client)
                 break
             case "container_close":
-                ContainerClose.prototype.writePacket(client, 3)
+                ClientContainerClose.prototype.handlePacket(client)
                 break
             case "request_chunk_radius":
                 ChunkRadiusUpdate.prototype.writePacket(client, 32)
