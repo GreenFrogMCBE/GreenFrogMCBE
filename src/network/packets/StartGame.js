@@ -42,7 +42,7 @@ class StartGame extends require("./Packet") {
             "achievements_disabled": true,
             "day_cycle_stop_time": 17,
             "edu_offer": 0,
-            "edu_features_enabled": false,
+            "edu_features_enabled": true,
             "edu_product_uuid": "",
             "rain_level": 0,
             "lightning_level": 0,
@@ -5929,7 +5929,7 @@ class StartGame extends require("./Packet") {
             ],
             "multiplayer_correlation_id": "77804352-c5eb-4a76-82ae-6a61fef7f618",
             "server_authoritative_inventory": true,
-            "engine": "1.19.1",
+            "engine": "GreenFrogMCBE",
             "property_data": {
                 "type": "compound",
                 "name": "",
