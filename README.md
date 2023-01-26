@@ -31,7 +31,7 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 ## Can't join locally
 
-Run powershell as an admin
+Open powershell as an admin
 
 Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
 
