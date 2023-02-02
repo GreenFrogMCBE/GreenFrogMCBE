@@ -145,6 +145,7 @@ class Server {
     client.port = client.connection.address.split("/")[1];
     client.fullip = client.connection.address;
     client.username = client.getUserData().displayName;
+    client.offline = false;
 
     Logger.log(
       this.lang.playerConnected
@@ -165,7 +166,7 @@ class Server {
     if (this.config.unstable) {
       Logger.log(this.lang.unstableWarning, "warning");
     }
-    if (this.config.debug) {
+    if (process.env.DEBUG == "minecraft-protocol" || this.config.debug) {
       Logger.log(this.lang.debugWarning, "warning");
     }
   }

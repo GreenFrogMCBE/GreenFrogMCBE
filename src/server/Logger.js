@@ -27,8 +27,8 @@ class Logger {
         console.log(`[${dStr} \x1b[31m${lang.error}\x1b[0m] ${message}`);
         break;
       case "debug":
-        if (config.debug)
-          console.log(`[${dStr} \x1b[90m${lang.debug}\x1b[0m] ${message}`);
+        if (process.env.DEBUG == "minecraft-protocol" || config.debug)
+          console.log(`[${dStr} \x1b[35m${lang.debug}\x1b[0m] ${message}`);
         break;
       default:
         throw new Error("Invalid log level");
@@ -68,9 +68,9 @@ class Logger {
         );
         break;
       case "debug":
-        if (config.debug)
+        if (process.env.DEBUG == "minecraft-protocol" || config.debug)
           console.log(
-            `[${dStr} \x1b[32m${lang.debug}\x1b[0m] ${prefix}${plugin}${suffix} ${message}`
+            `[${dStr} \x1b[35m${lang.debug}\x1b[0m] ${prefix}${plugin}${suffix} ${message}`
           );
         break;
       default:

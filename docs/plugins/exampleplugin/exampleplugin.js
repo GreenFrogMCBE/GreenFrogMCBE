@@ -4,7 +4,7 @@ const CommandManager = require("../src/player/CommandManager");
 const log = require("../src/server/Logger");
 const Logger = new log(); // Creates logger for this plugin
 
-// This plugin contains all list of events
+// This is a simple plugin that tests the Greenfrog's api
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
 
 class Exampleplugin extends BasePlugin {
@@ -67,11 +67,12 @@ class Exampleplugin extends BasePlugin {
     const cmdmanager = new CommandManager();
     cmdmanager.addCommand(client, "testcommand", "This is my first command!");
     // addCommand syntax: ("name", "description")
+
     // This code executes when player is spawned (this event executes after onJoin() event)
   }
 
   onChat(server, client, message) {
-    client.sendMessage(client, "This message was sent using GFMCBE API!");
+    client.sendMessage(client, "Your just sent a chat message: " + message);
     // This code executes when player uses chat
   }
 
@@ -83,6 +84,8 @@ class Exampleplugin extends BasePlugin {
       // client.fullip returns client's ip and port
       // client.gamemode returns client's gamemode
       // client.offline checks if the client is online or not
+      // client.op returns the client's op status
+      // client.permlevel returns the client's permission level
       client.sendMessage(`Hi ${client.username}. Your IP is: ${client.ip}`); // This code sends message TO client
       client.chat(`This message was sent by ${this.getName()}`); // This code sends message AS A client
       client.setGamemode("creative"); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"

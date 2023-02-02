@@ -17,7 +17,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 5,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6071,
+            block_runtime_id: 9805,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -31,7 +31,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 5,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6072,
+            block_runtime_id: 9806,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -45,7 +45,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 5,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6073,
+            block_runtime_id: 9807,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -59,7 +59,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 5,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6074,
+            block_runtime_id: 9808,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -73,7 +73,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 5,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6075,
+            block_runtime_id: 9809,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -87,7 +87,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 5,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6076,
+            block_runtime_id: 9810,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -101,7 +101,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -486,
             count: 1,
             metadata: 0,
-            block_runtime_id: 947,
+            block_runtime_id: 1570,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -115,7 +115,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -242,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4850,
+            block_runtime_id: 7399,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -129,7 +129,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -243,
             count: 1,
             metadata: 0,
-            block_runtime_id: 920,
+            block_runtime_id: 1543,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -143,7 +143,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1182,
+            block_runtime_id: 1805,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -157,7 +157,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1183,
+            block_runtime_id: 1806,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -171,7 +171,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1184,
+            block_runtime_id: 1807,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -185,7 +185,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1185,
+            block_runtime_id: 1808,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -199,7 +199,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1186,
+            block_runtime_id: 1809,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -213,7 +213,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1187,
+            block_runtime_id: 1810,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -227,7 +227,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1194,
+            block_runtime_id: 1817,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -241,7 +241,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1189,
+            block_runtime_id: 1812,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -255,7 +255,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1190,
+            block_runtime_id: 1813,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -269,7 +269,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1188,
+            block_runtime_id: 1811,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -283,7 +283,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1191,
+            block_runtime_id: 1814,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -297,7 +297,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1195,
+            block_runtime_id: 1818,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -311,7 +311,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1192,
+            block_runtime_id: 1815,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -325,7 +325,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1193,
+            block_runtime_id: 1816,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -339,7 +339,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -277,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3930,
+            block_runtime_id: 5707,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -353,7 +353,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -297,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6724,
+            block_runtime_id: 10496,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -367,7 +367,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -278,
             count: 1,
             metadata: 0,
-            block_runtime_id: 971,
+            block_runtime_id: 1594,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -381,7 +381,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -382,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8082,
+            block_runtime_id: 12260,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -395,7 +395,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -390,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5071,
+            block_runtime_id: 7636,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -409,7 +409,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -386,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7817,
+            block_runtime_id: 11995,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -423,7 +423,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -394,
             count: 1,
             metadata: 0,
-            block_runtime_id: 429,
+            block_runtime_id: 659,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -437,7 +437,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -481,
             count: 1,
             metadata: 0,
-            block_runtime_id: 730,
+            block_runtime_id: 1353,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -451,7 +451,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 85,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7364,
+            block_runtime_id: 11542,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -465,7 +465,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 85,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7365,
+            block_runtime_id: 11543,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -479,7 +479,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 85,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7366,
+            block_runtime_id: 11544,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -493,7 +493,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 85,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7367,
+            block_runtime_id: 11545,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -507,7 +507,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 85,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7368,
+            block_runtime_id: 11546,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -521,7 +521,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 85,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7369,
+            block_runtime_id: 11547,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -535,7 +535,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -491,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6633,
+            block_runtime_id: 10405,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -549,7 +549,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 113,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4290,
+            block_runtime_id: 6071,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -563,7 +563,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -256,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7996,
+            block_runtime_id: 12174,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -577,7 +577,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -257,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5853,
+            block_runtime_id: 8819,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -605,7 +605,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 183,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6584,
+            block_runtime_id: 10356,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -619,7 +619,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 184,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3777,
+            block_runtime_id: 5170,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -633,7 +633,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 185,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5365,
+            block_runtime_id: 7946,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -647,7 +647,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 187,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7586,
+            block_runtime_id: 11764,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -661,7 +661,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 186,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4173,
+            block_runtime_id: 5950,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -675,7 +675,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -492,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4625,
+            block_runtime_id: 6406,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -689,7 +689,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -258,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4661,
+            block_runtime_id: 6826,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -703,7 +703,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -259,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5399,
+            block_runtime_id: 7980,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -717,7 +717,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -180,
             count: 1,
             metadata: 0,
-            block_runtime_id: 633,
+            block_runtime_id: 864,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -731,7 +731,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 67,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3708,
+            block_runtime_id: 5101,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -745,7 +745,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -179,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4092,
+            block_runtime_id: 5869,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -787,7 +787,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 135,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7003,
+            block_runtime_id: 10781,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -801,7 +801,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 136,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6967,
+            block_runtime_id: 10745,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -815,7 +815,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 163,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6200,
+            block_runtime_id: 9950,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -829,7 +829,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 164,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5063,
+            block_runtime_id: 7628,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -843,7 +843,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -488,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4595,
+            block_runtime_id: 6376,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -857,7 +857,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 109,
             count: 1,
             metadata: 0,
-            block_runtime_id: 931,
+            block_runtime_id: 1554,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -871,7 +871,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -175,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5883,
+            block_runtime_id: 9233,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -885,7 +885,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 128,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3587,
+            block_runtime_id: 4980,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -899,7 +899,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -177,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3627,
+            block_runtime_id: 5020,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -913,7 +913,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 180,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5350,
+            block_runtime_id: 7931,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -927,7 +927,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -176,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5546,
+            block_runtime_id: 8127,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -941,7 +941,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -169,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3537,
+            block_runtime_id: 4546,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -955,7 +955,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -172,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4150,
+            block_runtime_id: 5927,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -969,7 +969,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -170,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4391,
+            block_runtime_id: 6172,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -983,7 +983,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -173,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6714,
+            block_runtime_id: 10486,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -997,7 +997,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5308,
+            block_runtime_id: 7889,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1011,7 +1011,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -174,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7028,
+            block_runtime_id: 10806,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1025,7 +1025,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 108,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6530,
+            block_runtime_id: 10302,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1053,7 +1053,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -184,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6602,
+            block_runtime_id: 10374,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1067,7 +1067,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -178,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6382,
+            block_runtime_id: 10140,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1081,7 +1081,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 156,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4767,
+            block_runtime_id: 6932,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1095,7 +1095,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -185,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7700,
+            block_runtime_id: 11878,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1109,7 +1109,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 203,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7755,
+            block_runtime_id: 11933,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1123,7 +1123,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -2,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7263,
+            block_runtime_id: 11441,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1137,7 +1137,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -3,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7430,
+            block_runtime_id: 11608,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1165,7 +1165,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -254,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6280,
+            block_runtime_id: 10038,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1179,7 +1179,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -255,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3718,
+            block_runtime_id: 5111,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1193,7 +1193,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -276,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7019,
+            block_runtime_id: 10797,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1207,7 +1207,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -292,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4297,
+            block_runtime_id: 6078,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1221,7 +1221,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -275,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4477,
+            block_runtime_id: 6258,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1235,7 +1235,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -354,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4604,
+            block_runtime_id: 6385,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1249,7 +1249,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -355,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4587,
+            block_runtime_id: 6368,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1263,7 +1263,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -356,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4305,
+            block_runtime_id: 6086,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1277,7 +1277,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -357,
             count: 1,
             metadata: 0,
-            block_runtime_id: 351,
+            block_runtime_id: 581,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1291,7 +1291,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -358,
             count: 1,
             metadata: 0,
-            block_runtime_id: 393,
+            block_runtime_id: 623,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1305,7 +1305,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -359,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3902,
+            block_runtime_id: 5679,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1319,7 +1319,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -360,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6167,
+            block_runtime_id: 9917,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1333,7 +1333,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -448,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5840,
+            block_runtime_id: 8806,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1361,7 +1361,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -389,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4653,
+            block_runtime_id: 6818,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1375,7 +1375,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -385,
             count: 1,
             metadata: 0,
-            block_runtime_id: 294,
+            block_runtime_id: 522,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1389,7 +1389,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -393,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7422,
+            block_runtime_id: 11600,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1403,7 +1403,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -480,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5522,
+            block_runtime_id: 8103,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1498,7 +1498,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 107,
           item: {
-            network_id: 633,
+            network_id: 634,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -1571,7 +1571,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -149,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6552,
+            block_runtime_id: 10324,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1585,7 +1585,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -146,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6650,
+            block_runtime_id: 10422,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1599,7 +1599,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -148,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5381,
+            block_runtime_id: 7962,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1613,7 +1613,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -145,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5589,
+            block_runtime_id: 8170,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1627,7 +1627,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -147,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7502,
+            block_runtime_id: 11680,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1641,7 +1641,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -496,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4485,
+            block_runtime_id: 6266,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1655,7 +1655,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 167,
             count: 1,
             metadata: 0,
-            block_runtime_id: 321,
+            block_runtime_id: 549,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1669,7 +1669,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -246,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4333,
+            block_runtime_id: 6114,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1683,7 +1683,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -247,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4733,
+            block_runtime_id: 6898,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1697,7 +1697,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 101,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4801,
+            block_runtime_id: 6966,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1711,7 +1711,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 20,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6164,
+            block_runtime_id: 9914,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1725,7 +1725,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1133,
+            block_runtime_id: 1756,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1739,7 +1739,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1141,
+            block_runtime_id: 1764,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1753,7 +1753,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1140,
+            block_runtime_id: 1763,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1767,7 +1767,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1148,
+            block_runtime_id: 1771,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1781,7 +1781,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1145,
+            block_runtime_id: 1768,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1795,7 +1795,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1147,
+            block_runtime_id: 1770,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1809,7 +1809,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1134,
+            block_runtime_id: 1757,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1823,7 +1823,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1137,
+            block_runtime_id: 1760,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1837,7 +1837,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1138,
+            block_runtime_id: 1761,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1851,7 +1851,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1146,
+            block_runtime_id: 1769,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1865,7 +1865,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1142,
+            block_runtime_id: 1765,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1879,7 +1879,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1136,
+            block_runtime_id: 1759,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1893,7 +1893,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1144,
+            block_runtime_id: 1767,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1907,7 +1907,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1143,
+            block_runtime_id: 1766,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1921,7 +1921,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1135,
+            block_runtime_id: 1758,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1935,7 +1935,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1139,
+            block_runtime_id: 1762,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1949,7 +1949,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -334,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5975,
+            block_runtime_id: 9325,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1963,7 +1963,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 102,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5233,
+            block_runtime_id: 7798,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1977,7 +1977,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4852,
+            block_runtime_id: 7401,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -1991,7 +1991,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4860,
+            block_runtime_id: 7409,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2005,7 +2005,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4859,
+            block_runtime_id: 7408,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2019,7 +2019,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4867,
+            block_runtime_id: 7416,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2033,7 +2033,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4864,
+            block_runtime_id: 7413,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2047,7 +2047,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4866,
+            block_runtime_id: 7415,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2061,7 +2061,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4853,
+            block_runtime_id: 7402,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2075,7 +2075,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4856,
+            block_runtime_id: 7405,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2089,7 +2089,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4857,
+            block_runtime_id: 7406,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2103,7 +2103,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4865,
+            block_runtime_id: 7414,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2117,7 +2117,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4861,
+            block_runtime_id: 7410,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2131,7 +2131,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4855,
+            block_runtime_id: 7404,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2145,7 +2145,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4863,
+            block_runtime_id: 7412,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2159,7 +2159,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4862,
+            block_runtime_id: 7411,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2173,7 +2173,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4854,
+            block_runtime_id: 7403,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2187,7 +2187,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 160,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4858,
+            block_runtime_id: 7407,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2201,7 +2201,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 65,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8262,
+            block_runtime_id: 12441,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2215,7 +2215,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -165,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3571,
+            block_runtime_id: 4964,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2229,7 +2229,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 44,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4270,
+            block_runtime_id: 6049,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2243,7 +2243,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -166,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5822,
+            block_runtime_id: 8404,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2257,7 +2257,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 44,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4273,
+            block_runtime_id: 6052,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2271,7 +2271,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 182,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5793,
+            block_runtime_id: 8375,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2285,7 +2285,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 158,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5270,
+            block_runtime_id: 7851,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2299,7 +2299,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 158,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5271,
+            block_runtime_id: 7852,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2313,7 +2313,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 158,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5272,
+            block_runtime_id: 7853,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2327,7 +2327,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 158,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5273,
+            block_runtime_id: 7854,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2341,7 +2341,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 158,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5274,
+            block_runtime_id: 7855,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2355,7 +2355,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 158,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5275,
+            block_runtime_id: 7856,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2369,7 +2369,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -489,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1149,
+            block_runtime_id: 1772,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2383,7 +2383,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 44,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4275,
+            block_runtime_id: 6054,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2397,7 +2397,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -166,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5820,
+            block_runtime_id: 8402,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2411,7 +2411,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 44,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4271,
+            block_runtime_id: 6050,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2425,7 +2425,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -166,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5823,
+            block_runtime_id: 8405,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2439,7 +2439,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 182,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5794,
+            block_runtime_id: 8376,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2453,7 +2453,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 182,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5788,
+            block_runtime_id: 8370,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2467,7 +2467,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -166,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5824,
+            block_runtime_id: 8406,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2481,7 +2481,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5805,
+            block_runtime_id: 8387,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2495,7 +2495,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5810,
+            block_runtime_id: 8392,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2509,7 +2509,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5811,
+            block_runtime_id: 8393,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2523,7 +2523,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5808,
+            block_runtime_id: 8390,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2537,7 +2537,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5809,
+            block_runtime_id: 8391,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2551,7 +2551,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5807,
+            block_runtime_id: 8389,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2565,7 +2565,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5806,
+            block_runtime_id: 8388,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2579,7 +2579,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 44,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4274,
+            block_runtime_id: 6053,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2593,7 +2593,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 44,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4277,
+            block_runtime_id: 6056,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2607,7 +2607,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 182,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5795,
+            block_runtime_id: 8377,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2621,7 +2621,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5804,
+            block_runtime_id: 8386,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2635,7 +2635,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 44,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4276,
+            block_runtime_id: 6055,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2649,7 +2649,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -166,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5821,
+            block_runtime_id: 8403,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2663,7 +2663,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 182,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5789,
+            block_runtime_id: 8371,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2677,7 +2677,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 182,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5790,
+            block_runtime_id: 8372,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2691,7 +2691,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 182,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5791,
+            block_runtime_id: 8373,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2705,7 +2705,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 182,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5792,
+            block_runtime_id: 8374,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2719,7 +2719,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -264,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5900,
+            block_runtime_id: 9250,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2733,7 +2733,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -265,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6484,
+            block_runtime_id: 10254,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2747,7 +2747,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -282,
             count: 1,
             metadata: 0,
-            block_runtime_id: 910,
+            block_runtime_id: 1533,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2761,7 +2761,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -293,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6018,
+            block_runtime_id: 9752,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2775,7 +2775,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -284,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4192,
+            block_runtime_id: 5971,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2789,7 +2789,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -361,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5235,
+            block_runtime_id: 7800,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2803,7 +2803,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -362,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6600,
+            block_runtime_id: 10372,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2817,7 +2817,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -363,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6053,
+            block_runtime_id: 9787,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2831,7 +2831,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -364,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5282,
+            block_runtime_id: 7863,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2845,7 +2845,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -365,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7815,
+            block_runtime_id: 11993,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2873,7 +2873,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -367,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6545,
+            block_runtime_id: 10317,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2887,7 +2887,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -449,
             count: 1,
             metadata: 0,
-            block_runtime_id: 708,
+            block_runtime_id: 1323,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2901,7 +2901,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -380,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7310,
+            block_runtime_id: 11488,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2929,7 +2929,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -388,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4291,
+            block_runtime_id: 6072,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2943,7 +2943,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -392,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3716,
+            block_runtime_id: 5109,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2957,7 +2957,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -478,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3910,
+            block_runtime_id: 5687,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2971,7 +2971,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 45,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4765,
+            block_runtime_id: 6930,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2985,7 +2985,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -302,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7249,
+            block_runtime_id: 11427,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -2999,7 +2999,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -303,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4552,
+            block_runtime_id: 6333,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3013,7 +3013,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -304,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6351,
+            block_runtime_id: 10109,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3027,7 +3027,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 98,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6547,
+            block_runtime_id: 10319,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3041,7 +3041,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 98,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6548,
+            block_runtime_id: 10320,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3055,7 +3055,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 98,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6549,
+            block_runtime_id: 10321,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3069,7 +3069,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 98,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6550,
+            block_runtime_id: 10322,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3097,7 +3097,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 168,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6087,
+            block_runtime_id: 9837,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3111,7 +3111,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -274,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4680,
+            block_runtime_id: 6845,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3125,7 +3125,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -280,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7214,
+            block_runtime_id: 11376,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3139,7 +3139,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -281,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4586,
+            block_runtime_id: 6367,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3153,7 +3153,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -279,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5062,
+            block_runtime_id: 7627,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3167,7 +3167,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -387,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4581,
+            block_runtime_id: 6362,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3181,7 +3181,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -409,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4160,
+            block_runtime_id: 5937,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3195,7 +3195,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -391,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5464,
+            block_runtime_id: 8045,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3209,7 +3209,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -410,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5364,
+            block_runtime_id: 7945,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3223,7 +3223,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -395,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5234,
+            block_runtime_id: 7799,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3237,7 +3237,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 4,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3615,
+            block_runtime_id: 5008,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3265,7 +3265,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -379,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6670,
+            block_runtime_id: 10442,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3279,7 +3279,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -183,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4582,
+            block_runtime_id: 6363,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3293,7 +3293,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 24,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3653,
+            block_runtime_id: 5046,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3307,7 +3307,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 24,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3654,
+            block_runtime_id: 5047,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3321,7 +3321,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 24,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3655,
+            block_runtime_id: 5048,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3335,7 +3335,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 24,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3656,
+            block_runtime_id: 5049,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3349,7 +3349,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 179,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6580,
+            block_runtime_id: 10352,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3363,7 +3363,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 179,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6581,
+            block_runtime_id: 10353,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3377,7 +3377,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 179,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6582,
+            block_runtime_id: 10354,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3391,7 +3391,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 179,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6583,
+            block_runtime_id: 10355,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3405,7 +3405,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 173,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5398,
+            block_runtime_id: 7979,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3419,7 +3419,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -139,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7979,
+            block_runtime_id: 12157,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3433,7 +3433,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 41,
             count: 1,
             metadata: 0,
-            block_runtime_id: 291,
+            block_runtime_id: 323,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3447,7 +3447,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 42,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8261,
+            block_runtime_id: 12440,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3461,7 +3461,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -340,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4651,
+            block_runtime_id: 6816,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3475,7 +3475,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -341,
             count: 1,
             metadata: 0,
-            block_runtime_id: 593,
+            block_runtime_id: 823,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3489,7 +3489,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -342,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8246,
+            block_runtime_id: 12424,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3503,7 +3503,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -343,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3553,
+            block_runtime_id: 4946,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3517,7 +3517,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -344,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7734,
+            block_runtime_id: 11912,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3531,7 +3531,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -345,
             count: 1,
             metadata: 0,
-            block_runtime_id: 694,
+            block_runtime_id: 1309,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3545,7 +3545,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -346,
             count: 1,
             metadata: 0,
-            block_runtime_id: 707,
+            block_runtime_id: 1322,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3559,7 +3559,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -446,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7542,
+            block_runtime_id: 11720,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3573,7 +3573,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -347,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4689,
+            block_runtime_id: 6854,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3587,7 +3587,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -348,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6166,
+            block_runtime_id: 9916,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3601,7 +3601,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -349,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7197,
+            block_runtime_id: 11359,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3615,7 +3615,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -350,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5478,
+            block_runtime_id: 8059,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3629,7 +3629,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -351,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7293,
+            block_runtime_id: 11471,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3643,7 +3643,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -352,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3809,
+            block_runtime_id: 5202,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3657,7 +3657,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -353,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4851,
+            block_runtime_id: 7400,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3685,7 +3685,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 133,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1159,
+            block_runtime_id: 1782,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3713,7 +3713,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 22,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4286,
+            block_runtime_id: 6065,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3727,7 +3727,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -451,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8260,
+            block_runtime_id: 12439,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3741,7 +3741,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -452,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5269,
+            block_runtime_id: 7850,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3755,7 +3755,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -453,
             count: 1,
             metadata: 0,
-            block_runtime_id: 361,
+            block_runtime_id: 591,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3769,7 +3769,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 155,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3696,
+            block_runtime_id: 5089,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3783,7 +3783,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 155,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3698,
+            block_runtime_id: 5091,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3797,7 +3797,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 155,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3697,
+            block_runtime_id: 5090,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3811,7 +3811,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 155,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3699,
+            block_runtime_id: 5092,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3825,7 +3825,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 168,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6085,
+            block_runtime_id: 9835,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3839,7 +3839,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 168,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6086,
+            block_runtime_id: 9836,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3853,7 +3853,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 165,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4233,
+            block_runtime_id: 6012,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3867,7 +3867,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -220,
             count: 1,
             metadata: 0,
-            block_runtime_id: 892,
+            block_runtime_id: 1515,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3881,7 +3881,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -221,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4476,
+            block_runtime_id: 6257,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3895,7 +3895,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 170,
             count: 1,
             metadata: 0,
-            block_runtime_id: 695,
+            block_runtime_id: 1310,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3909,7 +3909,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 216,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4234,
+            block_runtime_id: 6013,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3923,7 +3923,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 112,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7272,
+            block_runtime_id: 11450,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3951,7 +3951,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -270,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3775,
+            block_runtime_id: 5168,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3965,7 +3965,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -222,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8259,
+            block_runtime_id: 12437,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3979,7 +3979,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3458,
+            block_runtime_id: 4083,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -3993,7 +3993,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3466,
+            block_runtime_id: 4091,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4007,7 +4007,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3465,
+            block_runtime_id: 4090,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4021,7 +4021,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3473,
+            block_runtime_id: 4098,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4035,7 +4035,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3470,
+            block_runtime_id: 4095,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4049,7 +4049,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3472,
+            block_runtime_id: 4097,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4063,7 +4063,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3459,
+            block_runtime_id: 4084,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4077,7 +4077,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3462,
+            block_runtime_id: 4087,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4091,7 +4091,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3463,
+            block_runtime_id: 4088,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4105,7 +4105,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3471,
+            block_runtime_id: 4096,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4119,7 +4119,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3467,
+            block_runtime_id: 4092,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4133,7 +4133,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3461,
+            block_runtime_id: 4086,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4147,7 +4147,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3469,
+            block_runtime_id: 4094,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4161,7 +4161,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3468,
+            block_runtime_id: 4093,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4175,7 +4175,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3460,
+            block_runtime_id: 4085,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4189,7 +4189,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 35,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3464,
+            block_runtime_id: 4089,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4203,7 +4203,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 949,
+            block_runtime_id: 1572,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4217,7 +4217,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 957,
+            block_runtime_id: 1580,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4231,7 +4231,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 956,
+            block_runtime_id: 1579,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4245,7 +4245,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 964,
+            block_runtime_id: 1587,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4259,7 +4259,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 961,
+            block_runtime_id: 1584,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4273,7 +4273,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 963,
+            block_runtime_id: 1586,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4287,7 +4287,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 950,
+            block_runtime_id: 1573,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4301,7 +4301,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 953,
+            block_runtime_id: 1576,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4315,7 +4315,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 954,
+            block_runtime_id: 1577,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4329,7 +4329,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 962,
+            block_runtime_id: 1585,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4343,7 +4343,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 958,
+            block_runtime_id: 1581,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4357,7 +4357,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 952,
+            block_runtime_id: 1575,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4371,7 +4371,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 960,
+            block_runtime_id: 1583,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4385,7 +4385,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 959,
+            block_runtime_id: 1582,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4399,7 +4399,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 951,
+            block_runtime_id: 1574,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4413,7 +4413,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 171,
             count: 1,
             metadata: 0,
-            block_runtime_id: 955,
+            block_runtime_id: 1578,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4427,7 +4427,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6264,
+            block_runtime_id: 10022,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4441,7 +4441,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6272,
+            block_runtime_id: 10030,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4455,7 +4455,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6271,
+            block_runtime_id: 10029,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4469,7 +4469,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6279,
+            block_runtime_id: 10037,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4483,7 +4483,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6276,
+            block_runtime_id: 10034,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4497,7 +4497,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6278,
+            block_runtime_id: 10036,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4511,7 +4511,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6265,
+            block_runtime_id: 10023,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4525,7 +4525,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6268,
+            block_runtime_id: 10026,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4539,7 +4539,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6269,
+            block_runtime_id: 10027,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4553,7 +4553,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6277,
+            block_runtime_id: 10035,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4567,7 +4567,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6273,
+            block_runtime_id: 10031,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4581,7 +4581,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6267,
+            block_runtime_id: 10025,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4595,7 +4595,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6275,
+            block_runtime_id: 10033,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4609,7 +4609,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6274,
+            block_runtime_id: 10032,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4623,7 +4623,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6266,
+            block_runtime_id: 10024,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4637,7 +4637,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 237,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6270,
+            block_runtime_id: 10028,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4651,7 +4651,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 660,
+            block_runtime_id: 1275,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4665,7 +4665,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 668,
+            block_runtime_id: 1283,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4679,7 +4679,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 667,
+            block_runtime_id: 1282,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4693,7 +4693,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 675,
+            block_runtime_id: 1290,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4707,7 +4707,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 672,
+            block_runtime_id: 1287,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4721,7 +4721,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 674,
+            block_runtime_id: 1289,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4735,7 +4735,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 661,
+            block_runtime_id: 1276,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4749,7 +4749,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 664,
+            block_runtime_id: 1279,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4763,7 +4763,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 665,
+            block_runtime_id: 1280,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4777,7 +4777,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 673,
+            block_runtime_id: 1288,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4791,7 +4791,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 669,
+            block_runtime_id: 1284,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4805,7 +4805,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 663,
+            block_runtime_id: 1278,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4819,7 +4819,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 671,
+            block_runtime_id: 1286,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4833,7 +4833,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 670,
+            block_runtime_id: 1285,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4847,7 +4847,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 662,
+            block_runtime_id: 1277,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4861,7 +4861,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 666,
+            block_runtime_id: 1281,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4875,7 +4875,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 82,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7124,
+            block_runtime_id: 10902,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4889,7 +4889,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 172,
             count: 1,
             metadata: 0,
-            block_runtime_id: 641,
+            block_runtime_id: 872,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4903,7 +4903,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6176,
+            block_runtime_id: 9926,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4917,7 +4917,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6184,
+            block_runtime_id: 9934,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4931,7 +4931,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6183,
+            block_runtime_id: 9933,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4945,7 +4945,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6191,
+            block_runtime_id: 9941,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4959,7 +4959,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6188,
+            block_runtime_id: 9938,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4973,7 +4973,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6190,
+            block_runtime_id: 9940,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -4987,7 +4987,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6177,
+            block_runtime_id: 9927,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5001,7 +5001,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6180,
+            block_runtime_id: 9930,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5015,7 +5015,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6181,
+            block_runtime_id: 9931,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5029,7 +5029,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6189,
+            block_runtime_id: 9939,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5043,7 +5043,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6185,
+            block_runtime_id: 9935,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5057,7 +5057,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6179,
+            block_runtime_id: 9929,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5071,7 +5071,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6187,
+            block_runtime_id: 9937,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5085,7 +5085,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6186,
+            block_runtime_id: 9936,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5099,7 +5099,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6178,
+            block_runtime_id: 9928,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5113,7 +5113,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6182,
+            block_runtime_id: 9932,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5127,7 +5127,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 220,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5573,
+            block_runtime_id: 8154,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5141,7 +5141,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 228,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3531,
+            block_runtime_id: 4540,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5155,7 +5155,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 227,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8253,
+            block_runtime_id: 12431,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5169,7 +5169,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 235,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5834,
+            block_runtime_id: 8800,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5183,7 +5183,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 232,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3547,
+            block_runtime_id: 4940,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5197,7 +5197,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 234,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4167,
+            block_runtime_id: 5944,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5211,7 +5211,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 221,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1151,
+            block_runtime_id: 1774,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5225,7 +5225,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 224,
             count: 1,
             metadata: 0,
-            block_runtime_id: 913,
+            block_runtime_id: 1536,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5253,7 +5253,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 233,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6610,
+            block_runtime_id: 10382,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5267,7 +5267,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 229,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5358,
+            block_runtime_id: 7939,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5281,7 +5281,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 223,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5471,
+            block_runtime_id: 8052,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5295,7 +5295,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 231,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5465,
+            block_runtime_id: 8046,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5309,7 +5309,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 219,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7011,
+            block_runtime_id: 10789,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5323,7 +5323,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 222,
             count: 1,
             metadata: 0,
-            block_runtime_id: 965,
+            block_runtime_id: 1588,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5337,7 +5337,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 226,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6539,
+            block_runtime_id: 10311,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5351,7 +5351,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 201,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7714,
+            block_runtime_id: 11892,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5365,7 +5365,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 201,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7716,
+            block_runtime_id: 11894,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5393,7 +5393,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -475,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6889,
+            block_runtime_id: 10661,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5407,7 +5407,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 214,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4293,
+            block_runtime_id: 6074,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5421,7 +5421,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -227,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5905,
+            block_runtime_id: 9255,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5435,7 +5435,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -230,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5061,
+            block_runtime_id: 7610,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5449,7 +5449,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -232,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4189,
+            block_runtime_id: 5968,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5463,7 +5463,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -233,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6349,
+            block_runtime_id: 10107,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5477,7 +5477,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -234,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4349,
+            block_runtime_id: 6130,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5505,7 +5505,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -377,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1157,
+            block_runtime_id: 1780,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5519,7 +5519,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -236,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5830,
+            block_runtime_id: 8412,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5533,7 +5533,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 3,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5751,
+            block_runtime_id: 8333,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5547,7 +5547,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 3,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5752,
+            block_runtime_id: 8334,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5561,7 +5561,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 60,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3912,
+            block_runtime_id: 5689,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5575,7 +5575,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 2,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6975,
+            block_runtime_id: 10753,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5589,7 +5589,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 198,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8081,
+            block_runtime_id: 12259,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5603,7 +5603,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 243,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4650,
+            block_runtime_id: 6815,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5617,7 +5617,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 110,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3683,
+            block_runtime_id: 5076,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5631,7 +5631,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -473,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6684,
+            block_runtime_id: 10456,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5645,7 +5645,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 1,
             count: 1,
             metadata: 0,
-            block_runtime_id: 653,
+            block_runtime_id: 1268,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5659,7 +5659,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 15,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4690,
+            block_runtime_id: 6855,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5673,7 +5673,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 14,
             count: 1,
             metadata: 0,
-            block_runtime_id: 912,
+            block_runtime_id: 1535,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5687,7 +5687,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 56,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4361,
+            block_runtime_id: 6142,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5701,7 +5701,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 21,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7699,
+            block_runtime_id: 11877,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5715,7 +5715,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 73,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4289,
+            block_runtime_id: 6068,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5729,7 +5729,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 16,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4287,
+            block_runtime_id: 6066,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5743,7 +5743,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -311,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3554,
+            block_runtime_id: 4947,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5757,7 +5757,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 129,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7347,
+            block_runtime_id: 11525,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5771,7 +5771,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 153,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4501,
+            block_runtime_id: 6282,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5799,7 +5799,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -271,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6107,
+            block_runtime_id: 9857,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5813,7 +5813,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -401,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7273,
+            block_runtime_id: 11451,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5827,7 +5827,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -402,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6106,
+            block_runtime_id: 9856,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5841,7 +5841,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -405,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8038,
+            block_runtime_id: 12216,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5855,7 +5855,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -400,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7262,
+            block_runtime_id: 11440,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5869,7 +5869,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -403,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6616,
+            block_runtime_id: 10388,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5883,7 +5883,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -407,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6350,
+            block_runtime_id: 10108,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5897,7 +5897,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -406,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7196,
+            block_runtime_id: 11358,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5925,7 +5925,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 13,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8287,
+            block_runtime_id: 12466,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5939,7 +5939,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 1,
             count: 1,
             metadata: 0,
-            block_runtime_id: 654,
+            block_runtime_id: 1269,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5953,7 +5953,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 1,
             count: 1,
             metadata: 0,
-            block_runtime_id: 656,
+            block_runtime_id: 1271,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5967,7 +5967,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 1,
             count: 1,
             metadata: 0,
-            block_runtime_id: 658,
+            block_runtime_id: 1273,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -5981,7 +5981,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -273,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7585,
+            block_runtime_id: 11763,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6009,7 +6009,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 1,
             count: 1,
             metadata: 0,
-            block_runtime_id: 655,
+            block_runtime_id: 1270,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6023,7 +6023,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 1,
             count: 1,
             metadata: 0,
-            block_runtime_id: 657,
+            block_runtime_id: 1272,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6037,7 +6037,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 1,
             count: 1,
             metadata: 0,
-            block_runtime_id: 659,
+            block_runtime_id: 1274,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6051,7 +6051,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -291,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3682,
+            block_runtime_id: 5075,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6065,7 +6065,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -383,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7754,
+            block_runtime_id: 11932,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6079,7 +6079,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 12,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4195,
+            block_runtime_id: 5974,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6093,7 +6093,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 12,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4196,
+            block_runtime_id: 5975,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6107,7 +6107,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 81,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6986,
+            block_runtime_id: 10764,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6121,7 +6121,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 17,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6672,
+            block_runtime_id: 10444,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6135,7 +6135,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -10,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7543,
+            block_runtime_id: 11721,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6149,7 +6149,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 17,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6673,
+            block_runtime_id: 10445,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6163,7 +6163,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -5,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6288,
+            block_runtime_id: 10046,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6177,7 +6177,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 17,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6674,
+            block_runtime_id: 10446,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6191,7 +6191,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -6,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5972,
+            block_runtime_id: 9322,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6205,7 +6205,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 17,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6675,
+            block_runtime_id: 10447,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6219,7 +6219,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -7,
             count: 1,
             metadata: 0,
-            block_runtime_id: 642,
+            block_runtime_id: 1257,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6233,7 +6233,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3830,
+            block_runtime_id: 5607,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6247,7 +6247,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -8,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5848,
+            block_runtime_id: 8814,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6261,7 +6261,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 162,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3831,
+            block_runtime_id: 5608,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6289,7 +6289,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -484,
             count: 1,
             metadata: 0,
-            block_runtime_id: 348,
+            block_runtime_id: 578,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6303,7 +6303,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -485,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8284,
+            block_runtime_id: 12463,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6317,7 +6317,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -225,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5897,
+            block_runtime_id: 9247,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6331,7 +6331,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -240,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6948,
+            block_runtime_id: 10726,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6345,7 +6345,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -226,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6486,
+            block_runtime_id: 10256,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6359,7 +6359,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -241,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7400,
+            block_runtime_id: 11578,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6373,7 +6373,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3474,
+            block_runtime_id: 4099,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6387,7 +6387,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3480,
+            block_runtime_id: 4105,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6401,7 +6401,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3475,
+            block_runtime_id: 4100,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6415,7 +6415,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3481,
+            block_runtime_id: 4106,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6429,7 +6429,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3476,
+            block_runtime_id: 4101,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6443,7 +6443,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3482,
+            block_runtime_id: 4107,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6457,7 +6457,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3477,
+            block_runtime_id: 4102,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6471,7 +6471,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3483,
+            block_runtime_id: 4108,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6485,7 +6485,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3478,
+            block_runtime_id: 4103,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6499,7 +6499,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3484,
+            block_runtime_id: 4109,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6513,7 +6513,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3479,
+            block_runtime_id: 4104,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6527,7 +6527,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -212,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3485,
+            block_runtime_id: 4110,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6541,7 +6541,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -497,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4161,
+            block_runtime_id: 5938,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6555,7 +6555,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -498,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4229,
+            block_runtime_id: 6008,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6569,7 +6569,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -299,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4294,
+            block_runtime_id: 6075,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6583,7 +6583,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -300,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6499,
+            block_runtime_id: 10269,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6597,7 +6597,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -298,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5902,
+            block_runtime_id: 9252,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6611,7 +6611,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -301,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5579,
+            block_runtime_id: 8160,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6625,7 +6625,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 18,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6090,
+            block_runtime_id: 9840,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6639,7 +6639,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 18,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6091,
+            block_runtime_id: 9841,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6653,7 +6653,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 18,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6092,
+            block_runtime_id: 9842,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6667,7 +6667,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 18,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6093,
+            block_runtime_id: 9843,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6681,7 +6681,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 161,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4353,
+            block_runtime_id: 6134,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6695,7 +6695,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 161,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4354,
+            block_runtime_id: 6135,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6709,7 +6709,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -472,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6666,
+            block_runtime_id: 10438,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6723,7 +6723,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -324,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7710,
+            block_runtime_id: 11888,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6737,7 +6737,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -325,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6339,
+            block_runtime_id: 10097,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6751,7 +6751,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 6,
             count: 1,
             metadata: 0,
-            block_runtime_id: 712,
+            block_runtime_id: 1327,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6765,7 +6765,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 6,
             count: 1,
             metadata: 0,
-            block_runtime_id: 713,
+            block_runtime_id: 1328,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6779,7 +6779,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 6,
             count: 1,
             metadata: 0,
-            block_runtime_id: 714,
+            block_runtime_id: 1329,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6793,7 +6793,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 6,
             count: 1,
             metadata: 0,
-            block_runtime_id: 715,
+            block_runtime_id: 1330,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6807,7 +6807,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 6,
             count: 1,
             metadata: 0,
-            block_runtime_id: 716,
+            block_runtime_id: 1331,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6821,7 +6821,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 6,
             count: 1,
             metadata: 0,
-            block_runtime_id: 717,
+            block_runtime_id: 1332,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6835,7 +6835,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -474,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6976,
+            block_runtime_id: 10754,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -6849,7 +6849,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5754,
+            block_runtime_id: 8336,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7045,7 +7045,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 103,
             count: 1,
             metadata: 0,
-            block_runtime_id: 392,
+            block_runtime_id: 622,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7098,7 +7098,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 507,
           item: {
-            network_id: 653,
+            network_id: 658,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -7115,7 +7115,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 86,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4577,
+            block_runtime_id: 6358,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7129,7 +7129,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -155,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7378,
+            block_runtime_id: 11556,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7143,7 +7143,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 91,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6685,
+            block_runtime_id: 10457,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7171,7 +7171,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 31,
             count: 1,
             metadata: 0,
-            block_runtime_id: 929,
+            block_runtime_id: 1552,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7185,7 +7185,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 175,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5455,
+            block_runtime_id: 8036,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7199,7 +7199,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 31,
             count: 1,
             metadata: 0,
-            block_runtime_id: 928,
+            block_runtime_id: 1551,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7213,7 +7213,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 175,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5454,
+            block_runtime_id: 8035,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7241,7 +7241,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6492,
+            block_runtime_id: 10262,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7255,7 +7255,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6490,
+            block_runtime_id: 10260,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7269,7 +7269,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6491,
+            block_runtime_id: 10261,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7283,7 +7283,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6489,
+            block_runtime_id: 10259,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7297,7 +7297,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6493,
+            block_runtime_id: 10263,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7311,7 +7311,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6497,
+            block_runtime_id: 10267,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7325,7 +7325,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6495,
+            block_runtime_id: 10265,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7339,7 +7339,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6496,
+            block_runtime_id: 10266,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7353,7 +7353,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6494,
+            block_runtime_id: 10264,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7367,7 +7367,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6498,
+            block_runtime_id: 10268,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7381,7 +7381,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -133,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4616,
+            block_runtime_id: 6397,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7395,7 +7395,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -133,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4614,
+            block_runtime_id: 6395,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7409,7 +7409,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -133,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4615,
+            block_runtime_id: 6396,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7423,7 +7423,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -133,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4613,
+            block_runtime_id: 6394,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7437,7 +7437,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -133,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4617,
+            block_runtime_id: 6398,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7518,10 +7518,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 537,
           item: {
-            network_id: 382,
+            network_id: -223,
             count: 1,
             metadata: 0,
-            block_runtime_id: 0,
+            block_runtime_id: 11751,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7532,10 +7532,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 538,
           item: {
-            network_id: -130,
+            network_id: -224,
             count: 1,
             metadata: 0,
-            block_runtime_id: 246,
+            block_runtime_id: 6143,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7546,10 +7546,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 539,
           item: {
-            network_id: -223,
+            network_id: 37,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7573,
+            block_runtime_id: 530,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7560,10 +7560,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 540,
           item: {
-            network_id: -224,
+            network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4362,
+            block_runtime_id: 5009,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7574,10 +7574,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 541,
           item: {
-            network_id: 37,
+            network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 302,
+            block_runtime_id: 5010,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7591,7 +7591,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3616,
+            block_runtime_id: 5011,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7605,7 +7605,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3617,
+            block_runtime_id: 5012,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7619,7 +7619,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3618,
+            block_runtime_id: 5013,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7633,7 +7633,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3619,
+            block_runtime_id: 5014,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7647,7 +7647,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3620,
+            block_runtime_id: 5015,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7661,7 +7661,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3621,
+            block_runtime_id: 5016,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7675,7 +7675,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3622,
+            block_runtime_id: 5017,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7689,7 +7689,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3623,
+            block_runtime_id: 5018,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7703,7 +7703,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 38,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3624,
+            block_runtime_id: 5019,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7714,10 +7714,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 551,
           item: {
-            network_id: 38,
+            network_id: 175,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3625,
+            block_runtime_id: 8033,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7728,10 +7728,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 552,
           item: {
-            network_id: 38,
+            network_id: 175,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3626,
+            block_runtime_id: 8034,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7745,7 +7745,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 175,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5452,
+            block_runtime_id: 8037,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7759,7 +7759,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 175,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5453,
+            block_runtime_id: 8038,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7770,10 +7770,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 555,
           item: {
-            network_id: 175,
+            network_id: -216,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5456,
+            block_runtime_id: 9915,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -7783,34 +7783,6 @@ class CreativeContent extends require("./Packet") {
         },
         {
           entry_id: 556,
-          item: {
-            network_id: 175,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 5457,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 557,
-          item: {
-            network_id: -216,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 6165,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 558,
           item: {
             network_id: 410,
             count: 1,
@@ -7824,7 +7796,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 559,
+          entry_id: 557,
           item: {
             network_id: 402,
             count: 1,
@@ -7838,7 +7810,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 560,
+          entry_id: 558,
           item: {
             network_id: 403,
             count: 1,
@@ -7852,7 +7824,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 561,
+          entry_id: 559,
           item: {
             network_id: 395,
             count: 1,
@@ -7866,7 +7838,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 562,
+          entry_id: 560,
           item: {
             network_id: 398,
             count: 1,
@@ -7880,7 +7852,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 563,
+          entry_id: 561,
           item: {
             network_id: 396,
             count: 1,
@@ -7894,7 +7866,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 564,
+          entry_id: 562,
           item: {
             network_id: 409,
             count: 1,
@@ -7908,7 +7880,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 565,
+          entry_id: 563,
           item: {
             network_id: 406,
             count: 1,
@@ -7922,7 +7894,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 566,
+          entry_id: 564,
           item: {
             network_id: 405,
             count: 1,
@@ -7936,7 +7908,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 567,
+          entry_id: 565,
           item: {
             network_id: 397,
             count: 1,
@@ -7950,7 +7922,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 568,
+          entry_id: 566,
           item: {
             network_id: 401,
             count: 1,
@@ -7964,7 +7936,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 569,
+          entry_id: 567,
           item: {
             network_id: 407,
             count: 1,
@@ -7978,7 +7950,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 570,
+          entry_id: 568,
           item: {
             network_id: 399,
             count: 1,
@@ -7992,7 +7964,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 571,
+          entry_id: 569,
           item: {
             network_id: 400,
             count: 1,
@@ -8006,7 +7978,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 572,
+          entry_id: 570,
           item: {
             network_id: 408,
             count: 1,
@@ -8020,7 +7992,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 573,
+          entry_id: 571,
           item: {
             network_id: 404,
             count: 1,
@@ -8034,7 +8006,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 574,
+          entry_id: 572,
           item: {
             network_id: 413,
             count: 1,
@@ -8048,7 +8020,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 575,
+          entry_id: 573,
           item: {
             network_id: 503,
             count: 1,
@@ -8062,7 +8034,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 576,
+          entry_id: 574,
           item: {
             network_id: 412,
             count: 1,
@@ -8076,7 +8048,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 577,
+          entry_id: 575,
           item: {
             network_id: 414,
             count: 1,
@@ -8090,7 +8062,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 578,
+          entry_id: 576,
           item: {
             network_id: 411,
             count: 1,
@@ -8104,12 +8076,40 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 579,
+          entry_id: 577,
           item: {
             network_id: 106,
             count: 1,
             metadata: 0,
-            block_runtime_id: 894,
+            block_runtime_id: 1517,
+            extra: {
+              has_nbt: 0,
+              can_place_on: [],
+              can_destroy: [],
+            },
+          },
+        },
+        {
+          entry_id: 578,
+          item: {
+            network_id: -231,
+            count: 1,
+            metadata: 0,
+            block_runtime_id: 8060,
+            extra: {
+              has_nbt: 0,
+              can_place_on: [],
+              can_destroy: [],
+            },
+          },
+        },
+        {
+          entry_id: 579,
+          item: {
+            network_id: -287,
+            count: 1,
+            metadata: 0,
+            block_runtime_id: 8273,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8120,10 +8120,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 580,
           item: {
-            network_id: -231,
+            network_id: 111,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5479,
+            block_runtime_id: 1781,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8134,10 +8134,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 581,
           item: {
-            network_id: -287,
+            network_id: -130,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5691,
+            block_runtime_id: 246,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8148,10 +8148,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 582,
           item: {
-            network_id: 111,
+            network_id: 382,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1158,
+            block_runtime_id: 0,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8165,7 +8165,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 32,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4677,
+            block_runtime_id: 6842,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8179,7 +8179,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -163,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3684,
+            block_runtime_id: 5077,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8193,7 +8193,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 80,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4194,
+            block_runtime_id: 5973,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8207,7 +8207,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 79,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6689,
+            block_runtime_id: 10461,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8235,7 +8235,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -11,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7027,
+            block_runtime_id: 10805,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8263,7 +8263,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -308,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7416,
+            block_runtime_id: 11594,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8277,7 +8277,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -317,
             count: 1,
             metadata: 0,
-            block_runtime_id: 893,
+            block_runtime_id: 1516,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8305,7 +8305,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -320,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6538,
+            block_runtime_id: 10310,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8319,7 +8319,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -318,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5397,
+            block_runtime_id: 7978,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8347,7 +8347,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -482,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6175,
+            block_runtime_id: 9925,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8361,7 +8361,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -483,
             count: 1,
             metadata: 0,
-            block_runtime_id: 345,
+            block_runtime_id: 573,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8375,7 +8375,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -323,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5980,
+            block_runtime_id: 9330,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8389,7 +8389,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -336,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4320,
+            block_runtime_id: 6101,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8403,7 +8403,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -321,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7312,
+            block_runtime_id: 11490,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8417,7 +8417,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -337,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6888,
+            block_runtime_id: 10660,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8431,7 +8431,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -338,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5477,
+            block_runtime_id: 8058,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8445,7 +8445,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -411,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5684,
+            block_runtime_id: 8266,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8459,7 +8459,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -327,
             count: 1,
             metadata: 0,
-            block_runtime_id: 290,
+            block_runtime_id: 322,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8473,7 +8473,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -328,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7002,
+            block_runtime_id: 10780,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8487,7 +8487,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -329,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7810,
+            block_runtime_id: 11988,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8501,7 +8501,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -330,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4728,
+            block_runtime_id: 6893,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8515,7 +8515,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -331,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4376,
+            block_runtime_id: 6157,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8529,7 +8529,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -332,
             count: 1,
             metadata: 0,
-            block_runtime_id: 304,
+            block_runtime_id: 532,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8543,7 +8543,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -333,
             count: 1,
             metadata: 0,
-            block_runtime_id: 347,
+            block_runtime_id: 577,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8697,7 +8697,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 39,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3546,
+            block_runtime_id: 4939,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8711,7 +8711,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 40,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4585,
+            block_runtime_id: 6366,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8725,7 +8725,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -228,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7753,
+            block_runtime_id: 11931,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8753,7 +8753,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 99,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7362,
+            block_runtime_id: 11540,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8767,7 +8767,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 100,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3611,
+            block_runtime_id: 5004,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8781,7 +8781,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 99,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7363,
+            block_runtime_id: 11541,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8795,7 +8795,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 99,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7348,
+            block_runtime_id: 11526,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8879,7 +8879,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 30,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6713,
+            block_runtime_id: 10485,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8907,7 +8907,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 52,
             count: 1,
             metadata: 0,
-            block_runtime_id: 401,
+            block_runtime_id: 631,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8921,7 +8921,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 97,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4144,
+            block_runtime_id: 5921,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8935,7 +8935,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 97,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4145,
+            block_runtime_id: 5922,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8949,7 +8949,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 97,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4146,
+            block_runtime_id: 5923,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8963,7 +8963,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 97,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4147,
+            block_runtime_id: 5924,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8977,7 +8977,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 97,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4148,
+            block_runtime_id: 5925,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -8991,7 +8991,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 97,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4149,
+            block_runtime_id: 5926,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -9005,7 +9005,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -454,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4641,
+            block_runtime_id: 6806,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -9019,7 +9019,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 122,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7271,
+            block_runtime_id: 11449,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -9033,7 +9033,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -159,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7997,
+            block_runtime_id: 12175,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -9047,7 +9047,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -468,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4399,
+            block_runtime_id: 6180,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -9061,7 +9061,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -469,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6435,
+            block_runtime_id: 10193,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -9075,7 +9075,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -470,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6481,
+            block_runtime_id: 10251,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -9089,7 +9089,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -471,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3510,
+            block_runtime_id: 4519,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -9912,7 +9912,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 708,
           item: {
-            network_id: 454,
+            network_id: 652,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -9926,7 +9926,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 709,
           item: {
-            network_id: 456,
+            network_id: 454,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -9940,7 +9940,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 710,
           item: {
-            network_id: 469,
+            network_id: 456,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -9954,7 +9954,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 711,
           item: {
-            network_id: 474,
+            network_id: 469,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -9968,7 +9968,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 712,
           item: {
-            network_id: 475,
+            network_id: 474,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -9982,7 +9982,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 713,
           item: {
-            network_id: 476,
+            network_id: 475,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -9996,7 +9996,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 714,
           item: {
-            network_id: 449,
+            network_id: 476,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -10010,7 +10010,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 715,
           item: {
-            network_id: 492,
+            network_id: 449,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -10024,7 +10024,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 716,
           item: {
-            network_id: 477,
+            network_id: 492,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -10038,7 +10038,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 717,
           item: {
-            network_id: 486,
+            network_id: 477,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -10052,7 +10052,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 718,
           item: {
-            network_id: 491,
+            network_id: 486,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -10066,7 +10066,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 719,
           item: {
-            network_id: 493,
+            network_id: 491,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -10080,10 +10080,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 720,
           item: {
-            network_id: 49,
+            network_id: 493,
             count: 1,
             metadata: 0,
-            block_runtime_id: 428,
+            block_runtime_id: 0,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10094,10 +10094,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 721,
           item: {
-            network_id: -289,
+            network_id: 49,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6722,
+            block_runtime_id: 658,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10108,10 +10108,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 722,
           item: {
-            network_id: 7,
+            network_id: -289,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7017,
+            block_runtime_id: 10494,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10122,10 +10122,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 723,
           item: {
-            network_id: 88,
+            network_id: 7,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5831,
+            block_runtime_id: 10795,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10136,10 +10136,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 724,
           item: {
-            network_id: 87,
+            network_id: 88,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7037,
+            block_runtime_id: 8413,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10150,10 +10150,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 725,
           item: {
-            network_id: 213,
+            network_id: 87,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8009,
+            block_runtime_id: 10815,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10163,6 +10163,20 @@ class CreativeContent extends require("./Packet") {
         },
         {
           entry_id: 726,
+          item: {
+            network_id: 213,
+            count: 1,
+            metadata: 0,
+            block_runtime_id: 12187,
+            extra: {
+              has_nbt: 0,
+              can_place_on: [],
+              can_destroy: [],
+            },
+          },
+        },
+        {
+          entry_id: 727,
           item: {
             network_id: 294,
             count: 1,
@@ -10176,26 +10190,12 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 727,
+          entry_id: 728,
           item: {
             network_id: 121,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3836,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 728,
-          item: {
-            network_id: 200,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 4530,
+            block_runtime_id: 5613,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10206,10 +10206,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 729,
           item: {
-            network_id: 240,
+            network_id: 200,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5505,
+            block_runtime_id: 6311,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10219,6 +10219,20 @@ class CreativeContent extends require("./Packet") {
         },
         {
           entry_id: 730,
+          item: {
+            network_id: 240,
+            count: 1,
+            metadata: 0,
+            block_runtime_id: 8086,
+            extra: {
+              has_nbt: 0,
+              can_place_on: [],
+              can_destroy: [],
+            },
+          },
+        },
+        {
+          entry_id: 731,
           item: {
             network_id: 558,
             count: 1,
@@ -10232,7 +10246,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 731,
+          entry_id: 732,
           item: {
             network_id: 559,
             count: 1,
@@ -10246,26 +10260,12 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 732,
-          item: {
-            network_id: 19,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 629,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
           entry_id: 733,
           item: {
             network_id: 19,
             count: 1,
             metadata: 0,
-            block_runtime_id: 630,
+            block_runtime_id: 859,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10276,10 +10276,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 734,
           item: {
-            network_id: -132,
+            network_id: 19,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5237,
+            block_runtime_id: 860,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10293,7 +10293,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5238,
+            block_runtime_id: 7802,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10307,7 +10307,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5239,
+            block_runtime_id: 7803,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10321,7 +10321,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5240,
+            block_runtime_id: 7804,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10335,7 +10335,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5241,
+            block_runtime_id: 7805,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10349,7 +10349,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5242,
+            block_runtime_id: 7806,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10363,7 +10363,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5243,
+            block_runtime_id: 7807,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10377,7 +10377,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5244,
+            block_runtime_id: 7808,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10391,7 +10391,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5245,
+            block_runtime_id: 7809,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10405,7 +10405,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5246,
+            block_runtime_id: 7810,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10416,10 +10416,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 744,
           item: {
-            network_id: -458,
+            network_id: -132,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7036,
+            block_runtime_id: 7811,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10430,10 +10430,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 745,
           item: {
-            network_id: -459,
+            network_id: -458,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7132,
+            block_runtime_id: 10814,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10444,10 +10444,10 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 746,
           item: {
-            network_id: -460,
+            network_id: -459,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3613,
+            block_runtime_id: 11294,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10457,6 +10457,20 @@ class CreativeContent extends require("./Packet") {
         },
         {
           entry_id: 747,
+          item: {
+            network_id: -460,
+            count: 1,
+            metadata: 0,
+            block_runtime_id: 5006,
+            extra: {
+              has_nbt: 0,
+              can_place_on: [],
+              can_destroy: [],
+            },
+          },
+        },
+        {
+          entry_id: 748,
           item: {
             network_id: -461,
             count: 1,
@@ -10470,26 +10484,12 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 748,
+          entry_id: 749,
           item: {
             network_id: -307,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4389,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 749,
-          item: {
-            network_id: -466,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 5832,
+            block_runtime_id: 6170,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -10499,6 +10499,20 @@ class CreativeContent extends require("./Packet") {
         },
         {
           entry_id: 750,
+          item: {
+            network_id: -466,
+            count: 1,
+            metadata: 0,
+            block_runtime_id: 8798,
+            extra: {
+              has_nbt: 0,
+              can_place_on: [],
+              can_destroy: [],
+            },
+          },
+        },
+        {
+          entry_id: 751,
           item: {
             network_id: 335,
             count: 1,
@@ -10512,7 +10526,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 751,
+          entry_id: 752,
           item: {
             network_id: 339,
             count: 1,
@@ -10526,7 +10540,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 752,
+          entry_id: 753,
           item: {
             network_id: 343,
             count: 1,
@@ -10540,7 +10554,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 753,
+          entry_id: 754,
           item: {
             network_id: 351,
             count: 1,
@@ -10554,7 +10568,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 754,
+          entry_id: 755,
           item: {
             network_id: 347,
             count: 1,
@@ -10568,7 +10582,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 755,
+          entry_id: 756,
           item: {
             network_id: 609,
             count: 1,
@@ -10582,7 +10596,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 756,
+          entry_id: 757,
           item: {
             network_id: 336,
             count: 1,
@@ -10596,7 +10610,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 757,
+          entry_id: 758,
           item: {
             network_id: 340,
             count: 1,
@@ -10610,7 +10624,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 758,
+          entry_id: 759,
           item: {
             network_id: 344,
             count: 1,
@@ -10624,7 +10638,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 759,
+          entry_id: 760,
           item: {
             network_id: 352,
             count: 1,
@@ -10638,7 +10652,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 760,
+          entry_id: 761,
           item: {
             network_id: 348,
             count: 1,
@@ -10652,7 +10666,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 761,
+          entry_id: 762,
           item: {
             network_id: 610,
             count: 1,
@@ -10666,7 +10680,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 762,
+          entry_id: 763,
           item: {
             network_id: 337,
             count: 1,
@@ -10680,7 +10694,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 763,
+          entry_id: 764,
           item: {
             network_id: 341,
             count: 1,
@@ -10694,7 +10708,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 764,
+          entry_id: 765,
           item: {
             network_id: 345,
             count: 1,
@@ -10708,7 +10722,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 765,
+          entry_id: 766,
           item: {
             network_id: 353,
             count: 1,
@@ -10722,7 +10736,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 766,
+          entry_id: 767,
           item: {
             network_id: 349,
             count: 1,
@@ -10736,7 +10750,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 767,
+          entry_id: 768,
           item: {
             network_id: 611,
             count: 1,
@@ -10750,7 +10764,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 768,
+          entry_id: 769,
           item: {
             network_id: 338,
             count: 1,
@@ -10764,7 +10778,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 769,
+          entry_id: 770,
           item: {
             network_id: 342,
             count: 1,
@@ -10778,7 +10792,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 770,
+          entry_id: 771,
           item: {
             network_id: 346,
             count: 1,
@@ -10792,7 +10806,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 771,
+          entry_id: 772,
           item: {
             network_id: 354,
             count: 1,
@@ -10806,7 +10820,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 772,
+          entry_id: 773,
           item: {
             network_id: 350,
             count: 1,
@@ -10820,7 +10834,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 773,
+          entry_id: 774,
           item: {
             network_id: 612,
             count: 1,
@@ -10834,7 +10848,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 774,
+          entry_id: 775,
           item: {
             network_id: 308,
             count: 1,
@@ -10848,7 +10862,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 775,
+          entry_id: 776,
           item: {
             network_id: 312,
             count: 1,
@@ -10862,7 +10876,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 776,
+          entry_id: 777,
           item: {
             network_id: 307,
             count: 1,
@@ -10876,7 +10890,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 777,
+          entry_id: 778,
           item: {
             network_id: 322,
             count: 1,
@@ -10890,7 +10904,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 778,
+          entry_id: 779,
           item: {
             network_id: 316,
             count: 1,
@@ -10904,7 +10918,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 779,
+          entry_id: 780,
           item: {
             network_id: 604,
             count: 1,
@@ -10918,7 +10932,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 780,
+          entry_id: 781,
           item: {
             network_id: 311,
             count: 1,
@@ -10932,7 +10946,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 781,
+          entry_id: 782,
           item: {
             network_id: 315,
             count: 1,
@@ -10946,7 +10960,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 782,
+          entry_id: 783,
           item: {
             network_id: 298,
             count: 1,
@@ -10960,7 +10974,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 783,
+          entry_id: 784,
           item: {
             network_id: 325,
             count: 1,
@@ -10974,7 +10988,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 784,
+          entry_id: 785,
           item: {
             network_id: 319,
             count: 1,
@@ -10988,7 +11002,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 785,
+          entry_id: 786,
           item: {
             network_id: 607,
             count: 1,
@@ -11002,7 +11016,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 786,
+          entry_id: 787,
           item: {
             network_id: 310,
             count: 1,
@@ -11016,7 +11030,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 787,
+          entry_id: 788,
           item: {
             network_id: 314,
             count: 1,
@@ -11030,7 +11044,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 788,
+          entry_id: 789,
           item: {
             network_id: 297,
             count: 1,
@@ -11044,7 +11058,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 789,
+          entry_id: 790,
           item: {
             network_id: 324,
             count: 1,
@@ -11058,7 +11072,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 790,
+          entry_id: 791,
           item: {
             network_id: 318,
             count: 1,
@@ -11072,7 +11086,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 791,
+          entry_id: 792,
           item: {
             network_id: 606,
             count: 1,
@@ -11086,7 +11100,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 792,
+          entry_id: 793,
           item: {
             network_id: 309,
             count: 1,
@@ -11100,7 +11114,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 793,
+          entry_id: 794,
           item: {
             network_id: 313,
             count: 1,
@@ -11114,7 +11128,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 794,
+          entry_id: 795,
           item: {
             network_id: 296,
             count: 1,
@@ -11128,7 +11142,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 795,
+          entry_id: 796,
           item: {
             network_id: 323,
             count: 1,
@@ -11142,7 +11156,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 796,
+          entry_id: 797,
           item: {
             network_id: 317,
             count: 1,
@@ -11156,7 +11170,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 797,
+          entry_id: 798,
           item: {
             network_id: 605,
             count: 1,
@@ -11170,7 +11184,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 798,
+          entry_id: 799,
           item: {
             network_id: 329,
             count: 1,
@@ -11184,7 +11198,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 799,
+          entry_id: 800,
           item: {
             network_id: 330,
             count: 1,
@@ -11198,7 +11212,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 800,
+          entry_id: 801,
           item: {
             network_id: 331,
             count: 1,
@@ -11212,7 +11226,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 801,
+          entry_id: 802,
           item: {
             network_id: 333,
             count: 1,
@@ -11226,7 +11240,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 802,
+          entry_id: 803,
           item: {
             network_id: 332,
             count: 1,
@@ -11240,7 +11254,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 803,
+          entry_id: 804,
           item: {
             network_id: 608,
             count: 1,
@@ -11254,7 +11268,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 804,
+          entry_id: 805,
           item: {
             network_id: 300,
             count: 1,
@@ -11268,23 +11282,9 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 805,
-          item: {
-            network_id: 575,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
           entry_id: 806,
           item: {
-            network_id: 301,
+            network_id: 575,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -11300,7 +11300,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 6,
+            metadata: 0,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11314,7 +11314,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 7,
+            metadata: 6,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11328,7 +11328,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 8,
+            metadata: 7,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11342,7 +11342,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 9,
+            metadata: 8,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11356,7 +11356,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 10,
+            metadata: 9,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11370,7 +11370,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 11,
+            metadata: 10,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11384,7 +11384,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 12,
+            metadata: 11,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11398,7 +11398,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 13,
+            metadata: 12,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11412,7 +11412,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 14,
+            metadata: 13,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11426,7 +11426,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 15,
+            metadata: 14,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11440,7 +11440,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 16,
+            metadata: 15,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11454,7 +11454,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 17,
+            metadata: 16,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11468,7 +11468,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 18,
+            metadata: 17,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11482,7 +11482,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 19,
+            metadata: 18,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11496,7 +11496,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 20,
+            metadata: 19,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11510,7 +11510,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 21,
+            metadata: 20,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11524,7 +11524,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 22,
+            metadata: 21,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11538,7 +11538,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 23,
+            metadata: 22,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11552,7 +11552,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 24,
+            metadata: 23,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11566,7 +11566,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 25,
+            metadata: 24,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11580,7 +11580,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 26,
+            metadata: 25,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11594,7 +11594,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 27,
+            metadata: 26,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11608,7 +11608,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 28,
+            metadata: 27,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11622,7 +11622,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 29,
+            metadata: 28,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11636,7 +11636,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 30,
+            metadata: 29,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11650,7 +11650,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 31,
+            metadata: 30,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11664,7 +11664,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 32,
+            metadata: 31,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11678,7 +11678,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 33,
+            metadata: 32,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11692,7 +11692,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 34,
+            metadata: 33,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11706,7 +11706,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 35,
+            metadata: 34,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11720,7 +11720,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 36,
+            metadata: 35,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11734,7 +11734,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 37,
+            metadata: 36,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11748,7 +11748,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 38,
+            metadata: 37,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11762,7 +11762,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 39,
+            metadata: 38,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11776,7 +11776,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 40,
+            metadata: 39,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11790,7 +11790,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 41,
+            metadata: 40,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11804,7 +11804,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 42,
+            metadata: 41,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11818,7 +11818,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 301,
             count: 1,
-            metadata: 43,
+            metadata: 42,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -11829,6 +11829,20 @@ class CreativeContent extends require("./Packet") {
         },
         {
           entry_id: 845,
+          item: {
+            network_id: 301,
+            count: 1,
+            metadata: 43,
+            block_runtime_id: 0,
+            extra: {
+              has_nbt: 0,
+              can_place_on: [],
+              can_destroy: [],
+            },
+          },
+        },
+        {
+          entry_id: 846,
           item: {
             network_id: 355,
             count: 1,
@@ -11843,7 +11857,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 846,
+          entry_id: 847,
           item: {
             network_id: 276,
             count: 1,
@@ -11857,7 +11871,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 847,
+          entry_id: 848,
           item: {
             network_id: 263,
             count: 1,
@@ -11871,7 +11885,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 848,
+          entry_id: 849,
           item: {
             network_id: 274,
             count: 1,
@@ -11885,7 +11899,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 849,
+          entry_id: 850,
           item: {
             network_id: 551,
             count: 1,
@@ -11899,7 +11913,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 850,
+          entry_id: 851,
           item: {
             network_id: 289,
             count: 1,
@@ -11913,7 +11927,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 851,
+          entry_id: 852,
           item: {
             network_id: 268,
             count: 1,
@@ -11927,7 +11941,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 852,
+          entry_id: 853,
           item: {
             network_id: 269,
             count: 1,
@@ -11941,7 +11955,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 853,
+          entry_id: 854,
           item: {
             network_id: 261,
             count: 1,
@@ -11955,7 +11969,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 854,
+          entry_id: 855,
           item: {
             network_id: 260,
             count: 1,
@@ -11969,7 +11983,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 855,
+          entry_id: 856,
           item: {
             network_id: 286,
             count: 1,
@@ -11983,7 +11997,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 856,
+          entry_id: 857,
           item: {
             network_id: 290,
             count: 1,
@@ -11997,7 +12011,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 857,
+          entry_id: 858,
           item: {
             network_id: 281,
             count: 1,
@@ -12011,7 +12025,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 858,
+          entry_id: 859,
           item: {
             network_id: 271,
             count: 1,
@@ -12025,7 +12039,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 859,
+          entry_id: 860,
           item: {
             network_id: 284,
             count: 1,
@@ -12039,7 +12053,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 860,
+          entry_id: 861,
           item: {
             network_id: 417,
             count: 1,
@@ -12053,7 +12067,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 861,
+          entry_id: 862,
           item: {
             network_id: 270,
             count: 1,
@@ -12067,7 +12081,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 862,
+          entry_id: 863,
           item: {
             network_id: 392,
             count: 1,
@@ -12081,7 +12095,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 863,
+          entry_id: 864,
           item: {
             network_id: 517,
             count: 1,
@@ -12095,7 +12109,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 864,
+          entry_id: 865,
           item: {
             network_id: 618,
             count: 1,
@@ -12109,7 +12123,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 865,
+          entry_id: 866,
           item: {
             network_id: 374,
             count: 1,
@@ -12123,7 +12137,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 866,
+          entry_id: 867,
           item: {
             network_id: 421,
             count: 1,
@@ -12137,7 +12151,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 867,
+          entry_id: 868,
           item: {
             network_id: 299,
             count: 1,
@@ -12151,7 +12165,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 868,
+          entry_id: 869,
           item: {
             network_id: 547,
             count: 1,
@@ -12165,7 +12179,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 869,
+          entry_id: 870,
           item: {
             network_id: 393,
             count: 1,
@@ -12179,7 +12193,7 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 870,
+          entry_id: 871,
           item: {
             network_id: 391,
             count: 1,
@@ -12193,23 +12207,9 @@ class CreativeContent extends require("./Packet") {
           },
         },
         {
-          entry_id: 871,
-          item: {
-            network_id: 646,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
           entry_id: 872,
           item: {
-            network_id: 627,
+            network_id: 650,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -12225,7 +12225,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 627,
             count: 1,
-            metadata: 1,
+            metadata: 0,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12239,7 +12239,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 627,
             count: 1,
-            metadata: 2,
+            metadata: 1,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12253,7 +12253,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 627,
             count: 1,
-            metadata: 3,
+            metadata: 2,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12267,7 +12267,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 627,
             count: 1,
-            metadata: 4,
+            metadata: 3,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12281,7 +12281,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 627,
             count: 1,
-            metadata: 5,
+            metadata: 4,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12295,7 +12295,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 627,
             count: 1,
-            metadata: 6,
+            metadata: 5,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12309,7 +12309,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 627,
             count: 1,
-            metadata: 7,
+            metadata: 6,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12321,9 +12321,9 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 880,
           item: {
-            network_id: 515,
+            network_id: 627,
             count: 1,
-            metadata: 0,
+            metadata: 7,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12337,7 +12337,7 @@ class CreativeContent extends require("./Packet") {
           item: {
             network_id: 515,
             count: 1,
-            metadata: 2,
+            metadata: 0,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12349,9 +12349,9 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 882,
           item: {
-            network_id: 371,
+            network_id: 515,
             count: 1,
-            metadata: 0,
+            metadata: 2,
             block_runtime_id: 0,
             extra: {
               has_nbt: 0,
@@ -12363,7 +12363,15 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 883,
           item: {
-            network_id: 0,
+            network_id: 371,
+            count: 1,
+            metadata: 0,
+            block_runtime_id: 0,
+            extra: {
+              has_nbt: 0,
+              can_place_on: [],
+              can_destroy: [],
+            },
           },
         },
         {
@@ -14570,7 +14578,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 50,
             count: 1,
             metadata: 0,
-            block_runtime_id: 724,
+            block_runtime_id: 1347,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14584,7 +14592,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -268,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4644,
+            block_runtime_id: 6809,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14598,7 +14606,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -156,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5855,
+            block_runtime_id: 8821,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14612,7 +14620,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -208,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7074,
+            block_runtime_id: 10852,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14626,7 +14634,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -269,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5749,
+            block_runtime_id: 8331,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14640,7 +14648,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -412,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7403,
+            block_runtime_id: 11581,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14654,7 +14662,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -413,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5300,
+            block_runtime_id: 7881,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14668,7 +14676,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -414,
             count: 1,
             metadata: 0,
-            block_runtime_id: 362,
+            block_runtime_id: 592,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14682,7 +14690,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -415,
             count: 1,
             metadata: 0,
-            block_runtime_id: 418,
+            block_runtime_id: 648,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14696,7 +14704,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -416,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4569,
+            block_runtime_id: 6350,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14710,7 +14718,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -417,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6192,
+            block_runtime_id: 9942,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14724,7 +14732,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -418,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6368,
+            block_runtime_id: 10126,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14738,7 +14746,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -419,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7370,
+            block_runtime_id: 11548,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14752,7 +14760,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -420,
             count: 1,
             metadata: 0,
-            block_runtime_id: 939,
+            block_runtime_id: 1562,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14766,7 +14774,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -421,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6224,
+            block_runtime_id: 9982,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14780,7 +14788,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -422,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7726,
+            block_runtime_id: 11904,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14794,7 +14802,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -423,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7038,
+            block_runtime_id: 10816,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14822,7 +14830,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -425,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5875,
+            block_runtime_id: 9225,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14836,7 +14844,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -426,
             count: 1,
             metadata: 0,
-            block_runtime_id: 686,
+            block_runtime_id: 1301,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14850,7 +14858,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -427,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4681,
+            block_runtime_id: 6846,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14878,7 +14886,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 58,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5854,
+            block_runtime_id: 8820,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14892,7 +14900,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -200,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8288,
+            block_runtime_id: 12467,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14906,7 +14914,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -201,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5833,
+            block_runtime_id: 8799,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14920,7 +14928,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -202,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3726,
+            block_runtime_id: 5119,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14934,7 +14942,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -219,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6108,
+            block_runtime_id: 9858,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14976,7 +14984,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 61,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7802,
+            block_runtime_id: 11980,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -14990,7 +14998,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -196,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7567,
+            block_runtime_id: 11745,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15004,7 +15012,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -198,
             count: 1,
             metadata: 0,
-            block_runtime_id: 647,
+            block_runtime_id: 1262,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15018,7 +15026,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -272,
             count: 1,
             metadata: 0,
-            block_runtime_id: 681,
+            block_runtime_id: 1296,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15046,7 +15054,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 145,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6634,
+            block_runtime_id: 10406,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15060,7 +15068,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 145,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6638,
+            block_runtime_id: 10410,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15074,7 +15082,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 145,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6642,
+            block_runtime_id: 10414,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15088,7 +15096,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -195,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8039,
+            block_runtime_id: 12217,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15102,7 +15110,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 116,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6723,
+            block_runtime_id: 10495,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15116,7 +15124,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 47,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6671,
+            block_runtime_id: 10443,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15130,7 +15138,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -194,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6940,
+            block_runtime_id: 10718,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15158,7 +15166,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -213,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5415,
+            block_runtime_id: 7996,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15172,7 +15180,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 54,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7115,
+            block_runtime_id: 10893,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15186,7 +15194,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 146,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5583,
+            block_runtime_id: 8164,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15200,7 +15208,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 130,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4369,
+            block_runtime_id: 6150,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15214,7 +15222,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -203,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4518,
+            block_runtime_id: 6299,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15228,7 +15236,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 205,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3681,
+            block_runtime_id: 5074,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15242,7 +15250,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5316,
+            block_runtime_id: 7897,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15256,7 +15264,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5324,
+            block_runtime_id: 7905,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15270,7 +15278,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5323,
+            block_runtime_id: 7904,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15284,7 +15292,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5331,
+            block_runtime_id: 7912,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15298,7 +15306,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5328,
+            block_runtime_id: 7909,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15312,7 +15320,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5330,
+            block_runtime_id: 7911,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15326,7 +15334,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5317,
+            block_runtime_id: 7898,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15340,7 +15348,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5320,
+            block_runtime_id: 7901,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15354,7 +15362,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5321,
+            block_runtime_id: 7902,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15368,7 +15376,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5329,
+            block_runtime_id: 7910,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15382,7 +15390,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5325,
+            block_runtime_id: 7906,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15396,7 +15404,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5319,
+            block_runtime_id: 7900,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15410,7 +15418,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5327,
+            block_runtime_id: 7908,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15424,7 +15432,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5326,
+            block_runtime_id: 7907,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15438,7 +15446,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5318,
+            block_runtime_id: 7899,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15452,7 +15460,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 218,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5322,
+            block_runtime_id: 7903,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15480,7 +15488,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 25,
             count: 1,
             metadata: 0,
-            block_runtime_id: 346,
+            block_runtime_id: 576,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15494,7 +15502,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 84,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4874,
+            block_runtime_id: 7423,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15687,7 +15695,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1121,
           item: {
-            network_id: 636,
+            network_id: 639,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -15715,7 +15723,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1123,
           item: {
-            network_id: 637,
+            network_id: 640,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -15746,7 +15754,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 89,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3885,
+            block_runtime_id: 5662,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15774,7 +15782,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 169,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7546,
+            block_runtime_id: 11724,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -15869,7 +15877,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1134,
           item: {
-            network_id: 634,
+            network_id: 635,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -16250,7 +16258,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -206,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6908,
+            block_runtime_id: 10686,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -16264,7 +16272,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -157,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4232,
+            block_runtime_id: 6011,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -16278,7 +16286,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -197,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7574,
+            block_runtime_id: 11752,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -16292,7 +16300,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 120,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6077,
+            block_runtime_id: 9811,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -16821,7 +16829,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1202,
           item: {
-            network_id: 647,
+            network_id: 651,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -16936,7 +16944,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 208,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5891,
+            block_runtime_id: 9241,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -16950,7 +16958,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -312,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1176,
+            block_runtime_id: 1799,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -16961,7 +16969,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1212,
           item: {
-            network_id: 652,
+            network_id: 657,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -21611,7 +21619,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1332,
           item: {
-            network_id: 635,
+            network_id: 636,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -21625,7 +21633,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1333,
           item: {
-            network_id: 638,
+            network_id: 641,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -21639,7 +21647,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1334,
           item: {
-            network_id: 641,
+            network_id: 644,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -21653,7 +21661,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1335,
           item: {
-            network_id: 639,
+            network_id: 642,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -21667,7 +21675,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1336,
           item: {
-            network_id: 640,
+            network_id: 643,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -21681,7 +21689,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1337,
           item: {
-            network_id: 642,
+            network_id: 645,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -21695,7 +21703,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1338,
           item: {
-            network_id: 643,
+            network_id: 646,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -21709,7 +21717,7 @@ class CreativeContent extends require("./Packet") {
         {
           entry_id: 1339,
           item: {
-            network_id: 644,
+            network_id: 647,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,
@@ -21726,7 +21734,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 66,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3920,
+            block_runtime_id: 5697,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21740,7 +21748,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 27,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5332,
+            block_runtime_id: 7913,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21754,7 +21762,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 28,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4132,
+            block_runtime_id: 5909,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21768,7 +21776,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 126,
             count: 1,
             metadata: 0,
-            block_runtime_id: 309,
+            block_runtime_id: 537,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21852,7 +21860,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 152,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3776,
+            block_runtime_id: 5169,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21866,7 +21874,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 76,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3525,
+            block_runtime_id: 4534,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21880,7 +21888,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 69,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6514,
+            block_runtime_id: 10284,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21894,7 +21902,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 143,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6391,
+            block_runtime_id: 10149,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21908,7 +21916,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -144,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4321,
+            block_runtime_id: 6102,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21922,7 +21930,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -141,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7766,
+            block_runtime_id: 11944,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21950,7 +21958,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -140,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7231,
+            block_runtime_id: 11409,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21978,7 +21986,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -487,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7062,
+            block_runtime_id: 10840,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -21992,7 +22000,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 77,
             count: 1,
             metadata: 0,
-            block_runtime_id: 596,
+            block_runtime_id: 826,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22006,7 +22014,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -260,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4432,
+            block_runtime_id: 6213,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22020,7 +22028,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -261,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7250,
+            block_runtime_id: 11428,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22034,7 +22042,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -296,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7790,
+            block_runtime_id: 11968,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22048,7 +22056,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 131,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5914,
+            block_runtime_id: 9264,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22062,7 +22070,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 72,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8063,
+            block_runtime_id: 12241,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22076,7 +22084,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -154,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3759,
+            block_runtime_id: 5152,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22090,7 +22098,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -151,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3555,
+            block_runtime_id: 4948,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22104,7 +22112,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -153,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3635,
+            block_runtime_id: 5028,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22118,7 +22126,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -150,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5247,
+            block_runtime_id: 7812,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22132,7 +22140,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -152,
             count: 1,
             metadata: 0,
-            block_runtime_id: 5956,
+            block_runtime_id: 9306,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22146,7 +22154,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -490,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3869,
+            block_runtime_id: 5646,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22160,7 +22168,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -262,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8268,
+            block_runtime_id: 12447,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22188,7 +22196,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 70,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3886,
+            block_runtime_id: 5663,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22202,7 +22210,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 147,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3665,
+            block_runtime_id: 5058,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22216,7 +22224,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 148,
             count: 1,
             metadata: 0,
-            block_runtime_id: 1160,
+            block_runtime_id: 1783,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22230,7 +22238,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -295,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6232,
+            block_runtime_id: 9990,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22244,7 +22252,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 251,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3513,
+            block_runtime_id: 4522,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22258,7 +22266,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 151,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4197,
+            block_runtime_id: 5976,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22314,7 +22322,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 125,
             count: 1,
             metadata: 0,
-            block_runtime_id: 7385,
+            block_runtime_id: 11563,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22328,7 +22336,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 23,
             count: 1,
             metadata: 0,
-            block_runtime_id: 8013,
+            block_runtime_id: 12191,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22342,7 +22350,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 33,
             count: 1,
             metadata: 0,
-            block_runtime_id: 922,
+            block_runtime_id: 1545,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22356,7 +22364,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 29,
             count: 1,
             metadata: 0,
-            block_runtime_id: 4364,
+            block_runtime_id: 6145,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22370,7 +22378,7 @@ class CreativeContent extends require("./Packet") {
             network_id: 46,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6707,
+            block_runtime_id: 10479,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -22398,7 +22406,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -204,
             count: 1,
             metadata: 0,
-            block_runtime_id: 3826,
+            block_runtime_id: 5603,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -24652,7 +24660,7 @@ class CreativeContent extends require("./Packet") {
             network_id: -239,
             count: 1,
             metadata: 0,
-            block_runtime_id: 6390,
+            block_runtime_id: 10148,
             extra: {
               has_nbt: 0,
               can_place_on: [],
@@ -24664,370 +24672,6 @@ class CreativeContent extends require("./Packet") {
           entry_id: 1449,
           item: {
             network_id: 602,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1450,
-          item: {
-            network_id: 68,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1451,
-          item: {
-            network_id: 74,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1452,
-          item: {
-            network_id: 75,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1453,
-          item: {
-            network_id: 76,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1454,
-          item: {
-            network_id: 95,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1455,
-          item: {
-            network_id: 137,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1456,
-          item: {
-            network_id: 141,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1457,
-          item: {
-            network_id: 142,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1458,
-          item: {
-            network_id: 188,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1459,
-          item: {
-            network_id: 189,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1460,
-          item: {
-            network_id: 192,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1461,
-          item: {
-            network_id: 192,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1462,
-          item: {
-            network_id: 209,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1463,
-          item: {
-            network_id: 210,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1464,
-          item: {
-            network_id: 211,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1465,
-          item: {
-            network_id: 212,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1466,
-          item: {
-            network_id: 217,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1467,
-          item: {
-            network_id: 244,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1468,
-          item: {
-            network_id: 245,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1469,
-          item: {
-            network_id: 246,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1470,
-          item: {
-            network_id: 247,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1471,
-          item: {
-            network_id: 248,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1472,
-          item: {
-            network_id: 249,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1473,
-          item: {
-            network_id: 250,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1474,
-          item: {
-            network_id: 252,
-            count: 1,
-            metadata: 0,
-            block_runtime_id: 0,
-            extra: {
-              has_nbt: 0,
-              can_place_on: [],
-              can_destroy: [],
-            },
-          },
-        },
-        {
-          entry_id: 1475,
-          item: {
-            network_id: 255,
             count: 1,
             metadata: 0,
             block_runtime_id: 0,

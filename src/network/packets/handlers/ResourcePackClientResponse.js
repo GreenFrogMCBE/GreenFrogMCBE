@@ -145,8 +145,9 @@ class ResourcePackClientResponse extends Handler {
         }
 
         setInterval(() => {
-          if (!client.offline)
+          if (!client.offline) {
             new NetworkChunkPublisherUpdate().writePacket(client);
+          }
         }, 50);
 
         Logger.log(lang.spawned.replace("%player%", client.username));
@@ -156,7 +157,7 @@ class ResourcePackClientResponse extends Handler {
         }, 2000);
 
         setTimeout(() => {
-          if (client.offline) return;
+          if (!client.offline) return;
           for (let i = 0; i < new PlayerInfo().getPlayers().length; i++) {
             new PlayerInfo()
               .getPlayers()

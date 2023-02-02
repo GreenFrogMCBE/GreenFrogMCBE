@@ -18,16 +18,16 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 ## How to install
 
 1. Clone this repo
-2. Do 'npm i'
-3. Run 'npm run'
+2. Do `npm i`
+3. Run `npm run`
 
 ## Debugging
 
-Run npm run debug
+Run `npm run debug`
 
-## "Building"
+## Building
 
-Run npm run build
+Run `npm run build`
 
 This formats the code and enables debug mode
 
@@ -37,7 +37,7 @@ Step 1. Open powershell as an admin
 
 Step 2. Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
 
-Step 3. Join via 172.0.0.1 if it does not work join with your local IP from router settings
+Step 3. Join via `172.0.0.1` if it does not work join with your local IP from router settings
 
 ## Plugins available for public usage
 
