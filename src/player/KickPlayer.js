@@ -1,14 +1,13 @@
-const lang = require('../api/ServerInfo').lang
+const lang = require("../api/ServerInfo").lang;
 
 class KickPlayer {
+  constructor() {}
 
-    constructor() { }
+  kick(client, reason = lang.youweredisconnected) {
+    if (!client) throw new Error(lang.apikicknoclient);
 
-    kick(client, reason = lang.youweredisconnected) {
-        if (!client) throw new Error(lang.apikicknoclient)
-        
-        client.kick(reason)
-    }
+    client.kick(reason);
+  }
 }
 
 module.exports = KickPlayer;

@@ -11,8 +11,9 @@ class Logger {
    */
   log(message, type = "info") {
     const d = new Date();
-    const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1
-      }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
+    const dStr = `${d.getUTCFullYear()}-${
+      d.getUTCMonth() + 1
+    }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
     switch (type) {
       case "info":
         console.log(`[${dStr} \x1b[32m${lang.info}\x1b[0m] ${message}`);
@@ -26,10 +27,11 @@ class Logger {
         console.log(`[${dStr} \x1b[31m${lang.error}\x1b[0m] ${message}`);
         break;
       case "debug":
-        if (config.debug) console.log(`[${dStr} \x1b[90m${lang.debug}\x1b[0m] ${message}`);
+        if (config.debug)
+          console.log(`[${dStr} \x1b[90m${lang.debug}\x1b[0m] ${message}`);
         break;
       default:
-        throw new Error("Invalid log level")
+        throw new Error("Invalid log level");
     }
   }
 
@@ -43,8 +45,9 @@ class Logger {
    */
   pluginLog(type = "info", plugin, message, prefix = "", suffix = "") {
     const d = new Date();
-    const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1
-      }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
+    const dStr = `${d.getUTCFullYear()}-${
+      d.getUTCMonth() + 1
+    }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
 
     switch (type) {
       case "info":
@@ -60,10 +63,15 @@ class Logger {
         break;
       case "error":
       case "err":
-        console.log(`[${dStr} ${lang.error}] ${prefix}${plugin}${suffix} ${message}`);
+        console.log(
+          `[${dStr} ${lang.error}] ${prefix}${plugin}${suffix} ${message}`
+        );
         break;
       case "debug":
-        if (config.debug) console.log(`[${dStr} \x1b[32m${lang.debug}\x1b[0m] ${prefix}${plugin}${suffix} ${message}`);
+        if (config.debug)
+          console.log(
+            `[${dStr} \x1b[32m${lang.debug}\x1b[0m] ${prefix}${plugin}${suffix} ${message}`
+          );
         break;
       default:
         throw new Error("Invalid log level");

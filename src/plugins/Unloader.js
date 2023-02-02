@@ -1,37 +1,39 @@
 /* It shuts down the plugins. */
-const fs = require('fs')
-const ServerInfo = require('../server/ServerInfo')
-const log = require('../server/Logger');
-const Logger = new log()
+const fs = require("fs");
+const ServerInfo = require("../server/ServerInfo");
+const log = require("../server/Logger");
+const Logger = new log();
 
 class Unloader {
+  constructor() {}
 
-    constructor() { }
+  /* Shuts down the plugins. */
+  shutdown() {
+    const lang = ServerInfo.lang;
+    const config = ServerInfo.config;
 
-    /* Shuts down the plugins. */
-    shutdown() {
-        const lang = ServerInfo.lang
-        const config = ServerInfo.config
+    fs.readdir("./plugins", (err, plugins) => {
+      Logger.log(lang.shuttingDownPlugins);
+      try {
+        plugins.forEach((plugin) => {
+          try {
+            require(`../../plugins/${plugin}`).prototype.getName();
+          } catch (e) {
+            Logger.log(
+              lang.failedtoshutdownplugin.replace("%plugin%", plugin),
+              "error"
+            );
+          }
 
-        fs.readdir("./plugins", (err, plugins) => {
-            Logger.log(lang.shuttingDownPlugins)
-            try {
-                plugins.forEach(plugin => {
-                    try {
-                        require(`../../plugins/${plugin}`).prototype.getName()
-                    } catch (e) {
-                        Logger.log(lang.failedtoshutdownplugin.replace('%plugin%', plugin), 'error')
-                    }
-
-                    require(`../../plugins/${plugin}`).prototype.onShutdown()
-                });
-            } finally {
-                Logger.log(lang.doneShuttingDownPlugins)
-                Logger.log(lang.doneShuttingDown)
-                process.exit(config.exitstatuscode)
-            }
+          require(`../../plugins/${plugin}`).prototype.onShutdown();
         });
-    }
+      } finally {
+        Logger.log(lang.doneShuttingDownPlugins);
+        Logger.log(lang.doneShuttingDown);
+        process.exit(config.exitstatuscode);
+      }
+    });
+  }
 }
 
 module.exports = Unloader;

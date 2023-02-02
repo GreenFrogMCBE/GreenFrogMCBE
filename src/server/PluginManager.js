@@ -1,28 +1,28 @@
 /* It's a class that manages plugins */
-let plugins = []
+let plugins = [];
 
 class PluginManager {
-    constructor() { }
+  constructor() {}
 
-    /**
-     * GetPlugins() {
-     *         return plugins
-     * }
-     * @returns The plugins array.
-     */
-    getPlugins() {
-        return plugins
-    }
+  /**
+   * GetPlugins() {
+   *         return plugins
+   * }
+   * @returns The plugins array.
+   */
+  getPlugins() {
+    return plugins;
+  }
 
-    /**
-     * AddPlugin(name) {
-     *         plugins.push(name)
-     * }
-     * @param name - The name of the plugin.
-     */
-    addPlugin(name) {
-        plugins.push(name)
-    }
+  /**
+   * AddPlugin(name) {
+   *         plugins.push(name)
+   * }
+   * @param name - The name of the plugin.
+   */
+  addPlugin(name) {
+    plugins.push(name);
+  }
 }
 
-module.exports = PluginManager
+module.exports = PluginManager;

@@ -1,7 +1,7 @@
 /* It loads plugins. */
 const fs = require("fs");
-const log = require('../server/Logger');
-const Logger = new log()
+const log = require("../server/Logger");
+const Logger = new log();
 const CheckPluginFolder = require("../plugins/CheckPluginFolder");
 const ServerInfo = require("../server/ServerInfo");
 const PluginManager = require("../server/PluginManager");
@@ -9,13 +9,13 @@ const lang = ServerInfo.lang;
 const CCS = require("../server/ConsoleCommandSender");
 
 class Loader {
-  constructor() { }
+  constructor() {}
 
   /**
    * It loads all the plugins in the plugins folder.
    */
   async loadPlugins() {
-    Logger.log(lang.loadingPlugins)
+    Logger.log(lang.loadingPlugins);
 
     CheckPluginFolder.prototype.check();
 
@@ -25,9 +25,21 @@ class Loader {
           try {
             this.loadPlugin(plugin);
           } catch (e) {
-            Logger.log(lang.failedToLoadPlugin.replace('%name%', plugin).replace('%errorstack%', e.stack), "error")
+            Logger.log(
+              lang.failedToLoadPlugin
+                .replace("%name%", plugin)
+                .replace("%errorstack%", e.stack),
+              "error"
+            );
           } finally {
-            Logger.log(lang.loadedPlugin.replace('%name%', plugin).replace('%version%', require(`../../plugins/${plugin}`).prototype.getVersion()))
+            Logger.log(
+              lang.loadedPlugin
+                .replace("%name%", plugin)
+                .replace(
+                  "%version%",
+                  require(`../../plugins/${plugin}`).prototype.getVersion()
+                )
+            );
           }
         });
       } finally {
@@ -47,7 +59,10 @@ class Loader {
     require(`../../plugins/${plugin}`).prototype.getVersion();
 
     try {
-      if (require(`../../plugins/${plugin}`).prototype.getServerVersion() == !ServerInfo.majorserverversion) {
+      if (
+        require(`../../plugins/${plugin}`).prototype.getServerVersion() ==
+        !ServerInfo.majorserverversion
+      ) {
         Logger.log(
           lang.tpismf
             .replace(
@@ -63,10 +78,15 @@ class Loader {
         );
       }
     } catch (e) {
-      Logger.log(lang.pluginHasNoGetServerVersion.replace("%plugin%", plugin), "warning");
+      Logger.log(
+        lang.pluginHasNoGetServerVersion.replace("%plugin%", plugin),
+        "warning"
+      );
     }
 
-    PluginManager.prototype.addPlugin(require(`../../plugins/${plugin}`).prototype.getName());
+    PluginManager.prototype.addPlugin(
+      require(`../../plugins/${plugin}`).prototype.getName()
+    );
 
     require(`../../plugins/${plugin}`).prototype.onLoad();
   }
