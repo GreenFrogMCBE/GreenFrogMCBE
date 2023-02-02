@@ -1,16 +1,12 @@
-const { exec } = require('node:child_process');
+/* This file starts the server */
+const Frog = require('./src/Server.js')
 
-async function loadBP() {
-    try {
-        require('bedrock-protocol')
-    } catch (e) {
-        console.log(`Error: No bedrock-protocol found! Installing...`)
-        await exec(`npm i bedrock-protocol`, () => { });
-    }
+try {
+    new Frog().start()
+} catch (e) {
+    console.error("Failed to start the server")
+    console.error("The error was: ")
+    console.error(e.stack)
+    console.error(`Make sure that you have the required libraries. Run npm i to install them`)
+    console.error("If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE")
 }
-
-if (process.platform === 'win32') {
-    exec(`powershell /c CheckNetIsolation LoopbackExempt -a -n=Microsoft.MinecraftUWP_8wekyb3d8bbwe`, () => { });
-}
-
-require('./src/Server.js')

@@ -5,10 +5,7 @@
   <img alt="License" src="https://img.shields.io/github/license/andriycraft/GreenFrogMCBE">
 </a>
 <a href="https://github.com/andriycraft/GreenFrogMCBE/commits/main">
-  <img alt="GitHub commit activity (main)" src="https://img.shields.io/github/commit-activity/m/andriycraft/GreenFrogMCBE?color=%2387F4BC&style=flat-square">
-</a>
-<a href="https://github.com/andriycraft/GreenFrogMCBE/search?q=todo">
-  <img alt="TODO counter" src="https://img.shields.io/github/search/andriycraft/GreenFrogMCBE/todo?style=flat-square">
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/andriycraft/GreenFrogMCBE?color=%2387F4BC&style=flat-square">
 </a>
 
 ## GreenFrogMCBE 
@@ -17,9 +14,7 @@ Server software for Minecraft Bedrock, written in Node js
 
 Our Discord: https://discord.gg/UFqrnAbqjP
 
-#### development status > greenfrog 2.0 soon 
-
-#### software status > not ready for production
+#### development status > maintained
 
 ## How to install
 
@@ -29,26 +24,24 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 4. If not do 'node index.js'
 5. Done
 
-## Can't join locally
+## Debugging
 
-Open powershell as an admin
+Run node index.js --debug
 
-Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
+## Can't join locally?
 
-Join via 172.0.0.1
+Step 1. Open powershell as an admin
+
+Step 2. Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
+
+Step 3. Join via 172.0.0.1 if it does not work join with your local IP from router settings
 
 ## Plugins available for public usage
 
 If you have one feel free to open an issue
 
 * Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/main/docs/plugins/exampleplugin | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin | Author: GreenFrogMCBE
-* DonationReminder: https://github.com/andriycraft/GreenFrogMCBEdonations/ | Description: A plugin that adds that annoying donation message. | Author: GreenFrogMCBE
-
-## Plugin listing rules
-
-If you want for your plugin to be listed on the 'Plugins available for public usage' section, you must follow this rules:
-
-* Your plugin must contain .gfmcp file in the root directory. Example here: https://github.com/andriycraft/GreenFrogMCBE/tree/plugins/docs/exampleplugin/.gfmcp
+* Donations: https://github.com/andriycraft/GreenFrogMCBEdonations/ | Description: A plugin that adds that annoying donation message. | Author: GreenFrogMCBE
 
 ## Features
 
@@ -60,10 +53,14 @@ If you want for your plugin to be listed on the 'Plugins available for public us
 6. Language system
 7. Support of new versions
 8. Basic moderation (/kick)
-9. Basic admin commands
+9. Admin commands
 10. Plugin support
 11. Support of new versions
 12. Many events for plugin API
+13. Toast support
+14. Inventory support
+15. Packet API
+16. Transfer packet support
 
 ## Language system
 Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese
@@ -76,17 +73,14 @@ For Ukrainian language select "language": "uk_UA"
 
 For Vietnamese language select "language": "vi_VN"
 
+For French language select "language": "fr_FR"
 
 ## Configuration tutorial
 
 - You can edit your config in config.json
 - You can edit your server language in /src/lang/(server language).json
 - You can disable or enable commands in commands.json. "true" means enabled. "false" means disabled.
-
-## Forking rules
-
-1. You are not allowed to change your fork license
-2. Credit me and GreenFrogMCBE somewhere
+- ops.yml contains list of OPs
 
 ## Donations
 

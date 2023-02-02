@@ -1,24 +1,27 @@
+/* It checks if the plugin folder exists, if not, it creates it. */
 const fs = require('fs')
-const Logger = require('../console/Logger')
-const ServerInfo = require('../api/ServerInfo')
+const log = require('../server/Logger');
+const Logger = new log()
+const ServerInfo = require('../server/ServerInfo')
 
 class CheckPluginFolder {
-    constructor () { }
+    constructor() { }
 
+    /**
+     * It checks if the plugin folder exists, if it doesn't, it creates it. Then it checks if the plugin
+     * config folder exists, if it doesn't, it creates it.
+     */
     check() {
         const lang = ServerInfo.lang
         const config = ServerInfo.config
 
-        Logger.prototype.log(lang.loadingplugins)
         try {
             fs.readdirSync("./plugins/")
         } catch (e) {
-            Logger.prototype.log(lang.plnf)
             try {
                 fs.mkdirSync("./plugins/", { recursive: true })
-                Logger.prototype.log(lang.pfc)
             } catch (e) {
-                Logger.prototype.log(lang.ftcpf.replace('%error%', e), 'error')
+                Logger.log(lang.ftcpf.replace('%error%', e), 'error')
                 process.exit(config.crashstatuscode)
             }
         }
@@ -26,12 +29,10 @@ class CheckPluginFolder {
         try {
             fs.readdirSync("./pluginconfigs")
         } catch (e) {
-            Logger.prototype.log(lang.pcnf)
             try {
                 fs.mkdirSync("./pluginconfigs", { recursive: true })
-                Logger.prototype.log(lang.pcfc)
             } catch (e) {
-                Logger.prototype.log(lang.pcfcf.replace('%error%', e), 'error')
+                Logger.log(lang.pcfcf.replace('%error%', e), 'error')
                 process.exit(config.crashstatuscode)
             }
         }

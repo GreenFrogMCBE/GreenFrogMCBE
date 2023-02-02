@@ -1,376 +1,222 @@
-const Bedrock = require('bedrock-protocol')
-const Logger = require('./console/Logger')
-const ServerInfo = require('./api/ServerInfo')
-const PlayerInfo = require('./player/PlayerInfo')
-const ValidateConfig = require('./server/ValidateConfig')
-const Loader = require('./plugins/Loader')
+/* Its the server main file. */
+process.env.DEBUG = process.argv.includes("--debug") ? "minecraft-protocol" : "";
+
 const fs = require('fs')
-let clients = []
+const bedrock = require('bedrock-protocol')
+const PluginLoader = require('./plugins/Loader')
+const ServerInfo = require('./server/ServerInfo')
+const PlayerInfo = require('./player/PlayerInfo')
+const Text = require('./network/packets/handlers/Text')
+const ValidateConfig = require('./server/ValidateConfig')
+const Interact = require('./network/packets/handlers/Interact')
+const Unhandled = require('./network/packets/handlers/Unhandled')
+const ResponsePackInfo = require('./network/packets/ResponsePackInfo')
+const ClientContainerClose = require('./network/packets/handlers/ClientContainerClose')
+const ResourcePackClientResponse = require('./network/packets/handlers/ResourcePackClientResponse')
+const ItemStackRequest = require('./network/packets/handlers/ItemStackRequest');
+const RequestChunkRadius = require('./network/packets/handlers/RequestChunkRadius');
+const PlayerMove = require('./network/packets/handlers/PlayerMove');
+const SubChunkRequest = require('./network/packets/handlers/SubChunkRequest');
+const CommandRequest = require('./network/packets/handlers/CommandRequest');
 
-ValidateConfig.prototype.ValidateConfig()
-ValidateConfig.prototype.ValidateLangFile()
-ValidateConfig.prototype.ValidateCommands()
+const log = require('./server/Logger')
+const Logger = new log()
+const ev = require('./server/Events')
+const Events = new ev()
 
-const config = ServerInfo.config
-const lang = ServerInfo.lang
-const commands = ServerInfo.commands
 
-Logger.prototype.log(lang.loadingserver)
-
-process.on('uncaughtException', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${err.stack}`, 'error')
-    if (!config.donotcrashoncriticalerrors) {
-        process.exit(-1)
+class Server {
+    constructor() {
+        this.clients = []
+        this.server = null
+        this.config = null
+        this.lang = null
+        this.command = null
     }
-})
 
-process.on('uncaughtExceptionMonitor', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${err.stack}`, 'error')
-    if (!config.donotcrashoncriticalerrors) {
-        process.exit(-1)
+    /**
+     * It loads the JSON files into the server.
+     */
+    async initJson() {
+        this.config = ServerInfo.config
+        this.lang = ServerInfo.lang
+        this.commands = ServerInfo.commands
     }
-})
 
-process.on('unhandledRejection', function (err) {
-    Logger.prototype.log(`${lang.servererror}: ${err.stack}`, 'error')
-    if (!config.donotcrashoncriticalerrors) {
-        process.exit(-1)
+    /**
+     * GetServer() {
+     *         return this.server
+     * }
+     * @returns The server object.
+     */
+    getServer() {
+        return this.server
     }
-})
 
-const get = (packetName) => require(`./network/packets/${packetName}.json`)
-
-if (config.donotcrashoncriticalerrors) {
-    Logger.prototype.log(lang.unstablewarning, 'warning')
-}
-
-if (config.debug) {
-    Logger.prototype.log(lang.debugwarning, 'warning')
-}
-
-Logger.prototype.log(`${lang.scch}`)
-Loader.prototype.loadPlugins()
-
-let server
-try {
-    server = Bedrock.createServer({
-        host: config.host,
-        port: config.port,
-        version: config.version,
-        conLog: true,
-        offline: config.offlinemode,
-        maxPlayers: config.maxplayers,
-        motd: {
-            motd: config.motd,
-            levelName: config.softwarename
+    /**
+     * It logs the error and then exits the process
+     * @param err - The error that was thrown.
+     */
+    async attemptToDie(err) {
+        if (err.toString().includes("Server failed to start")) {
+            Logger.log(`Failed to bind port on ${this.config.host}:${this.config.port}`, "error")
+            Logger.log(`This means that another server is already running on this port`, "error")
+            process.exit(this.config.crashstatuscode)
+        } else {
+            Logger.log(`Server error: \n${err.stack}`, 'error')
+            if (!this.config.donotcrashoncriticalerrors) {
+                process.exit(this.config.crashstatuscode)
+            }
         }
-    })
-    Logger.prototype.log(`${lang.listening_on.replace(`%ipport%`, `/${config.host}:${config.port}`)}`)
-} catch (e) {
-    Logger.prototype.log(`${lang.listening_failed.replace(`%ipport%`, `/${config.host}:${config.port}`).replace('%error%', e)}`, 'error')
-    process.exit(-1)
-}
+    }
 
-server.on('connect', client => {
-    client.on('join', () => {
-        Logger.prototype.log(lang.playerconnected.replace('%player%', client.getUserData().displayName))
-
-        client.write('resource_packs_info', {
-            must_accept: false,
-            has_scripts: false,
-            behaviour_packs: [],
-            texture_packs: []
-        })
-
-        fs.readdir("./plugins", (err, plugins) => {
-            plugins.forEach(plugin => {
-                try {
-                    require(`../plugins/${plugin}`).prototype.onResourcePackInfoSent(server, client)
-                } catch (e) {
-                    Logger.prototype.log(lang.failedtoexecuteonresourcepackinfosent.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
-                }
-            });
-        });
-
-        clients.push(client)
-        PlayerInfo.prototype.setPlayers(clients)
-    })
-
-    function handlepk(client, packet) {
+    /**
+     * It handles packets.
+     * @param client - The client that sent the packet
+     * @param packet - The packet that was sent by the client
+     */
+    handlepk(client, packet) {
+        if (client.q) throw new Error("An attempt to handle packet from offline player")
         switch (packet.data.name) {
             case "resource_pack_client_response":
-                switch (packet.data.params.response_status) {
-                    case 'none': {
-                        Logger.prototype.log(lang.norpsinstalled.replace('%player%', client.getUserData().displayName))
-                        fs.readdir("./plugins", (err, plugins) => {
-                            plugins.forEach(plugin => {
-                                try {
-                                    require(`../plugins/${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(server, client)
-                                } catch (e) {
-                                    Logger.prototype.log(Logger.prototype.log(lang.failedtoexecuteonplayerhasnoresourcepacksinstalled.replace('%plugin%', plugin).replace('%e%', e.stack, 'error')), 'error')
-                                }
-                            });
-                        });
-                    }
-                    case 'refused': {
-                        fs.readdir("./plugins", (err, plugins) => {
-                            plugins.forEach(plugin => {
-                                try {
-                                    require(`../plugins/${plugin}`).prototype.onResourcePacksRefused(server, client)
-                                } catch (e) {
-                                    Logger.prototype.log(lang.failedtoexecuteonresourcepacksrefused.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
-                                }
-                            });
-                        });
-                        Logger.prototype.log(lang.rpsrefused.replace('%player%', client.getUserData().displayName))
-                        client.kick(lang.resource_packs_refused)
-                    }
-                    case 'have_all_packs': {
-                        fs.readdir("./plugins", (err, plugins) => {
-                            plugins.forEach(plugin => {
-                                try {
-                                    require(`../plugins/${plugin}`).prototype.onPlayerHaveAllPacks(server, client)
-                                } catch (e) {
-                                    Logger.prototype.log(lang.failedtoexecuteonplayerhaveallpacks.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'), 'error')
-                                }
-                            });
-                        });
-                        Logger.prototype.log(lang.rpsinstalled.replace('%player%', client.getUserData().displayName))
-
-                        client.write('resource_pack_stack', {
-                            must_accept: false,
-                            behavior_packs: [],
-                            resource_packs: [],
-                            game_version: '',
-                            experiments: [],
-                            experiments_previously_used: false
-                        })
-                        break
-                    }
-                    case 'completed': {
-                        fs.readdir("./plugins", (err, plugins) => {
-                            plugins.forEach(plugin => {
-                                try {
-                                    require(`../plugins/${plugin}`).prototype.onResourcePacksCompleted(server, client)
-                                } catch (e) {
-                                    Logger.prototype.log(lang.failedtoexecuteonresourcepackscompleted.replace('%plugin%', plugin).replace('%e%', e.stack, 'error'))
-                                }
-                            });
-                        });
-                        if (client.getUserData().displayName.length < 3) {
-                            client.kick(lang.username_is_too_short)
-                            return
-                        }
-
-                        if (client.getUserData().displayName.length > 16) {
-                            if (config.offlinemode) return
-                            client.kick(lang.username_is_too_long)
-                            return
-                        }
-
-                        Logger.prototype.log(lang.joined.replace('%player%', client.getUserData().displayName))
-                        client.write('player_list', get('player_list'))
-                        client.write('start_game', get('start_game'))
-                        client.write('set_spawn_position', get('set_spawn_position'))
-                        client.write('set_commands_enabled', { enabled: true })
-                        client.write('biome_definition_list', get('biome_definition_list'))
-                        client.write('available_entity_identifiers', get('available_entity_identifiers'))
-                        client.write('creative_content', get('creative_content'))
-                        client.write('respawn', get('respawn'))
-
-
-                        client.chat = function (msg) {
-                            client.write('text', {
-                                type: 'announcement',
-                                needs_translation: false,
-                                source_name: '',
-                                message: msg,
-                                xuid: '',
-                                platform_chat_id: ''
-                            })
-                        }
-
-
-                        client.kick = function (msg) {
-                            if (client.kicked) return
-                            if (msg == null || msg == undefined) msg = lang.playerdisconnected
-                            fs.readdir("./plugins", (err, plugins) => {
-                                plugins.forEach(plugin => {
-                                    try {
-                                        require(`../plugins/${plugin}`).prototype.onKick(server, client, msg)
-                                    } catch (e) {
-                                        Logger.prototype.log(lang.failedtoexecuteonkick.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
-                                    }
-                                });
-                            });
-                            client.kicked = true
-                            Logger.prototype.log(lang.kicked_consolemsg.replace('%player%', client.getUserData().displayName).replace('%reason%', msg))
-                            try { client.disconnect(msg) } catch (e) { }
-                        }
-
-                        setInterval(() => {
-                            if (client.q) {
-                                fs.readdir("./plugins", (err, plugins) => {
-                                    plugins.forEach(plugin => {
-                                        try {
-                                            require(`../plugins/${plugin}`).prototype.onLeave(server, client)
-                                        } catch (e) {
-                                            Logger.prototype.log(lang.failedtoexecuteonplayerspawn.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
-                                        }
-                                    });
-                                });
-                                if (!client.kicked) {
-                                    client.kick(lang.player_disconnected_from_this_server)
-                                    Logger.prototype.log(lang.disconnected.replace('%player%', client.getUserData().displayName))
-                                }
-                                for (let i = 0; i < clients.length; i++) {
-                                    clients[i].chat(lang.leftthegame.replace('%username%', client.getUserData().displayName))
-                                }
-                                delete client.q;
-                            }
-                        }, 10)
-
-                        Logger.prototype.log(lang.spawned.replace('%player%', client.getUserData().displayName))
-                        setTimeout(() => {
-                            if (client.q) return
-                            client.write('play_status', {
-                                status: 'player_spawn'
-                            })
-                            fs.readdir("./plugins", (err, plugins) => {
-                                plugins.forEach(plugin => {
-                                    try {
-                                        require(`../plugins/${plugin}`).prototype.onPlayerSpawn(server, client)
-                                    } catch (e) {
-                                        Logger.prototype.log(lang.failedtoexecuteonplayerspawn.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
-                                    }
-                                });
-                            });
-                        }, config.clientloadtime)
-
-
-                        for (let i = 0; i < clients.length; i++) {
-                            clients[i].chat(lang.joinedthegame.replace('%username%', client.getUserData().displayName))
-                        }
-
-                        break
-                    }
-                    default: {
-                        console.warn(lang.unhandledpacketdata.replace('%data%', packet.data.params.response_status))
-                    }
-                }
+                new ResourcePackClientResponse().handle(client, packet, this.server)
                 break
             case "client_to_server_handshake":
-            case "request_chunk_radius":
+            case "emote_list":
+            case "set_player_game_type":
             case "set_local_player_as_initialized":
-            case "tick_sync": // TODO: Handle this
-            case "emote_list": // TODO: Handle this
-            case "set_player_game_type": // TODO: Handle this
-            case "client_cache_status": // TODO: Handle this
-            case "move_player": // TODO: Handle this
-            case "player_action": // TODO: Handle this
-                Logger.prototype.log(`${lang.ignoredpacket.replace('%packet%', packet.data.name)}`, 'debug')
+            case "player_action":
+            case "mob_equipment":
+            case "client_cache_status":
+                new Unhandled().handle(packet)
+                break
+            case "move_player":
+                new PlayerMove().handle(client, packet)
+                break
+            case "item_stack_request":
+                new ItemStackRequest().handle(client, packet)
+                break
+            case "interact":
+                new Interact().handle(packet, client)
+                break
+            case "container_close":
+                new ClientContainerClose().handle(client)
+                break
+            case "request_chunk_radius":
+                new RequestChunkRadius().handle(client)
                 break
             case "text":
-                let msg = packet.data.params.message;
-                let fullmsg = lang.chatformat.replace('%username%', client.getUserData().displayName).replace('%message%', msg);
-                fs.readdir("./plugins", (err, plugins) => {
-                    plugins.forEach(plugin => {
-                        try {
-                            require(`../plugins/${plugin}`).prototype.onChat(server, client, msg, fullmsg)
-                        } catch (e) {
-                            Logger.prototype.log(lang.failedtoexecuteonchat.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
-                        }
-                    });
-                });
-                if (msg.includes("§") || msg.length == 0 || msg.length > 255 && config.blockinvalidmessages) {
-                    Logger.prototype.log(lang.illegalmessage.replace('%msg%', msg).replace('%player%', client.getUserData().displayName), 'warning')
-                    client.kick(lang.invalid_chat_message)
-                    return
-                }
-
-                if (!msg.replace(/\s/g, '').length) return
-
-                Logger.prototype.log(lang.chatmessage.replace('%message%', fullmsg))
-
-                for (let i = 0; i < clients.length; i++) {
-                    clients[i].chat(`${fullmsg}`)
-                }
+                new Text().handle(client, packet, this.lang)
+                break
+            case "subchunk_request":
+                new SubChunkRequest().handle(client, packet)
                 break
             case "command_request":
-                let cmd = packet.data.params.command.toLowerCase();
-                fs.readdir("./plugins", (err, plugins) => {
-                    plugins.forEach(plugin => {
-                        try {
-                            require(`../plugins/${plugin}`).prototype.onCommand(server, client, cmd)
-                        } catch (e) {
-                            Logger.prototype.log(lang.failedtoexecuteoncommand.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
-                        }
-                    });
-                });
-                Logger.prototype.log(lang.executedcmd.replace('%player%', client.getUserData().displayName).replace('%cmd%', cmd))
-                if (cmd.toLowerCase().startsWith('/' + lang.command_ver.toLowerCase())) {
-                    if (!commands.player_command_ver) {
-                        client.chat(lang.playerunknowncommand)
-                        return
-                    }
-                    client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
-                    client.chat(lang.playervercommandline2)
-                    return
+                new CommandRequest().handle(client, packet)
+                break
+            default:
+                if (this.config.logunhandledpackets) {
+                    Logger.log(this.lang.unhandledPacket, 'warning')
+                    console.log('%o', packet)
                 }
-                if (cmd.toLowerCase().startsWith('/' + lang.command_version.toLowerCase())) {
-                    if (!commands.player_command_ver) {
-                        client.chat(lang.playerunknowncommand)
-                        return
-                    }
-                    client.chat(lang.playervercommandline1.replace('%version%', ServerInfo.serverversion))
-                    client.chat(lang.playervercommandline2)
-                    return
-                }
-                if (cmd.toLowerCase().startsWith('/' + lang.command_cmds.toLowerCase())) {
-                    if (!commands.player_command_cmds) {
-                        client.chat(lang.playerunknowncommand)
-                        return
-                    }
-                    client.chat(lang.commands)
-                    client.chat(lang.commandsline1)
-                    client.chat(lang.commandsline2)
-                    client.chat(lang.commandsline3)
-                    client.chat(lang.commandsline4)
-                    return
-                }
-                if (cmd.toLowerCase().startsWith('/' + lang.command_commands.toLowerCase())) {
-                    if (!commands.player_command_commands) {
-                        client.chat(lang.playerunknowncommand)
-                        return
-                    }
-                    client.chat(lang.commandsline1)
-                    client.chat(lang.commandsline2)
-                    client.chat(lang.commandsline3)
-                    client.chat(lang.commandsline4)
-                    return
-                }
-                client.chat(lang.playerunknowncommand)
-                Logger.prototype.log(lang.unhandledpacket, 'warning')
-                console.log('%o', packet)
                 break
         }
     }
 
-    client.on('packet', (packet) => {
-        try {
-            handlepk(client, packet)
-        } catch (e) {
-            client.kick(lang.internal_server_error)
-            fs.readdir("./plugins", (err, plugins) => {
-                plugins.forEach(plugin => {
-                    try {
-                        require(`../plugins/${plugin}`).prototype.onInternalServerError(server, client, err)
-                    } catch (e) {
-                        Logger.prototype.log(lang.failedtoexecuteoninternalservererror.replace('%plugin%', plugin).replace('%e%', e.stack), 'error')
-                    }
-                });
-            });
-            Logger.prototype.log(lang.handlepacketexception.replace('%player%', client.getUserData().displayName).replace('%error%', e.stack), 'error')
+    /**
+     * It logs the player's IP, port, then sends the player the response pack, executes the
+     * events, and sets the player's info.
+     * @param client - The client that joined
+     */
+    async onJoin(client) {
+        client.ip = client.connection.address.split('/')[0]
+        client.port = client.connection.address.split('/')[1]
+        client.fullip = client.connection.address
+        client.username = client.getUserData().displayName
+
+        Logger.log(this.lang.playerConnected.replace('%player%', client.username).replace('%ip%', client.fullip))
+
+        Events.executeOJ(this.server, client)
+
+        new PlayerInfo().addPlayer(client)
+        new ResponsePackInfo().writePacket(client)
+    }
+
+    /**
+     * It logs a warning if the config.debug or config.unstable is true.
+     */
+    async initDebug() {
+        if (this.config.unstable) { Logger.log(this.lang.unstableWarning, 'warning') }
+        if (this.config.debug) {
+            Logger.log(this.lang.debugWarning, 'warning')
         }
-    })
-})
+    }
+
+    /**
+     * It loads the config, language file, and commands, then loads the plugins and starts the server.
+     */
+    async start() {
+        await new ValidateConfig().ValidateConfig()
+        await new ValidateConfig().ValidateLangFile()
+        await new ValidateConfig().ValidateCommands()
+
+        await this.initJson()
+
+        fs.access('ops.yml', fs.constants.F_OK, (err) => { if (err) { fs.writeFile('ops.yml', '', (err) => { if (err) throw err; }); } });
+
+        Logger.log(this.lang.loadingServer)
+
+        process.on('uncaughtException', (err) => this.attemptToDie(err))
+        process.on('uncaughtExceptionMonitor', (err) => this.attemptToDie(err))
+        process.on('unhandledRejection', (err) => this.attemptToDie(err))
+
+        await this.initDebug()
+
+        Logger.log(`${this.lang.scch}`, "debug")
+        await PluginLoader.prototype.loadPlugins()
+
+        this.listen()
+    }
+
+    /**
+     * It listens for a connection, and when it gets one, it listens for a join event, and when it gets
+     * one, it executes the onJoin function.
+     */
+    listen() {
+        try {
+            this.server = bedrock.createServer({
+                host: this.config.host,
+                port: this.config.port,
+                version: this.config.version,
+                offline: this.config.offlinemode,
+                maxPlayers: this.config.maxplayers,
+                motd: {
+                    motd: this.config.motd,
+                    levelName: "GreenFrogMCBE"
+                }
+            })
+            Logger.log(`${this.lang.listeningOn.replace(`%ipport%`, `/${this.config.host}:${this.config.port}`)}`)
+
+            this.server.on('connect', client => {
+                client.on('join', () => {
+                    this.onJoin(client)
+                })
+
+                client.on('packet', (packet) => {
+                    try {
+                        this.handlepk(client, packet)
+                    } catch (e) {
+                        try { client.kick(this.lang.internalServerError) } catch (e) { client.disconnect(this.lang.internalServerError) }
+                        Events.executeOISE(this.server, client, e)
+                        Logger.log(this.lang.packetHandlingException.replace('%player%', client.username).replace('%error%', e.stack), 'error')
+                    }
+                })
+            })
+        } catch (e) {
+            Logger.log(`${this.lang.listeningFailed.replace(`%ipport%`, `/${this.config.host}:${this.config.port}`).replace('%error%', e.stack)}`, 'error')
+            process.exit(this.config.exitstatuscode)
+        }
+    }
+}
+
+module.exports = Server;

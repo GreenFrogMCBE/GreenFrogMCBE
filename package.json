@@ -1,10 +1,13 @@
 {
-    "name": "greenfrogmcbe",
+    "name": "greenfrog",
     "description": "A server software for MCBE",
     "main": "index.js",
     "author": "andriycraft",
     "license": "MIT",
     "dependencies": {
-        "bedrock-protocol": "^3.22.0"
+        "bedrock-protocol": "git+https://github.com/greenfrogmc/Protocol.git"
+    },
+    "devDependencies": {
+        "eslint": "8.33.0"
     }
 }

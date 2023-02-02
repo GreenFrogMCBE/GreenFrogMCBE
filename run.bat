@@ -1,5 +1,3 @@
 @echo off
-@echo Running: title GreenFrogMCBE Server
-title GreenFrogMCBE Server
-@echo Running: node index.js
+title GreenFrog Server
 node index.js

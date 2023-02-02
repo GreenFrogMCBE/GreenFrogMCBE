@@ -1,5 +1,7 @@
+/* It's a class that contains all the functions that a plugin can use. */
 class BasePlugin {
   constructor() { }
+
   onLoad() { }
   onShutdown() { }
   onJoin() { }
@@ -15,6 +17,11 @@ class BasePlugin {
   onConsoleCommand() { }
   onInternalServerError() { }
   onLeave() { }
+  onPlayerMove() { }
+  onGamemodeChange() { }
+  onServerToClientChat() { }
+  onToast() { }
+  onTransfer() { }
 }
 
 module.exports = BasePlugin;

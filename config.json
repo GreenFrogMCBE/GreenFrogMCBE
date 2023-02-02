@@ -1,18 +1,19 @@
 {
-    "": "For tutorial go to /docs/config/config.json.tutorial",
     "host": "0.0.0.0",
     "port": 19132,
     "motd": "§6GreenFrogMCBE server",
     "maxplayers": 20,
     "version": "1.19.50",
-    "offlinemode": true,
-    "blockinvalidmessages": true,
+    "offlinemode": false,
+    "invalidmsgsblock": true,
+    "unstable": false,
     "lang": "en_US",
-    "donotcrashoncriticalerrors": false,
     "debug": false,
-    "pluginsshutdowntime": 10000,
     "crashstatuscode": -1,
     "exitstatuscode": 0,
-    "clientloadtime": 2000,
-    "softwarename": "GreenFrogMCBE"
+    "logunhandledpackets": true,
+    "gamemode": "creative",
+    "world_gamemode": "creative",
+    "default_permission_level": 2,
+    "render_chunks": true
 }
