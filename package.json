@@ -9,7 +9,7 @@
     "debug": "node index.js --debug",
     "run": "node index.js",
     "gencoryrightheader": "npx create-copyright-header --generate",
-    "build": "echo \"You can find the license headers in .ch file\" && npm run gencoryrightheader && npm run format && npm run debug"
+    "build": "echo \"You can find the license headers in the .licenseheaders file\" && npm run gencoryrightheader && npm run format && npm run debug"
   },
   "dependencies": {
     "bedrock-protocol": "git+https://github.com/greenfrogmc/Protocol.git"
