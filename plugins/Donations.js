@@ -19,10 +19,6 @@ class Donations extends BasePlugin {
     Logger.prototype.pluginLog("info", "Donations >", msg, "", "");
   }
 
-  onJoin(server, client) {
-    console.log(client.fullip);
-  }
-
   onLoad() {
     const config = require("../config.json");
     switch (config.lang) {

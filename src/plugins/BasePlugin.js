@@ -22,6 +22,7 @@ class BasePlugin {
   onServerToClientChat() {}
   onToast() {}
   onTransfer() {}
+  onFormResponse() {}
 }
 
 module.exports = BasePlugin;

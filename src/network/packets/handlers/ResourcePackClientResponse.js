@@ -137,7 +137,6 @@ class ResourcePackClientResponse extends Handler {
         new LevelChunk().writePacket(client);
 
         if (config.render_chunks) {
-          new UpdateBlock().writePacket(client, 0, 98, 0, 2);
           for (let x = 0; x < 10; x++) {
             for (let z = 0; z < 10; z++) {
               new UpdateBlock().writePacket(client, x, 98, z, 2);

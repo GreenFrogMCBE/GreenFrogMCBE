@@ -1,8 +1,8 @@
 const BasePlugin = require("../src/plugins/BasePlugin");
-const Logger = require("../src/server/Logger");
 const CommandManager = require("../src/player/CommandManager");
 
-const Logger = new Logger(); // Creates logger for this plugin
+const log = require("../src/server/Logger");
+const Logger = new log(); // Creates logger for this plugin
 
 // This plugin contains all list of events
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
@@ -15,11 +15,6 @@ class Exampleplugin extends BasePlugin {
   }
 
   onLoad() {
-    // Registers a command
-    const cmdmanager = new CommandManager();
-    cmdmanager.addCommand("testcommand", "This is my first command!");
-    // addCommand syntax: ("name", "description")
-
     // PLEASE DO NOT USE LOGGER.LOG() IN PLUGINS
     Logger.pluginLog(
       "info", // Log level. See API.md for docs
@@ -68,6 +63,10 @@ class Exampleplugin extends BasePlugin {
   }
 
   onPlayerSpawn(server, client) {
+    // Registers a command
+    const cmdmanager = new CommandManager();
+    cmdmanager.addCommand(client, "testcommand", "This is my first command!");
+    // addCommand syntax: ("name", "description")
     // This code executes when player is spawned (this event executes after onJoin() event)
   }
 
@@ -90,13 +89,14 @@ class Exampleplugin extends BasePlugin {
       client.sendToast("Hi", "This a toast notification");
       //              ^ title ^ toast description/body
       client.setTime(17000); // Updates the client time
+      client.sendForm(5555, "text", [{ text: "Button 1" }], "title", "form");
       setTimeout(() => {
         if (!client.offline) {
           // Make sure to check if the client is still online after doing setTimeout() that uses client API in production plugins
           client.transfer("172.0.0.1", 19132); // Moves player to another server
           //              ^ ip         ^ port
         }
-      }, 10000);
+      }, 30000);
 
       // ADVANCED API
       // client.write(packet_name, json_packet_data)
@@ -130,7 +130,16 @@ class Exampleplugin extends BasePlugin {
 
   onTransfer(client, server, address, port) {
     // This code executes when player transfers to another server
-    // WARNING: Functions like client.sendMessage(), client.transfer() will not work anymore on this player
+    // WARNING: Functions like client.sendMessage(), client.transfer() will not work anymore on that player
+  }
+
+  onFormResponse(client, server, packet) {
+    client.sendMessage(JSON.stringify(packet).toString());
+    // This code executes when:
+    // a) Player clicks a button in a form
+    // b) Player closes a form
+    // c) Player inputs text into form
+    // d) Player selects an option in a form
   }
 }
 

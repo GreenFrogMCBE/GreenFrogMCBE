@@ -1,7 +1,8 @@
 /* It handles events. */
 const fs = require("fs");
 const lang = require("../server/ServerInfo").lang;
-const Logger = new require("../server/Logger");
+const log = require("../server/Logger");
+const Logger = new log();
 
 class Events {
   /**
@@ -436,6 +437,28 @@ class Events {
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
               .replace("%event%", "onTransfer")
+              .replace("%e%", e.stack),
+            "error"
+          );
+        }
+      });
+    });
+  }
+
+  executeFR(client, server, packet) {
+    fs.readdir("./plugins", (err, plugins) => {
+      plugins.forEach((plugin) => {
+        try {
+          require(`../../plugins/${plugin}`).prototype.onFormResponse(
+            client,
+            server,
+            packet
+          );
+        } catch (e) {
+          Logger.log(
+            lang.failedToExecuteEvent
+              .replace("%plugin%", plugin)
+              .replace("%event%", "onFormResponse")
               .replace("%e%", e.stack),
             "error"
           );

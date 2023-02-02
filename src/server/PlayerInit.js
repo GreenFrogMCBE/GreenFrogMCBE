@@ -8,6 +8,7 @@ const ToastRequest = require("../network/packets/ToastRequest");
 const Transfer = require("../network/packets/Transfer");
 const PlayerGamemode = require("../network/packets/PlayerGamemode");
 const Time = require("../network/packets/Time");
+const FormRequest = require("../network/packets/FormRequest");
 const lang = require("../server/ServerInfo").lang;
 const config = require("../server/ServerInfo").config;
 
@@ -74,6 +75,24 @@ class PlayerInit {
     player.transfer = function (address, port) {
       new Transfer().writePacket(player, address, port);
       new Events().executeTR(player, require("../Server.js"), address, port);
+    };
+    /**
+     * Sends a form to the player.
+     * @param {number} id - The form id.
+     * @param {string} text - The form text.
+     * @param {Object} jsonbuttons - A JSON object containing buttons.
+     * @param {string} title - The form title.
+     * @param {string} type - The form type (modal, custom, form).
+     */
+    player.sendForm = function (id, text, jsonbuttons, title, type) {
+      new FormRequest().writePacket(
+        player,
+        id,
+        text,
+        JSON.stringify(jsonbuttons),
+        title,
+        type
+      );
     };
 
     /**

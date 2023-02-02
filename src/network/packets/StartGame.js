@@ -1,12 +1,27 @@
 class StartGame extends require("./Packet") {
+  /**
+   * It returns the string "start_game"
+   * @returns The name of the packet.
+   */
   name() {
     return "start_game";
   }
 
+  /**
+   * "If the client is null, throw an error."
+   * @param client - The client that sent the packet.
+   */
   validate(client) {
     if (!client) throw new Error("Packet processing error. Client is null");
   }
 
+  /**
+   * It writes a packet to the client
+   * @param client - The client that will receive the packet.
+   * @param gamemode - The gamemode
+   * @param world_gamemode = The world gamemode
+   * @param permission_level = The permission level
+   */
   writePacket(
     client,
     gamemode = "fallback",

@@ -7,7 +7,8 @@
   "scripts": {
     "format": "npx prettier --write .",
     "debug": "node index.js --debug",
-    "run": "node index.js"
+    "run": "node index.js",
+    "build": "npm run format && npm run debug"
   },
   "dependencies": {
     "bedrock-protocol": "git+https://github.com/greenfrogmc/Protocol.git"

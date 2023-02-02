@@ -23,7 +23,13 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 ## Debugging
 
-Run node index.js --debug
+Run npm run debug
+
+## "Building"
+
+Run npm run build
+
+This formats the code and enables debug mode
 
 ## Can't join locally?
 
@@ -56,8 +62,9 @@ If you have one feel free to open an issue
 12. Many events for plugin API
 13. Toast support
 14. Inventory support
-15. Packet API
-16. Transfer packet support
+15. Transfer packet support
+16. Packet API
+17. Form support
 
 ## Language system
 

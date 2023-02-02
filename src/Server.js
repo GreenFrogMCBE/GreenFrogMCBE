@@ -15,11 +15,12 @@ const Unhandled = require("./network/packets/handlers/Unhandled");
 const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
 const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponse");
-const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const RequestChunkRadius = require("./network/packets/handlers/RequestChunkRadius");
-const PlayerMove = require("./network/packets/handlers/PlayerMove");
+const ModalFormResponse = require("./network/packets/handlers/ModalFormResponse");
+const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
+const PlayerMove = require("./network/packets/handlers/PlayerMove");
 
 const log = require("./server/Logger");
 const Logger = new log();
@@ -121,6 +122,9 @@ class Server {
         break;
       case "command_request":
         new CommandRequest().handle(client, packet);
+        break;
+      case "modal_form_response":
+        new ModalFormResponse().handle(this.server, client, packet);
         break;
       default:
         if (this.config.logunhandledpackets) {
