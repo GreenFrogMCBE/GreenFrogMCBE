@@ -133,8 +133,8 @@ class Exampleplugin extends BasePlugin {
     // WARNING: Functions like client.sendMessage(), client.transfer() will not work anymore on that player
   }
 
-  onFormResponse(client, server, packet) {
-    client.sendMessage(JSON.stringify(packet).toString());
+  onFormResponse(server, client, packet) {
+    client.sendMessage("Response: " + JSON.stringify(packet).toString());
     // This code executes when:
     // a) Player clicks a button in a form
     // b) Player closes a form
