@@ -10,6 +10,6 @@ assignees: ""
 
 [type here]
 
-## What platform are you using?
+## What platform are you using? (linux/windows/etc)
 
 [type here]

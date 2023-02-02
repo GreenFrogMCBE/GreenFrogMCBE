@@ -1,6 +1,5 @@
 <img src="https://cdn.discordapp.com/attachments/1027321168576925799/1053767928849383514/logo.png">
 
-
 <a href="https://github.com/andriycraft/GreenFrogMCBE/blob/master/LICENSE">
   <img alt="License" src="https://img.shields.io/github/license/andriycraft/GreenFrogMCBE">
 </a>
@@ -8,7 +7,7 @@
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/andriycraft/GreenFrogMCBE?color=%2387F4BC&style=flat-square">
 </a>
 
-## GreenFrogMCBE 
+## GreenFrogMCBE
 
 Server software for Minecraft Bedrock, written in Node js
 
@@ -38,8 +37,8 @@ Step 3. Join via 172.0.0.1 if it does not work join with your local IP from rout
 
 If you have one feel free to open an issue
 
-* Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/main/docs/plugins/exampleplugin | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin | Author: GreenFrogMCBE
-* Donations: https://github.com/andriycraft/GreenFrogMCBEdonations/ | Description: A plugin that adds that annoying donation message. | Author: GreenFrogMCBE
+- Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/main/docs/plugins/exampleplugin | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin | Author: GreenFrogMCBE
+- Donations: https://github.com/andriycraft/GreenFrogMCBEdonations/ | Description: A plugin that adds that annoying donation message. | Author: GreenFrogMCBE
 
 ## Features
 
@@ -61,6 +60,7 @@ If you have one feel free to open an issue
 16. Transfer packet support
 
 ## Language system
+
 Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese
 
 For English language select "language": "en_US"
