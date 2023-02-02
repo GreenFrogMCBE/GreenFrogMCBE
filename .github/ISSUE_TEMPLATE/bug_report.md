@@ -1,14 +1,15 @@
 ---
 name: Bug report
 about: Report a bug/issue
-title: ''
+title: ""
 labels: Bug
-assignees: ''
-
+assignees: ""
 ---
 
 ## What is wrong?
+
 [type here]
 
 ## What platform are you using?
+
 [type here]

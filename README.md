@@ -20,9 +20,7 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 1. Clone this repo
 2. Do 'npm i'
-3. If you on Windows do 'run.bat'
-4. If not do 'node index.js'
-5. Done
+3. Run 'npm run'
 
 ## Debugging
 

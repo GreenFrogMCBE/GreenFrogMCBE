@@ -97,13 +97,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "bamboo",
-                "jungle",
-                "monster",
-                "overworld"
-              ]
+              "value": ["animal", "bamboo", "jungle", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -360,12 +354,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "beach",
-                "monster",
-                "overworld",
-                "warm"
-              ]
+              "value": ["beach", "monster", "overworld", "warm"]
             }
           },
           "temperature": {
@@ -841,12 +830,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "beach",
-                "cold",
-                "monster",
-                "overworld"
-              ]
+              "value": ["beach", "cold", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -973,12 +957,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "cold",
-                "monster",
-                "ocean",
-                "overworld"
-              ]
+              "value": ["cold", "monster", "ocean", "overworld"]
             }
           },
           "temperature": {
@@ -1506,13 +1485,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "cold",
-                "deep",
-                "monster",
-                "ocean",
-                "overworld"
-              ]
+              "value": ["cold", "deep", "monster", "ocean", "overworld"]
             }
           },
           "temperature": {
@@ -1580,11 +1553,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "caves",
-                "deep_dark",
-                "overworld"
-              ]
+              "value": ["caves", "deep_dark", "overworld"]
             }
           },
           "temperature": {
@@ -1711,13 +1680,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "deep",
-                "frozen",
-                "monster",
-                "ocean",
-                "overworld"
-              ]
+              "value": ["deep", "frozen", "monster", "ocean", "overworld"]
             }
           },
           "temperature": {
@@ -1844,13 +1807,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "deep",
-                "lukewarm",
-                "monster",
-                "ocean",
-                "overworld"
-              ]
+              "value": ["deep", "lukewarm", "monster", "ocean", "overworld"]
             }
           },
           "temperature": {
@@ -2005,12 +1962,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "deep",
-                "monster",
-                "ocean",
-                "overworld"
-              ]
+              "value": ["deep", "monster", "ocean", "overworld"]
             }
           },
           "temperature": {
@@ -2119,13 +2071,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "deep",
-                "monster",
-                "ocean",
-                "overworld",
-                "warm"
-              ]
+              "value": ["deep", "monster", "ocean", "overworld", "warm"]
             }
           },
           "temperature": {
@@ -2288,11 +2234,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "desert",
-                "monster",
-                "overworld"
-              ]
+              "value": ["desert", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -2360,12 +2302,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "desert",
-                "hills",
-                "monster",
-                "overworld"
-              ]
+              "value": ["desert", "hills", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -2433,12 +2370,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "desert",
-                "monster",
-                "mutated",
-                "overworld_generation"
-              ]
+              "value": ["desert", "monster", "mutated", "overworld_generation"]
             }
           },
           "temperature": {
@@ -2506,12 +2438,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "caves",
-                "dripstone_caves",
-                "monster",
-                "overworld"
-              ]
+              "value": ["caves", "dripstone_caves", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -2702,12 +2629,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "extreme_hills",
-                "monster",
-                "overworld"
-              ]
+              "value": ["animal", "extreme_hills", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -3489,12 +3411,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "frozen",
-                "monster",
-                "ocean",
-                "overworld"
-              ]
+              "value": ["frozen", "monster", "ocean", "overworld"]
             }
           },
           "temperature": {
@@ -3682,11 +3599,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "frozen",
-                "overworld",
-                "river"
-              ]
+              "value": ["frozen", "overworld", "river"]
             }
           },
           "temperature": {
@@ -3777,12 +3690,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "grove",
-                "monster",
-                "mountains",
-                "overworld"
-              ]
+              "value": ["grove", "monster", "mountains", "overworld"]
             }
           },
           "temperature": {
@@ -3949,12 +3857,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "frozen",
-                "ice",
-                "mountain",
-                "overworld"
-              ]
+              "value": ["frozen", "ice", "mountain", "overworld"]
             }
           },
           "temperature": {
@@ -4117,12 +4020,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "frozen",
-                "ice",
-                "ice_plains",
-                "overworld"
-              ]
+              "value": ["frozen", "ice", "ice_plains", "overworld"]
             }
           },
           "temperature": {
@@ -4479,13 +4377,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "jungle",
-                "monster",
-                "overworld",
-                "rare"
-              ]
+              "value": ["animal", "jungle", "monster", "overworld", "rare"]
             }
           },
           "temperature": {
@@ -4612,13 +4504,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "edge",
-                "jungle",
-                "monster",
-                "overworld"
-              ]
+              "value": ["animal", "edge", "jungle", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -4843,13 +4729,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "hills",
-                "jungle",
-                "monster",
-                "overworld"
-              ]
+              "value": ["animal", "hills", "jungle", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -5073,11 +4953,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "frozen",
-                "ocean",
-                "overworld"
-              ]
+              "value": ["frozen", "ocean", "overworld"]
             }
           },
           "temperature": {
@@ -5204,12 +5080,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "lukewarm",
-                "monster",
-                "ocean",
-                "overworld"
-              ]
+              "value": ["lukewarm", "monster", "ocean", "overworld"]
             }
           },
           "temperature": {
@@ -5277,12 +5148,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "caves",
-                "lush_caves",
-                "monster",
-                "overworld"
-              ]
+              "value": ["caves", "lush_caves", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -5350,10 +5216,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "mangrove_swamp",
-                "overworld"
-              ]
+              "value": ["mangrove_swamp", "overworld"]
             }
           },
           "temperature": {
@@ -5842,11 +5705,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "mesa",
-                "monster",
-                "overworld"
-              ]
+              "value": ["mesa", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -5914,13 +5773,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "mesa",
-                "monster",
-                "mutated",
-                "overworld"
-              ]
+              "value": ["animal", "mesa", "monster", "mutated", "overworld"]
             }
           },
           "temperature": {
@@ -6083,13 +5936,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "mesa",
-                "monster",
-                "overworld",
-                "plateau",
-                "rare"
-              ]
+              "value": ["mesa", "monster", "overworld", "plateau", "rare"]
             }
           },
           "temperature": {
@@ -6456,13 +6303,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "mesa",
-                "monster",
-                "mutated",
-                "overworld",
-                "plateau"
-              ]
+              "value": ["mesa", "monster", "mutated", "overworld", "plateau"]
             }
           },
           "temperature": {
@@ -6571,10 +6412,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "mooshroom_island",
-                "overworld"
-              ]
+              "value": ["mooshroom_island", "overworld"]
             }
           },
           "temperature": {
@@ -6665,11 +6503,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "mooshroom_island",
-                "overworld",
-                "shore"
-              ]
+              "value": ["mooshroom_island", "overworld", "shore"]
             }
           },
           "temperature": {
@@ -6814,11 +6648,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "monster",
-                "ocean",
-                "overworld"
-              ]
+              "value": ["monster", "ocean", "overworld"]
             }
           },
           "temperature": {
@@ -7225,10 +7055,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "overworld",
-                "river"
-              ]
+              "value": ["overworld", "river"]
             }
           },
           "temperature": {
@@ -7564,12 +7391,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "monster",
-                "overworld",
-                "savanna"
-              ]
+              "value": ["animal", "monster", "overworld", "savanna"]
             }
           },
           "temperature": {
@@ -7637,13 +7459,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "monster",
-                "mutated",
-                "overworld",
-                "savanna"
-              ]
+              "value": ["animal", "monster", "mutated", "overworld", "savanna"]
             }
           },
           "temperature": {
@@ -7734,13 +7550,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "monster",
-                "overworld",
-                "plateau",
-                "savanna"
-              ]
+              "value": ["animal", "monster", "overworld", "plateau", "savanna"]
             }
           },
           "temperature": {
@@ -8053,12 +7863,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "beach",
-                "monster",
-                "overworld",
-                "stone"
-              ]
+              "value": ["beach", "monster", "overworld", "stone"]
             }
           },
           "temperature": {
@@ -8126,11 +7931,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "monster",
-                "mountains",
-                "overworld"
-              ]
+              "value": ["monster", "mountains", "overworld"]
             }
           },
           "temperature": {
@@ -8396,12 +8197,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "monster",
-                "overworld",
-                "swamp"
-              ]
+              "value": ["animal", "monster", "overworld", "swamp"]
             }
           },
           "temperature": {
@@ -8602,13 +8398,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "forest",
-                "monster",
-                "overworld",
-                "taiga"
-              ]
+              "value": ["animal", "forest", "monster", "overworld", "taiga"]
             }
           },
           "temperature": {
@@ -8826,9 +8616,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "the_end"
-              ]
+              "value": ["the_end"]
             }
           },
           "temperature": {
@@ -8955,12 +8743,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "monster",
-                "ocean",
-                "overworld",
-                "warm"
-              ]
+              "value": ["monster", "ocean", "overworld", "warm"]
             }
           },
           "temperature": {

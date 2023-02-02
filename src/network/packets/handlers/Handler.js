@@ -1,9 +1,9 @@
 class Handler {
-    constructor() {}
+  constructor() {}
 
-    validate(client, packet) {}
+  validate(client, packet) {}
 
-    handle(client, packet) {} 
+  handle(client, packet) {}
 }
 
 module.exports = Handler;

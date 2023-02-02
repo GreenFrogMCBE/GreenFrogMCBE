@@ -1,13 +1,19 @@
 {
-    "name": "greenfrog",
-    "description": "A server software for MCBE",
-    "main": "index.js",
-    "author": "andriycraft",
-    "license": "MIT",
-    "dependencies": {
-        "bedrock-protocol": "git+https://github.com/greenfrogmc/Protocol.git"
-    },
-    "devDependencies": {
-        "eslint": "8.33.0"
-    }
+  "name": "greenfrog",
+  "description": "A server software for MCBE",
+  "main": "index.js",
+  "author": "andriycraft",
+  "license": "MIT",
+  "scripts": {
+    "format": "npx prettier --write .",
+    "debug": "node index.js --debug",
+    "run": "node index.js"
+  },
+  "dependencies": {
+    "bedrock-protocol": "git+https://github.com/greenfrogmc/Protocol.git"
+  },
+  "devDependencies": {
+    "eslint": "8.33.0",
+    "prettier": "2.8.3"
+  }
 }

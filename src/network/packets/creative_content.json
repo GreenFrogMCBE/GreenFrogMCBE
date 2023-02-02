@@ -11841,10 +11841,7 @@
           "has_nbt": 0,
           "can_place_on": [],
           "can_destroy": [],
-          "blocking_tick": [
-            0,
-            0
-          ]
+          "blocking_tick": [0, 0]
         }
       }
     },
@@ -22840,9 +22837,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                0
-                              ]
+                              "value": [0]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -22904,9 +22899,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                8
-                              ]
+                              "value": [8]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -22968,9 +22961,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                7
-                              ]
+                              "value": [7]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23032,9 +23023,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                15
-                              ]
+                              "value": [15]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23096,9 +23085,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                12
-                              ]
+                              "value": [12]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23160,9 +23147,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                14
-                              ]
+                              "value": [14]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23224,9 +23209,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                1
-                              ]
+                              "value": [1]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23288,9 +23271,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                4
-                              ]
+                              "value": [4]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23352,9 +23333,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                5
-                              ]
+                              "value": [5]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23416,9 +23395,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                13
-                              ]
+                              "value": [13]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23480,9 +23457,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                9
-                              ]
+                              "value": [9]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23544,9 +23519,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                3
-                              ]
+                              "value": [3]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23608,9 +23581,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                11
-                              ]
+                              "value": [11]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23672,9 +23643,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                10
-                              ]
+                              "value": [10]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23736,9 +23705,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                2
-                              ]
+                              "value": [2]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23800,9 +23767,7 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [
-                                6
-                              ]
+                              "value": [6]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -23858,9 +23823,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        0
-                      ]
+                      "value": [0]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -23912,9 +23875,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        8
-                      ]
+                      "value": [8]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -23966,9 +23927,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        7
-                      ]
+                      "value": [7]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24020,9 +23979,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        15
-                      ]
+                      "value": [15]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24074,9 +24031,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        12
-                      ]
+                      "value": [12]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24128,9 +24083,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        14
-                      ]
+                      "value": [14]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24182,9 +24135,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        1
-                      ]
+                      "value": [1]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24236,9 +24187,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        4
-                      ]
+                      "value": [4]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24290,9 +24239,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        5
-                      ]
+                      "value": [5]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24344,9 +24291,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        13
-                      ]
+                      "value": [13]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24398,9 +24343,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        9
-                      ]
+                      "value": [9]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24452,9 +24395,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        3
-                      ]
+                      "value": [3]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24506,9 +24447,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        11
-                      ]
+                      "value": [11]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24560,9 +24499,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        10
-                      ]
+                      "value": [10]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24614,9 +24551,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        2
-                      ]
+                      "value": [2]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -24668,9 +24603,7 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [
-                        6
-                      ]
+                      "value": [6]
                     },
                     "FireworkFade": {
                       "type": "byteArray",

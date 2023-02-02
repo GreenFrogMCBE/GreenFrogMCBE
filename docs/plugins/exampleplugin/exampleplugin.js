@@ -8,129 +8,130 @@ const Logger = new Logger(); // Creates logger for this plugin
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
 
 class Exampleplugin extends BasePlugin {
-    constructor() { }
+  constructor() {}
 
-    getName() {
-        return "ExamplePlugin" // Your plugin name
-    }
+  getName() {
+    return "ExamplePlugin"; // Your plugin name
+  }
 
-    onLoad() {
-        // Registers a command
-        const cmdmanager = new CommandManager()
-        cmdmanager.addCommand("testcommand", "This is my first command!")
-        // addCommand syntax: ("name", "description")
+  onLoad() {
+    // Registers a command
+    const cmdmanager = new CommandManager();
+    cmdmanager.addCommand("testcommand", "This is my first command!");
+    // addCommand syntax: ("name", "description")
 
-        // PLEASE DO NOT USE LOGGER.LOG() IN PLUGINS
-        Logger.pluginLog(
-            'info', // Log level. See API.md for docs
-            this.getName(), // Plugin name
-            'Hello, world', // Message
-            '[', // Prefix
-            ']' // Suffix
-        );
-    }
+    // PLEASE DO NOT USE LOGGER.LOG() IN PLUGINS
+    Logger.pluginLog(
+      "info", // Log level. See API.md for docs
+      this.getName(), // Plugin name
+      "Hello, world", // Message
+      "[", // Prefix
+      "]" // Suffix
+    );
+  }
 
-    onShutdown() {
-        Logger.pluginLog(
-            'info', // Log level. See API.md for docs
-            this.getName(), // Plugin name
-            'Goodbye', // Message
-            '[', // Prefix
-            ']' // Suffix
-        );
-    }
+  onShutdown() {
+    Logger.pluginLog(
+      "info", // Log level. See API.md for docs
+      this.getName(), // Plugin name
+      "Goodbye", // Message
+      "[", // Prefix
+      "]" // Suffix
+    );
+  }
 
-    getServerVersion() {
-        return "1.5" // The SERVER version that your plugin is made for
-    }
+  getServerVersion() {
+    return "1.5"; // The SERVER version that your plugin is made for
+  }
 
-    getVersion() {
-        return "1.2" // Your PLUGIN version
-    }
+  getVersion() {
+    return "1.2"; // Your PLUGIN version
+  }
 
-    onJoin(server, client) {
-        // This code executes when player joined
-    }
+  onJoin(server, client) {
+    // This code executes when player joined
+  }
 
-    // REMEMBER: You can just remove events that you don't use
+  // REMEMBER: You can just remove events that you don't use
 
-    onLeave(server, client) {
-        // This code executes when player left the server
-    }
+  onLeave(server, client) {
+    // This code executes when player left the server
+  }
 
-    onPlayerHasNoResourcePacksInstalled(server, client) { }
-    onResourcePacksRefused(server, client) { }
-    onPlayerHaveAllPacks(server, client) { }
-    onResourcePacksCompleted(server, client) { }
+  onPlayerHasNoResourcePacksInstalled(server, client) {}
+  onResourcePacksRefused(server, client) {}
+  onPlayerHaveAllPacks(server, client) {}
+  onResourcePacksCompleted(server, client) {}
 
-    onKick(server, client, msg) {
-        // This code executes when player is kicked
-    }
+  onKick(server, client, msg) {
+    // This code executes when player is kicked
+  }
 
-    onPlayerSpawn(server, client) {
-        // This code executes when player is spawned (this event executes after onJoin() event)
-    }
+  onPlayerSpawn(server, client) {
+    // This code executes when player is spawned (this event executes after onJoin() event)
+  }
 
-    onChat(server, client, message) {
-        client.sendMessage(client, "This message was sent using GFMCBE API!")
-        // This code executes when player uses chat
-    }
+  onChat(server, client, message) {
+    client.sendMessage(client, "This message was sent using GFMCBE API!");
+    // This code executes when player uses chat
+  }
 
-    onCommand(server, client, command) {
-        if (command.toLowerCase() === "/testcommand") {
-            // client.username returns the client's username
-            // client.ip returns the client's ip without port
-            // client.port returns the client's connection port
-            // client.fullip returns client's ip and port
-            // client.gamemode returns client's gamemode
-            // client.offline checks if the client is online or not
-            client.sendMessage(`Hi ${client.username}. Your IP is: ${client.ip}`) // This code sends message TO client
-            client.chat(`This message was sent by ${this.getName()}`) // This code sends message AS A client
-            client.setGamemode("creative") // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
-            client.sendToast("Hi", "This a toast notification")
-            //              ^ title ^ toast description/body
-            client.setTime(17000) // Updates the client time
-            setTimeout(() => {
-                if (!client.offline) { // Make sure to check if the client is still online after doing setTimeout() that uses client API in production plugins
-                    client.transfer("172.0.0.1", 19132) // Moves player to another server
-                    //              ^ ip         ^ port
-                }
-            }, 10000)
-
-            // ADVANCED API
-            // client.write(packet_name, json_packet_data)
-            // client.disconnect("reason") // force disconnect the client - may break other plugins
+  onCommand(server, client, command) {
+    if (command.toLowerCase() === "/testcommand") {
+      // client.username returns the client's username
+      // client.ip returns the client's ip without port
+      // client.port returns the client's connection port
+      // client.fullip returns client's ip and port
+      // client.gamemode returns client's gamemode
+      // client.offline checks if the client is online or not
+      client.sendMessage(`Hi ${client.username}. Your IP is: ${client.ip}`); // This code sends message TO client
+      client.chat(`This message was sent by ${this.getName()}`); // This code sends message AS A client
+      client.setGamemode("creative"); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
+      client.sendToast("Hi", "This a toast notification");
+      //              ^ title ^ toast description/body
+      client.setTime(17000); // Updates the client time
+      setTimeout(() => {
+        if (!client.offline) {
+          // Make sure to check if the client is still online after doing setTimeout() that uses client API in production plugins
+          client.transfer("172.0.0.1", 19132); // Moves player to another server
+          //              ^ ip         ^ port
         }
-    }
+      }, 10000);
 
-    onConsoleCommand(command, server) {
-        // This code executes when console executes a command
+      // ADVANCED API
+      // client.write(packet_name, json_packet_data)
+      // client.disconnect("reason") // force disconnect the client - may break other plugins
     }
+  }
 
-    onInternalServerError(server, client, error) {
-        // This code executes when there is an server error
-    }
+  onConsoleCommand(command, server) {
+    // This code executes when console executes a command
+  }
 
-    onPlayerMove(server, client, location) {
-        // This code executes when player moves
-    }
+  onInternalServerError(server, client, error) {
+    // This code executes when there is an server error
+  }
 
-    onGamemodeChange(server, client, gamemode) {
-        // This code executes when player changes his own gamemode
-    }
+  onPlayerMove(server, client, location) {
+    // This code executes when player moves
+  }
 
-    onServerToClientChat(server, client, msg) {
-        // This code executes when server sends a chat message to client (useful for custom logging)
-    }
+  onGamemodeChange(server, client, gamemode) {
+    // This code executes when player changes his own gamemode
+  }
 
-    onToast(client, server, title, msg) {
-        // This code executes when server sends toast to client
-    }
+  onServerToClientChat(server, client, msg) {
+    // This code executes when server sends a chat message to client (useful for custom logging)
+  }
 
-    onTransfer(client, server, address, port) {
-        // This code executes when player transfers to another server
-        // WARNING: Functions like client.sendMessage(), client.transfer() will not work anymore on this player
-    }
+  onToast(client, server, title, msg) {
+    // This code executes when server sends toast to client
+  }
+
+  onTransfer(client, server, address, port) {
+    // This code executes when player transfers to another server
+    // WARNING: Functions like client.sendMessage(), client.transfer() will not work anymore on this player
+  }
 }
 
 module.exports = Exampleplugin;

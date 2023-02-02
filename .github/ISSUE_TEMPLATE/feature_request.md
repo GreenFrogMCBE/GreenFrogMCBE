@@ -1,14 +1,15 @@
 ---
 name: Feature request
 about: Suggest an idea
-title: ''
+title: ""
 labels: Feature request
-assignees: ''
-
+assignees: ""
 ---
 
 ## What feature?
+
 [type here]
 
-## Why? 
+## Why?
+
 [type here]

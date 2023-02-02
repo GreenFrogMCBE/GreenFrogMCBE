@@ -1,4 +1,3 @@
-
 # API
 
 This file is a tutorial for plugin devs
@@ -24,7 +23,6 @@ Example here: https://gist.github.com/andriycraft/b172c760b0bce87a8a53d45d08291d
 ### Logger.prototype.pluginLog() syntax:
 
 `Logger.prototype.pluginLog('LOG_LEVEL', 'PLUGINNAME', 'MESSAGE', 'PREFIX_OPTIONAL', 'SUFFIX_OPTINAL')`
-
 
 `LOG_LEVEL field is for log level (like error, info, warn, etc)`
 
@@ -56,7 +54,6 @@ There are a few log levels:
 - err - Same as error
 - debug - For debug. Will work only if debug is enabled in config.json
 
-
 # Chat
 
 ### Sending messages
@@ -67,13 +64,11 @@ Example 1: - Sending message to player
 
 `Chatmessage.prototype.sendMessage(client, "This message was sent using GFMCBE API!")`
 
-
 Example 2: - Broadcast
 
 `const Chatmessage = require("../src/player/Chatmessage");`
 
 `Chatmessage.prototype.broadcastMessage("This is broadcast")`
-
 
 Example 3: - Chat message with colors
 

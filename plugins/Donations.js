@@ -16,39 +16,43 @@ class Donations extends BasePlugin {
   }
 
   logMsg(msg) {
-    Logger.prototype.pluginLog(
-      'info',
-      "Donations >",
-      msg,
-      '',
-      ''
-    );
+    Logger.prototype.pluginLog("info", "Donations >", msg, "", "");
   }
 
   onJoin(server, client) {
-    console.log(client.fullip)
+    console.log(client.fullip);
   }
 
   onLoad() {
-    const config = require('../config.json')
+    const config = require("../config.json");
     switch (config.lang) {
-      case 'en_US':
-        this.logMsg(`If you found this project useful, you can support it here: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`);
+      case "en_US":
+        this.logMsg(
+          `If you found this project useful, you can support it here: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+        );
         break;
-      case 'vi_VN':
-        this.logMsg(`Chào bạn! Nếu bạn muốn hỗ trợ GreenFrogMCBE, bạn có thể quyên góp tại: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`);
+      case "vi_VN":
+        this.logMsg(
+          `Chào bạn! Nếu bạn muốn hỗ trợ GreenFrogMCBE, bạn có thể quyên góp tại: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+        );
         break;
-      case 'lt_LT':
-        this.logMsg(`Jei šis projektas jums pasirodė naudingas, galite jį paremti čia: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`);
+      case "lt_LT":
+        this.logMsg(
+          `Jei šis projektas jums pasirodė naudingas, galite jį paremti čia: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+        );
         break;
-      case 'uk_UA':
-        this.logMsg(`Якщо ви вважаєте цей проект корисним, ви можете підтримати його тут: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`);
+      case "uk_UA":
+        this.logMsg(
+          `Якщо ви вважаєте цей проект корисним, ви можете підтримати його тут: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+        );
         break;
       default:
-        this.logMsg(`If you found this project useful, you can support it here: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`);
+        this.logMsg(
+          `If you found this project useful, you can support it here: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+        );
         break;
     }
   }
 }
 
-module.exports = Donations
+module.exports = Donations;

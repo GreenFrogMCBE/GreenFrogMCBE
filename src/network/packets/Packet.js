@@ -1,13 +1,13 @@
 class Packet {
-    constructor() { }
+  constructor() {}
 
-    name() {
-        return null
-    }
+  name() {
+    return null;
+  }
 
-    validate() { }
+  validate() {}
 
-    writePacket() { }
+  writePacket() {}
 }
 
 module.exports = Packet;

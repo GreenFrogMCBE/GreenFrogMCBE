@@ -1,15 +1,15 @@
-let plugins = []
+let plugins = [];
 
 class PluginManager {
-    constructor() {}
+  constructor() {}
 
-    getPlugins() {
-        return plugins
-    }
+  getPlugins() {
+    return plugins;
+  }
 
-    addPlugin(name) {
-        plugins.push(name)
-    }
+  addPlugin(name) {
+    plugins.push(name);
+  }
 }
 
-module.exports = PluginManager
+module.exports = PluginManager;
