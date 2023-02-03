@@ -37,7 +37,7 @@ Step 1. Open powershell as an admin
 
 Step 2. Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
 
-Step 3. Join via `172.0.0.1` if it does not work join with your local IP from router settings
+Step 3. Join via `127.0.0.1` if it does not work join with your local IP from router settings
 
 ## Plugins available for public usage
 
