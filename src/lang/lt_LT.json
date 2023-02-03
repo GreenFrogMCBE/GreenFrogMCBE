@@ -86,7 +86,6 @@
   "nežinomas": "nežinomas",
   "loadingPlugin": "Įkeliamas %plugin%...",
   "noPluginName": "Nėra papildinio pavadinimo! %plugin%",
-  "pluginHasNoGetServerVersion": "Įskiepis %plugin% neturi getServerVersion()",
   "tpismf": "Įskiepis %plugin% yra sukurtas %psv%. Jūsų serveris yra %msv%. Tai gali sukelti netikėtumųištaisytos problemos ar gedimai",
   "failedToLoadPlugin": "Nepavyko įkelti papildinio \"%name%\". Klaida buvo: %errorstack%",
   "ingameVerDescription": "Rodo serverio versiją",

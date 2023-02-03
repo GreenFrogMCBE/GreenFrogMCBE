@@ -10,25 +10,21 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const CommandManager = require("../src/player/CommandManager");
 const BasePlugin = require("../src/plugins/BasePlugin");
-const Logger = require("../src/server/Logger");
+const Log = require("../src/server/Logger");
+const Logger = new Log();
 
 class Donations extends BasePlugin {
   getName() {
     return "Donations";
   }
 
-  getServerVersion() {
-    return "1.5";
-  }
-
   getVersion() {
-    return "1.2";
+    return "1.3";
   }
 
   logMsg(msg) {
-    Logger.prototype.pluginLog("info", "Donations >", msg, "", "");
+    Logger.log("Donations > " + msg);
   }
 
   onLoad() {

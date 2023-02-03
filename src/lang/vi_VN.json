@@ -86,7 +86,6 @@
   "unknown": "không xác định",
   "loadingPlugin": "Đang tải plugin %plugin%...",
   "noPluginName": "Plugin không có tên! %plugin%",
-  "pluginHasNoGetServerVersion": "Plugin %plugin% không có getServerVersion()",
   "tpismf": "Plugin %plugin% được tạo cho %psv%. Máy chủ của bạn đang ở trên %msv%. Điều này có thể gây ra sự cố không mong muốn",
   "failedToLoadPlugin": "Không thể tải plugin \"%name%\". Lỗi: %errorstack%",
   "ingameVerDescription": "Hiển thị phiên bản của máy chủ",

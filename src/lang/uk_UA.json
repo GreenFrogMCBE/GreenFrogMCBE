@@ -86,7 +86,6 @@
   "unknown": "невідомо",
   "loadingPlugin": "Завантаження %plugin%...",
   "noPluginName": "Немає імені плагіну! %plugin%",
-  "pluginHasNoGetServerVersion": "Плагін %plugin% не має getServerVersion()",
   "tpismf": "Плагін %plugin% створено для %psv%. Ваш сервер знаходиться на %msv%. Це може викликати несподівані проблеми або крах",
   "failedToLoadPlugin": "Не вдалося завантажити плагін \"%name%\". Помилка була: %errorstack%",
   "ingameVerDescription": "Показує версію сервера",

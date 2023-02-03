@@ -86,7 +86,6 @@
   "unknown": "unknown",
   "loadingPlugin": "Loading %plugin%...",
   "noPluginName": "No plugin name! %plugin%",
-  "pluginHasNoGetServerVersion": "Plugin %plugin% has no getServerVersion()",
   "tpismf": "The plugin %plugin% is made for %psv%. Your server is on %msv%. This may cause unexpected issues or crashes",
   "failedToLoadPlugin": "Failed to load plugin \"%name%\". The error was: %errorstack%",
   "ingameVerDescription": "Shows the server version",

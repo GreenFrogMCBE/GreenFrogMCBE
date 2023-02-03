@@ -16,7 +16,10 @@ const ToastManager = require("../src/player/Toast");
 const GameMode = require("../src/player/GameMode");
 
 const log = require("../src/server/Logger");
+const ShutdownAPI = require("../src/server/ShutdownAPI");
 const Logger = new log(); // Creates logger for this plugin
+
+// For docs look at API.md in /docs/api.md
 
 // This is a simple plugin that tests the Greenfrog's api
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
@@ -29,32 +32,15 @@ class Exampleplugin extends BasePlugin {
   }
 
   onLoad() {
-    // PLEASE DO NOT USE LOGGER.LOG() IN PLUGINS
-    Logger.pluginLog(
-      "info", // Log level. See API.md for docs
-      this.getName(), // Plugin name
-      "Hello, world", // Message
-      "[", // Prefix
-      "]" // Suffix
-    );
+    Logger.log("Hello world!");
   }
 
   onShutdown() {
-    Logger.pluginLog(
-      "info", // Log level. See API.md for docs
-      this.getName(), // Plugin name
-      "Goodbye", // Message
-      "[", // Prefix
-      "]" // Suffix
-    );
-  }
-
-  getServerVersion() {
-    return "1.5"; // The SERVER version that your plugin is made for
+    Logger.log("Good bye!");
   }
 
   getVersion() {
-    return "1.2"; // Your PLUGIN version
+    return "1.2"; // Your plugin version
   }
 
   onJoin(server, client) {
@@ -80,6 +66,7 @@ class Exampleplugin extends BasePlugin {
     // Registers a command
     const cmdmanager = new CommandManager();
     cmdmanager.addCommand(client, "testcommand", "This is my first command!");
+    cmdmanager.addCommand(client, "stopserver", "Stop server command that is registered by the example plugin");
     // addCommand syntax: ("name", "description")
 
     // This code executes when player is spawned (this event executes after onJoin() event)
@@ -91,38 +78,45 @@ class Exampleplugin extends BasePlugin {
   }
 
   onCommand(server, client, command) {
-    if (command.toLowerCase() === "/testcommand") {
-      // client.username returns the client's username
-      // client.ip returns the client's ip without port
-      // client.port returns the client's connection port
-      // client.fullip returns client's ip and port
-      // client.gamemode returns client's gamemode
-      // client.offline checks if the client is online or not
-      // client.op returns the client's op status
-      // client.permlevel returns the client's permission level
-      client.sendMessage(`Hi ${client.username}. Your IP is: ${client.ip}`); // This code sends message TO client
-      client.setGamemode(GameMode.Creative); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
-      client.chat(`This message was sent by ${this.getName()}`); // This code sends message AS A client
-
-      const Toast = new ToastManager();
-      Toast.setTitle("This is a toast");
-      Toast.setMessage("This is a toast message");
-      Toast.send(client);
-
-      //              ^ title ^ toast description/body
-      client.setTime(17000); // Updates the client time
-      client.sendForm(5555, "text", [{ text: "Button 1" }], "title", "form");
-      setTimeout(() => {
-        if (!client.offline) {
-          // Make sure to check if the client is still online after doing setTimeout() that uses client API in production plugins
-          client.transfer("172.0.0.1", 19132); // Moves player to another server
-          //              ^ ip         ^ port
-        }
-      }, 30000);
-
-      // ADVANCED API
-      // client.write(packet_name, json_packet_data)
-      // client.disconnect("reason") // force disconnect the client - may break other plugins
+    switch (command.toLowerCase()) {
+      case '/testcommand':
+        // client.username returns the client's username
+        // client.ip returns the client's ip without port
+        // client.port returns the client's connection port
+        // client.fullip returns client's ip and port
+        // client.gamemode returns client's gamemode
+        // client.offline checks if the client is online or not
+        // client.op returns the client's op status
+        // client.permlevel returns the client's permission level
+        client.sendMessage(`Hi ${client.username}. Your IP is: ${client.ip}`); // This code sends message TO client
+        client.chat(`This message was sent by ${this.getName()}`); // This code sends message AS A client
+        client.setGamemode(GameMode.Creative); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
+  
+        const Toast = new ToastManager();
+        Toast.setTitle("This is a toast");
+        Toast.setMessage("This is a toast message");
+        Toast.send(client);
+  
+        //              ^ title ^ toast description/body
+        client.setTime(17000); // Updates the client time
+        client.sendForm(5555, "text", [{ text: "Button 1" }], "title", "form");
+        setTimeout(() => {
+          if (!client.offline) {
+            // Make sure to check if the client is still online after doing setTimeout() that uses client API in production plugins
+            client.transfer("172.0.0.1", 19132); // Moves player to another server
+            //              ^ ip         ^ port
+          }
+        }, 30000);
+  
+        // ADVANCED API
+        // client.write(packet_name, json_packet_data)
+        // client.disconnect("reason") // force disconnect the client - may break other plugins
+        break
+      case '/stopserver':
+        client.sendMessage("Stopping server...");
+        const sa = new ShutdownAPI()
+        sa.shutdownServer()
+        break
     }
   }
 

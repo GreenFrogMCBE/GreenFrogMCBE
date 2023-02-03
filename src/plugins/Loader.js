@@ -67,34 +67,11 @@ class Loader {
   loadPlugin(plugin) {
     Logger.log(lang.loadingPlugin.replace("%plugin%", plugin));
 
+    // Check if there is getName() and getVersion() method
+    // The plugin will throw an error if not
     require(`../../plugins/${plugin}`).prototype.getName();
     require(`../../plugins/${plugin}`).prototype.getVersion();
 
-    try {
-      if (
-        require(`../../plugins/${plugin}`).prototype.getServerVersion() ==
-        !ServerInfo.majorserverversion
-      ) {
-        Logger.log(
-          lang.tpismf
-            .replace(
-              "%plugin%",
-              require(`../../plugins/${plugin}`).prototype.getName()
-            )
-            .replace(
-              "%psv%",
-              require(`../../plugins/${plugin}`).prototype.getServerVersion()
-            )
-            .replace("%msv%", ServerInfo.majorserverversion),
-          "warning"
-        );
-      }
-    } catch (e) {
-      Logger.log(
-        lang.pluginHasNoGetServerVersion.replace("%plugin%", plugin),
-        "warning"
-      );
-    }
 
     PluginManager.prototype.addPlugin(
       require(`../../plugins/${plugin}`).prototype.getName()
