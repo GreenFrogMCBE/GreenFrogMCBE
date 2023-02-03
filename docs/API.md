@@ -144,4 +144,29 @@ class YourPlugin extends BasePlugin {
 module.exports = YourPlugin;
 ```
 
-### 
+### Toasts
+
+```javascript
+const BasePlugin = require("../src/plugins/BasePlugin");
+
+class YourPlugin extends BasePlugin {
+
+    constructor() { }
+
+    getName() { return "YourPlugin"; }
+    getVersion() { return "1.0"; }
+
+    onLoad() {}
+
+    onJoin(server, client) {
+        setTimeout(() => {
+            const Toast = new ToastManager();
+            Toast.setTitle("This is a toast");
+            Toast.setMessage("This is a toast message");
+            Toast.send(client);
+        }, 10000) // send the toast after 10 sec
+    }
+}
+
+module.exports = YourPlugin;
+```
