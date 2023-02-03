@@ -37,8 +37,8 @@ const Log = require("../src/server/Logger");
 const Logger = new Log()
 
 Logger.log(
-"message", // Message
-"info", // Log level. Info by default
+    "message", // Message
+    "info", // Log level. (info by default)
 )
 ```
 
