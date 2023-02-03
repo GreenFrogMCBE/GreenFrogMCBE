@@ -1,5 +1,7 @@
 ## GreenFrog API
 
+(Example plugin here: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/plugins/exampleplugin/exampleplugin.js)
+
 ### Plugin structure
 
 ```javascript
@@ -141,3 +143,5 @@ class YourPlugin extends BasePlugin {
 
 module.exports = YourPlugin;
 ```
+
+### 
