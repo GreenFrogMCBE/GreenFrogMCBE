@@ -64,23 +64,23 @@ module.exports = YourPlugin;
 
 ### Kicking player on join
 
-`const BasePlugin = require("../src/plugins/BasePlugin");
-
-class YourPlugin extends BasePlugin {
-
-constructor() { }
-
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
-
-    onLoad() {
-        // ...
-    }
-
-    onJoin(server, player) {
-        player.kick("hi")
-    }
-
-}
-
-module.exports = YourPlugin;`
+`const BasePlugin = require("../src/plugins/BasePlugin");`
+``
+`class YourPlugin extends BasePlugin {`
+``
+`    constructor() { }`
+``
+`    getName() { return "YourPlugin"; }`
+`    getVersion() { return "1.0"; }`
+``
+`    onLoad() {`
+`        // ...`
+`    }`
+``
+`    onJoin(server, player) {`
+`        player.kick("hi")`
+`    }`
+``
+`}`
+``
+`module.exports = YourPlugin;`
