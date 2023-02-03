@@ -64,9 +64,10 @@ module.exports = YourPlugin;
 
 ### Kicking player on join
 
-const BasePlugin = require("../src/plugins/BasePlugin");
+`const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
+
 constructor() { }
 
     getName() { return "YourPlugin"; }
@@ -82,4 +83,4 @@ constructor() { }
 
 }
 
-module.exports = YourPlugin;
+module.exports = YourPlugin;`
