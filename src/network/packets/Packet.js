@@ -16,9 +16,6 @@ class Packet {
   name() {}
   validate() {}
   send() {}
-
-  /* @deprecated */
-  writePacket() {}
 }
 
 module.exports = Packet;

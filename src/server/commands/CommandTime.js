@@ -10,13 +10,12 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const log = require("../Logger");
-const Logger = new log();
+const Logger = require("../Logger");
 const TimePacket = require("../../network/packets/Time");
 const PlayerInfo = require("../../player/PlayerInfo");
 
-const lang = require("../ServerInfo").lang;
-const commands = require("../ServerInfo").commands;
+const lang = require("../../server/ServerInfo").lang;
+const commands = require("../../server/ServerInfo").commands;
 
 class CommandTime extends require("./Command") {
   name() {
@@ -51,14 +50,15 @@ class CommandTime extends require("./Command") {
         }
     }
 
-    const players = PlayerInfo.prototype.getPlayers();
+    const players = PlayerInfo.getPlayers();
     if (!players) {
       Logger.log(lang.timeUpdated);
       return;
     }
 
     for (const client of players) {
-      TimePacket.prototype.writePacket(client, time);
+      const timepk = new TimePacket()
+      timepk.writePacket(client, time);
     }
 
     Logger.log(lang.timeUpdated);

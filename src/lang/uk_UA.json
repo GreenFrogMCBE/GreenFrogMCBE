@@ -28,7 +28,6 @@
   "executedCmd": "%player% виконав команду: %cmd%",
   "failedToExecuteEvent": "Не вдалося виконати %event% подію для плагіну \"%plugin%\". Помилка: %e%",
   "failedToShutdownPlugin": "Не вдалося вимкнути плагін %plugin%. Немає імені плагіну!",
-  "ftcpf": "Не вдалося створити папку для плагінів: %error%",
   "packetHandlingException": "Сталася помилка при спробі обробити пакет від %player%: %error%",
   "helpHelp": "%green%help %white%- %blue%Показує це повідомлення",
   "kickHelp": "%green%kick %cyan%[player] [reason] %white%- %blue%Викинути гравця",

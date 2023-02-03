@@ -36,25 +36,24 @@ const CommandPl = require("../../../server/commands/CommandPl");
 const CommandOp = require("../../../server/commands/CommandOp");
 const config = require("../../../server/ServerInfo").config;
 const PlayerInit = require("../../../server/PlayerInit");
-const log = require("../../../server/Logger");
 const lang = ServerInfo.lang;
-const Logger = new log();
+const Logger = require("../../../server/Logger");
 const fs = require("fs");
 
 class ResourcePackClientResponse extends Handler {
   async handle(client, packet, server) {
     switch (packet.data.params.response_status) {
       case "none": {
-        new Events().executePHNRPI(server, client);
+        Events.executePHNRPI(server, client);
         Logger.log(lang.noRpsInstalled.replace("%player%", client.username));
       }
       case "refused": {
-        new Events().executeFTEORPF(server, client);
+        Events.executeFTEORPF(server, client);
         Logger.log(lang.rpsrefused.replace("%player%", client.username));
         throw new ClientDisconnect(lang.resourcePacksRefused);
       }
       case "have_all_packs": {
-        new Events().executeFTEOPHAP(server, client);
+        Events.executeFTEOPHAP(server, client);
         Logger.log(lang.rpsInstalled.replace("%player%", client.username));
         new ResourcePackStack().writePacket(client);
         break;
@@ -69,7 +68,7 @@ class ResourcePackClientResponse extends Handler {
           client.username = client.username.replace(" ", "_");
         }
 
-        new Events().executeFTEOK(server, client);
+        Events.executeFTEOK(server, client);
         if (client.username.length < 3) {
           throw new ClientDisconnect(lang.usernameIsTooShort);
         }
@@ -78,16 +77,21 @@ class ResourcePackClientResponse extends Handler {
           throw new ClientDisconnect(lang.usernameIsTooLong);
         }
 
+        client.op = false;
+        client.items = []
+
         let ops = fs.readFileSync("ops.yml", "utf8").split("\n");
         for (let i = 0; i < ops.length; i++) {
-          if (ops[i] == client.username) {
+          if (ops[i].replace("\r", "") == client.username) {
             client.op = true;
             client.permlevel = 4;
           } else {
-            client.op = false;
             client.permlevel = config.default_permission_level;
           }
         }
+
+        client.items = []
+        client.gamemode = config.gamemode;
 
         Logger.log(lang.joined.replace("%player%", client.username));
         new PlayerList().writePacket(client, client.username);
@@ -104,7 +108,7 @@ class ResourcePackClientResponse extends Handler {
         new Respawn().writePacket(client);
         new ClientCacheStatus().writePacket(client);
 
-        new PlayerInit().initPlayer(client);
+        PlayerInit.initPlayer(client);
 
         const commandmanager = new CommandManager();
         commandmanager.init(client);
@@ -128,6 +132,7 @@ class ResourcePackClientResponse extends Handler {
           new CommandPl().aliases()[0],
           new CommandPl().getPlayerDescription()
         );
+        console.log(client.op)
         if (client.op) {
           commandmanager.addCommand(
             client,
@@ -165,7 +170,7 @@ class ResourcePackClientResponse extends Handler {
         Logger.log(lang.spawned.replace("%player%", client.username));
         setTimeout(() => {
           if (!client.offline) new PlayStatus().writePacket(client);
-          new Events().executeOPS(server, client);
+          Events.executeOPS(server, client);
         }, 2000);
 
         setTimeout(() => {

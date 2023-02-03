@@ -28,7 +28,6 @@
   "executedCmd": "%player% đã thực thi lệnh: %cmd%",
   "failedToExecuteEvent": "Không thể thực thi sự kiện %event% của plugin \"%plugin%\". Lỗi: %e%",
   "failedToShutdownPlugin": "Không thể tắt plugin %plugin%. Plugin không có tên!",
-  "ftcpf": "Không tạo được thư mực plugin: %error%",
   "packetHandlingException": "Lỗi ngoại lệ trong khi cố gắng xử lý gói tin từ %player%: %error%",
   "helpHelp": "%green%help %white%- %blue%Hiển thị menu trợ giúp",
   "kickHelp": "%green%kick %cyan%[người chơi] [lý do] %white%- %blue%Đá một người chơi khỏi máy chủ",

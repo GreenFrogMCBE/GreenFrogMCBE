@@ -26,8 +26,7 @@ class Transfer extends require("./Packet") {
    * @param {string} address - The server address to validate
    * @param {number} port - The server port to validate
    */
-  validate(client, address, port) {
-    if (!client) throw new Error("Packet processing error. Client is null");
+  validate(address, port) {
     if (!address)
       throw new Error("Packet processing error. Target server address is null");
     if (parseInt(port) == NaN)
@@ -42,8 +41,8 @@ class Transfer extends require("./Packet") {
    * @param {string} address - The server address
    * @param {number} port - The server port
    */
-  writePacket(client, address, port) {
-    this.validate(client, address, port);
+  send(client, address, port) {
+    this.validate(address, port);
     client.write(this.name(), {
       server_address: address,
       port: parseInt(port),

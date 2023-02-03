@@ -14,7 +14,7 @@
 const Frog = require("./src/Server.js");
 
 try {
-  new Frog().start();
+  Frog.start();
 } catch (e) {
   console.error("Failed to start the server");
   console.error("The error was: ");

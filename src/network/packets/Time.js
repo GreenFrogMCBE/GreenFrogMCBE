@@ -26,8 +26,7 @@ class Time extends require("./Packet") {
    * @param client - The client that sent the packet
    * @param time - The time in seconds to set the client's time to.
    */
-  validate(client, time) {
-    if (!client) throw new Error("Packet processing error. Client is null");
+  validate(time) {
     if (parseInt(time) == NaN)
       throw new Error(
         "Packet processing error. A plugin tried to set an invalid time (time must be int, not string)"
@@ -39,8 +38,8 @@ class Time extends require("./Packet") {
    * @param client - The client that the packet is being sent to.
    * @param time - The time to send to the client.
    */
-  writePacket(client, time) {
-    this.validate(client, time);
+  send(client, time) {
+    this.validate(time);
     client.write(this.name(), {
       time: time,
     });

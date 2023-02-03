@@ -14,8 +14,7 @@ const lang = require("../../server/ServerInfo").lang;
 const commands = require("../../server/ServerInfo").commands;
 const TextPacket = require("../../network/packets/Text");
 const PlayerInfo = require("../../player/PlayerInfo");
-const log = require("../Logger");
-const Logger = new log();
+const Logger = require("../Logger");
 
 class CommandSay extends require("./Command") {
   name() {
@@ -34,13 +33,13 @@ class CommandSay extends require("./Command") {
       return;
     }
 
-    let msg = lang.saycommand_format
+    let msg = lang.sayCommandFormat
       .replace(`%message%`, args)
       .replace(`%sender%`, "Server");
 
-    for (let i = 1; i < PlayerInfo.prototype.getPlayers().length; i++) {
-      let client = PlayerInfo.prototype.getPlayers()[i];
-      TextPacket.prototype.writePacket(client, msg);
+    for (let i = 1; i < PlayerInfo.getPlayers().length; i++) {
+      let client = PlayerInfo.getPlayers()[i];
+      TextPacket.writePacket(client, msg);
     }
 
     Logger.log(msg);
@@ -65,13 +64,15 @@ class CommandSay extends require("./Command") {
     }
     args = args.split(" ")[1];
 
-    let msg = lang.saycommand_format
+    let msg = lang.sayCommandFormat
       .replace(`%message%`, args)
       .replace(`%sender%`, client.username);
 
-    for (let i = 0; i < PlayerInfo.prototype.getPlayers().length; i++) {
-      TextPacket.prototype.writePacket(
-        PlayerInfo.prototype.getPlayers()[i],
+    for (let i = 0; i < PlayerInfo.getPlayers().length; i++) {
+      Logger.log(msg);
+      const text = new TextPacket()
+      text.writePacket(
+        PlayerInfo.getPlayers()[i],
         msg
       );
     }

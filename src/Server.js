@@ -34,28 +34,30 @@ const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
 
-const log = require("./server/Logger");
-const Logger = new log();
-const ev = require("./server/Events");
-const Events = new ev();
+const Logger = require("./server/Logger");
+const Events = require("./server/Events")
 
-class Server {
-  constructor() {
-    this.clients = [];
-    this.server = null;
-    this.config = null;
-    this.lang = null;
-    this.command = null;
-  }
+let clients = []
+let server = null
+let config = null
+let lang = null
+let command = null
+
+module.exports = {
+  clients: clients,
+  server: server,
+  config: config,
+  lang: lang,
+  commands: command,
 
   /**
    * It loads the JSON files into the server.
    */
   async initJson() {
-    this.config = ServerInfo.config;
-    this.lang = ServerInfo.lang;
-    this.commands = ServerInfo.commands;
-  }
+    config = ServerInfo.config;
+    lang = ServerInfo.lang;
+    commands = ServerInfo.commands;
+  },
 
   /**
    * GetServer() {
@@ -64,8 +66,8 @@ class Server {
    * @returns The server object.
    */
   getServer() {
-    return this.server;
-  }
+    return server;
+  },
 
   /**
    * It logs the error and then exits the process
@@ -74,21 +76,21 @@ class Server {
   async attemptToDie(err) {
     if (err.toString().includes("Server failed to start")) {
       Logger.log(
-        `Failed to bind port on ${this.config.host}:${this.config.port}`,
+        `Failed to bind port on ${config.host}:${config.port}`,
         "error"
       );
       Logger.log(
         `This means that another server is already running on this port`,
         "error"
       );
-      process.exit(this.config.crashstatuscode);
+      process.exit(config.crashstatuscode);
     } else {
       Logger.log(`Server error: \n${err.stack}`, "error");
-      if (!this.config.donotcrashoncriticalerrors) {
-        process.exit(this.config.crashstatuscode);
+      if (!config.donotcrashoncriticalerrors) {
+        process.exit(config.crashstatuscode);
       }
     }
-  }
+  },
 
   /**
    * It handles packets.
@@ -96,8 +98,7 @@ class Server {
    * @param packet - The packet that was sent by the client
    */
   handlepk(client, packet) {
-    if (client.q)
-      throw new Error("An attempt to handle packet from offline player");
+    if (client.offline) throw new Error("An attempt to handle packet from offline player");
     switch (packet.data.name) {
       case "resource_pack_client_response":
         new ResourcePackClientResponse().handle(client, packet, this.server);
@@ -127,7 +128,7 @@ class Server {
         new RequestChunkRadius().handle(client);
         break;
       case "text":
-        new Text().handle(client, packet, this.lang);
+        new Text().handle(client, packet, lang);
         break;
       case "subchunk_request":
         new SubChunkRequest().handle(client, packet);
@@ -139,13 +140,13 @@ class Server {
         new ModalFormResponse().handle(this.server, client, packet);
         break;
       default:
-        if (this.config.logunhandledpackets) {
-          Logger.log(this.lang.unhandledPacket, "warning");
+        if (config.logunhandledpackets) {
+          Logger.log(lang.unhandledPacket, "warning");
           console.log("%o", packet);
         }
         break;
     }
-  }
+  },
 
   /**
    * It logs the player's IP, port, then sends the player the response pack, executes the
@@ -160,36 +161,36 @@ class Server {
     client.offline = false;
 
     Logger.log(
-      this.lang.playerConnected
+      lang.playerConnected
         .replace("%player%", client.username)
         .replace("%ip%", client.fullip)
     );
 
     Events.executeOJ(this.server, client);
 
-    new PlayerInfo().addPlayer(client);
+    PlayerInfo.addPlayer(client);
     new ResponsePackInfo().writePacket(client);
-  }
+  },
 
   /**
    * It logs a warning if the config.debug or config.unstable is true.
    */
   async initDebug() {
-    if (this.config.unstable) {
-      Logger.log(this.lang.unstableWarning, "warning");
+    if (config.unstable) {
+      Logger.log(lang.unstableWarning, "warning");
     }
-    if (process.env.DEBUG == "minecraft-protocol" || this.config.debug) {
-      Logger.log(this.lang.debugWarning, "warning");
+    if (process.env.DEBUG == "minecraft-protocol" || config.debug) {
+      Logger.log(lang.debugWarning, "warning");
     }
-  }
+  },
 
   /**
-   * It loads the config, language file, and commands, then loads the plugins and starts the server.
+   * It loads the config, lang file, and commands, then loads the plugins and starts the server.
    */
   async start() {
-    await new ValidateConfig().ValidateConfig();
-    await new ValidateConfig().ValidateLangFile();
-    await new ValidateConfig().ValidateCommands();
+    await ValidateConfig.ValidateConfig();
+    await ValidateConfig.ValidateLangFile();
+    await ValidateConfig.ValidateCommands();
 
     await this.initJson();
 
@@ -201,7 +202,7 @@ class Server {
       }
     });
 
-    Logger.log(this.lang.loadingServer);
+    Logger.log(lang.loadingServer);
 
     process.on("uncaughtException", (err) => this.attemptToDie(err));
     process.on("uncaughtExceptionMonitor", (err) => this.attemptToDie(err));
@@ -209,11 +210,11 @@ class Server {
 
     await this.initDebug();
 
-    Logger.log(`${this.lang.scch}`, "debug");
-    await PluginLoader.prototype.loadPlugins();
+    Logger.log(`${lang.scch}`, "debug");
+    await PluginLoader.loadPlugins();
 
     this.listen();
-  }
+  },
 
   /**
    * It listens for a connection, and when it gets one, it listens for a join event, and when it gets
@@ -221,25 +222,25 @@ class Server {
    */
   listen() {
     try {
-      this.server = bedrock.createServer({
-        host: this.config.host,
-        port: this.config.port,
-        version: this.config.version,
-        offline: this.config.offlinemode,
-        maxPlayers: this.config.maxplayers,
+      server = bedrock.createServer({
+        host: config.host,
+        port: config.port,
+        version: config.version,
+        offline: config.offlinemode,
+        maxPlayers: config.maxplayers,
         motd: {
-          motd: this.config.motd,
+          motd: config.motd,
           levelName: "GreenFrogMCBE",
         },
       });
       Logger.log(
-        `${this.lang.listeningOn.replace(
+        `${lang.listeningOn.replace(
           `%ipport%`,
-          `/${this.config.host}:${this.config.port}`
+          `/${config.host}:${config.port}`
         )}`
       );
 
-      this.server.on("connect", (client) => {
+      server.on("connect", (client) => {
         client.on("join", () => {
           this.onJoin(client);
         });
@@ -249,13 +250,13 @@ class Server {
             this.handlepk(client, packet);
           } catch (e) {
             try {
-              client.kick(this.lang.internalServerError);
+              client.kick(lang.internalServerError);
             } catch (e) {
-              client.disconnect(this.lang.internalServerError);
+              client.disconnect(lang.internalServerError);
             }
             Events.executeOISE(this.server, client, e);
             Logger.log(
-              this.lang.packetHandlingException
+              lang.packetHandlingException
                 .replace("%player%", client.username)
                 .replace("%error%", e.stack),
               "error"
@@ -265,14 +266,12 @@ class Server {
       });
     } catch (e) {
       Logger.log(
-        `${this.lang.listeningFailed
-          .replace(`%ipport%`, `/${this.config.host}:${this.config.port}`)
+        `${lang.listeningFailed
+          .replace(`%ipport%`, `/${config.host}:${config.port}`)
           .replace("%error%", e.stack)}`,
         "error"
       );
-      process.exit(this.config.exitstatuscode);
+      process.exit(config.exitstatuscode);
     }
   }
 }
-
-module.exports = Server;

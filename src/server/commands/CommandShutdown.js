@@ -22,8 +22,7 @@ class CommandShutdown extends require("./Command") {
   aliases() {}
 
   execute() {
-    const servershutdown = new ShutdownAPI();
-    servershutdown.shutdownServer();
+    ShutdownAPI.shutdownServer();
   }
 
   getPlayerDescription() {

@@ -10,11 +10,10 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const log = require("../Logger");
-const Logger = new log();
+const Logger = require("../Logger");
 
-const lang = require("../ServerInfo").lang;
-const commands = require("../ServerInfo").commands;
+const lang = require("../../server/ServerInfo").lang;
+const commands = require("../../server/ServerInfo").commands;
 
 class CommandHelp extends require("./Command") {
   name() {

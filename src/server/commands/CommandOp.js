@@ -10,11 +10,10 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const lang = require("../ServerInfo").lang;
-const commands = require("../ServerInfo").commands;
 const fs = require("fs");
-const log = require("../Logger");
-const Logger = new log();
+const lang = require("../../server/ServerInfo").lang;
+const commands = require("../../server/ServerInfo").commands;
+const Logger = require("../Logger");
 
 class CommandOp extends require("./Command") {
   name() {
@@ -35,9 +34,7 @@ class CommandOp extends require("./Command") {
 
     fs.appendFile("ops.yml", args + "\n", (err) => {
       if (!err) Logger.log(lang.opped.replace("%player%", args));
-      else {
-        Logger.log(lang.opFail);
-      }
+      else Logger.log(lang.opFail);
     });
   }
 
@@ -50,18 +47,17 @@ class CommandOp extends require("./Command") {
       client.sendMessage(lang.noPermission);
       return;
     }
-    if (!args.split(" ")[1]) {
+    
+    const player = args.split(" ")[1];
+    if (!player) {
       client.sendMessage("§c" + lang.commandUsageOp);
       return;
     }
-
-    fs.appendFile("ops.yml", args.split(" ")[1] + "\n", (err) => {
-      if (!err)
-        client.sendMessage(lang.opped.replace("%player%", args.split(" ")[1]));
-      else {
-        client.sendMessage("§c" + lang.opFail);
-      }
-    });
+    
+    fs.appendFile("ops.yml", player + "\n", (err) => {
+      if (!err) client.sendMessage(lang.opped.replace("%player%", player));
+      else client.sendMessage("§c" + lang.opFail);
+    });    
   }
 }
 

@@ -13,31 +13,17 @@
 /* It's a class that stores an array of players */
 let playersonline = [];
 
-class PlayerInfo {
-  constructor() {}
-
+module.exports = {
   /**
    * AddPlayer(players) {
    *         this.players = players
-   *     }
-   * @param player - An array of player objects.
+   * }
+   * The function takes in an array of players and adds them to the game.
+   * @param player - An array of players.
    */
   addPlayer(player) {
     playersonline.push(player);
-  }
-
-  /**
-   * SetPlayers(players) {
-   *         this.addPlayer(players)
-   *     }
-   *
-   * The function takes in an array of players and adds them to the game.
-   * @param players - An array of players to add to the game.
-   * @deprecated
-   */
-  setPlayers(players) {
-    this.addPlayer(players);
-  }
+  },
 
   /**
    * GetPlayers() {
@@ -51,5 +37,3 @@ class PlayerInfo {
     return playersonline;
   }
 }
-
-module.exports = PlayerInfo;

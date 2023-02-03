@@ -11,77 +11,55 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* It checks if the config.json, commands.json and language files are valid JSON files. */
-const log = require("../server/Logger");
-const Logger = new log();
+const Logger = require("../server/Logger");
+const ServerInfo = require("../server/ServerInfo");
 
-class ValidateConfig {
-  constructor() {}
-
+module.exports = {
   /**
    * It checks if the config.json file exists, and if it does, it checks if it's valid JSON
    */
-  ValidateConfig() {
+  async ValidateConfig() {
     try {
-      require("../../config.json");
-    } catch (e) {
-      Logger.log(`Failed to load config.json | Error: ${e.stack}`);
+      const config = require("../../config.json");
+      JSON.parse(JSON.stringify(config));
+    } catch (error) {
+      console.error(`Failed to load or parse config.json | Error: ${error.stack}`);
       process.exit(-1);
     }
-
-    try {
-      JSON.parse(JSON.stringify(require("../../config.json")));
-    } catch (e) {
-      Logger.log(`Failed to parse config.json | Error: ${e.stack}`);
-      process.exit(-1);
-    }
-  }
+  },
 
   /**
    * It checks if the commands.json file is valid JSON.
    */
-
-  ValidateCommands() {
+  async ValidateCommands() {
     try {
-      require("../../commands.json");
-    } catch (e) {
-      Logger.log(`Failed to load commands.json | Error: ${e.stack}`);
+      const commands = require("../../commands.json");
+      JSON.parse(JSON.stringify(commands));
+    } catch (error) {
+      console.error(`Failed to load or parse commands.json | Error: ${error.stack}`);
       process.exit(-1);
     }
-
-    try {
-      JSON.parse(JSON.stringify(require("../../commands.json")));
-    } catch (e) {
-      Logger.log(`Failed to parse commands.json | Error: ${e.stack}`);
-      process.exit(-1);
-    }
-  }
+  },
 
   /**
    * It checks if the language files are valid JSON files
    */
-  ValidateLangFile() {
-    try {
-      require("../lang/en_US.json");
-      require("../lang/lt_LT.json");
-      require("../lang/uk_UA.json");
-      require("../lang/vi_VN.json");
-      require("../lang/fr_FR.json");
-    } catch (e) {
-      Logger.log(`Failed to load language file | Error: ${e.stack}`);
-      process.exit(-1);
-    }
+  async ValidateLangFile() {
+    const files = [
+      "../lang/en_US.json",
+      "../lang/lt_LT.json",
+      "../lang/uk_UA.json",
+      "../lang/vi_VN.json",
+      "../lang/fr_FR.json"
+    ];
 
-    try {
-      JSON.parse(JSON.stringify(require("../lang/en_US.json")));
-      JSON.parse(JSON.stringify(require("../lang/lt_LT.json")));
-      JSON.parse(JSON.stringify(require("../lang/uk_UA.json")));
-      JSON.parse(JSON.stringify(require("../lang/vi_VN.json")));
-      JSON.parse(JSON.stringify(require("../lang/fr_FR.json")));
-    } catch (e) {
-      Logger.log(`Failed to parse language file | Error: ${e.stack}`);
-      process.exit(-1);
+    for (const file of files) {
+      try {
+        JSON.parse(JSON.stringify(require(file)));
+      } catch (e) {
+        Logger.log(`Failed to load and parse language file ${file} | Error: ${e.stack}`);
+        process.exit(ServerInfo.config.crashstatuscode);
+      }
     }
   }
 }
-
-module.exports = ValidateConfig;

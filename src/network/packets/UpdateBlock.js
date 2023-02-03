@@ -21,16 +21,6 @@ class UpdateBlock extends require("./Packet") {
   }
 
   /**
-   * Validate(client) {
-   *         if (!client) throw new Error("Packet processing error. Client is null")
-   * }
-   * @param client - The client
-   */
-  validate(client) {
-    if (!client) throw new Error("Packet processing error. Client is null");
-  }
-
-  /**
    * It sends a packet to the client to update a block
    * @param client - The client that you want to send the packet to.
    * @param x - The x coordinate of the block
@@ -38,8 +28,7 @@ class UpdateBlock extends require("./Packet") {
    * @param z - The z coordinate of the block
    * @param block_runtime_id - The block ID of the block you want to place.
    */
-  writePacket(client, x, y, z, block_runtime_id) {
-    this.validate(client);
+  send(client, x, y, z, block_runtime_id) {
     client.write("update_block", {
       position: {
         x: x,

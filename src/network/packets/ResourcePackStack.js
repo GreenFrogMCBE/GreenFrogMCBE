@@ -35,7 +35,7 @@ class ResourcePackStack extends require("./Packet") {
       resource_packs: resource_packs,
       game_version: game_version,
       experiments: experiments,
-      experiments_previously_used: false,
+      experiments_previously_used: experiments_previously_used,
     });
   }
 }

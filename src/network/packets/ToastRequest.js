@@ -51,7 +51,7 @@ class ToastRequest extends require("./Packet") {
    * @param client - The client that the packet is being sent to.
    */
   send(client) {
-    new Events().executeOT(
+    Events.executeOT(
       client,
       require("../../Server"),
       this.title,

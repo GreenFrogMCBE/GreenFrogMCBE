@@ -15,42 +15,34 @@ const rl = require("readline");
 const Logger = require("./Logger");
 const ServerInfo = require("../server/ServerInfo");
 const Events = require("./Events");
-const CommandShutdown = require("./commands/CommandShutdown");
-const CommandKick = require("./commands/CommandKick");
-const CommandPl = require("./commands/CommandPl");
-const CommandVersion = require("./commands/CommandVersion");
-const CommandHelp = require("./commands/CommandHelp");
-const CommandTime = require("./commands/CommandTime");
-const CommandSay = require("./commands/CommandSay");
-const CommandOp = require("./commands/CommandOp");
+const Shutdown = require("./commands/CommandShutdown");
+const Kick = require("./commands/CommandKick");
+const Version = require("./commands/CommandVersion");
+const Help = require("./commands/CommandHelp");
+const Time = require("./commands/CommandTime");
+const Say = require("./commands/CommandSay");
+const Op = require("./commands/CommandOp");
+const PL = require("./commands/CommandPl");
 
-class ConsoleCommandSender {
-  constructor() {
-    this.closed = false;
-  }
+let closed1 = false;
 
-  /**
-   * Close() {
-   *         this.closed = true
-   * }
-   */
-  close() {
-    this.closed = true;
-  }
+module.exports = {
+  closed: closed1,
 
-  /**
-   * It's a function that allows you to execute commands in the console.
-   */
+  close() { closed1 = true; },
+
   async start() {
     const lang = ServerInfo.lang;
-    const shutdowncmd = new CommandShutdown();
-    const kickcmd = new CommandKick();
-    const vercmd = new CommandVersion();
-    const helpcmd = new CommandHelp();
-    const timecmd = new CommandTime();
-    const saycmd = new CommandSay();
-    const opcmd = new CommandOp();
-    const plcmd = new CommandPl();
+    const commands = {
+      shutdown: new Shutdown(),
+      kick: new Kick(),
+      version: new Version(),
+      help: new Help(),
+      time: new Time(),
+      say: new Say(),
+      op: new Op(),
+      pl: new PL()
+    };
 
     const r = rl.createInterface({
       input: process.stdin,
@@ -61,84 +53,72 @@ class ConsoleCommandSender {
     r.prompt(true);
 
     r.on("line", (data) => {
-      Events.prototype.executeOCC(
-        data,
-        require("../Server").prototype.getServer()
-      );
       if (data.toLowerCase().startsWith(`${lang.commandTime.toLowerCase()} `)) {
-        timecmd.execute(data.split(" "));
+        commands.time.execute(data.split(" "));
         return;
       }
 
       if (data.toLowerCase().startsWith(`${lang.commandSay.toLowerCase()} `)) {
-        let msg = "";
-        for (let i = 1; i < data.split(" ").length; i++) {
-          if (msg.length < 1) {
-            msg = data.split(" ")[i];
-          } else {
-            msg = msg + " " + data.split(" ")[i];
-          }
-        }
-        saycmd.execute(msg);
+        const msg = data.split(" ").slice(1).join(" ");
+        commands.say.execute(msg);
         return;
       }
 
       if (data.toLowerCase().startsWith(`${lang.commandKick.toLowerCase()} `)) {
-        let reason = "";
-        for (let i = 2; i < data.split(" ").length; i++) {
-          if (reason.length < 1) {
-            reason = data.split(" ")[i];
-          } else {
-            reason = reason + " " + data.split(" ")[i];
-          }
-        }
-        kickcmd.execute([data.split(" ")[1], reason]);
+        const dataParts = data.split(" ");
+        const target = dataParts[1];
+        const reason = dataParts.slice(2).join(" ");
+        commands.kick.execute([target, reason]);
         return;
       }
 
       if (data.toLowerCase().startsWith(`${lang.commandOp.toLowerCase()} `)) {
-        opcmd.execute(data.split(" ")[1]);
+        commands.op.execute(data.split(" ")[1]);
         return;
       }
 
-      switch (data.toLowerCase()) {
+      Events.executeOCC(data, require("../Server").getServer());
+      const command = data.toLowerCase().split(" ")[0];
+
+      switch (command) {
         case "":
           break;
         case lang.commandShutdown.toLowerCase():
         case lang.commandStop.toLowerCase():
-          shutdowncmd.execute();
+          commands.shutdown.execute();
           break;
         case lang.commandOp.toLowerCase():
-          opcmd.execute();
+          commands.op.execute(data.split(" ")[1]);
           break;
         case lang.commandKick.toLowerCase():
-          kickcmd.execute(null);
+          const reason = data.split(" ").slice(2).join(" ");
+          commands.kick.execute(data.split(" ")[1], reason);
           break;
         case lang.commandPl.toLowerCase():
         case lang.commandPlugins.toLowerCase():
-          plcmd.execute();
+          commands.pl.execute();
           break;
         case lang.commandVer.toLowerCase():
         case lang.commandVersion.toLowerCase():
-          vercmd.execute();
+          commands.version.execute();
           break;
         case lang.commandTime.toLowerCase():
-          timecmd.execute();
+          commands.time.execute();
           break;
         case lang.commandSay.toLowerCase():
-          saycmd.execute();
+          const msg = data.split(" ").slice(1).join(" ");
+          commands.say.execute(msg);
           break;
         case "?":
         case lang.commandHelp.toLowerCase():
-          helpcmd.execute();
+          commands.help.execute();
           break;
         default:
-          Logger.prototype.log(lang.unknownCommand);
+          Logger.log(lang.unknownCommand);
           break;
       }
-      if (!this.closed) r.prompt(true);
+
+      if (!closed1) r.prompt(true);
     });
   }
 }
-
-module.exports = ConsoleCommandSender;

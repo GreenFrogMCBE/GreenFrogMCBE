@@ -11,8 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* Makes the API work for the player */
-const log = require("../server/Logger");
-const Logger = new log();
+const Logger = require("../server/Logger");
 const Events = require("../server/Events");
 const Text = require("../network/packets/Text");
 const Chat = require("../player/Chat");
@@ -22,22 +21,16 @@ const Time = require("../network/packets/Time");
 const FormRequest = require("../network/packets/FormRequest");
 
 const lang = require("../server/ServerInfo").lang;
-const config = require("../server/ServerInfo").config;
 
-class PlayerInit {
-  constructor() {}
-
+module.exports = {
   initPlayer(player) {
-    player.gamemode = config.gamemode;
-    player.items = [];
-
     /**
      * Sends a message to the player
      * @param {string} msg - The message to send
      */
     player.sendMessage = function (msg) {
       new Text().writePacket(player, msg);
-      new Events().executeSRVTOCLCH(player, require("../Server"), msg);
+      Events.executeSRVTOCLCH(player, require("../Server"), msg);
     };
 
     /**
@@ -45,7 +38,7 @@ class PlayerInit {
      * @param {string} msg - The message to send
      */
     player.chat = function (msg) {
-      new Chat().broadcastMessage(
+      Chat.broadcastMessage(
         lang.chatFormat
           .replace("%username%", player.username)
           .replace("%message%", msg)
@@ -57,16 +50,12 @@ class PlayerInit {
      * @param {string} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
      */
     player.setGamemode = function (gamemode) {
-      if (
-        gamemode == !"survival" ||
-        gamemode == !"creative" ||
-        gamemode == !"adventure" ||
-        gamemode == !"spectator" ||
-        gamemode == !"fallback"
-      )
+      const validGamemodes = ["survival", "creative", "adventure", "spectator", "fallback"];
+      if (!validGamemodes.includes(gamemode)) {
         throw new Error("Invalid gamemode");
+      }
       new PlayerGamemode().writePacket(player, gamemode);
-      new Events().executeGMC(player, require("../Server.js"), gamemode);
+      Events.executeGMC(player, require("../Server.js"), gamemode);
     };
 
     /**
@@ -76,7 +65,7 @@ class PlayerInit {
      */
     player.transfer = function (address, port) {
       new Transfer().writePacket(player, address, port);
-      new Events().executeTR(player, require("../Server.js"), address, port);
+      Events.executeTR(player, require("../Server.js"), address, port);
     };
 
     /**
@@ -105,7 +94,7 @@ class PlayerInit {
     player.kick = function (msg = lang.playerDisconnected) {
       if (player.kicked) return;
       player.kicked = true;
-      Events.prototype.executeFTEOK(require("../Server"), player);
+      Events.executeFTEOK(require("../Server"), player);
       Logger.log(
         lang.kickedConsoleMsg
           .replace("%player%", player.getUserData().displayName)
@@ -125,13 +114,11 @@ class PlayerInit {
     /* Checks if the player is still online */
     setInterval(() => {
       if (player.q2) {
-        new Events().executeOL(require("../Server").prototype.server, player);
+        Events.executeOL(require("../Server").server, player);
         if (!player.kicked) {
           player.kick(lang.playerDisconnected);
           Logger.log(lang.disconnected.replace("%player%", player.username));
-          new Chat().broadcastMessage(
-            lang.leftTheGame.replace("%player%", player.username)
-          );
+          Chat.broadcastMessage(lang.leftTheGame.replace("%player%", player.username));
           delete player.q2;
           player.offline = true;
           player.q = true;
@@ -140,5 +127,3 @@ class PlayerInit {
     }, 50);
   }
 }
-
-module.exports = PlayerInit;

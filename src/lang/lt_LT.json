@@ -28,7 +28,6 @@
   "executedCmd": "%player% įvykdė serverio komandą: %cmd%",
   "failedToExecuteEvent": "Nepavyko vykdyti %event% įvykio, skirto papildiniui \"%plugin%\". Klaida buvo: %e%",
   "failedToShutdownPlugin": "Nepavyko išjungti įskiepio %plugin%. Nėra papildinio pavadinimo!",
-  "ftcpf": "Nepavyko sukurti papildinio aplanko: %error%",
   "packetHandlingException": "Išimtis bandant apdoroti paketą iš %player%: %error%",
   "helpHelp": "%green%help %white%- %blue%Rodo šį pranešimą",
   "kickHelp": "%green%kick %cyan%[player] [priežastis] %white%- %blue%Kick player",

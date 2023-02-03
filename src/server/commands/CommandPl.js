@@ -10,15 +10,14 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Colors = require("../Colors");
-const Colors2 = require("../../player/Colors");
+const ColorsServer = require("../Colors");
+const ColorsPlayer = require("../../player/Colors");
 const PluginManager = require("../PluginManager");
 
-const lang = require("../ServerInfo").lang;
-const commands = require("../ServerInfo").commands;
+const lang = require("../../server/ServerInfo").lang;
+const commands = require("../../server/ServerInfo").commands;
 
-const log = require("../Logger");
-const Logger = new log();
+const Logger = require("../Logger");
 
 class CommandPl extends require("./Command") {
   name() {
@@ -31,33 +30,33 @@ class CommandPl extends require("./Command") {
 
   execute() {
     if (!commands.console_command_plugins) {
-      Logger.log(lang.playerunknowncommand);
+      Logger.log(lang.playerUnknownCommand);
       return;
     }
     let plugins;
-    if (PluginManager.prototype.getPlugins() == null) {
+    if (PluginManager.getPlugins() == null) {
       plugins = 0;
     } else {
-      plugins = PluginManager.prototype.getPlugins().length;
+      plugins = PluginManager.getPlugins().length;
     }
 
     let pluginlist = "";
     for (
       let i = 0;
-      i < PluginManager.prototype.getPlugins().toString().split(",").length;
+      i < PluginManager.getPlugins().toString().split(",").length;
       i++
     ) {
       pluginlist =
         pluginlist +
-        Colors.CONSOLE_GREEN +
-        PluginManager.prototype.getPlugins().toString().split(",")[i] +
-        Colors.CONSOLE_RESET +
+        ColorsServer.CONSOLE_GREEN +
+        PluginManager.getPlugins().toString().split(",")[i] +
+        ColorsServer.CONSOLE_RESET +
         ", ";
     }
 
     Logger.log(
       `${lang.plugins} (${plugins}): ${pluginlist ?? ""} ${
-        Colors.CONSOLE_RESET
+        ColorsServer.CONSOLE_RESET
       }`,
       "info"
     );
@@ -69,32 +68,32 @@ class CommandPl extends require("./Command") {
 
   executePlayer(player) {
     if (!commands.player_command_plugins) {
-      Logger.log(lang.unknown_command);
+      Logger.log(lang.unknownCommand);
       return;
     }
     let plugins;
-    if (PluginManager.prototype.getPlugins() == null) {
+    if (PluginManager.getPlugins() == null) {
       plugins = 0;
     } else {
-      plugins = PluginManager.prototype.getPlugins().length;
+      plugins = PluginManager.getPlugins().length;
     }
 
     let pluginlist = "";
     for (
       let i = 0;
-      i < PluginManager.prototype.getPlugins().toString().split(",").length;
+      i < PluginManager.getPlugins().toString().split(",").length;
       i++
     ) {
       pluginlist =
         pluginlist +
-        Colors2.green +
-        PluginManager.prototype.getPlugins().toString().split(",")[i] +
-        Colors2.reset +
+        ColorsPlayer.green +
+        PluginManager.getPlugins().toString().split(",")[i] +
+        ColorsPlayer.reset +
         ", ";
     }
 
     player.sendMessage(
-      `${lang.plugins} (${plugins}): ${pluginlist ?? ""} ${Colors2.reset}`,
+      `${lang.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsPlayer.reset}`,
       "info"
     );
   }

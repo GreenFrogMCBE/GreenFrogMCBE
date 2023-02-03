@@ -12,24 +12,21 @@
  */
 /* It loads plugins. */
 const fs = require("fs");
-const log = require("../server/Logger");
-const Logger = new log();
+const Logger = require("../server/Logger");
 const CheckPluginFolder = require("../plugins/CheckPluginFolder");
 const ServerInfo = require("../server/ServerInfo");
 const PluginManager = require("../server/PluginManager");
-const lang = ServerInfo.lang;
 const CCS = require("../server/ConsoleCommandSender");
+const lang = ServerInfo.lang;
 
-class Loader {
-  constructor() {}
-
+module.exports = {
   /**
    * It loads all the plugins in the plugins folder.
    */
   async loadPlugins() {
     Logger.log(lang.loadingPlugins);
 
-    CheckPluginFolder.prototype.check();
+    CheckPluginFolder.check();
 
     fs.readdir("./plugins", (err, plugins) => {
       try {
@@ -39,7 +36,7 @@ class Loader {
           } catch (e) {
             Logger.log(
               lang.failedToLoadPlugin
-                .replace("%name%", plugin)
+                .replace("%name%", require(`../../plugins/${plugin}`).name)
                 .replace("%errorstack%", e.stack),
               "error"
             );
@@ -49,16 +46,16 @@ class Loader {
                 .replace("%name%", plugin)
                 .replace(
                   "%version%",
-                  require(`../../plugins/${plugin}`).prototype.getVersion()
+                  require(`../../plugins/${plugin}`).version
                 )
             );
           }
         });
       } finally {
-        CCS.prototype.start();
+        CCS.start();
       }
     });
-  }
+  },
 
   /**
    * It loads a plugin.
@@ -69,15 +66,11 @@ class Loader {
 
     // Check if there is getName() and getVersion() method
     // The plugin will throw an error if not
-    require(`../../plugins/${plugin}`).prototype.getName();
-    require(`../../plugins/${plugin}`).prototype.getVersion();
+    require(`../../plugins/${plugin}`).name;
+    require(`../../plugins/${plugin}`).version;
 
-    PluginManager.prototype.addPlugin(
-      require(`../../plugins/${plugin}`).prototype.getName()
-    );
+    PluginManager.addPlugin(require(`../../plugins/${plugin}`).name);
 
-    require(`../../plugins/${plugin}`).prototype.onLoad();
+    require(`../../plugins/${plugin}`).onLoad();
   }
 }
-
-module.exports = Loader;

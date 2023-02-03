@@ -43,8 +43,8 @@ class CommandRequest extends require("./Handler") {
   handle(client, packet) {
     let cmd = packet.data.params.command;
     this.validate(cmd);
-    new Events().executeOC2(require("../../../Server"), client, cmd);
-    new Logger().log(
+    Events.executeOC2(require("../../../Server"), client, cmd);
+    Logger.log(
       lang.executedCmd
         .replace("%player%", client.username)
         .replace("%cmd%", cmd)

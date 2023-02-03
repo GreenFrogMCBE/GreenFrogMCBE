@@ -38,8 +38,7 @@ Log levels are:
 const Colors = require("../src/player/Colors");
 const ColorsConsole = require("../src/server/Colors");
 const BasePlugin = require("../src/plugins/BasePlugin");
-const Log = require("../src/server/Logger");
-const Logger = new Log()
+const Logger = require("../src/server/Logger");
 
 class YourPlugin extends BasePlugin {
     constructor() { }
@@ -61,8 +60,7 @@ Here is an basic example of using colors:
 const Colors = require("../src/player/Colors");
 const ColorsConsole = require("../src/server/Colors");
 const BasePlugin = require("../src/plugins/BasePlugin");
-const Log = require("../src/server/Logger");
-const Logger = new Log()
+const Logger = require("../src/server/Logger");
 
 class YourPlugin extends BasePlugin {
     constructor() { }

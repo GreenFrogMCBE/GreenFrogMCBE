@@ -10,6 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+
 class SetCommandsEnabled extends require("./Packet") {
   /**
    * It returns the string "set_commands_enabled"
@@ -20,20 +21,10 @@ class SetCommandsEnabled extends require("./Packet") {
   }
 
   /**
-   * If the client is null, throw an error.
-   * @param client - The client that sent the packet.
-   */
-  validate(client) {
-    if (!client) throw new Error("Packet processing error. Client is null");
-  }
-
-  /**
    * It writes a packet to the client
-   * @param client - The client that is being written to.
-   * @param [enabled=true] - Whether or not the client should be able to use the command.
+   * @param [enabled=true] - Whether or not the client should be able to use the commands.
    */
   writePacket(client, enabled = true) {
-    this.validate(client);
     client.write(this.name(), {
       enabled: enabled,
     });

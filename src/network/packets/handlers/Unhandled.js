@@ -17,7 +17,7 @@ class Unhandled extends require("./Handler") {
   validate() {}
 
   handle(packet) {
-    Logger.prototype.log(
+    Logger.log(
       `${lang.ignoredPacket.replace("%packet%", packet.data.name)}`,
       "debug"
     );

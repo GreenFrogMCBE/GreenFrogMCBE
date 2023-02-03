@@ -21,7 +21,7 @@ class PlayerMove extends require("./Handler") {
 
   handle(client, packet) {
     this.validate(packet);
-    Events.prototype.executePMV(
+    Events.executePMV(
       client,
       require("../../../Server"),
       packet.data.params.position

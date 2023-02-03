@@ -15,10 +15,19 @@ const AvailableCommands = require("../network/packets/AvailableCommands");
 let commands = [];
 
 class CommandManager {
+  /**
+  * Retrieves the commands packet of a client.
+  * @param {Object} client - The client object.
+  * @returns {Object} The client's commands packet.
+  */
   getPacket(client) {
     return client.commands;
   }
 
+  /**
+  * Initializes the commands.
+  * @param {Object} client - The client.
+  */
   init(client) {
     client.commands = {
       values_len: 0,
@@ -32,10 +41,21 @@ class CommandManager {
     };
   }
 
+
+  /**
+  * Retrieves the commands array.
+  * @returns {Array} The commands array.
+  */
   getCommands() {
     return commands;
   }
 
+  /**
+   * Adds a new command to the client's commands packet and updates the commands array.
+   * @param {Object} client - The client.
+   * @param {String} name - The name of the new command.
+   * @param {String} description - The description of the command.
+   */
   addCommand(client, name, description) {
     client.commands.command_data.push({
       name: name,
@@ -65,7 +85,8 @@ class CommandManager {
       name,
       description,
     });
-    AvailableCommands.prototype.writePacket(client, this.getPacket(client));
+    const ac = new AvailableCommands()
+    ac.writePacket(client, this.getPacket(client));
   }
 }
 

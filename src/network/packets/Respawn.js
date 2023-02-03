@@ -15,12 +15,7 @@ class Respawn extends require("./Packet") {
     return "respawn";
   }
 
-  validate(client) {
-    if (!client) throw new Error("Packet processing error. Client is null");
-  }
-
   writePacket(client) {
-    this.validate(client);
     client.write(this.name(), {
       position: {
         x: 0.5,

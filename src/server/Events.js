@@ -10,13 +10,11 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It handles events. */
 const fs = require("fs");
 const lang = require("../server/ServerInfo").lang;
-const log = require("../server/Logger");
-const Logger = new log();
+const Logger = require("../server/Logger");
 
-class Events {
+module.exports = {
   /**
    * It executes a function in every plugin
    * @param server - The server object
@@ -26,7 +24,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onPlayerHasNoResourcePacksInstalled(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onPlayerHasNoResourcePacksInstalled(
             server,
             client
           );
@@ -41,7 +39,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It reads the plugins folder, and then executes the onResourcePacksRefused function in each plugin
@@ -52,7 +50,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onResourcePacksRefused(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onResourcePacksRefused(
             server,
             client
           );
@@ -67,7 +65,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It reads all the plugins in the plugins folder and executes the onPlayerHaveAllPacks function in
@@ -79,7 +77,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onPlayerHaveAllPacks(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onPlayerHaveAllPacks(
             server,
             client
           );
@@ -94,7 +92,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It reads the plugins folder, and then executes the onResourcePacksCompleted function in each plugin
@@ -105,7 +103,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onResourcePacksCompleted(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onResourcePacksCompleted(
             server,
             client
           );
@@ -120,7 +118,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It executes a function in every plugin that has the function onLeave
@@ -131,7 +129,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onLeave(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onLeave(
             server,
             client
           );
@@ -146,7 +144,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It reads all the plugins in the plugins folder and executes the onPlayerSpawn function in each
@@ -158,7 +156,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onPlayerSpawn(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onPlayerSpawn(
             server,
             client
           );
@@ -173,7 +171,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It executes a function in every plugin, and then executes the onJoin function in each plugin
@@ -184,7 +182,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onJoin(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onJoin(
             server,
             client
           );
@@ -199,7 +197,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It reads the plugins folder, and then executes the onInternalServerError function in each plugin
@@ -212,7 +210,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onInternalServerError(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onInternalServerError(
             server,
             client,
             err
@@ -228,7 +226,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It reads all the plugins in the plugins folder, and executes the onChat function in each plugin
@@ -241,7 +239,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onChat(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onChat(
             server,
             client,
             message
@@ -257,7 +255,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It executes the onCommand function of every plugin
@@ -269,7 +267,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).prototype.onCommand(
+          require(`${__dirname}\\..\\..\\plugins\\${plugin}`).onCommand(
             server,
             client,
             cmd
@@ -285,7 +283,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It executes a function in every plugin that has the function onConsoleCommand
@@ -296,7 +294,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`../../plugins/${plugin}`).prototype.onConsoleCommand(
+          require(`../../plugins/${plugin}`).onConsoleCommand(
             data.toLowerCase(),
             server
           );
@@ -311,7 +309,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It reads the plugins folder, and then executes the onPlayerMove function in each plugin
@@ -323,7 +321,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`../../plugins/${plugin}`).prototype.onPlayerMove(
+          require(`../../plugins/${plugin}`).onPlayerMove(
             client,
             server,
             location
@@ -339,7 +337,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It reads the plugins folder, and then executes the onGamemodeChange function in each plugin
@@ -351,7 +349,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`../../plugins/${plugin}`).prototype.onGamemodeChange(
+          require(`../../plugins/${plugin}`).onGamemodeChange(
             client,
             server,
             gamemode
@@ -367,7 +365,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It executes the onServerToClientChat event for all plugins
@@ -379,7 +377,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`../../plugins/${plugin}`).prototype.onServerToClientChat(
+          require(`../../plugins/${plugin}`).onServerToClientChat(
             client,
             server,
             msg
@@ -395,7 +393,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It reads all the plugins in the plugins folder and executes the onToast function in each plugin.
@@ -408,7 +406,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`../../plugins/${plugin}`).prototype.onToast(
+          require(`../../plugins/${plugin}`).onToast(
             client,
             server,
             title,
@@ -425,7 +423,7 @@ class Events {
         }
       });
     });
-  }
+  },
 
   /**
    * It executes the onTransfer event for all plugins
@@ -438,7 +436,7 @@ class Events {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`../../plugins/${plugin}`).prototype.onTransfer(
+          require(`../../plugins/${plugin}`).onTransfer(
             client,
             server,
             address,
@@ -455,13 +453,13 @@ class Events {
         }
       });
     });
-  }
+  },
 
   executeFR(client, server, packet) {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`../../plugins/${plugin}`).prototype.onFormResponse(
+          require(`../../plugins/${plugin}`).onFormResponse(
             client,
             server,
             packet
@@ -477,7 +475,5 @@ class Events {
         }
       });
     });
-  }
+  },
 }
-
-module.exports = Events;

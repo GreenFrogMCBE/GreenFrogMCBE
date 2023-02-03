@@ -11,20 +11,17 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const PlayerInfo = require("./PlayerInfo");
-const log = require("../server/Logger");
-const Logger = new log();
+const Logger = require("../server/Logger");
 const lang = require("../server/ServerInfo").lang;
 
-class Chat {
-  constructor() {}
-
-  broadcastMessage(msg = "") {
-    for (let i = 0; i < PlayerInfo.prototype.getPlayers().length; i++) {
-      let client = PlayerInfo.prototype.getPlayers()[i];
+module.exports = {
+  broadcastMessage(msg = '') {
+    const players = PlayerInfo.getPlayers();
+    for (const client of players) {
       client.sendMessage(msg);
     }
-    Logger.log(lang.bcmsg.replace("%msg%", msg));
+    
+    Logger.log(lang.bcmsg.replace("%msg%", msg));    
   }
 }
 
-module.exports = Chat;

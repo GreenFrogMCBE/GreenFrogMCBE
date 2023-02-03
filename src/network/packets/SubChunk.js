@@ -20,20 +20,10 @@ class SubChunk extends require("./Packet") {
   }
 
   /**
-   * "If the client is null, throw an error."
-   *
-   * @param client - The client that sent the packet.
-   */
-  validate(client) {
-    if (!client) throw new Error("Packet processing error. Client is null");
-  }
-
-  /**
    * It writes a packet to the client
    * @param client - The client that will receive the packet.
    */
   writePacket(client) {
-    this.validate(client);
     client.write(this.name(), {
       dimension: 0,
       x: 0,

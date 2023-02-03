@@ -54,7 +54,7 @@ class StartGame extends require("./Packet") {
         x: 0,
         z: 0,
       },
-      seed: [1773224668, 1031625076],
+      seed: [0, 0],
       biome_type: 0,
       biome_name: "plains",
       dimension: "overworld",
