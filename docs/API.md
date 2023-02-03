@@ -2,7 +2,8 @@
 
 ### Plugin structure
 
-`const BasePlugin = require("../src/plugins/BasePlugin");
+```javascript
+const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
 constructor() { }
@@ -16,7 +17,7 @@ constructor() { }
 
 }
 
-module.exports = YourPlugin;`
+module.exports = YourPlugin;```
 
 ### Log levels
 
