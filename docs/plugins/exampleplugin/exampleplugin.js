@@ -19,7 +19,7 @@ const log = require("../src/server/Logger");
 const ShutdownAPI = require("../src/server/ShutdownAPI");
 const Logger = new log(); // Creates logger for this plugin
 
-// For docs look at API.md in /docs/api.md
+// For advanced docs look at API.md in /docs/api.md
 
 // This is a simple plugin that tests the Greenfrog's api
 // Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
@@ -66,7 +66,11 @@ class Exampleplugin extends BasePlugin {
     // Registers a command
     const cmdmanager = new CommandManager();
     cmdmanager.addCommand(client, "testcommand", "This is my first command!");
-    cmdmanager.addCommand(client, "stopserver", "Stop server command that is registered by the example plugin");
+    cmdmanager.addCommand(
+      client,
+      "stopserver",
+      "Stop server command that is registered by the example plugin"
+    );
     // addCommand syntax: ("name", "description")
 
     // This code executes when player is spawned (this event executes after onJoin() event)
@@ -79,7 +83,7 @@ class Exampleplugin extends BasePlugin {
 
   onCommand(server, client, command) {
     switch (command.toLowerCase()) {
-      case '/testcommand':
+      case "/testcommand":
         // client.username returns the client's username
         // client.ip returns the client's ip without port
         // client.port returns the client's connection port
@@ -91,12 +95,12 @@ class Exampleplugin extends BasePlugin {
         client.sendMessage(`Hi ${client.username}. Your IP is: ${client.ip}`); // This code sends message TO client
         client.chat(`This message was sent by ${this.getName()}`); // This code sends message AS A client
         client.setGamemode(GameMode.Creative); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
-  
+
         const Toast = new ToastManager();
         Toast.setTitle("This is a toast");
         Toast.setMessage("This is a toast message");
         Toast.send(client);
-  
+
         //              ^ title ^ toast description/body
         client.setTime(17000); // Updates the client time
         client.sendForm(5555, "text", [{ text: "Button 1" }], "title", "form");
@@ -107,16 +111,16 @@ class Exampleplugin extends BasePlugin {
             //              ^ ip         ^ port
           }
         }, 30000);
-  
+
         // ADVANCED API
         // client.write(packet_name, json_packet_data)
         // client.disconnect("reason") // force disconnect the client - may break other plugins
-        break
-      case '/stopserver':
+        break;
+      case "/stopserver":
         client.sendMessage("Stopping server...");
-        const sa = new ShutdownAPI()
-        sa.shutdownServer()
-        break
+        const sa = new ShutdownAPI();
+        sa.shutdownServer();
+        break;
     }
   }
 

@@ -72,7 +72,6 @@ class Loader {
     require(`../../plugins/${plugin}`).prototype.getName();
     require(`../../plugins/${plugin}`).prototype.getVersion();
 
-
     PluginManager.prototype.addPlugin(
       require(`../../plugins/${plugin}`).prototype.getName()
     );

@@ -32,7 +32,9 @@ class ShutdownAPI {
       for (const player of players) {
         await player.kick(lang.serverShutdown);
       }
-    } catch (e) { /* ignored */ }
+    } catch (e) {
+      /* ignored */
+    }
 
     setTimeout(() => {
       new Unloader().shutdown();
