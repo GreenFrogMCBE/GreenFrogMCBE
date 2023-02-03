@@ -303,7 +303,7 @@ class YourPlugin extends BasePlugin {
     onLoad() {}
 
     onJoin(server, client) {
-        client.chat(`Hi`);
+        client.chat('Hi');
     }
 }
 
