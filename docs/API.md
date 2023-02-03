@@ -42,13 +42,16 @@ Logger.log(
 )
 ```
 
-### PLAYER colors
+### Colors
 
 Here is an basic example of using colors:
 
 ```javascript
 const Colors = require("../src/player/Colors");
+const ColorsConsole = require("../src/server/Colors");
 const BasePlugin = require("../src/plugins/BasePlugin");
+const Log = require("../src/server/Logger");
+const Logger = new Log()
 
 class YourPlugin extends BasePlugin {
     constructor() { }
@@ -57,18 +60,18 @@ class YourPlugin extends BasePlugin {
     getVersion() { return "1.0"; }
 
     onLoad() {
-        // ...
+        Logger.log(ColorsConsole.CONSOLE_GREEN + "Hi")
     }
 
     onJoin(server, player) {
-        player.sendMessage(Colors.red + "Hello World");
+        player.sendMessage(Colors.red + "Hello World"); // Player color demo
     }
 }
 
 module.exports = YourPlugin;
 ```
 
-#### Colors list:
+#### Color list for player:
 
 ```javascript
 black: "§0"
@@ -91,6 +94,16 @@ bold: "§l"
 italic: "§o"
 reset: "§r"
 char: "§"
+```
+
+#### Colors for console
+
+```javascript
+CONSOLE_RESET: "\x1b[0m",
+CONSOLE_BLUE: "\x1b[34m",
+CONSOLE_YELLOW: "\x1b[33m",
+CONSOLE_RED: "\x1b[31m",
+CONSOLE_GREEN: "\x1b[32m",
 ```
 
 ### Kicking player
