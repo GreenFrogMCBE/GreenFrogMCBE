@@ -6,7 +6,8 @@
 const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
-constructor() { }
+
+    constructor() { }
 
     getName() { return "YourPlugin"; }
     getVersion() { return "1.0"; }
@@ -26,11 +27,12 @@ Log levels are:
 
 1. Debug
 2. Info
-3. Warn / Warning
-4. Err / Error
+3. Warning // warn
+4. Error / err
 
 ### Printing "Hello World" into console
 
+```javascript
 const Log = require("../src/server/Logger");
 const Logger = new Log()
 
@@ -38,16 +40,18 @@ Logger.log(
 "message", // Message
 "info", // Log level. Info by default
 )
+```
 
 ### Colors
 
-Here is an basic example of using this:
+Here is an basic example of using colors:
 
+```javascript
 const Colors = require("../src/player/Colors");
 const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
-constructor() { }
+    constructor() { }
 
     getName() { return "YourPlugin"; }
     getVersion() { return "1.0"; }
@@ -59,13 +63,14 @@ constructor() { }
     onJoin(server, player) {
         player.sendMessage(Colors.red + "Hello World");
     }
-
 }
 
 module.exports = YourPlugin;
+```
 
-### Kicking player on join
+### Kicking player
 
+```javascript
 const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
@@ -86,3 +91,4 @@ class YourPlugin extends BasePlugin {
 }
 
 module.exports = YourPlugin;
+```
