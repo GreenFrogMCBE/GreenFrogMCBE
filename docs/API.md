@@ -148,6 +148,7 @@ module.exports = YourPlugin;
 
 ```javascript
 const BasePlugin = require("../src/plugins/BasePlugin");
+const ToastManager = require("../src/player/Toast");
 
 class YourPlugin extends BasePlugin {
 
@@ -165,6 +166,36 @@ class YourPlugin extends BasePlugin {
             Toast.setMessage("This is a toast message");
             Toast.send(client);
         }, 10000) // send the toast after 10 sec
+    }
+}
+
+module.exports = YourPlugin;
+```
+
+### Changing gamemode
+
+```javascript
+const GameMode = require("../src/player/GameMode");
+
+client.setGamemode(GameMode.Creative); // Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"        
+```
+
+```javascript
+const BasePlugin = require("../src/plugins/BasePlugin");
+const ToastManager = require("../src/player/Toast");
+const GameMode = require("../src/player/GameMode");
+
+class YourPlugin extends BasePlugin {
+
+    constructor() { }
+
+    getName() { return "YourPlugin"; }
+    getVersion() { return "1.0"; }
+
+    onLoad() {}
+
+    onJoin(server, client) {
+        client.setGamemode(GameMode.Creative);
     }
 }
 
