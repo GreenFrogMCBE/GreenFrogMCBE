@@ -27,7 +27,7 @@ Log levels are:
 
 1. Debug
 2. Info
-3. Warning // warn
+3. Warning / warn
 4. Error / err
 
 ### Printing "Hello World" into console
@@ -67,6 +67,8 @@ class YourPlugin extends BasePlugin {
 
 module.exports = YourPlugin;
 ```
+
+#### Colors list
 
 ### Kicking player
 
