@@ -83,7 +83,3 @@ constructor() { }
 }
 
 module.exports = YourPlugin;
-
-### Client.kick syntax
-
-client.kick("message")
