@@ -8,15 +8,14 @@
     "format": "npx prettier --write .",
     "debug": "node index.js --debug",
     "run": "node index.js",
-    "gencoryrightheader": "npx create-copyright-header --generate",
-    "build": "echo \"You can find the license headers in the .licenseheaders file\" && npm run gencoryrightheader && npm run format && npm run debug"
+    "gencoryrightheader": "node generatelicenseheaders.js",
+    "build": "npm run gencoryrightheader && npm run format && npm run debug"
   },
   "dependencies": {
     "bedrock-protocol": "git+https://github.com/greenfrogmc/Protocol.git"
   },
   "devDependencies": {
     "eslint": "8.33.0",
-    "prettier": "2.8.3",
-    "create-copyright-header": "2.2.1"
+    "prettier": "2.8.3"
   }
 }
