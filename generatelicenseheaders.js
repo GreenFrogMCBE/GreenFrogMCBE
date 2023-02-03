@@ -1,8 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const LICENSE_HEADER = `
-/**
+const LICENSE_HEADER = `/**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
@@ -16,7 +15,7 @@ const LICENSE_HEADER = `
 */
 `;
 
-const srcPath = path.join(__dirname, "src");
+const srcPath = path.join(__dirname, ".");
 
 const addHeader = (filePath) => {
   fs.readFile(filePath, (err, data) => {
@@ -25,7 +24,7 @@ const addHeader = (filePath) => {
       return;
     }
     let contents = data.toString();
-    if (!contents.startsWith(LICENSE_HEADER)) {
+    if (!contents.includes("Copyright 2023 andriycraft")) {
       contents = LICENSE_HEADER + contents;
       fs.writeFile(filePath, contents, (err) => {
         if (err) {
