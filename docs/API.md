@@ -207,7 +207,6 @@ module.exports = YourPlugin;
 ```javascript
 const BasePlugin = require("../src/plugins/BasePlugin");
 const ToastManager = require("../src/player/Toast");
-const GameMode = require("../src/player/GameMode");
 
 class YourPlugin extends BasePlugin {
 
@@ -238,4 +237,75 @@ client.transfer(
     "172.0.0.1", // server address
     19132 // port
 )
+```
+
+### Changing time
+
+client.setTime(17000) // Thats all...
+
+```javascript
+const BasePlugin = require("../src/plugins/BasePlugin");
+const ToastManager = require("../src/player/Toast");
+
+class YourPlugin extends BasePlugin {
+
+    constructor() { }
+
+    getName() { return "YourPlugin"; }
+    getVersion() { return "1.0"; }
+
+    onLoad() {}
+
+    onJoin(server, client) {
+        client.setTime(17000)
+    }
+}
+
+module.exports = YourPlugin;
+```
+
+### Sending message to client
+
+```javascript
+const BasePlugin = require("../src/plugins/BasePlugin");
+const ToastManager = require("../src/player/Toast");
+
+class YourPlugin extends BasePlugin {
+
+    constructor() { }
+
+    getName() { return "YourPlugin"; }
+    getVersion() { return "1.0"; }
+
+    onLoad() {}
+
+    onJoin(server, client) {
+        client.sendMessage(`Hi`);
+    }
+}
+
+module.exports = YourPlugin;
+```
+
+### Sending message as a client
+
+```javascript
+const BasePlugin = require("../src/plugins/BasePlugin");
+const ToastManager = require("../src/player/Toast");
+
+class YourPlugin extends BasePlugin {
+
+    constructor() { }
+
+    getName() { return "YourPlugin"; }
+    getVersion() { return "1.0"; }
+
+    onLoad() {}
+
+    onJoin(server, client) {
+        client.chat(`Hi`);
+    }
+}
+
+module.exports = YourPlugin;
 ```
