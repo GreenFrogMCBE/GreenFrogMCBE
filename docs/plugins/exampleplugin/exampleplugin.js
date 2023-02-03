@@ -4,12 +4,12 @@
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
  * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
  * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░ 
- * 
- * 
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
-*/
+ */
 const BasePlugin = require("../src/plugins/BasePlugin");
 const CommandManager = require("../src/player/CommandManager");
 const ToastManager = require("../src/player/Toast");
@@ -103,7 +103,7 @@ class Exampleplugin extends BasePlugin {
       client.sendMessage(`Hi ${client.username}. Your IP is: ${client.ip}`); // This code sends message TO client
       client.setGamemode(GameMode.Creative); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
       client.chat(`This message was sent by ${this.getName()}`); // This code sends message AS A client
-      
+
       const Toast = new ToastManager();
       Toast.setTitle("This is a toast");
       Toast.setMessage("This is a toast message");

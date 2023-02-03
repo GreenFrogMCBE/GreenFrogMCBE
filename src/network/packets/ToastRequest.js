@@ -4,18 +4,18 @@
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
  * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
  * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░ 
- * 
- * 
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
-*/
+ */
 
 const Events = require("../../server/Events");
 
 /* This class is used to send a toast request to the client. */
 class ToastRequest extends require("./Packet") {
-  constructor(title = '', message = '') {
+  constructor(title = "", message = "") {
     super(title, message);
     this.title = title;
     this.message = message;
@@ -51,7 +51,12 @@ class ToastRequest extends require("./Packet") {
    * @param client - The client that the packet is being sent to.
    */
   send(client) {
-    new Events().executeOT(client, require("../../Server"), this.title, this.message);
+    new Events().executeOT(
+      client,
+      require("../../Server"),
+      this.title,
+      this.message
+    );
     client.write(this.name(), {
       title: this.title,
       message: this.message,
