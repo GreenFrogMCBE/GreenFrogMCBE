@@ -182,7 +182,6 @@ client.setGamemode(GameMode.Creative); // Valid gamemodes are: "creative", "surv
 
 ```javascript
 const BasePlugin = require("../src/plugins/BasePlugin");
-const ToastManager = require("../src/player/Toast");
 const GameMode = require("../src/player/GameMode");
 
 class YourPlugin extends BasePlugin {
@@ -206,7 +205,6 @@ module.exports = YourPlugin;
 
 ```javascript
 const BasePlugin = require("../src/plugins/BasePlugin");
-const ToastManager = require("../src/player/Toast");
 
 class YourPlugin extends BasePlugin {
 
@@ -245,7 +243,6 @@ client.setTime(17000) // Thats all...
 
 ```javascript
 const BasePlugin = require("../src/plugins/BasePlugin");
-const ToastManager = require("../src/player/Toast");
 
 class YourPlugin extends BasePlugin {
 
@@ -268,7 +265,6 @@ module.exports = YourPlugin;
 
 ```javascript
 const BasePlugin = require("../src/plugins/BasePlugin");
-const ToastManager = require("../src/player/Toast");
 
 class YourPlugin extends BasePlugin {
 
@@ -290,8 +286,7 @@ module.exports = YourPlugin;
 ### Sending message as a client
 
 ```javascript
-const BasePlugin = require("../src/plugins/BasePlugin");
-const ToastManager = require("../src/player/Toast");
+const BasePlugin = require("../src/plugins/BasePlugin")
 
 class YourPlugin extends BasePlugin {
 
@@ -304,6 +299,64 @@ class YourPlugin extends BasePlugin {
 
     onJoin(server, client) {
         client.chat('Hi');
+    }
+}
+
+module.exports = YourPlugin;
+```
+
+### Sending form
+
+Warning! Syntax for forms is very complex
+
+client.sendForm(
+    5555, // Form id. Used to handle the response
+    "text", // form content
+    [{ text: "Button 1" }],  // Buttons encoded as JSON. WILL CRASH THE CLIENT IF THE JSON IS INVALID
+    "title", // title
+    "form" // type. can be "custom_form" or "form"
+);
+
+```javascript
+const BasePlugin = require("../src/plugins/BasePlugin");
+const ToastManager = require("../src/player/Toast");
+
+class YourPlugin extends BasePlugin {
+
+    constructor() { }
+
+    getName() { return "YourPlugin"; }
+    getVersion() { return "1.0"; }
+
+    onLoad() {}
+
+    onPlayerSpawn(server, client) {
+        client.sendForm(5555, "text", [{ text: "Button 1" }], "title", "form");
+    }
+}
+
+module.exports = YourPlugin;
+```
+
+### Shutting down server on player join
+
+```javascript
+const BasePlugin = require("../src/plugins/BasePlugin")
+const ShutdownAPI = require("../src/server/ShutdownAPI");
+
+class YourPlugin extends BasePlugin {
+
+    constructor() { }
+
+    getName() { return "YourPlugin"; }
+    getVersion() { return "1.0"; }
+
+    onLoad() {}
+
+    onJoin(server, client) { 
+        client.sendMessage("Stopping server...");
+        const sa = new ShutdownAPI();
+        sa.shutdownServer();
     }
 }
 
