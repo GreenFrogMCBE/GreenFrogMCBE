@@ -42,7 +42,7 @@ Logger.log(
 )
 ```
 
-### Colors
+### PLAYER colors
 
 Here is an basic example of using colors:
 
@@ -68,7 +68,30 @@ class YourPlugin extends BasePlugin {
 module.exports = YourPlugin;
 ```
 
-#### Colors list
+#### Colors list:
+
+```javascript
+black: "§0"
+dark_blue: "§1"
+dark_green: "§2"
+dark_aqua: "§3"
+dark_red: "§4"
+dark_purple: "§5"
+gold: "§6"
+gray: "§7"
+dark_gray: "§8"
+blue: "§9"
+green: "§a"
+red: "§c"
+light_purple: "§d"
+yellow: "§e"
+white: "§f"
+obfuscated: "§k"
+bold: "§l"
+italic: "§o"
+reset: "§r"
+char: "§"
+```
 
 ### Kicking player
 
