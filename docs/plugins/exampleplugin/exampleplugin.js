@@ -13,10 +13,10 @@
 const BasePlugin = require("../src/plugins/BasePlugin");
 const CommandManager = require("../src/player/CommandManager");
 const ToastManager = require("../src/player/Toast");
+const ShutdownAPI = require("../src/server/ShutdownAPI");
 const GameMode = require("../src/player/GameMode");
 
 const log = require("../src/server/Logger");
-const ShutdownAPI = require("../src/server/ShutdownAPI");
 const Logger = new log(); // Creates logger for this plugin
 
 // For advanced docs look at API.md in /docs/api.md
