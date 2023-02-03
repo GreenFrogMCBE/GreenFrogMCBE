@@ -70,6 +70,8 @@ module.exports = YourPlugin;
 
 ### Kicking player
 
+Here is an simple example how to kick a player when he joins the server
+
 ```javascript
 const BasePlugin = require("../src/plugins/BasePlugin");
 
