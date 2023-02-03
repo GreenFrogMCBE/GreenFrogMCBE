@@ -13,25 +13,27 @@
 const PlayerInfo = require("../player/PlayerInfo");
 const Unloader = require("../plugins/Unloader");
 const lang = require("../server/ServerInfo").lang;
+const CCS = require("./ConsoleCommandSender");
+const Log = require("../server/Logger");
+
+const Logger = new Log();
 
 class ShutdownAPI {
   /**
    * It closes the console, logs a message, and then kicks all players
    */
-  async shutdown() {
-    const Log = require("../server/Logger");
-    const Logger = new Log();
-    const CCS = require("./ConsoleCommandSender");
-
+  async shutdownServer() {
     await new CCS().close();
     Logger.log(lang.stoppingServer, "info");
+
+    const players = new PlayerInfo().getPlayers();
+
     try {
-      for (let i = 0; i < new PlayerInfo().getPlayers().length; i++) {
-        await new PlayerInfo().getPlayers()[i].kick(lang.serverShutdown);
+      for (const player of players) {
+        await player.kick(lang.serverShutdown);
       }
-    } catch (e) {
-      /* ignored  */
-    }
+    } catch (e) { /* ignored */ }
+
     setTimeout(() => {
       new Unloader().shutdown();
     }, 2000);
