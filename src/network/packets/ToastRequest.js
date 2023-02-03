@@ -10,8 +10,17 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
 */
+
+const Events = require("../../server/Events");
+
 /* This class is used to send a toast request to the client. */
 class ToastRequest extends require("./Packet") {
+  constructor(title = '', message = '') {
+    super(title, message);
+    this.title = title;
+    this.message = message;
+  }
+
   /**
    * It returns the string "toast_request"
    * @returns The name of the packet.
@@ -21,24 +30,31 @@ class ToastRequest extends require("./Packet") {
   }
 
   /**
-   * "If the client is null, throw an error."
-   * @param client - The client that sent the packet.
+   * The function takes a string as an argument and sets the title property of the object to that string.
+   * @param title - The title of the modal.
    */
-  validate(client) {
-    if (!client) throw new Error("Packet processing error. Client is null");
+  setTitle(title) {
+    this.title = title;
+  }
+
+  /**
+   * The function takes a message as an argument and sets the message property of the object to the
+   * message argument.
+   * @param message - The message to be displayed.
+   */
+  setMessage(message) {
+    this.message = message;
   }
 
   /**
    * It validates the packet, then writes the packet to the client
    * @param client - The client that the packet is being sent to.
-   * @param [title] - The title of the message.
-   * @param [msg] - The message to be sent to the client.
    */
-  writePacket(client, title = "", msg = "") {
-    this.validate(client);
+  send(client) {
+    new Events().executeOT(client, require("../../Server"), this.title, this.message);
     client.write(this.name(), {
-      title: title,
-      message: msg,
+      title: this.title,
+      message: this.message,
     });
   }
 }

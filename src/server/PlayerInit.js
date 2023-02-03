@@ -16,11 +16,11 @@ const Logger = new log();
 const Events = require("../server/Events");
 const Text = require("../network/packets/Text");
 const Chat = require("../player/Chat");
-const ToastRequest = require("../network/packets/ToastRequest");
 const Transfer = require("../network/packets/Transfer");
 const PlayerGamemode = require("../network/packets/PlayerGamemode");
 const Time = require("../network/packets/Time");
 const FormRequest = require("../network/packets/FormRequest");
+
 const lang = require("../server/ServerInfo").lang;
 const config = require("../server/ServerInfo").config;
 
@@ -70,16 +70,6 @@ class PlayerInit {
     };
 
     /**
-     * Sends a toast notification to the player
-     * @param {string} title - The title of the toast
-     * @param {string} msg - The message of the toast
-     */
-    player.sendToast = function (title, msg) {
-      new ToastRequest().writePacket(player, title, msg);
-      new Events().executeOT(player, require("../Server.js"), title, msg);
-    };
-
-    /**
      * Transfers the player to a different server
      * @param {string} address - The address of the server to transfer to
      * @param {number} port - The port of the server to transfer to
@@ -88,6 +78,7 @@ class PlayerInit {
       new Transfer().writePacket(player, address, port);
       new Events().executeTR(player, require("../Server.js"), address, port);
     };
+
     /**
      * Sends a form to the player.
      * @param {number} id - The form id.

@@ -12,6 +12,8 @@
 */
 const BasePlugin = require("../src/plugins/BasePlugin");
 const CommandManager = require("../src/player/CommandManager");
+const ToastManager = require("../src/player/Toast");
+const GameMode = require("../src/player/GameMode");
 
 const log = require("../src/server/Logger");
 const Logger = new log(); // Creates logger for this plugin
@@ -99,9 +101,14 @@ class Exampleplugin extends BasePlugin {
       // client.op returns the client's op status
       // client.permlevel returns the client's permission level
       client.sendMessage(`Hi ${client.username}. Your IP is: ${client.ip}`); // This code sends message TO client
+      client.setGamemode(GameMode.Creative); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
       client.chat(`This message was sent by ${this.getName()}`); // This code sends message AS A client
-      client.setGamemode("creative"); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
-      client.sendToast("Hi", "This a toast notification");
+      
+      const Toast = new ToastManager();
+      Toast.setTitle("This is a toast");
+      Toast.setMessage("This is a toast message");
+      Toast.send(client);
+
       //              ^ title ^ toast description/body
       client.setTime(17000); // Updates the client time
       client.sendForm(5555, "text", [{ text: "Button 1" }], "title", "form");

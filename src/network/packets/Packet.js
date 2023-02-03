@@ -13,12 +13,11 @@
 class Packet {
   constructor() {}
 
-  name() {
-    return null;
-  }
-
+  name() {}
   validate() {}
+  send() {}
 
+  /* @deprecated */
   writePacket() {}
 }
 
