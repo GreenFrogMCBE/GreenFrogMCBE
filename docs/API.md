@@ -17,7 +17,8 @@ constructor() { }
 
 }
 
-module.exports = YourPlugin;```
+module.exports = YourPlugin;
+```
 
 ### Log levels
 
