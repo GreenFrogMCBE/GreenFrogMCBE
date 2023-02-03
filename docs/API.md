@@ -233,7 +233,9 @@ module.exports = YourPlugin;
 
 #### client.transfer() syntax
 
+```javascript
 client.transfer(
     "172.0.0.1", // server address
     19132 // port
 )
+```
