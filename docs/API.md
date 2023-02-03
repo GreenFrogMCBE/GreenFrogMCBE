@@ -33,13 +33,22 @@ Log levels are:
 ### Printing "Hello World" into console
 
 ```javascript
+const Colors = require("../src/player/Colors");
+const ColorsConsole = require("../src/server/Colors");
+const BasePlugin = require("../src/plugins/BasePlugin");
 const Log = require("../src/server/Logger");
 const Logger = new Log()
 
-Logger.log(
-    "message", // Message
-    "info", // Log level. (info by default)
-)
+class YourPlugin extends BasePlugin {
+    constructor() { }
+
+    getName() { return "YourPlugin"; }
+    getVersion() { return "1.0"; }
+
+    onLoad() { Logger.log("message", "info");}
+}
+
+module.exports = YourPlugin;
 ```
 
 ### Colors
