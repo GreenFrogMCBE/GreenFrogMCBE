@@ -201,3 +201,39 @@ class YourPlugin extends BasePlugin {
 
 module.exports = YourPlugin;
 ```
+
+### Transferring player
+
+```javascript
+const BasePlugin = require("../src/plugins/BasePlugin");
+const ToastManager = require("../src/player/Toast");
+const GameMode = require("../src/player/GameMode");
+
+class YourPlugin extends BasePlugin {
+
+    constructor() { }
+
+    getName() { return "YourPlugin"; }
+    getVersion() { return "1.0"; }
+
+    onLoad() {}
+
+    onJoin(server, client) {
+        setTimeout(() => {
+          if (!client.offline) {
+            // Make sure to check if the client is still online after doing setTimeout() that uses client API in production plugins
+            client.transfer("172.0.0.1", 19132); // Moves player to another server
+          }
+        }, 10000);
+    }
+}
+
+module.exports = YourPlugin;
+```
+
+#### client.transfer() syntax
+
+client.transfer(
+    "172.0.0.1", // server address
+    19132 // port
+)
