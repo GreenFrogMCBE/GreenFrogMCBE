@@ -362,3 +362,17 @@ class YourPlugin extends BasePlugin {
 
 module.exports = YourPlugin;
 ```
+
+## Advanced API
+
+### Force disconnect - breaks other plugins
+
+client.disconnect(reason)
+
+### Sending a packet
+
+client.write(packetname, packetdata)
+
+## Events
+
+All events and examples are listed here: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/plugins/exampleplugin/exampleplugin.js
