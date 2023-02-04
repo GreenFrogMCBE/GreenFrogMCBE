@@ -75,7 +75,7 @@
    "timeUpdated": "Laikas atnaujintas!",
    "unhandledPacket": "Neapdorotas paketas",
    "unhandledPacketData": "Įspėjimas: netvarkomi paketų duomenys: %data%",
-   "unknownCommand": "Nežinoma komanda. Jei reikia pagalbos, įveskite \"help\",
+   "unknownCommand": "Nežinoma komanda. Jei reikia pagalbos, įveskite \"help\"",
    "unstableWarning": "Nestabilus režimas įjungtas! Dėl to jūsų serveris gali tapti nestabilus ir sukels daugiau delsos",
    "invalidusername": "§cJūsų atsiųstas vartotojo vardas yra neteisingas",
    "bcmsg": "(transliacija) %msg%",
