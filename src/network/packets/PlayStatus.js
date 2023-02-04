@@ -25,7 +25,7 @@ class PlayStatus extends require("./Packet") {
    * SetStatus(status1) {
    *     status = status1;
    * }
-   * @param status1 - The statu
+   * @param status1 - The status
    */
   setStatus(status1) {
     status = status1;
@@ -43,9 +43,9 @@ class PlayStatus extends require("./Packet") {
    * Sends the packet to the client
    * @param {Object} client 
    */
-  writePacket(client) {
+  send(client) {
     client.write(this.name(), {
-      status: status,
+      status: this.getStatus(),
     });
   }
 }

@@ -10,17 +10,33 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+let username = null
 class PlayerList extends require("./Packet") {
-  // TODO: REWRITE
+  /**
+   * It returns the packet name
+   * @returns The packet name
+   */
   name() {
     return "player_list";
   }
 
+  /**
+   * Validte the packet
+   * @param {string} username 
+   */
   validate(username) {
     if (!username) throw new Error("Packet processing error. Username is null");
   }
 
-  send(username = null) {
+  getUsername() {
+    return username;
+  }
+
+  setUsername(username1) {
+    username = username1
+  }
+
+  send(client) {
     this.validate(username);
     client.write(this.name(), {
       records: {

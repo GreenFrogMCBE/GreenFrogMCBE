@@ -33,6 +33,7 @@ const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
+const ValidateClient = require('./player/ValidateClient')
 
 const Logger = require("./server/Logger");
 const Events = require("./server/Events")
@@ -154,34 +155,26 @@ module.exports = {
    * @param client - The client that joined
    */
   async onJoin(client) {
-    client.ip = client.connection.address.split("/")[0];
-    client.port = client.connection.address.split("/")[1];
-    client.fullip = client.connection.address;
-    client.username = client.getUserData().displayName;
-    client.offline = false;
-
-    Logger.log(
-      lang.playerConnected
-        .replace("%player%", client.username)
-        .replace("%ip%", client.fullip)
-    );
+    await ValidateClient.initAndValidateClient(client);
 
     Events.executeOJ(this.server, client);
 
     PlayerInfo.addPlayer(client);
-    new ResponsePackInfo().writePacket(client);
+
+    const responsepackinfo = new ResponsePackInfo()
+    responsepackinfo.setMustAccept(true)
+    responsepackinfo.setHasScripts(false),
+    responsepackinfo.setBehaviorPacks([]),
+    responsepackinfo.setTexturePacks([])
+    responsepackinfo.send(client)
   },
 
   /**
    * It logs a warning if the config.debug or config.unstable is true.
    */
   async initDebug() {
-    if (config.unstable) {
-      Logger.log(lang.unstableWarning, "warning");
-    }
-    if (process.env.DEBUG == "minecraft-protocol" || config.debug) {
-      Logger.log(lang.debugWarning, "warning");
-    }
+    if (config.unstable) Logger.log(lang.unstableWarning, "warning");
+    if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.log(lang.debugWarning, "warning");
   },
 
   /**
@@ -194,13 +187,7 @@ module.exports = {
 
     await this.initJson();
 
-    fs.access("ops.yml", fs.constants.F_OK, (err) => {
-      if (err) {
-        fs.writeFile("ops.yml", "", (err) => {
-          if (err) throw err;
-        });
-      }
-    });
+    fs.access("ops.yml", fs.constants.F_OK, (err) => { if (err) { fs.writeFile("ops.yml", "", (err) => { if (err) throw err; }); }});
 
     Logger.log(lang.loadingServer);
 

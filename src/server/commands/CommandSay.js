@@ -71,10 +71,8 @@ class CommandSay extends require("./Command") {
     for (let i = 0; i < PlayerInfo.getPlayers().length; i++) {
       Logger.log(msg);
       const text = new TextPacket()
-      text.writePacket(
-        PlayerInfo.getPlayers()[i],
-        msg
-      );
+      text.setMessage(msg)
+      text.send(PlayerInfo.getPlayers()[i],);
     }
   }
 }

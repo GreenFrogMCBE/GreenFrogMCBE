@@ -19,6 +19,7 @@ const Transfer = require("../network/packets/Transfer");
 const PlayerGamemode = require("../network/packets/PlayerGamemode");
 const Time = require("../network/packets/Time");
 const FormRequest = require("../network/packets/FormRequest");
+const GameMode = require("../player/GameMode");
 
 const lang = require("../server/ServerInfo").lang;
 
@@ -29,7 +30,9 @@ module.exports = {
      * @param {string} msg - The message to send
      */
     player.sendMessage = function (msg) {
-      new Text().writePacket(player, msg);
+      const text = new Text()
+      text.setMessage(msg)
+      text.send(player);
       Events.executeSRVTOCLCH(player, require("../Server"), msg);
     };
 
@@ -50,12 +53,14 @@ module.exports = {
      * @param {string} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
      */
     player.setGamemode = function (gamemode) {
-      const validGamemodes = ["survival", "creative", "adventure", "spectator", "fallback"];
+      const validGamemodes = [GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SEPCTATOR, GameMode.FALLBACK];
       if (!validGamemodes.includes(gamemode)) {
         throw new Error("Invalid gamemode");
       }
       client.gamemode = gamemode;
-      new PlayerGamemode().writePacket(player, gamemode);
+      const gm = new PlayerGamemode()
+      gm.setGamemode(gamemode)
+      gm.send(player)
       Events.executeGMC(player, require("../Server.js").server, gamemode);
     };
 
@@ -65,7 +70,10 @@ module.exports = {
      * @param {number} port - The port of the server to transfer to
      */
     player.transfer = function (address, port) {
-      new Transfer().writePacket(player, address, port);
+      const trpk = new Transfer()
+      trpk.setServerAddress(address)
+      trpk.setPort(port)
+      trpk.send(player)
       Events.executeTR(player, require("../Server.js").server, address, port);
     };
 
@@ -95,7 +103,7 @@ module.exports = {
     player.kick = function (msg = lang.playerDisconnected) {
       if (player.kicked) return;
       player.kicked = true;
-      Events.executeFTEOK(require("../Server"), player);
+      Events.executeFTEOK(require("../Server").server, player);
       Logger.log(
         lang.kickedConsoleMsg
           .replace("%player%", player.getUserData().displayName)
@@ -109,7 +117,9 @@ module.exports = {
      * @param {number} time - The time to set the player to
      */
     player.setTime = function (time) {
-      new Time().writePacket(player, time);
+      const time1 = new Time()
+      time1.setTime(time)
+      time1.send(player, time);
     };
 
     /* Checks if the player is still online */

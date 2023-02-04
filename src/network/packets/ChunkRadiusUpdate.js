@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let chunk_radius = 0
+
 class ChunkRadiusUpdate extends require("./Packet") {
   /**
    * It returns the packet name
@@ -40,9 +41,9 @@ class ChunkRadiusUpdate extends require("./Packet") {
    * It send the packet to the client
    * @param {Object} client 
    */
-  send(client, chunk_radius = 0) {
+  send(client) {
     client.write(this.name(), {
-      chunk_radius: chunk_radius,
+      chunk_radius: this.getChunkRadius(),
     });
   }
 }

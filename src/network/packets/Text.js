@@ -15,8 +15,8 @@ let message = ""
 let type = "announcement"
 let needs_translation = false
 let source_name = ""
-let xuid = 0
-let platform_chat_id = 0
+let xuid = ""
+let platform_chat_id = ""
 
 class Text extends require("./Packet") {
   /**
@@ -63,7 +63,7 @@ class Text extends require("./Packet") {
 
   /**
    * Sets the xuid
-   * @param {number} xuid1 The xuid
+   * @param {string} xuid1 The xuid
   */
   setXuid(xuid1) {
     xuid = xuid1
@@ -71,7 +71,7 @@ class Text extends require("./Packet") {
 
   /**
    * Sets the platform chat id
-   * @param {number} platform_chat_id1 The platform chat id
+   * @param {string} platform_chat_id1 The platform chat id
   */
   setPlatformChatId(platform_chat_id1) {
     platform_chat_id = platform_chat_id1
@@ -132,18 +132,10 @@ class Text extends require("./Packet") {
    * @param {string} [type=announcement] - The type of message.
    * @param {boolean} [needs_translation=false] - If true, the message will be translated to the client's language (if there is translation key).
    * @param {string} [source_name] - The name of the source of the message.
-   * @param {Number} [xuid] - The XUID of the player, who sent the message.
-   * @param {Number} [platform_chat_id] - This is the ID of the player you want to send the message to.
+   * @param {string} [xuid] - The XUID of the player, who sent the message.
+   * @param {string} [platform_chat_id] - This is the ID of the player you want to send the message to.
    */
-  send(
-    client,
-    message = "",
-    type = "announcement",
-    needs_translation = false,
-    source_name = "",
-    xuid = "",
-    platform_chat_id = ""
-  ) {
+  send(client) {
     client.write(this.name(), {
       type: type,
       needs_translation: needs_translation,

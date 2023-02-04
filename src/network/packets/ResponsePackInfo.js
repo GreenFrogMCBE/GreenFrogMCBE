@@ -96,7 +96,7 @@ class ResponsePackInfo extends require("./Packet") {
   send(client) {
     client.write(this.name(), {
       must_accept: this.getMustAccept(),
-      has_scripts: this.has_scripts(),
+      has_scripts: this.getHasScripts(),
       behaviour_packs: this.getBehaviorPacks(),
       texture_packs: this.getTexturePacks(),
     });
