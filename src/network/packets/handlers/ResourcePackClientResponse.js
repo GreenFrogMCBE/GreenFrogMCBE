@@ -46,7 +46,7 @@ const lang = ServerInfo.lang;
 const fs = require("fs");
 
 class ResourcePackClientResponse extends Handler {
-  async handle(client, packet, server) {
+  handle(client, packet, server) {
     switch (packet.data.params.response_status) {
       case "none": {
         Events.executePHNRPI(server, client);
@@ -79,7 +79,7 @@ class ResourcePackClientResponse extends Handler {
         for (const op of ops) {
           if (op.replace("\r", "") === client.username) {
             client.op = true;
-            client.permlevel = 4;
+            client.permlevel = 4
             break;
           }
         }
@@ -97,7 +97,7 @@ class ResourcePackClientResponse extends Handler {
         const startgame = new StartGame()
         startgame.setEntityId(0)
         startgame.setRunTimeEntityId(0)
-        startgame.setGamemode(config.default_gamemode)
+        startgame.setGamemode(config.gamemode)
         startgame.setPlayerPosition(0, 100, 0)
         startgame.setPlayerRotation(0, 0)
         startgame.setSeed(-1)
@@ -105,9 +105,10 @@ class ResourcePackClientResponse extends Handler {
         startgame.setBiomeName(Biome.PLAINS)
         startgame.setDimension(Dimension.OVERWORLD)
         startgame.setGenerator(Generator.FLAT)
-        startgame.setWorldGamemode(config.default_gamemode)
+        startgame.setWorldGamemode(config.world_gamemode)
         startgame.setDifficulty(Difficulty.NORMAL)
         startgame.setSpawnPosition(0, 100, 0)
+        startgame.setPlayerPermissionLevel(client.permlevel)
         startgame.send(client)
 
         const commandsenabled = new SetCommandsEnabled()
@@ -128,7 +129,7 @@ class ResourcePackClientResponse extends Handler {
 
         const respawn = new Respawn()
         respawn.setX(0)
-        respawn.setY(0)
+        respawn.setY(100)
         respawn.setZ(0)
         respawn.setState(0)
         respawn.setRuntimeEntityId(0)
@@ -140,84 +141,101 @@ class ResourcePackClientResponse extends Handler {
 
         const commandmanager = new CommandManager();
         commandmanager.init(client);
-        commandmanager.addCommand(client, new CommandVersion().name(), new CommandVersion().getPlayerDescription());
-        commandmanager.addCommand(client, new CommandVersion().aliases()[0], new CommandVersion().getPlayerDescription());
-        commandmanager.addCommand(client, new CommandPl().name(), new CommandPl().getPlayerDescription());
-        commandmanager.addCommand(client, new CommandPl().aliases()[0], new CommandPl().getPlayerDescription());
+        commandmanager.addCommand(
+          client,
+          new CommandVersion().name(),
+          new CommandVersion().getPlayerDescription()
+        );
+        commandmanager.addCommand(
+          client,
+          new CommandVersion().aliases()[0],
+          new CommandVersion().getPlayerDescription()
+        );
+        commandmanager.addCommand(
+          client,
+          new CommandPl().name(),
+          new CommandPl().getPlayerDescription()
+        );
+        commandmanager.addCommand(
+          client,
+          new CommandPl().aliases()[0],
+          new CommandPl().getPlayerDescription()
+        );
         if (client.op) {
-          commandmanager.addCommand(client, new CommandShutdown().name(), new CommandShutdown().getPlayerDescription())
-          commandmanager.addCommand(client, new CommandSay().name(), new CommandSay().getPlayerDescription());
-          commandmanager.addCommand(client, new CommandOp().name(), new CommandOp().getPlayerDescription());
+          commandmanager.addCommand(
+            client,
+            new CommandShutdown().name(),
+            new CommandShutdown().getPlayerDescription()
+          );
+          commandmanager.addCommand(
+            client,
+            new CommandSay().name(),
+            new CommandSay().getPlayerDescription()
+          );
+          commandmanager.addCommand(
+            client,
+            new CommandOp().name(),
+            new CommandOp().getPlayerDescription()
+          );
         }
 
-        client.write('level_chunk', {
-          x: 0,
-          z: 0,
-          sub_chunk_count: 0,
-          cache_enabled: false,
-          payload: {
-            type: "Buffer", data: [
-              1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 255, 255, 255,
-              255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0,
-            ]
-          },
-        })
+        const chunk = new LevelChunk()
+        chunk.setX(0)
+        chunk.setZ(0)
+        chunk.setSubChunkCount(0)
+        chunk.setCacheEnabled(false)
+        chunk.setPayload([
+          1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 255, 255, 255,
+          255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0,
+        ])
+        chunk.send(client)
 
         if (config.render_chunks) {
           for (let x = 0; x < 10; x++) {
             for (let z = 0; z < 10; z++) {
-              client.write("update_block", {
-                position: {
-                  x: x,
-                  y: 98,
-                  z: z,
-                },
-                block_runtime_id: 2,
-                flags: {
-                  _value: 2,
-                  neighbors: false,
-                  network: true,
-                  no_graphic: false,
-                  unused: false,
-                  priority: false,
-                },
-                layer: 0,
-              });
+              const block = new UpdateBlock()
+              block.setX(x)
+              block.setY(98)
+              block.setZ(z)
+              block.setBlockRuntimeId(2)
+              block.send(client)
             }
           }
         }
 
         setInterval(() => {
           if (!client.offline) {
-            client.write("network_chunk_publisher_update", {
-              coordinates: { x: 0, y: 0, z: 0 },
-              radius: 64,
-              saved_chunks: [],
-            });
+            const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+            networkchunkpublisher.setCords(0, 0, 0)
+            networkchunkpublisher.setRadius(64)
+            networkchunkpublisher.setSavedChunks([])
+            networkchunkpublisher.send(client)
           }
         }, 50);
 
-
+        Logger.log(lang.spawned.replace("%player%", client.username));
         setTimeout(() => {
-          Logger.log(lang.spawned.replace("%player%", client.username));
-          const playstatus = new PlayStatus()
-          playstatus.setStatus(PlayStatuses.PLAYERSPAWN)
-          playstatus.send(client)
-          Events.executeOPS(server, client);
-        })
+          if (!client.offline) {
+            const ps = new PlayStatus()
+            ps.setStatus(PlayStatuses.PLAYERSPAWN)
+            ps.send(client);
+            Events.executeOPS(server, client);
+          }
+        }, 2000);
 
         setTimeout(() => {
           if (!client.offline) return;
-
-          const players = PlayerInfo.getPlayers();
-          for (const player of players) {
-            player.sendMessage(lang.joinedTheGame.replace("%username%", client.username));
+          for (let i = 0; i < new PlayerInfo().getPlayers().length; i++) {
+            new PlayerInfo()
+              .getPlayers()
+            [i].sendMessage(
+              lang.joinedTheGame.replace("%username%", client.username)
+            );
           }
         }, 1000);
-
-        break;
       }
-      default: {
+        break;
+      default:
         if (config.logunhandledpackets)
           Logger.log(
             lang.unhandledPacketData.replace(
@@ -225,7 +243,6 @@ class ResourcePackClientResponse extends Handler {
               packet.data.params.response_status
             )
           );
-      }
     }
   }
 }

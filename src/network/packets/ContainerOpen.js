@@ -91,6 +91,14 @@ class ContainerOpen extends require("./Packet") {
   }
 
   /**
+   * It returns the runtime entity id
+   * @returns The runtime entity id
+   */
+  getRuntimeEntityId() {
+    return runtime_entity_id
+  }
+
+  /**
    * It sends the packet
    * @param {Object} client 
    */

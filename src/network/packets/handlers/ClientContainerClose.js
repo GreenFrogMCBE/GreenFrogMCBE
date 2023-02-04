@@ -15,7 +15,10 @@ const Handler = require("./Handler");
 
 class ClientContainerClose extends Handler {
   handle(client) {
-    ContainerClose.prototype.writePacket(client, 3);
+    const co = new ContainerClose()
+    co.setServer(false)
+    co.setWindowId(-1)
+    co.send(client, 3);
   }
 }
 

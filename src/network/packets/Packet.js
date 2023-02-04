@@ -14,9 +14,7 @@ class Packet {
   constructor() {}
   name() { }
   validate() { }
-  send() { 
-    console.log('Sent: ' + this.name())
-  }
+  send() { }
 }
 
 module.exports = Packet;

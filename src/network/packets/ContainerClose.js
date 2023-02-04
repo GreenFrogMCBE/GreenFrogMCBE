@@ -17,7 +17,7 @@ class ContainerClose extends require("./Packet") {
   /**
    * It returns the packet name
    * @returns Packet name
-   */ 
+   */
   name() {
     return "container_close";
   }
@@ -58,8 +58,7 @@ class ContainerClose extends require("./Packet") {
    * It sends the packet
    * @param {Object} client 
    */
-  send(client, window_id = -1, server = false) {
-    this.validate(client, window_id);
+  send(client) {
     client.write(this.name(), {
       window_id: this.getWindowId(),
       server: this.getServer(),
