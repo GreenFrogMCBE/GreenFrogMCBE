@@ -36,8 +36,6 @@ const addHeader = (filePath) => {
         }
         console.log(`Added license header to file ${filePath}`);
       });
-    } else {
-      console.log(`File ${filePath} already has license header`);
     }
   });
 };

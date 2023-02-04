@@ -165,8 +165,8 @@ module.exports = {
     const responsepackinfo = new ResponsePackInfo();
     responsepackinfo.setMustAccept(true);
     responsepackinfo.setHasScripts(false);
-      responsepackinfo.setBehaviorPacks([]);
-      responsepackinfo.setTexturePacks([]);
+    responsepackinfo.setBehaviorPacks([]);
+    responsepackinfo.setTexturePacks([]);
     responsepackinfo.send(client);
   },
 
@@ -180,7 +180,7 @@ module.exports = {
   },
 
   /**
-   * It loads the config, lang file, and commands, then loads the plugins and starts the server.
+   * It loads the config, lang files, and commands, then loads the plugins and starts the server.
    */
   async start() {
     await ValidateConfig.ValidateConfig();
