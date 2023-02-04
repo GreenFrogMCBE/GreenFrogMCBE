@@ -54,8 +54,9 @@ module.exports = {
       if (!validGamemodes.includes(gamemode)) {
         throw new Error("Invalid gamemode");
       }
+      client.gamemode = gamemode;
       new PlayerGamemode().writePacket(player, gamemode);
-      Events.executeGMC(player, require("../Server.js"), gamemode);
+      Events.executeGMC(player, require("../Server.js").server, gamemode);
     };
 
     /**
@@ -65,7 +66,7 @@ module.exports = {
      */
     player.transfer = function (address, port) {
       new Transfer().writePacket(player, address, port);
-      Events.executeTR(player, require("../Server.js"), address, port);
+      Events.executeTR(player, require("../Server.js").server, address, port);
     };
 
     /**

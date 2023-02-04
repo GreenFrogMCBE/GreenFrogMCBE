@@ -14,13 +14,11 @@
 const Events = require("../../server/Events");
 
 /* This class is used to send a toast request to the client. */
-class ToastRequest extends require("./Packet") {
-  constructor(title = "", message = "") {
-    super(title, message);
-    this.title = title;
-    this.message = message;
-  }
 
+let title1 = "";
+let message = "";
+
+class ToastRequest extends require("./Packet") {
   /**
    * It returns the string "toast_request"
    * @returns The name of the packet.
@@ -31,19 +29,33 @@ class ToastRequest extends require("./Packet") {
 
   /**
    * The function takes a string as an argument and sets the title property of the object to that string.
-   * @param title - The title of the modal.
+   * @param title1 - The title of the modal.
    */
-  setTitle(title) {
-    this.title = title;
+  setTitle(title1) {
+    this.title = title1;
   }
 
   /**
    * The function takes a message as an argument and sets the message property of the object to the
    * message argument.
-   * @param message - The message to be displayed.
+   * @param message1 - The message to be displayed.
    */
-  setMessage(message) {
-    this.message = message;
+  setMessage(message1) {
+    this.message = message1;
+  }
+
+  /**
+   * @returns The title.
+   */
+  getTitle() {
+    return title1;
+  }
+
+  /**
+   * @returns The message.
+   */
+  getMessage() {
+    return message1;
   }
 
   /**
@@ -53,13 +65,13 @@ class ToastRequest extends require("./Packet") {
   send(client) {
     Events.executeOT(
       client,
-      require("../../Server"),
-      this.title,
-      this.message
+      require("../../Server").server,
+      this.getTitle(),
+      this.getMessage(),
     );
     client.write(this.name(), {
-      title: this.title,
-      message: this.message,
+      title: this.getTitle(),
+      message: this.getMessage(),
     });
   }
 }

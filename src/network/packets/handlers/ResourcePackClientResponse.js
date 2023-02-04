@@ -55,7 +55,15 @@ class ResourcePackClientResponse extends Handler {
       case "have_all_packs": {
         Events.executeFTEOPHAP(server, client);
         Logger.log(lang.rpsInstalled.replace("%player%", client.username));
-        new ResourcePackStack().writePacket(client);
+        
+        const resourcepackstack = new ResourcePackStack()
+        resourcepackstack.setMustAccept(false)
+        resourcepackstack.setBehaviorPacks([])
+        resourcepackstack.setResourcePacks([])
+        resourcepackstack.setGameVersion("")
+        resourcepackstack.setExperiments([])
+        resourcepackstack.setExperimentsPreviouslyUsed(false)
+        resourcepackstack.send(client)
         break;
       }
       case "completed": {

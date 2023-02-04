@@ -11,6 +11,10 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* It's a class that sends a packet to the client to transfer them to another server */
+
+let server_address = null;
+let port = null
+
 class Transfer extends require("./Packet") {
   /**
    * It returns the string "transfer"
@@ -36,16 +40,60 @@ class Transfer extends require("./Packet") {
   }
 
   /**
+   * Sets the server address
+   * @param {string} address 
+   */
+  setServerAddress(address) {
+    server_address = address;
+  }
+
+  /**
+   * Sets the server port
+   * @param {Number} port1 
+   */
+  setPort(port1) {
+    port = port1;
+  }
+
+  /**
+   * @returns The server address.
+  */
+  getServerAddress() {
+    return server_address;
+  }
+
+  /**
+   * @returns The server port.
+  */
+  getPort() {
+    return port;
+  }
+
+  /**
+   * @returns The server address.
+  */
+  getServerAddress() {
+    return server_address;
+  }
+
+  /**
+   * @returns The server port.
+   */
+  getPort() {
+    return port;
+  }
+
+  /**
    * Writes a packet that transfers the client to another server
    * @param {Object} client - The client to send the packet to
    * @param {string} address - The server address
-   * @param {number} port - The server port
+   * @param {Number} port - The server port
    */
   send(client, address, port) {
     this.validate(address, port);
     client.write(this.name(), {
-      server_address: address,
-      port: parseInt(port),
+      server_address: this.getServerAddress(),
+      port: parseInt(this.getPort()),
     });
   }
 }

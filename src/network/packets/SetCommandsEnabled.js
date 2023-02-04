@@ -11,6 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 
+let enabled = true;
+
 class SetCommandsEnabled extends require("./Packet") {
   /**
    * It returns the string "set_commands_enabled"
@@ -21,12 +23,31 @@ class SetCommandsEnabled extends require("./Packet") {
   }
 
   /**
-   * It writes a packet to the client
-   * @param [enabled=true] - Whether or not the client should be able to use the commands.
+   * SetEnabled(enabled1) {
+   *     enabled = enabled1;
+   * }
+   * @param {Boolean} enabled1 - Is enabled or not.
    */
-  writePacket(client, enabled = true) {
+  setEnabled(enabled1) {
+    enabled = enabled1;
+  }
+
+  /**
+   * GetEnabled() {
+   *     return enabled;
+   * }
+   * @returns The command enabled.
+   */
+  getEnabled() {
+    return enabled;
+  }
+
+  /**
+   * It writes a packet to the client
+   */
+  send(client) {
     client.write(this.name(), {
-      enabled: enabled,
+      enabled: this.getEnabled(),
     });
   }
 }

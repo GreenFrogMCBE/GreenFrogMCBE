@@ -10,6 +10,32 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Gamemode = require("../../player/GameMode");
+
+let entity_id = 0;
+let runtimeentity_id = 0
+let gamemode = Gamemode.FALLBACK
+let playerx = 0
+let playery = 0
+let playerz = 0
+let rotationx = 0
+let rotationz = 0
+let seed = []
+let biome_type = 0
+let biome_name = ""
+let dimension = "overworld"
+let generator = 2
+let world_gamemode = 0
+let difficulty = 0
+let spawn = {
+  x: 0,
+  y: 0,
+  z: 0
+}
+let achievements_disabled = null
+let gamerules = []
+let itemstates = []
+
 class StartGame extends require("./Packet") {
   /**
    * It returns the string "start_game"
@@ -19,53 +45,157 @@ class StartGame extends require("./Packet") {
     return "start_game";
   }
 
-  /**
-   * "If the client is null, throw an error."
-   * @param client - The client that sent the packet.
-   */
-  validate(client) {
-    if (!client) throw new Error("Packet processing error. Client is null");
+  // TODO: Docs
+
+  setEntityId(entity_id1) {
+    entity_id = entity_id1;
+  }
+
+  setRunTimeEntityId(runtimeentity_id1) {
+    runtimeentity_id = runtimeentity_id1
+  }
+
+  setGamemode(gamemode1) {
+    gamemode = gamemode1;
+  }
+
+  setPlayerPosition(x, y, z) {
+    playerx = x;
+    playery = y;
+    playerz = z;
+  }
+
+  setPlayerRotation(x, z) {
+    rotationx = x;
+    rotationz = z;
+  }
+
+  setSeed(seed1) {
+    seed = seed1;
+  }
+
+  setBiomeType(biome_type) {
+    biome_type = biome_type1
+  }
+
+  setBiomeName(biome_name1) {
+    biome_name = biome_name1;
+  }
+
+  setDimension(dimension1) {
+    dimension = dimension1;
+  }
+
+  setGenerator(generator1) {
+    generator = generator1;
+  }
+
+  setWorldGamemode(world_gamemode1) {
+    world_gamemode = world_gamemode1;
+  }
+
+  setDifficulty(difficulty1) {
+    difficulty = difficulty1;
+  }
+
+  setSpawnPosition(x, y, z) {
+    spawn.x = x
+    spawn.y = y
+    spawn.z = z
+  }
+
+  setAchievementsDisabled(disabled1) {
+    achievements_disabled = disabled1
+  }
+
+  setGamemodes(gamerules1) {
+    gamerules = gamerules1;
+  }
+
+  setItemStates(itemstates1) {
+    itemstates = itemstates1;
+  }
+
+  getEntityId() {
+    return entity_id;
+  }
+
+  getRunTimeEntityId() {
+    return runtimeentity_id;
+  }
+
+  getGamemode() {
+    return gamemode;
+  }
+
+  getPlayerPosition() {
+    return {
+      x: playerx,
+      y: playery,
+      z: playerz,
+    };
+  }
+
+  getPlayerRotation() {
+    return {
+      x: rotationx,
+      z: rotationz,
+    };
+  }
+
+  getSeed() {
+    return seed;
+  }
+
+  getBiomeType() {
+    return biome_type;
+  }
+
+  getBiomeName() {
+    return biome_name;
+  }
+
+  getDimension() {
+    return dimension;
+  }
+
+  getGenerator() {
+    return generator;
+  }
+
+  getWorldGamemode() {
+    return world_gamemode;
+  }
+
+  getDifficulty() {
+    return difficulty;
+  }
+
+  getSpawnPosition() {
+    return spawn;
   }
 
   /**
    * It writes a packet to the client
-   * @param client - The client that will receive the packet.
-   * @param gamemode - The gamemode
-   * @param world_gamemode = The world gamemode
-   * @param permission_level = The permission level
+   * @param client - The client that will receive the packet
    */
-  writePacket(
-    client,
-    gamemode = "fallback",
-    world_gamemode = "creative",
-    permission_level = 0
+  send(
+    client
   ) {
-    this.validate(client);
     client.write(this.name(), {
-      entity_id: "-4294967295",
-      runtime_entity_id: "1",
-      player_gamemode: gamemode,
-      player_position: {
-        x: 8,
-        y: 112,
-        z: 8,
-      },
-      rotation: {
-        x: 0,
-        z: 0,
-      },
-      seed: [0, 0],
-      biome_type: 0,
-      biome_name: "plains",
-      dimension: "overworld",
-      generator: 2,
-      world_gamemode: world_gamemode,
-      difficulty: 1,
-      spawn_position: {
-        x: 8,
-        y: 112,
-        z: 8,
-      },
+      entity_id: this.getEntityId(),
+      runtime_entity_id: this.getRunTimeEntityId(),
+      player_gamemode: this.getGamemode(),
+      player_position: this.getPlayerPosition(),
+      rotation: this.getPlayerRotation(),
+      seed: this.getSeed(),
+      biome_type: this.getBiomeType(),
+      biome_name: this.getBiomeName(),
+      dimension: this.getDimension(),
+      generator: this.getGamemode(),
+      world_gamemode: this.getWorldGamemode(),
+      difficulty: this.getDifficulty(),
+      spawn_position: this.getSpawnPosition(),
       achievements_disabled: true,
       day_cycle_stop_time: 17,
       edu_offer: 0,

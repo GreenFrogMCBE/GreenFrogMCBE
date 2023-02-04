@@ -11,17 +11,17 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 class PlayerList extends require("./Packet") {
+  // TODO: REWRITE
   name() {
     return "player_list";
   }
 
-  validate(client, username) {
-    if (!client) throw new Error("Packet processing error. Client is null");
+  validate(username) {
     if (!username) throw new Error("Packet processing error. Username is null");
   }
 
-  writePacket(client, username = null) {
-    this.validate(client, username);
+  send(username = null) {
+    this.validate(username);
     client.write(this.name(), {
       records: {
         type: "add",
