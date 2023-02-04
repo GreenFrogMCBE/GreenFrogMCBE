@@ -133,7 +133,6 @@ module.exports = {
         new Text().handle(client, packet, lang);
         break;
       case "subchunk_request":
-        console.log("subchunk req");
         new SubChunkRequest().handle(client, packet);
         break;
       case "command_request":
@@ -165,8 +164,8 @@ module.exports = {
 
     const responsepackinfo = new ResponsePackInfo();
     responsepackinfo.setMustAccept(true);
-    responsepackinfo.setHasScripts(false),
-      responsepackinfo.setBehaviorPacks([]),
+    responsepackinfo.setHasScripts(false);
+      responsepackinfo.setBehaviorPacks([]);
       responsepackinfo.setTexturePacks([]);
     responsepackinfo.send(client);
   },
