@@ -15,13 +15,12 @@ const Logger = require("../server/Logger");
 const lang = require("../server/ServerInfo").lang;
 
 module.exports = {
-  broadcastMessage(msg = '') {
+  broadcastMessage(msg = "") {
     const players = PlayerInfo.getPlayers();
     for (const client of players) {
       client.sendMessage(msg);
     }
-    
-    Logger.log(lang.bcmsg.replace("%msg%", msg));    
-  }
-}
 
+    Logger.log(lang.bcmsg.replace("%msg%", msg));
+  },
+};

@@ -47,17 +47,17 @@ class CommandOp extends require("./Command") {
       client.sendMessage(lang.noPermission);
       return;
     }
-    
+
     const player = args.split(" ")[1];
     if (!player) {
       client.sendMessage("§c" + lang.commandUsageOp);
       return;
     }
-    
+
     fs.appendFile("ops.yml", player + "\n", (err) => {
       if (!err) client.sendMessage(lang.opped.replace("%player%", player));
       else client.sendMessage("§c" + lang.opFail);
-    });    
+    });
   }
 }
 

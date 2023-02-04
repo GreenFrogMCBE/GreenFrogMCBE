@@ -152,5 +152,5 @@ module.exports = {
     // b) Player closes a form
     // c) Player inputs text into form
     // d) Player selects an option in a form
-  }
-}
+  },
+};

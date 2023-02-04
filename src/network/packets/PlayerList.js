@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let username = null
+let username = null;
 class PlayerList extends require("./Packet") {
   /**
    * It returns the packet name
@@ -22,7 +22,7 @@ class PlayerList extends require("./Packet") {
 
   /**
    * Validte the packet
-   * @param {string} username 
+   * @param {string} username
    */
   validate(username) {
     if (!username) throw new Error("Packet processing error. Username is null");
@@ -33,7 +33,7 @@ class PlayerList extends require("./Packet") {
   }
 
   setUsername(username1) {
-    username = username1
+    username = username1;
   }
 
   send(client) {

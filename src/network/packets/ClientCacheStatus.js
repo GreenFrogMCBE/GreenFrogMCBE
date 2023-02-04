@@ -15,7 +15,7 @@ class ClientCacheStatus extends require("./Packet") {
   /**
    * It returns the packet name
    * @returns Packet name
-  */
+   */
   name() {
     return "client_cache_status";
   }
@@ -42,7 +42,7 @@ class ClientCacheStatus extends require("./Packet") {
 
   /**
    * It send the packet to the client
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
     client.write(this.name(), {

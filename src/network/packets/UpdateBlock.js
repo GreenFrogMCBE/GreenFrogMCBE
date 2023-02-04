@@ -12,17 +12,17 @@
  */
 /* It sends a packet to the client to update a block */
 
-let x = 0
-let y = 0
-let z = 0
-let block_runtime_id = 0
-let flagsvalue = 2
-let neighbors = false
-let network = true
-let no_graphic = false
-let unused = false
-let priority = false
-let layer = 0
+let x = 0;
+let y = 0;
+let z = 0;
+let block_runtime_id = 0;
+let flagsvalue = 2;
+let neighbors = false;
+let network = true;
+let no_graphic = false;
+let unused = false;
+let priority = false;
+let layer = 0;
 
 class UpdateBlock extends require("./Packet") {
   /**
@@ -37,96 +37,96 @@ class UpdateBlock extends require("./Packet") {
    * @param {Number} x1 - The x coordinate of the point.
    */
   setX(x1) {
-    x = parseInt(x1)
+    x = parseInt(x1);
   }
 
   /**
    * @param {Number} y1 - The y coordinate of the point.
    */
   setY(y1) {
-    y = parseInt(y1)
+    y = parseInt(y1);
   }
 
   /**
    * @param {Number} z1 - The z coordinate of the point.
    */
   setZ(z1) {
-    z = parseInt(z1)
+    z = parseInt(z1);
   }
 
   /**
-   * @param {Number} block_runtime_id1 block_runtime_id1 
+   * @param {Number} block_runtime_id1 block_runtime_id1
    */
   setBlockRuntimeId(block_runtime_id1) {
-    block_runtime_id = parseInt(block_runtime_id1)
+    block_runtime_id = parseInt(block_runtime_id1);
   }
 
   /**
-   * @param {Number} flagsvalue1 flagsvalue1 
+   * @param {Number} flagsvalue1 flagsvalue1
    */
   setFlagsValue(flagsvalue1) {
-    flagsvalue = parseInt(flagsvalue1)
+    flagsvalue = parseInt(flagsvalue1);
   }
 
   /**
-   * @param {Number} neighbors1 neighbors1 
+   * @param {Number} neighbors1 neighbors1
    */
   setNeighbors(neighbors1) {
-    neighbors = neighbors1
+    neighbors = neighbors1;
   }
 
   /**
-   * @param {Number} network1 network1 
+   * @param {Number} network1 network1
    */
   setNetwork(network1) {
-    network = network1
+    network = network1;
   }
 
   /**
-   * @param {Number} no_graphic1 no_graphic1 
+   * @param {Number} no_graphic1 no_graphic1
    */
   setNoGraphic(no_graphic1) {
-    no_graphic = no_graphic1
+    no_graphic = no_graphic1;
   }
 
   /**
-   * @param {Number} unused1 unused1 
+   * @param {Number} unused1 unused1
    */
   setUnused(unused1) {
-    unused = unused1
+    unused = unused1;
   }
 
   /**
-   * @param {Number} priority1 priority1 
+   * @param {Number} priority1 priority1
    */
   setPriority(priority1) {
-    priority = priority1
+    priority = priority1;
   }
 
   /**
    * @param {Number} layer1 layer1
-  */
+   */
   setLayer(layer1) {
-    layer = parseInt(layer1)
+    layer = parseInt(layer1);
   }
 
   /**
    * @param {Number} x x
-  */
+   */
   getX() {
     return x;
   }
 
   /**
    * @param {Number} y y
-  */
+   */
   getY() {
     return y;
   }
 
   /**
    * @param {Number} z z
-  */
+   */
   getZ() {
     return z;
   }
@@ -168,21 +168,21 @@ class UpdateBlock extends require("./Packet") {
 
   /**
    * @param {Number} unused unused
-  */
+   */
   getUnused() {
     return unused;
   }
 
   /**
    * @param {Number} priority priority
-  */
+   */
   getPriority() {
     return priority;
   }
 
   /**
    * @param {Number} layer layer
-  */
+   */
   getLayer() {
     return layer;
   }

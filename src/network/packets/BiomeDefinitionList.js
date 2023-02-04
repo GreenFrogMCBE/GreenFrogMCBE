@@ -12,12 +12,12 @@ const { SelectMenuOptionBuilder } = require("@discordjs/builders");
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let nbt = {}
+let nbt = {};
 class BiomeDefinitionList extends require("./Packet") {
   /**
    * It returns the packet name
    * @returns Packet name
-  */
+   */
   name() {
     return "biome_definition_list";
   }
@@ -35,16 +35,16 @@ class BiomeDefinitionList extends require("./Packet") {
    * @returns The NBT.
    */
   getNbt() {
-    return nbt
+    return nbt;
   }
 
   /**
    * It send the packet to the client
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
     client.write(this.name(), {
-      nbt: nbt
+      nbt: nbt,
     });
   }
 }

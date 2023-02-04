@@ -35,5 +35,5 @@ module.exports = {
    */
   getPlayers() {
     return playersonline;
-  }
-}
+  },
+};

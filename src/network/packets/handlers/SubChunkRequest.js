@@ -13,7 +13,6 @@
 const SubChunk = require("../SubChunk");
 
 class SubChunkRequest extends require("./Handler") {
-
   handle(client) {
     client.write("subchunk", {
       dimension: 0,
@@ -240,7 +239,6 @@ class SubChunkRequest extends require("./Handler") {
       cache_enabled: false,
     });
   }
-
 }
 
 module.exports = SubChunkRequest;

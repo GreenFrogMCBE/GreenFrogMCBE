@@ -10,12 +10,12 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let data = null
+let data = null;
 class AvailableCommands extends require("./Packet") {
   /**
    * It returns the packet name
    * @returns Packet name
-  */
+   */
   name() {
     return "available_commands";
   }
@@ -23,7 +23,7 @@ class AvailableCommands extends require("./Packet") {
   /**
    * It sets the packet data
    * @param {Object} data1
-  */
+   */
   setData(data1) {
     data = data1;
   }
@@ -38,7 +38,7 @@ class AvailableCommands extends require("./Packet") {
 
   /**
    * It send the packet to the client
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
     client.write(this.name(), this.getData());

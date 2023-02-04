@@ -10,8 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let window_id = 0
-let server = false
+let window_id = 0;
+let server = false;
 
 class ContainerClose extends require("./Packet") {
   /**
@@ -51,12 +51,12 @@ class ContainerClose extends require("./Packet") {
    * @returns The server field
    */
   getServer() {
-    return server
+    return server;
   }
 
   /**
    * It sends the packet
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
     client.write(this.name(), {

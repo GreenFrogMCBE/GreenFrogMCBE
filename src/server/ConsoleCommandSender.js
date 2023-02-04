@@ -29,7 +29,9 @@ let closed1 = false;
 module.exports = {
   closed: closed1,
 
-  close() { closed1 = true; },
+  close() {
+    closed1 = true;
+  },
 
   async start() {
     const lang = ServerInfo.lang;
@@ -41,7 +43,7 @@ module.exports = {
       time: new Time(),
       say: new Say(),
       op: new Op(),
-      pl: new PL()
+      pl: new PL(),
     };
 
     const r = rl.createInterface({
@@ -120,5 +122,5 @@ module.exports = {
 
       if (!closed1) r.prompt(true);
     });
-  }
-}
+  },
+};

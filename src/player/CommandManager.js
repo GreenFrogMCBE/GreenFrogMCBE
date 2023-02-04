@@ -16,18 +16,18 @@ let commands = [];
 
 class CommandManager {
   /**
-  * Retrieves the commands packet of a client.
-  * @param {Object} client - The client object.
-  * @returns {Object} The client's commands packet.
-  */
+   * Retrieves the commands packet of a client.
+   * @param {Object} client - The client object.
+   * @returns {Object} The client's commands packet.
+   */
   getPacket(client) {
     return client.commands;
   }
 
   /**
-  * Initializes the commands.
-  * @param {Object} client - The client.
-  */
+   * Initializes the commands.
+   * @param {Object} client - The client.
+   */
   init(client) {
     client.commands = {
       values_len: 0,
@@ -41,11 +41,10 @@ class CommandManager {
     };
   }
 
-
   /**
-  * Retrieves the commands array.
-  * @returns {Array} The commands array.
-  */
+   * Retrieves the commands array.
+   * @returns {Array} The commands array.
+   */
   getCommands() {
     return commands;
   }
@@ -85,8 +84,8 @@ class CommandManager {
       name,
       description,
     });
-    const availablecommands = new AvailableCommands()
-    availablecommands.setData(client.commands)
+    const availablecommands = new AvailableCommands();
+    availablecommands.setData(client.commands);
     availablecommands.send(client, this.getPacket(client));
   }
 }

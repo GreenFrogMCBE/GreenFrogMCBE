@@ -67,7 +67,7 @@ class ToastRequest extends require("./Packet") {
       client,
       require("../../Server").server,
       this.getTitle(),
-      this.getMessage(),
+      this.getMessage()
     );
     client.write(this.name(), {
       title: this.getTitle(),

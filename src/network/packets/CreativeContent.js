@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let items = []
+let items = [];
 
 class CreativeContent extends require("./Packet") {
   /**
@@ -33,7 +33,7 @@ class CreativeContent extends require("./Packet") {
    * @returns Item list
    */
   getItems() {
-    return items
+    return items;
   }
 
   /**

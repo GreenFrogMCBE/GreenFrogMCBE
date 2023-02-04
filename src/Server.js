@@ -33,16 +33,16 @@ const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
-const ValidateClient = require('./player/ValidateClient')
+const ValidateClient = require("./player/ValidateClient");
 
 const Logger = require("./server/Logger");
-const Events = require("./server/Events")
+const Events = require("./server/Events");
 
-let clients = []
-let server = null
-let config = null
-let lang = null
-let command = null
+let clients = [];
+let server = null;
+let config = null;
+let lang = null;
+let command = null;
 
 module.exports = {
   clients: clients,
@@ -99,7 +99,8 @@ module.exports = {
    * @param packet - The packet that was sent by the client
    */
   handlepk(client, packet) {
-    if (client.offline) throw new Error("An attempt to handle packet from offline player");
+    if (client.offline)
+      throw new Error("An attempt to handle packet from offline player");
     switch (packet.data.name) {
       case "resource_pack_client_response":
         new ResourcePackClientResponse().handle(client, packet, this.server);
@@ -132,7 +133,7 @@ module.exports = {
         new Text().handle(client, packet, lang);
         break;
       case "subchunk_request":
-        console.log('subchunk req')
+        console.log("subchunk req");
         new SubChunkRequest().handle(client, packet);
         break;
       case "command_request":
@@ -162,12 +163,12 @@ module.exports = {
 
     PlayerInfo.addPlayer(client);
 
-    const responsepackinfo = new ResponsePackInfo()
-    responsepackinfo.setMustAccept(true)
+    const responsepackinfo = new ResponsePackInfo();
+    responsepackinfo.setMustAccept(true);
     responsepackinfo.setHasScripts(false),
-    responsepackinfo.setBehaviorPacks([]),
-    responsepackinfo.setTexturePacks([])
-    responsepackinfo.send(client)
+      responsepackinfo.setBehaviorPacks([]),
+      responsepackinfo.setTexturePacks([]);
+    responsepackinfo.send(client);
   },
 
   /**
@@ -175,7 +176,8 @@ module.exports = {
    */
   async initDebug() {
     if (config.unstable) Logger.log(lang.unstableWarning, "warning");
-    if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.log(lang.debugWarning, "warning");
+    if (process.env.DEBUG === "minecraft-protocol" || config.debug)
+      Logger.log(lang.debugWarning, "warning");
   },
 
   /**
@@ -188,7 +190,13 @@ module.exports = {
 
     await this.initJson();
 
-    fs.access("ops.yml", fs.constants.F_OK, (err) => { if (err) { fs.writeFile("ops.yml", "", (err) => { if (err) throw err; }); }});
+    fs.access("ops.yml", fs.constants.F_OK, (err) => {
+      if (err) {
+        fs.writeFile("ops.yml", "", (err) => {
+          if (err) throw err;
+        });
+      }
+    });
 
     Logger.log(lang.loadingServer);
 
@@ -261,5 +269,5 @@ module.exports = {
       );
       process.exit(config.exitstatuscode);
     }
-  }
-}
+  },
+};

@@ -28,7 +28,10 @@ const addHeader = (filePath) => {
       contents = LICENSE_HEADER + contents;
       fs.writeFile(filePath, contents, (err) => {
         if (err) {
-          console.error(`Error adding license header to file ${filePath}:`, err);
+          console.error(
+            `Error adding license header to file ${filePath}:`,
+            err
+          );
           return;
         }
         console.log(`Added license header to file ${filePath}`);

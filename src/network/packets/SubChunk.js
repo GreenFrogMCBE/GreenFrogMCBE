@@ -11,18 +11,18 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 
-let dimension = 0
+let dimension = 0;
 let x = 0;
 let y = 0;
 let z = 0;
 let ox = 0;
 let oy = 0;
 let oz = 0;
-let result = ""
-let data = []
-let heightMaptype = 0
-let heightMap = []
-let cache_enabled = false
+let result = "";
+let data = [];
+let heightMaptype = 0;
+let heightMap = [];
+let cache_enabled = false;
 
 class SubChunk extends require("./Packet") {
   /**
@@ -48,9 +48,9 @@ class SubChunk extends require("./Packet") {
    *     x1 = x;
    * }
    * @param x - The x cordinate.
-  */
+   */
   setX(x1) {
-    x = x1
+    x = x1;
   }
 
   /**
@@ -58,9 +58,9 @@ class SubChunk extends require("./Packet") {
    *     y1 = y;
    * }
    * @param y - The y cordinate.
-  */
+   */
   setY(y1) {
-    y = y1
+    y = y1;
   }
 
   /**
@@ -68,9 +68,9 @@ class SubChunk extends require("./Packet") {
    *     z1 = z;
    * }
    * @param z - The z cordinate.
-  */
+   */
   setZ(z1) {
-    z = z1
+    z = z1;
   }
 
   /**
@@ -82,7 +82,7 @@ class SubChunk extends require("./Packet") {
    * @param x1 - The x cordinate.
    * @param y1 - The y cordinate.
    * @param z1 - The z cordinate.
-  */
+   */
   setOrigin(x1, y1, z1) {
     ox = x1;
     oy = y1;
@@ -94,7 +94,7 @@ class SubChunk extends require("./Packet") {
    *     data1 = data;
    * }
    * @param data - The data.
-  */
+   */
   setData(data1) {
     data = data1;
   }
@@ -104,7 +104,7 @@ class SubChunk extends require("./Packet") {
    *     result1 = result;
    * }
    * @param result - The result.
-  */
+   */
   setRequestResult(result1) {
     result = result1;
   }
@@ -116,7 +116,7 @@ class SubChunk extends require("./Packet") {
    * @param heightMaptype - The heightMaptype.
    */
   setHeightMapType(heightMaptype1) {
-    heightMaptype = heightMaptype1
+    heightMaptype = heightMaptype1;
   }
 
   /**
@@ -150,7 +150,7 @@ class SubChunk extends require("./Packet") {
   /**
    * It returns the x cordinate.
    * @returns The x cordinate.
-  */
+   */
   getX() {
     return x;
   }
@@ -158,7 +158,7 @@ class SubChunk extends require("./Packet") {
   /**
    * It returns the y cordinate.
    * @returns The y cordinate.
-  */
+   */
   getY() {
     return y;
   }
@@ -166,7 +166,7 @@ class SubChunk extends require("./Packet") {
   /**
    * It returns the z cordinate.
    * @returns The z cordinate.
-  */
+   */
   getZ() {
     return z;
   }

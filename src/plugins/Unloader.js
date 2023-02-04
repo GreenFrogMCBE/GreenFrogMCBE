@@ -16,7 +16,7 @@ const Logger = require("../server/Logger");
 const ServerInfo = require("../server/ServerInfo");
 
 class Unloader {
-  constructor() { }
+  constructor() {}
 
   /* Shuts down the plugins. */
   async shutdown() {
@@ -32,13 +32,18 @@ class Unloader {
             const plugin1 = require(`../../plugins/${plugin}`);
             plugin1.onShutdown();
           } catch (e) {
-            Logger.log(lang.failedToShutdownPlugin.replace("%plugin%", plugin).replace("%e%", e.stack), "error");
+            Logger.log(
+              lang.failedToShutdownPlugin
+                .replace("%plugin%", plugin)
+                .replace("%e%", e.stack),
+              "error"
+            );
           }
         });
       } finally {
         Logger.log(lang.doneShuttingDownPlugins);
-        Logger.log(lang.doneShuttingDown)
-        process.exit(config.exitstatuscode)
+        Logger.log(lang.doneShuttingDown);
+        process.exit(config.exitstatuscode);
       }
     });
   }

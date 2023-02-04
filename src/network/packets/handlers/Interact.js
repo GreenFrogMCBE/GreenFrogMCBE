@@ -18,11 +18,11 @@ class Interact extends Handler {
   handle(packet, client) {
     switch (packet.data.params.action_id) {
       case "open_inventory": {
-        const co = new ContainerOpen()
-        co.setWindowId(-1)
-        co.setWindowType("inventory")
-        co.setRuntimeEntityId(2)
-        co.setCoordinates(0, 0, 0)
+        const co = new ContainerOpen();
+        co.setWindowId(-1);
+        co.setWindowType("inventory");
+        co.setRuntimeEntityId(2);
+        co.setCoordinates(0, 0, 0);
         co.send(client);
       }
       case "mouse_over_entity": {
@@ -32,7 +32,7 @@ class Interact extends Handler {
       default: {
         throw new PacketHandlingError(
           "Not supported packet data: packet = open_inventory, action_id = " +
-          packet.data.params.action_id
+            packet.data.params.action_id
         );
       }
     }

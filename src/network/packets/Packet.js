@@ -12,9 +12,9 @@
  */
 class Packet {
   constructor() {}
-  name() { }
-  validate() { }
-  send() { }
+  name() {}
+  validate() {}
+  send() {}
 }
 
 module.exports = Packet;

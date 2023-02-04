@@ -14,7 +14,6 @@
 class FormRequest extends require("./Packet") {
   // WARNING - FORM SYSTEM MUST BE REWRITTEN
 
-
   /**
    * It returns the packet name
    * @returns Packet name

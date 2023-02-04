@@ -23,11 +23,15 @@ module.exports = {
     const players = PlayerInfo.getPlayers();
 
     try {
-      for (const player of players) { await player.kick(lang.serverShutdown); }
-    } catch (e) { /* ignored */ }
+      for (const player of players) {
+        await player.kick(lang.serverShutdown);
+      }
+    } catch (e) {
+      /* ignored */
+    }
 
     setTimeout(() => {
       new Unloader().shutdown();
     }, 2000);
-  }
-}
+  },
+};

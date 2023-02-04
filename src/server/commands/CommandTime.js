@@ -57,7 +57,7 @@ class CommandTime extends require("./Command") {
     }
 
     for (const client of players) {
-      const timepk = new TimePacket()
+      const timepk = new TimePacket();
       timepk.writePacket(client, time);
     }
 

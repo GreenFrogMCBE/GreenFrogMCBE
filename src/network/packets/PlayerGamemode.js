@@ -34,7 +34,7 @@ class PlayerGamemode extends require("./Packet") {
   /**
    * It returns the gamemode
    * @returns The gamemode
-  */
+   */
   getGamemode() {
     return gamemode;
   }

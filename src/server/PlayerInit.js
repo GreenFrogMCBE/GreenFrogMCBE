@@ -30,8 +30,8 @@ module.exports = {
      * @param {string} msg - The message to send
      */
     player.sendMessage = function (msg) {
-      const text = new Text()
-      text.setMessage(msg)
+      const text = new Text();
+      text.setMessage(msg);
       text.send(player);
       Events.executeSRVTOCLCH(player, require("../Server"), msg);
     };
@@ -53,14 +53,20 @@ module.exports = {
      * @param {string} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
      */
     player.setGamemode = function (gamemode) {
-      const validGamemodes = [GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SEPCTATOR, GameMode.FALLBACK];
+      const validGamemodes = [
+        GameMode.SURVIVAL,
+        GameMode.CREATIVE,
+        GameMode.ADVENTURE,
+        GameMode.SEPCTATOR,
+        GameMode.FALLBACK,
+      ];
       if (!validGamemodes.includes(gamemode)) {
         throw new Error("Invalid gamemode");
       }
       client.gamemode = gamemode;
-      const gm = new PlayerGamemode()
-      gm.setGamemode(gamemode)
-      gm.send(player)
+      const gm = new PlayerGamemode();
+      gm.setGamemode(gamemode);
+      gm.send(player);
       Events.executeGMC(player, require("../Server.js").server, gamemode);
     };
 
@@ -70,10 +76,10 @@ module.exports = {
      * @param {number} port - The port of the server to transfer to
      */
     player.transfer = function (address, port) {
-      const trpk = new Transfer()
-      trpk.setServerAddress(address)
-      trpk.setPort(port)
-      trpk.send(player)
+      const trpk = new Transfer();
+      trpk.setServerAddress(address);
+      trpk.setPort(port);
+      trpk.send(player);
       Events.executeTR(player, require("../Server.js").server, address, port);
     };
 
@@ -117,8 +123,8 @@ module.exports = {
      * @param {number} time - The time to set the player to
      */
     player.setTime = function (time) {
-      const time1 = new Time()
-      time1.setTime(time)
+      const time1 = new Time();
+      time1.setTime(time);
       time1.send(player, time);
     };
 
@@ -129,12 +135,14 @@ module.exports = {
         if (!player.kicked) {
           player.kick(lang.playerDisconnected);
           Logger.log(lang.disconnected.replace("%player%", player.username));
-          Chat.broadcastMessage(lang.leftTheGame.replace("%player%", player.username));
+          Chat.broadcastMessage(
+            lang.leftTheGame.replace("%player%", player.username)
+          );
           delete player.q2;
           player.offline = true;
           player.q = true;
         }
       }
     }, 50);
-  }
-}
+  },
+};

@@ -15,9 +15,9 @@ let cords = {
   x: 0,
   y: 0,
   z: 0,
-}
-let window_type = ""
-let runtime_entity_id = 0
+};
+let window_type = "";
+let runtime_entity_id = 0;
 
 class ContainerOpen extends require("./Packet") {
   /**
@@ -46,7 +46,7 @@ class ContainerOpen extends require("./Packet") {
     cords = {
       x: x,
       y: y,
-      z: z
+      z: z,
     };
   }
 
@@ -60,7 +60,7 @@ class ContainerOpen extends require("./Packet") {
 
   /**
    * It sets the runtime entity id
-   * @param {Number} runtime_entity_id1 
+   * @param {Number} runtime_entity_id1
    */
   setRuntimeEntityId(runtime_entity_id1) {
     runtime_entity_id = runtime_entity_id1;
@@ -95,12 +95,12 @@ class ContainerOpen extends require("./Packet") {
    * @returns The runtime entity id
    */
   getRuntimeEntityId() {
-    return runtime_entity_id
+    return runtime_entity_id;
   }
 
   /**
    * It sends the packet
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
     client.write(this.name(), {

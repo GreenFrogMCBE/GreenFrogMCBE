@@ -14,29 +14,29 @@ let x = 0;
 let z = 0;
 let sub_chunk_count = 0;
 let cache_enabled = false;
-let payload = []
+let payload = [];
 class LevelChunk extends require("./Packet") {
   /**
    * It returns the packet name
-  */
+   */
   name() {
     return "level_chunk";
   }
 
   /**
    * It sets the X coordinate
-   * @param {Number} x1 
+   * @param {Number} x1
    */
   setX(x1) {
-    x = x1
+    x = x1;
   }
 
   /**
    * It sets the Z coordinate
-   * @param {Number} z1 
+   * @param {Number} z1
    */
   setZ(z1) {
-    z = z1
+    z = z1;
   }
 
   /**
@@ -44,23 +44,23 @@ class LevelChunk extends require("./Packet") {
    * @param {Number} count
    */
   setSubChunkCount(count) {
-    sub_chunk_count = count
+    sub_chunk_count = count;
   }
 
   /**
    * It sets if the cache is enabled
-   * @param {Boolean} enabled 
+   * @param {Boolean} enabled
    */
   setCacheEnabled(enabled) {
-    cache_enabled = enabled
+    cache_enabled = enabled;
   }
 
   /**
    * It sets if the payload
-   * @param {any} data 
+   * @param {any} data
    */
   setPayload(data) {
-    payload = data
+    payload = data;
   }
 
   /**

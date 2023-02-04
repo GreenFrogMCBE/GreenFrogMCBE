@@ -11,12 +11,12 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* It's a class that sends a text packet to the client */
-let message = ""
-let type = "announcement"
-let needs_translation = false
-let source_name = ""
-let xuid = ""
-let platform_chat_id = ""
+let message = "";
+let type = "announcement";
+let needs_translation = false;
+let source_name = "";
+let xuid = "";
+let platform_chat_id = "";
 
 class Text extends require("./Packet") {
   /**
@@ -30,51 +30,51 @@ class Text extends require("./Packet") {
   }
 
   /**
-   * Sets the message to be sent 
+   * Sets the message to be sent
    * @param {string} message Message to be sent
-  */
+   */
   setMessage(message1) {
-    message = message1
+    message = message1;
   }
 
   /**
-   * Sets the type 
+   * Sets the type
    * @param {string} type1 Set the type
-  */
+   */
   setType(type1) {
-    type = type1
+    type = type1;
   }
 
   /**
    * Sets the needs translation
    * @param {boolean} needs_translation1 Set the need translation
-  */
+   */
   setNeedsTranslation(needs_translation1) {
-    needs_translation = needs_translation1
+    needs_translation = needs_translation1;
   }
 
   /**
    * Sets the source name
    * @param {string} source_name1 Set the source name
-  */
+   */
   setSourceName(source_name1) {
-    source_name = source_name1
+    source_name = source_name1;
   }
 
   /**
    * Sets the xuid
    * @param {string} xuid1 The xuid
-  */
+   */
   setXuid(xuid1) {
-    xuid = xuid1
+    xuid = xuid1;
   }
 
   /**
    * Sets the platform chat id
    * @param {string} platform_chat_id1 The platform chat id
-  */
+   */
   setPlatformChatId(platform_chat_id1) {
-    platform_chat_id = platform_chat_id1
+    platform_chat_id = platform_chat_id1;
   }
 
   /**
@@ -82,47 +82,47 @@ class Text extends require("./Packet") {
    * @returns The message to be sent
    */
   getMessage() {
-    return message
+    return message;
   }
 
   /**
    * Returns the type
    * @returns The type
-  */
+   */
   getType() {
-    return type
+    return type;
   }
 
   /**
    * Returns the needs translation
    * @returns The needs translation
-  */
+   */
   getNeedsTranslation() {
-    return needs_translation
+    return needs_translation;
   }
 
   /**
    * Returns the source name
    * @returns The source name
-  */
+   */
   getSourceName() {
-    return source_name
+    return source_name;
   }
 
   /**
    * Returns the xuid
    * @returns The xuid
-  */
+   */
   getXuid() {
-    return xuid
+    return xuid;
   }
 
   /**
    * Returns the platform chat id
    * @returns The platform chat id
-  */
+   */
   getPlatformChatId() {
-    return platform_chat_id
+    return platform_chat_id;
   }
 
   /**

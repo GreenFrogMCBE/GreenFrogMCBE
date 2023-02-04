@@ -39,14 +39,14 @@ class Time extends require("./Packet") {
   /**
    * It updates the time
    * @param ${Number} time - The time in seconds to set the client's time to.
-  */
+   */
   setTime(time1) {
-    time = time1
+    time = time1;
   }
 
   /**
    * @returns The time
-  */
+   */
   getTime() {
     return time;
   }

@@ -12,7 +12,7 @@
  */
 let window_id = null;
 let slot = 0;
-let itemdata = {}
+let itemdata = {};
 class InventorySlot extends require("./Packet") {
   /**
    * It returns the name of the packet.
@@ -75,7 +75,7 @@ class InventorySlot extends require("./Packet") {
     client.write(this.name(), {
       window_id: this.getWindowId(),
       slot: this.getSlot(),
-      item: this.getItemData()
+      item: this.getItemData(),
     });
   }
 }

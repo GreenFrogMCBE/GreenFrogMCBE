@@ -13,25 +13,25 @@
 const Gamemode = require("../../player/GameMode");
 
 let entity_id = 0;
-let runtimeentity_id = 0
-let gamemode = Gamemode.FALLBACK
-let playerx = 0
-let playery = 0
-let playerz = 0
-let rotationx = 0
-let rotationz = 0
-let seed = []
-let biome_type = 0
-let biome_name = ""
-let dimension = "overworld"
-let generator = 2
-let world_gamemode = 0
-let difficulty = 0
+let runtimeentity_id = 0;
+let gamemode = Gamemode.FALLBACK;
+let playerx = 0;
+let playery = 0;
+let playerz = 0;
+let rotationx = 0;
+let rotationz = 0;
+let seed = [];
+let biome_type = 0;
+let biome_name = "";
+let dimension = "overworld";
+let generator = 2;
+let world_gamemode = 0;
+let difficulty = 0;
 let spawn = {
   x: 0,
   y: 0,
-  z: 0
-}
+  z: 0,
+};
 let gamerules = [
   {
     name: "commandblockoutput",
@@ -213,8 +213,8 @@ let gamerules = [
     type: "bool",
     value: true,
   },
-]
-let itemstates =  [
+];
+let itemstates = [
   {
     name: "minecraft:cooked_cod",
     runtime_id: 268,
@@ -5870,8 +5870,8 @@ let itemstates =  [
     runtime_id: 13,
     component_based: false,
   },
-]
-let permission_level = 0
+];
+let permission_level = 0;
 
 class StartGame extends require("./Packet") {
   /**
@@ -5889,7 +5889,7 @@ class StartGame extends require("./Packet") {
   }
 
   setRunTimeEntityId(runtimeentity_id1) {
-    runtimeentity_id = runtimeentity_id1
+    runtimeentity_id = runtimeentity_id1;
   }
 
   setGamemode(gamemode1) {
@@ -5912,7 +5912,7 @@ class StartGame extends require("./Packet") {
   }
 
   setBiomeType(biome_type1) {
-    biome_type = biome_type1
+    biome_type = biome_type1;
   }
 
   setBiomeName(biome_name1) {
@@ -5936,13 +5936,13 @@ class StartGame extends require("./Packet") {
   }
 
   setSpawnPosition(x, y, z) {
-    spawn.x = x
-    spawn.y = y
-    spawn.z = z
+    spawn.x = x;
+    spawn.y = y;
+    spawn.z = z;
   }
 
   setAchievementsDisabled(disabled1) {
-    achievements_disabled = disabled1
+    achievements_disabled = disabled1;
   }
 
   setPlayerPermissionLevel(permission_level1) {
@@ -6016,9 +6016,7 @@ class StartGame extends require("./Packet") {
    * It writes a packet to the client
    * @param client - The client that will receive the packet
    */
-  send(
-    client
-  ) {
+  send(client) {
     client.write(this.name(), {
       entity_id: this.getEntityId(),
       runtime_entity_id: this.getRunTimeEntityId(),

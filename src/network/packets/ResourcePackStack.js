@@ -28,7 +28,7 @@ class ResourcePackStack extends require("./Packet") {
 
   /**
    * Sets the most_accept
-   * @param {Boolean} must_accept1 
+   * @param {Boolean} must_accept1
    */
   setMustAccept(must_accept1) {
     must_accept = must_accept1;
@@ -37,7 +37,7 @@ class ResourcePackStack extends require("./Packet") {
   /**
    * Sets the behavior_packs
    * @returns {Boolean}
-  */
+   */
   setBehaviorPacks(behavior_packs1) {
     behavior_packs = behavior_packs1;
   }
@@ -45,28 +45,28 @@ class ResourcePackStack extends require("./Packet") {
   /**
    * Sets the resource_packs
    * @returns {Boolean}
-  */
+   */
   setResourcePacks(resource_packs1) {
     resource_packs = resource_packs1;
   }
 
   /**
    * Sets the game_version
-  */
+   */
   setGameVersion(game_version1) {
     game_version = game_version1;
   }
 
   /**
-    * Sets the experiments
-  */
+   * Sets the experiments
+   */
   setExperiments(experiments1) {
     experiments = experiments1;
   }
 
   /**
    * Sets the experiments_previously_used
-   * @param {Boolean} experiments_previously_used1 
+   * @param {Boolean} experiments_previously_used1
    */
   setExperimentsPreviouslyUsed(experiments_previously_used1) {
     experiments_previously_used = experiments_previously_used1;
@@ -87,7 +87,7 @@ class ResourcePackStack extends require("./Packet") {
   getBehaviorPacks() {
     return behavior_packs;
   }
-  
+
   /**
    * Returns the resource_packs
    * @returns The resource_packs
@@ -95,15 +95,15 @@ class ResourcePackStack extends require("./Packet") {
   getResourcePacks() {
     return resource_packs;
   }
-  
+
   /**
    * Returns the game_version
    * @returns The game_version
-  */
+   */
   getGameVersion() {
     return game_version;
   }
-  
+
   /**
    * Returns the experiments
    * @returns The experiments

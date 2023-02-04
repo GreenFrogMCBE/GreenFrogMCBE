@@ -14,8 +14,8 @@ let pos = {
   x: 0,
   y: 0,
   z: 0,
-}
-let state = 0
+};
+let state = 0;
 let runtime_entity_id = 0;
 
 class Respawn extends require("./Packet") {
@@ -82,7 +82,7 @@ class Respawn extends require("./Packet") {
 
   /**
    * Sets the Z cordinate
-   * @param {Number} z1 
+   * @param {Number} z1
    */
   setZ(z1) {
     pos.z = z1;
@@ -90,7 +90,7 @@ class Respawn extends require("./Packet") {
 
   /**
    * This functions sets the state.
-   * @param {Number} state1 
+   * @param {Number} state1
    */
   setState(state1) {
     state = state1;
@@ -107,7 +107,7 @@ class Respawn extends require("./Packet") {
   /**
    * Write packet to client
    * @param {Client} client
-  */
+   */
   send(client) {
     client.write(this.name(), {
       position: pos,

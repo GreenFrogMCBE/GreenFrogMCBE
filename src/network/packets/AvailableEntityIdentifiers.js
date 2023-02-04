@@ -10,12 +10,12 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let nbt = null
+let nbt = null;
 class AvailableEntityIdentifiers extends require("./Packet") {
   /**
    * It returns the packet name
    * @returns Packet name
-  */
+   */
   name() {
     return "available_entity_identifiers";
   }
@@ -33,12 +33,12 @@ class AvailableEntityIdentifiers extends require("./Packet") {
    * @returns The NBT.
    */
   getNbt() {
-    return nbt
+    return nbt;
   }
 
   /**
    * It send the packet to the client
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
     client.write(this.name(), {

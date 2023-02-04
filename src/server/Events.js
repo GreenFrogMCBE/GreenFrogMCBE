@@ -29,7 +29,11 @@ module.exports = {
             client
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -56,7 +60,11 @@ module.exports = {
             client
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -84,7 +92,11 @@ module.exports = {
             client
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -111,7 +123,11 @@ module.exports = {
             client
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -138,7 +154,11 @@ module.exports = {
             client
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -166,7 +186,11 @@ module.exports = {
             client
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -193,7 +217,11 @@ module.exports = {
             client
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -222,7 +250,11 @@ module.exports = {
             error
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -252,7 +284,11 @@ module.exports = {
             message
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -281,7 +317,11 @@ module.exports = {
             cmd
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -308,7 +348,11 @@ module.exports = {
             server
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -337,7 +381,11 @@ module.exports = {
             location
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -366,7 +414,11 @@ module.exports = {
             gamemode
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -395,7 +447,11 @@ module.exports = {
             msg
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -426,7 +482,11 @@ module.exports = {
             msg
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -457,7 +517,11 @@ module.exports = {
             port
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -480,7 +544,11 @@ module.exports = {
             packet
           );
         } catch (e) {
-          if (e.toString().startsWith(`TypeError: require(...)`) && e.toString().includes("is not a function")) return // Someone please rewrite the plugin system so we don't need to do this shit
+          if (
+            e.toString().startsWith(`TypeError: require(...)`) &&
+            e.toString().includes("is not a function")
+          )
+            return; // Someone please rewrite the plugin system so we don't need to do this shit
           Logger.log(
             lang.failedToExecuteEvent
               .replace("%plugin%", plugin)
@@ -492,4 +560,4 @@ module.exports = {
       });
     });
   },
-}
+};

@@ -23,7 +23,9 @@ module.exports = {
       const config = require("../../config.json");
       JSON.parse(JSON.stringify(config));
     } catch (error) {
-      console.error(`Failed to load or parse config.json | Error: ${error.stack}`);
+      console.error(
+        `Failed to load or parse config.json | Error: ${error.stack}`
+      );
       process.exit(-1);
     }
   },
@@ -36,7 +38,9 @@ module.exports = {
       const commands = require("../../commands.json");
       JSON.parse(JSON.stringify(commands));
     } catch (error) {
-      console.error(`Failed to load or parse commands.json | Error: ${error.stack}`);
+      console.error(
+        `Failed to load or parse commands.json | Error: ${error.stack}`
+      );
       process.exit(-1);
     }
   },
@@ -50,16 +54,18 @@ module.exports = {
       "../lang/lt_LT.json",
       "../lang/uk_UA.json",
       "../lang/vi_VN.json",
-      "../lang/fr_FR.json"
+      "../lang/fr_FR.json",
     ];
 
     for (const file of files) {
       try {
         JSON.parse(JSON.stringify(require(file)));
       } catch (e) {
-        Logger.log(`Failed to load and parse language file ${file} | Error: ${e.stack}`);
+        Logger.log(
+          `Failed to load and parse language file ${file} | Error: ${e.stack}`
+        );
         process.exit(ServerInfo.config.crashstatuscode);
       }
     }
-  }
-}
+  },
+};

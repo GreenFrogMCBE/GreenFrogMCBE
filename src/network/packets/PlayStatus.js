@@ -41,7 +41,7 @@ class PlayStatus extends require("./Packet") {
 
   /**
    * Sends the packet to the client
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
     client.write(this.name(), {

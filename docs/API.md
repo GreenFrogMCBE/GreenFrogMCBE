@@ -8,16 +8,18 @@ Event list & example plugin are here: https://github.com/andriycraft/GreenFrogMC
 const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
-
-    onLoad() {
-        // ...
-    }
-
+  onLoad() {
+    // ...
+  }
 }
 
 module.exports = YourPlugin;
@@ -41,12 +43,18 @@ const BasePlugin = require("../src/plugins/BasePlugin");
 const Logger = require("../src/server/Logger");
 
 class YourPlugin extends BasePlugin {
-    constructor() { }
+  constructor() {}
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    onLoad() { Logger.log("message", "info");}
+  onLoad() {
+    Logger.log("message", "info");
+  }
 }
 
 module.exports = YourPlugin;
@@ -63,18 +71,22 @@ const BasePlugin = require("../src/plugins/BasePlugin");
 const Logger = require("../src/server/Logger");
 
 class YourPlugin extends BasePlugin {
-    constructor() { }
+  constructor() {}
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    onLoad() {
-        Logger.log(ColorsConsole.CONSOLE_GREEN + "Hi")
-    }
+  onLoad() {
+    Logger.log(ColorsConsole.CONSOLE_GREEN + "Hi");
+  }
 
-    onJoin(server, player) {
-        player.sendMessage(Colors.red + "Hello World"); // Player color demo
-    }
+  onJoin(server, player) {
+    player.sendMessage(Colors.red + "Hello World"); // Player color demo
+  }
 }
 
 module.exports = YourPlugin;
@@ -83,26 +95,26 @@ module.exports = YourPlugin;
 #### Color list for player:
 
 ```javascript
-black: "§0"
-dark_blue: "§1"
-dark_green: "§2"
-dark_aqua: "§3"
-dark_red: "§4"
-dark_purple: "§5"
-gold: "§6"
-gray: "§7"
-dark_gray: "§8"
-blue: "§9"
-green: "§a"
-red: "§c"
-light_purple: "§d"
-yellow: "§e"
-white: "§f"
-obfuscated: "§k"
-bold: "§l"
-italic: "§o"
-reset: "§r"
-char: "§"
+black: "§0";
+dark_blue: "§1";
+dark_green: "§2";
+dark_aqua: "§3";
+dark_red: "§4";
+dark_purple: "§5";
+gold: "§6";
+gray: "§7";
+dark_gray: "§8";
+blue: "§9";
+green: "§a";
+red: "§c";
+light_purple: "§d";
+yellow: "§e";
+white: "§f";
+obfuscated: "§k";
+bold: "§l";
+italic: "§o";
+reset: "§r";
+char: "§";
 ```
 
 #### Colors for console
@@ -123,20 +135,22 @@ Here is an simple example how to kick a player when he joins the server
 const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  onLoad() {
+    // ...
+  }
 
-    onLoad() {
-        // ...
-    }
-
-    onJoin(server, player) {
-        player.kick("hi")
-    }
-
+  onJoin(server, player) {
+    player.kick("hi");
+  }
 }
 
 module.exports = YourPlugin;
@@ -149,22 +163,25 @@ const BasePlugin = require("../src/plugins/BasePlugin");
 const ToastManager = require("../src/player/Toast");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  onLoad() {}
 
-    onLoad() {}
-
-    onJoin(server, client) {
-        setTimeout(() => {
-            const Toast = new ToastManager();
-            Toast.setTitle("This is a toast");
-            Toast.setMessage("This is a toast message");
-            Toast.send(client);
-        }, 10000) // send the toast after 10 sec
-    }
+  onJoin(server, client) {
+    setTimeout(() => {
+      const Toast = new ToastManager();
+      Toast.setTitle("This is a toast");
+      Toast.setMessage("This is a toast message");
+      Toast.send(client);
+    }, 10000); // send the toast after 10 sec
+  }
 }
 
 module.exports = YourPlugin;
@@ -175,7 +192,7 @@ module.exports = YourPlugin;
 ```javascript
 const GameMode = require("../src/player/GameMode");
 
-client.setGamemode(GameMode.Creative); // Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"        
+client.setGamemode(GameMode.Creative); // Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
 ```
 
 ```javascript
@@ -183,17 +200,20 @@ const BasePlugin = require("../src/plugins/BasePlugin");
 const GameMode = require("../src/player/GameMode");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  onLoad() {}
 
-    onLoad() {}
-
-    onJoin(server, client) {
-        client.setGamemode(GameMode.Creative);
-    }
+  onJoin(server, client) {
+    client.setGamemode(GameMode.Creative);
+  }
 }
 
 module.exports = YourPlugin;
@@ -205,22 +225,25 @@ module.exports = YourPlugin;
 const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  onLoad() {}
 
-    onLoad() {}
-
-    onJoin(server, client) {
-        setTimeout(() => {
-          if (!client.offline) {
-            // Make sure to check if the client is still online after doing setTimeout() that uses client API in production plugins
-            client.transfer("172.0.0.1", 19132); // Moves player to another server
-          }
-        }, 10000);
-    }
+  onJoin(server, client) {
+    setTimeout(() => {
+      if (!client.offline) {
+        // Make sure to check if the client is still online after doing setTimeout() that uses client API in production plugins
+        client.transfer("172.0.0.1", 19132); // Moves player to another server
+      }
+    }, 10000);
+  }
 }
 
 module.exports = YourPlugin;
@@ -230,9 +253,9 @@ module.exports = YourPlugin;
 
 ```javascript
 client.transfer(
-    "172.0.0.1", // server address
-    19132 // port
-)
+  "172.0.0.1", // server address
+  19132 // port
+);
 ```
 
 ### Changing time
@@ -243,17 +266,20 @@ client.setTime(17000) // Thats all...
 const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  onLoad() {}
 
-    onLoad() {}
-
-    onJoin(server, client) {
-        client.setTime(17000)
-    }
+  onJoin(server, client) {
+    client.setTime(17000);
+  }
 }
 
 module.exports = YourPlugin;
@@ -265,17 +291,20 @@ module.exports = YourPlugin;
 const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  onLoad() {}
 
-    onLoad() {}
-
-    onJoin(server, client) {
-        client.sendMessage(`Hi`);
-    }
+  onJoin(server, client) {
+    client.sendMessage(`Hi`);
+  }
 }
 
 module.exports = YourPlugin;
@@ -284,20 +313,23 @@ module.exports = YourPlugin;
 ### Sending message as a client
 
 ```javascript
-const BasePlugin = require("../src/plugins/BasePlugin")
+const BasePlugin = require("../src/plugins/BasePlugin");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  onLoad() {}
 
-    onLoad() {}
-
-    onJoin(server, client) {
-        client.chat('Hi');
-    }
+  onJoin(server, client) {
+    client.chat("Hi");
+  }
 }
 
 module.exports = YourPlugin;
@@ -308,11 +340,11 @@ module.exports = YourPlugin;
 Warning! Syntax for forms is very complex
 
 client.sendForm(
-    5555, // Form id. Used to handle the response
-    "text", // form content
-    [{ text: "Button 1" }],  // Buttons encoded as JSON. WILL CRASH THE CLIENT IF THE JSON IS INVALID
-    "title", // title
-    "form" // type. can be "custom_form" or "form"
+5555, // Form id. Used to handle the response
+"text", // form content
+[{ text: "Button 1" }], // Buttons encoded as JSON. WILL CRASH THE CLIENT IF THE JSON IS INVALID
+"title", // title
+"form" // type. can be "custom_form" or "form"
 );
 
 ```javascript
@@ -320,17 +352,20 @@ const BasePlugin = require("../src/plugins/BasePlugin");
 const ToastManager = require("../src/player/Toast");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  onLoad() {}
 
-    onLoad() {}
-
-    onPlayerSpawn(server, client) {
-        client.sendForm(5555, "text", [{ text: "Button 1" }], "title", "form");
-    }
+  onPlayerSpawn(server, client) {
+    client.sendForm(5555, "text", [{ text: "Button 1" }], "title", "form");
+  }
 }
 
 module.exports = YourPlugin;
@@ -339,23 +374,26 @@ module.exports = YourPlugin;
 ### Shutting down server on player join
 
 ```javascript
-const BasePlugin = require("../src/plugins/BasePlugin")
+const BasePlugin = require("../src/plugins/BasePlugin");
 const ShutdownAPI = require("../src/server/ShutdownAPI");
 
 class YourPlugin extends BasePlugin {
+  constructor() {}
 
-    constructor() { }
+  getName() {
+    return "YourPlugin";
+  }
+  getVersion() {
+    return "1.0";
+  }
 
-    getName() { return "YourPlugin"; }
-    getVersion() { return "1.0"; }
+  onLoad() {}
 
-    onLoad() {}
-
-    onJoin(server, client) { 
-        client.sendMessage("Stopping server...");
-        const sa = new ShutdownAPI();
-        sa.shutdownServer();
-    }
+  onJoin(server, client) {
+    client.sendMessage("Stopping server...");
+    const sa = new ShutdownAPI();
+    sa.shutdownServer();
+  }
 }
 
 module.exports = YourPlugin;

@@ -72,5 +72,5 @@ module.exports = {
     PluginManager.addPlugin(require(`../../plugins/${plugin}`).name);
 
     require(`../../plugins/${plugin}`).onLoad();
-  }
-}
+  },
+};

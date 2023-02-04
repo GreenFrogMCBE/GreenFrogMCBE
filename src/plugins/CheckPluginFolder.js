@@ -22,6 +22,8 @@ module.exports = {
     try {
       fs.readdirSync("./plugins/");
       fs.readdirSync("./pluginsconfigs/");
-    } catch (e) { /* ignored */ }
-  }
-}
+    } catch (e) {
+      /* ignored */
+    }
+  },
+};

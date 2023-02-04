@@ -13,8 +13,8 @@
 let cords = {
   x: 0,
   y: 0,
-  z: 0
-}
+  z: 0,
+};
 let radius = 64;
 let saved_chunks = [];
 

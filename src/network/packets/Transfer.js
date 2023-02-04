@@ -13,7 +13,7 @@
 /* It's a class that sends a packet to the client to transfer them to another server */
 
 let server_address = null;
-let port = null
+let port = null;
 
 class Transfer extends require("./Packet") {
   /**
@@ -41,7 +41,7 @@ class Transfer extends require("./Packet") {
 
   /**
    * Sets the server address
-   * @param {string} address 
+   * @param {string} address
    */
   setServerAddress(address) {
     server_address = address;
@@ -49,7 +49,7 @@ class Transfer extends require("./Packet") {
 
   /**
    * Sets the server port
-   * @param {Number} port1 
+   * @param {Number} port1
    */
   setPort(port1) {
     port = port1;
@@ -57,21 +57,21 @@ class Transfer extends require("./Packet") {
 
   /**
    * @returns The server address.
-  */
+   */
   getServerAddress() {
     return server_address;
   }
 
   /**
    * @returns The server port.
-  */
+   */
   getPort() {
     return port;
   }
 
   /**
    * @returns The server address.
-  */
+   */
   getServerAddress() {
     return server_address;
   }
