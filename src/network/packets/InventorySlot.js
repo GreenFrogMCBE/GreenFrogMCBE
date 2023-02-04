@@ -71,7 +71,6 @@ class InventorySlot extends require("./Packet") {
   }
 
   send(client) {
-    this.validate(client);
     client.write(this.name(), {
       window_id: this.getWindowId(),
       slot: this.getSlot(),

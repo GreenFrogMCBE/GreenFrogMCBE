@@ -19,7 +19,7 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 1. Clone this repo
 2. Do `npm i`
-3. Run `npm run`
+3. Run `npm run run`
 
 ## Debugging
 
