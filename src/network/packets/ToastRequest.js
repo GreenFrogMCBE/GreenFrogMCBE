@@ -15,7 +15,7 @@ const Events = require("../../server/Events");
 
 /* This class is used to send a toast request to the client. */
 
-let title1 = "";
+let title = "";
 let message = "";
 
 class ToastRequest extends require("./Packet") {
@@ -32,7 +32,7 @@ class ToastRequest extends require("./Packet") {
    * @param title1 - The title of the modal.
    */
   setTitle(title1) {
-    this.title = title1;
+    title = title1;
   }
 
   /**
@@ -41,21 +41,21 @@ class ToastRequest extends require("./Packet") {
    * @param message1 - The message to be displayed.
    */
   setMessage(message1) {
-    this.message = message1;
+    message = message1;
   }
 
   /**
    * @returns The title.
    */
   getTitle() {
-    return title1;
+    return title;
   }
 
   /**
    * @returns The message.
    */
   getMessage() {
-    return message1;
+    return message;
   }
 
   /**
