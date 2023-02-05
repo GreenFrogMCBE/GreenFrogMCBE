@@ -12,10 +12,8 @@
  */
 class Handler {
   constructor() {}
-
-  validate(client, packet) {}
-
-  handle(client, packet) {}
+  validate() {}
+  handle() {}
 }
 
 module.exports = Handler;

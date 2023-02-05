@@ -10,6 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+/* eslint-disable no-case-declarations */
 /* It's a class that handles console commands. */
 const rl = require("readline");
 const Logger = require("./Logger");
