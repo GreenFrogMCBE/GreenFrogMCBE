@@ -39,8 +39,8 @@ class SubChunk extends require("./Packet") {
    * }
    * @param dimension - The dimension.
    */
-  setDimension(dimension) {
-    dimension1 = dimension;
+  setDimension(dimension1) {
+    dimension = dimension1;
   }
 
   /**
@@ -144,7 +144,7 @@ class SubChunk extends require("./Packet") {
    * @returns The dimension.
    */
   getDimension() {
-    return dimension1;
+    return dimension;
   }
 
   /**
