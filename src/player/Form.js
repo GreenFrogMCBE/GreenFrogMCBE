@@ -50,7 +50,7 @@ class Form {
         FormReq.setId(this.id)
         FormReq.setTitle(this.title)
         FormReq.setText(this.content)
-        FormReq.setJsonButtons(this.buttons)
+        FormReq.setButtons(this.buttons)
         FormReq.setType(this.type)
         FormReq.send(client)
     }
