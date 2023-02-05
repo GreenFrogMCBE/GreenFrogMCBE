@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* It's a class that stores an array of players */
-let playersonline = [];
+let playersOnline = [];
 
 module.exports = {
   /**
@@ -22,7 +22,7 @@ module.exports = {
    * @param player - An array of players.
    */
   addPlayer(player) {
-    playersonline.push(player);
+    playersOnline.push(player);
   },
 
   /**
@@ -34,6 +34,6 @@ module.exports = {
    * @returns The players array.
    */
   getPlayers() {
-    return playersonline;
+    return playersOnline;
   },
 };

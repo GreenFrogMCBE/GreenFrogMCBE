@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* This file starts the server */
+const { shutdownServer } = require("./src/server/ShutdownAPI.js");
 const Frog = require("./src/Server.js");
 
 try {
@@ -26,3 +27,9 @@ try {
     "If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE"
   );
 }
+
+// Close server on nodemon restart
+process.once('SIGINT', async () => {
+  await shutdownServer();
+  process.kill(process.pid, 'SIGINT')
+})
