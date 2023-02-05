@@ -1,3 +1,6 @@
+const FormRequest = require("../network/packets/FormRequest")
+const Events = require("../events/Events")
+
 class Form {
     constructor () {
         this.content = ""
@@ -5,7 +8,32 @@ class Form {
         this.title = ""
         this.buttons = []
         this.id = 0
-        this.callback = null
+    }
+
+    setId(id) {
+        this.id = id
+    }
+
+    setTitle(title) {
+        this.title = title
+    }
+
+    setContent(content) {
+        this.content = content
+    }
+
+    setButtons(buttons) {
+        this.buttons = buttons
+    }
+
+    send(client) {
+        const FormReq = new FormRequest()
+        FormReq.setId(this.id)
+        FormReq.setTitle(this.title)
+        FormReq.setText(this.content)
+        FormReq.setJsonButtons(this.buttons)
+        FormReq.setType(this.type)
+        FormReq.send(client)
     }
 }
 
