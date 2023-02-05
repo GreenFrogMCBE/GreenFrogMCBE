@@ -98,5 +98,6 @@
    "info": "THÔNG TIN",
    "warning": "CẢNH BÁO",
    "error": "LỖI",
-   "debug": "GỠ LỖI"
+   "debug": "GỠ LỖI",
+   "plugins": "bổ sung"
 }

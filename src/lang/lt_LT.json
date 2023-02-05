@@ -96,8 +96,8 @@
    "opped": "Opped %player%",
    "opFail": "Nepavyko paleisti op grotuvo",
    "opFailAlreadyOpped": "Šis grotuvas jau pasirinktas.",
-   "informacija": "INFO",
-   "warning": "WARN",
-   "error": "ERROR",
-   "debug": "DEBUG"
+   "info": "informacija",
+   "warning": "įspėjimas",
+   "error": "KLAIDA",
+   "debug": "DERINTI"
 }
