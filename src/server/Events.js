@@ -533,31 +533,4 @@ module.exports = {
       });
     });
   },
-
-  executeFR(client, server, packet) {
-    fs.readdir("./plugins", (err, plugins) => {
-      plugins.forEach((plugin) => {
-        try {
-          require(`../../plugins/${plugin}`).onFormResponse(
-            client,
-            server,
-            packet
-          );
-        } catch (e) {
-          if (
-            e.toString().startsWith(`TypeError: require(...)`) &&
-            e.toString().includes("is not a function")
-          )
-            return; // Someone please rewrite the plugin system so we don't need to do this shit
-          Logger.log(
-            lang.failedToExecuteEvent
-              .replace("%plugin%", plugin)
-              .replace("%event%", "onFormResponse")
-              .replace("%e%", e.stack),
-            "error"
-          );
-        }
-      });
-    });
-  },
 };
