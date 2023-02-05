@@ -9,22 +9,42 @@ class Form {
         this.id = 0
     }
 
+    /**
+     * Sets the id for the form
+     * @param id 
+     */
     setId(id) {
         this.id = id
     }
 
+    /**
+     * Sets the title for the form
+     * @param title 
+     */
     setTitle(title) {
         this.title = title
     }
 
+    /**
+     * Sets the content for the form
+     * @param content
+     */
     setContent(content) {
         this.content = content
     }
 
+    /**
+     * Sets the buttons for the form
+     * @param buttons
+     */
     setButtons(buttons) {
         this.buttons = buttons
     }
 
+    /**
+     * Sends the form to the client
+     * @param client
+     */
     send(client) {
         const FormReq = new FormRequest()
         FormReq.setId(this.id)
