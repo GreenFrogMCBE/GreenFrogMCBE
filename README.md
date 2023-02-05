@@ -60,11 +60,11 @@ If you have one feel free to open an issue
 10. Plugin support
 11. Support of new versions
 12. Many events for plugin API
-13. Toast support
-14. Inventory support
-15. Transfer packet support
-16. Packet API
-17. Form support
+13. Form support
+14. Toast support
+15. Inventory support
+16. Transfer packet support
+17. Packet API
 
 ## Language system
 
