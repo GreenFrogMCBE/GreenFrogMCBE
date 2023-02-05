@@ -7,7 +7,7 @@
   "scripts": {
     "format": "npx prettier --write .",
     "debug": "node index.js --debug",
-    "run": "node index.js",
+    "start": "node index.js",
     "gencoryrightheader": "node generatelicenseheaders.js",
     "build": "npm run gencoryrightheader && npm run format && npm run debug"
   },
