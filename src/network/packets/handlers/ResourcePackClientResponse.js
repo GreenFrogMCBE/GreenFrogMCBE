@@ -195,6 +195,12 @@ class ResourcePackClientResponse extends Handler {
           ]);
           chunk.send(client);
 
+          const block = new UpdateBlock();
+          block.setX(-1);
+          block.setY(98);
+          block.setZ(0);
+          block.setBlockRuntimeId(0);
+          block.send(client);
           if (config.render_chunks) {
             for (let x = 0; x < 10; x++) {
               for (let z = 0; z < 10; z++) {
@@ -202,7 +208,7 @@ class ResourcePackClientResponse extends Handler {
                 block.setX(x);
                 block.setY(98);
                 block.setZ(z);
-                block.setBlockRuntimeId(2);
+                block.setBlockRuntimeId(Math.floor(Math.random() * 1000));
                 block.send(client);
               }
             }
