@@ -51,7 +51,7 @@ class ResourcePackClientResponse extends Handler {
       case "none": {
         Events.executePHNRPI(server, client);
         Logger.log(lang.noRpsInstalled.replace("%player%", client.username));
-        break
+        break;
       }
       case "refused": {
         Events.executeFTEORPF(server, client);
@@ -238,7 +238,8 @@ class ResourcePackClientResponse extends Handler {
             if (!client.offline) return;
             for (let i = 0; i < new PlayerInfo().getPlayers().length; i++) {
               new PlayerInfo()
-                .getPlayers()[i].sendMessage(
+                .getPlayers()
+                [i].sendMessage(
                   lang.joinedTheGame.replace("%username%", client.username)
                 );
             }

@@ -29,7 +29,7 @@ try {
 }
 
 // Close server on nodemon restart
-process.once('SIGINT', async () => {
+process.once("SIGINT", async () => {
   await shutdownServer();
-  process.kill(process.pid, 'SIGINT')
-})
+  process.kill(process.pid, "SIGINT");
+});
