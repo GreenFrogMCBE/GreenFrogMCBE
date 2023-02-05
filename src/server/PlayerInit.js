@@ -18,7 +18,6 @@ const Chat = require("../player/Chat");
 const Transfer = require("../network/packets/Transfer");
 const PlayerGamemode = require("../network/packets/PlayerGamemode");
 const Time = require("../network/packets/Time");
-const FormRequest = require("../network/packets/FormRequest");
 const GameMode = require("../player/GameMode");
 
 const lang = require("../server/ServerInfo").lang;
@@ -63,7 +62,7 @@ module.exports = {
       if (!validGamemodes.includes(gamemode)) {
         throw new Error("Invalid gamemode");
       }
-      client.gamemode = gamemode;
+      player.gamemode = gamemode;
       const gm = new PlayerGamemode();
       gm.setGamemode(gamemode);
       gm.send(player);
@@ -81,25 +80,6 @@ module.exports = {
       trpk.setPort(port);
       trpk.send(player);
       Events.executeTR(player, require("../Server.js").server, address, port);
-    };
-
-    /**
-     * Sends a form to the player.
-     * @param {number} id - The form id.
-     * @param {string} text - The form text.
-     * @param {Object} jsonbuttons - A JSON object containing buttons.
-     * @param {string} title - The form title.
-     * @param {string} type - The form type (modal, custom, form).
-     */
-    player.sendForm = function (id, text, jsonbuttons, title, type) {
-      new FormRequest().writePacket(
-        player,
-        id,
-        text,
-        JSON.stringify(jsonbuttons),
-        title,
-        type
-      );
     };
 
     /**
