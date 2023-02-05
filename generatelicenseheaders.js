@@ -18,7 +18,7 @@ const LICENSE_HEADER = `/**
 const srcPath = path.join(__dirname, ".");
 
 const addHeader = (filePath) => {
-  if (filePath.includes("node_modules")) return
+  if (filePath.includes("node_modules")) return;
   fs.readFile(filePath, (err, data) => {
     if (err) {
       console.error(`Error reading file ${filePath}:`, err);
