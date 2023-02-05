@@ -1,5 +1,3 @@
-/* eslint-disable no-case-declarations */
-/* eslint-disable no-unused-vars */
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -12,6 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+/* eslint-disable no-case-declarations */
+/* eslint-disable no-unused-vars */
 const BasePlugin = require("../src/plugins/BasePlugin");
 const CommandManager = require("../src/player/CommandManager");
 const ToastManager = require("../src/player/Toast");
@@ -97,14 +97,12 @@ module.exports = {
         Toast.setMessage("This is a toast message");
         Toast.send(client);
 
-        const form = new Form()
-        form.buttons = [
-          [{"text": "Button 1"}]
-        ]
-        form.content = "Hello, world"
-        form.title = "Hello, world (title)"
-        form.type = "form"
-        form.send(client)
+        const form = new Form();
+        form.buttons = [[{ text: "Button 1" }]];
+        form.content = "Hello, world";
+        form.title = "Hello, world (title)";
+        form.type = "form";
+        form.send(client);
 
         //              ^ title ^ toast description/body
         client.setTime(17000); // Updates the client time
