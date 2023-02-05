@@ -11,16 +11,16 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let id = 0;
-let text = ''
-let buttons = null
-let title = ''
-let type = "form"
+let text = "";
+let buttons = null;
+let title = "";
+let type = "form";
 
 class FormRequest extends require("./Packet") {
   /**
-  * It returns the packet name
-  * @returns Packet name
-  */
+   * It returns the packet name
+   * @returns Packet name
+   */
   name() {
     return "modal_form_request";
   }
@@ -30,7 +30,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form id
    */
   setId(id1) {
-    id = id1
+    id = id1;
   }
 
   /**
@@ -38,7 +38,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form text
    */
   setText(text1) {
-    text = text1
+    text = text1;
   }
 
   /**
@@ -46,7 +46,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form buttons
    */
   setButtons(buttons1) {
-    buttons = buttons1
+    buttons = buttons1;
   }
 
   /**
@@ -54,7 +54,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form title
    */
   setTitle(title1) {
-    title = title1
+    title = title1;
   }
 
   /**
@@ -62,7 +62,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form type
    */
   setType(type1) {
-    type = type1
+    type = type1;
   }
 
   /**
@@ -70,7 +70,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form id
    */
   getId() {
-    return id
+    return id;
   }
 
   /**
@@ -78,7 +78,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form text
    */
   getText() {
-    return text
+    return text;
   }
 
   /**
@@ -86,7 +86,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form buttons
    */
   getButtons() {
-    return buttons
+    return buttons;
   }
 
   /**
@@ -94,7 +94,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form title
    */
   getTitle() {
-    return title
+    return title;
   }
 
   /**
@@ -102,7 +102,7 @@ class FormRequest extends require("./Packet") {
    * @returns Form type
    */
   getType() {
-    return type
+    return type;
   }
 
   /**
