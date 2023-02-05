@@ -1,5 +1,4 @@
 const FormRequest = require("../network/packets/FormRequest")
-const Events = require("../events/Events")
 
 class Form {
     constructor () {
