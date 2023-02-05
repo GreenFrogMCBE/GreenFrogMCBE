@@ -42,14 +42,14 @@ let clients = [];
 let server = null;
 let config = null;
 let lang = null;
-let command = null;
+let commands = null;
 
 module.exports = {
   clients: clients,
   server: server,
   config: config,
   lang: lang,
-  commands: command,
+  commands: commands,
 
   /**
    * It loads the JSON files into the server.
