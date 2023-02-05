@@ -12,7 +12,7 @@
  */
 let id = 0;
 let text = ''
-let buttons = []
+let buttons = null
 let title = ''
 let type = "form"
 
