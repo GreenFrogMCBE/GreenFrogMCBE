@@ -9,7 +9,7 @@
     "debug": "node index.js --debug",
     "start": "node index.js",
     "gencoryrightheader": "node generatelicenseheaders.js",
-    "build": "npm run gencoryrightheader && npm run format && npm run debug"
+    "build": "npm run gencoryrightheader && npm run format"
   },
   "dependencies": {
     "frog-protocol": "git+https://github.com/greenfrogmc/Protocol.git"
