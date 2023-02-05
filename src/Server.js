@@ -16,7 +16,7 @@ process.env.DEBUG = process.argv.includes("--debug")
   : "";
 
 const fs = require("fs");
-const bedrock = require("bedrock-protocol");
+const bedrock = require("frog-protocol");
 const PluginLoader = require("./plugins/Loader");
 const ServerInfo = require("./server/ServerInfo");
 const PlayerInfo = require("./player/PlayerInfo");
