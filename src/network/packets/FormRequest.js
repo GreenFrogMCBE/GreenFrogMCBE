@@ -12,7 +12,7 @@
  */
 let id = 0;
 let text = ''
-let jsonbuttons = []
+let buttons = []
 let title = ''
 let type = "form"
 
@@ -45,8 +45,8 @@ class FormRequest extends require("./Packet") {
    * It sets the form buttons
    * @returns Form buttons
    */
-  setJsonbuttons(jsonbuttons1) {
-    jsonbuttons = jsonbuttons1
+  setButtons(buttons1) {
+    buttons = buttons1
   }
 
   /**
@@ -85,8 +85,8 @@ class FormRequest extends require("./Packet") {
    * It returns the form buttons
    * @returns Form buttons
    */
-  getJsonbuttons() {
-    return jsonbuttons
+  getButtons() {
+    return buttons
   }
 
   /**
@@ -112,7 +112,7 @@ class FormRequest extends require("./Packet") {
   send(client) {
     client.write("modal_form_request", {
       form_id: this.getId(),
-      data: `{"content":"${this.getText()}","buttons":${this.getJsonbuttons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
+      data: `{"content":"${this.getText()}","buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
     });
   }
 }
