@@ -17,7 +17,7 @@ const Handler = require("./Handler");
 
 class ItemStackRequest extends Handler {
   validate(client) {
-    if (client.gamemode == !1)
+    if (client.gamemode !== 1)
       throw new PacketHandlingError(
         "An attempt to get items from creative mode, while the player is not in creative mode"
       );

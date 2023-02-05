@@ -18,17 +18,17 @@ const ServerInfo = require("../../../server/ServerInfo");
 
 class Text extends Handler {
   handle(client, packet, lang) {
-    let msg = packet.data.params.message;
-    let fullmsg = lang.chatFormat
+    const msg = packet.data.params.message;
+    const fullmsg = lang.chatFormat
       .replace("%username%", client.username)
       .replace("%message%", msg);
-    Events.prototype.executeOC(require("../../../Server"), client, msg); // (c) bestcodequality inc 2023
+    Events.executeOC(require("../../../Server"), client, msg); // (c) bestcodequality inc 2023
     if (
       msg.includes("§") ||
       msg.length == 0 ||
       (msg.length > 255 && ServerInfo.config.invalidmsgsblock)
     ) {
-      Logger.prototype.log(
+      Logger.log(
         lang.illegalMessage
           .replace("%msg%", msg)
           .replace("%player%", client.username),
@@ -40,10 +40,10 @@ class Text extends Handler {
 
     if (!msg.replace(/\s/g, "").length) return;
 
-    Logger.prototype.log(lang.chatMessage.replace("%message%", fullmsg));
+    Logger.log(lang.chatMessage.replace("%message%", fullmsg));
 
-    for (let i = 0; i < PlayerInfo.prototype.getPlayers().length; i++) {
-      PlayerInfo.prototype.getPlayers()[i].sendMessage(fullmsg);
+    for (const player of PlayerInfo.getPlayers()) {
+      player.sendMessage(fullmsg);
     }
   }
 }

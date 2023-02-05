@@ -34,7 +34,8 @@ class Transfer extends require("./Packet") {
   validate(address, port) {
     if (!address)
       throw new Error("Packet processing error. Target server address is null");
-    if (parseInt(port).isNaN())
+    // eslint-disable-next-line use-isnan
+    if (parseInt(port) == NaN) // isNaN will not work here
       throw new Error(
         "Packet processing error. A plugin tried to sent a player to invalid server (port must be int, not string)"
       );

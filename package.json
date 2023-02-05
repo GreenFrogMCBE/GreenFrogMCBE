@@ -8,6 +8,7 @@
     "format": "npx prettier --write .",
     "debug": "node index.js --debug",
     "start": "node index.js",
+    "dev": "nodemon --signal SIGINT index.js",
     "gencoryrightheader": "node generatelicenseheaders.js",
     "build": "npm run gencoryrightheader && npm run format"
   },
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "eslint": "8.33.0",
+    "nodemon": "^2.0.20",
     "prettier": "2.8.3"
   }
 }
