@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 /* eslint-disable no-unused-vars */
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
@@ -18,6 +19,7 @@ const ShutdownAPI = require("../src/server/ShutdownAPI");
 const GameMode = require("../src/player/GameMode");
 
 const Logger = require("../src/server/Logger"); // Creates logger for this plugin
+const Form = require("../../../src/player/Form");
 
 // For advanced docs look at API.md in /docs/api.md
 
@@ -90,15 +92,22 @@ module.exports = {
         client.chat(`This message was sent by ${this.name}`); // This code sends message AS A client
         client.setGamemode(GameMode.CREATIVE); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
 
-        // eslint-disable-next-line no-case-declarations
         const Toast = new ToastManager();
         Toast.setTitle("This is a toast");
         Toast.setMessage("This is a toast message");
         Toast.send(client);
 
+        const form = new Form()
+        form.buttons = [
+          [{"text": "Button 1"}]
+        ]
+        form.content = "Hello, world"
+        form.title = "Hello, world (title)"
+        form.type = "form"
+        form.send(client)
+
         //              ^ title ^ toast description/body
         client.setTime(17000); // Updates the client time
-        client.sendForm(5555, "text", [{ text: "Button 1" }], "title", "form");
         setTimeout(() => {
           if (!client.offline) {
             // Make sure to check if the client is still online after doing setTimeout() that uses client API in production plugins
