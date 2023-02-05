@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -89,6 +90,7 @@ module.exports = {
         client.chat(`This message was sent by ${this.name}`); // This code sends message AS A client
         client.setGamemode(GameMode.CREATIVE); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
 
+        // eslint-disable-next-line no-case-declarations
         const Toast = new ToastManager();
         Toast.setTitle("This is a toast");
         Toast.setMessage("This is a toast message");

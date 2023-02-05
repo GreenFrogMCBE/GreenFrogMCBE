@@ -84,25 +84,6 @@ module.exports = {
     };
 
     /**
-     * Sends a form to the player.
-     * @param {number} id - The form id.
-     * @param {string} text - The form text.
-     * @param {Object} jsonbuttons - A JSON object containing buttons.
-     * @param {string} title - The form title.
-     * @param {string} type - The form type (modal, custom, form).
-     */
-    player.sendForm = function (id, text, jsonbuttons, title, type) {
-      new FormRequest().writePacket(
-        player,
-        id,
-        text,
-        JSON.stringify(jsonbuttons),
-        title,
-        type
-      );
-    };
-
-    /**
      * Kicks a player from the server
      * @param {string} [msg=lang.playerDisconnected] - The reason for the kick
      */
