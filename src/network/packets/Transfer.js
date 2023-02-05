@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-class-members */
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -33,7 +34,8 @@ class Transfer extends require("./Packet") {
   validate(address, port) {
     if (!address)
       throw new Error("Packet processing error. Target server address is null");
-    if (parseInt(port) == NaN)
+    // eslint-disable-next-line use-isnan
+    if (parseInt(port) == NaN) // isNaN will not work here
       throw new Error(
         "Packet processing error. A plugin tried to sent a player to invalid server (port must be int, not string)"
       );
@@ -86,11 +88,9 @@ class Transfer extends require("./Packet") {
   /**
    * Writes a packet that transfers the client to another server
    * @param {Object} client - The client to send the packet to
-   * @param {string} address - The server address
-   * @param {Number} port - The server port
    */
-  send(client, address, port) {
-    this.validate(address, port);
+  send(client) {
+    this.validate(this.getServerAddress(), this.getPort());
     client.write(this.name(), {
       server_address: this.getServerAddress(),
       port: parseInt(this.getPort()),

@@ -24,6 +24,7 @@ class Interact extends Handler {
         co.setRuntimeEntityId(2);
         co.setCoordinates(0, 0, 0);
         co.send(client);
+        break;
       }
       case "mouse_over_entity": {
         // TODO. Pvp is not implemented yet

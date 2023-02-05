@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const lang = require("../server/ServerInfo").lang;
+const { lang } = require("../server/ServerInfo");
 const PlayerInfo = require("../player/PlayerInfo");
 const Unloader = require("../plugins/Unloader");
 const Logger = require("../server/Logger");

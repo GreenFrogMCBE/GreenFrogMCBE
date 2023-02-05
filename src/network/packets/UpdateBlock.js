@@ -195,7 +195,7 @@ class UpdateBlock extends require("./Packet") {
    * @param {Number} z - The z coordinate of the block
    * @param {Number} block_runtime_id - The block ID of the block you want to place.
    */
-  send(client, x, y, z, block_runtime_id) {
+  send(client) {
     client.write("update_block", {
       position: {
         x: this.getX(),
