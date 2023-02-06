@@ -84,9 +84,9 @@ module.exports = {
 
     /**
      * Kicks a player from the server
-     * @param {string} [msg=lang.playerDisconnected] - The reason for the kick
+     * @param {string} [msg=lang.kickedByPlugin] - The reason for the kick
      */
-    player.kick = function (msg = lang.playerDisconnected) {
+    player.kick = function (msg = lang.kickedByPlugin) {
       if (player.kicked) return;
       player.kicked = true;
       Events.executeFTEOK(require("../Server").server, player);
