@@ -72,9 +72,7 @@ module.exports = {
                 require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown()
               } finally {
                 Logger.log(lang.unloadedPlugin.replace('%plugin%', name))
-                if (!pl) {
-                  process.exit(config.exitstatuscode)
-                }
+                if (!pl) process.exit(config.exitstatuscode)
               }
             } catch (e) {
               Logger.log(lang.failedToExecFunction.replace('%plugin%', file).replace('%e%', e.stack), "error")
