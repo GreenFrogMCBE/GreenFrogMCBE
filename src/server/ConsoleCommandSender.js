@@ -15,17 +15,15 @@
 const rl = require("readline");
 const Logger = require("./Logger");
 const Events = require("./Events");
-const ServerInfo = require("../server/ServerInfo");
 const Shutdown = require("./commands/CommandShutdown");
-const Kick = require("./commands/CommandKick");
 const Version = require("./commands/CommandVersion");
+const { lang } = require("../server/ServerInfo");
+const Kick = require("./commands/CommandKick");
 const Help = require("./commands/CommandHelp");
 const Time = require("./commands/CommandTime");
 const Say = require("./commands/CommandSay");
 const Op = require("./commands/CommandOp");
 const PL = require("./commands/CommandPl");
-
-const { lang } = ServerInfo.lang;
 
 let closed1 = false;
 

@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ShutdownAPI = require("../ShutdownAPI");
 const { lang, commands } = require("../../server/ServerInfo")
 
 
@@ -22,7 +21,7 @@ class CommandShutdown extends require("./Command") {
   aliases() {}
 
   execute() {
-    ShutdownAPI.shutdownServer();
+    require("../ShutdownAPI").shutdownServer();
   }
 
   getPlayerDescription() {
