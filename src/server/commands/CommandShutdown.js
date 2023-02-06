@@ -10,9 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const lang = require("../../server/ServerInfo").lang;
-const commands = require("../../server/ServerInfo").commands;
 const ShutdownAPI = require("../ShutdownAPI");
+const { lang, commands } = require("../../server/ServerInfo")
+
 
 class CommandShutdown extends require("./Command") {
   name() {

@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let nbt = {};
+
 class BiomeDefinitionList extends require("./Packet") {
   /**
    * It returns the packet name

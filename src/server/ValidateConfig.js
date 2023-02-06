@@ -12,7 +12,7 @@
  */
 /* It checks if the config.json, commands.json and language files are valid JSON files. */
 const Logger = require("../server/Logger");
-const ServerInfo = require("../server/ServerInfo");
+const { config } = require("../server/ServerInfo");
 
 module.exports = {
   /**
@@ -64,7 +64,7 @@ module.exports = {
         Logger.log(
           `Failed to load and parse language file ${file} | Error: ${e.stack}`
         );
-        process.exit(ServerInfo.config.crashstatuscode);
+        process.exit(config.crashstatuscode);
       }
     }
   },

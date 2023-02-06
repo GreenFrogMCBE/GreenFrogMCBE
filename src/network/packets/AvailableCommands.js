@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let data = null;
+
 class AvailableCommands extends require("./Packet") {
   /**
    * It returns the packet name

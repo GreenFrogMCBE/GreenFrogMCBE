@@ -13,6 +13,7 @@
 let window_id = null;
 let slot = 0;
 let itemdata = {};
+
 class InventorySlot extends require("./Packet") {
   /**
    * It returns the name of the packet.
