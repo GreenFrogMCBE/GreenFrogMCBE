@@ -72,7 +72,7 @@ module.exports = {
                 require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown()
               } finally {
                 Logger.log(lang.unloadedPlugin.replace('%plugin%', name))
-                if (pl === 0) {
+                if (!pl) {
                   process.exit(config.exitstatuscode)
                 }
               }
