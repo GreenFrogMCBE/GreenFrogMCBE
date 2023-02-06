@@ -11,9 +11,9 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const PlayerInfo = require("../player/PlayerInfo");
-const { lang, config } = require("../server/ServerInfo");
+const { lang } = require("../server/ServerInfo");
 const Logger = require("../server/Logger");
-const PluginLoader = require("./PluginLoader");
+const PluginLoader = require("../plugin/PluginLoader");
 
 module.exports = {
   async shutdownServer() {
