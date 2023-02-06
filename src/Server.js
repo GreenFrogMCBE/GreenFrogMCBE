@@ -35,7 +35,7 @@ const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const ValidateClient = require("./player/ValidateClient");
 const Logger = require("./server/Logger");
-const Events = require("./server/Events");
+const Events = require("./plugin/Events");
 
 let clients = [];
 let server = null;

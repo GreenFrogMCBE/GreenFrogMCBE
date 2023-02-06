@@ -12,7 +12,7 @@
  */
 /* Makes the API work for the player */
 const Logger = require("../server/Logger");
-const Events = require("../server/Events");
+const Events = require("../plugin/Events");
 const Text = require("../network/packets/Text");
 const Chat = require("../player/Chat");
 const Transfer = require("../network/packets/Transfer");

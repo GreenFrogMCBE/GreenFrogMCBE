@@ -14,7 +14,7 @@
 /* It's a class that handles console commands. */
 const rl = require("readline");
 const Logger = require("./Logger");
-const Events = require("./Events");
+const Events = require("../plugin/Events");
 const Shutdown = require("./commands/CommandShutdown");
 const Version = require("./commands/CommandVersion");
 const { lang } = require("../server/ServerInfo");

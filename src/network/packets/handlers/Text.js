@@ -12,7 +12,7 @@
  */
 const PlayerInfo = require("../../../player/PlayerInfo");
 const Logger = require("../../../server/Logger");
-const Events = require("../../../server/Events");
+const Events = require("../../../plugin/Events");
 const Handler = require("./Handler");
 const ServerInfo = require("../../../server/ServerInfo");
 

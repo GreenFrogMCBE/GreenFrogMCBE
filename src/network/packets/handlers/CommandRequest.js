@@ -17,7 +17,7 @@ const PacketHandlingError = require("../exceptions/PacketHandlingError");
 const CommandShutdown = require("../../../server/commands/CommandShutdown");
 const CommandVersion = require("../../../server/commands/CommandVersion");
 const CommandOp = require("../../../server/commands/CommandOp");
-const Events = require("../../../server/Events");
+const Events = require("../../../plugin/Events");
 const Logger = require("../../../server/Logger");
 const { lang } = require("../../../server/ServerInfo")
 
