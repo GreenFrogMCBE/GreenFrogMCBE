@@ -20,7 +20,7 @@ const PlayerGamemode = require("../network/packets/PlayerGamemode");
 const Time = require("../network/packets/Time");
 const GameMode = require("../player/GameMode");
 
-const lang = require("../server/ServerInfo").lang;
+const { lang } = require("../server/ServerInfo");
 
 module.exports = {
   initPlayer(player) {

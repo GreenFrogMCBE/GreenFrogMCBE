@@ -96,6 +96,7 @@
   "opped": "Opped %player%",
   "opFail": "Failed to op player",
   "opFailAlreadyOpped": "This player is already opped.",
+  "pluginError": "Ignored plugin %plugin%. This plugin is invalid. Please delete it or fix it",
   "info": "INFO",
   "warning": "WARN",
   "error": "ERROR",
