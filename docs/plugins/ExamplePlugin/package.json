@@ -1,0 +1,8 @@
+{
+    "name": "exampleplugin",
+    "main": "exampleplugin.js",
+    "version": "1.0.0",
+    "displayName": "Example plugin",
+    "author": "Me",
+    "description": "Example plugin to test GreenFrog API"
+}
