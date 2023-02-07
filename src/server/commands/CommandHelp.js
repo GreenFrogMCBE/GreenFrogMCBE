@@ -12,7 +12,7 @@
  */
 const Logger = require("../Logger");
 
-const { lang, commands } = require("../../server/ServerInfo")
+const { lang, commands } = require("../../server/ServerInfo");
 
 class CommandHelp extends require("./Command") {
   name() {

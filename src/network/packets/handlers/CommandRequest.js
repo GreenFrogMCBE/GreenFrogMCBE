@@ -19,8 +19,7 @@ const CommandVersion = require("../../../server/commands/CommandVersion");
 const CommandOp = require("../../../server/commands/CommandOp");
 const Events = require("../../../plugin/Events");
 const Logger = require("../../../server/Logger");
-const { lang } = require("../../../server/ServerInfo")
-
+const { lang } = require("../../../server/ServerInfo");
 
 class CommandRequest extends require("./Handler") {
   validate(cmd) {

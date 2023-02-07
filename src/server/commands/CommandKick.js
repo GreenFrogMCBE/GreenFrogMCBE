@@ -13,7 +13,7 @@
 const PlayerInfo = require("../../player/PlayerInfo");
 const Logger = require("../../server/Logger");
 
-const { lang, commands } = require("../../server/ServerInfo")
+const { lang, commands } = require("../../server/ServerInfo");
 
 class CommandKick extends require("./Command") {
   name() {

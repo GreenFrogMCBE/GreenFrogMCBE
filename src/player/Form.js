@@ -19,7 +19,7 @@ class Form {
     this.title = "";
     this.buttons = [];
     this.id = 0;
-    this.actions = []
+    this.actions = [];
   }
 
   /**
@@ -29,7 +29,7 @@ class Form {
   addAction(action) {
     this.actions.push(action);
   }
-  
+
   // I used this code: https://github.com/Zwuiix-cmd/EasyProxy for examples
 
   /**
@@ -38,7 +38,7 @@ class Form {
    * @param [placeholder] - The text that will be displayed in the input box before the user types
    * anything.
    */
-  addInput(text, placeholder = '') {
+  addInput(text, placeholder = "") {
     this.addAction({ type: "input", text: text, placeholder: placeholder });
   }
 
@@ -52,8 +52,8 @@ class Form {
 
   /**
    * Adds a dropdown to the form.
-   * @param {string} text 
-   * @param {JSON} options 
+   * @param {string} text
+   * @param {JSON} options
    */
   addDropdown(text, options) {
     this.addAction({ type: "dropdown", text: text, options: options });
@@ -61,7 +61,7 @@ class Form {
 
   /**
    * Adds text
-   * @param {string} text 
+   * @param {string} text
    */
   addToggle(text) {
     this.addAction({ type: "toggle", text: text });
@@ -69,18 +69,24 @@ class Form {
 
   /**
    * Adds slider to the form.
-   * @param {string} text 
-   * @param {Number} min 
-   * @param {Number} max 
-   * @param {Number} step 
+   * @param {string} text
+   * @param {Number} min
+   * @param {Number} max
+   * @param {Number} step
    */
   addSlider(text, min, max, step = -1) {
-    this.addAction({ type: "slider", text: text, min: min, max: max, step: step });
+    this.addAction({
+      type: "slider",
+      text: text,
+      min: min,
+      max: max,
+      step: step,
+    });
   }
 
   /**
    * Sends the form to the client
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
     const FormReq = new FormRequest();
