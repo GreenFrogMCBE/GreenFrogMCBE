@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* Constructor for commands */
 /* eslint-disable no-unused-vars */
 class Command {
   constructor() {}
@@ -30,7 +29,7 @@ class Command {
    * @param args - The arguments that the user has typed in.
    * @param server - The server object.
    */
-  execute(args, server) {}
+  execute() {}
 
   /**
    * It returns the command description for player.
@@ -42,7 +41,7 @@ class Command {
    * @param client - The client that is executing the command.
    * @param args - The arguments that the user has typed in.
    */
-  executePlayer(client, args) {}
+  executePlayer() {}
 }
 
 module.exports = Command;

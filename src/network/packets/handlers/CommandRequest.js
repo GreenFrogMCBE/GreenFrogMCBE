@@ -13,13 +13,14 @@
 const CommandManager = require("../../../player/CommandManager");
 const CommandPl = require("../../../server/commands/CommandPl");
 const CommandSay = require("../../../server/commands/CommandSay");
+const PacketHandlingError = require("../exceptions/PacketHandlingError");
 const CommandShutdown = require("../../../server/commands/CommandShutdown");
 const CommandVersion = require("../../../server/commands/CommandVersion");
 const CommandOp = require("../../../server/commands/CommandOp");
-const Events = require("../../../server/Events");
+const Events = require("../../../plugin/Events");
 const Logger = require("../../../server/Logger");
-const PacketHandlingError = require("../exceptions/PacketHandlingError");
-const lang = require("../../../server/ServerInfo").lang;
+const { lang } = require("../../../server/ServerInfo")
+
 
 class CommandRequest extends require("./Handler") {
   validate(cmd) {

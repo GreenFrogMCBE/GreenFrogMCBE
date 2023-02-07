@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 
-const Events = require("../../server/Events");
+const Events = require("../../plugin/Events");
 
 /* This class is used to send a toast request to the client. */
 

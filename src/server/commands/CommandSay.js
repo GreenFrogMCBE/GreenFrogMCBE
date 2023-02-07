@@ -10,11 +10,11 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const lang = require("../../server/ServerInfo").lang;
-const commands = require("../../server/ServerInfo").commands;
+const { lang, commands } = require("../../server/ServerInfo")
 const TextPacket = require("../../network/packets/Text");
 const PlayerInfo = require("../../player/PlayerInfo");
 const Logger = require("../Logger");
+
 
 class CommandSay extends require("./Command") {
   name() {

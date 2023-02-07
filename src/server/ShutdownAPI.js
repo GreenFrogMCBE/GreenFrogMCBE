@@ -10,10 +10,10 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { lang } = require("../server/ServerInfo");
 const PlayerInfo = require("../player/PlayerInfo");
-const Unloader = require("../plugins/Unloader");
+const { lang } = require("../server/ServerInfo");
 const Logger = require("../server/Logger");
+const PluginLoader = require("../plugin/PluginLoader");
 
 module.exports = {
   async shutdownServer() {
@@ -30,8 +30,6 @@ module.exports = {
       /* ignored */
     }
 
-    setTimeout(() => {
-      new Unloader().shutdown();
-    }, 2000);
+    PluginLoader.unloadPlugins()
   },
 };

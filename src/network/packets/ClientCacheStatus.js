@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let enabled = false;
+
 class ClientCacheStatus extends require("./Packet") {
   /**
    * It returns the packet name

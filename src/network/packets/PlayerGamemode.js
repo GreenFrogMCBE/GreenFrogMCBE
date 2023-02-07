@@ -14,6 +14,7 @@
 const GameMode = require("../../player/GameMode");
 
 let gamemode = GameMode.FALLBACK;
+
 class PlayerGamemode extends require("./Packet") {
   /**
    * It returns the packet name

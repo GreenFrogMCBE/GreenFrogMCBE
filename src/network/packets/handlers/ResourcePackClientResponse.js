@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Handler = require("./Handler");
-const Events = require("../../../server/Events");
+const Events = require("../../../plugin/Events");
 const ServerInfo = require("../../../server/ServerInfo");
 const PlayerInfo = require("../../../player/PlayerInfo");
 const Respawn = require("../../../network/packets/Respawn");

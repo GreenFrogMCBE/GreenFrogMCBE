@@ -12,10 +12,9 @@
  */
 const ColorsServer = require("../Colors");
 const ColorsPlayer = require("../../player/Colors");
-const PluginManager = require("../PluginManager");
+const PluginManager = require("../../plugin/PluginManager");
 
-const lang = require("../../server/ServerInfo").lang;
-const commands = require("../../server/ServerInfo").commands;
+const { lang, commands } = require("../../server/ServerInfo")
 
 const Logger = require("../Logger");
 

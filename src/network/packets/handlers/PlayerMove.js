@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Events = require("../../../server/Events");
+const Events = require("../../../plugin/Events");
 const PacketHandlingError = require("../exceptions/PacketHandlingError");
 
 class PlayerMove extends require("./Handler") {

@@ -12,10 +12,11 @@
  */
 const PlayerInfo = require("./PlayerInfo");
 const Logger = require("../server/Logger");
-const lang = require("../server/ServerInfo").lang;
+const { lang } = require("../server/ServerInfo")
+
 
 module.exports = {
-  broadcastMessage(msg = "") {
+  broadcastMessage(msg = '') {
     const players = PlayerInfo.getPlayers();
     for (const client of players) {
       client.sendMessage(msg);

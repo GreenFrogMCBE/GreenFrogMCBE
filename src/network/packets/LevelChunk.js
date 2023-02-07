@@ -15,6 +15,7 @@ let z = 0;
 let sub_chunk_count = 0;
 let cache_enabled = false;
 let payload = [];
+
 class LevelChunk extends require("./Packet") {
   /**
    * It returns the packet name

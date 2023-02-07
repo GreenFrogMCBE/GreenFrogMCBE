@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let nbt = null;
+
 class AvailableEntityIdentifiers extends require("./Packet") {
   /**
    * It returns the packet name
