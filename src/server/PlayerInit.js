@@ -12,7 +12,7 @@
  */
 /* Makes the API work for the player */
 const Logger = require("../server/Logger");
-const Events = require("../server/Events");
+const Events = require("../plugin/Events");
 const Text = require("../network/packets/Text");
 const Chat = require("../player/Chat");
 const Transfer = require("../network/packets/Transfer");
@@ -20,7 +20,7 @@ const PlayerGamemode = require("../network/packets/PlayerGamemode");
 const Time = require("../network/packets/Time");
 const GameMode = require("../player/GameMode");
 
-const lang = require("../server/ServerInfo").lang;
+const { lang } = require("../server/ServerInfo");
 
 module.exports = {
   initPlayer(player) {
@@ -84,9 +84,9 @@ module.exports = {
 
     /**
      * Kicks a player from the server
-     * @param {string} [msg=lang.playerDisconnected] - The reason for the kick
+     * @param {string} [msg=lang.kickedByPlugin] - The reason for the kick
      */
-    player.kick = function (msg = lang.playerDisconnected) {
+    player.kick = function (msg = lang.kickedByPlugin) {
       if (player.kicked) return;
       player.kicked = true;
       Events.executeFTEOK(require("../Server").server, player);

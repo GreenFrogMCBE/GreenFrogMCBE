@@ -10,7 +10,8 @@
     "start": "node index.js",
     "dev": "nodemon --signal SIGINT index.js",
     "gencoryrightheader": "node generatelicenseheaders.js",
-    "build": "npm run gencoryrightheader && npm run format"
+    "build": "npm run gencoryrightheader && npm run format",
+    "dump": "cd tools && node DumpByIP.js geo.hivebedrock.network 19132"
   },
   "dependencies": {
     "frog-protocol": "git+https://github.com/greenfrogmc/Protocol.git"

@@ -89,18 +89,16 @@ module.exports = {
         client.setGamemode(GameMode.CREATIVE); // This updates the client gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
 
         const Toast = new ToastManager();
-        Toast.title = "Hello, world"
+        Toast.title = "Hello, world";
         Toast.message = "This is an example of a Toast";
-        Toast.send(client)
+        Toast.send(client);
 
-        const form = new Form()
-        form.buttons = [
-          {"text": "Button 1"}
-        ]
-        form.content = "Hello, world"
-        form.title = "Hello, world (title)"
-        form.type = "form"
-        form.send(client)
+        const form = new Form();
+        form.buttons = [{ text: "Button 1" }];
+        form.content = "Hello, world";
+        form.title = "Hello, world (title)";
+        form.type = "form";
+        form.send(client);
 
         //              ^ title ^ toast description/body
         client.setTime(17000); // Updates the client time

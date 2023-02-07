@@ -11,9 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const fs = require("fs");
-const lang = require("../../server/ServerInfo").lang;
-const commands = require("../../server/ServerInfo").commands;
 const Logger = require("../Logger");
+const { lang, commands } = require("../../server/ServerInfo")
 
 class CommandOp extends require("./Command") {
   name() {

@@ -14,8 +14,7 @@ const Logger = require("../Logger");
 const TimePacket = require("../../network/packets/Time");
 const PlayerInfo = require("../../player/PlayerInfo");
 
-const lang = require("../../server/ServerInfo").lang;
-const commands = require("../../server/ServerInfo").commands;
+const { lang, commands } = require("../../server/ServerInfo")
 
 class CommandTime extends require("./Command") {
   name() {

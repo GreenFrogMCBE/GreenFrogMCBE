@@ -17,9 +17,9 @@ process.env.DEBUG = process.argv.includes("--debug")
 
 const fs = require("fs");
 const bedrock = require("frog-protocol");
-const PluginLoader = require("./plugins/Loader");
 const ServerInfo = require("./server/ServerInfo");
 const PlayerInfo = require("./player/PlayerInfo");
+const PluginLoader = require("./plugin/PluginLoader");
 const Text = require("./network/packets/handlers/Text");
 const ValidateConfig = require("./server/ValidateConfig");
 const Interact = require("./network/packets/handlers/Interact");
@@ -34,9 +34,8 @@ const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const ValidateClient = require("./player/ValidateClient");
-
 const Logger = require("./server/Logger");
-const Events = require("./server/Events");
+const Events = require("./plugin/Events");
 
 let clients = [];
 let server = null;

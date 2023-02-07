@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let id = 0;
-let text = "";
+let content = "";
 let buttons = null;
 let title = "";
 let type = "form";
@@ -34,11 +34,11 @@ class FormRequest extends require("./Packet") {
   }
 
   /**
-   * It sets the form text
-   * @returns Form text
+   * It sets the form content
+   * @returns Form content
    */
-  setText(text1) {
-    text = text1;
+  setContent(content1) {
+    content = content1;
   }
 
   /**
@@ -74,11 +74,11 @@ class FormRequest extends require("./Packet") {
   }
 
   /**
-   * It returns the form text
-   * @returns Form text
+   * It returns the form content
+   * @returns Form content
    */
-  getText() {
-    return text;
+  getContent() {
+    return content;
   }
 
   /**
@@ -112,7 +112,7 @@ class FormRequest extends require("./Packet") {
   send(client) {
     client.write("modal_form_request", {
       form_id: this.getId(),
-      data: `{"content":"${this.getText()}","buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
+      data: `{"content":${JSON.stringify(this.getContent())},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
     });
   }
 }

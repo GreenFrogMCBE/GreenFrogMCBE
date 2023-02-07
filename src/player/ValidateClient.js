@@ -11,8 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../server/Logger");
-const lang = require("../server/ServerInfo").lang;
-const config = require("../server/ServerInfo").config;
+const { lang, config } = require("../server/ServerInfo")
 
 module.exports = {
   initAndValidateClient(client) {

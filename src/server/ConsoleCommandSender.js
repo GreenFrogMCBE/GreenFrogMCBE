@@ -14,11 +14,11 @@
 /* It's a class that handles console commands. */
 const rl = require("readline");
 const Logger = require("./Logger");
-const ServerInfo = require("../server/ServerInfo");
-const Events = require("./Events");
+const Events = require("../plugin/Events");
 const Shutdown = require("./commands/CommandShutdown");
-const Kick = require("./commands/CommandKick");
 const Version = require("./commands/CommandVersion");
+const { lang } = require("../server/ServerInfo");
+const Kick = require("./commands/CommandKick");
 const Help = require("./commands/CommandHelp");
 const Time = require("./commands/CommandTime");
 const Say = require("./commands/CommandSay");
@@ -35,7 +35,6 @@ module.exports = {
   },
 
   async start() {
-    const lang = ServerInfo.lang;
     const commands = {
       shutdown: new Shutdown(),
       kick: new Kick(),
