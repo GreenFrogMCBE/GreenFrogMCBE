@@ -17,11 +17,17 @@ const PluginManager = require('./PluginManager');
 const CCH = require('../server/ConsoleCommandSender')
 
 let plugins = [];
-let pl = 0;
+let count = 0;
 
 module.exports = {
-  async loadPlugins() {
-    await fs.readdir('./plugins', (err, files) => {
+  loadPlugins() {
+    setTimeout(() => { CCH.start() }, 1000)
+    try {
+      fs.mkdirSync("./plugins/");
+      fs.mkdirSync("./pluginsconfigs/");
+    } catch (ignored) { /* ignored */ }
+
+    fs.readdir('./plugins', (err, files) => {
       files.forEach(file => {
         fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
           if (stats.isDirectory()) {
@@ -36,8 +42,9 @@ module.exports = {
             }
             try {
               require(`${__dirname}/../../plugins/${file}/${main}`).onLoad()
-              PluginManager.addPlugin(name)
               Logger.log(lang.loadedPlugin.replace('%name%', name).replace('%version%', version))
+              PluginManager.addPlugin(name)
+              count++;
             } catch (e) {
               Logger.log(lang.failedToExecFunction.replace('%plugin%', file).replace('%e%', e.stack), "error")
             }
@@ -45,20 +52,19 @@ module.exports = {
           }
         });
       });
+      if (count === files.length) {
+        CCH.start();
+      }
     });
-    setTimeout(() => {
-      CCH.start()
-    }, 500)
   },
 
   async unloadPlugins() {
     Logger.log(lang.shuttingDownPlugins)
-    pl = plugins.length
     fs.readdir('./plugins', (err, files) => {
       files.forEach(file => {
-        pl--
         fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
           if (stats.isDirectory()) {
+            count--
             let name, main = null
             try {
               main = require(`${__dirname}/../../plugins/${file}/package.json`).main;
@@ -72,7 +78,7 @@ module.exports = {
                 require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown()
               } finally {
                 Logger.log(lang.unloadedPlugin.replace('%plugin%', name))
-                if (!pl) {
+                if (count <= 0) {
                   Logger.log(lang.doneShuttingDownPlugins)
                   Logger.log(lang.doneShuttingDown)
                   process.exit(config.exitstatuscode)
@@ -84,6 +90,6 @@ module.exports = {
           }
         });
       });
-    });
+    })
   }
 };

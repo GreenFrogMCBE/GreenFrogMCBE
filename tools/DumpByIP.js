@@ -10,8 +10,8 @@ const relay = new Relay({
     host: '0.0.0.0',
     port: 19132,
     destination: {
-        host: process.argv[3],
-        port: process.argv[4]
+        host: 'play.nethergames.org',
+        port: 19132
     }
 })
 relay.conLog = console.debug

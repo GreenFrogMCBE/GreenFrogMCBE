@@ -80,7 +80,7 @@
   "unstableWarning": "Unstable mode is enabled! This may make your server unstable and will cause more lag",
   "invalidusername": "§cThe username you sent is invalid",
   "bcmsg": "(broadcast) %msg%",
-  "playerDisconnected": "Player disconnected from the server",
+  "playerDisconnected": "Player has disconnected from the server",
   "kickedByPlugin": "A plugin cancelled your login process",
   "loadedPlugin": "Plugin %name% v%version% loaded",
   "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file",
