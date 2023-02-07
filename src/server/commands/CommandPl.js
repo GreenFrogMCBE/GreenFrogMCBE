@@ -14,7 +14,7 @@ const ColorsServer = require("../Colors");
 const ColorsPlayer = require("../../player/Colors");
 const PluginManager = require("../../plugin/PluginManager");
 
-const { lang, commands } = require("../../server/ServerInfo")
+const { lang, commands } = require("../../server/ServerInfo");
 
 const Logger = require("../Logger");
 

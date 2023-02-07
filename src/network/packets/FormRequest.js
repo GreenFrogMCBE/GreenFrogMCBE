@@ -112,7 +112,9 @@ class FormRequest extends require("./Packet") {
   send(client) {
     client.write("modal_form_request", {
       form_id: this.getId(),
-      data: `{"content":${JSON.stringify(this.getContent())},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
+      data: `{"content":${JSON.stringify(
+        this.getContent()
+      )},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
     });
   }
 }

@@ -21,7 +21,7 @@ module.exports = {
   },
 
   serverloadevent() {
-    console.log()
+    console.log();
   },
 
   onLoad() {
@@ -30,8 +30,8 @@ module.exports = {
       case "fr_FR":
         Logger.log(
           `Donations > Si vous avez trouvé ce projet utile, vous pouvez le soutenir ici: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
-        )
-        break
+        );
+        break;
       case "vi_VN":
         Logger.log(
           `Donations > Chào bạn! Nếu bạn muốn hỗ trợ GreenFrogMCBE, bạn có thể quyên góp tại: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`

@@ -21,8 +21,9 @@ module.exports = {
    */
   log(message, type = "info") {
     const d = new Date();
-    const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1
-      }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
+    const dStr = `${d.getUTCFullYear()}-${
+      d.getUTCMonth() + 1
+    }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
     const logLevel = {
       info: 32,
       warning: 33,
@@ -34,7 +35,11 @@ module.exports = {
     const logColor = logLevel[type] || 0;
     if (!logColor) throw new Error("Invalid log level");
 
-    if (type === "debug" &&!(process.env.DEBUG === "minecraft-protocol" || config.debug))return;
+    if (
+      type === "debug" &&
+      !(process.env.DEBUG === "minecraft-protocol" || config.debug)
+    )
+      return;
 
     console.log(`[${dStr} \x1b[${logColor}m${lang[type]}\x1b[0m] ${message}`);
   },

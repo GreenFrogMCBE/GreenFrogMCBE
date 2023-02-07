@@ -30,6 +30,6 @@ module.exports = {
       /* ignored */
     }
 
-    PluginLoader.unloadPlugins()
+    PluginLoader.unloadPlugins();
   },
 };
