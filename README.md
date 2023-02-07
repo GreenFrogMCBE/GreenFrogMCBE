@@ -99,7 +99,7 @@ If you have one fell free to open an issue!
 
 ## Credits
 
-@andriycraft - For creating this software
+-@andriycraft - For creating this software
 
 @AnyBananaGAME - For creating multilang (#9)
 
