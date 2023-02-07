@@ -100,11 +100,19 @@ If you have one fell free to open an issue!
 ## Credits
 
 @andriycraft - For creating this software
+
 @AnyBananaGAME - For creating multilang (#9)
+
 @hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33)
+
 @NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24)
+
 @ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fix weird usage of .prototype  (#44)
+
 @bufferfishq - For adding support for custom_form and new plugin system (#47)
+
 @andriycraftbot - For fixing the code style
+
 @Zwuiix-cmd - Suggested custom_form support
+
 EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) - Used as an example for custom_form support
