@@ -23,8 +23,9 @@ module.exports = {
       const config = require("../../config.json");
       JSON.parse(JSON.stringify(config));
     } catch (error) {
-      console.error(
-        `Failed to load or parse config.json | Error: ${error.stack}`
+      Logger.log(
+        `Failed to load or parse config.json | Error: ${error.stack}`,
+        "error"
       );
       process.exit(-1);
     }
@@ -38,8 +39,9 @@ module.exports = {
       const commands = require("../../commands.json");
       JSON.parse(JSON.stringify(commands));
     } catch (error) {
-      console.error(
-        `Failed to load or parse commands.json | Error: ${error.stack}`
+      Logger.log(
+        `Failed to load or parse commands.json | Error: ${error.stack}`,
+        "error"
       );
       process.exit(-1);
     }
@@ -62,7 +64,8 @@ module.exports = {
         JSON.parse(JSON.stringify(require(file)));
       } catch (e) {
         Logger.log(
-          `Failed to load and parse language file ${file} | Error: ${e.stack}`
+          `Failed to load and parse language file ${file} | Error: ${e.stack}`,
+          "error"
         );
         process.exit(config.crashstatuscode);
       }

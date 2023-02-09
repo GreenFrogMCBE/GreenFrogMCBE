@@ -10,27 +10,28 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const CommandManager = require("../src/player/CommandManager");
-const ToastManager = require("../src/player/Toast");
-const ShutdownAPI = require("../src/server/ShutdownAPI");
-const GameMode = require("../src/player/GameMode");
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-case-declarations */
+const CommandManager = require("../../src/player/CommandManager");
+const ToastManager = require("../../src/player/Toast");
+const ShutdownAPI = require("../../src/server/ShutdownAPI");
+const GameMode = require("../../src/player/GameMode");
 
-const Logger = require("../src/server/Logger"); // Creates logger for this plugin
-const Form = require("../src/player/Form");
+const Logger = require("../../src/server/Logger"); // Creates logger for this plugin
+const Form = require("../../src/player/Form");
+const Colors = require("../../src/player/Colors");
+const FormTypes = require("../../src/player/FormTypes");
 
 // This is a simple plugin that tests the GreenFrog's API
 // Another example: https://github.com/andriycraft/GreenFrogMCBEDonations
 
 module.exports = {
-  name: "ExamplePlugin", // Your plugin name
-  version: "1.3", // Your plugin version
-
   onLoad() {
-    Logger.log(`${this.name} > Hello world!`);
+    Logger.log(`Example > Hello world!`);
   },
 
   onShutdown() {
-    Logger.log(`${this.name} > Good bye!`);
+    Logger.log(`Example > Good bye!`);
   },
 
   onJoin(server, player) {
@@ -55,7 +56,14 @@ module.exports = {
   onPlayerSpawn(server, player) {
     // Registers a command
     const cmdmanager = new CommandManager();
-    cmdmanager.addCommand(player, "testcommand", "This is my first command!");
+    cmdmanager.addCommand(player,
+       "testcommand",
+       "This is my first command!"
+    );
+    cmdmanager.addCommand(player,
+      "kick",
+      "Kicks u!"
+    );
     cmdmanager.addCommand(
       player,
       "stopserver",
@@ -83,7 +91,8 @@ module.exports = {
         // player.op returns the player's op status
         // player.permlevel returns the player's permission level
         player.sendMessage(`Hi ${player.username}. Your IP is: ${player.ip}`); // This code sends message TO player
-        player.chat(`This message was sent by ${this.name}`); // This code sends message AS A player
+        player.sendMessage(Colors.red + "This message is red");
+        player.chat(`This message was sent by example plugin`); // This code sends message AS A player
         player.setGamemode(GameMode.CREATIVE); // This updates the player gamemode. Valid gamemodes are: "creative", "survival", "adventure", "spectator" or "fallback"
 
         const Toast = new ToastManager();
@@ -92,10 +101,21 @@ module.exports = {
         Toast.send(player);
 
         const form = new Form();
-        form.buttons = [{ text: "Button 1" }];
-        form.content = "Hello, world";
-        form.title = "Hello, world (title)";
-        form.type = "form";
+        // REMEMBER: FormTypes.FORM is supported, but is has very limited functionality. FormTypes.CUSTOMFORM is better
+        form.type = FormTypes.CUSTOMFORM
+        form.title = "Title"
+        form.id = 0
+        form.buttons = [
+          { "text": "Button" }
+        ]
+        form.addInput("Hello, world", "Placeholder")
+        //            ^ text          ^ placeholder
+        form.addText("text")
+        form.addDropdown("dropdown", [{"text": "Option 1"}])
+        //               ^ dropdown  ^ options (null to disable)
+        form.addToggle("Toggle")
+        form.addSlider("slider", 0, 100, 50)
+        //             ^ text   ^min^max ^ step
         form.send(player);
 
         //              ^ title ^ toast description/body
@@ -103,7 +123,7 @@ module.exports = {
         setTimeout(() => {
           if (!player.offline) {
             // Make sure to check if the player is still online after doing setTimeout() that uses player API in production plugins
-            player.transfer("172.0.0.1", 19132); // Moves player to another server
+            player.transfer("127.0.0.1", 19132); // Moves player to another server
             //              ^ ip         ^ port
           }
         }, 30000);
@@ -115,6 +135,9 @@ module.exports = {
       case "/stopserver":
         player.sendMessage("Stopping server...");
         ShutdownAPI.shutdownServer();
+        break;
+      case "/kick": 
+        player.kick(Colors.red + "Kick demo")
         break;
     }
   },
