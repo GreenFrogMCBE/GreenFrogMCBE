@@ -20,10 +20,6 @@ module.exports = {
     Logger.log("Donations > Bye!");
   },
 
-  serverloadevent() {
-    console.log();
-  },
-
   onLoad() {
     const config = require("../../config.json");
     switch (config.lang) {
