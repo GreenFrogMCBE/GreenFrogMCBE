@@ -3,3 +3,4 @@ package-lock.json
 plugins/
 pluginconfigs/
 ops.yml
+config.yml

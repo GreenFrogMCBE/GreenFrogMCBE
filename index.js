@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* This file starts the server */
 const fs = require('fs')
 
 try {
