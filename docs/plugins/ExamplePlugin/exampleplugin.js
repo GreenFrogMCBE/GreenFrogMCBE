@@ -84,7 +84,7 @@ module.exports = {
       case "/testcommand":
         // player.username returns the player's username
         // player.ip returns the player's ip without port
-        // player.port returns the player's connection port
+        // player.port returns the player's port
         // player.fullip returns player's ip and port
         // player.gamemode returns player's gamemode
         // player.offline checks if the player is online or not
