@@ -1,4 +1,4 @@
-<img src="https://cdn.discordapp.com/attachments/1027321168576925799/1053767928849383514/logo.png">
+<img src="https://greenfrog.f1470348511.workers.dev/favicon.ico">
 
 <a href="https://github.com/andriycraft/GreenFrogMCBE/blob/master/LICENSE">
   <img alt="License" src="https://img.shields.io/github/license/andriycraft/GreenFrogMCBE">
@@ -14,6 +14,8 @@ Server software for Minecraft Bedrock, written in Node JS
 Our Discord: https://discord.gg/UFqrnAbqjP
 
 #### development status > under active development
+
+#### website > https://greenfrog.f1470348511.workers.dev/
 
 ## How to install
 
