@@ -56,7 +56,7 @@ If you have one feel free to open an issue
 6. Language system
 7. Support of new versions
 8. Basic moderation (/kick)
-9. Admin commands
+9. Open source
 10. Plugin support
 11. Many events for plugin API
 12. Form support
