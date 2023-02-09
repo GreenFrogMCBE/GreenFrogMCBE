@@ -18,10 +18,8 @@ const GameMode = require("../src/player/GameMode");
 const Logger = require("../src/server/Logger"); // Creates logger for this plugin
 const Form = require("../src/player/Form");
 
-// For advanced docs look at API.md in /docs/api.md
-
-// This is a simple plugin that tests the GreenFrog's api
-// Another example: https://github.com/andriycraft/GreenFrogMCBE/blob/main/plugins/DonationReminder.js
+// This is a simple plugin that tests the GreenFrog's API
+// Another example: https://github.com/andriycraft/GreenFrogMCBEDonations
 
 module.exports = {
   name: "ExamplePlugin", // Your plugin name
