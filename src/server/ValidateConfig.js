@@ -16,41 +16,9 @@ const { config } = require("../server/ServerInfo");
 
 module.exports = {
   /**
-   * It checks if the config.json file exists, and if it does, it checks if it's valid JSON
-   */
-  async ValidateConfig() {
-    try {
-      const config = require("../../config.json");
-      JSON.parse(JSON.stringify(config));
-    } catch (error) {
-      Logger.log(
-        `Failed to load or parse config.json | Error: ${error.stack}`,
-        "error"
-      );
-      process.exit(-1);
-    }
-  },
-
-  /**
-   * It checks if the commands.json file is valid JSON.
-   */
-  async ValidateCommands() {
-    try {
-      const commands = require("../../commands.json");
-      JSON.parse(JSON.stringify(commands));
-    } catch (error) {
-      Logger.log(
-        `Failed to load or parse commands.json | Error: ${error.stack}`,
-        "error"
-      );
-      process.exit(-1);
-    }
-  },
-
-  /**
    * It checks if the language files are valid JSON files
    */
-  async ValidateLangFile() {
+  async ValidateLangFiles() {
     const files = [
       "../lang/en_US.json",
       "../lang/lt_LT.json",

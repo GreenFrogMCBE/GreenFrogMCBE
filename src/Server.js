@@ -182,9 +182,7 @@ module.exports = {
    * It loads the config, lang files, and commands, then loads the plugins and starts the server.
    */
   async start() {
-    await ValidateConfig.ValidateConfig();
-    await ValidateConfig.ValidateLangFile();
-    await ValidateConfig.ValidateCommands();
+    await ValidateConfig.ValidateLangFiles();
 
     await this.initJson();
 
