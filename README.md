@@ -58,13 +58,12 @@ If you have one feel free to open an issue
 8. Basic moderation (/kick)
 9. Admin commands
 10. Plugin support
-11. Support of new versions
-12. Many events for plugin API
-13. Form support
-14. Toast support
-15. Inventory support
-16. Transfer packet support
-17. Packet API
+11. Many events for plugin API
+12. Form support
+13. Toast support
+14. Inventory support
+15. Transfer packet support
+16. Packet API
 
 ## Language system
 
