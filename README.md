@@ -1,4 +1,4 @@
-<img src="https://cdn.discordapp.com/attachments/1027321168576925799/1053767928849383514/logo.png">
+<img src="https://greenfrog.f1470348511.workers.dev/favicon.ico">
 
 <a href="https://github.com/andriycraft/GreenFrogMCBE/blob/master/LICENSE">
   <img alt="License" src="https://img.shields.io/github/license/andriycraft/GreenFrogMCBE">
@@ -14,6 +14,8 @@ Server software for Minecraft Bedrock, written in Node JS
 Our Discord: https://discord.gg/UFqrnAbqjP
 
 #### development status > under active development
+
+#### website > https://greenfrog.f1470348511.workers.dev/
 
 ## How to install
 
@@ -37,9 +39,9 @@ Step 1. Open powershell as an admin
 
 Step 2. Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
 
-Step 3. Join via `172.0.0.1` if it does not work join with your local IP from router settings
+Step 3. Join via `127.0.0.1` if it does not work join with your local IP from router settings
 
-## Plugins available for public usage
+## Plugins
 
 If you have one feel free to open an issue
 
@@ -56,15 +58,14 @@ If you have one feel free to open an issue
 6. Language system
 7. Support of new versions
 8. Basic moderation (/kick)
-9. Admin commands
+9. Open source
 10. Plugin support
-11. Support of new versions
-12. Many events for plugin API
-13. Form support
-14. Toast support
-15. Inventory support
-16. Transfer packet support
-17. Packet API
+11. Many events for plugin API
+12. Form support
+13. Toast support
+14. Inventory support
+15. Transfer packet support
+16. Packet API
 
 ## Language system
 
