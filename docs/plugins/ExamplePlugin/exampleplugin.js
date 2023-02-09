@@ -56,14 +56,8 @@ module.exports = {
   onPlayerSpawn(server, player) {
     // Registers a command
     const cmdmanager = new CommandManager();
-    cmdmanager.addCommand(player,
-       "testcommand",
-       "This is my first command!"
-    );
-    cmdmanager.addCommand(player,
-      "kick",
-      "Kicks u!"
-    );
+    cmdmanager.addCommand(player, "testcommand", "This is my first command!");
+    cmdmanager.addCommand(player, "kick", "Kicks u!");
     cmdmanager.addCommand(
       player,
       "stopserver",
@@ -102,19 +96,17 @@ module.exports = {
 
         const form = new Form();
         // REMEMBER: FormTypes.FORM is supported, but is has very limited functionality. FormTypes.CUSTOMFORM is better
-        form.type = FormTypes.CUSTOMFORM
-        form.title = "Title"
-        form.id = 0
-        form.buttons = [
-          { "text": "Button" }
-        ]
-        form.addInput("Hello, world", "Placeholder")
+        form.type = FormTypes.CUSTOMFORM;
+        form.title = "Title";
+        form.id = 0;
+        form.buttons = [{ text: "Button" }];
+        form.addInput("Hello, world", "Placeholder");
         //            ^ text          ^ placeholder
-        form.addText("text")
-        form.addDropdown("dropdown", [{"text": "Option 1"}])
+        form.addText("text");
+        form.addDropdown("dropdown", [{ text: "Option 1" }]);
         //               ^ dropdown  ^ options (null to disable)
-        form.addToggle("Toggle")
-        form.addSlider("slider", 0, 100, 50)
+        form.addToggle("Toggle");
+        form.addSlider("slider", 0, 100, 50);
         //             ^ text   ^min^max ^ step
         form.send(player);
 
@@ -136,8 +128,8 @@ module.exports = {
         player.sendMessage("Stopping server...");
         ShutdownAPI.shutdownServer();
         break;
-      case "/kick": 
-        player.kick(Colors.red + "Kick demo")
+      case "/kick":
+        player.kick(Colors.red + "Kick demo");
         break;
     }
   },
