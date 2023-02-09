@@ -39,7 +39,7 @@ Step 2. Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8we
 
 Step 3. Join via `127.0.0.1` if it does not work join with your local IP from router settings
 
-## Plugins available for public usage
+## Plugins
 
 If you have one feel free to open an issue
 
