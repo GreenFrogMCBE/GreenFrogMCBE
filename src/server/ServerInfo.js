@@ -13,7 +13,7 @@
 /* It's a class that contains information about the server. */
 
 module.exports = {
-  lang: require(`../lang/${require("../../config.json").lang}.json`),
+  lang: require(`../lang/${require("../../config.json").chat.lang}.json`),
   config: require("../../config.json"),
   majorserverversion: "2.0",
   serverversion: "2.0",

@@ -14,43 +14,70 @@
 const fs = require('fs')
 
 try {
-  if (!fs.existsSync('config.json')) {
-    fs.writeFileSync('config.json', `{
-  "host": "0.0.0.0",
-  "port": 19132,
-  "motd": "§6GreenFrogMCBE server",
-  "maxplayers": 20,
-  "version": "1.19.50",
-  "offlinemode": false,
-  "invalidmsgsblock": true,
-  "unstable": false,
-  "lang": "en_US",
-  "debug": false,
-  "crashstatuscode": -1,
-  "exitstatuscode": 0,
-  "logunhandledpackets": true,
-  "gamemode": "creative",
-  "world_gamemode": "creative",
-  "default_permission_level": 2,
-  "render_chunks": true
-}`)
-  }
-  if (!fs.existsSync('commands.json')) {
-    fs.writeFileSync('commands.json', `{
-  "console_command_help": true,
-  "console_command_kick": true,
-  "console_command_version": true,
-  "console_command_time": true,
-  "console_command_pl": true,
-  "console_command_say": true,
-  "console_command_plugins": true,
-  "console_command_op": true,
-  "player_command_version": true,
-  "player_command_plugins": true,
-  "player_command_stop": true,
-  "player_command_say": true,
-  "player_command_op": true
-}`)
+  if (!fs.existsSync('config.yml')) {
+    fs.writeFileSync('config.yml', `# LISTENING
+# 
+# This section contains the config for server host and port
+
+host: '0.0.0.0'
+port: 19132
+
+# SERVER INFO
+#
+# This section contains motd, and other server info settings
+
+motd: '§6GreenFrog server'
+maxPlayers: 20
+version: '1.19.50'
+offlineMode: false
+lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
+
+# CHAT
+#
+# This section contains some chat settings
+
+disable: false
+commandsDisabled: false
+blockInvalidMessages: true # Kicks the player if the player tried to send an too long or empty message and also prevents from using colors in chat
+
+# DEVELOPMENT SETTINGS
+# 
+# This section contains settings like debug, exit codes, etc
+
+unstable: false # Makes your server not crash on critical errors
+debug: false # Debug mode
+crashCode: -1
+exitCode: 0
+logUnhandledPackets: false
+defaultPermissionLevel: 2
+
+# WORLD SETTINGS
+#
+# This section contains world settings
+
+renderChunks: true
+gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
+worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
+difficulty: 0 # Currently only visual
+
+# Command settings
+# 
+# Allows to disable/enable commands
+# Make sure that "commandsDisabled" in chat section is enabled
+
+consoleCommandHelp: true,
+consoleCommandKick: true,
+consoleCommandVersion: true,
+consoleCommandTime: true,
+consoleCommandPl: true,
+consoleCommandPlugins: true,
+consoleCommandsay: true,
+consoleCommandOp: true,
+playerCommandVersion: true,
+playerCommandPlugins: true,
+playerCommandStop: true,
+playerCommandSay: true,
+playerCommandOp: true`)
   }
   const Frog = require("./src/Server.js");
   Frog.start();

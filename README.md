@@ -81,13 +81,6 @@ For Vietnamese language select "language": "vi_VN"
 
 For French language select "language": "fr_FR"
 
-## Configuration tutorial
-
-- You can edit your config in config.json
-- You can edit your server language in /src/lang/(server language).json
-- You can disable or enable commands in commands.json. "true" means enabled. "false" means disabled.
-- ops.yml contains list of OPs
-
 ## Donations
 
 If you want to support this project, you can donate at: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
