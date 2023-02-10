@@ -68,7 +68,7 @@ class CommandSay extends require("./Command") {
       .replace(`%message%`, args)
       .replace(`%sender%`, client.username);
 
-    for (let i = 0; i < PlayerInfo.getPlayers().length; i++) {
+    for (let i = 0; i < PlayerInfo.players.length; i++) {
       client.sendMessage(msg)
     }
     Logger.log(msg);

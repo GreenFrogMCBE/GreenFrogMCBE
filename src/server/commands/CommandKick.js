@@ -10,14 +10,14 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerInfo = require("../../player/PlayerInfo");
 const Logger = require("../../server/Logger");
 
 const { lang, commands } = require("../../server/ServerInfo");
+const { get } = require("../../player/PlayerInfo");
 
 class CommandKick extends require("./Command") {
   name() {
-    return lang.command_kick;
+    return lang.commands.Kick;
   }
 
   aliases() {
@@ -36,13 +36,12 @@ class CommandKick extends require("./Command") {
     }
 
     const targetUsername = args[0];
-    const reason = args[1] || lang.noPlayer;
-    const players = PlayerInfo.getPlayers();
+    const reason = args[1] || lang.kickmessages.noPlayer;
 
-    const target = players.find((client) => client.username === targetUsername);
+    const target = get(targetUsername);
 
     if (target) {
-      target.kick(`${lang.kickedPrefix}${reason}`);
+      target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
       Logger.log(
         `${lang.kickmessages.kickedConsoleMsg
           .replace("%args[0]%", targetUsername)

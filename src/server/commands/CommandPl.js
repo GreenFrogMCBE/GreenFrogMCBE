@@ -20,18 +20,19 @@ const Logger = require("../Logger");
 
 class CommandPl extends require("./Command") {
   name() {
-    return lang.commandPl;
+    return lang.commands.Pl;
   }
 
   aliases() {
-    return [lang.commandPlugins];
+    return [lang.commands.Plugins];
   }
 
   execute() {
     if (!commands.console_command_plugins) {
-      Logger.log(lang.playerUnknownCommand);
+      Logger.log(lang.errors.playerUnknownCommand);
       return;
     }
+
     let plugins;
     if (PluginManager.getPlugins() == null) {
       plugins = 0;
@@ -56,18 +57,17 @@ class CommandPl extends require("./Command") {
     Logger.log(
       `${lang.plugins} (${plugins}): ${pluginlist ?? ""} ${
         ColorsServer.CONSOLE_RESET
-      }`,
-      "info"
+      }`
     );
   }
 
   getPlayerDescription() {
-    return lang.ingamePlDescription;
+    return lang.commands.ingamePlDescription;
   }
 
   executePlayer(player) {
     if (!commands.player_command_plugins) {
-      Logger.log(lang.unknownCommand);
+      Logger.log(lang.errors.unknownCommand);
       return;
     }
     let plugins;
@@ -92,7 +92,7 @@ class CommandPl extends require("./Command") {
     }
 
     player.sendMessage(
-      `${lang.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsPlayer.reset}`,
+      `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsPlayer.reset}`,
       "info"
     );
   }

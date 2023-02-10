@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../../server/Logger");
-const { lang, commands, serverversion } = require("../../server/ServerInfo");
+const { lang, config, serverversion } = require("../../server/ServerInfo");
 
 class CommandVersion extends require("./Command") {
   name() {
@@ -23,29 +23,29 @@ class CommandVersion extends require("./Command") {
   }
 
   execute() {
-    if (!commands.console_command_version) {
-      Logger.log(lang.unknownCommand);
+    if (!config.consoleCommandVersion) {
+      Logger.log(lang.erors.unknownCommand);
       return;
     }
     Logger.log(
-      lang.commandVerInfo.replace("%version%", serverversion)
+      lang.commands.VerInfo.replace("%version%", serverversion)
     );
   }
 
   getPlayerDescription() {
-    return lang.ingameVerDescription;
+    return lang.commands.ingameVerDescription;
   }
 
   executePlayer(client) {
-    if (!commands.player_command_version) {
-      client.sendMessage(lang.playerUnknownCommand);
+    if (!config.consoleCommandVersion) {
+      client.sendMessage(lang.errors.playerUnknownCommand);
       return;
     }
 
     client.sendMessage(
-      lang.playerVerCommandLine1.replace("%version%", serverversion)
+      lang.commands.playerVerCommandLine1.replace("%version%", serverversion)
     );
-    client.sendMessage(lang.playerVerCommandLine2);
+    client.sendMessage(lang.commands.playerVerCommandLine2);
     return;
   }
 }
