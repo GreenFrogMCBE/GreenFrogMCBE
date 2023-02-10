@@ -16,7 +16,7 @@ const Logger = require("../Logger");
 
 class CommandSay extends require("./Command") {
   name() {
-    return lang.commandSay;
+    return lang.commands.Say;
   }
 
   aliases() {

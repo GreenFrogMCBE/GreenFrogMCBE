@@ -16,34 +16,36 @@ const { lang, commands } = require("../../server/ServerInfo");
 
 class CommandOp extends require("./Command") {
   name() {
-    return lang.commandOp;
+    return lang.Op;
   }
 
-  aliases() {}
+  aliases() {
+    return null
+  }
 
   execute(args) {
     if (!commands.console_command_op) {
-      Logger.log(lang.unknownCommand);
+      Logger.log(lang.errors.unknownCommand);
       return;
     }
     if (!args) {
-      Logger.log(lang.commandUsageOp);
+      Logger.log(lang.commands.UsageOp);
       return;
     }
 
     fs.appendFile("ops.yml", args + "\n", (err) => {
-      if (!err) Logger.log(lang.opped.replace("%player%", args));
-      else Logger.log(lang.opFail);
+      if (!err) Logger.log(lang.commands.opped.replace("%player%", args));
+      else Logger.log(lang.commands.opFail);
     });
   }
 
   getPlayerDescription() {
-    return lang.ingameOpDescription;
+    return lang.commands.ingameOpDescription;
   }
 
   executePlayer(client, args) {
     if (!client.op) {
-      client.sendMessage(lang.noPermission);
+      client.sendMessage(lang.errors.noPermission);
       return;
     }
 
@@ -54,7 +56,7 @@ class CommandOp extends require("./Command") {
     }
 
     fs.appendFile("ops.yml", player + "\n", (err) => {
-      if (!err) client.sendMessage(lang.opped.replace("%player%", player));
+      if (!err) client.sendMessage(lang.commands.opped.replace("%player%", player));
       else client.sendMessage("§c" + lang.commands.opFail);
     });
   }

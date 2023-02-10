@@ -18,10 +18,12 @@ const { lang, commands } = require("../../server/ServerInfo");
 
 class CommandTime extends require("./Command") {
   name() {
-    return lang.commandTime;
+    return lang.commands.Time;
   }
 
-  aliases() {}
+  aliases() {
+    return null
+  }
 
   execute(args) {
     if (!commands.console_command_time) {

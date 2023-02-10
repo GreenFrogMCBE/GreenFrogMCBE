@@ -15,11 +15,11 @@ const { lang, commands, serverversion } = require("../../server/ServerInfo");
 
 class CommandVersion extends require("./Command") {
   name() {
-    return lang.commandVersion;
+    return lang.commands.Version;
   }
 
   aliases() {
-    return [lang.commandVer];
+    return [lang.commands.Ver];
   }
 
   execute() {

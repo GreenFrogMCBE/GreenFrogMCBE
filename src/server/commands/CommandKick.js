@@ -31,7 +31,7 @@ class CommandKick extends require("./Command") {
     }
 
     if (!args || !args[0]) {
-      Logger.log(lang.commands.commandUsageKick, "info");
+      Logger.log(lang.commands.UsageKick);
       return;
     }
 
@@ -42,15 +42,15 @@ class CommandKick extends require("./Command") {
     const target = players.find((client) => client.username === targetUsername);
 
     if (target) {
-      target.disconnect(`${lang.kickedPrefix}${reason}`);
+      target.kick(`${lang.kickedPrefix}${reason}`);
       Logger.log(
-        `${lang.kickedConsoleMsg
+        `${lang.kickmessages.kickedConsoleMsg
           .replace("%args[0]%", targetUsername)
           .replace("%args[1]%", reason)}`,
         "info"
       );
     } else {
-      Logger.log(lang.playerOffline, "info");
+      Logger.log(lang.errors.playerOffline, "info");
     }
   }
 }
