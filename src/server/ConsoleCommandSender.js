@@ -14,7 +14,7 @@
 const rl = require("readline");
 const Logger = require("./Logger");
 const Events = require("../plugin/Events");
-const { lang } = require("../server/ServerInfo")
+const { lang, config } = require("../server/ServerInfo")
 const Shutdown = require("./commands/CommandShutdown");
 const Version = require("./commands/CommandVersion");
 const Kick = require("./commands/CommandKick");
@@ -34,6 +34,7 @@ module.exports = {
   },
 
   async start() {
+    if (config.debug) Logger.log("started", "debug");
     const commands = {
       shutdown: new Shutdown(),
       kick: new Kick(),
@@ -54,6 +55,7 @@ module.exports = {
     r.prompt(true);
 
     r.on("line", (data) => {
+      if (config.debug) Logger.log("started", data);
       if (data.toLowerCase().startsWith(`${lang.commands.Time.toLowerCase()} `)) {
         commands.time.execute(data.split(" "));
         return;
@@ -84,38 +86,38 @@ module.exports = {
       switch (command) {
         case "":
           break;
-        case lang.commandShutdown.toLowerCase():
-        case lang.commandStop.toLowerCase():
+        case lang.commands.Shutdown.toLowerCase():
+        case lang.commands.Stop.toLowerCase():
           commands.shutdown.execute();
           break;
-        case lang.commandOp.toLowerCase():
+        case lang.commands.Op.toLowerCase():
           commands.op.execute(data.split(" ")[1]);
           break;
-        case lang.commandKick.toLowerCase():
+        case lang.commands.Kick.toLowerCase():
           const reason = data.split(" ").slice(2).join(" ");
           commands.kick.execute(data.split(" ")[1], reason);
           break;
-        case lang.commandPl.toLowerCase():
-        case lang.commandPlugins.toLowerCase():
+        case lang.commands.Pl.toLowerCase():
+        case lang.commands.Plugins.toLowerCase():
           commands.pl.execute();
           break;
-        case lang.commandVer.toLowerCase():
-        case lang.commandVersion.toLowerCase():
+        case lang.commands.Ver.toLowerCase():
+        case lang.commands.Version.toLowerCase():
           commands.version.execute();
           break;
-        case lang.commandTime.toLowerCase():
+        case lang.commands.Time.toLowerCase():
           commands.time.execute();
           break;
-        case lang.commandSay.toLowerCase():
+        case lang.commands.Say.toLowerCase():
           const msg = data.split(" ").slice(1).join(" ");
           commands.say.execute(msg);
           break;
         case "?":
-        case lang.commandHelp.toLowerCase():
+        case lang.commands.Help.toLowerCase():
           commands.help.execute();
           break;
         default:
-          Logger.log(lang.errors.unknownCommand);
+          Logger.log(lang.commands.unknownCommand);
           break;
       }
 

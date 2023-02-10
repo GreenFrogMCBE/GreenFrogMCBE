@@ -27,6 +27,9 @@ module.exports = {
     } catch (ignored) {
       /* ignored */
     }
+    setTimeout(() => {
+      CCH.start();
+    }, 1000)
 
     fs.readdir("./plugins", (err, files) => {
       files.forEach((file) => {
@@ -70,9 +73,6 @@ module.exports = {
           }
         });
       });
-      if (count === files.length) {
-        CCH.start();
-      }
     });
   },
 

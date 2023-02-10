@@ -24,7 +24,7 @@ class CommandHelp extends require("./Command") {
   }
 
   execute() {
-    Logger.log(lang.commands.commandList);
+    Logger.log(lang.commands.list);
 
     const commandHelps = [
       { command: "?", help: lang.commands.qmHelp },

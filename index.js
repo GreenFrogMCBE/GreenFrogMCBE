@@ -64,14 +64,17 @@ difficulty: 0 # Currently only visual
 # Allows to disable/enable commands
 # Make sure that "commandsDisabled" in chat section is enabled
 
-consoleCommandHelp: true
 consoleCommandKick: true
+consoleCommandVer: true
+consoleCommandShutdown: true
 consoleCommandVersion: true
 consoleCommandTime: true
 consoleCommandPl: true
 consoleCommandPlugins: true
+consoleCommandStop: true # Will only stop showing in /help, if disabled
 consoleCommandSay: true
 consoleCommandOp: true
+consoleCommandHelp: true
 playerCommandVersion: true
 playerCommandPlugins: true
 playerCommandStop: true

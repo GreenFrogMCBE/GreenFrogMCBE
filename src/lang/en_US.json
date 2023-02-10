@@ -2,7 +2,7 @@
   "commands": {
     "thereAreNoCommands": "There are no commands.",
     "unknownCommand": "Unknown command. Type \"help\" for help",
-    "List": "Command list: ",
+    "list": "Command list: ",
     "Help": "help",
     "Kick": "kick",
     "Op": "op",
