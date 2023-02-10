@@ -17,17 +17,13 @@ let title = "";
 let type = "form";
 
 class FormRequest extends require("./Packet") {
-  /**
-   * It returns the packet name
-   * @returns Packet name
-   */
   name() {
     return "modal_form_request";
   }
 
   /**
    * It sets the form id
-   * @returns Form id
+   * @param {Number} Form id
    */
   setId(id1) {
     id = id1;
@@ -35,7 +31,7 @@ class FormRequest extends require("./Packet") {
 
   /**
    * It sets the form content
-   * @returns Form content
+   * @param {JSON} Form content
    */
   setContent(content1) {
     content = content1;
@@ -43,7 +39,7 @@ class FormRequest extends require("./Packet") {
 
   /**
    * It sets the form buttons
-   * @returns Form buttons
+   * @param {JSON} Form buttons
    */
   setButtons(buttons1) {
     buttons = buttons1;
@@ -51,7 +47,7 @@ class FormRequest extends require("./Packet") {
 
   /**
    * It sets the form title
-   * @returns Form title
+   * @param {string} Form title
    */
   setTitle(title1) {
     title = title1;
@@ -59,7 +55,7 @@ class FormRequest extends require("./Packet") {
 
   /**
    * It sets the form type
-   * @returns Form type
+   * @param {FormTypes} Form type
    */
   setType(type1) {
     type = type1;

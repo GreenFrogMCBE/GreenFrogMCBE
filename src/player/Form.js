@@ -14,6 +14,7 @@ const FormRequest = require("../network/packets/FormRequest");
 const FormTypes = require("./FormTypes");
 
 class Form {
+  // I used this code: https://github.com/Zwuiix-cmd/EasyProxy for examples
   constructor() {
     this.type = FormTypes.FORM;
     this.title = "";
@@ -29,8 +30,6 @@ class Form {
   addAction(action) {
     this.actions.push(action);
   }
-
-  // I used this code: https://github.com/Zwuiix-cmd/EasyProxy for examples
 
   /**
    * Adds an input to the form.

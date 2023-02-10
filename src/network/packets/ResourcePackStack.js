@@ -18,47 +18,45 @@ let experiments = [];
 let experiments_previously_used = false;
 
 class ResourcePackStack extends require("./Packet") {
-  /**
-   * It returns the packet name
-   * @returns The packet name
-   */
   name() {
     return "resource_pack_stack";
   }
 
   /**
-   * Sets the most_accept
-   * @param {Boolean} must_accept1
+   * It sets the must_accept
+   * @param {Boolean} must_accept - Is the resource packs forced to accept?
    */
   setMustAccept(must_accept1) {
     must_accept = must_accept1;
   }
 
   /**
-   * Sets the behavior_packs
-   * @returns {Boolean}
+   * It sets the behavior packs
+   * @param {Array} - The behavior packs 
    */
   setBehaviorPacks(behavior_packs1) {
     behavior_packs = behavior_packs1;
   }
 
   /**
-   * Sets the resource_packs
-   * @returns {Boolean}
+   * It sets sets the resource packs
+   * @param {Array} - The resource packs 
    */
   setResourcePacks(resource_packs1) {
     resource_packs = resource_packs1;
   }
 
   /**
-   * Sets the game_version
+   * It sets the game_version
+   * @param {string} game_version - The game version
    */
   setGameVersion(game_version1) {
     game_version = game_version1;
   }
 
   /**
-   * Sets the experiments
+   * It sets the experiments
+   * @param {Array} - The experiments used
    */
   setExperiments(experiments1) {
     experiments = experiments1;
@@ -113,7 +111,7 @@ class ResourcePackStack extends require("./Packet") {
   }
 
   /**
-   * Returns the experiments_previously_used
+   * It returns the experiments_previously_used
    * @returns The experiments_previously_used
    */
   getExperimentsPreviouslyUsed() {
@@ -122,12 +120,12 @@ class ResourcePackStack extends require("./Packet") {
 
   send(client) {
     client.write(this.name(), {
-      must_accept: must_accept,
-      behavior_packs: behavior_packs,
-      resource_packs: resource_packs,
-      game_version: game_version,
-      experiments: experiments,
-      experiments_previously_used: experiments_previously_used,
+      must_accept: this.name(),
+      behavior_packs: this.getBehaviorPacks(),
+      resource_packs: this.getResourcePacks(),
+      game_version: this.getGameVersion(),
+      experiments: this.getExperiments(),
+      experiments_previously_used: this.getExperimentsPreviouslyUsed(),
     });
   }
 }

@@ -14,16 +14,12 @@ let window_id = 0;
 let server = false;
 
 class ContainerClose extends require("./Packet") {
-  /**
-   * It returns the packet name
-   * @returns Packet name
-   */
   name() {
     return "container_close";
   }
 
   /**
-   * It sets the window id field
+   * It sets the window id
    * @param {Number} id
    */
   setWindowId(id) {
@@ -31,7 +27,7 @@ class ContainerClose extends require("./Packet") {
   }
 
   /**
-   * It sets the server field
+   * It sets the if the request is coming from server
    * @param {Boolean} server1
    */
   setServer(server1) {
@@ -39,25 +35,21 @@ class ContainerClose extends require("./Packet") {
   }
 
   /**
-   * It returns the window id field
-   * @returns The window id field
+   * It returns the window id 
+   * @returns The window id 
    */
   getWindowId() {
     return window_id;
   }
 
   /**
-   * It returns the server field
-   * @returns The server field
+   * It returns the if request is coming from server 
+   * @returns The server field 
    */
   getServer() {
     return server;
   }
 
-  /**
-   * It sends the packet
-   * @param {Object} client
-   */
   send(client) {
     client.write(this.name(), {
       window_id: this.getWindowId(),

@@ -36,8 +36,8 @@ module.exports = {
     };
 
     /**
-     * Sends a chat message as another player
-     * @param {string} msg - The message to send
+     * Sends a chat message as a player
+     * @param {string} msg - The message to send as a player
      */
     player.chat = function (msg) {
       Chat.broadcastMessage(
@@ -59,9 +59,7 @@ module.exports = {
         GameMode.SEPCTATOR,
         GameMode.FALLBACK,
       ];
-      if (!validGamemodes.includes(gamemode)) {
-        throw new Error("Invalid gamemode");
-      }
+      if (!validGamemodes.includes(gamemode)) throw new Error(lang.errors.invalidGamemode);
       player.gamemode = gamemode;
       const gm = new PlayerGamemode();
       gm.setGamemode(gamemode);
@@ -84,14 +82,14 @@ module.exports = {
 
     /**
      * Kicks a player from the server
-     * @param {string} [msg=lang.kickedByPlugin] - The reason for the kick
+     * @param {string} [msg=lang.kickmessages.kickedByPlugin] - The reason for the kick
      */
-    player.kick = function (msg = lang.kickedByPlugin) {
+    player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
       if (player.kicked) return;
       player.kicked = true;
       Events.executeFTEOK(require("../Server").server, player);
       Logger.log(
-        lang.kickedConsoleMsg
+        lang.kickmessages.kickedConsoleMsg
           .replace("%player%", player.getUserData().displayName)
           .replace("%reason%", msg)
       );
@@ -103,9 +101,9 @@ module.exports = {
      * @param {number} time - The time to set the player to
      */
     player.setTime = function (time) {
-      const time1 = new Time();
-      time1.setTime(time);
-      time1.send(player, time);
+      const timepacket = new Time();
+      timepacket.setTime(time);
+      timepacket.send(player, time);
     };
 
     /* Checks if the player is still online */
@@ -113,10 +111,11 @@ module.exports = {
       if (player.q2) {
         Events.executeOL(require("../Server").server, player);
         if (!player.kicked) {
-          player.kick(lang.playerDisconnected);
-          Logger.log(lang.disconnected.replace("%player%", player.username));
+          player.kick(lang.kickmessages.playerDisconnected);
+          Logger.log(lang.playerstatuses.disconnected.replace("%player%", player.username));
           Chat.broadcastMessage(
-            lang.leftTheGame.replace("%player%", player.username)
+            /* Replacing the %player% with the player's username. */
+            lang.broadcasts.leftTheGame.replace("%player%", player.username)
           );
           delete player.q2;
           player.offline = true;

@@ -14,28 +14,31 @@ const { lang, commands } = require("../../server/ServerInfo");
 
 class CommandShutdown extends require("./Command") {
   name() {
-    return lang.commandStop;
+    return lang.commands.Stop;
   }
 
-  aliases() {}
+  aliases() {
+    return null
+  }
 
   execute() {
     require("../ShutdownAPI").shutdownServer();
   }
 
   getPlayerDescription() {
-    return lang.ingameStopDescription;
+    return lang.commands.ingameStopDescription;
   }
 
   executePlayer(client) {
-    if (!commands.player_command_stop) {
-      client.sendMessage(lang.playerUnknownCommand);
+    if (!commands.playerCommandStop) {
+      client.sendMessage(lang.errors.playerUnknownCommand);
       return;
     }
     if (!client.op) {
-      client.sendMessage(lang.noPermission);
+      client.sendMessage(lang.errors.noPermission);
       return;
     }
+    client.sendMessage("§c" + lang.server.stoppingServer)
     this.execute();
   }
 }
