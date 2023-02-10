@@ -36,7 +36,7 @@ lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 # This section contains some chat settings
 
 disable: false
-commandsDisabled: false
+commandsDisabled: false # (will only disabled them for players, not console)
 blockInvalidMessages: true # Kicks the player if the player tried to send an too long or empty message and also prevents from using colors in chat
 
 # DEVELOPMENT SETTINGS
@@ -64,18 +64,18 @@ difficulty: 0 # Currently only visual
 # Allows to disable/enable commands
 # Make sure that "commandsDisabled" in chat section is enabled
 
-consoleCommandHelp: true,
-consoleCommandKick: true,
-consoleCommandVersion: true,
-consoleCommandTime: true,
-consoleCommandPl: true,
-consoleCommandPlugins: true,
-consoleCommandsay: true,
-consoleCommandOp: true,
-playerCommandVersion: true,
-playerCommandPlugins: true,
-playerCommandStop: true,
-playerCommandSay: true,
+consoleCommandHelp: true
+consoleCommandKick: true
+consoleCommandVersion: true
+consoleCommandTime: true
+consoleCommandPl: true
+consoleCommandPlugins: true
+consoleCommandSay: true
+consoleCommandOp: true
+playerCommandVersion: true
+playerCommandPlugins: true
+playerCommandStop: true
+playerCommandSay: true
 playerCommandOp: true`)
   }
   const Frog = require("./src/Server.js");

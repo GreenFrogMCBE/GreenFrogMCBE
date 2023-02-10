@@ -12,11 +12,11 @@
  */
 const Logger = require("../Logger");
 
-const { lang, commands } = require("../../server/ServerInfo");
+const { lang, config } = require("../../server/ServerInfo");
 
 class CommandHelp extends require("./Command") {
   name() {
-    return lang.command_help;
+    return lang.commands.commandHelp;
   }
 
   aliases() {
@@ -24,29 +24,26 @@ class CommandHelp extends require("./Command") {
   }
 
   execute() {
-    if (!commands.console_command_help) {
-      Logger.log(lang.unknownCommand);
-      return;
-    }
-
-    Logger.log(lang.commandList);
+    Logger.log(lang.commands.commandList);
 
     const commandHelps = [
-      { command: "kick", help: lang.kickHelp },
-      { command: "time", help: lang.timeHelp },
-      { command: "stop", help: lang.shutdownHelp },
-      { command: "stop", help: lang.stopHelp },
-      { command: "help", help: lang.helpHelp },
-      { command: "help", help: lang.qmHelp },
-      { command: "version", help: lang.versionHelp },
-      { command: "version", help: lang.verHelp },
-      { command: "pl", help: lang.plHelp },
-      { command: "plugins", help: lang.pluginsHelp },
-      { command: "op", help: lang.opHelp },
+      { command: "?", help: lang.commands.qmHelp },
+      { command: "op", help: lang.commands.opHelp },
+      { command: "pl", help: lang.commands.plHelp },
+      { command: "ver", help: lang.commands.verHelp },
+      { command: "kick", help: lang.commands.kickHelp },
+      { command: "time", help: lang.commands.timeHelp },
+      { command: "stop", help: lang.commands.stopHelp },
+      { command: "help", help: lang.commands.helpHelp },
+      { command: "version", help: lang.commands.versionHelp },
+      { command: "plugins", help: lang.commands.pluginsHelp },
+      { command: "shutdown", help: lang.commands.shutdownHelp },
     ];
 
+    let commandsfound = false
     for (const help of commandHelps) {
-      if ("console_command_" + commands[help.command]) {
+      if (config[`consoleCommand${help.command.charAt(0).toUpperCase() + help.command.slice(1)}`]) {
+        commandsfound = true
         Logger.log(
           help.help
             .replace("%green%", "\x1b[32m")
@@ -56,7 +53,11 @@ class CommandHelp extends require("./Command") {
         );
       }
     }
-  }
+
+    if (!commandsfound) {
+      Logger.log(lang.commands.thereAreNoCommands);
+    }
+  }    
 }
 
 module.exports = CommandHelp;

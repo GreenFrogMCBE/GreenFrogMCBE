@@ -26,12 +26,12 @@ class CommandKick extends require("./Command") {
 
   execute(args) {
     if (!commands.console_command_kick) {
-      Logger.log(lang.unknownCommand);
+      Logger.log(lang.commands.unknownCommand);
       return;
     }
 
     if (!args || !args[0]) {
-      Logger.log(lang.commandUsageKick, "info");
+      Logger.log(lang.commands.commandUsageKick, "info");
       return;
     }
 

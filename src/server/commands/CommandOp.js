@@ -49,13 +49,13 @@ class CommandOp extends require("./Command") {
 
     const player = args.split(" ")[1];
     if (!player) {
-      client.sendMessage("§c" + lang.commandUsageOp);
+      client.sendMessage("§c" + lang.commands.commandUsageOp);
       return;
     }
 
     fs.appendFile("ops.yml", player + "\n", (err) => {
       if (!err) client.sendMessage(lang.opped.replace("%player%", player));
-      else client.sendMessage("§c" + lang.opFail);
+      else client.sendMessage("§c" + lang.commands.opFail);
     });
   }
 }

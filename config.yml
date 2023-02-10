@@ -48,16 +48,15 @@ difficulty: 0 # Currently only visual
 # Allows to disable/enable commands
 # Make sure that "commandsDisabled" in chat section is enabled
 
-consoleCommandHelp: true,
-consoleCommandKick: true,
-consoleCommandVersion: true,
-consoleCommandTime: true,
-consoleCommandPl: true,
-consoleCommandPlugins: true,
-consoleCommandsay: true,
-consoleCommandOp: true,
-playerCommandVersion: true,
-playerCommandPlugins: true,
-playerCommandStop: true,
-playerCommandSay: true,
+consoleCommandKick: false
+consoleCommandVersion: false
+consoleCommandTime: false
+consoleCommandPl: false
+consoleCommandPlugins: false
+consoleCommandSay: false
+consoleCommandOp: false
+playerCommandVersion: true
+playerCommandPlugins: true
+playerCommandStop: true
+playerCommandSay: true
 playerCommandOp: true
