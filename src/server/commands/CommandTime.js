@@ -25,11 +25,12 @@ class CommandTime extends require("./Command") {
 
   execute(args) {
     if (!commands.console_command_time) {
-      Logger.log(lang.unknownCommand);
+      Logger.log(lang.errors.unknownCommand);
       return;
     }
+
     if (!args) {
-      Logger.log(lang.commandUsageTime, "info");
+      Logger.log(lang.commands.UsageTime);
       return;
     }
 
@@ -44,23 +45,24 @@ class CommandTime extends require("./Command") {
       default:
         time = parseInt(args[1]);
         if (isNaN(time)) {
-          Logger.log(lang.invalidTime);
+          Logger.log(lang.errors.invalidTime);
           return;
         }
     }
 
     const players = PlayerInfo.getPlayers();
     if (!players) {
-      Logger.log(lang.timeUpdated);
+      Logger.log(lang.commands.timeUpdated);
       return;
     }
 
     for (const client of players) {
       const timepk = new TimePacket();
-      timepk.writePacket(client, time);
+      timepk.setTime(time)
+      timepk.send(client)
     }
 
-    Logger.log(lang.timeUpdated);
+    Logger.log(lang.commands.timeUpdated);
   }
 }
 

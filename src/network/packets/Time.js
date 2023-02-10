@@ -39,9 +39,10 @@ class Time extends require("./Packet") {
 
   /**
    * It updates the time
-   * @param ${Number} time - The time in seconds to set the client's time to.
+   * @param {Number} time - The time in seconds to set the client's time to.
    */
   setTime(time1) {
+    this.validate(time1);
     time = time1;
   }
 
@@ -55,9 +56,8 @@ class Time extends require("./Packet") {
   /**
    * It writes a packet to the client
    * @param {Object} client - The client that the packet is being sent to.
-   * @param {Number} time - The time to send to the client.
    */
-  send(client, time) {
+  send(client) {
     this.validate(time);
     client.write(this.name(), {
       time: this.getTime(),

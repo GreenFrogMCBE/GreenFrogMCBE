@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../../server/Logger");
-const { lang, commands } = require("../../server/ServerInfo");
+const { lang, commands, serverversion } = require("../../server/ServerInfo");
 
 class CommandVersion extends require("./Command") {
   name() {
@@ -28,7 +28,7 @@ class CommandVersion extends require("./Command") {
       return;
     }
     Logger.log(
-      lang.commandVerInfo.replace("%version%", ServerInfo.serverversion)
+      lang.commandVerInfo.replace("%version%", serverversion)
     );
   }
 
@@ -43,7 +43,7 @@ class CommandVersion extends require("./Command") {
     }
 
     client.sendMessage(
-      lang.playerVerCommandLine1.replace("%version%", ServerInfo.serverversion)
+      lang.playerVerCommandLine1.replace("%version%", serverversion)
     );
     client.sendMessage(lang.playerVerCommandLine2);
     return;

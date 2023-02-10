@@ -30,7 +30,6 @@
     "shutdownHelp": "%green%shutdown %white%- %blue%Stops the server",
     "plHelp": "%green%pl %white%- %blue%Plugin list",
     "opHelp": "%green%op %white%- %blue%Op a player",
-    "noPermission": "§cYou don't have permission to execute this command",
     "verInfo": "This server runs GreenFrogMCBE. Version: %version% | Repository: https://github.com/andriycraft/GreenFrogMCBE",
     "ingameVerDescription": "Shows the server version",
     "ingamePlDescription": "Shows the server plugins",
@@ -88,7 +87,8 @@
     "failedToExecFunction": "Failed to execute function in plugin \"%plugin%\". Error: %e%",
     "noPluginName": "No plugin name! %plugin%",
     "invalidUsernameWarning": "I am sorry, but %player%'s username contains spaces, but they are not implemented in GreenFrog yet, so i replaced spaces with underscores",
-    "opFailAlreadyOpped": "This player is already opped."
+    "opFailAlreadyOpped": "This player is already opped.",
+    "noPermission": "§cYou don't have permission to execute this command"
   },
   "server": {
     "listeningOn": "Listening on port %ipport%",
