@@ -36,7 +36,7 @@ class CommandKick extends require("./Command") {
     }
 
     const targetUsername = args[0];
-    const reason = args[1] || lang.kickmessages.noPlayer;
+    const reason = args[1] || lang.kickmessages.noReason;
 
     const target = get(targetUsername);
 
