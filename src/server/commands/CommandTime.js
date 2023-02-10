@@ -11,8 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../Logger");
-const PlayerInfo = require("../../player/PlayerInfo");
 
+const { players } = require("../../player/PlayerInfo");
 const { lang, config } = require("../../server/ServerInfo");
 
 class CommandTime extends require("./Command") {
@@ -49,12 +49,6 @@ class CommandTime extends require("./Command") {
           Logger.log(lang.errors.invalidTime);
           return;
         }
-    }
-
-    const players = PlayerInfo.getPlayers();
-    if (!players) {
-      Logger.log(lang.commands.timeUpdated);
-      return;
     }
 
     for (const client of players) {

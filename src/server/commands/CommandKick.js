@@ -12,7 +12,7 @@
  */
 const Logger = require("../../server/Logger");
 
-const { lang, commands } = require("../../server/ServerInfo");
+const { lang, config } = require("../../server/ServerInfo");
 const { get } = require("../../player/PlayerInfo");
 
 class CommandKick extends require("./Command") {
@@ -25,7 +25,7 @@ class CommandKick extends require("./Command") {
   }
 
   execute(args) {
-    if (!commands.consoleCommandKick) {
+    if (!config.consoleCommandKick) {
       Logger.log(lang.commands.unknownCommand);
       return;
     }
@@ -44,8 +44,8 @@ class CommandKick extends require("./Command") {
       target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
       Logger.log(
         `${lang.kickmessages.kickedConsoleMsg
-          .replace("%args[0]%", targetUsername)
-          .replace("%args[1]%", reason)}`,
+          .replace("%player%", targetUsername)
+          .replace("%reason%", reason)}`,
         "info"
       );
     } else {

@@ -14,7 +14,7 @@ const ColorsServer = require("../Colors");
 const ColorsPlayer = require("../../player/Colors");
 const PluginManager = require("../../plugin/PluginManager");
 
-const { lang, commands } = require("../../server/ServerInfo");
+const { lang, config } = require("../../server/ServerInfo");
 
 const Logger = require("../Logger");
 
@@ -28,7 +28,7 @@ class CommandPl extends require("./Command") {
   }
 
   execute() {
-    if (!commands.consoleCommandPlugins) {
+    if (!config.consoleCommandPlugins) {
       Logger.log(lang.errors.playerUnknownCommand);
       return;
     }
@@ -52,10 +52,10 @@ class CommandPl extends require("./Command") {
         PluginManager.getPlugins().toString().split(",")[i] +
         ColorsServer.CONSOLE_RESET +
         ", ";
-    }
+      }
 
     Logger.log(
-      `${lang.plugins} (${plugins}): ${pluginlist ?? ""} ${
+      `${lang.commands.Plugins} (${plugins}): ${pluginlist ?? ""} ${
         ColorsServer.CONSOLE_RESET
       }`
     );
@@ -66,27 +66,27 @@ class CommandPl extends require("./Command") {
   }
 
   executePlayer(player) {
-    if (!commands.playerCommandPlugins) {
+    if (!config.playerCommandPlugins) {
       Logger.log(lang.errors.unknownCommand);
       return;
     }
     let plugins;
-    if (PluginManager.getPlugins() == null) {
+    if (PluginManager.plugins == null) {
       plugins = 0;
     } else {
-      plugins = PluginManager.getPlugins().length;
+      plugins = PluginManager.plugins.length;
     }
 
     let pluginlist = "";
     for (
       let i = 0;
-      i < PluginManager.getPlugins().toString().split(",").length;
+      i < PluginManager.plugins.toString().split(",").length;
       i++
     ) {
       pluginlist =
         pluginlist +
         ColorsPlayer.green +
-        PluginManager.getPlugins().toString().split(",")[i] +
+        PluginManager.plugins.toString().split(",")[i] +
         ColorsPlayer.reset +
         ", ";
     }

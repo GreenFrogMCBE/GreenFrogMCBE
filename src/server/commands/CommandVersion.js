@@ -24,11 +24,12 @@ class CommandVersion extends require("./Command") {
 
   execute() {
     if (!config.consoleCommandVersion) {
-      Logger.log(lang.erors.unknownCommand);
+      Logger.log(lang.errors.unknownCommand);
       return;
     }
+
     Logger.log(
-      lang.commands.VerInfo.replace("%version%", serverversion)
+      lang.commands.verInfo.replace("%version%", serverversion)
     );
   }
 
@@ -37,14 +38,12 @@ class CommandVersion extends require("./Command") {
   }
 
   executePlayer(client) {
-    if (!config.consoleCommandVersion) {
+    if (!config.playerCommandVersion) {
       client.sendMessage(lang.errors.playerUnknownCommand);
       return;
     }
 
-    client.sendMessage(
-      lang.commands.playerVerCommandLine1.replace("%version%", serverversion)
-    );
+    client.sendMessage(lang.commands.playerVerCommandLine1.replace("%version%", serverversion));
     client.sendMessage(lang.commands.playerVerCommandLine2);
     return;
   }
