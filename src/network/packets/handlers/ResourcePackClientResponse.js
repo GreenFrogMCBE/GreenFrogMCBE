@@ -215,7 +215,7 @@ class ResourcePackClientResponse extends Handler {
           }
 
           setInterval(() => {
-            if (!client.offline) {
+            if (client.offline) {
               const networkchunkpublisher = new NetworkChunkPublisherUpdate();
               networkchunkpublisher.setCords(0, 0, 0);
               networkchunkpublisher.setRadius(64);
@@ -235,11 +235,9 @@ class ResourcePackClientResponse extends Handler {
           }, 2000);
 
           setTimeout(() => {
-            if (!client.offline) return;
-            for (let i = 0; i < new PlayerInfo().getPlayers().length; i++) {
-              new PlayerInfo()
-                .getPlayers()
-                [i].sendMessage(
+            if (client.offline) return;
+            for (let i = 0; i < new PlayerInfo().players.length; i++) {
+              new PlayerInfo().players[i].sendMessage(
                   lang.joinedTheGame.replace("%username%", client.username)
                 );
             }

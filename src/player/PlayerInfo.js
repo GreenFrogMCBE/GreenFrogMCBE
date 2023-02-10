@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It's a class that stores an array of players */
 let playersOnline = [];
 
 module.exports = {

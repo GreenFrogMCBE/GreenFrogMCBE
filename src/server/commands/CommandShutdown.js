@@ -30,7 +30,7 @@ class CommandShutdown extends require("./Command") {
   }
 
   executePlayer(client) {
-    if (!commands.player_command_stop) {
+    if (!commands.playerCommandStop) {
       client.sendMessage(lang.errors.playerUnknownCommand);
       return;
     }

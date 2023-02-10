@@ -41,14 +41,12 @@ let clients = [];
 let server = null;
 let config = null;
 let lang = null;
-let commands = null;
 
 module.exports = {
   clients: clients,
   server: server,
   config: config,
   lang: lang,
-  commands: commands,
 
   /**
    * It loads the JSON files into the server.
@@ -56,17 +54,6 @@ module.exports = {
   async initJson() {
     config = ServerInfo.config;
     lang = ServerInfo.lang;
-    commands = ServerInfo.commands;
-  },
-
-  /**
-   * GetServer() {
-   *         return this.server
-   * }
-   * @returns The server object.
-   */
-  getServer() {
-    return server;
   },
 
   /**
@@ -75,20 +62,17 @@ module.exports = {
    */
   async attemptToDie(err) {
     if (err.toString().includes("Server failed to start")) {
-      Logger.log(
-        `Failed to bind port on ${config.host}:${config.port}`,
-        "error"
-      );
-      Logger.log(
-        `This means that another server is already running on this port`,
-        "error"
-      );
-      process.exit(config.crashstatuscode);
+      Logger.log(lang.errors.failedToBind.replace('%address%', `${config.host}:${config.port}`), "error");
+      Logger.log(lang.errors.otherServerRunning, "error");
+      process.exit(config.crashCode);
     } else {
-      Logger.log(`Server error: \n${err.stack}`, "error");
-      if (!config.donotcrashoncriticalerrors) {
-        process.exit(config.crashstatuscode);
-      }
+      let se = "Server error: "
+      try {
+        if (lang.errors.serverError) return
+        se = lang.errors.serverError
+      } catch (e) { /* Ignored */ }
+      Logger.log(`${se}\n${err.stack}`, "error");
+      if (!config.unstable) process.exit(config.crashCode);
     }
   },
 
@@ -98,8 +82,7 @@ module.exports = {
    * @param packet - The packet that was sent by the client
    */
   handlepk(client, packet) {
-    if (client.offline)
-      throw new Error("An attempt to handle packet from offline player");
+    if (client.offline) throw new Error(lang.errors.packetErrorOffline);
     switch (packet.data.name) {
       case "resource_pack_client_response":
         new ResourcePackClientResponse().handle(client, packet, this.server);
@@ -129,7 +112,7 @@ module.exports = {
         new RequestChunkRadius().handle(client);
         break;
       case "text":
-        new Text().handle(client, packet, lang);
+        new Text().handle(client, packet);
         break;
       case "subchunk_request":
         new SubChunkRequest().handle(client, packet);
@@ -142,7 +125,7 @@ module.exports = {
         break;
       default:
         if (config.logunhandledpackets) {
-          Logger.log(lang.unhandledPacket, "warning");
+          Logger.log(lang.errors.unhandledPacket, "warning");
           console.log("%o", packet);
         }
         break;
@@ -173,9 +156,8 @@ module.exports = {
    * It logs a warning if the config.debug or config.unstable is true.
    */
   async initDebug() {
-    if (config.unstable) Logger.log(lang.unstableWarning, "warning");
-    if (process.env.DEBUG === "minecraft-protocol" || config.debug)
-      Logger.log(lang.debugWarning, "warning");
+    if (config.unstable) Logger.log(lang.errors.unstableWarning, "warning");
+    if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.log(lang.errors.debugWarning, "warning");
   },
 
   /**
@@ -194,7 +176,7 @@ module.exports = {
       }
     });
 
-    Logger.log(lang.loadingServer);
+    Logger.log(lang.server.loadingServer);
 
     process.on("uncaughtException", (err) => this.attemptToDie(err));
     process.on("uncaughtExceptionMonitor", (err) => this.attemptToDie(err));
@@ -202,7 +184,7 @@ module.exports = {
 
     await this.initDebug();
 
-    Logger.log(`${lang.scch}`, "debug");
+    Logger.log(`${lang.commandhander.scch}`, "debug");
     await PluginLoader.loadPlugins();
 
     this.listen();
@@ -226,8 +208,8 @@ module.exports = {
         },
       });
       Logger.log(
-        `${lang.listeningOn.replace(
-          `%ipport%`,
+        `${lang.server.listeningOn.replace(
+          `%address%`,
           `/${config.host}:${config.port}`
         )}`
       );
@@ -242,13 +224,13 @@ module.exports = {
             this.handlepk(client, packet);
           } catch (e) {
             try {
-              client.kick(lang.internalServerError);
+              client.kick(lang.kickmessages.internalServerError);
             } catch (e) {
-              client.disconnect(lang.internalServerError);
+              client.disconnect(lang.kickmessages.internalServerError);
             }
             Events.executeOISE(this.server, client, e);
             Logger.log(
-              lang.packetHandlingException
+              lang.errors.packetHandlingException
                 .replace("%player%", client.username)
                 .replace("%error%", e.stack),
               "error"
@@ -259,11 +241,11 @@ module.exports = {
     } catch (e) {
       Logger.log(
         `${lang.listeningFailed
-          .replace(`%ipport%`, `/${config.host}:${config.port}`)
+          .replace(`%address%`, `/${config.host}:${config.port}`)
           .replace("%error%", e.stack)}`,
         "error"
       );
-      process.exit(config.exitstatuscode);
+      process.exit(config.exitCode);
     }
   },
 };

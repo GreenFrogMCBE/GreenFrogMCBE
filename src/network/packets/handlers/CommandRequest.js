@@ -19,33 +19,24 @@ const CommandVersion = require("../../../server/commands/CommandVersion");
 const CommandOp = require("../../../server/commands/CommandOp");
 const Events = require("../../../plugin/Events");
 const Logger = require("../../../server/Logger");
-const { lang } = require("../../../server/ServerInfo");
+const { lang, config } = require("../../../server/ServerInfo");
 
 class CommandRequest extends require("./Handler") {
   validate(cmd) {
-    if (!cmd) {
-      throw new PacketHandlingError("Missing command in command request");
-    }
+    if (!cmd) throw new PacketHandlingError(lang.missingcommand);
 
-    if (!cmd.trim().length) {
-      throw new PacketHandlingError(
-        "Command cannot be empty or whitespace only"
-      );
-    }
+    if (!cmd.trim().length) throw new PacketHandlingError(lang.wsonly);
 
-    if (cmd.length > 256) {
-      throw new PacketHandlingError(
-        "Command exceeded maximum length of 256 characters"
-      );
-    }
+    if (cmd.length > 256) throw new PacketHandlingError(lang.cmdtoolong);
   }
 
   handle(client, packet) {
+    if (config.commandsDisabled) return
     let cmd = packet.data.params.command;
     this.validate(cmd);
-    Events.executeOC2(require("../../../Server"), client, cmd);
+    Events.executeOC2(require("../../../Server").server, client, cmd);
     Logger.log(
-      lang.executedCmd
+      lang.commands.executedCmd
         .replace("%player%", client.username)
         .replace("%cmd%", cmd)
     );
@@ -58,20 +49,20 @@ class CommandRequest extends require("./Handler") {
     const cmdOp = new CommandOp();
 
     if (
-      cmd.startsWith(`/${lang.commandVer.toLowerCase()}`) ||
-      cmd.startsWith(`/${lang.commandVersion.toLowerCase()}`)
+      cmd.startsWith(`/${lang.commands.Ver.toLowerCase()}`) ||
+      cmd.startsWith(`/${lang.commands.Version.toLowerCase()}`)
     ) {
       cmdVer.executePlayer(client);
     } else if (
-      cmd.startsWith(`/${lang.commandPl.toLowerCase()}`) ||
-      cmd.startsWith(`/${lang.commandPlugins.toLowerCase()}`)
+      cmd.startsWith(`/${lang.commands.Pl.toLowerCase()}`) ||
+      cmd.startsWith(`/${lang.commands.Plugins.toLowerCase()}`)
     ) {
       cmdPl.executePlayer(client);
-    } else if (cmd.startsWith(`/${lang.commandStop.toLowerCase()}`)) {
+    } else if (cmd.startsWith(`/${lang.commands.Stop.toLowerCase()}`)) {
       cmdStop.executePlayer(client);
-    } else if (cmd.startsWith(`/${lang.commandSay.toLowerCase()}`)) {
+    } else if (cmd.startsWith(`/${lang.commands.Say.toLowerCase()}`)) {
       cmdSay.executePlayer(client, cmd);
-    } else if (cmd.startsWith(`/${lang.commandOp.toLowerCase()}`)) {
+    } else if (cmd.startsWith(`/${lang.commands.Op.toLowerCase()}`)) {
       cmdOp.executePlayer(client, cmd);
     } else {
       let exists = false;
@@ -81,7 +72,7 @@ class CommandRequest extends require("./Handler") {
           break;
         }
       }
-      if (!exists) client.sendMessage(lang.playerUnknownCommand);
+      if (!exists) client.sendMessage(lang.errors.playerUnknownCommand);
     }
   }
 }

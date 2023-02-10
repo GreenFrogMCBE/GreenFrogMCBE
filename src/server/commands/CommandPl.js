@@ -28,7 +28,7 @@ class CommandPl extends require("./Command") {
   }
 
   execute() {
-    if (!commands.console_command_plugins) {
+    if (!commands.consoleCommandPlugins) {
       Logger.log(lang.errors.playerUnknownCommand);
       return;
     }
@@ -66,7 +66,7 @@ class CommandPl extends require("./Command") {
   }
 
   executePlayer(player) {
-    if (!commands.player_command_plugins) {
+    if (!commands.playerCommandPlugins) {
       Logger.log(lang.errors.unknownCommand);
       return;
     }

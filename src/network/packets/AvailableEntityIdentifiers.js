@@ -13,10 +13,6 @@
 let nbt = null;
 
 class AvailableEntityIdentifiers extends require("./Packet") {
-  /**
-   * It returns the packet name
-   * @returns Packet name
-   */
   name() {
     return "available_entity_identifiers";
   }
@@ -30,8 +26,8 @@ class AvailableEntityIdentifiers extends require("./Packet") {
   }
 
   /**
-   * `getNbt()` returns the NBT
-   * @returns The NBT.
+   * It returns the NBT data
+   * @returns The NBT data.
    */
   getNbt() {
     return nbt;

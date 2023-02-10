@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { lang, commands } = require("../../server/ServerInfo");
+const { lang, config } = require("../../server/ServerInfo");
 const PlayerInfo = require("../../player/PlayerInfo");
 const Logger = require("../Logger");
 
@@ -24,7 +24,7 @@ class CommandSay extends require("./Command") {
   }
 
   execute(args) {
-    if (!commands.console_command_say) {
+    if (!config.consoleCommandSay) {
       Logger.log(lang.errors.unknownCommand);
       return;
     }
@@ -50,7 +50,7 @@ class CommandSay extends require("./Command") {
   }
 
   executePlayer(client, args) {
-    if (!commands.player_command_say) {
+    if (!config.playerCommandSay) {
       client.sendMessage(lang.errors.playerUnknownCommand);
       return;
     }

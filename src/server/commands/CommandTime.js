@@ -11,10 +11,9 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../Logger");
-const TimePacket = require("../../network/packets/Time");
 const PlayerInfo = require("../../player/PlayerInfo");
 
-const { lang, commands } = require("../../server/ServerInfo");
+const { lang, config } = require("../../server/ServerInfo");
 
 class CommandTime extends require("./Command") {
   name() {
@@ -26,7 +25,7 @@ class CommandTime extends require("./Command") {
   }
 
   execute(args) {
-    if (!commands.console_command_time) {
+    if (!config.consoleCommandTime) {
       Logger.log(lang.errors.unknownCommand);
       return;
     }
@@ -59,9 +58,7 @@ class CommandTime extends require("./Command") {
     }
 
     for (const client of players) {
-      const timepk = new TimePacket();
-      timepk.setTime(time)
-      timepk.send(client)
+      client.setTime(time);
     }
 
     Logger.log(lang.commands.timeUpdated);

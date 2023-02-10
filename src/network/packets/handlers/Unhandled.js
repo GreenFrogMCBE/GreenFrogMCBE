@@ -11,14 +11,12 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../../../server/Logger");
-const lang = require("../../../server/ServerInfo").lang;
+const { lang } = require("../../../server/ServerInfo");
 
 class Unhandled extends require("./Handler") {
-  validate() {}
-
   handle(packet) {
     Logger.log(
-      `${lang.ignoredPacket.replace("%packet%", packet.data.name)}`,
+      `${lang.debug.ignoredPacket.replace("%packet%", packet.data.name)}`,
       "debug"
     );
   }

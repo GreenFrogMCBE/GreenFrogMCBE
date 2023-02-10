@@ -11,13 +11,12 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-case-declarations */
-/* It's a class that handles console commands. */
 const rl = require("readline");
 const Logger = require("./Logger");
 const Events = require("../plugin/Events");
+const { lang } = require("../server/ServerInfo")
 const Shutdown = require("./commands/CommandShutdown");
 const Version = require("./commands/CommandVersion");
-const { lang } = require("../server/ServerInfo");
 const Kick = require("./commands/CommandKick");
 const Help = require("./commands/CommandHelp");
 const Time = require("./commands/CommandTime");
@@ -25,13 +24,13 @@ const Say = require("./commands/CommandSay");
 const Op = require("./commands/CommandOp");
 const PL = require("./commands/CommandPl");
 
-let closed1 = false;
+let isclosed = false;
 
 module.exports = {
-  closed: closed1,
+  closed: isclosed,
 
   close() {
-    closed1 = true;
+    isclosed = true;
   },
 
   async start() {
@@ -55,18 +54,18 @@ module.exports = {
     r.prompt(true);
 
     r.on("line", (data) => {
-      if (data.toLowerCase().startsWith(`${lang.commandTime.toLowerCase()} `)) {
+      if (data.toLowerCase().startsWith(`${lang.commands.Time.toLowerCase()} `)) {
         commands.time.execute(data.split(" "));
         return;
       }
 
-      if (data.toLowerCase().startsWith(`${lang.commandSay.toLowerCase()} `)) {
+      if (data.toLowerCase().startsWith(`${lang.commands.Say.toLowerCase()} `)) {
         const msg = data.split(" ").slice(1).join(" ");
         commands.say.execute(msg);
         return;
       }
 
-      if (data.toLowerCase().startsWith(`${lang.commandKick.toLowerCase()} `)) {
+      if (data.toLowerCase().startsWith(`${lang.commands.Kick.toLowerCase()} `)) {
         const dataParts = data.split(" ");
         const target = dataParts[1];
         const reason = dataParts.slice(2).join(" ");
@@ -74,12 +73,12 @@ module.exports = {
         return;
       }
 
-      if (data.toLowerCase().startsWith(`${lang.commandOp.toLowerCase()} `)) {
+      if (data.toLowerCase().startsWith(`${lang.commands.Op.toLowerCase()} `)) {
         commands.op.execute(data.split(" ")[1]);
         return;
       }
 
-      Events.executeOCC(data, require("../Server").getServer());
+      Events.executeOCC(data, require("../Server").server);
       const command = data.toLowerCase().split(" ")[0];
 
       switch (command) {
@@ -116,11 +115,11 @@ module.exports = {
           commands.help.execute();
           break;
         default:
-          Logger.log(lang.unknownCommand);
+          Logger.log(lang.errors.unknownCommand);
           break;
       }
 
-      if (!closed1) r.prompt(true);
+      if (!isclosed) r.prompt(true);
     });
   },
 };

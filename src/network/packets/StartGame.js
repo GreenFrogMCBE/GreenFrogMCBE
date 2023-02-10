@@ -11,6 +11,9 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Gamemode = require("../../player/GameMode");
+const Difficulty = require("./types/Difficulty");
+const Dimension = require("./types/Dimension");
+const Generator = require("./types/Generator");
 
 let entity_id = 0;
 let runtimeentity_id = 0;
@@ -23,10 +26,10 @@ let rotationz = 0;
 let seed = [];
 let biome_type = 0;
 let biome_name = "";
-let dimension = "overworld";
-let generator = 2;
-let world_gamemode = 0;
-let difficulty = 0;
+let dimension = Dimension.OVERWORLD;
+let generator = Generator.INFINITE;
+let world_gamemode = Gamemode.SURVIVAL;
+let difficulty = Difficulty.PEACEFUL;
 let spawn = {
   x: 0,
   y: 0,
@@ -36,92 +39,173 @@ let permission_level = 0;
 
 class StartGame extends require("./Packet") {
   /**
-   * It returns the string "start_game"
-   * @returns The name of the packet.
+   * @returns The packet name
    */
+
   name() {
     return "start_game";
   }
 
-  // TODO: Docs
-
+  /**
+   * It sets the entity id
+   * @param {Number} - The entity id
+   */
   setEntityId(entity_id1) {
     entity_id = entity_id1;
   }
 
+  /**
+   * It sets the runtime entity id
+   * @param {Number} - The runtime entity id
+   */
   setRunTimeEntityId(runtimeentity_id1) {
     runtimeentity_id = runtimeentity_id1;
   }
 
+  /**
+   * It sets the gamemode
+   * @param {Gamemode} - The gamemode
+   */
   setGamemode(gamemode1) {
     gamemode = gamemode1;
   }
 
+  /**
+   * It sets the player spawn position X, Y, and Z
+   * @param {Number} - The player X
+   * @param {Number} - The player Y
+   * @param {Number} - The player Z
+   */
   setPlayerPosition(x, y, z) {
     playerx = x;
     playery = y;
     playerz = z;
   }
 
+  /**
+   * It sets the player rotation X and Z
+   * @param {Number} - The player rotation X
+   * @param {Number} - The player rotation Z
+   */
   setPlayerRotation(x, z) {
     rotationx = x;
     rotationz = z;
   }
 
+  /**
+   * It sets the seed
+   * @param {Array} - The seed
+   */
   setSeed(seed1) {
     seed = seed1;
   }
 
+  /**
+   * It sets the biome type
+   * @param {Number} - The biome type
+   */
   setBiomeType(biome_type1) {
     biome_type = biome_type1;
   }
 
+  /**
+   * It sets the biome name
+   * @param {string} - The biome name
+   */
   setBiomeName(biome_name1) {
     biome_name = biome_name1;
   }
 
+  /**
+   * It sets the dimension
+   * @param {Dimension} - The dimension
+   */
   setDimension(dimension1) {
     dimension = dimension1;
   }
 
+  /**
+   * It sets the generator
+   * @param {Generator} - The generator
+   */
   setGenerator(generator1) {
     generator = generator1;
   }
 
+  /**
+   * It sets the world gamemode
+   * @param {Gamemode} - The world gamemode
+   */
   setWorldGamemode(world_gamemode1) {
     world_gamemode = world_gamemode1;
   }
 
+  /**
+   * It sets the difficulty
+   * @param {Difficulty} - The difficulty
+   */
   setDifficulty(difficulty1) {
     difficulty = difficulty1;
   }
 
+  /**
+   * It sets the spawn position X, Y, and Z
+   * @param {Number} - The spawn X
+   * @param {Number} - The spawn Y
+   * @param {Number} - The spawn Z
+   */
   setSpawnPosition(x, y, z) {
     spawn.x = x;
     spawn.y = y;
     spawn.z = z;
   }
 
+  /**
+   * It sets the spawn position
+   * @param {Number} - The permission level
+   */
   setPlayerPermissionLevel(permission_level1) {
     permission_level = permission_level1;
   }
 
+  /**
+   * It returns the spawn position
+   * @returns {Number} - The permission level
+   */
   getPlayerPermissionLevel() {
     return permission_level;
   }
 
+  /**
+   * It returns the entity id
+   * @returns {Number} - The entity id
+   */
   getEntityId() {
     return entity_id;
   }
 
+  /**
+   * It returns the runtime entity id
+   * @returns {Number} - The runtime entity id
+   */
   getRunTimeEntityId() {
     return runtimeentity_id;
   }
 
+  /**
+   * It returns the gamemode
+   * @returns {Gamemode} - The gamemode
+   */
   getGamemode() {
     return gamemode;
   }
 
+  /**
+   * It returns the player spawn position X, Y, and Z
+   * @returns {Number} - The player X
+   * @returns {Number} - The player Y
+   * @returns {Number} - The player Z
+   */
   getPlayerPosition() {
     return {
       x: playerx,
@@ -130,6 +214,11 @@ class StartGame extends require("./Packet") {
     };
   }
 
+  /**
+   * It returns the player rotation X and Z
+   * @returns {Number} - The player rotation X
+   * @returns {Number} - The player rotation Z
+   */
   getPlayerRotation() {
     return {
       x: rotationx,
@@ -137,40 +226,71 @@ class StartGame extends require("./Packet") {
     };
   }
 
+  /**
+   * It returns the seed
+   * @returns {Array} - The seed
+   */
   getSeed() {
     return seed;
   }
 
+  /**
+   * It returns the biome type
+   * @returns {Number} - The biome type
+   */
   getBiomeType() {
     return biome_type;
   }
 
+  /**
+   * It returns the biome name
+   * @returns {string} - The biome name
+   */
   getBiomeName() {
     return biome_name;
   }
 
+  /**
+   * It returns the dimension
+   * @returns {Dimension} - The dimension
+   */
   getDimension() {
     return dimension;
   }
 
+  /**
+   * It returns the generator
+   * @returns {Generator} - The generator
+   */
   getGenerator() {
     return generator;
   }
 
+  /**
+   * It returns the world gamemode
+   * @returns {Gamemode} - The world gamemode
+   */ 
   getWorldGamemode() {
     return world_gamemode;
   }
 
+  /**
+   * It returns the difficulty
+   * @returns {Difficulty} - The difficulty
+   */
   getDifficulty() {
     return difficulty;
   }
 
+  /**
+   * It returns the spawn position as JSON
+   * @returns The spawn position as JSON
+   */
   getSpawnPosition() {
     return spawn;
   }
 
   /**
-   * It writes a packet to the client
    * @param client - The client that will receive the packet
    */
   send(client) {

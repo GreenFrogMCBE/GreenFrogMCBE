@@ -25,7 +25,7 @@ class CommandKick extends require("./Command") {
   }
 
   execute(args) {
-    if (!commands.console_command_kick) {
+    if (!commands.consoleCommandKick) {
       Logger.log(lang.commands.unknownCommand);
       return;
     }

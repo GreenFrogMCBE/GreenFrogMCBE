@@ -54,9 +54,7 @@ class CommandHelp extends require("./Command") {
       }
     }
 
-    if (!commandsfound) {
-      Logger.log(lang.commands.thereAreNoCommands);
-    }
+    if (!commandsfound) Logger.log(lang.commands.thereAreNoCommands);
   }    
 }
 

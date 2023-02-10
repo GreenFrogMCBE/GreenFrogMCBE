@@ -21,9 +21,6 @@ let count = 0;
 
 module.exports = {
   loadPlugins() {
-    setTimeout(() => {
-      CCH.start();
-    }, 1000);
     try {
       fs.mkdirSync("./plugins/");
       fs.mkdirSync("./pluginsconfigs/");
@@ -35,7 +32,7 @@ module.exports = {
       files.forEach((file) => {
         fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
           if (stats.isDirectory()) {
-            Logger.log(lang.loadingPlugin.replace("%plugin%", file));
+            Logger.log(lang.server.loadingPlugin.replace("%plugin%", file));
             let name,
               version,
               main = null;
@@ -48,14 +45,14 @@ module.exports = {
                 require(`${__dirname}/../../plugins/${file}/package.json`).main;
             } catch (ignored) {
               Logger.log(
-                lang.packageJSONError.replace("%plugin%", file),
+                lang.errors.packageJSONError.replace("%plugin%", file),
                 "warning"
               );
             }
             try {
               require(`${__dirname}/../../plugins/${file}/${main}`).onLoad();
               Logger.log(
-                lang.loadedPlugin
+                lang.server.loadedPlugin
                   .replace("%name%", name)
                   .replace("%version%", version)
               );
@@ -63,7 +60,7 @@ module.exports = {
               count++;
             } catch (e) {
               Logger.log(
-                lang.failedToExecFunction
+                lang.errors.failedToExecFunction
                   .replace("%plugin%", file)
                   .replace("%e%", e.stack),
                 "error"
@@ -80,7 +77,7 @@ module.exports = {
   },
 
   async unloadPlugins() {
-    Logger.log(lang.shuttingDownPlugins);
+    Logger.log(lang.server.shuttingDownPlugins);
     fs.readdir("./plugins", (err, files) => {
       files.forEach((file) => {
         fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
@@ -95,25 +92,25 @@ module.exports = {
                 require(`${__dirname}/../../plugins/${file}/package.json`).displayName;
             } catch (ignored) {
               Logger.log(
-                lang.packageJSONError.replace("%plugin%", file),
+                lang.errors.packageJSONError.replace("%plugin%", file),
                 "warning"
               );
             }
             try {
-              Logger.log(lang.unloadingPlugin.replace("%plugin%", name));
+              Logger.log(lang.server.unloadingPlugin.replace("%plugin%", name));
               try {
                 require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
               } finally {
-                Logger.log(lang.unloadedPlugin.replace("%plugin%", name));
+                Logger.log(lang.server.unloadedPlugin.replace("%plugin%", name));
                 if (count <= 0) {
-                  Logger.log(lang.doneShuttingDownPlugins);
-                  Logger.log(lang.doneShuttingDown);
-                  process.exit(config.exitstatuscode);
+                  Logger.log(lang.server.doneShuttingDownPlugins);
+                  Logger.log(lang.server.doneShuttingDown);
+                  process.exit(config.exitCode);
                 }
               }
             } catch (e) {
               Logger.log(
-                lang.failedToExecFunction
+                lang.errors.failedToExecFunction
                   .replace("%plugin%", file)
                   .replace("%e%", e.stack),
                 "error"

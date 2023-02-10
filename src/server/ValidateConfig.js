@@ -35,7 +35,7 @@ module.exports = {
           `Failed to load and parse language file ${file} | Error: ${e.stack}`,
           "error"
         );
-        process.exit(config.crashstatuscode);
+        process.exit(config.crashCode);
       }
     }
   },

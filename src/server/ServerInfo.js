@@ -16,6 +16,6 @@ const fs = require('fs');
 module.exports = {
   lang: require(`../lang/${yaml.load(fs.readFileSync('config.yml', 'utf8')).lang}.json`),
   config: yaml.load(fs.readFileSync('config.yml', 'utf8')),
-  majorserverversion: "2.0",
-  serverversion: "2.0",
+  majorserverversion: "2.2",
+  serverversion: "2.2",
 };

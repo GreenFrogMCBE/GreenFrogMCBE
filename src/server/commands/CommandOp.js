@@ -24,7 +24,7 @@ class CommandOp extends require("./Command") {
   }
 
   execute(args) {
-    if (!commands.console_command_op) {
+    if (!commands.consoleCommandOp) {
       Logger.log(lang.errors.unknownCommand);
       return;
     }

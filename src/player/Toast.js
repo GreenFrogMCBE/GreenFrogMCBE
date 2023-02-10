@@ -13,9 +13,6 @@
 const ToastRequest = require("../network/packets/ToastRequest");
 
 class Toast {
-  /**
-   * The constructor function is called when a new instance of the class is created
-   */
   constructor() {
     this.title = "";
     this.message = "";

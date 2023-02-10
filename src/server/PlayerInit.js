@@ -59,9 +59,7 @@ module.exports = {
         GameMode.SEPCTATOR,
         GameMode.FALLBACK,
       ];
-      if (!validGamemodes.includes(gamemode)) {
-        throw new Error("Invalid gamemode");
-      }
+      if (!validGamemodes.includes(gamemode)) throw new Error(lang.errors.invalidGamemode);
       player.gamemode = gamemode;
       const gm = new PlayerGamemode();
       gm.setGamemode(gamemode);
