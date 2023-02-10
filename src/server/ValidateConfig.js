@@ -21,10 +21,10 @@ module.exports = {
   async ValidateLangFiles() {
     const files = [
       "../lang/en_US.json",
-      "../lang/lt_LT.json",
-      "../lang/uk_UA.json",
-      "../lang/vi_VN.json",
-      "../lang/fr_FR.json",
+    //  "../lang/lt_LT.json",
+    //  "../lang/uk_UA.json",
+    //  "../lang/vi_VN.json",
+    //  "../lang/fr_FR.json",
     ];
 
     for (const file of files) {

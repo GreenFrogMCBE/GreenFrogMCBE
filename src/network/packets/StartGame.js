@@ -6389,7 +6389,7 @@ class StartGame extends require("./Packet") {
         }
       ],
       multiplayer_correlation_id: "77804352-c5eb-4a76-82ae-6a61fef7f618",
-      server_authoritative_inventory: true,
+      server_authoritative_inventory: false,
       engine: "GreenFrogMCBE",
       property_data: {
         type: "compound",
