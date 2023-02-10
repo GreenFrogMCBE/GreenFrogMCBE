@@ -72,7 +72,8 @@
     "serverShutdown": "§cServer shutdown",
     "invalidUsername": "§cThe username you sent is invalid",
     "resourcePacksRefused": "§cYou must accept resource packs to join this server",
-    "kickedByPlugin": "§cDisconnected"
+    "kickedByPlugin": "§cDisconnected",
+    "versionMismatch": "§cUnsupported version! Please use %version%"
   },
   "errors": {
     "debugWarning": "Debug is enabled! Use this only if you are developer and never use this thing in production",

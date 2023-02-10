@@ -34,6 +34,7 @@ const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const ValidateClient = require("./player/ValidateClient");
+const PlayerInit = require("./server/PlayerInit")
 const Logger = require("./server/Logger");
 const Events = require("./plugin/Events");
 
@@ -134,6 +135,8 @@ module.exports = {
    */
   async onJoin(client) {
     await ValidateClient.initAndValidateClient(client);
+
+    PlayerInit.initPlayer(client);
 
     Events.executeOJ(this.server, client);
 

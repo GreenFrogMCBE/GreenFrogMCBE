@@ -49,6 +49,7 @@ crashCode: -1
 exitCode: 0
 logUnhandledPackets: false
 defaultPermissionLevel: 2
+multiProtocol: false # Supports 1.19.20+. Some features may be broken
 
 # WORLD SETTINGS
 #
