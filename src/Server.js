@@ -66,12 +66,7 @@ module.exports = {
       Logger.log(lang.errors.otherServerRunning, "error");
       process.exit(config.crashCode);
     } else {
-      let se = "Server error: "
-      try {
-        if (lang.errors.serverError) return
-        se = lang.errors.serverError
-      } catch (e) { /* Ignored */ }
-      Logger.log(`${se}\n${err.stack}`, "error");
+      Logger.log(`Server error: \n${err.stack}`, "error");
       if (!config.unstable) process.exit(config.crashCode);
     }
   },
@@ -150,6 +145,8 @@ module.exports = {
     responsepackinfo.setBehaviorPacks([]);
     responsepackinfo.setTexturePacks([]);
     responsepackinfo.send(client);
+
+    client.offline = false
   },
 
   /**

@@ -93,7 +93,6 @@
     "invalidLogLevel": "Invalid log level: ",
     "failedToBind": "Failed to bind port on %address%",
     "otherServerRunning": "This usually means that another server is already running on this port",
-    "serverError": "Server error: ",
     "packetErrorOffline": "An attempt to handle packet from offline player",
     "invalidGamemode": "Invalid gamemode",
     "targetServerNull": "Packet processing error: The target server is null!",

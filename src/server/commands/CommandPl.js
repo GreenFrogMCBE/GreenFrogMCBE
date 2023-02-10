@@ -52,11 +52,10 @@ class CommandPl extends require("./Command") {
         PluginManager.getPlugins().toString().split(",")[i] +
         ColorsServer.CONSOLE_RESET +
         ", ";
-      }
+    }
 
     Logger.log(
-      `${lang.commands.Plugins} (${plugins}): ${pluginlist ?? ""} ${
-        ColorsServer.CONSOLE_RESET
+      `${lang.commands.Plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsServer.CONSOLE_RESET
       }`
     );
   }
@@ -71,26 +70,25 @@ class CommandPl extends require("./Command") {
       return;
     }
     let plugins;
-    if (PluginManager.plugins == null) {
+    if (PluginManager.getPlugins() == null) {
       plugins = 0;
     } else {
-      plugins = PluginManager.plugins.length;
+      plugins = PluginManager.getPlugins().length;
     }
 
     let pluginlist = "";
     for (
       let i = 0;
-      i < PluginManager.plugins.toString().split(",").length;
+      i < PluginManager.getPlugins().toString().split(",").length;
       i++
     ) {
       pluginlist =
         pluginlist +
         ColorsPlayer.green +
-        PluginManager.plugins.toString().split(",")[i] +
-        ColorsPlayer.reset +
+        PluginManager.getPlugins().toString().split(",")[i] +
+        ColorsPlayer.white +
         ", ";
     }
-
     player.sendMessage(
       `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsPlayer.reset}`,
       "info"

@@ -16,7 +16,7 @@ const { lang } = require("../../../server/ServerInfo");
 class Unhandled extends require("./Handler") {
   handle(packet) {
     Logger.log(
-      `${lang.debug.ignoredPacket.replace("%packet%", packet.data.name)}`,
+      `${lang.devdebug.ignoredPacket.replace("%packet%", packet.data.name)}`,
       "debug"
     );
   }

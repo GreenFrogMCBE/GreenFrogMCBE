@@ -38,7 +38,7 @@ module.exports = {
     }
 
     Logger.log(
-      lang.server.playerConnected
+      lang.playerstatuses.playerConnected
         .replace("%player%", client.username)
         .replace("%ip%", client.fullip)
     );

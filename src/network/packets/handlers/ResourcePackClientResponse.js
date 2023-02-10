@@ -50,17 +50,17 @@ class ResourcePackClientResponse extends Handler {
     switch (packet.data.params.response_status) {
       case "none": {
         Events.executePHNRPI(server, client);
-        Logger.log(lang.noRpsInstalled.replace("%player%", client.username));
+        Logger.log(lang.playerstatuses.noRpsInstalled.replace("%player%", client.username));
         break;
       }
       case "refused": {
         Events.executeFTEORPF(server, client);
-        Logger.log(lang.rpsrefused.replace("%player%", client.username));
+        Logger.log(lang.playerstatuses.rpsrefused.replace("%player%", client.username));
         throw new ClientDisconnect(lang.resourcePacksRefused);
       }
       case "have_all_packs": {
         Events.executeFTEOPHAP(server, client);
-        Logger.log(lang.rpsInstalled.replace("%player%", client.username));
+        Logger.log(lang.playerstatuses.rpsInstalled.replace("%player%", client.username));
 
         const resourcepackstack = new ResourcePackStack();
         resourcepackstack.setMustAccept(false);
@@ -86,9 +86,9 @@ class ResourcePackClientResponse extends Handler {
             }
           }
 
-          if (!client.op) client.permlevel = config.default_permission_level;
+          if (!client.op) client.permlevel = config.defaultPermissionLevel;
 
-          Logger.log(lang.joined.replace("%player%", client.username));
+          Logger.log(lang.playerstatuses.joined.replace("%player%", client.username));
 
           PlayerInit.initPlayer(client);
 
@@ -107,7 +107,7 @@ class ResourcePackClientResponse extends Handler {
           startgame.setBiomeName(Biome.PLAINS);
           startgame.setDimension(Dimension.OVERWORLD);
           startgame.setGenerator(Generator.FLAT);
-          startgame.setWorldGamemode(config.world_gamemode);
+          startgame.setWorldGamemode(config.worldGamemode);
           startgame.setDifficulty(Difficulty.NORMAL);
           startgame.setSpawnPosition(0, 100, 0);
           startgame.setPlayerPermissionLevel(client.permlevel);
@@ -126,15 +126,11 @@ class ResourcePackClientResponse extends Handler {
           availableentityids.send(client);
 
           const creativecontent = new CreativeContent();
-          creativecontent.setItems(
-            require("../res/creativecontent.json").content
-          );
+          creativecontent.setItems(require("../res/creativecontent.json").content);
           creativecontent.send(client);
 
           const respawn = new Respawn();
-          respawn.setX(0);
-          respawn.setY(100);
-          respawn.setZ(0);
+          respawn.setPosition(0, 100, 0);
           respawn.setState(0);
           respawn.setRuntimeEntityId(0);
           respawn.send(client);
@@ -147,38 +143,38 @@ class ResourcePackClientResponse extends Handler {
           commandmanager.init(client);
           commandmanager.addCommand(
             client,
-            new CommandVersion().name(),
+            new CommandVersion().name().toLowerCase(),
             new CommandVersion().getPlayerDescription()
           );
           commandmanager.addCommand(
             client,
-            new CommandVersion().aliases()[0],
+            new CommandVersion().aliases()[0].toLowerCase(),
             new CommandVersion().getPlayerDescription()
           );
           commandmanager.addCommand(
             client,
-            new CommandPl().name(),
+            new CommandPl().name().toLowerCase(),
             new CommandPl().getPlayerDescription()
           );
           commandmanager.addCommand(
             client,
-            new CommandPl().aliases()[0],
+            new CommandPl().aliases()[0].toLowerCase(),
             new CommandPl().getPlayerDescription()
           );
           if (client.op) {
             commandmanager.addCommand(
               client,
-              new CommandShutdown().name(),
+              new CommandShutdown().name().toLowerCase(),
               new CommandShutdown().getPlayerDescription()
             );
             commandmanager.addCommand(
               client,
-              new CommandSay().name(),
+              new CommandSay().name().toLowerCase(),
               new CommandSay().getPlayerDescription()
             );
             commandmanager.addCommand(
               client,
-              new CommandOp().name(),
+              new CommandOp().name().toLowerCase(),
               new CommandOp().getPlayerDescription()
             );
           }
@@ -215,7 +211,7 @@ class ResourcePackClientResponse extends Handler {
           }
 
           setInterval(() => {
-            if (client.offline) {
+            if (!client.offline) {
               const networkchunkpublisher = new NetworkChunkPublisherUpdate();
               networkchunkpublisher.setCords(0, 0, 0);
               networkchunkpublisher.setRadius(64);
@@ -224,7 +220,7 @@ class ResourcePackClientResponse extends Handler {
             }
           }, 50);
 
-          Logger.log(lang.spawned.replace("%player%", client.username));
+          Logger.log(lang.playerstatuses.spawned.replace("%player%", client.username));
           setTimeout(() => {
             if (!client.offline) {
               const ps = new PlayStatus();
@@ -236,18 +232,18 @@ class ResourcePackClientResponse extends Handler {
 
           setTimeout(() => {
             if (client.offline) return;
-            for (let i = 0; i < new PlayerInfo().players.length; i++) {
-              new PlayerInfo().players[i].sendMessage(
-                  lang.joinedTheGame.replace("%username%", client.username)
+            for (let i = 0; i < PlayerInfo.players.length; i++) {
+              PlayerInfo.players[i].sendMessage(
+                  lang.broadcasts.joinedTheGame.replace("%username%", client.username)
                 );
             }
           }, 1000);
         }
         break;
       default:
-        if (config.logunhandledpackets)
+        if (config.logUnhandledPackets)
           Logger.log(
-            lang.unhandledPacketData.replace(
+            lang.debugdev.unhandledPacketData.replace(
               "%data%",
               packet.data.params.response_status
             )
