@@ -200,8 +200,8 @@ module.exports = {
         host: config.host,
         port: config.port,
         version: config.version,
-        offline: config.offlinemode,
-        maxPlayers: config.maxplayers,
+        offline: config.offlineMode,
+        maxPlayers: config.maxPlayers,
         motd: {
           motd: config.motd,
           levelName: "GreenFrogMCBE",
