@@ -17,6 +17,8 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 #### website > https://greenfrog.f1470348511.workers.dev/
 
+#### help to translate > https://poeditor.com/join/project/fwIZCyBjPw
+
 ## How to install
 
 1. Clone this repo
@@ -67,6 +69,19 @@ If you have one feel free to open an issue
 15. Transfer packet support
 16. Packet API
 
+## Credits
+
+```@andriycraft - For creating this software
+@AnyBananaGAME - For creating multilang (#9)
+@hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33)
+@NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24)
+@ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype  (#44)
+@bufferfishq - For adding support for custom_form and new plugin system (#47)
+@andriycraftbot - For fixing the code style
+@Zwuiix-cmd - Suggested custom_form support
+EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) - Used as an example for custom_form support
+```
+
 ## Language system
 
 Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese
@@ -90,16 +105,3 @@ If you want to support this project, you can donate at: https://www.paypal.com/d
 If you have one fell free to open an issue!
 
 - Currently none
-
-## Credits
-
-```@andriycraft - For creating this software
-@AnyBananaGAME - For creating multilang (#9)
-@hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33)
-@NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24)
-@ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype  (#44)
-@bufferfishq - For adding support for custom_form and new plugin system (#47)
-@andriycraftbot - For fixing the code style
-@Zwuiix-cmd - Suggested custom_form support
-EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) - Used as an example for custom_form support
-```
