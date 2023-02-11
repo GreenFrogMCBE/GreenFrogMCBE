@@ -212,6 +212,9 @@ class ResourcePackClientResponse extends Handler {
           block.setX(-1);
           block.setY(98);
           block.setZ(0);
+          block.setNeighbors(true)
+          block.setNetwork(true)
+          block.setFlagsValue(3)
           block.setBlockRuntimeId(0);
           block.send(client);
           if (config.renderChunks) {
@@ -221,6 +224,9 @@ class ResourcePackClientResponse extends Handler {
                 block.setX(x);
                 block.setY(98);
                 block.setZ(z);
+                block.setNeighbors(true)
+                block.setNetwork(true)
+                block.setFlagsValue(3)
                 block.setBlockRuntimeId(Math.floor(Math.random() * 1000));
                 block.send(client);
               }
@@ -265,7 +271,7 @@ class ResourcePackClientResponse extends Handler {
       default:
         if (config.logUnhandledPackets)
           Logger.log(
-            lang.debugdev.unhandledPacketData.replace(
+            lang.debugdev.unhandledPacket.replace(
               "%data%",
               packet.data.params.response_status
             )

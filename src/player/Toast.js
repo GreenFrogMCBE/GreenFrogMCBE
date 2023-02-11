@@ -20,7 +20,7 @@ class Toast {
 
   /**
    * It sends a toast request to the client
-   * @param client - The client that will receive the toast.
+   * @param client - The client
    */
   send(client) {
     let packet = new ToastRequest();

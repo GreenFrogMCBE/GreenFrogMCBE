@@ -14,6 +14,10 @@ const Logger = require("../server/Logger");
 const { lang, config } = require("../server/ServerInfo");
 
 module.exports = {
+  /**
+   * Validates the client
+   * @param {Object} client 
+   */
   initAndValidateClient(client) {
     client.ip = client.connection.address.split("/")[0];
     client.port = client.connection.address.split("/")[1];

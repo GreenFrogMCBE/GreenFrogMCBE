@@ -14,8 +14,7 @@ let playersOnline = [];
 
 module.exports = {
   /**
-   * The function takes in an array of players and adds them to the game.
-   * @param player - An array of players.
+   * @param player - A player.
    */
   addPlayer(player) {
     playersOnline.push(player);
