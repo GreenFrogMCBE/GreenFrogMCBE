@@ -18,7 +18,7 @@ class CreativeContent extends require("./Packet") {
   }
 
   /**
-   * It sets the items list 
+   * It sets the items list
    * @param {Array} items2 - The list of items
    */
   setItems(items2) {

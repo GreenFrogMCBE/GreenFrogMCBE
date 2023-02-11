@@ -16,7 +16,7 @@
 let server_address = null;
 let port = null;
 
-const { lang } = require('../../server/ServerInfo')
+const { lang } = require("../../server/ServerInfo");
 
 class Transfer extends require("./Packet") {
   /**

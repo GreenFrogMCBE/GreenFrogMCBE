@@ -12,7 +12,7 @@
  */
 const PacketHandlingError = require("../exceptions/PacketHandlingError");
 const InventorySlot = require("../InventorySlot");
-const { lang } = require("../../../server/ServerInfo")
+const { lang } = require("../../../server/ServerInfo");
 const Logger = require("../../../server/Logger");
 const Handler = require("./Handler");
 
@@ -71,7 +71,10 @@ class ItemStackRequest extends Handler {
       }
     } catch (e) {
       Logger.log(
-        lang.failedtohandleitem.replace('%data%', `${client.username}: ${e.stack}`),
+        lang.failedtohandleitem.replace(
+          "%data%",
+          `${client.username}: ${e.stack}`
+        ),
         "error"
       );
     }

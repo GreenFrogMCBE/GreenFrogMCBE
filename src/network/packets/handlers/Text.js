@@ -13,11 +13,11 @@
 const PlayerInfo = require("../../../player/PlayerInfo");
 const Logger = require("../../../server/Logger");
 const Events = require("../../../plugin/Events");
-const { lang, config } = require("../../../server/ServerInfo")
+const { lang, config } = require("../../../server/ServerInfo");
 
-class Text extends require('./Handler') {
+class Text extends require("./Handler") {
   handle(client, packet) {
-    if (config.disable) return
+    if (config.disable) return;
     const msg = packet.data.params.message;
     const fullmsg = lang.chat.chatFormat
       .replace("%username%", client.username)

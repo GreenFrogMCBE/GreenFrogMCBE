@@ -32,7 +32,7 @@ class ResourcePackStack extends require("./Packet") {
 
   /**
    * It sets the behavior packs
-   * @param {Array} - The behavior packs 
+   * @param {Array} - The behavior packs
    */
   setBehaviorPacks(behavior_packs1) {
     behavior_packs = behavior_packs1;
@@ -40,7 +40,7 @@ class ResourcePackStack extends require("./Packet") {
 
   /**
    * It sets sets the resource packs
-   * @param {Array} - The resource packs 
+   * @param {Array} - The resource packs
    */
   setResourcePacks(resource_packs1) {
     resource_packs = resource_packs1;

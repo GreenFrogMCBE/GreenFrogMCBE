@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const PacketHandlingError = require("../exceptions/PacketHandlingError");
-const { lang } = require("../../../lang/en_US.json") 
+const { lang } = require("../../../lang/en_US.json");
 const ContainerOpen = require("../ContainerOpen");
 const Handler = require("./Handler");
 
@@ -32,7 +32,12 @@ class Interact extends Handler {
         break;
       }
       default: {
-        throw new PacketHandlingError(lang.notsupportedactionid.replace('%ai%', packet.data.params.action_id));
+        throw new PacketHandlingError(
+          lang.notsupportedactionid.replace(
+            "%ai%",
+            packet.data.params.action_id
+          )
+        );
       }
     }
   }

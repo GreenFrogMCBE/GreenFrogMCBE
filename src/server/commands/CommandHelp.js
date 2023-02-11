@@ -40,10 +40,16 @@ class CommandHelp extends require("./Command") {
       { command: "shutdown", help: lang.commands.shutdownHelp },
     ];
 
-    let commandsfound = false
+    let commandsfound = false;
     for (const help of commandHelps) {
-      if (config[`consoleCommand${help.command.charAt(0).toUpperCase() + help.command.slice(1)}`]) {
-        commandsfound = true
+      if (
+        config[
+          `consoleCommand${
+            help.command.charAt(0).toUpperCase() + help.command.slice(1)
+          }`
+        ]
+      ) {
+        commandsfound = true;
         Logger.log(
           help.help
             .replace("%green%", "\x1b[32m")
@@ -55,7 +61,7 @@ class CommandHelp extends require("./Command") {
     }
 
     if (!commandsfound) Logger.log(lang.commands.thereAreNoCommands);
-  }    
+  }
 }
 
 module.exports = CommandHelp;

@@ -38,7 +38,7 @@ class SetCommandsEnabled extends require("./Packet") {
   }
 
   /**
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
     client.write(this.name(), {

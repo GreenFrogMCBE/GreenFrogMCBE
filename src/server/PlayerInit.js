@@ -59,7 +59,8 @@ module.exports = {
         GameMode.SEPCTATOR,
         GameMode.FALLBACK,
       ];
-      if (!validGamemodes.includes(gamemode)) throw new Error(lang.errors.invalidGamemode);
+      if (!validGamemodes.includes(gamemode))
+        throw new Error(lang.errors.invalidGamemode);
       player.gamemode = gamemode;
       const gm = new PlayerGamemode();
       gm.setGamemode(gamemode);
@@ -112,7 +113,12 @@ module.exports = {
         Events.executeOL(require("../Server").server, player);
         if (!player.kicked) {
           player.kick(lang.kickmessages.playerDisconnected);
-          Logger.log(lang.playerstatuses.disconnected.replace("%player%", player.username));
+          Logger.log(
+            lang.playerstatuses.disconnected.replace(
+              "%player%",
+              player.username
+            )
+          );
           Chat.broadcastMessage(
             /* Replacing the %player% with the player's username. */
             lang.broadcasts.leftTheGame.replace("%player%", player.username)

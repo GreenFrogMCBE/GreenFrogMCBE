@@ -10,11 +10,13 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const fs = require('fs')
+const fs = require("fs");
 
 try {
-  if (!fs.existsSync('config.yml')) {
-    fs.writeFileSync('config.yml', `# LISTENING
+  if (!fs.existsSync("config.yml")) {
+    fs.writeFileSync(
+      "config.yml",
+      `# LISTENING
 # 
 # This section contains the config for server host and port
 
@@ -80,7 +82,8 @@ playerCommandVersion: true
 playerCommandPlugins: true
 playerCommandStop: true
 playerCommandSay: true
-playerCommandOp: true`)
+playerCommandOp: true`
+    );
   }
   const Frog = require("./src/Server.js");
   Frog.start();

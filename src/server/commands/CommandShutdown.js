@@ -18,7 +18,7 @@ class CommandShutdown extends require("./Command") {
   }
 
   aliases() {
-    return null
+    return null;
   }
 
   execute() {
@@ -38,7 +38,7 @@ class CommandShutdown extends require("./Command") {
       client.sendMessage(lang.errors.noPermission);
       return;
     }
-    client.sendMessage("§c" + lang.server.stoppingServer)
+    client.sendMessage("§c" + lang.server.stoppingServer);
     this.execute();
   }
 }

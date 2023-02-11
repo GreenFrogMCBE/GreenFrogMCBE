@@ -31,7 +31,7 @@ class CommandRequest extends require("./Handler") {
   }
 
   handle(client, packet) {
-    if (config.commandsDisabled) return
+    if (config.commandsDisabled) return;
     let cmd = packet.data.params.command;
     this.validate(cmd);
     Events.executeOC2(require("../../../Server").server, client, cmd);
