@@ -115,8 +115,8 @@ module.exports = {
         new ModalFormResponse().handle(this.server, client, packet);
         break;
       default:
-        if (config.logunhandledpackets || process.argv.includes("--debug")) {
-          Logger.log(lang.errors.unhandledPacket, "warning");
+        if (config.logUnhandledPackets || process.argv.includes("--debug")) {
+          Logger.log(lang.debdebug.unhandledPacket, "warning");
           console.log("%o", packet);
         }
         break;

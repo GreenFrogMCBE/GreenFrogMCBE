@@ -64,7 +64,7 @@ class UpdateBlock extends require("./Packet") {
 
   /**
    * It sets the flags value
-   * @param {Number} flagsvalue1 - It sets the flags value.
+   * @param {Number} flagsvalue1 - It sets the flags count (aka flags value).
    */
   setFlagsValue(flagsvalue1) {
     flagsvalue = parseInt(flagsvalue1);
