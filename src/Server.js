@@ -116,7 +116,7 @@ module.exports = {
         break;
       default:
         if (config.logUnhandledPackets || process.argv.includes("--debug")) {
-          Logger.log(lang.debdebug.unhandledPacket, "warning");
+          Logger.log(lang.devdebug.unhandledPacket, "warning");
           console.log("%o", packet);
         }
         break;
