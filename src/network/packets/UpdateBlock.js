@@ -10,8 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It sends a packet to the client to update a block */
-
 let x = 0;
 let y = 0;
 let z = 0;
