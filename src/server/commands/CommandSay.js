@@ -20,7 +20,7 @@ class CommandSay extends require("./Command") {
   }
 
   aliases() {
-    return null
+    return null;
   }
 
   execute(args) {
@@ -69,7 +69,7 @@ class CommandSay extends require("./Command") {
       .replace(`%sender%`, client.username);
 
     for (let i = 0; i < PlayerInfo.players.length; i++) {
-      client.sendMessage(msg)
+      client.sendMessage(msg);
     }
     Logger.log(msg);
   }

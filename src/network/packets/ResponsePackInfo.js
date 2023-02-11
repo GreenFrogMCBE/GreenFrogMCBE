@@ -30,7 +30,7 @@ class ResponsePackInfo extends require("./Packet") {
   }
 
   /**
-   * It updates the value of has_scripts 
+   * It updates the value of has_scripts
    * @param has_scripts1 - Does the RP has scripts?
    */
   setHasScripts(has_scripts1) {
@@ -47,7 +47,7 @@ class ResponsePackInfo extends require("./Packet") {
 
   /**
    * It sets the texture_packs
-  * @param texture_packs1 - The texture packs.
+   * @param texture_packs1 - The texture packs.
    */
   setTexturePacks(texture_packs1) {
     texture_packs = texture_packs1;

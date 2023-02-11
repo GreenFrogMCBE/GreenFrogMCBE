@@ -21,7 +21,7 @@ class CommandTime extends require("./Command") {
   }
 
   aliases() {
-    return null
+    return null;
   }
 
   execute(args) {

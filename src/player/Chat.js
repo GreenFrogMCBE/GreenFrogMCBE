@@ -17,9 +17,9 @@ const { lang } = require("../server/ServerInfo");
 module.exports = {
   /**
    * Broadcasts message to all players
-   * @param {string} msg 
+   * @param {string} msg
    */
-  broadcastMessage(msg = '') {
+  broadcastMessage(msg = "") {
     for (const player of players) {
       player.sendMessage(msg);
     }

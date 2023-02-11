@@ -29,7 +29,7 @@ module.exports = {
     }
     setTimeout(() => {
       CCH.start();
-    }, 1000)
+    }, 1000);
 
     fs.readdir("./plugins", (err, files) => {
       files.forEach((file) => {
@@ -101,7 +101,9 @@ module.exports = {
               try {
                 require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
               } finally {
-                Logger.log(lang.server.unloadedPlugin.replace("%plugin%", name));
+                Logger.log(
+                  lang.server.unloadedPlugin.replace("%plugin%", name)
+                );
                 if (count <= 0) {
                   Logger.log(lang.server.doneShuttingDownPlugins);
                   Logger.log(lang.server.doneShuttingDown);

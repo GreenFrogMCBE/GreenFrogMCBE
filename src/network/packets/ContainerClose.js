@@ -35,16 +35,16 @@ class ContainerClose extends require("./Packet") {
   }
 
   /**
-   * It returns the window id 
-   * @returns The window id 
+   * It returns the window id
+   * @returns The window id
    */
   getWindowId() {
     return window_id;
   }
 
   /**
-   * It returns the if request is coming from server 
-   * @returns The server field 
+   * It returns the if request is coming from server
+   * @returns The server field
    */
   getServer() {
     return server;

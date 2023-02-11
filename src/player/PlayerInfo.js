@@ -22,7 +22,7 @@ module.exports = {
   },
 
   /**
-   * @param {Object} player 
+   * @param {Object} player
    * @returns The player if the player is online, null otherwise.
    */
   get(player) {

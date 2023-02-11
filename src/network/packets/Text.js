@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const TextTypes = require('./types/TextTypes');
+const TextTypes = require("./types/TextTypes");
 let message = "";
 let type = TextTypes.ANNOUNCEMENT;
 let needs_translation = false;

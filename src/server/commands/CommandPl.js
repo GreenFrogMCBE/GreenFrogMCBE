@@ -55,7 +55,8 @@ class CommandPl extends require("./Command") {
     }
 
     Logger.log(
-      `${lang.commands.Plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsServer.CONSOLE_RESET
+      `${lang.commands.Plugins} (${plugins}): ${pluginlist ?? ""} ${
+        ColorsServer.CONSOLE_RESET
       }`
     );
   }
@@ -90,7 +91,9 @@ class CommandPl extends require("./Command") {
         ", ";
     }
     player.sendMessage(
-      `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsPlayer.reset}`,
+      `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${
+        ColorsPlayer.reset
+      }`,
       "info"
     );
   }

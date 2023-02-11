@@ -20,7 +20,7 @@ class CommandOp extends require("./Command") {
   }
 
   aliases() {
-    return null
+    return null;
   }
 
   execute(args) {
@@ -56,7 +56,8 @@ class CommandOp extends require("./Command") {
     }
 
     fs.appendFile("ops.yml", player + "\n", (err) => {
-      if (!err) client.sendMessage(lang.commands.opped.replace("%player%", player));
+      if (!err)
+        client.sendMessage(lang.commands.opped.replace("%player%", player));
       else client.sendMessage("§c" + lang.commands.opFail);
     });
   }

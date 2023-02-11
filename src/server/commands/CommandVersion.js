@@ -28,9 +28,7 @@ class CommandVersion extends require("./Command") {
       return;
     }
 
-    Logger.log(
-      lang.commands.verInfo.replace("%version%", serverversion)
-    );
+    Logger.log(lang.commands.verInfo.replace("%version%", serverversion));
   }
 
   getPlayerDescription() {
@@ -43,7 +41,9 @@ class CommandVersion extends require("./Command") {
       return;
     }
 
-    client.sendMessage(lang.commands.playerVerCommandLine1.replace("%version%", serverversion));
+    client.sendMessage(
+      lang.commands.playerVerCommandLine1.replace("%version%", serverversion)
+    );
     client.sendMessage(lang.commands.playerVerCommandLine2);
     return;
   }

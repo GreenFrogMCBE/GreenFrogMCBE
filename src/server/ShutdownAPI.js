@@ -24,7 +24,9 @@ module.exports = {
       for (const player of players) {
         await player.kick(lang.server.serverShutdown);
       }
-    } catch (e) { /* ignored */ }
+    } catch (e) {
+      /* ignored */
+    }
 
     PluginLoader.unloadPlugins();
   },

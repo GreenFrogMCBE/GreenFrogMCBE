@@ -14,7 +14,7 @@
 
 let time = 0;
 
-const { lang } = require('../../server/ServerInfo')
+const { lang } = require("../../server/ServerInfo");
 
 class Time extends require("./Packet") {
   /**
@@ -29,10 +29,7 @@ class Time extends require("./Packet") {
    * @param time - The time in seconds to set the client's time to.
    */
   validate(time) {
-    if (parseInt(time) == NaN)
-      throw new Error(
-        lang.invalidTimePacket
-      );
+    if (parseInt(time) == NaN) throw new Error(lang.invalidTimePacket);
   }
 
   /**

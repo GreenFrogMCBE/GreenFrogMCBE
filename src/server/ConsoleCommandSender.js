@@ -14,7 +14,7 @@
 const rl = require("readline");
 const Logger = require("./Logger");
 const Events = require("../plugin/Events");
-const { lang, config } = require("../server/ServerInfo")
+const { lang, config } = require("../server/ServerInfo");
 const Shutdown = require("./commands/CommandShutdown");
 const Version = require("./commands/CommandVersion");
 const Kick = require("./commands/CommandKick");
@@ -56,18 +56,24 @@ module.exports = {
 
     r.on("line", (data) => {
       if (config.debug) Logger.log("started", data);
-      if (data.toLowerCase().startsWith(`${lang.commands.Time.toLowerCase()} `)) {
+      if (
+        data.toLowerCase().startsWith(`${lang.commands.Time.toLowerCase()} `)
+      ) {
         commands.time.execute(data.split(" "));
         return;
       }
 
-      if (data.toLowerCase().startsWith(`${lang.commands.Say.toLowerCase()} `)) {
+      if (
+        data.toLowerCase().startsWith(`${lang.commands.Say.toLowerCase()} `)
+      ) {
         const msg = data.split(" ").slice(1).join(" ");
         commands.say.execute(msg);
         return;
       }
 
-      if (data.toLowerCase().startsWith(`${lang.commands.Kick.toLowerCase()} `)) {
+      if (
+        data.toLowerCase().startsWith(`${lang.commands.Kick.toLowerCase()} `)
+      ) {
         const dataParts = data.split(" ");
         const target = dataParts[1];
         const reason = dataParts.slice(2).join(" ");

@@ -34,7 +34,7 @@ const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const ValidateClient = require("./player/ValidateClient");
-const PlayerInit = require("./server/PlayerInit")
+const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
 const Events = require("./plugin/Events");
 
@@ -63,7 +63,13 @@ module.exports = {
    */
   async attemptToDie(err) {
     if (err.toString().includes("Server failed to start")) {
-      Logger.log(lang.errors.failedToBind.replace('%address%', `${config.host}:${config.port}`), "error");
+      Logger.log(
+        lang.errors.failedToBind.replace(
+          "%address%",
+          `${config.host}:${config.port}`
+        ),
+        "error"
+      );
       Logger.log(lang.errors.otherServerRunning, "error");
       process.exit(config.crashCode);
     } else {
@@ -149,7 +155,7 @@ module.exports = {
     responsepackinfo.setTexturePacks([]);
     responsepackinfo.send(client);
 
-    client.offline = false
+    client.offline = false;
   },
 
   /**
@@ -157,7 +163,8 @@ module.exports = {
    */
   async initDebug() {
     if (config.unstable) Logger.log(lang.errors.unstableWarning, "warning");
-    if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.log(lang.errors.debugWarning, "warning");
+    if (process.env.DEBUG === "minecraft-protocol" || config.debug)
+      Logger.log(lang.errors.debugWarning, "warning");
   },
 
   /**
