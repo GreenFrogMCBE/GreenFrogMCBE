@@ -11,15 +11,11 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 
-const GameMode = require("../../player/GameMode");
+const Gamemode = require("../../player/GameMode");
 
-let gamemode = GameMode.FALLBACK;
+let gamemode = Gamemode.FALLBACK;
 
 class PlayerGamemode extends require("./Packet") {
-  /**
-   * It returns the packet name
-   * @returns The packet name
-   */
   name() {
     return "set_player_game_type";
   }
@@ -40,10 +36,6 @@ class PlayerGamemode extends require("./Packet") {
     return gamemode;
   }
 
-  /**
-   * It sends the packet name
-   * @param client - The client that will recieve the packet.
-   */
   send(client) {
     client.write(this.name(), {
       gamemode: this.getGamemode(),

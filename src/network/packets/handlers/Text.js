@@ -13,36 +13,36 @@
 const PlayerInfo = require("../../../player/PlayerInfo");
 const Logger = require("../../../server/Logger");
 const Events = require("../../../plugin/Events");
-const Handler = require("./Handler");
-const ServerInfo = require("../../../server/ServerInfo");
+const { lang, config } = require("../../../server/ServerInfo")
 
-class Text extends Handler {
-  handle(client, packet, lang) {
+class Text extends require('./Handler') {
+  handle(client, packet) {
+    if (config.disable) return
     const msg = packet.data.params.message;
-    const fullmsg = lang.chatFormat
+    const fullmsg = lang.chat.chatFormat
       .replace("%username%", client.username)
       .replace("%message%", msg);
-    Events.executeOC(require("../../../Server"), client, msg); // (c) bestcodequality inc 2023
+    Events.executeOC(require("../../../Server").server, client, msg); // (c) bestcodequality inc 2023
     if (
       msg.includes("§") ||
       msg.length == 0 ||
-      (msg.length > 255 && ServerInfo.config.invalidmsgsblock)
+      (msg.length > 255 && config.blockInvalidMessages)
     ) {
       Logger.log(
-        lang.illegalMessage
+        lang.errors.illegalMessage
           .replace("%msg%", msg)
           .replace("%player%", client.username),
         "warning"
       );
-      client.kick(lang.invalidChatMessage);
+      client.kick(lang.kickmessages.invalidChatMessage);
       return;
     }
 
     if (!msg.replace(/\s/g, "").length) return;
 
-    Logger.log(lang.chatMessage.replace("%message%", fullmsg));
+    Logger.log(lang.chat.chatMessage.replace("%message%", fullmsg));
 
-    for (const player of PlayerInfo.getPlayers()) {
+    for (const player of PlayerInfo.players) {
       player.sendMessage(fullmsg);
     }
   }

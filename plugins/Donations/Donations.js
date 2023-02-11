@@ -11,17 +11,12 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../../src/server/Logger");
+const yaml = require('js-yaml');
+const fs = require('fs');
 
 module.exports = {
-  name: "Donations",
-  version: "1.4",
-
-  onShutdown() {
-    Logger.log("Donations > Bye!");
-  },
-
   onLoad() {
-    const config = require("../../config.json");
+    const config = yaml.load(fs.readFileSync('config.yml', 'utf8'))
     switch (config.lang) {
       case "fr_FR":
         Logger.log(
@@ -50,4 +45,8 @@ module.exports = {
         break;
     }
   },
+
+  onShutdown() {
+    Logger.log("Donations > Bye!");
+  }
 };

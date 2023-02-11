@@ -14,6 +14,10 @@ const fs = require("fs");
 const { lang } = require("../server/ServerInfo");
 const Logger = require("../server/Logger");
 
+// TODO: REWITE
+// TODO: REWITE
+// TODO: REWITE
+
 module.exports = {
   /**
    * It executes a function in every plugin

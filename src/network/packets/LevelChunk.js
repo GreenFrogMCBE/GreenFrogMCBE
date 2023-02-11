@@ -110,11 +110,11 @@ class LevelChunk extends require("./Packet") {
    */
   send(client) {
     client.write(this.name(), {
-      x: x,
-      z: z,
-      sub_chunk_count: sub_chunk_count,
-      cache_enabled: cache_enabled,
-      payload: { type: "Buffer", data: payload },
+      x: this.getX(),
+      z: this.getZ(),
+      sub_chunk_count: this.getSubChunkCount(),
+      cache_enabled: this.getCacheEnabled(),
+      payload: { type: "Buffer", data: this.getPayload() },
     });
   }
 }

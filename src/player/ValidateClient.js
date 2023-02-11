@@ -26,7 +26,7 @@ module.exports = {
 
     if (client.username.includes(" ")) {
       new Logger().log(
-        lang.invalidUsernameWarning.replace("%player%", client.username),
+        lang.errors.invalidUsernameWarning.replace("%player%", client.username),
         "warning"
       );
       client.usernameold = client.username;
@@ -34,11 +34,11 @@ module.exports = {
     }
 
     if (client.username.length > 16 || client.username.length < 3) {
-      client.kick(lang.invalidusername);
+      client.kick(lang.errors.invalidUsername);
     }
 
     Logger.log(
-      lang.playerConnected
+      lang.playerstatuses.playerConnected
         .replace("%player%", client.username)
         .replace("%ip%", client.fullip)
     );

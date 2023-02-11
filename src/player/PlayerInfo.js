@@ -10,14 +10,10 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It's a class that stores an array of players */
 let playersOnline = [];
 
 module.exports = {
   /**
-   * AddPlayer(players) {
-   *         this.players = players
-   * }
    * The function takes in an array of players and adds them to the game.
    * @param player - An array of players.
    */
@@ -26,14 +22,19 @@ module.exports = {
   },
 
   /**
-   * GetPlayers() {
-   *         return this.players
-   * }
-   *
-   * The function getPlayers() returns the array of players.
+   * @param {Object} player 
+   * @returns The player if the player is online, null otherwise.
+   */
+  get(player) {
+    try {
+      return playersOnline.find((client) => client.username === player);
+    } catch (e) {
+      return null;
+    }
+  },
+
+  /**
    * @returns The players array.
    */
-  getPlayers() {
-    return playersOnline;
-  },
+  players: playersOnline,
 };
