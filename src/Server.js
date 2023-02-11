@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* Its the server main file. */
 process.env.DEBUG = process.argv.includes("--debug")
   ? "minecraft-protocol"
   : "";
@@ -23,7 +22,6 @@ const PluginLoader = require("./plugin/PluginLoader");
 const Text = require("./network/packets/handlers/Text");
 const ValidateConfig = require("./server/ValidateConfig");
 const Interact = require("./network/packets/handlers/Interact");
-const Unhandled = require("./network/packets/handlers/Unhandled");
 const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
 const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponse");
@@ -89,15 +87,6 @@ module.exports = {
       case "resource_pack_client_response":
         new ResourcePackClientResponse().handle(client, packet, this.server);
         break;
-      case "client_to_server_handshake":
-      case "emote_list":
-      case "set_player_game_type":
-      case "set_local_player_as_initialized":
-      case "player_action":
-      case "mob_equipment":
-      case "client_cache_status":
-        new Unhandled().handle(packet);
-        break;
       case "move_player":
         new PlayerMove().handle(client, packet);
         break;
@@ -126,7 +115,7 @@ module.exports = {
         new ModalFormResponse().handle(this.server, client, packet);
         break;
       default:
-        if (config.logunhandledpackets) {
+        if (config.logunhandledpackets || process.argv.includes("--debug")) {
           Logger.log(lang.errors.unhandledPacket, "warning");
           console.log("%o", packet);
         }
