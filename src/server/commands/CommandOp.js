@@ -16,7 +16,7 @@ const { lang, config } = require("../../server/ServerInfo");
 
 class CommandOp extends require("./Command") {
   name() {
-    return lang.Op;
+    return lang.commands.op;
   }
 
   aliases() {
@@ -29,7 +29,7 @@ class CommandOp extends require("./Command") {
       return;
     }
     if (!args) {
-      Logger.log(lang.commands.UsageOp);
+      Logger.log(lang.commands.usageOp);
       return;
     }
 

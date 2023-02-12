@@ -82,7 +82,8 @@ playerCommandVersion: true
 playerCommandPlugins: true
 playerCommandStop: true
 playerCommandSay: true
-playerCommandOp: true`
+playerCommandOp: true
+playerCommandKick: true`
     );
   }
   const Frog = require("./src/Server.js");

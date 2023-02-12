@@ -17,7 +17,7 @@ const { lang, config } = require("../../server/ServerInfo");
 
 class CommandTime extends require("./Command") {
   name() {
-    return lang.commands.Time;
+    return lang.commands.time;
   }
 
   aliases() {

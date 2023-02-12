@@ -34,12 +34,13 @@ const CommandShutdown = require("../../../server/commands/CommandShutdown");
 const CommandVersion = require("../../../server/commands/CommandVersion");
 const VersionToProtocol = require("../../../server/VersionToProtocol");
 const Dimension = require("../../../network/packets/types/Dimension");
+const CommandKick = require("../../../server/commands/CommandKick");
 const CommandSay = require("../../../server/commands/CommandSay");
 const CommandManager = require("../../../player/CommandManager");
 const CommandPl = require("../../../server/commands/CommandPl");
 const CommandOp = require("../../../server/commands/CommandOp");
-const Biome = require("../../../network/packets/types/Biome");
 const { config, lang } = require("../../../server/ServerInfo");
+const Biome = require("../../../network/packets/types/Biome");
 const PlayStatuses = require("../types/PlayStatuses");
 const Difficulty = require("../types/Difficulty");
 const Logger = require("../../../server/Logger");
@@ -189,6 +190,11 @@ class ResourcePackClientResponse extends Handler {
             client,
             new CommandOp().name().toLowerCase(),
             new CommandOp().getPlayerDescription()
+          );
+          commandmanager.addCommand(
+            client,
+            new CommandKick().name().toLowerCase(),
+            new CommandKick().getPlayerDescription()
           );
         }
 

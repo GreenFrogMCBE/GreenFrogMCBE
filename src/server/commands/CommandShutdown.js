@@ -14,7 +14,7 @@ const { lang, config } = require("../../server/ServerInfo");
 
 class CommandShutdown extends require("./Command") {
   name() {
-    return lang.commands.Stop;
+    return lang.commands.stop;
   }
 
   aliases() {

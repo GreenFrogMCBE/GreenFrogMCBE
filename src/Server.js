@@ -226,8 +226,7 @@ module.exports = {
             } catch (e) {
               client.disconnect(lang.kickmessages.internalServerError);
             }
-            const internalerror = new ServerInternalServerErrorEvent()
-            internalerror.execute(server, e)
+            new ServerInternalServerErrorEvent().execute(server, e)
             Logger.log(
               lang.errors.packetHandlingException
                 .replace("%player%", client.username)

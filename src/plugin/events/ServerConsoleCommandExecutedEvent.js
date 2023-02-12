@@ -58,14 +58,14 @@ class ServerConsoleCommandExecutedEvent extends Event {
 
             if (config.debug) Logger.log("started", command);
             if (
-                cmd.toLowerCase().startsWith(`${lang.commands.Time.toLowerCase()} `)
+                cmd.toLowerCase().startsWith(`${lang.commands.time.toLowerCase()} `)
             ) {
                 commands.time.execute(cmd.split(" "));
                 return;
             }
 
             if (
-                cmd.toLowerCase().startsWith(`${lang.commands.Say.toLowerCase()} `)
+                cmd.toLowerCase().startsWith(`${lang.commands.say.toLowerCase()} `)
             ) {
                 const msg = cmd.split(" ").slice(1).join(" ");
                 commands.say.execute(msg);
@@ -73,7 +73,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
             }
 
             if (
-                cmd.toLowerCase().startsWith(`${lang.commands.Kick.toLowerCase()} `)
+                cmd.toLowerCase().startsWith(`${lang.commands.kick.toLowerCase()} `)
             ) {
                 const dataParts = cmd.split(" ");
                 const target = dataParts[1];
@@ -82,7 +82,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
                 return;
             }
 
-            if (cmd.toLowerCase().startsWith(`${lang.commands.Op.toLowerCase()} `)) {
+            if (cmd.toLowerCase().startsWith(`${lang.commands.op.toLowerCase()} `)) {
                 commands.op.execute(cmd.split(" ")[1]);
                 return;
             }
@@ -92,34 +92,34 @@ class ServerConsoleCommandExecutedEvent extends Event {
             switch (command) {
                 case "":
                     break;
-                case lang.commands.Shutdown.toLowerCase():
-                case lang.commands.Stop.toLowerCase():
+                case lang.commands.shutdown.toLowerCase():
+                case lang.commands.stop.toLowerCase():
                     commands.shutdown.execute();
                     break;
-                case lang.commands.Op.toLowerCase():
+                case lang.commands.op.toLowerCase():
                     commands.op.execute(command.split(" ")[1]);
                     break;
-                case lang.commands.Kick.toLowerCase():
+                case lang.commands.kick.toLowerCase():
                     const reason = command.split(" ").slice(2).join(" ");
                     commands.kick.execute(command.split(" ")[1], reason);
                     break;
-                case lang.commands.Pl.toLowerCase():
-                case lang.commands.Plugins.toLowerCase():
+                case lang.commands.pl.toLowerCase():
+                case lang.commands.plugins.toLowerCase():
                     commands.pl.execute();
                     break;
-                case lang.commands.Ver.toLowerCase():
-                case lang.commands.Version.toLowerCase():
+                case lang.commands.ver.toLowerCase():
+                case lang.commands.version.toLowerCase():
                     commands.version.execute();
                     break;
-                case lang.commands.Time.toLowerCase():
+                case lang.commands.time.toLowerCase():
                     commands.time.execute();
                     break;
-                case lang.commands.Say.toLowerCase():
+                case lang.commands.say.toLowerCase():
                     const msg = command.split(" ").slice(1).join(" ");
                     commands.say.execute(msg);
                     break;
                 case "?":
-                case lang.commands.Help.toLowerCase():
+                case lang.commands.help.toLowerCase():
                     commands.help.execute();
                     break;
                 default:

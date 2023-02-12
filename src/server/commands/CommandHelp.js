@@ -16,7 +16,7 @@ const { lang, config } = require("../../server/ServerInfo");
 
 class CommandHelp extends require("./Command") {
   name() {
-    return lang.commands.commandHelp;
+    return lang.commands.help;
   }
 
   aliases() {
