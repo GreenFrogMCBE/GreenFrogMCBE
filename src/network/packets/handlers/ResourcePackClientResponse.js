@@ -223,7 +223,7 @@ class ResourcePackClientResponse extends Handler {
               block.setNeighbors(true)
               block.setNetwork(true)
               block.setFlagsValue(3)
-              block.setBlockRuntimeId(Math.floor(Math.random() * 1000));
+              block.setBlockRuntimeId(Math.floor(Math.random() * 100));
               block.send(client);
             }
           }
