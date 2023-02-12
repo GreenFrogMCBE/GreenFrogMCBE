@@ -25,16 +25,17 @@ const Interact = require("./network/packets/handlers/Interact");
 const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
 const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponse");
+const ServerInternalServerErrorEvent = require("./plugin/events/ServerInternalServerErrorEvent");
 const RequestChunkRadius = require("./network/packets/handlers/RequestChunkRadius");
 const ModalFormResponse = require("./network/packets/handlers/ModalFormResponse");
 const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
+const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
 const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
-const Events = require("./plugin/Events");
 
 let clients = [];
 let server = null;
@@ -133,7 +134,8 @@ module.exports = {
 
     PlayerInit.initPlayer(client);
 
-    Events.executeOJ(this.server, client);
+    const event = new PlayerJoinEvent()
+    event.execute(server, client)
 
     PlayerInfo.addPlayer(client);
 
@@ -224,7 +226,8 @@ module.exports = {
             } catch (e) {
               client.disconnect(lang.kickmessages.internalServerError);
             }
-            Events.executeOISE(this.server, client, e);
+            const internalerror = new ServerInternalServerErrorEvent()
+            internalerror.execute(server, e)
             Logger.log(
               lang.errors.packetHandlingException
                 .replace("%player%", client.username)
