@@ -32,7 +32,7 @@ module.exports = {
         JSON.parse(JSON.stringify(require(file)));
       } catch (e) {
         Logger.log(
-          `Failed to load and parse language file ${file} | Error: ${e.stack}`,
+          `Failed to load or parse language file ${file} | Error: ${e.stack}`,
           "error"
         );
         process.exit(config.crashCode);
