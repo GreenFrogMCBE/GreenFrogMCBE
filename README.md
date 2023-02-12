@@ -79,6 +79,7 @@ If you have one feel free to open an issue
 @bufferfishq - For adding support for custom_form and new plugin system (#47)
 @andriycraftbot - For fixing the code style
 @Zwuiix-cmd - Suggested custom_form support
+@CreeperG16 - For a better way to handle player disconnection (https://github.com/andriycraft/GreenFrogMCBE/pull/55/commits/7376c60e73d9e98c4791f89f4c7c54b644e006a4#diff-f187ec8efe95aba91b86e895736549fccc085f2e0d364e35c17cbd8a1206b744L105-R105)
 EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) - Used as an example for custom_form support
 ```
 
@@ -104,4 +105,4 @@ If you want to support this project, you can donate at: https://www.paypal.com/d
 
 If you have one fell free to open an issue!
 
-- Currently non
+- Currently none
