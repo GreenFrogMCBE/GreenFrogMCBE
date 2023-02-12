@@ -1,4 +1,3 @@
-- Rewrite the event system and move each event into its own file
 - change_dimension packet
 - Fix subchunks
 - /deop
