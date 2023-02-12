@@ -202,7 +202,7 @@ class SubChunkRequest extends require("./Handler") {
     ]);
     sub.setRequestResult("success");
     sub.setHeightMapType("has_data");
-    sub.setHeightMapData([
+    sub.setHeightMap([
       15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
       15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
       15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
