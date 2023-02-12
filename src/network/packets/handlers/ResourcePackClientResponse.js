@@ -155,47 +155,59 @@ class ResourcePackClientResponse extends Handler {
 
         const commandmanager = new CommandManager();
         commandmanager.init(client);
-        commandmanager.addCommand(
-          client,
-          new CommandVersion().name().toLowerCase(),
-          new CommandVersion().getPlayerDescription()
-        );
-        commandmanager.addCommand(
-          client,
-          new CommandVersion().aliases()[0].toLowerCase(),
-          new CommandVersion().getPlayerDescription()
-        );
-        commandmanager.addCommand(
-          client,
-          new CommandPl().name().toLowerCase(),
-          new CommandPl().getPlayerDescription()
-        );
-        commandmanager.addCommand(
-          client,
-          new CommandPl().aliases()[0].toLowerCase(),
-          new CommandPl().getPlayerDescription()
-        );
+        if (config.playerCommandVersion) {
+          commandmanager.addCommand(
+            client,
+            new CommandVersion().name().toLowerCase(),
+            new CommandVersion().getPlayerDescription()
+          );
+          commandmanager.addCommand(
+            client,
+            new CommandVersion().aliases()[0].toLowerCase(),
+            new CommandVersion().getPlayerDescription()
+          );
+        }
+        if (config.playerCommandPlugins) {
+          commandmanager.addCommand(
+            client,
+            new CommandPl().name().toLowerCase(),
+            new CommandPl().getPlayerDescription()
+          );
+          commandmanager.addCommand(
+            client,
+            new CommandPl().aliases()[0].toLowerCase(),
+            new CommandPl().getPlayerDescription()
+          );
+        }
         if (client.op) {
-          commandmanager.addCommand(
-            client,
-            new CommandShutdown().name().toLowerCase(),
-            new CommandShutdown().getPlayerDescription()
-          );
-          commandmanager.addCommand(
-            client,
-            new CommandSay().name().toLowerCase(),
-            new CommandSay().getPlayerDescription()
-          );
-          commandmanager.addCommand(
-            client,
-            new CommandOp().name().toLowerCase(),
-            new CommandOp().getPlayerDescription()
-          );
-          commandmanager.addCommand(
-            client,
-            new CommandKick().name().toLowerCase(),
-            new CommandKick().getPlayerDescription()
-          );
+          if (config.playerCommandStop) {
+            commandmanager.addCommand(
+              client,
+              new CommandShutdown().name().toLowerCase(),
+              new CommandShutdown().getPlayerDescription()
+            );
+          }
+          if (config.playerCommandSay) {
+            commandmanager.addCommand(
+              client,
+              new CommandSay().name().toLowerCase(),
+              new CommandSay().getPlayerDescription()
+            );
+          }
+          if (config.playerCommandOp) {
+            commandmanager.addCommand(
+              client,
+              new CommandOp().name().toLowerCase(),
+              new CommandOp().getPlayerDescription()
+            );
+          }
+          if (config.playerCommandKick) {
+            commandmanager.addCommand(
+              client,
+              new CommandKick().name().toLowerCase(),
+              new CommandKick().getPlayerDescription()
+            );
+          }
         }
 
         const chunk = new LevelChunk();
