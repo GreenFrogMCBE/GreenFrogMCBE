@@ -102,25 +102,21 @@ module.exports = {
     };
 
     /* Checks if the player is still online */
-    setInterval(() => {
-      if (player.q2) {
-        if (!player.kicked) {
-          new PlayerLeaveEvent().execute(require('../Server').server, player)
-          
-          Logger.log(
-            lang.playerstatuses.disconnected.replace(
-              "%player%",
-              player.username
-            )
-          );
-          
-          Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
-          
-          delete player.q2;
-          player.offline = true;
-          player.q = true;
-        }
+    player.on('close', () => {
+      if (!player.kicked) {
+        new PlayerLeaveEvent().execute(require('../Server').server, player)
+
+        Logger.log(
+          lang.playerstatuses.disconnected.replace(
+            "%player%",
+            player.username
+          )
+        );
+
+        Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+
+        player.offline = true;
       }
-    }, 50);
+    })
   },
 };
