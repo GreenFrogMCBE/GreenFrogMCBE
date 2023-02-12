@@ -12,7 +12,7 @@
  */
 const fs = require("fs");
 const Logger = require("../Logger");
-const { lang, commands } = require("../../server/ServerInfo");
+const { lang, config } = require("../../server/ServerInfo");
 
 class CommandOp extends require("./Command") {
   name() {
@@ -24,7 +24,7 @@ class CommandOp extends require("./Command") {
   }
 
   execute(args) {
-    if (!commands.consoleCommandOp) {
+    if (!config.consoleCommandOp) {
       Logger.log(lang.errors.unknownCommand);
       return;
     }

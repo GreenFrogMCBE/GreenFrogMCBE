@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { lang, commands } = require("../../server/ServerInfo");
+const { lang, config } = require("../../server/ServerInfo");
 
 class CommandShutdown extends require("./Command") {
   name() {
@@ -30,7 +30,7 @@ class CommandShutdown extends require("./Command") {
   }
 
   executePlayer(client) {
-    if (!commands.playerCommandStop) {
+    if (!config.playerCommandStop) {
       client.sendMessage(lang.errors.playerUnknownCommand);
       return;
     }
