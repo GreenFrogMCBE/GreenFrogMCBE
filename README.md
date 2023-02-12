@@ -105,4 +105,4 @@ If you want to support this project, you can donate at: https://www.paypal.com/d
 
 If you have one fell free to open an issue!
 
-- Currently non
+- Currently none
