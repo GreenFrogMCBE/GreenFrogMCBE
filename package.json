@@ -6,9 +6,8 @@
   "license": "MIT",
   "scripts": {
     "format": "npx prettier --write .",
-    "debug": "node index.js --debug",
     "start": "node index.js",
-    "dev": "nodemon --signal SIGINT index.js",
+    "dev": "nodemon --signal SIGINT index.js --debug",
     "gencoryrightheader": "node generatelicenseheaders.js",
     "build": "npm run gencoryrightheader && npm run format"
   },
