@@ -77,6 +77,7 @@ consoleCommandPlugins: true
 consoleCommandStop: true # Will only stop showing in /help, if disabled
 consoleCommandSay: true
 consoleCommandOp: true
+consoleCommandDeop: true
 consoleCommandHelp: true
 playerCommandVersion: true
 playerCommandPlugins: true

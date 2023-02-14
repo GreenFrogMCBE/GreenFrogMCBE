@@ -5,6 +5,7 @@ const Version = require("../../server/commands/CommandVersion");
 const Kick = require("../../server/commands/CommandKick");
 const Help = require("../../server/commands/CommandHelp");
 const Time = require("../../server/commands/CommandTime");
+const Deop = require("../../server/commands/CommandDeop");
 const Say = require("../../server/commands/CommandSay");
 const Op = require("../../server/commands/CommandOp");
 const PL = require("../../server/commands/CommandPl");
@@ -54,27 +55,22 @@ class ServerConsoleCommandExecutedEvent extends Event {
                 say: new Say(),
                 op: new Op(),
                 pl: new PL(),
+                deop: new Deop()
             };
 
             if (config.debug) Logger.log("started", command);
-            if (
-                cmd.toLowerCase().startsWith(`${lang.commands.time.toLowerCase()} `)
-            ) {
+            if (cmd.toLowerCase().startsWith(`${lang.commands.time.toLowerCase()} `)) {
                 commands.time.execute(cmd.split(" "));
                 return;
             }
 
-            if (
-                cmd.toLowerCase().startsWith(`${lang.commands.say.toLowerCase()} `)
-            ) {
+            if (cmd.toLowerCase().startsWith(`${lang.commands.say.toLowerCase()} `)) {
                 const msg = cmd.split(" ").slice(1).join(" ");
                 commands.say.execute(msg);
                 return;
             }
 
-            if (
-                cmd.toLowerCase().startsWith(`${lang.commands.kick.toLowerCase()} `)
-            ) {
+            if (cmd.toLowerCase().startsWith(`${lang.commands.kick.toLowerCase()} `)) {
                 const dataParts = cmd.split(" ");
                 const target = dataParts[1];
                 const reason = dataParts.slice(2).join(" ");
@@ -84,6 +80,11 @@ class ServerConsoleCommandExecutedEvent extends Event {
 
             if (cmd.toLowerCase().startsWith(`${lang.commands.op.toLowerCase()} `)) {
                 commands.op.execute(cmd.split(" ")[1]);
+                return;
+            }
+
+            if (cmd.toLowerCase().startsWith(`${lang.commands.deop.toLowerCase()} `)) {
+                commands.deop.execute(cmd.split(" ")[1]);
                 return;
             }
 
@@ -115,9 +116,11 @@ class ServerConsoleCommandExecutedEvent extends Event {
                     commands.time.execute();
                     break;
                 case lang.commands.say.toLowerCase():
-                    const msg = command.split(" ").slice(1).join(" ");
-                    commands.say.execute(msg);
+                    commands.say.execute();
                     break;
+                case lang.commands.deop.toLowerCase():
+                    commands.deop.execute()
+                    break
                 case "?":
                 case lang.commands.help.toLowerCase():
                     commands.help.execute();
