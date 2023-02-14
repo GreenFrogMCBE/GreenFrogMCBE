@@ -18,6 +18,6 @@ module.exports = {
     yaml.load(fs.readFileSync("config.yml", "utf8")).lang
   }.json`),
   config: yaml.load(fs.readFileSync("config.yml", "utf8")),
-  majorserverversion: "2.2",
-  serverversion: "2.2",
+  majorserverversion: "2.5",
+  serverversion: "2.5",
 };
