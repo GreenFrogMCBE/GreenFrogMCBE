@@ -31,7 +31,7 @@ class CommandTime extends require("./Command") {
     }
 
     if (!args) {
-      Logger.log(lang.commands.UsageTime);
+      Logger.log(lang.commands.usageTime);
       return;
     }
 

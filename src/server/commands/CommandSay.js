@@ -54,12 +54,14 @@ class CommandSay extends require("./Command") {
       client.sendMessage(lang.errors.playerUnknownCommand);
       return;
     }
+
     if (!client.op) {
-      client.sendMessage(lang.errors.noPermission);
-      return;
+      client.sendMessage(lang.errors.noPermission)
+      return
     }
+
     if (!args.split(" ")[1]) {
-      client.sendMessage("§c" + lang.commands.UsageSay);
+      client.sendMessage("§c" + lang.commands.usageSay);
       return;
     }
     args = args.split(" ")[1];

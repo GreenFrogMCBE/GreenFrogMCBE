@@ -35,10 +35,10 @@ class CommandShutdown extends require("./Command") {
       return;
     }
     if (!client.op) {
-      client.sendMessage(lang.errors.noPermission);
-      return;
+      client.sendMessage(lang.errors.noPermission)
+      return
     }
-    client.sendMessage("§c" + lang.server.stoppingServer);
+    client.sendMessage(lang.server.stoppingServer);
     this.execute();
   }
 }

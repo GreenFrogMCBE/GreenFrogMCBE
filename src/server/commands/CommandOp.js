@@ -28,6 +28,7 @@ class CommandOp extends require("./Command") {
       Logger.log(lang.errors.unknownCommand);
       return;
     }
+
     if (!args) {
       Logger.log(lang.commands.usageOp);
       return;
@@ -45,13 +46,13 @@ class CommandOp extends require("./Command") {
 
   executePlayer(client, args) {
     if (!client.op) {
-      client.sendMessage(lang.errors.noPermission);
-      return;
+      client.sendMessage(lang.errors.noPermission)
+      return
     }
 
     const player = args.split(" ")[1];
     if (!player) {
-      client.sendMessage("§c" + lang.commands.commandUsageOp);
+      client.sendMessage("§c" + lang.commands.usageOp);
       return;
     }
 
