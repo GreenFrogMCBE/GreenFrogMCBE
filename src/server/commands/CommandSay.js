@@ -46,7 +46,7 @@ class CommandSay extends require("./Command") {
   }
 
   getPlayerDescription() {
-    return lang.commands.inGameSayDescription;
+    return lang.commands.ingameSayDescription;
   }
 
   executePlayer(client, args) {

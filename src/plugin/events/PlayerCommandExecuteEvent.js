@@ -6,12 +6,14 @@ const CommandPl = require("../../server/commands/CommandPl");
 const CommandOp = require("../../server/commands/CommandOp");
 const CommandManager = require("../../player/CommandManager");
 const CommandSay = require("../../server/commands/CommandSay");
+const CommandTime = require('../../server/commands/CommandTime')
 const CommandKick = require('../../server/commands/CommandKick');
 const CommandVersion = require("../../server/commands/CommandVersion");
 const FailedToHandleEvent = require('./exceptions/FailedToHandleEvent')
 const CommandShutdown = require("../../server/commands/CommandShutdown");
 
 const fs = require('fs');
+
 
 class PlayerCommandExecuteEvent extends Event {
   constructor() {
@@ -56,6 +58,7 @@ class PlayerCommandExecuteEvent extends Event {
       const cmdSay = new CommandSay();
       const cmdOp = new CommandOp();
       const cmdKick = new CommandKick();
+      const cmdTime = new CommandTime()
 
       if (message.startsWith(`/${lang.commands.ver.toLowerCase()}`) || message.startsWith(`/${lang.commands.version.toLowerCase()}`) ) {
         cmdVer.executePlayer(client);
@@ -69,6 +72,8 @@ class PlayerCommandExecuteEvent extends Event {
         cmdOp.executePlayer(client, message);
       } else if (message.startsWith(`/${lang.commands.kick.toLowerCase()}`)) {
         cmdKick.executePlayer(client, message)
+      } else if (message.startsWith(`/${lang.commands.time.toLowerCase()}`)) {
+        cmdTime.executePlayer(client, message)
       } else {
         let exists = false;
         for (let i = 0; i < cmdManager.getCommands().length; i++) {

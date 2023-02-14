@@ -24,6 +24,10 @@ class CommandTime extends require("./Command") {
     return null;
   }
 
+  getPlayerDescription() {
+    return lang.commands.ingameTimeDescription
+  }
+
   execute(args) {
     if (!config.consoleCommandTime) {
       Logger.log(lang.errors.unknownCommand);
@@ -46,7 +50,7 @@ class CommandTime extends require("./Command") {
       default:
         time = parseInt(args[1]);
         if (isNaN(time)) {
-          Logger.log(lang.errors.invalidTime);
+          Logger.log(lang.commands.usageTime);
           return;
         }
     }
@@ -56,6 +60,36 @@ class CommandTime extends require("./Command") {
     }
 
     Logger.log(lang.commands.timeUpdated);
+  }
+
+  executePlayer(client, args) {
+    if (!config.consoleCommandTime) {
+      client.sendMessage('§c' + lang.errors.unknownCommand);
+      return;
+    }
+
+    let time = args.split(" ")[1];
+    switch (time) {
+      case "day":
+        time = 1000;
+        break;
+      case "night":
+        time = 17000;
+        break;
+      default:
+        time = parseInt(args.split(" ")[1]);
+        console.log(args, args.split(" ")[1], time, isNaN(time))
+        if (isNaN(time)) {
+          client.sendMessage('§c' + lang.commands.usageTime);
+          return;
+        }
+    }
+
+    for (const client of players) {
+      client.setTime(time);
+    }
+
+    client.sendMessage(lang.commands.timeUpdated);
   }
 }
 

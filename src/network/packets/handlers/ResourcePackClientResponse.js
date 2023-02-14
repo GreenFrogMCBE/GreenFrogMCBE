@@ -35,6 +35,7 @@ const CommandVersion = require("../../../server/commands/CommandVersion");
 const VersionToProtocol = require("../../../server/VersionToProtocol");
 const Dimension = require("../../../network/packets/types/Dimension");
 const CommandKick = require("../../../server/commands/CommandKick");
+const CommandTime = require("../../../server/commands/CommandTime");
 const CommandSay = require("../../../server/commands/CommandSay");
 const CommandManager = require("../../../player/CommandManager");
 const CommandPl = require("../../../server/commands/CommandPl");
@@ -49,11 +50,8 @@ const fs = require("fs");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
-    if (!(client.version === VersionToProtocol.getProtocol(config.version))) {
-      if (config.multiProtocol) return;
-      client.kick(
-        lang.kickmessages.versionMismatch.replace("%version%", config.version)
-      );
+    if (!(client.version === VersionToProtocol.getProtocol(config.version)) && !config.multiProtocol) {
+      client.kick(lang.kickmessages.versionMismatch.replace("%version%", config.version));
       return;
     }
 
@@ -206,6 +204,13 @@ class ResourcePackClientResponse extends Handler {
               client,
               new CommandKick().name().toLowerCase(),
               new CommandKick().getPlayerDescription()
+            );
+          }
+          if (config.playerCommandTime) {
+            commandmanager.addCommand(
+              client,
+              new CommandTime().name().toLowerCase(),
+              new CommandTime().getPlayerDescription()
             );
           }
         }
