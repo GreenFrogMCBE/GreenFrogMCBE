@@ -21,6 +21,7 @@ const PlayerLeaveEvent = require("../plugin/events/PlayerLeaveEvent");
 const ServerToClientChat = require("../plugin/events/ServerToClientChat");
 const PlayerTransferEvent = require("../plugin/events/PlayerTransferEvent");
 const PlayerGamemodeChangeEvent = require("../plugin/events/PlayerGamemodeChangeEvent");
+const ChangeDimension = require("../network/packets/ChangeDimension");
 
 
 module.exports = {
@@ -93,13 +94,29 @@ module.exports = {
 
     /**
      * Sets the player's time
-     * @param {number} time - The time to set the player to
+     * @param {Number} time - The time to set the player to
      */
     player.setTime = function (time) {
       const timepacket = new Time();
       timepacket.setTime(time);
       timepacket.send(player, time);
     };
+
+    /**
+     * Sets the dimension for the player
+     * @param {Number} x 
+     * @param {Number} y 
+     * @param {Number} z 
+     * @param {Dimensions} dimension 
+     * @param {Boolean} respawn 
+     */
+    player.setDimension = function (x, y, z, dimension, respawn) {
+      const dimensionpacket = new ChangeDimension()
+      dimensionpacket.setPosition(x, y, z)
+      dimensionpacket.setDimension(dimension)
+      dimensionpacket.setRespawn(respawn)
+      dimensionpacket.send(player)
+    }
 
     /* Checks if the player is still online */
     player.on('close', () => {
