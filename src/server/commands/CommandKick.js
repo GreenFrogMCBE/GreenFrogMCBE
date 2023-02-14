@@ -62,6 +62,11 @@ class CommandKick extends require("./Command") {
       return;
     }
 
+    if (!client.op) {
+      client.sendMessage(lang.errors.noPermission)
+      return
+    }
+
     if (!args.split(" ") || !args.split(" ")[1]) {
       client.sendMessage("§c" + lang.commands.usageKick);
       return;
