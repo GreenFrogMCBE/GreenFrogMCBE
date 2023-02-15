@@ -79,27 +79,31 @@ playerCommandTime: true`
             );
         }
         const Frog = require("./src/Server.js");
-        Frog.start();
+        await Frog.start();
         setTimeout(() => {
             try {
                 require("./src/server/ShutdownAPI.js");
             } finally {
-                console.log(`\n\nTest 1 passed`)
                 try {
+                    console.log(`\n\nTest 1 passed`)
                     console.log('\nRunning test 2: JSON parsing config files')
 
-                    console.log('Parsing en_US.json')
-                    JSON.parse(JSON.stringify(__dirname + '\\src\\lang\\en_US.json'))
-                    console.log('Parsing fr_FR.json')
-                    JSON.parse(JSON.stringify(__dirname + '\\src\\lang\\fr_FR.json'))
-                    console.log('Parsing fr_FR.json')
-                    JSON.parse(JSON.stringify(__dirname + '\\src\\lang\\lt_LT.json'))
-                    console.log('Parsing lt_LT.json')
-                    JSON.parse(JSON.stringify(__dirname + '\\src\\lang\\uk_UA.json'))
-                    console.log('Parsing uk_UA.json')
-                    JSON.parse(JSON.stringify(__dirname + '\\src\\lang\\vi_VN.json'))
-                    console.log('Parsing package.json')
-                    JSON.parse(JSON.stringify(__dirname + '\\.\\package.json'))
+                    const files = [
+                        "\\src\\lang\\en_US.json",
+                        "\\src\\lang\\lt_LT.json",
+                        "\\src\\lang\\uk_UA.json",
+                        "\\src\\lang\\vi_VN.json",
+                        "\\src\\lang\\fr_FR.json",
+                        "\\src\\network\\packets\\res\\biomes.json",
+                        "\\src\\network\\packets\\res\\creativecontent.json",
+                        "\\src\\network\\packets\\res\\entities.json",
+                        "\\package.json"
+                    ];
+
+                    for (const file of files) {
+                        console.log(`Parsing: ${file}`)
+                        JSON.parse(JSON.stringify(require(__dirname + file)));
+                    }
 
                     console.log(`\nTest 2 passed`)
                     process.exit(0)

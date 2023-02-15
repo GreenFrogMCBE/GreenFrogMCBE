@@ -20,7 +20,6 @@ const ServerInfo = require("./server/ServerInfo");
 const PlayerInfo = require("./player/PlayerInfo");
 const PluginLoader = require("./plugin/PluginLoader");
 const Text = require("./network/packets/handlers/Text");
-const ValidateConfig = require("./server/ValidateConfig");
 const Interact = require("./network/packets/handlers/Interact");
 const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
@@ -162,8 +161,6 @@ module.exports = {
    * It loads the config, lang files, and commands, then loads the plugins and starts the server.
    */
   async start() {
-    await ValidateConfig.ValidateLangFiles();
-
     await this.initJson();
 
     fs.access("ops.yml", fs.constants.F_OK, (err) => {
