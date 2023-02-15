@@ -81,7 +81,6 @@ If you have one feel free to open an issue
 @Zwuiix-cmd - Suggested custom_form support
 @CreeperG16 - For a better way to handle player disconnection (https://github.com/andriycraft/GreenFrogMCBE/pull/55/commits/7376c60e73d9e98c4791f89f4c7c54b644e006a4#diff-f187ec8efe95aba91b86e895736549fccc085f2e0d364e35c17cbd8a1206b744L105-R105)
 EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) (@Zwuiix-cmd) - Used as an example for custom_form support (i had permission from repo owner)
-BlueBird (https://github.com/BlueBirdMC/Server/blob/main/test.js) (@Kanade-Giwi, @vp817) - used as an example for test
 ```
 
 ## Language system
