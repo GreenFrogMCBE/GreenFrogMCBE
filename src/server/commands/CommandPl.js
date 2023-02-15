@@ -67,7 +67,7 @@ class CommandPl extends require("./Command") {
 
   executePlayer(player) {
     if (!config.playerCommandPlugins) {
-      Logger.log(lang.errors.unknownCommand);
+      Logger.log(lang.errors.playerUnknownCommand);
       return;
     }
     let plugins;

@@ -35,6 +35,8 @@ const CommandVersion = require("../../../server/commands/CommandVersion");
 const VersionToProtocol = require("../../../server/VersionToProtocol");
 const Dimension = require("../../../network/packets/types/Dimension");
 const CommandKick = require("../../../server/commands/CommandKick");
+const CommandList = require("../../../server/commands/CommandList");
+const CommandDeop = require("../../../server/commands/CommandDeop");
 const CommandTime = require("../../../server/commands/CommandTime");
 const CommandSay = require("../../../server/commands/CommandSay");
 const CommandManager = require("../../../player/CommandManager");
@@ -47,6 +49,7 @@ const Difficulty = require("../types/Difficulty");
 const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const fs = require("fs");
+const CommandMe = require("../../../server/commands/CommandMe");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
@@ -177,6 +180,20 @@ class ResourcePackClientResponse extends Handler {
             new CommandPl().getPlayerDescription()
           );
         }
+        if (config.playerCommandList) {
+          commandmanager.addCommand(
+            client,
+            new CommandList().name().toLowerCase(),
+            new CommandList().getPlayerDescription()
+          );
+        }
+        if (config.playerCommandMe) {
+          commandmanager.addCommand(
+            client,
+            new CommandMe().name().toLowerCase(),
+            new CommandMe().getPlayerDescription()
+          );
+        }
         if (client.op) {
           if (config.playerCommandStop) {
             commandmanager.addCommand(
@@ -211,6 +228,13 @@ class ResourcePackClientResponse extends Handler {
               client,
               new CommandTime().name().toLowerCase(),
               new CommandTime().getPlayerDescription()
+            );
+          }
+          if (config.playerCommandDeop) {
+            commandmanager.addCommand(
+              client,
+              new CommandDeop().name().toLowerCase(),
+              new CommandDeop().getPlayerDescription()
             );
           }
         }

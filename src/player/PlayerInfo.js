@@ -26,7 +26,12 @@ module.exports = {
    */
   get(player) {
     try {
-      return playersOnline.find((client) => client.username === player);
+     for (let i = 0; i < playersOnline.length; i++) {
+      if (playersOnline[i].username === player) {
+        console.log(playersOnline[i].username, player)
+        return playersOnline[i]
+      }
+     }
     } catch (e) {
       return null;
     }

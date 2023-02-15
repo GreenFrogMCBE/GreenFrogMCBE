@@ -28,16 +28,19 @@ class CommandHelp extends require("./Command") {
 
     const commandHelps = [
       { command: "?", help: lang.commands.qmHelp },
-      { command: "op", help: lang.commands.opHelp },
-      { command: "pl", help: lang.commands.plHelp },
-      { command: "ver", help: lang.commands.verHelp },
-      { command: "kick", help: lang.commands.kickHelp },
-      { command: "time", help: lang.commands.timeHelp },
-      { command: "stop", help: lang.commands.stopHelp },
-      { command: "help", help: lang.commands.helpHelp },
-      { command: "version", help: lang.commands.versionHelp },
-      { command: "plugins", help: lang.commands.pluginsHelp },
-      { command: "shutdown", help: lang.commands.shutdownHelp },
+      { command: lang.commands.help, help: lang.commands.opHelp },
+      { command: lang.commands.me, help: lang.commands.meHelp },
+      { command: lang.commands.pl, help: lang.commands.plHelp },
+      { command: lang.commands.ver, help: lang.commands.verHelp },
+      { command: lang.commands.kick, help: lang.commands.kickHelp },
+      { command: lang.commands.time, help: lang.commands.timeHelp },
+      { command: lang.commands.stop, help: lang.commands.stopHelp },
+      { command: lang.commands.help, help: lang.commands.helpHelp },
+      { command: lang.commands.deop, help: lang.commands.deopHelp },
+      { command: lang.commands.listc, help: lang.commands.listHelp },
+      { command: lang.commands.version, help: lang.commands.versionHelp },
+      { command: lang.commands.plugins, help: lang.commands.pluginsHelp },
+      { command: lang.commands.shutdown, help: lang.commands.shutdownHelp },
     ];
 
     let commandsfound = false;

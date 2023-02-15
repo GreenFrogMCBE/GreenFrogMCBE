@@ -1,4 +1,5 @@
 const fs = require("fs");
+const yaml = require("js-yaml");
 
 async function test() {
     try {
@@ -75,7 +76,8 @@ playerCommandStop: true
 playerCommandSay: true
 playerCommandOp: true
 playerCommandKick: true
-playerCommandTime: true`
+playerCommandTime: true
+playerCommandDeop: true`
             );
         }
         const Frog = require("./src/Server.js");
@@ -104,6 +106,9 @@ playerCommandTime: true`
                         console.log(`Parsing: ${file}`)
                         JSON.parse(JSON.stringify(require(__dirname + file)));
                     }
+
+                    console.log('Parsing: config.yml')
+                    yaml.load(fs.readFileSync("config.yml", "utf8"))
 
                     console.log(`\nTest 2 passed`)
                     process.exit(0)

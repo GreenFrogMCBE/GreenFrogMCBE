@@ -6,13 +6,16 @@ const CommandPl = require("../../server/commands/CommandPl");
 const CommandOp = require("../../server/commands/CommandOp");
 const CommandManager = require("../../player/CommandManager");
 const CommandSay = require("../../server/commands/CommandSay");
+const CommandList = require('../../server/commands/CommandList')
 const CommandTime = require('../../server/commands/CommandTime')
 const CommandKick = require('../../server/commands/CommandKick');
+const CommandDeop = require('../../server/commands/CommandDeop');
 const CommandVersion = require("../../server/commands/CommandVersion");
-const FailedToHandleEvent = require('./exceptions/FailedToHandleEvent')
 const CommandShutdown = require("../../server/commands/CommandShutdown");
+const FailedToHandleEvent = require('./exceptions/FailedToHandleEvent')
 
 const fs = require('fs');
+const CommandMe = require('../../server/commands/CommandMe');
 
 
 class PlayerCommandExecuteEvent extends Event {
@@ -59,6 +62,9 @@ class PlayerCommandExecuteEvent extends Event {
       const cmdOp = new CommandOp();
       const cmdKick = new CommandKick();
       const cmdTime = new CommandTime()
+      const cmdDeop = new CommandDeop()
+      const cmdList = new CommandList()
+      const cmdMe = new CommandMe()
 
       if (message.startsWith(`/${lang.commands.ver.toLowerCase()}`) || message.startsWith(`/${lang.commands.version.toLowerCase()}`) ) {
         cmdVer.executePlayer(client);
@@ -74,6 +80,12 @@ class PlayerCommandExecuteEvent extends Event {
         cmdKick.executePlayer(client, message)
       } else if (message.startsWith(`/${lang.commands.time.toLowerCase()}`)) {
         cmdTime.executePlayer(client, message)
+      } else if (message.startsWith(`/${lang.commands.deop.toLowerCase()}`)) {
+        cmdDeop.executePlayer(client, message)
+      } else if (message.startsWith(`/${lang.commands.listc.toLowerCase()}`)) {
+        cmdList.executePlayer(client)
+      } else if (message.startsWith(`/${lang.commands.me.toLowerCase()}`)) {
+        cmdMe.executePlayer(client, message)
       } else {
         let exists = false;
         for (let i = 0; i < cmdManager.getCommands().length; i++) {

@@ -5,10 +5,12 @@ const Version = require("../../server/commands/CommandVersion");
 const Kick = require("../../server/commands/CommandKick");
 const Help = require("../../server/commands/CommandHelp");
 const Time = require("../../server/commands/CommandTime");
+const List = require("../../server/commands/CommandList");
 const Deop = require("../../server/commands/CommandDeop");
 const Say = require("../../server/commands/CommandSay");
 const Op = require("../../server/commands/CommandOp");
 const PL = require("../../server/commands/CommandPl");
+const Me = require("../../server/commands/CommandMe");
 const FailedToHandleEvent = require('./exceptions/FailedToHandleEvent')
 const { lang, config } = require('../../server/ServerInfo')
 const Logger = require('../../server/Logger')
@@ -55,7 +57,9 @@ class ServerConsoleCommandExecutedEvent extends Event {
                 say: new Say(),
                 op: new Op(),
                 pl: new PL(),
-                deop: new Deop()
+                deop: new Deop(),
+                list: new List(),
+                me: new Me()
             };
 
             if (config.debug) Logger.log("started", command);
@@ -67,6 +71,11 @@ class ServerConsoleCommandExecutedEvent extends Event {
             if (cmd.toLowerCase().startsWith(`${lang.commands.say.toLowerCase()} `)) {
                 const msg = cmd.split(" ").slice(1).join(" ");
                 commands.say.execute(msg);
+                return;
+            }
+
+            if (cmd.toLowerCase().startsWith(`${lang.commands.listc.toLowerCase()} `)) {
+                commands.list.execute();
                 return;
             }
 
@@ -88,11 +97,19 @@ class ServerConsoleCommandExecutedEvent extends Event {
                 return;
             }
 
+            if (cmd.toLowerCase().startsWith(`${lang.commands.me.toLowerCase()} `)) {
+                commands.me.execute(cmd.split(" ").slice(1).join(" "));
+                return;
+            }
+
             const command = cmd.toLowerCase().split(" ")[0];
 
             switch (command) {
                 case "":
                     break;
+                case lang.commands.listc:
+                    commands.list.execute()
+                    break
                 case lang.commands.shutdown.toLowerCase():
                 case lang.commands.stop.toLowerCase():
                     commands.shutdown.execute();
@@ -111,6 +128,9 @@ class ServerConsoleCommandExecutedEvent extends Event {
                 case lang.commands.ver.toLowerCase():
                 case lang.commands.version.toLowerCase():
                     commands.version.execute();
+                    break;
+                case lang.commands.me.toLowerCase():
+                    commands.me.execute();
                     break;
                 case lang.commands.time.toLowerCase():
                     commands.time.execute();
