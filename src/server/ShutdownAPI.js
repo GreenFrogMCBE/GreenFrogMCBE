@@ -20,16 +20,16 @@ module.exports = {
     await require("./ConsoleCommandSender").close();
     Logger.log(lang.server.stoppingServer, "info");
 
-    setTimeout(() => {
-      try {
-        for (const player of players) {
-          player.kick(lang.kickmessages.serverShutdown);
-        }
-      } catch (e) {
-        /* ignored */
+    try {
+      for (const player of players) {
+        player.kick(lang.kickmessages.serverShutdown);
       }
-    }, 2000)
+    } catch (e) {
+      /* ignored */
+    }
 
-    PluginLoader.unloadPlugins();
+    setTimeout(() => {
+      PluginLoader.unloadPlugins();
+    }, 1000)
   },
 };
