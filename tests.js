@@ -1,3 +1,4 @@
+// credits: https://github.com/BlueBirdMC/Server/blob/main/test.js used for example
 const fs = require("fs");
 
 async function test() {
