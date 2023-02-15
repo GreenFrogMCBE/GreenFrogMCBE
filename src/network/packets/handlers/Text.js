@@ -21,7 +21,7 @@ class Text extends require("./Handler") {
     const fullmsg = lang.chat.chatFormat.replace("%username%", client.username).replace("%message%", msg);
     if (
       msg.includes("§") ||
-      msg.trim().length ||
+      !msg ||
       (msg.length > 255 && config.blockInvalidMessages)
     ) {
       if (!client.op) {

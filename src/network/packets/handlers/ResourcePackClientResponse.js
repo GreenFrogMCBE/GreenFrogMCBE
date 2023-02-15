@@ -277,25 +277,23 @@ class ResourcePackClientResponse extends Handler {
         }
 
         setInterval(() => {
-          if (!client.offline) {
-            const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-            networkchunkpublisher.setCords(0, 0, 0);
-            networkchunkpublisher.setRadius(64);
-            networkchunkpublisher.setSavedChunks([]);
-            networkchunkpublisher.send(client);
-          }
+          if (client.offline) return
+          const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+          networkchunkpublisher.setCords(0, 0, 0);
+          networkchunkpublisher.setRadius(64);
+          networkchunkpublisher.setSavedChunks([]);
+          networkchunkpublisher.send(client);
         }, 50);
 
         Logger.log(
           lang.playerstatuses.spawned.replace("%player%", client.username)
         );
         setTimeout(() => {
-          if (!client.offline) {
-            const ps = new PlayStatus();
-            ps.setStatus(PlayStatuses.PLAYERSPAWN);
-            ps.send(client);
-            new PlayerSpawnEvent().execute(server, client)
-          }
+          if (client.offline) return
+          const ps = new PlayStatus();
+          ps.setStatus(PlayStatuses.PLAYERSPAWN);
+          ps.send(client);
+          new PlayerSpawnEvent().execute(server, client)
         }, 2000);
 
         setTimeout(() => {

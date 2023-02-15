@@ -15,7 +15,7 @@ const { lang, config } = require("../../../server/ServerInfo");
 
 class CommandRequest extends require("./Handler") {
   validate(client, cmd) {
-    if (!cmd || cmd.trim().length || cmd.includes("§")  || (cmd.length > 255 && config.blockInvalidMessages)) {
+    if (!cmd || cmd.includes("§") || (cmd.length > 255 && config.blockInvalidMessages)) {
       if (client.op) return
       client.kick(lang.kickmessages.invalidChatMessage);
     }

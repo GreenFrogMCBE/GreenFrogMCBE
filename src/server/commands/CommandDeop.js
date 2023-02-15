@@ -58,14 +58,14 @@ class CommandDeop extends require("./Command") {
             return;
         }
 
-        if (!args.split(" ")[1]) {
-            client.sendMessage('§c' + lang.commands.usageDeop);
-            return;
-        }
-
         if (!client.op) {
             client.sendMessage(lang.errors.noPermission)
             return
+        }
+
+        if (!args.split(" ")[1]) {
+            client.sendMessage('§c' + lang.commands.usageDeop);
+            return;
         }
 
         fs.readFile("ops.yml", "utf-8", (err, data) => {
