@@ -87,7 +87,7 @@ class ResourcePackClientResponse extends Handler {
         const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
 
         for (const op of ops) {
-          if (op.replace("\r", "") === client.username) {
+          if (op.replace(/\r/g, "") === client.username) {
             client.op = true;
             client.permlevel = 4;
             break;
