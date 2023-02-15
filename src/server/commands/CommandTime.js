@@ -78,7 +78,6 @@ class CommandTime extends require("./Command") {
         break;
       default:
         time = parseInt(args.split(" ")[1]);
-        console.log(args, args.split(" ")[1], time, isNaN(time))
         if (isNaN(time)) {
           client.sendMessage('§c' + lang.commands.usageTime);
           return;
