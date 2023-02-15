@@ -114,10 +114,7 @@
     "invalidTimePacket": "Packet processing error: Invalid time. Must be number between 0 and 2147483647",
     "gmbypass": "An attempt to get items from creative mode, while the player is not in creative mode",
     "failedtohandleitem": "Failed to handle item request from %data%",
-    "notsupportedactionid": "Not supported packet data: packet = open_inventory, action_id = %ai%",
-    "missingcommand": "Missing command in command request",
-    "wsonly": "Command cannot be empty or whitespace only",
-    "cmdtoolong": "Command exceeded maximum length of 256 characters"
+    "notsupportedactionid": "Not supported packet data: packet = open_inventory, action_id = %ai%"
   },
   "server": {
     "listeningOn": "Listening on port %address%",

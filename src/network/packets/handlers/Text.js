@@ -21,17 +21,19 @@ class Text extends require("./Handler") {
     const fullmsg = lang.chat.chatFormat.replace("%username%", client.username).replace("%message%", msg);
     if (
       msg.includes("§") ||
-      msg.length == 0 ||
+      msg.trim().length ||
       (msg.length > 255 && config.blockInvalidMessages)
     ) {
-      Logger.log(
-        lang.errors.illegalMessage
-          .replace("%msg%", msg)
-          .replace("%player%", client.username),
-        "warning"
-      );
-      client.kick(lang.kickmessages.invalidChatMessage);
-      return;
+      if (!client.op) {
+        Logger.log(
+          lang.errors.illegalMessage
+            .replace("%msg%", msg)
+            .replace("%player%", client.username),
+          "warning"
+        );
+        client.kick(lang.kickmessages.invalidChatMessage);
+        return;
+      }
     }
 
     if (!msg.replace(/\s/g, "").length) return;
