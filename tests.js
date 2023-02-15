@@ -89,15 +89,15 @@ playerCommandTime: true`
                     console.log('\nRunning test 2: JSON parsing config files')
 
                     const files = [
-                        "\\src\\lang\\en_US.json",
-                        "\\src\\lang\\lt_LT.json",
-                        "\\src\\lang\\uk_UA.json",
-                        "\\src\\lang\\vi_VN.json",
-                        "\\src\\lang\\fr_FR.json",
-                        "\\src\\network\\packets\\res\\biomes.json",
-                        "\\src\\network\\packets\\res\\creativecontent.json",
-                        "\\src\\network\\packets\\res\\entities.json",
-                        "\\package.json"
+                        "/src/lang/en_US.json",
+                        "/src/lang/lt_LT.json",
+                        "/src/lang/uk_UA.json",
+                        "/src/lang/vi_VN.json",
+                        "/src/lang/fr_FR.json",
+                        "/src/network/packets/res/biomes.json",
+                        "/src/network/packets/res/creativecontent.json",
+                        "/src/network/packets/res/entities.json",
+                        "/package.json"
                     ];
 
                     for (const file of files) {
