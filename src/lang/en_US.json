@@ -114,7 +114,8 @@
     "invalidTimePacket": "Packet processing error: Invalid time. Must be number between 0 and 2147483647",
     "gmbypass": "An attempt to get items from creative mode, while the player is not in creative mode",
     "failedtohandleitem": "Failed to handle item request from %data%",
-    "notsupportedactionid": "Not supported packet data: packet = open_inventory, action_id = %ai%"
+    "notsupportedactionid": "Not supported packet data: packet = open_inventory, action_id = %ai%",
+    "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file"
   },
   "server": {
     "listeningOn": "Listening on port %address%",
@@ -123,7 +124,6 @@
     "doneShuttingDown": "Done shutting down server",
     "doneShuttingDownPlugins": "Done shutting down plugins",
     "unloadingPlugin": "Unloading %plugin%",
-    "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file",
     "shuttingDownPlugins": "Shutting down plugins...",
     "unloadedPlugin": "Unloaded %plugin%",
     "stoppingServer": "Stopping server...",

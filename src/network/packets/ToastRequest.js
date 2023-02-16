@@ -11,8 +11,6 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 
-const Events = require("../../plugin/Events");
-
 let title = "";
 let message = "";
 
@@ -60,12 +58,6 @@ class ToastRequest extends require("./Packet") {
    * @param client - The client that the packet is being sent to.
    */
   send(client) {
-    Events.executeOT(
-      client,
-      require("../../Server").server,
-      this.getTitle(),
-      this.getMessage()
-    );
     client.write(this.name(), {
       title: this.getTitle(),
       message: this.getMessage(),

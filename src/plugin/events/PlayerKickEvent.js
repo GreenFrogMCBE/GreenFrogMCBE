@@ -6,12 +6,7 @@ const fs = require('fs')
 class PlayerKickEvent extends Event {
     constructor() {
         super()
-        this.cancelled = false
         this.name = 'PlayerKickEvent'
-    }
-
-    cancel() {
-        this.cancelled = true
     }
 
     execute(server, client, msg) {
