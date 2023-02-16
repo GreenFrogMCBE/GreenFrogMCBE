@@ -9,17 +9,17 @@
 
 ## GreenFrogMCBE
 
-Server software for Minecraft bedrock, written in NodeJS
+Server software for Minecraft: Bedrock edition, written in NodeJS
 
-Our Discord: https://discord.gg/UFqrnAbqjP
+Our discord: https://discord.gg/UFqrnAbqjP
 
-#### development status > under active development
+#### Development status > Under active development
 
-#### site > https://greenfrog.f1470348511.workers.dev/
+#### Site > https://greenfrog.f1470348511.workers.dev/
 
-#### help to translate > https://poeditor.com/join/project/fwIZCyBjPw
+#### Help to translate > https://poeditor.com/join/project/fwIZCyBjPw
 
-#### if you use our code in your software, please credit us and Kotinash
+#### If you use our code, please credit us
 
 ## How to install
 
