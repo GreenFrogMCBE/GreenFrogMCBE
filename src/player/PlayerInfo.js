@@ -14,8 +14,7 @@ let playersOnline = [];
 
 module.exports = {
   /**
-   * The function takes in an array of players and adds them to the game.
-   * @param player - An array of players.
+   * @param player - A player.
    */
   addPlayer(player) {
     playersOnline.push(player);
@@ -27,7 +26,12 @@ module.exports = {
    */
   get(player) {
     try {
-      return playersOnline.find((client) => client.username === player);
+     for (let i = 0; i < playersOnline.length; i++) {
+      if (playersOnline[i].username === player) {
+        console.log(playersOnline[i].username, player)
+        return playersOnline[i]
+      }
+     }
     } catch (e) {
       return null;
     }

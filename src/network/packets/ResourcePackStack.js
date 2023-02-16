@@ -18,6 +18,9 @@ let experiments = [];
 let experiments_previously_used = false;
 
 class ResourcePackStack extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "resource_pack_stack";
   }

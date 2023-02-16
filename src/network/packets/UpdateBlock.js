@@ -10,8 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It sends a packet to the client to update a block */
-
 let x = 0;
 let y = 0;
 let z = 0;
@@ -66,7 +64,7 @@ class UpdateBlock extends require("./Packet") {
 
   /**
    * It sets the flags value
-   * @param {Number} flagsvalue1 - It sets the flags value.
+   * @param {Number} flagsvalue1 - It sets the flags count (aka flags value).
    */
   setFlagsValue(flagsvalue1) {
     flagsvalue = parseInt(flagsvalue1);

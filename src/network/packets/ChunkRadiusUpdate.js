@@ -13,6 +13,9 @@
 let chunk_radius = 0;
 
 class ChunkRadiusUpdate extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "chunk_radius_update";
   }

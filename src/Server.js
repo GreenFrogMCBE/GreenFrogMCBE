@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* Its the server main file. */
 process.env.DEBUG = process.argv.includes("--debug")
   ? "minecraft-protocol"
   : "";
@@ -21,22 +20,21 @@ const ServerInfo = require("./server/ServerInfo");
 const PlayerInfo = require("./player/PlayerInfo");
 const PluginLoader = require("./plugin/PluginLoader");
 const Text = require("./network/packets/handlers/Text");
-const ValidateConfig = require("./server/ValidateConfig");
 const Interact = require("./network/packets/handlers/Interact");
-const Unhandled = require("./network/packets/handlers/Unhandled");
 const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
 const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponse");
+const ServerInternalServerErrorEvent = require("./plugin/events/ServerInternalServerErrorEvent");
 const RequestChunkRadius = require("./network/packets/handlers/RequestChunkRadius");
 const ModalFormResponse = require("./network/packets/handlers/ModalFormResponse");
 const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
+const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
 const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
-const Events = require("./plugin/Events");
 
 let clients = [];
 let server = null;
@@ -89,15 +87,6 @@ module.exports = {
       case "resource_pack_client_response":
         new ResourcePackClientResponse().handle(client, packet, this.server);
         break;
-      case "client_to_server_handshake":
-      case "emote_list":
-      case "set_player_game_type":
-      case "set_local_player_as_initialized":
-      case "player_action":
-      case "mob_equipment":
-      case "client_cache_status":
-        new Unhandled().handle(packet);
-        break;
       case "move_player":
         new PlayerMove().handle(client, packet);
         break;
@@ -126,8 +115,8 @@ module.exports = {
         new ModalFormResponse().handle(this.server, client, packet);
         break;
       default:
-        if (config.logunhandledpackets) {
-          Logger.log(lang.errors.unhandledPacket, "warning");
+        if (config.logUnhandledPackets || process.argv.includes("--debug")) {
+          Logger.log(lang.devdebug.unhandledPacket, "warning");
           console.log("%o", packet);
         }
         break;
@@ -144,7 +133,8 @@ module.exports = {
 
     PlayerInit.initPlayer(client);
 
-    Events.executeOJ(this.server, client);
+    const event = new PlayerJoinEvent()
+    event.execute(server, client)
 
     PlayerInfo.addPlayer(client);
 
@@ -171,8 +161,6 @@ module.exports = {
    * It loads the config, lang files, and commands, then loads the plugins and starts the server.
    */
   async start() {
-    await ValidateConfig.ValidateLangFiles();
-
     await this.initJson();
 
     fs.access("ops.yml", fs.constants.F_OK, (err) => {
@@ -235,7 +223,7 @@ module.exports = {
             } catch (e) {
               client.disconnect(lang.kickmessages.internalServerError);
             }
-            Events.executeOISE(this.server, client, e);
+            new ServerInternalServerErrorEvent().execute(server, e)
             Logger.log(
               lang.errors.packetHandlingException
                 .replace("%player%", client.username)

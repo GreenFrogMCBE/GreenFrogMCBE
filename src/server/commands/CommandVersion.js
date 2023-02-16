@@ -15,11 +15,11 @@ const { lang, config, serverversion } = require("../../server/ServerInfo");
 
 class CommandVersion extends require("./Command") {
   name() {
-    return lang.commands.Version;
+    return lang.commands.version;
   }
 
   aliases() {
-    return [lang.commands.Ver];
+    return [lang.commands.ver];
   }
 
   execute() {
@@ -41,10 +41,7 @@ class CommandVersion extends require("./Command") {
       return;
     }
 
-    client.sendMessage(
-      lang.commands.playerVerCommandLine1.replace("%version%", serverversion)
-    );
-    client.sendMessage(lang.commands.playerVerCommandLine2);
+    client.sendMessage("§7" + lang.commands.verInfo.replace('%version%', serverversion));
     return;
   }
 }

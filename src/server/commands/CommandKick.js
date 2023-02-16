@@ -17,11 +17,15 @@ const { get } = require("../../player/PlayerInfo");
 
 class CommandKick extends require("./Command") {
   name() {
-    return lang.commands.Kick;
+    return lang.commands.kick;
   }
 
   aliases() {
     return null;
+  }
+
+  getPlayerDescription() {
+    return lang.commands.ingameKickDescription;
   }
 
   execute(args) {
@@ -31,7 +35,7 @@ class CommandKick extends require("./Command") {
     }
 
     if (!args || !args[0]) {
-      Logger.log(lang.commands.UsageKick);
+      Logger.log(lang.commands.usageKick);
       return;
     }
 
@@ -45,11 +49,47 @@ class CommandKick extends require("./Command") {
       Logger.log(
         `${lang.kickmessages.kickedConsoleMsg
           .replace("%player%", targetUsername)
-          .replace("%reason%", reason)}`,
-        "info"
+          .replace("%reason%", reason)}`
       );
     } else {
-      Logger.log(lang.errors.playerOffline, "info");
+      Logger.log(lang.errors.playerOffline);
+    }
+  }
+
+  executePlayer(client, args) {
+    if (!config.playerCommandKick) {
+      client.sendMessage(lang.errors.playerUnknownCommand);
+      return;
+    }
+
+    if (!client.op) {
+      client.sendMessage(lang.errors.noPermission)
+      return
+    }
+
+    if (!args.split(" ") || !args.split(" ")[1]) {
+      client.sendMessage("§c" + lang.commands.usageKick);
+      return;
+    }
+
+    const targetUsername = args.split(" ")[1];
+    let reason = ""
+    for (let i = 2; i < args.split(" "); i++) {
+      reason = reason + args.split(" ")[i]
+    }
+    if (!reason) reason = lang.kickmessages.noReason
+
+    const target = get(targetUsername);
+
+    if (target) {
+      target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
+      client.sendMessage(
+        `${lang.kickmessages.kickedConsoleMsg
+          .replace("%player%", targetUsername)
+          .replace("%reason%", reason)}`
+      );
+    } else {
+      client.sendMessage("§c" + lang.errors.playerOffline);
     }
   }
 }

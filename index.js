@@ -77,12 +77,18 @@ consoleCommandPlugins: true
 consoleCommandStop: true # Will only stop showing in /help, if disabled
 consoleCommandSay: true
 consoleCommandOp: true
+consoleCommandDeop: true
 consoleCommandHelp: true
+consoleCommandList: true
 playerCommandVersion: true
 playerCommandPlugins: true
 playerCommandStop: true
 playerCommandSay: true
-playerCommandOp: true`
+playerCommandOp: true
+playerCommandKick: true
+playerCommandTime: true
+playerCommandDeop: true
+playerCommandList: true`
     );
   }
   const Frog = require("./src/Server.js");
@@ -97,6 +103,7 @@ playerCommandOp: true`
   console.error(
     "If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE"
   );
+  process.exit(-1)
 }
 
 // Close server on nodemon restart

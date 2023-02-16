@@ -24,9 +24,7 @@ module.exports = {
     try {
       fs.mkdirSync("./plugins/");
       fs.mkdirSync("./pluginsconfigs/");
-    } catch (ignored) {
-      /* ignored */
-    }
+    } catch (ignored) { /* ignored */ }
     setTimeout(() => {
       CCH.start();
     }, 1000);

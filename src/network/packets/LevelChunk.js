@@ -13,12 +13,13 @@
 let x = 0;
 let z = 0;
 let sub_chunk_count = 0;
+let highest_subchunk_count = 0
 let cache_enabled = false;
 let payload = [];
 
 class LevelChunk extends require("./Packet") {
   /**
-   * It returns the packet name
+   * @returns The name of the packet.
    */
   name() {
     return "level_chunk";
@@ -65,6 +66,14 @@ class LevelChunk extends require("./Packet") {
   }
 
   /**
+   * It sets the highest subchunk count
+   * @param {Number} highest_subchunk_count1 
+   */
+  setHighestSubchunkCount(highest_subchunk_count1) {
+    highest_subchunk_count = highest_subchunk_count1
+  }
+
+  /**
    * It gets the X coordinate
    * @returns {Number}
    */
@@ -97,11 +106,19 @@ class LevelChunk extends require("./Packet") {
   }
 
   /**
-   * It gets if the payload
+   * It gets the payload
    * @returns {any}
    */
   getPayload() {
     return payload;
+  }
+
+  /**
+   * It returns the highest sub chunk count
+   * @returns {Number}
+   */
+  getHighestSubchunkCount() {
+    return highest_subchunk_count
   }
 
   /**
@@ -113,6 +130,7 @@ class LevelChunk extends require("./Packet") {
       x: this.getX(),
       z: this.getZ(),
       sub_chunk_count: this.getSubChunkCount(),
+      highest_subchunk_count: this.getHighestSubchunkCount(),
       cache_enabled: this.getCacheEnabled(),
       payload: { type: "Buffer", data: this.getPayload() },
     });

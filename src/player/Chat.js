@@ -11,8 +11,9 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const { players } = require("./PlayerInfo");
-const Logger = require("../server/Logger");
 const { lang } = require("../server/ServerInfo");
+const Logger = require("../server/Logger");
+
 
 module.exports = {
   /**

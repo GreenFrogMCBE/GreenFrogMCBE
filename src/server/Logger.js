@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It's a class that logs messages to the console. */
 const { lang, config } = require("./ServerInfo");
 
 module.exports = {
@@ -21,9 +20,7 @@ module.exports = {
    */
   log(message, type = "info") {
     const d = new Date();
-    const dStr = `${d.getUTCFullYear()}-${
-      d.getUTCMonth() + 1
-    }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
+    const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
     const logLevel = {
       info: 32,
       warning: 33,

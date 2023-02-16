@@ -9,15 +9,17 @@
 
 ## GreenFrogMCBE
 
-Server software for Minecraft Bedrock, written in Node JS
+Server software for Minecraft bedrock, written in NodeJS
 
 Our Discord: https://discord.gg/UFqrnAbqjP
 
 #### development status > under active development
 
-#### website > https://greenfrog.f1470348511.workers.dev/
+#### site > https://greenfrog.f1470348511.workers.dev/
 
 #### help to translate > https://poeditor.com/join/project/fwIZCyBjPw
+
+#### if you use our code in your software, please credit us and Kotinash
 
 ## How to install
 
@@ -79,7 +81,8 @@ If you have one feel free to open an issue
 @bufferfishq - For adding support for custom_form and new plugin system (#47)
 @andriycraftbot - For fixing the code style
 @Zwuiix-cmd - Suggested custom_form support
-EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) - Used as an example for custom_form support
+@CreeperG16 - For a better way to handle player disconnection (https://github.com/andriycraft/GreenFrogMCBE/pull/55/commits/7376c60e73d9e98c4791f89f4c7c54b644e006a4#diff-f187ec8efe95aba91b86e895736549fccc085f2e0d364e35c17cbd8a1206b744L105-R105)
+EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) (@Zwuiix-cmd) - Used as an example for custom_form support (i had permission from repo owner)
 ```
 
 ## Language system
