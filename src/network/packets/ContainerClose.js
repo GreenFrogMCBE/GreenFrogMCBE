@@ -14,6 +14,9 @@ let window_id = 0;
 let server = false;
 
 class ContainerClose extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "container_close";
   }

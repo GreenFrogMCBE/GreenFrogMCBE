@@ -9,6 +9,9 @@ let pos = {
 let respawn = false
 
 class ChangeDimension extends require("./Packet") {
+    /**
+     * @returns The name of the packet.
+     */
     name() {
         return "change_dimension";
     }

@@ -17,6 +17,9 @@ let title = "";
 let type = "form";
 
 class FormRequest extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "modal_form_request";
   }

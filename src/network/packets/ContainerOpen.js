@@ -21,8 +21,7 @@ let runtime_entity_id = 0;
 
 class ContainerOpen extends require("./Packet") {
   /**
-   * It returns the packet name
-   * @returns Packet name
+   * @returns The name of the packet.
    */
   name() {
     return "container_open";

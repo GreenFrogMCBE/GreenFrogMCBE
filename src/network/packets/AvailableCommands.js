@@ -13,6 +13,9 @@
 let data = null;
 
 class AvailableCommands extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "available_commands";
   }

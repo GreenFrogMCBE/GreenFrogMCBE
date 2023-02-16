@@ -13,6 +13,9 @@
 let nbt = null;
 
 class AvailableEntityIdentifiers extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "available_entity_identifiers";
   }

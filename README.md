@@ -19,6 +19,8 @@ Our Discord: https://discord.gg/UFqrnAbqjP
 
 #### help to translate > https://poeditor.com/join/project/fwIZCyBjPw
 
+#### if you use our code in your software, please credit us and Kotinash
+
 ## How to install
 
 1. Clone this repo

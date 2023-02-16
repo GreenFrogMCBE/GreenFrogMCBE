@@ -13,6 +13,9 @@
 let items = [];
 
 class CreativeContent extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "creative_content";
   }

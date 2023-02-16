@@ -19,6 +19,9 @@ let radius = 64;
 let saved_chunks = [];
 
 class NetworkChunkPublisherUpdate extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "network_chunk_publisher_update";
   }

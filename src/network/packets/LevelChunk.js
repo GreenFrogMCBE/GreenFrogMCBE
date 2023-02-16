@@ -19,7 +19,7 @@ let payload = [];
 
 class LevelChunk extends require("./Packet") {
   /**
-   * It returns the packet name
+   * @returns The name of the packet.
    */
   name() {
     return "level_chunk";

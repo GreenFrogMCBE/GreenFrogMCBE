@@ -19,6 +19,9 @@ let state = 0;
 let runtime_entity_id = 0;
 
 class Respawn extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "respawn";
   }

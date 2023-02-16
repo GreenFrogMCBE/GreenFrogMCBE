@@ -16,6 +16,9 @@ const Gamemode = require("../../player/GameMode");
 let gamemode = Gamemode.FALLBACK;
 
 class PlayerGamemode extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "set_player_game_type";
   }

@@ -39,9 +39,8 @@ let permission_level = 0;
 
 class StartGame extends require("./Packet") {
   /**
-   * @returns The packet name
+   * @returns The name of the packet.
    */
-
   name() {
     return "start_game";
   }
