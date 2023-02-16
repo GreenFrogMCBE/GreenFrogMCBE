@@ -33,8 +33,8 @@ module.exports = {
     r.prompt(true);
 
     r.on("line", (data) => {
-      const cmd = new ConsoleCommandExecutedEvent()
-      cmd.execute(require('../Server').server, data)
+      const cmd = new ConsoleCommandExecutedEvent();
+      cmd.execute(require("../Server").server, data);
       if (!isclosed) r.prompt(true);
     });
   },

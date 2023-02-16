@@ -30,6 +30,6 @@ module.exports = {
 
     setTimeout(() => {
       PluginLoader.unloadPlugins();
-    }, 1000)
+    }, 1000);
   },
 };

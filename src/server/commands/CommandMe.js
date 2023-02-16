@@ -1,47 +1,67 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const Chat = require("../../player/Chat");
 const Logger = require("../Logger");
 const { lang, config } = require("../ServerInfo");
 
 class CommandMe extends require("./Command") {
-    name() {
-        return lang.commands.me;
+  name() {
+    return lang.commands.me;
+  }
+
+  aliases() {
+    return null;
+  }
+
+  execute(msg, client = { username: "Server" }) {
+    if (!config.consoleCommandMe) {
+      Logger.log(lang.errors.unknownCommand);
+      return;
     }
 
-    aliases() {
-        return null;
+    if (!msg.replace(/\s/g, "").length) {
+      Logger.log(lang.commands.usageMe);
+      return;
     }
 
-    execute(msg, client = { username: 'Server' }) {
-        if (!config.consoleCommandMe) {
-            Logger.log(lang.errors.unknownCommand);
-            return;
-        }
+    Chat.broadcastMessage(
+      lang.commands.meCommandFormat
+        .replace("%username%", client.username)
+        .replace("%message%", msg)
+    );
+  }
 
-        if (!msg.replace(/\s/g, "").length) {
-            Logger.log(lang.commands.usageMe)
-            return
-        }
+  getPlayerDescription() {
+    return lang.commands.ingameMeDescription;
+  }
 
-        Chat.broadcastMessage(lang.commands.meCommandFormat.replace('%username%', client.username).replace('%message%', msg))
+  executePlayer(client, msg) {
+    if (!config.playerCommandMe) {
+      client.sendMessage(lang.errors.playerUnknownCommand);
+      return;
     }
 
-    getPlayerDescription() {
-        return lang.commands.ingameMeDescription;
+    if (!msg.replace("/" + lang.commands.me, "").replace(/\s/g, "").length) {
+      client.sendMessage("§c" + lang.commands.usageMe);
+      return;
     }
 
-    executePlayer(client, msg) {
-        if (!config.playerCommandMe) {
-            client.sendMessage(lang.errors.playerUnknownCommand);
-            return;
-        }
-
-        if (!msg.replace('/' + lang.commands.me, '').replace(/\s/g, "").length) {
-            client.sendMessage('§c' + lang.commands.usageMe)
-            return
-        }
-
-        Chat.broadcastMessage(lang.commands.meCommandFormat.replace('%username%', client.username).replace('%message%', msg.replace('/' + lang.commands.me + ' ', '')))
-    }
+    Chat.broadcastMessage(
+      lang.commands.meCommandFormat
+        .replace("%username%", client.username)
+        .replace("%message%", msg.replace("/" + lang.commands.me + " ", ""))
+    );
+  }
 }
 
-module.exports = CommandMe
+module.exports = CommandMe;

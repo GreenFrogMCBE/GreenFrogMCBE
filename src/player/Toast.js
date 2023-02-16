@@ -14,13 +14,13 @@ const ServerToastRequest = require("../plugin/events/ServerToastRequest");
 
 class Toast {
   constructor() {
-    this.title = null
-    this.message = null
+    this.title = null;
+    this.message = null;
   }
 
   /**
    * Sets the title.
-   * @param {string} title 
+   * @param {string} title
    */
   setTitle(title) {
     this.title = title;
@@ -28,7 +28,7 @@ class Toast {
 
   /**
    * Sets the message.
-   * @param {string} message 
+   * @param {string} message
    */
   setMessage(message) {
     this.message = message;
@@ -36,11 +36,16 @@ class Toast {
 
   /**
    * Sends the toast
-   * @param {Object} client 
+   * @param {Object} client
    */
   send(client) {
-    const toast = new ServerToastRequest()
-    toast.execute(require("../Server").server, client, this.title, this.message);
+    const toast = new ServerToastRequest();
+    toast.execute(
+      require("../Server").server,
+      client,
+      this.title,
+      this.message
+    );
   }
 }
 

@@ -14,7 +14,6 @@ const { players } = require("./PlayerInfo");
 const { lang } = require("../server/ServerInfo");
 const Logger = require("../server/Logger");
 
-
 module.exports = {
   /**
    * Broadcasts message to all players

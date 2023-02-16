@@ -13,7 +13,7 @@
 let x = 0;
 let z = 0;
 let sub_chunk_count = 0;
-let highest_subchunk_count = 0
+let highest_subchunk_count = 0;
 let cache_enabled = false;
 let payload = [];
 
@@ -67,10 +67,10 @@ class LevelChunk extends require("./Packet") {
 
   /**
    * It sets the highest subchunk count
-   * @param {Number} highest_subchunk_count1 
+   * @param {Number} highest_subchunk_count1
    */
   setHighestSubchunkCount(highest_subchunk_count1) {
-    highest_subchunk_count = highest_subchunk_count1
+    highest_subchunk_count = highest_subchunk_count1;
   }
 
   /**
@@ -118,7 +118,7 @@ class LevelChunk extends require("./Packet") {
    * @returns {Number}
    */
   getHighestSubchunkCount() {
-    return highest_subchunk_count
+    return highest_subchunk_count;
   }
 
   /**

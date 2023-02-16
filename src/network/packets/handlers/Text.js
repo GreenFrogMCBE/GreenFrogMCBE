@@ -18,7 +18,9 @@ class Text extends require("./Handler") {
   handle(client, packet) {
     if (config.disable) return;
     const msg = packet.data.params.message;
-    const fullmsg = lang.chat.chatFormat.replace("%username%", client.username).replace("%message%", msg);
+    const fullmsg = lang.chat.chatFormat
+      .replace("%username%", client.username)
+      .replace("%message%", msg);
     if (
       msg.includes("§") ||
       !msg ||

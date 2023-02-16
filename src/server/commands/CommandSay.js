@@ -56,8 +56,8 @@ class CommandSay extends require("./Command") {
     }
 
     if (!client.op) {
-      client.sendMessage(lang.errors.noPermission)
-      return
+      client.sendMessage(lang.errors.noPermission);
+      return;
     }
 
     if (!args.split(" ")[1]) {

@@ -46,18 +46,18 @@ module.exports = {
     // This code executes when player left the server
   },
 
-  PlayerHasNoResourcePacksInstalledEvent(server, player, event) { },
-  onResourcePacksRefused(server, player, event) { },
-  onPlayerHaveAllPacks(server, player, event) { },
-  onResourcePacksCompleted(server, player, event) { },
+  PlayerHasNoResourcePacksInstalledEvent(server, player, event) {},
+  onResourcePacksRefused(server, player, event) {},
+  onPlayerHaveAllPacks(server, player, event) {},
+  onResourcePacksCompleted(server, player, event) {},
 
   PlayerKickEvent(server, player, msg, event) {
-    Logger.log(`Player got kicked! ${player.username}`)
+    Logger.log(`Player got kicked! ${player.username}`);
     // This code executes when player is kicked
   },
 
   PlayerSpawnEvent(server, player, event) {
-    Logger.log(`Player spawned! ${player.username}`)
+    Logger.log(`Player spawned! ${player.username}`);
     // Registers a command
     const cmdmanager = new CommandManager();
     cmdmanager.addCommand(player, "testcommand", "This is my first command!");
@@ -73,7 +73,7 @@ module.exports = {
   },
 
   PlayerChatEvent(server, player, message, event) {
-    Logger.log(`${player.username} said "${message}"`)
+    Logger.log(`${player.username} said "${message}"`);
     player.sendMessage(player, "Your just sent a chat message: " + message);
     // This code executes when player uses chat
   },
@@ -151,7 +151,7 @@ module.exports = {
   },
 
   PlayerMoveEvent(server, player, location, event) {
-    Logger.log(`Player moved to ${location}`)
+    Logger.log(`Player moved to ${location}`);
     // This code executes when player moves
   },
 
@@ -161,12 +161,12 @@ module.exports = {
   },
 
   ServerToClientChat(server, player, msg, event) {
-    Logger.log(`Server to client message: ${msg}`)
+    Logger.log(`Server to client message: ${msg}`);
     // This code executes when the server sends a chat message to player
   },
 
   ServerToastRequest(player, server, title, msg, event) {
-    Logger.log(`Toast: ${title}:${msg}`)
+    Logger.log(`Toast: ${title}:${msg}`);
     // This code executes when the server sends toast to player
   },
 

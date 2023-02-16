@@ -19,7 +19,7 @@ let texture_packs = [];
 class ResponsePackInfo extends require("./Packet") {
   /**
    * @returns The name of the packet.
-  */
+   */
   name() {
     return "resource_packs_info";
   }
