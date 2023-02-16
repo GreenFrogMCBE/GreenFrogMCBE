@@ -20,21 +20,21 @@ const ServerInfo = require("./server/ServerInfo");
 const PlayerInfo = require("./player/PlayerInfo");
 const PluginLoader = require("./plugin/PluginLoader");
 const Text = require("./network/packets/handlers/Text");
-const ValidateConfig = require("./server/ValidateConfig");
 const Interact = require("./network/packets/handlers/Interact");
 const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
 const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponse");
+const ServerInternalServerErrorEvent = require("./plugin/events/ServerInternalServerErrorEvent");
 const RequestChunkRadius = require("./network/packets/handlers/RequestChunkRadius");
 const ModalFormResponse = require("./network/packets/handlers/ModalFormResponse");
 const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
+const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
 const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
-const Events = require("./plugin/Events");
 
 let clients = [];
 let server = null;
@@ -116,7 +116,7 @@ module.exports = {
         break;
       default:
         if (config.logUnhandledPackets || process.argv.includes("--debug")) {
-          Logger.log(lang.debdebug.unhandledPacket, "warning");
+          Logger.log(lang.devdebug.unhandledPacket, "warning");
           console.log("%o", packet);
         }
         break;
@@ -133,7 +133,8 @@ module.exports = {
 
     PlayerInit.initPlayer(client);
 
-    Events.executeOJ(this.server, client);
+    const event = new PlayerJoinEvent()
+    event.execute(server, client)
 
     PlayerInfo.addPlayer(client);
 
@@ -160,8 +161,6 @@ module.exports = {
    * It loads the config, lang files, and commands, then loads the plugins and starts the server.
    */
   async start() {
-    await ValidateConfig.ValidateLangFiles();
-
     await this.initJson();
 
     fs.access("ops.yml", fs.constants.F_OK, (err) => {
@@ -224,7 +223,7 @@ module.exports = {
             } catch (e) {
               client.disconnect(lang.kickmessages.internalServerError);
             }
-            Events.executeOISE(this.server, client, e);
+            new ServerInternalServerErrorEvent().execute(server, e)
             Logger.log(
               lang.errors.packetHandlingException
                 .replace("%player%", client.username)

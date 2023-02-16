@@ -16,7 +16,7 @@ const Logger = require("../Logger");
 
 class CommandSay extends require("./Command") {
   name() {
-    return lang.commands.Say;
+    return lang.commands.say;
   }
 
   aliases() {
@@ -29,7 +29,7 @@ class CommandSay extends require("./Command") {
       return;
     }
     if (!args) {
-      Logger.log(lang.commands.UsageSay);
+      Logger.log(lang.commands.usageSay);
       return;
     }
 
@@ -37,8 +37,8 @@ class CommandSay extends require("./Command") {
       .replace(`%message%`, args)
       .replace(`%sender%`, "Server");
 
-    for (let i = 1; i < PlayerInfo.getPlayers().length; i++) {
-      let client = PlayerInfo.getPlayers()[i];
+    for (let i = 0; i < PlayerInfo.players.length; i++) {
+      let client = PlayerInfo.players[i];
       client.sendMessage(msg);
     }
 
@@ -46,7 +46,7 @@ class CommandSay extends require("./Command") {
   }
 
   getPlayerDescription() {
-    return lang.commands.inGameSayDescription;
+    return lang.commands.ingameSayDescription;
   }
 
   executePlayer(client, args) {
@@ -54,12 +54,14 @@ class CommandSay extends require("./Command") {
       client.sendMessage(lang.errors.playerUnknownCommand);
       return;
     }
+
     if (!client.op) {
-      client.sendMessage(lang.errors.noPermission);
-      return;
+      client.sendMessage(lang.errors.noPermission)
+      return
     }
+
     if (!args.split(" ")[1]) {
-      client.sendMessage("§c" + lang.commands.UsageSay);
+      client.sendMessage("§c" + lang.commands.usageSay);
       return;
     }
     args = args.split(" ")[1];

@@ -20,7 +20,7 @@ let platform_chat_id = "";
 
 class Text extends require("./Packet") {
   /**
-   * @returns Packet name
+   * @returns The name of the packet name
    */
   name() {
     return "text";

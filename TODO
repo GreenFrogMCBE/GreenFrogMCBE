@@ -1,4 +1,7 @@
-- Rewrite the event system and move each event into its own file
-- change_dimension packet
-- Fix subchunks
-- /deop
+Todo list (2.6):
+- ingame /deop
+- /list
+- /tell, /w, /msg
+- ban system
+- Title support
+- NPC packets

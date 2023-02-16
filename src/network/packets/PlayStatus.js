@@ -13,6 +13,9 @@
 let status = "";
 
 class PlayStatus extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "play_status";
   }

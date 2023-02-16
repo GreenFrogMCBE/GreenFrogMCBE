@@ -8,16 +8,16 @@ assignees: ""
 
 ## Link to your plugin
 
-[type here]
+[Type ur reponse]
 
 ## Plugin name
 
-[type here]
+[Type ur reponse]
 
 ## Description
 
-[type here]
+[Type ur reponse]
 
 ## Author
 
-[type here]
+[Type ur reponse]

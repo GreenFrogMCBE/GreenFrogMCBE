@@ -10,23 +10,37 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ToastRequest = require("../network/packets/ToastRequest");
+const ServerToastRequest = require("../plugin/events/ServerToastRequest");
 
 class Toast {
   constructor() {
-    this.title = "";
-    this.message = "";
+    this.title = null
+    this.message = null
   }
 
   /**
-   * It sends a toast request to the client
-   * @param client - The client
+   * Sets the title.
+   * @param {string} title 
+   */
+  setTitle(title) {
+    this.title = title;
+  }
+
+  /**
+   * Sets the message.
+   * @param {string} message 
+   */
+  setMessage(message) {
+    this.message = message;
+  }
+
+  /**
+   * Sends the toast
+   * @param {Object} client 
    */
   send(client) {
-    let packet = new ToastRequest();
-    packet.setTitle(this.title);
-    packet.setMessage(this.message);
-    packet.send(client);
+    const toast = new ServerToastRequest()
+    toast.execute(require("../Server").server, client, this.title, this.message);
   }
 }
 

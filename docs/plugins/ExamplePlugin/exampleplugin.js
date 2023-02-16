@@ -12,48 +12,52 @@
  */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
-const CommandManager = require("../../src/player/CommandManager");
-const ToastManager = require("../../src/player/Toast");
-const ShutdownAPI = require("../../src/server/ShutdownAPI");
-const GameMode = require("../../src/player/GameMode");
+const CommandManager = require("../../../src/player/CommandManager");
+const ToastManager = require("../../../src/player/Toast");
+const ShutdownAPI = require("../../../src/server/ShutdownAPI");
+const GameMode = require("../../../src/player/GameMode");
 
-const Logger = require("../../src/server/Logger"); // Creates logger for this plugin
-const Form = require("../../src/player/Form");
-const Colors = require("../../src/player/Colors");
-const FormTypes = require("../../src/player/FormTypes");
+const Logger = require("../../../src/server/Logger");
+const Form = require("../../../src/player/Form");
+const Colors = require("../../../src/player/Colors");
+const FormTypes = require("../../../src/player/FormTypes");
 
 // This is a simple plugin that tests the GreenFrog's API
 // Another example: https://github.com/andriycraft/GreenFrogMCBEDonations
 
 module.exports = {
   onLoad() {
-    Logger.log(`Example > Hello world!`);
+    Logger.log(`Example > Hello, world`);
   },
 
   onShutdown() {
-    Logger.log(`Example > Good bye!`);
+    Logger.log(`Example > Bye, world`);
   },
 
-  onJoin(server, player) {
+  PlayerJoinEvent(server, player, event) {
+    Logger.log(`Player joined: ${player.username}`);
     // This code executes when player joined
   },
 
   // REMEMBER: You can just remove events that you don't use
 
-  onLeave(server, player) {
+  PlayerLeaveEvent(server, player, event) {
+    Logger.log(`Player left: ${player.username}`);
     // This code executes when player left the server
   },
 
-  onPlayerHasNoResourcePacksInstalled(server, player) {},
-  onResourcePacksRefused(server, player) {},
-  onPlayerHaveAllPacks(server, player) {},
-  onResourcePacksCompleted(server, player) {},
+  PlayerHasNoResourcePacksInstalledEvent(server, player, event) { },
+  onResourcePacksRefused(server, player, event) { },
+  onPlayerHaveAllPacks(server, player, event) { },
+  onResourcePacksCompleted(server, player, event) { },
 
-  onKick(server, player, msg) {
+  PlayerKickEvent(server, player, msg, event) {
+    Logger.log(`Player got kicked! ${player.username}`)
     // This code executes when player is kicked
   },
 
-  onPlayerSpawn(server, player) {
+  PlayerSpawnEvent(server, player, event) {
+    Logger.log(`Player spawned! ${player.username}`)
     // Registers a command
     const cmdmanager = new CommandManager();
     cmdmanager.addCommand(player, "testcommand", "This is my first command!");
@@ -68,12 +72,14 @@ module.exports = {
     // This code executes when player is spawned (this event executes after onJoin() event)
   },
 
-  onChat(server, player, message) {
+  PlayerChatEvent(server, player, message, event) {
+    Logger.log(`${player.username} said "${message}"`)
     player.sendMessage(player, "Your just sent a chat message: " + message);
     // This code executes when player uses chat
   },
 
-  onCommand(server, player, command) {
+  PlayerCommandExecuteEvent(server, player, command, event) {
+    Logger.log(`command executed by ${player.username}: ${command}`);
     switch (command.toLowerCase()) {
       case "/testcommand":
         // player.username returns the player's username
@@ -134,36 +140,44 @@ module.exports = {
     }
   },
 
-  onConsoleCommand(command, server) {
+  ServerConsoleCommandExecutedEvent(command, server, event) {
+    Logger.log(`Console executed command: ${command}`);
     // This code executes when console executes a command
   },
 
-  onInternalServerError(server, player, error) {
+  ServerInternalServerErrorEvent(server, player, error, event) {
+    Logger.log(`Server error: ${error}`);
     // This code executes when there is an server error
   },
 
-  onPlayerMove(server, player, location) {
+  PlayerMoveEvent(server, player, location, event) {
+    Logger.log(`Player moved to ${location}`)
     // This code executes when player moves
   },
 
-  onGamemodeChange(server, player, gamemode) {
+  PlayerGamemodeChangeEvent(server, player, gamemode, event) {
+    Logger.log(`Gamemode changed to ${gamemode}`);
     // This code executes when player changes his own gamemode
   },
 
-  onServerToplayerChat(server, player, msg) {
-    // This code executes when server sends a chat message to player (useful for custom logging)
+  ServerToClientChat(server, player, msg, event) {
+    Logger.log(`Server to client message: ${msg}`)
+    // This code executes when the server sends a chat message to player
   },
 
-  onToast(player, server, title, msg) {
-    // This code executes when server sends toast to player
+  ServerToastRequest(player, server, title, msg, event) {
+    Logger.log(`Toast: ${title}:${msg}`)
+    // This code executes when the server sends toast to player
   },
 
-  onTransfer(player, server, address, port) {
+  PlayerTransferEvent(player, server, address, port, event) {
+    Logger.log(`Player transfered to ${address}:${port}`);
     // This code executes when player transfers to another server
     // WARNING: Functions like player.sendMessage(), player.transfer() will not work anymore on that player
   },
 
-  onFormResponse(server, player, packet) {
+  PlayerFormResponseEvent(server, player, packet, event) {
+    Logger.log(`Form response from ${player.username}`);
     player.sendMessage("Response: " + JSON.stringify(packet).toString());
     // This code executes when:
     // a) Player clicks a button in a form

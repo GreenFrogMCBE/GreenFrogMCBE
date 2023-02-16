@@ -22,12 +22,14 @@ module.exports = {
 
     try {
       for (const player of players) {
-        await player.kick(lang.server.serverShutdown);
+        player.kick(lang.kickmessages.serverShutdown);
       }
     } catch (e) {
       /* ignored */
     }
 
-    PluginLoader.unloadPlugins();
+    setTimeout(() => {
+      PluginLoader.unloadPlugins();
+    }, 1000)
   },
 };

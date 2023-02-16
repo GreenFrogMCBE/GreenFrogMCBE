@@ -13,6 +13,9 @@
 let enabled = false;
 
 class ClientCacheStatus extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "client_cache_status";
   }

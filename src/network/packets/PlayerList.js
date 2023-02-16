@@ -13,6 +13,9 @@
 let username = null;
 
 class PlayerList extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "player_list";
   }

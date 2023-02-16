@@ -13,6 +13,9 @@
 let nbt = {};
 
 class BiomeDefinitionList extends require("./Packet") {
+  /**
+   * @returns The name of the packet.
+   */
   name() {
     return "biome_definition_list";
   }

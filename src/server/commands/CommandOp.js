@@ -12,11 +12,12 @@
  */
 const fs = require("fs");
 const Logger = require("../Logger");
-const { lang, commands } = require("../../server/ServerInfo");
+const { lang, config } = require("../../server/ServerInfo");
+const PlayerInfo = require("../../player/PlayerInfo");
 
 class CommandOp extends require("./Command") {
   name() {
-    return lang.Op;
+    return lang.commands.op;
   }
 
   aliases() {
@@ -24,17 +25,20 @@ class CommandOp extends require("./Command") {
   }
 
   execute(args) {
-    if (!commands.consoleCommandOp) {
+    if (!config.consoleCommandOp) {
       Logger.log(lang.errors.unknownCommand);
       return;
     }
+
     if (!args) {
-      Logger.log(lang.commands.UsageOp);
+      Logger.log(lang.commands.usageOp);
       return;
     }
 
     fs.appendFile("ops.yml", args + "\n", (err) => {
-      if (!err) Logger.log(lang.commands.opped.replace("%player%", args));
+      if (!err) {
+        Logger.log(lang.commands.opped.replace("%player%", args));
+      }
       else Logger.log(lang.commands.opFail);
     });
   }
@@ -44,20 +48,30 @@ class CommandOp extends require("./Command") {
   }
 
   executePlayer(client, args) {
+    if (!config.playerCommandOp) {
+      client.sendMessage(lang.errors.playerUnknownCommand)
+      return
+    }
+
     if (!client.op) {
-      client.sendMessage(lang.errors.noPermission);
-      return;
+      client.sendMessage(lang.errors.noPermission)
+      return
     }
 
     const player = args.split(" ")[1];
     if (!player) {
-      client.sendMessage("§c" + lang.commands.commandUsageOp);
+      client.sendMessage("§c" + lang.commands.usageOp);
       return;
     }
 
     fs.appendFile("ops.yml", player + "\n", (err) => {
-      if (!err)
-        client.sendMessage(lang.commands.opped.replace("%player%", player));
+      if (!err) {
+        client.sendMessage(lang.commands.opped.replace("%player%", player))
+        try {
+          PlayerInfo.get(args.split(" ")[1]).op = true
+          console.log(PlayerInfo.get(args.split(" ")[1]))
+        } catch (e) { /* ignored */ }
+      }
       else client.sendMessage("§c" + lang.commands.opFail);
     });
   }
