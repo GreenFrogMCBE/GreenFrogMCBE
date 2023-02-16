@@ -1,98 +1,112 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const fs = require("fs");
 const Logger = require("../Logger");
 const { lang, config } = require("../../server/ServerInfo");
 
 class CommandDeop extends require("./Command") {
-    name() {
-        return lang.commands.deop;
+  name() {
+    return lang.commands.deop;
+  }
+
+  aliases() {
+    return null;
+  }
+
+  execute(args) {
+    if (!config.consoleCommandDeop) {
+      Logger.log(lang.errors.unknownCommand);
+      return;
     }
 
-    aliases() {
-        return null;
+    if (!args) {
+      Logger.log(lang.commands.usageDeop);
+      return;
     }
 
-    execute(args) {
-        if (!config.consoleCommandDeop) {
-            Logger.log(lang.errors.unknownCommand);
-            return;
-        }
+    fs.readFile("ops.yml", "utf-8", (err, data) => {
+      if (err) {
+        Logger.log(lang.commands.deopFail);
+        return;
+      }
 
-        if (!args) {
-            Logger.log(lang.commands.usageDeop);
-            return;
-        }
+      const players = data.trim().split("\n");
+      const index = players.indexOf(args);
 
-        fs.readFile("ops.yml", "utf-8", (err, data) => {
-            if (err) {
-                Logger.log(lang.commands.deopFail);
-                return;
-            }
+      if (index === -1) {
+        Logger.log(lang.commands.notOp.replace("%player%", args));
+        return;
+      }
 
-            const players = data.trim().split("\n");
-            const index = players.indexOf(args);
+      players.splice(index, 1);
+      const updatedPlayers = players.join("\n") + "\n";
 
-            if (index === -1) {
-                Logger.log(lang.commands.notOp.replace("%player%", args));
-                return;
-            }
+      fs.writeFile("ops.yml", updatedPlayers, (err) => {
+        if (!err) {
+          Logger.log(lang.commands.deopped.replace("%player%", args));
+        } else Logger.log(lang.commands.deopFail);
+      });
+    });
+  }
 
-            players.splice(index, 1);
-            const updatedPlayers = players.join("\n") + "\n";
+  getPlayerDescription() {
+    return lang.commands.ingameDeopDescription;
+  }
 
-            fs.writeFile("ops.yml", updatedPlayers, (err) => {
-                if (!err) {
-                    Logger.log(lang.commands.deopped.replace("%player%", args));
-                }
-                else Logger.log(lang.commands.deopFail);
-            });
-        });
+  executePlayer(client, args) {
+    if (!config.playerCommandDeop) {
+      client.sendMessage("§c" + lang.errors.playerUnknownCommand);
+      return;
     }
 
-    getPlayerDescription() {
-        return lang.commands.ingameDeopDescription;
+    if (!client.op) {
+      client.sendMessage(lang.errors.noPermission);
+      return;
     }
 
-    executePlayer(client, args) {
-        if (!config.playerCommandDeop) {
-            client.sendMessage('§c' + lang.errors.playerUnknownCommand);
-            return;
-        }
-
-        if (!client.op) {
-            client.sendMessage(lang.errors.noPermission)
-            return
-        }
-
-        if (!args.split(" ")[1]) {
-            client.sendMessage('§c' + lang.commands.usageDeop);
-            return;
-        }
-
-        fs.readFile("ops.yml", "utf-8", (err, data) => {
-            if (err) {
-                client.sendMessage('§c' + lang.commands.deopFail);
-                return;
-            }
-
-            const players = data.trim().split("\n");
-            const index = players.indexOf(args.split(" ")[1]);
-
-            if (index === -1) {
-                client.sendMessage('§c' + lang.commands.notOp.replace("%player%", args.split(" ")[1]));
-                return;
-            }
-
-            players.splice(index, 1);
-            const updatedPlayers = players.join("\n") + "\n";
-
-            fs.writeFile("ops.yml", updatedPlayers, (err) => {
-                if (!err) {
-                    client.sendMessage(lang.commands.deopped.replace("%player%", args.split(" ")[1]));
-                }
-                else client.sendMessage('§c' + lang.commands.deopFail);
-            });
-        });
+    if (!args.split(" ")[1]) {
+      client.sendMessage("§c" + lang.commands.usageDeop);
+      return;
     }
+
+    fs.readFile("ops.yml", "utf-8", (err, data) => {
+      if (err) {
+        client.sendMessage("§c" + lang.commands.deopFail);
+        return;
+      }
+
+      const players = data.trim().split("\n");
+      const index = players.indexOf(args.split(" ")[1]);
+
+      if (index === -1) {
+        client.sendMessage(
+          "§c" + lang.commands.notOp.replace("%player%", args.split(" ")[1])
+        );
+        return;
+      }
+
+      players.splice(index, 1);
+      const updatedPlayers = players.join("\n") + "\n";
+
+      fs.writeFile("ops.yml", updatedPlayers, (err) => {
+        if (!err) {
+          client.sendMessage(
+            lang.commands.deopped.replace("%player%", args.split(" ")[1])
+          );
+        } else client.sendMessage("§c" + lang.commands.deopFail);
+      });
+    });
+  }
 }
 
-module.exports = CommandDeop
+module.exports = CommandDeop;

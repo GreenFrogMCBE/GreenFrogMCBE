@@ -103,7 +103,7 @@ playerCommandList: true`
   console.error(
     "If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE"
   );
-  process.exit(-1)
+  process.exit(-1);
 }
 
 // Close server on nodemon restart

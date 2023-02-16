@@ -16,7 +16,7 @@ const { lang, config } = require("../server/ServerInfo");
 module.exports = {
   /**
    * Validates the client
-   * @param {Object} client 
+   * @param {Object} client
    */
   initAndValidateClient(client) {
     client.ip = client.connection.address.split("/")[0];

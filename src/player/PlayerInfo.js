@@ -26,12 +26,12 @@ module.exports = {
    */
   get(player) {
     try {
-     for (let i = 0; i < playersOnline.length; i++) {
-      if (playersOnline[i].username === player) {
-        console.log(playersOnline[i].username, player)
-        return playersOnline[i]
+      for (let i = 0; i < playersOnline.length; i++) {
+        if (playersOnline[i].username === player) {
+          console.log(playersOnline[i].username, player);
+          return playersOnline[i];
+        }
       }
-     }
     } catch (e) {
       return null;
     }

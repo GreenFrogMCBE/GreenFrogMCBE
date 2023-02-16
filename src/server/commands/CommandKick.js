@@ -63,8 +63,8 @@ class CommandKick extends require("./Command") {
     }
 
     if (!client.op) {
-      client.sendMessage(lang.errors.noPermission)
-      return
+      client.sendMessage(lang.errors.noPermission);
+      return;
     }
 
     if (!args.split(" ") || !args.split(" ")[1]) {
@@ -73,11 +73,11 @@ class CommandKick extends require("./Command") {
     }
 
     const targetUsername = args.split(" ")[1];
-    let reason = ""
+    let reason = "";
     for (let i = 2; i < args.split(" "); i++) {
-      reason = reason + args.split(" ")[i]
+      reason = reason + args.split(" ")[i];
     }
-    if (!reason) reason = lang.kickmessages.noReason
+    if (!reason) reason = lang.kickmessages.noReason;
 
     const target = get(targetUsername);
 

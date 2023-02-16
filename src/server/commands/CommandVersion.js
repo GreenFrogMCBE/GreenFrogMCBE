@@ -41,7 +41,9 @@ class CommandVersion extends require("./Command") {
       return;
     }
 
-    client.sendMessage("§7" + lang.commands.verInfo.replace('%version%', serverversion));
+    client.sendMessage(
+      "§7" + lang.commands.verInfo.replace("%version%", serverversion)
+    );
     return;
   }
 }

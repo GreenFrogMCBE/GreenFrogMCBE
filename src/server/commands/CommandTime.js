@@ -25,7 +25,7 @@ class CommandTime extends require("./Command") {
   }
 
   getPlayerDescription() {
-    return lang.commands.ingameTimeDescription
+    return lang.commands.ingameTimeDescription;
   }
 
   execute(args) {
@@ -64,7 +64,7 @@ class CommandTime extends require("./Command") {
 
   executePlayer(client, args) {
     if (!config.consoleCommandTime) {
-      client.sendMessage('§c' + lang.errors.unknownCommand);
+      client.sendMessage("§c" + lang.errors.unknownCommand);
       return;
     }
 
@@ -79,7 +79,7 @@ class CommandTime extends require("./Command") {
       default:
         time = parseInt(args.split(" ")[1]);
         if (isNaN(time)) {
-          client.sendMessage('§c' + lang.commands.usageTime);
+          client.sendMessage("§c" + lang.commands.usageTime);
           return;
         }
     }

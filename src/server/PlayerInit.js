@@ -23,7 +23,6 @@ const PlayerTransferEvent = require("../plugin/events/PlayerTransferEvent");
 const PlayerGamemodeChangeEvent = require("../plugin/events/PlayerGamemodeChangeEvent");
 const ChangeDimension = require("../network/packets/ChangeDimension");
 
-
 module.exports = {
   initPlayer(player) {
     /**
@@ -31,8 +30,8 @@ module.exports = {
      * @param {string} msg - The message to send
      */
     player.sendMessage = function (msg) {
-      const sendmsgevent = new ServerToClientChat()
-      sendmsgevent.execute(require("../Server").server, player, msg)
+      const sendmsgevent = new ServerToClientChat();
+      sendmsgevent.execute(require("../Server").server, player, msg);
     };
 
     /**
@@ -59,13 +58,18 @@ module.exports = {
         GameMode.SEPCTATOR,
         GameMode.FALLBACK,
       ];
-      if (!validGamemodes.includes(gamemode)) throw new Error(lang.errors.invalidGamemode);
+      if (!validGamemodes.includes(gamemode))
+        throw new Error(lang.errors.invalidGamemode);
 
       player.gamemode = gamemode;
       const gm = new PlayerGamemode();
       gm.setGamemode(gamemode);
       gm.send(player);
-      new PlayerGamemodeChangeEvent().execute(require('../Server').server, player, gamemode)
+      new PlayerGamemodeChangeEvent().execute(
+        require("../Server").server,
+        player,
+        gamemode
+      );
     };
 
     /**
@@ -74,8 +78,8 @@ module.exports = {
      * @param {number} port - The port of the server to transfer to
      */
     player.transfer = function (address, port) {
-      const transfer = new PlayerTransferEvent()
-      transfer.execute(require('../Server').server, player, address, port)
+      const transfer = new PlayerTransferEvent();
+      transfer.execute(require("../Server").server, player, address, port);
     };
 
     /**
@@ -86,9 +90,13 @@ module.exports = {
       if (player.kicked) return;
       player.kicked = true;
 
-      new PlayerKickEvent().execute(require('../Server').server, player, msg)
+      new PlayerKickEvent().execute(require("../Server").server, player, msg);
 
-      Logger.log(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.getUserData().displayName).replace("%reason%", msg));
+      Logger.log(
+        lang.kickmessages.kickedConsoleMsg
+          .replace("%player%", player.getUserData().displayName)
+          .replace("%reason%", msg)
+      );
       player.disconnect(msg);
     };
 
@@ -104,36 +112,35 @@ module.exports = {
 
     /**
      * Sets the dimension for the player
-     * @param {Number} x 
-     * @param {Number} y 
-     * @param {Number} z 
-     * @param {Dimensions} dimension 
-     * @param {Boolean} respawn 
+     * @param {Number} x
+     * @param {Number} y
+     * @param {Number} z
+     * @param {Dimensions} dimension
+     * @param {Boolean} respawn
      */
     player.setDimension = function (x, y, z, dimension, respawn) {
-      const dimensionpacket = new ChangeDimension()
-      dimensionpacket.setPosition(x, y, z)
-      dimensionpacket.setDimension(dimension)
-      dimensionpacket.setRespawn(respawn)
-      dimensionpacket.send(player)
-    }
+      const dimensionpacket = new ChangeDimension();
+      dimensionpacket.setPosition(x, y, z);
+      dimensionpacket.setDimension(dimension);
+      dimensionpacket.setRespawn(respawn);
+      dimensionpacket.send(player);
+    };
 
     /* Checks if the player is still online */
-    player.on('close', () => {
+    player.on("close", () => {
       if (!player.kicked) {
-        new PlayerLeaveEvent().execute(require('../Server').server, player)
+        new PlayerLeaveEvent().execute(require("../Server").server, player);
 
         Logger.log(
-          lang.playerstatuses.disconnected.replace(
-            "%player%",
-            player.username
-          )
+          lang.playerstatuses.disconnected.replace("%player%", player.username)
         );
 
-        Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+        Chat.broadcastMessage(
+          lang.broadcasts.leftTheGame.replace("%player%", player.username)
+        );
 
         player.offline = true;
       }
-    })
+    });
   },
 };
