@@ -30,7 +30,7 @@ class PlayerFormResponseEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerFormResponseEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerFormResponseEvent(
             server,
             client,
             data,

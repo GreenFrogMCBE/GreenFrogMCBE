@@ -44,7 +44,7 @@ class PlayerCommandExecuteEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerCommandExecuteEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerCommandExecuteEvent(
             server,
             client,
             command,

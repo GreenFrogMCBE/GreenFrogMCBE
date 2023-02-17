@@ -30,7 +30,7 @@ class PlayerSpawnEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerSpawnEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerSpawnEvent(
             server,
             client,
             this

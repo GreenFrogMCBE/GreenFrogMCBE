@@ -25,7 +25,7 @@ class PlayerKickEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerKickEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerKickEvent(
             server,
             client,
             msg,
