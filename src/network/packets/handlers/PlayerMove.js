@@ -10,20 +10,13 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Events = require("../../../plugin/Events");
-const PacketHandlingError = require("../exceptions/PacketHandlingError");
+const PlayerMoveEvent = require("../../../plugin/events/PlayerMoveEvent");
 
 class PlayerMove extends require("./Handler") {
-  validate(packet) {
-    if (!packet.data.params.position)
-      throw new PacketHandlingError("Invalid position");
-  }
-
   handle(client, packet) {
-    this.validate(packet);
-    Events.executePMV(
+    new PlayerMoveEvent().execute(
+      require("../../../Server").server,
       client,
-      require("../../../Server"),
       packet.data.params.position
     );
   }

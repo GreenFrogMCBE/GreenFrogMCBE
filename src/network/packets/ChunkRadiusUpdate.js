@@ -14,15 +14,14 @@ let chunk_radius = 0;
 
 class ChunkRadiusUpdate extends require("./Packet") {
   /**
-   * It returns the packet name
-   * @returns Packet name
+   * @returns The name of the packet.
    */
   name() {
     return "chunk_radius_update";
   }
 
   /**
-   * It returns the chunk radius
+   * It sets the chunk radius
    * @param {Number} radius
    */
   setChunkRadius(radius) {
@@ -37,10 +36,6 @@ class ChunkRadiusUpdate extends require("./Packet") {
     return chunk_radius;
   }
 
-  /**
-   * It send the packet to the client
-   * @param {Object} client
-   */
   send(client) {
     client.write(this.name(), {
       chunk_radius: this.getChunkRadius(),

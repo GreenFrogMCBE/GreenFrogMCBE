@@ -20,7 +20,6 @@ let runtime_entity_id = 0;
 
 class Respawn extends require("./Packet") {
   /**
-   * It returns the packet name.
    * @returns The name of the packet.
    */
   name() {
@@ -28,28 +27,15 @@ class Respawn extends require("./Packet") {
   }
 
   /**
-   * It returns the X cordinate.
+   * It returns the position.
+   * @return {JSON} The position.
    */
-  getX() {
-    return pos.x;
-  }
-
-  /*
-   * It returns the Y cordinate.
-   */
-  getY() {
-    return pos.y;
-  }
-
-  /*
-   * It returns the Z cordinate.
-   */
-  getZ() {
-    return pos.z;
+  getPosition() {
+    return pos;
   }
 
   /**
-   * Returns the state of the packet.
+   * Returns the state.
    * @returns The state.
    */
   getState() {
@@ -65,27 +51,15 @@ class Respawn extends require("./Packet") {
   }
 
   /**
-   * Sets the X cordinate
-   * @param {Number} x1
+   * This functions sets the position.
+   * @param {Number} x - The X coordinate.
+   * @param {Number} y - The Y coordinate.
+   * @param {Number} z - The Z coordinate.
    */
-  setX(x1) {
-    pos.x = x1;
-  }
-
-  /**
-   * Sets the Y cordinate
-   * @param {Number} y1
-   */
-  setY(y1) {
-    pos.y = y1;
-  }
-
-  /**
-   * Sets the Z cordinate
-   * @param {Number} z1
-   */
-  setZ(z1) {
-    pos.z = z1;
+  setPosition(x, y, z) {
+    pos.x = x;
+    pos.y = y;
+    pos.z = z;
   }
 
   /**
@@ -96,7 +70,7 @@ class Respawn extends require("./Packet") {
     state = state1;
   }
 
-  /**
+  /***
    * This function sets the runtime_entity_id
    * @param {Number} id1 - The Runtime ID of the entity
    */
@@ -104,15 +78,15 @@ class Respawn extends require("./Packet") {
     runtime_entity_id = id1;
   }
 
-  /**
+  /***
    * Write packet to client
    * @param {Client} client
    */
   send(client) {
     client.write(this.name(), {
-      position: pos,
-      state: 1,
-      runtime_entity_id: "0",
+      position: this.getPosition(),
+      state: this.getState(),
+      runtime_entity_id: this.getRuntimeEntityId(),
     });
   }
 }

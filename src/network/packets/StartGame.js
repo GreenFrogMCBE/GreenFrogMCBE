@@ -11,6 +11,9 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Gamemode = require("../../player/GameMode");
+const Difficulty = require("./types/Difficulty");
+const Dimension = require("./types/Dimension");
+const Generator = require("./types/Generator");
 
 let entity_id = 0;
 let runtimeentity_id = 0;
@@ -23,10 +26,10 @@ let rotationz = 0;
 let seed = [];
 let biome_type = 0;
 let biome_name = "";
-let dimension = "overworld";
-let generator = 2;
-let world_gamemode = 0;
-let difficulty = 0;
+let dimension = Dimension.OVERWORLD;
+let generator = Generator.INFINITE;
+let world_gamemode = Gamemode.SURVIVAL;
+let difficulty = Difficulty.PEACEFUL;
 let spawn = {
   x: 0,
   y: 0,
@@ -36,92 +39,172 @@ let permission_level = 0;
 
 class StartGame extends require("./Packet") {
   /**
-   * It returns the string "start_game"
    * @returns The name of the packet.
    */
   name() {
     return "start_game";
   }
 
-  // TODO: Docs
-
+  /**
+   * It sets the entity id
+   * @param {Number} - The entity id
+   */
   setEntityId(entity_id1) {
     entity_id = entity_id1;
   }
 
+  /**
+   * It sets the runtime entity id
+   * @param {Number} - The runtime entity id
+   */
   setRunTimeEntityId(runtimeentity_id1) {
     runtimeentity_id = runtimeentity_id1;
   }
 
+  /**
+   * It sets the gamemode
+   * @param {Gamemode} - The gamemode
+   */
   setGamemode(gamemode1) {
     gamemode = gamemode1;
   }
 
+  /**
+   * It sets the player spawn position X, Y, and Z
+   * @param {Number} - The player X
+   * @param {Number} - The player Y
+   * @param {Number} - The player Z
+   */
   setPlayerPosition(x, y, z) {
     playerx = x;
     playery = y;
     playerz = z;
   }
 
+  /**
+   * It sets the player rotation X and Z
+   * @param {Number} - The player rotation X
+   * @param {Number} - The player rotation Z
+   */
   setPlayerRotation(x, z) {
     rotationx = x;
     rotationz = z;
   }
 
+  /**
+   * It sets the seed
+   * @param {Array} - The seed
+   */
   setSeed(seed1) {
     seed = seed1;
   }
 
+  /**
+   * It sets the biome type
+   * @param {Number} - The biome type
+   */
   setBiomeType(biome_type1) {
     biome_type = biome_type1;
   }
 
+  /**
+   * It sets the biome name
+   * @param {string} - The biome name
+   */
   setBiomeName(biome_name1) {
     biome_name = biome_name1;
   }
 
+  /**
+   * It sets the dimension
+   * @param {Dimension} - The dimension
+   */
   setDimension(dimension1) {
     dimension = dimension1;
   }
 
+  /**
+   * It sets the generator
+   * @param {Generator} - The generator
+   */
   setGenerator(generator1) {
     generator = generator1;
   }
 
+  /**
+   * It sets the world gamemode
+   * @param {Gamemode} - The world gamemode
+   */
   setWorldGamemode(world_gamemode1) {
     world_gamemode = world_gamemode1;
   }
 
+  /**
+   * It sets the difficulty
+   * @param {Difficulty} - The difficulty
+   */
   setDifficulty(difficulty1) {
     difficulty = difficulty1;
   }
 
+  /**
+   * It sets the spawn position X, Y, and Z
+   * @param {Number} - The spawn X
+   * @param {Number} - The spawn Y
+   * @param {Number} - The spawn Z
+   */
   setSpawnPosition(x, y, z) {
     spawn.x = x;
     spawn.y = y;
     spawn.z = z;
   }
 
+  /**
+   * It sets the spawn position
+   * @param {Number} - The permission level
+   */
   setPlayerPermissionLevel(permission_level1) {
     permission_level = permission_level1;
   }
 
+  /**
+   * It returns the spawn position
+   * @returns {Number} - The permission level
+   */
   getPlayerPermissionLevel() {
     return permission_level;
   }
 
+  /**
+   * It returns the entity id
+   * @returns {Number} - The entity id
+   */
   getEntityId() {
     return entity_id;
   }
 
+  /**
+   * It returns the runtime entity id
+   * @returns {Number} - The runtime entity id
+   */
   getRunTimeEntityId() {
     return runtimeentity_id;
   }
 
+  /**
+   * It returns the gamemode
+   * @returns {Gamemode} - The gamemode
+   */
   getGamemode() {
     return gamemode;
   }
 
+  /**
+   * It returns the player spawn position X, Y, and Z
+   * @returns {Number} - The player X
+   * @returns {Number} - The player Y
+   * @returns {Number} - The player Z
+   */
   getPlayerPosition() {
     return {
       x: playerx,
@@ -130,6 +213,11 @@ class StartGame extends require("./Packet") {
     };
   }
 
+  /**
+   * It returns the player rotation X and Z
+   * @returns {Number} - The player rotation X
+   * @returns {Number} - The player rotation Z
+   */
   getPlayerRotation() {
     return {
       x: rotationx,
@@ -137,40 +225,71 @@ class StartGame extends require("./Packet") {
     };
   }
 
+  /**
+   * It returns the seed
+   * @returns {Array} - The seed
+   */
   getSeed() {
     return seed;
   }
 
+  /**
+   * It returns the biome type
+   * @returns {Number} - The biome type
+   */
   getBiomeType() {
     return biome_type;
   }
 
+  /**
+   * It returns the biome name
+   * @returns {string} - The biome name
+   */
   getBiomeName() {
     return biome_name;
   }
 
+  /**
+   * It returns the dimension
+   * @returns {Dimension} - The dimension
+   */
   getDimension() {
     return dimension;
   }
 
+  /**
+   * It returns the generator
+   * @returns {Generator} - The generator
+   */
   getGenerator() {
     return generator;
   }
 
+  /**
+   * It returns the world gamemode
+   * @returns {Gamemode} - The world gamemode
+   */
   getWorldGamemode() {
     return world_gamemode;
   }
 
+  /**
+   * It returns the difficulty
+   * @returns {Difficulty} - The difficulty
+   */
   getDifficulty() {
     return difficulty;
   }
 
+  /**
+   * It returns the spawn position as JSON
+   * @returns The spawn position as JSON
+   */
   getSpawnPosition() {
     return spawn;
   }
 
   /**
-   * It writes a packet to the client
    * @param client - The client that will receive the packet
    */
   send(client) {
@@ -444,7 +563,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:music_disc_ward",
-          runtime_id: 543,
+          runtime_id: 548,
           component_based: false,
         },
         {
@@ -469,7 +588,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:creeper_banner_pattern",
-          runtime_id: 582,
+          runtime_id: 587,
           component_based: false,
         },
         {
@@ -513,6 +632,11 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:bamboo_sign",
+          runtime_id: 654,
+          component_based: false,
+        },
+        {
           name: "minecraft:apple",
           runtime_id: 257,
           component_based: false,
@@ -523,13 +647,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:golden_horse_armor",
-          runtime_id: 532,
+          name: "minecraft:bookshelf",
+          runtime_id: 47,
           component_based: false,
         },
         {
-          name: "minecraft:bookshelf",
-          runtime_id: 47,
+          name: "minecraft:golden_horse_armor",
+          runtime_id: 537,
           component_based: false,
         },
         {
@@ -544,7 +668,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:nether_star",
-          runtime_id: 518,
+          runtime_id: 523,
           component_based: false,
         },
         {
@@ -555,16 +679,6 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:element_15",
           runtime_id: -26,
-          component_based: false,
-        },
-        {
-          name: "minecraft:light_block",
-          runtime_id: -215,
-          component_based: false,
-        },
-        {
-          name: "minecraft:item.dark_oak_door",
-          runtime_id: 197,
           component_based: false,
         },
         {
@@ -589,7 +703,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:oak_chest_boat",
-          runtime_id: 638,
+          runtime_id: 643,
           component_based: false,
         },
         {
@@ -604,7 +718,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:scute",
-          runtime_id: 572,
+          runtime_id: 577,
           component_based: false,
         },
         {
@@ -634,7 +748,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:music_disc_chirp",
-          runtime_id: 537,
+          runtime_id: 542,
           component_based: false,
         },
         {
@@ -649,7 +763,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:glow_squid_spawn_egg",
-          runtime_id: 502,
+          runtime_id: 503,
           component_based: false,
         },
         {
@@ -754,12 +868,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:sparkler",
-          runtime_id: 600,
+          runtime_id: 605,
           component_based: false,
         },
         {
           name: "minecraft:warped_door",
-          runtime_id: 617,
+          runtime_id: 622,
           component_based: false,
         },
         {
@@ -814,7 +928,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:nautilus_shell",
-          runtime_id: 570,
+          runtime_id: 575,
           component_based: false,
         },
         {
@@ -849,7 +963,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:comparator",
-          runtime_id: 522,
+          runtime_id: 527,
           component_based: false,
         },
         {
@@ -919,17 +1033,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:campfire",
-          runtime_id: 589,
+          runtime_id: 594,
           component_based: false,
         },
         {
           name: "minecraft:lingering_potion",
-          runtime_id: 562,
+          runtime_id: 567,
           component_based: false,
         },
         {
           name: "minecraft:rabbit_foot",
-          runtime_id: 528,
+          runtime_id: 533,
           component_based: false,
         },
         {
@@ -1039,17 +1153,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:music_disc_strad",
-          runtime_id: 542,
-          component_based: false,
-        },
-        {
-          name: "minecraft:white_candle",
-          runtime_id: -413,
+          runtime_id: 547,
           component_based: false,
         },
         {
           name: "minecraft:sweet_berries",
           runtime_id: 287,
+          component_based: false,
+        },
+        {
+          name: "minecraft:white_candle",
+          runtime_id: -413,
           component_based: false,
         },
         {
@@ -1064,7 +1178,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:command_block_minecart",
-          runtime_id: 563,
+          runtime_id: 568,
           component_based: false,
         },
         {
@@ -1094,12 +1208,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:spawn_egg",
-          runtime_id: 651,
+          runtime_id: 661,
           component_based: false,
         },
         {
           name: "minecraft:raw_iron",
-          runtime_id: 505,
+          runtime_id: 510,
           component_based: false,
         },
         {
@@ -1115,6 +1229,11 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:element_35",
           runtime_id: -46,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_double_slab",
+          runtime_id: -521,
           component_based: false,
         },
         {
@@ -1199,12 +1318,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:netherite_boots",
-          runtime_id: 612,
+          runtime_id: 617,
           component_based: false,
         },
         {
           name: "minecraft:music_disc_mall",
-          runtime_id: 539,
+          runtime_id: 544,
           component_based: false,
         },
         {
@@ -1224,7 +1343,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:raw_gold",
-          runtime_id: 506,
+          runtime_id: 511,
           component_based: false,
         },
         {
@@ -1283,6 +1402,21 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:vine",
+          runtime_id: 106,
+          component_based: false,
+        },
+        {
+          name: "minecraft:warped_wart_block",
+          runtime_id: -227,
+          component_based: false,
+        },
+        {
+          name: "minecraft:mangrove_hanging_sign",
+          runtime_id: -508,
+          component_based: false,
+        },
+        {
           name: "minecraft:bowl",
           runtime_id: 321,
           component_based: false,
@@ -1314,7 +1448,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:elytra",
-          runtime_id: 564,
+          runtime_id: 569,
           component_based: false,
         },
         {
@@ -1359,7 +1493,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:skull_banner_pattern",
-          runtime_id: 583,
+          runtime_id: 588,
           component_based: false,
         },
         {
@@ -1373,13 +1507,18 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:panda_spawn_egg",
-          runtime_id: 489,
+          name: "minecraft:snow_golem_spawn_egg",
+          runtime_id: 505,
           component_based: false,
         },
         {
           name: "minecraft:stone_hoe",
           runtime_id: 330,
+          component_based: false,
+        },
+        {
+          name: "minecraft:panda_spawn_egg",
+          runtime_id: 489,
           component_based: false,
         },
         {
@@ -1414,7 +1553,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:glow_frame",
-          runtime_id: 623,
+          runtime_id: 628,
           component_based: false,
         },
         {
@@ -1534,7 +1673,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:music_disc_pigstep",
-          runtime_id: 620,
+          runtime_id: 625,
           component_based: false,
         },
         {
@@ -1579,7 +1718,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:axolotl_spawn_egg",
-          runtime_id: 500,
+          runtime_id: 501,
           component_based: false,
         },
         {
@@ -1600,21 +1739,6 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:element_51",
           runtime_id: -62,
-          component_based: false,
-        },
-        {
-          name: "minecraft:double_wooden_slab",
-          runtime_id: 157,
-          component_based: false,
-        },
-        {
-          name: "minecraft:hard_stained_glass",
-          runtime_id: 254,
-          component_based: false,
-        },
-        {
-          name: "minecraft:element_84",
-          runtime_id: -95,
           component_based: false,
         },
         {
@@ -1674,7 +1798,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:heart_of_the_sea",
-          runtime_id: 571,
+          runtime_id: 576,
           component_based: false,
         },
         {
@@ -1699,7 +1823,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:music_disc_wait",
-          runtime_id: 545,
+          runtime_id: 550,
           component_based: false,
         },
         {
@@ -1719,7 +1843,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:tadpole_bucket",
-          runtime_id: 630,
+          runtime_id: 635,
           component_based: false,
         },
         {
@@ -1773,13 +1897,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:exposed_cut_copper_slab",
-          runtime_id: -362,
+          name: "minecraft:spruce_fence_gate",
+          runtime_id: 183,
           component_based: false,
         },
         {
-          name: "minecraft:spruce_fence_gate",
-          runtime_id: 183,
+          name: "minecraft:exposed_cut_copper_slab",
+          runtime_id: -362,
           component_based: false,
         },
         {
@@ -1794,7 +1918,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:music_disc_11",
-          runtime_id: 544,
+          runtime_id: 549,
           component_based: false,
         },
         {
@@ -1874,7 +1998,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:crossbow",
-          runtime_id: 575,
+          runtime_id: 580,
           component_based: false,
         },
         {
@@ -1913,13 +2037,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:silverfish_spawn_egg",
-          runtime_id: 443,
+          name: "minecraft:chemistry_table",
+          runtime_id: 238,
           component_based: false,
         },
         {
-          name: "minecraft:chemistry_table",
-          runtime_id: 238,
+          name: "minecraft:silverfish_spawn_egg",
+          runtime_id: 443,
           component_based: false,
         },
         {
@@ -1939,7 +2063,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:written_book",
-          runtime_id: 511,
+          runtime_id: 516,
           component_based: false,
         },
         {
@@ -1969,7 +2093,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:globe_banner_pattern",
-          runtime_id: 588,
+          runtime_id: 593,
           component_based: false,
         },
         {
@@ -1983,8 +2107,8 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:lit_pumpkin",
-          runtime_id: 91,
+          name: "minecraft:netherite_ingot",
+          runtime_id: 608,
           component_based: false,
         },
         {
@@ -1993,8 +2117,8 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:netherite_ingot",
-          runtime_id: 603,
+          name: "minecraft:lit_pumpkin",
+          runtime_id: 91,
           component_based: false,
         },
         {
@@ -2014,7 +2138,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:tadpole_spawn_egg",
-          runtime_id: 629,
+          runtime_id: 634,
           component_based: false,
         },
         {
@@ -2024,7 +2148,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:trident",
-          runtime_id: 546,
+          runtime_id: 551,
           component_based: false,
         },
         {
@@ -2035,11 +2159,6 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:chest_minecart",
           runtime_id: 389,
-          component_based: false,
-        },
-        {
-          name: "minecraft:mud_bricks",
-          runtime_id: -475,
           component_based: false,
         },
         {
@@ -2054,12 +2173,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:netherite_sword",
-          runtime_id: 604,
+          runtime_id: 609,
           component_based: false,
         },
         {
           name: "minecraft:music_disc_stal",
-          runtime_id: 541,
+          runtime_id: 546,
           component_based: false,
         },
         {
@@ -2159,7 +2278,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:frame",
-          runtime_id: 513,
+          runtime_id: 518,
           component_based: false,
         },
         {
@@ -2179,12 +2298,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:dye",
-          runtime_id: 649,
+          runtime_id: 659,
           component_based: false,
         },
         {
           name: "minecraft:music_disc_13",
-          runtime_id: 534,
+          runtime_id: 539,
           component_based: false,
         },
         {
@@ -2249,7 +2368,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:mangrove_door",
-          runtime_id: 633,
+          runtime_id: 638,
           component_based: false,
         },
         {
@@ -2283,6 +2402,11 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:camel_spawn_egg",
+          runtime_id: 657,
+          component_based: false,
+        },
+        {
           name: "minecraft:white_dye",
           runtime_id: 410,
           component_based: false,
@@ -2304,7 +2428,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:turtle_helmet",
-          runtime_id: 573,
+          runtime_id: 578,
           component_based: false,
         },
         {
@@ -2318,21 +2442,6 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:camera",
-          runtime_id: 593,
-          component_based: false,
-        },
-        {
-          name: "minecraft:chorus_fruit",
-          runtime_id: 558,
-          component_based: false,
-        },
-        {
-          name: "minecraft:stripped_crimson_stem",
-          runtime_id: -240,
-          component_based: false,
-        },
-        {
           name: "minecraft:lapis_lazuli",
           runtime_id: 414,
           component_based: false,
@@ -2343,8 +2452,23 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:stripped_crimson_stem",
+          runtime_id: -240,
+          component_based: false,
+        },
+        {
+          name: "minecraft:camera",
+          runtime_id: 598,
+          component_based: false,
+        },
+        {
+          name: "minecraft:chorus_fruit",
+          runtime_id: 563,
+          component_based: false,
+        },
+        {
           name: "minecraft:suspicious_stew",
-          runtime_id: 590,
+          runtime_id: 595,
           component_based: false,
         },
         {
@@ -2359,7 +2483,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:name_tag",
-          runtime_id: 548,
+          runtime_id: 553,
           component_based: false,
         },
         {
@@ -2389,7 +2513,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:netherite_chestplate",
-          runtime_id: 610,
+          runtime_id: 615,
           component_based: false,
         },
         {
@@ -2423,16 +2547,6 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:carved_pumpkin",
-          runtime_id: -155,
-          component_based: false,
-        },
-        {
-          name: "minecraft:red_sandstone_stairs",
-          runtime_id: 180,
-          component_based: false,
-        },
-        {
           name: "minecraft:ghast_tear",
           runtime_id: 424,
           component_based: false,
@@ -2449,7 +2563,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:cooked_mutton",
-          runtime_id: 551,
+          runtime_id: 556,
           component_based: false,
         },
         {
@@ -2528,6 +2642,11 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:bamboo_hanging_sign",
+          runtime_id: -522,
+          component_based: false,
+        },
+        {
           name: "minecraft:skeleton_spawn_egg",
           runtime_id: 444,
           component_based: false,
@@ -2543,18 +2662,18 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:colored_torch_rg",
-          runtime_id: 202,
-          component_based: false,
-        },
-        {
           name: "minecraft:bleach",
-          runtime_id: 596,
+          runtime_id: 601,
           component_based: false,
         },
         {
           name: "minecraft:spider_spawn_egg",
           runtime_id: 446,
+          component_based: false,
+        },
+        {
+          name: "minecraft:colored_torch_rg",
+          runtime_id: 202,
           component_based: false,
         },
         {
@@ -2604,7 +2723,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:warped_sign",
-          runtime_id: 615,
+          runtime_id: 620,
           component_based: false,
         },
         {
@@ -2619,7 +2738,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:chain",
-          runtime_id: 619,
+          runtime_id: 624,
           component_based: false,
         },
         {
@@ -2629,12 +2748,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:warped_fungus_on_a_stick",
-          runtime_id: 618,
+          runtime_id: 623,
           component_based: false,
         },
         {
           name: "minecraft:soul_campfire",
-          runtime_id: 622,
+          runtime_id: 627,
           component_based: false,
         },
         {
@@ -2699,7 +2818,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:spruce_sign",
-          runtime_id: 576,
+          runtime_id: 581,
           component_based: false,
         },
         {
@@ -2729,7 +2848,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:netherite_pickaxe",
-          runtime_id: 606,
+          runtime_id: 611,
           component_based: false,
         },
         {
@@ -2745,6 +2864,16 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:jukebox",
           runtime_id: 84,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_door",
+          runtime_id: -517,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_slab",
+          runtime_id: -513,
           component_based: false,
         },
         {
@@ -2794,7 +2923,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:warden_spawn_egg",
-          runtime_id: 632,
+          runtime_id: 637,
           component_based: false,
         },
         {
@@ -2819,7 +2948,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:rapid_fertilizer",
-          runtime_id: 597,
+          runtime_id: 602,
           component_based: false,
         },
         {
@@ -2868,13 +2997,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:warped_slab",
-          runtime_id: -265,
+          name: "minecraft:salmon_spawn_egg",
+          runtime_id: 482,
           component_based: false,
         },
         {
-          name: "minecraft:salmon_spawn_egg",
-          runtime_id: 482,
+          name: "minecraft:warped_slab",
+          runtime_id: -265,
           component_based: false,
         },
         {
@@ -2929,17 +3058,22 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:quartz",
-          runtime_id: 524,
+          runtime_id: 529,
           component_based: false,
         },
         {
           name: "minecraft:carrot_on_a_stick",
-          runtime_id: 517,
+          runtime_id: 522,
           component_based: false,
         },
         {
           name: "minecraft:wandering_trader_spawn_egg",
           runtime_id: 492,
+          component_based: false,
+        },
+        {
+          name: "minecraft:spruce_hanging_sign",
+          runtime_id: -501,
           component_based: false,
         },
         {
@@ -2953,8 +3087,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:sniffer_spawn_egg",
+          runtime_id: 500,
+          component_based: false,
+        },
+        {
           name: "minecraft:goat_spawn_egg",
-          runtime_id: 501,
+          runtime_id: 502,
           component_based: false,
         },
         {
@@ -2963,13 +3102,33 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:lime_glazed_terracotta",
+          runtime_id: 225,
+          component_based: false,
+        },
+        {
+          name: "minecraft:iron_golem_spawn_egg",
+          runtime_id: 504,
+          component_based: false,
+        },
+        {
+          name: "minecraft:ender_dragon_spawn_egg",
+          runtime_id: 506,
+          component_based: false,
+        },
+        {
+          name: "minecraft:wither_spawn_egg",
+          runtime_id: 507,
+          component_based: false,
+        },
+        {
           name: "minecraft:glow_ink_sac",
-          runtime_id: 503,
+          runtime_id: 508,
           component_based: false,
         },
         {
           name: "minecraft:copper_ingot",
-          runtime_id: 504,
+          runtime_id: 509,
           component_based: false,
         },
         {
@@ -3014,7 +3173,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:prismarine_shard",
-          runtime_id: 565,
+          runtime_id: 570,
           component_based: false,
         },
         {
@@ -3049,7 +3208,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:mutton",
-          runtime_id: 550,
+          runtime_id: 555,
           component_based: false,
         },
         {
@@ -3074,7 +3233,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:fire_charge",
-          runtime_id: 509,
+          runtime_id: 514,
           component_based: false,
         },
         {
@@ -3099,17 +3258,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:raw_copper",
-          runtime_id: 507,
+          runtime_id: 512,
           component_based: false,
         },
         {
           name: "minecraft:experience_bottle",
-          runtime_id: 508,
+          runtime_id: 513,
           component_based: false,
         },
         {
           name: "minecraft:writable_book",
-          runtime_id: 510,
+          runtime_id: 515,
           component_based: false,
         },
         {
@@ -3119,7 +3278,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:emerald",
-          runtime_id: 512,
+          runtime_id: 517,
           component_based: false,
         },
         {
@@ -3128,8 +3287,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:bamboo_fence_gate",
+          runtime_id: -516,
+          component_based: false,
+        },
+        {
           name: "minecraft:flower_pot",
-          runtime_id: 514,
+          runtime_id: 519,
           component_based: false,
         },
         {
@@ -3149,17 +3313,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:empty_map",
-          runtime_id: 515,
+          runtime_id: 520,
           component_based: false,
         },
         {
           name: "minecraft:skull",
-          runtime_id: 516,
+          runtime_id: 521,
           component_based: false,
         },
         {
           name: "minecraft:firework_rocket",
-          runtime_id: 519,
+          runtime_id: 524,
           component_based: false,
         },
         {
@@ -3168,13 +3332,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:colored_torch_bp",
-          runtime_id: 204,
+          name: "minecraft:firework_star",
+          runtime_id: 525,
           component_based: false,
         },
         {
-          name: "minecraft:firework_star",
-          runtime_id: 520,
+          name: "minecraft:colored_torch_bp",
+          runtime_id: 204,
           component_based: false,
         },
         {
@@ -3184,17 +3348,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:enchanted_book",
-          runtime_id: 521,
+          runtime_id: 526,
           component_based: false,
         },
         {
           name: "minecraft:totem_of_undying",
-          runtime_id: 568,
+          runtime_id: 573,
           component_based: false,
         },
         {
           name: "minecraft:netherbrick",
-          runtime_id: 523,
+          runtime_id: 528,
           component_based: false,
         },
         {
@@ -3204,22 +3368,22 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:tnt_minecart",
-          runtime_id: 525,
+          runtime_id: 530,
           component_based: false,
         },
         {
           name: "minecraft:hopper_minecart",
-          runtime_id: 526,
+          runtime_id: 531,
           component_based: false,
         },
         {
           name: "minecraft:dragon_breath",
-          runtime_id: 560,
+          runtime_id: 565,
           component_based: false,
         },
         {
           name: "minecraft:hopper",
-          runtime_id: 527,
+          runtime_id: 532,
           component_based: false,
         },
         {
@@ -3229,37 +3393,37 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:rabbit_hide",
-          runtime_id: 529,
+          runtime_id: 534,
           component_based: false,
         },
         {
           name: "minecraft:leather_horse_armor",
-          runtime_id: 530,
-          component_based: false,
-        },
-        {
-          name: "minecraft:iron_horse_armor",
-          runtime_id: 531,
-          component_based: false,
-        },
-        {
-          name: "minecraft:diamond_horse_armor",
-          runtime_id: 533,
-          component_based: false,
-        },
-        {
-          name: "minecraft:jungle_door",
-          runtime_id: 555,
-          component_based: false,
-        },
-        {
-          name: "minecraft:music_disc_cat",
           runtime_id: 535,
           component_based: false,
         },
         {
-          name: "minecraft:music_disc_blocks",
+          name: "minecraft:iron_horse_armor",
           runtime_id: 536,
+          component_based: false,
+        },
+        {
+          name: "minecraft:diamond_horse_armor",
+          runtime_id: 538,
+          component_based: false,
+        },
+        {
+          name: "minecraft:jungle_door",
+          runtime_id: 560,
+          component_based: false,
+        },
+        {
+          name: "minecraft:music_disc_cat",
+          runtime_id: 540,
+          component_based: false,
+        },
+        {
+          name: "minecraft:music_disc_blocks",
+          runtime_id: 541,
           component_based: false,
         },
         {
@@ -3274,12 +3438,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:music_disc_far",
-          runtime_id: 538,
+          runtime_id: 543,
           component_based: false,
         },
         {
           name: "minecraft:music_disc_mellohi",
-          runtime_id: 540,
+          runtime_id: 545,
           component_based: false,
         },
         {
@@ -3289,17 +3453,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:prismarine_crystals",
-          runtime_id: 549,
+          runtime_id: 554,
           component_based: false,
         },
         {
           name: "minecraft:lead",
-          runtime_id: 547,
+          runtime_id: 552,
           component_based: false,
         },
         {
           name: "minecraft:acacia_sign",
-          runtime_id: 579,
+          runtime_id: 584,
           component_based: false,
         },
         {
@@ -3309,27 +3473,32 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:armor_stand",
-          runtime_id: 552,
+          runtime_id: 557,
           component_based: false,
         },
         {
           name: "minecraft:phantom_membrane",
-          runtime_id: 574,
+          runtime_id: 579,
           component_based: false,
         },
         {
           name: "minecraft:spruce_door",
-          runtime_id: 553,
+          runtime_id: 558,
+          component_based: false,
+        },
+        {
+          name: "minecraft:birch_hanging_sign",
+          runtime_id: -502,
           component_based: false,
         },
         {
           name: "minecraft:birch_door",
-          runtime_id: 554,
+          runtime_id: 559,
           component_based: false,
         },
         {
           name: "minecraft:acacia_door",
-          runtime_id: 556,
+          runtime_id: 561,
           component_based: false,
         },
         {
@@ -3339,17 +3508,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:netherite_leggings",
-          runtime_id: 611,
+          runtime_id: 616,
           component_based: false,
         },
         {
           name: "minecraft:dark_oak_door",
-          runtime_id: 557,
+          runtime_id: 562,
           component_based: false,
         },
         {
           name: "minecraft:popped_chorus_fruit",
-          runtime_id: 559,
+          runtime_id: 564,
           component_based: false,
         },
         {
@@ -3359,12 +3528,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:splash_potion",
-          runtime_id: 561,
+          runtime_id: 566,
           component_based: false,
         },
         {
           name: "minecraft:shulker_shell",
-          runtime_id: 566,
+          runtime_id: 571,
           component_based: false,
         },
         {
@@ -3374,12 +3543,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:banner",
-          runtime_id: 567,
+          runtime_id: 572,
           component_based: false,
         },
         {
           name: "minecraft:iron_nugget",
-          runtime_id: 569,
+          runtime_id: 574,
           component_based: false,
         },
         {
@@ -3399,7 +3568,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:birch_sign",
-          runtime_id: 577,
+          runtime_id: 582,
           component_based: false,
         },
         {
@@ -3409,22 +3578,27 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:balloon",
-          runtime_id: 598,
+          runtime_id: 603,
           component_based: false,
         },
         {
           name: "minecraft:jungle_sign",
-          runtime_id: 578,
+          runtime_id: 583,
           component_based: false,
         },
         {
           name: "minecraft:dark_oak_sign",
-          runtime_id: 580,
+          runtime_id: 585,
           component_based: false,
         },
         {
           name: "minecraft:flower_banner_pattern",
-          runtime_id: 581,
+          runtime_id: 586,
+          component_based: false,
+        },
+        {
+          name: "minecraft:polished_diorite_stairs",
+          runtime_id: -173,
           component_based: false,
         },
         {
@@ -3434,27 +3608,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:mojang_banner_pattern",
-          runtime_id: 584,
-          component_based: false,
-        },
-        {
-          name: "minecraft:polished_diorite_stairs",
-          runtime_id: -173,
+          runtime_id: 589,
           component_based: false,
         },
         {
           name: "minecraft:frog_spawn_egg",
-          runtime_id: 628,
+          runtime_id: 633,
           component_based: false,
         },
         {
           name: "minecraft:field_masoned_banner_pattern",
-          runtime_id: 585,
-          component_based: false,
-        },
-        {
-          name: "minecraft:bell",
-          runtime_id: -206,
+          runtime_id: 590,
           component_based: false,
         },
         {
@@ -3464,17 +3628,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:bordure_indented_banner_pattern",
-          runtime_id: 586,
-          component_based: false,
-        },
-        {
-          name: "minecraft:purple_candle_cake",
-          runtime_id: -440,
+          runtime_id: 591,
           component_based: false,
         },
         {
           name: "minecraft:piglin_banner_pattern",
-          runtime_id: 587,
+          runtime_id: 592,
           component_based: false,
         },
         {
@@ -3489,7 +3648,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:honeycomb",
-          runtime_id: 591,
+          runtime_id: 596,
           component_based: false,
         },
         {
@@ -3499,7 +3658,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:honey_bottle",
-          runtime_id: 592,
+          runtime_id: 597,
           component_based: false,
         },
         {
@@ -3509,17 +3668,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:compound",
-          runtime_id: 594,
+          runtime_id: 599,
           component_based: false,
         },
         {
           name: "minecraft:ice_bomb",
-          runtime_id: 595,
+          runtime_id: 600,
           component_based: false,
         },
         {
           name: "minecraft:medicine",
-          runtime_id: 599,
+          runtime_id: 604,
           component_based: false,
         },
         {
@@ -3539,12 +3698,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:glow_stick",
-          runtime_id: 601,
+          runtime_id: 606,
           component_based: false,
         },
         {
           name: "minecraft:lodestone_compass",
-          runtime_id: 602,
+          runtime_id: 607,
           component_based: false,
         },
         {
@@ -3554,27 +3713,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:netherite_shovel",
-          runtime_id: 605,
+          runtime_id: 610,
           component_based: false,
         },
         {
           name: "minecraft:quartz_ore",
           runtime_id: 153,
-          component_based: false,
-        },
-        {
-          name: "minecraft:loom",
-          runtime_id: -204,
-          component_based: false,
-        },
-        {
-          name: "minecraft:chain_command_block",
-          runtime_id: 189,
-          component_based: false,
-        },
-        {
-          name: "minecraft:polished_deepslate_double_slab",
-          runtime_id: -397,
           component_based: false,
         },
         {
@@ -3584,22 +3728,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:netherite_axe",
-          runtime_id: 607,
+          runtime_id: 612,
           component_based: false,
         },
         {
           name: "minecraft:netherite_hoe",
-          runtime_id: 608,
-          component_based: false,
-        },
-        {
-          name: "minecraft:netherite_helmet",
-          runtime_id: 609,
-          component_based: false,
-        },
-        {
-          name: "minecraft:mud",
-          runtime_id: -473,
+          runtime_id: 613,
           component_based: false,
         },
         {
@@ -3613,8 +3747,18 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:mud",
+          runtime_id: -473,
+          component_based: false,
+        },
+        {
+          name: "minecraft:netherite_helmet",
+          runtime_id: 614,
+          component_based: false,
+        },
+        {
           name: "minecraft:netherite_scrap",
-          runtime_id: 613,
+          runtime_id: 618,
           component_based: false,
         },
         {
@@ -3624,12 +3768,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:crimson_sign",
-          runtime_id: 614,
+          runtime_id: 619,
           component_based: false,
         },
         {
           name: "minecraft:crimson_door",
-          runtime_id: 616,
+          runtime_id: 621,
           component_based: false,
         },
         {
@@ -3638,13 +3782,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:nether_sprouts",
-          runtime_id: 621,
+          name: "minecraft:cartography_table",
+          runtime_id: -200,
           component_based: false,
         },
         {
-          name: "minecraft:cartography_table",
-          runtime_id: -200,
+          name: "minecraft:nether_sprouts",
+          runtime_id: 626,
           component_based: false,
         },
         {
@@ -3674,12 +3818,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:mangrove_boat",
-          runtime_id: 635,
+          runtime_id: 640,
           component_based: false,
         },
         {
           name: "minecraft:spyglass",
-          runtime_id: 625,
+          runtime_id: 630,
           component_based: false,
         },
         {
@@ -3704,12 +3848,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:amethyst_shard",
-          runtime_id: 624,
+          runtime_id: 629,
           component_based: false,
         },
         {
           name: "minecraft:birch_chest_boat",
-          runtime_id: 639,
+          runtime_id: 644,
           component_based: false,
         },
         {
@@ -3719,7 +3863,12 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:music_disc_otherside",
-          runtime_id: 626,
+          runtime_id: 631,
+          component_based: false,
+        },
+        {
+          name: "minecraft:goat_horn",
+          runtime_id: 632,
           component_based: false,
         },
         {
@@ -3728,28 +3877,8 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:goat_horn",
-          runtime_id: 627,
-          component_based: false,
-        },
-        {
           name: "minecraft:smooth_red_sandstone_stairs",
           runtime_id: -176,
-          component_based: false,
-        },
-        {
-          name: "minecraft:wood",
-          runtime_id: -212,
-          component_based: false,
-        },
-        {
-          name: "minecraft:item.hopper",
-          runtime_id: 154,
-          component_based: false,
-        },
-        {
-          name: "minecraft:mud_brick_double_slab",
-          runtime_id: -479,
           component_based: false,
         },
         {
@@ -3759,7 +3888,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:allay_spawn_egg",
-          runtime_id: 631,
+          runtime_id: 636,
           component_based: false,
         },
         {
@@ -3784,7 +3913,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:mangrove_sign",
-          runtime_id: 634,
+          runtime_id: 639,
           component_based: false,
         },
         {
@@ -3818,18 +3947,18 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:music_disc_5",
-          runtime_id: 636,
-          component_based: false,
-        },
-        {
           name: "minecraft:green_glazed_terracotta",
           runtime_id: 233,
           component_based: false,
         },
         {
+          name: "minecraft:music_disc_5",
+          runtime_id: 641,
+          component_based: false,
+        },
+        {
           name: "minecraft:disc_fragment_5",
-          runtime_id: 637,
+          runtime_id: 642,
           component_based: false,
         },
         {
@@ -3853,38 +3982,28 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:candle_cake",
-          runtime_id: -429,
-          component_based: false,
-        },
-        {
-          name: "minecraft:pink_glazed_terracotta",
-          runtime_id: 226,
-          component_based: false,
-        },
-        {
           name: "minecraft:jungle_chest_boat",
-          runtime_id: 640,
+          runtime_id: 645,
           component_based: false,
         },
         {
           name: "minecraft:spruce_chest_boat",
-          runtime_id: 641,
+          runtime_id: 646,
           component_based: false,
         },
         {
           name: "minecraft:acacia_chest_boat",
-          runtime_id: 642,
+          runtime_id: 647,
           component_based: false,
         },
         {
           name: "minecraft:dark_oak_chest_boat",
-          runtime_id: 643,
+          runtime_id: 648,
           component_based: false,
         },
         {
           name: "minecraft:mangrove_chest_boat",
-          runtime_id: 644,
+          runtime_id: 649,
           component_based: false,
         },
         {
@@ -3894,7 +4013,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:recovery_compass",
-          runtime_id: 646,
+          runtime_id: 651,
           component_based: false,
         },
         {
@@ -3904,7 +4023,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:chest_boat",
-          runtime_id: 645,
+          runtime_id: 650,
           component_based: false,
         },
         {
@@ -3914,7 +4033,102 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:echo_shard",
-          runtime_id: 647,
+          runtime_id: 652,
+          component_based: false,
+        },
+        {
+          name: "minecraft:birch_trapdoor",
+          runtime_id: -146,
+          component_based: false,
+        },
+        {
+          name: "minecraft:trader_llama_spawn_egg",
+          runtime_id: 653,
+          component_based: false,
+        },
+        {
+          name: "minecraft:yellow_flower",
+          runtime_id: 37,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_mosaic_slab",
+          runtime_id: -524,
+          component_based: false,
+        },
+        {
+          name: "minecraft:stained_hardened_clay",
+          runtime_id: 159,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_raft",
+          runtime_id: 655,
+          component_based: false,
+        },
+        {
+          name: "minecraft:deadbush",
+          runtime_id: 32,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_chest_raft",
+          runtime_id: 656,
+          component_based: false,
+        },
+        {
+          name: "minecraft:oak_hanging_sign",
+          runtime_id: -500,
+          component_based: false,
+        },
+        {
+          name: "minecraft:element_89",
+          runtime_id: -100,
+          component_based: false,
+        },
+        {
+          name: "minecraft:end_brick_stairs",
+          runtime_id: -178,
+          component_based: false,
+        },
+        {
+          name: "minecraft:jungle_hanging_sign",
+          runtime_id: -503,
+          component_based: false,
+        },
+        {
+          name: "minecraft:element_91",
+          runtime_id: -102,
+          component_based: false,
+        },
+        {
+          name: "minecraft:acacia_hanging_sign",
+          runtime_id: -504,
+          component_based: false,
+        },
+        {
+          name: "minecraft:element_82",
+          runtime_id: -93,
+          component_based: false,
+        },
+        {
+          name: "minecraft:dark_oak_hanging_sign",
+          runtime_id: -505,
+          component_based: false,
+        },
+        {
+          name: "minecraft:crimson_hanging_sign",
+          runtime_id: -506,
+          component_based: false,
+        },
+        {
+          name: "minecraft:warped_hanging_sign",
+          runtime_id: -507,
+          component_based: false,
+        },
+        {
+          name: "minecraft:brown_candle",
+          runtime_id: -425,
           component_based: false,
         },
         {
@@ -3925,16 +4139,6 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:wool",
           runtime_id: 35,
-          component_based: false,
-        },
-        {
-          name: "minecraft:yellow_flower",
-          runtime_id: 37,
-          component_based: false,
-        },
-        {
-          name: "minecraft:stained_hardened_clay",
-          runtime_id: 159,
           component_based: false,
         },
         {
@@ -3973,6 +4177,11 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:bamboo_stairs",
+          runtime_id: -512,
+          component_based: false,
+        },
+        {
           name: "minecraft:stone_block_slab4",
           runtime_id: -166,
           component_based: false,
@@ -3993,13 +4202,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:double_stone_block_slab4",
-          runtime_id: -168,
+          name: "minecraft:tnt",
+          runtime_id: 46,
           component_based: false,
         },
         {
-          name: "minecraft:tnt",
-          runtime_id: 46,
+          name: "minecraft:double_stone_block_slab4",
+          runtime_id: -168,
           component_based: false,
         },
         {
@@ -4138,8 +4347,28 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:polished_deepslate_double_slab",
+          runtime_id: -397,
+          component_based: false,
+        },
+        {
+          name: "minecraft:chain_command_block",
+          runtime_id: 189,
+          component_based: false,
+        },
+        {
+          name: "minecraft:loom",
+          runtime_id: -204,
+          component_based: false,
+        },
+        {
           name: "minecraft:grindstone",
           runtime_id: -195,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bell",
+          runtime_id: -206,
           component_based: false,
         },
         {
@@ -4158,8 +4387,48 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:mud_brick_double_slab",
+          runtime_id: -479,
+          component_based: false,
+        },
+        {
+          name: "minecraft:item.hopper",
+          runtime_id: 154,
+          component_based: false,
+        },
+        {
+          name: "minecraft:wood",
+          runtime_id: -212,
+          component_based: false,
+        },
+        {
+          name: "minecraft:double_wooden_slab",
+          runtime_id: 157,
+          component_based: false,
+        },
+        {
+          name: "minecraft:hard_stained_glass",
+          runtime_id: 254,
+          component_based: false,
+        },
+        {
+          name: "minecraft:element_84",
+          runtime_id: -95,
+          component_based: false,
+        },
+        {
           name: "minecraft:hard_stained_glass_pane",
           runtime_id: 191,
+          component_based: false,
+        },
+        {
+          name: "minecraft:light_block",
+          runtime_id: -215,
+          component_based: false,
+        },
+        {
+          name: "minecraft:item.dark_oak_door",
+          runtime_id: 197,
           component_based: false,
         },
         {
@@ -4170,6 +4439,16 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:slime",
           runtime_id: 165,
+          component_based: false,
+        },
+        {
+          name: "minecraft:carved_pumpkin",
+          runtime_id: -155,
+          component_based: false,
+        },
+        {
+          name: "minecraft:red_sandstone_stairs",
+          runtime_id: 180,
           component_based: false,
         },
         {
@@ -4218,11 +4497,6 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:brown_candle",
-          runtime_id: -425,
-          component_based: false,
-        },
-        {
           name: "minecraft:green_candle",
           runtime_id: -426,
           component_based: false,
@@ -4230,11 +4504,6 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:red_candle",
           runtime_id: -427,
-          component_based: false,
-        },
-        {
-          name: "minecraft:birch_wall_sign",
-          runtime_id: -187,
           component_based: false,
         },
         {
@@ -4338,13 +4607,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:element_20",
-          runtime_id: -31,
+          name: "minecraft:pearlescent_froglight",
+          runtime_id: -469,
           component_based: false,
         },
         {
-          name: "minecraft:pearlescent_froglight",
-          runtime_id: -469,
+          name: "minecraft:element_20",
+          runtime_id: -31,
           component_based: false,
         },
         {
@@ -4390,11 +4659,6 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:element_36",
           runtime_id: -47,
-          component_based: false,
-        },
-        {
-          name: "minecraft:ice",
-          runtime_id: 79,
           component_based: false,
         },
         {
@@ -4568,16 +4832,6 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:element_82",
-          runtime_id: -93,
-          component_based: false,
-        },
-        {
-          name: "minecraft:polished_blackstone_wall",
-          runtime_id: -297,
-          component_based: false,
-        },
-        {
           name: "minecraft:element_85",
           runtime_id: -96,
           component_based: false,
@@ -4593,18 +4847,8 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:element_89",
-          runtime_id: -100,
-          component_based: false,
-        },
-        {
           name: "minecraft:element_90",
           runtime_id: -101,
-          component_based: false,
-        },
-        {
-          name: "minecraft:element_91",
-          runtime_id: -102,
           component_based: false,
         },
         {
@@ -4733,6 +4977,11 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:bamboo_button",
+          runtime_id: -511,
+          component_based: false,
+        },
+        {
           name: "minecraft:element_118",
           runtime_id: -129,
           component_based: false,
@@ -4759,17 +5008,17 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:boat",
-          runtime_id: 648,
+          runtime_id: 658,
           component_based: false,
         },
         {
           name: "minecraft:banner_pattern",
-          runtime_id: 650,
+          runtime_id: 660,
           component_based: false,
         },
         {
           name: "minecraft:end_crystal",
-          runtime_id: 652,
+          runtime_id: 662,
           component_based: false,
         },
         {
@@ -4779,7 +5028,7 @@ class StartGame extends require("./Packet") {
         },
         {
           name: "minecraft:glow_berries",
-          runtime_id: 653,
+          runtime_id: 663,
           component_based: false,
         },
         {
@@ -4795,6 +5044,11 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:nether_gold_ore",
           runtime_id: -288,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_block",
+          runtime_id: -527,
           component_based: false,
         },
         {
@@ -4863,23 +5117,18 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:lime_glazed_terracotta",
-          runtime_id: 225,
-          component_based: false,
-        },
-        {
           name: "minecraft:redstone_lamp",
           runtime_id: 123,
           component_based: false,
         },
         {
-          name: "minecraft:lever",
-          runtime_id: 69,
+          name: "minecraft:mossy_cobblestone",
+          runtime_id: 48,
           component_based: false,
         },
         {
-          name: "minecraft:mossy_cobblestone",
-          runtime_id: 48,
+          name: "minecraft:bamboo_planks",
+          runtime_id: -510,
           component_based: false,
         },
         {
@@ -4943,6 +5192,11 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:chiseled_bookshelf",
+          runtime_id: -526,
+          component_based: false,
+        },
+        {
           name: "minecraft:stripped_acacia_log",
           runtime_id: -8,
           component_based: false,
@@ -4998,6 +5252,16 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:bamboo_fence",
+          runtime_id: -515,
+          component_based: false,
+        },
+        {
+          name: "minecraft:blue_glazed_terracotta",
+          runtime_id: 231,
+          component_based: false,
+        },
+        {
           name: "minecraft:hardened_clay",
           runtime_id: 172,
           component_based: false,
@@ -5043,16 +5307,6 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:vine",
-          runtime_id: 106,
-          component_based: false,
-        },
-        {
-          name: "minecraft:warped_wart_block",
-          runtime_id: -227,
-          component_based: false,
-        },
-        {
           name: "minecraft:gold_ore",
           runtime_id: 14,
           component_based: false,
@@ -5088,13 +5342,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:wall_sign",
-          runtime_id: 68,
+          name: "minecraft:brick_stairs",
+          runtime_id: 108,
           component_based: false,
         },
         {
-          name: "minecraft:brick_stairs",
-          runtime_id: 108,
+          name: "minecraft:wall_sign",
+          runtime_id: 68,
           component_based: false,
         },
         {
@@ -5113,13 +5367,13 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:lightning_rod",
-          runtime_id: -312,
+          name: "minecraft:moss_block",
+          runtime_id: -320,
           component_based: false,
         },
         {
-          name: "minecraft:moss_block",
-          runtime_id: -320,
+          name: "minecraft:lightning_rod",
+          runtime_id: -312,
           component_based: false,
         },
         {
@@ -5165,6 +5419,16 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:cave_vines_body_with_berries",
           runtime_id: -375,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_trapdoor",
+          runtime_id: -520,
+          component_based: false,
+        },
+        {
+          name: "minecraft:stripped_bamboo_block",
+          runtime_id: -528,
           component_based: false,
         },
         {
@@ -5238,11 +5502,6 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:mangrove_fence",
-          runtime_id: -491,
-          component_based: false,
-        },
-        {
           name: "minecraft:blackstone_wall",
           runtime_id: -277,
           component_based: false,
@@ -5270,6 +5529,11 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:red_glazed_terracotta",
           runtime_id: 234,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_mosaic_double_slab",
+          runtime_id: -525,
           component_based: false,
         },
         {
@@ -5398,11 +5662,6 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:deadbush",
-          runtime_id: 32,
-          component_based: false,
-        },
-        {
           name: "minecraft:item.wheat",
           runtime_id: 59,
           component_based: false,
@@ -5493,18 +5752,8 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:cobbled_deepslate",
-          runtime_id: -379,
-          component_based: false,
-        },
-        {
           name: "minecraft:item.kelp",
           runtime_id: -138,
-          component_based: false,
-        },
-        {
-          name: "minecraft:blue_glazed_terracotta",
-          runtime_id: 231,
           component_based: false,
         },
         {
@@ -5568,23 +5817,18 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:reinforced_deepslate",
-          runtime_id: -466,
-          component_based: false,
-        },
-        {
           name: "minecraft:deepslate_redstone_ore",
           runtime_id: -403,
           component_based: false,
         },
         {
-          name: "minecraft:cobbled_deepslate_double_slab",
-          runtime_id: -396,
+          name: "minecraft:reinforced_deepslate",
+          runtime_id: -466,
           component_based: false,
         },
         {
-          name: "minecraft:item.nether_sprouts",
-          runtime_id: -238,
+          name: "minecraft:cobbled_deepslate_double_slab",
+          runtime_id: -396,
           component_based: false,
         },
         {
@@ -5610,6 +5854,11 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:sweet_berry_bush",
           runtime_id: -207,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_pressure_plate",
+          runtime_id: -514,
           component_based: false,
         },
         {
@@ -5648,6 +5897,11 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:bamboo_mosaic_stairs",
+          runtime_id: -523,
+          component_based: false,
+        },
+        {
           name: "minecraft:polished_blackstone_pressure_plate",
           runtime_id: -295,
           component_based: false,
@@ -5673,8 +5927,8 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:end_brick_stairs",
-          runtime_id: -178,
+          name: "minecraft:item.nether_sprouts",
+          runtime_id: -238,
           component_based: false,
         },
         {
@@ -5698,6 +5952,21 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:lever",
+          runtime_id: 69,
+          component_based: false,
+        },
+        {
+          name: "minecraft:candle_cake",
+          runtime_id: -429,
+          component_based: false,
+        },
+        {
+          name: "minecraft:pink_glazed_terracotta",
+          runtime_id: 226,
+          component_based: false,
+        },
+        {
           name: "minecraft:spruce_trapdoor",
           runtime_id: -149,
           component_based: false,
@@ -5708,13 +5977,28 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
-          name: "minecraft:birch_trapdoor",
-          runtime_id: -146,
+          name: "minecraft:mangrove_fence",
+          runtime_id: -491,
+          component_based: false,
+        },
+        {
+          name: "minecraft:cobbled_deepslate",
+          runtime_id: -379,
+          component_based: false,
+        },
+        {
+          name: "minecraft:ice",
+          runtime_id: 79,
           component_based: false,
         },
         {
           name: "minecraft:item.bed",
           runtime_id: 26,
+          component_based: false,
+        },
+        {
+          name: "minecraft:purple_candle_cake",
+          runtime_id: -440,
           component_based: false,
         },
         {
@@ -5728,6 +6012,11 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:polished_blackstone_wall",
+          runtime_id: -297,
+          component_based: false,
+        },
+        {
           name: "minecraft:waxed_exposed_double_cut_copper_slab",
           runtime_id: -373,
           component_based: false,
@@ -5735,6 +6024,21 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:azalea",
           runtime_id: -337,
+          component_based: false,
+        },
+        {
+          name: "minecraft:mud_bricks",
+          runtime_id: -475,
+          component_based: false,
+        },
+        {
+          name: "minecraft:birch_wall_sign",
+          runtime_id: -187,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_wall_sign",
+          runtime_id: -519,
           component_based: false,
         },
         {
@@ -5840,6 +6144,11 @@ class StartGame extends require("./Packet") {
         {
           name: "minecraft:cracked_polished_blackstone_bricks",
           runtime_id: -280,
+          component_based: false,
+        },
+        {
+          name: "minecraft:bamboo_standing_sign",
+          runtime_id: -518,
           component_based: false,
         },
         {
@@ -6053,6 +6362,11 @@ class StartGame extends require("./Packet") {
           component_based: false,
         },
         {
+          name: "minecraft:bamboo_mosaic",
+          runtime_id: -509,
+          component_based: false,
+        },
+        {
           name: "minecraft:raw_iron_block",
           runtime_id: -451,
           component_based: false,
@@ -6074,7 +6388,7 @@ class StartGame extends require("./Packet") {
         },
       ],
       multiplayer_correlation_id: "77804352-c5eb-4a76-82ae-6a61fef7f618",
-      server_authoritative_inventory: true,
+      server_authoritative_inventory: false,
       engine: "GreenFrogMCBE",
       property_data: {
         type: "compound",
@@ -6083,6 +6397,7 @@ class StartGame extends require("./Packet") {
       },
       block_pallette_checksum: [0, 0],
       world_template_id: "00000000-0000-0000-0000-000000000000",
+      client_side_generation: true,
     });
   }
 }

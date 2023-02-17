@@ -6,19 +6,19 @@
   "license": "MIT",
   "scripts": {
     "format": "npx prettier --write .",
-    "debug": "node index.js --debug",
     "start": "node index.js",
-    "dev": "nodemon --signal SIGINT index.js",
+    "dev": "nodemon --signal SIGINT index.js --debug",
     "gencoryrightheader": "node generatelicenseheaders.js",
     "build": "npm run gencoryrightheader && npm run format",
-    "dump": "cd tools && node DumpByIP.js geo.hivebedrock.network 19132"
+    "test": "node tests.js"
   },
   "dependencies": {
-    "frog-protocol": "git+https://github.com/greenfrogmc/Protocol.git"
+    "frog-protocol": "git+https://github.com/greenfrogmc/Protocol.git",
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
-    "eslint": "8.33.0",
+    "eslint": "8.34.0",
     "nodemon": "^2.0.20",
-    "prettier": "2.8.3"
+    "prettier": "2.8.4"
   }
 }

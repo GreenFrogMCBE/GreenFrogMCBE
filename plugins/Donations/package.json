@@ -1,0 +1,11 @@
+{
+  "name": "donations",
+  "main": "Donations.js",
+  "version": "1.0.0",
+  "displayName": "Donations",
+  "description": "A simple plugin that adds the annoying donation message to ur server",
+  "authors": [
+    "bufferfishq",
+    "andriycraft"
+  ]
+}

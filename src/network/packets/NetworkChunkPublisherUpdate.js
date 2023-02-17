@@ -20,22 +20,17 @@ let saved_chunks = [];
 
 class NetworkChunkPublisherUpdate extends require("./Packet") {
   /**
-   * It returns the packet name
-   * @returns The packet name
+   * @returns The name of the packet.
    */
   name() {
     return "network_chunk_publisher_update";
   }
 
   /**
-   * SetCords(x, y, z) {
-   *     cords.x = x;
-   *     cords.y = y;
-   *     cords.z = z;
-   * }
-   * @param x - The x coordinate of the player.
-   * @param y - The y coordinate of the player.
-   * @param z - The z coordinate of the player.
+   * It sets the coordinates of the chunk
+   * @param x - The X coordinate of the player.
+   * @param y - The Y coordinate of the player.
+   * @param z - The Z coordinate of the player.
    */
   setCords(x, y, z) {
     cords.x = x;
@@ -44,7 +39,7 @@ class NetworkChunkPublisherUpdate extends require("./Packet") {
   }
 
   /**
-   * The function setRadius() sets the radius
+   * It sets the radius
    * @param radius1 - The radius.
    */
   setRadius(radius1) {
@@ -52,23 +47,23 @@ class NetworkChunkPublisherUpdate extends require("./Packet") {
   }
 
   /**
-   * It takes an array of chunks and sets the saved_chunks variable to that array.
-   * @param chunks - An array of chunks.
+   * It sets the saved chunks
+   * @param chunks - An array of saved chunks.
    */
   setSavedChunks(chunks) {
     saved_chunks = chunks;
   }
 
   /**
-   * It returns the value of the variable coordinates.
-   * @returns The function getCords() is returning the variable coordinates.
+   * It returns the coordinates.
+   * @returns The coordinates.
    */
   getCords() {
     return cords;
   }
 
   /**
-   * The function getRadius() returns the radius.
+   * It returns the radius.
    * @returns The radius.
    */
   getRadius() {
@@ -76,17 +71,13 @@ class NetworkChunkPublisherUpdate extends require("./Packet") {
   }
 
   /**
-   * It returns the saved_chunks variable.
-   * @returns The saved_chunks array.
+   * It returns the saved_chunks.
+   * @returns The saved_chunks.
    */
   getSavedChunks() {
     return saved_chunks;
   }
 
-  /**
-   * Sends the packet
-   * @param client - The client that the packet is being sent to.
-   */
   send(client) {
     this.validate(client);
     client.write(this.name(), {

@@ -21,8 +21,7 @@ let runtime_entity_id = 0;
 
 class ContainerOpen extends require("./Packet") {
   /**
-   * It returns the packet name
-   * @returns Packet name
+   * @returns The name of the packet.
    */
   name() {
     return "container_open";
@@ -30,7 +29,7 @@ class ContainerOpen extends require("./Packet") {
 
   /**
    * It sets the window id
-   @param {number} window_id
+   * @param {number} window_id
    */
   setWindowId(window_id1) {
     window_id = window_id1;
@@ -38,9 +37,9 @@ class ContainerOpen extends require("./Packet") {
 
   /**
    * It sets the coordinates
-   @param {number} x
-   @param {number} y
-   @param {number} z
+   * @param {number} x
+   * @param {number} y
+   * @param {number} z
    */
   setCoordinates(x, y, z) {
     cords = {
@@ -52,7 +51,7 @@ class ContainerOpen extends require("./Packet") {
 
   /**
    * It sets the window type
-   @param {string} window_type
+   * @param {string} window_type
    */
   setWindowType(window_type1) {
     window_type = window_type1;

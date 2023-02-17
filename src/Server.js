@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* Its the server main file. */
 process.env.DEBUG = process.argv.includes("--debug")
   ? "minecraft-protocol"
   : "";
@@ -21,34 +20,32 @@ const ServerInfo = require("./server/ServerInfo");
 const PlayerInfo = require("./player/PlayerInfo");
 const PluginLoader = require("./plugin/PluginLoader");
 const Text = require("./network/packets/handlers/Text");
-const ValidateConfig = require("./server/ValidateConfig");
 const Interact = require("./network/packets/handlers/Interact");
-const Unhandled = require("./network/packets/handlers/Unhandled");
 const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
 const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponse");
+const ServerInternalServerErrorEvent = require("./plugin/events/ServerInternalServerErrorEvent");
 const RequestChunkRadius = require("./network/packets/handlers/RequestChunkRadius");
 const ModalFormResponse = require("./network/packets/handlers/ModalFormResponse");
 const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
+const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
 const ValidateClient = require("./player/ValidateClient");
+const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
-const Events = require("./plugin/Events");
 
 let clients = [];
 let server = null;
 let config = null;
 let lang = null;
-let commands = null;
 
 module.exports = {
   clients: clients,
   server: server,
   config: config,
   lang: lang,
-  commands: commands,
 
   /**
    * It loads the JSON files into the server.
@@ -56,17 +53,6 @@ module.exports = {
   async initJson() {
     config = ServerInfo.config;
     lang = ServerInfo.lang;
-    commands = ServerInfo.commands;
-  },
-
-  /**
-   * GetServer() {
-   *         return this.server
-   * }
-   * @returns The server object.
-   */
-  getServer() {
-    return server;
   },
 
   /**
@@ -76,19 +62,17 @@ module.exports = {
   async attemptToDie(err) {
     if (err.toString().includes("Server failed to start")) {
       Logger.log(
-        `Failed to bind port on ${config.host}:${config.port}`,
+        lang.errors.failedToBind.replace(
+          "%address%",
+          `${config.host}:${config.port}`
+        ),
         "error"
       );
-      Logger.log(
-        `This means that another server is already running on this port`,
-        "error"
-      );
-      process.exit(config.crashstatuscode);
+      Logger.log(lang.errors.otherServerRunning, "error");
+      process.exit(config.crashCode);
     } else {
       Logger.log(`Server error: \n${err.stack}`, "error");
-      if (!config.donotcrashoncriticalerrors) {
-        process.exit(config.crashstatuscode);
-      }
+      if (!config.unstable) process.exit(config.crashCode);
     }
   },
 
@@ -98,20 +82,10 @@ module.exports = {
    * @param packet - The packet that was sent by the client
    */
   handlepk(client, packet) {
-    if (client.offline)
-      throw new Error("An attempt to handle packet from offline player");
+    if (client.offline) throw new Error(lang.errors.packetErrorOffline);
     switch (packet.data.name) {
       case "resource_pack_client_response":
         new ResourcePackClientResponse().handle(client, packet, this.server);
-        break;
-      case "client_to_server_handshake":
-      case "emote_list":
-      case "set_player_game_type":
-      case "set_local_player_as_initialized":
-      case "player_action":
-      case "mob_equipment":
-      case "client_cache_status":
-        new Unhandled().handle(packet);
         break;
       case "move_player":
         new PlayerMove().handle(client, packet);
@@ -129,7 +103,7 @@ module.exports = {
         new RequestChunkRadius().handle(client);
         break;
       case "text":
-        new Text().handle(client, packet, lang);
+        new Text().handle(client, packet);
         break;
       case "subchunk_request":
         new SubChunkRequest().handle(client, packet);
@@ -141,8 +115,8 @@ module.exports = {
         new ModalFormResponse().handle(this.server, client, packet);
         break;
       default:
-        if (config.logunhandledpackets) {
-          Logger.log(lang.unhandledPacket, "warning");
+        if (config.logUnhandledPackets || process.argv.includes("--debug")) {
+          Logger.log(lang.devdebug.unhandledPacket, "warning");
           console.log("%o", packet);
         }
         break;
@@ -157,7 +131,10 @@ module.exports = {
   async onJoin(client) {
     await ValidateClient.initAndValidateClient(client);
 
-    Events.executeOJ(this.server, client);
+    PlayerInit.initPlayer(client);
+
+    const event = new PlayerJoinEvent();
+    event.execute(server, client);
 
     PlayerInfo.addPlayer(client);
 
@@ -167,25 +144,23 @@ module.exports = {
     responsepackinfo.setBehaviorPacks([]);
     responsepackinfo.setTexturePacks([]);
     responsepackinfo.send(client);
+
+    client.offline = false;
   },
 
   /**
    * It logs a warning if the config.debug or config.unstable is true.
    */
   async initDebug() {
-    if (config.unstable) Logger.log(lang.unstableWarning, "warning");
+    if (config.unstable) Logger.log(lang.errors.unstableWarning, "warning");
     if (process.env.DEBUG === "minecraft-protocol" || config.debug)
-      Logger.log(lang.debugWarning, "warning");
+      Logger.log(lang.errors.debugWarning, "warning");
   },
 
   /**
    * It loads the config, lang files, and commands, then loads the plugins and starts the server.
    */
   async start() {
-    await ValidateConfig.ValidateConfig();
-    await ValidateConfig.ValidateLangFile();
-    await ValidateConfig.ValidateCommands();
-
     await this.initJson();
 
     fs.access("ops.yml", fs.constants.F_OK, (err) => {
@@ -196,7 +171,7 @@ module.exports = {
       }
     });
 
-    Logger.log(lang.loadingServer);
+    Logger.log(lang.server.loadingServer);
 
     process.on("uncaughtException", (err) => this.attemptToDie(err));
     process.on("uncaughtExceptionMonitor", (err) => this.attemptToDie(err));
@@ -204,7 +179,7 @@ module.exports = {
 
     await this.initDebug();
 
-    Logger.log(`${lang.scch}`, "debug");
+    Logger.log(`${lang.commandhander.scch}`, "debug");
     await PluginLoader.loadPlugins();
 
     this.listen();
@@ -220,16 +195,16 @@ module.exports = {
         host: config.host,
         port: config.port,
         version: config.version,
-        offline: config.offlinemode,
-        maxPlayers: config.maxplayers,
+        offline: config.offlineMode,
+        maxPlayers: config.maxPlayers,
         motd: {
           motd: config.motd,
           levelName: "GreenFrogMCBE",
         },
       });
       Logger.log(
-        `${lang.listeningOn.replace(
-          `%ipport%`,
+        `${lang.server.listeningOn.replace(
+          `%address%`,
           `/${config.host}:${config.port}`
         )}`
       );
@@ -244,13 +219,13 @@ module.exports = {
             this.handlepk(client, packet);
           } catch (e) {
             try {
-              client.kick(lang.internalServerError);
+              client.kick(lang.kickmessages.internalServerError);
             } catch (e) {
-              client.disconnect(lang.internalServerError);
+              client.disconnect(lang.kickmessages.internalServerError);
             }
-            Events.executeOISE(this.server, client, e);
+            new ServerInternalServerErrorEvent().execute(server, e);
             Logger.log(
-              lang.packetHandlingException
+              lang.errors.packetHandlingException
                 .replace("%player%", client.username)
                 .replace("%error%", e.stack),
               "error"
@@ -261,11 +236,11 @@ module.exports = {
     } catch (e) {
       Logger.log(
         `${lang.listeningFailed
-          .replace(`%ipport%`, `/${config.host}:${config.port}`)
+          .replace(`%address%`, `/${config.host}:${config.port}`)
           .replace("%error%", e.stack)}`,
         "error"
       );
-      process.exit(config.exitstatuscode);
+      process.exit(config.exitCode);
     }
   },
 };

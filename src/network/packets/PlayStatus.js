@@ -14,17 +14,14 @@ let status = "";
 
 class PlayStatus extends require("./Packet") {
   /**
-   * It returns the packet name
-   * @returns The packet name
+   * @returns The name of the packet.
    */
   name() {
     return "play_status";
   }
 
   /**
-   * SetStatus(status1) {
-   *     status = status1;
-   * }
+   * It sets the status.
    * @param status1 - The status
    */
   setStatus(status1) {
@@ -39,10 +36,6 @@ class PlayStatus extends require("./Packet") {
     return status;
   }
 
-  /**
-   * Sends the packet to the client
-   * @param {Object} client
-   */
   send(client) {
     client.write(this.name(), {
       status: this.getStatus(),

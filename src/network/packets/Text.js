@@ -10,9 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It's a class that sends a text packet to the client */
+const TextTypes = require("./types/TextTypes");
 let message = "";
-let type = "announcement";
+let type = TextTypes.ANNOUNCEMENT;
 let needs_translation = false;
 let source_name = "";
 let xuid = "";
@@ -20,10 +20,7 @@ let platform_chat_id = "";
 
 class Text extends require("./Packet") {
   /**
-   * name() {
-   *         return "text"
-   * }
-   * @returns Packet name
+   * @returns The name of the packet name
    */
   name() {
     return "text";
@@ -126,7 +123,6 @@ class Text extends require("./Packet") {
   }
 
   /**
-   * It writes a packet to the client
    * @param {Object} client - The client that will receive the packet.
    * @param {string} [message] - The message to send.
    * @param {string} [type=announcement] - The type of message.
@@ -137,12 +133,12 @@ class Text extends require("./Packet") {
    */
   send(client) {
     client.write(this.name(), {
-      type: type,
-      needs_translation: needs_translation,
-      source_name: source_name,
-      message: message,
-      xuid: xuid,
-      platform_chat_id: platform_chat_id,
+      type: this.getType(),
+      needs_translation: this.getNeedsTranslation(),
+      source_name: this.getSourceName(),
+      message: this.getMessage(),
+      xuid: this.getXuid(),
+      platform_chat_id: this.getPlatformChatId(),
     });
   }
 }

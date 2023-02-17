@@ -10,33 +10,35 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { lang, commands } = require("../../server/ServerInfo")
-
+const { lang, config } = require("../../server/ServerInfo");
 
 class CommandShutdown extends require("./Command") {
   name() {
-    return lang.commandStop;
+    return lang.commands.stop;
   }
 
-  aliases() {}
+  aliases() {
+    return null;
+  }
 
   execute() {
     require("../ShutdownAPI").shutdownServer();
   }
 
   getPlayerDescription() {
-    return lang.ingameStopDescription;
+    return lang.commands.ingameStopDescription;
   }
 
   executePlayer(client) {
-    if (!commands.player_command_stop) {
-      client.sendMessage(lang.playerUnknownCommand);
+    if (!config.playerCommandStop) {
+      client.sendMessage(lang.errors.playerUnknownCommand);
       return;
     }
     if (!client.op) {
-      client.sendMessage(lang.noPermission);
+      client.sendMessage(lang.errors.noPermission);
       return;
     }
+    client.sendMessage(lang.server.stoppingServer);
     this.execute();
   }
 }

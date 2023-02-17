@@ -10,62 +10,43 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It checks if the config.json, commands.json and language files are valid JSON files. */
-const Logger = require("../server/Logger");
-const { config } = require("../server/ServerInfo");
+const Logger = require("../../src/server/Logger");
+const yaml = require("js-yaml");
+const fs = require("fs");
 
 module.exports = {
-  /**
-   * It checks if the config.json file exists, and if it does, it checks if it's valid JSON
-   */
-  async ValidateConfig() {
-    try {
-      const config = require("../../config.json");
-      JSON.parse(JSON.stringify(config));
-    } catch (error) {
-      console.error(
-        `Failed to load or parse config.json | Error: ${error.stack}`
-      );
-      process.exit(-1);
-    }
-  },
-
-  /**
-   * It checks if the commands.json file is valid JSON.
-   */
-  async ValidateCommands() {
-    try {
-      const commands = require("../../commands.json");
-      JSON.parse(JSON.stringify(commands));
-    } catch (error) {
-      console.error(
-        `Failed to load or parse commands.json | Error: ${error.stack}`
-      );
-      process.exit(-1);
-    }
-  },
-
-  /**
-   * It checks if the language files are valid JSON files
-   */
-  async ValidateLangFile() {
-    const files = [
-      "../lang/en_US.json",
-      "../lang/lt_LT.json",
-      "../lang/uk_UA.json",
-      "../lang/vi_VN.json",
-      "../lang/fr_FR.json",
-    ];
-
-    for (const file of files) {
-      try {
-        JSON.parse(JSON.stringify(require(file)));
-      } catch (e) {
+  onLoad() {
+    const config = yaml.load(fs.readFileSync("config.yml", "utf8"));
+    switch (config.lang) {
+      case "fr_FR":
         Logger.log(
-          `Failed to load and parse language file ${file} | Error: ${e.stack}`
+          `Donations > Si vous avez trouvé ce projet utile, vous pouvez le soutenir ici: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
         );
-        process.exit(config.crashstatuscode);
-      }
+        break;
+      case "vi_VN":
+        Logger.log(
+          `Donations > Chào bạn! Nếu bạn muốn hỗ trợ GreenFrogMCBE, bạn có thể quyên góp tại: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+        );
+        break;
+      case "lt_LT":
+        Logger.log(
+          `Donations > Jei šis projektas jums pasirodė naudingas, galite jį paremti čia: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+        );
+        break;
+      case "uk_UA":
+        Logger.log(
+          `Donations > Якщо ви вважаєте цей проект корисним, ви можете підтримати його тут: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+        );
+        break;
+      default:
+        Logger.log(
+          `Donations > If you found this project useful, you can support it here: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ`
+        );
+        break;
     }
+  },
+
+  onShutdown() {
+    Logger.log("Donations > Bye!");
   },
 };

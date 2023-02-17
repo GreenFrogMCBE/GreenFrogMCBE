@@ -8,8 +8,8 @@ assignees: ""
 
 ## What is wrong?
 
-[type here]
+[Type ur response]
 
-## What platform are you using? (linux/windows/etc)
+## How should we fix it?
 
-[type here]
+[Type ur response]

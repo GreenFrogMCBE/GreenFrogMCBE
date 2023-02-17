@@ -1,5 +1,5 @@
-- custom_form support
-- Rewrite the event system and move each event into its own file
-- change_dimension packet
-- Fix subchunks
-- /deop
+Todo list (2.7):
+- /tell, /w, /msg
+- ban system
+- Title support
+- NPC packets

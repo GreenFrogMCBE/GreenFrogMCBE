@@ -14,24 +14,25 @@ const ColorsServer = require("../Colors");
 const ColorsPlayer = require("../../player/Colors");
 const PluginManager = require("../../plugin/PluginManager");
 
-const { lang, commands } = require("../../server/ServerInfo")
+const { lang, config } = require("../../server/ServerInfo");
 
 const Logger = require("../Logger");
 
 class CommandPl extends require("./Command") {
   name() {
-    return lang.commandPl;
+    return lang.commands.pl;
   }
 
   aliases() {
-    return [lang.commandPlugins];
+    return [lang.commands.plugins];
   }
 
   execute() {
-    if (!commands.console_command_plugins) {
-      Logger.log(lang.playerUnknownCommand);
+    if (!config.consoleCommandPlugins) {
+      Logger.log(lang.errors.playerUnknownCommand);
       return;
     }
+
     let plugins;
     if (PluginManager.getPlugins() == null) {
       plugins = 0;
@@ -54,20 +55,19 @@ class CommandPl extends require("./Command") {
     }
 
     Logger.log(
-      `${lang.plugins} (${plugins}): ${pluginlist ?? ""} ${
+      `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${
         ColorsServer.CONSOLE_RESET
-      }`,
-      "info"
+      }`
     );
   }
 
   getPlayerDescription() {
-    return lang.ingamePlDescription;
+    return lang.commands.ingamePlDescription;
   }
 
   executePlayer(player) {
-    if (!commands.player_command_plugins) {
-      Logger.log(lang.unknownCommand);
+    if (!config.playerCommandPlugins) {
+      Logger.log(lang.errors.playerUnknownCommand);
       return;
     }
     let plugins;
@@ -87,12 +87,13 @@ class CommandPl extends require("./Command") {
         pluginlist +
         ColorsPlayer.green +
         PluginManager.getPlugins().toString().split(",")[i] +
-        ColorsPlayer.reset +
+        ColorsPlayer.white +
         ", ";
     }
-
     player.sendMessage(
-      `${lang.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsPlayer.reset}`,
+      `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${
+        ColorsPlayer.reset
+      }`,
       "info"
     );
   }

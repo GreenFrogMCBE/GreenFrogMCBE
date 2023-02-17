@@ -10,26 +10,26 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerInfo = require("../player/PlayerInfo");
-const { lang } = require("../server/ServerInfo");
 const Logger = require("../server/Logger");
 const PluginLoader = require("../plugin/PluginLoader");
+const { players } = require("../player/PlayerInfo");
+const { lang } = require("../server/ServerInfo");
 
 module.exports = {
   async shutdownServer() {
     await require("./ConsoleCommandSender").close();
-    Logger.log(lang.stoppingServer, "info");
-
-    const players = PlayerInfo.getPlayers();
+    Logger.log(lang.server.stoppingServer, "info");
 
     try {
       for (const player of players) {
-        await player.kick(lang.serverShutdown);
+        player.kick(lang.kickmessages.serverShutdown);
       }
     } catch (e) {
       /* ignored */
     }
 
-    PluginLoader.unloadPlugins()
+    setTimeout(() => {
+      PluginLoader.unloadPlugins();
+    }, 1000);
   },
 };

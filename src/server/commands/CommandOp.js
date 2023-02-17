@@ -12,50 +12,67 @@
  */
 const fs = require("fs");
 const Logger = require("../Logger");
-const { lang, commands } = require("../../server/ServerInfo")
+const { lang, config } = require("../../server/ServerInfo");
+const PlayerInfo = require("../../player/PlayerInfo");
 
 class CommandOp extends require("./Command") {
   name() {
-    return lang.commandOp;
+    return lang.commands.op;
   }
 
-  aliases() {}
+  aliases() {
+    return null;
+  }
 
   execute(args) {
-    if (!commands.console_command_op) {
-      Logger.log(lang.unknownCommand);
+    if (!config.consoleCommandOp) {
+      Logger.log(lang.errors.unknownCommand);
       return;
     }
+
     if (!args) {
-      Logger.log(lang.commandUsageOp);
+      Logger.log(lang.commands.usageOp);
       return;
     }
 
     fs.appendFile("ops.yml", args + "\n", (err) => {
-      if (!err) Logger.log(lang.opped.replace("%player%", args));
-      else Logger.log(lang.opFail);
+      if (!err) {
+        Logger.log(lang.commands.opped.replace("%player%", args));
+      } else Logger.log(lang.commands.opFail);
     });
   }
 
   getPlayerDescription() {
-    return lang.ingameOpDescription;
+    return lang.commands.ingameOpDescription;
   }
 
   executePlayer(client, args) {
+    if (!config.playerCommandOp) {
+      client.sendMessage(lang.errors.playerUnknownCommand);
+      return;
+    }
+
     if (!client.op) {
-      client.sendMessage(lang.noPermission);
+      client.sendMessage(lang.errors.noPermission);
       return;
     }
 
     const player = args.split(" ")[1];
     if (!player) {
-      client.sendMessage("§c" + lang.commandUsageOp);
+      client.sendMessage("§c" + lang.commands.usageOp);
       return;
     }
 
     fs.appendFile("ops.yml", player + "\n", (err) => {
-      if (!err) client.sendMessage(lang.opped.replace("%player%", player));
-      else client.sendMessage("§c" + lang.opFail);
+      if (!err) {
+        client.sendMessage(lang.commands.opped.replace("%player%", player));
+        try {
+          PlayerInfo.get(args.split(" ")[1]).op = true;
+          console.log(PlayerInfo.get(args.split(" ")[1]));
+        } catch (e) {
+          /* ignored */
+        }
+      } else client.sendMessage("§c" + lang.commands.opFail);
     });
   }
 }

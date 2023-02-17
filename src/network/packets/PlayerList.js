@@ -11,27 +11,27 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let username = null;
+
 class PlayerList extends require("./Packet") {
   /**
-   * It returns the packet name
-   * @returns The packet name
+   * @returns The name of the packet.
    */
   name() {
     return "player_list";
   }
 
   /**
-   * Validte the packet
-   * @param {string} username
+   * It returns the player's name
+   * @returns The player's username
    */
-  validate(username) {
-    if (!username) throw new Error("Packet processing error. Username is null");
-  }
-
   getUsername() {
     return username;
   }
 
+  /**
+   * It sets the player's name
+   * @param username The player's username
+   */
   setUsername(username1) {
     username = username1;
   }

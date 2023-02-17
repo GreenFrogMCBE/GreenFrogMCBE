@@ -10,80 +10,30 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const CommandManager = require("../../../player/CommandManager");
-const CommandPl = require("../../../server/commands/CommandPl");
-const CommandSay = require("../../../server/commands/CommandSay");
-const PacketHandlingError = require("../exceptions/PacketHandlingError");
-const CommandShutdown = require("../../../server/commands/CommandShutdown");
-const CommandVersion = require("../../../server/commands/CommandVersion");
-const CommandOp = require("../../../server/commands/CommandOp");
-const Events = require("../../../plugin/Events");
-const Logger = require("../../../server/Logger");
-const { lang } = require("../../../server/ServerInfo")
-
+const PlayerCommandExecuteEvent = require("../../../plugin/events/PlayerCommandExecuteEvent");
+const { lang, config } = require("../../../server/ServerInfo");
 
 class CommandRequest extends require("./Handler") {
-  validate(cmd) {
-    if (!cmd) {
-      throw new PacketHandlingError("Missing command in command request");
-    }
-
-    if (!cmd.trim().length) {
-      throw new PacketHandlingError(
-        "Command cannot be empty or whitespace only"
-      );
-    }
-
-    if (cmd.length > 256) {
-      throw new PacketHandlingError(
-        "Command exceeded maximum length of 256 characters"
-      );
+  validate(client, cmd) {
+    if (
+      !cmd ||
+      cmd.includes("§") ||
+      (cmd.length > 255 && config.blockInvalidMessages)
+    ) {
+      if (client.op) return;
+      client.kick(lang.kickmessages.invalidChatMessage);
     }
   }
 
   handle(client, packet) {
+    if (config.commandsDisabled) return;
     let cmd = packet.data.params.command;
-    this.validate(cmd);
-    Events.executeOC2(require("../../../Server"), client, cmd);
-    Logger.log(
-      lang.executedCmd
-        .replace("%player%", client.username)
-        .replace("%cmd%", cmd)
+    this.validate(client, cmd);
+    new PlayerCommandExecuteEvent().execute(
+      require("../../../Server").server,
+      client,
+      cmd
     );
-
-    const cmdManager = new CommandManager();
-    const cmdVer = new CommandVersion();
-    const cmdPl = new CommandPl();
-    const cmdStop = new CommandShutdown();
-    const cmdSay = new CommandSay();
-    const cmdOp = new CommandOp();
-
-    if (
-      cmd.startsWith(`/${lang.commandVer.toLowerCase()}`) ||
-      cmd.startsWith(`/${lang.commandVersion.toLowerCase()}`)
-    ) {
-      cmdVer.executePlayer(client);
-    } else if (
-      cmd.startsWith(`/${lang.commandPl.toLowerCase()}`) ||
-      cmd.startsWith(`/${lang.commandPlugins.toLowerCase()}`)
-    ) {
-      cmdPl.executePlayer(client);
-    } else if (cmd.startsWith(`/${lang.commandStop.toLowerCase()}`)) {
-      cmdStop.executePlayer(client);
-    } else if (cmd.startsWith(`/${lang.commandSay.toLowerCase()}`)) {
-      cmdSay.executePlayer(client, cmd);
-    } else if (cmd.startsWith(`/${lang.commandOp.toLowerCase()}`)) {
-      cmdOp.executePlayer(client, cmd);
-    } else {
-      let exists = false;
-      for (let i = 0; i < cmdManager.getCommands().length; i++) {
-        if (`/${cmdManager.getCommands()[i].name.toLowerCase()}` === cmd) {
-          exists = true;
-          break;
-        }
-      }
-      if (!exists) client.sendMessage(lang.playerUnknownCommand);
-    }
   }
 }
 

@@ -10,47 +10,86 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerInfo = require("../../player/PlayerInfo");
 const Logger = require("../../server/Logger");
 
-const { lang, commands } = require("../../server/ServerInfo")
+const { lang, config } = require("../../server/ServerInfo");
+const { get } = require("../../player/PlayerInfo");
 
 class CommandKick extends require("./Command") {
   name() {
-    return lang.command_kick;
+    return lang.commands.kick;
   }
 
   aliases() {
     return null;
   }
 
+  getPlayerDescription() {
+    return lang.commands.ingameKickDescription;
+  }
+
   execute(args) {
-    if (!commands.console_command_kick) {
-      Logger.log(lang.unknownCommand);
+    if (!config.consoleCommandKick) {
+      Logger.log(lang.commands.unknownCommand);
       return;
     }
 
     if (!args || !args[0]) {
-      Logger.log(lang.commandUsageKick, "info");
+      Logger.log(lang.commands.usageKick);
       return;
     }
 
     const targetUsername = args[0];
-    const reason = args[1] || lang.noPlayer;
-    const players = PlayerInfo.getPlayers();
+    const reason = args[1] || lang.kickmessages.noReason;
 
-    const target = players.find((client) => client.username === targetUsername);
+    const target = get(targetUsername);
 
     if (target) {
-      target.disconnect(`${lang.kickedPrefix}${reason}`);
+      target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
       Logger.log(
-        `${lang.kickedConsoleMsg
-          .replace("%args[0]%", targetUsername)
-          .replace("%args[1]%", reason)}`,
-        "info"
+        `${lang.kickmessages.kickedConsoleMsg
+          .replace("%player%", targetUsername)
+          .replace("%reason%", reason)}`
       );
     } else {
-      Logger.log(lang.playerOffline, "info");
+      Logger.log(lang.errors.playerOffline);
+    }
+  }
+
+  executePlayer(client, args) {
+    if (!config.playerCommandKick) {
+      client.sendMessage(lang.errors.playerUnknownCommand);
+      return;
+    }
+
+    if (!client.op) {
+      client.sendMessage(lang.errors.noPermission);
+      return;
+    }
+
+    if (!args.split(" ") || !args.split(" ")[1]) {
+      client.sendMessage("§c" + lang.commands.usageKick);
+      return;
+    }
+
+    const targetUsername = args.split(" ")[1];
+    let reason = "";
+    for (let i = 2; i < args.split(" "); i++) {
+      reason = reason + args.split(" ")[i];
+    }
+    if (!reason) reason = lang.kickmessages.noReason;
+
+    const target = get(targetUsername);
+
+    if (target) {
+      target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
+      client.sendMessage(
+        `${lang.kickmessages.kickedConsoleMsg
+          .replace("%player%", targetUsername)
+          .replace("%reason%", reason)}`
+      );
+    } else {
+      client.sendMessage("§c" + lang.errors.playerOffline);
     }
   }
 }

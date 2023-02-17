@@ -16,7 +16,6 @@ let itemdata = {};
 
 class InventorySlot extends require("./Packet") {
   /**
-   * It returns the name of the packet.
    * @returns The name of the packet.
    */
   name() {

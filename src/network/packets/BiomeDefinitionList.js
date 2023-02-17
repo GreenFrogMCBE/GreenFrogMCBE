@@ -14,8 +14,7 @@ let nbt = {};
 
 class BiomeDefinitionList extends require("./Packet") {
   /**
-   * It returns the packet name
-   * @returns Packet name
+   * @returns The name of the packet.
    */
   name() {
     return "biome_definition_list";
@@ -30,7 +29,7 @@ class BiomeDefinitionList extends require("./Packet") {
   }
 
   /**
-   * `getNbt()` returns the NBT
+   * It returns the NBT data
    * @returns The NBT.
    */
   getNbt() {
@@ -43,7 +42,7 @@ class BiomeDefinitionList extends require("./Packet") {
    */
   send(client) {
     client.write(this.name(), {
-      nbt: nbt,
+      nbt: this.getNbt(),
     });
   }
 }

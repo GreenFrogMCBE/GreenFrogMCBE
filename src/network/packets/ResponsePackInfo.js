@@ -18,7 +18,6 @@ let texture_packs = [];
 
 class ResponsePackInfo extends require("./Packet") {
   /**
-   * It returns the name of the packet.
    * @returns The name of the packet.
    */
   name() {
@@ -26,16 +25,16 @@ class ResponsePackInfo extends require("./Packet") {
   }
 
   /**
-   * This function updates the value of the must_accept
-   * @param must_accept1 - true or false
+   * Updates the value of the must_accept
+   * @param {boolean} must_accept1 - Is the response pack forced?
    */
   setMustAccept(must_accept1) {
     must_accept = must_accept1;
   }
 
   /**
-   * It updates the has_scripts value
-   * @param has_scripts1 - true or false
+   * It updates the value of has_scripts
+   * @param has_scripts1 - Does the RP has scripts?
    */
   setHasScripts(has_scripts1) {
     has_scripts = has_scripts1;
@@ -43,7 +42,7 @@ class ResponsePackInfo extends require("./Packet") {
 
   /**
    * It updates the behavior_packs
-   * @param behavior_packs1 - The behavior packs that you want to set.
+   * @param behavior_packs1 - The behavior packs.
    */
   setBehaviorPacks(behavior_packs1) {
     behavior_packs = behavior_packs1;
@@ -51,14 +50,14 @@ class ResponsePackInfo extends require("./Packet") {
 
   /**
    * It sets the texture_packs
-   * @param texture_packs1 - The texture packs to set.
+   * @param texture_packs1 - The texture packs.
    */
   setTexturePacks(texture_packs1) {
     texture_packs = texture_packs1;
   }
 
   /**
-   * It returns the value must_accept.
+   * It returns the must_accept.
    * @returns The value must_accept.
    */
   getMustAccept() {
@@ -66,7 +65,7 @@ class ResponsePackInfo extends require("./Packet") {
   }
 
   /**
-   * This function returns the value has_scripts.
+   * This function returns has_scripts.
    * @returns The value has_scripts.
    */
   getHasScripts() {
@@ -74,7 +73,7 @@ class ResponsePackInfo extends require("./Packet") {
   }
 
   /**
-   * It returns the behavior_packs variable.
+   * It returns the behavior_packs.
    * @returns The behavior_packs array.
    */
   getBehaviorPacks() {

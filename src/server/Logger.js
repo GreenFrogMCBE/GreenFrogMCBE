@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It's a class that logs messages to the console. */
 const { lang, config } = require("./ServerInfo");
 
 module.exports = {
@@ -21,8 +20,9 @@ module.exports = {
    */
   log(message, type = "info") {
     const d = new Date();
-    const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1
-      }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
+    const dStr = `${d.getUTCFullYear()}-${
+      d.getUTCMonth() + 1
+    }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
     const logLevel = {
       info: 32,
       warning: 33,
@@ -32,10 +32,16 @@ module.exports = {
       debug: 35,
     };
     const logColor = logLevel[type] || 0;
-    if (!logColor) throw new Error("Invalid log level");
+    if (!logColor) throw new Error(lang.invalidLogType);
 
-    if (type === "debug" &&!(process.env.DEBUG === "minecraft-protocol" || config.debug))return;
+    if (
+      type === "debug" &&
+      !(process.env.DEBUG === "minecraft-protocol" || config.debug)
+    )
+      return;
 
-    console.log(`[${dStr} \x1b[${logColor}m${lang[type]}\x1b[0m] ${message}`);
+    console.log(
+      `[${dStr} \x1b[${logColor}m${lang.logger[type]}\x1b[0m] ${message}`
+    );
   },
 };

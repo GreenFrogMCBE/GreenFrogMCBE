@@ -15,7 +15,6 @@ let enabled = true;
 
 class SetCommandsEnabled extends require("./Packet") {
   /**
-   * It returns the string "set_commands_enabled"
    * @returns The name of the packet.
    */
   name() {
@@ -23,27 +22,23 @@ class SetCommandsEnabled extends require("./Packet") {
   }
 
   /**
-   * SetEnabled(enabled1) {
-   *     enabled = enabled1;
-   * }
-   * @param {Boolean} enabled1 - Is enabled or not.
+   * It returns if commands are enabled or not.
+   * @param {Boolean} enabled1 - Are commands enabled.
    */
   setEnabled(enabled1) {
     enabled = enabled1;
   }
 
   /**
-   * GetEnabled() {
-   *     return enabled;
-   * }
-   * @returns The command enabled.
+   * It returns if commands are enabled or not.
+   * @returns If the commands are enabled.
    */
   getEnabled() {
     return enabled;
   }
 
   /**
-   * It writes a packet to the client
+   * @param {Object} client
    */
   send(client) {
     client.write(this.name(), {

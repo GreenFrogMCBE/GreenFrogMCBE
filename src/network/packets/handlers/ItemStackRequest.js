@@ -12,15 +12,13 @@
  */
 const PacketHandlingError = require("../exceptions/PacketHandlingError");
 const InventorySlot = require("../InventorySlot");
+const { lang } = require("../../../server/ServerInfo");
 const Logger = require("../../../server/Logger");
 const Handler = require("./Handler");
 
 class ItemStackRequest extends Handler {
   validate(client) {
-    if (client.gamemode !== 1)
-      throw new PacketHandlingError(
-        "An attempt to get items from creative mode, while the player is not in creative mode"
-      );
+    if (client.gamemode !== 1) throw new PacketHandlingError(lang.gmbypass);
   }
 
   handle(client, packet) {
@@ -73,7 +71,10 @@ class ItemStackRequest extends Handler {
       }
     } catch (e) {
       Logger.log(
-        `Failed to handle item request from ${client.username}: ${e.stack}`,
+        lang.failedtohandleitem.replace(
+          "%data%",
+          `${client.username}: ${e.stack}`
+        ),
         "error"
       );
     }

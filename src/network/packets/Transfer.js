@@ -1,4 +1,3 @@
-/* eslint-disable no-dupe-class-members */
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -11,35 +10,32 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* It's a class that sends a packet to the client to transfer them to another server */
+/* eslint-disable use-isnan */
+/* eslint-disable no-dupe-class-members */
 
 let server_address = null;
 let port = null;
 
+const { lang } = require("../../server/ServerInfo");
+
 class Transfer extends require("./Packet") {
   /**
-   * It returns the string "transfer"
-   * @returns The name of the function.
+   * @returns The name of the packet.
    */
   name() {
     return "transfer";
   }
 
   /**
-   * Validates the client, address and port before processing a packet
    * @param {Object} client - The client to validate
    * @param {string} address - The server address to validate
    * @param {number} port - The server port to validate
    */
   validate(address, port) {
-    if (!address)
-      throw new Error("Packet processing error. Target server address is null");
-    // eslint-disable-next-line use-isnan
+    if (!address) throw new Error(lang.errors.targetServerNull);
     if (parseInt(port) == NaN)
       // isNaN will not work here
-      throw new Error(
-        "Packet processing error. A plugin tried to sent a player to invalid server (port must be int, not string)"
-      );
+      throw new Error(lang.sendToInvalidServer);
   }
 
   /**
@@ -59,6 +55,7 @@ class Transfer extends require("./Packet") {
   }
 
   /**
+   * It returns the server address.
    * @returns The server address.
    */
   getServerAddress() {
@@ -66,6 +63,7 @@ class Transfer extends require("./Packet") {
   }
 
   /**
+   * It returns the server port.
    * @returns The server port.
    */
   getPort() {
@@ -73,21 +71,6 @@ class Transfer extends require("./Packet") {
   }
 
   /**
-   * @returns The server address.
-   */
-  getServerAddress() {
-    return server_address;
-  }
-
-  /**
-   * @returns The server port.
-   */
-  getPort() {
-    return port;
-  }
-
-  /**
-   * Writes a packet that transfers the client to another server
    * @param {Object} client - The client to send the packet to
    */
   send(client) {

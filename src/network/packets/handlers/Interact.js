@@ -10,8 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ContainerOpen = require("../ContainerOpen");
 const PacketHandlingError = require("../exceptions/PacketHandlingError");
+const { lang } = require("../../../lang/en_US.json");
+const ContainerOpen = require("../ContainerOpen");
 const Handler = require("./Handler");
 
 class Interact extends Handler {
@@ -27,13 +28,15 @@ class Interact extends Handler {
         break;
       }
       case "mouse_over_entity": {
-        // TODO. Pvp is not implemented yet
+        // TODO: Pvp is not implemented yet
         break;
       }
       default: {
         throw new PacketHandlingError(
-          "Not supported packet data: packet = open_inventory, action_id = " +
+          lang.notsupportedactionid.replace(
+            "%ai%",
             packet.data.params.action_id
+          )
         );
       }
     }

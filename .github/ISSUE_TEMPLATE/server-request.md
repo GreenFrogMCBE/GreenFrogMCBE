@@ -10,12 +10,12 @@ assignees: ""
 
 ## Server IP
 
-[type here]
+[Type ur reponse]
 
 ## MOTD/Description
 
-[type here]
+[Type ur reponse]
 
 ## Discord Link
 
-[type here]
+[Type ur reponse]
