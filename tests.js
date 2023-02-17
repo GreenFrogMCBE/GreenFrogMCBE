@@ -40,9 +40,9 @@ setTimeout(() => {
       } finally {
         setTimeout(() => {
           console.log("Tests passed!");
-          process.exit(0);  
-        }, 10000)
+          process.exit(0);
+        }, 10000);
       }
-    }, 3000);    
+    }, 3000);
   }
 }, 3500);

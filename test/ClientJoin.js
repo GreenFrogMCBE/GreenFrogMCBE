@@ -1,15 +1,26 @@
-const bedrock = require('frog-protocol')
-
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
+const bedrock = require("frog-protocol");
 
 module.exports = {
-    async test() {
-        console.log("[client] joining...");
-        await bedrock.createClient({
-            host: '127.0.0.1',
-            port: 19132,
-            username: 'bot',
-            offline: true
-        })
-        console.log("[client] joined");
-    }
-}
+  async test() {
+    console.log("[client] joining...");
+    await bedrock.createClient({
+      host: "127.0.0.1",
+      port: 19132,
+      username: "bot",
+      offline: true,
+    });
+    console.log("[client] joined");
+  },
+};
