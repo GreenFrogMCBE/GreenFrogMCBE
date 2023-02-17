@@ -30,7 +30,7 @@ class PlayerHasNoResourcePacksInstalledEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerHasNoResourcePacksInstalledEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerHasNoResourcePacksInstalledEvent(
             server,
             client,
             this

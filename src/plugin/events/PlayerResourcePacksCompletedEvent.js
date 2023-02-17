@@ -30,7 +30,7 @@ class PlayerResourcePacksCompletedEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerResourcePacksCompletedEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerResourcePacksCompletedEvent(
             server,
             client,
             this
