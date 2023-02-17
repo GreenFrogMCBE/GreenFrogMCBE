@@ -10,6 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+// super ugly code
 const ClientJoin = require("./test/ClientJoin");
 const StartServer = require("./test/StartServer");
 const TestConfigs = require("./test/TestConfigs");
@@ -37,9 +38,11 @@ setTimeout(() => {
         console.log("Tests failed! Failed to join with client! " + e.stack);
         process.exit(-1);
       } finally {
-        console.log("Tests passed!");
-        process.exit(0);
+        setTimeout(() => {
+          console.log("Tests passed!");
+          process.exit(0);  
+        }, 10000)
       }
-    }, 5000);    
+    }, 3000);    
   }
 }, 3500);
