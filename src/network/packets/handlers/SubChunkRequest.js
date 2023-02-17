@@ -16,7 +16,7 @@ class SubChunkRequest extends require("./Handler") {
   handle(client) {
     const sub = new SubChunk();
     sub.setDimension(0);
-    sub.setX(0);
+    sub.setX(-1);
     sub.setY(0);
     sub.setZ(0);
     sub.setOrigin(0, 0, 0);
@@ -220,7 +220,7 @@ class SubChunkRequest extends require("./Handler") {
       15, 15, 15, 15,
     ]);
     sub.setCacheEnabled(false);
-    sub.send(client);
+    sub.send(client); 
   }
 }
 
