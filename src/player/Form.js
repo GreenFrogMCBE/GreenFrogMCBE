@@ -59,8 +59,8 @@ class Form {
   }
 
   /**
-   * Adds text
-   * @param {string} text
+   * Adds toggle button
+   * @param {string} toggle button title
    */
   addToggle(text) {
     this.addAction({ type: "toggle", text: text });
