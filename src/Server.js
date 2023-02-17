@@ -235,7 +235,7 @@ module.exports = {
       });
     } catch (e) {
       Logger.log(
-        `${lang.listeningFailed
+        `${lang.errors.listeningFailed
           .replace(`%address%`, `/${config.host}:${config.port}`)
           .replace("%error%", e.stack)}`,
         "error"
