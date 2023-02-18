@@ -16,7 +16,7 @@ const Titles = require("../network/packets/types/Titles");
 class Title {
   constructor() {
     this.type = Titles.TITLE;
-    this.text = null;
+    this.text = "";
     this.fadeintime = 0
     this.fadeouttime = 0
     this.staytime = 0
@@ -35,7 +35,6 @@ class Title {
    * @param {string} text
    */
   setText(text) {
-    if (this.type === Titles.TITLE) text = "";
     this.text = text;
   }
 
