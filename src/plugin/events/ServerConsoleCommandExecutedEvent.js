@@ -78,7 +78,6 @@ class ServerConsoleCommandExecutedEvent extends Event {
         me: new Me(),
       };
 
-      if (config.debug) Logger.log("started", command);
       if (
         cmd.toLowerCase().startsWith(`${lang.commands.time.toLowerCase()} `)
       ) {

@@ -12,7 +12,7 @@
  */
 const Titles = require("./types/Titles");
 
-let title = Titles.TITLE;
+let type = Titles.TITLE;
 let text = "";
 let fadeintime = -1;
 let staytime = -1;
@@ -29,11 +29,11 @@ class Title extends require("./Packet") {
   }
 
   /**
-   * Sets the title.
-   * @param {Title} title1
+   * Sets the type of the title.
+   * @param {Titles}
    */
-  setTitle(title1) {
-    title = title1;
+  setType(type1) {
+    type = type1;
   }
 
   /**
@@ -74,13 +74,6 @@ class Title extends require("./Packet") {
    */
   setXuid(xuid1) {
     xuid = xuid1;
-  }
-
-  /**
-   * Gets the title.
-   */
-  getTitle() {
-    return title;
   }
 
   /**
@@ -125,10 +118,18 @@ class Title extends require("./Packet") {
     return platform_online_id;
   }
 
+  /**
+   * Returns the title type
+   * @returns The title type
+   */
+  getType() {
+    return type;
+  }
+
   send(client) {
-    if (this.getTitle() === Titles.CLEAR) this.setText("");
+    if (this.getType() === Titles.CLEAR) this.setText("");
     client.write(this.name(), {
-      type: this.getTitle(),
+      type: this.getType(),
       text: this.getText(),
       fade_in_time: this.getFadeinTime(),
       stay_time: this.getStaytime(),
