@@ -12,18 +12,22 @@
  */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
-const CommandManager = require("../../../src/player/CommandManager");
-const ToastManager = require("../../../src/player/Toast");
-const ShutdownAPI = require("../../../src/server/ShutdownAPI");
-const GameMode = require("../../../src/player/GameMode");
+const CommandManager = require("../../src/player/CommandManager");
+const ToastManager = require("../../src/player/Toast");
+const ShutdownAPI = require("../../src/server/ShutdownAPI");
+const GameMode = require("../../src/player/GameMode");
 
-const Logger = require("../../../src/server/Logger");
-const Form = require("../../../src/player/Form");
-const Colors = require("../../../src/player/Colors");
-const FormTypes = require("../../../src/player/FormTypes");
+const Logger = require("../../src/server/Logger");
+const Title = require("../../src/player/Title");
+const Form = require("../../src/player/Form");
+const Colors = require("../../src/player/Colors");
+const FormTypes = require("../../src/player/FormTypes");
+const Titles = require("../../src/network/packets/types/Titles");
 
 // This is a simple plugin that tests the GreenFrog's API
-// Another example: https://github.com/andriycraft/GreenFrogMCBEDonations
+// Another example: https://github.com/greenfrogmc/DonationsPlugin
+
+// REMEMBER: You can just remove events that you don't use
 
 module.exports = {
   onLoad() {
@@ -36,24 +40,19 @@ module.exports = {
 
   PlayerJoinEvent(server, player, event) {
     Logger.log(`Player joined: ${player.username}`);
-    // This code executes when player joined
   },
-
-  // REMEMBER: You can just remove events that you don't use
 
   PlayerLeaveEvent(server, player, event) {
     Logger.log(`Player left: ${player.username}`);
-    // This code executes when player left the server
   },
 
-  PlayerHasNoResourcePacksInstalledEvent(server, player, event) {},
-  onResourcePacksRefused(server, player, event) {},
-  onPlayerHaveAllPacks(server, player, event) {},
-  onResourcePacksCompleted(server, player, event) {},
+  PlayerHasNoResourcePacksInstalledEvent(server, player, event) { },
+  onResourcePacksRefused(server, player, event) { },
+  onPlayerHaveAllPacks(server, player, event) { },
+  onResourcePacksCompleted(server, player, event) { },
 
   PlayerKickEvent(server, player, msg, event) {
     Logger.log(`Player got kicked! ${player.username}`);
-    // This code executes when player is kicked
   },
 
   PlayerSpawnEvent(server, player, event) {
@@ -61,7 +60,7 @@ module.exports = {
     // Registers a command
     const cmdmanager = new CommandManager();
     cmdmanager.addCommand(player, "testcommand", "This is my first command!");
-    cmdmanager.addCommand(player, "kick", "Kicks u!");
+    cmdmanager.addCommand(player, "kickmepls", "Kicks you!");
     cmdmanager.addCommand(
       player,
       "stopserver",
@@ -74,12 +73,11 @@ module.exports = {
 
   PlayerChatEvent(server, player, message, event) {
     Logger.log(`${player.username} said "${message}"`);
-    player.sendMessage(player, "Your just sent a chat message: " + message);
-    // This code executes when player uses chat
+    player.sendMessage(player, "You just sent a chat message: " + message);
   },
 
   PlayerCommandExecuteEvent(server, player, command, event) {
-    Logger.log(`command executed by ${player.username}: ${command}`);
+    Logger.log(`Command executed by ${player.username}: ${command}`);
     switch (command.toLowerCase()) {
       case "/testcommand":
         // player.username returns the player's username
@@ -100,6 +98,24 @@ module.exports = {
         Toast.message = "This is an example of a Toast";
         Toast.send(player);
 
+        const titlepk = new Title()
+        titlepk.setFadeinTime(10)
+        titlepk.setFadeoutTime(10)
+        titlepk.setStayTime(10)
+        titlepk.setText("Title!")
+        titlepk.setType(Titles.TITLE)
+        titlepk.send(player)
+
+        const subtitle = new Title()
+        subtitle.setText("Subtitle!")
+        subtitle.setType(Titles.SUBTITLE)
+        subtitle.send(player)
+
+        const actionbar = new Title()
+        actionbar.setText("Actionbar!")
+        actionbar.setType(Titles.ACTIONBAR)
+        actionbar.send(player)
+
         const form = new Form();
         // REMEMBER: FormTypes.FORM is supported, but is has very limited functionality. FormTypes.CUSTOMFORM is better
         form.type = FormTypes.CUSTOMFORM;
@@ -109,15 +125,15 @@ module.exports = {
         form.addInput("Hello, world", "Placeholder");
         //            ^ text          ^ placeholder
         form.addText("text");
-        form.addDropdown("dropdown", [{ text: "Option 1" }]);
+        form.addDropdown("dropdown", ["Option 1", "Option 2", "Option 3"]);
         //               ^ dropdown  ^ options (null to disable)
         form.addToggle("Toggle");
         form.addSlider("slider", 0, 100, 50);
-        //             ^ text   ^min^max ^ step
+        //             ^ text   ^min ^max ^ step
         form.send(player);
 
-        //              ^ title ^ toast description/body
         player.setTime(17000); // Updates the player time
+
         setTimeout(() => {
           if (!player.offline) {
             // Make sure to check if the player is still online after doing setTimeout() that uses player API in production plugins
@@ -134,13 +150,13 @@ module.exports = {
         player.sendMessage("Stopping server...");
         ShutdownAPI.shutdownServer();
         break;
-      case "/kick":
-        player.kick(Colors.red + "Kick demo");
+      case "/kickmepls":
+        player.kick("You were disconnected");
         break;
     }
   },
 
-  ServerConsoleCommandExecutedEvent(command, server, event) {
+  ServerConsoleCommandExecutedEvent(server, command, event) {
     Logger.log(`Console executed command: ${command}`);
     // This code executes when console executes a command
   },
