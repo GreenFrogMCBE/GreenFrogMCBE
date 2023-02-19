@@ -19,6 +19,8 @@ Our discord: https://discord.gg/UFqrnAbqjP
 
 #### Help to translate > https://poeditor.com/join/project/fwIZCyBjPw
 
+#### Example plugin > https://github.com/greenfrogmc/ExamplePlugin
+
 #### If you use our code, please credit us
 
 ## How to install
@@ -49,9 +51,9 @@ Step 3. Join via `127.0.0.1` if it does not work join with your local IP from ro
 
 If you have one feel free to open an issue
 
-- Example plugin: https://github.com/andriycraft/GreenFrogMCBE/tree/main/docs/plugins/exampleplugin | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin. | Author: GreenFrogMCBE
+- Example plugin: https://github.com/greenfrogmc/ExamplePlugin | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin. | Author: GreenFrogMCBE
 
-- Donations: https://github.com/andriycraft/GreenFrogMCBEdonations/ | Description: A plugin that adds that annoying donation message. | Author: GreenFrogMCBE
+- Donations: https://github.com/greenfrogmc/DonationsPlugin | Description: A plugin that adds that annoying donation message. | Author: GreenFrogMCBE
 
 ## Features
 
