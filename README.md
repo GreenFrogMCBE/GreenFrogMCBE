@@ -41,17 +41,17 @@ This formats the code and enables debug mode
 
 ## Can't join locally?
 
-Step 1. Open powershell as an admin
+Step 1. Open PowerShell as an admin
 
 Step 2. Run: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
 
-Step 3. Join via `127.0.0.1` if it does not work join with your local IP from router settings
+Step 3. Join via `127.0.0.1` if it does not work, join with your local IP from router settings
 
 ## Plugins
 
-If you have one feel free to open an issue
+If you have one, feel free to open an issue (https://github.com/andriycraft/GreenFrogMCBE/issues/new/choose)
 
-- Example plugin: https://github.com/greenfrogmc/ExamplePlugin | Description: This is a plugin is used just to test our API. You can use this an scaffolding for your plugin. | Author: GreenFrogMCBE
+- Example plugin: https://github.com/greenfrogmc/ExamplePlugin | Description: This is a plugin is used just to test our API. You can use this a scaffolding for your plugin. | Author: GreenFrogMCBE
 
 - Donations: https://github.com/greenfrogmc/DonationsPlugin | Description: A plugin that adds that annoying donation message. | Author: GreenFrogMCBE
 
@@ -90,21 +90,23 @@ Wiki.vg (https://wiki.vg/Bedrock_Protocol) - For packet docs
 js-yaml (https://github.com/nodeca/js-yaml) - Used to parse config and other files
 EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) (@Zwuiix-cmd) - Used as an example for custom_form support (i had permission from repo owner)
 🌓Enzøツ#6666 - Helping me with chunk support
+@</hakaN#0746 - For translating this software into Turkish
+@BasToTheMax - For translating this software into Dutch (still in progress) and was the first person who starred this repo
 ```
 
 ## Language system
 
-Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese
+Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese, Turkish, Dutch (in progress)
 
-For English language select "language": "en_US"
+For English language, set "language" to "en_US"
 
-For Lithuanian language select "language": "lt_LT"
+For Lithuanian language, set "language" to "lt_LT"
 
-For Ukrainian language select "language": "uk_UA"
+For Ukrainian language, set "language" to "uk_UA"
 
-For Vietnamese language select "language": "vi_VN"
+For Vietnamese language, set "language" to "vi_VN"
 
-For French language select "language": "fr_FR"
+For French language, set "language" to "fr_FR"
 
 ## Donations
 
@@ -112,6 +114,7 @@ If you want to support this project, you can donate at: https://www.paypal.com/d
 
 ## Servers that run this software
 
-If you have one fell free to open an issue!
+If you have one, fell free to open an issue! (https://github.com/andriycraft/GreenFrogMCBE/issues/new/choose)
 
+(server must be hosted on this software)
 - Currently none
