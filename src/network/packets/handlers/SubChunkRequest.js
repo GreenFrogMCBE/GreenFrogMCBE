@@ -220,7 +220,7 @@ class SubChunkRequest extends require("./Handler") {
       15, 15, 15, 15,
     ]);
     sub.setCacheEnabled(false);
-    sub.send(client); 
+    sub.send(client);
   }
 }
 

@@ -256,8 +256,8 @@ class ResourcePackClientResponse extends Handler {
           chunk.setX(0);
           chunk.setZ(0);
           chunk.setSubChunkCount(undefined);
-          chunk.setHighestSubchunkCount(undefined)
-          chunk.setBlob(undefined)
+          chunk.setHighestSubchunkCount(undefined);
+          chunk.setBlob(undefined);
           chunk.setCacheEnabled(false);
           chunk.setPayload([
             1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 255, 255,
