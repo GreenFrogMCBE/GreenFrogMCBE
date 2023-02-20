@@ -38,7 +38,7 @@ class PlayerList extends require("./Packet") {
 
   send(client) {
     this.validate(username);
-    client.write(this.name(), {
+    /*client.write(this.name(), {
       records: {
         type: "add",
         records_count: 1,
@@ -14441,7 +14441,7 @@ class PlayerList extends require("./Packet") {
         ],
         verified: [true],
       },
-    });
+    });*/
   }
 }
 
