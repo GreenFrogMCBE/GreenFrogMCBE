@@ -10,16 +10,16 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const TitlePacket = require("../network/packets/Title")
+const TitlePacket = require("../network/packets/Title");
 const Titles = require("../network/packets/types/Titles");
 
 class Title {
   constructor() {
     this.type = Titles.TITLE;
     this.text = "";
-    this.fadeintime = 0
-    this.fadeouttime = 0
-    this.staytime = 0
+    this.fadeintime = 0;
+    this.fadeouttime = 0;
+    this.staytime = 0;
   }
 
   /**

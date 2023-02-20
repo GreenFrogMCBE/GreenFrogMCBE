@@ -84,12 +84,17 @@ class PlayerCommandExecuteEvent extends Event {
 
       let exists = false;
       for (let i = 0; i < cmdManager.getCommands().length; i++) {
-        if (`${cmdManager.getCommands()[i].name.toLowerCase()}`.startsWith(message.replace('/', '').split(" ")[0].replace(" ", ""))) {
+        if (
+          `${cmdManager.getCommands()[i].name.toLowerCase()}`.startsWith(
+            message.replace("/", "").split(" ")[0].replace(" ", "")
+          )
+        ) {
           exists = true;
           break;
         }
       }
-      if (!exists || message === "/") client.sendMessage(lang.errors.playerUnknownCommand);
+      if (!exists || message === "/")
+        client.sendMessage(lang.errors.playerUnknownCommand);
 
       if (
         message.startsWith(`/${lang.commands.ver.toLowerCase()}`) ||

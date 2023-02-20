@@ -81,7 +81,7 @@ module.exports = {
    * @param client - The client that sent the packet
    * @param packet - The packet that was sent by the client
    */
-  handlepk (client, packet) {
+  handlepk(client, packet) {
     if (client.offline) throw new Error(lang.errors.packetErrorOffline);
     switch (packet.data.name) {
       case "resource_pack_client_response":
