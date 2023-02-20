@@ -40,6 +40,7 @@ const CommandDeop = require("../../../server/commands/CommandDeop");
 const CommandTime = require("../../../server/commands/CommandTime");
 const CommandSay = require("../../../server/commands/CommandSay");
 const CommandManager = require("../../../player/CommandManager");
+const CommandMe = require("../../../server/commands/CommandMe");
 const CommandPl = require("../../../server/commands/CommandPl");
 const CommandOp = require("../../../server/commands/CommandOp");
 const { config, lang } = require("../../../server/ServerInfo");
@@ -49,7 +50,6 @@ const Difficulty = require("../types/Difficulty");
 const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const fs = require("fs");
-const CommandMe = require("../../../server/commands/CommandMe");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
