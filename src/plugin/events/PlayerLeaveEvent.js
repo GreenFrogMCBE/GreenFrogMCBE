@@ -30,7 +30,7 @@ class PlayerLeaveEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerLeaveEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerLeaveEvent(
             server,
             client,
             this

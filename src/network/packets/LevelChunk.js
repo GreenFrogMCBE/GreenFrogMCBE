@@ -16,6 +16,7 @@ let sub_chunk_count = 0;
 let highest_subchunk_count = 0;
 let cache_enabled = false;
 let payload = [];
+let blob = undefined
 
 class LevelChunk extends require("./Packet") {
   /**
@@ -74,6 +75,14 @@ class LevelChunk extends require("./Packet") {
   }
 
   /**
+   * Sets the blob
+   * @param {Number} blob1 
+   */
+  setBlob(blob1) {
+    blob = blob1;
+  }
+
+  /**
    * It gets the X coordinate
    * @returns {Number}
    */
@@ -122,6 +131,14 @@ class LevelChunk extends require("./Packet") {
   }
 
   /**
+   * It returns the chunk blob
+   * @returns The chunk blob
+   */
+  getBlob() {
+    return blob;
+  }
+
+  /**
    * It sends the packet
    * @param {Client} client
    */
@@ -132,6 +149,7 @@ class LevelChunk extends require("./Packet") {
       sub_chunk_count: this.getSubChunkCount(),
       highest_subchunk_count: this.getHighestSubchunkCount(),
       cache_enabled: this.getCacheEnabled(),
+      blob: this.getBlob(),
       payload: { type: "Buffer", data: this.getPayload() },
     });
   }

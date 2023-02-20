@@ -30,7 +30,7 @@ class PlayerJoinEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).onJoin(
+          require(`${__dirname}/../../../plugins/${plugin}`).onJoin(
             server,
             client,
             this

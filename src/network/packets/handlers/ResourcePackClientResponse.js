@@ -255,7 +255,9 @@ class ResourcePackClientResponse extends Handler {
           const chunk = new LevelChunk();
           chunk.setX(0);
           chunk.setZ(0);
-          chunk.setSubChunkCount(0);
+          chunk.setSubChunkCount(undefined);
+          chunk.setHighestSubchunkCount(undefined)
+          chunk.setBlob(undefined)
           chunk.setCacheEnabled(false);
           chunk.setPayload([
             1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 255, 255,
@@ -292,7 +294,7 @@ class ResourcePackClientResponse extends Handler {
           setInterval(() => {
             if (client.offline) return;
             const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-            networkchunkpublisher.setCords(0, 0, 0);
+            networkchunkpublisher.setCords(-1, 0, 0);
             networkchunkpublisher.setRadius(64);
             networkchunkpublisher.setSavedChunks([]);
             networkchunkpublisher.send(client);

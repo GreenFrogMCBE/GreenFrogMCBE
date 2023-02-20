@@ -31,7 +31,7 @@ class ServerToastRequest extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).ServerToastRequest(
+          require(`${__dirname}/../../../plugins/${plugin}`).ServerToastRequest(
             server,
             client,
             title,

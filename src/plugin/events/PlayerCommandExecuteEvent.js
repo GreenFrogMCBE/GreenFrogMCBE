@@ -44,7 +44,7 @@ class PlayerCommandExecuteEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerCommandExecuteEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerCommandExecuteEvent(
             server,
             client,
             command,
@@ -82,6 +82,15 @@ class PlayerCommandExecuteEvent extends Event {
       const cmdList = new CommandList();
       const cmdMe = new CommandMe();
 
+      let exists = false;
+      for (let i = 0; i < cmdManager.getCommands().length; i++) {
+        if (`${cmdManager.getCommands()[i].name.toLowerCase()}`.startsWith(message.replace('/', '').split(" ")[0].replace(" ", ""))) {
+          exists = true;
+          break;
+        }
+      }
+      if (!exists || message === "/") client.sendMessage(lang.errors.playerUnknownCommand);
+
       if (
         message.startsWith(`/${lang.commands.ver.toLowerCase()}`) ||
         message.startsWith(`/${lang.commands.version.toLowerCase()}`)
@@ -108,17 +117,6 @@ class PlayerCommandExecuteEvent extends Event {
         cmdList.executePlayer(client);
       } else if (message.startsWith(`/${lang.commands.me.toLowerCase()}`)) {
         cmdMe.executePlayer(client, message);
-      } else {
-        let exists = false;
-        for (let i = 0; i < cmdManager.getCommands().length; i++) {
-          if (
-            `/${cmdManager.getCommands()[i].name.toLowerCase()}` === message
-          ) {
-            exists = true;
-            break;
-          }
-        }
-        if (!exists) client.sendMessage(lang.errors.playerUnknownCommand);
       }
     }
   }

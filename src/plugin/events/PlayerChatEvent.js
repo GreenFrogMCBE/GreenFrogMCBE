@@ -34,7 +34,7 @@ class PlayerChatEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerChatEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerChatEvent(
             server,
             client,
             message,

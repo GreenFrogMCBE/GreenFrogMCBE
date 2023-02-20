@@ -40,7 +40,7 @@ module.exports = {
      */
     player.chat = function (msg) {
       Chat.broadcastMessage(
-        lang.chatFormat
+        lang.chat.chatFormat
           .replace("%username%", player.username)
           .replace("%message%", msg)
       );

@@ -10,12 +10,16 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const TitlePacket = require("../network/packets/Title")
 const Titles = require("../network/packets/types/Titles");
 
 class Title {
   constructor() {
     this.type = Titles.TITLE;
-    this.text = null;
+    this.text = "";
+    this.fadeintime = 0
+    this.fadeouttime = 0
+    this.staytime = 0
   }
 
   /**
@@ -31,7 +35,6 @@ class Title {
    * @param {string} text
    */
   setText(text) {
-    if (this.type === Titles.TITLE) text = "";
     this.text = text;
   }
 
@@ -47,7 +50,7 @@ class Title {
    * Sets the stay time
    * @param {Number} staytime
    */
-  setStaytime(staytime) {
+  setStayTime(staytime) {
     this.staytime = staytime;
   }
 
@@ -55,7 +58,7 @@ class Title {
    * Sets the fadeout time
    * @param {Number} fadeout
    */
-  setFadeout(fadeout) {
+  setFadeoutTime(fadeout) {
     this.fadeouttime = fadeout;
   }
 
@@ -100,9 +103,9 @@ class Title {
   }
 
   send(client) {
-    const titlepk = new Title();
+    const titlepk = new TitlePacket();
     titlepk.setFadeinTime(this.getFadeinTime());
-    titlepk.setStayTime(this.getStayTime());
+    titlepk.setStaytime(this.getStayTime());
     titlepk.setText(this.getText());
     titlepk.setType(this.getType());
     titlepk.setFadeoutTime(this.getFadeoutTime());

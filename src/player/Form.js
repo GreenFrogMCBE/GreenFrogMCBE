@@ -59,7 +59,7 @@ class Form {
   }
 
   /**
-   * Adds text
+   * Adds toggle button
    * @param {string} text
    */
   addToggle(text) {

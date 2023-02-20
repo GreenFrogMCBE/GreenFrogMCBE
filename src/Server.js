@@ -77,11 +77,11 @@ module.exports = {
   },
 
   /**
-   * It handles packets.
+   * Packet handler
    * @param client - The client that sent the packet
    * @param packet - The packet that was sent by the client
    */
-  handlepk(client, packet) {
+  handlepk (client, packet) {
     if (client.offline) throw new Error(lang.errors.packetErrorOffline);
     switch (packet.data.name) {
       case "resource_pack_client_response":
@@ -235,7 +235,7 @@ module.exports = {
       });
     } catch (e) {
       Logger.log(
-        `${lang.listeningFailed
+        `${lang.errors.listeningFailed
           .replace(`%address%`, `/${config.host}:${config.port}`)
           .replace("%error%", e.stack)}`,
         "error"

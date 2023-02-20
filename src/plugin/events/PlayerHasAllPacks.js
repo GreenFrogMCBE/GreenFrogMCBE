@@ -30,7 +30,7 @@ class PlayerHasAllPacks extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerHasAllPacks(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerHasAllPacks(
             server,
             client,
             this

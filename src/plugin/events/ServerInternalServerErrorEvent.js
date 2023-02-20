@@ -25,7 +25,7 @@ class ServerInternalServerErrorEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).ServerInternalServerErrorEvent(
+          require(`${__dirname}/../../../plugins/${plugin}`).ServerInternalServerErrorEvent(
             server,
             error,
             this

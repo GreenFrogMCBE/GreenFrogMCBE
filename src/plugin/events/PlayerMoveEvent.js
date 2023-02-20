@@ -31,7 +31,7 @@ class PlayerMoveEvent extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).onPlayerMove(
+          require(`${__dirname}/../../../plugins/${plugin}`).onPlayerMove(
             client,
             server,
             location,

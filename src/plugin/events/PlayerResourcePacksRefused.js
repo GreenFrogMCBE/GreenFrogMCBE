@@ -25,7 +25,7 @@ class PlayerResourcePacksRefused extends Event {
     fs.readdir("./plugins", (err, plugins) => {
       plugins.forEach((plugin) => {
         try {
-          require(`${__dirname}\\..\\..\\..\\plugins\\${plugin}`).PlayerResourcePacksRefused(
+          require(`${__dirname}/../../../plugins/${plugin}`).PlayerResourcePacksRefused(
             server,
             client,
             this
