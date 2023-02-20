@@ -82,10 +82,14 @@ If you have one feel free to open an issue
 @NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24)
 @ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype  (#44)
 @bufferfishq - For adding support for custom_form and new plugin system (#47)
-@andriycraftbot - For fixing the code style
-@Zwuiix-cmd - Suggested custom_form support
-@CreeperG16 - For a better way to handle player disconnection (https://github.com/andriycraft/GreenFrogMCBE/pull/55/commits/7376c60e73d9e98c4791f89f4c7c54b644e006a4#diff-f187ec8efe95aba91b86e895736549fccc085f2e0d364e35c17cbd8a1206b744L105-R105)
+@andriycraftbot - For fixing the code style (#37, #38, #40, #45, #46, #48, #50, #52, #58, #61)
+@Zwuiix-cmd - Suggested custom_form support (https://github.com/andriycraft/GreenFrogMCBE/issues/35)
+@CreeperG16 (Tom16#4672) - For a better way to handle player disconnection (https://github.com/andriycraft/GreenFrogMCBE/pull/55/commits/7376c60e73d9e98c4791f89f4c7c54b644e006a4#diff-f187ec8efe95aba91b86e895736549fccc085f2e0d364e35c17cbd8a1206b744L105-R105) and for adding 1.19.60 and 1.19.62 support to bedrock-protocol and helping me with chunk support
+Bedrock-protocol (https://github.com/PrismarineJS/bedrock-protocol) - Packet sender and raknet
+Wiki.vg (https://wiki.vg/Bedrock_Protocol) - For packet docs
+js-yaml (https://github.com/nodeca/js-yaml) - Used to parse config and other files
 EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) (@Zwuiix-cmd) - Used as an example for custom_form support (i had permission from repo owner)
+🌓Enzøツ#6666 - Helping me with chunk support
 ```
 
 ## Language system
