@@ -19,17 +19,15 @@ let port = null;
 const { lang } = require("../../server/ServerInfo");
 
 class Transfer extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
   name() {
     return "transfer";
   }
 
   /**
+   * This function should not be used outside this class
    * @param {Object} client - The client to validate
-   * @param {string} address - The server address to validate
-   * @param {number} port - The server port to validate
+   * @param {String} address - The server address to validate
+   * @param {Number} port - The server port to validate
    */
   validate(address, port) {
     if (!address) throw new Error(lang.errors.targetServerNull);
@@ -40,7 +38,7 @@ class Transfer extends require("./Packet") {
 
   /**
    * Sets the server address
-   * @param {string} address
+   * @param {String} address
    */
   setServerAddress(address) {
     server_address = address;
@@ -55,7 +53,7 @@ class Transfer extends require("./Packet") {
   }
 
   /**
-   * It returns the server address.
+   * Returns the server address.
    * @returns The server address.
    */
   getServerAddress() {
@@ -63,7 +61,7 @@ class Transfer extends require("./Packet") {
   }
 
   /**
-   * It returns the server port.
+   * Returns the server port.
    * @returns The server port.
    */
   getPort() {
@@ -71,6 +69,7 @@ class Transfer extends require("./Packet") {
   }
 
   /**
+   * Sends the packet
    * @param {Object} client - The client to send the packet to
    */
   send(client) {
