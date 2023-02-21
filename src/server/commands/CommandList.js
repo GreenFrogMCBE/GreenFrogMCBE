@@ -41,14 +41,14 @@ class CommandList extends require("./Command") {
       }
     }
 
-   if (!isconsole) {
+    if (!isconsole) {
       client.sendMessage(
         lang.commands.playerlist.replace(
           "%info%",
           `${PlayerInfo.players.length}/${config.maxPlayers}`
         )
       );
-      if(Number(PlayerInfo.players.length) > 0){
+      if (Number(PlayerInfo.players.length) > 0) {
         client.sendMessage(players);
       }
       return;
@@ -60,10 +60,9 @@ class CommandList extends require("./Command") {
         `${PlayerInfo.players.length}/${config.maxPlayers}`
       )
     );
-    if(Number(PlayerInfo.players.length) > 0){
+    if (Number(PlayerInfo.players.length) > 0) {
       Logger.log(players);
     }
-    
   }
 
   getPlayerDescription() {

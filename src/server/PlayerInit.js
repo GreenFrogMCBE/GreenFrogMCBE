@@ -22,6 +22,10 @@ const ServerToClientChat = require("../plugin/events/ServerToClientChat");
 const PlayerTransferEvent = require("../plugin/events/PlayerTransferEvent");
 const PlayerGamemodeChangeEvent = require("../plugin/events/PlayerGamemodeChangeEvent");
 const ChangeDimension = require("../network/packets/ChangeDimension");
+const PlayerListTypes = require("../network/packets/types/PlayerList");
+const ServerInfo = require("../server/ServerInfo");
+const PlayerInfo = require("../player/PlayerInfo");
+const PlayerList = require("../network/packets/PlayerList");
 
 module.exports = {
   initPlayer(player) {
@@ -129,6 +133,16 @@ module.exports = {
     /* Checks if the player is still online */
     player.on("close", () => {
       if (!player.kicked) {
+        for (let i = 0; i < PlayerInfo.players; i++) {
+          if (PlayerInfo.players[i].username == !player.username) {
+            ServerInfo.addPlayer();
+            const pl = new PlayerList();
+            pl.setType(PlayerListTypes.REMOVE);
+            pl.setUuid(player.profile.uuid);
+            pl.send(PlayerInfo.players[i]);
+          }
+        }
+
         new PlayerLeaveEvent().execute(require("../Server").server, player);
 
         Logger.log(

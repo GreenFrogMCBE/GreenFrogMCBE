@@ -30,6 +30,7 @@ const AvailableEntityIdentifiers = require("../../../network/packets/AvailableEn
 const NetworkChunkPublisherUpdate = require("../../../network/packets/NetworkChunkPublisherUpdate");
 const PlayerResourcePacksCompletedEvent = require("../../../plugin/events/PlayerResourcePacksCompletedEvent");
 const PlayerHasNoResourcePacksInstalledEvent = require("../../../plugin/events/PlayerHasNoResourcePacksInstalledEvent");
+const PlayerListTypes = require("../../../network/packets/types/PlayerList");
 const CommandShutdown = require("../../../server/commands/CommandShutdown");
 const CommandVersion = require("../../../server/commands/CommandVersion");
 const VersionToProtocol = require("../../../server/VersionToProtocol");
@@ -45,6 +46,7 @@ const CommandPl = require("../../../server/commands/CommandPl");
 const CommandOp = require("../../../server/commands/CommandOp");
 const { config, lang } = require("../../../server/ServerInfo");
 const Biome = require("../../../network/packets/types/Biome");
+const ServerInfo = require("../../../server/ServerInfo");
 const PlayStatuses = require("../types/PlayStatuses");
 const Difficulty = require("../types/Difficulty");
 const Logger = require("../../../server/Logger");
@@ -153,7 +155,7 @@ class ResourcePackClientResponse extends Handler {
 
           const creativecontent = new CreativeContent();
           creativecontent.setItems(
-            require("../res/creativecontent.json").content
+            require("../res/creativeContent.json").content
           );
           creativecontent.send(client);
 
@@ -266,6 +268,20 @@ class ResourcePackClientResponse extends Handler {
           ]);
           chunk.send(client);
 
+          setTimeout(() => {
+            for (let i = 0; i < PlayerInfo.players; i++) {
+              if (PlayerInfo.players[i].username == !client.username) {
+                ServerInfo.addPlayer();
+                const pl = new PlayerList();
+                pl.setType(PlayerListTypes.ADD);
+                pl.setUsername(client.username);
+                pl.setId(Math.floor(Math.random() * 99999999999));
+                pl.setUuid(client.profile.uuid);
+                pl.send(PlayerInfo.players[i]);
+              }
+            }
+          }, 1000);
+
           const block = new UpdateBlock();
           block.setX(-1);
           block.setY(98);
@@ -303,6 +319,7 @@ class ResourcePackClientResponse extends Handler {
           Logger.log(
             lang.playerstatuses.spawned.replace("%player%", client.username)
           );
+
           setTimeout(() => {
             if (client.offline) return;
             const ps = new PlayStatus();
