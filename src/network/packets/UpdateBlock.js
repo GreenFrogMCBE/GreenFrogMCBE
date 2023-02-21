@@ -29,94 +29,94 @@ class UpdateBlock extends require("./Packet") {
 
   /**
    * Sets the X coordinate
-   * @param {Number} x1 - The X coordinate.
+   * @param {Number} x1 - The X coordinate
    */
   setX(x1) {
     x = parseInt(x1);
   }
 
   /**
-   * It sets the Y coordinate
-   * @param {Number} y1 - The Y coordinate.
+   * Sets the Y coordinate
+   * @param {Number} y1 - The Y coordinate
    */
   setY(y1) {
     y = parseInt(y1);
   }
 
   /**
-   * It sets the Z coordinate
-   * @param {Number} z1 - The Z coordinate.
+   * Sets the Z coordinate
+   * @param {Number} z1 - The Z coordinate
    */
   setZ(z1) {
     z = parseInt(z1);
   }
 
   /**
-   * It sets the block runtime id
-   * @param {Number} block_runtime_id1 - It sets the block runtime id.
+   * Sets the block runtime id
+   * @param {Number} block_runtime_id1 - Sets the block runtime id.
    */
   setBlockRuntimeId(block_runtime_id1) {
     block_runtime_id = parseInt(block_runtime_id1);
   }
 
   /**
-   * It sets the flags value
-   * @param {Number} flagsvalue1 - It sets the flags count (aka flags value).
+   * Sets the flags value
+   * @param {Number} flagsvalue1 - Flags value (count).
    */
   setFlagsValue(flagsvalue1) {
     flagsvalue = parseInt(flagsvalue1);
   }
 
   /**
-   * It sets the flags value called "neighbors"
-   * @param {Number} neighbors1 - It sets the flag value called "neighbors".
+   * Sets the "neighbors" flag
+   * @param {Number} neighbors1
    */
   setNeighbors(neighbors1) {
     neighbors = neighbors1;
   }
 
   /**
-   * It sets the flags value called "network"
-   * @param {Number} network1 - It sets the flag value called "network".
+   * Sets the network flag
+   * @param {Number} network1
    */
   setNetwork(network1) {
     network = network1;
   }
 
   /**
-   * It sets the flags value called "no_graphic"
-   * @param {Number} no_graphic1 - It sets the flag value called "no_graphic".
+   * Sets the no_graphic flag
+   * @param {Number} no_graphic1
    */
   setNoGraphic(no_graphic1) {
     no_graphic = no_graphic1;
   }
 
   /**
-   * It sets the flags value called "unused"
-   * @param {Number} unused1 - It sets the flags value called "unused".
+   * Sets the unused flag
+   * @param {Number} unused1
    */
   setUnused(unused1) {
     unused = unused1;
   }
 
   /**
-   * It sets the flags value called "priority"
-   * @param {Number} priority1 - It sets the flag value called "priority".
+   * Sets the priority flag
+   * @param {Boolean} priority1
    */
   setPriority(priority1) {
     priority = priority1;
   }
 
   /**
-   * It sets the layer
-   * @param {Number} layer1 - It sets the layer.
+   * Sets the layer
+   * @param {Number} layer1 - The layer.
    */
   setLayer(layer1) {
     layer = parseInt(layer1);
   }
 
   /**
-   * It returns the X coordinate
+   * Returns the X coordinate
    * @param {Number} x - The X coordinate.
    */
   getX() {
@@ -124,7 +124,7 @@ class UpdateBlock extends require("./Packet") {
   }
 
   /**
-   * It returns the Y coordinate
+   * Returns the Y coordinate
    * @param {Number} y - The Y coordinate.
    */
   getY() {
@@ -132,7 +132,7 @@ class UpdateBlock extends require("./Packet") {
   }
 
   /**
-   * It returns the Z coordinate
+   * Returns the Z coordinate
    * @param {Number} z - The Z coordinate.
    */
   getZ() {
@@ -140,70 +140,71 @@ class UpdateBlock extends require("./Packet") {
   }
 
   /**
-   * It returns the block runtime id
-   * @param {Number} block_runtime_id - It returns the block runtime id.
+   * Returns the block runtime id
+   * @param {Number} block_runtime_id
    */
   getBlockRuntimeId() {
     return block_runtime_id;
   }
 
   /**
-   * It returns the flags value
-   * @param {Number} flagsvalue - It returns the flags value.
+   * Returns the flags value
+   * @param {Number} flagsvalue
    */
   getFlagsValue() {
     return flagsvalue;
   }
 
   /**
-   * It returns the flags value called "neighbors"
-   * @param {Number} neighbors - It returns the flag value called "neighbors".
+   * Returns the flags value called "neighbors"
+   * @param {Number} neighbors
    */
   getNeighbors() {
     return neighbors;
   }
 
   /**
-   * It returns the flags value called "network"
-   * @param {Number} network - It sets the flag value called "network".
+   * Returns the flags value called "network"
+   * @param {Number} network
    */
   getNetwork() {
     return network;
   }
 
   /**
-   * It returns the flags value called "no_graphic"
-   * @param {Number} no_graphic - It sets the flag value called "no_graphic".
+   * Returns the flags value called "no_graphic"
+   * @param {Number} no_graphic
    */
   getNoGraphic() {
     return no_graphic;
   }
 
   /**
-   * It returns the flags value called "unused"
-   * @param {Number} unused - It returns the flags value called "unused".
+   * Returns the flags value called "unused"
+   * @param {Number} unused
    */
   getUnused() {
     return unused;
   }
 
   /**
-   * It returns the flags value called "priority"
-   * @param {Number} priority - It returns the flags value called "priority".
+   * Returns the flags value called "priority"
+   * @param {Number} priority
    */
   getPriority() {
     return priority;
   }
 
   /**
-   * It returns the layer
-   * @param {Number} layer - It returns the layer.
+   * Returns the layer
+   * @param {Number} layer
    */
   getLayer() {
     return layer;
   }
 
   /**
+   * Sends the packet
    * @param {Object} client - The client that you want to send the packet to.
    * @param {Number} x - The x coordinate of the block
    * @param {Number} y - The y coordinate of the block
