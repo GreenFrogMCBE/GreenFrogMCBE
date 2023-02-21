@@ -23,15 +23,12 @@ let priority = false;
 let layer = 0;
 
 class UpdateBlock extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
   name() {
     return "update_block";
   }
 
   /**
-   * It sets the X coordinate
+   * Sets the X coordinate
    * @param {Number} x1 - The X coordinate.
    */
   setX(x1) {
