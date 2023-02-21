@@ -14,7 +14,20 @@
 const ClientJoin = require("./test/ClientJoin");
 const StartServer = require("./test/StartServer");
 const TestConfigs = require("./test/TestConfigs");
+const fs = require('fs')
 
+if (fs.existsSync("config.yml")) {
+const ServerInfo = require("./src/server/ServerInfo")
+const config = ServerInfo.config;
+if(!config.offlineMode){
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+  +
+  '\u001b[38;5;203m\u001b[6mYou can not use tests in \u001b[38;5;87mOfflineMode\u001b[38;5;203m set to \u001b[38;5;87mfalse \u001b[0m'
+  +
+  "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+  process.exit(0)
+
+}
 console.log("Starting testing...");
 
 try {
@@ -46,3 +59,6 @@ setTimeout(() => {
     }, 3000);
   }
 }, 3500);
+
+
+}
