@@ -15,15 +15,12 @@ let title = "";
 let message = "";
 
 class ToastRequest extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
   name() {
     return "toast_request";
   }
 
   /**
-   * It sets the title of the toast.
+   * Sets the title of the toast.
    * @param title1 - The title of the toast.
    */
   setTitle(title1) {
@@ -31,7 +28,7 @@ class ToastRequest extends require("./Packet") {
   }
 
   /**
-   * It sets the message of the toast.
+   * Sets the message of the toast.
    * @param message1 - The message to be displayed.
    */
   setMessage(message1) {
@@ -39,7 +36,7 @@ class ToastRequest extends require("./Packet") {
   }
 
   /**
-   * It returns the title.
+   * Returns the title.
    * @returns The title.
    */
   getTitle() {
@@ -47,7 +44,7 @@ class ToastRequest extends require("./Packet") {
   }
 
   /**
-   * It returns the message.
+   * Returns the message.
    * @returns The message.
    */
   getMessage() {
