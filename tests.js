@@ -14,10 +14,11 @@
 const ClientJoin = require("./test/ClientJoin");
 const StartServer = require("./test/StartServer");
 const TestConfigs = require("./test/TestConfigs");
+const fs = require('fs')
+
+if (fs.existsSync("config.yml")) {
 const ServerInfo = require("./src/server/ServerInfo")
 const config = ServerInfo.config;
-
-
 if(!config.offlineMode){
   console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
   +
@@ -27,7 +28,6 @@ if(!config.offlineMode){
   process.exit(0)
 
 }
-
 console.log("Starting testing...");
 
 try {
@@ -59,3 +59,6 @@ setTimeout(() => {
     }, 3000);
   }
 }, 3500);
+
+
+}
