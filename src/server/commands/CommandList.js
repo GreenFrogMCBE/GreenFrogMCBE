@@ -48,9 +48,7 @@ class CommandList extends require("./Command") {
           `${PlayerInfo.players.length}/${config.maxPlayers}`
         )
       );
-      if (Number(PlayerInfo.players.length) > 0) {
-        client.sendMessage(players);
-      }
+      if (Number(PlayerInfo.players.length) > 0) client.sendMessage(players);
       return;
     }
 
@@ -60,6 +58,7 @@ class CommandList extends require("./Command") {
         `${PlayerInfo.players.length}/${config.maxPlayers}`
       )
     );
+
     if (Number(PlayerInfo.players.length) > 0) {
       Logger.log(players);
     }
