@@ -28,7 +28,7 @@ class Form {
    * @param action - The action to add to the list of actions.
    */
   addAction(action) {
-    this.actions.push(action);
+    if (this.type === FormTypes.CUSTOMFORM) this.actions.push(action);
   }
 
   /**
@@ -91,11 +91,7 @@ class Form {
     const FormReq = new FormRequest();
     FormReq.setId(this.id);
     FormReq.setTitle(this.title);
-    if (this.actions === []) {
-      FormReq.setContent(this.actions);
-    } else {
-      FormReq.setContent("");      
-    }
+    FormReq.setContent(this.actions);
     FormReq.setButtons(JSON.stringify(this.buttons));
     FormReq.setType(this.type);
     FormReq.send(client);
