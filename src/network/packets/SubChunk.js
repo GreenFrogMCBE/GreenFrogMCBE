@@ -25,9 +25,6 @@ let heightMap = [];
 let cache_enabled = false;
 
 class SubChunk extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
   name() {
     return "subchunk";
   }
@@ -58,7 +55,7 @@ class SubChunk extends require("./Packet") {
 
   /**
    * It sets the Z coordinate of the subchunk.
-   * @param z - The Z cordinate.
+   * @param z - The Z coordinate.
    */
   setZ(z1) {
     z = z1;
@@ -66,9 +63,9 @@ class SubChunk extends require("./Packet") {
 
   /**
    * It sets the X, Y and Z coordinate of the origin in subchunk.
-   * @param x1 - The X cordinate.
-   * @param y1 - The Y cordinate.
-   * @param z1 - The Z cordinate.
+   * @param x1 - The X coordinate.
+   * @param y1 - The Y coordinate.
+   * @param z1 - The Z coordinate.
    */
   setOrigin(x1, y1, z1) {
     ox = x1;
@@ -86,70 +83,70 @@ class SubChunk extends require("./Packet") {
 
   /**
    * It sets request result
-   * @param result - The request result.
+   * @param result - The request result
    */
   setRequestResult(result1) {
     result = result1;
   }
 
   /**
-   * It sets the height map type.
-   * @param heightMaptype - The height map type.
+   * It sets the height map type
+   * @param heightMaptype - The height map type
    */
   setHeightMapType(heightMaptype1) {
     heightMaptype = heightMaptype1;
   }
 
   /**
-   * It sets the height map.
-   * @param heightMap - The height map.
+   * It sets the height map
+   * @param heightMap - The height map
    */
   setHeightMap(heightMap1) {
     heightMap = heightMap1;
   }
 
   /**
-   * It sets the if cache enabled.
-   * @param cacheEnabled - Is cache enabled.
+   * It sets the if cache enabled
+   * @param cacheEnabled - Is cache enabled
    */
   setCacheEnabled(cacheEnabled1) {
     cache_enabled = cacheEnabled1;
   }
 
   /**
-   * It returns the dimension.
-   * @returns The dimension.
+   * Returns the dimension
+   * @returns The dimension
    */
   getDimension() {
     return dimension;
   }
 
   /**
-   * It returns the X cordinate.
-   * @returns The X cordinate.
+   * Returns the X coordinate
+   * @returns The X coordinate
    */
   getX() {
     return x;
   }
 
   /**
-   * It returns the Y cordinate.
-   * @returns The Y cordinate.
+   * Returns the Y coordinate
+   * @returns The Y coordinate
    */
   getY() {
     return y;
   }
 
   /**
-   * It returns the Z cordinate.
-   * @returns The Z cordinate.
+   * Returns the Z coordinate
+   * @returns The Z coordinate
    */
   getZ() {
     return z;
   }
 
   /**
-   * It returns the origin.
+   * Returns the origin.
    * @returns The origin X, Y, and Z coordinates
    */
   getOrigin() {
@@ -173,7 +170,7 @@ class SubChunk extends require("./Packet") {
   }
 
   /**
-   * It returns the height map type.
+   * Returns the height map type.
    * @returns The height map type.
    */
   getHeightMapType() {
@@ -181,7 +178,7 @@ class SubChunk extends require("./Packet") {
   }
 
   /**
-   * It returns the height map.
+   * Returns the height map.
    * @returns The height map.
    */
   getHeightMap() {
@@ -190,14 +187,14 @@ class SubChunk extends require("./Packet") {
 
   /**
    * Returns the cache enabled.
-   * @returns It returns if the cache is enabled.
+   * @returns Returns if the cache is enabled.
    */
   getCacheEnabled() {
     return cache_enabled;
   }
 
   /**
-   * It writes a packet to the client
+   * Sends the packet
    * @param client - The client that will receive the packet.
    */
   send(client) {
