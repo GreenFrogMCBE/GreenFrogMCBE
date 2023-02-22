@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const TextTypes = require("./types/TextTypes");
+
 let message = "";
 let type = TextTypes.ANNOUNCEMENT;
 let needs_translation = false;
@@ -19,16 +20,13 @@ let xuid = "";
 let platform_chat_id = "";
 
 class Text extends require("./Packet") {
-  /**
-   * @returns The name of the packet name
-   */
   name() {
     return "text";
   }
 
   /**
    * Sets the message to be sent
-   * @param {string} message Message to be sent
+   * @param {String} message Message to be sent
    */
   setMessage(message1) {
     message = message1;
@@ -36,7 +34,7 @@ class Text extends require("./Packet") {
 
   /**
    * Sets the type
-   * @param {string} type1 Set the type
+   * @param {String} type1 The type
    */
   setType(type1) {
     type = type1;
@@ -44,7 +42,7 @@ class Text extends require("./Packet") {
 
   /**
    * Sets the needs translation
-   * @param {boolean} needs_translation1 Set the need translation
+   * @param {boolean} needs_translation1 Does the need translation need?
    */
   setNeedsTranslation(needs_translation1) {
     needs_translation = needs_translation1;
@@ -52,7 +50,7 @@ class Text extends require("./Packet") {
 
   /**
    * Sets the source name
-   * @param {string} source_name1 Set the source name
+   * @param {String} source_name1 The source name
    */
   setSourceName(source_name1) {
     source_name = source_name1;
@@ -60,7 +58,7 @@ class Text extends require("./Packet") {
 
   /**
    * Sets the xuid
-   * @param {string} xuid1 The xuid
+   * @param {String} xuid1 The xuid
    */
   setXuid(xuid1) {
     xuid = xuid1;
@@ -68,7 +66,7 @@ class Text extends require("./Packet") {
 
   /**
    * Sets the platform chat id
-   * @param {string} platform_chat_id1 The platform chat id
+   * @param {String} platform_chat_id1 The platform chat id (default = "")
    */
   setPlatformChatId(platform_chat_id1) {
     platform_chat_id = platform_chat_id1;
@@ -83,7 +81,7 @@ class Text extends require("./Packet") {
   }
 
   /**
-   * Returns the type
+   * Returns the chat message type
    * @returns The type
    */
   getType() {
@@ -91,7 +89,7 @@ class Text extends require("./Packet") {
   }
 
   /**
-   * Returns the needs translation
+   * Returns chat message needs translation field
    * @returns The needs translation
    */
   getNeedsTranslation() {
@@ -107,8 +105,8 @@ class Text extends require("./Packet") {
   }
 
   /**
-   * Returns the xuid
-   * @returns The xuid
+   * Returns the XUID
+   * @returns The XUID
    */
   getXuid() {
     return xuid;
@@ -124,12 +122,12 @@ class Text extends require("./Packet") {
 
   /**
    * @param {Object} client - The client that will receive the packet.
-   * @param {string} [message] - The message to send.
-   * @param {string} [type=announcement] - The type of message.
-   * @param {boolean} [needs_translation=false] - If true, the message will be translated to the client's language (if there is translation key).
-   * @param {string} [source_name] - The name of the source of the message.
-   * @param {string} [xuid] - The XUID of the player, who sent the message.
-   * @param {string} [platform_chat_id] - This is the ID of the player you want to send the message to.
+   * @param {String} [message] - The message to send.
+   * @param {String} [type=announcement] - The type of message.
+   * @param {Boolean} [needs_translation=false] - If true, the message will be translated to the client's language (if there is translation key).
+   * @param {String} [source_name] - The name of the source of the message.
+   * @param {String} [xuid] - The XUID of the player, who sent the message.
+   * @param {String} [platform_chat_id] - This is the ID of the player you want to send the message to.
    */
   send(client) {
     client.write(this.name(), {
