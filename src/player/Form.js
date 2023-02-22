@@ -91,7 +91,11 @@ class Form {
     const FormReq = new FormRequest();
     FormReq.setId(this.id);
     FormReq.setTitle(this.title);
-    FormReq.setContent(this.actions);
+    if (this.actions === []) {
+      FormReq.setContent(this.actions);
+    } else {
+      FormReq.setContent("");      
+    }
     FormReq.setButtons(JSON.stringify(this.buttons));
     FormReq.setType(this.type);
     FormReq.send(client);
