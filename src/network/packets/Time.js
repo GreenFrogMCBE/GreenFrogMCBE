@@ -17,14 +17,12 @@ let time = 0;
 const { lang } = require("../../server/ServerInfo");
 
 class Time extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
   name() {
     return "set_time";
   }
 
   /**
+   * This function should not be used outside this class
    * @param client - The client that sent the packet
    * @param time - The time in seconds to set the client's time to.
    */
@@ -33,16 +31,15 @@ class Time extends require("./Packet") {
   }
 
   /**
-   * It updates the time
-   * @param {Number} time - The time in seconds to set the client's time to.
+   * Sets the time
+   * @param {Number} time - The time in ms to set the client's time to.
    */
   setTime(time1) {
-    this.validate(time1);
     time = time1;
   }
 
   /**
-   * It returns the time
+   * Returns the time
    * @returns The time
    */
   getTime() {
@@ -50,6 +47,7 @@ class Time extends require("./Packet") {
   }
 
   /**
+   * Sends the packet
    * @param {Object} client - The client that the packet is being sent to.
    */
   send(client) {
