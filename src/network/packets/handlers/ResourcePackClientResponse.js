@@ -100,8 +100,7 @@ class ResourcePackClientResponse extends Handler {
         resourcepackstack.send(client);
         break;
       }
-      case "completed":
-        {
+      case "completed": {
           new PlayerResourcePacksCompletedEvent().execute(server, client);
 
           const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
@@ -166,7 +165,7 @@ class ResourcePackClientResponse extends Handler {
           respawn.send(client);
 
           const clientcachestatus = new ClientCacheStatus();
-          clientcachestatus.setEnabled(true);
+          clientcachestatus.setEnabled(false);
           clientcachestatus.send(client);
 
           const commandmanager = new CommandManager();
