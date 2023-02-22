@@ -21,9 +21,6 @@ let xuid = "";
 let platform_online_id = "";
 
 class Title extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
   name() {
     return "set_title";
   }
@@ -77,42 +74,42 @@ class Title extends require("./Packet") {
   }
 
   /**
-   * Gets the text.
+   * Returns the text.
    */
   getText() {
     return text;
   }
 
   /**
-   * Gets the fade in time.
+   * Returns the fade in time.
    */
   getFadeinTime() {
     return fadeintime;
   }
 
   /**
-   * Gets the stay time.
+   * Returns the stay time.
    */
-  getStaytime() {
+  Returnstaytime() {
     return staytime;
   }
 
   /**
-   * Gets the fade out time.
+   * Returns the fade out time.
    */
   getFadeout() {
     return fadeouttime;
   }
 
   /**
-   * Gets the xuid.
+   * Returns the xuid.
    */
   getXuid() {
     return xuid;
   }
 
   /**
-   * Gets the platform_online_id.
+   * Returns the platform_online_id.
    */
   getPlatformOnlineId() {
     return platform_online_id;
@@ -132,7 +129,7 @@ class Title extends require("./Packet") {
       type: this.getType(),
       text: this.getText(),
       fade_in_time: this.getFadeinTime(),
-      stay_time: this.getStaytime(),
+      stay_time: this.Returnstaytime(),
       fade_out_time: this.getFadeout(),
       xuid: this.getXuid(),
       platform_online_id: this.getPlatformOnlineId(),
