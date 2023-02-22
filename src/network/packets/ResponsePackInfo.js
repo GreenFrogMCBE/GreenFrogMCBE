@@ -17,15 +17,12 @@ let behavior_packs = [];
 let texture_packs = [];
 
 class ResponsePackInfo extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
   name() {
     return "resource_packs_info";
   }
 
   /**
-   * Updates the value of the must_accept
+   * Sets the value of the must_accept
    * @param {boolean} must_accept1 - Is the response pack forced?
    */
   setMustAccept(must_accept1) {
@@ -33,15 +30,15 @@ class ResponsePackInfo extends require("./Packet") {
   }
 
   /**
-   * It updates the value of has_scripts
-   * @param has_scripts1 - Does the RP has scripts?
+   * Sets the value of has_scripts
+   * @param has_scripts1 - Does the RP have scripts?
    */
   setHasScripts(has_scripts1) {
     has_scripts = has_scripts1;
   }
 
   /**
-   * It updates the behavior_packs
+   * Sets the behavior_packs
    * @param behavior_packs1 - The behavior packs.
    */
   setBehaviorPacks(behavior_packs1) {
@@ -49,7 +46,7 @@ class ResponsePackInfo extends require("./Packet") {
   }
 
   /**
-   * It sets the texture_packs
+   * Sets he texture_packs
    * @param texture_packs1 - The texture packs.
    */
   setTexturePacks(texture_packs1) {
