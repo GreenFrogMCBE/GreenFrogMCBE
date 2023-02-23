@@ -310,8 +310,8 @@ class ResourcePackClientResponse extends Handler {
           setInterval(() => {
             if (client.offline) return;
             const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-            networkchunkpublisher.setCords(-1, 0, 0);
-            networkchunkpublisher.setRadius(64);
+            networkchunkpublisher.setCords(0, 100, 0);
+            networkchunkpublisher.setRadius(80);
             networkchunkpublisher.setSavedChunks([]);
             networkchunkpublisher.send(client);
           }, 50);
