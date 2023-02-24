@@ -120,11 +120,31 @@ class ResourcePackClientResponse extends Handler {
             lang.playerstatuses.joined.replace("%player%", client.username)
           );
 
+          const get = (packetName) => {
+            return require(__dirname + `\\..\\..\\..\\..\\data\\${packetName}.json`);
+          }
+
+          client.queue('start_game', get('start_game'))
+          client.queue('set_time', get('set_time'))
+          client.queue('set_time', get('set_time'))
+          client.queue('update_abilities', get('update_abilities'))
+          client.queue('biome_definition_list', get('biome_definition_list'))
+          client.queue('available_entity_identifiers', get('available_entity_identifiers'))
+          client.queue('update_attributes', get('update_attributes'))
+          client.queue('creative_content', get('creative_content'))
+
+          client.queue('player_hotbar', { "selected_slot": 0, "window_id": "inventory", "select_slot": true })
+
+          client.queue('entity_event', { "runtime_entity_id": "1", "event_id": "player_check_treasure_hunter_achievement", "data": 0 })
+          client.queue('set_entity_data', { "runtime_entity_id": "1", "metadata": [{ "key": "flags", "type": "long", "value": { "onfire": false, "sneaking": false, "riding": false, "sprinting": false, "action": false, "invisible": false, "tempted": false, "inlove": false, "saddled": false, "powered": false, "ignited": false, "baby": false, "converting": false, "critical": false, "can_show_nametag": false, "always_show_nametag": false, "no_ai": false, "silent": false, "wallclimbing": false, "can_climb": true, "swimmer": false, "can_fly": false, "walker": false, "resting": false, "sitting": false, "angry": false, "interested": false, "charged": false, "tamed": false, "orphaned": false, "leashed": false, "sheared": false, "gliding": false, "elder": false, "moving": false, "breathing": true, "chested": false, "stackable": false, "showbase": false, "rearing": false, "vibrating": false, "idling": false, "evoker_spell": false, "charge_attack": false, "wasd_controlled": false, "can_power_jump": false, "linger": false, "has_collision": true, "affected_by_gravity": true, "fire_immune": false, "dancing": false, "enchanted": false, "show_trident_rope": false, "container_private": false, "transforming": false, "spin_attack": false, "swimming": false, "bribed": false, "pregnant": false, "laying_egg": false, "rider_can_pick": false, "transition_sitting": false, "eating": false, "laying_down": false } }], "tick": "0", "properties": { "ints": [], "floats": [] }, "links": [] })
+
+          client.queue('chunk_radius_update', { chunk_radius: 32 })
+
           const playerlist = new PlayerList();
           playerlist.setUsername(client.username);
           playerlist.send(client);
 
-          const startgame = new StartGame();
+          /*const startgame = new StartGame();
           startgame.setEntityId(0);
           startgame.setRunTimeEntityId(0);
           startgame.setGamemode(config.gamemode);
@@ -252,9 +272,20 @@ class ResourcePackClientResponse extends Handler {
                 new CommandDeop().getPlayerDescription()
               );
             }
+          }*/
+
+          client.write('network_chunk_publisher_update', { "coordinates": { "x": -65, "y": 51, "z": -29 }, "radius": 160, "saved_chunks": [] })
+
+          const chunkData = JSON.parse(fs.readFileSync(`./chunks.json`))
+          for (const chunkPacket of chunkData) {
+            client.queue("level_chunk", chunkPacket)
           }
 
-          const chunk = new LevelChunk();
+          setInterval(() => {
+            client.write('network_chunk_publisher_update', { "coordinates": { "x": -65, "y": 51, "z": -29 }, "radius": 160, "saved_chunks": [] })
+          }, 4500)
+
+          /*const chunk = new LevelChunk();
           chunk.setX(0);
           chunk.setZ(0);
           chunk.setSubChunkCount(undefined);
@@ -314,7 +345,7 @@ class ResourcePackClientResponse extends Handler {
             networkchunkpublisher.setRadius(64);
             networkchunkpublisher.setSavedChunks([]);
             networkchunkpublisher.send(client);
-          }, 50);
+          }, 50);*/
 
           Logger.log(
             lang.playerstatuses.spawned.replace("%player%", client.username)

@@ -105,9 +105,6 @@ module.exports = {
       case "text":
         new Text().handle(client, packet);
         break;
-      case "subchunk_request":
-        new SubChunkRequest().handle(client, packet);
-        break;
       case "command_request":
         new CommandRequest().handle(client, packet);
         break;
