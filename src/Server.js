@@ -152,7 +152,7 @@ module.exports = {
    * It logs a warning if the config.debug or config.unstable is true.
    */
   async initDebug() {
-    if (config.unstable) Logger.log(lang.errors.unstableWarning, "warning");
+    if (config.unstable) Logger.log(lang.devdebug.unstableWarning, "warning");
     if (process.env.DEBUG === "minecraft-protocol" || config.debug)
       Logger.log(lang.errors.debugWarning, "warning");
   },

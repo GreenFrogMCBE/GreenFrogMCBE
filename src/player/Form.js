@@ -28,7 +28,7 @@ class Form {
    * @param action - The action to add to the list of actions.
    */
   addAction(action) {
-    this.actions.push(action);
+    if (this.type === FormTypes.CUSTOMFORM) this.actions.push(action);
   }
 
   /**

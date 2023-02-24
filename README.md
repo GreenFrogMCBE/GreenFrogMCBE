@@ -92,6 +92,7 @@ EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) (@Zwuiix-cmd) - Used as an e
 🌓Enzøツ#6666 - Helping me with chunk support
 @</hakaN#0746 - For translating this software into Turkish
 @BasToTheMax - For translating this software into Dutch (still in progress) and was the first person who starred this repo
+@faaxz - For making the /list code & packet API look better, also for reporting form bugs
 ```
 
 ## Language system
