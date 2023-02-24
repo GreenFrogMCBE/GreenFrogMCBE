@@ -247,8 +247,7 @@ class ResourcePackClientResponse extends Handler {
           networkchunkpublisher.setSavedChunks([]);
           networkchunkpublisher.send(client);
 
-
-          const chunkData = JSON.parse(fs.readFileSync(`./chunks.json`))
+          const chunkData = JSON.parse(fs.readFileSync(__dirname + `\\..\\..\\..\\..\\world\\chunks.json`))
 
           for (const chunkPacket of chunkData) {
             client.queue("level_chunk", chunkPacket)

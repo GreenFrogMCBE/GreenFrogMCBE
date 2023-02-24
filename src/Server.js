@@ -163,6 +163,8 @@ module.exports = {
       }
     });
 
+    if (!fs.existsSync("world")) fs.mkdirSync("world");
+
     Logger.log(lang.server.loadingServer);
 
     process.on("uncaughtException", (err) => this.attemptToDie(err));
