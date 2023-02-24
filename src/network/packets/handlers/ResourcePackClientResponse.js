@@ -125,9 +125,6 @@ class ResourcePackClientResponse extends Handler {
           }
 
           client.queue('start_game', get('start_game'))
-          client.queue('set_time', get('set_time'))
-          client.queue('set_time', get('set_time'))
-          client.queue('update_abilities', get('update_abilities'))
           client.queue('biome_definition_list', get('biome_definition_list'))
           client.queue('available_entity_identifiers', get('available_entity_identifiers'))
           client.queue('update_attributes', get('update_attributes'))

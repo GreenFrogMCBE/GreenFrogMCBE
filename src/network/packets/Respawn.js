@@ -10,6 +10,11 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+
+// !!! This packet is no longer used
+// !!! This packet is no longer used
+// !!! This packet is no longer used
+
 let pos = {
   x: 0,
   y: 0,
