@@ -155,13 +155,12 @@ module.exports = {
   async start() {
     await this.initJson();
 
-    fs.access("ops.yml", fs.constants.F_OK, (err) => {
-      if (err) {
-        fs.writeFile("ops.yml", "", (err) => {
-          if (err) throw err;
-        });
-      }
-    });
+    if (!fs.existsSync("ops.yml")) {
+      fs.writeFile("ops.yml", "", (err) => {
+        if (err) throw err;
+      });
+    }
+
 
     if (!fs.existsSync("world")) fs.mkdirSync("world");
 
