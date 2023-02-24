@@ -127,40 +127,21 @@ class ResourcePackClientResponse extends Handler {
           client.queue('start_game', get('start_game'))
           client.queue('biome_definition_list', get('biome_definition_list'))
           client.queue('available_entity_identifiers', get('available_entity_identifiers'))
-          client.queue('update_attributes', get('update_attributes'))
-          client.queue('creative_content', get('creative_content'))
 
-          client.queue('player_hotbar', { "selected_slot": 0, "window_id": "inventory", "select_slot": true })
-
-          client.queue('entity_event', { "runtime_entity_id": "1", "event_id": "player_check_treasure_hunter_achievement", "data": 0 })
-          client.queue('set_entity_data', { "runtime_entity_id": "1", "metadata": [{ "key": "flags", "type": "long", "value": { "onfire": false, "sneaking": false, "riding": false, "sprinting": false, "action": false, "invisible": false, "tempted": false, "inlove": false, "saddled": false, "powered": false, "ignited": false, "baby": false, "converting": false, "critical": false, "can_show_nametag": false, "always_show_nametag": false, "no_ai": false, "silent": false, "wallclimbing": false, "can_climb": true, "swimmer": false, "can_fly": false, "walker": false, "resting": false, "sitting": false, "angry": false, "interested": false, "charged": false, "tamed": false, "orphaned": false, "leashed": false, "sheared": false, "gliding": false, "elder": false, "moving": false, "breathing": true, "chested": false, "stackable": false, "showbase": false, "rearing": false, "vibrating": false, "idling": false, "evoker_spell": false, "charge_attack": false, "wasd_controlled": false, "can_power_jump": false, "linger": false, "has_collision": true, "affected_by_gravity": true, "fire_immune": false, "dancing": false, "enchanted": false, "show_trident_rope": false, "container_private": false, "transforming": false, "spin_attack": false, "swimming": false, "bribed": false, "pregnant": false, "laying_egg": false, "rider_can_pick": false, "transition_sitting": false, "eating": false, "laying_down": false } }], "tick": "0", "properties": { "ints": [], "floats": [] }, "links": [] })
-
-          client.queue('chunk_radius_update', { chunk_radius: 32 })
 
           const playerlist = new PlayerList();
           playerlist.setUsername(client.username);
           playerlist.send(client);
 
-          /*const startgame = new StartGame();
-          startgame.setEntityId(0);
-          startgame.setRunTimeEntityId(0);
-          startgame.setGamemode(config.gamemode);
-          startgame.setPlayerPosition(0, 100, 0);
-          startgame.setPlayerRotation(0, 0);
-          startgame.setSeed(-1);
-          startgame.setBiomeType(0);
-          startgame.setBiomeName(Biome.PLAINS);
-          startgame.setDimension(Dimension.OVERWORLD);
-          startgame.setGenerator(Generator.FLAT);
-          startgame.setWorldGamemode(config.worldGamemode);
-          startgame.setDifficulty(Difficulty.NORMAL);
-          startgame.setSpawnPosition(0, 100, 0);
-          startgame.setPlayerPermissionLevel(client.permlevel);
-          startgame.send(client);
-
           const commandsenabled = new SetCommandsEnabled();
           commandsenabled.setEnabled(true);
           commandsenabled.send(client);
+
+          const creativecontent = new CreativeContent();
+          creativecontent.setItems(
+            require("../res/creativeContent.json").content
+          );
+          creativecontent.send(client);
 
           const biomedeflist = new BiomeDefinitionList();
           biomedeflist.setNBT(require("../res/biomes.json"));
@@ -169,18 +150,6 @@ class ResourcePackClientResponse extends Handler {
           const availableentityids = new AvailableEntityIdentifiers();
           availableentityids.setNBT(require("../res/entities.json"));
           availableentityids.send(client);
-
-          const creativecontent = new CreativeContent();
-          creativecontent.setItems(
-            require("../res/creativeContent.json").content
-          );
-          creativecontent.send(client);
-
-          const respawn = new Respawn();
-          respawn.setPosition(0, 100, 0);
-          respawn.setState(0);
-          respawn.setRuntimeEntityId(0);
-          respawn.send(client);
 
           const clientcachestatus = new ClientCacheStatus();
           clientcachestatus.setEnabled(true);
@@ -269,32 +238,30 @@ class ResourcePackClientResponse extends Handler {
                 new CommandDeop().getPlayerDescription()
               );
             }
-          }*/
+          }
 
-          client.write('network_chunk_publisher_update', { "coordinates": { "x": -65, "y": 51, "z": -29 }, "radius": 160, "saved_chunks": [] })
+
+          const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+          networkchunkpublisher.setCords(-65, 51, -29);
+          networkchunkpublisher.setRadius(160);
+          networkchunkpublisher.setSavedChunks([]);
+          networkchunkpublisher.send(client);
+
 
           const chunkData = JSON.parse(fs.readFileSync(`./chunks.json`))
+
           for (const chunkPacket of chunkData) {
             client.queue("level_chunk", chunkPacket)
           }
 
           setInterval(() => {
-            client.write('network_chunk_publisher_update', { "coordinates": { "x": -65, "y": 51, "z": -29 }, "radius": 160, "saved_chunks": [] })
+            const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+            networkchunkpublisher.setCords(-65, 51, -29);
+            networkchunkpublisher.setRadius(160);
+            networkchunkpublisher.setSavedChunks([]);
+            networkchunkpublisher.send(client);
           }, 4500)
 
-          /*const chunk = new LevelChunk();
-          chunk.setX(0);
-          chunk.setZ(0);
-          chunk.setSubChunkCount(undefined);
-          chunk.setHighestSubchunkCount(undefined);
-          chunk.setBlob(undefined);
-          chunk.setCacheEnabled(false);
-          chunk.setPayload([
-            1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 1, 88, 255, 255,
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
-            255, 255, 0,
-          ]);
-          chunk.send(client);
 
           setTimeout(() => {
             for (let i = 0; i < PlayerInfo.players; i++) {
@@ -310,39 +277,6 @@ class ResourcePackClientResponse extends Handler {
             }
           }, 1000);
 
-          const block = new UpdateBlock();
-          block.setX(-1);
-          block.setY(98);
-          block.setZ(0);
-          block.setNeighbors(true);
-          block.setNetwork(true);
-          block.setFlagsValue(3);
-          block.setBlockRuntimeId(0);
-          block.send(client);
-          if (config.renderChunks) {
-            for (let x = 0; x < 10; x++) {
-              for (let z = 0; z < 10; z++) {
-                const block = new UpdateBlock();
-                block.setX(x);
-                block.setY(98);
-                block.setZ(z);
-                block.setNeighbors(true);
-                block.setNetwork(true);
-                block.setFlagsValue(3);
-                block.setBlockRuntimeId(Math.floor(Math.random() * 100));
-                block.send(client);
-              }
-            }
-          }
-
-          setInterval(() => {
-            if (client.offline) return;
-            const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-            networkchunkpublisher.setCords(-1, 0, 0);
-            networkchunkpublisher.setRadius(64);
-            networkchunkpublisher.setSavedChunks([]);
-            networkchunkpublisher.send(client);
-          }, 50);*/
 
           Logger.log(
             lang.playerstatuses.spawned.replace("%player%", client.username)
