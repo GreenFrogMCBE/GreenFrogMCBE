@@ -12,8 +12,7 @@
  */
 
 // !!! This packet is no longer used
-// !!! This packet is no longer used
-// !!! This packet is no longer used
+// (this file will not be deleted, even if its not used anymore, so you can use this packet to respawn the packet using packet API in your plugin)
 
 let pos = {
   x: 0,
@@ -84,7 +83,7 @@ class Respawn extends require("./Packet") {
   }
 
   /***
-   * Write packet to client
+   * Queue packet to client
    * @param {Client} client
    */
   send(client) {
