@@ -266,7 +266,7 @@ class ResourcePackClientResponse extends Handler {
               } catch (e) {
                 throw new Error("Invalid chunk data!")
               }
-              client.queue("level_chunk", chunkPacket)
+              levelchunk.send(client)
             }
 
             setInterval(() => {
