@@ -214,7 +214,7 @@ class UpdateBlock extends require("./Packet") {
    * @param {Number} block_runtime_id - The block ID of the block you want to place.
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       position: {
         x: this.getX(),
         y: this.getY(),

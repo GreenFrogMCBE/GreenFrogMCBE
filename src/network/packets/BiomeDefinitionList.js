@@ -41,7 +41,7 @@ class BiomeDefinitionList extends require("./Packet") {
    * @param {Object} client
    */
   send(client) {
-    client.write(this.name(), this.getValue());
+    client.queue(this.name(), this.getValue());
   }
 }
 

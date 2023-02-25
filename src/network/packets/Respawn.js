@@ -88,7 +88,7 @@ class Respawn extends require("./Packet") {
    * @param {Client} client
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       position: this.getPosition(),
       state: this.getState(),
       runtime_entity_id: this.getRuntimeEntityId(),

@@ -58,7 +58,7 @@ class ToastRequest extends require("./Packet") {
    * @param client - The client that the packet is being sent to.
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       title: this.getTitle(),
       message: this.getMessage(),
     });

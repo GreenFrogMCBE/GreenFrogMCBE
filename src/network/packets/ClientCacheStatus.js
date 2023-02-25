@@ -37,7 +37,7 @@ class ClientCacheStatus extends require("./Packet") {
   }
 
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       enabled: this.getEnabled(client),
     });
   }

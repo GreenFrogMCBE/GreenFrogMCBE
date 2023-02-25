@@ -125,8 +125,8 @@ class ResourcePackClientResponse extends Handler {
           }
 
           client.queue('start_game', get('start_game'))
-            client.queue('biome_definition_list', get('biome_definition_list'))
-            client.queue('available_entity_identifiers', get('available_entity_identifiers'))
+          client.queue('biome_definition_list', get('biome_definition_list'))
+          client.queue('available_entity_identifiers', get('available_entity_identifiers'))
 
 
           const playerlist = new PlayerList();
@@ -143,9 +143,9 @@ class ResourcePackClientResponse extends Handler {
           );
           creativecontent.send(client);
 
-          const biomedeflist = new BiomeDefinitionList();
-          biomedeflist.setValue(require("../res/biomes.json"));
-          biomedeflist.send(client);
+          //const biomedeflist = new BiomeDefinitionList();
+          //biomedeflist.setValue(require("../res/biomes.json"));
+          //biomedeflist.send(client);
 
           //const availableentityids = new AvailableEntityIdentifiers();
           //availableentityids.setValue(require("../res/entities.json"));

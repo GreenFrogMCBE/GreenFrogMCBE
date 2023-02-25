@@ -75,7 +75,7 @@ class Transfer extends require("./Packet") {
    */
   send(client) {
     this.validate(this.getServerAddress(), this.getPort());
-    client.write(this.name(), {
+    client.queue(this.name(), {
       server_address: this.getServerAddress(),
       port: parseInt(this.getPort()),
     });

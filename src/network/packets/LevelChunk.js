@@ -143,7 +143,7 @@ class LevelChunk extends require("./Packet") {
    * @param {Client} client
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       x: this.getX(),
       z: this.getZ(),
       sub_chunk_count: this.getSubChunkCount(),

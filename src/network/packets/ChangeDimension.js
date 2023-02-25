@@ -81,7 +81,7 @@ class ChangeDimension extends require("./Packet") {
   }
 
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       dimension: this.getDimension(),
       position: this.getPosition(),
       respawn: this.getRespawn(),

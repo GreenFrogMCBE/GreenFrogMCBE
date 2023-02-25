@@ -37,7 +37,7 @@ class CreativeContent extends require("./Packet") {
   }
 
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       items: items,
     });
   }

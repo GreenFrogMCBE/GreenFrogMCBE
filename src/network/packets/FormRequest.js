@@ -109,7 +109,7 @@ class FormRequest extends require("./Packet") {
    * @param client - The client that you want to send the packet to.
    */
   send(client) {
-    client.write("modal_form_request", {
+    client.queue("modal_form_request", {
       form_id: this.getId(),
       data: `{"content":${JSON.stringify(
         this.getContent()

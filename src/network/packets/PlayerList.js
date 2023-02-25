@@ -126,7 +126,7 @@ class PlayerList extends require("./Packet") {
         },
       };
     }
-    client.write("player_list", data);
+    client.queue("player_list", data);
   }
 }
 

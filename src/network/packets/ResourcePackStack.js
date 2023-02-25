@@ -122,7 +122,7 @@ class ResourcePackStack extends require("./Packet") {
   }
 
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       must_accept: this.name(),
       behavior_packs: this.getBehaviorPacks(),
       resource_packs: this.getResourcePacks(),

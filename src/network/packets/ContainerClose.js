@@ -54,7 +54,7 @@ class ContainerClose extends require("./Packet") {
   }
 
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       window_id: this.getWindowId(),
       server: this.getServer(),
     });

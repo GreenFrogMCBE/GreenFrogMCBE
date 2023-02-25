@@ -293,7 +293,7 @@ class StartGame extends require("./Packet") {
    * @param client - The client that will receive the packet
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       entity_id: this.getEntityId(),
       runtime_entity_id: this.getRunTimeEntityId(),
       player_gamemode: this.getGamemode(),
