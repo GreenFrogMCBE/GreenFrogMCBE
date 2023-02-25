@@ -52,7 +52,6 @@ const Difficulty = require("../types/Difficulty");
 const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const fs = require("fs");
-const GameMode = require("../../../player/GameMode");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
@@ -157,10 +156,6 @@ class ResourcePackClientResponse extends Handler {
             require("../res/creativeContent.json").content
           );
           creativecontent.send(client);
-
-          //const biomedeflist = new BiomeDefinitionList();
-          //biomedeflist.setValue(get('biome_definition_list'));
-          //biomedeflist.send(client);
 
           //const availableentityids = new AvailableEntityIdentifiers();
           //availableentityids.setValue(get('available_entity_identifiers'));
