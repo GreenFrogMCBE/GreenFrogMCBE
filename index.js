@@ -29,7 +29,7 @@ port: 19132
 
 motd: '§6GreenFrog server'
 maxPlayers: 20
-version: '1.19.62'
+version: '1.19.63'
 offlineMode: false
 lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 
