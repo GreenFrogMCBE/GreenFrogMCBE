@@ -51,6 +51,12 @@ crashCode: -1
 exitCode: 0
 logUnhandledPackets: false
 defaultPermissionLevel: 2
+# Permission levels are: 
+# 4 - operator
+# 3 - unknown
+# 2 - member
+# 1 - unknown
+# 0 - visitor
 multiProtocol: false # Supports 1.19.20+. Some features may be broken
 
 # WORLD SETTINGS

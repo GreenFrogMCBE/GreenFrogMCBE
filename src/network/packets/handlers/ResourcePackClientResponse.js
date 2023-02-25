@@ -48,6 +48,7 @@ const PlayStatuses = require("../types/PlayStatuses");
 const Difficulty = require("../types/Difficulty");
 const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
+const LevelChunk = require("../LevelChunk");
 const fs = require("fs");
 
 class ResourcePackClientResponse extends Handler {
@@ -131,6 +132,7 @@ class ResourcePackClientResponse extends Handler {
           startgame.setWorldGamemode(config.worldGamemode)
           startgame.setDifficulty(Difficulty.NORMAL)
           startgame.setSpawnPosition(100000, 0, 100000)
+          startgame.setPlayerPermissionLevel(client.permlevel)
           startgame.send(client)
 
           const biomedeflist = new BiomeDefinitionList()
@@ -244,26 +246,38 @@ class ResourcePackClientResponse extends Handler {
             }
           }
 
-          const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-          networkchunkpublisher.setCords(-65, 51, -29);
-          networkchunkpublisher.setRadius(160);
-          networkchunkpublisher.setSavedChunks([]);
-          networkchunkpublisher.send(client);
-
-          const chunkData = JSON.parse(fs.readFileSync(__dirname + `\\..\\..\\..\\..\\world\\chunks.json`))
-
-          for (const chunkPacket of chunkData) {
-            client.queue("level_chunk", chunkPacket)
-          }
-
-          setInterval(() => {
-            if (client.offline) return
+          if (config.renderChunks) {
             const networkchunkpublisher = new NetworkChunkPublisherUpdate();
             networkchunkpublisher.setCords(-65, 51, -29);
             networkchunkpublisher.setRadius(160);
             networkchunkpublisher.setSavedChunks([]);
             networkchunkpublisher.send(client);
-          }, 4500)
+
+            const chunkData = JSON.parse(fs.readFileSync(__dirname + `\\..\\..\\..\\..\\world\\chunks.json`))
+
+            for (const chunkPacket of chunkData) {
+              const levelchunk = new LevelChunk()
+              levelchunk.setX(chunkPacket.x)
+              levelchunk.setZ(chunkPacket.z)
+              levelchunk.setSubChunkCount(chunkPacket.sub_chunk_count)
+              levelchunk.setCacheEnabled(chunkPacket.cache_enabled)
+              try {
+                levelchunk.setPayload(chunkPacket.payload.data)
+              } catch (e) {
+                throw new Error("Invalid chunk data!")
+              }
+              client.queue("level_chunk", chunkPacket)
+            }
+
+            setInterval(() => {
+              if (client.offline) return
+              const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+              networkchunkpublisher.setCords(-65, 51, -29);
+              networkchunkpublisher.setRadius(160);
+              networkchunkpublisher.setSavedChunks([]);
+              networkchunkpublisher.send(client);
+            }, 4500)
+          }
 
 
           setTimeout(() => {
