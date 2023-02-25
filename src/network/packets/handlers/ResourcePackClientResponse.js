@@ -155,10 +155,6 @@ class ResourcePackClientResponse extends Handler {
           );
           creativecontent.send(client);
 
-          //const availableentityids = new AvailableEntityIdentifiers();
-          //availableentityids.setValue(get('available_entity_identifiers'));
-          //availableentityids.send(client);
-
           const clientcachestatus = new ClientCacheStatus();
           clientcachestatus.setEnabled(true);
           clientcachestatus.send(client);
