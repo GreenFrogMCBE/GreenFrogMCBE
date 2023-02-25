@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let value = {};
+let value = null;
 
 class BiomeDefinitionList extends require("./Packet") {
   /**
@@ -41,7 +41,7 @@ class BiomeDefinitionList extends require("./Packet") {
    * @param {Object} client
    */
   send(client) {
-    client.write(this.name(), this.getValue());
+    client.queue(this.name(), this.getValue());
   }
 }
 

@@ -12,12 +12,9 @@
  */
 const Handler = require("./Handler");
 const PlayerInfo = require("../../../player/PlayerInfo");
-const Respawn = require("../../../network/packets/Respawn");
 const StartGame = require("../../../network/packets/StartGame");
 const PlayerList = require("../../../network/packets/PlayerList");
-const LevelChunk = require("../../../network/packets/LevelChunk");
 const PlayStatus = require("../../../network/packets/PlayStatus");
-const UpdateBlock = require("../../../network/packets/UpdateBlock");
 const PlayerSpawnEvent = require("../../../plugin/events/PlayerSpawnEvent");
 const CreativeContent = require("../../../network/packets/CreativeContent");
 const PlayerHasAllPacks = require("../../../plugin/events/PlayerHasAllPacks");
@@ -120,10 +117,6 @@ class ResourcePackClientResponse extends Handler {
             lang.playerstatuses.joined.replace("%player%", client.username)
           );
 
-          const get = (packetName) => {
-            return require(__dirname + `\\..\\..\\..\\..\\data\\${packetName}.json`);
-          }
-
           const startgame = new StartGame()
           startgame.setEntityId("1")
           startgame.setRunTimeEntityId("1")
@@ -140,8 +133,13 @@ class ResourcePackClientResponse extends Handler {
           startgame.setSpawnPosition(100000, 0, 100000)
           startgame.send(client)
 
-          client.queue('biome_definition_list', get('biome_definition_list'))
-          client.queue('available_entity_identifiers', get('available_entity_identifiers'))
+          const biomedeflist = new BiomeDefinitionList()
+          biomedeflist.setValue({ nbt: require('../res/biomes.json').nbt })
+          biomedeflist.send(client)
+
+          const availableentityids = new AvailableEntityIdentifiers()
+          availableentityids.setValue({ nbt: require('../res/entities.json').nbt })
+          availableentityids.send(client)
 
           const playerlist = new PlayerList();
           playerlist.setUsername(client.username);
@@ -153,7 +151,7 @@ class ResourcePackClientResponse extends Handler {
 
           const creativecontent = new CreativeContent();
           creativecontent.setItems(
-            require("../res/creativeContent.json").content
+            require("../res/creativeContent.json").items
           );
           creativecontent.send(client);
 
