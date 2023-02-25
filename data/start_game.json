@@ -65,7 +65,7 @@
     "experiments_previously_used": false,
     "bonus_chest": false,
     "map_enabled": false,
-    "permission_level": "operator",
+    "permission_level": this.getPermissionLevel(),
     "server_chunk_tick_range": 83886080,
     "has_locked_behavior_pack": false,
     "has_locked_resource_pack": false,

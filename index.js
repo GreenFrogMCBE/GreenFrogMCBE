@@ -27,7 +27,7 @@ port: 19132
 #
 # This section contains motd, and other server info settings
 
-motd: '§6GreenFrog server'
+motd: '§aDedicated GreenFrog server'
 maxPlayers: 20
 version: '1.19.63'
 offlineMode: false

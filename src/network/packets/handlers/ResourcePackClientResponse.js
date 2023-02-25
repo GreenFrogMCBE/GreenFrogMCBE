@@ -52,6 +52,7 @@ const Difficulty = require("../types/Difficulty");
 const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const fs = require("fs");
+const GameMode = require("../../../player/GameMode");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
@@ -124,10 +125,24 @@ class ResourcePackClientResponse extends Handler {
             return require(__dirname + `\\..\\..\\..\\..\\data\\${packetName}.json`);
           }
 
-          client.queue('start_game', get('start_game'))
+          const startgame = new StartGame()
+          startgame.setEntityId("1")
+          startgame.setRunTimeEntityId("1")
+          startgame.setGamemode(config.gamemode)
+          startgame.setPlayerPosition(-57.5, 54.0, -27.5)
+          startgame.setPlayerRotation(0, -90)
+          startgame.setSeed(0, 0)
+          startgame.setBiomeType(0)
+          startgame.setBiomeName(Biome.PLAINS)
+          startgame.setDimension(Dimension.OVERWORLD)
+          startgame.setGenerator(Generator.FLAT)
+          startgame.setWorldGamemode(config.worldGamemode)
+          startgame.setDifficulty(Difficulty.NORMAL)
+          startgame.setSpawnPosition(100000, 0, 100000)
+          startgame.send(client)
+
           client.queue('biome_definition_list', get('biome_definition_list'))
           client.queue('available_entity_identifiers', get('available_entity_identifiers'))
-
 
           const playerlist = new PlayerList();
           playerlist.setUsername(client.username);
@@ -144,11 +159,11 @@ class ResourcePackClientResponse extends Handler {
           creativecontent.send(client);
 
           //const biomedeflist = new BiomeDefinitionList();
-          //biomedeflist.setValue(require("../res/biomes.json"));
+          //biomedeflist.setValue(get('biome_definition_list'));
           //biomedeflist.send(client);
 
           //const availableentityids = new AvailableEntityIdentifiers();
-          //availableentityids.setValue(require("../res/entities.json"));
+          //availableentityids.setValue(get('available_entity_identifiers'));
           //availableentityids.send(client);
 
           const clientcachestatus = new ClientCacheStatus();
@@ -253,6 +268,7 @@ class ResourcePackClientResponse extends Handler {
           }
 
           setInterval(() => {
+            if (client.offline) return
             const networkchunkpublisher = new NetworkChunkPublisherUpdate();
             networkchunkpublisher.setCords(-65, 51, -29);
             networkchunkpublisher.setRadius(160);
