@@ -13,6 +13,8 @@ Server software for Minecraft: Bedrock edition, written in NodeJS
 
 Our discord: https://discord.gg/UFqrnAbqjP
 
+#### Warning: This software is still in beta!
+
 #### Development status > Under active development
 
 #### Help to translate > https://poeditor.com/join/project/fwIZCyBjPw
