@@ -152,6 +152,7 @@
     "broadcastmessage": "(broadcast) %msg%"
   },
   "other": {
-    "unknown": "unknown"
+    "unknown": "unknown",
+    "server": "Server"
   }
 }

@@ -86,6 +86,7 @@ consoleCommandOp: true
 consoleCommandDeop: true
 consoleCommandHelp: true
 consoleCommandList: true
+consoleCommandMe: true
 playerCommandVersion: true
 playerCommandPlugins: true
 playerCommandStop: true
