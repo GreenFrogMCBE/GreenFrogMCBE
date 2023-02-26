@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { lang, config } = require("../../server/ServerInfo");
+const { lang, config } = require("../ServerInfo");
 
 class CommandShutdown extends require("./Command") {
   name() {

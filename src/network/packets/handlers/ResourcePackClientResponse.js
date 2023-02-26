@@ -28,9 +28,9 @@ const NetworkChunkPublisherUpdate = require("../../../network/packets/NetworkChu
 const PlayerResourcePacksCompletedEvent = require("../../../plugin/events/PlayerResourcePacksCompletedEvent");
 const PlayerHasNoResourcePacksInstalledEvent = require("../../../plugin/events/PlayerHasNoResourcePacksInstalledEvent");
 const PlayerListTypes = require("../../../network/packets/types/PlayerList");
-const CommandShutdown = require("../../../server/commands/CommandShutdown");
 const CommandVersion = require("../../../server/commands/CommandVersion");
 const Dimension = require("../../../network/packets/types/Dimension");
+const CommandStop = require("../../../server/commands/CommandStop");
 const CommandKick = require("../../../server/commands/CommandKick");
 const CommandList = require("../../../server/commands/CommandList");
 const CommandDeop = require("../../../server/commands/CommandDeop");
@@ -197,8 +197,8 @@ class ResourcePackClientResponse extends Handler {
             if (config.playerCommandStop) {
               commandmanager.addCommand(
                 client,
-                new CommandShutdown().name().toLowerCase(),
-                new CommandShutdown().getPlayerDescription()
+                new CommandStop().name().toLowerCase(),
+                new CommandStop().getPlayerDescription()
               );
             }
             if (config.playerCommandSay) {

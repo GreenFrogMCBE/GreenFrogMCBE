@@ -22,8 +22,8 @@ const CommandList = require("../../server/commands/CommandList");
 const CommandTime = require("../../server/commands/CommandTime");
 const CommandKick = require("../../server/commands/CommandKick");
 const CommandDeop = require("../../server/commands/CommandDeop");
+const CommandStop = require("../../server/commands/CommandStop");
 const CommandVersion = require("../../server/commands/CommandVersion");
-const CommandShutdown = require("../../server/commands/CommandShutdown");
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 
 const fs = require("fs");
@@ -73,7 +73,7 @@ class PlayerCommandExecuteEvent extends Event {
       const cmdManager = new CommandManager();
       const cmdVer = new CommandVersion();
       const cmdPl = new CommandPl();
-      const cmdStop = new CommandShutdown();
+      const cmdStop = new CommandStop();
       const cmdSay = new CommandSay();
       const cmdOp = new CommandOp();
       const cmdKick = new CommandKick();

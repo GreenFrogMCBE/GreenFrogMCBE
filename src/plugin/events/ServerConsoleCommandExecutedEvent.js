@@ -12,8 +12,8 @@
  */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-unused-vars */
-const Shutdown = require("../../server/commands/CommandShutdown");
 const Version = require("../../server/commands/CommandVersion");
+const Stop = require("../../server/commands/CommandStop");
 const Kick = require("../../server/commands/CommandKick");
 const Help = require("../../server/commands/CommandHelp");
 const Time = require("../../server/commands/CommandTime");
@@ -65,7 +65,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
   postExecute(cmd) {
     if (!this.isCancelled() || !config.disable) {
       const commands = {
-        shutdown: new Shutdown(),
+        stop: new Stop(),
         kick: new Kick(),
         version: new Version(),
         help: new Help(),
@@ -133,9 +133,8 @@ class ServerConsoleCommandExecutedEvent extends Event {
         case lang.commands.listc:
           commands.list.execute();
           break;
-        case lang.commands.shutdown.toLowerCase():
         case lang.commands.stop.toLowerCase():
-          commands.shutdown.execute();
+          commands.stop.execute();
           break;
         case lang.commands.op.toLowerCase():
           commands.op.execute(command.split(" ")[1]);
