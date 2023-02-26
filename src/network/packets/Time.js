@@ -54,7 +54,7 @@ class Time extends require("./Packet") {
    */
   send(client) {
     this.validate(time);
-    client.write(this.name(), {
+    client.queue(this.name(), {
       time: this.getTime(),
     });
   }

@@ -132,7 +132,7 @@ class Text extends require("./Packet") {
    * @param {string} [platform_chat_id] - This is the ID of the player you want to send the message to.
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       type: this.getType(),
       needs_translation: this.getNeedsTranslation(),
       source_name: this.getSourceName(),

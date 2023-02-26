@@ -16,7 +16,7 @@ const ChunkRadiusUpdate = require("../ChunkRadiusUpdate");
 class RequestChunkRadius extends Handler {
   handle(client) {
     const chunkradiusupdate = new ChunkRadiusUpdate();
-    chunkradiusupdate.setChunkRadius(18);
+    chunkradiusupdate.setChunkRadius(32);
     chunkradiusupdate.send(client);
   }
 }

@@ -80,7 +80,7 @@ class NetworkChunkPublisherUpdate extends require("./Packet") {
 
   send(client) {
     this.validate(client);
-    client.write(this.name(), {
+    client.queue(this.name(), {
       coordinates: this.getCords(),
       radius: this.getRadius(),
       saved_chunks: this.getSavedChunks(),

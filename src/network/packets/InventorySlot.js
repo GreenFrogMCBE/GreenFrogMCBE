@@ -71,7 +71,7 @@ class InventorySlot extends require("./Packet") {
   }
 
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       window_id: this.getWindowId(),
       slot: this.getSlot(),
       item: this.getItemData(),

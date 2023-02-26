@@ -25,10 +25,8 @@ const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
 const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponse");
 const ServerInternalServerErrorEvent = require("./plugin/events/ServerInternalServerErrorEvent");
-const RequestChunkRadius = require("./network/packets/handlers/RequestChunkRadius");
 const ModalFormResponse = require("./network/packets/handlers/ModalFormResponse");
 const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
-const SubChunkRequest = require("./network/packets/handlers/SubChunkRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
@@ -99,14 +97,8 @@ module.exports = {
       case "container_close":
         new ClientContainerClose().handle(client);
         break;
-      case "request_chunk_radius":
-        new RequestChunkRadius().handle(client);
-        break;
       case "text":
         new Text().handle(client, packet);
-        break;
-      case "subchunk_request":
-        new SubChunkRequest().handle(client, packet);
         break;
       case "command_request":
         new CommandRequest().handle(client, packet);
@@ -163,13 +155,14 @@ module.exports = {
   async start() {
     await this.initJson();
 
-    fs.access("ops.yml", fs.constants.F_OK, (err) => {
-      if (err) {
-        fs.writeFile("ops.yml", "", (err) => {
-          if (err) throw err;
-        });
-      }
-    });
+    if (!fs.existsSync("ops.yml")) {
+      fs.writeFile("ops.yml", "", (err) => {
+        if (err) throw err;
+      });
+    }
+
+
+    if (!fs.existsSync("world")) fs.mkdirSync("world");
 
     Logger.log(lang.server.loadingServer);
 
