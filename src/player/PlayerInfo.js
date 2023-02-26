@@ -14,7 +14,8 @@ let playersOnline = [];
 
 module.exports = {
   /**
-   * @param player - A player.
+   * Adds player
+   * @param player
    */
   addPlayer(player) {
     playersOnline.push(player);
