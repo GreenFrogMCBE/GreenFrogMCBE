@@ -257,16 +257,17 @@ class ResourcePackClientResponse extends Handler {
           networkchunkpublisher.setSavedChunks([]);
           networkchunkpublisher.send(client);
 
-          const chunkData = require(__dirname +
+          const chunks = require(__dirname +
             "\\..\\..\\..\\..\\world\\chunks.json");
-          for (const chunkPacket of chunkData) {
+
+          for (const chunk of chunks) {
             const levelchunk = new LevelChunk();
-            levelchunk.setX(chunkPacket.x);
-            levelchunk.setZ(chunkPacket.z);
-            levelchunk.setSubChunkCount(chunkPacket.sub_chunk_count);
-            levelchunk.setCacheEnabled(chunkPacket.cache_enabled);
+            levelchunk.setX(chunk.x);
+            levelchunk.setZ(chunk.z);
+            levelchunk.setSubChunkCount(chunk.sub_chunk_count);
+            levelchunk.setCacheEnabled(chunk.cache_enabled);
             try {
-              levelchunk.setPayload(chunkPacket.payload.data);
+              levelchunk.setPayload(chunk.payload.data);
             } catch (e) {
               throw new Error("Invalid chunk data!");
             }
