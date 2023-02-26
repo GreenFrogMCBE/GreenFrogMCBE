@@ -13,7 +13,7 @@
 module.exports = {
   CREATIVE: "creative",
   SURVIVAL: "survival",
-  SEPCTATOR: "spectator",
+  SPECTATOR: "spectator",
   ADVENTURE: "adventure",
   FALLBACK: "fallback",
 };

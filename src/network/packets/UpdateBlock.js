@@ -14,13 +14,16 @@ let x = 0;
 let y = 0;
 let z = 0;
 let block_runtime_id = 0;
-let flagsvalue = 2;
+let flagsvalue = 0;
 let neighbors = false;
-let network = true;
+let network = false;
 let no_graphic = false;
 let unused = false;
 let priority = false;
 let layer = 0;
+
+// !!! This packet is no longer used
+// (this file will not be deleted, even if its not used anymore, so you can use this packet to update blocks using packet API in your plugin)
 
 class UpdateBlock extends require("./Packet") {
   /**
@@ -214,7 +217,7 @@ class UpdateBlock extends require("./Packet") {
    * @param {Number} block_runtime_id - The block ID of the block you want to place.
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       position: {
         x: this.getX(),
         y: this.getY(),

@@ -41,7 +41,7 @@ class SetCommandsEnabled extends require("./Packet") {
    * @param {Object} client
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       enabled: this.getEnabled(),
     });
   }

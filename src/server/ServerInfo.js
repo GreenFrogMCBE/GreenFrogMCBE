@@ -19,5 +19,12 @@ module.exports = {
   }.json`),
   config: yaml.load(fs.readFileSync("config.yml", "utf8")),
   majorserverversion: "2.5",
-  serverversion: "2.5",
+  serverversion: "2.5.4",
+  playersList: 0,
+  addPlayer() {
+    this.playersList++;
+  },
+  removePlayer() {
+    this.playersList--;
+  },
 };

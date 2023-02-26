@@ -102,7 +102,7 @@ class ContainerOpen extends require("./Packet") {
    * @param {Object} client
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       window_id: this.getWindowId(),
       window_type: this.getWindowType(),
       coordinates: this.getCoordinates(),

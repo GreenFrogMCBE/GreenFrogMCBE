@@ -93,7 +93,7 @@ class ResponsePackInfo extends require("./Packet") {
    * @param client - The client.
    */
   send(client) {
-    client.write(this.name(), {
+    client.queue(this.name(), {
       must_accept: this.getMustAccept(),
       has_scripts: this.getHasScripts(),
       behaviour_packs: this.getBehaviorPacks(),

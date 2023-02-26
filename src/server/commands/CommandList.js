@@ -48,16 +48,21 @@ class CommandList extends require("./Command") {
           `${PlayerInfo.players.length}/${config.maxPlayers}`
         )
       );
-      client.sendMessage(players);
+      if (Number(PlayerInfo.players.length) > 0) {
+        client.sendMessage(players);
+      }
       return;
     }
+
     Logger.log(
       lang.commands.playerlist.replace(
         "%info%",
         `${PlayerInfo.players.length}/${config.maxPlayers}`
       )
     );
-    Logger.log(players);
+    if (Number(PlayerInfo.players.length) > 0) {
+      Logger.log(players);
+    }
   }
 
   getPlayerDescription() {

@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let nbt = null;
+let value = null;
 
 class AvailableEntityIdentifiers extends require("./Packet") {
   /**
@@ -21,19 +21,19 @@ class AvailableEntityIdentifiers extends require("./Packet") {
   }
 
   /**
-   * It sets the NBT
-   * @param nbt1 - The NBT data to set.
+   * It sets the packet value
+   * @param pkvalue - The packet value data to set.
    */
-  setNBT(nbt1) {
-    nbt = nbt1;
+  setValue(pkvalue) {
+    value = pkvalue;
   }
 
   /**
-   * It returns the NBT data
-   * @returns The NBT data.
+   * It returns the packet value
+   * @returns The packet value.
    */
-  getNbt() {
-    return nbt;
+  getValue() {
+    return value;
   }
 
   /**
@@ -41,9 +41,7 @@ class AvailableEntityIdentifiers extends require("./Packet") {
    * @param {Object} client
    */
   send(client) {
-    client.write(this.name(), {
-      nbt: nbt,
-    });
+    client.queue(this.name(), this.getValue());
   }
 }
 

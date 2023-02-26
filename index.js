@@ -27,9 +27,9 @@ port: 19132
 #
 # This section contains motd, and other server info settings
 
-motd: '§6GreenFrog server'
+motd: '§aDedicated GreenFrog server'
 maxPlayers: 20
-version: '1.19.62'
+version: '1.19.63'
 offlineMode: false
 lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 
@@ -51,6 +51,12 @@ crashCode: -1
 exitCode: 0
 logUnhandledPackets: false
 defaultPermissionLevel: 2
+# Permission levels are: 
+# 4 - operator
+# 3 - unknown
+# 2 - member
+# 1 - unknown
+# 0 - visitor
 multiProtocol: false # Supports 1.19.20+. Some features may be broken
 
 # WORLD SETTINGS

@@ -128,7 +128,7 @@ class Title extends require("./Packet") {
 
   send(client) {
     if (this.getType() === Titles.CLEAR) this.setText("");
-    client.write(this.name(), {
+    client.queue(this.name(), {
       type: this.getType(),
       text: this.getText(),
       fade_in_time: this.getFadeinTime(),
