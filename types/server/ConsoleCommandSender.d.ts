@@ -1,5 +1,5 @@
 declare class ConsoleCommandExecutedEvent {
-  // Todo: replace any with something else
+  //  TODO: replace any with something else
   execute(server: any, data: string): void;
 }
 
