@@ -43,6 +43,7 @@ const CommandPl = require("../../../server/commands/CommandPl");
 const CommandOp = require("../../../server/commands/CommandOp");
 const { config, lang } = require("../../../server/ServerInfo");
 const Biome = require("../../../network/packets/types/Biome");
+const ChunkRadiusUpdate = require("../ChunkRadiusUpdate");
 const ServerInfo = require("../../../server/ServerInfo");
 const PlayStatuses = require("../types/PlayStatuses");
 const Difficulty = require("../types/Difficulty");
@@ -118,30 +119,36 @@ class ResourcePackClientResponse extends Handler {
             lang.playerstatuses.joined.replace("%player%", client.username)
           );
 
-          const startgame = new StartGame()
-          startgame.setEntityId("1")
-          startgame.setRunTimeEntityId("1")
-          startgame.setGamemode(config.gamemode)
-          startgame.setPlayerPosition(-57.5, 54.0, -27.5)
-          startgame.setPlayerRotation(0, -90)
-          startgame.setSeed(0, 0)
-          startgame.setBiomeType(0)
-          startgame.setBiomeName(Biome.PLAINS)
-          startgame.setDimension(Dimension.OVERWORLD)
-          startgame.setGenerator(Generator.FLAT)
-          startgame.setWorldGamemode(config.worldGamemode)
-          startgame.setDifficulty(Difficulty.NORMAL)
-          startgame.setSpawnPosition(100000, 0, 100000)
-          startgame.setPlayerPermissionLevel(client.permlevel)
-          startgame.send(client)
+          const startgame = new StartGame();
+          startgame.setEntityId(0);
+          startgame.setRunTimeEntityId(0);
+          startgame.setGamemode(config.gamemode);
+          startgame.setPlayerPosition(0, 69, 0);
+          startgame.setPlayerRotation(1, 1);
+          startgame.setSeed(-1);
+          startgame.setBiomeType(0);
+          startgame.setBiomeName(Biome.PLAINS);
+          startgame.setDimension(Dimension.OVERWORLD);
+          startgame.setGenerator(Generator.FLAT);
+          startgame.setWorldGamemode(config.worldGamemode);
+          startgame.setDifficulty(Difficulty.NORMAL);
+          startgame.setSpawnPosition(0, 0, 0);
+          startgame.setPlayerPermissionLevel(client.permlevel);
+          startgame.send(client);
+          
+          const biomedeflist = new BiomeDefinitionList();
+          biomedeflist.setValue(require("../res/biomes.json"));
+          biomedeflist.send(client);
 
-          const biomedeflist = new BiomeDefinitionList()
-          biomedeflist.setValue({ nbt: require('../res/biomes.json').nbt })
-          biomedeflist.send(client)
+          const availableentityids = new AvailableEntityIdentifiers();
+          availableentityids.setValue(require("../res/entities.json"));
+          availableentityids.send(client);
 
-          const availableentityids = new AvailableEntityIdentifiers()
-          availableentityids.setValue({ nbt: require('../res/entities.json').nbt })
-          availableentityids.send(client)
+          const creativecontent = new CreativeContent();
+          creativecontent.setItems(
+            require("../res/creativeContent.json").items
+          );
+          creativecontent.send(client);
 
           const playerlist = new PlayerList();
           playerlist.setUsername(client.username);
@@ -150,12 +157,6 @@ class ResourcePackClientResponse extends Handler {
           const commandsenabled = new SetCommandsEnabled();
           commandsenabled.setEnabled(true);
           commandsenabled.send(client);
-
-          const creativecontent = new CreativeContent();
-          creativecontent.setItems(
-            require("../res/creativeContent.json").items
-          );
-          creativecontent.send(client);
 
           const clientcachestatus = new ClientCacheStatus();
           clientcachestatus.setEnabled(true);
@@ -246,39 +247,39 @@ class ResourcePackClientResponse extends Handler {
             }
           }
 
-          if (config.renderChunks) {
-            const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-            networkchunkpublisher.setCords(-65, 51, -29);
-            networkchunkpublisher.setRadius(160);
-            networkchunkpublisher.setSavedChunks([]);
-            networkchunkpublisher.send(client);
+          const chunkradiusupdate = new ChunkRadiusUpdate();
+          chunkradiusupdate.setChunkRadius(32);
+          chunkradiusupdate.send(client);
 
-            const chunkData = JSON.parse(fs.readFileSync(__dirname + `\\..\\..\\..\\..\\world\\chunks.json`))
+          const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+          networkchunkpublisher.setCords(-81, 158, -52);
+          networkchunkpublisher.setRadius(272);
+          networkchunkpublisher.setSavedChunks([]);
+          networkchunkpublisher.send(client);
 
-            for (const chunkPacket of chunkData) {
-              const levelchunk = new LevelChunk()
-              levelchunk.setX(chunkPacket.x)
-              levelchunk.setZ(chunkPacket.z)
-              levelchunk.setSubChunkCount(chunkPacket.sub_chunk_count)
-              levelchunk.setCacheEnabled(chunkPacket.cache_enabled)
-              try {
-                levelchunk.setPayload(chunkPacket.payload.data)
-              } catch (e) {
-                throw new Error("Invalid chunk data!")
-              }
-              levelchunk.send(client)
+          const chunkData = require(__dirname + '\\..\\..\\..\\..\\world\\chunks.json')
+          for (const chunkPacket of chunkData) {
+            const levelchunk = new LevelChunk()
+            levelchunk.setX(chunkPacket.x)
+            levelchunk.setZ(chunkPacket.z)
+            levelchunk.setSubChunkCount(chunkPacket.sub_chunk_count)
+            levelchunk.setCacheEnabled(chunkPacket.cache_enabled)
+            try {
+              levelchunk.setPayload(chunkPacket.payload.data)
+            } catch (e) {
+              throw new Error("Invalid chunk data!")
             }
-
-            setInterval(() => {
-              if (client.offline) return
-              const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-              networkchunkpublisher.setCords(-65, 51, -29);
-              networkchunkpublisher.setRadius(160);
-              networkchunkpublisher.setSavedChunks([]);
-              networkchunkpublisher.send(client);
-            }, 4500)
+            levelchunk.send(client)
           }
 
+          setInterval(() => {
+            if (client.offline) return
+            const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+            networkchunkpublisher.setCords(-81, 158, -52);
+            networkchunkpublisher.setRadius(272);
+            networkchunkpublisher.setSavedChunks([]);
+            networkchunkpublisher.send(client);
+          }, 4500)
 
           setTimeout(() => {
             for (let i = 0; i < PlayerInfo.players; i++) {
@@ -293,7 +294,6 @@ class ResourcePackClientResponse extends Handler {
               }
             }
           }, 1000);
-
 
           Logger.log(
             lang.playerstatuses.spawned.replace("%player%", client.username)
