@@ -30,7 +30,6 @@ const PlayerHasNoResourcePacksInstalledEvent = require("../../../plugin/events/P
 const PlayerListTypes = require("../../../network/packets/types/PlayerList");
 const CommandShutdown = require("../../../server/commands/CommandShutdown");
 const CommandVersion = require("../../../server/commands/CommandVersion");
-const VersionToProtocol = require("../../../server/VersionToProtocol");
 const Dimension = require("../../../network/packets/types/Dimension");
 const CommandKick = require("../../../server/commands/CommandKick");
 const CommandList = require("../../../server/commands/CommandList");
@@ -55,17 +54,8 @@ const PacketHandlingError = require("../exceptions/PacketHandlingError");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
-    if (
-      !(client.version === VersionToProtocol.getProtocol(config.version)) &&
-      !config.multiProtocol
-    ) {
-      client.kick(
-        lang.kickmessages.versionMismatch.replace("%version%", config.version)
-      );
-      return;
-    }
-
-    switch (packet.data.params.response_status) {
+ 
+   switch (packet.data.params.response_status) {
       case "none": {
         new PlayerHasNoResourcePacksInstalledEvent().execute(server, client);
         Logger.log(

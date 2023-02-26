@@ -30,6 +30,7 @@ const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
+const VersionToProtocol = require("./server/VersionToProtocol");
 const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
@@ -130,6 +131,20 @@ module.exports = {
 
     PlayerInfo.addPlayer(client);
 
+    if (PlayerInfo.players.length > config.maxPlayers) {
+      client.kick(lang.kickmessages.serverFull)
+      return
+    }
+
+    if (
+      !(client.version === VersionToProtocol.getProtocol(config.version)) &&
+      !config.multiProtocol
+    ) {
+      client.kick(
+        lang.kickmessages.versionMismatch.replace("%version%", config.version)
+      );
+      return;
+    }
     const responsepackinfo = new ResponsePackInfo();
     responsepackinfo.setMustAccept(true);
     responsepackinfo.setHasScripts(false);

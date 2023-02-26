@@ -80,14 +80,15 @@
     "kickedPrefix": "You were kicked for: ",
     "noReason": "No reason",
     "kickedConsoleMsg": "Kicked %player% for: %reason%",
-    "playerDisconnected": "Player has disconnected from the server",
+    "playerDisconnected": "Client disconnected",
     "internalServerError": "§cInternal server error",
     "invalidChatMessage": "§cInvalid message in chat",
     "serverShutdown": "§cServer shutdown",
     "invalidUsername": "§cThe username you sent is invalid",
     "resourcePacksRefused": "§cYou must accept resource packs to join this server",
-    "kickedByPlugin": "§cDisconnected",
-    "versionMismatch": "§cUnsupported version! Please use %version%"
+    "kickedByPlugin": "disconnectionScreen.noReason",
+    "versionMismatch": "§cUnsupported version! Please use %version%",
+    "serverFull": "disconnectionScreen.serverFull"
   },
   "errors": {
     "debugWarning": "Debug is enabled! Use this only if you are developer and never use this thing in production",
