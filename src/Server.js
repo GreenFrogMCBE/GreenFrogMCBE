@@ -161,7 +161,6 @@ module.exports = {
       });
     }
 
-
     if (!fs.existsSync("world")) fs.mkdirSync("world");
 
     Logger.log(lang.server.loadingServer);

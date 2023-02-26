@@ -135,7 +135,7 @@ class ResourcePackClientResponse extends Handler {
           startgame.setSpawnPosition(0, 0, 0);
           startgame.setPlayerPermissionLevel(client.permlevel);
           startgame.send(client);
-          
+
           const biomedeflist = new BiomeDefinitionList();
           biomedeflist.setValue(require("../res/biomes.json"));
           biomedeflist.send(client);
@@ -257,29 +257,30 @@ class ResourcePackClientResponse extends Handler {
           networkchunkpublisher.setSavedChunks([]);
           networkchunkpublisher.send(client);
 
-          const chunkData = require(__dirname + '\\..\\..\\..\\..\\world\\chunks.json')
+          const chunkData = require(__dirname +
+            "\\..\\..\\..\\..\\world\\chunks.json");
           for (const chunkPacket of chunkData) {
-            const levelchunk = new LevelChunk()
-            levelchunk.setX(chunkPacket.x)
-            levelchunk.setZ(chunkPacket.z)
-            levelchunk.setSubChunkCount(chunkPacket.sub_chunk_count)
-            levelchunk.setCacheEnabled(chunkPacket.cache_enabled)
+            const levelchunk = new LevelChunk();
+            levelchunk.setX(chunkPacket.x);
+            levelchunk.setZ(chunkPacket.z);
+            levelchunk.setSubChunkCount(chunkPacket.sub_chunk_count);
+            levelchunk.setCacheEnabled(chunkPacket.cache_enabled);
             try {
-              levelchunk.setPayload(chunkPacket.payload.data)
+              levelchunk.setPayload(chunkPacket.payload.data);
             } catch (e) {
-              throw new Error("Invalid chunk data!")
+              throw new Error("Invalid chunk data!");
             }
-            levelchunk.send(client)
+            levelchunk.send(client);
           }
 
           setInterval(() => {
-            if (client.offline) return
+            if (client.offline) return;
             const networkchunkpublisher = new NetworkChunkPublisherUpdate();
             networkchunkpublisher.setCords(-81, 158, -52);
             networkchunkpublisher.setRadius(272);
             networkchunkpublisher.setSavedChunks([]);
             networkchunkpublisher.send(client);
-          }, 4500)
+          }, 4500);
 
           setTimeout(() => {
             for (let i = 0; i < PlayerInfo.players; i++) {
