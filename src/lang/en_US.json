@@ -96,7 +96,7 @@
     "illegalMessage": "%player% sent an invalid message. Message content was: %msg%",
     "listeningFailed": "Failed to listen on %address% | Error: %error%",
     "playerOffline": "Player not found",
-    "playerUnknownCommand": "§cUnknown command. Type /help for a list of commands",
+    "playerUnknownCommandOrNoPermission": "§cUnknown command: %commandname%. Please check that the command exists and that you have permission to use it.",
     "failedToLoadPlugin": "Failed to load plugin \"%name%\". The error was: %errorstack%",
     "failedToExecFunction": "Failed to execute function in plugin \"%plugin%\". Error: %e%",
     "noPluginName": "No plugin name! %plugin%",

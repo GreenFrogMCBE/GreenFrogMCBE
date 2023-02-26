@@ -93,35 +93,36 @@ class PlayerCommandExecuteEvent extends Event {
           break;
         }
       }
-      if (!exists || message === "/")
-        client.sendMessage(lang.errors.playerUnknownCommand);
-
-      if (
-        message.startsWith(`/${lang.commands.ver.toLowerCase()}`) ||
-        message.startsWith(`/${lang.commands.version.toLowerCase()}`)
-      ) {
-        cmdVer.executePlayer(client);
-      } else if (
-        message.startsWith(`/${lang.commands.pl.toLowerCase()}`) ||
-        message.startsWith(`/${lang.commands.plugins.toLowerCase()}`)
-      ) {
-        cmdPl.executePlayer(client);
-      } else if (message.startsWith(`/${lang.commands.stop.toLowerCase()}`)) {
-        cmdStop.executePlayer(client);
-      } else if (message.startsWith(`/${lang.commands.say.toLowerCase()}`)) {
-        cmdSay.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.op.toLowerCase()}`)) {
-        cmdOp.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.kick.toLowerCase()}`)) {
-        cmdKick.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.time.toLowerCase()}`)) {
-        cmdTime.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.deop.toLowerCase()}`)) {
-        cmdDeop.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.listc.toLowerCase()}`)) {
-        cmdList.executePlayer(client);
-      } else if (message.startsWith(`/${lang.commands.me.toLowerCase()}`)) {
-        cmdMe.executePlayer(client, message);
+      if (!exists || message === "/") {
+        client.sendMessage(lang.errors.playerUnknownCommandOrNoPermission.replace('%commandname%', message));
+      } else {
+        if (
+          message.startsWith(`/${lang.commands.ver.toLowerCase()}`) ||
+          message.startsWith(`/${lang.commands.version.toLowerCase()}`)
+        ) {
+          cmdVer.executePlayer(client);
+        } else if (
+          message.startsWith(`/${lang.commands.pl.toLowerCase()}`) ||
+          message.startsWith(`/${lang.commands.plugins.toLowerCase()}`)
+        ) {
+          cmdPl.executePlayer(client);
+        } else if (message.startsWith(`/${lang.commands.stop.toLowerCase()}`)) {
+          cmdStop.executePlayer(client);
+        } else if (message.startsWith(`/${lang.commands.say.toLowerCase()}`)) {
+          cmdSay.executePlayer(client, message);
+        } else if (message.startsWith(`/${lang.commands.op.toLowerCase()}`)) {
+          cmdOp.executePlayer(client, message);
+        } else if (message.startsWith(`/${lang.commands.kick.toLowerCase()}`)) {
+          cmdKick.executePlayer(client, message);
+        } else if (message.startsWith(`/${lang.commands.time.toLowerCase()}`)) {
+          cmdTime.executePlayer(client, message);
+        } else if (message.startsWith(`/${lang.commands.deop.toLowerCase()}`)) {
+          cmdDeop.executePlayer(client, message);
+        } else if (message.startsWith(`/${lang.commands.listc.toLowerCase()}`)) {
+          cmdList.executePlayer(client);
+        } else if (message.startsWith(`/${lang.commands.me.toLowerCase()}`)) {
+          cmdMe.executePlayer(client, message);
+        }
       }
     }
   }

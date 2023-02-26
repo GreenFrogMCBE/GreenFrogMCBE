@@ -24,11 +24,6 @@ class CommandDeop extends require("./Command") {
   }
 
   execute(args) {
-    if (!config.consoleCommandDeop) {
-      Logger.log(lang.errors.unknownCommand);
-      return;
-    }
-
     if (!args) {
       Logger.log(lang.commands.usageDeop);
       return;

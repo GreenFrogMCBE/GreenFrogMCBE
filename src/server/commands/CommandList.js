@@ -24,11 +24,6 @@ class CommandList extends require("./Command") {
   }
 
   execute(isconsole = true, client) {
-    if (!config.consoleCommandList) {
-      Logger.log(lang.errors.unknownCommand);
-      return;
-    }
-
     let players = "";
 
     for (let i = 0; i < PlayerInfo.players.length; i++) {
