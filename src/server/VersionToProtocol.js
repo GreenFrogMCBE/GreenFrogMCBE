@@ -31,7 +31,7 @@ module.exports = {
       case "1.19.40":
       case "1.19.40.24":
       case "1.19.40.23":
-        return 557
+        return 557;
       case "1.19.40.22":
       case "1.19.40.21":
         return 555;
