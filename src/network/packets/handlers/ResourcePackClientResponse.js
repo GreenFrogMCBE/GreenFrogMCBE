@@ -51,6 +51,7 @@ const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const LevelChunk = require("../LevelChunk");
 const fs = require("fs");
+const PacketHandlingError = require("../exceptions/PacketHandlingError");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
@@ -247,41 +248,49 @@ class ResourcePackClientResponse extends Handler {
             }
           }
 
-          const chunkradiusupdate = new ChunkRadiusUpdate();
-          chunkradiusupdate.setChunkRadius(32);
-          chunkradiusupdate.send(client);
+          if (config.renderChunks) {
+            const chunkradiusupdate = new ChunkRadiusUpdate();
+            chunkradiusupdate.setChunkRadius(32);
+            chunkradiusupdate.send(client);
 
-          const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-          networkchunkpublisher.setCords(-81, 158, -52);
-          networkchunkpublisher.setRadius(272);
-          networkchunkpublisher.setSavedChunks([]);
-          networkchunkpublisher.send(client);
-
-          const chunks = require(__dirname +
-            "\\..\\..\\..\\..\\world\\chunks.json");
-
-          for (const chunk of chunks) {
-            const levelchunk = new LevelChunk();
-            levelchunk.setX(chunk.x);
-            levelchunk.setZ(chunk.z);
-            levelchunk.setSubChunkCount(chunk.sub_chunk_count);
-            levelchunk.setCacheEnabled(chunk.cache_enabled);
-            try {
-              levelchunk.setPayload(chunk.payload.data);
-            } catch (e) {
-              throw new Error("Invalid chunk data!");
-            }
-            levelchunk.send(client);
-          }
-
-          setInterval(() => {
-            if (client.offline) return;
             const networkchunkpublisher = new NetworkChunkPublisherUpdate();
             networkchunkpublisher.setCords(-81, 158, -52);
             networkchunkpublisher.setRadius(272);
             networkchunkpublisher.setSavedChunks([]);
             networkchunkpublisher.send(client);
-          }, 4500);
+
+            let chunks = null
+
+            try {
+              chunks = require(__dirname +
+                "\\..\\..\\..\\..\\world\\chunks.json");  
+            } catch (e) {
+              throw new PacketHandlingError(lang.failedToLoadWorld)
+            }
+
+            for (const chunk of chunks) {
+              const levelchunk = new LevelChunk();
+              levelchunk.setX(chunk.x);
+              levelchunk.setZ(chunk.z);
+              levelchunk.setSubChunkCount(chunk.sub_chunk_count);
+              levelchunk.setCacheEnabled(chunk.cache_enabled);
+              try {
+                levelchunk.setPayload(chunk.payload.data);
+              } catch (e) {
+                throw new Error(lang.failedToLoadWorld_InvalidChunkData);
+              }
+              levelchunk.send(client);
+            }
+
+            setInterval(() => {
+              if (client.offline) return;
+              const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+              networkchunkpublisher.setCords(-81, 158, -52);
+              networkchunkpublisher.setRadius(272);
+              networkchunkpublisher.setSavedChunks([]);
+              networkchunkpublisher.send(client);
+            }, 4500);
+          }
 
           setTimeout(() => {
             for (let i = 0; i < PlayerInfo.players; i++) {

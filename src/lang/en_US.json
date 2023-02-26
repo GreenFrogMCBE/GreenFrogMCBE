@@ -115,7 +115,9 @@
     "itemExploit": "An attempt to get items from creative mode, while the player is not in creative mode",
     "failedToHandleItemRequest": "Failed to handle item request from %data%",
     "notSupportedActionID": "Not supported packet data: packet = open_inventory, action_id = %ai%",
-    "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file"
+    "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file",
+    "failedToLoadWorld": "Failed to load world! Make sure the chunks.json and gamerules.json exist!",
+    "failedToLoadWorld_InvalidChunkData": "Failed to load world! The chunks are corrupted"
   },
   "server": {
     "listeningOn": "Listening on port %address%",
