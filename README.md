@@ -15,8 +15,6 @@ Our discord: https://discord.gg/UFqrnAbqjP
 
 #### Development status > Under active development
 
-#### Site > https://greenfrog.f1470348511.workers.dev/
-
 #### Help to translate > https://poeditor.com/join/project/fwIZCyBjPw
 
 #### Example plugin > https://github.com/greenfrogmc/ExamplePlugin
