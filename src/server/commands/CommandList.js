@@ -43,7 +43,7 @@ class CommandList extends require("./Command") {
 
     if (!isconsole) {
       client.sendMessage(
-        lang.commands.playerlist.replace(
+        lang.commands.playerList.replace(
           "%info%",
           `${PlayerInfo.players.length}/${config.maxPlayers}`
         )
@@ -55,12 +55,12 @@ class CommandList extends require("./Command") {
     }
 
     Logger.log(
-      lang.commands.playerlist.replace(
+      lang.commands.playerList.replace(
         "%info%",
         `${PlayerInfo.players.length}/${config.maxPlayers}`
       )
     );
-    if (Number(PlayerInfo.players.length) > 0) {
+    if (PlayerInfo.players.length > 0) {
       Logger.log(players);
     }
   }

@@ -52,12 +52,12 @@
     "plugins": "Plugins",
     "sayCommandFormat": "[%sender%] %message%",
     "opped": "Opped %player%",
-    "deopped": "Deopped %player%",
+    "deOpped": "Deopped %player%",
     "notOp": "The player is not opped!",
     "deopFail": "Failed to remove OP status from that player",
     "opFail": "Failed to give OP status to that player",
     "executedCmd": "%player% executed a server command: %cmd%",
-    "playerlist": "There are %info% players online:"
+    "playerList": "There are %info% players online:"
   },
   "commandhander": {
     "cchs": "The console command handler has been started",
@@ -112,9 +112,9 @@
     "targetServerNull": "Packet processing error: The target server is null!",
     "sendToInvalidServer": "Packet processing error: The target server port is invalid! Must be number between 0 and 65535",
     "invalidTimePacket": "Packet processing error: Invalid time. Must be number between 0 and 2147483647",
-    "gmbypass": "An attempt to get items from creative mode, while the player is not in creative mode",
-    "failedtohandleitem": "Failed to handle item request from %data%",
-    "notsupportedactionid": "Not supported packet data: packet = open_inventory, action_id = %ai%",
+    "itemExploit": "An attempt to get items from creative mode, while the player is not in creative mode",
+    "failedToHandleItemRequest": "Failed to handle item request from %data%",
+    "notSupportedActionID": "Not supported packet data: packet = open_inventory, action_id = %ai%",
     "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file"
   },
   "server": {

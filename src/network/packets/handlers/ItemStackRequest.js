@@ -18,7 +18,7 @@ const Handler = require("./Handler");
 
 class ItemStackRequest extends Handler {
   validate(client) {
-    if (client.gamemode !== 1) throw new PacketHandlingError(lang.gmbypass);
+    if (client.gamemode !== 1) throw new PacketHandlingError(lang.itemExploit);
   }
 
   handle(client, packet) {
@@ -71,7 +71,7 @@ class ItemStackRequest extends Handler {
       }
     } catch (e) {
       Logger.log(
-        lang.failedtohandleitem.replace(
+        lang.failedToHandleItemRequest.replace(
           "%data%",
           `${client.username}: ${e.stack}`
         ),
