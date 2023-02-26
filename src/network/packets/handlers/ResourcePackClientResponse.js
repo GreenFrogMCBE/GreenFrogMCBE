@@ -321,6 +321,7 @@ class ResourcePackClientResponse extends Handler {
           setTimeout(() => {
             if (client.offline) return;
             for (let i = 0; i < PlayerInfo.players.length; i++) {
+              if (PlayerInfo.players[i].username == client.username) return; // Vanilla behaviour
               PlayerInfo.players[i].sendMessage(
                 lang.broadcasts.joinedTheGame.replace(
                   "%username%",
