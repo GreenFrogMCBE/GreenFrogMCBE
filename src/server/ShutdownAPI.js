@@ -22,7 +22,7 @@ module.exports = {
 
     try {
       for (const player of players) {
-        player.kick(lang.kickmessages.serverShutdown);
+        if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
       }
     } catch (e) {
       /* ignored */
