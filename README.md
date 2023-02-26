@@ -76,7 +76,7 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 
 ```@andriycraft - For creating this software
 @AnyBananaGAME - For creating multilang (#9) also for improving tests and /list
-@hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33)
+@hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33) also for disabling workflows for .MD files
 @NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24)
 @ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype  (#44)
 @bufferfishq - For adding support for custom_form and new plugin system (#47)
