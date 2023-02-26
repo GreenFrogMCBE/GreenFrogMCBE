@@ -15,6 +15,8 @@ Our discord: https://discord.gg/UFqrnAbqjP
 
 #### Warning: This software is still in beta!
 
+#### Our goal is to make the software support as much features, as possible
+
 #### Development status > Under active development
 
 #### Help to translate > https://poeditor.com/join/project/fwIZCyBjPw
