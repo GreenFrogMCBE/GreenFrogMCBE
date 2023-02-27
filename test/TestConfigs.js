@@ -22,6 +22,8 @@ module.exports = {
       "/../src/network/packets/res/creativeContent.json",
       "/../src/network/packets/res/skinData.json",
       "/../src/network/packets/res/entities.json",
+      "/../world/chunks.json",
+      "/../world/custom_items.json",
       "/../package.json",
       "/../package-lock.json",
     ];
