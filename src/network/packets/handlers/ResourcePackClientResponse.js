@@ -29,6 +29,7 @@ const PlayerResourcePacksCompletedEvent = require("../../../plugin/events/Player
 const PlayerHasNoResourcePacksInstalledEvent = require("../../../plugin/events/PlayerHasNoResourcePacksInstalledEvent");
 const PlayerListTypes = require("../../../network/packets/types/PlayerList");
 const CommandVersion = require("../../../server/commands/CommandVersion");
+const PacketHandlingError = require("../exceptions/PacketHandlingError");
 const Dimension = require("../../../network/packets/types/Dimension");
 const CommandStop = require("../../../server/commands/CommandStop");
 const CommandKick = require("../../../server/commands/CommandKick");
@@ -50,12 +51,12 @@ const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const LevelChunk = require("../LevelChunk");
 const fs = require("fs");
-const PacketHandlingError = require("../exceptions/PacketHandlingError");
+const ItemComponent = require("../ItemComponent");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
- 
-   switch (packet.data.params.response_status) {
+
+    switch (packet.data.params.response_status) {
       case "none": {
         new PlayerHasNoResourcePacksInstalledEvent().execute(server, client);
         Logger.log(
@@ -238,6 +239,16 @@ class ResourcePackClientResponse extends Handler {
             }
           }
 
+          // This pascket is used to set custom items
+          const itemcomponent = new ItemComponent()
+          try {
+            itemcomponent.setItems(require("../../../../world/custom_items.json").items)
+          } catch (e) {
+            itemcomponent.setItems([])
+          }
+
+          itemcomponent.send(client)
+
           if (config.renderChunks) {
             const chunkradiusupdate = new ChunkRadiusUpdate();
             chunkradiusupdate.setChunkRadius(32);
@@ -253,7 +264,7 @@ class ResourcePackClientResponse extends Handler {
 
             try {
               chunks = require(__dirname +
-                "\\..\\..\\..\\..\\world\\chunks.json");  
+                "\\..\\..\\..\\..\\world\\chunks.json");
             } catch (e) {
               throw new PacketHandlingError(lang.failedToLoadWorld)
             }
