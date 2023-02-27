@@ -239,7 +239,7 @@ class ResourcePackClientResponse extends Handler {
             }
           }
 
-          // This pascket is used to set custom items
+          // This packet is used to set custom items
           const itemcomponent = new ItemComponent()
           try {
             itemcomponent.setItems(require("../../../../world/custom_items.json").items)

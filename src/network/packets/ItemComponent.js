@@ -5,7 +5,7 @@ class ItemComponent extends require("./Packet") {
      * @returns The name of the packet.
      */
     name() {
-        return "inventory_slot";
+        return "item_component";
     }
 
     /**
