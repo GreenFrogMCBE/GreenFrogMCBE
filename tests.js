@@ -16,17 +16,90 @@ const StartServer = require("./test/StartServer");
 const TestConfigs = require("./test/TestConfigs");
 const fs = require("fs");
 
-//if (fs.existsSync("config.yml")) {
-const ServerInfo = require("./src/server/ServerInfo");
-const config = ServerInfo.config;
-if (!config.offlineMode) {
-  console.log(
-    "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" +
-    "\u001b[38;5;203m\u001b[6mYou can not use tests in \u001b[38;5;87mOfflineMode\u001b[38;5;203m set to \u001b[38;5;87mfalse \u001b[0m" +
-    "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-  );
-  process.exit(-1);
-}
+fs.writeFileSync(
+  "config.yml",
+  `# LISTENING
+# 
+# This section contains the config for server host and port
+
+host: '0.0.0.0'
+port: 19132
+
+# SERVER INFO
+#
+# This section contains motd, and other server info settings
+
+motd: '§aDedicated GreenFrog server'
+maxPlayers: 20
+version: '1.19.63'
+offlineMode: false
+lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
+
+# CHAT
+#
+# This section contains some chat settings
+
+disable: false
+commandsDisabled: false # (will only disabled them for players, not console)
+blockInvalidMessages: true # Kicks the player if the player tried to send an too long or empty message and also prevents from using colors in chat
+
+# DEVELOPMENT SETTINGS
+# 
+# This section contains settings like debug, exit codes, etc
+
+unstable: false # Makes your server not crash on critical errors
+debug: false # Debug mode
+crashCode: -1
+exitCode: 0
+logUnhandledPackets: false
+defaultPermissionLevel: 2
+# Permission levels are: 
+# 4 - operator
+# 3 - unknown
+# 2 - member
+# 1 - unknown
+# 0 - visitor
+multiProtocol: false # Supports 1.19.20+. Some features may be broken
+
+# WORLD SETTINGS
+#
+# This section contains world settings
+
+renderChunks: true
+gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
+worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
+difficulty: 0 # Currently only visual
+
+# Command settings
+# 
+# Allows to disable/enable commands
+# Make sure that "commandsDisabled" in chat section is enabled
+
+consoleCommandKick: true
+consoleCommandVer: true
+consoleCommandShutdown: true
+consoleCommandVersion: true
+consoleCommandTime: true
+consoleCommandPl: true
+consoleCommandPlugins: true
+consoleCommandStop: true # Will only stop showing in /help, if disabled
+consoleCommandSay: true
+consoleCommandOp: true
+consoleCommandDeop: true
+consoleCommandHelp: true
+consoleCommandList: true
+consoleCommandMe: true
+playerCommandVersion: true
+playerCommandPlugins: true
+playerCommandStop: true
+playerCommandSay: true
+playerCommandOp: true
+playerCommandKick: true
+playerCommandTime: true
+playerCommandDeop: true
+playerCommandList: true
+playerCommandMe: true`
+);
 
 console.log("Starting testing...");
 
@@ -59,4 +132,3 @@ setTimeout(() => {
     }, 3000);
   }
 }, 3500);
-//s}
