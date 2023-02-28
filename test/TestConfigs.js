@@ -27,7 +27,7 @@ module.exports = {
     ];
 
     for (const file of files) {
-      console.log(`[langs] Parsing: ${file}`);
+      console.log(`[config files] Parsing: ${file}`);
       JSON.parse(JSON.stringify(require(__dirname + file)));
     }
   },

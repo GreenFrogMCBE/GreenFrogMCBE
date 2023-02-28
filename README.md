@@ -72,10 +72,15 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 15. Transfer packet support
 16. Packet API
 
+## Testing
+
+1. If you want to test the project manually run `tests-manually.js`
+2. If you are Github workflow or something run `test-auto.js`
+
 ## Credits
 
 ```@andriycraft - For creating this software
-@AnyBananaGAME - For creating multilang (#9) also for improving tests and /list
+@AnyBananaGAME - For creating multilang (#9) also for improving tests and /list, making better tests (#70)
 @hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33) also for disabling workflows for .MD files
 @NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24)
 @ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype  (#44)

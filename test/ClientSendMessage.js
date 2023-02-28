@@ -14,18 +14,18 @@ const bedrock = require("frog-protocol");
 
 module.exports = {
   async test() {
-    await console.log("[client] joining...");
+    await console.log("[sendmessage bot] joining...");
     let Bot =
       bedrock.createClient({
         host: "127.0.0.1",
         port: 19132,
-        username: "bot",
+        username: "sendmessagebot",
         offline: true,
         version: "1.19.63",
       });
 
 
-    console.log("[client] joined");
+    console.log("[sendmessage bot] joined");
     Bot.on("spawn", () => {
       Bot.queue("text", {
         type: "chat",
