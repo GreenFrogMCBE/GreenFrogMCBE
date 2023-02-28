@@ -10,27 +10,31 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-module.exports = {
-  test() {
-    const files = [
-      "/../src/lang/en_US.json",
-      "/../src/lang/lt_LT.json",
-      "/../src/lang/uk_UA.json",
-      "/../src/lang/vi_VN.json",
-      "/../src/lang/fr_FR.json",
-      "/../src/network/packets/res/biomes.json",
-      "/../src/network/packets/res/creativeContent.json",
-      "/../src/network/packets/res/skinData.json",
-      "/../src/network/packets/res/entities.json",
-      "/../world/chunks.json",
-      "/../world/custom_items.json",
-      "/../package.json",
-      "/../package-lock.json",
-    ];
+const bedrock = require("frog-protocol");
 
-    for (const file of files) {
-      console.log(`[config files] Parsing: ${file}`);
-      JSON.parse(JSON.stringify(require(__dirname + file)));
-    }
+module.exports = {
+  async test() {
+    await console.log("[commandbot] joining...");
+    let Bot = bedrock.createClient({
+      host: "127.0.0.1",
+      port: 19132,
+      username: "commandbot",
+      offline: true,
+      version: "1.19.63",
+    });
+
+    console.log("[commandbot] joined");
+    Bot.on("spawn", () => {
+      Bot.queue("command_request", {
+        command: '/pl',
+        internal: false,
+        version: 52,
+        origin: {
+          uuid: Bot.profile.uuid,
+          request_id: Bot.profile.uuid,
+          type: 'player',
+        },
+      });
+    });
   },
 };
