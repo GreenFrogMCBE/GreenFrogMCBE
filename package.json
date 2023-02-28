@@ -10,7 +10,7 @@
     "dev": "nodemon --signal SIGINT index.js --debug",
     "gencoryrightheader": "node generatelicenseheaders.js",
     "build": "npm run gencoryrightheader && npm run format",
-    "testsworkflow": "node tests-auto.js",
+    "autotest": "node tests-auto.js",
     "test": "node tests-manual.js"
   },
   "dependencies": {
