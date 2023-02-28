@@ -26,7 +26,7 @@ module.exports = {
     console.log("[client] joined");
     Bot.on("spawn", () => {
       Bot.queue("command_request", {
-        command: '/help',
+        command: '/pl',
         internal: false,
         version: 52,
         origin: {
