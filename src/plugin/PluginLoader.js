@@ -23,7 +23,11 @@ module.exports = {
   loadPlugins() {
     try {
       fs.mkdirSync("./plugins/");
-      fs.mkdirSync("./pluginsconfigs/");
+    } catch (ignored) {
+      /* ignored */
+    }
+    try {
+      fs.mkdirSync("./plugins_configs/");
     } catch (ignored) {
       /* ignored */
     }

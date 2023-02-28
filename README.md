@@ -93,6 +93,8 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 8. src\network\packets\creativeContent.json - Allows for you to customize the creative menu. Useful to remove some items, and add custom
 9. src\network\packets\skinData.json - Allows to customize the skin data for the player list
 10. src\network\packets\entities.json - Allows to disable/enable entities
+11. plugins folder - A folder for plugins
+12. plugins_configs - A folder for configs and data for plugins
 
 ## Credits
 
