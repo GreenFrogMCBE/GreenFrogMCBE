@@ -32,7 +32,7 @@ class Title {
 
   /**
    * Sets the text
-   * @param {string} text
+   * @param {String} text
    */
   setText(text) {
     this.text = text;
@@ -72,7 +72,7 @@ class Title {
 
   /**
    * Returns the title text
-   * @returns {string} The title text
+   * @returns {String} The title text
    */
   getText() {
     return this.text;

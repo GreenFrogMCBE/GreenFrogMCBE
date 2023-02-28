@@ -24,11 +24,6 @@ class CommandDeop extends require("./Command") {
   }
 
   execute(args) {
-    if (!config.consoleCommandDeop) {
-      Logger.log(lang.errors.unknownCommand);
-      return;
-    }
-
     if (!args) {
       Logger.log(lang.commands.usageDeop);
       return;
@@ -53,7 +48,7 @@ class CommandDeop extends require("./Command") {
 
       fs.writeFile("ops.yml", updatedPlayers, (err) => {
         if (!err) {
-          Logger.log(lang.commands.deopped.replace("%player%", args));
+          Logger.log(lang.commands.deOpped.replace("%player%", args));
         } else Logger.log(lang.commands.deopFail);
       });
     });
@@ -101,7 +96,7 @@ class CommandDeop extends require("./Command") {
       fs.writeFile("ops.yml", updatedPlayers, (err) => {
         if (!err) {
           client.sendMessage(
-            lang.commands.deopped.replace("%player%", args.split(" ")[1])
+            lang.commands.deOpped.replace("%player%", args.split(" ")[1])
           );
         } else client.sendMessage("§c" + lang.commands.deopFail);
       });

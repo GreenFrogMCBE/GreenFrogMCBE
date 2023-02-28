@@ -22,8 +22,8 @@ const CommandList = require("../../server/commands/CommandList");
 const CommandTime = require("../../server/commands/CommandTime");
 const CommandKick = require("../../server/commands/CommandKick");
 const CommandDeop = require("../../server/commands/CommandDeop");
+const CommandStop = require("../../server/commands/CommandStop");
 const CommandVersion = require("../../server/commands/CommandVersion");
-const CommandShutdown = require("../../server/commands/CommandShutdown");
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 
 const fs = require("fs");
@@ -73,7 +73,7 @@ class PlayerCommandExecuteEvent extends Event {
       const cmdManager = new CommandManager();
       const cmdVer = new CommandVersion();
       const cmdPl = new CommandPl();
-      const cmdStop = new CommandShutdown();
+      const cmdStop = new CommandStop();
       const cmdSay = new CommandSay();
       const cmdOp = new CommandOp();
       const cmdKick = new CommandKick();
@@ -93,35 +93,44 @@ class PlayerCommandExecuteEvent extends Event {
           break;
         }
       }
-      if (!exists || message === "/")
-        client.sendMessage(lang.errors.playerUnknownCommand);
+      if (!exists || message === "/") {
+        client.sendMessage(lang.errors.playerUnknownCommandOrNoPermission.replace('%commandname%', message));
+      } else {
+        const commands = {
+          ver: `/${lang.commands.ver.toLowerCase()}`,
+          version: `/${lang.commands.version.toLowerCase()}`,
+          pl: `/${lang.commands.pl.toLowerCase()}`,
+          plugins: `/${lang.commands.plugins.toLowerCase()}`,
+          stop: `/${lang.commands.stop.toLowerCase()}`,
+          say: `/${lang.commands.say.toLowerCase()}`,
+          op: `/${lang.commands.op.toLowerCase()}`,
+          kick: `/${lang.commands.kick.toLowerCase()}`,
+          time: `/${lang.commands.time.toLowerCase()}`,
+          deop: `/${lang.commands.deop.toLowerCase()}`,
+          list: `/${lang.commands.listc.toLowerCase()}`,
+          me: `/${lang.commands.me.toLowerCase()}`,
+        };
 
-      if (
-        message.startsWith(`/${lang.commands.ver.toLowerCase()}`) ||
-        message.startsWith(`/${lang.commands.version.toLowerCase()}`)
-      ) {
-        cmdVer.executePlayer(client);
-      } else if (
-        message.startsWith(`/${lang.commands.pl.toLowerCase()}`) ||
-        message.startsWith(`/${lang.commands.plugins.toLowerCase()}`)
-      ) {
-        cmdPl.executePlayer(client);
-      } else if (message.startsWith(`/${lang.commands.stop.toLowerCase()}`)) {
-        cmdStop.executePlayer(client);
-      } else if (message.startsWith(`/${lang.commands.say.toLowerCase()}`)) {
-        cmdSay.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.op.toLowerCase()}`)) {
-        cmdOp.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.kick.toLowerCase()}`)) {
-        cmdKick.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.time.toLowerCase()}`)) {
-        cmdTime.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.deop.toLowerCase()}`)) {
-        cmdDeop.executePlayer(client, message);
-      } else if (message.startsWith(`/${lang.commands.listc.toLowerCase()}`)) {
-        cmdList.executePlayer(client);
-      } else if (message.startsWith(`/${lang.commands.me.toLowerCase()}`)) {
-        cmdMe.executePlayer(client, message);
+        const commandsToExecute = {
+          [commands.ver]: cmdVer,
+          [commands.version]: cmdVer,
+          [commands.pl]: cmdPl,
+          [commands.plugins]: cmdPl,
+          [commands.stop]: cmdStop,
+          [commands.say]: cmdSay,
+          [commands.op]: cmdOp,
+          [commands.kick]: cmdKick,
+          [commands.time]: cmdTime,
+          [commands.deop]: cmdDeop,
+          [commands.list]: cmdList,
+          [commands.me]: cmdMe,
+        };
+
+        const commandFound = Object.keys(commandsToExecute).find((command) => message.startsWith(command));
+
+        if (commandFound) {
+          commandsToExecute[commandFound].executePlayer(client, message);
+        }
       }
     }
   }

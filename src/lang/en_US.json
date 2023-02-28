@@ -10,7 +10,6 @@
     "op": "op",
     "pl": "pl",
     "say": "say",
-    "shutdown": "shutdown",
     "stop": "stop",
     "time": "time",
     "ver": "ver",
@@ -32,7 +31,6 @@
     "versionHelp": "%green%version %white%- %blue%Shows the server version",
     "timeHelp": "%green%time %cyan%[time] %white%- %blue%Changes the world's game time",
     "meHelp": "%green%me %cyan%[message] %white%- %blue%Displays message about yourself",
-    "shutdownHelp": "%green%shutdown %white%- %blue%Stops a server",
     "plHelp": "%green%pl %white%- %blue%Shows the server plugins",
     "opHelp": "%green%op %white%- %blue%Grants operator status to a player",
     "deopHelp": "%green%deop %white%- %blue%Revokes operator status from a player",
@@ -52,12 +50,12 @@
     "plugins": "Plugins",
     "sayCommandFormat": "[%sender%] %message%",
     "opped": "Opped %player%",
-    "deopped": "Deopped %player%",
+    "deOpped": "Deopped %player%",
     "notOp": "The player is not opped!",
     "deopFail": "Failed to remove OP status from that player",
     "opFail": "Failed to give OP status to that player",
     "executedCmd": "%player% executed a server command: %cmd%",
-    "playerlist": "There are %info% players online:"
+    "playerList": "There are %info% players online:"
   },
   "commandhander": {
     "cchs": "The console command handler has been started",
@@ -80,14 +78,15 @@
     "kickedPrefix": "You were kicked for: ",
     "noReason": "No reason",
     "kickedConsoleMsg": "Kicked %player% for: %reason%",
-    "playerDisconnected": "Player has disconnected from the server",
+    "playerDisconnected": "Client disconnected",
     "internalServerError": "§cInternal server error",
     "invalidChatMessage": "§cInvalid message in chat",
     "serverShutdown": "§cServer shutdown",
     "invalidUsername": "§cThe username you sent is invalid",
     "resourcePacksRefused": "§cYou must accept resource packs to join this server",
-    "kickedByPlugin": "§cDisconnected",
-    "versionMismatch": "§cUnsupported version! Please use %version%"
+    "kickedByPlugin": "disconnectionScreen.noReason",
+    "versionMismatch": "§cUnsupported version! Please use %version%",
+    "serverFull": "disconnectionScreen.serverFull"
   },
   "errors": {
     "debugWarning": "Debug is enabled! Use this only if you are developer and never use this thing in production",
@@ -97,7 +96,7 @@
     "illegalMessage": "%player% sent an invalid message. Message content was: %msg%",
     "listeningFailed": "Failed to listen on %address% | Error: %error%",
     "playerOffline": "Player not found",
-    "playerUnknownCommand": "§cUnknown command. Type /help for a list of commands",
+    "playerUnknownCommandOrNoPermission": "§cUnknown command: %commandname%. Please check that the command exists and that you have permission to use it.",
     "failedToLoadPlugin": "Failed to load plugin \"%name%\". The error was: %errorstack%",
     "failedToExecFunction": "Failed to execute function in plugin \"%plugin%\". Error: %e%",
     "noPluginName": "No plugin name! %plugin%",
@@ -112,10 +111,12 @@
     "targetServerNull": "Packet processing error: The target server is null!",
     "sendToInvalidServer": "Packet processing error: The target server port is invalid! Must be number between 0 and 65535",
     "invalidTimePacket": "Packet processing error: Invalid time. Must be number between 0 and 2147483647",
-    "gmbypass": "An attempt to get items from creative mode, while the player is not in creative mode",
-    "failedtohandleitem": "Failed to handle item request from %data%",
-    "notsupportedactionid": "Not supported packet data: packet = open_inventory, action_id = %ai%",
-    "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file"
+    "itemExploit": "An attempt to get items from creative mode, while the player is not in creative mode",
+    "failedToHandleItemRequest": "Failed to handle item request from %data%",
+    "notSupportedActionID": "Not supported packet data: packet = open_inventory, action_id = %ai%",
+    "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file",
+    "failedToLoadWorld": "Failed to load world! Make sure the chunks.json and gamerules.json exist!",
+    "failedToLoadWorld_InvalidChunkData": "Failed to load world! The chunks are corrupted"
   },
   "server": {
     "listeningOn": "Listening on port %address%",
@@ -149,6 +150,7 @@
     "broadcastmessage": "(broadcast) %msg%"
   },
   "other": {
-    "unknown": "unknown"
+    "unknown": "unknown",
+    "server": "Server"
   }
 }

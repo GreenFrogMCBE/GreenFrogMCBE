@@ -11,14 +11,15 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const PacketHandlingError = require("../exceptions/PacketHandlingError");
-const InventorySlot = require("../InventorySlot");
+const GameModeLegacy = require("../types/GameModeLegacy");
 const { lang } = require("../../../server/ServerInfo");
+const InventorySlot = require("../InventorySlot");
 const Logger = require("../../../server/Logger");
 const Handler = require("./Handler");
 
 class ItemStackRequest extends Handler {
   validate(client) {
-    if (client.gamemode !== 1) throw new PacketHandlingError(lang.gmbypass);
+    if (client.gamemode !== GameModeLegacy.CREATIVE) throw new PacketHandlingError(lang.itemExploit);
   }
 
   handle(client, packet) {
@@ -71,7 +72,7 @@ class ItemStackRequest extends Handler {
       }
     } catch (e) {
       Logger.log(
-        lang.failedtohandleitem.replace(
+        lang.failedToHandleItemRequest.replace(
           "%data%",
           `${client.username}: ${e.stack}`
         ),

@@ -28,12 +28,12 @@ class Interact extends Handler {
         break;
       }
       case "mouse_over_entity": {
-        // TODO: Pvp is not implemented yet
+        // TODO: PVP is not implemented yet
         break;
       }
       default: {
         throw new PacketHandlingError(
-          lang.notsupportedactionid.replace(
+          lang.notSupportedActionID.replace(
             "%ai%",
             packet.data.params.action_id
           )

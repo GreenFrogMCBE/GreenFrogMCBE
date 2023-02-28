@@ -28,10 +28,10 @@ const NetworkChunkPublisherUpdate = require("../../../network/packets/NetworkChu
 const PlayerResourcePacksCompletedEvent = require("../../../plugin/events/PlayerResourcePacksCompletedEvent");
 const PlayerHasNoResourcePacksInstalledEvent = require("../../../plugin/events/PlayerHasNoResourcePacksInstalledEvent");
 const PlayerListTypes = require("../../../network/packets/types/PlayerList");
-const CommandShutdown = require("../../../server/commands/CommandShutdown");
 const CommandVersion = require("../../../server/commands/CommandVersion");
-const VersionToProtocol = require("../../../server/VersionToProtocol");
+const PacketHandlingError = require("../exceptions/PacketHandlingError");
 const Dimension = require("../../../network/packets/types/Dimension");
+const CommandStop = require("../../../server/commands/CommandStop");
 const CommandKick = require("../../../server/commands/CommandKick");
 const CommandList = require("../../../server/commands/CommandList");
 const CommandDeop = require("../../../server/commands/CommandDeop");
@@ -51,18 +51,10 @@ const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const LevelChunk = require("../LevelChunk");
 const fs = require("fs");
+const ItemComponent = require("../ItemComponent");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
-    if (
-      !(client.version === VersionToProtocol.getProtocol(config.version)) &&
-      !config.multiProtocol
-    ) {
-      client.kick(
-        lang.kickmessages.versionMismatch.replace("%version%", config.version)
-      );
-      return;
-    }
 
     switch (packet.data.params.response_status) {
       case "none": {
@@ -134,19 +126,20 @@ class ResourcePackClientResponse extends Handler {
           startgame.setDifficulty(Difficulty.NORMAL);
           startgame.setSpawnPosition(0, 0, 0);
           startgame.setPlayerPermissionLevel(client.permlevel);
+          startgame.setWorldName(require("..\\..\\..\\..\\world\\world_settings.json").worldname)
           startgame.send(client);
 
           const biomedeflist = new BiomeDefinitionList();
-          biomedeflist.setValue(require("../res/biomes.json"));
+          biomedeflist.setValue(require("..\\res\\biomes.json"));
           biomedeflist.send(client);
 
           const availableentityids = new AvailableEntityIdentifiers();
-          availableentityids.setValue(require("../res/entities.json"));
+          availableentityids.setValue(require("..\\res\\entities.json"));
           availableentityids.send(client);
 
           const creativecontent = new CreativeContent();
           creativecontent.setItems(
-            require("../res/creativeContent.json").items
+            require("..\\res\\creativeContent.json").items
           );
           creativecontent.send(client);
 
@@ -206,8 +199,8 @@ class ResourcePackClientResponse extends Handler {
             if (config.playerCommandStop) {
               commandmanager.addCommand(
                 client,
-                new CommandShutdown().name().toLowerCase(),
-                new CommandShutdown().getPlayerDescription()
+                new CommandStop().name().toLowerCase(),
+                new CommandStop().getPlayerDescription()
               );
             }
             if (config.playerCommandSay) {
@@ -247,41 +240,59 @@ class ResourcePackClientResponse extends Handler {
             }
           }
 
-          const chunkradiusupdate = new ChunkRadiusUpdate();
-          chunkradiusupdate.setChunkRadius(32);
-          chunkradiusupdate.send(client);
-
-          const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-          networkchunkpublisher.setCords(-81, 158, -52);
-          networkchunkpublisher.setRadius(272);
-          networkchunkpublisher.setSavedChunks([]);
-          networkchunkpublisher.send(client);
-
-          const chunks = require(__dirname +
-            "\\..\\..\\..\\..\\world\\chunks.json");
-
-          for (const chunk of chunks) {
-            const levelchunk = new LevelChunk();
-            levelchunk.setX(chunk.x);
-            levelchunk.setZ(chunk.z);
-            levelchunk.setSubChunkCount(chunk.sub_chunk_count);
-            levelchunk.setCacheEnabled(chunk.cache_enabled);
-            try {
-              levelchunk.setPayload(chunk.payload.data);
-            } catch (e) {
-              throw new Error("Invalid chunk data!");
-            }
-            levelchunk.send(client);
+          // This packet is used to set custom items
+          const itemcomponent = new ItemComponent()
+          try {
+            itemcomponent.setItems(require("..\\..\\..\\..\\world\\custom_items.json").items)
+          } catch (e) {
+            itemcomponent.setItems([])
           }
 
-          setInterval(() => {
-            if (client.offline) return;
+          itemcomponent.send(client)
+
+          if (config.renderChunks) {
+            const chunkradiusupdate = new ChunkRadiusUpdate();
+            chunkradiusupdate.setChunkRadius(32);
+            chunkradiusupdate.send(client);
+
             const networkchunkpublisher = new NetworkChunkPublisherUpdate();
             networkchunkpublisher.setCords(-81, 158, -52);
             networkchunkpublisher.setRadius(272);
             networkchunkpublisher.setSavedChunks([]);
             networkchunkpublisher.send(client);
-          }, 4500);
+
+            let chunks = null
+
+            try {
+              chunks = require(__dirname +
+                "\\..\\..\\..\\..\\world\\chunks.json");
+            } catch (e) {
+              throw new PacketHandlingError(lang.failedToLoadWorld)
+            }
+
+            for (const chunk of chunks) {
+              const levelchunk = new LevelChunk();
+              levelchunk.setX(chunk.x);
+              levelchunk.setZ(chunk.z);
+              levelchunk.setSubChunkCount(chunk.sub_chunk_count);
+              levelchunk.setCacheEnabled(chunk.cache_enabled);
+              try {
+                levelchunk.setPayload(chunk.payload.data);
+              } catch (e) {
+                throw new Error(lang.failedToLoadWorld_InvalidChunkData);
+              }
+              levelchunk.send(client);
+            }
+
+            setInterval(() => {
+              if (client.offline) return;
+              const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+              networkchunkpublisher.setCords(-81, 158, -52);
+              networkchunkpublisher.setRadius(272);
+              networkchunkpublisher.setSavedChunks([]);
+              networkchunkpublisher.send(client);
+            }, 4500);
+          }
 
           setTimeout(() => {
             for (let i = 0; i < PlayerInfo.players; i++) {
@@ -312,6 +323,7 @@ class ResourcePackClientResponse extends Handler {
           setTimeout(() => {
             if (client.offline) return;
             for (let i = 0; i < PlayerInfo.players.length; i++) {
+              if (PlayerInfo.players[i].username == client.username) return; // Vanilla behaviour
               PlayerInfo.players[i].sendMessage(
                 lang.broadcasts.joinedTheGame.replace(
                   "%username%",
