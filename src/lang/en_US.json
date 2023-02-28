@@ -135,7 +135,7 @@
     "ignoredPacket": "Ignored packet: %packet%",
     "debug": "DEBUG",
     "unhandledPacket": "Unhandled packet",
-    "unhandledPacketData": "Warning: Unhandled packet data: %data%",
+    "unhandledPacketData": "Unhandled packet data: ",
     "unstableWarning": "Unstable mode is enabled! This may make your server unstable and will cause more lag"
   },
   "logger": {

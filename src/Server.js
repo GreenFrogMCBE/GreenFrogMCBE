@@ -25,6 +25,7 @@ const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
 const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponse");
 const ServerInternalServerErrorEvent = require("./plugin/events/ServerInternalServerErrorEvent");
+const InventoryTransaction = require("./network/packets/handlers/InventoryTransaction");
 const ModalFormResponse = require("./network/packets/handlers/ModalFormResponse");
 const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
@@ -107,9 +108,12 @@ module.exports = {
       case "modal_form_response":
         new ModalFormResponse().handle(this.server, client, packet);
         break;
+      case "inventory_transaction":
+        new InventoryTransaction().handle(this.server, client, packet);
+        break;
       default:
-        if (config.logUnhandledPackets || process.argv.includes("--debug")) {
-          Logger.log(lang.devdebug.unhandledPacket, "warning");
+        if (config.logUnhandledPackets) {
+          Logger.log(lang.devdebug.unhandledPacket, "debug");
           console.log("%o", packet);
         }
         break;
