@@ -59,7 +59,7 @@ module.exports = {
         GameMode.SURVIVAL,
         GameMode.CREATIVE,
         GameMode.ADVENTURE,
-        GameMode.SEPCTATOR,
+        GameMode.SPECTATOR,
         GameMode.FALLBACK,
       ];
       if (!validGamemodes.includes(gamemode))
