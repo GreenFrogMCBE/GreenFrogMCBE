@@ -29,7 +29,6 @@ module.exports = {
     try {
       for (let i = 0; i < playersOnline.length; i++) {
         if (playersOnline[i].username === player) {
-          console.log(playersOnline[i].username, player);
           return playersOnline[i];
         }
       }
