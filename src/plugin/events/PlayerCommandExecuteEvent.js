@@ -15,6 +15,7 @@ const Event = require("./Event");
 const Logger = require("../../server/Logger");
 const { config, lang } = require("../../server/ServerInfo");
 const CommandPl = require("../../server/commands/CommandPl");
+const CommandMe = require("../../server/commands/CommandMe");
 const CommandOp = require("../../server/commands/CommandOp");
 const CommandManager = require("../../player/CommandManager");
 const CommandSay = require("../../server/commands/CommandSay");
@@ -25,9 +26,9 @@ const CommandDeop = require("../../server/commands/CommandDeop");
 const CommandStop = require("../../server/commands/CommandStop");
 const CommandVersion = require("../../server/commands/CommandVersion");
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
+const CommandGamemode = require("../../server/commands/CommandGamemode");
 
 const fs = require("fs");
-const CommandMe = require("../../server/commands/CommandMe");
 
 class PlayerCommandExecuteEvent extends Event {
   constructor() {
@@ -70,6 +71,7 @@ class PlayerCommandExecuteEvent extends Event {
           .replace("%cmd%", message)
       );
 
+      const cmdGamemode = new CommandGamemode()
       const cmdManager = new CommandManager();
       const cmdVer = new CommandVersion();
       const cmdPl = new CommandPl();
@@ -109,6 +111,7 @@ class PlayerCommandExecuteEvent extends Event {
           deop: `/${lang.commands.deop.toLowerCase()}`,
           list: `/${lang.commands.listc.toLowerCase()}`,
           me: `/${lang.commands.me.toLowerCase()}`,
+          gamemode: `/gamemode`,
         };
 
         const commandsToExecute = {
@@ -124,6 +127,7 @@ class PlayerCommandExecuteEvent extends Event {
           [commands.deop]: cmdDeop,
           [commands.list]: cmdList,
           [commands.me]: cmdMe,
+          [commands.gamemode]: cmdGamemode,
         };
 
         const commandFound = Object.keys(commandsToExecute).find((command) => message.startsWith(command));

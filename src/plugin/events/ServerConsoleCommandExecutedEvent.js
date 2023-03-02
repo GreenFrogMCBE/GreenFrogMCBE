@@ -12,6 +12,7 @@
  */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-unused-vars */
+const Gamemode = require("../../server/commands/CommandGamemode");
 const Version = require("../../server/commands/CommandVersion");
 const Stop = require("../../server/commands/CommandStop");
 const Kick = require("../../server/commands/CommandKick");

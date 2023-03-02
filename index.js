@@ -86,7 +86,6 @@ consoleCommandOp: true
 consoleCommandDeop: true
 consoleCommandHelp: true
 consoleCommandList: true
-consoleCommandMe: true
 playerCommandVersion: true
 playerCommandPlugins: true
 playerCommandStop: true
@@ -96,7 +95,7 @@ playerCommandKick: true
 playerCommandTime: true
 playerCommandDeop: true
 playerCommandList: true
-playerCommandMe: true`
+playerCommandGamemode: true`
     );
   }
   const Frog = require("./src/Server.js");

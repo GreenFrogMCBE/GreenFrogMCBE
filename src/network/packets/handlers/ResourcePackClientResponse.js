@@ -28,6 +28,7 @@ const NetworkChunkPublisherUpdate = require("../../../network/packets/NetworkChu
 const PlayerResourcePacksCompletedEvent = require("../../../plugin/events/PlayerResourcePacksCompletedEvent");
 const PlayerHasNoResourcePacksInstalledEvent = require("../../../plugin/events/PlayerHasNoResourcePacksInstalledEvent");
 const PlayerListTypes = require("../../../network/packets/types/PlayerList");
+const CommandGamemode = require("../../../server/commands/CommandGamemode");
 const CommandVersion = require("../../../server/commands/CommandVersion");
 const PacketHandlingError = require("../exceptions/PacketHandlingError");
 const Dimension = require("../../../network/packets/types/Dimension");
@@ -237,6 +238,13 @@ class ResourcePackClientResponse extends Handler {
                 new CommandDeop().name().toLowerCase(),
                 new CommandDeop().getPlayerDescription()
               );
+            }
+            if (config.playerCommandGamemode) {
+              commandmanager.addCommand(
+                client,
+                new CommandGamemode().name().toLowerCase(),
+                new CommandGamemode().getPlayerDescription()
+              )
             }
           }
 
