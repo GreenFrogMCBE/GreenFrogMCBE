@@ -88,8 +88,7 @@ class CommandPl extends require("./Command") {
     player.sendMessage(
       `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${
         ColorsPlayer.reset
-      }`,
-      "info"
+      }`
     );
   }
 }

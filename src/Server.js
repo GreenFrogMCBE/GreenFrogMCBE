@@ -35,6 +35,7 @@ const VersionToProtocol = require("./server/VersionToProtocol");
 const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
+const LogTypes = require("./server/LogTypes");
 
 let clients = [];
 let server = null;
@@ -68,10 +69,10 @@ module.exports = {
         ),
         "error"
       );
-      Logger.log(lang.errors.otherServerRunning, "error");
+      Logger.log(lang.errors.otherServerRunning, LogTypes.ERROR);
       process.exit(config.crashCode);
     } else {
-      Logger.log(`Server error: \n${err.stack}`, "error");
+      Logger.log(`Server error: \n${err.stack}`, LogTypes.ERROR);
       if (!config.unstable) process.exit(config.crashCode);
     }
   },
@@ -113,7 +114,7 @@ module.exports = {
         break;
       default:
         if (config.logUnhandledPackets) {
-          Logger.log(lang.devdebug.unhandledPacket, "debug");
+          Logger.log(lang.devdebug.unhandledPacket, LogTypes.WARNING);
           console.log("%o", packet);
         }
         break;
@@ -163,9 +164,9 @@ module.exports = {
    * It logs a warning if the config.debug or config.unstable is true.
    */
   async initDebug() {
-    if (config.unstable) Logger.log(lang.devdebug.unstableWarning, "warning");
+    if (config.unstable) Logger.log(lang.devdebug.unstableWarning, LogTypes.WARNING);
     if (process.env.DEBUG === "minecraft-protocol" || config.debug)
-      Logger.log(lang.errors.debugWarning, "warning");
+      Logger.log(lang.errors.debugWarning, LogTypes.WARNING);
   },
 
   /**
@@ -190,7 +191,7 @@ module.exports = {
 
     await this.initDebug();
 
-    Logger.log(`${lang.commandhander.scch}`, "debug");
+    Logger.log(`${lang.commandhander.scch}`, LogTypes.DEBUG);
     await PluginLoader.loadPlugins();
 
     this.listen();
@@ -239,7 +240,7 @@ module.exports = {
               lang.errors.packetHandlingException
                 .replace("%player%", client.username)
                 .replace("%error%", e.stack),
-              "error"
+                LogTypes.ERROR
             );
           }
         });
@@ -249,7 +250,7 @@ module.exports = {
         `${lang.errors.listeningFailed
           .replace(`%address%`, `/${config.host}:${config.port}`)
           .replace("%error%", e.stack)}`,
-        "error"
+        LogTypes.ERROR
       );
       process.exit(config.exitCode);
     }

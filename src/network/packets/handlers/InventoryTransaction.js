@@ -1,6 +1,7 @@
 /* eslint-disable no-case-declarations */
 const BlockBreakEvent = require("../../../plugin/events/BlockBreakEvent");
 const Logger = require("../../../server/Logger");
+const LogTypes = require("../../../server/LogTypes");
 const { config, lang } = require("../../../server/ServerInfo")
 const Handler = require("./Handler");
 
@@ -23,7 +24,7 @@ class InventoryTransaction extends Handler {
                 break
             default:
                 if (config.logUnhandledPackets) {
-                    Logger.log(lang.devdebug.unhandledPacketData, "debug");
+                    Logger.log(lang.devdebug.unhandledPacketData, LogTypes.DEBUG);
                     console.log("%o", packet);
                 }
                 break

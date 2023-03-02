@@ -15,6 +15,7 @@ const Logger = require("../server/Logger");
 const { lang, config } = require("../server/ServerInfo");
 const PluginManager = require("./PluginManager");
 const CCH = require("../server/ConsoleCommandSender");
+const LogTypes = require("../server/LogTypes");
 
 let plugins = [];
 let count = 0;
@@ -53,7 +54,7 @@ module.exports = {
             } catch (ignored) {
               Logger.log(
                 lang.errors.packageJSONError.replace("%plugin%", file),
-                "warning"
+                LogTypes.WARNING
               );
             }
             try {
@@ -70,7 +71,7 @@ module.exports = {
                 lang.errors.failedToExecFunction
                   .replace("%plugin%", file)
                   .replace("%e%", e.stack),
-                "error"
+                LogTypes.ERROR
               );
             }
             plugins.push(file);
@@ -97,7 +98,7 @@ module.exports = {
             } catch (ignored) {
               Logger.log(
                 lang.errors.packageJSONError.replace("%plugin%", file),
-                "warning"
+                LogTypes.WARNING
               );
             }
             try {
@@ -119,7 +120,7 @@ module.exports = {
                 lang.errors.failedToExecFunction
                   .replace("%plugin%", file)
                   .replace("%e%", e.stack),
-                "error"
+                LogTypes.ERROR
               );
             }
           }

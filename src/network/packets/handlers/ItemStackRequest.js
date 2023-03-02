@@ -13,6 +13,7 @@
 const PacketHandlingError = require("../exceptions/PacketHandlingError");
 const GameModeLegacy = require("../types/GameModeLegacy");
 const { lang } = require("../../../server/ServerInfo");
+const LogTypes = require("../../../server/LogTypes");
 const InventorySlot = require("../InventorySlot");
 const Logger = require("../../../server/Logger");
 const Handler = require("./Handler");
@@ -76,7 +77,7 @@ class ItemStackRequest extends Handler {
           "%data%",
           `${client.username}: ${e.stack}`
         ),
-        "error"
+        LogTypes.ERROR
       );
     }
   }

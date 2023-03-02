@@ -47,12 +47,13 @@ const Biome = require("../../../network/packets/types/Biome");
 const ChunkRadiusUpdate = require("../ChunkRadiusUpdate");
 const ServerInfo = require("../../../server/ServerInfo");
 const PlayStatuses = require("../types/PlayStatuses");
+const LogTypes = require("../../../server/LogTypes");
 const Difficulty = require("../types/Difficulty");
+const ItemComponent = require("../ItemComponent");
 const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const LevelChunk = require("../LevelChunk");
 const fs = require("fs");
-const ItemComponent = require("../ItemComponent");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
@@ -349,7 +350,7 @@ class ResourcePackClientResponse extends Handler {
               "%data%",
               packet.data.params.response_status
             )
-          );
+          , LogTypes.WARNING);
     }
   }
 }

@@ -12,8 +12,9 @@
  */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-unused-vars */
-const Gamemode = require("../../server/commands/CommandGamemode");
+const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const Version = require("../../server/commands/CommandVersion");
+const { lang, config } = require("../../server/ServerInfo");
 const Stop = require("../../server/commands/CommandStop");
 const Kick = require("../../server/commands/CommandKick");
 const Help = require("../../server/commands/CommandHelp");
@@ -24,8 +25,6 @@ const Say = require("../../server/commands/CommandSay");
 const Op = require("../../server/commands/CommandOp");
 const PL = require("../../server/commands/CommandPl");
 const Me = require("../../server/commands/CommandMe");
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const { lang, config } = require("../../server/ServerInfo");
 const Logger = require("../../server/Logger");
 const Event = require("./Event");
 
