@@ -14,9 +14,9 @@
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const { lang, config } = require("../../server/ServerInfo");
 const PlayerInfo = require("../../player/PlayerInfo");
+const LogTypes = require("../../server/LogTypes");
 const Logger = require("../../server/Logger");
 const Event = require("./Event");
-
 const fs = require("fs");
 
 class PlayerChatEvent extends Event {
@@ -68,7 +68,7 @@ class PlayerChatEvent extends Event {
           lang.errors.illegalMessage
             .replace("%message%", message)
             .replace("%player%", client.username),
-          "warning"
+          LogTypes.WARNING
         );
         client.kick(lang.kickmessages.invalidChatMessage);
         return;

@@ -25,14 +25,17 @@ const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
 const ClientContainerClose = require("./network/packets/handlers/ClientContainerClose");
 const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponse");
 const ServerInternalServerErrorEvent = require("./plugin/events/ServerInternalServerErrorEvent");
+const InventoryTransaction = require("./network/packets/handlers/InventoryTransaction");
 const ModalFormResponse = require("./network/packets/handlers/ModalFormResponse");
 const ItemStackRequest = require("./network/packets/handlers/ItemStackRequest");
 const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
+const VersionToProtocol = require("./server/VersionToProtocol");
 const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
+const LogTypes = require("./server/LogTypes");
 
 let clients = [];
 let server = null;
@@ -66,10 +69,10 @@ module.exports = {
         ),
         "error"
       );
-      Logger.log(lang.errors.otherServerRunning, "error");
+      Logger.log(lang.errors.otherServerRunning, LogTypes.ERROR);
       process.exit(config.crashCode);
     } else {
-      Logger.log(`Server error: \n${err.stack}`, "error");
+      Logger.log(`Server error: \n${err.stack}`, LogTypes.ERROR);
       if (!config.unstable) process.exit(config.crashCode);
     }
   },
@@ -106,9 +109,12 @@ module.exports = {
       case "modal_form_response":
         new ModalFormResponse().handle(this.server, client, packet);
         break;
+      case "inventory_transaction":
+        new InventoryTransaction().handle(this.server, client, packet);
+        break;
       default:
-        if (config.logUnhandledPackets || process.argv.includes("--debug")) {
-          Logger.log(lang.devdebug.unhandledPacket, "warning");
+        if (config.logUnhandledPackets) {
+          Logger.log(lang.devdebug.unhandledPacket, LogTypes.WARNING);
           console.log("%o", packet);
         }
         break;
@@ -130,6 +136,20 @@ module.exports = {
 
     PlayerInfo.addPlayer(client);
 
+    if (PlayerInfo.players.length > config.maxPlayers) {
+      client.kick(lang.kickmessages.serverFull)
+      return
+    }
+
+    if (
+      !(client.version === VersionToProtocol.getProtocol(config.version)) &&
+      !config.multiProtocol
+    ) {
+      client.kick(
+        lang.kickmessages.versionMismatch.replace("%version%", config.version)
+      );
+      return;
+    }
     const responsepackinfo = new ResponsePackInfo();
     responsepackinfo.setMustAccept(true);
     responsepackinfo.setHasScripts(false);
@@ -144,9 +164,9 @@ module.exports = {
    * It logs a warning if the config.debug or config.unstable is true.
    */
   async initDebug() {
-    if (config.unstable) Logger.log(lang.devdebug.unstableWarning, "warning");
+    if (config.unstable) Logger.log(lang.devdebug.unstableWarning, LogTypes.WARNING);
     if (process.env.DEBUG === "minecraft-protocol" || config.debug)
-      Logger.log(lang.errors.debugWarning, "warning");
+      Logger.log(lang.errors.debugWarning, LogTypes.WARNING);
   },
 
   /**
@@ -171,7 +191,7 @@ module.exports = {
 
     await this.initDebug();
 
-    Logger.log(`${lang.commandhander.scch}`, "debug");
+    Logger.log(`${lang.commandhander.scch}`, LogTypes.DEBUG);
     await PluginLoader.loadPlugins();
 
     this.listen();
@@ -220,7 +240,7 @@ module.exports = {
               lang.errors.packetHandlingException
                 .replace("%player%", client.username)
                 .replace("%error%", e.stack),
-              "error"
+                LogTypes.ERROR
             );
           }
         });
@@ -230,7 +250,7 @@ module.exports = {
         `${lang.errors.listeningFailed
           .replace(`%address%`, `/${config.host}:${config.port}`)
           .replace("%error%", e.stack)}`,
-        "error"
+        LogTypes.ERROR
       );
       process.exit(config.exitCode);
     }

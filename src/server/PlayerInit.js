@@ -23,9 +23,9 @@ const PlayerTransferEvent = require("../plugin/events/PlayerTransferEvent");
 const PlayerGamemodeChangeEvent = require("../plugin/events/PlayerGamemodeChangeEvent");
 const ChangeDimension = require("../network/packets/ChangeDimension");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
+const PlayerList = require("../network/packets/PlayerList");
 const ServerInfo = require("../server/ServerInfo");
 const PlayerInfo = require("../player/PlayerInfo");
-const PlayerList = require("../network/packets/PlayerList");
 
 module.exports = {
   initPlayer(player) {
@@ -59,7 +59,7 @@ module.exports = {
         GameMode.SURVIVAL,
         GameMode.CREATIVE,
         GameMode.ADVENTURE,
-        GameMode.SEPCTATOR,
+        GameMode.SPECTATOR,
         GameMode.FALLBACK,
       ];
       if (!validGamemodes.includes(gamemode))
@@ -95,6 +95,12 @@ module.exports = {
       player.kicked = true;
 
       new PlayerKickEvent().execute(require("../Server").server, player, msg);
+
+      if (msg === 'disconnectionScreen.serverFull') {
+        msg = 'Wow this server is popular! Check back later to see if space opens up.';
+      } else if (msg === 'disconnectionScreen.noReason') {
+        msg = 'You were disconnected'
+      }
 
       Logger.log(
         lang.kickmessages.kickedConsoleMsg

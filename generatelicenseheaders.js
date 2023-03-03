@@ -56,7 +56,7 @@ const walk = (dir) => {
         }
         if (stats.isDirectory()) {
           walk(filePath);
-        } else if (path.extname(filePath) === ".js") {
+        } else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts") {
           addHeader(filePath);
         }
       });

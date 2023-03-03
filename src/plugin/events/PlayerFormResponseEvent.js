@@ -12,9 +12,6 @@
  */
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const { lang, config } = require("../../server/ServerInfo");
-const PlayerInfo = require("../../player/PlayerInfo");
-const Logger = require("../../server/Logger");
 const Event = require("./Event");
 
 const fs = require("fs");
