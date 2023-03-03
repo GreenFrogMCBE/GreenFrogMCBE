@@ -292,7 +292,7 @@ class ResourcePackClientResponse extends Handler {
             let chunks = null;
 
             try {
-              chunks = require(`${__dirname}/../../../../world/chunks${
+              chunks = require(`${__dirname}\\..\\..\\..\\..\\world\chunks${
                 config.generator == WorldGenerator.DEFAULT ? "" : "-flat"
               }.json`);
             } catch (e) {
