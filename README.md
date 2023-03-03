@@ -123,6 +123,8 @@ Our language system currently supports those languages: English, Lithuanian, Ukr
 
 For English language, set "language" to "en_US"
 
+## Warning: Lang system is temp disabled
+
 For Lithuanian language, set "language" to "lt_LT"
 
 For Ukrainian language, set "language" to "uk_UA"
