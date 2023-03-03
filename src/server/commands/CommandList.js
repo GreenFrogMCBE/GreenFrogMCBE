@@ -36,9 +36,9 @@ class CommandList extends require("./Command") {
       }
     }
 
-    let playercount = 0
+    let playercount = 0;
     for (let i = 0; i < PlayerInfo.players.length; i++) {
-      if (!PlayerInfo.players[i].offline) playercount++
+      if (!PlayerInfo.players[i].offline) playercount++;
     }
 
     if (!isconsole) {

@@ -18,8 +18,8 @@ const TestConfigs = require("./test/TestConfigs");
 const fs = require("fs");
 
 fs.writeFileSync(
-    "config.yml",
-    `# LISTENING
+  "config.yml",
+  `# LISTENING
 # 
 # This section contains the config for server host and port
 
@@ -105,51 +105,53 @@ playerCommandGamemode: true`
 console.log("Starting testing...");
 
 try {
-    StartServer.test();
+  StartServer.test();
 } catch (e) {
-    console.log("Tests failed! Failed to start the server! " + e.stack);
-    process.exit(-1);
+  console.log("Tests failed! Failed to start the server! " + e.stack);
+  process.exit(-1);
 }
 
 setTimeout(() => {
-    try {
-        TestConfigs.test();
-    } catch (e) {
-        console.log("Tests failed! Failed to test the configs! " + e.stack);
+  try {
+    TestConfigs.test();
+  } catch (e) {
+    console.log("Tests failed! Failed to test the configs! " + e.stack);
+    process.exit(-1);
+  } finally {
+    setTimeout(() => {
+      try {
+        ClientJoin.test();
+      } catch (e) {
+        console.log("Tests failed! Failed to join with client! " + e.stack);
         process.exit(-1);
-    } finally {
+      } finally {
         setTimeout(() => {
-            try {
-                ClientJoin.test();
-            } catch (e) {
-                console.log("Tests failed! Failed to join with client! " + e.stack);
-                process.exit(-1);
-            } finally {
-                setTimeout(() => {
-                    try {
-                        ClientRunCommand.test();
-                    } catch (e) {
-                        console.log("Tests failed! Failed to run command: /pl! " + e.stack);
-                        process.exit(-1);
-                    } finally {
-                        setTimeout(() => {
-                            setTimeout(() => {
-                                try {
-                                    ClientSendMessage.test();
-                                } catch (e) {
-                                    console.log("Tests failed! Failed to send a chat message! " + e.stack);
-                                    process.exit(-1);
-                                } finally {
-                                    setTimeout(() => {
-                                        console.log("Tests passed")
-                                        process.exit(-1)
-                                    }, 10000);
-                                }
-                            }, 3000);
-                        }, 10000);
-                    }
-                }, 10000);
-            }
+          try {
+            ClientRunCommand.test();
+          } catch (e) {
+            console.log("Tests failed! Failed to run command: /pl! " + e.stack);
+            process.exit(-1);
+          } finally {
+            setTimeout(() => {
+              setTimeout(() => {
+                try {
+                  ClientSendMessage.test();
+                } catch (e) {
+                  console.log(
+                    "Tests failed! Failed to send a chat message! " + e.stack
+                  );
+                  process.exit(-1);
+                } finally {
+                  setTimeout(() => {
+                    console.log("Tests passed");
+                    process.exit(-1);
+                  }, 10000);
+                }
+              }, 3000);
+            }, 10000);
+          }
         }, 10000);
-    }
+      }
+    }, 10000);
+  }
 }, 3500);

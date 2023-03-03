@@ -20,7 +20,8 @@ const Handler = require("./Handler");
 
 class ItemStackRequest extends Handler {
   validate(client) {
-    if (client.gamemode !== GameModeLegacy.CREATIVE) throw new PacketHandlingError(lang.itemExploit);
+    if (client.gamemode !== GameModeLegacy.CREATIVE)
+      throw new PacketHandlingError(lang.itemExploit);
   }
 
   handle(client, packet) {

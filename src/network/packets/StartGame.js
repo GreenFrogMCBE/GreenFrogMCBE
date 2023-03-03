@@ -36,7 +36,7 @@ let spawn = {
   z: 0,
 };
 let permission_level = 0;
-let world = ""
+let world = "";
 
 class StartGame extends require("./Packet") {
   /**
@@ -170,10 +170,10 @@ class StartGame extends require("./Packet") {
 
   /**
    * Sets the world name
-   * @param {String} worldname 
+   * @param {String} worldname
    */
   setWorldName(worldname) {
-    world = worldname
+    world = worldname;
   }
 
   /**
@@ -303,7 +303,7 @@ class StartGame extends require("./Packet") {
    * @returns The world name
    */
   getWorldName() {
-    return world
+    return world;
   }
 
   /**

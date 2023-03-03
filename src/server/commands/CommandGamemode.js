@@ -1,6 +1,18 @@
-const GameMode = require('../../player/GameMode');
-const { lang } = require('../ServerInfo');
-const Command = require('./Command');
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
+const GameMode = require("../../player/GameMode");
+const { lang } = require("../ServerInfo");
+const Command = require("./Command");
 
 class CommandGamemode extends Command {
   name() {
@@ -16,7 +28,7 @@ class CommandGamemode extends Command {
   }
 
   executePlayer(client, gamemode) {
-    const gamemodeArg = gamemode.split(' ')[1];
+    const gamemodeArg = gamemode.split(" ")[1];
     if (!gamemodeArg) {
       client.sendMessage(lang.commands.usageGamemode);
       return;
@@ -59,14 +71,20 @@ class CommandGamemode extends Command {
           client.setGamemode(GameMode.SPECTATOR);
           break;
         default:
-          client.sendMessage(lang.commands.gamemodeInvalid.replace('%gm%', gamemodeArg),);
+          client.sendMessage(
+            lang.commands.gamemodeInvalid.replace("%gm%", gamemodeArg)
+          );
           break;
       }
     } else {
       const selectedGamemodeName =
         selectedGamemode.charAt(0).toUpperCase() + selectedGamemode.slice(1);
-      client.sendMessage(`${lang.commands.gamemodeUpdated}${selectedGamemodeName}`);
-      client.sendMessage(`${lang.commands.setOwnGamemode}${selectedGamemodeName}`);
+      client.sendMessage(
+        `${lang.commands.gamemodeUpdated}${selectedGamemodeName}`
+      );
+      client.sendMessage(
+        `${lang.commands.setOwnGamemode}${selectedGamemodeName}`
+      );
       client.setGamemode(selectedGamemode);
     }
   }
