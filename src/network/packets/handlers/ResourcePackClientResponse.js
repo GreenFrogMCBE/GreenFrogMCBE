@@ -139,21 +139,21 @@ class ResourcePackClientResponse extends Handler {
           startgame.setSpawnPosition(0, 0, 0);
           startgame.setPlayerPermissionLevel(client.permlevel);
           startgame.setWorldName(
-            require("..\\..\\..\\..\\world\\world_settings.json").worldname
+            require(__dirname + "/../../../../world/world_settings.json").worldname
           );
           startgame.send(client);
 
           const biomedeflist = new BiomeDefinitionList();
-          biomedeflist.setValue(require("..\\res\\biomes.json"));
+          biomedeflist.setValue(require("../res/biomes.json"));
           biomedeflist.send(client);
 
           const availableentityids = new AvailableEntityIdentifiers();
-          availableentityids.setValue(require("..\\res\\entities.json"));
+          availableentityids.setValue(require("../res/entities.json"));
           availableentityids.send(client);
 
           const creativecontent = new CreativeContent();
           creativecontent.setItems(
-            require("..\\res\\creativeContent.json").items
+            require("../res/creativeContent.json").items
           );
           creativecontent.send(client);
 
@@ -265,7 +265,7 @@ class ResourcePackClientResponse extends Handler {
           const itemcomponent = new ItemComponent();
           try {
             itemcomponent.setItems(
-              require("..\\..\\..\\..\\world\\custom_items.json").items
+              require("../../../../world/custom_items.json").items
             );
           } catch (e) {
             itemcomponent.setItems([]);
@@ -292,7 +292,7 @@ class ResourcePackClientResponse extends Handler {
             let chunks = null;
 
             try {
-              chunks = require(`${__dirname}\\..\\..\\..\\..\\world\chunks${
+              chunks = require(`${__dirname}/../../../../world/chunks${
                 config.generator == WorldGenerator.DEFAULT ? "" : "-flat"
               }.json`);
             } catch (e) {
