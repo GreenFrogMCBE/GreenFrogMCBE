@@ -18,11 +18,11 @@ const { lang } = require("../server/ServerInfo");
 module.exports = {
   async shutdownServer() {
     await require("./ConsoleCommandSender").close();
-    Logger.log(lang.server.stoppingServer, "info");
+    Logger.log(lang.server.stoppingServer);
 
     try {
       for (const player of players) {
-        player.kick(lang.kickmessages.serverShutdown);
+        if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
       }
     } catch (e) {
       /* ignored */

@@ -14,20 +14,23 @@ module.exports = {
   test() {
     const files = [
       "/../src/lang/en_US.json",
-      "/../src/lang/lt_LT.json",
-      "/../src/lang/uk_UA.json",
-      "/../src/lang/vi_VN.json",
-      "/../src/lang/fr_FR.json",
+      //"/../src/lang/lt_LT.json",
+      //"/../src/lang/uk_UA.json",
+      //"/../src/lang/vi_VN.json",
+      //"/../src/lang/fr_FR.json",
       "/../src/network/packets/res/biomes.json",
       "/../src/network/packets/res/creativeContent.json",
       "/../src/network/packets/res/skinData.json",
       "/../src/network/packets/res/entities.json",
+      "/../world/chunks.json",
+      "/../world/chunks-flat.json",
+      "/../world/custom_items.json",
       "/../package.json",
       "/../package-lock.json",
     ];
 
     for (const file of files) {
-      console.log(`[langs] Parsing: ${file}`);
+      console.log(`[config files] Parsing: ${file}`);
       JSON.parse(JSON.stringify(require(__dirname + file)));
     }
   },

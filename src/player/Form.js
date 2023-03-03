@@ -15,6 +15,7 @@ const FormTypes = require("./FormTypes");
 
 class Form {
   // I used this code: https://github.com/Zwuiix-cmd/EasyProxy for examples
+  
   constructor() {
     this.type = FormTypes.FORM;
     this.title = "";

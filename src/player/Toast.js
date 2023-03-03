@@ -20,7 +20,7 @@ class Toast {
 
   /**
    * Sets the title.
-   * @param {string} title
+   * @param {String} title
    */
   setTitle(title) {
     this.title = title;
@@ -28,7 +28,7 @@ class Toast {
 
   /**
    * Sets the message.
-   * @param {string} message
+   * @param {String} message
    */
   setMessage(message) {
     this.message = message;

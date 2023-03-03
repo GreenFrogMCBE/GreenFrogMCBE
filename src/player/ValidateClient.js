@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../server/Logger");
+const LogTypes = require("../server/LogTypes");
 const { lang, config } = require("../server/ServerInfo");
 
 module.exports = {
@@ -29,9 +30,9 @@ module.exports = {
     client.op = false;
 
     if (client.username.includes(" ")) {
-      new Logger().log(
+      Logger.log(
         lang.errors.invalidUsernameWarning.replace("%player%", client.username),
-        "warning"
+        LogTypes.WARNING
       );
       client.usernameold = client.username;
       client.username = client.username.replace(" ", "_");

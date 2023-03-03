@@ -23,12 +23,7 @@ class CommandMe extends require("./Command") {
     return null;
   }
 
-  execute(msg, client = { username: "Server" }) {
-    if (!config.consoleCommandMe) {
-      Logger.log(lang.errors.unknownCommand);
-      return;
-    }
-
+  execute(msg = "", client = { username: lang.other.server }) {
     if (!msg.replace(/\s/g, "").length) {
       Logger.log(lang.commands.usageMe);
       return;

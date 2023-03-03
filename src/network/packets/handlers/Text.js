@@ -10,9 +10,10 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerInfo = require("../../../player/PlayerInfo");
-const Logger = require("../../../server/Logger");
 const { lang, config } = require("../../../server/ServerInfo");
+const PlayerInfo = require("../../../player/PlayerInfo");
+const LogTypes = require("../../../server/LogTypes");
+const Logger = require("../../../server/Logger");
 
 class Text extends require("./Handler") {
   handle(client, packet) {
@@ -31,7 +32,7 @@ class Text extends require("./Handler") {
           lang.errors.illegalMessage
             .replace("%msg%", msg)
             .replace("%player%", client.username),
-          "warning"
+          LogTypes.WARNING
         );
         client.kick(lang.kickmessages.invalidChatMessage);
         return;

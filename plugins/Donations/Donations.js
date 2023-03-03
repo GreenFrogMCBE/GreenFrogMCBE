@@ -46,7 +46,5 @@ module.exports = {
     }
   },
 
-  onShutdown() {
-    Logger.log("Donations > Bye!");
-  },
+  onShutdown() {},
 };

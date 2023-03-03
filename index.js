@@ -67,6 +67,7 @@ renderChunks: true
 gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 difficulty: 0 # Currently only visual
+generator: "default" # Can be default, flat (superflat), or void (empty)
 
 # Command settings
 # 
@@ -94,7 +95,8 @@ playerCommandOp: true
 playerCommandKick: true
 playerCommandTime: true
 playerCommandDeop: true
-playerCommandList: true`
+playerCommandList: true
+playerCommandGamemode: true`
     );
   }
   const Frog = require("./src/Server.js");

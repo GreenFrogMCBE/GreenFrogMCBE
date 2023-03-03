@@ -14,7 +14,8 @@ let playersOnline = [];
 
 module.exports = {
   /**
-   * @param player - A player.
+   * Adds player
+   * @param player
    */
   addPlayer(player) {
     playersOnline.push(player);
@@ -28,7 +29,6 @@ module.exports = {
     try {
       for (let i = 0; i < playersOnline.length; i++) {
         if (playersOnline[i].username === player) {
-          console.log(playersOnline[i].username, player);
           return playersOnline[i];
         }
       }

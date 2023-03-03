@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const { lang } = require("../../../server/ServerInfo");
+const LogTypes = require("../../../server/LogTypes");
 const Logger = require("../../../server/Logger");
 
 module.exports = {
@@ -25,7 +26,7 @@ module.exports = {
         .replace("%plugin%", plugin)
         .replace("%event%", name)
         .replace("%e%", e.stack),
-      "error"
+      LogTypes.ERROR
     );
   },
 };
