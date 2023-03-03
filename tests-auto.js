@@ -144,7 +144,7 @@ setTimeout(() => {
                 } finally {
                   setTimeout(() => {
                     console.log("Tests passed");
-                    process.exit(-1);
+                    process.exit(0);
                   }, 10000);
                 }
               }, 3000);
