@@ -28,11 +28,6 @@ class CommandPl extends require("./Command") {
   }
 
   execute() {
-    if (!config.consoleCommandPlugins) {
-      Logger.log(lang.errors.playerUnknownCommand);
-      return;
-    }
-
     let plugins;
     if (PluginManager.getPlugins() == null) {
       plugins = 0;
@@ -93,8 +88,7 @@ class CommandPl extends require("./Command") {
     player.sendMessage(
       `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${
         ColorsPlayer.reset
-      }`,
-      "info"
+      }`
     );
   }
 }

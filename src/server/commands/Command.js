@@ -14,31 +14,30 @@ class Command {
   constructor() {}
 
   /**
-   * It's a function named `name` returns the command name
+   * Returns the command name
+   * @returns {String} Command name
    */
   name() {}
 
   /**
-   * `aliases()` is a function that returns an array of aliases
+   * Returns the command aliases
+   * @returns {Array} Command aliases
    */
   aliases() {}
 
   /**
-   * It executes the command code
-   * @param args - The arguments that the user has typed in.
-   * @param server - The server object.
+   * It executes the command
    */
   execute() {}
 
   /**
-   * It returns the command description for player.
+   * Returns the command description for in-game tab complete
+   * @returns In-game command description
    */
   getPlayerDescription() {}
 
   /**
    * It executes the command code as a player
-   * @param client - The client that is executing the command.
-   * @param args - The arguments that the user has typed in.
    */
   executePlayer() {}
 }

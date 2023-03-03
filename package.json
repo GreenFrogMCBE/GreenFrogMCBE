@@ -10,15 +10,16 @@
     "dev": "nodemon --signal SIGINT index.js --debug",
     "gencoryrightheader": "node generatelicenseheaders.js",
     "build": "npm run gencoryrightheader && npm run format",
-    "test": "node tests.js"
+    "autotest": "node tests-auto.js",
+    "test": "node tests-manual.js"
   },
   "dependencies": {
     "frog-protocol": "git+https://github.com/greenfrogmc/Protocol.git",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
-    "eslint": "8.34.0",
     "nodemon": "^2.0.21",
+    "eslint": "8.35.0",
     "prettier": "2.8.4"
   }
 }

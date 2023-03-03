@@ -24,10 +24,6 @@ class CommandSay extends require("./Command") {
   }
 
   execute(args) {
-    if (!config.consoleCommandSay) {
-      Logger.log(lang.errors.unknownCommand);
-      return;
-    }
     if (!args) {
       Logger.log(lang.commands.usageSay);
       return;

@@ -29,11 +29,6 @@ class CommandTime extends require("./Command") {
   }
 
   execute(args) {
-    if (!config.consoleCommandTime) {
-      Logger.log(lang.errors.unknownCommand);
-      return;
-    }
-
     if (!args) {
       Logger.log(lang.commands.usageTime);
       return;

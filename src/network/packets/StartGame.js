@@ -36,6 +36,7 @@ let spawn = {
   z: 0,
 };
 let permission_level = 0;
+let world = ""
 
 class StartGame extends require("./Packet") {
   /**
@@ -168,6 +169,14 @@ class StartGame extends require("./Packet") {
   }
 
   /**
+   * Sets the world name
+   * @param {String} worldname 
+   */
+  setWorldName(worldname) {
+    world = worldname
+  }
+
+  /**
    * It returns the spawn position
    * @returns {Number} - The permission level
    */
@@ -290,6 +299,14 @@ class StartGame extends require("./Packet") {
   }
 
   /**
+   * It returns the world name
+   * @returns The world name
+   */
+  getWorldName() {
+    return world
+  }
+
+  /**
    * @param client - The client that will receive the packet
    */
   send(client) {
@@ -350,8 +367,8 @@ class StartGame extends require("./Packet") {
       experimental_gameplay_override: false,
       chat_restriction_level: "none",
       disable_player_interactions: false,
-      level_id: "GreenFrogMCBE",
-      world_name: "GreenFrogMCBE",
+      level_id: this.getWorldName(),
+      world_name: this.getWorldName(),
       premium_world_template_id: "00000000-0000-0000-0000-000000000000",
       is_trial: false,
       movement_authority: "client",

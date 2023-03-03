@@ -24,11 +24,6 @@ class CommandList extends require("./Command") {
   }
 
   execute(isconsole = true, client) {
-    if (!config.consoleCommandList) {
-      Logger.log(lang.errors.unknownCommand);
-      return;
-    }
-
     let players = "";
 
     for (let i = 0; i < PlayerInfo.players.length; i++) {
@@ -41,26 +36,31 @@ class CommandList extends require("./Command") {
       }
     }
 
+    let playercount = 0
+    for (let i = 0; i < PlayerInfo.players.length; i++) {
+      if (!PlayerInfo.players[i].offline) playercount++
+    }
+
     if (!isconsole) {
       client.sendMessage(
-        lang.commands.playerlist.replace(
+        lang.commands.playerList.replace(
           "%info%",
-          `${PlayerInfo.players.length}/${config.maxPlayers}`
+          `${playercount}/${config.maxPlayers}`
         )
       );
-      if (Number(PlayerInfo.players.length) > 0) {
+      if (playercount > 0) {
         client.sendMessage(players);
       }
       return;
     }
 
     Logger.log(
-      lang.commands.playerlist.replace(
+      lang.commands.playerList.replace(
         "%info%",
-        `${PlayerInfo.players.length}/${config.maxPlayers}`
+        `${playercount}/${config.maxPlayers}`
       )
     );
-    if (Number(PlayerInfo.players.length) > 0) {
+    if (playercount > 0) {
       Logger.log(players);
     }
   }

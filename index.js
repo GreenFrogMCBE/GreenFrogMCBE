@@ -94,7 +94,8 @@ playerCommandOp: true
 playerCommandKick: true
 playerCommandTime: true
 playerCommandDeop: true
-playerCommandList: true`
+playerCommandList: true
+playerCommandGamemode: true`
     );
   }
   const Frog = require("./src/Server.js");

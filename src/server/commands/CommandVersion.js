@@ -36,11 +36,6 @@ class CommandVersion extends require("./Command") {
   }
 
   executePlayer(client) {
-    if (!config.playerCommandVersion) {
-      client.sendMessage(lang.errors.playerUnknownCommand);
-      return;
-    }
-
     client.sendMessage(
       "§7" + lang.commands.verInfo.replace("%version%", serverversion)
     );
