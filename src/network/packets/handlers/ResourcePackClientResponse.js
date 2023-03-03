@@ -58,7 +58,6 @@ const fs = require("fs");
 
 class ResourcePackClientResponse extends Handler {
   handle(client, packet, server) {
-
     switch (packet.data.params.response_status) {
       case "none": {
         new PlayerHasNoResourcePacksInstalledEvent().execute(server, client);
@@ -125,7 +124,9 @@ class ResourcePackClientResponse extends Handler {
           } else if (config.generator === WorldGenerator.VOID) {
             startgame.setPlayerPosition(0, 100, 0);
           } else {
-            throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator)
+            throw new ChunkError(
+              lang.errors.failedToLoadWorld_InvalidGenerator
+            );
           }
           startgame.setPlayerRotation(1, 1);
           startgame.setSeed(-1);
@@ -137,7 +138,9 @@ class ResourcePackClientResponse extends Handler {
           startgame.setDifficulty(Difficulty.NORMAL);
           startgame.setSpawnPosition(0, 0, 0);
           startgame.setPlayerPermissionLevel(client.permlevel);
-          startgame.setWorldName(require("..\\..\\..\\..\\world\\world_settings.json").worldname)
+          startgame.setWorldName(
+            require("..\\..\\..\\..\\world\\world_settings.json").worldname
+          );
           startgame.send(client);
 
           const biomedeflist = new BiomeDefinitionList();
@@ -254,27 +257,31 @@ class ResourcePackClientResponse extends Handler {
                 client,
                 new CommandGamemode().name().toLowerCase(),
                 new CommandGamemode().getPlayerDescription()
-              )
+              );
             }
           }
 
           // This packet is used to set custom items
-          const itemcomponent = new ItemComponent()
+          const itemcomponent = new ItemComponent();
           try {
-            itemcomponent.setItems(require("..\\..\\..\\..\\world\\custom_items.json").items)
+            itemcomponent.setItems(
+              require("..\\..\\..\\..\\world\\custom_items.json").items
+            );
           } catch (e) {
-            itemcomponent.setItems([])
+            itemcomponent.setItems([]);
           }
 
-          itemcomponent.send(client)
+          itemcomponent.send(client);
 
           if (config.renderChunks) {
             const chunkradiusupdate = new ChunkRadiusUpdate();
             chunkradiusupdate.setChunkRadius(32);
             chunkradiusupdate.send(client);
 
-            const cords = (config.generator == WorldGenerator.DEFAULT) ?
-              { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
+            const cords =
+              config.generator == WorldGenerator.DEFAULT
+                ? { x: -81, y: 158, z: -52 }
+                : { x: 13, y: 155, z: -28 };
 
             const networkchunkpublisher = new NetworkChunkPublisherUpdate();
             networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
@@ -285,9 +292,13 @@ class ResourcePackClientResponse extends Handler {
             let chunks = null;
 
             try {
-              chunks = require(`${__dirname}/../../../../world/chunks${(config.generator == WorldGenerator.DEFAULT) ? '' : '-flat'}.json`);
+              chunks = require(`${__dirname}/../../../../world/chunks${
+                config.generator == WorldGenerator.DEFAULT ? "" : "-flat"
+              }.json`);
             } catch (e) {
-              throw new ChunkError(lang.errors.failedToLoadWorld + " " + e.stack);
+              throw new ChunkError(
+                lang.errors.failedToLoadWorld + " " + e.stack
+              );
             }
 
             for (const chunk of chunks) {
@@ -299,7 +310,9 @@ class ResourcePackClientResponse extends Handler {
               try {
                 levelchunk.setPayload(chunk.payload.data);
               } catch (e) {
-                throw new ChunkError(lang.errors.failedToLoadWorld_InvalidChunkData);
+                throw new ChunkError(
+                  lang.errors.failedToLoadWorld_InvalidChunkData
+                );
               }
               levelchunk.send(client);
             }
@@ -313,7 +326,6 @@ class ResourcePackClientResponse extends Handler {
               networkchunkpublisher.send(client);
             }, 4500);
           }
-
 
           setTimeout(() => {
             for (let i = 0; i < PlayerInfo.players; i++) {
@@ -361,8 +373,9 @@ class ResourcePackClientResponse extends Handler {
             lang.debugdev.unhandledPacket.replace(
               "%data%",
               packet.data.params.response_status
-            )
-            , LogTypes.WARNING);
+            ),
+            LogTypes.WARNING
+          );
     }
   }
 }

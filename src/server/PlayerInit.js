@@ -96,10 +96,11 @@ module.exports = {
 
       new PlayerKickEvent().execute(require("../Server").server, player, msg);
 
-      if (msg === 'disconnectionScreen.serverFull') {
-        msg = 'Wow this server is popular! Check back later to see if space opens up.';
-      } else if (msg === 'disconnectionScreen.noReason') {
-        msg = 'You were disconnected'
+      if (msg === "disconnectionScreen.serverFull") {
+        msg =
+          "Wow this server is popular! Check back later to see if space opens up.";
+      } else if (msg === "disconnectionScreen.noReason") {
+        msg = "You were disconnected";
       }
 
       Logger.log(

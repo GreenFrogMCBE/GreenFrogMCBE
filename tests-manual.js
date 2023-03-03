@@ -105,7 +105,7 @@ playerCommandTime: true
 playerCommandDeop: true
 playerCommandList: true
 playerCommandGamemode: true`
-  )
+  );
 }
 
 console.log("Starting testing...");
@@ -116,8 +116,8 @@ const config = ServerInfo.config;
 if (!config.offlineMode) {
   console.log(
     "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" +
-    "\u001b[38;5;203m\u001b[6mYou can not use tests in \u001b[38;5;87mOfflineMode\u001b[38;5;203m set to \u001b[38;5;87mfalse \u001b[0m" +
-    "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+      "\u001b[38;5;203m\u001b[6mYou can not use tests in \u001b[38;5;87mOfflineMode\u001b[38;5;203m set to \u001b[38;5;87mfalse \u001b[0m" +
+      "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
   );
   return process.exit(0);
 }
@@ -147,7 +147,7 @@ r.question("> ", (response) => {
     console.log(
       "\u001b[1m\u001b[38;5;214mStarting test 2 (Join server and send Messages)...\u001b[0m"
     );
-    messageTest()
+    messageTest();
   }
   if (args[0] == "3") {
     StartServer.test();
@@ -156,7 +156,7 @@ r.question("> ", (response) => {
     console.log(
       "\u001b[1m\u001b[38;5;214mStarting test 2 (Join server and try to execute a command)...\u001b[0m"
     );
-    commandTest()
+    commandTest();
   }
 
   if (!tests.includes(args[0])) {

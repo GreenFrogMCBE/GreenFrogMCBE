@@ -26,13 +26,13 @@ module.exports = {
     console.log("[commandbot] joined");
     Bot.on("spawn", () => {
       Bot.queue("command_request", {
-        command: '/pl',
+        command: "/pl",
         internal: false,
         version: 52,
         origin: {
           uuid: Bot.profile.uuid,
           request_id: Bot.profile.uuid,
-          type: 'player',
+          type: "player",
         },
       });
     });

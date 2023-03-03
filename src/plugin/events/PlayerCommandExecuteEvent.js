@@ -71,7 +71,7 @@ class PlayerCommandExecuteEvent extends Event {
           .replace("%cmd%", message)
       );
 
-      const cmdGamemode = new CommandGamemode()
+      const cmdGamemode = new CommandGamemode();
       const cmdManager = new CommandManager();
       const cmdVer = new CommandVersion();
       const cmdPl = new CommandPl();
@@ -96,7 +96,12 @@ class PlayerCommandExecuteEvent extends Event {
         }
       }
       if (!exists || message === "/") {
-        client.sendMessage(lang.errors.playerUnknownCommandOrNoPermission.replace('%commandname%', message));
+        client.sendMessage(
+          lang.errors.playerUnknownCommandOrNoPermission.replace(
+            "%commandname%",
+            message
+          )
+        );
       } else {
         const commands = {
           ver: `/${lang.commands.ver.toLowerCase()}`,
@@ -130,7 +135,9 @@ class PlayerCommandExecuteEvent extends Event {
           [commands.gamemode]: cmdGamemode,
         };
 
-        const commandFound = Object.keys(commandsToExecute).find((command) => message.startsWith(command));
+        const commandFound = Object.keys(commandsToExecute).find((command) =>
+          message.startsWith(command)
+        );
 
         if (commandFound) {
           commandsToExecute[commandFound].executePlayer(client, message);

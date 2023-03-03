@@ -21,8 +21,9 @@ module.exports = {
    */
   log(message, type = LogTypes.INFO) {
     const d = new Date();
-    const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1
-      }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
+    const dStr = `${d.getUTCFullYear()}-${
+      d.getUTCMonth() + 1
+    }-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
 
     const logLevel = {
       info: 32,

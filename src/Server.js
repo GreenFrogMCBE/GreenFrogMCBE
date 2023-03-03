@@ -137,8 +137,8 @@ module.exports = {
     PlayerInfo.addPlayer(client);
 
     if (PlayerInfo.players.length > config.maxPlayers) {
-      client.kick(lang.kickmessages.serverFull)
-      return
+      client.kick(lang.kickmessages.serverFull);
+      return;
     }
 
     if (
@@ -164,7 +164,8 @@ module.exports = {
    * It logs a warning if the config.debug or config.unstable is true.
    */
   async initDebug() {
-    if (config.unstable) Logger.log(lang.devdebug.unstableWarning, LogTypes.WARNING);
+    if (config.unstable)
+      Logger.log(lang.devdebug.unstableWarning, LogTypes.WARNING);
     if (process.env.DEBUG === "minecraft-protocol" || config.debug)
       Logger.log(lang.errors.debugWarning, LogTypes.WARNING);
   },
@@ -240,7 +241,7 @@ module.exports = {
               lang.errors.packetHandlingException
                 .replace("%player%", client.username)
                 .replace("%error%", e.stack),
-                LogTypes.ERROR
+              LogTypes.ERROR
             );
           }
         });
