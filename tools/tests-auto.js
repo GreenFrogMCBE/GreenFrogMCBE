@@ -10,11 +10,11 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ClientRunCommand = require("./test/ClientRunCommand");
-const ClientSendMessage = require("./test/ClientSendMessage");
-const ClientJoin = require("./test/ClientJoin");
-const StartServer = require("./test/StartServer");
-const TestConfigs = require("./test/TestConfigs");
+const ClientRunCommand = require("../test/ClientRunCommand");
+const ClientSendMessage = require("../test/ClientSendMessage");
+const ClientJoin = require("../test/ClientJoin");
+const StartServer = require("../test/StartServer");
+const TestConfigs = require("../test/TestConfigs");
 const fs = require("fs");
 
 fs.writeFileSync(

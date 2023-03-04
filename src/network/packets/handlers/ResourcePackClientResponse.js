@@ -139,7 +139,8 @@ class ResourcePackClientResponse extends Handler {
           startgame.setSpawnPosition(0, 0, 0);
           startgame.setPlayerPermissionLevel(client.permlevel);
           startgame.setWorldName(
-            require(__dirname + "/../../../../world/world_settings.json").worldname
+            require(__dirname + "/../../../../world/world_settings.json")
+              .worldname
           );
           startgame.send(client);
 

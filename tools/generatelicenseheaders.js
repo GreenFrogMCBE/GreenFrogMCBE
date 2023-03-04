@@ -15,7 +15,7 @@ const LICENSE_HEADER = `/**
 */
 `;
 
-const srcPath = path.join(__dirname, ".");
+const srcPath = path.join(__dirname, "..");
 
 const addHeader = (filePath) => {
   if (filePath.includes("node_modules")) return;
