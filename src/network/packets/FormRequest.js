@@ -18,8 +18,8 @@ let content = Colors.red + "Invalid text!";
 let buttons = null;
 let title = Colors.red + "Invalid title!";
 let type = "form";
-let button1 = Colors.red + "Invalid button1!"
-let button2 = Colors.red + "Invalid button2!"
+let button1 = Colors.red + "Invalid button1!";
+let button2 = Colors.red + "Invalid button2!";
 
 class FormRequest extends require("./Packet") {
   name() {
@@ -47,19 +47,19 @@ class FormRequest extends require("./Packet") {
   }
 
   setButton1(_button1) {
-    button1 = _button1
+    button1 = _button1;
   }
 
   setText(_text) {
-    content = _text
+    content = _text;
   }
 
   setButton2(_button2) {
-    button2 = _button2
+    button2 = _button2;
   }
 
   getText() {
-    return content
+    return content;
   }
 
   getId() {
@@ -83,11 +83,11 @@ class FormRequest extends require("./Packet") {
   }
 
   getButton1() {
-    return button1
+    return button1;
   }
 
   getButton2() {
-    return button2
+    return button2;
   }
 
   /**
@@ -99,7 +99,7 @@ class FormRequest extends require("./Packet") {
       client.queue("modal_form_request", {
         form_id: this.getId(),
         data: `{"content":"${this.getText()}","button1":"${this.getButton1()}","button2":"${this.getButton2()}","type":"${this.getType()}","title":"${this.getTitle()}"}`,
-      })
+      });
     } else {
       client.queue("modal_form_request", {
         form_id: this.getId(),

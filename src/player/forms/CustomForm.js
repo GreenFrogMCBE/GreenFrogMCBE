@@ -24,7 +24,6 @@ class CustomForm {
     this.id = 0;
     this.actions = [];
   }
-  
 
   /**
    * Add an action.
