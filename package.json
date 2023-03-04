@@ -8,10 +8,10 @@
     "format": "npx prettier --write .",
     "start": "node index.js",
     "dev": "nodemon --signal SIGINT index.js --debug",
-    "gencoryrightheader": "node generatelicenseheaders.js",
+    "gencoryrightheader": "node tools/generatelicenseheaders.js",
     "build": "npm run gencoryrightheader && npm run format",
-    "autotest": "node tests-auto.js",
-    "test": "node tests-manual.js"
+    "autotest": "node tools/tests-auto.js",
+    "test": "node tools/tests-manual.js"
   },
   "dependencies": {
     "frog-protocol": "git+https://github.com/greenfrogmc/Protocol.git",
