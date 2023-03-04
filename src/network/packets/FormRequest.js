@@ -1,3 +1,6 @@
+const FormTypes = require("../../player/forms/FormTypes");
+const Colors = require("../../player/Colors");
+
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -11,97 +14,80 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let id = 0;
-let content = "";
+let content = Colors.red + "Invalid text!";
 let buttons = null;
-let title = "";
+let title = Colors.red + "Invalid title!";
 let type = "form";
+let button1 = Colors.red + "Invalid button1!"
+let button2 = Colors.red + "Invalid button2!"
 
 class FormRequest extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
   name() {
     return "modal_form_request";
   }
 
-  /**
-   * It sets the form id
-   * @param {Number} Form id
-   */
   setId(id1) {
     id = id1;
   }
 
-  /**
-   * It sets the form content
-   * @param {JSON} Form content
-   */
   setContent(content1) {
     content = content1;
   }
 
-  /**
-   * It sets the form buttons
-   * @param {JSON} Form buttons
-   */
   setButtons(buttons1) {
     buttons = buttons1;
   }
 
-  /**
-   * It sets the form title
-   * @param {string} Form title
-   */
   setTitle(title1) {
     title = title1;
   }
 
-  /**
-   * It sets the form type
-   * @param {FormTypes} Form type
-   */
   setType(type1) {
     type = type1;
   }
 
-  /**
-   * It returns the form id
-   * @returns Form id
-   */
+  setButton1(_button1) {
+    button1 = _button1
+  }
+
+  setText(_text) {
+    content = _text
+  }
+
+  setButton2(_button2) {
+    button2 = _button2
+  }
+
+  getText() {
+    return content
+  }
+
   getId() {
     return id;
   }
 
-  /**
-   * It returns the form content
-   * @returns Form content
-   */
   getContent() {
     return content;
   }
 
-  /**
-   * It returns the form buttons
-   * @returns Form buttons
-   */
   getButtons() {
     return buttons;
   }
 
-  /**
-   * It returns the form title
-   * @returns Form title
-   */
   getTitle() {
     return title;
   }
 
-  /**
-   * It returns the form type
-   * @returns Form type
-   */
   getType() {
     return type;
+  }
+
+  getButton1() {
+    return button1
+  }
+
+  getButton2() {
+    return button2
   }
 
   /**
@@ -109,12 +95,17 @@ class FormRequest extends require("./Packet") {
    * @param client - The client that you want to send the packet to.
    */
   send(client) {
-    client.queue("modal_form_request", {
-      form_id: this.getId(),
-      data: `{"content":${JSON.stringify(
-        this.getContent()
-      )},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
-    });
+    if (type === FormTypes.MODALFORM) {
+      client.queue("modal_form_request", {
+        form_id: this.getId(),
+        data: `{"content":"${this.getText()}","button1":"${this.getButton1()}","button2":"${this.getButton2()}","type":"${this.getType()}","title":"${this.getTitle()}"}`,
+      })
+    } else {
+      client.queue("modal_form_request", {
+        form_id: this.getId(),
+        data: `{"content":${this.getContent()},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
+      });
+    }
   }
 }
 
