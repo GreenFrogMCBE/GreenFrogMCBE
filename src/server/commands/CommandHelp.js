@@ -40,7 +40,7 @@ class CommandHelp extends require("./Command") {
       { command: lang.commands.listc, help: lang.commands.listHelp },
       { command: lang.commands.version, help: lang.commands.versionHelp },
       { command: lang.commands.plugins, help: lang.commands.pluginsHelp },
-      { command: lang.commands.shutdown, help: lang.commands.shutdownHelp }, // TODO: Broken
+      { command: lang.commands.stop, help: lang.commands.stopHelp },
     ];
 
     let commandsfound = false;
