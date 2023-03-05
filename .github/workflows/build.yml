@@ -18,14 +18,6 @@ jobs:
           git config --global user.name "andriycraftbot"
           git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
           git add .
-          set +e
-          git status | grep modified
-          if [ $? -eq 0 ]
-          then
-            set -e
-            git commit -m "Formatting: Builded project"
-            git push
-          else
-            set -e
-            echo "No changes since last run"
-          fi
+          git commit -m "Formatting: Builded project"
+          git push
+          
