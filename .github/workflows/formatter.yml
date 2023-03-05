@@ -1,0 +1,31 @@
+name: Formatter
+
+on:
+  push:
+  pull_request:
+
+permissions: write-all
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    name: Format Files
+    steps:
+      - uses: actions/checkout@v3
+      - name: Prettier
+        run: |
+          npx prettier --write .
+          git config --global user.name "andriycraft"
+          git config --global user.email "92477814+andriycraft@users.noreply.github.com"
+          git add .
+          set +e
+          git status | grep modified
+          if [ $? -eq 0 ]
+          then
+            set -e
+            git commit -m "Format Document"
+            git push
+          else
+            set -e
+            echo "No changes since last run"
+          fi
