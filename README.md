@@ -101,8 +101,8 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 ```@andriycraft - For creating this software
 @AnyBananaGAME - For creating multilang (#9) also for improving tests and /list, making better tests (#70)
 @hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33) also for disabling workflows for .MD files
-@NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24), for reporting /help bug, for adding yarn, many changes to tests, also making a workflow that automatically builds the project, also for fixing paths
-@ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype  (#44)
+@NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24), for reporting /help bug, for adding yarn, many changes to tests, also making a workflow that automatically builds the project, for fixing paths, also for reporting a bug that server cannot be stopped when plugins is null
+@ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype (#44)
 @bufferfishq - For adding support for custom_form and new plugin system (#47)
 @andriycraftbot - For fixing the code style (#37, #38, #40, #45, #46, #48, #50, #52, #58, #61, #73)
 @Zwuiix-cmd - Suggested custom_form support (https://github.com/andriycraft/GreenFrogMCBE/issues/35)

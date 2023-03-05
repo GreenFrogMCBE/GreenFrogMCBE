@@ -31,7 +31,7 @@ class PlayerMoveEvent extends Event {
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				try {
-					require(`${__dirname}/../../../plugins/${plugin}`).onPlayerMove(client, server, location, this);
+					require(`${__dirname}/../../../plugins/${plugin}`).PlayerMoveEvent(client, server, location, this);
 				} catch (e) {
 					FailedToHandleEvent.handleEventError(e, plugin, this.name);
 				}
@@ -42,10 +42,6 @@ class PlayerMoveEvent extends Event {
 
 	isCancelled() {
 		return this.cancelled;
-	}
-
-	postExecute(client) {
-		//TODO
 	}
 }
 
