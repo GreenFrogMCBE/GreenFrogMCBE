@@ -78,8 +78,8 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 
 ## Testing
 
-1. If you want to test the project manually run `tests-manually.js`
-2. If you are Github workflow or something run `test-auto.js`
+1. If you want to test the project manually run `node tools/tests-manual.js`
+2. If you are Github workflow or something run `node tools/tests-auto.js`
 
 ## Configuration files list
 
@@ -101,7 +101,7 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 ```@andriycraft - For creating this software
 @AnyBananaGAME - For creating multilang (#9) also for improving tests and /list, making better tests (#70)
 @hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33) also for disabling workflows for .MD files
-@NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24), for reporting /help bug, and for adding yarn, many changes to tests, and also make a workflow that automatically builds the project
+@NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24), for reporting /help bug, for adding yarn, many changes to tests, also making a workflow that automatically builds the project, also for fixing paths
 @ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype  (#44)
 @bufferfishq - For adding support for custom_form and new plugin system (#47)
 @andriycraftbot - For fixing the code style (#37, #38, #40, #45, #46, #48, #50, #52, #58, #61)

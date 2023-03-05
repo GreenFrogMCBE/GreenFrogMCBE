@@ -25,7 +25,7 @@ if (!fs.existsSync("config.yml")) {
 	fs.writeFileSync(
 		"config.yml",
 		`# LISTENING
-# 
+#
 # This section contains the config for server host and port
 
 host: '0.0.0.0'
@@ -50,7 +50,7 @@ commandsDisabled: false # (will only disabled them for players, not console)
 blockInvalidMessages: true # Kicks the player if the player tried to send an too long or empty message and also prevents from using colors in chat
 
 # DEVELOPMENT SETTINGS
-# 
+#
 # This section contains settings like debug, exit codes, etc
 
 unstable: false # Makes your server not crash on critical errors
@@ -59,7 +59,7 @@ crashCode: -1
 exitCode: 0
 logUnhandledPackets: false
 defaultPermissionLevel: 2
-# Permission levels are: 
+# Permission levels are:
 # 4 - operator
 # 3 - unknown
 # 2 - member
@@ -78,7 +78,7 @@ difficulty: 0 # Currently only visual
 generator: "default" # Can be default, flat (superflat), or void (empty)
 
 # Command settings
-# 
+#
 # Allows to disable/enable commands
 # Make sure that "commandsDisabled" in chat section is enabled
 
@@ -110,7 +110,7 @@ playerCommandGamemode: true`
 
 console.log("Starting testing...");
 
-const ServerInfo = require("./src/server/ServerInfo");
+const ServerInfo = require("../src/server/ServerInfo");
 const config = ServerInfo.config;
 
 if (!config.offlineMode) {
