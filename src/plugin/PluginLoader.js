@@ -57,10 +57,7 @@ module.exports = {
 							PluginManager.addPlugin(name);
 							count++;
 						} catch (e) {
-							Logger.log(
-								lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack),
-								LogTypes.ERROR
-							);
+							Logger.log(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack), LogTypes.ERROR);
 						}
 						plugins.push(file);
 					}
@@ -97,10 +94,7 @@ module.exports = {
 								}
 							}
 						} catch (e) {
-							Logger.log(
-								lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack),
-								LogTypes.ERROR
-							);
+							Logger.log(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack), LogTypes.ERROR);
 						}
 					}
 				});

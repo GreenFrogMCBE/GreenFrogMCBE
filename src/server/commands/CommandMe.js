@@ -29,9 +29,7 @@ class CommandMe extends require("./Command") {
 			return;
 		}
 
-		Chat.broadcastMessage(
-			lang.commands.meCommandFormat.replace("%username%", client.username).replace("%message%", msg)
-		);
+		Chat.broadcastMessage(lang.commands.meCommandFormat.replace("%username%", client.username).replace("%message%", msg));
 	}
 
 	getPlayerDescription() {
@@ -49,11 +47,7 @@ class CommandMe extends require("./Command") {
 			return;
 		}
 
-		Chat.broadcastMessage(
-			lang.commands.meCommandFormat
-				.replace("%username%", client.username)
-				.replace("%message%", msg.replace("/" + lang.commands.me + " ", ""))
-		);
+		Chat.broadcastMessage(lang.commands.meCommandFormat.replace("%username%", client.username).replace("%message%", msg.replace("/" + lang.commands.me + " ", "")));
 	}
 }
 

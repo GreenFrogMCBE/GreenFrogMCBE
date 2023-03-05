@@ -31,12 +31,7 @@ class ServerToClientChat extends Event {
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				try {
-					require(`${__dirname}/../../../plugins/${plugin}`).ServerToClientChat(
-						server,
-						client,
-						message,
-						this
-					);
+					require(`${__dirname}/../../../plugins/${plugin}`).ServerToClientChat(server, client, message, this);
 				} catch (e) {
 					FailedToHandleEvent.handleEventError(e, plugin, this.name);
 				}
