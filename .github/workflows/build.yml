@@ -2,7 +2,9 @@ name: Build
 
 on:
   push:
+    branches: ["main"]
   pull_request:
+    branches: ["main"]
 
 permissions: write-all
 
@@ -13,8 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Prettier
-        run: |
-          npm run build
+      - run: |
+          npx prettier
           git config --global user.name "andriycraftbot"
           git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
           git add .

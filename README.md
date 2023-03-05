@@ -7,7 +7,7 @@
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/andriycraft/GreenFrogMCBE?color=%2387F4BC&style=flat-square">
 </a>
 
-## GreenFrogMCBE
+## GreenFrogMCBE 
 
 Server software for Minecraft: Bedrock edition, written in NodeJS
 
@@ -100,7 +100,7 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 
 ```@andriycraft - For creating this software
 @AnyBananaGAME - For creating multilang (#9) also for improving tests and /list, making better tests (#70)
-@hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33) also for disabling workflows for .MD files
+@hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33) also for disabling workflows for .MD files, also #81
 @NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24), for reporting /help bug, for adding yarn, many changes to tests, making a workflow that automatically builds the project, for fixing paths, also for reporting a bug that server cannot be stopped when plugins is null, also for making /pl code better
 @ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype (#44)
 @bufferfishq - For adding support for custom_form and new plugin system (#47)
