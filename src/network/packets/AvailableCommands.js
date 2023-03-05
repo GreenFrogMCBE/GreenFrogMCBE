@@ -26,7 +26,7 @@ class AvailableCommands extends require("./Packet") {
 	 */
 	setData(data1) {
 		data = data1;
-	} 
+	}
 
 	/**
 	 * It returns the packet data
