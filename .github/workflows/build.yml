@@ -16,8 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
       - name: prettier
         run: npm run build
       - name: Check for modified files
