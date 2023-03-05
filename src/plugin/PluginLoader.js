@@ -66,8 +66,29 @@ module.exports = {
 		});
 	},
 
+	async checkIfEmpty(dir) {
+		fs.readdir(dir, function (err, files) {
+			if (err) {
+				return false
+			} else {
+				if (!files.length) {
+					return true 
+				} else {
+					return true
+				}
+			}
+		});
+	},
+
+	async killServer() {
+		Logger.log(lang.server.doneShuttingDownPlugins);
+		Logger.log(lang.server.doneShuttingDown);
+		process.exit(config.exitCode);
+	},
+
 	async unloadPlugins() {
 		Logger.log(lang.server.shuttingDownPlugins);
+		if (this.checkIfEmpty("./plugins")) this.killServer()
 		fs.readdir("./plugins", (err, files) => {
 			files.forEach((file) => {
 				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
@@ -87,11 +108,7 @@ module.exports = {
 								require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
 							} finally {
 								Logger.log(lang.server.unloadedPlugin.replace("%plugin%", name));
-								if (count <= 0) {
-									Logger.log(lang.server.doneShuttingDownPlugins);
-									Logger.log(lang.server.doneShuttingDown);
-									process.exit(config.exitCode);
-								}
+								if (count <= 0) this.killServer()
 							}
 						} catch (e) {
 							Logger.log(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack), LogTypes.ERROR);
