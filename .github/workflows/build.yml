@@ -21,11 +21,9 @@ jobs:
       - name: Check for modified files
         id: git-check
         run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
-      - name: Push changes
-        if: steps.git-check.outputs.modified == 'true'
-        run: |
-          git config --global user.name 'andriycraftbot'
-          git config --global user.email '124494132+andriycraftbot@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -am "Automated changes"
-          git push origin ${{ steps.branch-name.outputs.current_branch }}
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          pull: '--rebase --autostash ...'
+
+    
