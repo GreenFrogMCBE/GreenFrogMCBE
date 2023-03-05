@@ -18,7 +18,6 @@ jobs:
           git config --global user.name "andriycraftbot"
           git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
           git add .
-          set +e
           git status | grep modified
           git commit -m "Bot: Builded project"
-          git push
+          git push origin main
