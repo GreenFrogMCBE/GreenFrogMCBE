@@ -1,0 +1,25 @@
+name: Format code with Prettier and commit changes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  format-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Prettier
+        run: npm install --save-dev prettier
+
+      - name: Format code with Prettier
+        run: npx prettier --write "**/*.js"
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: "Format code with Prettier"
+          add: "."
