@@ -24,7 +24,7 @@ jobs:
           then
             set -e
             git commit -m "Format Document"
-            git push
+            git push origin HEAD:$GITHUB_REF
           else
             set -e
             echo "No changes since last run"
