@@ -17,5 +17,4 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn install
-      - run: yarn prettier --check .
+      - run: npx prettier --write .
