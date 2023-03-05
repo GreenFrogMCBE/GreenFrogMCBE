@@ -17,9 +17,7 @@ jobs:
         run: |
           git config --global user.name "andriycraftbot"
           git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
-          git pull andriycraft/GreenFrogMCBE main
           git checkout -b prettier-branch
-          git pull andriycraft/GreenFrogMCBE main
           git add .
           git commit -m "Format code with Prettier"
           git remote add fork "https://github.com/andriycraft/GreenFrogMCBE.git"
