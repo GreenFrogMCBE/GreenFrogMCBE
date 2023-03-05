@@ -1,8 +1,7 @@
-name: Prettier
-
 on:
-  push:
-    branches: [main]
+  pull_request_target:
+    branches:
+      - main
 
 jobs:
   prettier:
@@ -23,11 +22,12 @@ jobs:
           git checkout -b prettier-branch
           git add .
           git commit -m "Format code with Prettier"
-          git push --set-upstream origin prettier-branch
+          git remote add fork "${{ github.repository }}"
+          git push --set-upstream fork prettier-branch
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
           title: Prettier Formatting
           body: This pull request was created automatically to apply Prettier formatting to the codebase.
           branch: prettier-branch
-
+          token: ${{ secrets.PAT }}
