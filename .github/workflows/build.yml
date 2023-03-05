@@ -1,5 +1,4 @@
 # https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests/
-
 name: auto-format
 on: [pull_request, push]
 jobs:
@@ -14,13 +13,27 @@ jobs:
       - name: Check for modified files
         id: git-check
         run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
-      - name: Push changes
+      - name: Create Pull Request
         if: steps.git-check.outputs.modified == 'true'
-        run: |
-          git config --global user.name "andriycraftbot"
-          git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git init
-          git add .
-          git commit -m "Bot: Automated changes"
-          git push origin HEAD:${{ github.head_ref || github.ref_name }}
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const github = require('@actions/github');
+            const octokit = new github.getOctokit('${{ secrets.GITHUB_TOKEN }}');
+
+            const context = github.context;
+
+            const head = context.payload.pull_request.head.sha;
+            const base = context.payload.pull_request.base.ref;
+
+            const pr = await octokit.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Auto-format code`,
+              body: `This pull request was automatically generated to apply prettier formatting to the code.`,
+              head: `${context.repo.owner}:${head}`,
+              base: base,
+            });
+            
+            console.log(pr.data.html_url);
