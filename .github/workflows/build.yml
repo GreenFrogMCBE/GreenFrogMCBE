@@ -13,8 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Prettier
-      - with:
-         persist-credentials: false
       - run: |
           npm run build
           git config --global user.name "andriycraftbot"
