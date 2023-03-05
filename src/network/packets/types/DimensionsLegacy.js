@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 module.exports = {
-  OVERWORLD: 0,
-  NETHER: 1,
-  END: 2,
+	OVERWORLD: 0,
+	NETHER: 1,
+	END: 2,
 };

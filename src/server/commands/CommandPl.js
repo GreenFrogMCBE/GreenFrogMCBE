@@ -19,78 +19,52 @@ const { lang, config } = require("../../server/ServerInfo");
 const Logger = require("../Logger");
 
 class CommandPl extends require("./Command") {
-  name() {
-    return lang.commands.pl;
-  }
+	name() {
+		return lang.commands.pl;
+	}
 
-  aliases() {
-    return [lang.commands.plugins];
-  }
+	aliases() {
+		return [lang.commands.plugins];
+	}
 
-  execute() {
-    let plugins;
-    if (PluginManager.getPlugins() == null) {
-      plugins = 0;
-    } else {
-      plugins = PluginManager.getPlugins().length;
-    }
+	execute() {
+		let plugins;
+		if (PluginManager.getPlugins() == null) {
+			plugins = 0;
+		} else {
+			plugins = PluginManager.getPlugins().length;
+		}
 
-    let pluginlist = "";
-    for (
-      let i = 0;
-      i < PluginManager.getPlugins().toString().split(",").length;
-      i++
-    ) {
-      pluginlist =
-        pluginlist +
-        ColorsServer.CONSOLE_GREEN +
-        PluginManager.getPlugins().toString().split(",")[i] +
-        ColorsServer.CONSOLE_RESET +
-        ", ";
-    }
+		let pluginlist = "";
+		for (let i = 0; i < PluginManager.getPlugins().toString().split(",").length; i++) {
+			pluginlist = pluginlist + ColorsServer.CONSOLE_GREEN + PluginManager.getPlugins().toString().split(",")[i] + ColorsServer.CONSOLE_RESET + ", ";
+		}
 
-    Logger.log(
-      `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${
-        ColorsServer.CONSOLE_RESET
-      }`
-    );
-  }
+		Logger.log(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsServer.CONSOLE_RESET}`);
+	}
 
-  getPlayerDescription() {
-    return lang.commands.ingamePlDescription;
-  }
+	getPlayerDescription() {
+		return lang.commands.ingamePlDescription;
+	}
 
-  executePlayer(player) {
-    if (!config.playerCommandPlugins) {
-      Logger.log(lang.errors.playerUnknownCommand);
-      return;
-    }
-    let plugins;
-    if (PluginManager.getPlugins() == null) {
-      plugins = 0;
-    } else {
-      plugins = PluginManager.getPlugins().length;
-    }
+	executePlayer(player) {
+		if (!config.playerCommandPlugins) {
+			Logger.log(lang.errors.playerUnknownCommand);
+			return;
+		}
+		let plugins;
+		if (PluginManager.getPlugins() == null) {
+			plugins = 0;
+		} else {
+			plugins = PluginManager.getPlugins().length;
+		}
 
-    let pluginlist = "";
-    for (
-      let i = 0;
-      i < PluginManager.getPlugins().toString().split(",").length;
-      i++
-    ) {
-      pluginlist =
-        pluginlist +
-        ColorsPlayer.green +
-        PluginManager.getPlugins().toString().split(",")[i] +
-        ColorsPlayer.white +
-        ", ";
-    }
-    player.sendMessage(
-      `${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${
-        ColorsPlayer.reset
-      }`
-    );
-  }
+		let pluginlist = "";
+		for (let i = 0; i < PluginManager.getPlugins().toString().split(",").length; i++) {
+			pluginlist = pluginlist + ColorsPlayer.green + PluginManager.getPlugins().toString().split(",")[i] + ColorsPlayer.white + ", ";
+		}
+		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsPlayer.reset}`);
+	}
 }
 
 module.exports = CommandPl;

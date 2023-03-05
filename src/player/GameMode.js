@@ -11,9 +11,9 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 module.exports = {
-  CREATIVE: "creative",
-  SURVIVAL: "survival",
-  SPECTATOR: "spectator",
-  ADVENTURE: "adventure",
-  FALLBACK: "fallback",
+	CREATIVE: "creative",
+	SURVIVAL: "survival",
+	SPECTATOR: "spectator",
+	ADVENTURE: "adventure",
+	FALLBACK: "fallback",
 };

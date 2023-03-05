@@ -11,5 +11,5 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare module "ValidateClient" {
-  export const initAndValidateClient: (client: any) => void;
+	export const initAndValidateClient: (client: any) => void;
 }

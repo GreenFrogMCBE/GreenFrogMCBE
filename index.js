@@ -13,10 +13,10 @@
 const fs = require("fs");
 
 try {
-  if (!fs.existsSync("config.yml")) {
-    fs.writeFileSync(
-      "config.yml",
-      `# LISTENING
+	if (!fs.existsSync("config.yml")) {
+		fs.writeFileSync(
+			"config.yml",
+			`# LISTENING
 # 
 # This section contains the config for server host and port
 
@@ -97,24 +97,20 @@ playerCommandTime: true
 playerCommandDeop: true
 playerCommandList: true
 playerCommandGamemode: true`
-    );
-  }
-  const Frog = require("./src/Server.js");
-  Frog.start();
+		);
+	}
+	const Frog = require("./src/Server.js");
+	Frog.start();
 } catch (e) {
-  console.error("Failed to start the server");
-  console.error("The error was: ");
-  console.error(e.stack);
-  console.error(
-    `Make sure that you have the required libraries. Run npm i to install them`
-  );
-  console.error(
-    "If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE"
-  );
-  process.exit(-1);
+	console.error("Failed to start the server");
+	console.error("The error was: ");
+	console.error(e.stack);
+	console.error(`Make sure that you have the required libraries. Run npm i to install them`);
+	console.error("If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE");
+	process.exit(-1);
 }
 
 // Close server on nodemon restart
 process.once("SIGINT", async () => {
-  await require("./src/server/ShutdownAPI.js");
+	await require("./src/server/ShutdownAPI.js");
 });

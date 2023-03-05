@@ -13,11 +13,11 @@
 const fs = require("fs");
 
 module.exports = {
-  test() {
-    if (!fs.existsSync("config.yml")) {
-      fs.writeFileSync(
-        "config.yml",
-        `# LISTENING
+	test() {
+		if (!fs.existsSync("config.yml")) {
+			fs.writeFileSync(
+				"config.yml",
+				`# LISTENING
 # 
 # This section contains the config for server host and port
 
@@ -87,10 +87,10 @@ playerCommandSay: true
 playerCommandOp: true
 playerCommandKick: true
 playerCommandTime: true`
-      );
-    }
-    const Frog = require("../src/Server.js");
-    Frog.start();
-    console.log("[server] started");
-  },
+			);
+		}
+		const Frog = require("../src/Server.js");
+		Frog.start();
+		console.log("[server] started");
+	},
 };

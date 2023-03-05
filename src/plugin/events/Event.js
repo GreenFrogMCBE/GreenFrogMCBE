@@ -11,11 +11,11 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 class Event {
-  cancel() {}
+	cancel() {}
 
-  execute() {}
+	execute() {}
 
-  postExecute() {}
+	postExecute() {}
 }
 
 module.exports = Event;

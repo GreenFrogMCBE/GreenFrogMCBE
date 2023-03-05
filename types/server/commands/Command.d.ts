@@ -11,11 +11,11 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare class Command {
-  name(): string;
-  aliases(): string[];
-  execute(): void;
-  getPlayerDescription(): string;
-  executePlayer(): void;
+	name(): string;
+	aliases(): string[];
+	execute(): void;
+	getPlayerDescription(): string;
+	executePlayer(): void;
 }
 
 export = Command;

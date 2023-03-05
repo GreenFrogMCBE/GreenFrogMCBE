@@ -11,5 +11,5 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare module "PlayerInit" {
-  export function initPlayer(player: Object): void;
+	export function initPlayer(player: Object): void;
 }

@@ -11,5 +11,5 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare module "Logger" {
-  export function log(message: string, type: string): void;
+	export function log(message: string, type: string): void;
 }

@@ -11,6 +11,6 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 module.exports = {
-  ADD: "add",
-  REMOVE: "remove",
+	ADD: "add",
+	REMOVE: "remove",
 };

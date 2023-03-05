@@ -288,14 +288,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "bamboo",
-                "hills",
-                "jungle",
-                "monster",
-                "overworld"
-              ]
+              "value": ["animal", "bamboo", "hills", "jungle", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -431,12 +424,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "basalt_deltas",
-                "nether",
-                "spawn_ghast",
-                "spawn_many_magma_cubes"
-              ]
+              "value": ["basalt_deltas", "nether", "spawn_ghast", "spawn_many_magma_cubes"]
             }
           },
           "temperature": {
@@ -713,14 +701,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "bee_habitat",
-                "birch",
-                "forest",
-                "monster",
-                "overworld"
-              ]
+              "value": ["animal", "bee_habitat", "birch", "forest", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -852,15 +833,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "bee_habitat",
-                "birch",
-                "forest",
-                "hills",
-                "monster",
-                "overworld"
-              ]
+              "value": ["animal", "bee_habitat", "birch", "forest", "hills", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -969,15 +942,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "birch",
-                "forest",
-                "hills",
-                "monster",
-                "mutated",
-                "overworld_generation"
-              ]
+              "value": ["animal", "birch", "forest", "hills", "monster", "mutated", "overworld_generation"]
             }
           },
           "temperature": {
@@ -1086,15 +1051,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "bee_habitat",
-                "birch",
-                "forest",
-                "monster",
-                "mutated",
-                "overworld_generation"
-              ]
+              "value": ["animal", "bee_habitat", "birch", "forest", "monster", "mutated", "overworld_generation"]
             }
           },
           "temperature": {
@@ -1580,14 +1537,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "cold",
-                "forest",
-                "monster",
-                "overworld",
-                "taiga"
-              ]
+              "value": ["animal", "cold", "forest", "monster", "overworld", "taiga"]
             }
           },
           "temperature": {
@@ -1719,15 +1669,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "cold",
-                "forest",
-                "hills",
-                "monster",
-                "overworld",
-                "taiga"
-              ]
+              "value": ["animal", "cold", "forest", "hills", "monster", "overworld", "taiga"]
             }
           },
           "temperature": {
@@ -1836,15 +1778,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "cold",
-                "forest",
-                "monster",
-                "mutated",
-                "overworld_generation",
-                "taiga"
-              ]
+              "value": ["animal", "cold", "forest", "monster", "mutated", "overworld_generation", "taiga"]
             }
           },
           "temperature": {
@@ -1953,13 +1887,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "crimson_forest",
-                "nether",
-                "netherwart_forest",
-                "spawn_few_zombified_piglins",
-                "spawn_piglin"
-              ]
+              "value": ["crimson_forest", "nether", "netherwart_forest", "spawn_few_zombified_piglins", "spawn_piglin"]
             }
           },
           "temperature": {
@@ -3949,14 +3877,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "edge",
-                "extreme_hills",
-                "monster",
-                "mountain",
-                "overworld"
-              ]
+              "value": ["animal", "edge", "extreme_hills", "monster", "mountain", "overworld"]
             }
           },
           "temperature": {
@@ -4065,13 +3986,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "extreme_hills",
-                "monster",
-                "mutated",
-                "overworld"
-              ]
+              "value": ["animal", "extreme_hills", "monster", "mutated", "overworld"]
             }
           },
           "temperature": {
@@ -4221,14 +4136,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "extreme_hills",
-                "forest",
-                "monster",
-                "mountain",
-                "overworld"
-              ]
+              "value": ["animal", "extreme_hills", "forest", "monster", "mountain", "overworld"]
             }
           },
           "temperature": {
@@ -4337,14 +4245,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "extreme_hills",
-                "forest",
-                "monster",
-                "mutated",
-                "overworld"
-              ]
+              "value": ["animal", "extreme_hills", "forest", "monster", "mutated", "overworld"]
             }
           },
           "temperature": {
@@ -4453,13 +4354,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "bee_habitat",
-                "flower_forest",
-                "monster",
-                "mutated",
-                "overworld"
-              ]
+              "value": ["bee_habitat", "flower_forest", "monster", "mutated", "overworld"]
             }
           },
           "temperature": {
@@ -4637,13 +4532,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "bee_habitat",
-                "forest",
-                "monster",
-                "overworld"
-              ]
+              "value": ["animal", "bee_habitat", "forest", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -4752,14 +4641,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "bee_habitat",
-                "forest",
-                "hills",
-                "monster",
-                "overworld"
-              ]
+              "value": ["animal", "bee_habitat", "forest", "hills", "monster", "overworld"]
             }
           },
           "temperature": {
@@ -5151,13 +5033,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "frozen",
-                "frozen_peaks",
-                "monster",
-                "mountains",
-                "overworld"
-              ]
+              "value": ["frozen", "frozen_peaks", "monster", "mountains", "overworld"]
             }
           },
           "temperature": {
@@ -5563,15 +5439,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "nether",
-                "nether_wastes",
-                "spawn_endermen",
-                "spawn_few_piglins",
-                "spawn_ghast",
-                "spawn_magma_cubes",
-                "spawn_zombified_piglin"
-              ]
+              "value": ["nether", "nether_wastes", "spawn_endermen", "spawn_few_piglins", "spawn_ghast", "spawn_magma_cubes", "spawn_zombified_piglin"]
             }
           },
           "temperature": {
@@ -6039,13 +5907,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "frozen",
-                "ice_plains",
-                "monster",
-                "mutated",
-                "overworld"
-              ]
+              "value": ["frozen", "ice_plains", "monster", "mutated", "overworld"]
             }
           },
           "temperature": {
@@ -6215,13 +6077,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "frozen",
-                "jagged_peaks",
-                "monster",
-                "mountains",
-                "overworld"
-              ]
+              "value": ["frozen", "jagged_peaks", "monster", "mountains", "overworld"]
             }
           },
           "temperature": {
@@ -6743,14 +6599,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "edge",
-                "jungle",
-                "monster",
-                "mutated",
-                "overworld_generation"
-              ]
+              "value": ["animal", "edge", "jungle", "monster", "mutated", "overworld_generation"]
             }
           },
           "temperature": {
@@ -7050,13 +6899,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "jungle",
-                "monster",
-                "mutated",
-                "overworld_generation"
-              ]
+              "value": ["animal", "jungle", "monster", "mutated", "overworld_generation"]
             }
           },
           "temperature": {
@@ -7788,13 +7631,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "bee_habitat",
-                "meadow",
-                "monster",
-                "mountains",
-                "overworld"
-              ]
+              "value": ["bee_habitat", "meadow", "monster", "mountains", "overworld"]
             }
           },
           "temperature": {
@@ -8039,15 +7876,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "forest",
-                "mega",
-                "monster",
-                "overworld",
-                "rare",
-                "taiga"
-              ]
+              "value": ["animal", "forest", "mega", "monster", "overworld", "rare", "taiga"]
             }
           },
           "temperature": {
@@ -8179,15 +8008,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "forest",
-                "hills",
-                "mega",
-                "monster",
-                "overworld",
-                "taiga"
-              ]
+              "value": ["animal", "forest", "hills", "mega", "monster", "overworld", "taiga"]
             }
           },
           "temperature": {
@@ -9228,14 +9049,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "mesa",
-                "monster",
-                "mutated",
-                "overworld",
-                "plateau",
-                "stone"
-              ]
+              "value": ["mesa", "monster", "mutated", "overworld", "plateau", "stone"]
             }
           },
           "temperature": {
@@ -9632,14 +9446,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "mesa",
-                "monster",
-                "overworld",
-                "plateau",
-                "rare",
-                "stone"
-              ]
+              "value": ["mesa", "monster", "overworld", "plateau", "rare", "stone"]
             }
           },
           "temperature": {
@@ -10512,13 +10319,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "bee_habitat",
-                "monster",
-                "overworld",
-                "plains"
-              ]
+              "value": ["animal", "bee_habitat", "monster", "overworld", "plains"]
             }
           },
           "temperature": {
@@ -10627,16 +10428,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "forest",
-                "hills",
-                "mega",
-                "monster",
-                "mutated",
-                "overworld_generation",
-                "taiga"
-              ]
+              "value": ["animal", "forest", "hills", "mega", "monster", "mutated", "overworld_generation", "taiga"]
             }
           },
           "temperature": {
@@ -10745,15 +10537,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "forest",
-                "mega",
-                "monster",
-                "mutated",
-                "overworld",
-                "taiga"
-              ]
+              "value": ["animal", "forest", "mega", "monster", "mutated", "overworld", "taiga"]
             }
           },
           "temperature": {
@@ -11053,14 +10837,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "forest",
-                "monster",
-                "no_legacy_worldgen",
-                "overworld",
-                "roofed"
-              ]
+              "value": ["animal", "forest", "monster", "no_legacy_worldgen", "overworld", "roofed"]
             }
           },
           "temperature": {
@@ -11169,14 +10946,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "forest",
-                "monster",
-                "mutated",
-                "overworld_generation",
-                "roofed"
-              ]
+              "value": ["animal", "forest", "monster", "mutated", "overworld_generation", "roofed"]
             }
           },
           "temperature": {
@@ -11694,14 +11464,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "monster",
-                "mutated",
-                "overworld",
-                "plateau",
-                "savanna"
-              ]
+              "value": ["animal", "monster", "mutated", "overworld", "plateau", "savanna"]
             }
           },
           "temperature": {
@@ -11871,13 +11634,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "frozen",
-                "monster",
-                "mountains",
-                "overworld",
-                "snowy_slopes"
-              ]
+              "value": ["frozen", "monster", "mountains", "overworld", "snowy_slopes"]
             }
           },
           "temperature": {
@@ -12017,12 +11774,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "nether",
-                "soulsand_valley",
-                "spawn_endermen",
-                "spawn_ghast"
-              ]
+              "value": ["nether", "soulsand_valley", "spawn_endermen", "spawn_ghast"]
             }
           },
           "temperature": {
@@ -12387,14 +12139,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "bee_habitat",
-                "monster",
-                "mutated",
-                "overworld",
-                "plains"
-              ]
+              "value": ["animal", "bee_habitat", "monster", "mutated", "overworld", "plains"]
             }
           },
           "temperature": {
@@ -12855,13 +12600,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "monster",
-                "mutated",
-                "overworld_generation",
-                "swamp"
-              ]
+              "value": ["animal", "monster", "mutated", "overworld_generation", "swamp"]
             }
           },
           "temperature": {
@@ -13138,14 +12877,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "forest",
-                "hills",
-                "monster",
-                "overworld",
-                "taiga"
-              ]
+              "value": ["animal", "forest", "hills", "monster", "overworld", "taiga"]
             }
           },
           "temperature": {
@@ -13254,14 +12986,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "animal",
-                "forest",
-                "monster",
-                "mutated",
-                "overworld_generation",
-                "taiga"
-              ]
+              "value": ["animal", "forest", "monster", "mutated", "overworld_generation", "taiga"]
             }
           },
           "temperature": {
@@ -13651,12 +13376,7 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": [
-                "nether",
-                "netherwart_forest",
-                "spawn_endermen",
-                "warped_forest"
-              ]
+              "value": ["nether", "netherwart_forest", "spawn_endermen", "warped_forest"]
             }
           },
           "temperature": {

@@ -13,13 +13,9 @@
 const PlayerMoveEvent = require("../../../plugin/events/PlayerMoveEvent");
 
 class PlayerMove extends require("./Handler") {
-  handle(client, packet) {
-    new PlayerMoveEvent().execute(
-      require("../../../Server").server,
-      client,
-      packet.data.params.position
-    );
-  }
+	handle(client, packet) {
+		new PlayerMoveEvent().execute(require("../../../Server").server, client, packet.data.params.position);
+	}
 }
 
 module.exports = PlayerMove;

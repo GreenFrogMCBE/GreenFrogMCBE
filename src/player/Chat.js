@@ -15,15 +15,15 @@ const { lang } = require("../server/ServerInfo");
 const Logger = require("../server/Logger");
 
 module.exports = {
-  /**
-   * Broadcasts message to all players
-   * @param {string} msg
-   */
-  broadcastMessage(msg = "") {
-    for (const player of players) {
-      player.sendMessage(msg);
-    }
+	/**
+	 * Broadcasts message to all players
+	 * @param {string} msg
+	 */
+	broadcastMessage(msg = "") {
+		for (const player of players) {
+			player.sendMessage(msg);
+		}
 
-    Logger.log(lang.broadcasts.broadcastmessage.replace("%msg%", msg));
-  },
+		Logger.log(lang.broadcasts.broadcastmessage.replace("%msg%", msg));
+	},
 };

@@ -15,62 +15,58 @@ const PlayerInfo = require("../../player/PlayerInfo");
 const Logger = require("../Logger");
 
 class CommandSay extends require("./Command") {
-  name() {
-    return lang.commands.say;
-  }
+	name() {
+		return lang.commands.say;
+	}
 
-  aliases() {
-    return null;
-  }
+	aliases() {
+		return null;
+	}
 
-  execute(args) {
-    if (!args) {
-      Logger.log(lang.commands.usageSay);
-      return;
-    }
+	execute(args) {
+		if (!args) {
+			Logger.log(lang.commands.usageSay);
+			return;
+		}
 
-    let msg = lang.commands.sayCommandFormat
-      .replace(`%message%`, args)
-      .replace(`%sender%`, "Server");
+		let msg = lang.commands.sayCommandFormat.replace(`%message%`, args).replace(`%sender%`, "Server");
 
-    for (let i = 0; i < PlayerInfo.players.length; i++) {
-      let client = PlayerInfo.players[i];
-      client.sendMessage(msg);
-    }
+		for (let i = 0; i < PlayerInfo.players.length; i++) {
+			let client = PlayerInfo.players[i];
+			client.sendMessage(msg);
+		}
 
-    Logger.log(msg);
-  }
+		Logger.log(msg);
+	}
 
-  getPlayerDescription() {
-    return lang.commands.ingameSayDescription;
-  }
+	getPlayerDescription() {
+		return lang.commands.ingameSayDescription;
+	}
 
-  executePlayer(client, args) {
-    if (!config.playerCommandSay) {
-      client.sendMessage(lang.errors.playerUnknownCommand);
-      return;
-    }
+	executePlayer(client, args) {
+		if (!config.playerCommandSay) {
+			client.sendMessage(lang.errors.playerUnknownCommand);
+			return;
+		}
 
-    if (!client.op) {
-      client.sendMessage(lang.errors.noPermission);
-      return;
-    }
+		if (!client.op) {
+			client.sendMessage(lang.errors.noPermission);
+			return;
+		}
 
-    if (!args.split(" ")[1]) {
-      client.sendMessage("§c" + lang.commands.usageSay);
-      return;
-    }
-    args = args.split(" ")[1];
+		if (!args.split(" ")[1]) {
+			client.sendMessage("§c" + lang.commands.usageSay);
+			return;
+		}
+		args = args.split(" ")[1];
 
-    let msg = lang.commands.sayCommandFormat
-      .replace(`%message%`, args)
-      .replace(`%sender%`, client.username);
+		let msg = lang.commands.sayCommandFormat.replace(`%message%`, args).replace(`%sender%`, client.username);
 
-    for (let i = 0; i < PlayerInfo.players.length; i++) {
-      client.sendMessage(msg);
-    }
-    Logger.log(msg);
-  }
+		for (let i = 0; i < PlayerInfo.players.length; i++) {
+			client.sendMessage(msg);
+		}
+		Logger.log(msg);
+	}
 }
 
 module.exports = CommandSay;

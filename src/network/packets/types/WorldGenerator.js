@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 module.exports = {
-  FLAT: "flat",
-  DEFAULT: "default",
-  VOID: "void",
+	FLAT: "flat",
+	DEFAULT: "default",
+	VOID: "void",
 };
