@@ -14,5 +14,5 @@ const plugins = [];
 
 module.exports = {
 	getPlugins: () => plugins,
-	addPlugin: (name) => plugins.push(name),
+	addPlugin: (name, version) => plugins.push(`${name} v${version}`),
 };
