@@ -11,10 +11,10 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 class ChunkError extends Error {
-  constructor(message) {
-    super("Failed to load chunks! " + message);
-    this.name = "ChunkError";
-  }
+	constructor(message) {
+		super("Failed to load chunks! " + message);
+		this.name = "ChunkError";
+	}
 }
 
 module.exports = ChunkError;

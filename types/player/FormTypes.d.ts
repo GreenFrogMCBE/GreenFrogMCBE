@@ -11,6 +11,6 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare module "FormTypes" {
-  export const FORM: "form";
-  export const CUSTOMFORM: "custom_form";
+	export const FORM: "form";
+	export const CUSTOMFORM: "custom_form";
 }

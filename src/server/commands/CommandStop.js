@@ -13,30 +13,30 @@
 const { lang } = require("../ServerInfo");
 
 class CommandShutdown extends require("./Command") {
-  name() {
-    return lang.commands.stop;
-  }
+	name() {
+		return lang.commands.stop;
+	}
 
-  aliases() {
-    return null;
-  }
+	aliases() {
+		return null;
+	}
 
-  execute() {
-    require("../ShutdownAPI").shutdownServer();
-  }
+	execute() {
+		require("../ShutdownAPI").shutdownServer();
+	}
 
-  getPlayerDescription() {
-    return lang.commands.ingameStopDescription;
-  }
+	getPlayerDescription() {
+		return lang.commands.ingameStopDescription;
+	}
 
-  executePlayer(client) {
-    if (!client.op) {
-      client.sendMessage(lang.errors.noPermission);
-      return;
-    }
-    client.sendMessage(lang.server.stoppingServer);
-    this.execute();
-  }
+	executePlayer(client) {
+		if (!client.op) {
+			client.sendMessage(lang.errors.noPermission);
+			return;
+		}
+		client.sendMessage(lang.server.stoppingServer);
+		this.execute();
+	}
 }
 
 module.exports = CommandShutdown;

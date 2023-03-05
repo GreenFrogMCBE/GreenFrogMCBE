@@ -13,36 +13,36 @@
 let data = null;
 
 class AvailableCommands extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
-  name() {
-    return "available_commands";
-  }
+	/**
+	 * @returns The name of the packet.
+	 */
+	name() {
+		return "available_commands";
+	}
 
-  /**
-   * It sets the packet data
-   * @param {Object} data1
-   */
-  setData(data1) {
-    data = data1;
-  }
+	/**
+	 * It sets the packet data
+	 * @param {Object} data1
+	 */
+	setData(data1) {
+		data = data1;
+	}
 
-  /**
-   * It returns the packet data
-   * @returns The packet data
-   */
-  getData() {
-    return data;
-  }
+	/**
+	 * It returns the packet data
+	 * @returns The packet data
+	 */
+	getData() {
+		return data;
+	}
 
-  /**
-   * It send the packet to the client
-   * @param {Object} client
-   */
-  send(client) {
-    client.queue(this.name(), this.getData());
-  }
+	/**
+	 * It send the packet to the client
+	 * @param {Object} client
+	 */
+	send(client) {
+		client.queue(this.name(), this.getData());
+	}
 }
 
 module.exports = AvailableCommands;

@@ -11,6 +11,6 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare module "PluginLoader" {
-  export function unloadPlugins(): void;
-  export function loadPlugins(): void;
+	export function unloadPlugins(): void;
+	export function loadPlugins(): void;
 }

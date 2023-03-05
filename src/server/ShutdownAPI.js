@@ -16,20 +16,20 @@ const { players } = require("../player/PlayerInfo");
 const { lang } = require("../server/ServerInfo");
 
 module.exports = {
-  async shutdownServer() {
-    await require("./ConsoleCommandSender").close();
-    Logger.log(lang.server.stoppingServer);
+	async shutdownServer() {
+		await require("./ConsoleCommandSender").close();
+		Logger.log(lang.server.stoppingServer);
 
-    try {
-      for (const player of players) {
-        if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
-      }
-    } catch (e) {
-      /* ignored */
-    }
+		try {
+			for (const player of players) {
+				if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
+			}
+		} catch (e) {
+			/* ignored */
+		}
 
-    setTimeout(() => {
-      PluginLoader.unloadPlugins();
-    }, 1000);
-  },
+		setTimeout(() => {
+			PluginLoader.unloadPlugins();
+		}, 1000);
+	},
 };

@@ -13,36 +13,36 @@
 let value = null;
 
 class BiomeDefinitionList extends require("./Packet") {
-  /**
-   * @returns The name of the packet.
-   */
-  name() {
-    return "biome_definition_list";
-  }
+	/**
+	 * @returns The name of the packet.
+	 */
+	name() {
+		return "biome_definition_list";
+	}
 
-  /**
-   * It sets the packet value
-   * @param pkvalue - The packet value data to set.
-   */
-  setValue(pkvalue) {
-    value = pkvalue;
-  }
+	/**
+	 * It sets the packet value
+	 * @param pkvalue - The packet value data to set.
+	 */
+	setValue(pkvalue) {
+		value = pkvalue;
+	}
 
-  /**
-   * It returns the packet value
-   * @returns The packet value.
-   */
-  getValue() {
-    return value;
-  }
+	/**
+	 * It returns the packet value
+	 * @returns The packet value.
+	 */
+	getValue() {
+		return value;
+	}
 
-  /**
-   * It send the packet to the client
-   * @param {Object} client
-   */
-  send(client) {
-    client.queue(this.name(), this.getValue());
-  }
+	/**
+	 * It send the packet to the client
+	 * @param {Object} client
+	 */
+	send(client) {
+		client.queue(this.name(), this.getValue());
+	}
 }
 
 module.exports = BiomeDefinitionList;

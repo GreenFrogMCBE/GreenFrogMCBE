@@ -17,25 +17,25 @@ const ConsoleCommandExecutedEvent = require("../plugin/events/ServerConsoleComma
 let isclosed = false;
 
 module.exports = {
-  closed: isclosed,
+	closed: isclosed,
 
-  close() {
-    isclosed = true;
-  },
+	close() {
+		isclosed = true;
+	},
 
-  async start() {
-    const r = rl.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
+	async start() {
+		const r = rl.createInterface({
+			input: process.stdin,
+			output: process.stdout,
+		});
 
-    r.setPrompt("> ");
-    r.prompt(true);
+		r.setPrompt("> ");
+		r.prompt(true);
 
-    r.on("line", (data) => {
-      const cmd = new ConsoleCommandExecutedEvent();
-      cmd.execute(require("../Server").server, data);
-      if (!isclosed) r.prompt(true);
-    });
-  },
+		r.on("line", (data) => {
+			const cmd = new ConsoleCommandExecutedEvent();
+			cmd.execute(require("../Server").server, data);
+			if (!isclosed) r.prompt(true);
+		});
+	},
 };

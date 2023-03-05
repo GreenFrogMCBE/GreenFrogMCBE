@@ -11,5 +11,5 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare module "ShutdownAPI" {
-  export function close(): void;
+	export function close(): void;
 }

@@ -11,9 +11,9 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 class Handler {
-  constructor() {}
-  validate() {}
-  handle() {}
+	constructor() {}
+	validate() {}
+	handle() {}
 }
 
 module.exports = Handler;

@@ -13,9 +13,9 @@
 const PlayerFormResponse = require("../../../plugin/events/PlayerFormResponseEvent");
 
 class ModalFormResponse extends require("./Handler") {
-  handle(server, client, packet) {
-    new PlayerFormResponse().execute(server, client, packet);
-  }
+	handle(server, client, packet) {
+		new PlayerFormResponse().execute(server, client, packet);
+	}
 }
 
 module.exports = ModalFormResponse;

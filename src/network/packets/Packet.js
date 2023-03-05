@@ -11,10 +11,10 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 class Packet {
-  constructor() {}
-  name() {}
-  validate() {}
-  send() {}
+	constructor() {}
+	name() {}
+	validate() {}
+	send() {}
 }
 
 module.exports = Packet;

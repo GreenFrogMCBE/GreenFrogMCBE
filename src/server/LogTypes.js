@@ -11,8 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 module.exports = {
-  INFO: "info",
-  WARNING: "warning",
-  ERROR: "error",
-  DEBUG: "debug",
+	INFO: "info",
+	WARNING: "warning",
+	ERROR: "error",
+	DEBUG: "debug",
 };

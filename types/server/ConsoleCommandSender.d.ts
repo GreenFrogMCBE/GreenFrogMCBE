@@ -11,8 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare class ConsoleCommandExecutedEvent {
-  //  TODO: replace any with something else
-  execute(server: any, data: string): void;
+	//  TODO: replace any with something else
+	execute(server: any, data: string): void;
 }
 
 declare let isclosed: boolean;

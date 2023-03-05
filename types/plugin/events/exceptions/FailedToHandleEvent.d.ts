@@ -11,9 +11,5 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare module "FailedToHandleEvent" {
-  export function handleEventError(
-    e: Error,
-    plugin: string,
-    name: string
-  ): void;
+	export function handleEventError(e: Error, plugin: string, name: string): void;
 }

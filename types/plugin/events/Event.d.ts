@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare class GFEvent {
-  cancel(): void;
-  execute(): void;
-  postExecute(): void;
+	cancel(): void;
+	execute(): void;
+	postExecute(): void;
 }
