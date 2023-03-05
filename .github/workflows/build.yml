@@ -21,4 +21,5 @@ jobs:
           git add .
           git commit -m "Formatting: Builded project"
           git push
-          
+      - with:
+          github_token: ${{ secrets.PAT }}
