@@ -23,4 +23,4 @@ jobs:
           git init
           git add .
           git commit -m "Bot: Automated changes"
-          git push -u origin ${{ github.head_ref || github.ref_name }}
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}
