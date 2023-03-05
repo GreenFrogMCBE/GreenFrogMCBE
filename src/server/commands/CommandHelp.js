@@ -47,13 +47,7 @@ class CommandHelp extends require("./Command") {
 		for (const help of commandHelps) {
 			if (config[`consoleCommand${help.command.charAt(0).toUpperCase() + help.command.slice(1)}`]) {
 				commandsfound = true;
-				Logger.log(
-					help.help
-						.replace("%green%", "\x1b[32m")
-						.replace("%cyan%", "\x1b[36m")
-						.replace("%white%", "\x1b[0m")
-						.replace("%blue%", "\x1b[34m") + "\x1b[0m"
-				);
+				Logger.log(help.help.replace("%green%", "\x1b[32m").replace("%cyan%", "\x1b[36m").replace("%white%", "\x1b[0m").replace("%blue%", "\x1b[34m") + "\x1b[0m");
 			}
 		}
 

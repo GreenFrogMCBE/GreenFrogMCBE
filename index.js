@@ -106,9 +106,7 @@ playerCommandGamemode: true`
 	console.error("The error was: ");
 	console.error(e.stack);
 	console.error(`Make sure that you have the required libraries. Run npm i to install them`);
-	console.error(
-		"If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE"
-	);
+	console.error("If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE");
 	process.exit(-1);
 }
 

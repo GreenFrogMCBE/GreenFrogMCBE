@@ -39,8 +39,6 @@ module.exports = {
 			client.kick(lang.errors.invalidUsername);
 		}
 
-		Logger.log(
-			lang.playerstatuses.playerConnected.replace("%player%", client.username).replace("%ip%", client.fullip)
-		);
+		Logger.log(lang.playerstatuses.playerConnected.replace("%player%", client.username).replace("%ip%", client.fullip));
 	},
 };

@@ -41,9 +41,7 @@ class CommandKick extends require("./Command") {
 
 		if (target) {
 			target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
-			Logger.log(
-				`${lang.kickmessages.kickedConsoleMsg.replace("%player%", targetUsername).replace("%reason%", reason)}`
-			);
+			Logger.log(`${lang.kickmessages.kickedConsoleMsg.replace("%player%", targetUsername).replace("%reason%", reason)}`);
 		} else {
 			Logger.log(lang.errors.playerOffline);
 		}
@@ -76,9 +74,7 @@ class CommandKick extends require("./Command") {
 
 		if (target) {
 			target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
-			client.sendMessage(
-				`${lang.kickmessages.kickedConsoleMsg.replace("%player%", targetUsername).replace("%reason%", reason)}`
-			);
+			client.sendMessage(`${lang.kickmessages.kickedConsoleMsg.replace("%player%", targetUsername).replace("%reason%", reason)}`);
 		} else {
 			client.sendMessage("§c" + lang.errors.playerOffline);
 		}
