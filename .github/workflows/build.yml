@@ -19,12 +19,13 @@ jobs:
         run: git pull
       - name: Commit changes
         run: |
-          git pull --rebase --autostash
+          git config --global rebase.autoStash true
           git config --global user.name "andriycraftbot"
           git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
           git checkout -b prettier-branch
           git add .
           git commit -m "Bot: Auto builded"
           git remote add fork "https://github.com/andriycraft/GreenFrogMCBE.git"
+          git pull --rebase --autostash
           git push --set-upstream fork prettier-branch
           gh pr create --title "Auto builded" --body " "
