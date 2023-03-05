@@ -7,7 +7,7 @@
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/andriycraft/GreenFrogMCBE?color=%2387F4BC&style=flat-square">
 </a>
 
-## GreenFrogMCBE 
+## GreenFrogMCBE
 
 Server software for Minecraft: Bedrock edition, written in NodeJS
 
