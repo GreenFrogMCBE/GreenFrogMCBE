@@ -1,4 +1,3 @@
-*.lock
 src/network/packets/res/skinData.json
 world/chunks-flat.json
 world/chunks.json
