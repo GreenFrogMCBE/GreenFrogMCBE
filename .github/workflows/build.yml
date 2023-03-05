@@ -2,17 +2,21 @@ on:
   push:
     branches:
       - main
-
 jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: main
+          fetch-depth: 0
       - name: Install Prettier
         run: npm install prettier
       - name: Format code
         run: npx prettier --write .
+      - name: Pull latest changes
+        run: git pull
       - name: Commit changes
         run: |
           git config --global user.name "andriycraftbot"
@@ -27,3 +31,5 @@ jobs:
         with:
           source_branch: prettier-branch
           target_branch: main
+          title: Prettier Formatting
+          body: This pull request was created automatically to apply Prettier formatting to the codebase.
