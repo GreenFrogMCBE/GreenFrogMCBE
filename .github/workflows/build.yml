@@ -26,6 +26,6 @@ jobs:
           git add .
           git commit -m "Bot: Auto builded"
           git remote add fork "https://github.com/andriycraft/GreenFrogMCBE.git"
-          git pull --rebase --autostash
+          git pull andriycraft GreenFrogMCBE
           git push --set-upstream fork prettier-branch
           gh pr create --title "Auto builded" --body " "
