@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Install Prettier
         run: npm install prettier
       - name: Format code
@@ -18,16 +20,14 @@ jobs:
         run: |
           git config --global user.name "andriycraftbot"
           git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
+          git checkout -b prettier-branch
           git add .
           git commit -m "Format code with Prettier"
-          git push
-  review:
-    needs: prettier
-    runs-on: ubuntu-latest
-    steps:
-      - name: Request review
-        uses: peter-evans/request-changes-action@v1.4.1
+          git push --set-upstream origin prettier-branch
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
         with:
-          reviewers: "andriycraft"
-          number-of-reviewers: 1
-          changes-requested-message: "Please review and approve changes."
+          title: Prettier Formatting
+          body: This pull request was created automatically to apply Prettier formatting to the codebase.
+          branch: prettier-branch
+
