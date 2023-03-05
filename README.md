@@ -78,8 +78,8 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 
 ## Testing
 
-1. If you want to test the project manually run `tests-manually.js`
-2. If you are Github workflow or something run `test-auto.js`
+1. If you want to test the project manually run `node tools/tests-manual.js`
+2. If you are Github workflow or something run `node tools/tests-auto.js`
 
 ## Configuration files list
 
