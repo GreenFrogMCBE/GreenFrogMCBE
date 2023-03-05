@@ -114,14 +114,20 @@ const ServerInfo = require("./src/server/ServerInfo");
 const config = ServerInfo.config;
 
 if (!config.offlineMode) {
-	console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" + "\u001b[38;5;203m\u001b[6mYou can not use tests in \u001b[38;5;87mOfflineMode\u001b[38;5;203m set to \u001b[38;5;87mfalse \u001b[0m" + "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+	console.log(
+		"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" +
+			"\u001b[38;5;203m\u001b[6mYou can not use tests in \u001b[38;5;87mOfflineMode\u001b[38;5;203m set to \u001b[38;5;87mfalse \u001b[0m" +
+			"\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+	);
 	return process.exit(0);
 }
 const r = rl.createInterface({
 	input: process.stdin,
 	output: process.stdout,
 });
-console.log("Welcome to GreenFrogMCBE Tests!\n\n[1] = Join server (Test)\n[2] = Join the server and send a message (Test)\n[3] = Join the server and try to send a command request (Test)");
+console.log(
+	"Welcome to GreenFrogMCBE Tests!\n\n[1] = Join server (Test)\n[2] = Join the server and send a message (Test)\n[3] = Join the server and try to send a command request (Test)"
+);
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);

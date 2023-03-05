@@ -5439,7 +5439,15 @@
             "type": "list",
             "value": {
               "type": "string",
-              "value": ["nether", "nether_wastes", "spawn_endermen", "spawn_few_piglins", "spawn_ghast", "spawn_magma_cubes", "spawn_zombified_piglin"]
+              "value": [
+                "nether",
+                "nether_wastes",
+                "spawn_endermen",
+                "spawn_few_piglins",
+                "spawn_ghast",
+                "spawn_magma_cubes",
+                "spawn_zombified_piglin"
+              ]
             }
           },
           "temperature": {

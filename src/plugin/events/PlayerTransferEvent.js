@@ -31,7 +31,13 @@ class PlayerTransferEvent extends Event {
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				try {
-					require(`${__dirname}/../../../plugins/${plugin}`).PlayerTransferEvent(server, client, address, port, this);
+					require(`${__dirname}/../../../plugins/${plugin}`).PlayerTransferEvent(
+						server,
+						client,
+						address,
+						port,
+						this
+					);
 				} catch (e) {
 					FailedToHandleEvent.handleEventError(e, plugin, this.name);
 				}
