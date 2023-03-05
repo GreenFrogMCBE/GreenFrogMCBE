@@ -19,6 +19,7 @@ jobs:
         run: git pull
       - name: Commit changes
         run: |
+          git pull
           git config --global user.name "andriycraftbot"
           git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
           git checkout -b prettier-branch
