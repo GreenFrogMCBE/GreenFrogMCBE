@@ -37,5 +37,5 @@ module.exports = {
 		}
 	},
 
-	onShutdown() { },
+	onShutdown() {},
 };
