@@ -45,7 +45,12 @@ class PlayerCommandExecuteEvent extends Event {
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				try {
-					require(`${__dirname}/../../../plugins/${plugin}`).PlayerCommandExecuteEvent(server, client, command, this);
+					require(`${__dirname}/../../../plugins/${plugin}`).PlayerCommandExecuteEvent(
+						server,
+						client,
+						command,
+						this
+					);
 				} catch (e) {
 					FailedToHandleEvent.handleEventError(e, plugin, this.name);
 				}
@@ -77,7 +82,11 @@ class PlayerCommandExecuteEvent extends Event {
 
 			let exists = false;
 			for (let i = 0; i < cmdManager.getCommands().length; i++) {
-				if (`${cmdManager.getCommands()[i].name.toLowerCase()}`.startsWith(message.replace("/", "").split(" ")[0].replace(" ", ""))) {
+				if (
+					`${cmdManager.getCommands()[i].name.toLowerCase()}`.startsWith(
+						message.replace("/", "").split(" ")[0].replace(" ", "")
+					)
+				) {
 					exists = true;
 					break;
 				}

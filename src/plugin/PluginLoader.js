@@ -59,7 +59,10 @@ module.exports = {
 							Logger.log(lang.server.loadedPlugin.replace("%name%", name).replace("%version%", version));
 							PluginManager.addPlugin(name, version);
 						} catch (e) {
-							Logger.log(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack), LogTypes.ERROR);
+							Logger.log(
+								lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack),
+								LogTypes.ERROR
+							);
 						}
 					}
 				});
@@ -106,7 +109,10 @@ module.exports = {
 								this.killServer();
 							}
 						} catch (e) {
-							Logger.log(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack), LogTypes.ERROR);
+							Logger.log(
+								lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack),
+								LogTypes.ERROR
+							);
 						}
 					}
 				});

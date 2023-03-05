@@ -155,40 +155,92 @@ class ResourcePackClientResponse extends Handler {
 					const commandmanager = new CommandManager();
 					commandmanager.init(client);
 					if (config.playerCommandVersion) {
-						commandmanager.addCommand(client, new CommandVersion().name().toLowerCase(), new CommandVersion().getPlayerDescription());
-						commandmanager.addCommand(client, new CommandVersion().aliases()[0].toLowerCase(), new CommandVersion().getPlayerDescription());
+						commandmanager.addCommand(
+							client,
+							new CommandVersion().name().toLowerCase(),
+							new CommandVersion().getPlayerDescription()
+						);
+						commandmanager.addCommand(
+							client,
+							new CommandVersion().aliases()[0].toLowerCase(),
+							new CommandVersion().getPlayerDescription()
+						);
 					}
 					if (config.playerCommandPlugins) {
-						commandmanager.addCommand(client, new CommandPl().name().toLowerCase(), new CommandPl().getPlayerDescription());
-						commandmanager.addCommand(client, new CommandPl().aliases()[0].toLowerCase(), new CommandPl().getPlayerDescription());
+						commandmanager.addCommand(
+							client,
+							new CommandPl().name().toLowerCase(),
+							new CommandPl().getPlayerDescription()
+						);
+						commandmanager.addCommand(
+							client,
+							new CommandPl().aliases()[0].toLowerCase(),
+							new CommandPl().getPlayerDescription()
+						);
 					}
 					if (config.playerCommandList) {
-						commandmanager.addCommand(client, new CommandList().name().toLowerCase(), new CommandList().getPlayerDescription());
+						commandmanager.addCommand(
+							client,
+							new CommandList().name().toLowerCase(),
+							new CommandList().getPlayerDescription()
+						);
 					}
 					if (config.playerCommandMe) {
-						commandmanager.addCommand(client, new CommandMe().name().toLowerCase(), new CommandMe().getPlayerDescription());
+						commandmanager.addCommand(
+							client,
+							new CommandMe().name().toLowerCase(),
+							new CommandMe().getPlayerDescription()
+						);
 					}
 					if (client.op) {
 						if (config.playerCommandStop) {
-							commandmanager.addCommand(client, new CommandStop().name().toLowerCase(), new CommandStop().getPlayerDescription());
+							commandmanager.addCommand(
+								client,
+								new CommandStop().name().toLowerCase(),
+								new CommandStop().getPlayerDescription()
+							);
 						}
 						if (config.playerCommandSay) {
-							commandmanager.addCommand(client, new CommandSay().name().toLowerCase(), new CommandSay().getPlayerDescription());
+							commandmanager.addCommand(
+								client,
+								new CommandSay().name().toLowerCase(),
+								new CommandSay().getPlayerDescription()
+							);
 						}
 						if (config.playerCommandOp) {
-							commandmanager.addCommand(client, new CommandOp().name().toLowerCase(), new CommandOp().getPlayerDescription());
+							commandmanager.addCommand(
+								client,
+								new CommandOp().name().toLowerCase(),
+								new CommandOp().getPlayerDescription()
+							);
 						}
 						if (config.playerCommandKick) {
-							commandmanager.addCommand(client, new CommandKick().name().toLowerCase(), new CommandKick().getPlayerDescription());
+							commandmanager.addCommand(
+								client,
+								new CommandKick().name().toLowerCase(),
+								new CommandKick().getPlayerDescription()
+							);
 						}
 						if (config.playerCommandTime) {
-							commandmanager.addCommand(client, new CommandTime().name().toLowerCase(), new CommandTime().getPlayerDescription());
+							commandmanager.addCommand(
+								client,
+								new CommandTime().name().toLowerCase(),
+								new CommandTime().getPlayerDescription()
+							);
 						}
 						if (config.playerCommandDeop) {
-							commandmanager.addCommand(client, new CommandDeop().name().toLowerCase(), new CommandDeop().getPlayerDescription());
+							commandmanager.addCommand(
+								client,
+								new CommandDeop().name().toLowerCase(),
+								new CommandDeop().getPlayerDescription()
+							);
 						}
 						if (config.playerCommandGamemode) {
-							commandmanager.addCommand(client, new CommandGamemode().name().toLowerCase(), new CommandGamemode().getPlayerDescription());
+							commandmanager.addCommand(
+								client,
+								new CommandGamemode().name().toLowerCase(),
+								new CommandGamemode().getPlayerDescription()
+							);
 						}
 					}
 
@@ -207,7 +259,10 @@ class ResourcePackClientResponse extends Handler {
 						chunkradiusupdate.setChunkRadius(32);
 						chunkradiusupdate.send(client);
 
-						const cords = config.generator == WorldGenerator.DEFAULT ? { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
+						const cords =
+							config.generator == WorldGenerator.DEFAULT
+								? { x: -81, y: 158, z: -52 }
+								: { x: 13, y: 155, z: -28 };
 
 						const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 						networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
@@ -218,7 +273,9 @@ class ResourcePackClientResponse extends Handler {
 						let chunks = null;
 
 						try {
-							chunks = require(`${__dirname}/../../../../world/chunks${config.generator == WorldGenerator.DEFAULT ? "" : "-flat"}.json`);
+							chunks = require(`${__dirname}/../../../../world/chunks${
+								config.generator == WorldGenerator.DEFAULT ? "" : "-flat"
+							}.json`);
 						} catch (e) {
 							throw new ChunkError(lang.errors.failedToLoadWorld + " " + e.stack);
 						}
@@ -275,13 +332,19 @@ class ResourcePackClientResponse extends Handler {
 						if (client.offline) return;
 						for (let i = 0; i < PlayerInfo.players.length; i++) {
 							if (PlayerInfo.players[i].username == client.username) return; // Vanilla behaviour
-							PlayerInfo.players[i].sendMessage(lang.broadcasts.joinedTheGame.replace("%username%", client.username));
+							PlayerInfo.players[i].sendMessage(
+								lang.broadcasts.joinedTheGame.replace("%username%", client.username)
+							);
 						}
 					}, 1000);
 				}
 				break;
 			default:
-				if (config.logUnhandledPackets) Logger.log(lang.debugdev.unhandledPacket.replace("%data%", packet.data.params.response_status), LogTypes.WARNING);
+				if (config.logUnhandledPackets)
+					Logger.log(
+						lang.debugdev.unhandledPacket.replace("%data%", packet.data.params.response_status),
+						LogTypes.WARNING
+					);
 		}
 	}
 }
