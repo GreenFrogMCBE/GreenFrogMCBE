@@ -4,7 +4,8 @@ on:
   push:
   pull_request:
 
-permissions: write-all
+permissions:
+  actions: write
 
 jobs:
   format:
