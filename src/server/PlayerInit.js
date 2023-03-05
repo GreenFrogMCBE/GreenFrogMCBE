@@ -43,7 +43,9 @@ module.exports = {
 		 * @param {string} msg - The message to send as a player
 		 */
 		player.chat = function (msg) {
-			Chat.broadcastMessage(lang.chat.chatFormat.replace("%username%", player.username).replace("%message%", msg));
+			Chat.broadcastMessage(
+				lang.chat.chatFormat.replace("%username%", player.username).replace("%message%", msg)
+			);
 		};
 
 		/**
@@ -51,7 +53,13 @@ module.exports = {
 		 * @param {string} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 */
 		player.setGamemode = function (gamemode) {
-			const validGamemodes = [GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR, GameMode.FALLBACK];
+			const validGamemodes = [
+				GameMode.SURVIVAL,
+				GameMode.CREATIVE,
+				GameMode.ADVENTURE,
+				GameMode.SPECTATOR,
+				GameMode.FALLBACK,
+			];
 			if (!validGamemodes.includes(gamemode)) throw new Error(lang.errors.invalidGamemode);
 
 			player.gamemode = gamemode;
@@ -87,7 +95,11 @@ module.exports = {
 				msg = "You were disconnected";
 			}
 
-			Logger.log(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.getUserData().displayName).replace("%reason%", msg));
+			Logger.log(
+				lang.kickmessages.kickedConsoleMsg
+					.replace("%player%", player.getUserData().displayName)
+					.replace("%reason%", msg)
+			);
 			player.disconnect(msg);
 		};
 

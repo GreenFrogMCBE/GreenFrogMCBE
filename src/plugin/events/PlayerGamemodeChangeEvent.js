@@ -30,7 +30,12 @@ class PlayerGamemodeChangeEvent extends Event {
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				try {
-					require(`${__dirname}/../../../plugins/${plugin}`).PlayerGamemodeChangeEvent(server, client, gamemode, this);
+					require(`${__dirname}/../../../plugins/${plugin}`).PlayerGamemodeChangeEvent(
+						server,
+						client,
+						gamemode,
+						this
+					);
 				} catch (e) {
 					FailedToHandleEvent.handleEventError(e, plugin, this.name);
 				}
