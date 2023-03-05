@@ -35,9 +35,7 @@ class CommandPl extends require("./Command") {
 			plugins = PluginManager.getPlugins().length;
 		}
 
-		let pluginlist =
-			ColorsServer.CONSOLE_GREEN +
-			PluginManager.getPlugins().join(ColorsServer.CONSOLE_RESET + ", " + ColorsServer.CONSOLE_GREEN);
+		let pluginlist = ColorsServer.CONSOLE_GREEN + PluginManager.getPlugins().join(ColorsServer.CONSOLE_RESET + ", " + ColorsServer.CONSOLE_GREEN);
 
 		Logger.log(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsServer.CONSOLE_RESET}`);
 	}
@@ -58,8 +56,7 @@ class CommandPl extends require("./Command") {
 			plugins = PluginManager.getPlugins().length;
 		}
 
-		let pluginlist =
-			ColorsPlayer.green + PluginManager.getPlugins().join(ColorsPlayer.white + ", " + ColorsPlayer.green);
+		let pluginlist = ColorsPlayer.green + PluginManager.getPlugins().join(ColorsPlayer.white + ", " + ColorsPlayer.green);
 
 		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsPlayer.reset}`);
 	}

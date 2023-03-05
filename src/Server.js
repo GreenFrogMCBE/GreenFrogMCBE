@@ -151,8 +151,7 @@ module.exports = {
 	 */
 	async initDebug() {
 		if (config.unstable) Logger.log(lang.devdebug.unstableWarning, LogTypes.WARNING);
-		if (process.env.DEBUG === "minecraft-protocol" || config.debug)
-			Logger.log(lang.errors.debugWarning, LogTypes.WARNING);
+		if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.log(lang.errors.debugWarning, LogTypes.WARNING);
 	},
 
 	/**
@@ -217,22 +216,12 @@ module.exports = {
 							client.disconnect(lang.kickmessages.internalServerError);
 						}
 						new ServerInternalServerErrorEvent().execute(server, e);
-						Logger.log(
-							lang.errors.packetHandlingException
-								.replace("%player%", client.username)
-								.replace("%error%", e.stack),
-							LogTypes.ERROR
-						);
+						Logger.log(lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack), LogTypes.ERROR);
 					}
 				});
 			});
 		} catch (e) {
-			Logger.log(
-				`${lang.errors.listeningFailed
-					.replace(`%address%`, `/${config.host}:${config.port}`)
-					.replace("%error%", e.stack)}`,
-				LogTypes.ERROR
-			);
+			Logger.log(`${lang.errors.listeningFailed.replace(`%address%`, `/${config.host}:${config.port}`).replace("%error%", e.stack)}`, LogTypes.ERROR);
 			process.exit(config.exitCode);
 		}
 	},

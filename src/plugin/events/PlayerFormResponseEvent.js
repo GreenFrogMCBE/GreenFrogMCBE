@@ -27,12 +27,7 @@ class PlayerFormResponseEvent extends Event {
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				try {
-					require(`${__dirname}/../../../plugins/${plugin}`).PlayerFormResponseEvent(
-						server,
-						client,
-						data,
-						this
-					);
+					require(`${__dirname}/../../../plugins/${plugin}`).PlayerFormResponseEvent(server, client, data, this);
 				} catch (e) {
 					FailedToHandleEvent.handleEventError(e, plugin, this.name);
 				}

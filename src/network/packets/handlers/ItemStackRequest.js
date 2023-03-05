@@ -69,10 +69,7 @@ class ItemStackRequest extends Handler {
 				is.send(client);
 			}
 		} catch (e) {
-			Logger.log(
-				lang.failedToHandleItemRequest.replace("%data%", `${client.username}: ${e.stack}`),
-				LogTypes.ERROR
-			);
+			Logger.log(lang.failedToHandleItemRequest.replace("%data%", `${client.username}: ${e.stack}`), LogTypes.ERROR);
 		}
 	}
 }

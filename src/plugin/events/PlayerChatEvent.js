@@ -49,20 +49,11 @@ class PlayerChatEvent extends Event {
 
 	postExecute(client, message) {
 		if (!this.isCancelled() || !config.disable) {
-			const fullmessage = lang.chat.chatFormat
-				.replace("%username%", client.username)
-				.replace("%message%", message);
+			const fullmessage = lang.chat.chatFormat.replace("%username%", client.username).replace("%message%", message);
 			if (!message.replace(/\s/g, "").length) return;
 
-			if (
-				message.includes("§") ||
-				message.length === 0 ||
-				(message.length > 256 && config.blockInvalidMessages)
-			) {
-				Logger.log(
-					lang.errors.illegalMessage.replace("%message%", message).replace("%player%", client.username),
-					LogTypes.WARNING
-				);
+			if (message.includes("§") || message.length === 0 || (message.length > 256 && config.blockInvalidMessages)) {
+				Logger.log(lang.errors.illegalMessage.replace("%message%", message).replace("%player%", client.username), LogTypes.WARNING);
 				client.kick(lang.kickmessages.invalidChatMessage);
 				return;
 			}

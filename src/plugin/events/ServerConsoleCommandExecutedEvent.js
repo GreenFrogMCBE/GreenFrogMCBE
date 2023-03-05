@@ -45,11 +45,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				try {
-					require(`${__dirname}/../../../plugins/${plugin}`).ServerConsoleCommandExecutedEvent(
-						server,
-						command,
-						this
-					);
+					require(`${__dirname}/../../../plugins/${plugin}`).ServerConsoleCommandExecutedEvent(server, command, this);
 				} catch (e) {
 					FailedToHandleEvent.handleEventError(e, plugin, this.name);
 				}
