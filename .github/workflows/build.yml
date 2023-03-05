@@ -23,9 +23,7 @@ jobs:
           git remote add fork "https://github.com/andriycraft/GreenFrogMCBE.git"
           git push --set-upstream fork prettier-branch
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v3
+        uses: devops-infra/action-pull-request@v0.5.5
         with:
-          title: Prettier Formatting
-          body: This pull request was created automatically to apply Prettier formatting to the codebase.
-          branch: prettier-branch
-          token: ${{ secrets.PAT }}
+          source_branch: prettier-branch
+          target_branch: main
