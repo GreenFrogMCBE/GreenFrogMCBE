@@ -13,7 +13,9 @@
 const Logger = require("../../src/server/Logger");
 const yaml = require("js-yaml");
 const fs = require("fs");
-
+/**
+ * @type {import('../../types/base/Plugin').default}
+ */
 module.exports = {
 	onLoad() {
 		const config = yaml.load(fs.readFileSync("config.yml", "utf8"));
@@ -37,5 +39,5 @@ module.exports = {
 		}
 	},
 
-	onShutdown() { },
+	onShutdown() {},
 };
