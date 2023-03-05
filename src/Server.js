@@ -32,8 +32,8 @@ const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
 const VersionToProtocol = require("./server/VersionToProtocol");
 const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
-const Logger = require("./server/Logger");
 const LogTypes = require("./server/LogTypes");
+const Logger = require("./server/Logger");
 
 let clients = [];
 let server = null;
@@ -119,9 +119,8 @@ module.exports = {
 	 * @param client - The client that joined
 	 */
 	async onJoin(client) {
+		await PlayerInit.initPlayer(client);
 		await ValidateClient.initAndValidateClient(client);
-
-		PlayerInit.initPlayer(client);
 
 		const event = new PlayerJoinEvent();
 		event.execute(server, client);
