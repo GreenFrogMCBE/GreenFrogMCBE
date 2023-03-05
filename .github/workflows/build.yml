@@ -20,5 +20,6 @@ jobs:
           git config --global user.name "andriycraftbot"
           git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git add .
           git commit -m "Bot: Automated changes"
           git push -u origin ${{ github.head_ref || github.ref_name }}
