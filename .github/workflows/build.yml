@@ -24,13 +24,7 @@ jobs:
           git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
           git checkout -b prettier-branch
           git add .
-          git commit -m "Format code with Prettier"
+          git commit -m "Bot: Auto builded"
           git remote add fork "https://github.com/andriycraft/GreenFrogMCBE.git"
           git push --set-upstream fork prettier-branch
-      - name: Create pull request
-        uses: devops-infra/action-pull-request@v0.5.5
-        with:
-          source_branch: prettier-branch
-          target_branch: main
-          title: Prettier Formatting
-          body: This pull request was created automatically to apply Prettier formatting to the codebase.
+          gh pr create --title "Auto builded" --body " "
