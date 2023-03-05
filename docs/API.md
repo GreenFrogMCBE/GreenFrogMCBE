@@ -1,5 +1,3 @@
-API Docs > Moved to https://greenfrog.f1470348511.workers.dev/apidocs
+Example plugin (has all Events in it) > https://github.com/greenfrogmc/ExamplePlugin
 
-Example plugin > https://github.com/greenfrogmc/ExamplePlugin
-
-Support > https://discord.gg/pN7ybDdxXp
+Plugin support > https://discord.gg/pN7ybDdxXp
