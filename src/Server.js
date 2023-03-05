@@ -119,9 +119,8 @@ module.exports = {
 	 * @param client - The client that joined
 	 */
 	async onJoin(client) {
+		await PlayerInit.initPlayer(client);
 		await ValidateClient.initAndValidateClient(client);
-
-		PlayerInit.initPlayer(client);
 
 		const event = new PlayerJoinEvent();
 		event.execute(server, client);
