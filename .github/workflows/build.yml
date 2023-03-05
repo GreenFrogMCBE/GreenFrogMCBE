@@ -1,25 +1,33 @@
-name: Format code with Prettier and commit changes
+name: Prettier
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  format-and-commit:
+  prettier:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Install Prettier
-        run: npm install --save-dev prettier
-
-      - name: Format code with Prettier
-        run: npx prettier --write "**/*.js"
-
+        run: npm install prettier
+      - name: Format code
+        run: npx prettier --write .
       - name: Commit changes
-        uses: EndBug/add-and-commit@v7
+        run: |
+          git config --global user.name "andriycraftbot"
+          git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
+          git add .
+          git commit -m "Format code with Prettier"
+          git push
+  review:
+    needs: prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request review
+        uses: peter-evans/request-changes-action@v1.4.1
         with:
-          message: "Format code with Prettier"
-          add: "."
+          reviewers: "andriycraft"
+          number-of-reviewers: 1
+          changes-requested-message: "Please review and approve changes."
