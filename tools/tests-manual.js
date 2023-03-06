@@ -14,11 +14,11 @@
 // Credit: AnyBananaGAME
 
 const rl = require("readline");
-const ClientJoin = require("../test/ClientJoin");
-const ClientMessage = require("../test/ClientSendMessage");
-const ClientCommand = require("../test/ClientRunCommand");
-const StartServer = require("../test/StartServer");
-const TestConfigs = require("../test/TestConfigs");
+const ClientJoin = require("./test/ClientJoin");
+const ClientMessage = require("./test/ClientSendMessage");
+const ClientCommand = require("./test/ClientRunCommand");
+const StartServer = require("./test/StartServer");
+const TestConfigs = require("./test/TestConfigs");
 
 const fs = require("fs");
 if (!fs.existsSync("config.yml")) {
@@ -110,7 +110,7 @@ playerCommandGamemode: true`
 
 console.log("Starting testing...");
 
-const ServerInfo = require("../src/server/ServerInfo");
+const ServerInfo = require("./src/server/ServerInfo");
 const config = ServerInfo.config;
 
 if (!config.offlineMode) {
