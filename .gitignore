@@ -1,6 +1,4 @@
 node_modules/
-plugins/
-plugin_configs/
 ops.yml
 config.yml
 *_packetReadError.txt
