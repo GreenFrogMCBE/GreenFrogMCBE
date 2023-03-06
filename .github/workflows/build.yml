@@ -6,16 +6,12 @@ jobs:
     #if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
       - name: prettier
         run: npm run build
-      - name: Check for modified files
-        id: git-check
-        run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
       - name: Push changes
-        if: steps.git-check.outputs.modified == 'true'
         run: |
           git config --global user.name 'andriycraftbot'
           git config --global user.email '124494132+andriycraftbot@users.noreply.github.com'
