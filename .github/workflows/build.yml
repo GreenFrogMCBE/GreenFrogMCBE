@@ -2,8 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [main, $GITHUB_BASE_REF]
+    branches: [main]
   pull_request:
+    branches: [$GITHUB_BASE_REF]
     types: [opened, reopened, synchronize]
 
 permissions:
