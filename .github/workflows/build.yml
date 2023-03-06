@@ -23,7 +23,6 @@ jobs:
 
       - name: Commit changes
         run: |
-          set +e
           git add .
           git status | grep modified
           git commit -m "Bot: Auto builded"
