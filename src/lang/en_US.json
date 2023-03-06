@@ -71,10 +71,6 @@
     "gamemodeUpdated": "Your gamemode has been updated to ",
     "setOwnGamemode": "Set own gamemode to "
   },
-  "commandhander": {
-    "cchs": "The console command handler has been started",
-    "scch": "Starting console command handler..."
-  },
   "chat": {
     "chatFormat": "<%username%> %message%",
     "chatMessage": "(chat message) %message%"
