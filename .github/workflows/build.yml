@@ -22,9 +22,10 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: Commit
         run: |
-          npm run build
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
+          npm run build
+          git pll
           git add .
-          git commit -am "Bot: Auto builded"
+          git commit -m "Bot: Auto builded"
           git push
