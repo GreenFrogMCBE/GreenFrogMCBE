@@ -23,9 +23,14 @@ jobs:
 
       - name: Commit changes
         run: |
-          npm run build
-          git config --global user.name "andriycraftbot"
-          git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
-          git add .
-          git commit -m "Bot: Auto builded"
-          git push
+          set +e
+          git status | grep modified
+          if [ $? -eq 0 ]
+          then
+            set -e
+            git commit -m "Bot: Auto builded"
+            git push
+          else
+            set -e
+            echo "No changes since last run" 
+          fi
