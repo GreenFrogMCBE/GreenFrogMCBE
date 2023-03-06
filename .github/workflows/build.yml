@@ -24,6 +24,7 @@ jobs:
       - name: Commit changes
         run: |
           set +e
+          git add .
           git status | grep modified
           if [ $? -eq 0 ]
           then
