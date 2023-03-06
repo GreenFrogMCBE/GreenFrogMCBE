@@ -23,4 +23,10 @@ jobs:
         run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
       - uses: EndBug/add-and-commit@v9
         with:
+          add: "."
           default_author: github_actions
+          fetch: true
+          message: "Auto builded"
+          pathspec_error_handling: ignore
+          pull: ""
+          push: true
