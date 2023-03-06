@@ -89,7 +89,7 @@ playerCommandKick: true
 playerCommandTime: true`
 			);
 		}
-		const Frog = require("../src/Server.js");
+		const Frog = require("../../src/Server.js");
 		Frog.start();
 		console.log("[server] started");
 	},
