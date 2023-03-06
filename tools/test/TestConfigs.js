@@ -10,6 +10,11 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+
+/**
+ * @type {import('../../types/base/Plugin').default}
+ */
+
 module.exports = {
 	test() {
 		const files = [
