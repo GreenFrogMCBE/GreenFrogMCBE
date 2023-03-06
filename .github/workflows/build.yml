@@ -22,6 +22,7 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: Commit
         run: |
+          git checkout -b FORMAT_%RANDOM%
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           npm run build
@@ -29,3 +30,4 @@ jobs:
           git add .
           git commit -m "Bot: Auto builded"
           git push
+          gh pr create --fill
