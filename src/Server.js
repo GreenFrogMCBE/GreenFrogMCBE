@@ -176,7 +176,6 @@ module.exports = {
 
 		await this.initDebug();
 
-		Logger.log(`${lang.commandhander.scch}`, LogTypes.DEBUG);
 		await PluginLoader.loadPlugins();
 
 		this.listen();
