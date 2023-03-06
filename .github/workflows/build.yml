@@ -1,4 +1,4 @@
-name: Build
+name: Build and Create PR
 
 on:
   push:
@@ -8,26 +8,31 @@ on:
 
 permissions:
   contents: write
-  issues: write
   pull-requests: write
 
 jobs:
   prettier:
-    if: "!contains(github.actor, 'andriycraftbot')"
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
+      - name: Create branch
+        run: |
+          git checkout -b build/${{ github.head_ref }}
       - name: Commit
         run: |
-          git checkout -b FORMAT_%RANDOM%
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           npm run build
           git pull
           git add .
           git commit -m "Bot: Auto builded"
-          git push
-          gh pr create --fill
+          git push --set-upstream origin build/${{ github.head_ref }}
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: 'Bot: Auto builded'
+          branch: 'main'
+          commit-message: 'Bot: Auto builded'
