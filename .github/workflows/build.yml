@@ -25,7 +25,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           npm run build
-          git pll
+          git pull
           git add .
           git commit -m "Bot: Auto builded"
           git push
