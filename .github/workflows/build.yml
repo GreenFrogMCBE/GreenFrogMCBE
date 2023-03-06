@@ -20,16 +20,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
-      - name: Setup
+      - name: Commit
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-      - name: Adding . to git commit
-        run: |
           git add .
-      - name: Commiting...
-        run: |
           git commit -am "Bot: Auto builded"
-      - name: Pushing...
-        run: |
           git push
