@@ -21,9 +21,12 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Commit changes
+      - name: Adding . to git commit
         run: |
           git add .
-          git status | grep modified
-          git commit -m "Bot: Auto builded"
+      - name: Commiting...
+        run: |
+          git commit -am "Bot: Auto builded"
+      - name: Pushing...
+        run: |
           git push
