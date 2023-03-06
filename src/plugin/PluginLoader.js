@@ -24,6 +24,7 @@ module.exports = {
 		} catch (ignored) {
 			// Do nothing if directory already exists
 		}
+
 		try {
 			fs.mkdirSync("./plugins_configs/");
 		} catch (ignored) {
@@ -67,11 +68,6 @@ module.exports = {
 		});
 	},
 
-	async checkIfEmpty(dir) {
-		const files = await fs.promises.readdir(dir);
-		return files.length === 0;
-	},
-
 	async killServer() {
 		process.exit(config.exitCode);
 	},
@@ -79,6 +75,7 @@ module.exports = {
 	async unloadPlugins() {
 		let count = 0;
 		fs.readdir("./plugins", (err, files) => {
+			if (files.length === 0) this.killServer();
 			files.forEach((file) => {
 				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
 					if (err) {
@@ -87,8 +84,8 @@ module.exports = {
 					}
 					if (stats.isDirectory()) {
 						count++;
-						let name,
-							main = null;
+						let name, main = null;
+
 						try {
 							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
 							name = packageJson.displayName;
@@ -97,14 +94,13 @@ module.exports = {
 							Logger.log(lang.errors.packageJSONError.replace("%plugin%", file), LogTypes.WARNING);
 							return;
 						}
+
 						try {
 							Logger.log(lang.server.unloadingPlugin.replace("%plugin%", name));
 							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
 							Logger.log(lang.server.unloadedPlugin.replace("%plugin%", name));
 							count--;
-							if (count <= 0) {
-								this.killServer();
-							}
+							if (count <= 0) this.killServer();
 						} catch (e) {
 							Logger.log(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack), LogTypes.ERROR);
 						}
