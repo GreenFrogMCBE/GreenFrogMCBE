@@ -13,11 +13,11 @@
 module.exports = {
 	test() {
 		const files = [
-			"/../src/lang/en_US.js",
-			//"/../src/lang/lt_LT.js",
-			//"/../src/lang/uk_UA.js",
-			//"/../src/lang/vi_VN.js",
-			//"/../src/lang/fr_FR.js",
+			"/../src/lang/en_US.json",
+			//"/../src/lang/lt_LT.json",
+			//"/../src/lang/uk_UA.json",
+			//"/../src/lang/vi_VN.json",
+			//"/../src/lang/fr_FR.json",
 			"/../src/network/packets/res/biomes.json",
 			"/../src/network/packets/res/creativeContent.json",
 			"/../src/network/packets/res/skinData.json",

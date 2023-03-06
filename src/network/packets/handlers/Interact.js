@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const PacketHandlingError = require("../exceptions/PacketHandlingError");
-const lang = require("../../../lang/en_US.js");
+const lang = require("../../../lang/en_US.json");
 const ContainerOpen = require("../ContainerOpen");
 const Handler = require("./Handler");
 

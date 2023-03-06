@@ -176,7 +176,7 @@ module.exports = {
 
 		await this.initDebug();
 
-		Logger.log(`${lang.commandhander.scch}`, LogTypes.DEBUG);
+		Logger.log(`${lang.chat.ccs}`, LogTypes.DEBUG);
 		await PluginLoader.loadPlugins();
 
 		this.listen();
