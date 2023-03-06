@@ -10,8 +10,8 @@
     "dev": "nodemon --signal SIGINT index.js --debug",
     "gencoryrightheader": "node tools/generatelicenseheaders.js",
     "build": "npm run gencoryrightheader && npm run format",
-    "autotest": "node tools/tests-auto.js",
-    "test": "node tools/tests-manual.js"
+    "autotest": "node tools/test/tests-auto.js",
+    "test": "node tools/test/tests-manual.js"
   },
   "dependencies": {
     "frog-protocol": "git+https://github.com/greenfrogmc/Protocol.git",
