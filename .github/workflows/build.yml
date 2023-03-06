@@ -36,5 +36,5 @@ jobs:
             git push
           else
             set -e
-            echo "No changes since last run"
+            echo "No changes since last run" 
           fi
