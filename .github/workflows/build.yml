@@ -3,14 +3,14 @@ on: pull_request
 jobs:
   format:
     # Check if the PR is not from a fork
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    #if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
         with:
           ref: ${{ github.head_ref }}
       - name: prettier
-        run: npx prettier --write .
+        run: npm run build
       - name: Check for modified files
         id: git-check
         run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
