@@ -26,12 +26,5 @@ jobs:
           set +e
           git add .
           git status | grep modified
-          if [ $? -eq 0 ]
-          then
-            set -e
-            git commit -m "Bot: Auto builded"
-            git push
-          else
-            set -e
-            echo "No changes since last run" 
-          fi
+          git commit -m "Bot: Auto builded"
+          git push
