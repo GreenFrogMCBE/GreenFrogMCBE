@@ -136,6 +136,7 @@ module.exports = {
 			client.kick(lang.kickmessages.versionMismatch.replace("%version%", config.version));
 			return;
 		}
+
 		const responsepackinfo = new ResponsePackInfo();
 		responsepackinfo.setMustAccept(true);
 		responsepackinfo.setHasScripts(false);
@@ -223,5 +224,22 @@ module.exports = {
 			Logger.log(`${lang.errors.listeningFailed.replace(`%address%`, `/${config.host}:${config.port}`).replace("%error%", e.stack)}`, LogTypes.ERROR);
 			process.exit(config.exitCode);
 		}
+	},
+
+	async shutdown() {
+		await require("./server/ConsoleCommandSender").close();
+		Logger.log(lang.server.stoppingServer);
+
+		try {
+			for (const player of PlayerInfo.players) {
+				if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
+			}
+		} catch (e) {
+			/* ignored */
+		}
+
+		setTimeout(() => {
+			PluginLoader.unloadPlugins();
+		}, 1000);
 	},
 };

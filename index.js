@@ -112,5 +112,5 @@ playerCommandGamemode: true`
 
 // Close server on nodemon restart
 process.once("SIGINT", async () => {
-	await require("./src/server/ShutdownAPI.js");
+	await require("./src/Server").shutdown();
 });
