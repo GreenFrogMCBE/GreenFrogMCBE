@@ -11,6 +11,11 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 module.exports = {
+	/**
+	 * Returns the version as a protocol number
+	 * @param {String} version 
+	 * @returns The version as a protocol number
+	 */
 	getProtocol(version) {
 		switch (version) {
 			case "1.19.63":

@@ -28,7 +28,7 @@ const ServerInfo = require("../server/ServerInfo");
 const PlayerInfo = require("../player/PlayerInfo");
 
 module.exports = {
-	initPlayer(player) {
+	_initPlayer(player) {
 		/**
 		 * Sends a message to the player
 		 * @param {string} msg - The message to send
