@@ -31,6 +31,7 @@ const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
 const VersionToProtocol = require("./server/VersionToProtocol");
 const ValidateClient = require("./player/ValidateClient");
+const SoftwareInfo = require("./SoftwareInfo");
 const PlayerInit = require("./server/PlayerInit");
 const LogTypes = require("./server/LogTypes");
 const Logger = require("./server/Logger");
@@ -45,10 +46,10 @@ module.exports = {
 	server: server,
 	config: config,
 	lang: lang,
+	majorServerVersion: SoftwareInfo.majorServerVersion,
+	minorServerVersion: SoftwareInfo.minorServerVersion,
+	apiVersion: SoftwareInfo.minorServerVersion,
 
-	/**
-	 * It loads the JSON files into the server.
-	 */
 	async _initJson() {
 		config = ServerInfo.config;
 		lang = ServerInfo.lang;
@@ -215,7 +216,7 @@ module.exports = {
 						} catch (e) {
 							client.disconnect(lang.kickmessages.internalServerError);
 						}
-						
+
 						new ServerInternalServerErrorEvent().execute(server, e);
 						Logger.log(lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack), LogTypes.ERROR);
 					}
