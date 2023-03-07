@@ -55,10 +55,6 @@ module.exports = {
 		lang = ServerInfo.lang;
 	},
 
-	/**
-	 * It logs the error and then exits the process
-	 * @param err - The error that was thrown.
-	 */
 	async _handleCriticalError(err) {
 		if (err.toString().includes("Server failed to start")) {
 			Logger.log(lang.errors.failedToBind.replace("%address%", `${config.host}:${config.port}`), "error");
@@ -70,11 +66,6 @@ module.exports = {
 		}
 	},
 
-	/**
-	 * Packet handler
-	 * @param client - The client that sent the packet
-	 * @param packet - The packet that was sent by the client
-	 */
 	_handlepk(client, packet) {
 		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
 		switch (packet.data.name) {
@@ -114,11 +105,6 @@ module.exports = {
 		}
 	},
 
-	/**
-	 * It logs the player's IP, port, then sends the player the response pack, executes the
-	 * events, and sets the player's info.
-	 * @param client - The client that joined
-	 */
 	async _onJoin(client) {
 		await PlayerInit.initPlayer(client);
 		await ValidateClient.initAndValidateClient(client);
@@ -148,17 +134,11 @@ module.exports = {
 		client.offline = false;
 	},
 
-	/**
-	 * It logs a warning if the config.debug or config.unstable is true.
-	 */
 	async _initDebug() {
 		if (config.unstable) Logger.log(lang.devdebug.unstableWarning, LogTypes.WARNING);
 		if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.log(lang.errors.debugWarning, LogTypes.WARNING);
 	},
 
-	/**
-	 * It loads the config, lang files, and commands, then loads the plugins and starts the server.
-	 */
 	async start() {
 		await this._initJson();
 
@@ -183,10 +163,6 @@ module.exports = {
 		this._listen();
 	},
 
-	/**
-	 * It listens for a connection, and when it gets one, it listens for a join event, and when it gets
-	 * one, it executes the onJoin function.
-	 */
 	_listen() {
 		try {
 			server = bedrock.createServer({
