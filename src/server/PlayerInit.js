@@ -26,6 +26,7 @@ const PlayerListTypes = require("../network/packets/types/PlayerList");
 const PlayerList = require("../network/packets/PlayerList");
 const ServerInfo = require("../server/ServerInfo");
 const PlayerInfo = require("../player/PlayerInfo");
+const LogTypes = require("./LogTypes");
 
 module.exports = {
 	_initPlayer(player) {
@@ -128,8 +129,17 @@ module.exports = {
 						pl.send(PlayerInfo.players[i]);
 					}
 				}
+				
+				for (let i = 0; i < PlayerInfo.players.length; i++) {
+					if (PlayerInfo.players[i].offline) {
+						Logger.log(LogTypes.DEBUG, " | Garbage collector | Deleted " + PlayerInfo.players[i].username)
+						PlayerInfo.players.splice(i, 1);
+						i--;
+					}
+				}
 
 				new PlayerLeaveEvent().execute(require("../Server").server, player);
+
 				Logger.log(lang.playerstatuses.disconnected.replace("%player%", player.username));
 				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
 				player.offline = true;
