@@ -17,4 +17,5 @@ declare module "Server" {
 	export const lang: JSON;
 
 	export function shutdown(): void;
+	export function getPlayer(player: Object): void;
 }

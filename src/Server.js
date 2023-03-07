@@ -36,6 +36,7 @@ const PlayerInit = require("./server/PlayerInit");
 const LogTypes = require("./server/LogTypes");
 const Logger = require("./server/Logger");
 
+let playersOnline = [];
 let clients = [];
 let server = null;
 let config = null;
@@ -225,5 +226,24 @@ module.exports = {
 		}, 1000);
 	},
 
+	_addPlayer(player) {
+		playersOnline.push(player);
+	},
 
+	/**
+	 * Returns the player
+	 * @param {Object} player
+	 * @returns The player if the player is online, null otherwise.
+	 */
+	getPlayer(player) {
+		try {
+			for (let i = 0; i < playersOnline.length; i++) {
+				if (playersOnline[i].username === player) {
+					return playersOnline[i];
+				}
+			}
+		} catch (e) {
+			return null;
+		}
+	},
 };
