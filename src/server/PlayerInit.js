@@ -10,11 +10,11 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Logger = require("./Logger");
 const Chat = require("../player/Chat");
-const Logger = require("../server/Logger");
+const { lang } = require("./ServerInfo");
 const GameMode = require("../player/GameMode");
 const Time = require("../network/packets/Time");
-const { lang } = require("../server/ServerInfo");
 const PlayerGamemode = require("../network/packets/PlayerGamemode");
 const PlayerKickEvent = require("../plugin/events/PlayerKickEvent");
 const PlayerLeaveEvent = require("../plugin/events/PlayerLeaveEvent");
@@ -24,9 +24,9 @@ const PlayerGamemodeChangeEvent = require("../plugin/events/PlayerGamemodeChange
 const ChangeDimension = require("../network/packets/ChangeDimension");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const PlayerList = require("../network/packets/PlayerList");
-const ServerInfo = require("../server/ServerInfo");
+const GarbageCollector = require("./GarbageCollector");
 const PlayerInfo = require("../player/PlayerInfo");
-const LogTypes = require("./LogTypes");
+const ServerInfo = require("./ServerInfo")
 
 module.exports = {
 	_initPlayer(player) {
@@ -130,13 +130,7 @@ module.exports = {
 					}
 				}
 				
-				for (let i = 0; i < PlayerInfo.players.length; i++) {
-					if (PlayerInfo.players[i].offline) {
-						Logger.log(LogTypes.DEBUG, " | Garbage collector | Deleted " + PlayerInfo.players[i].username)
-						PlayerInfo.players.splice(i, 1);
-						i--;
-					}
-				}
+				GarbageCollector.clearOfflinePlayers()
 
 				new PlayerLeaveEvent().execute(require("../Server").server, player);
 
