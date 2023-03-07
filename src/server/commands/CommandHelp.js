@@ -11,7 +11,6 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../Logger");
-
 const { lang, config } = require("../../server/ServerInfo");
 
 class CommandHelp extends require("./Command") {
@@ -43,15 +42,23 @@ class CommandHelp extends require("./Command") {
 			{ command: lang.commands.stop, help: lang.commands.stopHelp },
 		];
 
-		let commandsfound = false;
-		for (const help of commandHelps) {
-			if (config[`consoleCommand${help.command.charAt(0).toUpperCase() + help.command.slice(1)}`]) {
-				commandsfound = true;
-				Logger.log(help.help.replace("%green%", "\x1b[32m").replace("%cyan%", "\x1b[36m").replace("%white%", "\x1b[0m").replace("%blue%", "\x1b[34m") + "\x1b[0m");
-			}
-		}
+		const availableCommands = commandHelps.filter((help) =>
+			config[`consoleCommand${help.command.charAt(0).toUpperCase() + help.command.slice(1)}`]
+		);
 
-		if (!commandsfound) Logger.log(lang.commands.thereAreNoCommands);
+		if (availableCommands.length > 0) {
+			availableCommands.forEach((help) => {
+				Logger.log(
+					help.help
+						.replace("%green%", "\x1b[32m")
+						.replace("%cyan%", "\x1b[36m")
+						.replace("%white%", "\x1b[0m")
+						.replace("%blue%", "\x1b[34m") + "\x1b[0m"
+				);
+			});
+		} else {
+			Logger.log(lang.commands.thereAreNoCommands);
+		}
 	}
 }
 
