@@ -37,6 +37,6 @@ module.exports = {
 
 		if (type === LogTypes.DEBUG && !(process.env.DEBUG === "minecraft-protocol" || config.debug)) return;
 
-		console.log(`[${dStr} \x1b[${logColor}m${lang.logger[type]}\x1b[0m] ${message}`);
+		console.log(`${dStr} \x1b[${logColor}m${lang.logger[type]}\x1b[0m | ${message}`);
 	},
 };
