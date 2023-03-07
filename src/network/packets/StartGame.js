@@ -339,7 +339,7 @@ class StartGame extends require("./Packet") {
 			platform_broadcast_mode: 8,
 			enable_commands: true,
 			is_texturepacks_required: false,
-			gamerules: [],
+			gamerules: require("../../../world/gamerules.json").gamerules,
 			experiments: [],
 			experiments_previously_used: false,
 			bonus_chest: false,
@@ -6236,14 +6236,14 @@ class StartGame extends require("./Packet") {
 			],
 			multiplayer_correlation_id: "",
 			server_authoritative_inventory: true,
-			engine: "",
+			engine: "GreenFrogMCBE",
 			property_data: {
 				type: "compound",
 				name: "",
 				value: {},
 			},
 			block_pallette_checksum: [0, 0],
-			world_template_id: "b84914f3-c588-fe85-fb97-5993bac50a8a",
+			world_template_id: "00000000-0000-0000-0000-000000000000",
 			client_side_generation: false,
 		});
 	}

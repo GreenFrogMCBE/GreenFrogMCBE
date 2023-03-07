@@ -109,7 +109,7 @@ class ResourcePackClientResponse extends Handler {
 					if (config.generator === WorldGenerator.FLAT) {
 						startgame.setPlayerPosition(0, -58, 0);
 					} else if (config.generator === WorldGenerator.DEFAULT) {
-						startgame.setPlayerPosition(0, 69, 0);
+						startgame.setPlayerPosition(0, 61, 0);
 					} else if (config.generator === WorldGenerator.VOID) {
 						startgame.setPlayerPosition(0, 100, 0);
 					} else {

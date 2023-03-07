@@ -28,8 +28,10 @@ module.exports = {
 			"/../../src/network/packets/res/skinData.json",
 			"/../../src/network/packets/res/entities.json",
 			"/../../world/chunks.json",
-			"/../../world/chunks-flat.json",
+			"/../../world/chunks_flat.json",
+			"/../../world/world_settings.json",
 			"/../../world/custom_items.json",
+			"/../../world/gamerules.json",
 			"/../../package.json",
 			"/../../package-lock.json",
 		];
