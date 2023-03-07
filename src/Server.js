@@ -170,6 +170,7 @@ module.exports = {
 		if (!fs.existsSync("world")) fs.mkdirSync("world");
 
 		Logger.log(lang.server.loadingServer);
+		Logger.log(lang.commands.verInfo.replace("%version%", ServerInfo.minorServerVersion))
 
 		process.on("uncaughtException", (err) => this.attemptToDie(err));
 		process.on("uncaughtExceptionMonitor", (err) => this.attemptToDie(err));
