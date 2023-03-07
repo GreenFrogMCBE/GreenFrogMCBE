@@ -245,5 +245,6 @@ module.exports = {
 		} catch (e) {
 			return null;
 		}
-	},
-};
+		return null;
+	}
+}
