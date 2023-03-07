@@ -33,9 +33,9 @@ module.exports = {
 		};
 
 		const logColor = logLevel[type] || 0;
-		if (!logColor) throw new Error(lang.invalidLogType);
+		if (!logColor) throw new Error(lang.errors.invalidLogType);
 
-		if (type === "debug" && !(process.env.DEBUG === "minecraft-protocol" || config.debug)) return;
+		if (type === LogTypes.DEBUG && !(process.env.DEBUG === "minecraft-protocol" || config.debug)) return;
 
 		console.log(`[${dStr} \x1b[${logColor}m${lang.logger[type]}\x1b[0m] ${message}`);
 	},
