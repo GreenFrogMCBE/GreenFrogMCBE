@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerInfo = require("../../server/ServerInfo");
+const PlayerInfo = require("../../player/PlayerInfo");
 const PlayerListTypes = require("../packets/types/PlayerList");
 
 let username = "unknown";
@@ -96,7 +96,7 @@ class PlayerList extends require("./Packet") {
 			data = {
 				records: {
 					type: PlayerListTypes.REMOVE,
-					records_count: ServerInfo.players.length,
+					records_count: PlayerInfo.players.length,
 					records: [
 						{
 							uuid: this.getUuid(),
@@ -108,7 +108,7 @@ class PlayerList extends require("./Packet") {
 			data = {
 				records: {
 					type: PlayerListTypes.REMOVE,
-					records_count: ServerInfo.players.length,
+					records_count: PlayerInfo.players.length,
 					records: [
 						{
 							uuid: this.getUuid(),

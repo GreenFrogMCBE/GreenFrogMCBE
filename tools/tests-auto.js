@@ -66,7 +66,6 @@ multiProtocol: false # Supports 1.19.20+. Some features may be broken
 #
 # This section contains world settings
 
-renderChunks: true
 gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 difficulty: 0 # Currently only visual
