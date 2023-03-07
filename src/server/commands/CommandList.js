@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerInfo = require("../../player/PlayerInfo");
+const { players: playerList } = require("../../player/PlayerInfo");
 const Logger = require("../Logger");
 const { lang, config } = require("../ServerInfo");
 
@@ -24,34 +24,22 @@ class CommandList extends require("./Command") {
 	}
 
 	execute(isconsole = true, client) {
-		let players = "";
-
-		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			if (!PlayerInfo.players[i].offline) {
-				if (!players) {
-					players = PlayerInfo.players[i].username;
-				} else {
-					players = players + " " + PlayerInfo.players[i].username;
-				}
-			}
-		}
-
-		let playercount = 0;
-		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			if (!PlayerInfo.players[i].offline) playercount++;
-		}
+		const onlinePlayers = playerList.filter(player => !player.offline);
+		const playerNames = onlinePlayers.map(player => player.username);
+		const playerCount = onlinePlayers.length;
+		const playerListMessage = lang.commands.playerList.replace("%info%", `${playerCount}/${config.maxPlayers}`);
 
 		if (!isconsole) {
-			client.sendMessage(lang.commands.playerList.replace("%info%", `${playercount}/${config.maxPlayers}`));
-			if (playercount > 0) {
-				client.sendMessage(players);
+			client.sendMessage(playerListMessage);
+			if (playerCount > 0) {
+				client.sendMessage(playerNames.join(", "));
 			}
 			return;
 		}
 
-		Logger.log(lang.commands.playerList.replace("%info%", `${playercount}/${config.maxPlayers}`));
-		if (playercount > 0) {
-			Logger.log(players);
+		Logger.log(playerListMessage);
+		if (playerCount > 0) {
+			Logger.log(playerNames.join(", "));
 		}
 	}
 
