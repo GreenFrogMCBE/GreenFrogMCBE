@@ -114,7 +114,7 @@
     "invalidUsernameWarning": "I am sorry, but %player%'s username contains spaces, but they are not implemented in GreenFrog yet, so i replaced spaces with underscores",
     "opFailAlreadyOpped": "This player is already opped.",
     "noPermission": "§cYou don't have permission to execute this command",
-    "invalidLogLevel": "Invalid log level: ",
+    "invalidLogLevel": "Invalid log level!",
     "failedToBind": "Failed to bind port on %address%",
     "otherServerRunning": "This usually means that another server is already running on this port",
     "packetErrorOffline": "An attempt to handle packet from offline player",

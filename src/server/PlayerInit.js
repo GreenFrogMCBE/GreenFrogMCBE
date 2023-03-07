@@ -129,7 +129,7 @@ module.exports = {
 						pl.send(PlayerInfo.players[i]);
 					}
 				}
-				
+
 				GarbageCollector.clearOfflinePlayers()
 
 				new PlayerLeaveEvent().execute(require("../Server").server, player);

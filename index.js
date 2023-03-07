@@ -96,7 +96,13 @@ playerCommandKick: true
 playerCommandTime: true
 playerCommandDeop: true
 playerCommandList: true
-playerCommandGamemode: true`
+playerCommandGamemode: true
+
+# PERFORMANCE SETTINGS
+#
+# Allows to make your server faster
+
+garbageCollectorDelay: 60000`
 		);
 	}
 	const Frog = require("./src/Server.js");

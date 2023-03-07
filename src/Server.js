@@ -34,6 +34,7 @@ const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 const LogTypes = require("./server/LogTypes");
 const Logger = require("./server/Logger");
+const GarbageCollector = require("./server/GarbageCollector");
 
 let clients = [];
 let server = null;
@@ -172,15 +173,19 @@ module.exports = {
 		Logger.log(lang.server.loadingServer);
 		Logger.log(lang.commands.verInfo.replace("%version%", ServerInfo.minorServerVersion))
 
-		process.on("uncaughtException", (err) => this.attemptToDie(err));
-		process.on("uncaughtExceptionMonitor", (err) => this.attemptToDie(err));
-		process.on("unhandledRejection", (err) => this.attemptToDie(err));
+		process.on("uncaughtException", (err) => this._handleCriticalError(err));
+		process.on("uncaughtExceptionMonitor", (err) => this._handleCriticalError(err));
+		process.on("unhandledRejection", (err) => this._handleCriticalError(err));
 
 		await this._initDebug();
 
 		await PluginLoader.loadPlugins();
 
 		this._listen();
+
+		setInterval(() => {
+			GarbageCollector.gc()
+		}, parseInt(config.garbageCollectorDelay))
 	},
 
 	/**

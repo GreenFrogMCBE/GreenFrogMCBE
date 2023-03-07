@@ -11,8 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const { players: playerList } = require("../../player/PlayerInfo");
-const Logger = require("../Logger");
 const { lang, config } = require("../ServerInfo");
+const Logger = require("../Logger");
 
 class CommandList extends require("./Command") {
 	name() {
@@ -24,9 +24,8 @@ class CommandList extends require("./Command") {
 	}
 
 	execute(isconsole = true, client) {
-		const onlinePlayers = playerList.filter(player => !player.offline);
-		const playerNames = onlinePlayers.map(player => player.username);
-		const playerCount = onlinePlayers.length;
+		const playerNames = playerList.map(player => player.username);
+		const playerCount = playerList.length;
 		const playerListMessage = lang.commands.playerList.replace("%info%", `${playerCount}/${config.maxPlayers}`);
 
 		if (!isconsole) {
