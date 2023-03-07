@@ -31,12 +31,10 @@ const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
 const VersionToProtocol = require("./server/VersionToProtocol");
 const ValidateClient = require("./player/ValidateClient");
-const SoftwareInfo = require("./SoftwareInfo");
 const PlayerInit = require("./server/PlayerInit");
 const LogTypes = require("./server/LogTypes");
 const Logger = require("./server/Logger");
 
-let playersOnline = [];
 let clients = [];
 let server = null;
 let config = null;
@@ -47,15 +45,19 @@ module.exports = {
 	server: server,
 	config: config,
 	lang: lang,
-	majorServerVersion: SoftwareInfo.majorServerVersion,
-	minorServerVersion: SoftwareInfo.minorServerVersion,
-	apiVersion: SoftwareInfo.minorServerVersion,
 
+	/**
+	 * It loads the JSON files into the server.
+	 */
 	async _initJson() {
 		config = ServerInfo.config;
 		lang = ServerInfo.lang;
 	},
 
+	/**
+	 * It logs the error and then exits the process
+	 * @param err - The error that was thrown.
+	 */
 	async _handleCriticalError(err) {
 		if (err.toString().includes("Server failed to start")) {
 			Logger.log(lang.errors.failedToBind.replace("%address%", `${config.host}:${config.port}`), "error");
@@ -67,6 +69,11 @@ module.exports = {
 		}
 	},
 
+	/**
+	 * Packet handler
+	 * @param client - The client that sent the packet
+	 * @param packet - The packet that was sent by the client
+	 */
 	_handlepk(client, packet) {
 		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
 		switch (packet.data.name) {
@@ -106,6 +113,11 @@ module.exports = {
 		}
 	},
 
+	/**
+	 * It logs the player's IP, port, then sends the player the response pack, executes the
+	 * events, and sets the player's info.
+	 * @param client - The client that joined
+	 */
 	async _onJoin(client) {
 		await PlayerInit.initPlayer(client);
 		await ValidateClient.initAndValidateClient(client);
@@ -135,11 +147,17 @@ module.exports = {
 		client.offline = false;
 	},
 
+	/**
+	 * It logs a warning if the config.debug or config.unstable is true.
+	 */
 	async _initDebug() {
 		if (config.unstable) Logger.log(lang.devdebug.unstableWarning, LogTypes.WARNING);
 		if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.log(lang.errors.debugWarning, LogTypes.WARNING);
 	},
 
+	/**
+	 * It loads the config, lang files, and commands, then loads the plugins and starts the server.
+	 */
 	async start() {
 		await this._initJson();
 
@@ -164,6 +182,10 @@ module.exports = {
 		this._listen();
 	},
 
+	/**
+	 * It listens for a connection, and when it gets one, it listens for a join event, and when it gets
+	 * one, it executes the onJoin function.
+	 */
 	_listen() {
 		try {
 			server = bedrock.createServer({
@@ -193,7 +215,7 @@ module.exports = {
 						} catch (e) {
 							client.disconnect(lang.kickmessages.internalServerError);
 						}
-
+						
 						new ServerInternalServerErrorEvent().execute(server, e);
 						Logger.log(lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack), LogTypes.ERROR);
 					}
@@ -226,25 +248,5 @@ module.exports = {
 		}, 1000);
 	},
 
-	_addPlayer(player) {
-		playersOnline.push(player);
-	},
 
-	/**
-	 * Returns the player
-	 * @param {Object} player
-	 * @returns The player if the player is online, null otherwise.
-	 */
-	getPlayer(player) {
-		try {
-			for (let i = 0; i < playersOnline.length; i++) {
-				if (playersOnline[i].username === player) {
-					return playersOnline[i];
-				}
-			}
-		} catch (e) {
-			return null;
-		}
-		return null;
-	}
-}
+};
