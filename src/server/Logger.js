@@ -15,9 +15,9 @@ const { lang, config } = require("./ServerInfo");
 
 module.exports = {
 	/**
-	 * It logs a message to the console with a timestamp and a color
-	 * @param message - The message to log
-	 * @param [type=info] - The type.
+	 * Logs a message to console
+	 * @param {String} message - The message to log
+	 * @param {LogTypes} - The type.
 	 */
 	log(message, type = LogTypes.INFO) {
 		const d = new Date();
