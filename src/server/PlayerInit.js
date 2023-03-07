@@ -117,11 +117,10 @@ module.exports = {
 			dimensionpacket.send(player);
 		};
 
-		/* Checks if the player is still online */
 		player.on("close", () => {
 			if (!player.kicked) {
-				for (let i = 0; i < PlayerInfo.players; i++) {
-					if (PlayerInfo.players[i].username == !player.username) {
+				for (let i = 0; i < PlayerInfo.players.length; i++) {
+					if (PlayerInfo.players[i].username !== player.username) {
 						ServerInfo.addPlayer();
 						const pl = new PlayerList();
 						pl.setType(PlayerListTypes.REMOVE);
@@ -131,11 +130,8 @@ module.exports = {
 				}
 
 				new PlayerLeaveEvent().execute(require("../Server").server, player);
-
 				Logger.log(lang.playerstatuses.disconnected.replace("%player%", player.username));
-
 				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
-
 				player.offline = true;
 			}
 		});
