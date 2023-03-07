@@ -95,8 +95,8 @@ class PlayerList extends require("./Packet") {
 		if (this.getType() === PlayerListTypes.REMOVE) {
 			data = {
 				records: {
-					type: "remove",
-					records_count: ServerInfo.playersList,
+					type: PlayerListTypes.REMOVE,
+					records_count: ServerInfo.players.length,
 					records: [
 						{
 							uuid: this.getUuid(),
@@ -107,8 +107,8 @@ class PlayerList extends require("./Packet") {
 		} else {
 			data = {
 				records: {
-					type: "add",
-					records_count: ServerInfo.playersList,
+					type: PlayerListTypes.REMOVE,
+					records_count: ServerInfo.players.length,
 					records: [
 						{
 							uuid: this.getUuid(),
