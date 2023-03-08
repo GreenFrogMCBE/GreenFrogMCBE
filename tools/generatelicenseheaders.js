@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const path = require("path");
 
 const LICENSE_HEADER = `/**
@@ -12,53 +12,41 @@ const LICENSE_HEADER = `/**
  *
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
-*/
+ */
 `;
 
 const srcPath = path.join(__dirname, "..");
 
-const addHeader = (filePath) => {
+const addHeader = async (filePath) => {
 	if (filePath.includes("node_modules")) return;
-	fs.readFile(filePath, (err, data) => {
-		if (err) {
-			console.error(`Error reading file ${filePath}:`, err);
-			return;
-		}
+	try {
+		const data = await fs.readFile(filePath);
 		let contents = data.toString();
 		if (!contents.includes("Copyright 2023 andriycraft")) {
 			contents = LICENSE_HEADER + contents;
-			fs.writeFile(filePath, contents, (err) => {
-				if (err) {
-					console.error(`Error adding license header to file ${filePath}:`, err);
-					return;
-				}
-				console.log(`Added license header to file ${filePath}`);
-			});
+			await fs.writeFile(filePath, contents);
+			console.log(`Added license header to file ${filePath}`);
 		}
-	});
+	} catch (err) {
+		console.error(`Error adding license header to file ${filePath}:`, err);
+	}
 };
 
-const walk = (dir) => {
-	fs.readdir(dir, (err, files) => {
-		if (err) {
-			console.error(`Error reading directory ${dir}:`, err);
-			return;
-		}
-		files.forEach((file) => {
+const walk = async (dir) => {
+	try {
+		const files = await fs.readdir(dir);
+		for (const file of files) {
 			const filePath = path.join(dir, file);
-			fs.stat(filePath, (err, stats) => {
-				if (err) {
-					console.error(`Error getting stats for file ${filePath}:`, err);
-					return;
-				}
-				if (stats.isDirectory()) {
-					walk(filePath);
-				} else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts") {
-					addHeader(filePath);
-				}
-			});
-		});
-	});
+			const stats = await fs.stat(filePath);
+			if (stats.isDirectory()) {
+				await walk(filePath);
+			} else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts") {
+				await addHeader(filePath);
+			}
+		}
+	} catch (err) {
+		console.error(`Error reading directory ${dir}:`, err);
+	}
 };
 
 walk(srcPath);
