@@ -29,7 +29,7 @@ module.exports = {
 			output: process.stdout,
 		});
 
-		r.setPrompt("> ");
+		r.setPrompt("");
 		r.prompt(true);
 
 		r.on("line", (data) => {
