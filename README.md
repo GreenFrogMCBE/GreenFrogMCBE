@@ -130,7 +130,16 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
    > For fixing paths
    > For reporting a bug that server cannot be stopped when plugins is null
    > For making /pl code better
-   > 
+   > For making /list code better
+   > For making /deop code better
+   > For making /help code better
+   > For making /time code better
+   > For making /say code better
+   > For making /me code better
+   > For making /op code better
+   > For improving _listen() in Server.js
+   > For improving generatelicenseheaders.js
+   
 
 5. @ATXLtheAxolotl
 
@@ -160,53 +169,51 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 
 10. Bedrock-protocol (https://github.com/PrismarineJS/bedrock-protocol)
   
-  > Packet handler and raknet
+   > Packet handler and raknet
 
 11. Wiki.VG (https://wiki.vg/Bedrock_Protocol)
   
-  > For packet documentation
+   > For packet documentation
 
 11. js-yaml (https://github.com/nodeca/js-yaml)
   
-  > Used to parse config and other files
+   > Used to parse config and other files
 
 12. EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) (@Zwuiix-cmd)
 
-  > Used as an example for custom_form support (i had permission from repo owner)
+   > Used as an example for custom_form support (i had permission from repo owner)
 
 13. 🌓Enzø ツ#6666
 
-  > Helping me with chunk support
+   > Helping me with chunk support
 
 14. \<\/hakaN#0746
 
-  > For translating this software into Turkish
+   > For translating this software into Turkish
   
 15. @BasToTheMax
 
-  > For translating this software into Dutch (still in progress) 
-  > Was the first person who starred this repo
+   > For translating this software into Dutch (still in progress) 
+   > Was the first person who starred this repo
 
 16 . @faaxz
 
-  > For reporting form bugs 
-  > For helping me to add the chunk support
+   > For reporting form bugs 
+   > For helping me to add the chunk support
 
 ## Language system
 
 Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese, Turkish, Dutch (in progress)
 
-For English language, set "language" to "en_US"
+# English > set language in config.yml to "en_US"
 
-## Warning: Language system is temporary disabled in 2.8+ update
+# Lithuanian > set language in config.yml to "lt_LT"
 
-For Lithuanian language, set "language" to "lt_LT"
+# Ukrainian > set language in config.yml to "uk_UA"
 
-For Ukrainian language, set "language" to "uk_UA"
+# Vietnamese > set language in config.yml to "vi_VN"
 
-For Vietnamese language, set "language" to "vi_VN"
-
-For French language, set "language" to "fr_FR"
+# French > set language in config.yml to "fr_FR"
 
 ## Donations
 
