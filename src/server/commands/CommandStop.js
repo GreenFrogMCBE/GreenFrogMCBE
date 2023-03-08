@@ -22,7 +22,7 @@ class CommandShutdown extends require("./Command") {
 	}
 
 	execute() {
-		require("../ShutdownAPI").shutdownServer();
+		require("../../Server").shutdown();
 	}
 
 	getPlayerDescription() {

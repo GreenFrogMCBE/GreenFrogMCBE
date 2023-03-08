@@ -29,12 +29,11 @@ class CommandSay extends require("./Command") {
 			return;
 		}
 
-		let msg = lang.commands.sayCommandFormat.replace(`%message%`, args).replace(`%sender%`, "Server");
+		const msg = lang.commands.sayCommandFormat.replace(`%message%`, args).replace(`%sender%`, "Server");
 
-		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			let client = PlayerInfo.players[i];
+		PlayerInfo.players.forEach((client) => {
 			client.sendMessage(msg);
-		}
+		});
 
 		Logger.log(msg);
 	}
@@ -54,17 +53,18 @@ class CommandSay extends require("./Command") {
 			return;
 		}
 
-		if (!args.split(" ")[1]) {
-			client.sendMessage("§c" + lang.commands.usageSay);
+		const message = args.split(" ")[1];
+		if (!message) {
+			client.sendMessage(`§c${lang.commands.usageSay}`);
 			return;
 		}
-		args = args.split(" ")[1];
 
-		let msg = lang.commands.sayCommandFormat.replace(`%message%`, args).replace(`%sender%`, client.username);
+		const msg = lang.commands.sayCommandFormat.replace(`%message%`, message).replace(`%sender%`, client.username);
 
-		for (let i = 0; i < PlayerInfo.players.length; i++) {
+		PlayerInfo.players.forEach((client) => {
 			client.sendMessage(msg);
-		}
+		});
+
 		Logger.log(msg);
 	}
 }

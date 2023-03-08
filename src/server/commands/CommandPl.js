@@ -28,16 +28,10 @@ class CommandPl extends require("./Command") {
 	}
 
 	execute() {
-		let plugins;
-		if (PluginManager.getPlugins() == null) {
-			plugins = 0;
-		} else {
-			plugins = PluginManager.getPlugins().length;
-		}
+		const plugins = PluginManager.getPlugins()?.length ?? 0;
+		const pluginList = ColorsServer.CONSOLE_GREEN + PluginManager.getPlugins()?.join(ColorsServer.CONSOLE_RESET + ", " + ColorsServer.CONSOLE_GREEN) || "";
 
-		let pluginlist = ColorsServer.CONSOLE_GREEN + PluginManager.getPlugins().join(ColorsServer.CONSOLE_RESET + ", " + ColorsServer.CONSOLE_GREEN);
-
-		Logger.log(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsServer.CONSOLE_RESET}`);
+		Logger.log(`${lang.commands.plugins} (${plugins}): ${pluginList} ${ColorsServer.CONSOLE_RESET}`);
 	}
 
 	getPlayerDescription() {
@@ -49,16 +43,11 @@ class CommandPl extends require("./Command") {
 			Logger.log(lang.errors.playerUnknownCommand);
 			return;
 		}
-		let plugins;
-		if (PluginManager.getPlugins() == null) {
-			plugins = 0;
-		} else {
-			plugins = PluginManager.getPlugins().length;
-		}
 
-		let pluginlist = ColorsPlayer.green + PluginManager.getPlugins().join(ColorsPlayer.white + ", " + ColorsPlayer.green);
+		const plugins = PluginManager.getPlugins()?.length ?? 0;
+		const pluginList = ColorsPlayer.green + PluginManager.getPlugins()?.join(ColorsPlayer.white + ", " + ColorsPlayer.green) || "";
 
-		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? ""} ${ColorsPlayer.reset}`);
+		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList} ${ColorsPlayer.reset}`);
 	}
 }
 

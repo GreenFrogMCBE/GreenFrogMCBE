@@ -34,6 +34,7 @@ const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 const LogTypes = require("./server/LogTypes");
 const Logger = require("./server/Logger");
+const GarbageCollector = require("./server/GarbageCollector");
 
 let clients = [];
 let server = null;
@@ -49,7 +50,7 @@ module.exports = {
 	/**
 	 * It loads the JSON files into the server.
 	 */
-	async initJson() {
+	async _initJson() {
 		config = ServerInfo.config;
 		lang = ServerInfo.lang;
 	},
@@ -58,7 +59,7 @@ module.exports = {
 	 * It logs the error and then exits the process
 	 * @param err - The error that was thrown.
 	 */
-	async attemptToDie(err) {
+	async _handleCriticalError(err) {
 		if (err.toString().includes("Server failed to start")) {
 			Logger.log(lang.errors.failedToBind.replace("%address%", `${config.host}:${config.port}`), "error");
 			Logger.log(lang.errors.otherServerRunning, LogTypes.ERROR);
@@ -74,7 +75,7 @@ module.exports = {
 	 * @param client - The client that sent the packet
 	 * @param packet - The packet that was sent by the client
 	 */
-	handlepk(client, packet) {
+	_handlepk(client, packet) {
 		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
 		switch (packet.data.name) {
 			case "resource_pack_client_response":
@@ -118,9 +119,9 @@ module.exports = {
 	 * events, and sets the player's info.
 	 * @param client - The client that joined
 	 */
-	async onJoin(client) {
-		await PlayerInit.initPlayer(client);
-		await ValidateClient.initAndValidateClient(client);
+	async _onJoin(client) {
+		await PlayerInit._initPlayer(client);
+		await ValidateClient._initAndValidateClient(client);
 
 		const event = new PlayerJoinEvent();
 		event.execute(server, client);
@@ -136,6 +137,7 @@ module.exports = {
 			client.kick(lang.kickmessages.versionMismatch.replace("%version%", config.version));
 			return;
 		}
+
 		const responsepackinfo = new ResponsePackInfo();
 		responsepackinfo.setMustAccept(true);
 		responsepackinfo.setHasScripts(false);
@@ -149,7 +151,7 @@ module.exports = {
 	/**
 	 * It logs a warning if the config.debug or config.unstable is true.
 	 */
-	async initDebug() {
+	async _initDebug() {
 		if (config.unstable) Logger.log(lang.devdebug.unstableWarning, LogTypes.WARNING);
 		if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.log(lang.errors.debugWarning, LogTypes.WARNING);
 	},
@@ -158,7 +160,7 @@ module.exports = {
 	 * It loads the config, lang files, and commands, then loads the plugins and starts the server.
 	 */
 	async start() {
-		await this.initJson();
+		await this._initJson();
 
 		if (!fs.existsSync("ops.yml")) {
 			fs.writeFile("ops.yml", "", (err) => {
@@ -169,29 +171,40 @@ module.exports = {
 		if (!fs.existsSync("world")) fs.mkdirSync("world");
 
 		Logger.log(lang.server.loadingServer);
+		Logger.log(lang.commands.verInfo.replace("%version%", ServerInfo.minorServerVersion))
 
-		process.on("uncaughtException", (err) => this.attemptToDie(err));
-		process.on("uncaughtExceptionMonitor", (err) => this.attemptToDie(err));
-		process.on("unhandledRejection", (err) => this.attemptToDie(err));
+		process.on("uncaughtException", (err) => this._handleCriticalError(err));
+		process.on("uncaughtExceptionMonitor", (err) => this._handleCriticalError(err));
+		process.on("unhandledRejection", (err) => this._handleCriticalError(err));
 
-		await this.initDebug();
+		await this._initDebug();
 
 		await PluginLoader.loadPlugins();
 
-		this.listen();
+		this._listen();
+
+		setInterval(() => {
+			GarbageCollector.gc()
+		}, parseInt(config.garbageCollectorDelay))
 	},
 
 	/**
 	 * It listens for a connection, and when it gets one, it listens for a join event, and when it gets
 	 * one, it executes the onJoin function.
 	 */
-	listen() {
+	_listen() {
 		const { host, port, version, offlineMode: offline, maxPlayers, motd } = config;
 
 		try {
 			const server = bedrock.createServer({
-				host, port, version, offline, maxPlayers, motd: {
-					motd: motd, levelName: "GreenFrogMCBE",
+		  		host, 
+          port, 
+          version, 
+          offline, 
+          maxPlayers, 
+          motd: {
+					  motd: motd, 
+            levelName: "GreenFrogMCBE",
 				},
 			});
 
@@ -199,18 +212,19 @@ module.exports = {
 
 			server.on("connect", client => {
 				client.on("join", () => {
-					this.onJoin(client);
+					this._onJoin(client);
 				});
 
 				client.on("packet", packet => {
 					try {
-						this.handlepk(client, packet);
+						this._handlepk(client, packet);
 					} catch (e) {
 						try {
 							client.kick(lang.kickmessages.internalServerError);
 						} catch (e) {
 							client.disconnect(lang.kickmessages.internalServerError);
 						}
+						
 						new ServerInternalServerErrorEvent().execute(server, e);
 						Logger.log(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`, LogTypes.ERROR);
 					}
@@ -221,4 +235,27 @@ module.exports = {
 			process.exit(config.exitCode);
 		}
 	},
+
+
+	/**
+	 * Shutdowns the server.
+	 */
+	async shutdown() {
+		await require("./server/ConsoleCommandSender").close();
+		Logger.log(lang.server.stoppingServer);
+
+		try {
+			for (const player of PlayerInfo.players) {
+				if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
+			}
+		} catch (e) {
+			/* ignored */
+		}
+
+		setTimeout(() => {
+			PluginLoader.unloadPlugins();
+		}, 1000);
+	},
+
+
 };
