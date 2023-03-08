@@ -15,21 +15,18 @@ const Logger = require("../Logger");
 const { lang, config } = require("../ServerInfo");
 
 class CommandMe extends require("./Command") {
-	name() {
-		return lang.commands.me;
-	}
-
-	aliases() {
-		return null;
-	}
+	name = () => lang.commands.me;
+	aliases = () => null;
 
 	execute(msg = "", client = { username: lang.other.server }) {
-		if (!msg.replace(/\s/g, "").length) {
+		const message = msg.replace(/\s/g, "");
+		if (!message) {
 			Logger.log(lang.commands.usageMe);
 			return;
 		}
 
-		Chat.broadcastMessage(lang.commands.meCommandFormat.replace("%username%", client.username).replace("%message%", msg));
+		const broadcastMessage = lang.commands.meCommandFormat.replace("%username%", client.username).replace("%message%", msg);
+		Chat.broadcastMessage(broadcastMessage);
 	}
 
 	getPlayerDescription() {
@@ -42,12 +39,14 @@ class CommandMe extends require("./Command") {
 			return;
 		}
 
-		if (!msg.replace("/" + lang.commands.me, "").replace(/\s/g, "").length) {
-			client.sendMessage("§c" + lang.commands.usageMe);
+		const message = msg.replace(`/${lang.commands.me}`, "").replace(/\s/g, "");
+		if (!message) {
+			client.sendMessage(`§c${lang.commands.usageMe}`);
 			return;
 		}
 
-		Chat.broadcastMessage(lang.commands.meCommandFormat.replace("%username%", client.username).replace("%message%", msg.replace("/" + lang.commands.me + " ", "")));
+		const broadcastMessage = lang.commands.meCommandFormat.replace("%username%", client.username).replace("%message%", message);
+		Chat.broadcastMessage(broadcastMessage);
 	}
 }
 
