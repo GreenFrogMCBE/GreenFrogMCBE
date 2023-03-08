@@ -186,26 +186,23 @@ module.exports = {
 	 * one, it executes the onJoin function.
 	 */
 	listen() {
+		const { host, port, version, offlineMode: offline, maxPlayers, motd } = config;
+
 		try {
-			server = bedrock.createServer({
-				host: config.host,
-				port: config.port,
-				version: config.version,
-				offline: config.offlineMode,
-				maxPlayers: config.maxPlayers,
-				motd: {
-					motd: config.motd,
-					levelName: "GreenFrogMCBE",
+			const server = bedrock.createServer({
+				host, port, version, offline, maxPlayers, motd: {
+					motd: motd, levelName: "GreenFrogMCBE",
 				},
 			});
-			Logger.log(`${lang.server.listeningOn.replace(`%address%`, `/${config.host}:${config.port}`)}`);
 
-			server.on("connect", (client) => {
+			Logger.log(`${lang.server.listeningOn.replace(`%address%`, `/${host}:${port}`)}`);
+
+			server.on("connect", client => {
 				client.on("join", () => {
 					this.onJoin(client);
 				});
 
-				client.on("packet", (packet) => {
+				client.on("packet", packet => {
 					try {
 						this.handlepk(client, packet);
 					} catch (e) {
@@ -215,12 +212,12 @@ module.exports = {
 							client.disconnect(lang.kickmessages.internalServerError);
 						}
 						new ServerInternalServerErrorEvent().execute(server, e);
-						Logger.log(lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack), LogTypes.ERROR);
+						Logger.log(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`, LogTypes.ERROR);
 					}
 				});
 			});
 		} catch (e) {
-			Logger.log(`${lang.errors.listeningFailed.replace(`%address%`, `/${config.host}:${config.port}`).replace("%error%", e.stack)}`, LogTypes.ERROR);
+			Logger.log(`${lang.errors.listeningFailed.replace(`%address%`, `/${host}:${port}`).replace("%error%", e.stack)}`, LogTypes.ERROR);
 			process.exit(config.exitCode);
 		}
 	},
