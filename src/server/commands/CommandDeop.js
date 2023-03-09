@@ -25,7 +25,7 @@ class CommandDeop extends require("./Command") {
 
 	async execute(args) {
 		if (!args) {
-			Logger.log(lang.commands.usageDeop);
+			Logger.info(lang.commands.usageDeop);
 			return;
 		}
 
@@ -35,7 +35,7 @@ class CommandDeop extends require("./Command") {
 			const index = players.indexOf(args);
 
 			if (index === -1) {
-				Logger.log(lang.commands.notOp.replace("%player%", args));
+				Logger.info(lang.commands.notOp.replace("%player%", args));
 				return;
 			}
 
@@ -43,9 +43,9 @@ class CommandDeop extends require("./Command") {
 			const updatedPlayers = players.join("\n") + "\n";
 
 			await fs.writeFile("ops.yml", updatedPlayers);
-			Logger.log(lang.commands.deOpped.replace("%player%", args));
+			Logger.info(lang.commands.deOpped.replace("%player%", args));
 		} catch (err) {
-			Logger.log(lang.commands.deopFail);
+			Logger.info(lang.commands.deopFail);
 		}
 	}
 

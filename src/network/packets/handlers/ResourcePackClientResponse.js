@@ -48,7 +48,6 @@ const WorldGenerator = require("../types/WorldGenerator");
 const ServerInfo = require("../../../server/ServerInfo");
 const ChunkError = require("../exceptions/ChunkError");
 const PlayStatuses = require("../types/PlayStatuses");
-const LogTypes = require("../../../server/LogTypes");
 const Difficulty = require("../types/Difficulty");
 const ItemComponent = require("../ItemComponent");
 const Logger = require("../../../server/Logger");
@@ -61,18 +60,18 @@ class ResourcePackClientResponse extends Handler {
 		switch (packet.data.params.response_status) {
 			case "none": {
 				new PlayerHasNoResourcePacksInstalledEvent().execute(server, client);
-				Logger.log(lang.playerstatuses.noRpsInstalled.replace("%player%", client.username));
+				Logger.info(lang.playerstatuses.noRpsInstalled.replace("%player%", client.username));
 				break;
 			}
 			case "refused": {
 				new PlayerResourcePacksRefused().execute(server, client);
-				Logger.log(lang.playerstatuses.rpsrefused.replace("%player%", client.username));
+				Logger.info(lang.playerstatuses.rpsrefused.replace("%player%", client.username));
 				client.kick(lang.resourcePacksRefused);
 				break;
 			}
 			case "have_all_packs": {
 				new PlayerHasAllPacks().execute(server, client);
-				Logger.log(lang.playerstatuses.rpsInstalled.replace("%player%", client.username));
+				Logger.info(lang.playerstatuses.rpsInstalled.replace("%player%", client.username));
 
 				const resourcepackstack = new ResourcePackStack();
 				resourcepackstack.setMustAccept(false);
@@ -259,13 +258,15 @@ class ResourcePackClientResponse extends Handler {
 						}
 					}, 1000);
 
-					Logger.log(lang.playerstatuses.spawned.replace("%player%", client.username));
+					Logger.info(lang.playerstatuses.spawned.replace("%player%", client.username));
 
 					setTimeout(() => {
 						if (client.offline) return;
+
 						const ps = new PlayStatus();
 						ps.setStatus(PlayStatuses.PLAYERSPAWN);
 						ps.send(client);
+
 						new PlayerSpawnEvent().execute(server, client);
 					}, 2000);
 
@@ -279,7 +280,7 @@ class ResourcePackClientResponse extends Handler {
 				}
 				break;
 			default:
-				if (config.logUnhandledPackets) Logger.log(lang.debugdev.unhandledPacket.replace("%data%", packet.data.params.response_status), LogTypes.WARNING);
+				if (config.logUnhandledPackets) Logger.warning(lang.debugdev.unhandledPacket.replace("%data%", packet.data.params.response_status));
 		}
 	}
 }

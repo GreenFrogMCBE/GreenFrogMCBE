@@ -34,7 +34,7 @@ class CommandTime extends require("./Command") {
 		}
 
 		const time = args[1];
-		const setTime = time === 'day' ? 1000 : time === 'night' ? 17000 : parseInt(time, 10);
+		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
 
 		if (!Number.isInteger(setTime)) {
 			Logger.log(lang.commands.usageTime);
@@ -51,8 +51,8 @@ class CommandTime extends require("./Command") {
 			return;
 		}
 
-		const time = args.split(' ')[1];
-		const setTime = time === 'day' ? 1000 : time === 'night' ? 17000 : parseInt(time, 10);
+		const time = args.split(" ")[1];
+		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
 
 		if (!Number.isInteger(setTime)) {
 			client.sendMessage(`§c${lang.commands.usageTime}`);

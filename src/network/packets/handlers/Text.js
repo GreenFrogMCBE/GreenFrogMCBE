@@ -12,7 +12,6 @@
  */
 const { lang, config } = require("../../../server/ServerInfo");
 const PlayerInfo = require("../../../player/PlayerInfo");
-const LogTypes = require("../../../server/LogTypes");
 const Logger = require("../../../server/Logger");
 
 class Text extends require("./Handler") {
@@ -22,7 +21,7 @@ class Text extends require("./Handler") {
 		const fullmsg = lang.chat.chatFormat.replace("%username%", client.username).replace("%message%", msg);
 		if (msg.includes("§") || !msg || (msg.length > 255 && config.blockInvalidMessages)) {
 			if (!client.op) {
-				Logger.log(lang.errors.illegalMessage.replace("%msg%", msg).replace("%player%", client.username), LogTypes.WARNING);
+				Logger.warning(lang.errors.illegalMessage.replace("%msg%", msg).replace("%player%", client.username));
 				client.kick(lang.kickmessages.invalidChatMessage);
 				return;
 			}

@@ -23,7 +23,7 @@ class CommandHelp extends require("./Command") {
 	}
 
 	execute() {
-		Logger.log(lang.commands.list);
+		Logger.info(lang.commands.list);
 
 		const commandHelps = [
 			{ command: "?", help: lang.commands.qmHelp },
@@ -42,22 +42,14 @@ class CommandHelp extends require("./Command") {
 			{ command: lang.commands.stop, help: lang.commands.stopHelp },
 		];
 
-		const availableCommands = commandHelps.filter((help) =>
-			config[`consoleCommand${help.command.charAt(0).toUpperCase() + help.command.slice(1)}`]
-		);
+		const availableCommands = commandHelps.filter((help) => config[`consoleCommand${help.command.charAt(0).toUpperCase() + help.command.slice(1)}`]);
 
 		if (availableCommands.length > 0) {
 			availableCommands.forEach((help) => {
-				Logger.log(
-					help.help
-						.replace("%green%", "\x1b[32m")
-						.replace("%cyan%", "\x1b[36m")
-						.replace("%white%", "\x1b[0m")
-						.replace("%blue%", "\x1b[34m") + "\x1b[0m"
-				);
+				Logger.info(help.help.replace("%green%", "\x1b[32m").replace("%cyan%", "\x1b[36m").replace("%white%", "\x1b[0m").replace("%blue%", "\x1b[34m") + "\x1b[0m");
 			});
 		} else {
-			Logger.log(lang.commands.thereAreNoCommands);
+			Logger.info(lang.commands.thereAreNoCommands);
 		}
 	}
 }

@@ -11,10 +11,9 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-case-declarations */
-const BlockBreakEvent = require("../../../plugin/events/BlockBreakEvent");
 const Logger = require("../../../server/Logger");
-const LogTypes = require("../../../server/LogTypes");
 const { config, lang } = require("../../../server/ServerInfo");
+const BlockBreakEvent = require("../../../plugin/events/BlockBreakEvent");
 const Handler = require("./Handler");
 
 class InventoryTransaction extends Handler {
@@ -32,7 +31,7 @@ class InventoryTransaction extends Handler {
 				break;
 			default:
 				if (config.logUnhandledPackets) {
-					Logger.log(lang.devdebug.unhandledPacketData, LogTypes.DEBUG);
+					Logger.debug(lang.devdebug.unhandledPacketData);
 					console.log("%o", packet);
 				}
 				break;

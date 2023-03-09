@@ -30,11 +30,10 @@ const CommandRequest = require("./network/packets/handlers/CommandRequest");
 const PlayerMove = require("./network/packets/handlers/PlayerMove");
 const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
 const VersionToProtocol = require("./server/VersionToProtocol");
+const GarbageCollector = require("./server/GarbageCollector");
 const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
-const LogTypes = require("./server/LogTypes");
 const Logger = require("./server/Logger");
-const GarbageCollector = require("./server/GarbageCollector");
 
 let clients = [];
 let server = null;
@@ -61,11 +60,11 @@ module.exports = {
 	 */
 	async _handleCriticalError(err) {
 		if (err.toString().includes("Server failed to start")) {
-			Logger.log(lang.errors.failedToBind.replace("%address%", `${config.host}:${config.port}`), "error");
-			Logger.log(lang.errors.otherServerRunning, LogTypes.ERROR);
+			Logger.error(lang.errors.failedToBind.replace("%address%", `${config.host}:${config.port}`));
+			Logger.error(lang.errors.otherServerRunning);
 			process.exit(config.crashCode);
 		} else {
-			Logger.log(`Server error: \n${err.stack}`, LogTypes.ERROR);
+			Logger.error(`Server error: \n${err.stack}`);
 			if (!config.unstable) process.exit(config.crashCode);
 		}
 	},
@@ -107,8 +106,8 @@ module.exports = {
 				break;
 			default:
 				if (config.logUnhandledPackets) {
-					Logger.log(lang.devdebug.unhandledPacket, LogTypes.WARNING);
-					console.log("%o", packet);
+					Logger.warning(lang.devdebug.unhandledPacket);
+					console.info("%o", packet);
 				}
 				break;
 		}
@@ -152,8 +151,8 @@ module.exports = {
 	 * It logs a warning if the config.debug or config.unstable is true.
 	 */
 	async _initDebug() {
-		if (config.unstable) Logger.log(lang.devdebug.unstableWarning, LogTypes.WARNING);
-		if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.log(lang.errors.debugWarning, LogTypes.WARNING);
+		if (config.unstable) Logger.warning(lang.devdebug.unstableWarning);
+		if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.debug(lang.errors.debugWarning);
 	},
 
 	/**
@@ -170,8 +169,8 @@ module.exports = {
 
 		if (!fs.existsSync("world")) fs.mkdirSync("world");
 
-		Logger.log(lang.server.loadingServer);
-		Logger.log(lang.commands.verInfo.replace("%version%", ServerInfo.minorServerVersion))
+		Logger.info(lang.server.loadingServer);
+		Logger.info(lang.commands.verInfo.replace("%version%", ServerInfo.minorServerVersion));
 
 		process.on("uncaughtException", (err) => this._handleCriticalError(err));
 		process.on("uncaughtExceptionMonitor", (err) => this._handleCriticalError(err));
@@ -184,8 +183,8 @@ module.exports = {
 		this._listen();
 
 		setInterval(() => {
-			GarbageCollector.gc()
-		}, parseInt(config.garbageCollectorDelay))
+			GarbageCollector.gc();
+		}, parseInt(config.garbageCollectorDelay));
 	},
 
 	/**
@@ -197,25 +196,25 @@ module.exports = {
 
 		try {
 			const server = bedrock.createServer({
-		  		host, 
-          port, 
-          version, 
-          offline, 
-          maxPlayers, 
-          motd: {
-					  motd: motd, 
-            levelName: "GreenFrogMCBE",
+				host,
+				port,
+				version,
+				offline,
+				maxPlayers,
+				motd: {
+					motd: motd,
+					levelName: "GreenFrogMCBE",
 				},
 			});
 
-			Logger.log(`${lang.server.listeningOn.replace(`%address%`, `/${host}:${port}`)}`);
+			Logger.info(`${lang.server.listeningOn.replace(`%address%`, `/${host}:${port}`)}`);
 
-			server.on("connect", client => {
+			server.on("connect", (client) => {
 				client.on("join", () => {
 					this._onJoin(client);
 				});
 
-				client.on("packet", packet => {
+				client.on("packet", (packet) => {
 					try {
 						this._handlepk(client, packet);
 					} catch (e) {
@@ -224,25 +223,24 @@ module.exports = {
 						} catch (e) {
 							client.disconnect(lang.kickmessages.internalServerError);
 						}
-						
+
 						new ServerInternalServerErrorEvent().execute(server, e);
-						Logger.log(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`, LogTypes.ERROR);
+						Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
 					}
 				});
 			});
 		} catch (e) {
-			Logger.log(`${lang.errors.listeningFailed.replace(`%address%`, `/${host}:${port}`).replace("%error%", e.stack)}`, LogTypes.ERROR);
+			Logger.error(`${lang.errors.listeningFailed.replace(`%address%`, `/${host}:${port}`).replace("%error%", e.stack)}`);
 			process.exit(config.exitCode);
 		}
 	},
-
 
 	/**
 	 * Shutdowns the server.
 	 */
 	async shutdown() {
 		await require("./server/ConsoleCommandSender").close();
-		Logger.log(lang.server.stoppingServer);
+		Logger.info(lang.server.stoppingServer);
 
 		try {
 			for (const player of PlayerInfo.players) {
@@ -256,6 +254,4 @@ module.exports = {
 			PluginLoader.unloadPlugins();
 		}, 1000);
 	},
-
-
 };
