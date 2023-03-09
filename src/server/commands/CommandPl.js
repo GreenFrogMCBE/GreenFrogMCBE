@@ -31,7 +31,7 @@ class CommandPl extends require("./Command") {
 		const plugins = PluginManager.getPlugins()?.length ?? 0;
 		const pluginList = ColorsServer.CONSOLE_GREEN + PluginManager.getPlugins()?.join(ColorsServer.CONSOLE_RESET + ", " + ColorsServer.CONSOLE_GREEN) || "";
 
-		Logger.log(`${lang.commands.plugins} (${plugins}): ${pluginList} ${ColorsServer.CONSOLE_RESET}`);
+		Logger.info(`${lang.commands.plugins} (${plugins}): ${pluginList} ${ColorsServer.CONSOLE_RESET}`);
 	}
 
 	getPlayerDescription() {
@@ -40,7 +40,7 @@ class CommandPl extends require("./Command") {
 
 	executePlayer(player) {
 		if (!config.playerCommandPlugins) {
-			Logger.log(lang.errors.playerUnknownCommand);
+			Logger.info(lang.errors.playerUnknownCommand);
 			return;
 		}
 

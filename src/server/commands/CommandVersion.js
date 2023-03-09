@@ -24,11 +24,11 @@ class CommandVersion extends require("./Command") {
 
 	execute() {
 		if (!config.consoleCommandVersion) {
-			Logger.log(lang.errors.unknownCommand);
+			Logger.info(lang.errors.unknownCommand);
 			return;
 		}
 
-		Logger.log(lang.commands.verInfo.replace("%version%", serverversion));
+		Logger.info(lang.commands.verInfo.replace("%version%", serverversion));
 	}
 
 	getPlayerDescription() {

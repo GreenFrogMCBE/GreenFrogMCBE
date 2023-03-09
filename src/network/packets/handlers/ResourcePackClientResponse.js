@@ -48,7 +48,6 @@ const WorldGenerator = require("../types/WorldGenerator");
 const ServerInfo = require("../../../server/ServerInfo");
 const ChunkError = require("../exceptions/ChunkError");
 const PlayStatuses = require("../types/PlayStatuses");
-const LogTypes = require("../../../server/LogTypes");
 const Difficulty = require("../types/Difficulty");
 const ItemComponent = require("../ItemComponent");
 const Logger = require("../../../server/Logger");
@@ -61,18 +60,18 @@ class ResourcePackClientResponse extends Handler {
 		switch (packet.data.params.response_status) {
 			case "none": {
 				new PlayerHasNoResourcePacksInstalledEvent().execute(server, client);
-				Logger.log(lang.playerstatuses.noRpsInstalled.replace("%player%", client.username));
+				Logger.info(lang.playerstatuses.noRpsInstalled.replace("%player%", client.username));
 				break;
 			}
 			case "refused": {
 				new PlayerResourcePacksRefused().execute(server, client);
-				Logger.log(lang.playerstatuses.rpsrefused.replace("%player%", client.username));
+				Logger.info(lang.playerstatuses.rpsrefused.replace("%player%", client.username));
 				client.kick(lang.resourcePacksRefused);
 				break;
 			}
 			case "have_all_packs": {
 				new PlayerHasAllPacks().execute(server, client);
-				Logger.log(lang.playerstatuses.rpsInstalled.replace("%player%", client.username));
+				Logger.info(lang.playerstatuses.rpsInstalled.replace("%player%", client.username));
 
 				const resourcepackstack = new ResourcePackStack();
 				resourcepackstack.setMustAccept(false);
@@ -199,73 +198,76 @@ class ResourcePackClientResponse extends Handler {
 					} catch (e) {
 						itemcomponent.setItems([]);
 					}
-
 					itemcomponent.send(client);
 
-					const chunkradiusupdate = new ChunkRadiusUpdate();
-					chunkradiusupdate.setChunkRadius(32);
-					chunkradiusupdate.send(client);
+					if (client.sendChunks) {
+						const chunkradiusupdate = new ChunkRadiusUpdate();
+						chunkradiusupdate.setChunkRadius(32);
+						chunkradiusupdate.send(client);
 
-					const cords = config.generator == WorldGenerator.DEFAULT ? { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
+						const cords = config.generator === WorldGenerator.DEFAULT ? { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
 
-					const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-					networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
-					networkchunkpublisher.setRadius(272);
-					networkchunkpublisher.setSavedChunks([]);
-					networkchunkpublisher.send(client);
-
-					let chunks = null;
-
-					try {
-						chunks = require(`${__dirname}/../../../../world/chunks${config.generator == WorldGenerator.DEFAULT ? "" : "-flat"}.json`);
-					} catch (e) {
-						throw new ChunkError(lang.errors.failedToLoadWorld + " " + e.stack);
-					}
-
-					for (const chunk of chunks) {
-						const levelchunk = new LevelChunk();
-						levelchunk.setX(chunk.x);
-						levelchunk.setZ(chunk.z);
-						levelchunk.setSubChunkCount(chunk.sub_chunk_count);
-						levelchunk.setCacheEnabled(chunk.cache_enabled);
-						try {
-							levelchunk.setPayload(chunk.payload.data);
-						} catch (e) {
-							throw new ChunkError(lang.errors.failedToLoadWorld_InvalidChunkData);
-						}
-						levelchunk.send(client);
-					}
-
-					setInterval(() => {
-						if (client.offline) return;
 						const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 						networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
 						networkchunkpublisher.setRadius(272);
 						networkchunkpublisher.setSavedChunks([]);
 						networkchunkpublisher.send(client);
-					}, 4500);
+
+						let chunks = null;
+
+						try {
+							chunks = require(`${__dirname}/../../../../world/chunks${config.generator === WorldGenerator.DEFAULT ? "" : "-flat"}.json`);
+						} catch (e) {
+							throw new ChunkError(`${lang.errors.failedToLoadWorld} ${e}`);
+						}
+
+						for (const chunk of chunks) {
+							const levelchunk = new LevelChunk();
+							levelchunk.setX(chunk.x);
+							levelchunk.setZ(chunk.z);
+							levelchunk.setSubChunkCount(chunk.sub_chunk_count);
+							levelchunk.setCacheEnabled(chunk.cache_enabled);
+							try {
+								levelchunk.setPayload(chunk.payload.data);
+							} catch (e) {
+								throw new ChunkError(lang.errors.failedToLoadWorld_InvalidChunkData);
+							}
+							levelchunk.send(client);
+						}
+
+						setInterval(() => {
+							if (client.offline) return;
+							const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+							networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
+							networkchunkpublisher.setRadius(272);
+							networkchunkpublisher.setSavedChunks([]);
+							networkchunkpublisher.send(client);
+						}, 4500);
+					}
 
 					setTimeout(() => {
-						for (let i = 0; i < PlayerInfo.players; i++) {
-							if (PlayerInfo.players[i].username == !client.username) {
+						for (const player of PlayerInfo.players) {
+							if (player.username !== client.username) {
 								ServerInfo.addPlayer();
 								const pl = new PlayerList();
 								pl.setType(PlayerListTypes.ADD);
 								pl.setUsername(client.username);
 								pl.setId(Math.floor(Math.random() * 99999999999));
 								pl.setUuid(client.profile.uuid);
-								pl.send(PlayerInfo.players[i]);
+								pl.send(player);
 							}
 						}
 					}, 1000);
 
-					Logger.log(lang.playerstatuses.spawned.replace("%player%", client.username));
+					Logger.info(lang.playerstatuses.spawned.replace("%player%", client.username));
 
 					setTimeout(() => {
 						if (client.offline) return;
+
 						const ps = new PlayStatus();
 						ps.setStatus(PlayStatuses.PLAYERSPAWN);
 						ps.send(client);
+
 						new PlayerSpawnEvent().execute(server, client);
 					}, 2000);
 
@@ -279,7 +281,7 @@ class ResourcePackClientResponse extends Handler {
 				}
 				break;
 			default:
-				if (config.logUnhandledPackets) Logger.log(lang.debugdev.unhandledPacket.replace("%data%", packet.data.params.response_status), LogTypes.WARNING);
+				if (config.logUnhandledPackets) Logger.warning(lang.debugdev.unhandledPacket.replace("%data%", packet.data.params.response_status));
 		}
 	}
 }

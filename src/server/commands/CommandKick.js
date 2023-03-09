@@ -30,7 +30,7 @@ class CommandKick extends require("./Command") {
 
 	execute(args) {
 		if (!args || !args[0]) {
-			Logger.log(lang.commands.usageKick);
+			Logger.info(lang.commands.usageKick);
 			return;
 		}
 
@@ -41,9 +41,9 @@ class CommandKick extends require("./Command") {
 
 		if (target) {
 			target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
-			Logger.log(`${lang.kickmessages.kickedConsoleMsg.replace("%player%", targetUsername).replace("%reason%", reason)}`);
+			Logger.info(`${lang.kickmessages.kickedConsoleMsg.replace("%player%", targetUsername).replace("%reason%", reason)}`);
 		} else {
-			Logger.log(lang.errors.playerOffline);
+			Logger.info(lang.errors.playerOffline);
 		}
 	}
 

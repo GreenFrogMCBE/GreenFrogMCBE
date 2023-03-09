@@ -12,10 +12,9 @@
  */
 const fs = require("fs");
 const Logger = require("../server/Logger");
-const { lang, config } = require("../server/ServerInfo");
 const PluginManager = require("./PluginManager");
 const CCH = require("../server/ConsoleCommandSender");
-const LogTypes = require("../server/LogTypes");
+const { lang, config } = require("../server/ServerInfo");
 
 module.exports = {
 	loadPlugins() {
@@ -39,7 +38,7 @@ module.exports = {
 			files.forEach((file) => {
 				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
 					if (err) {
-						Logger.log(lang.errors.failedToGetStats.replace("%plugin%", file), LogTypes.ERROR);
+						Logger.error(lang.errors.failedToGetStats.replace("%plugin%", file));
 						return;
 					}
 					if (stats.isDirectory()) {
@@ -52,7 +51,7 @@ module.exports = {
 							version = packageJson.version;
 							main = packageJson.main;
 						} catch (ignored) {
-							Logger.log(lang.errors.packageJSONError.replace("%plugin%", file), LogTypes.WARNING);
+							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
 							return;
 						}
 						try {
@@ -60,7 +59,7 @@ module.exports = {
 							Logger.log(lang.server.loadedPlugin.replace("%name%", name).replace("%version%", version));
 							PluginManager.addPlugin(name, version);
 						} catch (e) {
-							Logger.log(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack), LogTypes.ERROR);
+							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack));
 						}
 					}
 				});
@@ -79,19 +78,21 @@ module.exports = {
 			files.forEach((file) => {
 				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
 					if (err) {
-						Logger.log(lang.errors.failedToGetStats.replace("%plugin%", file), LogTypes.ERROR);
+						Logger.error(lang.errors.failedToGetStats.replace("%plugin%", file));
 						return;
 					}
+
 					if (stats.isDirectory()) {
 						count++;
-						let name, main = null;
+						let name,
+							main = null;
 
 						try {
 							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
 							name = packageJson.displayName;
 							main = packageJson.main;
 						} catch (ignored) {
-							Logger.log(lang.errors.packageJSONError.replace("%plugin%", file), LogTypes.WARNING);
+							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
 							return;
 						}
 
@@ -102,7 +103,7 @@ module.exports = {
 							count--;
 							if (count <= 0) this.killServer();
 						} catch (e) {
-							Logger.log(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack), LogTypes.ERROR);
+							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack));
 						}
 					}
 				});

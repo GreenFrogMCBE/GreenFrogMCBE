@@ -21,7 +21,7 @@ class CommandMe extends require("./Command") {
 	execute(msg = "", client = { username: lang.other.server }) {
 		const message = msg.replace(/\s/g, "");
 		if (!message) {
-			Logger.log(lang.commands.usageMe);
+			Logger.info(lang.commands.usageMe);
 			return;
 		}
 

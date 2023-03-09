@@ -13,7 +13,7 @@
 module.exports = {
 	/**
 	 * Returns the version as a protocol number
-	 * @param {String} version 
+	 * @param {String} version
 	 * @returns The version as a protocol number
 	 */
 	getProtocol(version) {

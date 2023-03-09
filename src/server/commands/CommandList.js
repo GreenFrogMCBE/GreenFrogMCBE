@@ -24,7 +24,7 @@ class CommandList extends require("./Command") {
 	}
 
 	execute(isconsole = true, client) {
-		const playerNames = playerList.map(player => player.username);
+		const playerNames = playerList.map((player) => player.username);
 		const playerCount = playerList.length;
 		const playerListMessage = lang.commands.playerList.replace("%info%", `${playerCount}/${config.maxPlayers}`);
 
@@ -36,9 +36,9 @@ class CommandList extends require("./Command") {
 			return;
 		}
 
-		Logger.log(playerListMessage);
+		Logger.info(playerListMessage);
 		if (playerCount > 0) {
-			Logger.log(playerNames.join(", "));
+			Logger.info(playerNames.join(", "));
 		}
 	}
 

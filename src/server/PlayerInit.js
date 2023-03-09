@@ -26,7 +26,7 @@ const PlayerListTypes = require("../network/packets/types/PlayerList");
 const PlayerList = require("../network/packets/PlayerList");
 const GarbageCollector = require("./GarbageCollector");
 const PlayerInfo = require("../player/PlayerInfo");
-const ServerInfo = require("./ServerInfo")
+const ServerInfo = require("./ServerInfo");
 
 module.exports = {
 	_initPlayer(player) {
@@ -88,7 +88,7 @@ module.exports = {
 				msg = "You were disconnected";
 			}
 
-			Logger.log(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.getUserData().displayName).replace("%reason%", msg));
+			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.getUserData().displayName).replace("%reason%", msg));
 			player.disconnect(msg);
 		};
 
@@ -130,11 +130,11 @@ module.exports = {
 					}
 				}
 
-				GarbageCollector.clearOfflinePlayers()
+				GarbageCollector.clearOfflinePlayers();
 
 				new PlayerLeaveEvent().execute(require("../Server").server, player);
 
-				Logger.log(lang.playerstatuses.disconnected.replace("%player%", player.username));
+				Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
 				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
 				player.offline = true;
 			}

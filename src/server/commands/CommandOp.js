@@ -26,15 +26,15 @@ class CommandOp extends require("./Command") {
 
 	async execute(args) {
 		if (!args) {
-			Logger.log(lang.commands.usageOp);
+			Logger.info(lang.commands.usageOp);
 			return;
 		}
 
 		try {
 			await fs.appendFile("ops.yml", args + "\n");
-			Logger.log(lang.commands.opped.replace("%player%", args));
+			Logger.info(lang.commands.opped.replace("%player%", args));
 		} catch (err) {
-			Logger.log(lang.commands.opFail);
+			Logger.info(lang.commands.opFail);
 		}
 	}
 
@@ -63,7 +63,7 @@ class CommandOp extends require("./Command") {
 			await fs.appendFile("ops.yml", player + "\n");
 			client.sendMessage(lang.commands.opped.replace("%player%", player));
 			getPlayerInfo(player).op = true;
-			console.log(getPlayerInfo(player));
+			console.info(getPlayerInfo(player));
 		} catch (err) {
 			client.sendMessage("§c" + lang.commands.opFail);
 		}

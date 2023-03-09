@@ -25,7 +25,7 @@ class CommandSay extends require("./Command") {
 
 	execute(args) {
 		if (!args) {
-			Logger.log(lang.commands.usageSay);
+			Logger.info(lang.commands.usageSay);
 			return;
 		}
 
@@ -35,7 +35,7 @@ class CommandSay extends require("./Command") {
 			client.sendMessage(msg);
 		});
 
-		Logger.log(msg);
+		Logger.info(msg);
 	}
 
 	getPlayerDescription() {
@@ -65,7 +65,7 @@ class CommandSay extends require("./Command") {
 			client.sendMessage(msg);
 		});
 
-		Logger.log(msg);
+		Logger.info(msg);
 	}
 }
 
