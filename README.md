@@ -200,6 +200,8 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 
    > For reporting form bugs 
    > For helping me to add the chunk support
+   > For rewriting logger
+   > For rewriting 20% of the network code
 
 ## Language system
 
