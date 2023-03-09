@@ -198,15 +198,14 @@ class ResourcePackClientResponse extends Handler {
 					} catch (e) {
 						itemcomponent.setItems([]);
 					}
+					itemcomponent.send(client);
 
 					if (client.sendChunks) {
-						itemcomponent.send(client);
-
 						const chunkradiusupdate = new ChunkRadiusUpdate();
 						chunkradiusupdate.setChunkRadius(32);
 						chunkradiusupdate.send(client);
 
-						const cords = config.generator == WorldGenerator.DEFAULT ? { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
+						const cords = config.generator === WorldGenerator.DEFAULT ? { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
 
 						const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 						networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
@@ -217,9 +216,9 @@ class ResourcePackClientResponse extends Handler {
 						let chunks = null;
 
 						try {
-							chunks = require(`${__dirname}/../../../../world/chunks${config.generator == WorldGenerator.DEFAULT ? "" : "-flat"}.json`);
+							chunks = require(`${__dirname}/../../../../world/chunks${config.generator === WorldGenerator.DEFAULT ? "" : "-flat"}.json`);
 						} catch (e) {
-							throw new ChunkError(lang.errors.failedToLoadWorld + " " + e.stack);
+							throw new ChunkError(`${lang.errors.failedToLoadWorld} ${e}`);
 						}
 
 						for (const chunk of chunks) {
