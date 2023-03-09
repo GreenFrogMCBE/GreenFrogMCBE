@@ -18,12 +18,8 @@ const Handler = require("./Handler");
 
 class InventoryTransaction extends Handler {
 	handle(server, client, packet) {
-		let action;
-		try {
-			action = packet.data.params.transaction.transaction_data.action_type;
-		} catch (e) {
-			action = null;
-		}
+		let action = packet?.data?.params?.transaction?.transaction_data?.action_type || null;
+
 		switch (action) {
 			case "break_block":
 				const breakevent = new BlockBreakEvent();
