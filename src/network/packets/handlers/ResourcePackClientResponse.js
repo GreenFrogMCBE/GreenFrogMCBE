@@ -245,15 +245,15 @@ class ResourcePackClientResponse extends Handler {
 					}, 4500);
 
 					setTimeout(() => {
-						for (let i = 0; i < PlayerInfo.players; i++) {
-							if (PlayerInfo.players[i].username == !client.username) {
+						for (const player of PlayerInfo.players) {
+							if (player.username !== client.username) {
 								ServerInfo.addPlayer();
 								const pl = new PlayerList();
 								pl.setType(PlayerListTypes.ADD);
 								pl.setUsername(client.username);
 								pl.setId(Math.floor(Math.random() * 99999999999));
 								pl.setUuid(client.profile.uuid);
-								pl.send(PlayerInfo.players[i]);
+								pl.send(player);
 							}
 						}
 					}, 1000);
