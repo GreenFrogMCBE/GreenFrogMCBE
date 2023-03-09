@@ -2,6 +2,8 @@
   "commands": {
     "thereAreNoCommands": "There are no commands.",
     "unknownCommand": "Unknown command. Type \"help\" for help",
+    "maxArg": "Maximum Argument is %m but received %r",
+    "minArg": "Minimum Argument is %m but received %r",
     "meCommandFormat": "* %username% %message%",
     "list": "Command list: ",
     "help": "help",

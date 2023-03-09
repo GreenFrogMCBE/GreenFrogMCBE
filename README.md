@@ -98,40 +98,124 @@ If you have one, feel free to open an issue (https://github.com/andriycraft/Gree
 
 ## Credits
 
-```@andriycraft - For creating this software
-@AnyBananaGAME - For creating multilang (#9) also for improving tests and /list, making better tests (#70)
-@hvlxh - For creating BasePlugin.js (#20) and fixing langs (#19) and also making logger better (#33) also for disabling workflows for .MD files, also #81
-@NhanAZ - For improving code (#4) and sorting lang strings (#22, #23, #24), for reporting /help bug, for adding yarn, many changes to tests, making a workflow that automatically builds the project, for fixing paths, also for reporting a bug that server cannot be stopped when plugins is null, also for making /pl code better
-@ATXLtheAxolotl - For adding nodemon script for faster development, tiny cleaning, & fixed weird usage of .prototype (#44)
-@bufferfishq - For adding support for custom_form and new plugin system (#47)
-@andriycraftbot - For fixing the code style (#37, #38, #40, #45, #46, #48, #50, #52, #58, #61, #73, #90)
-@Zwuiix-cmd - Suggested custom_form support (https://github.com/andriycraft/GreenFrogMCBE/issues/35)
-@CreeperG16 (Tom16#4672) - For a better way to handle player disconnection (https://github.com/andriycraft/GreenFrogMCBE/pull/55/commits/7376c60e73d9e98c4791f89f4c7c54b644e006a4#diff-f187ec8efe95aba91b86e895736549fccc085f2e0d364e35c17cbd8a1206b744L105-R105) and for adding 1.19.60 and 1.19.62 support to bedrock-protocol and helping me with chunk support, also for suggesting modal form support
-Bedrock-protocol (https://github.com/PrismarineJS/bedrock-protocol) - Packet sender and raknet
-Wiki.vg (https://wiki.vg/Bedrock_Protocol) - For packet docs
-js-yaml (https://github.com/nodeca/js-yaml) - Used to parse config and other files
-EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) (@Zwuiix-cmd) - Used as an example for custom_form support (i had permission from repo owner)
-🌓Enzøツ#6666 - Helping me with chunk support
-@</hakaN#0746 - For translating this software into Turkish
-@BasToTheMax - For translating this software into Dutch (still in progress) and was the first person who starred this repo
-@faaxz - for reporting form bugs & helping me to add the chunk support
-```
+> If the name starts with "@" this means that the user has Github account credited
+> If the name does not start with "@" and contains "#" this means that the user has Discord account credited
+
+1. @andriycraft
+
+   > For creating this software
+
+2. @AnyBananaGAME
+
+   > For creating multilang (#9)
+   > For improving tests and /list
+   > Making better tests (#70)
+
+3. @hvlxh
+
+   > For creating BasePlugin.js (#20)
+   > Fixing langs (#19)
+   > Making logger better
+   > Also for disabling workflows for .MD files, also #81
+   > For making better commands system
+   > For making the README.md file look better
+
+4. @NhanAZ
+
+   > For improving code (#4)
+   > For sorting lang strings (#22, #23, #24)
+   > For reporting /help bug,
+   > For adding yarn, many changes to tests
+   > For making a workflow that automatically builds the project,
+   > For fixing paths
+   > For reporting a bug that server cannot be stopped when plugins is null
+   > For making /pl code better
+   > For making /list code better
+   > For making /deop code better
+   > For making /help code better
+   > For making /time code better
+   > For making /say code better
+   > For making /me code better
+   > For making /op code better
+   > For improving _listen() in Server.js
+   > For improving generatelicenseheaders.js
+   
+
+5. @ATXLtheAxolotl
+
+   > For adding nodemon script for faster development
+   > For tiny cleaning
+   > Also for fixing weird usage of .prototype (#44)
+
+6. @bufferfishq
+
+   > For adding support for custom_form and new plugin system (#47)
+
+7. @andriycraftbot
+
+   > For fixing the code style (#37, #38, #40, #45, #46, #48, #50, #52, #58, #61, #73, #90)
+
+8. @Zwuiix-cmd
+
+   > Suggested custom_form support (https://github.com/andriycraft/GreenFrogMCBE/issues/35)
+
+9. @CreeperG16 (Tom16#4672)
+
+   > For a better way to handle player disconnection (https://github.com/andriycraft/GreenFrogMCBE/pull/55/commits/7376c60e73d9e98c4791f89f4c7c54b644e006a4#diff-f187ec8efe95aba91b86e895736549fccc085f2e0d364e35c17cbd8a1206b744L105-R105) 
+   > For adding 1.19.60 support
+   > For adding 1.19.62 support 
+   > For helping me with chunk support
+   > For suggesting modal form support
+
+10. Bedrock-protocol (https://github.com/PrismarineJS/bedrock-protocol)
+  
+   > Packet handler and raknet
+
+11. Wiki.VG (https://wiki.vg/Bedrock_Protocol)
+  
+   > For packet documentation
+
+11. js-yaml (https://github.com/nodeca/js-yaml)
+  
+   > Used to parse config and other files
+
+12. EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) (@Zwuiix-cmd)
+
+   > Used as an example for custom_form support (i had permission from repo owner)
+
+13. 🌓Enzø ツ#6666
+
+   > Helping me with chunk support
+
+14. \<\/hakaN#0746
+
+   > For translating this software into Turkish
+  
+15. @BasToTheMax
+
+   > For translating this software into Dutch (still in progress) 
+   > Was the first person who starred this repo
+
+16 . @faaxz
+
+   > For reporting form bugs 
+   > For helping me to add the chunk support
+   > For rewriting logger
+   > For rewriting 20% of the network code
 
 ## Language system
 
 Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese, Turkish, Dutch (in progress)
 
-For English language, set "language" to "en_US"
+# English > set language in config.yml to "en_US"
 
-## Warning: Language system is temporary disabled in 2.8+ update
+# Lithuanian > set language in config.yml to "lt_LT"
 
-For Lithuanian language, set "language" to "lt_LT"
+# Ukrainian > set language in config.yml to "uk_UA"
 
-For Ukrainian language, set "language" to "uk_UA"
+# Vietnamese > set language in config.yml to "vi_VN"
 
-For Vietnamese language, set "language" to "vi_VN"
-
-For French language, set "language" to "fr_FR"
+# French > set language in config.yml to "fr_FR"
 
 ## Donations
 
@@ -144,3 +228,7 @@ If you have one, fell free to open an issue! (https://github.com/andriycraft/Gre
 (server must be hosted on this software)
 
 - Currently none
+
+```
+
+```

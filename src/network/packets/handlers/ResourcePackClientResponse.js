@@ -28,19 +28,7 @@ const NetworkChunkPublisherUpdate = require("../../../network/packets/NetworkChu
 const PlayerResourcePacksCompletedEvent = require("../../../plugin/events/PlayerResourcePacksCompletedEvent");
 const PlayerHasNoResourcePacksInstalledEvent = require("../../../plugin/events/PlayerHasNoResourcePacksInstalledEvent");
 const PlayerListTypes = require("../../../network/packets/types/PlayerList");
-const CommandGamemode = require("../../../server/commands/CommandGamemode");
-const CommandVersion = require("../../../server/commands/CommandVersion");
 const Dimension = require("../../../network/packets/types/Dimension");
-const CommandStop = require("../../../server/commands/CommandStop");
-const CommandKick = require("../../../server/commands/CommandKick");
-const CommandList = require("../../../server/commands/CommandList");
-const CommandDeop = require("../../../server/commands/CommandDeop");
-const CommandTime = require("../../../server/commands/CommandTime");
-const CommandSay = require("../../../server/commands/CommandSay");
-const CommandManager = require("../../../player/CommandManager");
-const CommandMe = require("../../../server/commands/CommandMe");
-const CommandPl = require("../../../server/commands/CommandPl");
-const CommandOp = require("../../../server/commands/CommandOp");
 const { config, lang } = require("../../../server/ServerInfo");
 const Biome = require("../../../network/packets/types/Biome");
 const ChunkRadiusUpdate = require("../ChunkRadiusUpdate");
@@ -151,46 +139,6 @@ class ResourcePackClientResponse extends Handler {
 					const clientcachestatus = new ClientCacheStatus();
 					clientcachestatus.setEnabled(true);
 					clientcachestatus.send(client);
-
-					const commandmanager = new CommandManager();
-					commandmanager.init(client);
-					if (config.playerCommandVersion) {
-						commandmanager.addCommand(client, new CommandVersion().name().toLowerCase(), new CommandVersion().getPlayerDescription());
-						commandmanager.addCommand(client, new CommandVersion().aliases()[0].toLowerCase(), new CommandVersion().getPlayerDescription());
-					}
-					if (config.playerCommandPlugins) {
-						commandmanager.addCommand(client, new CommandPl().name().toLowerCase(), new CommandPl().getPlayerDescription());
-						commandmanager.addCommand(client, new CommandPl().aliases()[0].toLowerCase(), new CommandPl().getPlayerDescription());
-					}
-					if (config.playerCommandList) {
-						commandmanager.addCommand(client, new CommandList().name().toLowerCase(), new CommandList().getPlayerDescription());
-					}
-					if (config.playerCommandMe) {
-						commandmanager.addCommand(client, new CommandMe().name().toLowerCase(), new CommandMe().getPlayerDescription());
-					}
-					if (client.op) {
-						if (config.playerCommandStop) {
-							commandmanager.addCommand(client, new CommandStop().name().toLowerCase(), new CommandStop().getPlayerDescription());
-						}
-						if (config.playerCommandSay) {
-							commandmanager.addCommand(client, new CommandSay().name().toLowerCase(), new CommandSay().getPlayerDescription());
-						}
-						if (config.playerCommandOp) {
-							commandmanager.addCommand(client, new CommandOp().name().toLowerCase(), new CommandOp().getPlayerDescription());
-						}
-						if (config.playerCommandKick) {
-							commandmanager.addCommand(client, new CommandKick().name().toLowerCase(), new CommandKick().getPlayerDescription());
-						}
-						if (config.playerCommandTime) {
-							commandmanager.addCommand(client, new CommandTime().name().toLowerCase(), new CommandTime().getPlayerDescription());
-						}
-						if (config.playerCommandDeop) {
-							commandmanager.addCommand(client, new CommandDeop().name().toLowerCase(), new CommandDeop().getPlayerDescription());
-						}
-						if (config.playerCommandGamemode) {
-							commandmanager.addCommand(client, new CommandGamemode().name().toLowerCase(), new CommandGamemode().getPlayerDescription());
-						}
-					}
 
 					// This packet is used to set custom items
 					const itemcomponent = new ItemComponent();
