@@ -32,7 +32,7 @@ Server software for Minecraft: Bedrock edition, written in NodeJS
 
 ## Plugins
 
-If you have one, feel free to open an issue (https://github.com/andriycraft/GreenFrogMCBE/issues/new/choose)
+If you have one, feel free to open an issue
 
 - Example plugin: https://github.com/greenfrogmc/ExamplePlugin | Description: This is a plugin is used just to test our API. You can use this a scaffolding for your plugin. | Author: GreenFrogMCBE
 
@@ -190,7 +190,7 @@ Our language system currently supports those languages: English, Lithuanian, Ukr
 
 #### French > set language in config.yml to "fr_FR"
 
-## Servers (https://github.com/andriycraft/GreenFrogMCBE/issues/new/choose)
+## Servers
 
 Contact me us in our discord server, if you have one, or open an issue in this repo
 
