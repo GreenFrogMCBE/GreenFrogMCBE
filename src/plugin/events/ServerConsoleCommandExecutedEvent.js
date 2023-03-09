@@ -14,8 +14,10 @@
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const Event = require("./Event");
+const server = require("../../Server");
 
 const fs = require("fs");
+const { readdir } = require("fs/promises");
 
 class ServerConsoleCommandExecutedEvent extends Event {
 	constructor() {
@@ -45,8 +47,16 @@ class ServerConsoleCommandExecutedEvent extends Event {
 		return this.cancelled;
 	}
 
-	postExecute(cmd) {
-		// TODO: Make the commands system better.
+	async postExecute(cmd) {
+		const cmds = await readdir("./src/server/commands");
+		for (const camd of cmds) {
+			/**
+			 * @type {import('../../base/Command').Command}
+			 */
+			const command = require(`../../server/commands/${camd}`);
+
+			if (command.data.name === cmd) command.runAsConsole(server);
+		}
 	}
 }
 
