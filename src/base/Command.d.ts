@@ -11,6 +11,8 @@ export interface Options {
 	name: string;
 	description: string;
 	arguments?: ArgOptions[];
+	maxArg: number;
+	minArg: number;
 }
 
 export interface Command {

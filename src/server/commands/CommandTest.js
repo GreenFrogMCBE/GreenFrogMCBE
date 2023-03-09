@@ -27,5 +27,7 @@ module.exports = {
 	data: {
 		name: "test",
 		description: "Test command.",
+		minArg: 1,
+		maxArg: 2,
 	},
 };
