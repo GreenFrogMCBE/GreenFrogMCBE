@@ -199,50 +199,52 @@ class ResourcePackClientResponse extends Handler {
 						itemcomponent.setItems([]);
 					}
 
-					itemcomponent.send(client);
+					if (client.sendChunks) {
+						itemcomponent.send(client);
 
-					const chunkradiusupdate = new ChunkRadiusUpdate();
-					chunkradiusupdate.setChunkRadius(32);
-					chunkradiusupdate.send(client);
+						const chunkradiusupdate = new ChunkRadiusUpdate();
+						chunkradiusupdate.setChunkRadius(32);
+						chunkradiusupdate.send(client);
 
-					const cords = config.generator == WorldGenerator.DEFAULT ? { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
+						const cords = config.generator == WorldGenerator.DEFAULT ? { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
 
-					const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-					networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
-					networkchunkpublisher.setRadius(272);
-					networkchunkpublisher.setSavedChunks([]);
-					networkchunkpublisher.send(client);
-
-					let chunks = null;
-
-					try {
-						chunks = require(`${__dirname}/../../../../world/chunks${config.generator == WorldGenerator.DEFAULT ? "" : "-flat"}.json`);
-					} catch (e) {
-						throw new ChunkError(lang.errors.failedToLoadWorld + " " + e.stack);
-					}
-
-					for (const chunk of chunks) {
-						const levelchunk = new LevelChunk();
-						levelchunk.setX(chunk.x);
-						levelchunk.setZ(chunk.z);
-						levelchunk.setSubChunkCount(chunk.sub_chunk_count);
-						levelchunk.setCacheEnabled(chunk.cache_enabled);
-						try {
-							levelchunk.setPayload(chunk.payload.data);
-						} catch (e) {
-							throw new ChunkError(lang.errors.failedToLoadWorld_InvalidChunkData);
-						}
-						levelchunk.send(client);
-					}
-
-					setInterval(() => {
-						if (client.offline) return;
 						const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 						networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
 						networkchunkpublisher.setRadius(272);
 						networkchunkpublisher.setSavedChunks([]);
 						networkchunkpublisher.send(client);
-					}, 4500);
+
+						let chunks = null;
+
+						try {
+							chunks = require(`${__dirname}/../../../../world/chunks${config.generator == WorldGenerator.DEFAULT ? "" : "-flat"}.json`);
+						} catch (e) {
+							throw new ChunkError(lang.errors.failedToLoadWorld + " " + e.stack);
+						}
+
+						for (const chunk of chunks) {
+							const levelchunk = new LevelChunk();
+							levelchunk.setX(chunk.x);
+							levelchunk.setZ(chunk.z);
+							levelchunk.setSubChunkCount(chunk.sub_chunk_count);
+							levelchunk.setCacheEnabled(chunk.cache_enabled);
+							try {
+								levelchunk.setPayload(chunk.payload.data);
+							} catch (e) {
+								throw new ChunkError(lang.errors.failedToLoadWorld_InvalidChunkData);
+							}
+							levelchunk.send(client);
+						}
+
+						setInterval(() => {
+							if (client.offline) return;
+							const networkchunkpublisher = new NetworkChunkPublisherUpdate();
+							networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
+							networkchunkpublisher.setRadius(272);
+							networkchunkpublisher.setSavedChunks([]);
+							networkchunkpublisher.send(client);
+						}, 4500);
+					}
 
 					setTimeout(() => {
 						for (const player of PlayerInfo.players) {
