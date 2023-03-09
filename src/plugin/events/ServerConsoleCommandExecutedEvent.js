@@ -69,7 +69,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
 				}
 
 				if (command.data.maxArg && command.data.maxArg < args.length) {
-					Logger.log(lang.commands.maxArg.replace("%m", command.data.minArg).replace("%r", args.length));
+					Logger.log(lang.commands.maxArg.replace("%m", command.data.maxArg).replace("%r", args.length));
 					exists = true;
 					return;
 				}

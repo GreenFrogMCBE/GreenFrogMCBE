@@ -1,4 +1,3 @@
-const Text = require("../../network/packets/Text");
 const Logger = require("../Logger");
 
 module.exports = {
@@ -11,14 +10,7 @@ module.exports = {
 	},
 
 	run(_server, player) {
-		const text = new Text();
-		text.setMessage("Hello.");
-		text.setNeedsTranslation(false);
-		text.setPlatformChatId("");
-		text.setSourceName("");
-		text.setType("chat");
-		text.setXuid("");
-		text.send(player);
+		player.sendMessage("Hello.");
 	},
 
 	/**
