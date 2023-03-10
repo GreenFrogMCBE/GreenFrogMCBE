@@ -63,13 +63,13 @@ class ServerConsoleCommandExecutedEvent extends Event {
 
 			if (command.data.name === name) {
 				if (command.data.minArg && command.data.minArg > args.length) {
-					Logger.log(lang.commands.minArg.replace("%m", command.data.minArg).replace("%r", args.length));
+					Logger.log(lang.commands.minArg.replace("%m%", command.data.minArg).replace("%r%", args.length));
 					exists = true;
 					return;
 				}
 
 				if (command.data.maxArg && command.data.maxArg < args.length) {
-					Logger.log(lang.commands.maxArg.replace("%m", command.data.maxArg).replace("%r", args.length));
+					Logger.log(lang.commands.maxArg.replace("%m%", command.data.maxArg).replace("%r%", args.length));
 					exists = true;
 					return;
 				}
@@ -79,8 +79,8 @@ class ServerConsoleCommandExecutedEvent extends Event {
 			}
 		}
 
-		if (!exists) {
-			Logger.log(lang.commands.unknownCommand);
+		if (!exists && cmd) {
+			Logger.log(lang.errors.unknownCommandOrNoPermission.replace('%commandname%', cmd));
 		}
 	}
 }

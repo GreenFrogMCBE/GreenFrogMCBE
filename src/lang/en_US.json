@@ -1,9 +1,8 @@
 {
   "commands": {
     "thereAreNoCommands": "There are no commands.",
-    "unknownCommand": "Unknown command. Type \"help\" for help",
-    "maxArg": "Maximum Argument is %m but received %r",
-    "minArg": "Minimum Argument is %m but received %r",
+    "maxArg": "§cSyntax error: Invalid argument. Required length of arguments is %m%, but received %r%",
+    "minArg": "§cSyntax error: Missing argument. Required length of arguments is %m%, but received %r%",
     "meCommandFormat": "* %username% %message%",
     "list": "Command list: ",
     "help": "help",
@@ -109,7 +108,7 @@
     "illegalMessage": "%player% sent an invalid message. Message content was: %msg%",
     "listeningFailed": "Failed to listen on %address% | Error: %error%",
     "playerOffline": "Player not found",
-    "playerUnknownCommandOrNoPermission": "§cUnknown command: %commandname%. Please check that the command exists and that you have permission to use it.",
+    "unknownCommandOrNoPermission": "§cUnknown command: %commandname%. Please check that the command exists and that you have permission to use it.",
     "failedToLoadPlugin": "Failed to load plugin \"%name%\". The error was: %errorstack%",
     "failedToExecFunction": "Failed to execute function in plugin \"%plugin%\". Error: %e%",
     "noPluginName": "No plugin name! %plugin%",
