@@ -64,14 +64,27 @@ module.exports = {
 			{ mc: "§f", method: (t) => `\x1b[97m${t}` },
 		];
 
-		const ar = text.split(" ");
+		text.replace(/§0/g, colors[0].method());
+		text.replace(/§1/g, colors[1].method());
+		text.replace(/§2/g, colors[2].method());
+		text.replace(/§3/g, colors[3].method());
+		text.replace(/§4/g, colors[4].method());
+		text.replace(/§5/g, colors[5].method());
+		text.replace(/§6/g, colors[6].method());
+		text.replace(/§7/g, colors[7].method());
+		text.replace(/§8/g, colors[8].method());
+		text.replace(/§9/g, colors[9].method());
+		text.replace(/§a/g, colors[10].method());
+		text.replace(/§b/g, colors[11].method());
+		text.replace(/§c/g, colors[12].method());
+		text.replace(/§d/g, colors[13].method());
+		text.replace(/§e/g, colors[14].method());
+		text.replace(/§f/g, colors[15].method());
+		text.replace(/§l/g, "\u00A7l");
+		text.replace(/§m/g, "\u00A7m");
+		text.replace(/§o/g, "\u00A7o");
+		text.replace(/§r/g, "\u00A7r");
 
-		ar.forEach((text, index) => {
-			colors.forEach((c) => {
-				if (text.startsWith(c.mc)) ar[index] = c.method(text.substring(2));
-			});
-		});
-
-		return `${ar.join(" ")}\x1b[0m`;
+		return text;
 	},
 };
