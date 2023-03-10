@@ -77,6 +77,8 @@ class PlayerCommandExecuteEvent extends Event {
 			}
 		}
 
+		exists = client.commands.toString().contains(cmd.replace("/", ""))
+
 		if (!exists) {
 			client.sendMessage(lang.commands.unknownCommand);
 		}
