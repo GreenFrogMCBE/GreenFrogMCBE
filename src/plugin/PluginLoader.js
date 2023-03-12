@@ -56,7 +56,7 @@ module.exports = {
 						}
 						try {
 							require(`${__dirname}/../../plugins/${file}/${main}`).onLoad();
-							Logger.log(lang.server.loadedPlugin.replace("%name%", name).replace("%version%", version));
+							Logger.info(lang.server.loadedPlugin.replace("%name%", name).replace("%version%", version));
 							PluginManager.addPlugin(name, version);
 						} catch (e) {
 							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack));

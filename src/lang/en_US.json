@@ -120,7 +120,6 @@
     "invalidGamemode": "Invalid gamemode",
     "targetServerNull": "Packet processing error: The target server is null!",
     "sendToInvalidServer": "Packet processing error: The target server port is invalid! Must be number between 0 and 65535",
-    "invalidTimePacket": "Packet processing error: Invalid time. Must be number between 0 and 2147483647",
     "itemExploit": "An attempt to get items from creative mode, while the player is not in creative mode",
     "failedToHandleItemRequest": "Failed to handle item request from %data%",
     "notSupportedActionID": "Not supported packet data: packet = open_inventory, action_id = %ai%",

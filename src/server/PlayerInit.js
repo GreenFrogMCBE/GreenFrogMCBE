@@ -24,11 +24,17 @@ const PlayerGamemodeChangeEvent = require("../plugin/events/PlayerGamemodeChange
 const ChangeDimension = require("../network/packets/ChangeDimension");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const PlayerList = require("../network/packets/PlayerList");
+const SetHealth = require("../network/packets/SetHealth");
 const GarbageCollector = require("./GarbageCollector");
 const PlayerInfo = require("../player/PlayerInfo");
 const ServerInfo = require("./ServerInfo");
+const UpdateAttributes = require("../network/packets/UpdateAttributes");
 
 module.exports = {
+	/**
+	 * @private
+	 * @param {Object} player 
+	 */
 	_initPlayer(player) {
 		/**
 		 * Sends a message to the player
@@ -103,7 +109,34 @@ module.exports = {
 		};
 
 		/**
-		 * Sets the dimension for the player
+		 * Sets the health of the player
+		 * @param {Float} health 
+		 */
+		player.setHealth = function (health) {
+			const sethealthpacket = new SetHealth()
+			sethealthpacket.setHealth(health)
+			sethealthpacket.send(player)
+
+			const updateattributespacket = new UpdateAttributes()
+			updateattributespacket.setPlayerID(0) // 0 - Means local player
+			updateattributespacket.setTick(0)
+			updateattributespacket.setAttributes([
+				{
+					"min": 0,
+					"max": 20,
+					"current": health,
+					"default": 20,
+					"name": "minecraft:health",
+					"modifiers": []
+				}
+			])
+			updateattributespacket.send(player)
+
+			player.health = health;
+		};
+
+		/**
+		 * Updates the dimension for the player
 		 * @param {Number} x
 		 * @param {Number} y
 		 * @param {Number} z

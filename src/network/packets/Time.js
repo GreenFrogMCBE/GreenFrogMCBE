@@ -10,11 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable use-isnan */
+const assert = require('assert')
 
 let time = 0;
-
-const { lang } = require("../../server/ServerInfo");
 
 class Time extends require("./Packet") {
 	/**
@@ -29,7 +27,7 @@ class Time extends require("./Packet") {
 	 * @param time - The time in seconds to set the client's time to.
 	 */
 	validate(time) {
-		if (parseInt(time) == NaN) throw new Error(lang.invalidTimePacket);
+		assert(parseInt(time), NaN)
 	}
 
 	/**
@@ -38,6 +36,7 @@ class Time extends require("./Packet") {
 	 */
 	setTime(time1) {
 		this.validate(time1);
+
 		time = time1;
 	}
 
