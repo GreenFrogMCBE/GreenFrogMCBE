@@ -86,18 +86,19 @@
     "playerConnected": "%player% connected (%ip%)"
   },
   "kickmessages": {
-    "kickedPrefix": "You were kicked for: ",
     "noReason": "No reason",
-    "kickedConsoleMsg": "Kicked %player% for: %reason%",
+    "serverShutdown": "§cServer shutdown",
+    "kickedPrefix": "You were kicked for: ",
     "playerDisconnected": "Client disconnected",
+    "kickedByPlugin": "disconnectionScreen.noReason",
+    "serverFull": "disconnectionScreen.serverFull",
     "internalServerError": "§cInternal server error",
     "invalidChatMessage": "§cInvalid message in chat",
-    "serverShutdown": "§cServer shutdown",
+    "kickedConsoleMsg": "Kicked %player% for: %reason%",
     "invalidUsername": "§cThe username you sent is invalid",
     "resourcePacksRefused": "§cYou must accept resource packs to join this server",
-    "kickedByPlugin": "disconnectionScreen.noReason",
-    "versionMismatch": "§cUnsupported version! Please use %version%",
-    "serverFull": "disconnectionScreen.serverFull"
+    "invalidPacket": "§cEncountered an error while trying to handle packet from your client",
+    "versionMismatch": "§cUnsupported version! Please use %version%"
   },
   "errors": {
     "debugWarning": "Debug is enabled! Use this only if you are developer and never use this thing in production",

@@ -226,11 +226,7 @@ module.exports = {
 					try {
 						this._handlepk(client, packet);
 					} catch (e) {
-						try {
-							client.kick(lang.kickmessages.internalServerError);
-						} catch (e) {
-							client.disconnect(lang.kickmessages.internalServerError);
-						}
+						client.kick(lang.kickmessages.invalidPacket);
 
 						new ServerInternalServerErrorEvent().execute(server, e);
 						Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
