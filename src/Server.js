@@ -32,8 +32,10 @@ const PlayerJoinEvent = require("./plugin/events/PlayerJoinEvent");
 const VersionToProtocol = require("./server/VersionToProtocol");
 const GarbageCollector = require("./server/GarbageCollector");
 const ValidateClient = require("./player/ValidateClient");
+const DefaultWorld = require("./world/DefaultWorld");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
+const assert = require('assert');
 
 let clients = [];
 let server = null;
@@ -163,6 +165,9 @@ module.exports = {
 	async start() {
 		await this._initJson();
 
+		await assert(parseInt(config.garbageCollectorDelay), NaN)
+		await assert(parseInt(config.randomTickSpeed), NaN)
+
 		if (!fs.existsSync("ops.yml")) {
 			fs.writeFile("ops.yml", "", (err) => {
 				if (err) throw err;
@@ -187,6 +192,11 @@ module.exports = {
 		setInterval(() => {
 			GarbageCollector.gc();
 		}, parseInt(config.garbageCollectorDelay));
+
+		setInterval(() => {
+			const serverLocalWorld = new DefaultWorld();
+			serverLocalWorld.tick()
+		}, parseInt(config.randomTickSpeed))
 	},
 
 	/**

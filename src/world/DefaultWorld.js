@@ -1,4 +1,6 @@
 const PlayerInfo = require("../player/PlayerInfo");
+const { config } = require("../server/ServerInfo");
+const Logger = require("../server/Logger");
 
 class DefaultWorld {
     constructor() {
@@ -9,6 +11,7 @@ class DefaultWorld {
             z: null,
         };
         this.chunkRadius = 0;
+        this._time = 0; /* DO NOT USE IN PLUGIN APIS */
     }
 
     /**
@@ -74,6 +77,22 @@ class DefaultWorld {
      */
     getChunkRadius() {
         return this.chunkRadius
+    }
+
+    /**
+     * Ticks the world (DO NOT USE IN YOUR PLUGIN BECAUSE THIS WILL BREAK THE SERVER!!!)
+     */
+    tick() {
+        try {
+            if (config.tickWorldTime) {
+                for (let i = 0; i < this.getPlayersInWorld(); i++) {
+                    this._time++
+                    this.getPlayersInWorld()[i].setTime(this._time++)
+                }
+            }
+        } catch (e) {
+            Logger.error("Exception ticking world! " + e.stack)
+        }
     }
 }
 
