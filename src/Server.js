@@ -127,6 +127,8 @@ module.exports = {
 
 		PlayerInfo.addPlayer(client);
 
+		client.chunksEnabled = true
+
 		if (PlayerInfo.players.length > config.maxPlayers) {
 			client.kick(lang.kickmessages.serverFull);
 			return;

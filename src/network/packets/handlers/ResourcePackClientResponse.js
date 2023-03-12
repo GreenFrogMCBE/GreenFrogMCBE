@@ -54,6 +54,7 @@ const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const LevelChunk = require("../LevelChunk");
 const fs = require("fs");
+const DefaultWorld = require("../../../world/DefaultWorld");
 
 class ResourcePackClientResponse extends Handler {
 	handle(client, packet, server) {
@@ -99,21 +100,26 @@ class ResourcePackClientResponse extends Handler {
 
 					if (!client.op) client.permlevel = config.defaultPermissionLevel;
 
-					Logger.log(lang.playerstatuses.joined.replace("%player%", client.username));
+					Logger.info(lang.playerstatuses.joined.replace("%player%", client.username));
 
+					const clientLocalWorld = new DefaultWorld();
+					clientLocalWorld.setChunkRadius(require("../../../../world/world_settings.json").chunkLoadRadius)
+					clientLocalWorld.setName(require("../../../../world/world_settings.json").worldname)
+					if (config.generator === WorldGenerator.FLAT) {
+						clientLocalWorld.setSpawnCoordinates(0, -58, 0);
+					} else if (config.generator === WorldGenerator.DEFAULT) {
+						clientLocalWorld.setSpawnCoordinates(0, 61, 0);
+					} else if (config.generator === WorldGenerator.VOID) {
+						clientLocalWorld.setSpawnCoordinates(0, 100, 0);
+					} else {
+						throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator);
+					}
+					
 					const startgame = new StartGame();
 					startgame.setEntityId(0);
 					startgame.setRunTimeEntityId(0);
 					startgame.setGamemode(config.gamemode);
-					if (config.generator === WorldGenerator.FLAT) {
-						startgame.setPlayerPosition(0, -58, 0);
-					} else if (config.generator === WorldGenerator.DEFAULT) {
-						startgame.setPlayerPosition(0, 61, 0);
-					} else if (config.generator === WorldGenerator.VOID) {
-						startgame.setPlayerPosition(0, 100, 0);
-					} else {
-						throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator);
-					}
+					startgame.setPlayerPosition(clientLocalWorld.getSpawnCoordinates().x, clientLocalWorld.getSpawnCoordinates().y, clientLocalWorld.getSpawnCoordinates().z);
 					startgame.setPlayerRotation(1, 1);
 					startgame.setSeed(-1);
 					startgame.setBiomeType(0);
@@ -124,7 +130,7 @@ class ResourcePackClientResponse extends Handler {
 					startgame.setDifficulty(Difficulty.NORMAL);
 					startgame.setSpawnPosition(0, 0, 0);
 					startgame.setPlayerPermissionLevel(client.permlevel);
-					startgame.setWorldName(require(__dirname + "/../../../../world/world_settings.json").worldname);
+					startgame.setWorldName(clientLocalWorld.getName());
 					startgame.send(client);
 
 					const biomedeflist = new BiomeDefinitionList();
@@ -200,9 +206,9 @@ class ResourcePackClientResponse extends Handler {
 					}
 					itemcomponent.send(client);
 
-					if (client.sendChunks) {
+					if (client.chunksEnabled) {
 						const chunkradiusupdate = new ChunkRadiusUpdate();
-						chunkradiusupdate.setChunkRadius(32);
+						chunkradiusupdate.setChunkRadius(clientLocalWorld.getChunkRadius());
 						chunkradiusupdate.send(client);
 
 						const cords = config.generator === WorldGenerator.DEFAULT ? { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
