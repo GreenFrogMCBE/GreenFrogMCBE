@@ -64,7 +64,6 @@ class CommandGamemode extends Command {
 					client.sendMessage(lang.commands.setOwnGamemodeAdventure);
 					client.setGamemode(GameMode.ADVENTURE);
 					break;
-				case 3:
 				case 6:
 					client.sendMessage(lang.commands.gamemodeSpectator);
 					client.sendMessage(lang.commands.setOwnGamemodeSpectator);
