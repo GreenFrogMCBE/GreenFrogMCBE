@@ -37,7 +37,7 @@ class PlayerHealthUpdateEvent extends Event {
 				}
 			});
 		});
-		this.postExecute(client);
+		this.postExecute(client, health);
 	}
 
 	isCancelled() {
@@ -45,7 +45,7 @@ class PlayerHealthUpdateEvent extends Event {
 	}
 
 	postExecute(player, health) {
-		if (this.isCancelled()) {
+		if (!this.isCancelled()) {
 			const sethealthpacket = new SetHealth()
 			sethealthpacket.setHealth(health)
 			sethealthpacket.send(player)
@@ -60,6 +60,10 @@ class PlayerHealthUpdateEvent extends Event {
 			})
 
 			player.health = health;
+			
+			if (player.health <= 0) {
+				player.dead = true
+			}
 		}
 	}
 }

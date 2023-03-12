@@ -24,7 +24,7 @@ class PlayerMoveEvent extends Event {
 
 	cancel() {
 		this.cancelled = true;
-		//TODO
+		// TODO
 	}
 
 	execute(server, client, location) {

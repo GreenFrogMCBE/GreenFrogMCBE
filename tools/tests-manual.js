@@ -75,6 +75,8 @@ gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", 
 worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 difficulty: 0 # Currently only visual
 generator: "default" # Can be default, flat (superflat), or void (empty)
+tickWorldTime: true
+randomTickSpeed: 1000
 
 # Command settings
 # 

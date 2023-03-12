@@ -125,6 +125,8 @@ module.exports = {
 		 * @param {Float} health 
 		 */
 		player.setHealth = function (health) {
+			if (player.dead) return
+
 			const playerhealthupdateevent = new PlayerHealthUpdateEvent()
 			playerhealthupdateevent.execute(require("../Server").server, player, health)
 		};

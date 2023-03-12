@@ -43,18 +43,19 @@ const CommandPl = require("../../../server/commands/CommandPl");
 const CommandOp = require("../../../server/commands/CommandOp");
 const { config, lang } = require("../../../server/ServerInfo");
 const Biome = require("../../../network/packets/types/Biome");
+const DefaultWorld = require("../../../world/DefaultWorld");
 const ChunkRadiusUpdate = require("../ChunkRadiusUpdate");
 const WorldGenerator = require("../types/WorldGenerator");
 const ServerInfo = require("../../../server/ServerInfo");
 const ChunkError = require("../exceptions/ChunkError");
 const PlayStatuses = require("../types/PlayStatuses");
+const GameMode = require("../../../player/GameMode");
 const Difficulty = require("../types/Difficulty");
 const ItemComponent = require("../ItemComponent");
 const Logger = require("../../../server/Logger");
 const Generator = require("../types/Generator");
 const LevelChunk = require("../LevelChunk");
 const fs = require("fs");
-const DefaultWorld = require("../../../world/DefaultWorld");
 
 class ResourcePackClientResponse extends Handler {
 	handle(client, packet, server) {
@@ -102,6 +103,19 @@ class ResourcePackClientResponse extends Handler {
 
 					Logger.info(lang.playerstatuses.joined.replace("%player%", client.username));
 
+					setInterval(() => {
+						const posY = Math.floor(client.y);
+						if (posY <= -63) {
+							if (client.gamemode === GameMode.CREATIVE || client.gamemode === GameMode.SPECTATOR) {
+								if (client.damage_loop) delete client.damage_loop;
+							} else if (!client.cannotbedamagedbyvoid) {
+								client.setHealth(client.health - 3);
+							}
+						} else {
+							if (client.damage_loop) delete client.damage_loop;
+						}	
+					}, 500)
+
 					const clientLocalWorld = new DefaultWorld();
 					clientLocalWorld.setChunkRadius(require("../../../../world/world_settings.json").chunkLoadRadius)
 					clientLocalWorld.setName(require("../../../../world/world_settings.json").worldname)
@@ -114,7 +128,7 @@ class ResourcePackClientResponse extends Handler {
 					} else {
 						throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator);
 					}
-					
+
 					const startgame = new StartGame();
 					startgame.setEntityId(0);
 					startgame.setRunTimeEntityId(0);

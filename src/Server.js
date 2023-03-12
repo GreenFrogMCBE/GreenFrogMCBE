@@ -141,9 +141,10 @@ module.exports = {
 		responsepackinfo.setTexturePacks([]);
 		responsepackinfo.send(client);
 
-		client.offline = false;
 		client.chunksEnabled = true
-		client.health = 1;
+		client.health = 20;
+		client.dead, client.offline = false;
+		client.x, client.y, client.z = 0;
 	},
 
 	/**
