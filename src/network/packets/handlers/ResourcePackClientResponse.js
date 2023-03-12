@@ -103,9 +103,18 @@ class ResourcePackClientResponse extends Handler {
 
 					Logger.info(lang.playerstatuses.joined.replace("%player%", client.username));
 
-					setInterval(() => {
+					client.void_loop = setInterval(() => {
 						const posY = Math.floor(client.y);
-						if (posY <= -63) {
+						
+						let min = -63;
+
+						if (config.generator === WorldGenerator.FLAT) {
+							min = -67
+						} else if (config.generator === WorldGenerator.VOID) {
+							min = NaN
+						}
+						
+						if (posY <= min) {
 							if (client.gamemode === GameMode.CREATIVE || client.gamemode === GameMode.SPECTATOR) {
 								if (client.damage_loop) delete client.damage_loop;
 							} else if (!client.cannotbedamagedbyvoid) {
@@ -236,7 +245,7 @@ class ResourcePackClientResponse extends Handler {
 						let chunks = null;
 
 						try {
-							chunks = require(`${__dirname}/../../../../world/chunks${config.generator === WorldGenerator.DEFAULT ? "" : "-flat"}.json`);
+							chunks = require(`${__dirname}/../../../../world/chunks${config.generator === WorldGenerator.DEFAULT ? "" : "_flat"}.json`);
 						} catch (e) {
 							throw new ChunkError(`${lang.errors.failedToLoadWorld} ${e}`);
 						}

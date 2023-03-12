@@ -28,7 +28,6 @@ const ChangeDimension = require("../network/packets/ChangeDimension");
 const PlayerList = require("../network/packets/PlayerList");
 const GarbageCollector = require("./GarbageCollector");
 const PlayerInfo = require("../player/PlayerInfo");
-const ServerInfo = require("./ServerInfo");
 
 module.exports = {
 	/**
@@ -151,7 +150,6 @@ module.exports = {
 			if (!player.kicked) {
 				for (let i = 0; i < PlayerInfo.players.length; i++) {
 					if (PlayerInfo.players[i].username !== player.username) {
-						ServerInfo.addPlayer();
 						const pl = new PlayerList();
 						pl.setType(PlayerListTypes.REMOVE);
 						pl.setUuid(player.profile.uuid);

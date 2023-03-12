@@ -24,6 +24,6 @@ module.exports = {
 			player.sendMessage(msg);
 		}
 
-		Logger.log(lang.broadcasts.broadcastmessage.replace("%msg%", msg));
+		Logger.info(lang.broadcasts.broadcastmessage.replace("%msg%", msg));
 	},
 };
