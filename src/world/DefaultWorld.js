@@ -1,6 +1,7 @@
 const PlayerInfo = require("../player/PlayerInfo");
 const { config } = require("../server/ServerInfo");
 const Logger = require("../server/Logger");
+const assert = require('assert');
 
 class DefaultWorld {
     constructor() {
@@ -11,7 +12,7 @@ class DefaultWorld {
             z: null,
         };
         this.chunkRadius = 0;
-        this._time = 0; /* DO NOT USE IN PLUGIN APIS */
+        this._time = 0; 
     }
 
     /**
@@ -19,7 +20,7 @@ class DefaultWorld {
      * @param {String} name 
      */
     setName(name) {
-        console.assert(name, "");
+        assert(name, "");
         this.name = name;
     }
 
@@ -57,9 +58,9 @@ class DefaultWorld {
      * Returns the spawn coordinates
      */
     getSpawnCoordinates() {
-        console.assert(this.cords.x !== null, null);
-        console.assert(this.cords.y !== null, null);
-        console.assert(this.cords.z !== null, null);
+        assert(this.cords.x !== null, null);
+        assert(this.cords.y !== null, null);
+        assert(this.cords.z !== null, null);
 
         return this.cords;
     }
@@ -80,7 +81,8 @@ class DefaultWorld {
     }
 
     /**
-     * Ticks the world (DO NOT USE IN YOUR PLUGIN BECAUSE THIS WILL BREAK THE SERVER!!!)
+     * Ticks the world
+     * @private
      */
     tick() {
         try {

@@ -49,7 +49,7 @@ module.exports = {
 	lang: lang,
 
 	/**
-	 * It loads the JSON files into the server.
+	 * @private
 	 */
 	async _initJson() {
 		config = ServerInfo.config;
@@ -57,8 +57,7 @@ module.exports = {
 	},
 
 	/**
-	 * It logs the error and then exits the process
-	 * @param err - The error that was thrown.
+	 * @private
 	 */
 	async _handleCriticalError(err) {
 		if (err.toString().includes("Server failed to start")) {
@@ -72,9 +71,7 @@ module.exports = {
 	},
 
 	/**
-	 * Packet handler
-	 * @param client - The client that sent the packet
-	 * @param packet - The packet that was sent by the client
+	 * @private
 	 */
 	_handlepk(client, packet) {
 		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
@@ -116,9 +113,7 @@ module.exports = {
 	},
 
 	/**
-	 * It logs the player's IP, port, then sends the player the response pack, executes the
-	 * events, and sets the player's info.
-	 * @param client - The client that joined
+	 * @private
 	 */
 	async _onJoin(client) {
 		await PlayerInit._initPlayer(client);
@@ -153,6 +148,7 @@ module.exports = {
 
 	/**
 	 * It logs a warning if the config.debug or config.unstable is true.
+	 * @private
 	 */
 	async _initDebug() {
 		if (config.unstable) Logger.warning(lang.devdebug.unstableWarning);
@@ -200,8 +196,7 @@ module.exports = {
 	},
 
 	/**
-	 * It listens for a connection, and when it gets one, it listens for a join event, and when it gets
-	 * one, it executes the onJoin function.
+	 * @private
 	 */
 	_listen() {
 		const { host, port, version, offlineMode: offline, maxPlayers, motd } = config;
