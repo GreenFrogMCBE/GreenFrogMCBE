@@ -109,6 +109,18 @@ module.exports = {
 		};
 
 		/**
+		 * Sets some attribute for the player
+		 * @param {JSON} attribute
+		 */
+		player.setAttribute = function (attribute) {
+			const updateattributespacket = new UpdateAttributes()
+			updateattributespacket.setPlayerID(0) // 0 - Means local player
+			updateattributespacket.setTick(0)
+			updateattributespacket.setAttributes([attribute])
+			updateattributespacket.send(player)
+		}
+
+		/**
 		 * Sets the health of the player
 		 * @param {Float} health 
 		 */
@@ -117,20 +129,14 @@ module.exports = {
 			sethealthpacket.setHealth(health)
 			sethealthpacket.send(player)
 
-			const updateattributespacket = new UpdateAttributes()
-			updateattributespacket.setPlayerID(0) // 0 - Means local player
-			updateattributespacket.setTick(0)
-			updateattributespacket.setAttributes([
-				{
-					"min": 0,
-					"max": 20,
-					"current": health,
-					"default": 20,
-					"name": "minecraft:health",
-					"modifiers": []
-				}
-			])
-			updateattributespacket.send(player)
+			player.setAttribute({
+				"min": 0,
+				"max": 20,
+				"current": health,
+				"default": 20,
+				"name": "minecraft:health",
+				"modifiers": []
+			})
 
 			player.health = health;
 		};

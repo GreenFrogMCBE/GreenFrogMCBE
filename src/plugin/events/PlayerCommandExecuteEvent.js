@@ -60,7 +60,7 @@ class PlayerCommandExecuteEvent extends Event {
 
 	postExecute(client, message) {
 		if (!this.isCancelled() || config.commandsDisabled) {
-			Logger.log(lang.commands.executedCmd.replace("%player%", client.username).replace("%cmd%", message));
+			Logger.info(lang.commands.executedCmd.replace("%player%", client.username).replace("%cmd%", message));
 
 			const cmdGamemode = new CommandGamemode();
 			const cmdManager = new CommandManager();
