@@ -21,14 +21,14 @@ const PlayerLeaveEvent = require("../plugin/events/PlayerLeaveEvent");
 const ServerToClientChat = require("../plugin/events/ServerToClientChat");
 const PlayerTransferEvent = require("../plugin/events/PlayerTransferEvent");
 const PlayerGamemodeChangeEvent = require("../plugin/events/PlayerGamemodeChangeEvent");
-const ChangeDimension = require("../network/packets/ChangeDimension");
+const PlayerHealthUpdateEvent = require("../plugin/events/PlayerHealthUpdateEvent");
+const UpdateAttributes = require("../network/packets/UpdateAttributes");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
+const ChangeDimension = require("../network/packets/ChangeDimension");
 const PlayerList = require("../network/packets/PlayerList");
-const SetHealth = require("../network/packets/SetHealth");
 const GarbageCollector = require("./GarbageCollector");
 const PlayerInfo = require("../player/PlayerInfo");
 const ServerInfo = require("./ServerInfo");
-const UpdateAttributes = require("../network/packets/UpdateAttributes");
 
 module.exports = {
 	/**
@@ -125,20 +125,8 @@ module.exports = {
 		 * @param {Float} health 
 		 */
 		player.setHealth = function (health) {
-			const sethealthpacket = new SetHealth()
-			sethealthpacket.setHealth(health)
-			sethealthpacket.send(player)
-
-			player.setAttribute({
-				"min": 0,
-				"max": 20,
-				"current": health,
-				"default": 20,
-				"name": "minecraft:health",
-				"modifiers": []
-			})
-
-			player.health = health;
+			const playerhealthupdateevent = new PlayerHealthUpdateEvent()
+			playerhealthupdateevent.execute(require("../Server").server, player, health)
 		};
 
 		/**
