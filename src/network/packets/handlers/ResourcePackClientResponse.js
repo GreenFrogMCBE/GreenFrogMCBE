@@ -241,8 +241,7 @@ class ResourcePackClientResponse extends Handler {
 							levelchunk.send(client);
 						}
 
-						setInterval(() => {
-							if (client.offline) return;
+						client.network_chunks_loop = setInterval(() => {
 							const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 							networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
 							networkchunkpublisher.setRadius(272);
