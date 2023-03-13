@@ -31,7 +31,7 @@ class PlayerHealthUpdateEvent extends Event {
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				try {
-					require(`${__dirname}/../../../plugins/${plugin}`).PlayerHealthUpdateEvent(server, client, health);
+					require(`${__dirname}/../../plugins/${plugin}`).PlayerHealthUpdateEvent(server, client, health);
 				} catch (e) {
 					FailedToHandleEvent.handleEventError(e, plugin, this.name);
 				}

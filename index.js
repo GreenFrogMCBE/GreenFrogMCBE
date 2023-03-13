@@ -66,7 +66,7 @@ multiProtocol: false # Supports 1.19.20+. Some features may be broken
 gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 difficulty: 0 # Currently only visual
-generator: "flat" # Can be default, flat (superflat), or void (empty)
+generator: "default" # Can be default, flat (superflat), or void (empty)
 tickWorldTime: true # Should time update be server side?
 tickVoid: true # Should people that are in void take damage?
 randomTickSpeed: 1000

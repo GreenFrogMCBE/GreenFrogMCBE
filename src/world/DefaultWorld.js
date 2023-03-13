@@ -102,7 +102,7 @@ class DefaultWorld {
                     let min = -63;
 
                     if (config.generator === WorldGenerator.FLAT) {
-                        min = -67
+                        min = -64
                     } else if (config.generator === WorldGenerator.VOID) {
                         min = NaN
                     }
@@ -111,7 +111,7 @@ class DefaultWorld {
                         if (client.gamemode === GameMode.CREATIVE || client.gamemode === GameMode.SPECTATOR) {
                             if (client.damage_loop) delete client.damage_loop;
                         } else if (!client.cannotbedamagedbyvoid) {
-                            client.setHealth(client.health - 3);
+                            client.setHealth(client.health - 5);
                         }
                     } else {
                         if (client.damage_loop) delete client.damage_loop;
