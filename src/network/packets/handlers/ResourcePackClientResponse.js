@@ -49,7 +49,6 @@ const WorldGenerator = require("../types/WorldGenerator");
 const ServerInfo = require("../../../server/ServerInfo");
 const ChunkError = require("../exceptions/ChunkError");
 const PlayStatuses = require("../types/PlayStatuses");
-const GameMode = require("../../../player/GameMode");
 const Difficulty = require("../types/Difficulty");
 const ItemComponent = require("../ItemComponent");
 const Logger = require("../../../server/Logger");
@@ -102,28 +101,6 @@ class ResourcePackClientResponse extends Handler {
 					if (!client.op) client.permlevel = config.defaultPermissionLevel;
 
 					Logger.info(lang.playerstatuses.joined.replace("%player%", client.username));
-
-					client.void_loop = setInterval(() => {
-						const posY = Math.floor(client.y);
-						
-						let min = -63;
-
-						if (config.generator === WorldGenerator.FLAT) {
-							min = -67
-						} else if (config.generator === WorldGenerator.VOID) {
-							min = NaN
-						}
-						
-						if (posY <= min) {
-							if (client.gamemode === GameMode.CREATIVE || client.gamemode === GameMode.SPECTATOR) {
-								if (client.damage_loop) delete client.damage_loop;
-							} else if (!client.cannotbedamagedbyvoid) {
-								client.setHealth(client.health - 3);
-							}
-						} else {
-							if (client.damage_loop) delete client.damage_loop;
-						}	
-					}, 500)
 
 					const clientLocalWorld = new DefaultWorld();
 					clientLocalWorld.setChunkRadius(require("../../../../world/world_settings.json").chunkLoadRadius)

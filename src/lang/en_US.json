@@ -127,7 +127,8 @@
     "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file",
     "failedToLoadWorld": "Make sure the chunks.json and gamerules.json exist, and make sure that the file is valid JSON!",
     "failedToLoadWorld_InvalidChunkData": "The chunks are corrupted",
-    "failedToLoadWorld_InvalidGenerator": "Invalid generator!"
+    "failedToLoadWorld_InvalidGenerator": "Invalid generator!",
+    "errorTickingWorld": "Error ticking world! %e.stack%"
   },
   "server": {
     "listeningOn": "Listening on port %address%",

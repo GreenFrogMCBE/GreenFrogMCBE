@@ -1,5 +1,7 @@
+const WorldGenerator = require("../network/packets/types/WorldGenerator");
+const { config, lang } = require("../server/ServerInfo");
 const PlayerInfo = require("../player/PlayerInfo");
-const { config } = require("../server/ServerInfo");
+const GameMode = require("../player/GameMode");
 const Logger = require("../server/Logger");
 const assert = require('assert');
 
@@ -12,7 +14,7 @@ class DefaultWorld {
             z: null,
         };
         this.chunkRadius = 0;
-        this._time = 0; 
+        this._time = 0;
     }
 
     /**
@@ -87,13 +89,37 @@ class DefaultWorld {
     tick() {
         try {
             if (config.tickWorldTime) {
-                for (let i = 0; i < this.getPlayersInWorld(); i++) {
-                    this._time++
-                    this.getPlayersInWorld()[i].setTime(this._time++)
+                this._time++
+                for (const player of this.getPlayersInWorld()) {
+                    player.setTime(this._time)
+                }
+            }
+
+            if (config.tickVoid) {
+                for (const client of this.getPlayersInWorld()) {
+                    const posY = Math.floor(client.y);
+
+                    let min = -63;
+
+                    if (config.generator === WorldGenerator.FLAT) {
+                        min = -67
+                    } else if (config.generator === WorldGenerator.VOID) {
+                        min = NaN
+                    }
+
+                    if (posY <= min) {
+                        if (client.gamemode === GameMode.CREATIVE || client.gamemode === GameMode.SPECTATOR) {
+                            if (client.damage_loop) delete client.damage_loop;
+                        } else if (!client.cannotbedamagedbyvoid) {
+                            client.setHealth(client.health - 3);
+                        }
+                    } else {
+                        if (client.damage_loop) delete client.damage_loop;
+                    }
                 }
             }
         } catch (e) {
-            Logger.error("Exception ticking world! " + e.stack)
+            Logger.error(lang.errors.errorTickingWorld.replace("%e.stack%", e.stack))
         }
     }
 }

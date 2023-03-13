@@ -119,6 +119,11 @@ module.exports = {
 		await PlayerInit._initPlayer(client);
 		await ValidateClient._initAndValidateClient(client);
 
+		client.chunksEnabled = true
+		client.health = 20;
+		client.dead, client.offline = false;
+		client.x, client.y, client.z = 0;
+
 		const event = new PlayerJoinEvent();
 		event.execute(server, client);
 
@@ -140,11 +145,6 @@ module.exports = {
 		responsepackinfo.setBehaviorPacks([]);
 		responsepackinfo.setTexturePacks([]);
 		responsepackinfo.send(client);
-
-		client.chunksEnabled = true
-		client.health = 20;
-		client.dead, client.offline = false;
-		client.x, client.y, client.z = 0;
 	},
 
 	/**
