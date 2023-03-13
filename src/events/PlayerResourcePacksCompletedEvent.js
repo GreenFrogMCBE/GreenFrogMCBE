@@ -13,6 +13,7 @@
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const Event = require("./Event");
+const assert = require("assert");
 const fs = require("fs");
 
 class PlayerResourcePacksCompletedEvent extends Event {
@@ -22,7 +23,10 @@ class PlayerResourcePacksCompletedEvent extends Event {
 		this.name = "PlayerResourcePacksCompletedEvent";
 	}
 
-	cancel() {
+	cancel(client) {
+		assert(client, null)
+
+		client.kick();
 		this.cancelled = true;
 	}
 
@@ -36,15 +40,6 @@ class PlayerResourcePacksCompletedEvent extends Event {
 				}
 			});
 		});
-		this.postExecute(client);
-	}
-
-	isCancelled() {
-		return this.cancelled;
-	}
-
-	postExecute(client) {
-		if (this.isCancelled()) client.kick();
 	}
 }
 

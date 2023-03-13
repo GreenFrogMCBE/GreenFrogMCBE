@@ -12,18 +12,22 @@
  */
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
+const assert = require("assert");
 const Event = require("./Event");
 const fs = require("fs");
 
 class PlayerHasNoResourcePacksInstalledEvent extends Event {
 	constructor() {
 		super();
+		this.name = "PlayerHasNoResourcePacksInstalledEvent"
 		this.cancelled = false;
-		this.name = "PlayerHasNoResourcePacksInstalledEvent";
 	}
 
-	cancel() {
-		this.cancelled = true;
+	cancel(client) {
+		assert(client, null)
+
+		client.kick();
+		this.cancelled = true;	
 	}
 
 	execute(server, client) {
@@ -36,15 +40,6 @@ class PlayerHasNoResourcePacksInstalledEvent extends Event {
 				}
 			});
 		});
-		this.postExecute(client);
-	}
-
-	isCancelled() {
-		return this.cancelled;
-	}
-
-	postExecute(client) {
-		if (this.isCancelled()) client.kick();
 	}
 }
 

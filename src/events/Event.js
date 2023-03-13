@@ -15,7 +15,9 @@ class Event {
 
 	execute() {}
 
-	postExecute() {}
+	postExecute() {
+		//console.trace()
+	}
 }
 
 module.exports = Event;

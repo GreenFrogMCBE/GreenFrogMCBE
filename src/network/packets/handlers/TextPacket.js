@@ -10,31 +10,12 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { lang, config } = require("../../../api/ServerInfo");
-const PlayerInfo = require("../../../api/PlayerInfo");
-const Logger = require("../../../server/Logger");
+const PlayerChatEvent = require("../../../events/PlayerChatEvent");
 
 class Text extends require("./Handler") {
 	handle(client, packet) {
-		if (config.disable) return;
-
-		const msg = packet.data.params.message;
-		const fullmsg = lang.chat.chatFormat.replace("%username%", client.username).replace("%message%", msg);
-		if (msg.includes("§") || !msg || (msg.length > 255 && config.blockInvalidMessages)) {
-			if (!client.op) {
-				Logger.warning(lang.errors.illegalMessage.replace("%msg%", msg).replace("%player%", client.username));
-				client.kick(lang.kickmessages.invalidChatMessage);
-				return;
-			}
-		}
-
-		if (!msg.replace(/\s/g, "").length) return;
-
-		Logger.info(lang.chat.chatMessage.replace("%message%", fullmsg));
-
-		for (const player of PlayerInfo.players) {
-			player.sendMessage(fullmsg);
-		}
+		const chatevent = new PlayerChatEvent()
+		chatevent.execute(require("../../../Server").server, client, packet.data.params.message)
 	}
 }
 

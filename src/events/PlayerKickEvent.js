@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-unused-vars */
+const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const Event = require("./Event");
 const fs = require("fs");
@@ -19,6 +20,11 @@ class PlayerKickEvent extends Event {
 	constructor() {
 		super();
 		this.name = "PlayerKickEvent";
+		this.cancelled = false
+	}
+
+	cancel() {
+		throw new UnsupportedOperationException("Cancelling this event is not supported")
 	}
 
 	execute(server, client, msg) {

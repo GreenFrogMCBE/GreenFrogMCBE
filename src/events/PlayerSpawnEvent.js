@@ -12,6 +12,7 @@
  */
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
+const assert = require("assert");
 const Event = require("./Event");
 const fs = require("fs");
 
@@ -22,7 +23,10 @@ class PlayerSpawnEvent extends Event {
 		this.name = "PlayerSpawnEvent";
 	}
 
-	cancel() {
+	cancel(client) {
+		assert(client, null)
+
+		client.kick();
 		this.cancelled = true;
 	}
 
@@ -36,15 +40,6 @@ class PlayerSpawnEvent extends Event {
 				}
 			});
 		});
-		this.postExecute(client);
-	}
-
-	isCancelled() {
-		return this.cancelled;
-	}
-
-	postExecute(client) {
-		if (this.isCancelled()) client.kick();
 	}
 }
 
