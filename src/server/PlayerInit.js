@@ -19,7 +19,7 @@ const PlayerKickEvent = require("../events/PlayerKickEvent");
 const PlayerLeaveEvent = require("../events/PlayerLeaveEvent");
 const PlayerGamemode = require("../network/packets/PlayerGamemode");
 const PlayerTransferEvent = require("../events/PlayerTransferEvent");
-const ServerToClientChat = require("../events/ServerToClientChatEvent");
+const ServerToClientChatEvent = require("../events/ServerToClientChatEvent");
 const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
 const UpdateAttributes = require("../network/packets/UpdateAttributes");
@@ -40,7 +40,7 @@ module.exports = {
 		 * @param {string} msg - The message to send
 		 */
 		player.sendMessage = function (msg) {
-			const sendmsgevent = new ServerToClientChat();
+			const sendmsgevent = new ServerToClientChatEvent();
 			sendmsgevent.execute(require("../Server").server, player, msg);
 		};
 
