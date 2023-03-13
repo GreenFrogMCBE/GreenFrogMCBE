@@ -24,8 +24,9 @@ class CommandList extends require("./Command") {
 	}
 
 	execute(isconsole = true, client) {
-		const playerNames = playerList.map((player) => player.username);
-		const playerCount = playerList.length;
+		const onlinePlayerList = playerList.filter((player) => !player.offline);
+		const playerNames = onlinePlayerList.map((player) => player.username);
+		const playerCount = onlinePlayerList.length;
 		const playerListMessage = lang.commands.playerList.replace("%info%", `${playerCount}/${config.maxPlayers}`);
 
 		if (!isconsole) {
