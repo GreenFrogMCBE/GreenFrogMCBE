@@ -119,6 +119,17 @@ module.exports = {
 			updateattributespacket.send(player)
 		}
 
+		player.setXP = function (xp) {
+			player.setAttribute({
+				"min": 0,
+				"max": 1000000,
+				"current": xp,
+				"default": 0,
+				"name": "player.experience",
+				"modifiers": []
+			})
+		}
+
 		/**
 		 * Sets the health of the player
 		 * @param {Float} health 
