@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { lang, config } = require("./ServerInfo");
+const { lang, config } = require("../api/ServerInfo");
 
 module.exports = {
 	/**

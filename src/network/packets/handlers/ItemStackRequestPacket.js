@@ -10,40 +10,51 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const PacketHandlingError = require("../exceptions/PacketHandlingError");
+const GameModeLegacy = require("../types/GameModeLegacy");
+const { lang } = require("../../../api/ServerInfo");
+const InventorySlot = require("../InventorySlot");
+const Logger = require("../../../server/Logger");
+const Handler = require("./Handler");
 
-const Gamemode = require("../../api/GameMode");
-
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
-	name() {
-		return "set_player_game_type";
+class ItemStackRequest extends Handler {
+	validate(client) {
+		if (client.gamemode !== GameModeLegacy.CREATIVE) throw new PacketHandlingError(lang.itemExploit);
 	}
 
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
-	}
+	handle(client, packet) {
+		try {
+			const request = packet.data.params.requests[0].actions[1].result_items[0];
+			const count = request?.count || 0;
+			const network_id = request?.network_id || 0;
+			const block_runtime_id = request?.block_runtime_id || 0;
 
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
-	}
+			const jsondata = { count, network_id, block_runtime_id };
+			client.items.push(jsondata);
 
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+			for (const [i, item] of client.items.entries()) {
+				const is = new InventorySlot();
+				is.setWindowId("inventory");
+				is.setSlot(i);
+				is.setItemData({
+					network_id: item.network_id,
+					count: item.count,
+					metadata: 0,
+					has_stack_id: 1,
+					stack_id: 1,
+					block_runtime_id: item.block_runtime_id,
+					extra: {
+						has_nbt: 0,
+						can_place_on: [],
+						can_destroy: [],
+					},
+				});
+				is.send(client);
+			}
+		} catch (error) {
+			Logger.error(lang.errors.failedToHandleItemRequest.replace("%data%", `${client.username}: ${error.stack}`));
+		}
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = ItemStackRequest;

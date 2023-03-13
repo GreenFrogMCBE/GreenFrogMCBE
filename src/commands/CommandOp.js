@@ -10,40 +10,64 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const fs = require("fs").promises;
+const Logger = require("../server/Logger");
+const { lang, config } = require("../api/ServerInfo");
+const { get: getPlayerInfo } = require("../api/PlayerInfo");
 
-const Gamemode = require("../../api/GameMode");
-
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
+class CommandOp extends require("./Command") {
 	name() {
-		return "set_player_game_type";
+		return lang.commands.op;
 	}
 
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
+	aliases() {
+		return null;
 	}
 
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
+	async execute(args) {
+		if (!args) {
+			Logger.info(lang.commands.usageOp);
+			return;
+		}
+
+		try {
+			await fs.appendFile("ops.yml", args + "\n");
+			Logger.info(lang.commands.opped.replace("%player%", args));
+		} catch (err) {
+			Logger.info(lang.commands.opFail);
+		}
 	}
 
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+	getPlayerDescription() {
+		return lang.commands.ingameOpDescription;
+	}
+
+	async executePlayer(client, args) {
+		if (!config.playerCommandOp) {
+			client.sendMessage(lang.errors.playerUnknownCommand);
+			return;
+		}
+
+		if (!client.op) {
+			client.sendMessage(lang.errors.noPermission);
+			return;
+		}
+
+		const player = args.split(" ")[1];
+		if (!player) {
+			client.sendMessage("§c" + lang.commands.usageOp);
+			return;
+		}
+
+		try {
+			await fs.appendFile("ops.yml", player + "\n");
+			client.sendMessage(lang.commands.opped.replace("%player%", player));
+			getPlayerInfo(player).op = true;
+			console.info(getPlayerInfo(player));
+		} catch (err) {
+			client.sendMessage("§c" + lang.commands.opFail);
+		}
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = CommandOp;

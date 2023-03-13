@@ -1,7 +1,7 @@
 const WorldGenerator = require("../network/packets/types/WorldGenerator");
-const { config, lang } = require("../server/ServerInfo");
-const PlayerInfo = require("../player/PlayerInfo");
-const GameMode = require("../player/GameMode");
+const { config, lang } = require("../api/ServerInfo");
+const PlayerInfo = require("../api/PlayerInfo");
+const GameMode = require("../api/GameMode");
 const Logger = require("../server/Logger");
 const assert = require('assert');
 

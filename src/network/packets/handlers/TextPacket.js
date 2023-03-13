@@ -10,40 +10,32 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const { lang, config } = require("../../../api/ServerInfo");
+const PlayerInfo = require("../../../api/PlayerInfo");
+const Logger = require("../../../server/Logger");
 
-const Gamemode = require("../../api/GameMode");
+class Text extends require("./Handler") {
+	handle(client, packet) {
+		if (config.disable) return;
 
-let gamemode = Gamemode.FALLBACK;
+		const msg = packet.data.params.message;
+		const fullmsg = lang.chat.chatFormat.replace("%username%", client.username).replace("%message%", msg);
+		if (msg.includes("§") || !msg || (msg.length > 255 && config.blockInvalidMessages)) {
+			if (!client.op) {
+				Logger.warning(lang.errors.illegalMessage.replace("%msg%", msg).replace("%player%", client.username));
+				client.kick(lang.kickmessages.invalidChatMessage);
+				return;
+			}
+		}
 
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
-	name() {
-		return "set_player_game_type";
-	}
+		if (!msg.replace(/\s/g, "").length) return;
 
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
-	}
+		Logger.info(lang.chat.chatMessage.replace("%message%", fullmsg));
 
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
-	}
-
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+		for (const player of PlayerInfo.players) {
+			player.sendMessage(fullmsg);
+		}
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = Text;

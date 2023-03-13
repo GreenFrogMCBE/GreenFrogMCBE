@@ -10,40 +10,20 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const { players } = require("./PlayerInfo");
+const { lang } = require("./ServerInfo");
+const Logger = require("../server/Logger");
 
-const Gamemode = require("../../api/GameMode");
-
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
+module.exports = {
 	/**
-	 * @returns The name of the packet.
+	 * Broadcasts message to all players
+	 * @param {string} msg
 	 */
-	name() {
-		return "set_player_game_type";
-	}
+	broadcastMessage(msg = "") {
+		for (const player of players) {
+			player.sendMessage(msg);
+		}
 
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
-	}
-
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
-	}
-
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
-	}
-}
-
-module.exports = PlayerGamemode;
+		Logger.info(lang.broadcasts.broadcastmessage.replace("%msg%", msg));
+	},
+};

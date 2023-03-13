@@ -10,40 +10,38 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const PlayerInfo = require("../api/PlayerInfo");
+const Logger = require("../server/Logger");
 
-const Gamemode = require("../../api/GameMode");
-
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
+module.exports = {
 	/**
-	 * @returns The name of the packet.
+	 * Removes data of offline players
 	 */
-	name() {
-		return "set_player_game_type";
-	}
-
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
-	}
+	clearOfflinePlayers() {
+		for (let i = 0; i < PlayerInfo.players.length; i++) {
+			if (PlayerInfo.players[i].offline) {
+				Logger.debug("[Garbage collector] Deleted " + PlayerInfo.players[i].username);
+				PlayerInfo.players.splice(i, 1);
+				i--;
+			}
+		}
+	},
 
 	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
+	 * Clears RAM from useless entries
 	 */
-	getGamemode() {
-		return gamemode;
-	}
+	gc() {
+		Logger.debug("[Garbage collector] Starting Garbage-collect everything...");
+		this.clearOfflinePlayers();
 
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
-	}
-}
+		for (let i = 0; i < PlayerInfo.players.length; i++) {
+			delete PlayerInfo.players[i].q;
+			delete PlayerInfo.players[i].q2;
+			delete PlayerInfo.players[i].profile;
+			delete PlayerInfo.players[i].skinData;
+			delete PlayerInfo.players[i].userData;
+		}
 
-module.exports = PlayerGamemode;
+		Logger.debug("[Garbage collector] Finished");
+	},
+};

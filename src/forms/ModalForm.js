@@ -10,40 +10,33 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const FormRequest = require("../network/packets/FormRequest");
+const Colors = require("../api/PlayerColors");
+const FormTypes = require("./FormTypes");
 
-const Gamemode = require("../../api/GameMode");
-
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
-	name() {
-		return "set_player_game_type";
+class ModalForm {
+	constructor() {
+		this.title = Colors.red + "Invalid title!";
+		this.text = Colors.red + "Invalid text!";
+		this.button1 = Colors.red + "Invalid button1!";
+		this.button2 = Colors.red + "Invalid button2!";
+		this.id = 0;
 	}
 
 	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
+	 * Sends the form to the client
+	 * @param {Object} client
 	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
-	}
-
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
-	}
-
 	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+		const FormReq = new FormRequest();
+		FormReq.setType(FormTypes.MODALFORM);
+		FormReq.setId(this.id);
+		FormReq.setTitle(this.title);
+		FormReq.setContent(this.text);
+		FormReq.setButton1(this.button1);
+		FormReq.setButton2(this.button2);
+		FormReq.send(client);
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = ModalForm;

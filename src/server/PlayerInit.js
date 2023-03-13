@@ -11,23 +11,23 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("./Logger");
-const Chat = require("../player/Chat");
-const { lang } = require("./ServerInfo");
-const GameMode = require("../player/GameMode");
+const Chat = require("../api/Chat");
+const GameMode = require("../api/GameMode");
+const { lang } = require("../api/ServerInfo");
 const Time = require("../network/packets/Time");
+const PlayerKickEvent = require("../events/PlayerKickEvent");
+const PlayerLeaveEvent = require("../events/PlayerLeaveEvent");
+const ServerToClientChat = require("../events/ServerToClientChat");
 const PlayerGamemode = require("../network/packets/PlayerGamemode");
-const PlayerKickEvent = require("../plugin/events/PlayerKickEvent");
-const PlayerLeaveEvent = require("../plugin/events/PlayerLeaveEvent");
-const ServerToClientChat = require("../plugin/events/ServerToClientChat");
-const PlayerTransferEvent = require("../plugin/events/PlayerTransferEvent");
-const PlayerGamemodeChangeEvent = require("../plugin/events/PlayerGamemodeChangeEvent");
-const PlayerHealthUpdateEvent = require("../plugin/events/PlayerHealthUpdateEvent");
+const PlayerTransferEvent = require("../events/PlayerTransferEvent");
+const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
+const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
 const UpdateAttributes = require("../network/packets/UpdateAttributes");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const ChangeDimension = require("../network/packets/ChangeDimension");
+const GarbageCollector = require("../utils/GarbageCollector");
 const PlayerList = require("../network/packets/PlayerList");
-const GarbageCollector = require("./GarbageCollector");
-const PlayerInfo = require("../player/PlayerInfo");
+const PlayerInfo = require("../api/PlayerInfo");
 
 module.exports = {
 	/**

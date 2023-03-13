@@ -10,40 +10,43 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const PluginManager = require("../plugins/PluginManager");
+const { lang, config } = require("../api/ServerInfo");
+const ConsoleColors = require("../api/ConsoleColors");
+const PlayerColors = require("../api/PlayerColors");
+const Logger = require("../server/Logger");
 
-const Gamemode = require("../../api/GameMode");
-
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
+class CommandPl extends require("./Command") {
 	name() {
-		return "set_player_game_type";
+		return lang.commands.pl;
 	}
 
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
+	aliases() {
+		return [lang.commands.plugins];
 	}
 
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
+	execute() {
+		const plugins = PluginManager.getPlugins()?.length ?? 0;
+		const pluginList = ConsoleColors.CONSOLE_GREEN + PluginManager.getPlugins()?.join(ConsoleColors.CONSOLE_RESET + ", " + ConsoleColors.CONSOLE_GREEN) || "";
+
+		Logger.info(`${lang.commands.plugins} (${plugins}): ${pluginList} ${ConsoleColors.CONSOLE_RESET}`);
 	}
 
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+	getPlayerDescription() {
+		return lang.commands.ingamePlDescription;
+	}
+
+	executePlayer(player) {
+		if (!config.playerCommandPlugins) {
+			Logger.info(lang.errors.playerUnknownCommand);
+			return;
+		}
+
+		const plugins = PluginManager.getPlugins()?.length ?? 0;
+		const pluginList = PlayerColors.green + PluginManager.getPlugins()?.join(PlayerColors.white + ", " + PlayerColors.green) || "";
+
+		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList} ${PlayerColors.reset}`);
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = CommandPl;

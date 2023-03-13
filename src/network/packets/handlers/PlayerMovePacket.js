@@ -10,40 +10,20 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const PlayerMoveEvent = require("../../../events/PlayerMoveEvent");
 
-const Gamemode = require("../../api/GameMode");
+class PlayerMove extends require("./Handler") {
+	handle(client, packet) {
+		new PlayerMoveEvent().execute(
+			require("../../../Server").server,
+			client,
+			packet.data.params.position
+		);
 
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
-	name() {
-		return "set_player_game_type";
-	}
-
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
-	}
-
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
-	}
-
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+		client.x = packet.data.params.position.x
+		client.y = packet.data.params.position.y
+		client.z = packet.data.params.position.z
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = PlayerMove;

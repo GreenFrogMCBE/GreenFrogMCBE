@@ -10,40 +10,35 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Logger = require("../server/Logger");
+const { lang, config, minorServerVersion } = require("../api/ServerInfo");
 
-const Gamemode = require("../../api/GameMode");
-
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
+class CommandVersion extends require("./Command") {
 	name() {
-		return "set_player_game_type";
+		return lang.commands.version;
 	}
 
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
+	aliases() {
+		return [lang.commands.ver];
 	}
 
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
+	execute() {
+		if (!config.consoleCommandVersion) {
+			Logger.info(lang.errors.unknownCommand);
+			return;
+		}
+
+		Logger.info(lang.commands.verInfo.replace("%version%", minorServerVersion));
 	}
 
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+	getPlayerDescription() {
+		return lang.commands.ingameVerDescription;
+	}
+
+	executePlayer(client) {
+		client.sendMessage("§7" + lang.commands.verInfo.replace("%version%", minorServerVersion));
+		return;
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = CommandVersion;

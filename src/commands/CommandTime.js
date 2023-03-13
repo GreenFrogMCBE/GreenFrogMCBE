@@ -10,40 +10,58 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Logger = require("../server/Logger");
+const { players } = require("../api/PlayerInfo");
+const { lang, config } = require("../api/ServerInfo");
 
-const Gamemode = require("../../api/GameMode");
-
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
+class CommandTime extends require("./Command") {
 	name() {
-		return "set_player_game_type";
+		return lang.commands.time;
 	}
 
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
+	aliases() {
+		return null;
 	}
 
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
+	getPlayerDescription() {
+		return lang.commands.ingameTimeDescription;
 	}
 
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+	execute(args) {
+		if (!args) {
+			Logger.log(lang.commands.usageTime);
+			return;
+		}
+
+		const time = args[1];
+		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
+
+		if (!Number.isInteger(setTime)) {
+			Logger.log(lang.commands.usageTime);
+			return;
+		}
+
+		players.forEach((client) => client.setTime(setTime));
+		Logger.log(lang.commands.timeUpdated);
+	}
+
+	executePlayer(client, args) {
+		if (!config.consoleCommandTime) {
+			client.sendMessage(`§c${lang.errors.unknownCommand}`);
+			return;
+		}
+
+		const time = args.split(" ")[1];
+		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
+
+		if (!Number.isInteger(setTime)) {
+			client.sendMessage(`§c${lang.commands.usageTime}`);
+			return;
+		}
+
+		players.forEach((client) => client.setTime(setTime));
+		client.sendMessage(lang.commands.timeUpdated);
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = CommandTime;

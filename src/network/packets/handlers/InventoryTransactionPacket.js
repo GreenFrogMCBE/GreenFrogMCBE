@@ -10,40 +10,29 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+/* eslint-disable no-case-declarations */
+const Logger = require("../../../server/Logger");
+const { config, lang } = require("../../../api/ServerInfo");
+const BlockBreakEvent = require("../../../events/BlockBreakEvent");
+const Handler = require("./Handler");
 
-const Gamemode = require("../../api/GameMode");
+class InventoryTransaction extends Handler {
+	handle(server, client, packet) {
+		let action = packet?.data?.params?.transaction?.transaction_data?.action_type || null;
 
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
-	name() {
-		return "set_player_game_type";
-	}
-
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
-	}
-
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
-	}
-
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+		switch (action) {
+			case "break_block":
+				const breakevent = new BlockBreakEvent();
+				breakevent.execute(server, client, packet.data.params.transaction);
+				break;
+			default:
+				if (config.logUnhandledPackets) {
+					Logger.debug(lang.devdebug.unhandledPacketData);
+					console.log("%o", packet);
+				}
+				break;
+		}
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = InventoryTransaction;

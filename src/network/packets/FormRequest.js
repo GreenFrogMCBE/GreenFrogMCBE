@@ -1,5 +1,5 @@
 const FormTypes = require("../../player/forms/FormTypes");
-const Colors = require("../../player/Colors");
+const Colors = require("../../api/PlayerColors");
 
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░

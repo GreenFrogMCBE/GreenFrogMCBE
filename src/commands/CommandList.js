@@ -10,40 +10,50 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const { players: playerList } = require("../api/PlayerInfo");
+const { lang, config } = require("../api/ServerInfo");
+const Logger = require("../server/Logger");
 
-const Gamemode = require("../../api/GameMode");
-
-let gamemode = Gamemode.FALLBACK;
-
-class PlayerGamemode extends require("./Packet") {
-	/**
-	 * @returns The name of the packet.
-	 */
+class CommandList extends require("./Command") {
 	name() {
-		return "set_player_game_type";
+		return lang.commands.listc;
 	}
 
-	/**
-	 * It sets the gamemode.
-	 * @param gamemode1 - The gamemode.
-	 */
-	setGamemode(gamemode1) {
-		gamemode = gamemode1;
+	aliases() {
+		return null;
 	}
 
-	/**
-	 * It returns the gamemode
-	 * @returns The gamemode
-	 */
-	getGamemode() {
-		return gamemode;
+	execute(isconsole = true, client) {
+		const playerNames = playerList.map((player) => player.username);
+		const playerCount = playerList.length;
+		const playerListMessage = lang.commands.playerList.replace("%info%", `${playerCount}/${config.maxPlayers}`);
+
+		if (!isconsole) {
+			client.sendMessage(playerListMessage);
+			if (playerCount > 0) {
+				client.sendMessage(playerNames.join(", "));
+			}
+			return;
+		}
+
+		Logger.info(playerListMessage);
+		if (playerCount > 0) {
+			Logger.info(playerNames.join(", "));
+		}
 	}
 
-	send(client) {
-		client.queue(this.name(), {
-			gamemode: this.getGamemode(),
-		});
+	getPlayerDescription() {
+		return lang.commands.ingameListDescription;
+	}
+
+	executePlayer(client) {
+		if (!config.playerCommandList) {
+			client.sendMessage(lang.errors.playerUnknownCommand);
+			return;
+		}
+
+		this.execute(false, client);
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = CommandList;
