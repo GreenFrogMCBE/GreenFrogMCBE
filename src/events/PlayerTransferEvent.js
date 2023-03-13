@@ -27,25 +27,25 @@ class PlayerTransferEvent extends Event {
 		this.cancelled = true;
 	}
 
-	execute(server, client, address, port) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).PlayerTransferEvent(server, client, address, port, this);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
+	async execute(server, client, address, port) {
+		await new Promise((resolve, reject) => {
+			fs.readdir("./plugins", (err, plugins) => {
+				if (err) {
+					reject(err);
+				} else {
+					plugins.forEach((plugin) => {
+						try {
+							require(`${__dirname}/../../plugins/${plugin}`).PlayerTransferEvent(server, client, address, port, this);
+						} catch (e) {
+							FailedToHandleEvent.handleEventError(e, plugin, this.name);
+						}
+					});
+					resolve();
 				}
 			});
 		});
-		this.postExecute(client, address, port);
-	}
 
-	isCancelled() {
-		return this.cancelled;
-	}
-
-	postExecute(client, address, port) {
-		if (!this.isCancelled()) {
+		if (!this.cancelled) {
 			const trpk = new Transfer();
 			trpk.setServerAddress(address);
 			trpk.setPort(port);

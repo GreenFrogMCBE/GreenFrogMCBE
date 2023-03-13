@@ -41,26 +41,31 @@ class PlayerCommandExecuteEvent extends Event {
 		this.cancelled = true;
 	}
 
-	execute(server, client, command) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).PlayerCommandExecuteEvent(server, client, command, this);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
-				}
+	async execute(server, client, command) {
+		await new Promise((resolve) => {
+			fs.readdir("./plugins", (err, plugins) => {
+				plugins.forEach((plugin) => {
+					try {
+						require(`${__dirname}/../../plugins/${plugin}`).PlayerCommandExecuteEvent(
+							server,
+							client,
+							command,
+							this
+						);
+					} catch (e) {
+						FailedToHandleEvent.handleEventError(e, plugin, this.name);
+					}
+				});
+				resolve();
 			});
 		});
-		this.postExecute(client, command);
-	}
 
-	isCancelled() {
-		return this.cancelled;
-	}
-
-	postExecute(client, message) {
-		if (!this.isCancelled() || config.commandsDisabled) {
-			Logger.info(lang.commands.executedCmd.replace("%player%", client.username).replace("%cmd%", message));
+		if (!this.cancelled || config.commandsDisabled) {
+			Logger.info(
+				lang.commands.executedCmd
+					.replace("%player%", client.username)
+					.replace("%cmd%", command)
+			);
 
 			const cmdGamemode = new CommandGamemode();
 			const cmdManager = new CommandManager();
@@ -77,13 +82,22 @@ class PlayerCommandExecuteEvent extends Event {
 
 			let exists = false;
 			for (let i = 0; i < cmdManager.getCommands().length; i++) {
-				if (`${cmdManager.getCommands()[i].name.toLowerCase()}`.startsWith(message.replace("/", "").split(" ")[0].replace(" ", ""))) {
+				if (
+					`${cmdManager.getCommands()[i].name.toLowerCase()}`.startsWith(
+						command.replace("/", "").split(" ")[0].replace(" ", "")
+					)
+				) {
 					exists = true;
 					break;
 				}
 			}
-			if (!exists || message === "/") {
-				client.sendMessage(lang.errors.playerUnknownCommandOrNoPermission.replace("%commandname%", message));
+			if (!exists || command === "/") {
+				client.sendcommand(
+					lang.errors.playerUnknownCommandOrNoPermission.replace(
+						"%commandname%",
+						command
+					)
+				);
 			} else {
 				const commands = {
 					ver: `/${lang.commands.ver.toLowerCase()}`,
@@ -117,10 +131,12 @@ class PlayerCommandExecuteEvent extends Event {
 					[commands.gamemode]: cmdGamemode,
 				};
 
-				const commandFound = Object.keys(commandsToExecute).find((command) => message.startsWith(command));
+				const commandFound = Object.keys(commandsToExecute).find((command) =>
+					command.startsWith(command)
+				);
 
 				if (commandFound) {
-					commandsToExecute[commandFound].executePlayer(client, message);
+					commandsToExecute[commandFound].executePlayer(client, command);
 				}
 			}
 		}

@@ -11,6 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-unused-vars */
+const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const Event = require("./Event");
 const fs = require("fs");
@@ -19,6 +20,10 @@ class ServerInternalServerErrorEvent extends Event {
 	constructor() {
 		super();
 		this.name = "ServerInternalServerErrorEvent";
+	}
+
+	cancel() {
+		throw new UnsupportedOperationException("This event is impossible to cancel")
 	}
 
 	execute(server, error) {

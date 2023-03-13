@@ -26,29 +26,34 @@ class PlayerGamemodeChangeEvent extends Event {
 		this.cancelled = true;
 	}
 
-	execute(server, client, gamemode) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).PlayerGamemodeChangeEvent(server, client, gamemode, this);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
+	async execute(server, client, gamemode) {
+		return new Promise((resolve, reject) => {
+			fs.readdir("./plugins", (err, plugins) => {
+				if (err) {
+					reject(err);
+					return;
 				}
+				const promises = plugins.map((plugin) => {
+					return new Promise((resolve) => {
+						try {
+							require(`${__dirname}/../../plugins/${plugin}`).PlayerGamemodeChangeEvent(server, client, gamemode, this);
+							resolve();
+						} catch (e) {
+							FailedToHandleEvent.handleEventError(e, plugin, this.name);
+							resolve();
+						}
+					});
+				});
+				Promise.all(promises).then(() => {
+					if (!this.cancelled) {
+						client.oldgamemode = gamemode;
+					} else {
+						client.setGamemode(client.oldgamemode);
+					}
+					resolve();
+				});
 			});
 		});
-		this.postExecute(client, gamemode);
-	}
-
-	isCancelled() {
-		return this.cancelled;
-	}
-
-	postExecute(client, gamemode) {
-		if (!this.isCancelled()) {
-			client.oldgamemode = gamemode;
-		} else {
-			client.setGamemode(client.oldgamemode);
-		}
 	}
 }
 

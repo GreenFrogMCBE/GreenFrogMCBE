@@ -21,10 +21,10 @@ const ClientCacheStatus = require("../ClientCacheStatus");
 const SetCommandsEnabled = require("../SetCommandsEnabled");
 const BiomeDefinitionList = require("../BiomeDefinitionList");
 const PlayerSpawnEvent = require("../../../events/PlayerSpawnEvent");
-const PlayerHasAllPacks = require("../../../events/PlayerHasAllPacks");
 const AvailableEntityIdentifiers = require("../AvailableEntityIdentifiers");
 const NetworkChunkPublisherUpdate = require("../NetworkChunkPublisherUpdate");
-const PlayerResourcePacksRefused = require("../../../events/PlayerResourcePacksRefused");
+const PlayerHasAllPacksEvent = require("../../../events/PlayerHasAllPacksEvent");
+const PlayerResourcePacksRefusedEvent = require("../../../events/PlayerResourcePacksRefusedEvent");
 const PlayerResourcePacksCompletedEvent = require("../../../events/PlayerResourcePacksCompletedEvent");
 const PlayerHasNoResourcePacksInstalledEvent = require("../../../events/PlayerHasNoResourcePacksInstalledEvent");
 const CommandGamemode = require("../../../commands/CommandGamemode");
@@ -65,13 +65,13 @@ class ResourcePackClientResponse extends Handler {
 				break;
 			}
 			case "refused": {
-				new PlayerResourcePacksRefused().execute(server, client);
+				new PlayerResourcePacksRefusedEvent().execute(server, client);
 				Logger.info(lang.playerstatuses.rpsrefused.replace("%player%", client.username));
 				client.kick(lang.resourcePacksRefused);
 				break;
 			}
 			case "have_all_packs": {
-				new PlayerHasAllPacks().execute(server, client);
+				new PlayerHasAllPacksEvent().execute(server, client);
 				Logger.info(lang.playerstatuses.rpsInstalled.replace("%player%", client.username));
 
 				const resourcepackstack = new ResourcePackStack();

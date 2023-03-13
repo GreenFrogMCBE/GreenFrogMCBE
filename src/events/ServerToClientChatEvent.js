@@ -12,35 +12,40 @@
  */
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
+const Text = require("../network/packets/Text");
 const Event = require("./Event");
-const assert = require("assert");
 const fs = require("fs");
 
-class PlayerHasAllPacks extends Event {
+class ServerToClientChatEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
-		this.name = "PlayerHasAllPacks";
+		this.name = "ServerToClientChatEvent";
 	}
 
-	cancel(client) {
-		assert(client, null)
-
-		client.kick();
-		this.cancelled = true;	
+	cancel() {
+		this.cancelled = true;
 	}
-
-	execute(server, client) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).PlayerHasAllPacks(server, client, this);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
-				}
+	async execute(server, client, message) {
+		await new Promise((resolve) => {
+			fs.readdir("./plugins", (err, plugins) => {
+				plugins.forEach((plugin) => {
+					try {
+						require(`${__dirname}/../../plugins/${plugin}`).ServerToClientChatEvent(server, client, message, this);
+					} catch (e) {
+						FailedToHandleEvent.handleEventError(e, plugin, this.name);
+					}
+				});
+				resolve();
 			});
 		});
+
+		if (!this.cancelled) {
+			const text = new Text();
+			text.setMessage(message);
+			text.send(client);
+		}
 	}
 }
 
-module.exports = PlayerHasAllPacks;
+module.exports = ServerToClientChatEvent;

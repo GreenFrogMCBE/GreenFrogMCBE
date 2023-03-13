@@ -12,45 +12,35 @@
  */
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const Text = require("../network/packets/Text");
 const Event = require("./Event");
+const assert = require("assert");
 const fs = require("fs");
 
-class ServerToClientChat extends Event {
+class PlayerHasAllPacksEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
-		this.name = "ServerToClientChat";
+		this.name = "PlayerHasAllPacksEvent";
 	}
 
-	cancel() {
-		this.cancelled = true;
+	cancel(client) {
+		assert(client, null)
+
+		client.kick();
+		this.cancelled = true;	
 	}
 
-	execute(server, client, message) {
+	execute(server, client) {
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				try {
-					require(`${__dirname}/../../plugins/${plugin}`).ServerToClientChat(server, client, message, this);
+					require(`${__dirname}/../../plugins/${plugin}`).PlayerHasAllPacksEvent(server, client, this);
 				} catch (e) {
 					FailedToHandleEvent.handleEventError(e, plugin, this.name);
 				}
 			});
 		});
-		this.postExecute(client, message);
-	}
-
-	isCancelled() {
-		return this.cancelled;
-	}
-
-	postExecute(client, message) {
-		if (!this.isCancelled()) {
-			const text = new Text();
-			text.setMessage(message);
-			text.send(client);
-		}
 	}
 }
 
-module.exports = ServerToClientChat;
+module.exports = PlayerHasAllPacksEvent;

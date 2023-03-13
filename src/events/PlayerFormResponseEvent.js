@@ -14,6 +14,7 @@
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const Event = require("./Event");
 
+const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
 const fs = require("fs");
 
 class PlayerFormResponseEvent extends Event {
@@ -21,6 +22,10 @@ class PlayerFormResponseEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerFormResponseEvent";
+	}
+
+	cancel() {
+		throw new UnsupportedOperationException("This event is impossible to cancel")
 	}
 
 	execute(server, client, data) {

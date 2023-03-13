@@ -12,35 +12,42 @@
  */
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
+const ToastRequest = require("../../network/packets/ToastRequest");
 const Event = require("./Event");
-const assert = require("assert");
 const fs = require("fs");
 
-class PlayerResourcePacksRefused extends Event {
+class ServerToastRequestEvent extends Event {
 	constructor() {
 		super();
-		this.name = "PlayerResourcePacksRefused";
 		this.cancelled = false;
+		this.name = "ServerToastRequestEvent";
 	}
 
-	cancel(client) {
-		assert(client, null)
-
-		client.kick();
+	cancel() {
 		this.cancelled = true;
 	}
 
-	execute(server, client) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).PlayerResourcePacksRefused(server, client, this);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
-				}
+	async execute(server, client, title, message) {
+		await new Promise((resolve) => {
+			fs.readdir("./plugins", (err, plugins) => {
+				plugins.forEach((plugin) => {
+					try {
+						require(`${__dirname}/../../../plugins/${plugin}`).ServerToastRequestEvent(server, client, title, message, this);
+					} catch (e) {
+						FailedToHandleEvent.handleEventError(e, plugin, this.name);
+					}
+				});
+				resolve();
 			});
 		});
+
+		if (!this.cancelled) {
+			let packet = new ToastRequest();
+			packet.setTitle(title);
+			packet.setMessage(message);
+			packet.send(client);
+		}
 	}
 }
 
-module.exports = PlayerResourcePacksRefused;
+module.exports = ServerToastRequestEvent;
