@@ -20,7 +20,7 @@ module.exports = {
 			port: 19132,
 			username: "commandbot",
 			offline: true,
-			version: "1.19.63",
+			version: "1.19.70",
 		});
 
 		console.log("[commandbot] joined");

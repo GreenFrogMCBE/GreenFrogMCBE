@@ -37,7 +37,7 @@ port: 19132
 
 motd: '§aDedicated GreenFrog server'
 maxPlayers: 20
-version: '1.19.63'
+version: '1.19.70'
 offlineMode: false
 lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 
@@ -213,7 +213,7 @@ let commandTest = () =>
 		try {
 			TestConfigs.test();
 		} catch (e) {
-			console.log("Tests failed! Failed to test the configs! " + e.stack);
+			console.log("Tests failed! Failed to parse the configs! " + e.stack);
 			process.exit(-1);
 		} finally {
 			setTimeout(() => {

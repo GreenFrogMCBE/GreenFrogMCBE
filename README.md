@@ -136,7 +136,8 @@ If you have one, feel free to open an issue
 
 > For a better way to handle player disconnection <br>
 > For adding 1.19.60 support <br>
-> For adding 1.19.62 support  <br>
+> For adding 1.19.62 support <br>
+> For adding 1.19.70 support <br>
 > For helping me with chunk support <br>
 > For suggesting modal form support
 
