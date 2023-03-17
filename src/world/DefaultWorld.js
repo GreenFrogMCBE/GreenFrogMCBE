@@ -92,7 +92,7 @@ class DefaultWorld {
             if (config.tickWorldTime) {
                 _time++
                 for (const player of this.getPlayersInWorld()) {
-                    if (player.offline) return // do shame me for this
+                    if (player.offline || player.q) return // do shame me for this
                     player.setTime(_time)
                 }
             }
