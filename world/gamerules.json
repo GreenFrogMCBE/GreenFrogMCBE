@@ -8,7 +8,7 @@
     },
     {
       "name": "dodaylightcycle",
-      "editable": false,
+      "editable": true,
       "type": "bool",
       "value": false
     },

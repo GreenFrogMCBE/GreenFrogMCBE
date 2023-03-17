@@ -216,9 +216,9 @@ class ResourcePackClientResponse extends Handler {
 							y: 274,
 							z: -915
 						} : {
-							x: 1070,
-							y: 274,
-							z: -915
+							x: -17,
+							y: 117,
+							z: 22
 						};
 
 						const networkchunkpublisher = new NetworkChunkPublisherUpdate();

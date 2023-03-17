@@ -90,7 +90,7 @@ class DefaultWorld {
     tick() {
         try {
             if (config.tickWorldTime) {
-                _time++
+                _time = _time + 10
                 for (const player of this.getPlayersInWorld()) {
                     if (player.offline || player.q) return // do shame me for this
                     player.setTime(_time)

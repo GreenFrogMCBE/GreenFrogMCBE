@@ -121,7 +121,6 @@ class PlayerCommandExecuteEvent extends Event {
 
 				const commandFound = Object.keys(commandsToExecute).find((foundCommand) => command.startsWith(foundCommand));
 
-				console.log(commandFound, commands)
 				if (commandFound) {
 					commandsToExecute[commandFound].executePlayer(client, command);
 				}
