@@ -11,24 +11,24 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-unused-vars */
+const fs = require("fs");
 const Event = require("./Event");
 const Logger = require("../server/Logger");
-const CommandPl = require("../commands/CommandPl");
-const CommandMe = require("../commands/CommandMe");
-const CommandOp = require("../commands/CommandOp");
-const CommandSay = require("../commands/CommandSay");
 const { config, lang } = require("../api/ServerInfo");
-const CommandList = require("../commands/CommandList");
-const CommandTime = require("../commands/CommandTime");
-const CommandKick = require("../commands/CommandKick");
-const CommandDeop = require("../commands/CommandDeop");
-const CommandStop = require("../commands/CommandStop");
-const CommandManager = require("../player/CommandManager");
-const CommandVersion = require("../commands/CommandVersion");
-const CommandGamemode = require("../commands/CommandGamemode");
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-
-const fs = require("fs");
+const CommandHelp = require("../commands/CommandHelp");
+const CommandShutdown = require("../commands/CommandStop");
+const CommandKick = require("../commands/CommandKick");
+const CommandVersion = require("../commands/CommandVersion");
+const CommandTime = require("../commands/CommandTime");
+const CommandSay = require("../commands/CommandSay");
+const CommandOp = require("../commands/CommandOp");
+const CommandPl = require("../commands/CommandPl");
+const CommandDeop = require("../commands/CommandDeop");
+const CommandList = require("../commands/CommandList");
+const CommandMe = require("../commands/CommandMe");
+const CommandManager = require("../player/CommandManager");
+const CommandGamemode = require("../commands/CommandGamemode");
 
 class PlayerCommandExecuteEvent extends Event {
 	constructor() {
@@ -61,17 +61,13 @@ class PlayerCommandExecuteEvent extends Event {
 		});
 
 		if (!this.cancelled || config.commandsDisabled) {
-			Logger.info(
-				lang.commands.executedCmd
-					.replace("%player%", client.username)
-					.replace("%cmd%", command)
-			);
+			Logger.info(lang.commands.executedCommand.replace("%player%", client.username).replace("%cmd%", command));
 
 			const cmdGamemode = new CommandGamemode();
 			const cmdManager = new CommandManager();
 			const cmdVer = new CommandVersion();
 			const cmdPl = new CommandPl();
-			const cmdStop = new CommandStop();
+			const cmdStop = new CommandShutdown();
 			const cmdSay = new CommandSay();
 			const cmdOp = new CommandOp();
 			const cmdKick = new CommandKick();
@@ -82,22 +78,14 @@ class PlayerCommandExecuteEvent extends Event {
 
 			let exists = false;
 			for (let i = 0; i < cmdManager.getCommands().length; i++) {
-				if (
-					`${cmdManager.getCommands()[i].name.toLowerCase()}`.startsWith(
-						command.replace("/", "").split(" ")[0].replace(" ", "")
-					)
-				) {
+				if (`${cmdManager.getCommands()[i].name.toLowerCase()}`.startsWith(command.replace("/", "").split(" ")[0].replace(" ", ""))) {
 					exists = true;
 					break;
 				}
 			}
+
 			if (!exists || command === "/") {
-				client.sendcommand(
-					lang.errors.playerUnknownCommandOrNoPermission.replace(
-						"%commandname%",
-						command
-					)
-				);
+				client.sendMessage(lang.errors.playerUnknownCommandOrNoPermission.replace("%commandname%", command));
 			} else {
 				const commands = {
 					ver: `/${lang.commands.ver.toLowerCase()}`,
@@ -131,10 +119,9 @@ class PlayerCommandExecuteEvent extends Event {
 					[commands.gamemode]: cmdGamemode,
 				};
 
-				const commandFound = Object.keys(commandsToExecute).find((command) =>
-					command.startsWith(command)
-				);
+				const commandFound = Object.keys(commandsToExecute).find((foundCommand) => command.startsWith(foundCommand));
 
+				console.log(commandFound, commands)
 				if (commandFound) {
 					commandsToExecute[commandFound].executePlayer(client, command);
 				}

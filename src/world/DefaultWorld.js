@@ -101,11 +101,9 @@ class DefaultWorld {
                 for (const client of this.getPlayersInWorld()) {
                     const posY = Math.floor(client.y);
 
-                    let min = -63;
+                    let min = -64;
 
-                    if (config.generator === WorldGenerator.FLAT) {
-                        min = -64
-                    } else if (config.generator === WorldGenerator.VOID) {
+                    if (config.generator === WorldGenerator.VOID) {
                         min = NaN
                     }
 

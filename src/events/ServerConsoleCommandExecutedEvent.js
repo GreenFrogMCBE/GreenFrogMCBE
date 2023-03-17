@@ -43,6 +43,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
 
 	async execute(server, command) {
 		const pluginPromises = [];
+
 		fs.readdir("./plugins", (err, plugins) => {
 			plugins.forEach((plugin) => {
 				const pluginPromise = new Promise((resolve, reject) => {
@@ -114,9 +115,9 @@ class ServerConsoleCommandExecutedEvent extends Event {
 					return;
 				}
 
-				const command = command.toLowerCase().split(" ")[0];
+				const firstArgOfCommand = command.toLowerCase().split(" ")[0];
 
-				switch (command) {
+				switch (firstArgOfCommand) {
 					case "":
 						break;
 					case lang.commands.listc:

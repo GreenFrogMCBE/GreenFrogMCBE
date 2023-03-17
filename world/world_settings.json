@@ -1,4 +1,4 @@
 {
-  "worldname": "GreenFrog server",
-  "chunkLoadRadius": 32
+  "worldName": "GreenFrog server",
+  "chunkLoadRadius": 11
 }

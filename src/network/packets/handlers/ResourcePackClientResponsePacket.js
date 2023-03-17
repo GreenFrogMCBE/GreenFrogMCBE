@@ -104,11 +104,11 @@ class ResourcePackClientResponse extends Handler {
 
 					const clientLocalWorld = new DefaultWorld();
 					clientLocalWorld.setChunkRadius(require("../../../../world/world_settings.json").chunkLoadRadius)
-					clientLocalWorld.setName(require("../../../../world/world_settings.json").worldname)
+					clientLocalWorld.setName(require("../../../../world/world_settings.json").worldName)
 					if (config.generator === WorldGenerator.FLAT) {
 						clientLocalWorld.setSpawnCoordinates(0, -58, 0);
 					} else if (config.generator === WorldGenerator.DEFAULT) {
-						clientLocalWorld.setSpawnCoordinates(0, 61, 0);
+						clientLocalWorld.setSpawnCoordinates(1070, 139, -914);
 					} else if (config.generator === WorldGenerator.VOID) {
 						clientLocalWorld.setSpawnCoordinates(0, 100, 0);
 					} else {
@@ -211,7 +211,15 @@ class ResourcePackClientResponse extends Handler {
 						chunkradiusupdate.setChunkRadius(clientLocalWorld.getChunkRadius());
 						chunkradiusupdate.send(client);
 
-						const cords = config.generator === WorldGenerator.DEFAULT ? { x: -81, y: 158, z: -52 } : { x: 13, y: 155, z: -28 };
+						const cords = config.generator === WorldGenerator.DEFAULT ? {
+							x: 1070,
+							y: 274,
+							z: -915
+						} : {
+							x: 1070,
+							y: 274,
+							z: -915
+						};
 
 						const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 						networkchunkpublisher.setCords(cords.x, cords.y, cords.z);

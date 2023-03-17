@@ -23,6 +23,7 @@ class CommandRequest extends require("./Handler") {
 
 	handle(client, packet) {
 		if (config.commandsDisabled) return;
+
 		let cmd = packet.data.params.command;
 		this.validate(client, cmd);
 		new PlayerCommandExecuteEvent().execute(require("../../../Server").server, client, cmd);

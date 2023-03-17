@@ -8,9 +8,9 @@
     },
     {
       "name": "dodaylightcycle",
-      "editable": true,
+      "editable": false,
       "type": "bool",
-      "value": true
+      "value": false
     },
     {
       "name": "doentitydrops",

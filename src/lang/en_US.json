@@ -57,7 +57,7 @@
     "notOp": "The player is not opped!",
     "deopFail": "Failed to remove OP status from that player",
     "opFail": "Failed to give OP status to that player",
-    "executedCmd": "%player% executed a server command: %cmd%",
+    "executedCommand": "%player% executed a server command: %cmd%",
     "playerList": "There are %info% players online:",
     "gamemodeInvalid": "§cGame mode '%gm%' is invalid",
     "gamemodeSurvival": "Your gamemode has been updated to Survival",
