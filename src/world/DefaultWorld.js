@@ -5,6 +5,8 @@ const GameMode = require("../api/GameMode");
 const Logger = require("../server/Logger");
 const assert = require('assert');
 
+let _time = 0
+
 class DefaultWorld {
     constructor() {
         this.name = "";
@@ -14,7 +16,6 @@ class DefaultWorld {
             z: null,
         };
         this.chunkRadius = 0;
-        this._time = 0;
     }
 
     /**
@@ -89,9 +90,10 @@ class DefaultWorld {
     tick() {
         try {
             if (config.tickWorldTime) {
-                this._time++
+                _time++
                 for (const player of this.getPlayersInWorld()) {
-                    player.setTime(this._time)
+                    if (player.offline) return // do shame me for this
+                    player.setTime(_time)
                 }
             }
 
