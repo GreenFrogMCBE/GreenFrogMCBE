@@ -131,11 +131,7 @@ class DefaultWorld {
         return {
             name: this.name,
             chunk_radius: this.chunkRadius,
-            spawn_coordinates: this.cords,
-            functions: {
-                tick: this.tick(),
-                setChunkRadius: this.setChunkRadius(),
-            }
+            spawn_coordinates: this.cords
         }
     }
 }

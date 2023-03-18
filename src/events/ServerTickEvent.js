@@ -13,7 +13,6 @@
 /* eslint-disable no-unused-vars */
 const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const ToastRequest = require("../../network/packets/ToastRequest");
 const Event = require("./Event");
 const fs = require("fs");
 
