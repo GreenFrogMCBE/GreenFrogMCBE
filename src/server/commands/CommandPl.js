@@ -1,8 +1,9 @@
 const Logger = require("../Logger");
 const PluginManager  = require('../../plugin/PluginManager')
 const ColorsServer = require("../Colors");
+const ColorsPlayer = require("../../player/Colors");
 
-const { lang } = require("../../server/ServerInfo");
+const { lang, config } = require("../../server/ServerInfo");
 
 /**
  * @type {import('../../base/Command').Command}
@@ -22,8 +23,21 @@ module.exports = {
 	},
 
 	run(_server, player) {
-		player.sendMessage("Hello.");
-	},
+        if (!config.playerCommandPlugins) {
+			Logger.log(lang.errors.playerUnknownCommand);
+			return;
+		}
+		let plugins;
+		if (PluginManager.getPlugins() == null) {
+			plugins = 0;
+		} else {
+			plugins = PluginManager.getPlugins().length;
+		}
+
+		let pluginlist = ColorsPlayer.green + PluginManager.getPlugins().join(ColorsPlayer.white + ", " + ColorsPlayer.green);
+
+		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? "No Plugin Available"} ${ColorsPlayer.reset}`);
+    },
 
 	data: {
 		name: "plugins",
