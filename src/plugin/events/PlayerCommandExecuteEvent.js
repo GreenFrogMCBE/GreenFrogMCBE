@@ -72,12 +72,10 @@ class PlayerCommandExecuteEvent extends Event {
 				}
 
 				const server = require("../../Server");
-				command.run(server, client);
+				command.run(server, client, args);
 				exists = true;
 			}
 		}
-
-		exists = client.commands.toString().contains(cmd.replace("/", ""))
 
 		if (!exists) {
 			client.sendMessage(lang.commands.unknownCommand);

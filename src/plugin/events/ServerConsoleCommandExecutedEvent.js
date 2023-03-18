@@ -74,7 +74,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
 					return;
 				}
 
-				command.runAsConsole(server);
+				command.runAsConsole(server, args);
 				exists = true;
 			}
 		}
