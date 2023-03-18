@@ -1,10 +1,9 @@
 const Logger = require("../Logger");
 
+/**
+ * @type {import('../../base/Command').Command}
+ */	
 module.exports = {
-	/**
-	 *
-	 * @param {import('../../../types/Server')} server
-	 */
 	runAsConsole() {
 		Logger.log("Hello.", "info");
 	},
@@ -13,9 +12,6 @@ module.exports = {
 		player.sendMessage("Hello.");
 	},
 
-	/**
-	 * @type {import('../../base/Command').Options}
-	 */
 	data: {
 		name: "test",
 		description: "Test command.",
