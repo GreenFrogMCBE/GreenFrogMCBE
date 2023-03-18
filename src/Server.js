@@ -36,6 +36,7 @@ const DefaultWorld = require("./world/DefaultWorld");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
 const assert = require('assert');
+const SetPlayerGameTypePacket = require("./network/packets/handlers/SetPlayerGameTypePacket");
 
 let clients = [];
 let server = null;
@@ -84,6 +85,9 @@ module.exports = {
 				break;
 			case "item_stack_request":
 				new ItemStackRequest().handle(client, packet);
+				break;
+			case "set_player_game_type":
+				new SetPlayerGameTypePacket().handle(client, packet)
 				break;
 			case "interact":
 				new Interact().handle(packet, client);
