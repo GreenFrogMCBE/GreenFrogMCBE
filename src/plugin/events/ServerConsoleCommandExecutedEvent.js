@@ -61,7 +61,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
 			 */
 			const command = require(`../../server/commands/${camd}`);
 
-			if (command.data.name === name) {
+			if (command.data.name === name || command.data.aliases && command.data.aliases.includes(name)) {
 				if (command.data.minArg && command.data.minArg > args.length) {
 					Logger.log(lang.commands.minArg.replace("%m%", command.data.minArg).replace("%r%", args.length));
 					exists = true;

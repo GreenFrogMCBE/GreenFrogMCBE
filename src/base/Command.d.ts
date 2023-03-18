@@ -10,6 +10,7 @@ export interface ArgOptions {
 export interface Options {
 	name: string;
 	description: string;
+	aliases: string[];
 	arguments?: ArgOptions[];
 	maxArg: number;
 	minArg: number;
