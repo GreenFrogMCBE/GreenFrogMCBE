@@ -11,28 +11,28 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-unused-vars */
+const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const Text = require("../network/packets/Text");
+const ToastRequest = require("../../network/packets/ToastRequest");
 const Event = require("./Event");
 const fs = require("fs");
 
-class ServerToClientChatEvent extends Event {
+class ServerTickEvent extends Event {
 	constructor() {
 		super();
-		this.cancelled = false;
-		this.name = "ServerToClientChatEvent";
+		this.name = "ServerTickEvent";
 	}
 
 	cancel() {
-		this.cancelled = true;
-	}
+		throw new UnsupportedOperationException("This event is impossible to cancel")
+    }
 
-	async execute(server, client, message) {
+	async execute(server, world) {
 		await new Promise((resolve) => {
 			fs.readdir("./plugins", (err, plugins) => {
 				plugins.forEach((plugin) => {
 					try {
-						require(`${__dirname}/../../plugins/${plugin}`).ServerToClientChatEvent(server, client, message, this);
+						require(`${__dirname}/../../../plugins/${plugin}`).ServerTickEvent(server, world);
 					} catch (e) {
 						FailedToHandleEvent.handleEventError(e, plugin, this.name);
 					}
@@ -40,13 +40,7 @@ class ServerToClientChatEvent extends Event {
 				resolve();
 			});
 		});
-
-		if (!this.cancelled) {
-			const text = new Text();
-			text.setMessage(message);
-			text.send(client);
-		}
 	}
 }
 
-module.exports = ServerToClientChatEvent;
+module.exports = ServerTickEvent;

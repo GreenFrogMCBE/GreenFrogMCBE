@@ -4,6 +4,7 @@ const PlayerInfo = require("../api/PlayerInfo");
 const GameMode = require("../api/GameMode");
 const Logger = require("../server/Logger");
 const assert = require('assert');
+const ServerTickEvent = require("../events/ServerTickEvent");
 
 let _time = 0
 
@@ -89,6 +90,9 @@ class DefaultWorld {
      */
     tick() {
         try {
+            const tickEvent = new ServerTickEvent()
+            tickEvent.execute(require("../Server"), this.toJSON())
+
             if (config.tickWorldTime) {
                 _time = _time + 10
                 for (const player of this.getPlayersInWorld()) {
@@ -120,6 +124,18 @@ class DefaultWorld {
             }
         } catch (e) {
             Logger.error(lang.errors.errorTickingWorld.replace("%e.stack%", e.stack))
+        }
+    }
+
+    toJSON() {
+        return {
+            name: this.name,
+            chunk_radius: this.chunkRadius,
+            spawn_coordinates: this.cords,
+            functions: {
+                tick: this.tick(),
+                setChunkRadius: this.setChunkRadius(),
+            }
         }
     }
 }
