@@ -12,13 +12,15 @@
  */
 const PlayerContainerCloseEvent = require("../../events/PlayerContainerCloseEvent");
 const ServerContainerClosePacket = require("./ServerContainerClosePacket");
+
 const PacketConstructor = require("./PacketConstructor");
+
 const WindowIds = require("./types/WindowIds");
 
 class ClientContainerClosePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
+	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
 		return "container_close"
@@ -26,7 +28,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false

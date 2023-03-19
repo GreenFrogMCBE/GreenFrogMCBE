@@ -36,8 +36,7 @@ class ClientTextPacket extends PacketConstructor {
 	/**
 	 * Validates the packet
 	 * @param {any} player
-	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {String} message
 	 */
 	async validatePacket(player, message) {
 		assert(player, null)

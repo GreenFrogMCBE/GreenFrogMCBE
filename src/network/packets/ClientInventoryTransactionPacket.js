@@ -19,7 +19,7 @@ const Logger = require("../../server/Logger");
 class ClientInventoryTransactionPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
+	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
 		return "inventory_transaction"
@@ -27,7 +27,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false

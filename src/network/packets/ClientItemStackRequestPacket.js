@@ -1,13 +1,15 @@
-const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
 const PacketConstructor = require("./PacketConstructor");
+
+const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
 const InventoryTypes = require("./types/InventoryTypes");
+
 const { lang } = require("../../api/ServerInfo");
 const Logger = require("../../server/Logger");
 
 class ClientItemStackRequestPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
+	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
 		return "item_stack_request"
@@ -15,7 +17,7 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false

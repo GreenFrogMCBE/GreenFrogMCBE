@@ -61,27 +61,25 @@ const fs = require("fs");
 
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
-    /**
-    * Returns the packet name
-    * @returns The name of the packet
-    */
+	/**
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
     getPacketName() {
         return "resource_pack_client_response"
     }
 
-    /**
-     * Returns if is the packet critical?
-     * @returns Returns if the packet is critical
-     */
+	/**
+	 * Returns if is the packet critical?
+	 * @returns {Boolean} Returns if the packet is critical
+	 */
     isCriticalPacket() {
         return true
     }
 
     /**
      * Validates the packet
-     * @param {any} player
-     * @param {JSON} packet
-     * @param {any} server
+     * @param {ResourcePackStatus} response_status
      */
     async validatePacket(response_status) {
         const valid = [

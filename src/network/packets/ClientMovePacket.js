@@ -19,7 +19,7 @@ const PlayerMoveEvent = require('../../events/PlayerMoveEvent')
 class ClientMovePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
+	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
 		return "move_player"
@@ -27,7 +27,7 @@ class ClientMovePacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false
@@ -36,8 +36,6 @@ class ClientMovePacket extends PacketConstructor {
 	/**
 	 * Validates the packet
 	 * @param {any} player
-	 * @param {JSON} packet
-	 * @param {any} server
 	 */
 	async validatePacket(player) {
 		assert(player, null)
@@ -47,6 +45,7 @@ class ClientMovePacket extends PacketConstructor {
 	 * Reads the packet from player
 	 * @param {any} player
 	 * @param {JSON} packet
+	 * @param {any} server
 	 */
 	async readPacket(player, packet, server) {
 		await this.validatePacket(player)

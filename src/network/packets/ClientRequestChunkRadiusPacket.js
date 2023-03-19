@@ -19,7 +19,7 @@ const PlayerRequestChunkRadiusEvent = require("../../events/PlayerRequestChunkRa
 class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
+	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
 		return "request_chunk_radius"
