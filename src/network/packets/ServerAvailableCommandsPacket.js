@@ -33,15 +33,15 @@ class ServerAvailableCommandsPacket extends PacketConstructor {
 
 	/**
 	 * It sets the packet data
-	 * @param {Object} data1
+	 * @param {JSON} new_data - The new command data
 	 */
-	setData(data1) {
-		data = data1;
+	setData(new_data) {
+		data = new_data;
 	}
 
 	/**
-	 * It returns the packet data
-	 * @returns The packet data
+	 * It returns the command data
+	 * @returns {JSON} The command data
 	 */
 	getData() {
 		return data;
