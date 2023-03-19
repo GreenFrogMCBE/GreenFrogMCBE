@@ -52,7 +52,7 @@ class AvailableCommands extends PacketConstructor {
 	 * @param {Object} client
 	 */
 	writePacket(client) {
-		client.queue(this.name(), this.getData());
+		client.queue(this.getPacketName(), this.getData());
 	}
 }
 

@@ -50,7 +50,7 @@ class PlayerGamemode extends PacketConstructor {
 	}
 
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			gamemode: this.getGamemode(),
 		});
 	}

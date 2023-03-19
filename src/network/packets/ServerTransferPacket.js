@@ -83,7 +83,7 @@ class Transfer extends PacketConstructor {
 	 */
 	writePacket(client) {
 		this.validate(this.getServerAddress(), this.getPort());
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			server_address: this.getServerAddress(),
 			port: parseInt(this.getPort()),
 		});

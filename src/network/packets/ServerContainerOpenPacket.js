@@ -106,7 +106,7 @@ class ContainerOpen extends PacketConstructor {
 	 * @param {Object} client
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			window_id: this.getWindowId(),
 			window_type: this.getWindowType(),
 			coordinates: this.getCoordinates(),

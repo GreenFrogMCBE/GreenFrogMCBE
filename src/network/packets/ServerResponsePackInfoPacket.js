@@ -105,7 +105,7 @@ class ResponsePackInfo extends PacketConstructor {
 	 * @param client - The client.
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			must_accept: this.getMustAccept(),
 			has_scripts: this.getHasScripts(),
 			behaviour_packs: this.getBehaviorPacks(),

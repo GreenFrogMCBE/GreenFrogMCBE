@@ -52,7 +52,7 @@ class SetCommandsEnabled extends PacketConstructor {
 	 * @param {Object} client
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			enabled: this.getEnabled(),
 		});
 	}

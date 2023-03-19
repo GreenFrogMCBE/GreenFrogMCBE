@@ -116,12 +116,12 @@ class FormRequest extends PacketConstructor {
 	 */
 	writePacket(client) {
 		if (type === FormTypes.MODALFORM) {
-			client.queue("modal_form_request", {
+			client.queue(this.getPacketName(), {
 				form_id: this.getId(),
 				data: `{"content":"${this.getText()}","button1":"${this.getButton1()}","button2":"${this.getButton2()}","type":"${this.getType()}","title":"${this.getTitle()}"}`,
 			});
 		} else {
-			client.queue("modal_form_request", {
+			client.queue(this.getPacketName(), {
 				form_id: this.getId(),
 				data: `{"content":${this.getContent()},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
 			});

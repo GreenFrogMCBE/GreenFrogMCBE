@@ -75,8 +75,6 @@ module.exports = {
 		fs.readdirSync(packetsDir).forEach((filename) => {
 			if (filename.startsWith('Client')) {
 				const packetPath = path.join(packetsDir, filename);
-				console.log(packetPath)
-				console.log('%o', require(packetPath))
 				try {
 					require(packetPath).writePacket(client, packet, server);
 				} catch (e) {
@@ -121,7 +119,7 @@ module.exports = {
 		responsepackinfo.setHasScripts(false);
 		responsepackinfo.setBehaviorPacks([]);
 		responsepackinfo.setTexturePacks([]);
-		responsepackinfo.send(client);
+		responsepackinfo.writePacket(client);
 	},
 
 	/**

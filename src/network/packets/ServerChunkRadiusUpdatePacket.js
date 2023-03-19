@@ -48,7 +48,7 @@ class ChunkRadiusUpdate extends PacketConstructor {
 	}
 
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			chunk_radius: this.getChunkRadius(),
 		});
 	}

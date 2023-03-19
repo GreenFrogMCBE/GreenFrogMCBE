@@ -65,7 +65,7 @@ class ContainerClose extends PacketConstructor {
 	}
 
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			window_id: this.getWindowId(),
 			server: this.getServer(),
 		});

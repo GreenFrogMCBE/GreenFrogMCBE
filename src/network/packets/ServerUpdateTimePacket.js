@@ -63,7 +63,7 @@ class Time extends PacketConstructor {
 	 */
 	writePacket(client) {
 		this.validate(time);
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			time: this.getTime(),
 		});
 	}

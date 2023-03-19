@@ -138,7 +138,7 @@ class Title extends PacketConstructor {
 
 	writePacket(client) {
 		if (this.getType() === Titles.CLEAR) this.setText("");
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			type: this.getType(),
 			text: this.getText(),
 			fade_in_time: this.getFadeinTime(),

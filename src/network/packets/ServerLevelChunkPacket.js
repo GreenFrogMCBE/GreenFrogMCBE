@@ -120,7 +120,7 @@ class LevelChunk extends PacketConstructor {
 	 * @param {Client} client
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			x: this.getX(),
 			z: this.getZ(),
 			sub_chunk_count: this.getSubChunkCount(),

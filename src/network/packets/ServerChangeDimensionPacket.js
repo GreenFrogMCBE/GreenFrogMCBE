@@ -92,7 +92,7 @@ class ChangeDimension extends PacketConstructor {
 	}
 
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			dimension: this.getDimension(),
 			position: this.getPosition(),
 			respawn: this.getRespawn(),

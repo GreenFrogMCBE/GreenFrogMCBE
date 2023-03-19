@@ -137,7 +137,7 @@ class PlayerList extends PacketConstructor {
 				},
 			};
 		}
-		client.queue("player_list", data);
+		client.queue(this.getPacketName(), data);
 	}
 }
 

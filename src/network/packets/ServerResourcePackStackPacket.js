@@ -133,8 +133,8 @@ class ResourcePackStack extends PacketConstructor {
 	}
 
 	writePacket(client) {
-		client.queue(this.name(), {
-			must_accept: this.name(),
+		client.queue(this.getPacketName(), {
+			must_accept: this.getPacketName(),
 			behavior_packs: this.getBehaviorPacks(),
 			resource_packs: this.getResourcePacks(),
 			game_version: this.getGameVersion(),

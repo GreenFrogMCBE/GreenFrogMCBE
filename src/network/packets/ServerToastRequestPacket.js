@@ -68,7 +68,7 @@ class ToastRequest extends PacketConstructor {
 	 * @param client - The client that the packet is being sent to.
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			title: this.getTitle(),
 			message: this.getMessage(),
 		});

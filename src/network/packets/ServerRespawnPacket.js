@@ -98,7 +98,7 @@ class Respawn extends PacketConstructor {
 	 * @param {Client} client
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			position: this.getPosition(),
 			state: this.getState(),
 			runtime_entity_id: this.getRuntimeEntityId(),

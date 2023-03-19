@@ -109,7 +109,7 @@ module.exports = {
 			chunkradiusupdate.setChunkRadius(
 				radius
 			);
-			chunkradiusupdate.send(player);
+			chunkradiusupdate.writePacket(player);
 		}
 
 		/**
@@ -119,7 +119,7 @@ module.exports = {
 		player.setTime = function (time) {
 			const timepacket = new Time();
 			timepacket.setTime(time);
-			timepacket.send(player, time);
+			timepacket.writePacket(player, time);
 		};
 
 		/**
@@ -131,7 +131,7 @@ module.exports = {
 			updateattributespacket.setPlayerID(0) // 0 - Means local player
 			updateattributespacket.setTick(0)
 			updateattributespacket.setAttributes([attribute])
-			updateattributespacket.send(player)
+			updateattributespacket.writePacket(player)
 		}
 
 		player.setXP = function (xp) {
@@ -169,7 +169,7 @@ module.exports = {
 			dimensionpacket.setPosition(x, y, z);
 			dimensionpacket.setDimension(dimension);
 			dimensionpacket.setRespawn(respawn);
-			dimensionpacket.send(player);
+			dimensionpacket.writePacket(player);
 		};
 
 		player.on("close", () => {
@@ -179,7 +179,7 @@ module.exports = {
 						const pl = new PlayerList();
 						pl.setType(PlayerListTypes.REMOVE);
 						pl.setUuid(player.profile.uuid);
-						pl.send(PlayerInfo.players[i]);
+						pl.writePacket(PlayerInfo.players[i]);
 					}
 				}
 

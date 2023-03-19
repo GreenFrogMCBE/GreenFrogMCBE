@@ -44,7 +44,7 @@ class BiomeDefinitionList extends PacketConstructor {
 	 * @param {Object} client
 	 */
 	writePacket(client) {
-		client.queue(this.name(), this.getValue());
+		client.queue(this.getPacketName(), this.getValue());
 	}
 }
 

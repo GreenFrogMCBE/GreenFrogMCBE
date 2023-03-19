@@ -143,7 +143,7 @@ class Text extends PacketConstructor {
 	 * @param {string} [platform_chat_id] - This is the ID of the player you want to writePacket the message to.
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			type: this.getType(),
 			needs_translation: this.getNeedsTranslation(),
 			source_name: this.getSourceName(),

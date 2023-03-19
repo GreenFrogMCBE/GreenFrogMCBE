@@ -13,7 +13,7 @@
 const Gamemode = require("../../api/GameMode");
 const Difficulty = require("./types/Difficulty");
 const Dimension = require("./types/Dimension");
-const Generator = require("./types/Generator");
+const Generator = require("./types/Generators");
 const PacketConstructor = require("./PacketConstructor");
 
 let entity_id = 0;
@@ -320,7 +320,7 @@ class StartGame extends PacketConstructor {
 	 * @param client - The client that will receive the packet
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			entity_id: this.getEntityId(),
 			runtime_entity_id: this.getRunTimeEntityId(),
 			player_gamemode: this.getGamemode(),

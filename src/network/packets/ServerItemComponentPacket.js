@@ -51,7 +51,7 @@ class ItemComponent extends PacketConstructor {
 	 * @param {any} client
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			entries: this.getItems(),
 		});
 	}

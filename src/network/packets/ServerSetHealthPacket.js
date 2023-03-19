@@ -37,7 +37,7 @@ class SetHealth extends PacketConstructor {
      * @param {Object} client 
      */
     writePacket(client) {
-        client.queue(this.name(), { health: this.getHealth() })
+        client.queue(this.getPacketName(), { health: this.getHealth() })
     }
 }
 

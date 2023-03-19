@@ -92,7 +92,7 @@ class NetworkChunkPublisherUpdate extends PacketConstructor {
 
 	send(client) {
 		this.validate(client);
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			coordinates: this.getCords(),
 			radius: this.getRadius(),
 			saved_chunks: this.getSavedChunks(),

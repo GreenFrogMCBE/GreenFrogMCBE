@@ -228,7 +228,7 @@ class UpdateBlock extends PacketConstructor {
 	 * @param {Number} block_runtime_id - The block ID of the block you want to place.
 	 */
 	writePacket(client) {
-		client.queue(this.name(), {
+		client.queue(this.getPacketName(), {
 			position: {
 				x: this.getX(),
 				y: this.getY(),
