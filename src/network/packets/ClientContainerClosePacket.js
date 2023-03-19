@@ -14,7 +14,6 @@ const PlayerContainerCloseEvent = require("../../events/PlayerContainerCloseEven
 const ServerContainerClosePacket = require("./ServerContainerClosePacket");
 const PacketConstructor = require("./PacketConstructor");
 const WindowIds = require("./types/WindowIds");
-const assert = require("assert");
 
 class ClientContainerClosePacket extends PacketConstructor {
 	/**
@@ -34,20 +33,11 @@ class ClientContainerClosePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Validates the packet
-	 */
-	async validatePacket(player) {
-		assert(player.op, false)
-	}
-
-	/**
 	 * Reads the packet from client
 	 * @param {any} player
 	 * @param {JSON} packet
 	 */
 	async readPacket(player) {
-		this.validatePacket(player)
-
 		const containerclose = new ServerContainerClosePacket()
 		containerclose.setServer(false)
 		containerclose.setWindowId(WindowIds.CREATIVE)

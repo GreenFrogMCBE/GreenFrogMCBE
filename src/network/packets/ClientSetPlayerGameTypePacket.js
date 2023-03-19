@@ -39,10 +39,8 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 * @param {any} server
 	 */
-	async validatePacket(player, packet, server) {
+	async validatePacket(player, packet) {
 		assert(player, null)
-		JSON.parse(packet)
-		assert(server, null)
 
 		if (!packet.data.params.gamemode) throw new PacketHandlingError("Bad gamemode packet - Bad gamemode")
 
@@ -54,8 +52,8 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	 * @param {any} player
 	 * @param {JSON} packet
 	 */
-	async readPacket(player, packet, server) {
-		await this.validatePacket(player, packet, server)
+	async readPacket(player, packet) {
+		await this.validatePacket(player, packet)
 
 		player.setGamemode(packet.data.params.gamemode)
 	}

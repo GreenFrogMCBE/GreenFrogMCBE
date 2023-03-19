@@ -30,6 +30,7 @@ class ServerItemComponentPacket extends PacketConstructor {
 	isCriticalPacket() {
 		return false
 	}
+
 	/**
 	 * Sets the custom items (some items may require texture pack)
 	 * @param {Array} itemstoset
@@ -47,7 +48,7 @@ class ServerItemComponentPacket extends PacketConstructor {
 	}
 
 	/**
-	 * writePackets the packet to the client
+	 * Sends the packet to the client
 	 * @param {any} client
 	 */
 	writePacket(client) {

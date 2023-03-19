@@ -1,8 +1,8 @@
 const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
 const PacketConstructor = require("./PacketConstructor");
 const InventoryTypes = require("./types/InventoryTypes");
+const { lang } = require("../../api/ServerInfo");
 const Logger = require("../../server/Logger");
-const { lang } = require("../../Server");
 
 class ClientItemStackRequestPacket extends PacketConstructor {
 	/**
@@ -62,10 +62,10 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 						can_destroy: [],
 					},
 				});
-				is.send(player);
+				is.writePacket(player);
 			}
 		} catch (e) {
-			Logger.error(lang.failedToHandleItemRequest.replace("%data%", `${player.username}: ${e.stack}`));
+			Logger.error(lang.errors.failedToHandleItemRequest.replace("%data%", `${player.username}: ${e.stack}`));
 		}
 	}
 }

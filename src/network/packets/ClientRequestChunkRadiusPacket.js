@@ -39,10 +39,8 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 * @param {any} server
 	 */
-	async validatePacket(player, packet, server) {
+	async validatePacket(player) {
 		assert(player, null)
-		JSON.parse(packet)
-		assert(server, null)
 	}
 
 	/**
@@ -51,11 +49,11 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
      * @param {JSON} packet
      */
 	async readPacket(player, packet, server) {
-		await this.validatePacket(player, packet, server)
+		await this.validatePacket(player)
 
 		const requestradiusevent = new PlayerRequestChunkRadiusEvent()
 		requestradiusevent.execute(
-			packet,
+			player,
 			server,
 			packet.data.params.radius
 		)

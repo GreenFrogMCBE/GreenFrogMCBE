@@ -32,6 +32,14 @@ class ServerBiomeDefinitionListPacket extends PacketConstructor {
 	}
 
 	/**
+	 * Sets the packet value
+	 * @param newvalue - The packet value.
+	 */
+	setValue(newvalue) {
+		value = newvalue;
+	}
+
+	/**
 	 * It returns the packet value
 	 * @returns The packet value.
 	 */

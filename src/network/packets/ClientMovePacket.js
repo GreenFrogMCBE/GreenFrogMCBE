@@ -16,8 +16,6 @@ const assert = require('assert');
 
 const PlayerMoveEvent = require('../../events/PlayerMoveEvent')
 
-const PacketHandlingException = require('./exceptions/PacketHandlingError')
-
 class ClientMovePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
@@ -41,17 +39,8 @@ class ClientMovePacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 * @param {any} server
 	 */
-	async validatePacket(player, packet, server) {
+	async validatePacket(player) {
 		assert(player, null)
-		JSON.parse(packet)
-		assert(server, null)
-
-		if (Math.abs(packet.data.params.position.x) > Math.E ||
-			Math.abs(packet.data.params.position.y) > Math.E ||
-			Math.abs(packet.data.params.position.z) > Math.E
-		) {
-			throw new PacketHandlingException("Invalid position in ClientMovePlayer packet!")
-		}
 	}
 
 	/**
@@ -60,7 +49,7 @@ class ClientMovePacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet, server) {
-		await this.validatePacket(player, packet, server)
+		await this.validatePacket(player)
 
 		let position = packet.data.params.position
 

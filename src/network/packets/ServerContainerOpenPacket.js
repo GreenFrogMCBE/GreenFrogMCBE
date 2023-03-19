@@ -61,6 +61,14 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	}
 
 	/**
+	 * It sets the window id
+	 * @param {WindowIds} ids
+	 */
+	setWindowId(id) {
+		window_id = id;
+	}
+
+	/**
 	 * It sets the runtime entity id
 	 * This must be a string
 	 * @param {String} runtime_entity_id1

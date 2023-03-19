@@ -1,5 +1,5 @@
 const PlayerCommandExecuteEvent = require("../../events/PlayerCommandExecuteEvent");
-const { config } = require("../../Server");
+const { config } = require("../../api/ServerInfo");
 const assert = require("assert")
 
 const PacketConstructor = require("./PacketConstructor");

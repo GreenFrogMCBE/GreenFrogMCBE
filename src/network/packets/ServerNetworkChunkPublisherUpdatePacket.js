@@ -90,8 +90,7 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 		return saved_chunks;
 	}
 
-	send(client) {
-		this.validate(client);
+	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			coordinates: this.getCords(),
 			radius: this.getRadius(),

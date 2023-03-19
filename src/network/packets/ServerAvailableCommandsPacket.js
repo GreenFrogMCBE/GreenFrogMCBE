@@ -48,7 +48,7 @@ class ServerAvailableCommandsPacket extends PacketConstructor {
 	}
 
 	/**
-	 * It writePacket the packet to the client
+	 * It sends the packet to the client
 	 * @param {Object} client
 	 */
 	writePacket(client) {

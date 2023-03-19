@@ -11,7 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-case-declarations */
-const ContainerOpen = require("./ServerContainerClosePacket");
+const UnsupportedOperationException = require("../../events/exceptions/UnsupportedOperationException");
+const ContainerOpen = require("./ServerContainerOpenPacket");
 const InventoryTypes = require("./types/InventoryTypes");
 const PacketConstructor = require("./PacketConstructor");
 const InteractTypes = require("./types/InteractTypes");
@@ -58,6 +59,13 @@ class ClientInteractPacket extends PacketConstructor {
 			default:
 				Logger.debug("Unsupported action ID: " + actionID)
 		}
+	}
+
+	/**
+	 * Writes the packet to the client
+	 */
+	writePacket() {
+		throw new UnsupportedOperationException("Cannot write client-side packet")
 	}
 }
 

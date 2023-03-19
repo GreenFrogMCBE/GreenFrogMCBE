@@ -87,7 +87,7 @@
   },
   "kickmessages": {
     "noReason": "No reason",
-    "serverShutdown": "§cServer shutdown",
+    "serverShutdown": "§cServer closed",
     "kickedPrefix": "You were kicked for: ",
     "playerDisconnected": "Client disconnected",
     "kickedByPlugin": "disconnectionScreen.noReason",

@@ -39,9 +39,8 @@ class ClientModalFormResponsePacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 * @param {any} server
 	 */
-	async validatePacket(player, packet, server) {
+	async validatePacket(player, server) {
 		assert(player, null)
-		JSON.parse(packet)
 		assert(server, null)
 	}
 
@@ -51,7 +50,7 @@ class ClientModalFormResponsePacket extends PacketConstructor {
      * @param {JSON} packet
      */
 	async readPacket(player, packet, server) {
-		await this.validatePacket(player, packet, server)
+		await this.validatePacket(player, server)
 
 		const modal_form_response_event = new PlayerFormResponseEvent()
 		modal_form_response_event.execute(

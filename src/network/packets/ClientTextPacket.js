@@ -39,10 +39,8 @@ class ClientTextPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 * @param {any} server
 	 */
-	async validatePacket(player, packet, server, message) {
+	async validatePacket(player, message) {
 		assert(player, null)
-		JSON.parse(packet)
-		assert(server, null)
 		assert(message, "")
 	}
 
@@ -54,7 +52,7 @@ class ClientTextPacket extends PacketConstructor {
 	async readPacket(player, packet, server) {
 		let message = packet.data.params.message
 
-		await this.validatePacket(player, packet, server, message)
+		await this.validatePacket(player, message)
 
 		const chatevent = new PlayerChatEvent()
 		chatevent.execute(server, player, message)

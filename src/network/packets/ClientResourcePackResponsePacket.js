@@ -14,9 +14,9 @@
 const StartGame = require("./ServerStartGamePacket");
 const PlayerList = require("./ServerPlayerListPacket");
 const PlayStatus = require("./ServerPlayStatusPacket");
-const CreativeContent = require("./ServerCreativeContentPacket");
 const PlayerInfo = require("../../api/PlayerInfo");
 const PacketConstructor = require("./PacketConstructor");
+const CreativeContent = require("./ServerCreativeContentPacket");
 const PlayerSpawnEvent = require("../../events/PlayerSpawnEvent");
 const ResourcePackStack = require("./ServerResourcePackStackPacket");
 const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
@@ -200,9 +200,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                 biomedeflist.setValue(require("./res/biomes.json"));
                 biomedeflist.writePacket(player);
 
-                const availableentityids = new AvailableEntityIdentifiers();
-                availableentityids.setValue(require("./res/entities"));
-                availableentityids.writePacket(player);
+                // const availableentityids = new AvailableEntityIdentifiers();
+                // availableentityids.setData(require("./res/entities.json"));
+                // availableentityids.writePacket(player);
 
                 const creativecontent = new CreativeContent();
                 creativecontent.setItems(require("./res/creativeContent.json").items);
@@ -293,7 +293,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                     let chunks = null;
 
                     try {
-                        chunks = require(`${__dirname}/../../../../world/chunks${config.generator === WorldGenerator.DEFAULT ? "" : "_flat"}.json`);
+                        chunks = require(`${__dirname}/../../../world/chunks${config.generator === WorldGenerator.DEFAULT ? "" : "_flat"}.json`);
                     } catch (e) {
                         throw new ChunkError(`${lang.errors.failedToLoadWorld} ${e}`);
                     }

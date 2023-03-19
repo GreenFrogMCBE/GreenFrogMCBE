@@ -86,7 +86,7 @@ class CommandManager {
 		});
 		const availablecommands = new AvailableCommands();
 		availablecommands.setData(client.commands);
-		availablecommands.send(client, this.getPacket(client));
+		availablecommands.writePacket(client);
 	}
 }
 
