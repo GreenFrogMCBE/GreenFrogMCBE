@@ -14,7 +14,7 @@ let gitems = [];
 
 const PacketConstructor = require("./PacketConstructor");
 
-class ItemComponent extends PacketConstructor {
+class ServerItemComponentPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -57,4 +57,4 @@ class ItemComponent extends PacketConstructor {
 	}
 }
 
-module.exports = ItemComponent;
+module.exports = ServerItemComponentPacket;

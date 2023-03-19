@@ -14,7 +14,7 @@ let value = null;
 
 const PacketConstructor = require('./PacketConstructor')
 
-class AvailableEntityIdentifiers extends PacketConstructor {
+class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
  	 * @returns The name of the packet
@@ -56,4 +56,4 @@ class AvailableEntityIdentifiers extends PacketConstructor {
 	}
 }
 
-module.exports = AvailableEntityIdentifiers;
+module.exports = ServerAvailableEntityIdentifiersPacket;

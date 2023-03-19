@@ -14,7 +14,7 @@ const PacketConstructor = require("./PacketConstructor");
 
 const assert = require('assert');
 
-const PlayerChatEvent = require("../../../events/PlayerChatEvent");
+const PlayerChatEvent = require("../../events/PlayerChatEvent");
 
 class ClientTextPacket extends PacketConstructor {
 	/**
@@ -57,7 +57,7 @@ class ClientTextPacket extends PacketConstructor {
 		await this.validatePacket(player, packet, server, message)
 
 		const chatevent = new PlayerChatEvent()
-		chatevent.execute(require("../../../Server").server, player, message)
+		chatevent.execute(server, player, message)
 	}
 }
 

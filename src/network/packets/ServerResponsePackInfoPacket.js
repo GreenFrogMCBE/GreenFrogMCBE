@@ -18,7 +18,7 @@ let texture_packs = [];
 
 const PacketConstructor = require("./PacketConstructor");
 
-class ResponsePackInfo extends PacketConstructor {
+class ServerResponsePackInfoPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -114,4 +114,4 @@ class ResponsePackInfo extends PacketConstructor {
 	}
 }
 
-module.exports = ResponsePackInfo;
+module.exports = ServerResponsePackInfoPacket;

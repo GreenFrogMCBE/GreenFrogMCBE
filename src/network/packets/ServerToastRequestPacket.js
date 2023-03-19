@@ -15,7 +15,7 @@ const PacketConstructor = require("./PacketConstructor");
 let title = "";
 let message = "";
 
-class ToastRequest extends PacketConstructor {
+class ServerToastRequestPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -75,4 +75,4 @@ class ToastRequest extends PacketConstructor {
 	}
 }
 
-module.exports = ToastRequest;
+module.exports = ServerToastRequestPacket;

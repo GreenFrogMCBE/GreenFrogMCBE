@@ -14,7 +14,7 @@ let data = null;
 
 const PacketConstructor = require('./PacketConstructor')
 
-class AvailableCommands extends PacketConstructor {
+class ServerAvailableCommandsPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
 	 * @returns The name of the packet
@@ -56,4 +56,4 @@ class AvailableCommands extends PacketConstructor {
 	}
 }
 
-module.exports = AvailableCommands;
+module.exports = ServerAvailableCommandsPacket;

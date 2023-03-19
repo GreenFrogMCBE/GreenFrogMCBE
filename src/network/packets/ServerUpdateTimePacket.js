@@ -15,7 +15,7 @@ const PacketConstructor = require("./PacketConstructor");
 
 let time = 0;
 
-class Time extends PacketConstructor {
+class ServerUpdateTimePacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -69,4 +69,4 @@ class Time extends PacketConstructor {
 	}
 }
 
-module.exports = Time;
+module.exports = ServerUpdateTimePacket;

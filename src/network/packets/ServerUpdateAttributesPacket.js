@@ -4,7 +4,7 @@ let id = -1;
 let attributes = null;
 let tick = -1;
 
-class UpdateAttributes extends PacketConstructor {
+class ServerUpdateAttributesPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -80,4 +80,4 @@ class UpdateAttributes extends PacketConstructor {
     }
 }
 
-module.exports = UpdateAttributes;
+module.exports = ServerUpdateAttributesPacket;

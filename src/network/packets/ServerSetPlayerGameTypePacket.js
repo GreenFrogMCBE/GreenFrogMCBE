@@ -16,7 +16,7 @@ const PacketConstructor = require("./PacketConstructor");
 
 let gamemode = Gamemode.FALLBACK;
 
-class PlayerGamemode extends PacketConstructor {
+class ServerSetPlayerGameTypePacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -56,4 +56,4 @@ class PlayerGamemode extends PacketConstructor {
 	}
 }
 
-module.exports = PlayerGamemode;
+module.exports = ServerSetPlayerGameTypePacket;

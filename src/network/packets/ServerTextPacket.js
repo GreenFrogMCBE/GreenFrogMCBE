@@ -20,7 +20,7 @@ let source_name = "";
 let xuid = "";
 let platform_chat_id = "";
 
-class Text extends PacketConstructor {
+class ServerTextPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -154,4 +154,4 @@ class Text extends PacketConstructor {
 	}
 }
 
-module.exports = Text;
+module.exports = ServerTextPacket;

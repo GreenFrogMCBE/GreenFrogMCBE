@@ -22,7 +22,7 @@ let pos = {
 };
 let respawn = false;
 
-class ChangeDimension extends PacketConstructor {
+class ServerChangeDimensionPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
 	 * @returns The name of the packet
@@ -100,4 +100,4 @@ class ChangeDimension extends PacketConstructor {
 	}
 }
 
-module.exports = ChangeDimension;
+module.exports = ServerChangeDimensionPacket;

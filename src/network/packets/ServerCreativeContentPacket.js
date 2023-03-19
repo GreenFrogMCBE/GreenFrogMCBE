@@ -14,7 +14,7 @@ let items = [];
 
 const PacketConstructor = require('./PacketConstructor')
 
-class CreativeContent extends PacketConstructor {
+class ServerCreativeContentPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -54,4 +54,4 @@ class CreativeContent extends PacketConstructor {
 	}
 }
 
-module.exports = CreativeContent;
+module.exports = ServerCreativeContentPacket;

@@ -14,7 +14,7 @@ let status = "";
 
 const PacketConstructor = require("./PacketConstructor");
 
-class PlayStatus extends PacketConstructor {
+class ServerPlayStatusPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -54,4 +54,4 @@ class PlayStatus extends PacketConstructor {
 	}
 }
 
-module.exports = PlayStatus;
+module.exports = ServerPlayStatusPacket;

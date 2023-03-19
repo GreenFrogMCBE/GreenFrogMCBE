@@ -14,7 +14,7 @@ let enabled = false;
 
 const PacketConstructor = require('./PacketConstructor')
 
-class ClientCacheStatus extends PacketConstructor {
+class ServerClientCacheStatusPacket extends PacketConstructor {
 	/**
 	 * @returns The name of the packet.
 	 */
@@ -45,4 +45,4 @@ class ClientCacheStatus extends PacketConstructor {
 	}
 }
 
-module.exports = ClientCacheStatus;
+module.exports = ServerClientCacheStatusPacket;

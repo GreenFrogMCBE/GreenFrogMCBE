@@ -65,7 +65,7 @@ module.exports = {
 	/**
 	 * @private
 	 */
-	async _handlepk(client, packet, server) {
+	async _handlepk(client, packetparams, server) {
 		if (client.offline) {
 			throw new Error(lang.errors.packetErrorOffline);
 		}
@@ -76,12 +76,16 @@ module.exports = {
 			if (filename.startsWith('Client')) {
 				const packetPath = path.join(packetsDir, filename);
 				try {
-					require(packetPath).writePacket(client, packet, server);
+					const packetPathImport = require(packetPath);
+					const packet = new packetPathImport()
+					if (packet.getPacketName() === packetparams.data.name) {
+						packet.readPacket(client, packetparams, server);
+					}
 				} catch (e) {
-					if (e.toString().includes("writePacket")) {
+					if (e.toString().includes("readPacket")) {
 						if (config.logUnhandledPackets) {
 							Logger.warning(lang.devdebug.unhandledPacket);
-							console.info("%o", packet);
+							console.info("%o", packetparams);
 						}
 					} else {
 						client.kick(lang.kickmessages.invalidPacket);

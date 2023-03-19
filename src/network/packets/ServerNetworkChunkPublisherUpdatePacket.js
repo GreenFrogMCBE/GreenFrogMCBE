@@ -20,7 +20,7 @@ let saved_chunks = [];
 
 const PacketConstructor = require("./PacketConstructor");
 
-class NetworkChunkPublisherUpdate extends PacketConstructor {
+class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -100,4 +100,4 @@ class NetworkChunkPublisherUpdate extends PacketConstructor {
 	}
 }
 
-module.exports = NetworkChunkPublisherUpdate;
+module.exports = ServerNetworkChunkPublisherUpdatePacket;

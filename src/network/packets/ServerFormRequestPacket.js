@@ -23,7 +23,7 @@ let type = "form";
 let button1 = Colors.red + "Invalid button1!";
 let button2 = Colors.red + "Invalid button2!";
 
-class FormRequest extends PacketConstructor {
+class ServerFormRequestPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -129,4 +129,4 @@ class FormRequest extends PacketConstructor {
 	}
 }
 
-module.exports = FormRequest;
+module.exports = ServerFormRequestPacket;

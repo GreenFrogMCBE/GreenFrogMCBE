@@ -15,7 +15,7 @@ let enabled = true;
 
 const PacketConstructor = require("./PacketConstructor");
 
-class SetCommandsEnabled extends PacketConstructor {
+class ServerSetCommandsEnabledPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -58,4 +58,4 @@ class SetCommandsEnabled extends PacketConstructor {
 	}
 }
 
-module.exports = SetCommandsEnabled;
+module.exports = ServerSetCommandsEnabledPacket;

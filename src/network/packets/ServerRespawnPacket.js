@@ -24,7 +24,7 @@ let runtime_entity_id = 0;
 
 const PacketConstructor = require("./PacketConstructor");
 
-class Respawn extends PacketConstructor {
+class ServerRespawnPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -106,4 +106,4 @@ class Respawn extends PacketConstructor {
 	}
 }
 
-module.exports = Respawn;
+module.exports = ServerRespawnPacket;

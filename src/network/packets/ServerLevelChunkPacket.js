@@ -18,7 +18,7 @@ let payload = [];
 
 const PacketConstructor = require("./PacketConstructor");
 
-class LevelChunk extends PacketConstructor {
+class ServerLevelChunkPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -130,4 +130,4 @@ class LevelChunk extends PacketConstructor {
 	}
 }
 
-module.exports = LevelChunk;
+module.exports = ServerLevelChunkPacket;

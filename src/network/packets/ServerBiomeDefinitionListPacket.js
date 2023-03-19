@@ -14,7 +14,7 @@ let value = null;
 
 const PacketConstructor = require('./PacketConstructor')
 
-class BiomeDefinitionList extends PacketConstructor {
+class ServerBiomeDefinitionListPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
 	 * @returns The name of the packet
@@ -48,4 +48,4 @@ class BiomeDefinitionList extends PacketConstructor {
 	}
 }
 
-module.exports = BiomeDefinitionList;
+module.exports = ServerBiomeDefinitionListPacket;

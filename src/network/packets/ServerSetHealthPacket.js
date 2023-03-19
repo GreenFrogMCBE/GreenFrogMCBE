@@ -2,7 +2,7 @@ let health = 0;
 
 const PacketConstructor = require("./PacketConstructor");
 
-class SetHealth extends PacketConstructor {
+class ServerSetHealthPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -41,4 +41,4 @@ class SetHealth extends PacketConstructor {
     }
 }
 
-module.exports = SetHealth
+module.exports = ServerSetHealthPacket

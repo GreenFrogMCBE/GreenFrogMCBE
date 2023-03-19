@@ -17,47 +17,46 @@ const PlayStatus = require("./ServerPlayStatusPacket");
 const CreativeContent = require("./ServerCreativeContentPacket");
 const PlayerInfo = require("../../api/PlayerInfo");
 const PacketConstructor = require("./PacketConstructor");
+const PlayerSpawnEvent = require("../../events/PlayerSpawnEvent");
 const ResourcePackStack = require("./ServerResourcePackStackPacket");
 const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
 const SetCommandsEnabled = require("./ServerSetCommandsEnabledPacket");
-const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket");
-const PlayerSpawnEvent = require("../../events/PlayerSpawnEvent");
+const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket")
 const PacketHandlingError = require("./exceptions/PacketHandlingError");
 const AvailableEntityIdentifiers = require("./ServerAvailableCommandsPacket");
-const NetworkChunkPublisherUpdate = require("./ServerNetworkChunkPublisherUpdatePacket");
 const PlayerHasAllPacksEvent = require("../../events/PlayerHasAllPacksEvent");
+const NetworkChunkPublisherUpdate = require("./ServerNetworkChunkPublisherUpdatePacket");
 const PlayerResourcePacksRefusedEvent = require("../../events/PlayerResourcePacksRefusedEvent");
 const PlayerResourcePacksCompletedEvent = require("../../events/PlayerResourcePacksCompletedEvent");
 const PlayerHasNoResourcePacksInstalledEvent = require("../../events/PlayerHasNoResourcePacksInstalledEvent");
+const ChunkRadiusUpdate = require("./ServerChunkRadiusUpdatePacket");
 const CommandGamemode = require("../../commands/CommandGamemode");
+const ResourcePackStatus = require("./types/ResourcePackStatus");
 const CommandVersion = require("../../commands/CommandVersion");
 const CommandManager = require("../../player/CommandManager");
-const ResourcePackStatus = require("./types/ResourcePackStatus");
+const ItemComponent = require("./ServerItemComponentPacket");
 const CommandStop = require("../../commands/CommandStop");
 const CommandKick = require("../../commands/CommandKick");
 const CommandList = require("../../commands/CommandList");
 const CommandDeop = require("../../commands/CommandDeop");
 const CommandTime = require("../../commands/CommandTime");
+const WorldGenerator = require("./types/WorldGenerator");
 const { config, lang } = require("../../api/ServerInfo");
 const DefaultWorld = require("../../world/DefaultWorld");
 const CommandSay = require("../../commands/CommandSay");
-const WorldGenerator = require("./types/WorldGenerator");
-const ChunkRadiusUpdate = require("./ServerChunkRadiusUpdatePacket");
+const LevelChunk = require("./ServerLevelChunkPacket");
 const CommandMe = require("../../commands/CommandMe");
 const CommandPl = require("../../commands/CommandPl");
 const CommandOp = require("../../commands/CommandOp");
 const PlayerListTypes = require("./types/PlayerList");
 const ChunkError = require("./exceptions/ChunkError");
-const ServerInfo = require("../../api/ServerInfo");
 const PlayStatuses = require("./types/PlayStatuses");
+const ServerInfo = require("../../api/ServerInfo");
 const Difficulty = require("./types/Difficulty");
-const ItemComponent = require("./ServerItemComponentPacket");
-const Logger = require("../../server/Logger");
-const Generator = require("./types/Generator");
+const Generator = require("./types/Generators");
 const Dimension = require("./types/Dimension");
-const LevelChunk = require("./ServerLevelChunkPacket");
-const Biome = require("../types/Biome");
-const assert = require("assert")
+const Logger = require("../../server/Logger");
+const Biome = require("./types/Biome");
 const fs = require("fs");
 
 
@@ -84,11 +83,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
      * @param {JSON} packet
      * @param {any} server
      */
-    async validatePacket(player, packet, server, response_status) {
-        assert(player, null)
-        JSON.parse(packet)
-        assert(server, null)
-
+    async validatePacket(response_status) {
         const valid = [
             ResourcePackStatus.NONE,
             ResourcePackStatus.REFUSED,
@@ -108,7 +103,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
      */
     async readPacket(player, packet, server) {
         const responseStatus = packet.data.params.response_status;
-        await this.validatePacket(player, packet, server, responseStatus);
+        await this.validatePacket(responseStatus);
 
         switch (responseStatus) {
             case ResourcePackStatus.NONE:
@@ -171,8 +166,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                 Logger.info(lang.playerstatuses.joined.replace("%player%", player.username));
 
                 const clientLocalWorld = new DefaultWorld();
-                clientLocalWorld.setChunkRadius(require("../../../../world/world_settings.json").chunkLoadRadius)
-                clientLocalWorld.setName(require("../../../../world/world_settings.json").worldName)
+                clientLocalWorld.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius)
+                clientLocalWorld.setName(require("../../../world/world_settings.json").worldName)
                 if (config.generator === WorldGenerator.FLAT) {
                     clientLocalWorld.setSpawnCoordinates(0, -58, 0);
                 } else if (config.generator === WorldGenerator.DEFAULT) {
@@ -202,15 +197,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                 startgame.writePacket(player);
 
                 const biomedeflist = new BiomeDefinitionList();
-                biomedeflist.setValue(require("../res/biomes.json"));
+                biomedeflist.setValue(require("./res/biomes.json"));
                 biomedeflist.writePacket(player);
 
                 const availableentityids = new AvailableEntityIdentifiers();
-                availableentityids.setValue(require("../res/entities.json"));
+                availableentityids.setValue(require("./res/entities"));
                 availableentityids.writePacket(player);
 
                 const creativecontent = new CreativeContent();
-                creativecontent.setItems(require("../res/creativeContent.json").items);
+                creativecontent.setItems(require("./res/creativeContent.json").items);
                 creativecontent.writePacket(player);
 
                 const playerlist = new PlayerList();

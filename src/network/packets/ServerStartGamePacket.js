@@ -39,7 +39,7 @@ let spawn = {
 let permission_level = 0;
 let world = "";
 
-class StartGame extends PacketConstructor {
+class ServerStartGamePacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -6389,4 +6389,4 @@ class StartGame extends PacketConstructor {
 	}
 }
 
-module.exports = StartGame;
+module.exports = ServerStartGamePacket;

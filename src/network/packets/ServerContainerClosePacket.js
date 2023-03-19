@@ -15,7 +15,7 @@ let server = false;
 
 const PacketConstructor = require('./PacketConstructor')
 
-class ContainerClose extends PacketConstructor {
+class ServerContainerClosePacket extends PacketConstructor {
 	/**
  	 * Returns the packet name
  	 * @returns The name of the packet
@@ -72,4 +72,4 @@ class ContainerClose extends PacketConstructor {
 	}
 }
 
-module.exports = ContainerClose;
+module.exports = ServerContainerClosePacket;

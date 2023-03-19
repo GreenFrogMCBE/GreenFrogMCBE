@@ -14,7 +14,7 @@ let chunk_radius = 0;
 
 const PacketConstructor = require('./PacketConstructor')
 
-class ChunkRadiusUpdate extends PacketConstructor {
+class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
 	 * @returns The name of the packet
@@ -54,4 +54,4 @@ class ChunkRadiusUpdate extends PacketConstructor {
 	}
 }
 
-module.exports = ChunkRadiusUpdate;
+module.exports = ServerChunkRadiusUpdatePacket;

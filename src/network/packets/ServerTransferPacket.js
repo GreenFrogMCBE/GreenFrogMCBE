@@ -19,7 +19,7 @@ let port = null;
 
 const assert = require('assert')
 
-class Transfer extends PacketConstructor {
+class ServerTransferPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -90,4 +90,4 @@ class Transfer extends PacketConstructor {
 	}
 }
 
-module.exports = Transfer;
+module.exports = ServerTransferPacket;

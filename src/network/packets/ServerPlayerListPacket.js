@@ -20,7 +20,7 @@ let type = PlayerListTypes.ADD;
 
 const PacketConstructor = require("./PacketConstructor");
 
-class PlayerList extends PacketConstructor {
+class ServerPlayerListPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -141,4 +141,4 @@ class PlayerList extends PacketConstructor {
 	}
 }
 
-module.exports = PlayerList;
+module.exports = ServerPlayerListPacket;

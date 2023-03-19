@@ -21,7 +21,7 @@ let fadeouttime = -1;
 let xuid = "";
 let platform_online_id = "";
 
-class Title extends PacketConstructor {
+class ServerSetTitlePacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -150,4 +150,4 @@ class Title extends PacketConstructor {
 	}
 }
 
-module.exports = Title;
+module.exports = ServerSetTitlePacket;

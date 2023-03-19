@@ -16,7 +16,7 @@ let itemdata = {};
 
 const PacketConstructor = require("./PacketConstructor");
 
-class InventorySlot extends PacketConstructor {
+class ServerInventorySlotPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -90,4 +90,4 @@ class InventorySlot extends PacketConstructor {
 	}
 }
 
-module.exports = InventorySlot;
+module.exports = ServerInventorySlotPacket;

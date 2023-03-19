@@ -19,7 +19,7 @@ let experiments_previously_used = false;
 
 const PacketConstructor = require("./PacketConstructor");
 
-class ResourcePackStack extends PacketConstructor {
+class ServerResourcePackStackPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -144,4 +144,4 @@ class ResourcePackStack extends PacketConstructor {
 	}
 }
 
-module.exports = ResourcePackStack;
+module.exports = ServerResourcePackStackPacket;

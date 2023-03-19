@@ -27,7 +27,7 @@ let layer = 0;
 // !!! This packet is no longer used
 // (this file will not be deleted, even if its not used anymore, so you can use this packet to update blocks using packet API in your plugin)
 
-class UpdateBlock extends PacketConstructor {
+class ServerUpdateBlockPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
 	* @returns The name of the packet
@@ -248,4 +248,4 @@ class UpdateBlock extends PacketConstructor {
 	}
 }
 
-module.exports = UpdateBlock;
+module.exports = ServerUpdateBlockPacket;

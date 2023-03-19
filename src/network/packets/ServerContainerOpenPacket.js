@@ -21,7 +21,7 @@ let runtime_entity_id = 0;
 
 const PacketConstructor = require('./PacketConstructor')
 
-class ContainerOpen extends PacketConstructor {
+class ServerContainerOpenPacket extends PacketConstructor {
 	/**
  	 * Returns the packet name
  	 * @returns The name of the packet
@@ -115,4 +115,4 @@ class ContainerOpen extends PacketConstructor {
 	}
 }
 
-module.exports = ContainerOpen;
+module.exports = ServerContainerOpenPacket;
