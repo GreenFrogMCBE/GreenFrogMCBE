@@ -68,10 +68,13 @@ module.exports = {
 			if (!validGamemodes.includes(gamemode)) throw new Error("Invalid gamemode!")
 
 			player.gamemode = gamemode;
+
 			const gm = new PlayerGamemode();
 			gm.setGamemode(gamemode);
-			gm.send(player);
-			new PlayerGamemodeChangeEvent().execute(require("../Server").server, player, gamemode);
+			gm.writePacket(player);
+			
+			const gamemodechange = new PlayerGamemodeChangeEvent()
+			gamemodechange.execute(require("../Server").server, player, gamemode);
 		};
 
 		/**

@@ -41,7 +41,7 @@ class clientHealthUpdateEvent extends Event {
 		if (!this.cancelled) {
 			const sethealthpacket = new SetHealth()
 			sethealthpacket.setHealth(health)
-			sethealthpacket.send(client)
+			sethealthpacket.writePacket(client)
 	
 			client.setAttribute({
 				"min": 0,

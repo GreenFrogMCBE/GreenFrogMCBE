@@ -45,7 +45,7 @@ class ServerToastRequestEvent extends Event {
 			let packet = new ToastRequest();
 			packet.setTitle(title);
 			packet.setMessage(message);
-			packet.send(client);
+			packet.writePacket(client);
 		}
 	}
 }
