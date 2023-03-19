@@ -10,48 +10,71 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const Transfer = require("../network/packets/ServerTransferPacket");
-const Event = require("./Event");
-const fs = require("fs");
+const PacketConstructor = require("./PacketConstructor");
 
-class PlayerTransferEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerTransferEvent";
+const assert = require('assert');
+
+const PlayerMoveEvent = require('../../events/PlayerMoveEvent')
+
+const PacketHandlingException = require('./exceptions/PacketHandlingError')
+
+class ClientMovePacket extends PacketConstructor {
+	/**
+	 * Returns the packet name
+	 * @returns The name of the packet
+	 */
+	getPacketName() {
+		return "move_player"
 	}
 
-	cancel() {
-		this.cancelled = true;
+	/**
+	 * Returns if is the packet critical?
+	 * @returns Returns if the packet is critical
+	 */
+	isCriticalPacket() {
+		return false
 	}
 
-	async execute(server, client, address, port) {
-		await new Promise((resolve, reject) => {
-			fs.readdir("./plugins", (err, plugins) => {
-				if (err) {
-					reject(err);
-				} else {
-					plugins.forEach((plugin) => {
-						try {
-							require(`${__dirname}/../../plugins/${plugin}`).PlayerTransferEvent(server, client, address, port, this);
-						} catch (e) {
-							FailedToHandleEvent.handleEventError(e, plugin, this.name);
-						}
-					});
-					resolve();
-				}
-			});
-		});
+	/**
+	 * Validates the packet
+	 * @param {any} player
+	 * @param {JSON} packet
+	 * @param {any} server
+	 */
+	async validatePacket(player, packet, server) {
+		assert(player, null)
+		JSON.parse(packet)
+		assert(server, null)
 
-		if (!this.cancelled) {
-			const trpk = new Transfer();
-			trpk.setServerAddress(address);
-			trpk.setPort(port);
-			trpk.send(client);
+		if (Math.abs(packet.data.params.position.x) > Math.E ||
+			Math.abs(packet.data.params.position.y) > Math.E ||
+			Math.abs(packet.data.params.position.z) > Math.E
+		) {
+			throw new PacketHandlingException("Invalid position in ClientMovePlayer packet!")
 		}
+	}
+
+	/**
+	 * Reads the packet from player
+	 * @param {any} player
+	 * @param {JSON} packet
+	 */
+	async readPacket(player, packet, server) {
+		await this.validatePacket(player, packet, server)
+
+		let position = packet.data.params.position
+
+		const move_event = new PlayerMoveEvent()
+		move_event.execute(
+			server,
+			player,
+			position
+		)
+
+		player.x = position.x
+		player.y = position.y
+		player.z = position.z
 	}
 }
 
-module.exports = PlayerTransferEvent;
+module.exports = ClientMovePacket;

@@ -12,7 +12,7 @@
  */
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const Text = require("../network/packets/Text");
+const Text = require("../network/packets/ServerTextPacket");
 const Event = require("./Event");
 const fs = require("fs");
 

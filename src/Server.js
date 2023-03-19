@@ -13,21 +13,13 @@
 process.env.DEBUG = process.argv.includes("--debug") ? "minecraft-protocol" : "";
 
 const fs = require("fs");
+const path = require("path")
 const bedrock = require("frog-protocol");
 const ServerInfo = require("./api/ServerInfo");
 const PlayerInfo = require("./api/PlayerInfo");
 const PluginLoader = require("./plugins/PluginLoader");
-const Text = require("./network/packets/handlers/TextPacket");
-const Interact = require("./network/packets/handlers/InteractPacket");
-const ResponsePackInfo = require("./network/packets/ResponsePackInfo");
-const ClientContainerClose = require("./network/packets/handlers/ClientContainerClosePacket");
-const ResourcePackClientResponse = require("./network/packets/handlers/ResourcePackClientResponsePacket");
-const InventoryTransaction = require("./network/packets/handlers/InventoryTransactionPacket");
+const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
 const ServerInternalServerErrorEvent = require("./events/ServerInternalServerErrorEvent");
-const ModalFormResponse = require("./network/packets/handlers/ModalFormResponsePacket");
-const ItemStackRequest = require("./network/packets/handlers/ItemStackRequestPacket");
-const CommandRequest = require("./network/packets/handlers/CommandRequestPacket");
-const PlayerMove = require("./network/packets/handlers/PlayerMovePacket");
 const VersionToProtocol = require("./utils/VersionToProtocol");
 const GarbageCollector = require("./utils/GarbageCollector");
 const PlayerJoinEvent = require("./events/PlayerJoinEvent");
@@ -36,7 +28,6 @@ const DefaultWorld = require("./world/DefaultWorld");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
 const assert = require('assert');
-const SetPlayerGameTypePacket = require("./network/packets/handlers/SetPlayerGameTypePacket");
 
 let clients = [];
 let server = null;
@@ -74,46 +65,28 @@ module.exports = {
 	/**
 	 * @private
 	 */
-	_handlepk(client, packet) {
-		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
-		switch (packet.data.name) {
-			case "resource_pack_client_response":
-				new ResourcePackClientResponse().handle(client, packet, this.server);
-				break;
-			case "move_player":
-				new PlayerMove().handle(client, packet);
-				break;
-			case "item_stack_request":
-				new ItemStackRequest().handle(client, packet);
-				break;
-			case "set_player_game_type":
-				new SetPlayerGameTypePacket().handle(client, packet)
-				break;
-			case "interact":
-				new Interact().handle(packet, client);
-				break;
-			case "container_close":
-				new ClientContainerClose().handle(client);
-				break;
-			case "text":
-				new Text().handle(client, packet);
-				break;
-			case "command_request":
-				new CommandRequest().handle(client, packet);
-				break;
-			case "modal_form_response":
-				new ModalFormResponse().handle(this.server, client, packet);
-				break;
-			case "inventory_transaction":
-				new InventoryTransaction().handle(this.server, client, packet);
-				break;
-			default:
-				if (config.logUnhandledPackets) {
-					Logger.warning(lang.devdebug.unhandledPacket);
-					console.info("%o", packet);
-				}
-				break;
+	async _handlepk(client, packet, server) {
+		if (client.offline) {
+			throw new Error(lang.errors.packetErrorOffline);
 		}
+	
+		const packetsDir = path.join(__dirname, 'network', 'packets');
+		
+		fs.readdirSync(packetsDir).forEach((filename) => {
+			if (filename.startsWith('Client')) {
+				const packetPath = path.join(packetsDir, filename);
+				console.log(packetPath)
+				console.log('%o', require(packetPath))
+				try {
+					require(packetPath).writePacket(client, packet, server);
+				} catch (e) {
+					if (config.logUnhandledPackets) {
+						Logger.warning(lang.devdebug.unhandledPacket);
+						console.info("%o", packet);
+					}
+				}
+			}
+		});
 	},
 
 	/**

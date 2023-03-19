@@ -10,48 +10,50 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const Transfer = require("../network/packets/ServerTransferPacket");
-const Event = require("./Event");
-const fs = require("fs");
 
-class PlayerTransferEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerTransferEvent";
+const Gamemode = require("../../api/GameMode");
+const PacketConstructor = require("./PacketConstructor");
+
+let gamemode = Gamemode.FALLBACK;
+
+class PlayerGamemode extends PacketConstructor {
+	/**
+	* Returns the packet name
+	* @returns The name of the packet
+	*/
+	getPacketName() {
+		return "set_player_game_type";
 	}
 
-	cancel() {
-		this.cancelled = true;
+	/**
+	 * Returns if is the packet critical?
+	 * @returns Returns if the packet is critical
+	 */
+	isCriticalPacket() {
+		return false
 	}
 
-	async execute(server, client, address, port) {
-		await new Promise((resolve, reject) => {
-			fs.readdir("./plugins", (err, plugins) => {
-				if (err) {
-					reject(err);
-				} else {
-					plugins.forEach((plugin) => {
-						try {
-							require(`${__dirname}/../../plugins/${plugin}`).PlayerTransferEvent(server, client, address, port, this);
-						} catch (e) {
-							FailedToHandleEvent.handleEventError(e, plugin, this.name);
-						}
-					});
-					resolve();
-				}
-			});
+	/**
+	 * It sets the gamemode.
+	 * @param gamemode1 - The gamemode.
+	 */
+	setGamemode(gamemode1) {
+		gamemode = gamemode1;
+	}
+
+	/**
+	 * It returns the gamemode
+	 * @returns The gamemode
+	 */
+	getGamemode() {
+		return gamemode;
+	}
+
+	writePacket(client) {
+		client.queue(this.name(), {
+			gamemode: this.getGamemode(),
 		});
-
-		if (!this.cancelled) {
-			const trpk = new Transfer();
-			trpk.setServerAddress(address);
-			trpk.setPort(port);
-			trpk.send(client);
-		}
 	}
 }
 
-module.exports = PlayerTransferEvent;
+module.exports = PlayerGamemode;

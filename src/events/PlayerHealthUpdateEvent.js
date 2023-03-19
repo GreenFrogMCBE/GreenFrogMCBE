@@ -12,7 +12,7 @@
  */
 /* eslint-disable no-unused-vars */
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const SetHealth = require("../network/packets/SetHealth")
+const SetHealth = require("../network/packets/ServerSetHealthPacket")
 const Event = require("./Event");
 const fs = require("fs");
 

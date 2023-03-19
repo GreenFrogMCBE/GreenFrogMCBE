@@ -1,4 +1,5 @@
 {
   "worldName": "GreenFrog server",
-  "chunkLoadRadius": 11
+  "chunkLoadRadius": 11,
+  "networkChunkLoadRadius": 272
 }

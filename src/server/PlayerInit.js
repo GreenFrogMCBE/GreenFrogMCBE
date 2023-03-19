@@ -14,19 +14,20 @@ const Logger = require("./Logger");
 const Chat = require("../api/Chat");
 const GameMode = require("../api/GameMode");
 const { lang } = require("../api/ServerInfo");
-const Time = require("../network/packets/Time");
 const PlayerKickEvent = require("../events/PlayerKickEvent");
 const PlayerLeaveEvent = require("../events/PlayerLeaveEvent");
-const PlayerGamemode = require("../network/packets/PlayerGamemode");
+const Time = require("../network/packets/ServerUpdateTimePacket");
 const PlayerTransferEvent = require("../events/PlayerTransferEvent");
 const ServerToClientChatEvent = require("../events/ServerToClientChatEvent");
 const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
+const PlayerGamemode = require("../network/packets/ServerSetPlayerGameTypePacket");
+const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
+const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
+const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
-const UpdateAttributes = require("../network/packets/UpdateAttributes");
+const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
-const ChangeDimension = require("../network/packets/ChangeDimension");
 const GarbageCollector = require("../utils/GarbageCollector");
-const PlayerList = require("../network/packets/PlayerList");
 const PlayerInfo = require("../api/PlayerInfo");
 
 module.exports = {
@@ -57,8 +58,14 @@ module.exports = {
 		 * @param {string} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 */
 		player.setGamemode = function (gamemode) {
-			const validGamemodes = [GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR, GameMode.FALLBACK];
-			if (!validGamemodes.includes(gamemode)) throw new Error(lang.errors.invalidGamemode);
+			const validGamemodes = [
+				GameMode.SURVIVAL,
+				GameMode.CREATIVE, 
+				GameMode.ADVENTURE, 
+				GameMode.SPECTATOR, 
+				GameMode.FALLBACK
+			];
+			if (!validGamemodes.includes(gamemode)) throw new Error("Invalid gamemode!")
 
 			player.gamemode = gamemode;
 			const gm = new PlayerGamemode();
@@ -96,6 +103,14 @@ module.exports = {
 			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.getUserData().displayName).replace("%reason%", msg));
 			player.disconnect(msg);
 		};
+
+		player.setChunkRadius = function (radius) {
+			const chunkradiusupdate = new ChunkRadiusUpdate();
+			chunkradiusupdate.setChunkRadius(
+				radius
+			);
+			chunkradiusupdate.send(player);
+		}
 
 		/**
 		 * Sets the player's time

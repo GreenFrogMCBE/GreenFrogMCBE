@@ -10,48 +10,84 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const Transfer = require("../network/packets/ServerTransferPacket");
-const Event = require("./Event");
-const fs = require("fs");
+let window_id = null;
+let slot = 0;
+let itemdata = {};
 
-class PlayerTransferEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerTransferEvent";
+const PacketConstructor = require("./PacketConstructor");
+
+class InventorySlot extends PacketConstructor {
+	/**
+	* Returns the packet name
+	* @returns The name of the packet
+	*/
+	getPacketName() {
+		return "inventory_slot";
 	}
 
-	cancel() {
-		this.cancelled = true;
+	/**
+	 * Returns if is the packet critical?
+	 * @returns Returns if the packet is critical
+	 */
+	isCriticalPacket() {
+		return false
 	}
 
-	async execute(server, client, address, port) {
-		await new Promise((resolve, reject) => {
-			fs.readdir("./plugins", (err, plugins) => {
-				if (err) {
-					reject(err);
-				} else {
-					plugins.forEach((plugin) => {
-						try {
-							require(`${__dirname}/../../plugins/${plugin}`).PlayerTransferEvent(server, client, address, port, this);
-						} catch (e) {
-							FailedToHandleEvent.handleEventError(e, plugin, this.name);
-						}
-					});
-					resolve();
-				}
-			});
+	/**
+	 * It sets the window id.
+	 * @param {Number} id
+	 */
+	setWindowId(id) {
+		window_id = id;
+	}
+
+	/**
+	 * It sets the slot.
+	 * @param {Number} slot1
+	 */
+	setSlot(slot1) {
+		slot = slot1;
+	}
+
+	/**
+	 * It sets the item data.
+	 * @param {JSON} itemdata1
+	 */
+	setItemData(itemdata1) {
+		itemdata = itemdata1;
+	}
+
+	/**
+	 * It returns the window id.
+	 * @returns The window id.
+	 */
+	getWindowId() {
+		return window_id;
+	}
+
+	/**
+	 * It returns the slot.
+	 * @returns The slot.
+	 */
+	getSlot() {
+		return slot;
+	}
+
+	/**
+	 * It returns the item data.
+	 * @returns The item data.
+	 */
+	getItemData() {
+		return itemdata;
+	}
+
+	writePacket(client) {
+		client.queue(this.name(), {
+			window_id: this.getWindowId(),
+			slot: this.getSlot(),
+			item: this.getItemData(),
 		});
-
-		if (!this.cancelled) {
-			const trpk = new Transfer();
-			trpk.setServerAddress(address);
-			trpk.setPort(port);
-			trpk.send(client);
-		}
 	}
 }
 
-module.exports = PlayerTransferEvent;
+module.exports = InventorySlot;

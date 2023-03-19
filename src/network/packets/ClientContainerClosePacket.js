@@ -10,48 +10,55 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const Transfer = require("../network/packets/ServerTransferPacket");
-const Event = require("./Event");
-const fs = require("fs");
+const PlayerContainerCloseEvent = require("../../events/PlayerContainerCloseEvent");
+const ServerContainerClosePacket = require("./ServerContainerClosePacket");
+const PacketConstructor = require("./PacketConstructor");
+const WindowIds = require("./types/WindowIds");
+const assert = require("assert");
 
-class PlayerTransferEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerTransferEvent";
+class ClientContainerClosePacket extends PacketConstructor {
+	/**
+	 * Returns the packet name
+	 * @returns The name of the packet
+	 */
+	getPacketName() {
+		return "container_close"
 	}
 
-	cancel() {
-		this.cancelled = true;
+	/**
+	 * Returns if is the packet critical?
+	 * @returns Returns if the packet is critical
+	 */
+	isCriticalPacket() {
+		return false
 	}
 
-	async execute(server, client, address, port) {
-		await new Promise((resolve, reject) => {
-			fs.readdir("./plugins", (err, plugins) => {
-				if (err) {
-					reject(err);
-				} else {
-					plugins.forEach((plugin) => {
-						try {
-							require(`${__dirname}/../../plugins/${plugin}`).PlayerTransferEvent(server, client, address, port, this);
-						} catch (e) {
-							FailedToHandleEvent.handleEventError(e, plugin, this.name);
-						}
-					});
-					resolve();
-				}
-			});
-		});
+	/**
+	 * Validates the packet
+	 */
+	async validatePacket(player) {
+		assert(player.op, false)
+	}
 
-		if (!this.cancelled) {
-			const trpk = new Transfer();
-			trpk.setServerAddress(address);
-			trpk.setPort(port);
-			trpk.send(client);
-		}
+	/**
+	 * Reads the packet from client
+	 * @param {any} player
+	 * @param {JSON} packet
+	 */
+	async readPacket(player) {
+		this.validatePacket(player)
+
+		const containerclose = new ServerContainerClosePacket()
+		containerclose.setServer(false)
+		containerclose.setWindowId(WindowIds.CREATIVE)
+		containerclose.writePacket(player)
+
+		const containercloseevent = new PlayerContainerCloseEvent()
+		containercloseevent.execute(
+			require("../../Server").server,
+			player
+		)
 	}
 }
 
-module.exports = PlayerTransferEvent;
+module.exports = ClientContainerClosePacket;

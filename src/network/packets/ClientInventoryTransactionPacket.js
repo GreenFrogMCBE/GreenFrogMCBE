@@ -10,48 +10,56 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const Transfer = require("../network/packets/ServerTransferPacket");
-const Event = require("./Event");
-const fs = require("fs");
+/* eslint-disable no-case-declarations */
+const BlockBreakEvent = require("../../events/BlockBreakEvent");
+const PacketConstructor = require("./PacketConstructor");
+const BlockActions = require("./types/BlockActions");
+const Logger = require("../../server/Logger");
 
-class PlayerTransferEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerTransferEvent";
+class ClientInventoryTransactionPacket extends PacketConstructor {
+	/**
+	 * Returns the packet name
+	 * @returns The name of the packet
+	 */
+	getPacketName() {
+		return "inventory_transaction"
 	}
 
-	cancel() {
-		this.cancelled = true;
+	/**
+	 * Returns if is the packet critical?
+	 * @returns Returns if the packet is critical
+	 */
+	isCriticalPacket() {
+		return false
 	}
 
-	async execute(server, client, address, port) {
-		await new Promise((resolve, reject) => {
-			fs.readdir("./plugins", (err, plugins) => {
-				if (err) {
-					reject(err);
-				} else {
-					plugins.forEach((plugin) => {
-						try {
-							require(`${__dirname}/../../plugins/${plugin}`).PlayerTransferEvent(server, client, address, port, this);
-						} catch (e) {
-							FailedToHandleEvent.handleEventError(e, plugin, this.name);
-						}
-					});
-					resolve();
-				}
-			});
-		});
+	/**
+	 * Reads the packet from client
+	 * @param {any} player
+	 * @param {JSON} packet
+	 */
+	async readPacket(player, packet, server) {
+		let actionID = null
 
-		if (!this.cancelled) {
-			const trpk = new Transfer();
-			trpk.setServerAddress(address);
-			trpk.setPort(port);
-			trpk.send(client);
+		try {
+			actionID = packet.data.params.transaction.transaction_data.action_type;
+		} catch {
+			actionID = null
+		}
+
+		switch (actionID) {
+			case BlockActions.BREAKBLOCK:
+				const blockbreakevent = new BlockBreakEvent()
+				blockbreakevent.execute(
+					server,
+					player,
+					packet.data.params.transaction
+				)
+				break
+			default:
+				Logger.debug("Unsupported Block action from " + player.username + ": " + actionID)
 		}
 	}
 }
 
-module.exports = PlayerTransferEvent;
+module.exports = ClientInventoryTransactionPacket;

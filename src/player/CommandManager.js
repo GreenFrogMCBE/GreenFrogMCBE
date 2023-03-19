@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const AvailableCommands = require("../network/packets/AvailableCommands");
+const AvailableCommands = require("../network/packets/ServerAvailableCommandsPacket");
 
 let commands = [];
 
