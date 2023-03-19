@@ -17,38 +17,38 @@ const PacketConstructor = require('./PacketConstructor')
 class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
- 	 * @returns The name of the packet
- 	*/
+ 	 * @returns {String} The name of the packet
+ 	 */
 	getPacketName() {
 		return "available_entity_identifiers";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return true
 	}
 
 	/**
-	 * It sets the packet value
-	 * @param pkvalue - The packet value data to set.
+	 * Sets the packet value
+	 * @param {JSON} new_value - The packet value data to set.
 	 */
-	setValue(pkvalue) {
-		value = pkvalue;
+	setValue(new_value) {
+		value = new_value;
 	}
 
 	/**
-	 * It returns the packet value
-	 * @returns The packet value.
+	 * Returns the packet value
+	 * @returns {String} The packet value.
 	 */
 	getValue() {
 		return value;
 	}
 
 	/**
-	 * It writePacket the packet to the client
+	 * Sends the packet to the client
 	 * @param {Object} client
 	 */
 	writePacket(client) {
