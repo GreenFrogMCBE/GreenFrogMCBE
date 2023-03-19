@@ -21,10 +21,10 @@ const PlayerSpawnEvent = require("../../events/PlayerSpawnEvent");
 const ResourcePackStack = require("./ServerResourcePackStackPacket");
 const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
 const SetCommandsEnabled = require("./ServerSetCommandsEnabledPacket");
-const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket")
-const PacketHandlingError = require("./exceptions/PacketHandlingError");
-const AvailableEntityIdentifiers = require("./ServerAvailableCommandsPacket");
+const PacketHandlingError = require("./exceptions/PacketHandlingError")
+const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket");
 const PlayerHasAllPacksEvent = require("../../events/PlayerHasAllPacksEvent");
+const AvailableEntityIdentifiers = require("./ServerAvailableEntityIdentifiersPacket");
 const NetworkChunkPublisherUpdate = require("./ServerNetworkChunkPublisherUpdatePacket");
 const PlayerResourcePacksRefusedEvent = require("../../events/PlayerResourcePacksRefusedEvent");
 const PlayerResourcePacksCompletedEvent = require("../../events/PlayerResourcePacksCompletedEvent");
@@ -200,9 +200,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                 biomedeflist.setValue(require("./res/biomes.json"));
                 biomedeflist.writePacket(player);
 
-                // const availableentityids = new AvailableEntityIdentifiers();
-                // availableentityids.setData(require("./res/entities.json"));
-                // availableentityids.writePacket(player);
+                const availableentityids = new AvailableEntityIdentifiers();
+                availableentityids.setValue(require("./res/entities.json"));
+                availableentityids.writePacket(player);
 
                 const creativecontent = new CreativeContent();
                 creativecontent.setItems(require("./res/creativeContent.json").items);
