@@ -199,31 +199,31 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                 startgame.setSpawnPosition(0, 0, 0);
                 startgame.setPlayerPermissionLevel(player.permlevel);
                 startgame.setWorldName(clientLocalWorld.getName());
-                startgame.send(player);
+                startgame.writePacket(player);
 
                 const biomedeflist = new BiomeDefinitionList();
                 biomedeflist.setValue(require("../res/biomes.json"));
-                biomedeflist.send(player);
+                biomedeflist.writePacket(player);
 
                 const availableentityids = new AvailableEntityIdentifiers();
                 availableentityids.setValue(require("../res/entities.json"));
-                availableentityids.send(player);
+                availableentityids.writePacket(player);
 
                 const creativecontent = new CreativeContent();
                 creativecontent.setItems(require("../res/creativeContent.json").items);
-                creativecontent.send(player);
+                creativecontent.writePacket(player);
 
                 const playerlist = new PlayerList();
                 playerlist.setUsername(player.username);
-                playerlist.send(player);
+                playerlist.writePacket(player);
 
                 const commandsenabled = new SetCommandsEnabled();
                 commandsenabled.setEnabled(true);
-                commandsenabled.send(player);
+                commandsenabled.writePacket(player);
 
                 const clientcachestatus = new ClientCacheStatus();
                 clientcachestatus.setEnabled(true);
-                clientcachestatus.send(player);
+                clientcachestatus.writePacket(player);
 
                 const commandmanager = new CommandManager();
                 commandmanager.init(player);
@@ -272,12 +272,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                 } catch (e) {
                     itemcomponent.setItems([]);
                 }
-                itemcomponent.send(player);
+                itemcomponent.writePacket(player);
 
                 if (player.chunksEnabled) {
                     const chunkradiusupdate = new ChunkRadiusUpdate();
                     chunkradiusupdate.setChunkRadius(clientLocalWorld.getChunkRadius());
-                    chunkradiusupdate.send(player);
+                    chunkradiusupdate.writePacket(player);
 
                     const cords = config.generator === WorldGenerator.DEFAULT ? {
                         x: 1070,
@@ -293,7 +293,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                     networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
                     networkchunkpublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
                     networkchunkpublisher.setSavedChunks([]);
-                    networkchunkpublisher.send(player);
+                    networkchunkpublisher.writePacket(player);
 
                     let chunks = null;
 
@@ -314,7 +314,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                         } catch (e) {
                             throw new ChunkError(lang.errors.failedToLoadWorld_InvalidChunkData);
                         }
-                        levelchunk.send(player);
+                        levelchunk.writePacket(player);
                     }
 
                     player.network_chunks_loop = setInterval(() => {
@@ -322,7 +322,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                         networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
                         networkchunkpublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
                         networkchunkpublisher.setSavedChunks([]);
-                        networkchunkpublisher.send(player);
+                        networkchunkpublisher.writePacket(player);
                     }, 4500);
                 }
 
@@ -335,7 +335,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                             pl.setUsername(player.username);
                             pl.setId(Math.floor(Math.random() * 99999999999));
                             pl.setUuid(player.profile.uuid);
-                            pl.send(player);
+                            pl.writePacket(player);
                         }
                     }
                 }, 1000);
@@ -347,7 +347,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
                     const ps = new PlayStatus();
                     ps.setStatus(PlayStatuses.PLAYERSPAWN);
-                    ps.send(player);
+                    ps.writePacket(player);
 
                     const spawnevent = new PlayerSpawnEvent()
                     spawnevent.execute(
@@ -360,7 +360,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                     if (player.offline) return;
                     for (let i = 0; i < PlayerInfo.players.length; i++) {
                         if (PlayerInfo.players[i].username == player.username) return; // Vanilla behaviour
-                        PlayerInfo.players[i].sendMessage(lang.broadcasts.joinedTheGame.replace("%username%", player.username));
+                        PlayerInfo.players[i].writePacketMessage(lang.broadcasts.joinedTheGame.replace("%username%", player.username));
                     }
                 }, 1000);
         }

@@ -69,18 +69,27 @@ module.exports = {
 		if (client.offline) {
 			throw new Error(lang.errors.packetErrorOffline);
 		}
-	
+
 		const packetsDir = path.join(__dirname, 'network', 'packets');
-		
+
 		fs.readdirSync(packetsDir).forEach((filename) => {
 			if (filename.startsWith('Client')) {
 				const packetPath = path.join(packetsDir, filename);
 				try {
 					require(packetPath).writePacket(client, packet, server);
 				} catch (e) {
-					if (config.logUnhandledPackets) {
-						Logger.warning(lang.devdebug.unhandledPacket);
-						console.info("%o", packet);
+					if (e.toString().includes("writePacket")) {
+						if (config.logUnhandledPackets) {
+							Logger.warning(lang.devdebug.unhandledPacket);
+							console.info("%o", packet);
+						}
+					} else {
+						client.kick(lang.kickmessages.invalidPacket);
+
+						const internalerrorevent = new ServerInternalServerErrorEvent()
+						internalerrorevent.execute(server, e);
+
+						Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
 					}
 				}
 			}

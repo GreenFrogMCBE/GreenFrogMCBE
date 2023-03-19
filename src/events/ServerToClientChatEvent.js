@@ -44,7 +44,7 @@ class ServerToClientChatEvent extends Event {
 		if (!this.cancelled) {
 			const text = new Text();
 			text.setMessage(message);
-			text.send(client);
+			text.writePacket(client);
 		}
 	}
 }
