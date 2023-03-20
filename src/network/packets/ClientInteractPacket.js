@@ -18,7 +18,7 @@ const PacketConstructor = require("./PacketConstructor");
 const ContainerOpen = require("./ServerContainerOpenPacket");
 const InventoryType = require("./types/InventoryType");
 const InteractType = require("./types/InteractType");
-const WindowIDs = require("./types/WindowIDs");
+const WindowID = require("./types/WindowID");
 
 const Logger = require("../../server/Logger");
 
@@ -50,7 +50,7 @@ class ClientInteractPacket extends PacketConstructor {
 		switch (actionID) {
 			case InteractType.INVENTORYOPEN:
 				const containeropen = new ContainerOpen()
-				containeropen.setWindowID(WindowIDs.CREATIVE)
+				containeropen.setWindowID(WindowID.CREATIVE)
 				containeropen.setWindowType(InventoryType.INVENTORY)
 				containeropen.setRuntimeEntityId(2)
 				containeropen.setCoordinates(0, 0, 0)
