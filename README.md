@@ -7,7 +7,6 @@ Server software for Minecraft: Bedrock edition, written in NodeJS
 #### Development status > Under active development
 
 [Discord](https://discord.gg/UFqrnAbqjP) <br>
-[Help to translate](https://poeditor.com/join/project/fwIZCyBjPw) <br>
 [Example plugin](https://github.com/greenfrogmc/ExamplePlugin) <br>
 
 ## How to install
