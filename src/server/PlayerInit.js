@@ -10,31 +10,38 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Chat = require("../player/Chat");
-const Logger = require("../server/Logger");
-const GameMode = require("../player/GameMode");
-const Time = require("../network/packets/Time");
-const { lang } = require("../server/ServerInfo");
-const PlayerGamemode = require("../network/packets/PlayerGamemode");
-const PlayerKickEvent = require("../plugin/events/PlayerKickEvent");
-const PlayerLeaveEvent = require("../plugin/events/PlayerLeaveEvent");
-const ServerToClientChat = require("../plugin/events/ServerToClientChat");
-const PlayerTransferEvent = require("../plugin/events/PlayerTransferEvent");
-const PlayerGamemodeChangeEvent = require("../plugin/events/PlayerGamemodeChangeEvent");
-const ChangeDimension = require("../network/packets/ChangeDimension");
+const Logger = require("./Logger");
+const Chat = require("../api/Chat");
+const GameMode = require("../api/GameMode");
+const { lang } = require("../api/ServerInfo");
+const PlayerKickEvent = require("../events/PlayerKickEvent");
+const PlayerLeaveEvent = require("../events/PlayerLeaveEvent");
+const Time = require("../network/packets/ServerUpdateTimePacket");
+const PlayerTransferEvent = require("../events/PlayerTransferEvent");
+const ServerToClientChatEvent = require("../events/ServerToClientChatEvent");
+const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
+const PlayerGamemode = require("../network/packets/ServerSetPlayerGameTypePacket");
+const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
+const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
+const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
+const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
+const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
-const PlayerList = require("../network/packets/PlayerList");
-const ServerInfo = require("../server/ServerInfo");
-const PlayerInfo = require("../player/PlayerInfo");
+const GarbageCollector = require("../utils/GarbageCollector");
+const PlayerInfo = require("../api/PlayerInfo");
 
 module.exports = {
-	initPlayer(player) {
+	/**
+	 * @private
+	 * @param {Object} player 
+	 */
+	_initPlayer(player) {
 		/**
 		 * Sends a message to the player
 		 * @param {string} msg - The message to send
 		 */
 		player.sendMessage = function (msg) {
-			const sendmsgevent = new ServerToClientChat();
+			const sendmsgevent = new ServerToClientChatEvent();
 			sendmsgevent.execute(require("../Server").server, player, msg);
 		};
 
@@ -51,14 +58,23 @@ module.exports = {
 		 * @param {string} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 */
 		player.setGamemode = function (gamemode) {
-			const validGamemodes = [GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR, GameMode.FALLBACK];
-			if (!validGamemodes.includes(gamemode)) throw new Error(lang.errors.invalidGamemode);
+			const validGamemodes = [
+				GameMode.SURVIVAL,
+				GameMode.CREATIVE, 
+				GameMode.ADVENTURE, 
+				GameMode.SPECTATOR, 
+				GameMode.FALLBACK
+			];
+			if (!validGamemodes.includes(gamemode)) throw new Error("Invalid gamemode!")
 
 			player.gamemode = gamemode;
+
 			const gm = new PlayerGamemode();
 			gm.setGamemode(gamemode);
-			gm.send(player);
-			new PlayerGamemodeChangeEvent().execute(require("../Server").server, player, gamemode);
+			gm.writePacket(player);
+			
+			const gamemodechange = new PlayerGamemodeChangeEvent()
+			gamemodechange.execute(require("../Server").server, player, gamemode);
 		};
 
 		/**
@@ -87,9 +103,17 @@ module.exports = {
 				msg = "You were disconnected";
 			}
 
-			Logger.log(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.getUserData().displayName).replace("%reason%", msg));
+			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.getUserData().displayName).replace("%reason%", msg));
 			player.disconnect(msg);
 		};
+
+		player.setChunkRadius = function (radius) {
+			const chunkradiusupdate = new ChunkRadiusUpdate();
+			chunkradiusupdate.setChunkRadius(
+				radius
+			);
+			chunkradiusupdate.writePacket(player);
+		}
 
 		/**
 		 * Sets the player's time
@@ -98,11 +122,45 @@ module.exports = {
 		player.setTime = function (time) {
 			const timepacket = new Time();
 			timepacket.setTime(time);
-			timepacket.send(player, time);
+			timepacket.writePacket(player, time);
 		};
 
 		/**
-		 * Sets the dimension for the player
+		 * Sets some attribute for the player
+		 * @param {JSON} attribute
+		 */
+		player.setAttribute = function (attribute) {
+			const updateattributespacket = new UpdateAttributes()
+			updateattributespacket.setPlayerID(0) // 0 - Means local player
+			updateattributespacket.setTick(0)
+			updateattributespacket.setAttributes([attribute])
+			updateattributespacket.writePacket(player)
+		}
+
+		player.setXP = function (xp) {
+			player.setAttribute({
+				"min": 0,
+				"max": 1000000,
+				"current": xp,
+				"default": 0,
+				"name": "player.experience",
+				"modifiers": []
+			})
+		}
+
+		/**
+		 * Sets the health of the player
+		 * @param {Float} health 
+		 */
+		player.setHealth = function (health) {
+			if (player.dead) return
+
+			const playerhealthupdateevent = new PlayerHealthUpdateEvent()
+			playerhealthupdateevent.execute(require("../Server").server, player, health)
+		};
+
+		/**
+		 * Updates the dimension for the player
 		 * @param {Number} x
 		 * @param {Number} y
 		 * @param {Number} z
@@ -114,28 +172,26 @@ module.exports = {
 			dimensionpacket.setPosition(x, y, z);
 			dimensionpacket.setDimension(dimension);
 			dimensionpacket.setRespawn(respawn);
-			dimensionpacket.send(player);
+			dimensionpacket.writePacket(player);
 		};
 
-		/* Checks if the player is still online */
 		player.on("close", () => {
 			if (!player.kicked) {
-				for (let i = 0; i < PlayerInfo.players; i++) {
-					if (PlayerInfo.players[i].username == !player.username) {
-						ServerInfo.addPlayer();
+				for (let i = 0; i < PlayerInfo.players.length; i++) {
+					if (PlayerInfo.players[i].username !== player.username) {
 						const pl = new PlayerList();
 						pl.setType(PlayerListTypes.REMOVE);
 						pl.setUuid(player.profile.uuid);
-						pl.send(PlayerInfo.players[i]);
+						pl.writePacket(PlayerInfo.players[i]);
 					}
 				}
 
+				GarbageCollector.clearOfflinePlayers();
+
 				new PlayerLeaveEvent().execute(require("../Server").server, player);
 
-				Logger.log(lang.playerstatuses.disconnected.replace("%player%", player.username));
-
+				Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
 				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
-
 				player.offline = true;
 			}
 		});

@@ -18,6 +18,7 @@
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
+    "eslint": "8.36.0",
     "nodemon": "^2.0.21",
     "eslint": "8.35.0",
     "prettier": "2.8.5"

@@ -16,11 +16,6 @@ declare module "Server" {
 	export const config: string;
 	export const lang: JSON;
 
-	export function initJson(): Promise<void>;
-	export function attemptToDie(err: Error): Promise<void>;
-	export function handlepk(client: unknown, packet: unknown): void;
-	export function onJoin(client: unknown): Promise<void>;
-	export function initDebug(): Promise<void>;
-	export function start(): Promise<void>;
-	export function listen(): void;
+	export function shutdown(): void;
+	export function getPlayer(player: Object): void;
 }
