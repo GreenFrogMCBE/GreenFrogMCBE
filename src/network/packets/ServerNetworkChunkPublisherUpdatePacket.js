@@ -22,16 +22,16 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "network_chunk_publisher_update";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false
@@ -39,10 +39,11 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 
 
 	/**
-	 * It sets the coordinates of the chunk
-	 * @param x - The X coordinate of the player.
-	 * @param y - The Y coordinate of the player.
-	 * @param z - The Z coordinate of the player.
+	 * Sets the coordinates of the chunk to load
+	 * 
+	 * @param x - The X coordinate.
+	 * @param y - The Y coordinate.
+	 * @param z - The Z coordinate.
 	 */
 	setCords(x, y, z) {
 		cords.x = x;
@@ -51,45 +52,49 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	}
 
 	/**
-	 * It sets the radius
-	 * @param radius1 - The radius.
+	 * Sets the radius of chunks for client to load
+	 * @param new_radius
 	 */
-	setRadius(radius1) {
-		radius = radius1;
+	setRadius(new_radius) {
+		radius = new_radius;
 	}
 
 	/**
-	 * It sets the saved chunks
-	 * @param chunks - An array of saved chunks.
+	 * Sets the list saved chunks
+	 * @param new_saved_chunks
 	 */
-	setSavedChunks(chunks) {
-		saved_chunks = chunks;
+	setSavedChunks(new_saved_chunks) {
+		saved_chunks = new_saved_chunks;
 	}
 
 	/**
-	 * It returns the coordinates.
-	 * @returns The coordinates.
+	 * Returns the coordinates of chunks to load.
+	 * @returns {JSON} The coordinates.
 	 */
 	getCords() {
 		return cords;
 	}
 
 	/**
-	 * It returns the radius.
-	 * @returns The radius.
+	 * Returns the radius of chunks to load.
+	 * @returns {Number} The radius.
 	 */
 	getRadius() {
 		return radius;
 	}
 
 	/**
-	 * It returns the saved_chunks.
-	 * @returns The saved_chunks.
+	 * Returns the list of saved chunks.
+	 * @returns {Array} The list of saved chunks.
 	 */
 	getSavedChunks() {
 		return saved_chunks;
 	}
 
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			coordinates: this.getCords(),

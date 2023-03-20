@@ -16,28 +16,41 @@ const PacketConstructor = require('./PacketConstructor')
 
 class ServerClientCacheStatusPacket extends PacketConstructor {
 	/**
-	 * @returns The name of the packet.
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
 	 */
 	name() {
 		return "client_cache_status";
 	}
 
 	/**
-	 * It returns if the client cache is enabled or not
-	 * @param {Boolean} enabled1 - Is caching enabled or not.
+	 * Returns if is the packet critical?
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
-	setEnabled(enabled1) {
-		enabled = enabled1;
+	isCriticalPacket() {
+		return false
 	}
 
 	/**
-	 * It returns if the caching are enabled or not
-	 * @returns {Boolean} If the caching are enabled.
+	 * Sets if the caching is enabled? 
+	 * @param {Boolean} new_enabled - Caching enabled?
+	 */
+	setEnabled(new_enabled) {
+		enabled = new_enabled;
+	}
+
+	/**
+	 * Returns if the caching is enabled
+	 * @returns {Boolean} If the caching is enabled.
 	 */
 	getEnabled() {
 		return enabled;
 	}
 
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			enabled: this.getEnabled(client),

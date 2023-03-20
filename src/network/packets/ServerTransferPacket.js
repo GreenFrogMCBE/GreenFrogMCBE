@@ -17,38 +17,26 @@ const PacketConstructor = require("./PacketConstructor");
 let server_address = null;
 let port = null;
 
-const assert = require('assert')
-
 class ServerTransferPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
-	getPacketName() {
+	 * Returns the name of the packet.
+	 * @returns {String} The name of the packet.
+	 */
+	getPacketName() {	
 		return "transfer";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * Returns whether the packet is critical or not.
+	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return false
 	}
 	
 	/**
-	 * @param {Object} client - The client to validate
-	 * @param {string} address - The server address to validate
-	 * @param {number} port - The server port to validate
-	 */
-	validate(address, port) {
-		assert(address, null)
-		assert(parseInt(port), NaN)
-	}
-
-	/**
 	 * Sets the server address
-	 * @param {string} address
+	 * @param {String} address
 	 */
 	setServerAddress(address) {
 		server_address = address;
@@ -56,30 +44,31 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Sets the server port
-	 * @param {Number} port1
+	 * @param {Number} new_port
 	 */
-	setPort(port1) {
-		port = port1;
+	setPort(new_port) {
+		port = new_port;
 	}
 
 	/**
-	 * It returns the server address.
-	 * @returns The server address.
+	 * Returns the server address.
+	 * @returns {String}
 	 */
 	getServerAddress() {
 		return server_address;
 	}
 
 	/**
-	 * It returns the server port.
-	 * @returns The server port.
+	 * Returns the server port.
+	 * @returns {Number}
 	 */
 	getPort() {
 		return port;
 	}
 
 	/**
-	 * @param {Object} client - The client to writePacket the packet to
+	 * Sends the packet to the client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		this.validate(this.getServerAddress(), this.getPort());

@@ -22,85 +22,89 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerPlayerListPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "player_list";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false
 	}
 	
 	/**
-	 * It returns the player's name
-	 * @returns The player's username
+	 * Returns the player username
+	 * @returns {String} The player username
 	 */
 	getUsername() {
 		return username;
 	}
 
 	/**
-	 * It sets the player's name
-	 * @param username The player's username
+	 * Sets the player username
+	 * @param {String} new_username The player username
 	 */
-	setUsername(username1) {
-		username = username1;
+	setUsername(new_username) {
+		username = new_username;
 	}
 
 	/**
-	 * Get the id of the player
-	 * @returns The id of the player
+	 * Returns the ID of the player
+	 * @returns {Number} The ID of the player
 	 */
 	getId() {
 		return id;
 	}
 
 	/**
-	 * Set the id of the player
-	 * @param id The id to set for the player
+	 * Sets the ID of the player
+	 * @param new_id
 	 */
-	setId(id1) {
-		id = id1;
+	setId(new_id) {
+		id = new_id;
 	}
 
 	/**
 	 * Returns the type of the packet
-	 * @returns The type
+	 * @returns {PlayerListTypes} The type
 	 */
 	getType() {
 		return type;
 	}
 
 	/**
-	 * Get the uuid of the player
-	 * @returns The uuid of the player
+	 * Returns the UUID of the player
+	 * @returns {UUID} The UUID of the player
 	 */
 	getUuid() {
 		return uuid;
 	}
 
 	/**
-	 * Sets the uuid of the player
-	 * @param uuid The uuid to set for the player
+	 * Sets the UUID of the player
+	 * @param {UUID} new_uuid The UUID to set for the player
 	 */
-	setUuid(uuid1) {
-		uuid = uuid1;
+	setUuid(new_uuid) {
+		uuid = new_uuid;
 	}
 
 	/**
-	 * Sets the type for player list managment packet
-	 * @param type1 The type. Valid types are ADD or REMOVE
+	 * Sets the type
+	 * @param {PlayerListTypes} new_type The type. Valid types are ADD or REMOVE
 	 */
-	setType(type1) {
-		type = type1;
+	setType(new_type) {
+		type = new_type;
 	}
 
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
 	writePacket(client) {
 		let data = null;
 		if (this.getType() === PlayerListTypes.REMOVE) {

@@ -20,89 +20,88 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerResponsePackInfoPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "resource_packs_info";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return true
 	}
 
-
 	/**
-	 * Updates the value of the must_accept
-	 * @param {boolean} must_accept1 - Is the response pack forced?
+	 * Sets if the client must accept the packet
+	 * @param {Boolean} new_must_accept
 	 */
-	setMustAccept(must_accept1) {
-		must_accept = must_accept1;
+	setMustAccept(new_must_accept) {
+		must_accept = new_must_accept;
 	}
 
 	/**
-	 * It updates the value of has_scripts
-	 * @param has_scripts1 - Does the RP has scripts?
+	 * Sets, if the resource pack has scripts
+	 * @param {Boolean} new_has_scripts
 	 */
-	setHasScripts(has_scripts1) {
-		has_scripts = has_scripts1;
+	setHasScripts(new_has_scripts) {
+		has_scripts = new_has_scripts;
 	}
 
 	/**
-	 * It updates the behavior_packs
-	 * @param behavior_packs1 - The behavior packs.
+	 * Sets the list of behavior packs
+	 * @param {Array} new_behavior_packs
 	 */
-	setBehaviorPacks(behavior_packs1) {
-		behavior_packs = behavior_packs1;
+	setBehaviorPacks(new_behavior_packs) {
+		behavior_packs = new_behavior_packs;
 	}
 
 	/**
-	 * It sets the texture_packs
-	 * @param texture_packs1 - The texture packs.
+	 * Sets the list of texture packs
+	 * @param {Array} new_texture_packs
 	 */
-	setTexturePacks(texture_packs1) {
-		texture_packs = texture_packs1;
+	setTexturePacks(new_texture_packs) {
+		texture_packs = new_texture_packs;
 	}
 
 	/**
-	 * It returns the must_accept.
-	 * @returns The value must_accept.
+	 * Returns if the resource pack is forced to accept.
+	 * @returns {Boolean}
 	 */
 	getMustAccept() {
 		return must_accept;
 	}
 
 	/**
-	 * This function returns has_scripts.
-	 * @returns The value has_scripts.
+	 * Returns if the resource pack has scripts.
+	 * @returns {Boolean}
 	 */
 	getHasScripts() {
 		return has_scripts;
 	}
 
 	/**
-	 * It returns the behavior_packs.
-	 * @returns The behavior_packs array.
+	 * Returns the list of behavior packs.
+	 * @returns {Array}.
 	 */
 	getBehaviorPacks() {
 		return behavior_packs;
 	}
 
 	/**
-	 * It returns the texture_packs.
-	 * @returns The texture_packs array.
+	 * Returns the list of texture packs.
+	 * @returns {Array}.
 	 */
 	getTexturePacks() {
 		return texture_packs;
 	}
 
 	/**
-	 * It writePackets a packet to the client.
-	 * @param client - The client.
+	 * Sends the packet to the client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

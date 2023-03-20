@@ -23,23 +23,25 @@ const PacketConstructor = require('./PacketConstructor')
 
 class ServerContainerOpenPacket extends PacketConstructor {
 	/**
- 	 * Returns the packet name
- 	 * @returns The name of the packet
- 	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "container_open";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false
 	}
 
 	/**
-	 * It sets the coordinates
+	 * Sets the coordinates of the container
+	 * If the container is creative menu then the cords are xyz: 0, 0, 0
+	 * 
 	 * @param {Number} x
 	 * @param {Number} y
 	 * @param {Number} z
@@ -53,48 +55,47 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	}
 
 	/**
-	 * It sets the window type
-	 * @param {WindowType} window_type
+	 * Sets the window type
+	 * @param {WindowTypes} new_window_type
 	 */
-	setWindowType(window_type1) {
-		window_type = window_type1;
+	setWindowType(new_window_type) {
+		window_type = new_window_type;
 	}
 
 	/**
-	 * It sets the window id
-	 * @param {WindowIds} ids
+	 * It sets the window ID
+	 * @param {WindowIds} new_window_id
 	 */
-	setWindowId(id) {
-		window_id = id;
+	setWindowId(new_window_id) {
+		window_id = new_window_id;
 	}
 
 	/**
 	 * It sets the runtime entity id
-	 * This must be a string
-	 * @param {String} runtime_entity_id1
+	 * @param {String} new_runtime_entity_id
 	 */
-	setRuntimeEntityId(runtime_entity_id1) {
-		runtime_entity_id = runtime_entity_id1;
+	setRuntimeEntityId(new_runtime_entity_id) {
+		runtime_entity_id = new_runtime_entity_id;
 	}
 
 	/**
-	 * It returns the window id
-	 * @returns {String} The window id
+	 * It returns the window ID
+	 * @returns {Number} The window ID
 	 */
 	getWindowId() {
 		return window_id;
 	}
 
 	/**
-	 * It returns the runtime entity id
-	 * @returns {JSON} The runtime entity id
+	 * It returns the runtime entity ID
+	 * @returns {String} The runtime entity ID
 	 */
 	getCoordinates() {
 		return cords;
 	}
 
 	/**
-	 * It returns the window type
+	 * Returns the window type
 	 * @returns {WindowType} The window type
 	 */
 	getWindowType() {
@@ -102,7 +103,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	}
 
 	/**
-	 * It returns the runtime entity id
+	 * Returns the runtime entity id
 	 * @returns {String} The runtime entity id
 	 */
 	getRuntimeEntityId() {
@@ -110,8 +111,8 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	}
 
 	/**
-	 * It writePackets the packet
-	 * @param {Object} client
+	 * Sends the packet to the client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

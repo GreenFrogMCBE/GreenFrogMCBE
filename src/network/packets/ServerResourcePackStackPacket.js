@@ -21,120 +21,124 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerResourcePackStackPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "resource_pack_stack";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return true
 	}
 
 	/**
-	 * It sets the must_accept
-	 * @param {Boolean} must_accept - Is the resource packs forced to accept?
+	 * Sets if the client must accept the packet
+	 * @param {Boolean} new_must_accept
 	 */
-	setMustAccept(must_accept1) {
-		must_accept = must_accept1;
+	setMustAccept(new_must_accept) {
+		must_accept = new_must_accept;
 	}
 
 	/**
-	 * It sets the behavior packs
-	 * @param {Array} - The behavior packs
+	 * Sets the list of behavior packs
+	 * @param {Array} new_behavior_packs - The behavior packs
 	 */
-	setBehaviorPacks(behavior_packs1) {
-		behavior_packs = behavior_packs1;
+	setBehaviorPacks(new_behavior_packs) {
+		behavior_packs = new_behavior_packs;
 	}
 
 	/**
-	 * It sets sets the resource packs
-	 * @param {Array} - The resource packs
+	 * Sets the list of resource packs
+	 * @param {Array} new_resource_packs - The resource packs
 	 */
-	setResourcePacks(resource_packs1) {
-		resource_packs = resource_packs1;
+	setResourcePacks(new_resource_packs) {
+		resource_packs = new_resource_packs;
 	}
 
 	/**
-	 * It sets the game_version
-	 * @param {string} game_version - The game version
+	 * Sets the game version
+	 * @param {String} new_game_version - The game version
 	 */
-	setGameVersion(game_version1) {
-		game_version = game_version1;
+	setGameVersion(new_game_version) {
+		game_version = new_game_version;
 	}
 
 	/**
-	 * It sets the experiments
-	 * @param {Array} - The experiments used
+	 * Sets the experiments
+	 * @param {Array} new_experiments - The experiments used
 	 */
-	setExperiments(experiments1) {
-		experiments = experiments1;
+	setExperiments(new_experiments) {
+		experiments = new_experiments;
 	}
 
 	/**
-	 * Sets the experiments_previously_used
-	 * @param {Boolean} experiments_previously_used1
+	 * Sets the if the experiments were previously used
+	 * @param {Boolean} new_experiments_previously_used
 	 */
-	setExperimentsPreviouslyUsed(experiments_previously_used1) {
-		experiments_previously_used = experiments_previously_used1;
+	setExperimentsPreviouslyUsed(new_experiments_previously_used) {
+		experiments_previously_used = new_experiments_previously_used;
 	}
 
 	/**
-	 * Returns the must_accept
-	 * @returns The must_accept
+	 * Returns the if the client must accept the packet
+	 * @returns {Boolean}
 	 */
 	getMustAccept() {
 		return must_accept;
 	}
 
 	/**
-	 * Returns the behavior_packs
-	 * @returns The behavior_packs
+	 * Returns the list of behavior packs
+	 * @returns {Array}
 	 */
 	getBehaviorPacks() {
 		return behavior_packs;
 	}
 
 	/**
-	 * Returns the resource_packs
-	 * @returns The resource_packs
+	 * Returns the list of resource packs
+	 * @returns {Array}
 	 */
 	getResourcePacks() {
 		return resource_packs;
 	}
 
 	/**
-	 * Returns the game_version
-	 * @returns The game_version
+	 * Returns the game version that the resource pack was made for
+	 * @returns {String}
 	 */
 	getGameVersion() {
 		return game_version;
 	}
 
 	/**
-	 * Returns the experiments
-	 * @returns The experiments
+	 * Returns the experiments that were used
+	 * @returns {Array}
 	 */
 	getExperiments() {
 		return experiments;
 	}
 
 	/**
-	 * It returns the experiments_previously_used
-	 * @returns The experiments_previously_used
+	 * Returns if the experiments were previously used
+	 * @returns {Boolean}
 	 */
 	getExperimentsPreviouslyUsed() {
 		return experiments_previously_used;
 	}
 
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			must_accept: this.getPacketName(),
+			must_accept: this.getMustAccept(),
 			behavior_packs: this.getBehaviorPacks(),
 			resource_packs: this.getResourcePacks(),
 			game_version: this.getGameVersion(),

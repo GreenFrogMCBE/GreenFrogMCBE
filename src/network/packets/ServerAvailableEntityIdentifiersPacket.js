@@ -49,7 +49,7 @@ class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {Object} client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), this.getValue());

@@ -18,69 +18,73 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerInventorySlotPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "inventory_slot";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false
 	}
 
 	/**
-	 * It sets the window id.
-	 * @param {Number} id
+	 * Sets the window ID.
+	 * @param {Number} ID
 	 */
-	setWindowId(id) {
-		window_id = id;
+	setWindowId(new_id) {
+		window_id = new_id;
 	}
 
 	/**
-	 * It sets the slot.
-	 * @param {Number} slot1
+	 * Sets the slot of the item.
+	 * @param {Number} new_slot
 	 */
-	setSlot(slot1) {
-		slot = slot1;
+	setSlot(new_slot) {
+		slot = new_slot;
 	}
 
 	/**
-	 * It sets the item data.
-	 * @param {JSON} itemdata1
+	 * Sets the item data (NBT).
+	 * @param {JSON} new_item_data
 	 */
-	setItemData(itemdata1) {
-		itemdata = itemdata1;
+	setItemData(new_item_data) {
+		itemdata = new_item_data;
 	}
 
 	/**
-	 * It returns the window id.
-	 * @returns The window id.
+	 * Returns the window ID.
+	 * @returns {Number} The window ID.
 	 */
 	getWindowId() {
 		return window_id;
 	}
 
 	/**
-	 * It returns the slot.
-	 * @returns The slot.
+	 * Returns the slot of the item.
+	 * @returns {Number}
 	 */
 	getSlot() {
 		return slot;
 	}
 
 	/**
-	 * It returns the item data.
-	 * @returns The item data.
+	 * Returns the item data (NBT).
+	 * @returns {JSON} The item data.
 	 */
 	getItemData() {
 		return itemdata;
 	}
 
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			window_id: this.getWindowId(),

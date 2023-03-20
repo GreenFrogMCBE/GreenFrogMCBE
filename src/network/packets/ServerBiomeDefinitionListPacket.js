@@ -17,15 +17,15 @@ const PacketConstructor = require('./PacketConstructor')
 class ServerBiomeDefinitionListPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
-	 */
+ 	 * @returns {String} The name of the packet
+ 	 */
 	getPacketName() {
 		return "biome_definition_list";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return true
@@ -33,23 +33,23 @@ class ServerBiomeDefinitionListPacket extends PacketConstructor {
 
 	/**
 	 * Sets the packet value
-	 * @param newvalue - The packet value.
+	 * @param new_value - The packet value.
 	 */
-	setValue(newvalue) {
-		value = newvalue;
+	setValue(new_value) {
+		value = new_value;
 	}
 
 	/**
-	 * It returns the packet value
-	 * @returns The packet value.
+	 * Returns the packet value
+	 * @returns {JSON}.
 	 */
 	getValue() {
 		return value;
 	}
 
 	/**
-	 * It writePacket the packet to the client
-	 * @param {Object} client
+	 * Sends the packet to the client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), this.getValue());

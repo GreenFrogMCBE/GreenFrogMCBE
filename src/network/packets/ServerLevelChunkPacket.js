@@ -20,59 +20,59 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerLevelChunkPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "level_chunk";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
-	 */
+	 * @returns {Boolean} Returns if the packet is critical
+	 */	
 	isCriticalPacket() {
 		return false
 	}
 
 	/**
-	 * It sets the X coordinate
-	 * @param {Number} x1
+	 * Sets the X coordinate
+	 * @param {Number} new_x
 	 */
-	setX(x1) {
-		x = x1;
+	setX(new_x) {
+		x = new_x;
 	}
 
 	/**
-	 * It sets the Z coordinate
-	 * @param {Number} z1
+	 * Sets the Z coordinate
+	 * @param {Number} new_z
 	 */
-	setZ(z1) {
-		z = z1;
+	setZ(new_z) {
+		z = new_z;
 	}
 
 	/**
-	 * It sets the sub chunk count
-	 * @param {Number} count
+	 * Sets the sub chunk count
+	 * @param {Number} new_sub_chunk_count
 	 */
-	setSubChunkCount(count) {
-		sub_chunk_count = count;
+	setSubChunkCount(new_sub_chunk_count) {
+		sub_chunk_count = new_sub_chunk_count;
 	}
 
 	/**
-	 * It sets if the cache is enabled
-	 * @param {Boolean} enabled
+	 * Sets if the cache is enabled
+	 * @param {Boolean} new_cache_enabled
 	 */
-	setCacheEnabled(enabled) {
-		cache_enabled = enabled;
+	setCacheEnabled(new_cache_enabled) {
+		cache_enabled = new_cache_enabled;
 	}
 
 	/**
-	 * It sets if the payload
-	 * @param {any} data
+	 * Sets the chunk payload
+	 * @param {JSON} new_payload
 	 */
-	setPayload(data) {
-		payload = data;
+	setPayload(new_payload) {
+		payload = new_payload;
 	}
 
 	/**
@@ -100,7 +100,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 	}
 
 	/**
-	 * It gets if the cache is enabled
+	 * Returns if the cache is enabled
 	 * @returns {Boolean}
 	 */
 	getCacheEnabled() {
@@ -108,16 +108,16 @@ class ServerLevelChunkPacket extends PacketConstructor {
 	}
 
 	/**
-	 * It gets the payload
-	 * @returns {any}
+	 * Returns the payload
+	 * @returns {JSON}
 	 */
 	getPayload() {
 		return payload;
 	}
 
 	/**
-	 * It writePackets the packet
-	 * @param {Client} client
+	 * Sends the packet to the client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

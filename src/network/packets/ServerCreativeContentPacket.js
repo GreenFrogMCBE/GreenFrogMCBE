@@ -16,37 +16,41 @@ const PacketConstructor = require('./PacketConstructor')
 
 class ServerCreativeContentPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "creative_content";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return true
 	}
 
 	/**
-	 * It sets the items list
-	 * @param {Array<JSON>} items2 - The list of items
+	 * Sets the items list
+	 * @param {Array<JSON>} new_items - item list
 	 */
-	setItems(items2) {
-		items = items2;
+	setItems(new_items) {
+		items = new_items;
 	}
 
 	/**
-	 * It returns the items list
-	 * @returns Item list
+	 * Returns the item list
+	 * @returns {Array<JSON>} Item list
 	 */
 	getItems() {
 		return items;
 	}
 
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			items: items,

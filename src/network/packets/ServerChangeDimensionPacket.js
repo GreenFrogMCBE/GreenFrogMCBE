@@ -25,15 +25,15 @@ let respawn = false;
 class ServerChangeDimensionPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
-	 */
+ 	 * @returns {String} The name of the packet
+ 	 */
 	getPacketName() {
 		return "change_dimension";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false
@@ -41,14 +41,14 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 
 	/**
 	 * Sets the dimension
-	 * @param {Dimensions} dim1
+	 * @param {Dimensions} new_dimension
 	 */
-	setDimension(dim1) {
-		dim = dim1;
+	setDimension(new_dimension) {
+		dim = new_dimension;
 	}
 
 	/**
-	 * Sets the position
+	 * Sets the spawn position
 	 * @param {Number} x
 	 * @param {Number} y
 	 * @param {Number} z
@@ -61,15 +61,15 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 
 	/**
 	 * Sets if the player needs to be respawned after the dimension change (default = false)
-	 * @param {boolean} respawn1
+	 * @param {boolean} needs_respawn
 	 */
-	setRespawn(respawn1) {
-		respawn = respawn1;
+	setRespawn(needs_respawn) {
+		respawn = needs_respawn;
 	}
 
 	/**
 	 * Returns the dimension
-	 * @returns The dimension
+	 * @returns {Dimensions} The dimension
 	 */
 	getDimension() {
 		return dim;
@@ -77,7 +77,7 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the player needs the be respawned
-	 * @returns If the player needs the be respawned
+	 * @returns {Boolean} If the player needs to be respawned
 	 */
 	getRespawn() {
 		return respawn;
@@ -85,12 +85,16 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 
 	/**
 	 * Returns the position of the player
-	 * @returns The position of the player
+	 * @returns {JSON} The position of the player
 	 */
 	getPosition() {
 		return pos;
 	}
 
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			dimension: this.getDimension(),

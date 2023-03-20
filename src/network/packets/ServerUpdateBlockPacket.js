@@ -24,9 +24,6 @@ let unused = false;
 let priority = false;
 let layer = 0;
 
-// !!! This packet is no longer used
-// (this file will not be deleted, even if its not used anymore, so you can use this packet to update blocks using packet API in your plugin)
-
 class ServerUpdateBlockPacket extends PacketConstructor {
 	/**
 	* Returns the packet name
@@ -43,189 +40,184 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 	isCriticalPacket() {
 		return false
 	}
-	
+
 	/**
-	 * It sets the X coordinate
-	 * @param {Number} x1 - The X coordinate.
+	 * Sets the X coordinate
+	 * @param {Number} new_x
 	 */
-	setX(x1) {
-		x = parseInt(x1);
+	setX(new_x) {
+		x = parseInt(new_x);
 	}
 
 	/**
-	 * It sets the Y coordinate
-	 * @param {Number} y1 - The Y coordinate.
+	 * Sets the Y coordinate
+	 * @param {Number} new_y
 	 */
-	setY(y1) {
-		y = parseInt(y1);
+	setY(new_y) {
+		y = parseInt(new_y);
 	}
 
 	/**
-	 * It sets the Z coordinate
-	 * @param {Number} z1 - The Z coordinate.
+	 * Sets the Z coordinate
+	 * @param {Number} new_z
 	 */
-	setZ(z1) {
-		z = parseInt(z1);
+	setZ(new_z) {
+		z = parseInt(new_z);
 	}
 
 	/**
-	 * It sets the block runtime id
-	 * @param {Number} block_runtime_id1 - It sets the block runtime id.
+	 * Sets the block runtime id
+	 * @param {Number} new_block_runtime_id
 	 */
-	setBlockRuntimeId(block_runtime_id1) {
-		block_runtime_id = parseInt(block_runtime_id1);
+	setBlockRuntimeId(new_block_runtime_id) {
+		block_runtime_id = parseInt(new_block_runtime_id);
 	}
 
 	/**
-	 * It sets the flags value
-	 * @param {Number} flagsvalue1 - It sets the flags count (aka flags value).
+	 * Sets the flags count (aka flags value).
+	 * @param {Number} new_flags_value
 	 */
-	setFlagsValue(flagsvalue1) {
-		flagsvalue = parseInt(flagsvalue1);
+	setFlagsValue(new_flags_value) {
+		flagsvalue = parseInt(new_flags_value);
 	}
 
 	/**
-	 * It sets the flags value called "neighbors"
-	 * @param {Number} neighbors1 - It sets the flag value called "neighbors".
+	 * Sets the flag value called "neighbors".
+	 * @param {Number} new_neighbors
 	 */
-	setNeighbors(neighbors1) {
-		neighbors = neighbors1;
+	setNeighbors(new_neighbors) {
+		neighbors = new_neighbors;
 	}
 
 	/**
-	 * It sets the flags value called "network"
-	 * @param {Number} network1 - It sets the flag value called "network".
+	 * Sets the flag value called "network".
+	 * @param {Number} new_network
 	 */
-	setNetwork(network1) {
-		network = network1;
+	setNetwork(new_network) {
+		network = new_network;
+	}
+	/**
+	 * Sets the flag value called "no_graphic".
+	 * @param {Number} new_no_graphic
+	 */
+	setNoGraphic(new_no_graphic) {
+		no_graphic = new_no_graphic;
 	}
 
 	/**
-	 * It sets the flags value called "no_graphic"
-	 * @param {Number} no_graphic1 - It sets the flag value called "no_graphic".
+	 * Sets the flags value called "unused".
+	 * @param {Number} new_unused
 	 */
-	setNoGraphic(no_graphic1) {
-		no_graphic = no_graphic1;
+	setUnused(new_unused) {
+		unused = new_unused;
 	}
 
 	/**
-	 * It sets the flags value called "unused"
-	 * @param {Number} unused1 - It sets the flags value called "unused".
+	 * Sets the flag value called "priority".
+	 * @param {Number} new_priority
 	 */
-	setUnused(unused1) {
-		unused = unused1;
+	setPriority(new_priority) {
+		priority = new_priority;
 	}
 
 	/**
-	 * It sets the flags value called "priority"
-	 * @param {Number} priority1 - It sets the flag value called "priority".
+	 * Sets the layer.
+	 * @param {Number} new_layer
 	 */
-	setPriority(priority1) {
-		priority = priority1;
+	setLayer(new_layer) {
+		layer = parseInt(new_layer);
 	}
-
 	/**
-	 * It sets the layer
-	 * @param {Number} layer1 - It sets the layer.
-	 */
-	setLayer(layer1) {
-		layer = parseInt(layer1);
-	}
-
-	/**
-	 * It returns the X coordinate
-	 * @param {Number} x - The X coordinate.
+	 * Returns the X coordinate.
+	 * @returns {Number} The X coordinate.
 	 */
 	getX() {
 		return x;
 	}
 
 	/**
-	 * It returns the Y coordinate
-	 * @param {Number} y - The Y coordinate.
+	 * Returns the Y coordinate.
+	 * @returns {Number} The Y coordinate.
 	 */
 	getY() {
 		return y;
 	}
 
 	/**
-	 * It returns the Z coordinate
-	 * @param {Number} z - The Z coordinate.
+	 * Returns the Z coordinate.
+	 * @returns {Number} The Z coordinate.
 	 */
 	getZ() {
 		return z;
 	}
 
 	/**
-	 * It returns the block runtime id
-	 * @param {Number} block_runtime_id - It returns the block runtime id.
+	 * Returns the block runtime id.
+	 * @returns {Number} The block runtime id.
 	 */
 	getBlockRuntimeId() {
 		return block_runtime_id;
 	}
 
 	/**
-	 * It returns the flags value
-	 * @param {Number} flagsvalue - It returns the flags value.
+	 * Returns the flags value.
+	 * @returns {Number} The flags value.
 	 */
 	getFlagsValue() {
 		return flagsvalue;
 	}
 
 	/**
-	 * It returns the flags value called "neighbors"
-	 * @param {Number} neighbors - It returns the flag value called "neighbors".
+	 * Returns the flag value called "neighbors".
+	 * @returns {Number} The flag value called "neighbors".
 	 */
 	getNeighbors() {
 		return neighbors;
 	}
 
 	/**
-	 * It returns the flags value called "network"
-	 * @param {Number} network - It sets the flag value called "network".
+	 * Returns the flag value called "network".
+	 * @returns {Number} The flag value called "network".
 	 */
 	getNetwork() {
 		return network;
 	}
 
 	/**
-	 * It returns the flags value called "no_graphic"
-	 * @param {Number} no_graphic - It sets the flag value called "no_graphic".
+	 * Returns the flag value called "no_graphic".
+	 * @returns {Number} The flag value called "no_graphic".
 	 */
 	getNoGraphic() {
 		return no_graphic;
 	}
 
 	/**
-	 * It returns the flags value called "unused"
-	 * @param {Number} unused - It returns the flags value called "unused".
+	 * Returns the flags value called "unused".
+	 * @returns {Number} The flags value called "unused".
 	 */
 	getUnused() {
 		return unused;
 	}
 
 	/**
-	 * It returns the flags value called "priority"
-	 * @param {Number} priority - It returns the flags value called "priority".
+	 * Returns the flags value called "priority".
+	 * @returns {Number} The flags value called "priority".
 	 */
 	getPriority() {
 		return priority;
 	}
 
 	/**
-	 * It returns the layer
-	 * @param {Number} layer - It returns the layer.
+	 * Returns the layer.
+	 * @returns {Number} The layer.
 	 */
 	getLayer() {
 		return layer;
 	}
 
 	/**
-	 * @param {Object} client - The client that you want to writePacket the packet to.
-	 * @param {Number} x - The x coordinate of the block
-	 * @param {Number} y - The y coordinate of the block
-	 * @param {Number} z - The z coordinate of the block
-	 * @param {Number} block_runtime_id - The block ID of the block you want to place.
+	 * Sends the packet to the client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

@@ -24,6 +24,7 @@ class PacketConstructor {
 	}
 
 	validatePacket() { }
+
 	writePacket() {
 		throw new UnsupportedOperationException("Can't write a client-side packet")
 	}

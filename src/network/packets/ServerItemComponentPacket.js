@@ -10,22 +10,22 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let gitems = [];
+let items = [];
 
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerItemComponentPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "item_component";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false
@@ -33,18 +33,18 @@ class ServerItemComponentPacket extends PacketConstructor {
 
 	/**
 	 * Sets the custom items (some items may require texture pack)
-	 * @param {Array} itemstoset
+	 * @param {Array} new_items
 	 */
-	setItems(items) {
-		gitems = items;
+	setItems(new_items) {
+		items = new_items;
 	}
 
 	/**
-	 * Returns the custom items list as an array
-	 * @returns The custom items list as an array
+	 * Returns the custom items list
+	 * @returns {Array<JSON>} The custom items list
 	 */
 	getItems() {
-		return gitems;
+		return items;
 	}
 
 	/**

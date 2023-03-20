@@ -17,55 +17,56 @@ let message = "";
 
 class ServerToastRequestPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the name of the packet.
+	 * @returns {String} The name of the packet.
+	 */
 	getPacketName() {	
 		return "toast_request";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * Returns whether the packet is critical or not.
+	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return false
 	}
 
 	/**
-	 * It sets the title of the toast.
-	 * @param title1 - The title of the toast.
+	 * Sets the title of the toast.
+	 * @param new_title
 	 */
-	setTitle(title1) {
-		title = title1;
+	setTitle(new_title) {
+		title = new_title;
 	}
 
 	/**
-	 * It sets the message of the toast.
-	 * @param message1 - The message to be displayed.
+	 * Sets the message of the toast.
+	 * @param new_messaged.
 	 */
-	setMessage(message1) {
-		message = message1;
+	setMessage(new_message) {
+		message = new_message;
 	}
 
 	/**
-	 * It returns the title.
-	 * @returns The title.
+	 * Returns the title.
+	 * @returns {String}
 	 */
 	getTitle() {
 		return title;
 	}
 
 	/**
-	 * It returns the message.
-	 * @returns The message.
+	 * Returns the message.
+	 * @returns {String}
 	 */
 	getMessage() {
 		return message;
 	}
 
 	/**
-	 * @param client - The client that the packet is being sent to.
+	 * Sends the packet to the client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

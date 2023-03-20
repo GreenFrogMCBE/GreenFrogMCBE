@@ -22,16 +22,16 @@ let platform_chat_id = "";
 
 class ServerTextPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the name of the packet.
+	 * @returns {String} The name of the packet.
+	 */
 	getPacketName() {
 		return "text";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * Returns whether the packet is critical or not.
+	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return false
@@ -39,55 +39,55 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the message to be sent
-	 * @param {string} message Message to be sent
+	 * @param {String} new_message
 	 */
-	setMessage(message1) {
-		message = message1;
+	setMessage(new_message) {
+		message = new_message;
 	}
 
 	/**
 	 * Sets the type
-	 * @param {string} type1 Set the type
+	 * @param {TextTypes} new_type
 	 */
-	setType(type1) {
-		type = type1;
+	setType(new_type) {
+		type = new_type;
 	}
 
 	/**
-	 * Sets the needs translation
-	 * @param {boolean} needs_translation1 Set the need translation
+	 * Sets the if the message needs translation
+	 * @param {Boolean} new_needs_translation
 	 */
-	setNeedsTranslation(needs_translation1) {
-		needs_translation = needs_translation1;
+	setNeedsTranslation(new_needs_translation) {
+		needs_translation = new_needs_translation;
 	}
 
 	/**
 	 * Sets the source name
-	 * @param {string} source_name1 Set the source name
+	 * @param {String} new_source_name
 	 */
-	setSourceName(source_name1) {
-		source_name = source_name1;
+	setSourceName(new_source_name) {
+		source_name = new_source_name;
 	}
 
 	/**
-	 * Sets the xuid
-	 * @param {string} xuid1 The xuid
+	 * Sets the XUID
+	 * @param {String} new_xuid
 	 */
-	setXuid(xuid1) {
-		xuid = xuid1;
+	setXuid(new_xuid) {
+		xuid = new_xuid;
 	}
 
 	/**
 	 * Sets the platform chat id
-	 * @param {string} platform_chat_id1 The platform chat id
+	 * @param {String} new_platform_chat_id
 	 */
-	setPlatformChatId(platform_chat_id1) {
-		platform_chat_id = platform_chat_id1;
+	setPlatformChatId(new_platform_chat_id) {
+		platform_chat_id = new_platform_chat_id;
 	}
 
 	/**
 	 * Returns the message
-	 * @returns The message to be sent
+	 * @returns {String}
 	 */
 	getMessage() {
 		return message;
@@ -95,7 +95,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the type
-	 * @returns The type
+	 * @returns {TextTypes}
 	 */
 	getType() {
 		return type;
@@ -103,7 +103,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the needs translation
-	 * @returns The needs translation
+	 * @returns {Boolean}
 	 */
 	getNeedsTranslation() {
 		return needs_translation;
@@ -111,15 +111,15 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the source name
-	 * @returns The source name
+	 * @returns {String}
 	 */
 	getSourceName() {
 		return source_name;
 	}
 
 	/**
-	 * Returns the xuid
-	 * @returns The xuid
+	 * Returns the XUID
+	 * @returns {String}
 	 */
 	getXuid() {
 		return xuid;
@@ -127,20 +127,15 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the platform chat id
-	 * @returns The platform chat id
+	 * @returns {String}
 	 */
 	getPlatformChatId() {
 		return platform_chat_id;
 	}
 
 	/**
-	 * @param {Object} client - The client that will receive the packet.
-	 * @param {string} [message] - The message to writePacket.
-	 * @param {string} [type=announcement] - The type of message.
-	 * @param {boolean} [needs_translation=false] - If true, the message will be translated to the client's language (if there is translation key).
-	 * @param {string} [source_name] - The name of the source of the message.
-	 * @param {string} [xuid] - The XUID of the player, who sent the message.
-	 * @param {string} [platform_chat_id] - This is the ID of the player you want to writePacket the message to.
+	 * Sends the packet to the client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

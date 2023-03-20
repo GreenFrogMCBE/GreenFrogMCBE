@@ -16,37 +16,41 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerPlayStatusPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "play_status";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return true
 	}
 
 	/**
-	 * It sets the status.
-	 * @param status1 - The status
+	 * Sets the status.
+	 * @param new_status
 	 */
-	setStatus(status1) {
-		status = status1;
+	setStatus(new_status) {
+		status = new_status;
 	}
 
 	/**
-	 * It returns the status.
-	 * @returns The status
+	 * Returns the status.
+	 * @returns {String} The status
 	 */
 	getStatus() {
 		return status;
 	}
 
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			status: this.getStatus(),

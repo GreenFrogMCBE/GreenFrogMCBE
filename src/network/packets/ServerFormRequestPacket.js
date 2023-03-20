@@ -10,109 +10,166 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const FormTypes = require("../../player/forms/FormTypes");
-const Colors = require("../../api/PlayerColors");
+const FormTypes = require("../../forms/FormTypes");
 
 const PacketConstructor = require('./PacketConstructor')
 
 let id = 0;
-let content = Colors.red + "Invalid text!";
+let content = "";
 let buttons = null;
-let title = Colors.red + "Invalid title!";
-let type = "form";
-let button1 = Colors.red + "Invalid button1!";
-let button2 = Colors.red + "Invalid button2!";
+let title = "";
+let type = FormTypes.FORM;
+let button1 = "";
+let button2 = "";
 
 class ServerFormRequestPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the packet name
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "modal_form_request";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false
 	}
 
 	/**
-	 * Sets the ID for the form request
-	 * @param {Number} id1 
+	 * Sets the ID for the form
+	 * @param {Number} new_id
 	 */
-	setId(id1) {
-		id = id1;
+	setId(new_id) {
+		id = new_id;
 	}
 
-	// TODO: More docs
-
-	setContent(content1) {
-		content = content1;
+	/**
+	 * Sets the content of the form
+	 * @param {JSON} new_content 
+	 */
+	setContent(new_content) {
+		content = new_content;
 	}
 
-	setButtons(buttons1) {
-		buttons = buttons1;
+	/**
+	 * Sets the buttons of the form
+	 * @param {JSON} new_buttons 
+	 */
+	setButtons(new_buttons) {
+		buttons = new_buttons;
 	}
 
-	setTitle(title1) {
-		title = title1;
+	/**
+	 * Sets the title of the form
+	 * @param {String} new_title - The new title
+	 */
+	setTitle(new_title) {
+		title = new_title;
 	}
 
-	setType(type1) {
-		type = type1;
+	/**
+	 * Sets the type of the form.
+	 * @param {FormTypes} new_type - The type of the form.
+	 */
+	setType(new_type) {
+		type = new_type;
 	}
 
-	setButton1(_button1) {
-		button1 = _button1;
+	/**
+	 * Sets the button1 of the form (requires modal form)
+	 * @param {JSON} new_button1 
+	 */
+	setButton1(new_button1) {
+		button1 = new_button1;
 	}
 
-	setText(_text) {
-		content = _text;
+	/**
+	 * Sets the button2 of the form (requires modal form)
+	 * @param {JSON} new_button2 
+	 */
+	setButton2(new_button2) {
+		button2 = new_button2;
 	}
 
-	setButton2(_button2) {
-		button2 = _button2;
+	/**
+	 * Sets the text of the form
+	 * @param {String} new_text 
+	 */
+	setText(new_text) {
+		content = new_text;
 	}
 
+	/**
+	 * Returns the form text
+	 * @returns {String} - The form text
+	 */
 	getText() {
 		return content;
 	}
 
+	/**
+	 * Returns the ID of the form
+	 * @returns {Number} - The ID of the form
+	 */
 	getId() {
 		return id;
 	}
 
+	/**
+	 * Returns the content of the form
+	 * @returns {String} - The content of the form
+	 */
 	getContent() {
 		return content;
 	}
 
+	/**
+	 * Returns the button list
+	 * @returns {JSON} - The button list
+	 */
 	getButtons() {
 		return buttons;
 	}
 
+	/**
+	 * Returns the form title
+	 * @returns {String} - The title
+	 */
 	getTitle() {
 		return title;
 	}
 
+	/**
+	 * Returns the form type
+	 * @returns {FormTypes} - The form types
+	 */
 	getType() {
 		return type;
 	}
 
+	/**
+	 * Returns the button1 of the form (requires modal form)
+	 * @returns {JSON} - The button1
+	 */
 	getButton1() {
 		return button1;
 	}
 
+	/**
+	 * Returns the button2 of the form (requires modal form)
+	 * @returns {JSON} - The button2
+	 */
 	getButton2() {
 		return button2;
 	}
 
 	/**
-	 * It writePackets the form to the player
-	 * @param client - The client that you want to writePacket the packet to.
+	 * Sends the packet to the client
+	 * @param {any} client
 	 */
 	writePacket(client) {
 		if (type === FormTypes.MODALFORM) {
@@ -120,12 +177,13 @@ class ServerFormRequestPacket extends PacketConstructor {
 				form_id: this.getId(),
 				data: `{"content":"${this.getText()}","button1":"${this.getButton1()}","button2":"${this.getButton2()}","type":"${this.getType()}","title":"${this.getTitle()}"}`,
 			});
-		} else {
-			client.queue(this.getPacketName(), {
-				form_id: this.getId(),
-				data: `{"content":${this.getContent()},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
-			});
+			return
 		}
+
+		client.queue(this.getPacketName(), {
+			form_id: this.getId(),
+			data: `{"content":${this.getContent()},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`
+		});
 	}
 }
 

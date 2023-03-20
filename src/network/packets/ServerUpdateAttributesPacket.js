@@ -6,32 +6,32 @@ let tick = -1;
 
 class ServerUpdateAttributesPacket extends PacketConstructor {
 	/**
-	* Returns the packet name
-	* @returns The name of the packet
-	*/
+	 * Returns the name of the packet.
+	 * @returns {String} The name of the packet.
+	 */
 	getPacketName() {
 		return "update_attributes";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * Returns whether the packet is critical or not.
+	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return false
 	}
 	
-
     /**
-     * Sets the player id
-     * @param {Int} playerid
+     * Sets the player ID
+     * @param {Number} new_playerid
      */
-    setPlayerID(playerid) {
-        id = playerid;
+    setPlayerID(new_playerid) {
+        id = new_playerid;
     }
 
     /**
      * Returns the player ID
+     * @returns {Number}
      */
     getPlayerID() {
         return id;
@@ -47,30 +47,32 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 
     /**
      * Returns the attributes
+     * @returns {Array<JSON>}
      */
     getAttributes() {
         return attributes;
     }
 
     /**
-     * Sets the tick
-     * @param {Int} t - The tick
+     * Sets the current tick
+     * @param {Number} new_tick - The tick
      */
-    setTick(t) {
-        tick = t;
+    setTick(new_tick) {
+        tick = new_tick;
     }
 
     /**
-     * Returns the tick
+     * Returns the current tick
+     * @returns {Number};
      */
     getTick() {
         return tick;
     }
 
-    /**
-     * writePackets the packet to client
-     * @param {Object} client 
-     */
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
     writePacket(client) {
         client.queue(this.getPacketName(), { 
             runtime_entity_id: this.getPlayerID(),

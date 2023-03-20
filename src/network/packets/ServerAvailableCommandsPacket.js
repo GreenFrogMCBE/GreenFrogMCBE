@@ -17,7 +17,7 @@ const PacketConstructor = require('./PacketConstructor')
 class ServerAvailableCommandsPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
+	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
 		return "available_commands";
