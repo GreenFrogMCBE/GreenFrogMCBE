@@ -61,18 +61,18 @@ const fs = require("fs");
 
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {String} The name of the packet
-	 */
+    /**
+     * Returns the packet name
+     * @returns {String} The name of the packet
+     */
     getPacketName() {
         return "resource_pack_client_response"
     }
 
-	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
-	 */
+    /**
+     * Returns if is the packet critical?
+     * @returns {Boolean} Returns if the packet is critical
+     */
     isCriticalPacket() {
         return true
     }
@@ -348,6 +348,14 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                         server,
                         player
                     );
+
+                    player.setEntityData("can_climb", true)
+                    player.setEntityData("can_fly", false)
+                    player.setEntityData("walker", true)
+                    player.setEntityData("moving", true)
+                    player.setEntityData("breathing", true)
+                    player.setEntityData("has_collision", true)
+                    player.setEntityData("affected_by_gravity", true)
                 }, 2000);
 
                 setTimeout(() => {

@@ -22,14 +22,15 @@ const ServerToClientChatEvent = require("../events/ServerToClientChatEvent");
 const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
 const PlayerGamemode = require("../network/packets/ServerSetPlayerGameTypePacket");
 const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
+const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
+const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 const PlayerInfo = require("../api/PlayerInfo");
-const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
 
 module.exports = {
 	/**
@@ -61,9 +62,9 @@ module.exports = {
 		player.setGamemode = function (gamemode) {
 			const validGamemodes = [
 				GameMode.SURVIVAL,
-				GameMode.CREATIVE, 
-				GameMode.ADVENTURE, 
-				GameMode.SPECTATOR, 
+				GameMode.CREATIVE,
+				GameMode.ADVENTURE,
+				GameMode.SPECTATOR,
 				GameMode.FALLBACK
 			];
 			if (!validGamemodes.includes(gamemode)) throw new Error("Invalid gamemode!")
@@ -73,7 +74,7 @@ module.exports = {
 			const gm = new PlayerGamemode();
 			gm.setGamemode(gamemode);
 			gm.writePacket(player);
-			
+
 			const gamemodechangeevent = new PlayerGamemodeChangeEvent()
 			gamemodechangeevent.execute(require("../Server").server, player, gamemode);
 		};
@@ -88,9 +89,30 @@ module.exports = {
 			transferevent.execute(require("../Server").server, player, address, port);
 		};
 
+		/**
+		 * Sets the player local difficulty
+		 * @param {Difficulty} difficulty 
+		 */
 		player.setDifficulty = function (difficulty) {
 			const difficultyevent = new PlayerUpdateDifficultyEvent()
 			difficultyevent.execute(require("../Server").server, player, difficulty)
+		}
+
+		/**
+		 * Sets the data of the player/entity (eg on_fire, etc)
+		 * @param {String} field 
+		 * @param {Boolean} value 
+		 */
+		player.setEntityData = function (field, value) {
+			const playerentitypacket = new ServerSetEntityDataPacket()
+			playerentitypacket.setProperties({
+				"ints": [],
+				"floats": []
+			})
+			playerentitypacket.setRuntimeEntityID(0) // Local player
+			playerentitypacket.setTick(0)
+			playerentitypacket.setValue(field, value)
+			playerentitypacket.writePacket(player)
 		}
 
 		/**
