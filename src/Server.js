@@ -72,6 +72,8 @@ module.exports = {
 
 		const packetsDir = path.join(__dirname, 'network', 'packets');
 
+		let exist = false
+
 		fs.readdirSync(packetsDir).forEach((filename) => {
 			if (filename.startsWith('Client')) {
 				const packetPath = path.join(packetsDir, filename);
@@ -80,24 +82,23 @@ module.exports = {
 					const packet = new packetPathImport()
 					if (packet.getPacketName() === packetparams.data.name) {
 						packet.readPacket(client, packetparams, server);
+						exist = true
 					}
 				} catch (e) {
-					if (e.toString().includes("readPacket")) {
-						if (config.logUnhandledPackets) {
-							Logger.warning(lang.devdebug.unhandledPacket);
-							console.info("%o", packetparams);
-						}
-					} else {
-						client.kick(lang.kickmessages.invalidPacket);
+					client.kick(lang.kickmessages.invalidPacket);
 
-						const internalerrorevent = new ServerInternalServerErrorEvent()
-						internalerrorevent.execute(server, e);
+					const internalerrorevent = new ServerInternalServerErrorEvent()
+					internalerrorevent.execute(server, e);
 
-						Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
-					}
+					Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
 				}
 			}
 		});
+
+		if (!exist && config.logUnhandledPackets) {
+			Logger.warning(lang.devdebug.unhandledPacket);
+			console.info("%o", packetparams);
+		}
 	},
 
 	/**
