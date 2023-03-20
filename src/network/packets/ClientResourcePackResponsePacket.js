@@ -98,6 +98,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
      * Reads the packet from player
      * @param {any} player
      * @param {JSON} packet
+     * @param {any} server
      */
     async readPacket(player, packet, server) {
         const responseStatus = packet.data.params.response_status;

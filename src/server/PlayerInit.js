@@ -29,6 +29,7 @@ const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 const PlayerInfo = require("../api/PlayerInfo");
+const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
 
 module.exports = {
 	/**
@@ -73,8 +74,8 @@ module.exports = {
 			gm.setGamemode(gamemode);
 			gm.writePacket(player);
 			
-			const gamemodechange = new PlayerGamemodeChangeEvent()
-			gamemodechange.execute(require("../Server").server, player, gamemode);
+			const gamemodechangeevent = new PlayerGamemodeChangeEvent()
+			gamemodechangeevent.execute(require("../Server").server, player, gamemode);
 		};
 
 		/**
@@ -83,9 +84,14 @@ module.exports = {
 		 * @param {number} port - The port of the server to transfer to
 		 */
 		player.transfer = function (address, port) {
-			const transfer = new PlayerTransferEvent();
-			transfer.execute(require("../Server").server, player, address, port);
+			const transferevent = new PlayerTransferEvent();
+			transferevent.execute(require("../Server").server, player, address, port);
 		};
+
+		player.setDifficulty = function (difficulty) {
+			const difficultyevent = new PlayerUpdateDifficultyEvent()
+			difficultyevent.execute(require("../Server").server, player, difficulty)
+		}
 
 		/**
 		 * Kicks a player from the server
