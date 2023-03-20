@@ -193,6 +193,6 @@ Our language system currently supports those languages: English, Lithuanian, Ukr
 
 ## Servers
 
-Contact me us in our discord server, if you have one, or open an issue in this repo
+Contact us in our Discord server, if you have one, or open an issue in this repo
 
 > Currently none
