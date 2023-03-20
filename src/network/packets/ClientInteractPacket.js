@@ -12,11 +12,14 @@
  */
 /* eslint-disable no-case-declarations */
 const UnsupportedOperationException = require("../../events/exceptions/UnsupportedOperationException");
+
+const PacketConstructor = require("./PacketConstructor");
+
 const ContainerOpen = require("./ServerContainerOpenPacket");
 const InventoryTypes = require("./types/InventoryTypes");
-const PacketConstructor = require("./PacketConstructor");
 const InteractTypes = require("./types/InteractTypes");
 const WindowIds = require("./types/WindowIds");
+
 const Logger = require("../../server/Logger");
 
 class ClientInteractPacket extends PacketConstructor {
