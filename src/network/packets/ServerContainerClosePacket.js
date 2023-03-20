@@ -36,7 +36,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 	 * Sets the window ID
 	 * @param {Number} new_id
 	 */
-	setWindowId(new_id) {
+	setWindowID(new_id) {
 		window_id = new_id;
 	}
 
@@ -52,7 +52,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 	 * It returns the window ID
 	 * @returns {Number} The window ID
 	 */
-	getWindowId() {
+	getWindowID() {
 		return window_id;
 	}
 
@@ -70,7 +70,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			window_id: this.getWindowId(),
+			window_id: this.getWindowID(),
 			server: this.getServer(),
 		});
 	}

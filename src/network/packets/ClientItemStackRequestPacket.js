@@ -1,7 +1,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
-const InventoryTypes = require("./types/InventoryTypes");
+const InventoryType = require("./types/InventoryType");
 
 const PacketHandlingError = require("./exceptions/PacketHandlingError");
 
@@ -59,7 +59,7 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 
 			for (const [i, item] of player.items.entries()) {
 				const is = new ServerInventorySlotPacket();
-				is.setWindowId(InventoryTypes.INVENTORY);
+				is.setWindowID(InventoryType.INVENTORY);
 				is.setSlot(i);
 				is.setItemData({
 					network_id: item.network_id,

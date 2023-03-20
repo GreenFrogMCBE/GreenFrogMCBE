@@ -16,9 +16,9 @@ const UnsupportedOperationException = require("../../events/exceptions/Unsupport
 const PacketConstructor = require("./PacketConstructor");
 
 const ContainerOpen = require("./ServerContainerOpenPacket");
-const InventoryTypes = require("./types/InventoryTypes");
-const InteractTypes = require("./types/InteractTypes");
-const WindowIds = require("./types/WindowIds");
+const InventoryType = require("./types/InventoryType");
+const InteractType = require("./types/InteractType");
+const WindowIDs = require("./types/WindowIDs");
 
 const Logger = require("../../server/Logger");
 
@@ -48,15 +48,15 @@ class ClientInteractPacket extends PacketConstructor {
 		const actionID = packet.data.params.action_id
 
 		switch (actionID) {
-			case InteractTypes.INVENTORYOPEN:
+			case InteractType.INVENTORYOPEN:
 				const containeropen = new ContainerOpen()
-				containeropen.setWindowId(WindowIds.CREATIVE)
-				containeropen.setWindowType(InventoryTypes.INVENTORY)
+				containeropen.setWindowID(WindowIDs.CREATIVE)
+				containeropen.setWindowType(InventoryType.INVENTORY)
 				containeropen.setRuntimeEntityId(2)
 				containeropen.setCoordinates(0, 0, 0)
 				containeropen.writePacket(player)
 				break
-			case InteractTypes.MOUSEOVERENTITY:
+			case InteractType.MOUSEOVERENTITY:
 				// TODO: This thing is related to PVP, but it is not implemented yet in GreenFrog
 				break
 			default:

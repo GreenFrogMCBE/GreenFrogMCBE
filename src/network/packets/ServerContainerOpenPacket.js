@@ -64,9 +64,9 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * It sets the window ID
-	 * @param {WindowIds} new_window_id
+	 * @param {WindowIDs} new_window_id
 	 */
-	setWindowId(new_window_id) {
+	setWindowID(new_window_id) {
 		window_id = new_window_id;
 	}
 
@@ -82,7 +82,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	 * It returns the window ID
 	 * @returns {Number} The window ID
 	 */
-	getWindowId() {
+	getWindowID() {
 		return window_id;
 	}
 
@@ -116,7 +116,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			window_id: this.getWindowId(),
+			window_id: this.getWindowID(),
 			window_type: this.getWindowType(),
 			coordinates: this.getCoordinates(),
 			runtime_entity_id: this.getRuntimeEntityId(),

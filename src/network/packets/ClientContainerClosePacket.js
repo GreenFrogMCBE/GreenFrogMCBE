@@ -15,7 +15,7 @@ const ServerContainerClosePacket = require("./ServerContainerClosePacket");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const WindowIds = require("./types/WindowIds");
+const WindowIDs = require("./types/WindowIDs");
 
 class ClientContainerClosePacket extends PacketConstructor {
 	/**
@@ -42,7 +42,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 	async readPacket(player) {
 		const containerclose = new ServerContainerClosePacket()
 		containerclose.setServer(false)
-		containerclose.setWindowId(WindowIds.CREATIVE)
+		containerclose.setWindowID(WindowIDs.CREATIVE)
 		containerclose.writePacket(player)
 
 		const containercloseevent = new PlayerContainerCloseEvent()

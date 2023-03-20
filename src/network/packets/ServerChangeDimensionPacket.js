@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Dimensions = require("./types/DimensionsLegacy");
+const Dimensions = require("./types/DimensionLegacy");
 
 const PacketConstructor = require('./PacketConstructor')
 

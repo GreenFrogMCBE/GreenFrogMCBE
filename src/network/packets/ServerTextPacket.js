@@ -10,11 +10,11 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const TextTypes = require("./types/TextTypes");
+const TextType = require("./types/TextType");
 const PacketConstructor = require("./PacketConstructor");
 
 let message = "";
-let type = TextTypes.ANNOUNCEMENT;
+let type = TextType.ANNOUNCEMENT;
 let needs_translation = false;
 let source_name = "";
 let xuid = "";
@@ -47,7 +47,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the type
-	 * @param {TextTypes} new_type
+	 * @param {TextType} new_type
 	 */
 	setType(new_type) {
 		type = new_type;
@@ -95,7 +95,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the type
-	 * @returns {TextTypes}
+	 * @returns {TextType}
 	 */
 	getType() {
 		return type;

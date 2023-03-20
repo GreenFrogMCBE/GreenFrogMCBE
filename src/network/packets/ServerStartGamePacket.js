@@ -13,7 +13,7 @@
 const Gamemode = require("../../api/GameMode");
 const Difficulty = require("./types/Difficulty");
 const Dimension = require("./types/Dimension");
-const Generator = require("./types/Generators");
+const Generator = require("./types/Generator");
 const PacketConstructor = require("./PacketConstructor");
 
 let entity_id = 0;
@@ -136,7 +136,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the generator
-	 * @param {Generators} new_generator - The generator
+	 * @param {Generator} new_generator - The generator
 	 */
 	setGenerator(new_generator) {
 		generator = new_generator;

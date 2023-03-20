@@ -37,7 +37,7 @@ class ServerInventorySlotPacket extends PacketConstructor {
 	 * Sets the window ID.
 	 * @param {Number} ID
 	 */
-	setWindowId(new_id) {
+	setWindowID(new_id) {
 		window_id = new_id;
 	}
 
@@ -61,7 +61,7 @@ class ServerInventorySlotPacket extends PacketConstructor {
 	 * Returns the window ID.
 	 * @returns {Number} The window ID.
 	 */
-	getWindowId() {
+	getWindowID() {
 		return window_id;
 	}
 
@@ -87,7 +87,7 @@ class ServerInventorySlotPacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			window_id: this.getWindowId(),
+			window_id: this.getWindowID(),
 			slot: this.getSlot(),
 			item: this.getItemData(),
 		});

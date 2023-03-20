@@ -50,10 +50,10 @@ const CommandPl = require("../../commands/CommandPl");
 const CommandOp = require("../../commands/CommandOp");
 const PlayerListTypes = require("./types/PlayerList");
 const ChunkError = require("./exceptions/ChunkError");
-const PlayStatuses = require("./types/PlayStatuses");
+const PlayStatusType = require("./types/PlayStatus");
 const ServerInfo = require("../../api/ServerInfo");
 const Difficulty = require("./types/Difficulty");
-const Generator = require("./types/Generators");
+const Generator = require("./types/Generator");
 const Dimension = require("./types/Dimension");
 const Logger = require("../../server/Logger");
 const Biome = require("./types/Biome");
@@ -339,7 +339,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                     if (player.offline) return;
 
                     const ps = new PlayStatus();
-                    ps.setStatus(PlayStatuses.PLAYERSPAWN);
+                    ps.setStatus(PlayStatusType.PLAYERSPAWN);
                     ps.writePacket(player);
 
                     const spawnevent = new PlayerSpawnEvent()
