@@ -60,7 +60,7 @@ If you have one, feel free to open an issue
 
 1. config.yml - A file where all main settings are stored
 2. package.json - (Do not edit if you don't know what are you doing) Config for some dependency related things
-3. src/lang/<server language>.json - A place, where all the translation string are stored.
+3. src/lang/(server language).json - A place, where all the translation string are stored.
 4. world/chunks.json - A save file for world
 5. world/chunks_flat.json - A save file for flat world
 6. world/gamerules.json - Gamerules
