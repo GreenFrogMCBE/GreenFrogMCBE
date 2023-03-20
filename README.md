@@ -177,10 +177,6 @@ If you have one, feel free to open an issue
 > For rewriting logger <br>
 > For rewriting 20% of the network code 
 
-18. PocketmineMP
-
-> Used for attribute list: https://github.com/PocketMine/PocketMine-MP/blob/e27f5695d942b179527506c5dfed183cd4fdf201/src/pocketmine/entity/Attribute.php#L53
-
 ## Language system
 
 Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese, Turkish, Dutch (in progress)
