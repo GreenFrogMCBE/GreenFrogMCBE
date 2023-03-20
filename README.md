@@ -62,14 +62,16 @@ If you have one, feel free to open an issue
 2. package.json - (Do not edit if you don't know what are you doing) Config for some dependency related things
 3. src/lang/<server language>.json - A place, where all the translation string are stored.
 4. world/chunks.json - A save file for world
-5. world/world_settings.json - Here you can change the world name and other settings
-6. world/custom_items.json - Allows for you to create custom items on your server
-7. src/network/packets/biomes.json - Allows for you to configure biomes
-8. src/network/packets/creativeContent.json - Allows for you to customize the creative menu. Useful to remove some items, and add custom
-9. src/network/packets/skinData.json - Allows to customize the skin data for the player list
-10. src/network/packets/entities.json - Allows to disable/enable entities
-11. plugins folder - A folder for plugins
-12. plugins_configs - A folder for configs and data for plugins
+5. world/chunks_flat.json - A save file for flat world
+6. world/gamerules.json - Gamerules
+7. world/world_settings.json - Here you can change the world name and other settings
+8. world/custom_items.json - Allows for you to create custom items on your server
+9. src/network/packets/biomes.json - Allows for you to configure biomes
+10. src/network/packets/creativeContent.json - Allows for you to customize the creative menu. Useful to remove some items, and add custom
+11. src/network/packets/skinData.json - Allows to customize the skin data for the player list
+12. src/network/packets/entities.json - Allows to disable/enable entities
+13. plugins folder - A folder for plugins
+14. plugins_configs - A folder for configs and data for plugins
 
 ## Credits
 
