@@ -52,7 +52,6 @@ class ServerUpdateTimePacket extends PacketConstructor {
 	 * @param {any} client
 	 */
 	writePacket(client) {
-		this.validate(time);
 		client.queue(this.getPacketName(), {
 			time: this.getTime(),
 		});
