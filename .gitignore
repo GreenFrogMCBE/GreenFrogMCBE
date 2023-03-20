@@ -4,3 +4,4 @@ config.yml
 *_packetReadError.txt
 .gitignore
 TODO
+tools/refactor.js
