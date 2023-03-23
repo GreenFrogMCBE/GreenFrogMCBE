@@ -14,18 +14,18 @@
 // Credit: AnyBananaGAME
 
 const rl = require("readline");
-const ClientJoin = require("./test/ClientJoin");
-const ClientMessage = require("./test/ClientSendMessage");
-const ClientCommand = require("./test/ClientRunCommand");
-const StartServer = require("./test/StartServer");
-const TestConfigs = require("./test/TestConfigs");
+const ClientJoin = require("../test/ClientJoin");
+const ClientMessage = require("../test/ClientSendMessage");
+const ClientCommand = require("../test/ClientRunCommand");
+const StartServer = require("../test/StartServer");
+const TestConfigs = require("../test/TestConfigs");
 
 const fs = require("fs");
 if (!fs.existsSync("config.yml")) {
 	fs.writeFileSync(
 		"config.yml",
 		`# LISTENING
-#
+# 
 # This section contains the config for server host and port
 
 host: '0.0.0.0'
@@ -37,8 +37,8 @@ port: 19132
 
 motd: '§aDedicated GreenFrog server'
 maxPlayers: 20
-version: '1.19.63'
-offlineMode: true
+version: '1.19.70'
+offlineMode: false
 lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 
 # CHAT
@@ -50,7 +50,7 @@ commandsDisabled: false # (will only disabled them for players, not console)
 blockInvalidMessages: true # Kicks the player if the player tried to send an too long or empty message and also prevents from using colors in chat
 
 # DEVELOPMENT SETTINGS
-#
+# 
 # This section contains settings like debug, exit codes, etc
 
 unstable: false # Makes your server not crash on critical errors
@@ -59,7 +59,7 @@ crashCode: -1
 exitCode: 0
 logUnhandledPackets: false
 defaultPermissionLevel: 2
-# Permission levels are:
+# Permission levels are: 
 # 4 - operator
 # 3 - unknown
 # 2 - member
@@ -71,14 +71,16 @@ multiProtocol: false # Supports 1.19.20+. Some features may be broken
 #
 # This section contains world settings
 
-renderChunks: true
 gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 difficulty: 0 # Currently only visual
 generator: "default" # Can be default, flat (superflat), or void (empty)
+tickWorldTime: true # Should time update be server side?
+tickVoid: true # Should people that are in void take damage?
+randomTickSpeed: 1000
 
 # Command settings
-#
+# 
 # Allows to disable/enable commands
 # Make sure that "commandsDisabled" in chat section is enabled
 
@@ -104,7 +106,13 @@ playerCommandKick: true
 playerCommandTime: true
 playerCommandDeop: true
 playerCommandList: true
-playerCommandGamemode: true`
+playerCommandGamemode: true
+
+# PERFORMANCE SETTINGS
+#
+# Allows to make your server faster
+
+garbageCollectorDelay: 60000`
 	);
 }
 
@@ -205,7 +213,7 @@ let commandTest = () =>
 		try {
 			TestConfigs.test();
 		} catch (e) {
-			console.log("Tests failed! Failed to test the configs! " + e.stack);
+			console.log("Tests failed! Failed to parse the configs! " + e.stack);
 			process.exit(-1);
 		} finally {
 			setTimeout(() => {
