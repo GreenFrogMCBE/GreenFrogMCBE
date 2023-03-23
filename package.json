@@ -20,6 +20,6 @@
   "devDependencies": {
     "nodemon": "^2.0.22",
     "eslint": "8.35.0",
-    "prettier": "2.8.4"
+    "prettier": "2.8.6"
   }
 }
