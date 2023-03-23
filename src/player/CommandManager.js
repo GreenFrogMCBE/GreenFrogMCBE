@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const AvailableCommands = require("../network/packets/AvailableCommands");
+const AvailableCommands = require("../network/packets/ServerAvailableCommandsPacket");
 
 let commands = [];
 
@@ -86,7 +86,7 @@ class CommandManager {
 		});
 		const availablecommands = new AvailableCommands();
 		availablecommands.setData(client.commands);
-		availablecommands.send(client, this.getPacket(client));
+		availablecommands.writePacket(client);
 	}
 }
 

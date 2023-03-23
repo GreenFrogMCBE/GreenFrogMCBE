@@ -29,7 +29,7 @@ port: 19132
 
 motd: '§aDedicated GreenFrog server'
 maxPlayers: 20
-version: '1.19.63'
+version: '1.19.70'
 offlineMode: false
 lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 
@@ -63,11 +63,13 @@ multiProtocol: false # Supports 1.19.20+. Some features may be broken
 #
 # This section contains world settings
 
-renderChunks: true
 gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 difficulty: 0 # Currently only visual
 generator: "default" # Can be default, flat (superflat), or void (empty)
+tickWorldTime: true # Should time update be server side?
+tickVoid: true # Should people that are in void take damage?
+randomTickSpeed: 1000
 
 # Command settings
 # 
@@ -96,7 +98,13 @@ playerCommandKick: true
 playerCommandTime: true
 playerCommandDeop: true
 playerCommandList: true
-playerCommandGamemode: true`
+playerCommandGamemode: true
+
+# PERFORMANCE SETTINGS
+#
+# Allows to make your server faster
+
+garbageCollectorDelay: 60000`
 		);
 	}
 	const Frog = require("./src/Server.js");
@@ -112,5 +120,5 @@ playerCommandGamemode: true`
 
 // Close server on nodemon restart
 process.once("SIGINT", async () => {
-	await require("./src/server/ShutdownAPI.js");
+	await require("./src/Server").shutdown();
 });

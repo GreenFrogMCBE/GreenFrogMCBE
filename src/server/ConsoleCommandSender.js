@@ -12,7 +12,7 @@
  */
 /* eslint-disable no-case-declarations */
 const rl = require("readline");
-const ConsoleCommandExecutedEvent = require("../plugin/events/ServerConsoleCommandExecutedEvent");
+const ConsoleCommandExecutedEvent = require("../events/ServerConsoleCommandExecutedEvent");
 
 let isclosed = false;
 
