@@ -24,6 +24,10 @@ class PlayerHealthUpdateEvent extends Event {
 		this.player = null
 		this.server = null
 		this.health = 0
+		this.maxHealth = 20
+		this.minHealth = 0
+		this.modifiers = []
+		this.attributeName = "minecraft:health"
 	}
 
 	cancel() {
@@ -39,12 +43,12 @@ class PlayerHealthUpdateEvent extends Event {
 			setHealthPacket.writePacket(this.player);
 
 			this.player.setAttribute({
-				name: 'minecraft:health',
-				min: 0,
-				max: 20,
+				name: this.attributeName,
+				min: this.minHealth,
+				max: this.maxHealth,
 				current: this.health,
-				default: 20,
-				modifiers: []
+				default: this.maxHealth,
+				modifiers: this.modifiers
 			});
 
 			this.player.health = this.health;
