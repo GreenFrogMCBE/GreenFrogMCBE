@@ -13,42 +13,44 @@
 const SetHealth = require("../network/packets/ServerSetHealthPacket")
 
 
-class clientHealthUpdateEvent extends Event {
+class PlayerHealthUpdateEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
-		this.name = "clientHealthUpdateEvent";
+		this.name = "PlayerHealthUpdateEvent";
+		this.player = null
+		this.server = null
+		this.health = 0
 	}
 
 	cancel() {
 		this.cancelled = true;
 	}
 
-	async execute(server, client, health) {
+	async execute() {
 		await this._execute()
-	
+
 		if (!this.cancelled) {
-			const sethealthpacket = new SetHealth()
-			sethealthpacket.setHealth(health)
-			sethealthpacket.writePacket(client)
-	
-			client.setAttribute({
-				"min": 0,
-				"max": 20,
-				"current": health,
-				"default": 20,
-				"name": "minecraft:health",
-				"modifiers": []
-			})
-	
-			client.health = health;
-	
-			if (client.health <= 0) {
-				client.dead = true
+			const setHealthPacket = new SetHealth();
+			setHealthPacket.setHealth(this.health);
+			setHealthPacket.writePacket(this.player);
+
+			this.player.setAttribute({
+				name: 'minecraft:health',
+				min: 0,
+				max: 20,
+				current: this.health,
+				default: 20,
+				modifiers: []
+			});
+
+			this.player.health = this.health;
+
+			if (this.player.health <= 0) {
+				this.player.dead = true;
 			}
 		}
 	}
-	
 }
 
-module.exports = clientHealthUpdateEvent;
+module.exports = PlayerHealthUpdateEvent;
