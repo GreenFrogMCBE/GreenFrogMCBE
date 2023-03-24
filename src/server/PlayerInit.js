@@ -31,6 +31,7 @@ const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 const PlayerInfo = require("../api/PlayerInfo");
+const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 
 module.exports = {
 	/**
@@ -40,24 +41,29 @@ module.exports = {
 	_initPlayer(player) {
 		/**
 		 * Sends a message to the player
-		 * @param {string} msg - The message to send
+		 * @param {String} msg - The message to send
 		 */
 		player.sendMessage = function (msg) {
-			const sendmsgevent = new ServerToClientChatEvent();
-			sendmsgevent.execute(require("../Server").server, player, msg);
+			const sendMessageEvent = new ServerToClientChatEvent();
+			sendMessageEvent.execute(require("../Server").server, player, msg);
 		};
 
 		/**
 		 * Sends a chat message as a player
-		 * @param {string} msg - The message to send as a player
+		 * @param {String} message - The message to send as a player
 		 */
-		player.chat = function (msg) {
-			Chat.broadcastMessage(lang.chat.chatFormat.replace("%username%", player.username).replace("%message%", msg));
+		player.chat = function (message) {
+			const chatAsPlayerEvent = new PluginChatAsPlayerEvent()
+			chatAsPlayerEvent.player = player;
+			chatAsPlayerEvent.message = message;
+			chatAsPlayerEvent.server = require("../Server").server; 
+			// TODO: Make this code better
+			chatAsPlayerEvent.execute()
 		};
 
 		/**
 		 * Sets a player gamemode
-		 * @param {string} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
+		 * @param {String} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 */
 		player.setGamemode = function (gamemode) {
 			const validGamemodes = [
@@ -75,18 +81,18 @@ module.exports = {
 			gm.setGamemode(gamemode);
 			gm.writePacket(player);
 
-			const gamemodechangeevent = new PlayerGamemodeChangeEvent()
-			gamemodechangeevent.execute(require("../Server").server, player, gamemode);
+			const gamemodeChangeEvent = new PlayerGamemodeChangeEvent()
+			gamemodeChangeEvent.execute(require("../Server").server, player, gamemode);
 		};
 
 		/**
 		 * Transfers the player to a different server
-		 * @param {string} address - The address of the server to transfer to
+		 * @param {String} address - The address of the server to transfer to
 		 * @param {number} port - The port of the server to transfer to
 		 */
 		player.transfer = function (address, port) {
-			const transferevent = new PlayerTransferEvent();
-			transferevent.execute(require("../Server").server, player, address, port);
+			const transferEvent = new PlayerTransferEvent();
+			transferEvent.execute(require("../Server").server, player, address, port);
 		};
 
 		/**
@@ -117,7 +123,7 @@ module.exports = {
 
 		/**
 		 * Kicks a player from the server
-		 * @param {string} [msg=lang.kickmessages.kickedByPlugin] - The reason for the kick
+		 * @param {String} [msg=lang.kickmessages.kickedByPlugin] - The reason for the kick
 		 */
 		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
