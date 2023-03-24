@@ -16,10 +16,12 @@ const UnsupportedOperationException = require("./exceptions/UnsupportedOperation
 const fs = require("fs");
 
 class Event {
-	cancel() {}
+	cancel() {
+		throw new UnsupportedOperationException("This event is impossible to cancel")
+	}
 
 	execute() {
-		throw new UnsupportedOperationException("This event is impossible to cancel")
+		throw new UnsupportedOperationException("Not implemented")
 	}
 
 	async _execute(event) {
