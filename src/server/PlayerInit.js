@@ -171,6 +171,10 @@ module.exports = {
 			updateattributespacket.writePacket(player)
 		}
 
+		/**
+		 * Sets the XP for the player
+		 * @param {Float} xp 
+		 */
 		player.setXP = function (xp) {
 			player.setAttribute({
 				"min": 0,
