@@ -17,12 +17,11 @@ const PlayerContainerOpenEvent = require("../../events/PlayerContainerOpenEvent"
 
 const PacketConstructor = require("./PacketConstructor");
 
-const ContainerOpen = require("./ServerContainerOpenPacket");
-const InventoryType = require("./types/InventoryType");
 const InteractType = require("./types/InteractType");
 const WindowID = require("./types/WindowID");
 
 const Logger = require("../../server/Logger");
+const InventoryType = require("./types/InventoryType");
 
 class ClientInteractPacket extends PacketConstructor {
 	/**
@@ -54,14 +53,10 @@ class ClientInteractPacket extends PacketConstructor {
 				const event = new PlayerContainerOpenEvent()
 				event.server = server
 				event.client = player
+				event.windowID = WindowID.CREATIVE
+				event.windowType = InventoryType.INVENTORY
+				event.runtimeId = 2
 				event.execute()
-
-				const containeropen = new ContainerOpen()
-				containeropen.setWindowID(WindowID.CREATIVE)
-				containeropen.setWindowType(InventoryType.INVENTORY)
-				containeropen.setRuntimeEntityId(2)
-				containeropen.setCoordinates(0, 0, 0)
-				containeropen.writePacket(player)
 				break
 			case InteractType.MOUSEOVERENTITY:
 				// TODO: This thing is related to PVP, but it is not implemented yet in GreenFrog
