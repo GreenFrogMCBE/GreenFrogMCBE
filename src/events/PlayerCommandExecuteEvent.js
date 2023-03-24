@@ -35,7 +35,7 @@ class PlayerCommandExecuteEvent extends Event {
 		this.name = "PlayerCommandExecuteEvent";
 		this.server = null;
 		this.player = null;
-		this.command = "";
+		this.command = null;
 	}
 
 	cancel() {
@@ -48,9 +48,9 @@ class PlayerCommandExecuteEvent extends Event {
 		if (!this.cancelled || config.commandsDisabled) {
 			Logger.info(lang.commands.executedCommand.replace("%player%", this.player.username).replace("%cmd%", this.command));
 
-			const cmdManager = new CommandManager();
-
 			let exists = false;
+
+			const cmdManager = new CommandManager();
 
 			const commandName = this.command.replace("/", "").split(" ")[0].replace(" ", "").toLowerCase();
 			const commandlist = cmdManager.getCommands();
@@ -102,9 +102,7 @@ class PlayerCommandExecuteEvent extends Event {
 
 			const commandFound = Object.keys(commandsToExecute).find((foundCommand) => this.command.startsWith(foundCommand));
 
-			if (commandFound) {
-				commandsToExecute[commandFound].executePlayer(this.player, this.command);
-			}
+			if (commandFound) commandsToExecute[commandFound].executePlayer(this.player, this.command);
 		}
 	}
 }
