@@ -193,8 +193,15 @@ module.exports = {
 		player.setHealth = function (health) {
 			if (player.dead) return
 
-			const playerhealthupdateevent = new PlayerHealthUpdateEvent()
-			playerhealthupdateevent.execute(require("../Server").server, player, health)
+			const healthUpdateEvent = new PlayerHealthUpdateEvent()
+			healthUpdateEvent.server = require("../Server").server
+			healthUpdateEvent.player = player
+			healthUpdateEvent.name = "minecraft:health"
+			healthUpdateEvent.modifiers = []
+			healthUpdateEvent.minHealth = 0
+			healthUpdateEvent.maxHealth = 20
+			healthUpdateEvent.health = health
+			healthUpdateEvent.execute()
 		};
 
 		/**
