@@ -33,7 +33,7 @@ function traverseDirectory(dirPath, replacements) {
 const replacements = [  
   // Put your replacements here
   // example:
-  ['WindowIDs', 'WindowID']
+  ['this.client', 'this.player']
 ];
 
 traverseDirectory(rootDir, replacements);

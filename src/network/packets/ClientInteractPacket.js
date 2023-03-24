@@ -13,6 +13,8 @@
 /* eslint-disable no-case-declarations */
 const UnsupportedOperationException = require("../../events/exceptions/UnsupportedOperationException");
 
+const PlayerContainerOpenEvent = require("../../events/PlayerContainerOpenEvent")
+
 const PacketConstructor = require("./PacketConstructor");
 
 const ContainerOpen = require("./ServerContainerOpenPacket");
@@ -44,11 +46,16 @@ class ClientInteractPacket extends PacketConstructor {
 	 * @param {any} player
 	 * @param {JSON} packet
 	 */
-	async readPacket(player, packet) {
+	async readPacket(player, packet, server) {
 		const actionID = packet.data.params.action_id
 
 		switch (actionID) {
 			case InteractType.INVENTORYOPEN:
+				const event = new PlayerContainerOpenEvent()
+				event.server = server
+				event.client = player
+				event.execute()
+
 				const containeropen = new ContainerOpen()
 				containeropen.setWindowID(WindowID.CREATIVE)
 				containeropen.setWindowType(InventoryType.INVENTORY)

@@ -10,11 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const SetHealth = require("../network/packets/ServerSetHealthPacket")
-const Event = require("./Event");
-const fs = require("fs");
+
 
 class clientHealthUpdateEvent extends Event {
 	constructor() {
@@ -28,15 +25,7 @@ class clientHealthUpdateEvent extends Event {
 	}
 
 	async execute(server, client, health) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).clientHealthUpdateEvent(server, client, health);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
-				}
-			});
-		});
+		await this._execute()
 	
 		if (!this.cancelled) {
 			const sethealthpacket = new SetHealth()

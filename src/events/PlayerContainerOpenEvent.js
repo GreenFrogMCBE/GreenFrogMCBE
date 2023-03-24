@@ -10,54 +10,31 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unsafe-finally */
-/* eslint-disable no-unused-vars */
-const PlayerSentInvalidMessageEvent = require("./PlayerSentInvalidMessageEvent");
+const ServerContainerClosePacket = require("../network/packets/ServerContainerClosePacket")
+const WindowID = require("../network/packets/types/WindowID")
 
-const { lang, config } = require("../api/ServerInfo");
-const PlayerInfo = require("../api/PlayerInfo");
-const Logger = require("../server/Logger");
 const Event = require("./Event");
 
-
-class PlayerChatEvent extends Event {
+class PlayerContainerOpenEvent extends Event {
 	constructor() {
 		super();
-		this.cancelled = false;
-		this.name = "PlayerChatEvent";
-		this.message = ""
-		this.player = null;
-		this.server = null;
+		this.name = "PlayerContainerOpenEvent";
+		this.server = null
+		this.player = null
+		this.windowID = WindowID.CREATIVE
+		this.cancelled = false
 	}
 
 	cancel() {
-		this.cancelled = true;
+		const containerclose = new ServerContainerClosePacket()
+		containerclose.setServer(false)
+		containerclose.setWindowID(WindowID.CREATIVE)
+		containerclose.writePacket(this.player)
 	}
 
 	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled || config.disable === true) return;
-
-		const fullmessage = lang.chat.chatFormat
-			.replace("%username%", this.player.username)
-			.replace("%message%", this.message);
-
-		if (!this.message.trim()) return;
-
-		if (this.message.includes("§") || this.message.length > 256 && config.blockInvalidMessages) {
-			// TODO
-			// const _PlayerSentInvalidMessageEvent = new PlayerSentInvalidMessageEvent()
-			// _PlayerSentInvalidMessageEvent.execute()
-			return;
-		}
-
-		Logger.info(lang.chat.chatMessage.replace("%message%", fullmessage));
-
-		for (const player of PlayerInfo.players) {
-			player.sendMessage(fullmessage);
-		}
+		await this._execute(this)
 	}
 }
 
-module.exports = PlayerChatEvent;
+module.exports = PlayerContainerOpenEvent;

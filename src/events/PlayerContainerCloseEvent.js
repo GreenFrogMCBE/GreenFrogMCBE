@@ -10,32 +10,39 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
+
+const InventoryType = require("../network/packets/types/InventoryType");
+const WindowID = require("../network/packets/types/WindowID");
+
+const ContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket")
+
 const Event = require("./Event");
-const fs = require("fs");
 
 class PlayerContainerCloseEvent extends Event {
 	constructor() {
 		super();
-		this.cancelled = false;
 		this.name = "PlayerContainerCloseEvent";
+		this.server = null
+		this.player = null
+		this.coordinates = 0, 0, 0
+		this.runtimeEntityId = 2
+		this.windowType = InventoryType.INVENTORY
+		this.windowID = WindowID.CREATIVE
+		this.cancelled = false
 	}
 
 	cancel() {
-		throw new UnsupportedOperationException("This event is impossible to cancel")
+		const containeropen = new ContainerOpenPacket()
+		containeropen.setWindowID(WindowID.CREATIVE)
+		containeropen.setWindowType(InventoryType.INVENTORY)
+		containeropen.setRuntimeEntityId(2)
+		containeropen.setCoordinates(0, 0, 0)
+		containeropen.writePacket(this.player)
+		this.cancelled = true
 	}
 
-	execute(server, client) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).PlayerContainerCloseEvent(server, client);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
-				}
-			});
-		});
+	async execute() {
+		await this._execute(this)
 	}
 }
 
