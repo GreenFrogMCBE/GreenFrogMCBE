@@ -35,7 +35,6 @@ const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 
 module.exports = {
 	/**
-	 * @private
 	 * @param {Object} player 
 	 */
 	_initPlayer(player) {
@@ -57,13 +56,12 @@ module.exports = {
 			chatAsPlayerEvent.player = player;
 			chatAsPlayerEvent.message = message;
 			chatAsPlayerEvent.server = require("../Server").server; 
-			// TODO: Make this code better
 			chatAsPlayerEvent.execute()
 		};
 
 		/**
 		 * Sets a player gamemode
-		 * @param {String} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
+		 * @param {Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 */
 		player.setGamemode = function (gamemode) {
 			const validGamemodes = [

@@ -11,10 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const Event = require("./Event");
-
-const fs = require("fs");
 
 class PlayerGamemodeChangeEvent extends Event {
 	constructor() {
