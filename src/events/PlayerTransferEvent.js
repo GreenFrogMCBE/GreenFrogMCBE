@@ -36,7 +36,7 @@ class PlayerTransferEvent extends Event {
 			const trpk = new Transfer();
 			trpk.setServerAddress(this.address);
 			trpk.setPort(this.port);
-			trpk.send(this.client);
+			trpk.send(this.player);
 		}
 	}
 }

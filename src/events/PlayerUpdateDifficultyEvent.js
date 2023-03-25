@@ -33,7 +33,7 @@ class PlayerUpdateDifficultyEvent extends Event {
 		if (!this.cancelled) {
 			const difficultypacket = new Difficulty();
 			difficultypacket.setDifficulty(this.difficulty)
-			difficultypacket.writePacket(this.client)
+			difficultypacket.writePacket(this.player)
 		}
 	}
 }

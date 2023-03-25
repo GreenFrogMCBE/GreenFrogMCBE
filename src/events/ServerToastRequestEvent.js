@@ -19,7 +19,7 @@ class ServerToastRequestEvent extends Event {
 		this.cancelled = false;
 		this.name = "ServerToastRequestEvent";
 		this.title = null
-		this.client = null
+		this.player = null
 		this.message = null
 	}
 
@@ -34,7 +34,7 @@ class ServerToastRequestEvent extends Event {
 			let packet = new ToastRequest();
 			packet.setTitle(this.title);
 			packet.setMessage(this.message);
-			packet.writePacket(this.client);
+			packet.writePacket(this.player);
 		}
 	}
 }

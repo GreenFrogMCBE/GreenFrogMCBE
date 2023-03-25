@@ -20,9 +20,9 @@ const PlayerInfo = require("./api/PlayerInfo");
 const PluginLoader = require("./plugins/PluginLoader");
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
 const ServerInternalServerErrorEvent = require("./events/ServerInternalServerErrorEvent");
+const PlayerConnectionCreateEvent = require("./events/PlayerConnectionCreateEvent");
 const VersionToProtocol = require("./utils/VersionToProtocol");
 const GarbageCollector = require("./utils/GarbageCollector");
-const PlayerJoinEvent = require("./events/PlayerConnectionCreateEvent");
 const ValidateClient = require("./player/ValidateClient");
 const DefaultWorld = require("./world/DefaultWorld");
 const PlayerInit = require("./server/PlayerInit");
@@ -88,7 +88,9 @@ module.exports = {
 					client.kick(lang.kickmessages.invalidPacket);
 
 					const internalerrorevent = new ServerInternalServerErrorEvent()
-					internalerrorevent.execute(server, e);
+					internalerrorevent.server = this
+					internalerrorevent.error = e
+					internalerrorevent.execute();
 
 					Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
 				}
@@ -113,8 +115,10 @@ module.exports = {
 		client.dead, client.offline = false;
 		client.x, client.y, client.z = 0;
 
-		const event = new PlayerJoinEvent();
-		event.execute(server, client);
+		const playerconnectionevent = new PlayerConnectionCreateEvent();
+		playerconnectionevent.server = this
+		playerconnectionevent.client = client
+		playerconnectionevent.execute(server, client);
 
 		PlayerInfo.addPlayer(client);
 
@@ -217,7 +221,10 @@ module.exports = {
 					} catch (e) {
 						client.kick(lang.kickmessages.invalidPacket);
 
-						new ServerInternalServerErrorEvent().execute(server, e);
+						const internalerrorevent = new ServerInternalServerErrorEvent()
+						internalerrorevent.server = this
+						internalerrorevent.error = e
+						internalerrorevent.execute();	
 						Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
 					}
 				});

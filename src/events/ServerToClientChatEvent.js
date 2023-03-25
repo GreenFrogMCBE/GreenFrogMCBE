@@ -22,7 +22,7 @@ class ServerToClientChatEvent extends Event {
 		this.cancelled = false;
 		this.name = "ServerToClientChatEvent";
 		this.server = null
-		this.client = null
+		this.player = null
 		this.message = null
 	}
 
@@ -35,7 +35,7 @@ class ServerToClientChatEvent extends Event {
 		if (!this.cancelled) {
 			const text = new Text();
 			text.setMessage(this.message);
-			text.writePacket(this.client);
+			text.writePacket(this.player);
 		}
 	}
 }
