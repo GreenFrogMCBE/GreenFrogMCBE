@@ -233,7 +233,10 @@ module.exports = {
 
 				GarbageCollector.clearOfflinePlayers();
 
-				new PlayerLeaveEvent().execute(require("../Server").server, player);
+				const leaveEvent = new PlayerLeaveEvent()
+				leaveEvent.player = player
+				leaveEvent.server = require("../Server")
+				leaveEvent.execute()
 
 				Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
 				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
