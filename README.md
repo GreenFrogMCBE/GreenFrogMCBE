@@ -146,7 +146,7 @@ If you have one, feel free to open an issue
 
 > Packet handler and raknet
 
-11. Wiki.VG (https://wiki.vg/Bedrock_Protocol)
+11. Wiki.vg (https://wiki.vg/Bedrock_Protocol)
 
 > For packet documentation
 
