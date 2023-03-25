@@ -56,7 +56,6 @@ class PlayerHealthUpdateEvent extends Event {
 			if (this.player.health <= 0) {
 				const playerDeathEvent = new PlayerDeathEvent()
 				playerDeathEvent.execute()
-				this.player.dead = true;
 			}
 		}
 	}

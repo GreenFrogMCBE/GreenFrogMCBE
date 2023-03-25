@@ -19,10 +19,17 @@ class PlayerDeathEvent extends Event {
 		this.name = "PlayerDeathEvent"
 		this.player = null
 		this.server = null
+		this.cancelled = false
+	}
+
+	cancel() {
+		this.cancelled = true
 	}
 
 	execute() {
 		this._execute()
+		
+		if (!this.cancelled) this.player.dead = true;
 	}
 }
 
