@@ -14,7 +14,6 @@
 const Gamemode = require("../../api/GameMode");
 const PacketConstructor = require("./PacketConstructor");
 
-// Initialize the default gamemode to fallback
 let gamemode = Gamemode.FALLBACK;
 
 class ServerSetPlayerGameTypePacket extends PacketConstructor {

@@ -13,6 +13,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
+const GameModeLegacy = require("./types/GameModeLegacy");
 const InventoryType = require("./types/InventoryType");
 
 const PacketHandlingError = require("./exceptions/PacketHandlingError");
@@ -38,8 +39,8 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	}
 
 	validatePacket(player) {
-		if (player.gamemode == !1) {
-			throw new PacketHandlingError("Itemstackrequest from non-creative gamemode player");
+		if (player.gamemode == !GameModeLegacy.CREATIVE) {
+			throw new PacketHandlingError("Impossible ItemStackRequest");
 		}
 	}
 
@@ -49,7 +50,7 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet) {
-		//TODO: Event
+		// TODO: Event
 
 		await this.validatePacket(player);
 
