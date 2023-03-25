@@ -18,6 +18,8 @@ class PlayerKickEvent extends Event {
 		super();
 		this.name = "PlayerKickEvent";
 		this.reason = null
+		this.server = null
+		this.player = null
 	}
 
 	execute() {
