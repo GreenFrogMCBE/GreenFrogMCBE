@@ -90,8 +90,10 @@ class DefaultWorld {
      */
     tick() {
         try {
-            const tickEvent = new ServerTickEvent()
-            tickEvent.execute(require("../Server"), this.toJSON())
+            const serverTickEvent = new ServerTickEvent()
+            serverTickEvent.world = this.toJSON()
+            serverTickEvent.server = require("../Server")
+            serverTickEvent.execute()
 
             if (config.tickWorldTime) {
                 _time = _time + 10
