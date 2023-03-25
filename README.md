@@ -2,17 +2,19 @@
 
 ```diff
 @@ GreenFrog is A Server software for Minecraft: Bedrock edition @@
-@@ Written in NodeJS, currently supports 1.19.70/1.19.71 @@
-@@ It is under active development @@
+
+It is written in NodeJS, currently supports 1.19.70/1.19.71
+It is under active development
 
 + Discord: https://discord.gg/UFqrnAbqjP
 + Example plugin: https://github.com/greenfrogmc/ExamplePlugin
 + Donation plugin: https://github.com/greenfrogmc/Donations
 
-@@ You can install it by downloading this repo, running "npm i", "git submodule update -remote", @@
-@@ and then "npm run start" @@
+You can install it by downloading this repo, 
+running "npm i", "git submodule update -remote"
+and then "npm run start"
 
-@@ PS: It also supports multilang! @@
+PS: It also supports multilang!
 
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/Credits.md
 + Multilang docs: https://github.com/bufferfishq/GreenFrogMCBE/blob/main/docs/Multilang.md
