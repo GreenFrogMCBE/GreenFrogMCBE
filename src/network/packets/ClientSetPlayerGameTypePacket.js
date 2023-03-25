@@ -10,6 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const PlayerGamemodeChangeRequest = require("../events/PlayerGamemodeChangeRequestEvent")
+
 const PacketConstructor = require("./PacketConstructor");
 
 const PacketHandlingError = require("./exceptions/PacketHandlingError");
@@ -50,7 +52,8 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	async readPacket(player, packet) {
 		await this.validatePacket(player, packet);
 
-		player.setGamemode(packet.data.params.gamemode);
+		const gamemodeChangeEvent = new PlayerGamemodeChangeRequestEvent()
+		gamemodeChangeEvent.server = require("")
 	}
 }
 

@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
+const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js")
 const Event = require("./Event");
 
 class PlayerGamemodeChangeEvent extends Event {
@@ -21,7 +21,6 @@ class PlayerGamemodeChangeEvent extends Event {
 		this.server = null;
 		this.player = null;
 		this.gamemode = null;
-		this.oldGamemode = null;
 	}
 
 	cancel() {
@@ -37,8 +36,8 @@ class PlayerGamemodeChangeEvent extends Event {
 
 		this.player.gamemode = this.gamemode;
 
-		const playerGamemode = new PlayerGamemodeChangeEvent();
-		playerGamemode.setGamemode(this.gamemode);
+		const playerGamemode = new ServerSetPlayerGameTypePacket();
+		playerGamemode.setGamemode(this.gamemode)
 		playerGamemode.writePacket(this.player);
 	}
 }
