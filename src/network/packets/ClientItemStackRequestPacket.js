@@ -37,6 +37,8 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet) {
+		//TODO: Event
+		
 		await this.validatePacket(player)
 		
 		try {
