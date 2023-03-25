@@ -30,7 +30,7 @@ class PlayerRequestChunkRadiusEvent extends Event {
 		this._execute(this);
 
 		if (!this.cancelled) {
-			this.player.setChunkRadius(this.worldSettings.chunkLoadRadius);
+			this.player.setChunkRadius(this.radius);
 		}
 	}
 }
