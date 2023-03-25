@@ -39,11 +39,14 @@ module.exports = {
 	_initPlayer(player) {
 		/**
 		 * Sends a message to the player
-		 * @param {String} msg - The message to send
+		 * @param {String} message - The message to send
 		 */
-		player.sendMessage = function (msg) {
+		player.sendMessage = function (message) {
 			const sendMessageEvent = new ServerToClientChatEvent();
-			sendMessageEvent.execute(require("../Server").server, player, msg);
+			sendMessageEvent.message = message
+			sendMessageEvent.player = player
+			sendMessageEvent.server = require("../Server")
+			sendMessageEvent.execute();
 		};
 
 		/**
@@ -133,6 +136,10 @@ module.exports = {
 			player.disconnect(msg);
 		};
 
+		/**
+		 * Updates the client chunk render radius
+		 * @param {Number} radius 
+		 */
 		player.setChunkRadius = function (radius) {
 			const chunkradiusupdate = new ChunkRadiusUpdate();
 			chunkradiusupdate.setChunkRadius(radius);
