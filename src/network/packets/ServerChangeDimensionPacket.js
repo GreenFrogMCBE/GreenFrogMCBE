@@ -49,9 +49,9 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 
 	/**
 	 * Sets the spawn position
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Number} z
+	 * @param {Float} x
+	 * @param {Float} y
+	 * @param {Float} z
 	 */
 	setPosition(x, y, z) {
 		pos.x = x;
