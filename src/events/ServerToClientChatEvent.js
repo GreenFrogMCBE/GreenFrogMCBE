@@ -36,7 +36,7 @@ class ServerToClientChatEvent extends Event {
 		if (!this.cancelled) {
 			const text = new Text();
 			text.setMessage(this.message);
-			text.writePacket(this.player);
+			try { text.writePacket(this.player); } catch (e) { /* do nothing */ }
 		}
 	}
 }
