@@ -32,7 +32,7 @@ class Event {
 				} else {
 					plugins.forEach((plugin) => {
 						try {
-							require(`${__dirname}\\..\\..\\plugins\\${plugin}`)[event.name](event);
+							require(`${__dirname}/../../plugins/${plugin}`)[event.name](event);
 						} catch (e) {
 							FailedToHandleEvent.handleEventError(e, plugin, event.name);
 						}

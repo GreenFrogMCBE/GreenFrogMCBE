@@ -36,7 +36,7 @@ module.exports = {
 
 		fs.readdir("./plugins", (err, files) => {
 			files.forEach((file) => {
-				fs.stat(`${__dirname}\\..\\..\\plugins\\${file}`, (err, stats) => {
+				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
 					if (err) {
 						Logger.error(lang.errors.failedToLoadPlugin.replace("%name%", file).replace("%errorstack%", err.stack));
 						return;
@@ -46,7 +46,7 @@ module.exports = {
 							version,
 							main = null;
 						try {
-							const packageJson = require(`${__dirname}\\..\\..\\plugins\\${file}\\package.json`);
+							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
 							name = packageJson.displayName;
 							version = packageJson.version;
 							main = packageJson.main;
@@ -55,7 +55,7 @@ module.exports = {
 							return;
 						}
 						try {
-							require(`${__dirname}\\..\\..\\plugins\\${file}\\${main}`).onLoad();
+							require(`${__dirname}/../../plugins/${file}/${main}`).onLoad();
 							Logger.info(lang.server.loadedPlugin.replace("%name%", name).replace("%version%", version));
 							PluginManager.addPlugin(name, version);
 						} catch (err) {
@@ -76,7 +76,7 @@ module.exports = {
 		fs.readdir("./plugins", (err, files) => {
 			if (files.length === 0) this.killServer();
 			files.forEach((file) => {
-				fs.stat(`${__dirname}\\..\\..\\plugins\\${file}`, (err, stats) => {
+				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
 					if (err) {
 						Logger.error(lang.errors.failedToLoadPlugin.replace("%name%", file).replace("%errorstack%", err.stack));
 						return;
@@ -88,7 +88,7 @@ module.exports = {
 							main = null;
 
 						try {
-							const packageJson = require(`${__dirname}\\..\\..\\plugins\\${file}\\package.json`);
+							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
 							name = packageJson.displayName;
 							main = packageJson.main;
 						} catch (ignored) {
@@ -98,7 +98,7 @@ module.exports = {
 
 						try {
 							Logger.info(lang.server.unloadingPlugin.replace("%plugin%", name));
-							require(`${__dirname}\\..\\..plugins/${file}/${main}`).onShutdown();
+							require(`${__dirname}/../..plugins/${file}/${main}`).onShutdown();
 							Logger.info(lang.server.unloadedPlugin.replace("%plugin%", name));
 							count--;
 							if (count <= 0) this.killServer();

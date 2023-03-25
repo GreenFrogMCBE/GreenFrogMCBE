@@ -13,7 +13,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const rootDir = __dirname + "\\..\\src\\";
+const rootDir = __dirname + "/../";
 
 console.info("Started refactoring");
 console.time("Finished refactoring in");
