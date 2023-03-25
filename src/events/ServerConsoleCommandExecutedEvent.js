@@ -150,4 +150,4 @@ class ServerConsoleCommandExecutedEvent extends Event {
 	}
 }
 
-module.exports = ServerConsolethis.commandExecutedEvent;
+module.exports = ServerConsoleCommandExecutedEvent;
