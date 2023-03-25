@@ -11,10 +11,10 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-case-declarations */
-const StartGame = require("./ServerStartGamePacket");
-const PlayerList = require("./ServerPlayerListPacket");
-const PlayStatus = require("./ServerPlayStatusPacket");
 const PlayerInfo = require("../../api/PlayerInfo");
+const StartGame = require("./ServerStartGamePacket");
+const PlayStatus = require("./ServerPlayStatusPacket");
+const PlayerList = require("./ServerPlayerListPacket");
 const PacketConstructor = require("./PacketConstructor");
 const CreativeContent = require("./ServerCreativeContentPacket");
 const PlayerSpawnEvent = require("../../events/PlayerSpawnEvent");
