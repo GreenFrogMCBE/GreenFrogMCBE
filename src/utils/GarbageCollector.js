@@ -11,6 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const PlayerInfo = require("../api/PlayerInfo");
+const GarbageCollectionEvent = require("../events/GarbageCollectionEvent");
+const GarbageOfflinePlayerCollectorEvent = require("../events/GarbageOfflinePlayerCollectorEvent");
 const Logger = require("../server/Logger");
 
 module.exports = {
@@ -18,6 +20,9 @@ module.exports = {
 	 * Removes data of offline players
 	 */
 	clearOfflinePlayers() {
+		const garbageOfflinePlayerCollectorEvent = new GarbageOfflinePlayerCollectorEvent()
+		garbageOfflinePlayerCollectorEvent.server = require("../Server")
+		garbageOfflinePlayerCollectorEvent.execute()
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
 			if (PlayerInfo.players[i].offline) {
 				Logger.debug("[Garbage collector] Deleted " + PlayerInfo.players[i].username);
@@ -33,6 +38,10 @@ module.exports = {
 	gc() {
 		Logger.debug("[Garbage collector] Starting Garbage-collect everything...");
 		this.clearOfflinePlayers();
+		
+		const garbageCollectionEvent = new GarbageCollectionEvent()
+		garbageCollectionEvent.server = require("../Server")
+		garbageCollectionEvent.execute()
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
 			delete PlayerInfo.players[i].q;
