@@ -72,7 +72,6 @@
 "chat": {
 "chatFormat": "<%username%> %message%",
 "chatMessage": "(pranešimas) %message%",
-"ccs": "Įkeliama konsolės komandų siuntėja"
 },
 "playerstatuses": {
 "joined": "%player% prisijungė",
