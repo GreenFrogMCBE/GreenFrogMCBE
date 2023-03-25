@@ -37,7 +37,7 @@ class PlayerChatEvent extends Event {
 		await this._execute(this);
 
 		if (this.cancelled || config.disable) {
-			Logger.debug("Ignored")
+			Logger.debug("Ignored");
 		}
 
 		const fullmessage = lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message);
