@@ -31,12 +31,15 @@ class PlayerGamemodeChangeEvent extends Event {
 	async execute() {
 		await this._execute()
 
-		if (!this.cancelled) {
-			this.player.oldGamemode = this.gamemode;
+		if (this.cancelled) {
 			return
 		}
-		
-		this.player.setGamemode(this.oldGamemode);
+
+		this.player.gamemode = this.gamemode;
+
+		const playerGamemode = new PlayerGamemodeChangeEvent();
+		playerGamemode.setGamemode(this.gamemode);
+		playerGamemode.writePacket(this.player);
 	}
 }
 

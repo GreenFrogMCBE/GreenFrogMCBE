@@ -55,7 +55,7 @@ module.exports = {
 			const chatAsPlayerEvent = new PluginChatAsPlayerEvent()
 			chatAsPlayerEvent.player = player;
 			chatAsPlayerEvent.message = message;
-			chatAsPlayerEvent.server = require("../Server").server; 
+			chatAsPlayerEvent.server = require("../Server").server;
 			chatAsPlayerEvent.execute()
 		};
 
@@ -64,23 +64,24 @@ module.exports = {
 		 * @param {Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 */
 		player.setGamemode = function (gamemode) {
-			const validGamemodes = [
+			const allowedGameModes = [
 				GameMode.SURVIVAL,
 				GameMode.CREATIVE,
 				GameMode.ADVENTURE,
 				GameMode.SPECTATOR,
-				GameMode.FALLBACK
+				GameMode.FALLBACK,
 			];
-			if (!validGamemodes.includes(gamemode)) throw new Error("Invalid gamemode!")
 
-			player.gamemode = gamemode;
+			if (!allowedGameModes.includes(gamemode)) {
+				throw new Error("Invalid game mode!");
+			}
 
-			const gm = new PlayerGamemode();
-			gm.setGamemode(gamemode);
-			gm.writePacket(player);
-
-			const gamemodeChangeEvent = new PlayerGamemodeChangeEvent()
-			gamemodeChangeEvent.execute(require("../Server").server, player, gamemode);
+			const gamemodeChangeEvent = new PlayerGamemodeChangeEvent();
+			gamemodeChangeEvent.player = player
+			gamemodeChangeEvent.server = require("../Server").server
+			gamemodeChangeEvent.gamemode = gamemode
+			gamemodeChangeEvent.oldGamemode = player.gamemode
+			gamemodeChangeEvent.execute()
 		};
 
 		/**
