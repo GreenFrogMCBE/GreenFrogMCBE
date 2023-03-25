@@ -24,7 +24,7 @@
     "usageDeop": "Naudojimas: deop [grotuvas]",
     "usageMe": "Naudojimas: me [pranešimas]",
     "helpHelp": "%green%help %white%- %blue%Pateikia komandų pagalbą",
-    "kickHelp": "%žalias%spyris %cyan%[žaidėjas] [priežastis] %baltas%%mėlynas%Kick player",
+    "kickHelp": "%žalias%kick %cyan%[žaidėjas] [priežastis] %baltas%%mėlynas%Kick player",
     "pluginsHelp": "%green%plugins %white%- %blue%Rodo serverio papildinius",
     "qmHelp": "%žalias%? ",
     "stopHelp": "%green%stop %white%- %blue%Sustabdo serverį",
