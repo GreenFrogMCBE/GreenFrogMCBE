@@ -21,25 +21,17 @@ class PlayerSpawnEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerSpawnEvent";
+		this.player = null
+		this.server = null
 	}
 
 	cancel(client) {
-		assert(client, null)
-
 		client.kick();
 		this.cancelled = true;
 	}
 
-	execute(server, client) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).PlayerSpawnEvent(server, client, this);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
-				}
-			});
-		});
+	execute() {
+		this._execute()
 	}
 }
 

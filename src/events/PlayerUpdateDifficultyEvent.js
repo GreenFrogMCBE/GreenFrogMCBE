@@ -27,28 +27,13 @@ class PlayerUpdateDifficultyEvent extends Event {
 		this.cancelled = true;
 	}
 
-	async execute(server, client, difficulty) {
-		await new Promise((resolve, reject) => {
-			fs.readdir("./plugins", (err, plugins) => {
-				if (err) {
-					reject(err);
-				} else {
-					plugins.forEach((plugin) => {
-						try {
-							require(`${__dirname}/../../plugins/${plugin}`).PlayerUpdateDifficultyEvent(server, client, difficulty);
-						} catch (e) {
-							FailedToHandleEvent.handleEventError(e, plugin, this.name);
-						}
-					});
-					resolve();
-				}
-			});
-		});
+	async execute() {
+		this._execute()
 
 		if (!this.cancelled) {
 			const difficultypacket = new Difficulty();
-			difficultypacket.setDifficulty(difficulty)
-			difficultypacket.writePacket(client)
+			difficultypacket.setDifficulty(this.difficulty)
+			difficultypacket.writePacket(this.client)
 		}
 	}
 }
