@@ -16,7 +16,6 @@ const GameMode = require("../api/GameMode");
 const { lang } = require("../api/ServerInfo");
 const PlayerKickEvent = require("../events/PlayerKickEvent");
 const PlayerLeaveEvent = require("../events/PlayerLeaveEvent");
-const Time = require("../network/packets/ServerUpdateTimePacket");
 const PlayerTransferEvent = require("../events/PlayerTransferEvent");
 const ServerToClientChatEvent = require("../events/ServerToClientChatEvent");
 const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
@@ -27,6 +26,7 @@ const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEve
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
 const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
+const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent")
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
@@ -152,9 +152,11 @@ module.exports = {
 		 * @param {Number} time - The time to set the player to
 		 */
 		player.setTime = function (time) {
-			const timepacket = new Time();
-			timepacket.setTime(time);
-			timepacket.writePacket(player, time);
+			const timeevent = new PlayerTimeUpdateEvent()
+			timeevent.player = player
+			timeevent.server = require("../Server")
+			timeevent.time = time
+			timeevent.execute()
 		};
 
 		/**
