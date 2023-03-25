@@ -28,7 +28,7 @@ class ServerToastRequestEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute(this)();
+		await this._execute(this);
 
 		if (!this.cancelled) {
 			let packet = new ToastRequest();

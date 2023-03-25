@@ -45,7 +45,7 @@ function traverseDirectory(dirPath, replacements) {
 const replacements = [
 	// Put your replacements here
 	// example:
-	["this.client", "this.player"],
+	["this._execute(this)()", "this._execute(this)"],
 ];
 
 traverseDirectory(rootDir, replacements);

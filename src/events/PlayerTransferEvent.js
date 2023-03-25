@@ -30,7 +30,7 @@ class PlayerTransferEvent extends Event {
 	}
 
 	async execute() {
-		this._execute(this)();
+		this._execute(this);
 
 		if (!this.cancelled) {
 			const trpk = new Transfer();

@@ -43,7 +43,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
 	}
 
 	async execute() {
-		this._execute(this)();
+		this._execute(this);
 
 		if (!this.cancelled || !config.disable) {
 			const commands = {

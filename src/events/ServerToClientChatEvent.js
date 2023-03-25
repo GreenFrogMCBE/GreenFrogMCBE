@@ -31,7 +31,8 @@ class ServerToClientChatEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute(this)();
+		await this._execute(this);
+
 		if (!this.cancelled) {
 			const text = new Text();
 			text.setMessage(this.message);
