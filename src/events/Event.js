@@ -25,6 +25,7 @@ class Event {
 	}
 
 	async _execute(event) {
+		console.trace()
 		await new Promise((resolve, reject) => {
 			fs.readdir("./plugins", (err, plugins) => {
 				if (err) {
