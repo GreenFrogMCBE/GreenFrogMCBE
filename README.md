@@ -14,8 +14,6 @@ You can install it by downloading this repo,
 running "npm i", "git submodule update -remote"
 and then "npm run start"
 
-PS: It also supports multilang!
-
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/Credits.md
 + Multilang docs: https://github.com/bufferfishq/GreenFrogMCBE/blob/main/docs/Multilang.md
 ```
