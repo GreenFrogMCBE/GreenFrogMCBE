@@ -48,12 +48,16 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	 * Reads the packet from player
 	 * @param {any} player
 	 * @param {JSON} packet
+	 * @param {any} server
 	 */
-	async readPacket(player, packet) {
+	async readPacket(player, packet, server) {
 		await this.validatePacket(player, packet);
 
 		const gamemodeChangeEvent = new PlayerGamemodeChangeRequestEvent()
-		gamemodeChangeEvent.server = require("")
+		gamemodeChangeEvent.server = server
+		gamemodeChangeEvent.player = player
+		gamemodeChangeEvent.gamemode = packet.data.params.gamemode
+		gamemodeChangeEvent.execute()
 	}
 }
 
