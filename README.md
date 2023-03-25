@@ -1,6 +1,6 @@
 <img src="https://camo.githubusercontent.com/5766bb5bc89960c611cf479219f4acecf766f6314f070bfb728d772f1267f4db/68747470733a2f2f677265656e66726f672e66313437303334383531312e776f726b6572732e6465762f66617669636f6e2e69636f" align="right">
 
-```patch
+```diff
 @@ Server software for Minecraft: Bedrock edition, written in NodeJS, currently supports 1.19.70/1.19.71
 ```
 #### Development status > Under active development
