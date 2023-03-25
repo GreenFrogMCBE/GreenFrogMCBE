@@ -14,7 +14,7 @@ Server software for Minecraft: Bedrock edition, written in NodeJS
 1. Download this repo (use the Download > Download as zip button)
 2. Install modules via `npm i`
 3. Update all submodules via `git submodule update –remote`
-3. Run this software using `npm run start` command
+4. Run this software using `npm run start` command
 
 ## Developing
 

@@ -115,10 +115,10 @@ module.exports = {
 		client.dead, (client.offline = false);
 		client.x, client.y, (client.z = 0);
 
-		const playerconnectionevent = new PlayerConnectionCreateEvent();
-		playerconnectionevent.server = this;
-		playerconnectionevent.client = client;
-		playerconnectionevent.execute(server, client);
+		const playerConnectionEvent = new PlayerConnectionCreateEvent();
+		playerConnectionEvent.server = this;
+		playerConnectionEvent.client = client;
+		playerConnectionEvent.execute(server, client);
 
 		PlayerInfo.addPlayer(client);
 

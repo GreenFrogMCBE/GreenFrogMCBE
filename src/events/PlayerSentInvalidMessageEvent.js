@@ -28,7 +28,7 @@ class PlayerSentInvalidMessageEvent extends Event {
 	}
 
 	async execute() {
-		this._execute(this)
+		this._execute(this);
 
 		if (this.cancelled) return;
 
