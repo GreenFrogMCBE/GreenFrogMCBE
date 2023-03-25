@@ -1,5 +1,7 @@
 node_modules/
-plugins/
-pluginconfigs/
 ops.yml
 config.yml
+*_packetReadError.txt
+.gitignore
+TODO
+tools/refactor.js

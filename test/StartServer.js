@@ -13,11 +13,11 @@
 const fs = require("fs");
 
 module.exports = {
-  test() {
-    if (!fs.existsSync("config.yml")) {
-      fs.writeFileSync(
-        "config.yml",
-        `# LISTENING
+	test() {
+		if (!fs.existsSync("config.yml")) {
+			fs.writeFileSync(
+				"config.yml",
+				`# LISTENING
 # 
 # This section contains the config for server host and port
 
@@ -28,10 +28,10 @@ port: 19132
 #
 # This section contains motd, and other server info settings
 
-motd: '§6GreenFrog server'
+motd: '§aDedicated GreenFrog server'
 maxPlayers: 20
-version: '1.19.60'
-offlineMode: true
+version: '1.19.70'
+offlineMode: false
 lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 
 # CHAT
@@ -52,16 +52,25 @@ crashCode: -1
 exitCode: 0
 logUnhandledPackets: false
 defaultPermissionLevel: 2
+# Permission levels are: 
+# 4 - operator
+# 3 - unknown
+# 2 - member
+# 1 - unknown
+# 0 - visitor
 multiProtocol: false # Supports 1.19.20+. Some features may be broken
 
 # WORLD SETTINGS
 #
 # This section contains world settings
 
-renderChunks: true
 gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 difficulty: 0 # Currently only visual
+generator: "default" # Can be default, flat (superflat), or void (empty)
+tickWorldTime: true # Should time update be server side?
+tickVoid: true # Should people that are in void take damage?
+randomTickSpeed: 1000
 
 # Command settings
 # 
@@ -80,17 +89,27 @@ consoleCommandSay: true
 consoleCommandOp: true
 consoleCommandDeop: true
 consoleCommandHelp: true
+consoleCommandList: true
 playerCommandVersion: true
 playerCommandPlugins: true
 playerCommandStop: true
 playerCommandSay: true
 playerCommandOp: true
 playerCommandKick: true
-playerCommandTime: true`
-      );
-    }
-    const Frog = require("../src/Server.js");
-    Frog.start();
-    console.log("[server] started");
-  },
+playerCommandTime: true
+playerCommandDeop: true
+playerCommandList: true
+playerCommandGamemode: true
+
+# PERFORMANCE SETTINGS
+#
+# Allows to make your server faster
+
+garbageCollectorDelay: 60000`
+			);
+		}
+		const Frog = require("../src/Server");
+		Frog.start();
+		console.log("[server] started");
+	},
 };

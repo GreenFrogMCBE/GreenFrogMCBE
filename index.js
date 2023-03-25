@@ -13,10 +13,10 @@
 const fs = require("fs");
 
 try {
-  if (!fs.existsSync("config.yml")) {
-    fs.writeFileSync(
-      "config.yml",
-      `# LISTENING
+	if (!fs.existsSync("config.yml")) {
+		fs.writeFileSync(
+			"config.yml",
+			`# LISTENING
 # 
 # This section contains the config for server host and port
 
@@ -27,9 +27,9 @@ port: 19132
 #
 # This section contains motd, and other server info settings
 
-motd: '§6GreenFrog server'
+motd: '§aDedicated GreenFrog server'
 maxPlayers: 20
-version: '1.19.60'
+version: '1.19.70'
 offlineMode: false
 lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 
@@ -51,16 +51,25 @@ crashCode: -1
 exitCode: 0
 logUnhandledPackets: false
 defaultPermissionLevel: 2
+# Permission levels are: 
+# 4 - operator
+# 3 - unknown
+# 2 - member
+# 1 - unknown
+# 0 - visitor
 multiProtocol: false # Supports 1.19.20+. Some features may be broken
 
 # WORLD SETTINGS
 #
 # This section contains world settings
 
-renderChunks: true
 gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 difficulty: 0 # Currently only visual
+generator: "default" # Can be default, flat (superflat), or void (empty)
+tickWorldTime: true # Should time update be server side?
+tickVoid: true # Should people that are in void take damage?
+randomTickSpeed: 1000
 
 # Command settings
 # 
@@ -88,25 +97,28 @@ playerCommandOp: true
 playerCommandKick: true
 playerCommandTime: true
 playerCommandDeop: true
-playerCommandList: true`
-    );
-  }
-  const Frog = require("./src/Server.js");
-  Frog.start();
+playerCommandList: true
+playerCommandGamemode: true
+
+# PERFORMANCE SETTINGS
+#
+# Allows to make your server faster
+
+garbageCollectorDelay: 60000`
+		);
+	}
+	const Frog = require("./src/Server.js");
+	Frog.start();
 } catch (e) {
-  console.error("Failed to start the server");
-  console.error("The error was: ");
-  console.error(e.stack);
-  console.error(
-    `Make sure that you have the required libraries. Run npm i to install them`
-  );
-  console.error(
-    "If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE"
-  );
-  process.exit(-1);
+	console.error("Failed to start the server");
+	console.error("The error was: ");
+	console.error(e.stack);
+	console.error(`Make sure that you have the required libraries. Run npm i to install them`);
+	console.error("If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE");
+	process.exit(-1);
 }
 
 // Close server on nodemon restart
 process.once("SIGINT", async () => {
-  await require("./src/server/ShutdownAPI.js");
+	await require("./src/Server").shutdown();
 });
