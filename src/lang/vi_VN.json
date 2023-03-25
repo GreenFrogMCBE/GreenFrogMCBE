@@ -72,7 +72,7 @@
   },
   "chat": {
     "chatFormat": "<%username%> %tin nhắn%",
-    "chatMessage": "(tin nhắn trò chuyện) %message"
+    "chatMessage": "(tin nhắn trò chuyện) %message%"
   },
   "playerstatuses": {
     "joined": "%player% đã tham gia",

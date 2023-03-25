@@ -38,7 +38,7 @@ module.exports = {
 			files.forEach((file) => {
 				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
 					if (err) {
-						Logger.error(lang.errors.failedToGetStats.replace("%plugin%", file));
+						Logger.error(lang.errors.failedToLoadPlugin.replace("%name%", file).replace("%errorstack%", err.stack));
 						return;
 					}
 					if (stats.isDirectory()) {
@@ -58,8 +58,8 @@ module.exports = {
 							require(`${__dirname}/../../plugins/${file}/${main}`).onLoad();
 							Logger.info(lang.server.loadedPlugin.replace("%name%", name).replace("%version%", version));
 							PluginManager.addPlugin(name, version);
-						} catch (e) {
-							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack));
+						} catch (err) {
+							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", err.stack));
 						}
 					}
 				});
@@ -78,7 +78,7 @@ module.exports = {
 			files.forEach((file) => {
 				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
 					if (err) {
-						Logger.error(lang.errors.failedToGetStats.replace("%plugin%", file));
+						Logger.error(lang.errors.failedToLoadPlugin.replace("%name%", file).replace("%errorstack%", err.stack));
 						return;
 					}
 
@@ -98,7 +98,7 @@ module.exports = {
 
 						try {
 							Logger.info(lang.server.unloadingPlugin.replace("%plugin%", name));
-							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
+							require(`${__dirname}/../..plugins/${file}/${main}`).onShutdown();
 							Logger.info(lang.server.unloadedPlugin.replace("%plugin%", name));
 							count--;
 							if (count <= 0) this.killServer();
