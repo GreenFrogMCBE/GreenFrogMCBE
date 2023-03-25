@@ -23,7 +23,7 @@ class PlayerKickEvent extends Event {
 	}
 
 	execute() {
-		this._execute(this)();
+		this._execute(this);
 	}
 }
 

@@ -35,7 +35,7 @@ class PlayerHealthUpdateEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute(this)();
+		await this._execute(this);
 
 		if (!this.cancelled) {
 			const setHealthPacket = new SetHealth();

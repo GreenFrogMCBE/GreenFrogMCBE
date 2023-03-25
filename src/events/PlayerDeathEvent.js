@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
 const Event = require("./Event");
 
 class PlayerDeathEvent extends Event {
@@ -27,7 +26,7 @@ class PlayerDeathEvent extends Event {
 	}
 
 	execute() {
-		this._execute(this)();
+		this._execute(this);
 
 		if (!this.cancelled) this.player.dead = true;
 	}

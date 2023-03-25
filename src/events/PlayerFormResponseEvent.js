@@ -24,7 +24,7 @@ class PlayerFormResponseEvent extends Event {
 	}
 
 	execute() {
-		this._execute(this)(this);
+		this._execute(this);
 	}
 }
 
