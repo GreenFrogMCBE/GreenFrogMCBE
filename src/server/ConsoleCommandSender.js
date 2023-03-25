@@ -12,7 +12,7 @@
  */
 /* eslint-disable no-case-declarations */
 const rl = require("readline");
-const ConsoleCommandExecutedEvent = require("../plugin/events/ServerConsoleCommandExecutedEvent");
+const ConsoleCommandExecutedEvent = require("../events/ServerConsoleCommandExecutedEvent");
 
 let isclosed = false;
 
@@ -33,8 +33,11 @@ module.exports = {
 		r.prompt(true);
 
 		r.on("line", (data) => {
-			const cmd = new ConsoleCommandExecutedEvent();
-			cmd.execute(require("../Server").server, data);
+			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
+			commandExecutedEvent.server = require("../Server");
+			commandExecutedEvent.command = data;
+			commandExecutedEvent.execute();
+
 			if (!isclosed) r.prompt(true);
 		});
 	},

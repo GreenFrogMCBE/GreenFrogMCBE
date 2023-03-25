@@ -11,15 +11,10 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../server/Logger");
-const LogTypes = require("../server/LogTypes");
-const { lang, config } = require("../server/ServerInfo");
+const { lang, config } = require("../api/ServerInfo");
 
 module.exports = {
-	/**
-	 * Validates the client
-	 * @param {Object} client
-	 */
-	initAndValidateClient(client) {
+	_initAndValidateClient(client) {
 		client.ip = client.connection.address.split("/")[0];
 		client.port = client.connection.address.split("/")[1];
 		client.fullip = client.connection.address;
@@ -30,7 +25,8 @@ module.exports = {
 		client.op = false;
 
 		if (client.username.includes(" ")) {
-			Logger.log(lang.errors.invalidUsernameWarning.replace("%player%", client.username), LogTypes.WARNING);
+			Logger.warning(lang.errors.invalidUsernameWarning.replace("%player%", client.username));
+
 			client.usernameold = client.username;
 			client.username = client.username.replace(" ", "_");
 		}
@@ -39,6 +35,6 @@ module.exports = {
 			client.kick(lang.errors.invalidUsername);
 		}
 
-		Logger.log(lang.playerstatuses.playerConnected.replace("%player%", client.username).replace("%ip%", client.fullip));
+		Logger.info(lang.playerstatuses.playerConnected.replace("%player%", client.username).replace("%ip%", client.fullip));
 	},
 };
