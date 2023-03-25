@@ -10,11 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
-const fs = require("fs");
 const { lang } = require("../api/ServerInfo");
 const Logger = require("../server/Logger");
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 
 class PlayerSentInvalidMessageEvent extends Event {
 	constructor() {
@@ -31,6 +28,8 @@ class PlayerSentInvalidMessageEvent extends Event {
 	}
 
 	async execute() {
+		this._execute()
+
 		if (this.cancelled) return;
 
 		Logger.warning(lang.errors.illegalMessage.replace("%message%", this.message).replace("%player%", this.player.username));

@@ -20,7 +20,7 @@ class GarbageCollectionEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute();
+		await this._execute(this)();
 	}
 }
 

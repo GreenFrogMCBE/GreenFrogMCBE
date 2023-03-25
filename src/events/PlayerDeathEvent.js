@@ -27,7 +27,7 @@ class PlayerDeathEvent extends Event {
 	}
 
 	execute() {
-		this._execute();
+		this._execute(this)();
 
 		if (!this.cancelled) this.player.dead = true;
 	}

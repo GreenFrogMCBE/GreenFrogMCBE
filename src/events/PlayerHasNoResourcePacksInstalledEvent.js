@@ -30,7 +30,7 @@ class PlayerHasNoResourcePacksInstalledEvent extends Event {
 	}
 
 	execute() {
-		this._execute();
+		this._execute(this)();
 	}
 }
 

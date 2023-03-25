@@ -27,7 +27,7 @@ class PlayerRequestChunkRadiusEvent extends Event {
 	}
 
 	async execute() {
-		this._execute();
+		this._execute(this)();
 
 		if (!this.cancelled) {
 			this.player.setChunkRadius(this.worldSettings.chunkLoadRadius);

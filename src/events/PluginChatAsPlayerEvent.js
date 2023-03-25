@@ -30,7 +30,7 @@ class PluginChatAsPlayerEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute(this);
+		await this._execute(this)(this);
 
 		if (!this.cancelled) {
 			Chat.broadcastMessage(lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message));

@@ -34,7 +34,7 @@ class PlayerContainerOpenEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute(this);
+		await this._execute(this)(this);
 
 		if (!this.cancelled) {
 			const containeropen = new ServerContainerOpenPacket();

@@ -43,7 +43,7 @@ class PlayerCommandExecuteEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute();
+		await this._execute(this)();
 
 		if (!this.cancelled || config.commandsDisabled) {
 			Logger.info(lang.commands.executedCommand.replace("%player%", this.player.username).replace("%cmd%", this.command));

@@ -24,7 +24,7 @@ class PlayerMoveEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute();
+		await this._execute(this)();
 
 		this.player.x = this.position.x;
 		this.player.y = this.position.y;

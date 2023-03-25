@@ -28,7 +28,7 @@ class PlayerUpdateDifficultyEvent extends Event {
 	}
 
 	async execute() {
-		this._execute();
+		this._execute(this)();
 
 		if (!this.cancelled) {
 			const difficultypacket = new Difficulty();

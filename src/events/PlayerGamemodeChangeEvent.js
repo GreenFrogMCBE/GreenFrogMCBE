@@ -29,7 +29,7 @@ class PlayerGamemodeChangeEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute();
+		await this._execute(this)();
 
 		if (this.cancelled) {
 			return;
