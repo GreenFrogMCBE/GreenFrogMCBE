@@ -50,6 +50,7 @@
 6. @bufferfishq
 
 > For adding support for custom_form and new plugin system (https://github.com/andriycraft/GreenFrogMCBE/pull/47)
+> For fixing a lot of bugs, and paths
 
 7. @andriycraftbot
 
