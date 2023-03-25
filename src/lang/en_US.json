@@ -72,8 +72,7 @@
   },
   "chat": {
     "chatFormat": "<%username%> %message%",
-    "chatMessage": "(chat message) %message%",
-    "ccs": "Loading Console Command Sender"
+    "chatMessage": "(chat message) %message",
   },
   "playerstatuses": {
     "joined": "%player% joined",
