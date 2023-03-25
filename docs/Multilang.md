@@ -11,5 +11,3 @@ Our language system currently supports those languages: English, Lithuanian, Ukr
 #### Vietnamese > set language in config.yml to "vi_VN"
 
 #### French > set language in config.yml to "fr_FR"
-
-#### Turkish > set language in config.yml to "tr_TR"
