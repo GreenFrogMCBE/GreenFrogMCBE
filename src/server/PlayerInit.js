@@ -171,20 +171,20 @@ module.exports = {
 			updateattributespacket.writePacket(player)
 		}
 
-		/**
-		 * Sets the XP for the player
-		 * @param {Float} xp 
-		 */
-		player.setXP = function (xp) {
-			player.setAttribute({
-				"min": 0,
-				"max": 1000000,
-				"current": xp,
-				"default": 0,
-				"name": "player.experience",
-				"modifiers": []
-			})
-		}
+		// /**
+		//  * Sets the XP for the player
+		//  * @param {Float} xp 
+		//  */
+		// player.setXP = function (xp) {
+		// 	player.setAttribute({
+		// 		"min": 0,
+		// 		"max": 1000000,
+		// 		"current": xp,
+		// 		"default": 0,
+		// 		"name": "player.experience",
+		// 		"modifiers": []
+		// 	})
+		// }
 
 		/**
 		 * Sets the health of the player
