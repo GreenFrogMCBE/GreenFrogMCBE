@@ -12,8 +12,6 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-const assert = require('assert');
-
 const PlayerMoveEvent = require('../../events/PlayerMoveEvent')
 
 class ClientMovePacket extends PacketConstructor {
@@ -31,14 +29,6 @@ class ClientMovePacket extends PacketConstructor {
 	 */
 	isCriticalPacket() {
 		return false
-	}
-
-	/**
-	 * Validates the packet
-	 * @param {any} player
-	 */
-	async validatePacket(player) {
-		assert(player, null)
 	}
 
 	/**
