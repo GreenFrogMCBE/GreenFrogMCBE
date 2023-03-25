@@ -23,8 +23,12 @@ class PlayerMoveEvent extends Event {
 		this.player = null
 	}
 
-	execute() {
-		this._execute()
+	async execute() {
+		await this._execute()
+
+		this.player.x = this.position.x
+		this.player.y = this.position.y
+		this.player.z = this.position.z
 	}
 }
 

@@ -42,16 +42,11 @@ class ClientMovePacket extends PacketConstructor {
 
 		let position = packet.data.params.position
 
-		const move_event = new PlayerMoveEvent()
-		move_event.execute(
-			server,
-			player,
-			position
-		)
-
-		player.x = position.x
-		player.y = position.y
-		player.z = position.z
+		const playerMoveEvent = new PlayerMoveEvent()
+		playerMoveEvent.player = player
+		playerMoveEvent.server = server
+		playerMoveEvent.position = position
+		playerMoveEvent.execute()
 	}
 }
 
