@@ -42,12 +42,11 @@ class ClientCommandRequestPacket extends PacketConstructor {
 		await this.validatePacket(player, command)
 
 		if (!config.commandsDisabled) {
-			const CommandExecutionEvent = new PlayerCommandExecuteEvent()
-			CommandExecutionEvent.execute(
-				server,
-				player,
-				command
-			)
+			const commandExecutionEvent = new PlayerCommandExecuteEvent()
+			commandExecutionEvent.command = command
+			commandExecutionEvent.player = player
+			commandExecutionEvent.server = server
+			commandExecutionEvent.execute()
 		}
 	}
 }
