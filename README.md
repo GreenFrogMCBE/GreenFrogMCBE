@@ -9,7 +9,7 @@
 + Example plugin: https://github.com/greenfrogmc/ExamplePlugin
 + Donation plugin: https://github.com/greenfrogmc/Donations
 
-@@ You can install it by downloading this repo, running "npm i", "git submodule update -remote", 
+@@ You can install it by downloading this repo, running "npm i", "git submodule update -remote", @@
 @@ and then "npm run start" @@
 
 @@ PS: It also supports multilang! @@
