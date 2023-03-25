@@ -10,36 +10,49 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js");
-const Event = require("./Event");
-
-class PlayerGamemodeChangeEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null;
-		this.player = null;
-		this.gamemode = null;
-	}
-
-	cancel() {
-		this.cancelled = true;
-	}
-
-	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled) {
-			return;
-		}
-
-		this.player.gamemode = this.gamemode;
-
-		const playerGamemode = new ServerSetPlayerGameTypePacket();
-		playerGamemode.setGamemode(this.gamemode);
-		playerGamemode.writePacket(this.player);
-	}
+export = ServerSetEntityDataPacket;
+declare class ServerSetEntityDataPacket extends PacketConstructor {
+	/**
+	 * Sets the field value for the player
+	 * @param {String} field
+	 * @param {Boolean} new_value
+	 */
+	setValue(field: string, new_value: boolean): void;
+	/**
+	 * Returns the field value
+	 * @returns {JSON}
+	 */
+	getFieldValue(): JSON;
+	/**
+	 * Sets properties for the packet
+	 * @param {JSON} new_properties
+	 */
+	setProperties(new_properties: JSON): void;
+	/**
+	 * Returns the properties of the packet
+	 * @returns {JSON}
+	 */
+	getProperties(): JSON;
+	/**
+	 * Sets the current tick
+	 * @param {Number} new_tick
+	 */
+	setTick(new_tick: number): void;
+	/**
+	 * Returns the current tick
+	 * @returns {Number}
+	 */
+	getTick(): number;
+	/**
+	 * Sets the runtime_entity_id
+	 * @param {String} new_runtime_entity_id
+	 */
+	setRuntimeEntityID(new_runtime_entity_id: string): void;
+	/**
+	 * Returns the runtime entity ID of the entity.
+	 * @returns {String}
+	 */
+	getRuntimeEntityID(): string;
+	writePacket(client: any): void;
 }
-
-module.exports = PlayerGamemodeChangeEvent;
+import PacketConstructor = require("./PacketConstructor");

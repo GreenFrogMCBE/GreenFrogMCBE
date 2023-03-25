@@ -10,36 +10,14 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js");
-const Event = require("./Event");
-
-class PlayerGamemodeChangeEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null;
-		this.player = null;
-		this.gamemode = null;
-	}
-
-	cancel() {
-		this.cancelled = true;
-	}
-
-	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled) {
-			return;
-		}
-
-		this.player.gamemode = this.gamemode;
-
-		const playerGamemode = new ServerSetPlayerGameTypePacket();
-		playerGamemode.setGamemode(this.gamemode);
-		playerGamemode.writePacket(this.player);
-	}
-}
-
-module.exports = PlayerGamemodeChangeEvent;
+export const RAW: string;
+export const CHAT: string;
+export const TRANSLATION: string;
+export const POPUP: string;
+export const JUKEBOX_POPUP: string;
+export const TIP: string;
+export const SYSTEM: string;
+export const WHISPER: string;
+export const ANNOUNCEMENT: string;
+export const OBJECT: string;
+export const OBJECTWISPHER: string;

@@ -1,3 +1,4 @@
+export = Command;
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -10,36 +11,28 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js");
-const Event = require("./Event");
-
-class PlayerGamemodeChangeEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null;
-		this.player = null;
-		this.gamemode = null;
-	}
-
-	cancel() {
-		this.cancelled = true;
-	}
-
-	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled) {
-			return;
-		}
-
-		this.player.gamemode = this.gamemode;
-
-		const playerGamemode = new ServerSetPlayerGameTypePacket();
-		playerGamemode.setGamemode(this.gamemode);
-		playerGamemode.writePacket(this.player);
-	}
+declare class Command {
+	/**
+	 * Returns the command name
+	 * @returns {String} Command name
+	 */
+	name(): string;
+	/**
+	 * Returns the command aliases
+	 * @returns {Array} Command aliases
+	 */
+	aliases(): any[];
+	/**
+	 * It executes the command
+	 */
+	execute(): void;
+	/**
+	 * Returns the command description for in-game tab complete
+	 * @returns In-game command description
+	 */
+	getPlayerDescription(): void;
+	/**
+	 * It executes the command code as a player
+	 */
+	executePlayer(): void;
 }
-
-module.exports = PlayerGamemodeChangeEvent;

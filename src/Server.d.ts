@@ -10,36 +10,40 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js");
-const Event = require("./Event");
-
-class PlayerGamemodeChangeEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null;
-		this.player = null;
-		this.gamemode = null;
-	}
-
-	cancel() {
-		this.cancelled = true;
-	}
-
-	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled) {
-			return;
-		}
-
-		this.player.gamemode = this.gamemode;
-
-		const playerGamemode = new ServerSetPlayerGameTypePacket();
-		playerGamemode.setGamemode(this.gamemode);
-		playerGamemode.writePacket(this.player);
-	}
-}
-
-module.exports = PlayerGamemodeChangeEvent;
+export let clients: any[];
+export let server: any;
+export let config: any;
+export let lang: any;
+/**
+ * @private
+ */
+export declare function _initJson(): Promise<void>;
+/**
+ * @private
+ */
+export declare function _handleCriticalError(err: any): Promise<void>;
+/**
+ * @private
+ */
+export declare function _handlepk(client: any, packetparams: any, server: any): Promise<void>;
+/**
+ * @private
+ */
+export declare function _onJoin(client: any): Promise<void>;
+/**
+ * It logs a warning if the config.debug or config.unstable is true.
+ * @private
+ */
+export declare function _initDebug(): Promise<void>;
+/**
+ * It loads the config, lang files, and commands, then loads the plugins and starts the server.
+ */
+export declare function start(): Promise<void>;
+/**
+ * @private
+ */
+export declare function _listen(): void;
+/**
+ * Shutdowns the server.
+ */
+export declare function shutdown(): Promise<void>;

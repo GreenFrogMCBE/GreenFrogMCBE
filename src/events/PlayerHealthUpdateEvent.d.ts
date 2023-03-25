@@ -10,36 +10,17 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js");
-const Event = require("./Event");
-
-class PlayerGamemodeChangeEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null;
-		this.player = null;
-		this.gamemode = null;
-	}
-
-	cancel() {
-		this.cancelled = true;
-	}
-
-	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled) {
-			return;
-		}
-
-		this.player.gamemode = this.gamemode;
-
-		const playerGamemode = new ServerSetPlayerGameTypePacket();
-		playerGamemode.setGamemode(this.gamemode);
-		playerGamemode.writePacket(this.player);
-	}
+export = PlayerHealthUpdateEvent;
+declare class PlayerHealthUpdateEvent extends Event {
+	cancelled: boolean;
+	name: string;
+	player: any;
+	server: any;
+	health: number;
+	maxHealth: number;
+	minHealth: number;
+	modifiers: any[];
+	attributeName: string;
+	execute(): Promise<void>;
 }
-
-module.exports = PlayerGamemodeChangeEvent;
+import Event = require("./Event");
