@@ -267,15 +267,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const cords =
 						config.generator === WorldGenerator.DEFAULT
 							? {
-									x: 1070,
-									y: 274,
-									z: -915,
-							  }
+								x: 1070,
+								y: 274,
+								z: -915,
+							}
 							: {
-									x: -17,
-									y: 117,
-									z: 22,
-							  };
+								x: -17,
+								y: 117,
+								z: 22,
+							};
 
 					const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 					networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
@@ -355,7 +355,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					if (player.offline) return;
 					for (let i = 0; i < PlayerInfo.players.length; i++) {
 						if (PlayerInfo.players[i].username == player.username) return; // Vanilla behaviour
-						PlayerInfo.players[i].writePacketMessage(lang.broadcasts.joinedTheGame.replace("%username%", player.username));
+						PlayerInfo.players[i].writePacket(lang.broadcasts.joinedTheGame.replace("%username%", player.username));
 					}
 				}, 1000);
 		}
