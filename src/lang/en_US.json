@@ -133,7 +133,6 @@
   },
   "devdebug": {
     "ignoredPacket": "Ignored packet: %packet%",
-    "debug": "DEBUG",
     "unhandledPacket": "Unhandled packet",
     "unhandledPacketData": "Unhandled packet data: ",
     "unstableWarning": "Unstable mode is enabled! This may make your server unstable and will cause more lag"
