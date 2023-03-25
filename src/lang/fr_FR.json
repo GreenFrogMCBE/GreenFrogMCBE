@@ -72,7 +72,7 @@
   },
   "chat": {
     "chatFormat": "<%username%> %message%",
-    "chatMessage": "(message de discussion) %message"
+    "chatMessage": "(message de discussion) %message%"
   },
   "playerstatuses": {
     "joined": "%joueur% a rejoint",
