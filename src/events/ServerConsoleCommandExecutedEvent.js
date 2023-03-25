@@ -60,23 +60,23 @@ class ServerConsoleCommandExecutedEvent extends Event {
 				me: new Me(),
 			};
 
-			if (this.command.toLowerCase().startsWith(`${lang.this.commands.time.toLowerCase()} `)) {
+			if (this.command.toLowerCase().startsWith(`${lang.commands.time.toLowerCase()} `)) {
 				this.commands.time.execute(this.command.split(" "));
 				return;
 			}
 
-			if (this.command.toLowerCase().startsWith(`${lang.this.commands.say.toLowerCase()} `)) {
+			if (this.command.toLowerCase().startsWith(`${lang.commands.say.toLowerCase()} `)) {
 				const msg = this.command.split(" ").slice(1).join(" ");
 				this.commands.say.execute(msg);
 				return;
 			}
 
-			if (this.command.toLowerCase().startsWith(`${lang.this.commands.listc.toLowerCase()} `)) {
+			if (this.command.toLowerCase().startsWith(`${lang.commands.listc.toLowerCase()} `)) {
 				this.commands.list.execute();
 				return;
 			}
 
-			if (this.command.toLowerCase().startsWith(`${lang.this.commands.kick.toLowerCase()} `)) {
+			if (this.command.toLowerCase().startsWith(`${lang.commands.kick.toLowerCase()} `)) {
 				const dataParts = this.command.split(" ");
 				const target = dataParts[1];
 				const reason = dataParts.slice(2).join(" ");
@@ -84,17 +84,17 @@ class ServerConsoleCommandExecutedEvent extends Event {
 				return;
 			}
 
-			if (this.command.toLowerCase().startsWith(`${lang.this.commands.op.toLowerCase()} `)) {
+			if (this.command.toLowerCase().startsWith(`${lang.commands.op.toLowerCase()} `)) {
 				this.commands.op.execute(this.command.split(" ")[1]);
 				return;
 			}
 
-			if (this.command.toLowerCase().startsWith(`${lang.this.commands.deop.toLowerCase()} `)) {
+			if (this.command.toLowerCase().startsWith(`${lang.commands.deop.toLowerCase()} `)) {
 				this.commands.deop.execute(this.command.split(" ")[1]);
 				return;
 			}
 
-			if (this.command.toLowerCase().startsWith(`${lang.this.commands.me.toLowerCase()} `)) {
+			if (this.command.toLowerCase().startsWith(`${lang.commands.me.toLowerCase()} `)) {
 				this.commands.me.execute(this.command.split(" ").slice(1).join(" "));
 				return;
 			}
@@ -104,45 +104,45 @@ class ServerConsoleCommandExecutedEvent extends Event {
 			switch (firstArgOfcommand) {
 				case "":
 					break;
-				case lang.this.commands.listc:
+				case lang.commands.listc:
 					this.commands.list.execute();
 					break;
-				case lang.this.commands.stop.toLowerCase():
+				case lang.commands.stop.toLowerCase():
 					this.commands.stop.execute();
 					break;
-				case lang.this.commands.op.toLowerCase():
+				case lang.commands.op.toLowerCase():
 					this.commands.op.execute(this.command.split(" ")[1]);
 					break;
-				case lang.this.commands.kick.toLowerCase():
+				case lang.commands.kick.toLowerCase():
 					const reason = this.command.split(" ").slice(2).join(" ");
 					this.commands.kick.execute(this.command.split(" ")[1], reason);
 					break;
-				case lang.this.commands.pl.toLowerCase():
-				case lang.this.commands.plugins.toLowerCase():
+				case lang.commands.pl.toLowerCase():
+				case lang.commands.plugins.toLowerCase():
 					this.commands.pl.execute();
 					break;
-				case lang.this.commands.ver.toLowerCase():
-				case lang.this.commands.version.toLowerCase():
+				case lang.commands.ver.toLowerCase():
+				case lang.commands.version.toLowerCase():
 					this.commands.version.execute();
 					break;
-				case lang.this.commands.me.toLowerCase():
+				case lang.commands.me.toLowerCase():
 					this.commands.me.execute();
 					break;
-				case lang.this.commands.time.toLowerCase():
+				case lang.commands.time.toLowerCase():
 					this.commands.time.execute();
 					break;
-				case lang.this.commands.say.toLowerCase():
+				case lang.commands.say.toLowerCase():
 					this.commands.say.execute();
 					break;
-				case lang.this.commands.deop.toLowerCase():
+				case lang.commands.deop.toLowerCase():
 					this.commands.deop.execute();
 					break;
 				case "?":
-				case lang.this.commands.help.toLowerCase():
+				case lang.commands.help.toLowerCase():
 					this.commands.help.execute();
 					break;
 				default:
-					Logger.info(lang.this.commands.unknownthis.command);
+					Logger.info(lang.commands.unknownthis.command);
 					break;
 			}
 		}
