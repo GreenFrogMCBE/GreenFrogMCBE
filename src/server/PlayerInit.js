@@ -20,7 +20,6 @@ const Time = require("../network/packets/ServerUpdateTimePacket");
 const PlayerTransferEvent = require("../events/PlayerTransferEvent");
 const ServerToClientChatEvent = require("../events/ServerToClientChatEvent");
 const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
-const PlayerGamemode = require("../network/packets/ServerSetPlayerGameTypePacket");
 const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
 const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
