@@ -33,7 +33,7 @@ port: 19132
 motd: '§aDedicated GreenFrog server'
 maxPlayers: 20
 version: '1.19.70'
-offlineMode: false
+offlineMode: true
 lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 
 # CHAT
