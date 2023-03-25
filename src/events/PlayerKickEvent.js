@@ -17,6 +17,7 @@ class PlayerKickEvent extends Event {
 	constructor() {
 		super();
 		this.name = "PlayerKickEvent";
+		this.reason = null
 	}
 
 	execute() {
