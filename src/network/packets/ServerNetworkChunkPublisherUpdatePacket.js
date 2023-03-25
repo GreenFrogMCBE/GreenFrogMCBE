@@ -34,13 +34,12 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
-
 
 	/**
 	 * Sets the coordinates of the chunk to load
-	 * 
+	 *
 	 * @param x - The X coordinate.
 	 * @param y - The Y coordinate.
 	 * @param z - The Z coordinate.

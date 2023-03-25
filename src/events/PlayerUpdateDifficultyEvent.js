@@ -28,12 +28,12 @@ class PlayerUpdateDifficultyEvent extends Event {
 	}
 
 	async execute() {
-		this._execute()
+		this._execute();
 
 		if (!this.cancelled) {
 			const difficultypacket = new Difficulty();
-			difficultypacket.setDifficulty(this.difficulty)
-			difficultypacket.writePacket(this.player)
+			difficultypacket.setDifficulty(this.difficulty);
+			difficultypacket.writePacket(this.player);
 		}
 	}
 }

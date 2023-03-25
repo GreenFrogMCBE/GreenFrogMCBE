@@ -19,7 +19,7 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
-		return "request_chunk_radius"
+		return "request_chunk_radius";
 	}
 
 	/**
@@ -27,22 +27,22 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	 * @returns Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
-     * Reads the packet from player
-     * @param {any} player
-     * @param {JSON} packet
-     */
+	 * Reads the packet from player
+	 * @param {any} player
+	 * @param {JSON} packet
+	 */
 	async readPacket(player, packet, server) {
-		await this.validatePacket(player)
+		await this.validatePacket(player);
 
-		const requestRadiusEvent = new PlayerRequestChunkRadiusEvent()
-		requestRadiusEvent.player = player
-		requestRadiusEvent.server = server
-		requestRadiusEvent.radius = packet.data.params.radius
-		requestRadiusEvent.execute()
+		const requestRadiusEvent = new PlayerRequestChunkRadiusEvent();
+		requestRadiusEvent.player = player;
+		requestRadiusEvent.server = server;
+		requestRadiusEvent.radius = packet.data.params.radius;
+		requestRadiusEvent.execute();
 	}
 }
 

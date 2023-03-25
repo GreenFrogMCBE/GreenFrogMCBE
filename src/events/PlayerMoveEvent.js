@@ -18,17 +18,17 @@ class PlayerMoveEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerMoveEvent";
-		this.position = null
-		this.server = null
-		this.player = null
+		this.position = null;
+		this.server = null;
+		this.player = null;
 	}
 
 	async execute() {
-		await this._execute()
+		await this._execute();
 
-		this.player.x = this.position.x
-		this.player.y = this.position.y
-		this.player.z = this.position.z
+		this.player.x = this.position.x;
+		this.player.y = this.position.y;
+		this.player.z = this.position.z;
 	}
 }
 

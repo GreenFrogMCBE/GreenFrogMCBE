@@ -21,9 +21,9 @@ class ServerToClientChatEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "ServerToClientChatEvent";
-		this.server = null
-		this.player = null
-		this.message = null
+		this.server = null;
+		this.player = null;
+		this.message = null;
 	}
 
 	cancel() {
@@ -31,7 +31,7 @@ class ServerToClientChatEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute()
+		await this._execute();
 		if (!this.cancelled) {
 			const text = new Text();
 			text.setMessage(this.message);

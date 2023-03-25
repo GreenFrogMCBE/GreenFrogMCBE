@@ -17,13 +17,12 @@ class ServerTickEvent extends Event {
 	constructor() {
 		super();
 		this.name = "ServerTickEvent";
-		this.server = null
-		this.world = null
+		this.server = null;
+		this.world = null;
 	}
 
-
 	async execute() {
-		await this._execute()
+		await this._execute();
 	}
 }
 

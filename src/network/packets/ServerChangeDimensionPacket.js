@@ -12,7 +12,7 @@
  */
 const Dimensions = require("./types/DimensionLegacy");
 
-const PacketConstructor = require('./PacketConstructor')
+const PacketConstructor = require("./PacketConstructor");
 
 let dim = Dimensions.OVERWORLD;
 let pos = {
@@ -25,8 +25,8 @@ let respawn = false;
 class ServerChangeDimensionPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
- 	 * @returns {String} The name of the packet
- 	 */
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "change_dimension";
 	}
@@ -36,7 +36,7 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**

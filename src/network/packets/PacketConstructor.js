@@ -10,27 +10,27 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const UnsupportedOperationException = require('../../events/exceptions/UnsupportedOperationException')
+const UnsupportedOperationException = require("../../events/exceptions/UnsupportedOperationException");
 
 class PacketConstructor {
-	constructor() { }
+	constructor() {}
 
 	getPacketName() {
-		return "Unknown"
+		return "Unknown";
 	}
 
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
-	validatePacket() { }
+	validatePacket() {}
 
 	writePacket() {
-		throw new UnsupportedOperationException("Can't write a client-side packet")
+		throw new UnsupportedOperationException("Can't write a client-side packet");
 	}
 
 	readPacket() {
-		throw new UnsupportedOperationException("Can't read a server-side packet")
+		throw new UnsupportedOperationException("Can't read a server-side packet");
 	}
 }
 

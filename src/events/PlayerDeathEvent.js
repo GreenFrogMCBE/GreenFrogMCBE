@@ -16,19 +16,19 @@ const Event = require("./Event");
 class PlayerDeathEvent extends Event {
 	constructor() {
 		super();
-		this.name = "PlayerDeathEvent"
-		this.player = null
-		this.server = null
-		this.cancelled = false
+		this.name = "PlayerDeathEvent";
+		this.player = null;
+		this.server = null;
+		this.cancelled = false;
 	}
 
 	cancel() {
-		this.cancelled = true
+		this.cancelled = true;
 	}
 
 	execute() {
-		this._execute()
-		
+		this._execute();
+
 		if (!this.cancelled) this.player.dead = true;
 	}
 }

@@ -12,7 +12,7 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-const PacketHandlingError = require("./exceptions/PacketHandlingError")
+const PacketHandlingError = require("./exceptions/PacketHandlingError");
 
 class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	/**
@@ -20,7 +20,7 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
-		return "set_player_game_type"
+		return "set_player_game_type";
 	}
 
 	/**
@@ -28,7 +28,7 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
@@ -37,9 +37,9 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async validatePacket(player, packet) {
-		if (!packet.data.params.gamemode) throw new PacketHandlingError("Bad gamemode packet - Bad gamemode")
+		if (!packet.data.params.gamemode) throw new PacketHandlingError("Bad gamemode packet - Bad gamemode");
 
-        if (!player.op) throw new PacketHandlingError("Bad gamemode packet - Tried to switch gamemode, while not opped")
+		if (!player.op) throw new PacketHandlingError("Bad gamemode packet - Tried to switch gamemode, while not opped");
 	}
 
 	/**
@@ -48,9 +48,9 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet) {
-		await this.validatePacket(player, packet)
+		await this.validatePacket(player, packet);
 
-		player.setGamemode(packet.data.params.gamemode)
+		player.setGamemode(packet.data.params.gamemode);
 	}
 }
 

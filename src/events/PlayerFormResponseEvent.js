@@ -18,13 +18,13 @@ class PlayerFormResponseEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerFormResponseEvent";
-		this.server = null
-		this.player = null
-		this.formData = null
+		this.server = null;
+		this.player = null;
+		this.formData = null;
 	}
 
 	execute() {
-		this._execute(this)
+		this._execute(this);
 	}
 }
 

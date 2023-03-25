@@ -13,7 +13,7 @@
 /* eslint-disable no-case-declarations */
 const UnsupportedOperationException = require("../../events/exceptions/UnsupportedOperationException");
 
-const PlayerContainerOpenEvent = require("../../events/PlayerContainerOpenEvent")
+const PlayerContainerOpenEvent = require("../../events/PlayerContainerOpenEvent");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -29,7 +29,7 @@ class ClientInteractPacket extends PacketConstructor {
 	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
-		return "interact"
+		return "interact";
 	}
 
 	/**
@@ -37,7 +37,7 @@ class ClientInteractPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
@@ -46,23 +46,23 @@ class ClientInteractPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet, server) {
-		const actionID = packet.data.params.action_id
+		const actionID = packet.data.params.action_id;
 
 		switch (actionID) {
 			case InteractType.INVENTORYOPEN:
-				const event = new PlayerContainerOpenEvent()
-				event.server = server
-				event.client = player
-				event.windowID = WindowID.CREATIVE
-				event.windowType = InventoryType.INVENTORY
-				event.runtimeId = 2
-				event.execute()
-				break
+				const event = new PlayerContainerOpenEvent();
+				event.server = server;
+				event.client = player;
+				event.windowID = WindowID.CREATIVE;
+				event.windowType = InventoryType.INVENTORY;
+				event.runtimeId = 2;
+				event.execute();
+				break;
 			case InteractType.MOUSEOVERENTITY:
 				// TODO: This thing is related to PVP, but it is not implemented yet in GreenFrog
-				break
+				break;
 			default:
-				Logger.debug("Unsupported action ID: " + actionID)
+				Logger.debug("Unsupported action ID: " + actionID);
 		}
 	}
 
@@ -70,7 +70,7 @@ class ClientInteractPacket extends PacketConstructor {
 	 * Writes the packet to the client
 	 */
 	writePacket() {
-		throw new UnsupportedOperationException("Cannot write client-side packet")
+		throw new UnsupportedOperationException("Cannot write client-side packet");
 	}
 }
 

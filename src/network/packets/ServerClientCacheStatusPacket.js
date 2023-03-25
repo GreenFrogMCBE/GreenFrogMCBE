@@ -12,7 +12,7 @@
  */
 let enabled = false;
 
-const PacketConstructor = require('./PacketConstructor')
+const PacketConstructor = require("./PacketConstructor");
 
 class ServerClientCacheStatusPacket extends PacketConstructor {
 	/**
@@ -28,11 +28,11 @@ class ServerClientCacheStatusPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
-	 * Sets if the caching is enabled? 
+	 * Sets if the caching is enabled?
 	 * @param {Boolean} new_enabled - Caching enabled?
 	 */
 	setEnabled(new_enabled) {

@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const PacketConstructor = require("./PacketConstructor");
 
 const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
@@ -14,7 +26,7 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
-		return "item_stack_request"
+		return "item_stack_request";
 	}
 
 	/**
@@ -22,12 +34,12 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	validatePacket(player) {
-		if (player.gamemode ==! 1) {
-			throw new PacketHandlingError("Itemstackrequest from non-creative gamemode player")
+		if (player.gamemode == !1) {
+			throw new PacketHandlingError("Itemstackrequest from non-creative gamemode player");
 		}
 	}
 
@@ -38,19 +50,19 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	 */
 	async readPacket(player, packet) {
 		//TODO: Event
-		
-		await this.validatePacket(player)
-		
+
+		await this.validatePacket(player);
+
 		try {
-			let request = null
+			let request = null;
 			try {
 				request = packet.data.params.requests[0].actions[1].result_items[0];
 			} catch {
 				request = {
 					count: 0,
 					network_id: 0,
-					block_runtime_id: 0
-				}
+					block_runtime_id: 0,
+				};
 			}
 			const count = request.count;
 			const network_id = request.network_id;

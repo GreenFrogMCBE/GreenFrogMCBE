@@ -30,9 +30,9 @@ class ServerLevelChunkPacket extends PacketConstructor {
 	/**
 	 * Returns if is the packet critical?
 	 * @returns {Boolean} Returns if the packet is critical
-	 */	
+	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**

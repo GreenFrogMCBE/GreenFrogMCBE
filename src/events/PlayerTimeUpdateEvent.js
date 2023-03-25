@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerUpdateTimePacket = require("../network/packets/ServerUpdateTimePacket")
+const ServerUpdateTimePacket = require("../network/packets/ServerUpdateTimePacket");
 const Event = require("./Event");
 
 class PlayerSpawnEvent extends Event {
@@ -18,17 +18,17 @@ class PlayerSpawnEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerTimeUpdateEvent";
-		this.player = null
-		this.server = null
-        this.time = 0
+		this.player = null;
+		this.server = null;
+		this.time = 0;
 	}
 
 	cancel() {
-		this.cancelled = true
+		this.cancelled = true;
 	}
 
 	execute() {
-		this._execute()
+		this._execute();
 
 		if (!this.cancelled) {
 			const timepacket = new ServerUpdateTimePacket();

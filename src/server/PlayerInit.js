@@ -26,7 +26,7 @@ const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEve
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
 const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
-const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent")
+const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent");
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
@@ -34,7 +34,7 @@ const PlayerInfo = require("../api/PlayerInfo");
 
 module.exports = {
 	/**
-	 * @param {Object} player 
+	 * @param {Object} player
 	 */
 	_initPlayer(player) {
 		/**
@@ -51,11 +51,11 @@ module.exports = {
 		 * @param {String} message - The message to send as a player
 		 */
 		player.chat = function (message) {
-			const chatAsPlayerEvent = new PluginChatAsPlayerEvent()
+			const chatAsPlayerEvent = new PluginChatAsPlayerEvent();
 			chatAsPlayerEvent.player = player;
 			chatAsPlayerEvent.message = message;
 			chatAsPlayerEvent.server = require("../Server").server;
-			chatAsPlayerEvent.execute()
+			chatAsPlayerEvent.execute();
 		};
 
 		/**
@@ -63,24 +63,18 @@ module.exports = {
 		 * @param {Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 */
 		player.setGamemode = function (gamemode) {
-			const allowedGameModes = [
-				GameMode.SURVIVAL,
-				GameMode.CREATIVE,
-				GameMode.ADVENTURE,
-				GameMode.SPECTATOR,
-				GameMode.FALLBACK,
-			];
+			const allowedGameModes = [GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR, GameMode.FALLBACK];
 
 			if (!allowedGameModes.includes(gamemode)) {
 				throw new Error("Invalid game mode!");
 			}
 
 			const gamemodeChangeEvent = new PlayerGamemodeChangeEvent();
-			gamemodeChangeEvent.player = player
-			gamemodeChangeEvent.server = require("../Server").server
-			gamemodeChangeEvent.gamemode = gamemode
-			gamemodeChangeEvent.oldGamemode = player.gamemode
-			gamemodeChangeEvent.execute()
+			gamemodeChangeEvent.player = player;
+			gamemodeChangeEvent.server = require("../Server").server;
+			gamemodeChangeEvent.gamemode = gamemode;
+			gamemodeChangeEvent.oldGamemode = player.gamemode;
+			gamemodeChangeEvent.execute();
 		};
 
 		/**
@@ -95,29 +89,29 @@ module.exports = {
 
 		/**
 		 * Sets the player local difficulty
-		 * @param {Difficulty} difficulty 
+		 * @param {Difficulty} difficulty
 		 */
 		player.setDifficulty = function (difficulty) {
-			const difficultyevent = new PlayerUpdateDifficultyEvent()
-			difficultyevent.execute(require("../Server").server, player, difficulty)
-		}
+			const difficultyevent = new PlayerUpdateDifficultyEvent();
+			difficultyevent.execute(require("../Server").server, player, difficulty);
+		};
 
 		/**
 		 * Sets the data of the player/entity (eg on_fire, etc)
-		 * @param {String} field 
-		 * @param {Boolean} value 
+		 * @param {String} field
+		 * @param {Boolean} value
 		 */
 		player.setEntityData = function (field, value) {
-			const playerentitypacket = new ServerSetEntityDataPacket()
+			const playerentitypacket = new ServerSetEntityDataPacket();
 			playerentitypacket.setProperties({
-				"ints": [],
-				"floats": []
-			})
-			playerentitypacket.setRuntimeEntityID(0) // Local player
-			playerentitypacket.setTick(0)
-			playerentitypacket.setValue(field, value)
-			playerentitypacket.writePacket(player)
-		}
+				ints: [],
+				floats: [],
+			});
+			playerentitypacket.setRuntimeEntityID(0); // Local player
+			playerentitypacket.setTick(0);
+			playerentitypacket.setValue(field, value);
+			playerentitypacket.writePacket(player);
+		};
 
 		/**
 		 * Kicks a player from the server
@@ -141,22 +135,20 @@ module.exports = {
 
 		player.setChunkRadius = function (radius) {
 			const chunkradiusupdate = new ChunkRadiusUpdate();
-			chunkradiusupdate.setChunkRadius(
-				radius
-			);
+			chunkradiusupdate.setChunkRadius(radius);
 			chunkradiusupdate.writePacket(player);
-		}
+		};
 
 		/**
 		 * Sets the player's time
 		 * @param {Number} time - The time to set the player to
 		 */
 		player.setTime = function (time) {
-			const timeevent = new PlayerTimeUpdateEvent()
-			timeevent.player = player
-			timeevent.server = require("../Server")
-			timeevent.time = time
-			timeevent.execute()
+			const timeevent = new PlayerTimeUpdateEvent();
+			timeevent.player = player;
+			timeevent.server = require("../Server");
+			timeevent.time = time;
+			timeevent.execute();
 		};
 
 		/**
@@ -164,16 +156,16 @@ module.exports = {
 		 * @param {JSON} attribute
 		 */
 		player.setAttribute = function (attribute) {
-			const updateattributespacket = new UpdateAttributes()
-			updateattributespacket.setPlayerID(0) // 0 - Means local player
-			updateattributespacket.setTick(0)
-			updateattributespacket.setAttributes([attribute])
-			updateattributespacket.writePacket(player)
-		}
+			const updateattributespacket = new UpdateAttributes();
+			updateattributespacket.setPlayerID(0); // 0 - Means local player
+			updateattributespacket.setTick(0);
+			updateattributespacket.setAttributes([attribute]);
+			updateattributespacket.writePacket(player);
+		};
 
 		// /**
 		//  * Sets the XP for the player
-		//  * @param {Float} xp 
+		//  * @param {Float} xp
 		//  */
 		// player.setXP = function (xp) {
 		// 	player.setAttribute({
@@ -188,20 +180,20 @@ module.exports = {
 
 		/**
 		 * Sets the health of the player
-		 * @param {Float} health 
+		 * @param {Float} health
 		 */
 		player.setHealth = function (health) {
-			if (player.dead) return
+			if (player.dead) return;
 
-			const healthUpdateEvent = new PlayerHealthUpdateEvent()
-			healthUpdateEvent.server = require("../Server").server
-			healthUpdateEvent.player = player
-			healthUpdateEvent.name = "minecraft:health"
-			healthUpdateEvent.modifiers = []
-			healthUpdateEvent.minHealth = 0
-			healthUpdateEvent.maxHealth = 20
-			healthUpdateEvent.health = health
-			healthUpdateEvent.execute()
+			const healthUpdateEvent = new PlayerHealthUpdateEvent();
+			healthUpdateEvent.server = require("../Server").server;
+			healthUpdateEvent.player = player;
+			healthUpdateEvent.name = "minecraft:health";
+			healthUpdateEvent.modifiers = [];
+			healthUpdateEvent.minHealth = 0;
+			healthUpdateEvent.maxHealth = 20;
+			healthUpdateEvent.health = health;
+			healthUpdateEvent.execute();
 		};
 
 		/**
@@ -233,10 +225,10 @@ module.exports = {
 
 				GarbageCollector.clearOfflinePlayers();
 
-				const leaveEvent = new PlayerLeaveEvent()
-				leaveEvent.player = player
-				leaveEvent.server = require("../Server")
-				leaveEvent.execute()
+				const leaveEvent = new PlayerLeaveEvent();
+				leaveEvent.player = player;
+				leaveEvent.server = require("../Server");
+				leaveEvent.execute();
 
 				Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
 				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));

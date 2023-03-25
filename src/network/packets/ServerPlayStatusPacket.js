@@ -28,7 +28,7 @@ class ServerPlayStatusPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return true
+		return true;
 	}
 
 	/**

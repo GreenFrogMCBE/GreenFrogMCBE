@@ -16,15 +16,17 @@ class BlockBreakEvent extends Event {
 	constructor() {
 		super();
 		this.name = "BlockBreakEvent";
-		this.legacy = {}
-		this.actions = []
-		this.transaction_type = ''
-		this.transaction_data = {}
+		this.legacy = {};
+		this.actions = [];
+		this.transaction_type = "";
+		this.transaction_data = {};
 		this.player = null;
 		this.server = null;
 	}
 
-	execute() { this._execute(this) }
+	execute() {
+		this._execute(this);
+	}
 }
 
 module.exports = BlockBreakEvent;

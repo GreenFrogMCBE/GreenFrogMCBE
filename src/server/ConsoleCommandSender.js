@@ -34,9 +34,9 @@ module.exports = {
 
 		r.on("line", (data) => {
 			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
-			commandExecutedEvent.server = require("../Server")
-			commandExecutedEvent.command = data
-			commandExecutedEvent.execute()
+			commandExecutedEvent.server = require("../Server");
+			commandExecutedEvent.command = data;
+			commandExecutedEvent.execute();
 
 			if (!isclosed) r.prompt(true);
 		});

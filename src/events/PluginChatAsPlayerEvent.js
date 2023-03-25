@@ -20,20 +20,20 @@ class PluginChatAsPlayerEvent extends Event {
 	constructor() {
 		super();
 		this.name = "PluginChatAsPlayerEvent";
-		this.server = null
-		this.player = null
-        this.message = null
+		this.server = null;
+		this.player = null;
+		this.message = null;
 	}
 
 	cancel() {
-		this.cancelled = true
+		this.cancelled = true;
 	}
 
 	async execute() {
-		await this._execute(this)
+		await this._execute(this);
 
 		if (!this.cancelled) {
-            Chat.broadcastMessage(lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message));
+			Chat.broadcastMessage(lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message));
 		}
 	}
 }

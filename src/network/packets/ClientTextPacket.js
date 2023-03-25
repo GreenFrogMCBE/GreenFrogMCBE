@@ -20,7 +20,7 @@ class ClientTextPacket extends PacketConstructor {
 	 * @returns The name of the packet
 	 */
 	getPacketName() {
-		return "text"
+		return "text";
 	}
 
 	/**
@@ -28,7 +28,7 @@ class ClientTextPacket extends PacketConstructor {
 	 * @returns Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
@@ -37,15 +37,15 @@ class ClientTextPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet, server) {
-		let message = packet.data.params.message
+		let message = packet.data.params.message;
 
-		await this.validatePacket(player, message)
+		await this.validatePacket(player, message);
 
-		const chatEvent = new PlayerChatEvent()
-		chatEvent.server = server
-		chatEvent.player = player
-		chatEvent.message = message
-		chatEvent.execute()
+		const chatEvent = new PlayerChatEvent();
+		chatEvent.server = server;
+		chatEvent.player = player;
+		chatEvent.message = message;
+		chatEvent.execute();
 	}
 }
 

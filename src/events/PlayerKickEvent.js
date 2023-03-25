@@ -17,13 +17,13 @@ class PlayerKickEvent extends Event {
 	constructor() {
 		super();
 		this.name = "PlayerKickEvent";
-		this.reason = null
-		this.server = null
-		this.player = null
+		this.reason = null;
+		this.server = null;
+		this.player = null;
 	}
 
 	execute() {
-		this._execute()
+		this._execute();
 	}
 }
 

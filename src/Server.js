@@ -13,7 +13,7 @@
 process.env.DEBUG = process.argv.includes("--debug") ? "minecraft-protocol" : "";
 
 const fs = require("fs");
-const path = require("path")
+const path = require("path");
 const bedrock = require("frog-protocol");
 const ServerInfo = require("./api/ServerInfo");
 const PlayerInfo = require("./api/PlayerInfo");
@@ -27,7 +27,7 @@ const ValidateClient = require("./player/ValidateClient");
 const DefaultWorld = require("./world/DefaultWorld");
 const PlayerInit = require("./server/PlayerInit");
 const Logger = require("./server/Logger");
-const assert = require('assert');
+const assert = require("assert");
 
 let clients = [];
 let server = null;
@@ -70,26 +70,26 @@ module.exports = {
 			throw new Error(lang.errors.packetErrorOffline);
 		}
 
-		const packetsDir = path.join(__dirname, 'network', 'packets');
+		const packetsDir = path.join(__dirname, "network", "packets");
 
-		let exist = false
+		let exist = false;
 
 		fs.readdirSync(packetsDir).forEach((filename) => {
-			if (filename.startsWith('Client')) {
+			if (filename.startsWith("Client")) {
 				const packetPath = path.join(packetsDir, filename);
 				try {
 					const packetPathImport = require(packetPath);
-					const packet = new packetPathImport()
+					const packet = new packetPathImport();
 					if (packet.getPacketName() === packetparams.data.name) {
 						packet.readPacket(client, packetparams, server);
-						exist = true
+						exist = true;
 					}
 				} catch (e) {
 					client.kick(lang.kickmessages.invalidPacket);
 
-					const internalerrorevent = new ServerInternalServerErrorEvent()
-					internalerrorevent.server = this
-					internalerrorevent.error = e
+					const internalerrorevent = new ServerInternalServerErrorEvent();
+					internalerrorevent.server = this;
+					internalerrorevent.error = e;
 					internalerrorevent.execute();
 
 					Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
@@ -110,14 +110,14 @@ module.exports = {
 		await PlayerInit._initPlayer(client);
 		await ValidateClient._initAndValidateClient(client);
 
-		client.chunksEnabled = true
+		client.chunksEnabled = true;
 		client.health = 20;
-		client.dead, client.offline = false;
-		client.x, client.y, client.z = 0;
+		client.dead, (client.offline = false);
+		client.x, client.y, (client.z = 0);
 
 		const playerconnectionevent = new PlayerConnectionCreateEvent();
-		playerconnectionevent.server = this
-		playerconnectionevent.client = client
+		playerconnectionevent.server = this;
+		playerconnectionevent.client = client;
 		playerconnectionevent.execute(server, client);
 
 		PlayerInfo.addPlayer(client);
@@ -155,8 +155,8 @@ module.exports = {
 	async start() {
 		await this._initJson();
 
-		await assert(parseInt(config.garbageCollectorDelay), NaN)
-		await assert(parseInt(config.randomTickSpeed), NaN)
+		await assert(parseInt(config.garbageCollectorDelay), NaN);
+		await assert(parseInt(config.randomTickSpeed), NaN);
 
 		if (!fs.existsSync("ops.yml")) {
 			fs.writeFile("ops.yml", "", (err) => {
@@ -185,8 +185,8 @@ module.exports = {
 
 		setInterval(() => {
 			const serverLocalWorld = new DefaultWorld();
-			serverLocalWorld.tick()
-		}, parseInt(config.randomTickSpeed))
+			serverLocalWorld.tick();
+		}, parseInt(config.randomTickSpeed));
 	},
 
 	/**
@@ -221,10 +221,10 @@ module.exports = {
 					} catch (e) {
 						client.kick(lang.kickmessages.invalidPacket);
 
-						const internalerrorevent = new ServerInternalServerErrorEvent()
-						internalerrorevent.server = this
-						internalerrorevent.error = e
-						internalerrorevent.execute();	
+						const internalerrorevent = new ServerInternalServerErrorEvent();
+						internalerrorevent.server = this;
+						internalerrorevent.error = e;
+						internalerrorevent.execute();
 						Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
 					}
 				});

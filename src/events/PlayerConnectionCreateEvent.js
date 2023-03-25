@@ -18,8 +18,8 @@ class PlayerConnectionCreateEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerConnectionCreateEvent";
-		this.player = null
-		this.server = null
+		this.player = null;
+		this.server = null;
 	}
 
 	cancel() {
@@ -28,7 +28,7 @@ class PlayerConnectionCreateEvent extends Event {
 	}
 
 	execute() {
-		this._execute()
+		this._execute();
 	}
 }
 

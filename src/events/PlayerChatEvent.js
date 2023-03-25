@@ -19,13 +19,12 @@ const PlayerInfo = require("../api/PlayerInfo");
 const Logger = require("../server/Logger");
 const Event = require("./Event");
 
-
 class PlayerChatEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerChatEvent";
-		this.message = null
+		this.message = null;
 		this.player = null;
 		this.server = null;
 	}
@@ -39,18 +38,16 @@ class PlayerChatEvent extends Event {
 
 		if (this.cancelled || config.disable === true) return;
 
-		const fullmessage = lang.chat.chatFormat
-			.replace("%username%", this.player.username)
-			.replace("%message%", this.message);
+		const fullmessage = lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message);
 
 		if (!this.message.trim()) return;
 
-		if (this.message.includes("§") || this.message.length > 256 && config.blockInvalidMessages) {
-			const playerSentInvalidMessageEvent = new PlayerSentInvalidMessageEvent()
-			playerSentInvalidMessageEvent.server = this.server
-			playerSentInvalidMessageEvent.player = this.player
-			playerSentInvalidMessageEvent.message = this.message
-			playerSentInvalidMessageEvent.execute()
+		if (this.message.includes("§") || (this.message.length > 256 && config.blockInvalidMessages)) {
+			const playerSentInvalidMessageEvent = new PlayerSentInvalidMessageEvent();
+			playerSentInvalidMessageEvent.server = this.server;
+			playerSentInvalidMessageEvent.player = this.player;
+			playerSentInvalidMessageEvent.message = this.message;
+			playerSentInvalidMessageEvent.execute();
 			return;
 		}
 

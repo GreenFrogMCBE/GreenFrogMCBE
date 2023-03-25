@@ -20,9 +20,9 @@ module.exports = {
 	 * Removes data of offline players
 	 */
 	clearOfflinePlayers() {
-		const garbageOfflinePlayerCollectorEvent = new GarbageOfflinePlayerCollectorEvent()
-		garbageOfflinePlayerCollectorEvent.server = require("../Server")
-		garbageOfflinePlayerCollectorEvent.execute()
+		const garbageOfflinePlayerCollectorEvent = new GarbageOfflinePlayerCollectorEvent();
+		garbageOfflinePlayerCollectorEvent.server = require("../Server");
+		garbageOfflinePlayerCollectorEvent.execute();
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
 			if (PlayerInfo.players[i].offline) {
 				Logger.debug("[Garbage collector] Deleted " + PlayerInfo.players[i].username);
@@ -38,10 +38,10 @@ module.exports = {
 	gc() {
 		Logger.debug("[Garbage collector] Starting Garbage-collect everything...");
 		this.clearOfflinePlayers();
-		
-		const garbageCollectionEvent = new GarbageCollectionEvent()
-		garbageCollectionEvent.server = require("../Server")
-		garbageCollectionEvent.execute()
+
+		const garbageCollectionEvent = new GarbageCollectionEvent();
+		garbageCollectionEvent.server = require("../Server");
+		garbageCollectionEvent.execute();
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
 			delete PlayerInfo.players[i].q;

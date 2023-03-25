@@ -12,7 +12,7 @@
  */
 let chunk_radius = 0;
 
-const PacketConstructor = require('./PacketConstructor')
+const PacketConstructor = require("./PacketConstructor");
 
 class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 	/**
@@ -28,7 +28,7 @@ class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**

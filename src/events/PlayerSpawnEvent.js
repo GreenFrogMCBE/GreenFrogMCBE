@@ -17,8 +17,8 @@ class PlayerSpawnEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerSpawnEvent";
-		this.player = null
-		this.server = null
+		this.player = null;
+		this.server = null;
 	}
 
 	cancel(client) {
@@ -27,7 +27,7 @@ class PlayerSpawnEvent extends Event {
 	}
 
 	execute() {
-		this._execute()
+		this._execute();
 	}
 }
 

@@ -21,25 +21,25 @@ class PlayerContainerCloseEvent extends Event {
 	constructor() {
 		super();
 		this.name = "PlayerContainerCloseEvent";
-		this.server = null
-		this.player = null
-		this.isRequestByServer = false // TODO: Should be true
-		this.windowID = WindowID.CREATIVE
-		this.cancelled = false
+		this.server = null;
+		this.player = null;
+		this.isRequestByServer = false; // TODO: Should be true
+		this.windowID = WindowID.CREATIVE;
+		this.cancelled = false;
 	}
 
 	cancel() {
-		this.cancelled = true
+		this.cancelled = true;
 	}
 
 	async execute() {
-		await this._execute(this)
+		await this._execute(this);
 
 		if (!this.cancelled) {
-			const containerclose = new ServerContainerClosePacket()
-			containerclose.setServer(this.isRequestByServer)
-			containerclose.setWindowID(this.windowID)
-			containerclose.writePacket(this.player)	
+			const containerclose = new ServerContainerClosePacket();
+			containerclose.setServer(this.isRequestByServer);
+			containerclose.setWindowID(this.windowID);
+			containerclose.writePacket(this.player);
 		}
 	}
 }

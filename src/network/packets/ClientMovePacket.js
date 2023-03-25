@@ -12,7 +12,7 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-const PlayerMoveEvent = require('../../events/PlayerMoveEvent')
+const PlayerMoveEvent = require("../../events/PlayerMoveEvent");
 
 class ClientMovePacket extends PacketConstructor {
 	/**
@@ -20,7 +20,7 @@ class ClientMovePacket extends PacketConstructor {
 	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
-		return "move_player"
+		return "move_player";
 	}
 
 	/**
@@ -28,7 +28,7 @@ class ClientMovePacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
@@ -38,15 +38,15 @@ class ClientMovePacket extends PacketConstructor {
 	 * @param {any} server
 	 */
 	async readPacket(player, packet, server) {
-		await this.validatePacket(player)
+		await this.validatePacket(player);
 
-		let position = packet.data.params.position
+		let position = packet.data.params.position;
 
-		const playerMoveEvent = new PlayerMoveEvent()
-		playerMoveEvent.player = player
-		playerMoveEvent.server = server
-		playerMoveEvent.position = position
-		playerMoveEvent.execute()
+		const playerMoveEvent = new PlayerMoveEvent();
+		playerMoveEvent.player = player;
+		playerMoveEvent.server = server;
+		playerMoveEvent.position = position;
+		playerMoveEvent.execute();
 	}
 }
 

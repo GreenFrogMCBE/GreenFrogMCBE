@@ -12,7 +12,7 @@
  */
 const FormTypes = require("../../forms/FormTypes");
 
-const PacketConstructor = require('./PacketConstructor')
+const PacketConstructor = require("./PacketConstructor");
 
 let id = 0;
 let content = "";
@@ -36,7 +36,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
@@ -49,7 +49,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sets the content of the form
-	 * @param {JSON} new_content 
+	 * @param {JSON} new_content
 	 */
 	setContent(new_content) {
 		content = new_content;
@@ -57,7 +57,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sets the buttons of the form
-	 * @param {JSON} new_buttons 
+	 * @param {JSON} new_buttons
 	 */
 	setButtons(new_buttons) {
 		buttons = new_buttons;
@@ -81,7 +81,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sets the button1 of the form (requires modal form)
-	 * @param {JSON} new_button1 
+	 * @param {JSON} new_button1
 	 */
 	setButton1(new_button1) {
 		button1 = new_button1;
@@ -89,7 +89,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sets the button2 of the form (requires modal form)
-	 * @param {JSON} new_button2 
+	 * @param {JSON} new_button2
 	 */
 	setButton2(new_button2) {
 		button2 = new_button2;
@@ -97,7 +97,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sets the text of the form
-	 * @param {String} new_text 
+	 * @param {String} new_text
 	 */
 	setText(new_text) {
 		content = new_text;
@@ -177,12 +177,12 @@ class ServerFormRequestPacket extends PacketConstructor {
 				form_id: this.getId(),
 				data: `{"content":"${this.getText()}","button1":"${this.getButton1()}","button2":"${this.getButton2()}","type":"${this.getType()}","title":"${this.getTitle()}"}`,
 			});
-			return
+			return;
 		}
 
 		client.queue(this.getPacketName(), {
 			form_id: this.getId(),
-			data: `{"content":${this.getContent()},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`
+			data: `{"content":${this.getContent()},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
 		});
 	}
 }

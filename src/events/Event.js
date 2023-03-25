@@ -17,11 +17,11 @@ const fs = require("fs");
 
 class Event {
 	cancel() {
-		throw new UnsupportedOperationException("This event is impossible to cancel")
+		throw new UnsupportedOperationException("This event is impossible to cancel");
 	}
 
 	execute() {
-		throw new UnsupportedOperationException("Not implemented")
+		throw new UnsupportedOperationException("Not implemented");
 	}
 
 	async _execute(event) {

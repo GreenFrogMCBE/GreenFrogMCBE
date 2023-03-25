@@ -22,7 +22,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
-		return "inventory_transaction"
+		return "inventory_transaction";
 	}
 
 	/**
@@ -30,7 +30,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
@@ -39,27 +39,27 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet, server) {
-		let actionID = null
+		let actionID = null;
 
 		try {
 			actionID = packet.data.params.transaction.transaction_data.action_type;
 		} catch {
-			actionID = null
+			actionID = null;
 		}
 
 		switch (actionID) {
 			case BlockActions.BREAKBLOCK:
-				const blockbreakevent = new BlockBreakEvent()
-				blockbreakevent.actions = packet.data.params.actions
-				blockbreakevent.legacy = []
-				blockbreakevent.player = player
-				blockbreakevent.server = server
-				blockbreakevent.transaction_data = packet.data.params.transaction_data
-				blockbreakevent.transaction_type = packet.data.params.transaction_type
-				blockbreakevent.execute()
-				break
+				const blockbreakevent = new BlockBreakEvent();
+				blockbreakevent.actions = packet.data.params.actions;
+				blockbreakevent.legacy = [];
+				blockbreakevent.player = player;
+				blockbreakevent.server = server;
+				blockbreakevent.transaction_data = packet.data.params.transaction_data;
+				blockbreakevent.transaction_type = packet.data.params.transaction_type;
+				blockbreakevent.execute();
+				break;
 			default:
-				Logger.debug("Unsupported Block action from " + player.username + ": " + actionID)
+				Logger.debug("Unsupported Block action from " + player.username + ": " + actionID);
 		}
 	}
 }

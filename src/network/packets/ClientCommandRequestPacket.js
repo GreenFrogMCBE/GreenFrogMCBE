@@ -1,6 +1,18 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const PlayerCommandExecuteEvent = require("../../events/PlayerCommandExecuteEvent");
 const { config } = require("../../api/ServerInfo");
-const assert = require("assert")
+const assert = require("assert");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -10,7 +22,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
-		return "command_request"
+		return "command_request";
 	}
 
 	/**
@@ -18,7 +30,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
@@ -27,8 +39,8 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async validatePacket(player, command) {
-		assert(player, null)
-		assert(command, null)
+		assert(player, null);
+		assert(command, null);
 	}
 
 	/**
@@ -38,15 +50,15 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	 */
 	async readPacket(player, packet, server) {
 		const command = packet.data.params.command;
-		
-		await this.validatePacket(player, command)
+
+		await this.validatePacket(player, command);
 
 		if (!config.commandsDisabled) {
-			const commandExecutionEvent = new PlayerCommandExecuteEvent()
-			commandExecutionEvent.command = command
-			commandExecutionEvent.player = player
-			commandExecutionEvent.server = server
-			commandExecutionEvent.execute()
+			const commandExecutionEvent = new PlayerCommandExecuteEvent();
+			commandExecutionEvent.command = command;
+			commandExecutionEvent.player = player;
+			commandExecutionEvent.server = server;
+			commandExecutionEvent.execute();
 		}
 	}
 }

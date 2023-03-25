@@ -16,12 +16,12 @@ const Event = require("./Event");
 class PlayerHasNoResourcePacksInstalledEvent extends Event {
 	constructor() {
 		super();
-		this.name = "PlayerHasNoResourcePacksInstalledEvent"
+		this.name = "PlayerHasNoResourcePacksInstalledEvent";
 		this.cancelled = false;
-		this.player = null
-		this.server = null
-		this.resourcePacksIds = []
-		this.resourcePacksRequired = true
+		this.player = null;
+		this.server = null;
+		this.resourcePacksIds = [];
+		this.resourcePacksRequired = true;
 	}
 
 	cancel(client) {
@@ -30,7 +30,7 @@ class PlayerHasNoResourcePacksInstalledEvent extends Event {
 	}
 
 	execute() {
-		this._execute()
+		this._execute();
 	}
 }
 

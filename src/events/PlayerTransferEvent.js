@@ -19,10 +19,10 @@ class PlayerTransferEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerTransferEvent";
-		this.server = null
-		this.player = null
-		this.address = null
-		this.port = null
+		this.server = null;
+		this.player = null;
+		this.address = null;
+		this.port = null;
 	}
 
 	cancel() {
@@ -30,7 +30,7 @@ class PlayerTransferEvent extends Event {
 	}
 
 	async execute() {
-		this._execute()
+		this._execute();
 
 		if (!this.cancelled) {
 			const trpk = new Transfer();

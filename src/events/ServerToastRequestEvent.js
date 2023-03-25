@@ -18,9 +18,9 @@ class ServerToastRequestEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "ServerToastRequestEvent";
-		this.title = null
-		this.player = null
-		this.message = null
+		this.title = null;
+		this.player = null;
+		this.message = null;
 	}
 
 	cancel() {
@@ -28,7 +28,7 @@ class ServerToastRequestEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute()
+		await this._execute();
 
 		if (!this.cancelled) {
 			let packet = new ToastRequest();

@@ -17,12 +17,12 @@ class PlayerLeaveEvent extends Event {
 	constructor() {
 		super();
 		this.name = "PlayerLeaveEvent";
-		this.player = null
-		this.server = null
+		this.player = null;
+		this.server = null;
 	}
 
 	execute() {
-		this._execute()
+		this._execute();
 	}
 }
 

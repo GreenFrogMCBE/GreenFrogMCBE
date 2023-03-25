@@ -12,13 +12,13 @@
  */
 let value = null;
 
-const PacketConstructor = require('./PacketConstructor')
+const PacketConstructor = require("./PacketConstructor");
 
 class ServerBiomeDefinitionListPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
- 	 * @returns {String} The name of the packet
- 	 */
+	 * @returns {String} The name of the packet
+	 */
 	getPacketName() {
 		return "biome_definition_list";
 	}
@@ -28,7 +28,7 @@ class ServerBiomeDefinitionListPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return true
+		return true;
 	}
 
 	/**

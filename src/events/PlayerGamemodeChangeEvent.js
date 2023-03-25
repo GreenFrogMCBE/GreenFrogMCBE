@@ -18,10 +18,10 @@ class PlayerGamemodeChangeEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null
-		this.player = null
-		this.gamemode = null
-		this.oldGamemode = null
+		this.server = null;
+		this.player = null;
+		this.gamemode = null;
+		this.oldGamemode = null;
 	}
 
 	cancel() {
@@ -29,10 +29,10 @@ class PlayerGamemodeChangeEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute()
+		await this._execute();
 
 		if (this.cancelled) {
-			return
+			return;
 		}
 
 		this.player.gamemode = this.gamemode;

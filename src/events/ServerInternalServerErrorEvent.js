@@ -17,12 +17,12 @@ class ServerInternalServerErrorEvent extends Event {
 	constructor() {
 		super();
 		this.name = "ServerInternalServerErrorEvent";
-		this.server = null
-		this.error = null
+		this.server = null;
+		this.error = null;
 	}
 
 	async execute() {
-		await this._execute()
+		await this._execute();
 	}
 }
 

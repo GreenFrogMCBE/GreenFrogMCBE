@@ -18,18 +18,18 @@ const PacketConstructor = require("./PacketConstructor");
 let gamemode = Gamemode.FALLBACK;
 
 class ServerSetPlayerGameTypePacket extends PacketConstructor {
-    /**
-     * Returns the packet name.
-     * @returns {String} The name of the packet.
-     */
+	/**
+	 * Returns the packet name.
+	 * @returns {String} The name of the packet.
+	 */
 	getPacketName() {
 		return "set_player_game_type";
 	}
 
-    /**
-     * Returns whether the packet is critical.
-     * @returns {Boolean} Returns if the packet is critical.
-     */
+	/**
+	 * Returns whether the packet is critical.
+	 * @returns {Boolean} Returns if the packet is critical.
+	 */
 	isCriticalPacket() {
 		return false;
 	}
