@@ -12,8 +12,6 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-const assert = require('assert');
-
 const PacketHandlingError = require("./exceptions/PacketHandlingError")
 
 class ClientSetPlayerGameTypePacket extends PacketConstructor {
@@ -39,8 +37,6 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async validatePacket(player, packet) {
-		assert(player, null)
-
 		if (!packet.data.params.gamemode) throw new PacketHandlingError("Bad gamemode packet - Bad gamemode")
 
         if (!player.op) throw new PacketHandlingError("Bad gamemode packet - Tried to switch gamemode, while not opped")

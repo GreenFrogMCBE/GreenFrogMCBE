@@ -23,9 +23,9 @@ const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
 const SetCommandsEnabled = require("./ServerSetCommandsEnabledPacket");
 const PacketHandlingError = require("./exceptions/PacketHandlingError")
 const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket");
-const PlayerHasAllPacksEvent = require("../../events/PlayerHasAllPacksEvent");
 const AvailableEntityIdentifiers = require("./ServerAvailableEntityIdentifiersPacket");
 const NetworkChunkPublisherUpdate = require("./ServerNetworkChunkPublisherUpdatePacket");
+const PlayerHasAllResourcePacksEvent = require("../../events/PlayerHasAllResourcePacksEvent");
 const PlayerResourcePacksRefusedEvent = require("../../events/PlayerResourcePacksRefusedEvent");
 const PlayerResourcePacksCompletedEvent = require("../../events/PlayerResourcePacksCompletedEvent");
 const PlayerHasNoResourcePacksInstalledEvent = require("../../events/PlayerHasNoResourcePacksInstalledEvent");
@@ -58,7 +58,6 @@ const Dimension = require("./types/Dimension");
 const Logger = require("../../server/Logger");
 const Biome = require("./types/Biome");
 const fs = require("fs");
-
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
     /**
@@ -106,11 +105,11 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
         switch (responseStatus) {
             case ResourcePackStatus.NONE:
-                const noRpsInstalled = new PlayerHasNoResourcePacksInstalledEvent()
-                noRpsInstalled.execute(
-                    server,
-                    player
-                );
+                const noRpsInstalledEvent = new PlayerHasNoResourcePacksInstalledEvent()
+                noRpsInstalledEvent.resourcePacksIds = []
+                noRpsInstalledEvent.resourcePacksRequired = true
+                noRpsInstalledEvent.server = server
+                noRpsInstalledEvent.player = player
 
                 Logger.info(lang.playerstatuses.noRpsInstalled.replace("%player%", player.username));
                 break;
@@ -125,11 +124,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                 player.kick(lang.kickmessages.resourcePacksRefused);
                 break;
             case ResourcePackStatus.HAVEALLPACKS: {
-                const hasAllPacks = new PlayerHasAllPacksEvent()
-                hasAllPacks.execute(
-                    server,
-                    player
-                );
+                const hasAllPacksEvent = new PlayerHasAllResourcePacksEvent()
+                hasAllPacksEvent.resourcePacksIds = []
+                hasAllPacksEvent.resourcePacksRequired = true
+                hasAllPacksEvent.server = server
+                hasAllPacksEvent.player = player
+                hasAllPacksEvent.execute();
 
                 Logger.info(lang.playerstatuses.rpsInstalled.replace("%player%", player.username));
 
@@ -145,10 +145,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
             }
             case ResourcePackStatus.COMPLETED:
                 const completeEvent = new PlayerResourcePacksCompletedEvent()
-                completeEvent.execute(
-                    server,
-                    player
-                );
+                completeEvent.server = server
+                completeEvent.player = player
+                completeEvent.execute();
 
                 const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
 
@@ -343,11 +342,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                     ps.setStatus(PlayStatusType.PLAYERSPAWN);
                     ps.writePacket(player);
 
-                    const spawnevent = new PlayerSpawnEvent()
-                    spawnevent.execute(
-                        server,
-                        player
-                    );
+                    const spawnEvent = new PlayerSpawnEvent()
+                    spawnEvent.player = player;
+                    spawnEvent.server = server;
+                    spawnEvent.execute();
 
                     player.setEntityData("can_climb", true)
                     player.setEntityData("can_fly", false)

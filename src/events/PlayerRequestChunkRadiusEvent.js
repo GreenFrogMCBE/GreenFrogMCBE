@@ -5,7 +5,6 @@ class PlayerRequestChunkRadiusEvent extends Event {
     super();
     this.cancelled = false;
     this.name = "PlayerRequestChunkRadiusEvent";
-    this.worldSettings = null
     this.server = null
     this.player = null
     this.radius = null
