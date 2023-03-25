@@ -10,36 +10,55 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js");
-const Event = require("./Event");
-
-class PlayerGamemodeChangeEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null;
-		this.player = null;
-		this.gamemode = null;
-	}
-
-	cancel() {
-		this.cancelled = true;
-	}
-
-	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled) {
-			return;
-		}
-
-		this.player.gamemode = this.gamemode;
-
-		const playerGamemode = new ServerSetPlayerGameTypePacket();
-		playerGamemode.setGamemode(this.gamemode);
-		playerGamemode.writePacket(this.player);
-	}
+export = ServerPlayerListPacket;
+declare class ServerPlayerListPacket extends PacketConstructor {
+	/**
+	 * Returns the player username
+	 * @returns {String} The player username
+	 */
+	getUsername(): string;
+	/**
+	 * Sets the player username
+	 * @param {String} new_username The player username
+	 */
+	setUsername(new_username: string): void;
+	/**
+	 * Returns the ID of the player
+	 * @returns {Number} The ID of the player
+	 */
+	getId(): number;
+	/**
+	 * Sets the ID of the player
+	 * @param new_id
+	 */
+	setId(new_id: any): void;
+	/**
+	 * Returns the type of the packet
+	 * @returns {PlayerListTypes} The type
+	 */
+	getType(): {
+		ADD: string;
+		REMOVE: string;
+	};
+	/**
+	 * Returns the UUID of the player
+	 * @returns {UUID} The UUID of the player
+	 */
+	getUuid(): UUID;
+	/**
+	 * Sets the UUID of the player
+	 * @param {UUID} new_uuid The UUID to set for the player
+	 */
+	setUuid(new_uuid: UUID): void;
+	/**
+	 * Sets the type
+	 * @param {PlayerListTypes} new_type The type. Valid types are ADD or REMOVE
+	 */
+	setType(new_type: { ADD: string; REMOVE: string }): void;
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
+	writePacket(client: any): void;
 }
-
-module.exports = PlayerGamemodeChangeEvent;
+import PacketConstructor = require("./PacketConstructor");

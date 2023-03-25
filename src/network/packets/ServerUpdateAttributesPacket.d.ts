@@ -10,36 +10,42 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js");
-const Event = require("./Event");
-
-class PlayerGamemodeChangeEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null;
-		this.player = null;
-		this.gamemode = null;
-	}
-
-	cancel() {
-		this.cancelled = true;
-	}
-
-	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled) {
-			return;
-		}
-
-		this.player.gamemode = this.gamemode;
-
-		const playerGamemode = new ServerSetPlayerGameTypePacket();
-		playerGamemode.setGamemode(this.gamemode);
-		playerGamemode.writePacket(this.player);
-	}
+export = ServerUpdateAttributesPacket;
+declare class ServerUpdateAttributesPacket extends PacketConstructor {
+	/**
+	 * Sets the player ID
+	 * @param {Number} new_playerid
+	 */
+	setPlayerID(new_playerid: number): void;
+	/**
+	 * Returns the player ID
+	 * @returns {Number}
+	 */
+	getPlayerID(): number;
+	/**
+	 * Sets the attributes
+	 * @param {Array<JSON>} attr
+	 */
+	setAttributes(attr: Array<JSON>): void;
+	/**
+	 * Returns the attributes
+	 * @returns {Array<JSON>}
+	 */
+	getAttributes(): Array<JSON>;
+	/**
+	 * Sets the current tick
+	 * @param {Number} new_tick - The tick
+	 */
+	setTick(new_tick: number): void;
+	/**
+	 * Returns the current tick
+	 * @returns {Number};
+	 */
+	getTick(): number;
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
+	writePacket(client: any): void;
 }
-
-module.exports = PlayerGamemodeChangeEvent;
+import PacketConstructor = require("./PacketConstructor");

@@ -10,36 +10,32 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js");
-const Event = require("./Event");
-
-class PlayerGamemodeChangeEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null;
-		this.player = null;
-		this.gamemode = null;
-	}
-
-	cancel() {
-		this.cancelled = true;
-	}
-
-	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled) {
-			return;
-		}
-
-		this.player.gamemode = this.gamemode;
-
-		const playerGamemode = new ServerSetPlayerGameTypePacket();
-		playerGamemode.setGamemode(this.gamemode);
-		playerGamemode.writePacket(this.player);
-	}
+export = ServerTransferPacket;
+declare class ServerTransferPacket extends PacketConstructor {
+	/**
+	 * Sets the server address
+	 * @param {String} address
+	 */
+	setServerAddress(address: string): void;
+	/**
+	 * Sets the server port
+	 * @param {Number} new_port
+	 */
+	setPort(new_port: number): void;
+	/**
+	 * Returns the server address.
+	 * @returns {String}
+	 */
+	getServerAddress(): string;
+	/**
+	 * Returns the server port.
+	 * @returns {Number}
+	 */
+	getPort(): number;
+	/**
+	 * Sends the packet to the client
+	 * @param {any} client
+	 */
+	writePacket(client: any): void;
 }
-
-module.exports = PlayerGamemodeChangeEvent;
+import PacketConstructor = require("./PacketConstructor");

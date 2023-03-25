@@ -10,36 +10,12 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket.js");
-const Event = require("./Event");
-
-class PlayerGamemodeChangeEvent extends Event {
-	constructor() {
-		super();
-		this.cancelled = false;
-		this.name = "PlayerGamemodeChangeEvent";
-		this.server = null;
-		this.player = null;
-		this.gamemode = null;
-	}
-
-	cancel() {
-		this.cancelled = true;
-	}
-
-	async execute() {
-		await this._execute(this);
-
-		if (this.cancelled) {
-			return;
-		}
-
-		this.player.gamemode = this.gamemode;
-
-		const playerGamemode = new ServerSetPlayerGameTypePacket();
-		playerGamemode.setGamemode(this.gamemode);
-		playerGamemode.writePacket(this.player);
-	}
+export = CommandDeop;
+declare const CommandDeop_base: typeof import("./Command");
+declare class CommandDeop extends CommandDeop_base {
+	name(): any;
+	aliases(): any;
+	execute(args: any): Promise<void>;
+	getPlayerDescription(): any;
+	executePlayer(client: any, args: any): Promise<void>;
 }
-
-module.exports = PlayerGamemodeChangeEvent;
