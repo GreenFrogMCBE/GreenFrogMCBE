@@ -98,8 +98,8 @@
 "versionMismatch": "§cNepalaikoma versija! Prašome naudoti %version%"
 },
 "errors": {
-"failedToLoadPlugin": "Nepavyko įkelti įskiepio "%name%". Klaida: %errorstack%",
-"failedToExecFunction": "Nepavyko įvykdyti funkcijos įskiepyje "%plugin%". Klaida: %e%",
+"failedToLoadPlugin": "Nepavyko įkelti įskiepio \"%name%\". Klaida: %errorstack%",
+"failedToExecFunction": "Nepavyko įvykdyti funkcijos įskiepyje \"%plugin%\". Klaida: %e%",
 "noPluginName": "Nėra įskiepio pavadinimo! %plugin%",
 "invalidUsernameWarning": "Atsiprašau, bet %player% vartotojo vardas turi tarpus, tačiau jie dar nėra įgyvendinti GreenFrog, todėl aš pakeičiu juos į pabrėžimus",
 "opFailAlreadyOpped": "Šis žaidėjas jau turi operatoriaus teises.",
@@ -124,7 +124,6 @@
 },
 "devdebug": {
 "ignoredPacket": "Praleistas paketas: %packet%",
-"debug": "DERINIMAS",
 "unhandledPacket": "Nesuprantamas paketas",
 "unhandledPacketData": "Nesuprantamas paketo turinys: ",
 "unstableWarning": "Nestabilus režimas įjungtas! Tai gali padaryti serverį nestabilų ir sukelti daugiau lag'ų"
