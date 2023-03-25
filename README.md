@@ -2,7 +2,7 @@
 
 ## GreenFrog
 
-Server software for Minecraft: Bedrock edition, written in NodeJS
+Server software for Minecraft: Bedrock edition, written in NodeJS, currently supports 1.19.70/1.19.71
 
 #### Development status > Under active development
 
