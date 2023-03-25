@@ -12,7 +12,7 @@
  */
 const Event = require("./Event")
 
-class PlayerHasAllPacksEvent extends Event {
+class PlayerHasAllResourcePacksEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
@@ -33,4 +33,4 @@ class PlayerHasAllPacksEvent extends Event {
 	}
 }
 
-module.exports = PlayerHasAllPacksEvent;
+module.exports = PlayerHasAllResourcePacksEvent;
