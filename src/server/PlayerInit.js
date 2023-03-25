@@ -206,9 +206,9 @@ module.exports = {
 
 		/**
 		 * Updates the dimension for the player
-		 * @param {Number} x
-		 * @param {Number} y
-		 * @param {Number} z
+		 * @param {Float} x
+		 * @param {Float} y
+		 * @param {Float} z
 		 * @param {Dimensions} dimension
 		 * @param {Boolean} respawn
 		 */
