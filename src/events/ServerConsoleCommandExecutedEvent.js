@@ -61,18 +61,18 @@ class ServerConsoleCommandExecutedEvent extends Event {
 			};
 
 			if (this.command.toLowerCase().startsWith(`${lang.commands.time.toLowerCase()} `)) {
-				this.commands.time.execute(this.command.split(" "));
+				commands.time.execute(this.command.split(" "));
 				return;
 			}
 
 			if (this.command.toLowerCase().startsWith(`${lang.commands.say.toLowerCase()} `)) {
 				const msg = this.command.split(" ").slice(1).join(" ");
-				this.commands.say.execute(msg);
+				commands.say.execute(msg);
 				return;
 			}
 
 			if (this.command.toLowerCase().startsWith(`${lang.commands.listc.toLowerCase()} `)) {
-				this.commands.list.execute();
+				commands.list.execute();
 				return;
 			}
 
@@ -80,22 +80,22 @@ class ServerConsoleCommandExecutedEvent extends Event {
 				const dataParts = this.command.split(" ");
 				const target = dataParts[1];
 				const reason = dataParts.slice(2).join(" ");
-				this.commands.kick.execute([target, reason]);
+				commands.kick.execute([target, reason]);
 				return;
 			}
 
 			if (this.command.toLowerCase().startsWith(`${lang.commands.op.toLowerCase()} `)) {
-				this.commands.op.execute(this.command.split(" ")[1]);
+				commands.op.execute(this.command.split(" ")[1]);
 				return;
 			}
 
 			if (this.command.toLowerCase().startsWith(`${lang.commands.deop.toLowerCase()} `)) {
-				this.commands.deop.execute(this.command.split(" ")[1]);
+				commands.deop.execute(this.command.split(" ")[1]);
 				return;
 			}
 
 			if (this.command.toLowerCase().startsWith(`${lang.commands.me.toLowerCase()} `)) {
-				this.commands.me.execute(this.command.split(" ").slice(1).join(" "));
+				commands.me.execute(this.command.split(" ").slice(1).join(" "));
 				return;
 			}
 
@@ -105,41 +105,41 @@ class ServerConsoleCommandExecutedEvent extends Event {
 				case "":
 					break;
 				case lang.commands.listc:
-					this.commands.list.execute();
+					commands.list.execute();
 					break;
 				case lang.commands.stop.toLowerCase():
-					this.commands.stop.execute();
+					commands.stop.execute();
 					break;
 				case lang.commands.op.toLowerCase():
-					this.commands.op.execute(this.command.split(" ")[1]);
+					commands.op.execute(this.command.split(" ")[1]);
 					break;
 				case lang.commands.kick.toLowerCase():
 					const reason = this.command.split(" ").slice(2).join(" ");
-					this.commands.kick.execute(this.command.split(" ")[1], reason);
+					commands.kick.execute(this.command.split(" ")[1], reason);
 					break;
 				case lang.commands.pl.toLowerCase():
 				case lang.commands.plugins.toLowerCase():
-					this.commands.pl.execute();
+					commands.pl.execute();
 					break;
 				case lang.commands.ver.toLowerCase():
 				case lang.commands.version.toLowerCase():
-					this.commands.version.execute();
+					commands.version.execute();
 					break;
 				case lang.commands.me.toLowerCase():
-					this.commands.me.execute();
+					commands.me.execute();
 					break;
 				case lang.commands.time.toLowerCase():
-					this.commands.time.execute();
+					commands.time.execute();
 					break;
 				case lang.commands.say.toLowerCase():
-					this.commands.say.execute();
+					commands.say.execute();
 					break;
 				case lang.commands.deop.toLowerCase():
-					this.commands.deop.execute();
+					commands.deop.execute();
 					break;
 				case "?":
 				case lang.commands.help.toLowerCase():
-					this.commands.help.execute();
+					commands.help.execute();
 					break;
 				default:
 					Logger.info(lang.commands.unknownCommandOrNoPermission.replace("§c", ""));

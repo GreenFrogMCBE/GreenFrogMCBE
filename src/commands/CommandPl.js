@@ -8,7 +8,7 @@
  *
  *
  * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * Github: https://github.com/andriycraft/GREENFrogMCBE
  */
 const PluginManager = require("../plugins/PluginManager");
 const { lang, config } = require("../api/ServerInfo");
@@ -43,7 +43,7 @@ class CommandPl extends require("./Command") {
 		}
 
 		const plugins = PluginManager.getPlugins()?.length ?? 0;
-		const pluginList = PlayerColors.green + PluginManager.getPlugins()?.join(PlayerColors.white + ", " + PlayerColors.green) || "";
+		const pluginList = PlayerColors.GREEN + PluginManager.getPlugins()?.join(PlayerColors.white + ", " + PlayerColors.GREEN) || "";
 
 		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList} ${PlayerColors.reset}`);
 	}
