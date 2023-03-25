@@ -355,7 +355,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					if (player.offline) return;
 					for (let i = 0; i < PlayerInfo.players.length; i++) {
 						if (PlayerInfo.players[i].username == player.username) return; // Vanilla behaviour
-						PlayerInfo.players[i].writePacket(lang.broadcasts.joinedTheGame.replace("%username%", player.username));
+						PlayerInfo.players[i].sendMessage(lang.broadcasts.joinedTheGame.replace("%username%", player.username));
 					}
 				}, 1000);
 		}
