@@ -18,22 +18,22 @@
 module.exports = {
 	test() {
 		const files = [
-			"/../../src/lang/en_US.json",
+			"/../src/lang/en_US.json",
 			//"/../src/lang/lt_LT.json",
 			//"/../src/lang/uk_UA.json",
 			//"/../src/lang/vi_VN.json",
 			//"/../src/lang/fr_FR.json",
-			"/../../src/network/packets/res/biomes.json",
-			"/../../src/network/packets/res/creativeContent.json",
-			"/../../src/network/packets/res/skinData.json",
-			"/../../src/network/packets/res/entities.json",
-			"/../../world/chunks.json",
-			"/../../world/chunks_flat.json",
-			"/../../world/world_settings.json",
-			"/../../world/custom_items.json",
-			"/../../world/gamerules.json",
-			"/../../package.json",
-			"/../../package-lock.json",
+			"/../src/network/packets/res/biomes.json",
+			"/../src/network/packets/res/creativeContent.json",
+			"/../src/network/packets/res/skinData.json",
+			"/../src/network/packets/res/entities.json",
+			"/../world/chunks.json",
+			"/../world/chunks_flat.json",
+			"/../world/world_settings.json",
+			"/../world/custom_items.json",
+			"/../world/gamerules.json",
+			"/../package.json",
+			"/../package-lock.json",
 		];
 
 		for (const file of files) {
