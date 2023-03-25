@@ -50,11 +50,13 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 		switch (actionID) {
 			case BlockActions.BREAKBLOCK:
 				const blockbreakevent = new BlockBreakEvent()
-				blockbreakevent.execute(
-					server,
-					player,
-					packet.data.params.transaction
-				)
+				blockbreakevent.actions = packet.data.params.actions
+				blockbreakevent.legacy = []
+				blockbreakevent.player = player
+				blockbreakevent.server = server
+				blockbreakevent.transaction_data = packet.data.params.transaction_data
+				blockbreakevent.transaction_type = packet.data.params.transaction_type
+				blockbreakevent.execute()
 				break
 			default:
 				Logger.debug("Unsupported Block action from " + player.username + ": " + actionID)
