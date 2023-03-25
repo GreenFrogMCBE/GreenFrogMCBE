@@ -25,12 +25,12 @@ const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDat
 const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
 const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
+const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 const PlayerInfo = require("../api/PlayerInfo");
-const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 
 module.exports = {
 	/**
