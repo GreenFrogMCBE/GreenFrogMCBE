@@ -20,7 +20,7 @@ class PlayerMoveEvent extends Event {
 		this.name = "PlayerMoveEvent";
 		this.position = null
 		this.server = null
-		this.client = null
+		this.player = null
 	}
 
 	execute() {

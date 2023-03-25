@@ -46,9 +46,11 @@ class PlayerChatEvent extends Event {
 		if (!this.message.trim()) return;
 
 		if (this.message.includes("§") || this.message.length > 256 && config.blockInvalidMessages) {
-			// TODO
-			// const _PlayerSentInvalidMessageEvent = new PlayerSentInvalidMessageEvent()
-			// _PlayerSentInvalidMessageEvent.execute()
+			const playerSentInvalidMessageEvent = new PlayerSentInvalidMessageEvent()
+			playerSentInvalidMessageEvent.server = this.server
+			playerSentInvalidMessageEvent.player = this.player
+			playerSentInvalidMessageEvent.message = this.message
+			playerSentInvalidMessageEvent.execute()
 			return;
 		}
 

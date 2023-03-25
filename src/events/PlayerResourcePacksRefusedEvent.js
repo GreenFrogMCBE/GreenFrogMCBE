@@ -18,7 +18,7 @@ class PlayerResourcePacksRefusedEvent extends Event {
 		this.name = "PlayerResourcePacksRefusedEvent";
 		this.cancelled = false;
 		this.server = null
-		this.client = null
+		this.player = null
 	}
 
 	cancel(client) {

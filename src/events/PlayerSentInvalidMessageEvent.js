@@ -10,7 +10,7 @@ class PlayerSentInvalidMessageEvent extends Event {
         this.name = "PlayerSentInvalidMessageEvent";
         this.cancelled = false
         this.message = null
-        this.client = null
+        this.player = null
         this.server = null
     }
 
@@ -21,8 +21,8 @@ class PlayerSentInvalidMessageEvent extends Event {
     async execute() {
         if (this.cancelled) return;
 
-        Logger.warning(lang.errors.illegalMessage.replace("%message%", this.message).replace("%player%", this.client.username));
-        this.client.kick(lang.kickmessages.invalidChatMessage);
+        Logger.warning(lang.errors.illegalMessage.replace("%message%", this.message).replace("%player%", this.player.username));
+        this.player.kick(lang.kickmessages.invalidChatMessage);
     }
 }
 
