@@ -12,19 +12,18 @@
  */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const Version = require("../this.commands/this.commandVersion");
+const Version = require("../commands/commandVersion");
 const { lang, config } = require("../api/ServerInfo");
-const Stop = require("../this.commands/this.commandStop");
-const Kick = require("../this.commands/this.commandKick");
-const Help = require("../this.commands/this.commandHelp");
-const Time = require("../this.commands/this.commandTime");
-const List = require("../this.commands/this.commandList");
-const Deop = require("../this.commands/this.commandDeop");
-const Say = require("../this.commands/this.commandSay");
-const Op = require("../this.commands/this.commandOp");
-const PL = require("../this.commands/this.commandPl");
-const Me = require("../this.commands/this.commandMe");
+const Help = require("../commands/commandHelp");
+const Time = require("../commands/commandTime");
+const List = require("../commands/commandList");
+const Deop = require("../commands/commandDeop");
+const Stop = require("../commands/commandStop");
+const Kick = require("../commands/commandKick");
+const Say = require("../commands/commandSay");
+const Op = require("../commands/commandOp");
+const PL = require("../commands/commandPl");
+const Me = require("../commands/commandMe");
 const Logger = require("../server/Logger");
 const Event = require("./Event");
 
