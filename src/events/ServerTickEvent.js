@@ -22,7 +22,7 @@ class ServerTickEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute(this)(this);
+		await this._execute(this);
 	}
 }
 
