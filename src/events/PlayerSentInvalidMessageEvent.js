@@ -1,39 +1,41 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 /* eslint-disable no-unused-vars */
-const fs = require('fs');
-const { lang } = require('../api/ServerInfo');
-const Logger = require('../server/Logger');
+const fs = require("fs");
+const { lang } = require("../api/ServerInfo");
+const Logger = require("../server/Logger");
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 
 class PlayerSentInvalidMessageEvent extends Event {
-    constructor() {
-        super();
-        this.name = "PlayerSentInvalidMessageEvent";
-        this.cancelled = false
-    }
+	constructor() {
+		super();
+		this.name = "PlayerSentInvalidMessageEvent";
+		this.cancelled = false;
+		this.message = null;
+		this.player = null;
+		this.server = null;
+	}
 
-    cancel() {
-        this.cancelled = true
-    }
+	cancel() {
+		this.cancelled = true;
+	}
 
-    async execute(server, client, message) {
-        new Promise((resolve, reject) => {
-            fs.readdir("./plugins", async (err, plugins) => {
-                for (const plugin of plugins) {
-                    try {
-                        await require(`${__dirname}/../../plugins/${plugin}`).PlayerSentInvalidMessageEvent(server, client, message, this);
-                    } catch (e) {
-                        FailedToHandleEvent.handleEventError(e, plugin, this.name);
-                    }
-                }
-                resolve();
-            });
-        }).then(() => {
-            if (this.cancelled) return;
+	async execute() {
+		if (this.cancelled) return;
 
-            Logger.warning(lang.errors.illegalMessage.replace("%message%", message).replace("%player%", client.username));
-            client.kick(lang.kickmessages.invalidChatMessage);
-        });
-    }
+		Logger.warning(lang.errors.illegalMessage.replace("%message%", this.message).replace("%player%", this.player.username));
+		this.player.kick(lang.kickmessages.invalidChatMessage);
+	}
 }
 
 module.exports = PlayerSentInvalidMessageEvent;

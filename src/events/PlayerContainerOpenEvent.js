@@ -10,30 +10,41 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-interface IFormAction {
-	type: string;
-	text: string;
-	placeholder?: string;
-	options?: JSON;
-	min?: number;
-	max?: number;
-	step?: number;
+const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket");
+
+const Event = require("./Event");
+
+class PlayerContainerOpenEvent extends Event {
+	constructor() {
+		super();
+		this.name = "PlayerContainerOpenEvent";
+		this.server = null;
+		this.player = null;
+		this.windowID = null;
+		this.windowType = null;
+		this.runtimeId = null;
+		this.cancelled = false;
+		this.coordinateX = 0;
+		this.coordinateY = 0;
+		this.coordinateZ = 0;
+	}
+
+	cancel() {
+		this.cancelled = true;
+	}
+
+	async execute() {
+		await this._execute(this);
+
+		if (!this.cancelled) {
+			const containeropen = new ServerContainerOpenPacket();
+			containeropen.setWindowID(this.windowID);
+			containeropen.setWindowType(this.windowType);
+			containeropen.setRuntimeEntityId(this.runtimeId);
+			containeropen.setCoordinates(this.coordinateX, this.coordinateY, this.coordinateZ);
+			containeropen.writePacket(this.player);
+		}
+	}
 }
 
-declare class Form {
-	type: any;
-	title: string;
-	buttons: Array<{ text: string; image?: { type: string; data: string } }>;
-	id: number;
-	actions: IFormAction[];
-
-	addAction(action: IFormAction): void;
-	addInput(text: string, placeholder?: string): void;
-	addText(text: string): void;
-	addDropdown(text: string, options: JSON): void;
-	addToggle(text: string): void;
-	addSlider(text: string, min: number, max: number, step?: number): void;
-	send(client: Object): void;
-}
-
-export default Form;
+module.exports = PlayerContainerOpenEvent;

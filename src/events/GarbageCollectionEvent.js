@@ -10,7 +10,18 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-declare module "PluginLoader" {
-	export function unloadPlugins(): void;
-	export function loadPlugins(): void;
+const Event = require("./Event");
+
+class GarbageCollectionEvent extends Event {
+	constructor() {
+		super();
+		this.name = "GarbageCollectionEvent";
+		this.server = null;
+	}
+
+	async execute() {
+		await this._execute();
+	}
 }
+
+module.exports = GarbageCollectionEvent;

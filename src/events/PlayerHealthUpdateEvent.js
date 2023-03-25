@@ -10,56 +10,55 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
-const SetHealth = require("../network/packets/ServerSetHealthPacket")
 const Event = require("./Event");
-const fs = require("fs");
 
-class clientHealthUpdateEvent extends Event {
+const SetHealth = require("../network/packets/ServerSetHealthPacket");
+
+const PlayerDeathEvent = require("./PlayerDeathEvent");
+
+class PlayerHealthUpdateEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
-		this.name = "clientHealthUpdateEvent";
+		this.name = "PlayerHealthUpdateEvent";
+		this.player = null;
+		this.server = null;
+		this.health = 0;
+		this.maxHealth = 20;
+		this.minHealth = 0;
+		this.modifiers = [];
+		this.attributeName = "minecraft:health";
 	}
 
 	cancel() {
 		this.cancelled = true;
 	}
 
-	async execute(server, client, health) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).clientHealthUpdateEvent(server, client, health);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
-				}
-			});
-		});
-	
+	async execute() {
+		await this._execute();
+
 		if (!this.cancelled) {
-			const sethealthpacket = new SetHealth()
-			sethealthpacket.setHealth(health)
-			sethealthpacket.writePacket(client)
-	
-			client.setAttribute({
-				"min": 0,
-				"max": 20,
-				"current": health,
-				"default": 20,
-				"name": "minecraft:health",
-				"modifiers": []
-			})
-	
-			client.health = health;
-	
-			if (client.health <= 0) {
-				client.dead = true
+			const setHealthPacket = new SetHealth();
+			setHealthPacket.setHealth(this.health);
+			setHealthPacket.writePacket(this.player);
+
+			this.player.setAttribute({
+				name: this.attributeName,
+				min: this.minHealth,
+				max: this.maxHealth,
+				current: this.health,
+				default: this.maxHealth,
+				modifiers: this.modifiers,
+			});
+
+			this.player.health = this.health;
+
+			if (this.player.health <= 0) {
+				const playerDeathEvent = new PlayerDeathEvent();
+				playerDeathEvent.execute();
 			}
 		}
 	}
-	
 }
 
-module.exports = clientHealthUpdateEvent;
+module.exports = PlayerHealthUpdateEvent;

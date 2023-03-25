@@ -13,63 +13,46 @@
 /* eslint-disable no-unsafe-finally */
 /* eslint-disable no-unused-vars */
 const PlayerSentInvalidMessageEvent = require("./PlayerSentInvalidMessageEvent");
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
+
 const { lang, config } = require("../api/ServerInfo");
 const PlayerInfo = require("../api/PlayerInfo");
 const Logger = require("../server/Logger");
 const Event = require("./Event");
-const fs = require("fs");
 
 class PlayerChatEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerChatEvent";
+		this.message = null;
+		this.player = null;
+		this.server = null;
 	}
 
 	cancel() {
 		this.cancelled = true;
 	}
 
-	async execute(server, client, message) {
-		await new Promise((resolve, reject) => {
-			fs.readdir("./plugins", (err, plugins) => {
-				if (err) {
-					reject(err);
-				} else {
-					plugins.forEach((plugin) => {
-						try {
-							require(`${__dirname}/../../plugins/${plugin}`).PlayerChatEvent(server, client, message, this);
-						} catch (e) {
-							FailedToHandleEvent.handleEventError(e, plugin, this.name);
-						}
-					});
-					resolve();
-				}
-			});
-		});
+	async execute() {
+		await this._execute(this);
 
 		if (this.cancelled || config.disable === true) return;
 
-		// Format the chat message with the username and message
-		const fullmessage = lang.chat.chatFormat
-			.replace("%username%", client.username)
-			.replace("%message%", message);
+		const fullmessage = lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message);
 
-		// Ignore the message if it contains only white spaces
-		if (!message.trim()) return;
+		if (!this.message.trim()) return;
 
-		// Ignore the message if it contains invalid characters, or if its length exceeds 256 characters
-		if (message.includes("§") || message.length > 256 && config.blockInvalidMessages) {
-			const _PlayerSentInvalidMessageEvent = new PlayerSentInvalidMessageEvent()
-			_PlayerSentInvalidMessageEvent.execute(server, client, message)
+		if (this.message.includes("§") || (this.message.length > 256 && config.blockInvalidMessages)) {
+			const playerSentInvalidMessageEvent = new PlayerSentInvalidMessageEvent();
+			playerSentInvalidMessageEvent.server = this.server;
+			playerSentInvalidMessageEvent.player = this.player;
+			playerSentInvalidMessageEvent.message = this.message;
+			playerSentInvalidMessageEvent.execute();
 			return;
 		}
 
-		// Log the chat message
 		Logger.info(lang.chat.chatMessage.replace("%message%", fullmessage));
 
-		// Send the chat message to all players
 		for (const player of PlayerInfo.players) {
 			player.sendMessage(fullmessage);
 		}

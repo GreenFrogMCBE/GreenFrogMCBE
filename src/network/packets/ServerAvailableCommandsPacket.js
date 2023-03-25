@@ -12,7 +12,7 @@
  */
 let data = null;
 
-const PacketConstructor = require('./PacketConstructor')
+const PacketConstructor = require("./PacketConstructor");
 
 class ServerAvailableCommandsPacket extends PacketConstructor {
 	/**
@@ -28,7 +28,7 @@ class ServerAvailableCommandsPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**

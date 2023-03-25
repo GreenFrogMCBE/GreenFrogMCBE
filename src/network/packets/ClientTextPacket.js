@@ -12,8 +12,6 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-const assert = require('assert');
-
 const PlayerChatEvent = require("../../events/PlayerChatEvent");
 
 class ClientTextPacket extends PacketConstructor {
@@ -22,7 +20,7 @@ class ClientTextPacket extends PacketConstructor {
 	 * @returns The name of the packet
 	 */
 	getPacketName() {
-		return "text"
+		return "text";
 	}
 
 	/**
@@ -30,17 +28,7 @@ class ClientTextPacket extends PacketConstructor {
 	 * @returns Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
-	}
-
-	/**
-	 * Validates the packet
-	 * @param {any} player
-	 * @param {String} message
-	 */
-	async validatePacket(player, message) {
-		assert(player, null)
-		assert(message, "")
+		return false;
 	}
 
 	/**
@@ -49,12 +37,15 @@ class ClientTextPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet, server) {
-		let message = packet.data.params.message
+		let message = packet.data.params.message;
 
-		await this.validatePacket(player, message)
+		await this.validatePacket(player, message);
 
-		const chatevent = new PlayerChatEvent()
-		chatevent.execute(server, player, message)
+		const chatEvent = new PlayerChatEvent();
+		chatEvent.server = server;
+		chatEvent.player = player;
+		chatEvent.message = message;
+		chatEvent.execute();
 	}
 }
 

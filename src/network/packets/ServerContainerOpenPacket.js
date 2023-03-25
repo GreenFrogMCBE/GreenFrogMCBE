@@ -19,7 +19,7 @@ let cords = {
 let window_type = "";
 let runtime_entity_id = 0;
 
-const PacketConstructor = require('./PacketConstructor')
+const PacketConstructor = require("./PacketConstructor");
 
 class ServerContainerOpenPacket extends PacketConstructor {
 	/**
@@ -35,13 +35,13 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
 	 * Sets the coordinates of the container
 	 * If the container is creative menu then the cords are xyz: 0, 0, 0
-	 * 
+	 *
 	 * @param {Number} x
 	 * @param {Number} y
 	 * @param {Number} z

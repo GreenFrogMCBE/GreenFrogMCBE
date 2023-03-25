@@ -83,8 +83,8 @@ If you have one, feel free to open an issue
 
 2. @AnyBananaGAME
 
-> For creating multilang (https://github.com/andriycraft/GreenFrogMCBE/pull/9)  <br>
-> For improving tests and /list  <br>
+> For creating multilang (https://github.com/andriycraft/GreenFrogMCBE/pull/9) <br>
+> For improving tests and /list <br>
 > Making better tests (https://github.com/andriycraft/GreenFrogMCBE/pull/70)
 
 3. @hvlxh
@@ -165,18 +165,18 @@ If you have one, feel free to open an issue
 15. \<\/hakaN#0746
 
 > For translating this software into Turkish <br>
-  
+
 16. @BasToTheMax
 
-> For translating this software into Dutch (still in progress)  <br>
+> For translating this software into Dutch (still in progress) <br>
 > Was the first person who starred this repo
 
 17. @faaxz
 
-> For reporting form bugs  <br>
+> For reporting form bugs <br>
 > For helping me to add the chunk support <br>
 > For rewriting logger <br>
-> For rewriting 20% of the network code 
+> For rewriting 20% of the network code
 
 ## Language system
 

@@ -13,7 +13,7 @@
 let window_id = 0;
 let server = false;
 
-const PacketConstructor = require('./PacketConstructor')
+const PacketConstructor = require("./PacketConstructor");
 
 class ServerContainerClosePacket extends PacketConstructor {
 	/**
@@ -29,7 +29,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
@@ -58,7 +58,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Returns if request is coming from server
-	 * @returns {Boolean} 
+	 * @returns {Boolean}
 	 */
 	getServer() {
 		return server;

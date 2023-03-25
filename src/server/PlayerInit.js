@@ -16,17 +16,17 @@ const GameMode = require("../api/GameMode");
 const { lang } = require("../api/ServerInfo");
 const PlayerKickEvent = require("../events/PlayerKickEvent");
 const PlayerLeaveEvent = require("../events/PlayerLeaveEvent");
-const Time = require("../network/packets/ServerUpdateTimePacket");
 const PlayerTransferEvent = require("../events/PlayerTransferEvent");
 const ServerToClientChatEvent = require("../events/ServerToClientChatEvent");
 const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
-const PlayerGamemode = require("../network/packets/ServerSetPlayerGameTypePacket");
 const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
 const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
 const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
+const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
+const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent");
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
@@ -34,90 +34,88 @@ const PlayerInfo = require("../api/PlayerInfo");
 
 module.exports = {
 	/**
-	 * @private
-	 * @param {Object} player 
+	 * @param {Object} player
 	 */
 	_initPlayer(player) {
 		/**
 		 * Sends a message to the player
-		 * @param {string} msg - The message to send
+		 * @param {String} msg - The message to send
 		 */
 		player.sendMessage = function (msg) {
-			const sendmsgevent = new ServerToClientChatEvent();
-			sendmsgevent.execute(require("../Server").server, player, msg);
+			const sendMessageEvent = new ServerToClientChatEvent();
+			sendMessageEvent.execute(require("../Server").server, player, msg);
 		};
 
 		/**
 		 * Sends a chat message as a player
-		 * @param {string} msg - The message to send as a player
+		 * @param {String} message - The message to send as a player
 		 */
-		player.chat = function (msg) {
-			Chat.broadcastMessage(lang.chat.chatFormat.replace("%username%", player.username).replace("%message%", msg));
+		player.chat = function (message) {
+			const chatAsPlayerEvent = new PluginChatAsPlayerEvent();
+			chatAsPlayerEvent.player = player;
+			chatAsPlayerEvent.message = message;
+			chatAsPlayerEvent.server = require("../Server").server;
+			chatAsPlayerEvent.execute();
 		};
 
 		/**
 		 * Sets a player gamemode
-		 * @param {string} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
+		 * @param {Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 */
 		player.setGamemode = function (gamemode) {
-			const validGamemodes = [
-				GameMode.SURVIVAL,
-				GameMode.CREATIVE,
-				GameMode.ADVENTURE,
-				GameMode.SPECTATOR,
-				GameMode.FALLBACK
-			];
-			if (!validGamemodes.includes(gamemode)) throw new Error("Invalid gamemode!")
+			const allowedGameModes = [GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR, GameMode.FALLBACK];
 
-			player.gamemode = gamemode;
+			if (!allowedGameModes.includes(gamemode)) {
+				throw new Error("Invalid game mode!");
+			}
 
-			const gm = new PlayerGamemode();
-			gm.setGamemode(gamemode);
-			gm.writePacket(player);
-
-			const gamemodechangeevent = new PlayerGamemodeChangeEvent()
-			gamemodechangeevent.execute(require("../Server").server, player, gamemode);
+			const gamemodeChangeEvent = new PlayerGamemodeChangeEvent();
+			gamemodeChangeEvent.player = player;
+			gamemodeChangeEvent.server = require("../Server").server;
+			gamemodeChangeEvent.gamemode = gamemode;
+			gamemodeChangeEvent.oldGamemode = player.gamemode;
+			gamemodeChangeEvent.execute();
 		};
 
 		/**
 		 * Transfers the player to a different server
-		 * @param {string} address - The address of the server to transfer to
+		 * @param {String} address - The address of the server to transfer to
 		 * @param {number} port - The port of the server to transfer to
 		 */
 		player.transfer = function (address, port) {
-			const transferevent = new PlayerTransferEvent();
-			transferevent.execute(require("../Server").server, player, address, port);
+			const transferEvent = new PlayerTransferEvent();
+			transferEvent.execute(require("../Server").server, player, address, port);
 		};
 
 		/**
 		 * Sets the player local difficulty
-		 * @param {Difficulty} difficulty 
+		 * @param {Difficulty} difficulty
 		 */
 		player.setDifficulty = function (difficulty) {
-			const difficultyevent = new PlayerUpdateDifficultyEvent()
-			difficultyevent.execute(require("../Server").server, player, difficulty)
-		}
+			const difficultyevent = new PlayerUpdateDifficultyEvent();
+			difficultyevent.execute(require("../Server").server, player, difficulty);
+		};
 
 		/**
 		 * Sets the data of the player/entity (eg on_fire, etc)
-		 * @param {String} field 
-		 * @param {Boolean} value 
+		 * @param {String} field
+		 * @param {Boolean} value
 		 */
 		player.setEntityData = function (field, value) {
-			const playerentitypacket = new ServerSetEntityDataPacket()
+			const playerentitypacket = new ServerSetEntityDataPacket();
 			playerentitypacket.setProperties({
-				"ints": [],
-				"floats": []
-			})
-			playerentitypacket.setRuntimeEntityID(0) // Local player
-			playerentitypacket.setTick(0)
-			playerentitypacket.setValue(field, value)
-			playerentitypacket.writePacket(player)
-		}
+				ints: [],
+				floats: [],
+			});
+			playerentitypacket.setRuntimeEntityID(0); // Local player
+			playerentitypacket.setTick(0);
+			playerentitypacket.setValue(field, value);
+			playerentitypacket.writePacket(player);
+		};
 
 		/**
 		 * Kicks a player from the server
-		 * @param {string} [msg=lang.kickmessages.kickedByPlugin] - The reason for the kick
+		 * @param {String} [msg=lang.kickmessages.kickedByPlugin] - The reason for the kick
 		 */
 		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
@@ -137,20 +135,20 @@ module.exports = {
 
 		player.setChunkRadius = function (radius) {
 			const chunkradiusupdate = new ChunkRadiusUpdate();
-			chunkradiusupdate.setChunkRadius(
-				radius
-			);
+			chunkradiusupdate.setChunkRadius(radius);
 			chunkradiusupdate.writePacket(player);
-		}
+		};
 
 		/**
 		 * Sets the player's time
 		 * @param {Number} time - The time to set the player to
 		 */
 		player.setTime = function (time) {
-			const timepacket = new Time();
-			timepacket.setTime(time);
-			timepacket.writePacket(player, time);
+			const timeevent = new PlayerTimeUpdateEvent();
+			timeevent.player = player;
+			timeevent.server = require("../Server");
+			timeevent.time = time;
+			timeevent.execute();
 		};
 
 		/**
@@ -158,40 +156,51 @@ module.exports = {
 		 * @param {JSON} attribute
 		 */
 		player.setAttribute = function (attribute) {
-			const updateattributespacket = new UpdateAttributes()
-			updateattributespacket.setPlayerID(0) // 0 - Means local player
-			updateattributespacket.setTick(0)
-			updateattributespacket.setAttributes([attribute])
-			updateattributespacket.writePacket(player)
-		}
+			const updateattributespacket = new UpdateAttributes();
+			updateattributespacket.setPlayerID(0); // 0 - Means local player
+			updateattributespacket.setTick(0);
+			updateattributespacket.setAttributes([attribute]);
+			updateattributespacket.writePacket(player);
+		};
 
-		player.setXP = function (xp) {
-			player.setAttribute({
-				"min": 0,
-				"max": 1000000,
-				"current": xp,
-				"default": 0,
-				"name": "player.experience",
-				"modifiers": []
-			})
-		}
+		// /**
+		//  * Sets the XP for the player
+		//  * @param {Float} xp
+		//  */
+		// player.setXP = function (xp) {
+		// 	player.setAttribute({
+		// 		"min": 0,
+		// 		"max": 1000000,
+		// 		"current": xp,
+		// 		"default": 0,
+		// 		"name": "player.experience",
+		// 		"modifiers": []
+		// 	})
+		// }
 
 		/**
 		 * Sets the health of the player
-		 * @param {Float} health 
+		 * @param {Float} health
 		 */
 		player.setHealth = function (health) {
-			if (player.dead) return
+			if (player.dead) return;
 
-			const playerhealthupdateevent = new PlayerHealthUpdateEvent()
-			playerhealthupdateevent.execute(require("../Server").server, player, health)
+			const healthUpdateEvent = new PlayerHealthUpdateEvent();
+			healthUpdateEvent.server = require("../Server").server;
+			healthUpdateEvent.player = player;
+			healthUpdateEvent.name = "minecraft:health";
+			healthUpdateEvent.modifiers = [];
+			healthUpdateEvent.minHealth = 0;
+			healthUpdateEvent.maxHealth = 20;
+			healthUpdateEvent.health = health;
+			healthUpdateEvent.execute();
 		};
 
 		/**
 		 * Updates the dimension for the player
-		 * @param {Number} x
-		 * @param {Number} y
-		 * @param {Number} z
+		 * @param {Float} x
+		 * @param {Float} y
+		 * @param {Float} z
 		 * @param {Dimensions} dimension
 		 * @param {Boolean} respawn
 		 */
@@ -216,7 +225,10 @@ module.exports = {
 
 				GarbageCollector.clearOfflinePlayers();
 
-				new PlayerLeaveEvent().execute(require("../Server").server, player);
+				const leaveEvent = new PlayerLeaveEvent();
+				leaveEvent.player = player;
+				leaveEvent.server = require("../Server");
+				leaveEvent.execute();
 
 				Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
 				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));

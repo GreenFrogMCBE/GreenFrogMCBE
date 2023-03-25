@@ -23,7 +23,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
-		return "container_close"
+		return "container_close";
 	}
 
 	/**
@@ -31,7 +31,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
@@ -40,16 +40,17 @@ class ClientContainerClosePacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player) {
-		const containerclose = new ServerContainerClosePacket()
-		containerclose.setServer(false)
-		containerclose.setWindowID(WindowID.CREATIVE)
-		containerclose.writePacket(player)
+		const containerclose = new ServerContainerClosePacket();
+		containerclose.setServer(false);
+		containerclose.setWindowID(WindowID.CREATIVE);
+		containerclose.writePacket(player);
 
-		const containercloseevent = new PlayerContainerCloseEvent()
-		containercloseevent.execute(
-			require("../../Server").server,
-			player
-		)
+		const containerCloseEvent = new PlayerContainerCloseEvent();
+		containerCloseEvent.player = player;
+		containerCloseEvent.server = require("../../Server").server;
+		containerCloseEvent.isRequestByServer = false;
+		containerCloseEvent.windowID = WindowID.CREATIVE;
+		containerCloseEvent.execute();
 	}
 }
 

@@ -20,7 +20,7 @@ class ServerToastRequestPacket extends PacketConstructor {
 	 * Returns the name of the packet.
 	 * @returns {String} The name of the packet.
 	 */
-	getPacketName() {	
+	getPacketName() {
 		return "toast_request";
 	}
 
@@ -29,7 +29,7 @@ class ServerToastRequestPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**

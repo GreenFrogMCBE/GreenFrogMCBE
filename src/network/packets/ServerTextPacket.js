@@ -34,7 +34,7 @@ class ServerTextPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**

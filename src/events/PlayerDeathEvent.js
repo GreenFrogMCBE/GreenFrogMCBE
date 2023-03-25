@@ -10,13 +10,27 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-declare class ConsoleCommandExecutedEvent {
-	//  TODO: replace any with something else
-	execute(server: any, data: string): void;
+/* eslint-disable no-unused-vars */
+const Event = require("./Event");
+
+class PlayerDeathEvent extends Event {
+	constructor() {
+		super();
+		this.name = "PlayerDeathEvent";
+		this.player = null;
+		this.server = null;
+		this.cancelled = false;
+	}
+
+	cancel() {
+		this.cancelled = true;
+	}
+
+	execute() {
+		this._execute();
+
+		if (!this.cancelled) this.player.dead = true;
+	}
 }
 
-declare let isclosed: boolean;
-export declare const closed: boolean;
-
-export declare function close(): void;
-export declare function start(): Promise<void>;
+module.exports = PlayerDeathEvent;

@@ -29,5 +29,5 @@ module.exports = {
 	OBFUSCATED: "§k",
 	BOLD: "§l",
 	ITALIC: "§o",
-	RESET: "§r"
+	RESET: "§r",
 };

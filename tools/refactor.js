@@ -1,41 +1,53 @@
-const fs = require('fs');
-const path = require('path');
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
+const fs = require("fs");
+const path = require("path");
 
-const rootDir = __dirname + '\\..\\src\\';
+const rootDir = __dirname + "\\..\\src\\";
 
-console.info('Started refactoring')
-console.time('Finished refactoring in')
+console.info("Started refactoring");
+console.time("Finished refactoring in");
 
 function replaceInFile(filePath, replacements) {
-  let fileContent = fs.readFileSync(filePath, 'utf8');
+	let fileContent = fs.readFileSync(filePath, "utf8");
 
-  for (const [searchValue, replaceValue] of replacements) {
-    fileContent = fileContent.replace(new RegExp(searchValue, 'g'), replaceValue);
-  }
+	for (const [searchValue, replaceValue] of replacements) {
+		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
+	}
 
-  fs.writeFileSync(filePath, fileContent);
+	fs.writeFileSync(filePath, fileContent);
 }
 
 function traverseDirectory(dirPath, replacements) {
-  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+	const entries = fs.readdirSync(dirPath, { withFileTypes: true });
 
-  for (const entry of entries) {
-    const entryPath = path.join(dirPath, entry.name);
+	for (const entry of entries) {
+		const entryPath = path.join(dirPath, entry.name);
 
-    if (entry.isDirectory()) {
-      traverseDirectory(entryPath, replacements);
-    } else if (entry.isFile() && entry.name.endsWith('.js')) {
-      replaceInFile(entryPath, replacements);
-    }
-  }
+		if (entry.isDirectory()) {
+			traverseDirectory(entryPath, replacements);
+		} else if (entry.isFile() && entry.name.endsWith(".js")) {
+			replaceInFile(entryPath, replacements);
+		}
+	}
 }
 
-const replacements = [  
-  // Put your replacements here
-  // example:
-  ['WindowIDs', 'WindowID']
+const replacements = [
+	// Put your replacements here
+	// example:
+	["this.client", "this.player"],
 ];
 
 traverseDirectory(rootDir, replacements);
 
-console.timeEnd('Finished refactoring in')
+console.timeEnd("Finished refactoring in");

@@ -10,8 +10,27 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-declare class GFEvent {
-	cancel(): void;
-	execute(): void;
-	postExecute(): void;
+const Event = require("./Event");
+
+class PlayerHasAllResourcePacksEvent extends Event {
+	constructor() {
+		super();
+		this.cancelled = false;
+		this.name = "PlayerHasAllPacksEvent";
+		this.player = null;
+		this.server = null;
+		this.resourcePacksIds = [];
+		this.resourcePacksRequired = true;
+	}
+
+	cancel(client) {
+		this.cancelled = true;
+		client.kick();
+	}
+
+	execute() {
+		this._execute();
+	}
 }
+
+module.exports = PlayerHasAllResourcePacksEvent;

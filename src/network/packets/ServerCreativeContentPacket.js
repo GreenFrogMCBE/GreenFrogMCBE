@@ -12,7 +12,7 @@
  */
 let items = [];
 
-const PacketConstructor = require('./PacketConstructor')
+const PacketConstructor = require("./PacketConstructor");
 
 class ServerCreativeContentPacket extends PacketConstructor {
 	/**
@@ -28,7 +28,7 @@ class ServerCreativeContentPacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return true
+		return true;
 	}
 
 	/**

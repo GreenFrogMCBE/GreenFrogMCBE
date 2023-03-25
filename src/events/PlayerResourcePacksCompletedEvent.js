@@ -11,35 +11,24 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-unused-vars */
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const Event = require("./Event");
-const assert = require("assert");
-const fs = require("fs");
 
 class PlayerResourcePacksCompletedEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerResourcePacksCompletedEvent";
+		this.player = null;
+		this.server = null;
 	}
 
-	cancel(client) {
-		assert(client, null)
-
-		client.kick();
+	cancel() {
+		this.player.kick();
 		this.cancelled = true;
 	}
 
-	execute(server, client) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).PlayerResourcePacksCompletedEvent(server, client, this);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
-				}
-			});
-		});
+	execute() {
+		this._execute();
 	}
 }
 

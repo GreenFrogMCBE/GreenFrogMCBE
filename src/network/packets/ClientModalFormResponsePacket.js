@@ -12,9 +12,7 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-const assert = require('assert');
-
-const PlayerFormResponseEvent = require('../../events/PlayerFormResponseEvent')
+const PlayerFormResponseEvent = require("../../events/PlayerFormResponseEvent");
 
 class ClientModalFormResponsePacket extends PacketConstructor {
 	/**
@@ -22,7 +20,7 @@ class ClientModalFormResponsePacket extends PacketConstructor {
 	 * @returns {String} The name of the packet
 	 */
 	getPacketName() {
-		return "modal_form_response"
+		return "modal_form_response";
 	}
 
 	/**
@@ -30,33 +28,20 @@ class ClientModalFormResponsePacket extends PacketConstructor {
 	 * @returns {Boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
-		return false
+		return false;
 	}
 
 	/**
-	 * Validates the packet
+	 * Reads the packet from player
 	 * @param {any} player
-	 * @param {any} server
+	 * @param {JSON} packet
 	 */
-	async validatePacket(player, server) {
-		assert(player, null)
-		assert(server, null)
-	}
-
-	/**
-     * Reads the packet from player
-     * @param {any} player
-     * @param {JSON} packet
-     */
 	async readPacket(player, packet, server) {
-		await this.validatePacket(player, server)
-
-		const modal_form_response_event = new PlayerFormResponseEvent()
-		modal_form_response_event.execute(
-			server,
-			player,
-			packet
-		)
+		const modalFormResponseEvent = new PlayerFormResponseEvent();
+		modalFormResponseEvent.player = player;
+		modalFormResponseEvent.server = server;
+		modalFormResponseEvent.formData = packet;
+		modalFormResponseEvent.execute();
 	}
 }
 

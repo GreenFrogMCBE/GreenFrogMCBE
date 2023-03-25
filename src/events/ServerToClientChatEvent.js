@@ -21,30 +21,21 @@ class ServerToClientChatEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "ServerToClientChatEvent";
+		this.server = null;
+		this.player = null;
+		this.message = null;
 	}
 
 	cancel() {
 		this.cancelled = true;
 	}
 
-	async execute(server, client, message) {
-		await new Promise((resolve) => {
-			fs.readdir("./plugins", (err, plugins) => {
-				plugins.forEach((plugin) => {
-					try {
-						require(`${__dirname}/../../plugins/${plugin}`).ServerToClientChatEvent(server, client, message, this);
-					} catch (e) {
-						FailedToHandleEvent.handleEventError(e, plugin, this.name);
-					}
-				});
-				resolve();
-			});
-		});
-
+	async execute() {
+		await this._execute();
 		if (!this.cancelled) {
 			const text = new Text();
-			text.setMessage(message);
-			text.writePacket(client);
+			text.setMessage(this.message);
+			text.writePacket(this.player);
 		}
 	}
 }

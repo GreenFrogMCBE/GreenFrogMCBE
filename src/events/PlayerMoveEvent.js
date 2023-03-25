@@ -11,32 +11,24 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-unused-vars */
-const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
-const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const Event = require("./Event");
-const fs = require("fs");
 
 class PlayerMoveEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerMoveEvent";
+		this.position = null;
+		this.server = null;
+		this.player = null;
 	}
 
-	cancel() {
-		throw new UnsupportedOperationException("Not implemented")
-	}
+	async execute() {
+		await this._execute();
 
-	execute(server, client, location) {
-		fs.readdir("./plugins", (err, plugins) => {
-			plugins.forEach((plugin) => {
-				try {
-					require(`${__dirname}/../../plugins/${plugin}`).PlayerMoveEvent(client, server, location, this);
-				} catch (e) {
-					FailedToHandleEvent.handleEventError(e, plugin, this.name);
-				}
-			});
-		});
+		this.player.x = this.position.x;
+		this.player.y = this.position.y;
+		this.player.z = this.position.z;
 	}
 }
 
