@@ -8,7 +8,7 @@
  *
  *
  * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GREENFrogMCBE
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const PluginManager = require("../plugins/PluginManager");
 const { lang, config } = require("../api/ServerInfo");
