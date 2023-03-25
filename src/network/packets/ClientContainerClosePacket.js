@@ -46,8 +46,11 @@ class ClientContainerClosePacket extends PacketConstructor {
 		containerclose.writePacket(player)
 
 		const containerCloseEvent = new PlayerContainerCloseEvent()
-		containerCloseEvent.execute(
-		)
+		containerCloseEvent.player = player
+		containerCloseEvent.server = require("../../Server").server
+		containerCloseEvent.isRequestByServer = false
+		containerCloseEvent.windowID = WindowID.CREATIVE
+		containerCloseEvent.execute()
 	}
 }
 
