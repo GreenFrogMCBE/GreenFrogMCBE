@@ -33,7 +33,7 @@ class PlayerContainerCloseEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute(this)(this);
+		await this._execute(this);
 
 		if (!this.cancelled) {
 			const containerclose = new ServerContainerClosePacket();

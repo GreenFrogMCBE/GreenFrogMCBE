@@ -34,7 +34,7 @@ class PlayerChatEvent extends Event {
 	}
 
 	async execute() {
-		await this._execute(this)(this);
+		await this._execute(this);
 
 		if (this.cancelled || config.disable === true) return;
 
