@@ -108,7 +108,7 @@ playerCommandGamemode: true
 garbageCollectorDelay: 60000`
 			);
 		}
-		const Frog = require("../../src/Server.js");
+		const Frog = require("../src/Server");
 		Frog.start();
 		console.log("[server] started");
 	},
