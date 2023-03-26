@@ -246,9 +246,7 @@ module.exports = {
 			for (const player of PlayerInfo.players) {
 				if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
 			}
-		} catch (ignored) {
-			/* ignored */
-		}
+		} catch (ignored) { /* ignored */ }
 
 		setTimeout(() => {
 			PluginLoader.unloadPlugins();
