@@ -97,14 +97,14 @@ module.exports = {
 							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
 							name = packageJson.displayName;
 							main = packageJson.main;
+
+							Logger.info(lang.server.unloadingPlugin.replace("%plugin%", name));
 						} catch (error) {
-							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
 							this.initPluginShutdown()
 							return;
 						}
 
 						try {
-							Logger.info(lang.server.unloadingPlugin.replace("%plugin%", name));
 							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
 							Logger.info(lang.server.unloadedPlugin.replace("%plugin%", name));
 							this.initPluginShutdown()
