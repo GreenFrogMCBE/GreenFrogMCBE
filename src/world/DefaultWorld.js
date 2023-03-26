@@ -16,7 +16,6 @@ const ServerTickEvent = require("../events/ServerTickEvent");
 const PlayerInfo = require("../api/PlayerInfo");
 const GameMode = require("../api/GameMode");
 const Logger = require("../server/Logger");
-const assert = require("assert");
 
 class DefaultWorld {
 	constructor() {
@@ -35,7 +34,6 @@ class DefaultWorld {
 	 * @param {String} name
 	 */
 	setName(name) {
-		assert(name, "");
 		this.name = name;
 	}
 
@@ -57,9 +55,9 @@ class DefaultWorld {
 
 	/**
 	 * Sets the coordinates for the world spawn
-	 * @param {Int} x
-	 * @param {Int} y
-	 * @param {Int} z
+	 * @param {Float} x
+	 * @param {Float} y
+	 * @param {Float} z
 	 */
 	setSpawnCoordinates(x, y, z) {
 		this.cords = {
@@ -73,10 +71,6 @@ class DefaultWorld {
 	 * Returns the spawn coordinates
 	 */
 	getSpawnCoordinates() {
-		assert(this.cords.x !== null, null);
-		assert(this.cords.y !== null, null);
-		assert(this.cords.z !== null, null);
-
 		return this.cords;
 	}
 
