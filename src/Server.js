@@ -246,7 +246,7 @@ module.exports = {
 			for (const player of PlayerInfo.players) {
 				if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
 			}
-		} catch (e) {
+		} catch (ignored) {
 			/* ignored */
 		}
 
