@@ -141,6 +141,19 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				completeEvent.player = player;
 				completeEvent.execute();
 
+				client.world = new DefaultWorld()
+				client.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
+				client.world.setName(require("../../../world/world_settings.json").worldName);
+				if (config.generator === WorldGenerator.FLAT) {
+					client.world.setSpawnCoordinates(0, -58, 0);
+				} else if (config.generator === WorldGenerator.DEFAULT) {
+					client.world.setSpawnCoordinates(1070, 139, -914);
+				} else if (config.generator === WorldGenerator.VOID) {
+					client.world.setSpawnCoordinates(0, 100, 0);
+				} else {
+					throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator);
+				}
+
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
 
 				for (const op of ops) {
@@ -155,24 +168,11 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				Logger.info(lang.playerstatuses.joined.replace("%player%", player.username));
 
-				const clientLocalWorld = new DefaultWorld();
-				clientLocalWorld.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
-				clientLocalWorld.setName(require("../../../world/world_settings.json").worldName);
-				if (config.generator === WorldGenerator.FLAT) {
-					clientLocalWorld.setSpawnCoordinates(0, -58, 0);
-				} else if (config.generator === WorldGenerator.DEFAULT) {
-					clientLocalWorld.setSpawnCoordinates(1070, 139, -914);
-				} else if (config.generator === WorldGenerator.VOID) {
-					clientLocalWorld.setSpawnCoordinates(0, 100, 0);
-				} else {
-					throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator);
-				}
-
 				const startgame = new StartGame();
 				startgame.setEntityId(0);
 				startgame.setRunTimeEntityId(0);
 				startgame.setGamemode(config.gamemode);
-				startgame.setPlayerPosition(clientLocalWorld.getSpawnCoordinates().x, clientLocalWorld.getSpawnCoordinates().y, clientLocalWorld.getSpawnCoordinates().z);
+				startgame.setPlayerPosition(client.world.getSpawnCoordinates().x, client.world.getSpawnCoordinates().y, client.world.getSpawnCoordinates().z);
 				startgame.setPlayerRotation(1, 1);
 				startgame.setSeed(-1);
 				startgame.setBiomeType(0);

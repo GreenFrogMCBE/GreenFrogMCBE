@@ -12,13 +12,11 @@
  */
 const WorldGenerator = require("../network/packets/types/WorldGenerator");
 const { config, lang } = require("../api/ServerInfo");
+const ServerTickEvent = require("../events/ServerTickEvent");
 const PlayerInfo = require("../api/PlayerInfo");
 const GameMode = require("../api/GameMode");
 const Logger = require("../server/Logger");
 const assert = require("assert");
-const ServerTickEvent = require("../events/ServerTickEvent");
-
-let _time = 0;
 
 class DefaultWorld {
 	constructor() {
@@ -29,6 +27,7 @@ class DefaultWorld {
 			z: null,
 		};
 		this.chunkRadius = 0;
+		this._time = 0
 	}
 
 	/**
@@ -96,6 +95,10 @@ class DefaultWorld {
 		return this.chunkRadius;
 	}
 
+	placeBlock() {
+
+	}
+
 	/**
 	 * Ticks the world
 	 * @private
@@ -108,9 +111,9 @@ class DefaultWorld {
 			serverTickEvent.execute();
 
 			if (config.tickWorldTime) {
-				_time = _time + 10;
+				this._time = this._time + 10;
 				for (const player of this.getPlayersInWorld()) {
-					if (!player.offline) player.setTime(_time);
+					if (!player.offline) player.setTime(this._time);
 				}
 			}
 
