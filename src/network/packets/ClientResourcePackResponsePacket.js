@@ -332,11 +332,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setEntityData("has_collision", true);
 					player.setEntityData("affected_by_gravity", true);
 
-
 					ServerInfo.__addPlayer();
 					for (const onlineplayers of PlayerInfo.players) {
 						if (onlineplayers.username == player.username) {
-							Logger.warning("ignored!!!")
+							Logger.debug("Ignored bad PlayerList packet")
 						} else {
 							let xuid = player.profile.xuid
 							let uuid = player.profile.uuid

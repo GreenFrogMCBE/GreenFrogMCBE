@@ -52,7 +52,7 @@ class ClientInteractPacket extends PacketConstructor {
 			case InteractType.INVENTORYOPEN:
 				const event = new PlayerContainerOpenEvent();
 				event.server = server;
-				event.client = player;
+				event.player = player;
 				event.windowID = WindowID.CREATIVE;
 				event.windowType = InventoryType.INVENTORY;
 				event.runtimeId = 2;
