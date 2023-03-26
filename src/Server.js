@@ -104,8 +104,8 @@ module.exports = {
 	/**
 	 * @private
 	 */
-	async _onJoin(client) {
-		await PlayerInit._initPlayer(client);
+	async _onJoin(client, server) {
+		await PlayerInit._initPlayer(client, server);
 		await ValidateClient._initAndValidateClient(client);
 
 		client.world = null; // This gets initialised in PlayerResourcePacksCompletedEvent
@@ -210,7 +210,7 @@ module.exports = {
 
 			server.on("connect", (client) => {
 				client.on("join", () => {
-					this._onJoin(client);
+					this._onJoin(client, this);
 				});
 
 				client.on("packet", (packet) => {

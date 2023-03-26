@@ -35,8 +35,9 @@ const PlayerInfo = require("../api/PlayerInfo");
 module.exports = {
 	/**
 	 * @param {any} player
+	 * @param {any} server
 	 */
-	_initPlayer(player) {
+	_initPlayer(player, server) {
 		/**
 		 * Sends a message to the player
 		 * @param {String} message - The message to send
@@ -45,7 +46,7 @@ module.exports = {
 			const sendMessageEvent = new ServerToClientChatEvent();
 			sendMessageEvent.message = message;
 			sendMessageEvent.player = player;
-			sendMessageEvent.server = require("../Server");
+			sendMessageEvent.server = server;
 			sendMessageEvent.execute();
 		};
 
@@ -57,7 +58,7 @@ module.exports = {
 			const chatAsPlayerEvent = new PluginChatAsPlayerEvent();
 			chatAsPlayerEvent.player = player;
 			chatAsPlayerEvent.message = message;
-			chatAsPlayerEvent.server = require("../Server").server;
+			chatAsPlayerEvent.server = server.server;
 			chatAsPlayerEvent.execute();
 		};
 
@@ -74,7 +75,7 @@ module.exports = {
 
 			const gamemodeChangeEvent = new PlayerGamemodeChangeEvent();
 			gamemodeChangeEvent.player = player;
-			gamemodeChangeEvent.server = require("../Server").server;
+			gamemodeChangeEvent.server = server.server;
 			gamemodeChangeEvent.gamemode = gamemode;
 			gamemodeChangeEvent.oldGamemode = player.gamemode;
 			gamemodeChangeEvent.execute();
@@ -87,7 +88,7 @@ module.exports = {
 		 */
 		player.transfer = function (address, port) {
 			const transferEvent = new PlayerTransferEvent();
-			transferEvent.execute(require("../Server").server, player, address, port);
+			transferEvent.execute(server.server, player, address, port);
 		};
 
 		/**
@@ -96,7 +97,7 @@ module.exports = {
 		 */
 		player.setDifficulty = function (difficulty) {
 			const difficultyevent = new PlayerUpdateDifficultyEvent();
-			difficultyevent.execute(require("../Server").server, player, difficulty);
+			difficultyevent.execute(server.server, player, difficulty);
 		};
 
 		/**
@@ -124,7 +125,7 @@ module.exports = {
 			if (player.kicked) return;
 			player.kicked = true;
 
-			new PlayerKickEvent().execute(require("../Server").server, player, msg);
+			new PlayerKickEvent().execute(server.server, player, msg);
 
 			if (msg === "disconnectionScreen.serverFull") {
 				msg = "Wow this server is popular! Check back later to see if space opens up.";
@@ -153,7 +154,7 @@ module.exports = {
 		player.setTime = function (time) {
 			const timeevent = new PlayerTimeUpdateEvent();
 			timeevent.player = player;
-			timeevent.server = require("../Server");
+			timeevent.server = server;
 			timeevent.time = time;
 			timeevent.execute();
 		};
@@ -193,7 +194,7 @@ module.exports = {
 			if (player.dead) return;
 
 			const healthUpdateEvent = new PlayerHealthUpdateEvent();
-			healthUpdateEvent.server = require("../Server").server;
+			healthUpdateEvent.server = server.server;
 			healthUpdateEvent.player = player;
 			healthUpdateEvent.name = "minecraft:health";
 			healthUpdateEvent.modifiers = [];
@@ -234,7 +235,7 @@ module.exports = {
 
 				const leaveEvent = new PlayerLeaveEvent();
 				leaveEvent.player = player;
-				leaveEvent.server = require("../Server");
+				leaveEvent.server = server;
 				leaveEvent.execute();
 
 				Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
