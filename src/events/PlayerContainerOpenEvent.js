@@ -37,6 +37,7 @@ class PlayerContainerOpenEvent extends Event {
 		await this._execute(this);
 
 		if (!this.cancelled) {
+			console.trace()
 			const containeropen = new ServerContainerOpenPacket();
 			containeropen.setWindowID(this.windowID);
 			containeropen.setWindowType(this.windowType);
