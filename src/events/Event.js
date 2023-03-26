@@ -31,12 +31,10 @@ class Event {
 					reject(err);
 				} else {
 					plugins.forEach((plugin) => {
-						if (plugin.includes(".js")) {
-							try {
-								require(`${__dirname}/../../plugins/${plugin}`)[event.name](event);
-							} catch (e) {
-								FailedToHandleEvent.handleEventError(e, plugin, event.name);
-							}
+						try {
+							require(`${__dirname}/../../plugins/${plugin}`)[event.name](event);
+						} catch (e) {
+							FailedToHandleEvent.handleEventError(e, plugin, event.name);
 						}
 					});
 					resolve();
