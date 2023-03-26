@@ -22,15 +22,11 @@ module.exports = {
 	loadPlugins() {
 		try {
 			fs.mkdirSync("./plugins/");
-		} catch (ignored) {
-			// Do nothing if directory already exists
-		}
+		} catch (ignored) { /* ignored */ }
 
 		try {
 			fs.mkdirSync("./plugins_configs/");
-		} catch (ignored) {
-			// Do nothing if directory already exists
-		}
+		} catch (ignored) { /* ignored */ }
 
 		setTimeout(() => {
 			CCH.start();
