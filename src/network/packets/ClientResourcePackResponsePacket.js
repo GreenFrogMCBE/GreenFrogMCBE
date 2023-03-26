@@ -172,7 +172,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startgame.setEntityId(0);
 				startgame.setRunTimeEntityId(0);
 				startgame.setGamemode(config.gamemode);
-				startgame.setPlayerPosition(client.world.getSpawnCoordinates().x, client.world.getSpawnCoordinates().y, client.world.getSpawnCoordinates().z);
+				startgame.setPlayerPosition(player.world.getSpawnCoordinates().x, player.world.getSpawnCoordinates().y, player.world.getSpawnCoordinates().z);
 				startgame.setPlayerRotation(1, 1);
 				startgame.setSeed(-1);
 				startgame.setBiomeType(0);
@@ -183,7 +183,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startgame.setDifficulty(Difficulty.NORMAL);
 				startgame.setSpawnPosition(0, 0, 0);
 				startgame.setPlayerPermissionLevel(player.permlevel);
-				startgame.setWorldName(clientLocalWorld.getName());
+				startgame.setWorldName(player.world.getName());
 				startgame.writePacket(player);
 
 				const biomedeflist = new BiomeDefinitionList();
@@ -261,21 +261,21 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				if (player.chunksEnabled) {
 					const chunkradiusupdate = new ChunkRadiusUpdate();
-					chunkradiusupdate.setChunkRadius(clientLocalWorld.getChunkRadius());
+					chunkradiusupdate.setChunkRadius(player.world.getChunkRadius());
 					chunkradiusupdate.writePacket(player);
 
 					const cords =
 						config.generator === WorldGenerator.DEFAULT
 							? {
-									x: 1070,
-									y: 274,
-									z: -915,
-							  }
+								x: 1070,
+								y: 274,
+								z: -915,
+							}
 							: {
-									x: -17,
-									y: 117,
-									z: 22,
-							  };
+								x: -17,
+								y: 117,
+								z: 22,
+							};
 
 					const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 					networkchunkpublisher.setCords(cords.x, cords.y, cords.z);

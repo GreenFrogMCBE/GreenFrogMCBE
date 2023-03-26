@@ -31,6 +31,7 @@ class Event {
 					reject(err);
 				} else {
 					plugins.forEach((plugin) => {
+						if (!plugin.includes(".js") || !plugin.includes(".mjs")) return
 						try {
 							require(`${__dirname}/../../plugins/${plugin}`)[event.name](event);
 						} catch (e) {
