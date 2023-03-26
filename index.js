@@ -27,10 +27,10 @@ port: 19132
 #
 # This section contains motd, and other server info settings
 
-motd: '§aDedicated GreenFrog server'
+motd: '§aGreenFrog server'
 maxPlayers: 20
 version: '1.19.70'
-offlineMode: false
+offlineMode: true
 lang: 'en_US' # Valid languages are en_US, fr_FR, lt_LT, uk_UA, vi_VN
 
 # CHAT
@@ -46,7 +46,7 @@ blockInvalidMessages: true # Kicks the player if the player tried to send an too
 # This section contains settings like debug, exit codes, etc
 
 unstable: false # Makes your server not crash on critical errors
-debug: false # Debug mode
+debug: false
 crashCode: -1
 exitCode: 0
 logUnhandledPackets: false
@@ -57,7 +57,7 @@ defaultPermissionLevel: 2
 # 2 - member
 # 1 - unknown
 # 0 - visitor
-multiProtocol: false # Supports 1.19.20+. Some features may be broken
+multiProtocol: false # Supports 1.19.70+. Some features may be broken
 
 # WORLD SETTINGS
 #
@@ -113,7 +113,7 @@ garbageCollectorDelay: 60000`
 	console.error("Failed to start the server");
 	console.error("The error was: ");
 	console.error(e.stack);
-	console.error(`Make sure that you have the required libraries. Run npm i to install them`);
+	console.error(`Make sure that you have the required libraries. Run "npm i" to install them`);
 	console.error("If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE");
 	process.exit(-1);
 }
