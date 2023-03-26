@@ -123,14 +123,14 @@ const config = ServerInfo.config;
 
 if (!config.offlineMode) {
 	console.log("You can't use tests in online mode!");
-	process.exit(0);
+	process.exit();
 }
 
 const r = rl.createInterface({
 	input: process.stdin,
 	output: process.stdout,
 });
-console.log("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Join the server and send a message\n[3] = Join the server and try to send a command request");
+console.log("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);
@@ -138,28 +138,27 @@ r.question("> ", (response) => {
 
 	if (args[0] == "1") {
 		StartServer.test();
-		console.log("\u001b[1m\u001b[38;5;214mStarting test 1 (Join server)...\u001b[0m");
+		console.log("\u001b[1m\u001b[38;5;214mStarting test 1 (Start server)...\u001b[0m");
 		r.close();
 		joinTest();
 	}
 	if (args[0] == "2") {
 		StartServer.test();
 		r.close();
-		console.log("\u001b[1m\u001b[38;5;214mStarting test 2 (Join server and send Messages)...\u001b[0m");
+		console.log("\u001b[1m\u001b[38;5;214mStarting test 2 (Start server and send message)...\u001b[0m");
 		messageTest();
 	}
 	if (args[0] == "3") {
 		StartServer.test();
 
 		r.close();
-		console.log("\u001b[1m\u001b[38;5;214mStarting test 2 (Join server and try to execute a command)...\u001b[0m");
+		console.log("\u001b[1m\u001b[38;5;214mStarting test 3 (Start server and try to execute a command)...\u001b[0m");
 		commandTest();
 	}
 
 	if (!tests.includes(args[0])) {
 		console.log(`Could not find test ${args[0]}`);
 		r.close();
-		process.exit();
 	}
 });
 
