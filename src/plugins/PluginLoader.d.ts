@@ -1,15 +1,4 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
 export function loadPlugins(): void;
-export function killServer(): Promise<void>;
-export function unloadPlugins(): Promise<void>;
+export function killServer(): any;
+export function initPluginShutdown(): void;
+export function unloadPlugins(): any;

@@ -1,20 +1,8 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
 export = PlayerDeathEvent;
 declare class PlayerDeathEvent extends Event {
-	name: string;
-	player: any;
-	server: any;
-	cancelled: boolean;
+    name: string;
+    player: any;
+    server: any;
+    cancelled: boolean;
 }
 import Event = require("./Event");

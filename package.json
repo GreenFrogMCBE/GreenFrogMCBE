@@ -11,8 +11,7 @@
     "gencoryrightheader": "node tools/generatelicenseheaders.js",
     "build": "npm run gencoryrightheader && npm run format",
     "autotest": "node tools/tests-auto.js",
-    "test": "node tools/tests-manual.js",
-    "install": "install.bat"
+    "test": "node tools/tests-manual.js"
   },
   "dependencies": {
     "frog-protocol": "github:greenfrogmc/Protocol",
