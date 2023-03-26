@@ -10,13 +10,13 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerInfo = require("../../api/PlayerInfo");
 const PlayerListTypes = require("./types/PlayerList");
 
 let username = "unknown";
 let uuid = "";
 let id = 0;
 let type = PlayerListTypes.ADD;
+let xboxid = "0"
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -102,16 +102,33 @@ class ServerPlayerListPacket extends PacketConstructor {
 	}
 
 	/**
+	 * Sets the xbox id of user
+	 * @param {String} id
+	 */
+	setXboxID(new_id) {
+		xboxid = new_id
+	}
+
+	/**
+	 * Returns the xbox id of user
+	 * @returns {String}
+	 */
+	getXboxID() {
+		return xboxid
+	}
+
+	/**
 	 * Sends the packet to the client
 	 * @param {any} client
 	 */
 	writePacket(client) {
 		let data = null;
+
 		if (this.getType() === PlayerListTypes.REMOVE) {
 			data = {
 				records: {
 					type: PlayerListTypes.REMOVE,
-					records_count: PlayerInfo.players.length,
+					records_count: 1,
 					records: [
 						{
 							uuid: this.getUuid(),
@@ -122,14 +139,14 @@ class ServerPlayerListPacket extends PacketConstructor {
 		} else {
 			data = {
 				records: {
-					type: PlayerListTypes.REMOVE,
-					records_count: PlayerInfo.players.length,
+					type: PlayerListTypes.ADD,
+					records_count: 1,
 					records: [
 						{
 							uuid: this.getUuid(),
 							entity_unique_id: "-" + this.getId(),
 							username: this.getUsername(),
-							xbox_user_id: "0",
+							xbox_user_id: this.getXboxID(),
 							platform_chat_id: "",
 							build_platform: 7,
 							skin_data: require("./res/skinData.json"),

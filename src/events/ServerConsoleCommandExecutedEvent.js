@@ -142,7 +142,9 @@ class ServerConsoleCommandExecutedEvent extends Event {
 					commands.help.execute();
 					break;
 				default:
-					Logger.info(lang.commands.unknownCommandOrNoPermission.replace("§c", ""));
+					Logger.info(lang.errors.unknownCommandOrNoPermission
+						.replace("§c", "")
+						.replace("%commandname%", firstArgOfcommand));
 					break;
 			}
 		}

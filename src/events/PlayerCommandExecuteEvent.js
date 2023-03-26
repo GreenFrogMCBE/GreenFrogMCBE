@@ -63,7 +63,7 @@ class PlayerCommandExecuteEvent extends Event {
 			}
 
 			if (!exists || this.command === "/") {
-				const errorMsg = lang.errors.playerUnknownCommandOrNoPermission.replace("%commandname%", this.command);
+				const errorMsg = lang.errors.unknownCommandOrNoPermission.replace("%commandname%", this.command);
 				this.player.sendMessage(errorMsg);
 				return;
 			}

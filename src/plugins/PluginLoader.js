@@ -16,23 +16,21 @@ const PluginManager = require("./PluginManager");
 const CCH = require("../server/ConsoleCommandSender");
 const { lang, config } = require("../api/ServerInfo");
 
+let count = null;
+
 module.exports = {
 	loadPlugins() {
 		try {
 			fs.mkdirSync("./plugins/");
-		} catch (ignored) {
-			// Do nothing if directory already exists
-		}
+		} catch (ignored) { /* ignored */ }
 
 		try {
 			fs.mkdirSync("./plugins_configs/");
-		} catch (ignored) {
-			// Do nothing if directory already exists
-		}
+		} catch (ignored) { /* ignored */ }
 
 		setTimeout(() => {
 			CCH.start();
-		}, 1000);
+		}, 1500);
 
 		fs.readdir("./plugins", (err, files) => {
 			files.forEach((file) => {
@@ -50,7 +48,7 @@ module.exports = {
 							name = packageJson.displayName;
 							version = packageJson.version;
 							main = packageJson.main;
-						} catch (ignored) {
+						} catch (error) {
 							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
 							return;
 						}
@@ -71,8 +69,12 @@ module.exports = {
 		process.exit(config.exitCode);
 	},
 
+	initPluginShutdown() {
+		count--
+		if (count <= 0) this.killServer();
+	},
+
 	async unloadPlugins() {
-		let count = 0;
 		fs.readdir("./plugins", (err, files) => {
 			if (files.length === 0) this.killServer();
 			files.forEach((file) => {
@@ -91,19 +93,20 @@ module.exports = {
 							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
 							name = packageJson.displayName;
 							main = packageJson.main;
-						} catch (ignored) {
-							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
+
+							Logger.info(lang.server.unloadingPlugin.replace("%plugin%", name));
+						} catch (error) {
+							this.initPluginShutdown()
 							return;
 						}
 
 						try {
-							Logger.info(lang.server.unloadingPlugin.replace("%plugin%", name));
-							require(`${__dirname}/../..plugins/${file}/${main}`).onShutdown();
+							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
 							Logger.info(lang.server.unloadedPlugin.replace("%plugin%", name));
-							count--;
-							if (count <= 0) this.killServer();
+							this.initPluginShutdown()
 						} catch (e) {
 							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack));
+							this.initPluginShutdown()
 						}
 					}
 				});

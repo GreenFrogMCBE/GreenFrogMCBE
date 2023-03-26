@@ -66,9 +66,7 @@ module.exports = {
 	 * @private
 	 */
 	async _handlepk(client, packetparams, server) {
-		if (client.offline) {
-			throw new Error(lang.errors.packetErrorOffline);
-		}
+		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
 
 		const packetsDir = path.join(__dirname, "network", "packets");
 
@@ -110,10 +108,10 @@ module.exports = {
 		await PlayerInit._initPlayer(client);
 		await ValidateClient._initAndValidateClient(client);
 
-		client.chunksEnabled = true;
-		client.health = 20;
-		client.dead, (client.offline = false);
-		client.x, client.y, (client.z = 0);
+		client.world = null // This gets initialised in PlayerResourcePacksCompletedEvent
+		Object.assign(client, { x: 0, y: 0, z: 0 }) // Player coordinates
+		Object.assign(client, { health: 20, chunksEnabled: true }) // Network stuff
+		Object.assign(client, { dead: false, offline: false }) // API fields
 
 		const playerConnectionEvent = new PlayerConnectionCreateEvent();
 		playerConnectionEvent.server = this;
@@ -173,9 +171,9 @@ module.exports = {
 		process.on("uncaughtExceptionMonitor", (err) => this._handleCriticalError(err));
 		process.on("unhandledRejection", (err) => this._handleCriticalError(err));
 
-		await this._initDebug();
+		this._initDebug();
 
-		await PluginLoader.loadPlugins();
+		PluginLoader.loadPlugins();
 
 		this._listen();
 
@@ -204,7 +202,7 @@ module.exports = {
 				maxPlayers,
 				motd: {
 					motd: motd,
-					levelName: "GreenFrogMCBE",
+					levelName: "GreenFrog",
 				},
 			});
 
@@ -246,9 +244,7 @@ module.exports = {
 			for (const player of PlayerInfo.players) {
 				if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
 			}
-		} catch (e) {
-			/* ignored */
-		}
+		} catch (ignored) { /* ignored */ }
 
 		setTimeout(() => {
 			PluginLoader.unloadPlugins();
