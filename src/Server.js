@@ -20,7 +20,6 @@ const PlayerInfo = require("./api/PlayerInfo");
 const PluginLoader = require("./plugins/PluginLoader");
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
 const ServerInternalServerErrorEvent = require("./events/ServerInternalServerErrorEvent");
-const UnsupportedOperationException = require("./events/exceptions/UnsupportedOperationException");
 const PlayerConnectionCreateEvent = require("./events/PlayerConnectionCreateEvent");
 const VersionToProtocol = require("./utils/VersionToProtocol");
 const GarbageCollector = require("./utils/GarbageCollector");
@@ -113,8 +112,11 @@ module.exports = {
 
 		client.chunksEnabled = true;
 		client.health = 20;
-		client.dead, (client.offline = false);
-		client.x, client.y, (client.z = 0);
+		client.dead = false
+		client.offline = false;
+		client.x = 0;
+		client.y = 0;
+		client.z = 0;
 		client.world = null // This gets initialised in PlayerResourcePacksCompletedEvent
 
 		const playerConnectionEvent = new PlayerConnectionCreateEvent();
