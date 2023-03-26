@@ -221,27 +221,25 @@ module.exports = {
 		};
 
 		player.on("close", () => {
-			if (!player.kicked) {
-				for (let i = 0; i < PlayerInfo.players.length; i++) {
-					if (PlayerInfo.players[i].username !== player.username) {
-						const pl = new PlayerList();
-						pl.setType(PlayerListTypes.REMOVE);
-						pl.setUuid(player.profile.uuid);
-						pl.writePacket(PlayerInfo.players[i]);
-					}
+			for (let i = 0; i < PlayerInfo.players.length; i++) {
+				if (PlayerInfo.players[i].username !== player.username) {
+					const pl = new PlayerList();
+					pl.setType(PlayerListTypes.REMOVE);
+					pl.setUuid(player.profile.uuid);
+					pl.writePacket(PlayerInfo.players[i]);
 				}
-
-				GarbageCollector.clearOfflinePlayers();
-
-				const leaveEvent = new PlayerLeaveEvent();
-				leaveEvent.player = player;
-				leaveEvent.server = server;
-				leaveEvent.execute();
-
-				Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
-				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
-				player.offline = true;
 			}
+
+			const leaveEvent = new PlayerLeaveEvent();
+			leaveEvent.player = player;
+			leaveEvent.server = server;
+			leaveEvent.execute();
+
+			GarbageCollector.clearOfflinePlayers();
+
+			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
+			Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+			player.offline = true;
 		});
 	},
 };
