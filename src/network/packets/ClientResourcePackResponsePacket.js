@@ -314,19 +314,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}, 4500);
 				}
 
-				setTimeout(() => {
-					for (const player of PlayerInfo.players) {
-						if (player.username !== player.username) {
-							ServerInfo.addPlayer();
-							const pl = new PlayerList();
-							pl.setType(PlayerListTypes.ADD);
-							pl.setUsername(player.username);
-							pl.setId(Math.floor(Math.random() * 99999999999));
-							pl.setUuid(player.profile.uuid);
-							pl.writePacket(player);
-						}
-					}
-				}, 1000);
+				for (const player of PlayerInfo.players) {
+					ServerInfo.__addPlayer();
+					const pl = new PlayerList();
+					pl.setType(PlayerListTypes.ADD);
+					pl.setUsername(player.username);
+					pl.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+					pl.setUuid(player.profile.uuid);
+					pl.writePacket(player);
+				}
 
 				Logger.info(lang.playerstatuses.spawned.replace("%player%", player.username));
 
