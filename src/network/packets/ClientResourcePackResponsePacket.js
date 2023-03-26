@@ -198,10 +198,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				creativecontent.setItems(require("./res/creativeContent.json").items);
 				creativecontent.writePacket(player);
 
-				const playerlist = new PlayerList();
-				playerlist.setUsername(player.username);
-				playerlist.writePacket(player);
-
 				const commandsenabled = new SetCommandsEnabled();
 				commandsenabled.setEnabled(true);
 				commandsenabled.writePacket(player);
@@ -314,18 +310,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}, 4500);
 				}
 
-				setTimeout(() => {
-					for (const joinedplayer of PlayerInfo.players) {
-						ServerInfo.__addPlayer();
-						const pl = new PlayerList();
-						pl.setType(PlayerListTypes.ADD);
-						pl.setUsername(joinedplayer.username);
-						pl.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-						pl.setUuid(joinedplayer.profile.uuid);
-						pl.writePacket(player);
-					}
-				}, 10000)
-
 				Logger.info(lang.playerstatuses.spawned.replace("%player%", player.username));
 
 				setTimeout(() => {
@@ -347,6 +331,25 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setEntityData("breathing", true);
 					player.setEntityData("has_collision", true);
 					player.setEntityData("affected_by_gravity", true);
+
+
+					ServerInfo.__addPlayer();
+					for (const onlineplayers of PlayerInfo.players) {
+						if (onlineplayers.username == player.username) {
+							Logger.warning("ignored!!!")
+						} else {
+							let xuid = player.profile.xuid
+							let uuid = player.profile.uuid
+
+							const pl = new PlayerList();
+							pl.setType(PlayerListTypes.ADD);
+							pl.setUsername(player.username);
+							pl.setXboxID(xuid)
+							pl.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							pl.setUuid(uuid);
+							pl.writePacket(onlineplayers);
+						}
+					}
 				}, 2000);
 
 				setTimeout(() => {
