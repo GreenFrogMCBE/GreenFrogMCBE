@@ -65,7 +65,7 @@ module.exports = {
 	/**
 	 * @private
 	 */
-	async _handlepk(client, packetparams, server) {
+	async _handlepk(client, packetparams) {
 		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
 
 		const packetsDir = path.join(__dirname, "network", "packets");
@@ -79,7 +79,7 @@ module.exports = {
 					const packetPathImport = require(packetPath);
 					const packet = new packetPathImport();
 					if (packet.getPacketName() === packetparams.data.name) {
-						packet.readPacket(client, packetparams, server);
+						packet.readPacket(client, packetparams, this);
 						exist = true;
 					}
 				} catch (e) {
