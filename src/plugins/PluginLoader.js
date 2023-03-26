@@ -22,11 +22,15 @@ module.exports = {
 	loadPlugins() {
 		try {
 			fs.mkdirSync("./plugins/");
-		} catch (ignored) { /* ignored */ }
+		} catch (ignored) {
+			/* ignored */
+		}
 
 		try {
 			fs.mkdirSync("./plugins_configs/");
-		} catch (ignored) { /* ignored */ }
+		} catch (ignored) {
+			/* ignored */
+		}
 
 		setTimeout(() => {
 			CCH.start();
@@ -70,7 +74,7 @@ module.exports = {
 	},
 
 	initPluginShutdown() {
-		count--
+		count--;
 		if (count <= 0) this.killServer();
 	},
 
@@ -96,17 +100,17 @@ module.exports = {
 
 							Logger.info(lang.server.unloadingPlugin.replace("%plugin%", name));
 						} catch (error) {
-							this.initPluginShutdown()
+							this.initPluginShutdown();
 							return;
 						}
 
 						try {
 							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
 							Logger.info(lang.server.unloadedPlugin.replace("%plugin%", name));
-							this.initPluginShutdown()
+							this.initPluginShutdown();
 						} catch (e) {
 							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack));
-							this.initPluginShutdown()
+							this.initPluginShutdown();
 						}
 					}
 				});

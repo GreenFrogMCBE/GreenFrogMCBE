@@ -16,7 +16,7 @@ let username = "unknown";
 let uuid = "";
 let id = 0;
 let type = PlayerListTypes.ADD;
-let xboxid = "0"
+let xboxid = "0";
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -106,7 +106,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * @param {String} id
 	 */
 	setXboxID(new_id) {
-		xboxid = new_id
+		xboxid = new_id;
 	}
 
 	/**
@@ -114,7 +114,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * @returns {String}
 	 */
 	getXboxID() {
-		return xboxid
+		return xboxid;
 	}
 
 	/**

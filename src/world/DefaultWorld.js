@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const WorldGenerator = require("../network/packets/types/WorldGenerator");
-const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket")
+const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 const ServerTickEvent = require("../events/ServerTickEvent");
 const { config, lang } = require("../api/ServerInfo");
 const PlayerInfo = require("../api/PlayerInfo");
@@ -93,21 +93,21 @@ class DefaultWorld {
 
 	/**
 	 * Places block at specified coordinates
-	 * @param {Number} x 
-	 * @param {Number} y 
-	 * @param {Number} z 
-	 * @param {Number} id 
+	 * @param {Number} x
+	 * @param {Number} y
+	 * @param {Number} z
+	 * @param {Number} id
 	 */
 	placeBlock(x, y, z, id) {
 		for (const player of this.getPlayersInWorld()) {
-			const updateblock = new UpdateBlock()
-			updateblock.setBlockRuntimeId(id)
-			updateblock.setX(x)
-			updateblock.setY(y)
-			updateblock.setZ(z)
-			updateblock.setNetwork(true)
-			updateblock.setFlagsValue(2)
-			updateblock.writePacket(player)
+			const updateblock = new UpdateBlock();
+			updateblock.setBlockRuntimeId(id);
+			updateblock.setX(x);
+			updateblock.setY(y);
+			updateblock.setZ(z);
+			updateblock.setNetwork(true);
+			updateblock.setFlagsValue(2);
+			updateblock.writePacket(player);
 		}
 	}
 
