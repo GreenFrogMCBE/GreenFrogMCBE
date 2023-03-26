@@ -5,3 +5,4 @@ config.yml
 .gitignore
 TODO
 tools/refactor.js
+plugins/
