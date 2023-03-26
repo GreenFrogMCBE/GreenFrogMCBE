@@ -14,12 +14,12 @@
     "test": "node tools/tests-manual.js"
   },
   "dependencies": {
-    "frog-protocol": "git+https://github.com/greenfrogmc/Protocol.git",
+    "frog-protocol": "github:greenfrogmc/Protocol",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22",
     "eslint": "8.35.0",
+    "nodemon": "^2.0.22",
     "prettier": "2.8.6"
   }
 }

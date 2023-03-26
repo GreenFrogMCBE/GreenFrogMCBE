@@ -35,7 +35,7 @@ port: 19132
 #
 # This section contains motd, and other server info settings
 
-motd: '§aDedicated GreenFrog server'
+motd: '§aGreenFrog server'
 maxPlayers: 20
 version: '1.19.70'
 offlineMode: true
@@ -54,7 +54,7 @@ blockInvalidMessages: true # Kicks the player if the player tried to send an too
 # This section contains settings like debug, exit codes, etc
 
 unstable: false # Makes your server not crash on critical errors
-debug: false # Debug mode
+debug: false
 crashCode: -1
 exitCode: 0
 logUnhandledPackets: false
@@ -65,7 +65,7 @@ defaultPermissionLevel: 2
 # 2 - member
 # 1 - unknown
 # 0 - visitor
-multiProtocol: false # Supports 1.19.20+. Some features may be broken
+multiProtocol: false # Supports 1.19.70+. Some features may be broken
 
 # WORLD SETTINGS
 #
@@ -118,18 +118,19 @@ garbageCollectorDelay: 60000`
 
 console.log("Starting testing...");
 
-const ServerInfo = require("./src/server/ServerInfo");
+const ServerInfo = require("../src/api/ServerInfo");
 const config = ServerInfo.config;
 
 if (!config.offlineMode) {
-	console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" + "\u001b[38;5;203m\u001b[6mYou can not use tests in \u001b[38;5;87mOfflineMode\u001b[38;5;203m set to \u001b[38;5;87mfalse \u001b[0m" + "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-	return process.exit(0);
+	console.log("You can't use tests in online mode!");
+	process.exit();
 }
+
 const r = rl.createInterface({
 	input: process.stdin,
 	output: process.stdout,
 });
-console.log("Welcome to GreenFrogMCBE Tests!\n\n[1] = Join server (Test)\n[2] = Join the server and send a message (Test)\n[3] = Join the server and try to send a command request (Test)");
+console.log("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);
@@ -137,28 +138,27 @@ r.question("> ", (response) => {
 
 	if (args[0] == "1") {
 		StartServer.test();
-		console.log("\u001b[1m\u001b[38;5;214mStarting test 1 (Join server)...\u001b[0m");
+		console.log("\u001b[1m\u001b[38;5;214mStarting test 1 (Start server)...\u001b[0m");
 		r.close();
 		joinTest();
 	}
 	if (args[0] == "2") {
 		StartServer.test();
 		r.close();
-		console.log("\u001b[1m\u001b[38;5;214mStarting test 2 (Join server and send Messages)...\u001b[0m");
+		console.log("\u001b[1m\u001b[38;5;214mStarting test 2 (Start server and send message)...\u001b[0m");
 		messageTest();
 	}
 	if (args[0] == "3") {
 		StartServer.test();
 
 		r.close();
-		console.log("\u001b[1m\u001b[38;5;214mStarting test 2 (Join server and try to execute a command)...\u001b[0m");
+		console.log("\u001b[1m\u001b[38;5;214mStarting test 3 (Start server and try to execute a command)...\u001b[0m");
 		commandTest();
 	}
 
 	if (!tests.includes(args[0])) {
 		console.log(`Could not find test ${args[0]}`);
 		r.close();
-		process.exit();
 	}
 });
 

@@ -141,6 +141,19 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				completeEvent.player = player;
 				completeEvent.execute();
 
+				player.world = new DefaultWorld()
+				player.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
+				player.world.setName(require("../../../world/world_settings.json").worldName);
+				if (config.generator === WorldGenerator.FLAT) {
+					player.world.setSpawnCoordinates(0, -58, 0);
+				} else if (config.generator === WorldGenerator.DEFAULT) {
+					player.world.setSpawnCoordinates(1070, 139, -914);
+				} else if (config.generator === WorldGenerator.VOID) {
+					player.world.setSpawnCoordinates(0, 100, 0);
+				} else {
+					throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator);
+				}
+
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
 
 				for (const op of ops) {
@@ -155,24 +168,11 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				Logger.info(lang.playerstatuses.joined.replace("%player%", player.username));
 
-				const clientLocalWorld = new DefaultWorld();
-				clientLocalWorld.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
-				clientLocalWorld.setName(require("../../../world/world_settings.json").worldName);
-				if (config.generator === WorldGenerator.FLAT) {
-					clientLocalWorld.setSpawnCoordinates(0, -58, 0);
-				} else if (config.generator === WorldGenerator.DEFAULT) {
-					clientLocalWorld.setSpawnCoordinates(1070, 139, -914);
-				} else if (config.generator === WorldGenerator.VOID) {
-					clientLocalWorld.setSpawnCoordinates(0, 100, 0);
-				} else {
-					throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator);
-				}
-
 				const startgame = new StartGame();
 				startgame.setEntityId(0);
 				startgame.setRunTimeEntityId(0);
 				startgame.setGamemode(config.gamemode);
-				startgame.setPlayerPosition(clientLocalWorld.getSpawnCoordinates().x, clientLocalWorld.getSpawnCoordinates().y, clientLocalWorld.getSpawnCoordinates().z);
+				startgame.setPlayerPosition(player.world.getSpawnCoordinates().x, player.world.getSpawnCoordinates().y, player.world.getSpawnCoordinates().z);
 				startgame.setPlayerRotation(1, 1);
 				startgame.setSeed(-1);
 				startgame.setBiomeType(0);
@@ -183,7 +183,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startgame.setDifficulty(Difficulty.NORMAL);
 				startgame.setSpawnPosition(0, 0, 0);
 				startgame.setPlayerPermissionLevel(player.permlevel);
-				startgame.setWorldName(clientLocalWorld.getName());
+				startgame.setWorldName(player.world.getName());
 				startgame.writePacket(player);
 
 				const biomedeflist = new BiomeDefinitionList();
@@ -197,10 +197,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				const creativecontent = new CreativeContent();
 				creativecontent.setItems(require("./res/creativeContent.json").items);
 				creativecontent.writePacket(player);
-
-				const playerlist = new PlayerList();
-				playerlist.setUsername(player.username);
-				playerlist.writePacket(player);
 
 				const commandsenabled = new SetCommandsEnabled();
 				commandsenabled.setEnabled(true);
@@ -261,21 +257,21 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				if (player.chunksEnabled) {
 					const chunkradiusupdate = new ChunkRadiusUpdate();
-					chunkradiusupdate.setChunkRadius(clientLocalWorld.getChunkRadius());
+					chunkradiusupdate.setChunkRadius(player.world.getChunkRadius());
 					chunkradiusupdate.writePacket(player);
 
 					const cords =
 						config.generator === WorldGenerator.DEFAULT
 							? {
-									x: 1070,
-									y: 274,
-									z: -915,
-							  }
+								x: 1070,
+								y: 274,
+								z: -915,
+							}
 							: {
-									x: -17,
-									y: 117,
-									z: 22,
-							  };
+								x: -17,
+								y: 117,
+								z: 22,
+							};
 
 					const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 					networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
@@ -314,20 +310,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}, 4500);
 				}
 
-				setTimeout(() => {
-					for (const player of PlayerInfo.players) {
-						if (player.username !== player.username) {
-							ServerInfo.addPlayer();
-							const pl = new PlayerList();
-							pl.setType(PlayerListTypes.ADD);
-							pl.setUsername(player.username);
-							pl.setId(Math.floor(Math.random() * 99999999999));
-							pl.setUuid(player.profile.uuid);
-							pl.writePacket(player);
-						}
-					}
-				}, 1000);
-
 				Logger.info(lang.playerstatuses.spawned.replace("%player%", player.username));
 
 				setTimeout(() => {
@@ -349,6 +331,24 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setEntityData("breathing", true);
 					player.setEntityData("has_collision", true);
 					player.setEntityData("affected_by_gravity", true);
+
+					ServerInfo.__addPlayer();
+					for (const onlineplayers of PlayerInfo.players) {
+						if (onlineplayers.username == player.username) {
+							Logger.debug("Ignored bad PlayerList packet")
+						} else {
+							let xuid = player.profile.xuid
+							let uuid = player.profile.uuid
+
+							const pl = new PlayerList();
+							pl.setType(PlayerListTypes.ADD);
+							pl.setUsername(player.username);
+							pl.setXboxID(xuid)
+							pl.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							pl.setUuid(uuid);
+							pl.writePacket(onlineplayers);
+						}
+					}
 				}, 2000);
 
 				setTimeout(() => {

@@ -11,12 +11,12 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const WorldGenerator = require("../network/packets/types/WorldGenerator");
+const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket")
+const ServerTickEvent = require("../events/ServerTickEvent");
 const { config, lang } = require("../api/ServerInfo");
 const PlayerInfo = require("../api/PlayerInfo");
 const GameMode = require("../api/GameMode");
 const Logger = require("../server/Logger");
-const assert = require("assert");
-const ServerTickEvent = require("../events/ServerTickEvent");
 
 let _time = 0;
 
@@ -36,7 +36,6 @@ class DefaultWorld {
 	 * @param {String} name
 	 */
 	setName(name) {
-		assert(name, "");
 		this.name = name;
 	}
 
@@ -58,9 +57,9 @@ class DefaultWorld {
 
 	/**
 	 * Sets the coordinates for the world spawn
-	 * @param {Int} x
-	 * @param {Int} y
-	 * @param {Int} z
+	 * @param {Float} x
+	 * @param {Float} y
+	 * @param {Float} z
 	 */
 	setSpawnCoordinates(x, y, z) {
 		this.cords = {
@@ -74,10 +73,6 @@ class DefaultWorld {
 	 * Returns the spawn coordinates
 	 */
 	getSpawnCoordinates() {
-		assert(this.cords.x !== null, null);
-		assert(this.cords.y !== null, null);
-		assert(this.cords.z !== null, null);
-
 		return this.cords;
 	}
 
@@ -94,6 +89,26 @@ class DefaultWorld {
 	 */
 	getChunkRadius() {
 		return this.chunkRadius;
+	}
+
+	/**
+	 * Places block at specified coordinates
+	 * @param {Number} x 
+	 * @param {Number} y 
+	 * @param {Number} z 
+	 * @param {Number} id 
+	 */
+	placeBlock(x, y, z, id) {
+		for (const player of this.getPlayersInWorld()) {
+			const updateblock = new UpdateBlock()
+			updateblock.setBlockRuntimeId(id)
+			updateblock.setX(x)
+			updateblock.setY(y)
+			updateblock.setZ(z)
+			updateblock.setNetwork(true)
+			updateblock.setFlagsValue(2)
+			updateblock.writePacket(player)
+		}
 	}
 
 	/**

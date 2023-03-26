@@ -34,7 +34,7 @@ const PlayerInfo = require("../api/PlayerInfo");
 
 module.exports = {
 	/**
-	 * @param {Object} player
+	 * @param {any} player
 	 */
 	_initPlayer(player) {
 		/**
