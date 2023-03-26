@@ -204,7 +204,7 @@ module.exports = {
 				maxPlayers,
 				motd: {
 					motd: motd,
-					levelName: "GreenFrogMCBE",
+					levelName: "GreenFrog",
 				},
 			});
 
