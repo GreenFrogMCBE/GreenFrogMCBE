@@ -50,7 +50,7 @@ module.exports = {
 							name = packageJson.displayName;
 							version = packageJson.version;
 							main = packageJson.main;
-						} catch (ignored) {
+						} catch (error) {
 							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
 							return;
 						}
