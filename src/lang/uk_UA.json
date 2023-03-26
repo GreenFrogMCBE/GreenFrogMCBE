@@ -99,7 +99,7 @@
     "versionMismatch": "§cНепідтримувана версія! Використовуйте "
   },
   "errors": {
-    "debugWarning": "Налагодження включено! ",
+    "debugWarning": "Налагодження включено! Ніколи не юзайте цю хуйню в розробці/продукції",
     "failedToExecuteEvent": "Не вдалося виконати подію %event% для плагіна \"%plugin%\". ",
     "failedToShutdownPlugin": "Не вдалося завершити плагін %plugin%. ",
     "packetHandlingException": "Виняток під час спроби обробки пакета від %player%: %error%",
