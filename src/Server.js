@@ -73,7 +73,7 @@ module.exports = {
 		let exist = false;
 
 		fs.readdirSync(packetsDir).forEach((filename) => {
-			if (filename.startsWith("Client")) {
+			if (filename.startsWith("Client") && filename.includes(".js")) {
 				const packetPath = path.join(packetsDir, filename);
 				try {
 					const packetPathImport = require(packetPath);
