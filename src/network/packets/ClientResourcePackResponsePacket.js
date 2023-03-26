@@ -141,15 +141,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				completeEvent.player = player;
 				completeEvent.execute();
 
-				client.world = new DefaultWorld()
-				client.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
-				client.world.setName(require("../../../world/world_settings.json").worldName);
+				player.world = new DefaultWorld()
+				player.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
+				player.world.setName(require("../../../world/world_settings.json").worldName);
 				if (config.generator === WorldGenerator.FLAT) {
-					client.world.setSpawnCoordinates(0, -58, 0);
+					player.world.setSpawnCoordinates(0, -58, 0);
 				} else if (config.generator === WorldGenerator.DEFAULT) {
-					client.world.setSpawnCoordinates(1070, 139, -914);
+					player.world.setSpawnCoordinates(1070, 139, -914);
 				} else if (config.generator === WorldGenerator.VOID) {
-					client.world.setSpawnCoordinates(0, 100, 0);
+					player.world.setSpawnCoordinates(0, 100, 0);
 				} else {
 					throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator);
 				}
