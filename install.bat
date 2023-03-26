@@ -3,4 +3,5 @@
 cd plugins
 git clone https://github.com/greenfrogmc/Donations.git
 cd ..
+npm i
 npm run start

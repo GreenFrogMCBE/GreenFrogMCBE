@@ -15,7 +15,7 @@ const fs = require("fs");
 
 module.exports = {
 	/**
-	 * Returns the major server version (e.g 3.0) 
+	 * Returns the major server version (e.g 3.0)
 	 */
 	majorServerVersion: "3.0",
 	/**
@@ -33,7 +33,11 @@ module.exports = {
 	/** @private */
 	__playercount: 0,
 	/** @private */
-	__addPlayer() { this.__playercount++ },
+	__addPlayer() {
+		this.__playercount++;
+	},
 	/** @private */
-	__deletePlayer() { this.__playercount-- }
+	__deletePlayer() {
+		this.__playercount--;
+	},
 };

@@ -108,10 +108,10 @@ module.exports = {
 		await PlayerInit._initPlayer(client);
 		await ValidateClient._initAndValidateClient(client);
 
-		client.world = null // This gets initialised in PlayerResourcePacksCompletedEvent
-		Object.assign(client, { x: 0, y: 0, z: 0 }) // Player coordinates
-		Object.assign(client, { health: 20, chunksEnabled: true }) // Network stuff
-		Object.assign(client, { dead: false, offline: false }) // API fields
+		client.world = null; // This gets initialised in PlayerResourcePacksCompletedEvent
+		Object.assign(client, { x: 0, y: 0, z: 0 }); // Player coordinates
+		Object.assign(client, { health: 20, chunksEnabled: true }); // Network stuff
+		Object.assign(client, { dead: false, offline: false }); // API fields
 
 		const playerConnectionEvent = new PlayerConnectionCreateEvent();
 		playerConnectionEvent.server = this;
@@ -244,7 +244,9 @@ module.exports = {
 			for (const player of PlayerInfo.players) {
 				if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
 			}
-		} catch (ignored) { /* ignored */ }
+		} catch (ignored) {
+			/* ignored */
+		}
 
 		setTimeout(() => {
 			PluginLoader.unloadPlugins();

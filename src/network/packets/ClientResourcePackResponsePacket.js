@@ -141,7 +141,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				completeEvent.player = player;
 				completeEvent.execute();
 
-				player.world = new DefaultWorld()
+				player.world = new DefaultWorld();
 				player.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
 				player.world.setName(require("../../../world/world_settings.json").worldName);
 				if (config.generator === WorldGenerator.FLAT) {
@@ -263,15 +263,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const cords =
 						config.generator === WorldGenerator.DEFAULT
 							? {
-								x: 1070,
-								y: 274,
-								z: -915,
-							}
+									x: 1070,
+									y: 274,
+									z: -915,
+							  }
 							: {
-								x: -17,
-								y: 117,
-								z: 22,
-							};
+									x: -17,
+									y: 117,
+									z: 22,
+							  };
 
 					const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 					networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
@@ -335,15 +335,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					ServerInfo.__addPlayer();
 					for (const onlineplayers of PlayerInfo.players) {
 						if (onlineplayers.username == player.username) {
-							Logger.debug("Ignored bad PlayerList packet")
+							Logger.debug("Ignored bad PlayerList packet");
 						} else {
-							let xuid = player.profile.xuid
-							let uuid = player.profile.uuid
+							let xuid = player.profile.xuid;
+							let uuid = player.profile.uuid;
 
 							const pl = new PlayerList();
 							pl.setType(PlayerListTypes.ADD);
 							pl.setUsername(player.username);
-							pl.setXboxID(xuid)
+							pl.setXboxID(xuid);
 							pl.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
 							pl.setUuid(uuid);
 							pl.writePacket(onlineplayers);

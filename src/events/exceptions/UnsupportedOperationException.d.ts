@@ -11,6 +11,7 @@ export = UnsupportedOperationException;
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-declare class UnsupportedOperationException extends Error {
-	constructor(message: any);
+declare class UnsupportedOperationException {
+    constructor(message: any);
+    name: string;
 }
