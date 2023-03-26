@@ -110,14 +110,10 @@ module.exports = {
 		await PlayerInit._initPlayer(client);
 		await ValidateClient._initAndValidateClient(client);
 
-		client.chunksEnabled = true;
-		client.health = 20;
-		client.dead = false
-		client.offline = false;
-		client.x = 0;
-		client.y = 0;
-		client.z = 0;
 		client.world = null // This gets initialised in PlayerResourcePacksCompletedEvent
+		Object.assign(client, { x: 0, y: 0, z: 0 }) // Player coordinates
+		Object.assign(client, { health: 20, chunksEnabled: true }) // Network stuff
+		Object.assign(client, { dead: false, offline: false }) // API fields
 
 		const playerConnectionEvent = new PlayerConnectionCreateEvent();
 		playerConnectionEvent.server = this;
