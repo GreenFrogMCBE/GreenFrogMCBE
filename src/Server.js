@@ -173,9 +173,9 @@ module.exports = {
 		process.on("uncaughtExceptionMonitor", (err) => this._handleCriticalError(err));
 		process.on("unhandledRejection", (err) => this._handleCriticalError(err));
 
-		await this._initDebug();
+		this._initDebug();
 
-		await PluginLoader.loadPlugins();
+		PluginLoader.loadPlugins();
 
 		this._listen();
 
