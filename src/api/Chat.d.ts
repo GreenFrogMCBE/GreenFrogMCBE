@@ -1,5 +1,5 @@
 /**
  * Broadcasts message to all players
- * @param {string} msg
+ * @param {String} msg
  */
-export function broadcastMessage(msg?: string): void;
+export function broadcastMessage(msg?: String): void;
