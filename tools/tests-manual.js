@@ -118,18 +118,19 @@ garbageCollectorDelay: 60000`
 
 console.log("Starting testing...");
 
-const ServerInfo = require("./src/server/ServerInfo");
+const ServerInfo = require("../src/api/ServerInfo");
 const config = ServerInfo.config;
 
 if (!config.offlineMode) {
-	console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" + "\u001b[38;5;203m\u001b[6mYou can not use tests in \u001b[38;5;87mOfflineMode\u001b[38;5;203m set to \u001b[38;5;87mfalse \u001b[0m" + "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-	return process.exit(0);
+	console.log("You can't use tests in online mode!");
+	process.exit(0);
 }
+
 const r = rl.createInterface({
 	input: process.stdin,
 	output: process.stdout,
 });
-console.log("Welcome to GreenFrogMCBE Tests!\n\n[1] = Join server (Test)\n[2] = Join the server and send a message (Test)\n[3] = Join the server and try to send a command request (Test)");
+console.log("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Join the server and send a message\n[3] = Join the server and try to send a command request");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);

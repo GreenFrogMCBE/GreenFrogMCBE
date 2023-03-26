@@ -66,9 +66,7 @@ module.exports = {
 	 * @private
 	 */
 	async _handlepk(client, packetparams, server) {
-		if (client.offline) {
-			throw new Error(lang.errors.packetErrorOffline);
-		}
+		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
 
 		const packetsDir = path.join(__dirname, "network", "packets");
 

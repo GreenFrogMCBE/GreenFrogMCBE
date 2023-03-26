@@ -18,6 +18,8 @@ const PlayerInfo = require("../api/PlayerInfo");
 const GameMode = require("../api/GameMode");
 const Logger = require("../server/Logger");
 
+let _time = 0;
+
 class DefaultWorld {
 	constructor() {
 		this.name = "";
@@ -27,7 +29,6 @@ class DefaultWorld {
 			z: null,
 		};
 		this.chunkRadius = 0;
-		this._time = 0
 	}
 
 	/**
@@ -122,9 +123,9 @@ class DefaultWorld {
 			serverTickEvent.execute();
 
 			if (config.tickWorldTime) {
-				this._time = this._time + 10;
+				_time = _time + 10;
 				for (const player of this.getPlayersInWorld()) {
-					if (!player.offline) player.setTime(this._time);
+					if (!player.offline) player.setTime(_time);
 				}
 			}
 
