@@ -8,6 +8,7 @@ It is under active development
 
 + Discord: https://discord.gg/UFqrnAbqjP
 + Example plugin: https://github.com/greenfrogmc/ExamplePlugin
++ Example block generator plugin: https://github.com/greenfrogmc/RBG
 + Donation plugin: https://github.com/greenfrogmc/Donations
 
 You can install it by downloading this repo,
