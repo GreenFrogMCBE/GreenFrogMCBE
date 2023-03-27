@@ -11,8 +11,8 @@ It is under active development
 + Donation plugin: https://github.com/greenfrogmc/Donations
 
 You can install it by downloading this repo,
-then running "install.sh" if you are on Linux/MacOS
-if you are on Windows run "install.bat"
+then running "npm install"
+to start the server use "npm run start"
 
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/Credits.md
 + Multilang docs: https://github.com/bufferfishq/GreenFrogMCBE/blob/main/docs/Multilang.md
