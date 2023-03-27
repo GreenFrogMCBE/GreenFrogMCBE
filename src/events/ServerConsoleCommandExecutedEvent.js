@@ -33,7 +33,7 @@ class ServerConsoleCommandExecutedEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
-		this.name = "ServerConsolethis.commandExecutedEvent";
+		this.name = "ServerConsoleExecutedEvent";
 		this.server = null;
 		this.command = null;
 	}
