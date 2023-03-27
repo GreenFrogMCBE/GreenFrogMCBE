@@ -101,8 +101,9 @@ class DefaultWorld {
 			updateblock.setX(x);
 			updateblock.setY(y);
 			updateblock.setZ(z);
+			updateblock.setNeighbors(true);
 			updateblock.setNetwork(true);
-			updateblock.setFlagsValue(2);
+			updateblock.setFlagsValue(3)
 			updateblock.writePacket(player);
 		}
 	}

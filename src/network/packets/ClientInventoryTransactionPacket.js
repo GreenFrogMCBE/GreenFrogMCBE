@@ -51,11 +51,12 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 			case BlockActions.BREAKBLOCK:
 				const blockbreakevent = new BlockBreakEvent();
 				blockbreakevent.actions = packet.data.params.actions;
-				blockbreakevent.legacy = [];
+				blockbreakevent.legacy = packet.data.params.transaction.legacy;
 				blockbreakevent.player = player;
 				blockbreakevent.server = server;
-				blockbreakevent.transaction_data = packet.data.params.transaction_data;
-				blockbreakevent.transaction_type = packet.data.params.transaction_type;
+				blockbreakevent.action = packet.data.params.transaction.transaction_data.action_type;
+				blockbreakevent.block_position = packet.data.params.transaction.transaction_data.block_position;
+				blockbreakevent.transaction_type = packet.data.params.transaction.transaction_type;
 				blockbreakevent.execute();
 				break;
 			default:
