@@ -88,7 +88,11 @@ module.exports = {
 		 */
 		player.transfer = function (address, port) {
 			const transferEvent = new PlayerTransferEvent();
-			transferEvent.execute(server.server, player, address, port);
+			transferEvent.address = address;
+			transferEvent.port = port;
+			transferEvent.player = player
+			transferEvent.server = server
+			transferEvent.execute();
 		};
 
 		/**
@@ -97,7 +101,10 @@ module.exports = {
 		 */
 		player.setDifficulty = function (difficulty) {
 			const difficultyevent = new PlayerUpdateDifficultyEvent();
-			difficultyevent.execute(server.server, player, difficulty);
+			difficultyevent.server = server
+			difficultyevent.player = player
+			difficultyevent.difficulty = difficulty
+			difficultyevent.execute();
 		};
 
 		/**
@@ -106,15 +113,15 @@ module.exports = {
 		 * @param {Boolean} value
 		 */
 		player.setEntityData = function (field, value) {
-			const playerentitypacket = new ServerSetEntityDataPacket();
-			playerentitypacket.setProperties({
+			const playerEntityPacket = new ServerSetEntityDataPacket();
+			playerEntityPacket.setProperties({
 				ints: [],
 				floats: [],
 			});
-			playerentitypacket.setRuntimeEntityID(0); // Local player
-			playerentitypacket.setTick(0);
-			playerentitypacket.setValue(field, value);
-			playerentitypacket.writePacket(player);
+			playerEntityPacket.setRuntimeEntityID(0); // Local player
+			playerEntityPacket.setTick(0);
+			playerEntityPacket.setValue(field, value);
+			playerEntityPacket.writePacket(player);
 		};
 
 		/**

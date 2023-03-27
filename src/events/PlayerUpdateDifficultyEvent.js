@@ -21,6 +21,9 @@ class PlayerUpdateDifficultyEvent extends Event {
 		super();
 		this.cancelled = false;
 		this.name = "PlayerUpdateDifficultyEvent";
+		this.player = null
+		this.server = null
+		this.difficulty = null
 	}
 
 	cancel() {
