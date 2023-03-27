@@ -144,14 +144,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				player.world = new DefaultWorld();
 				player.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
 				player.world.setName(require("../../../world/world_settings.json").worldName);
-				if (config.generator === WorldGenerator.FLAT) {
-					player.world.setSpawnCoordinates(0, -58, 0);
-				} else if (config.generator === WorldGenerator.DEFAULT) {
+				if (config.generator === WorldGenerator.DEFAULT) {
 					player.world.setSpawnCoordinates(1070, 139, -914);
 				} else if (config.generator === WorldGenerator.VOID) {
 					player.world.setSpawnCoordinates(0, 100, 0);
 				} else {
-					throw new ChunkError(lang.errors.failedToLoadWorld_InvalidGenerator);
+					player.world.setSpawnCoordinates(0, -58, 0);
 				}
 
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
