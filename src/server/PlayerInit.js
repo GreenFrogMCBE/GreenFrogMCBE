@@ -133,7 +133,7 @@ module.exports = {
 				msg = "You were disconnected";
 			}
 
-			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.getUserData().displayName).replace("%reason%", msg));
+			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", msg));
 			player.disconnect(msg);
 		};
 

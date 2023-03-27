@@ -11,7 +11,6 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-case-declarations */
-/* eslint-disable no-unused-vars */
 const Version = require("../commands/CommandVersion");
 const { lang, config } = require("../api/ServerInfo");
 const Help = require("../commands/CommandHelp");
@@ -26,8 +25,6 @@ const PL = require("../commands/CommandPl");
 const Me = require("../commands/CommandMe");
 const Logger = require("../server/Logger");
 const Event = require("./Event");
-
-const fs = require("fs");
 
 class ServerConsoleCommandExecutedEvent extends Event {
 	constructor() {
