@@ -13,7 +13,7 @@
 const { config } = require("../api/ServerInfo");
 
 const ServerLevelChunkPacket = require("../network/packets/ServerLevelChunkPacket");
-const WorldGenerator = require("../network/packets/types/WorldGenerator")
+const WorldGenerator = require("../network/packets/types/WorldGenerator");
 
 const Event = require("./Event");
 
