@@ -9,7 +9,7 @@ It is under active development
 + Discord: https://discord.gg/UFqrnAbqjP
 + Example plugin: https://github.com/greenfrogmc/ExamplePlugin
 + Example block generator plugin: https://github.com/greenfrogmc/RBG
-+ Donation plugin: https://github.com/greenfrogmc/Donations
++ Support me: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
 You can install it by downloading this repo,
 then running "npm install"
