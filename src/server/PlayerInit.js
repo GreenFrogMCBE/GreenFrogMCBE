@@ -90,8 +90,8 @@ module.exports = {
 			const transferEvent = new PlayerTransferEvent();
 			transferEvent.address = address;
 			transferEvent.port = port;
-			transferEvent.player = player
-			transferEvent.server = server
+			transferEvent.player = player;
+			transferEvent.server = server;
 			transferEvent.execute();
 		};
 
@@ -101,9 +101,9 @@ module.exports = {
 		 */
 		player.setDifficulty = function (difficulty) {
 			const difficultyevent = new PlayerUpdateDifficultyEvent();
-			difficultyevent.server = server
-			difficultyevent.player = player
-			difficultyevent.difficulty = difficulty
+			difficultyevent.server = server;
+			difficultyevent.player = player;
+			difficultyevent.difficulty = difficulty;
 			difficultyevent.execute();
 		};
 
@@ -132,12 +132,12 @@ module.exports = {
 			if (player.kicked) return;
 			player.kicked = true;
 
-			const kickEvent = new PlayerKickEvent()
-			kickEvent.server = server
-			kickEvent.player = player
-			kickEvent.message = msg
-			kickEvent.execute()
-			
+			const kickEvent = new PlayerKickEvent();
+			kickEvent.server = server;
+			kickEvent.player = player;
+			kickEvent.message = msg;
+			kickEvent.execute();
+
 			if (msg === "disconnectionScreen.serverFull") {
 				msg = "Wow this server is popular! Check back later to see if space opens up.";
 			} else if (msg === "disconnectionScreen.noReason") {

@@ -13,7 +13,7 @@
 const FailedToHandleEvent = require("./exceptions/FailedToHandleEvent");
 const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
 
-const Logger = require("../server/Logger")
+const Logger = require("../server/Logger");
 
 const fs = require("fs");
 
@@ -34,7 +34,7 @@ class Event {
 				} else {
 					plugins.forEach((plugin) => {
 						try {
-							Logger.debug("Executing " + event.name + " event in " + plugin)
+							Logger.debug("Executing " + event.name + " event in " + plugin);
 							require(`${__dirname}/../../plugins/${plugin}`)[event.name](event);
 						} catch (e) {
 							FailedToHandleEvent.handleEventError(e, plugin, event.name);
