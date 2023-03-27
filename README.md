@@ -5,15 +5,16 @@
 
 It is written in NodeJS, currently supports 1.19.70/1.19.71
 It is under active development
+Please note that this software is still in beta, so do not stare directly at the bugs!
 
 + Discord: https://discord.gg/UFqrnAbqjP
 + Example plugin: https://github.com/greenfrogmc/ExamplePlugin
 + Example block generator plugin: https://github.com/greenfrogmc/RBG
-+ Donation plugin: https://github.com/greenfrogmc/Donations
++ Support me: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
 You can install it by downloading this repo,
 then running "npm install"
-to start the server use "npm run start"
+to start the server, use "npm run start"
 
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/Credits.md
 + Multilang docs: https://github.com/bufferfishq/GreenFrogMCBE/blob/main/docs/Multilang.md
