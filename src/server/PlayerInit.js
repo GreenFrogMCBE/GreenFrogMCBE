@@ -125,8 +125,12 @@ module.exports = {
 			if (player.kicked) return;
 			player.kicked = true;
 
-			new PlayerKickEvent().execute(server.server, player, msg);
-
+			const kickEvent = new PlayerKickEvent()
+			kickEvent.server = server
+			kickEvent.player = player
+			kickEvent.message = msg
+			kickEvent.execute()
+			
 			if (msg === "disconnectionScreen.serverFull") {
 				msg = "Wow this server is popular! Check back later to see if space opens up.";
 			} else if (msg === "disconnectionScreen.noReason") {
