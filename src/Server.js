@@ -65,7 +65,7 @@ module.exports = {
 	/**
 	 * @private
 	 */
-	async _handlepk(client, packetparams, server) {
+	async _handlepk(client, packetparams) {
 		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
 
 		const packetsDir = path.join(__dirname, "network", "packets");
@@ -73,13 +73,13 @@ module.exports = {
 		let exist = false;
 
 		fs.readdirSync(packetsDir).forEach((filename) => {
-			if (filename.startsWith("Client")) {
+			if (filename.startsWith("Client") && filename.includes(".js")) {
 				const packetPath = path.join(packetsDir, filename);
 				try {
 					const packetPathImport = require(packetPath);
 					const packet = new packetPathImport();
 					if (packet.getPacketName() === packetparams.data.name) {
-						packet.readPacket(client, packetparams, server);
+						packet.readPacket(client, packetparams, this);
 						exist = true;
 					}
 				} catch (e) {
@@ -104,8 +104,8 @@ module.exports = {
 	/**
 	 * @private
 	 */
-	async _onJoin(client) {
-		await PlayerInit._initPlayer(client);
+	async _onJoin(client, server) {
+		await PlayerInit._initPlayer(client, server);
 		await ValidateClient._initAndValidateClient(client);
 
 		client.world = null; // This gets initialised in PlayerResourcePacksCompletedEvent
@@ -210,7 +210,7 @@ module.exports = {
 
 			server.on("connect", (client) => {
 				client.on("join", () => {
-					this._onJoin(client);
+					this._onJoin(client, this);
 				});
 
 				client.on("packet", (packet) => {

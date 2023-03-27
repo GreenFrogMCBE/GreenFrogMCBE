@@ -22,13 +22,9 @@ let _time = 0;
 
 class DefaultWorld {
 	constructor() {
-		this.name = "";
-		this.cords = {
-			x: null,
-			y: null,
-			z: null,
-		};
-		this.chunkRadius = 0;
+		this.name;
+		this.cords = {};
+		this.chunkRadius;
 	}
 
 	/**
@@ -105,8 +101,9 @@ class DefaultWorld {
 			updateblock.setX(x);
 			updateblock.setY(y);
 			updateblock.setZ(z);
+			updateblock.setNeighbors(true);
 			updateblock.setNetwork(true);
-			updateblock.setFlagsValue(2);
+			updateblock.setFlagsValue(3)
 			updateblock.writePacket(player);
 		}
 	}

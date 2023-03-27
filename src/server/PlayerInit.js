@@ -35,8 +35,9 @@ const PlayerInfo = require("../api/PlayerInfo");
 module.exports = {
 	/**
 	 * @param {any} player
+	 * @param {any} server
 	 */
-	_initPlayer(player) {
+	_initPlayer(player, server) {
 		/**
 		 * Sends a message to the player
 		 * @param {String} message - The message to send
@@ -45,7 +46,7 @@ module.exports = {
 			const sendMessageEvent = new ServerToClientChatEvent();
 			sendMessageEvent.message = message;
 			sendMessageEvent.player = player;
-			sendMessageEvent.server = require("../Server");
+			sendMessageEvent.server = server;
 			sendMessageEvent.execute();
 		};
 
@@ -57,7 +58,7 @@ module.exports = {
 			const chatAsPlayerEvent = new PluginChatAsPlayerEvent();
 			chatAsPlayerEvent.player = player;
 			chatAsPlayerEvent.message = message;
-			chatAsPlayerEvent.server = require("../Server").server;
+			chatAsPlayerEvent.server = server.server;
 			chatAsPlayerEvent.execute();
 		};
 
@@ -74,7 +75,7 @@ module.exports = {
 
 			const gamemodeChangeEvent = new PlayerGamemodeChangeEvent();
 			gamemodeChangeEvent.player = player;
-			gamemodeChangeEvent.server = require("../Server").server;
+			gamemodeChangeEvent.server = server.server;
 			gamemodeChangeEvent.gamemode = gamemode;
 			gamemodeChangeEvent.oldGamemode = player.gamemode;
 			gamemodeChangeEvent.execute();
@@ -87,7 +88,11 @@ module.exports = {
 		 */
 		player.transfer = function (address, port) {
 			const transferEvent = new PlayerTransferEvent();
-			transferEvent.execute(require("../Server").server, player, address, port);
+			transferEvent.address = address;
+			transferEvent.port = port;
+			transferEvent.player = player
+			transferEvent.server = server
+			transferEvent.execute();
 		};
 
 		/**
@@ -96,7 +101,10 @@ module.exports = {
 		 */
 		player.setDifficulty = function (difficulty) {
 			const difficultyevent = new PlayerUpdateDifficultyEvent();
-			difficultyevent.execute(require("../Server").server, player, difficulty);
+			difficultyevent.server = server
+			difficultyevent.player = player
+			difficultyevent.difficulty = difficulty
+			difficultyevent.execute();
 		};
 
 		/**
@@ -105,15 +113,15 @@ module.exports = {
 		 * @param {Boolean} value
 		 */
 		player.setEntityData = function (field, value) {
-			const playerentitypacket = new ServerSetEntityDataPacket();
-			playerentitypacket.setProperties({
+			const playerEntityPacket = new ServerSetEntityDataPacket();
+			playerEntityPacket.setProperties({
 				ints: [],
 				floats: [],
 			});
-			playerentitypacket.setRuntimeEntityID(0); // Local player
-			playerentitypacket.setTick(0);
-			playerentitypacket.setValue(field, value);
-			playerentitypacket.writePacket(player);
+			playerEntityPacket.setRuntimeEntityID(0); // Local player
+			playerEntityPacket.setTick(0);
+			playerEntityPacket.setValue(field, value);
+			playerEntityPacket.writePacket(player);
 		};
 
 		/**
@@ -124,15 +132,19 @@ module.exports = {
 			if (player.kicked) return;
 			player.kicked = true;
 
-			new PlayerKickEvent().execute(require("../Server").server, player, msg);
-
+			const kickEvent = new PlayerKickEvent()
+			kickEvent.server = server
+			kickEvent.player = player
+			kickEvent.message = msg
+			kickEvent.execute()
+			
 			if (msg === "disconnectionScreen.serverFull") {
 				msg = "Wow this server is popular! Check back later to see if space opens up.";
 			} else if (msg === "disconnectionScreen.noReason") {
 				msg = "You were disconnected";
 			}
 
-			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.getUserData().displayName).replace("%reason%", msg));
+			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", msg));
 			player.disconnect(msg);
 		};
 
@@ -153,7 +165,7 @@ module.exports = {
 		player.setTime = function (time) {
 			const timeevent = new PlayerTimeUpdateEvent();
 			timeevent.player = player;
-			timeevent.server = require("../Server");
+			timeevent.server = server;
 			timeevent.time = time;
 			timeevent.execute();
 		};
@@ -193,7 +205,7 @@ module.exports = {
 			if (player.dead) return;
 
 			const healthUpdateEvent = new PlayerHealthUpdateEvent();
-			healthUpdateEvent.server = require("../Server").server;
+			healthUpdateEvent.server = server.server;
 			healthUpdateEvent.player = player;
 			healthUpdateEvent.name = "minecraft:health";
 			healthUpdateEvent.modifiers = [];
@@ -220,27 +232,25 @@ module.exports = {
 		};
 
 		player.on("close", () => {
-			if (!player.kicked) {
-				for (let i = 0; i < PlayerInfo.players.length; i++) {
-					if (PlayerInfo.players[i].username !== player.username) {
-						const pl = new PlayerList();
-						pl.setType(PlayerListTypes.REMOVE);
-						pl.setUuid(player.profile.uuid);
-						pl.writePacket(PlayerInfo.players[i]);
-					}
+			for (let i = 0; i < PlayerInfo.players.length; i++) {
+				if (PlayerInfo.players[i].username !== player.username) {
+					const pl = new PlayerList();
+					pl.setType(PlayerListTypes.REMOVE);
+					pl.setUuid(player.profile.uuid);
+					pl.writePacket(PlayerInfo.players[i]);
 				}
-
-				GarbageCollector.clearOfflinePlayers();
-
-				const leaveEvent = new PlayerLeaveEvent();
-				leaveEvent.player = player;
-				leaveEvent.server = require("../Server");
-				leaveEvent.execute();
-
-				Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
-				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
-				player.offline = true;
 			}
+
+			const leaveEvent = new PlayerLeaveEvent();
+			leaveEvent.player = player;
+			leaveEvent.server = server;
+			leaveEvent.execute();
+
+			GarbageCollector.clearOfflinePlayers();
+
+			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
+			Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+			player.offline = true;
 		});
 	},
 };
