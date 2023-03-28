@@ -76,6 +76,10 @@ module.exports = {
 			if (filename.startsWith("Client") && filename.includes(".js")) {
 				const packetPath = path.join(packetsDir, filename);
 				try {
+					if (client.packetCount++ > 50) {
+						throw new Error("Too many packets!")
+					}
+
 					const packetPathImport = require(packetPath);
 					const packet = new packetPathImport();
 					if (packet.getPacketName() === packetparams.data.name) {
@@ -211,6 +215,12 @@ module.exports = {
 			server.on("connect", (client) => {
 				client.on("join", () => {
 					this._onJoin(client, this);
+
+					client.packetCount = 0;
+
+					setInterval(() => {
+						client.packetCount++
+					}, 1000)
 				});
 
 				client.on("packet", (packet) => {

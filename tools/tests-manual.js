@@ -75,9 +75,6 @@ gamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", 
 worldGamemode: "creative" # Valid gamemodes are "creative", "survival", "spectator", "adventure" and "fallback"
 difficulty: 0 # Currently only visual
 generator: "default" # Can be default, flat (superflat), or void (empty)
-tickWorldTime: true # Should time update be server side?
-tickVoid: true # Should people that are in void take damage?
-randomTickSpeed: 1000
 
 # Command settings
 # 
@@ -112,8 +109,12 @@ playerCommandGamemode: true
 #
 # Allows to make your server faster
 
-garbageCollectorDelay: 60000`
-	);
+garbageCollectorDelay: 60000
+
+tickEvent: true # Should ServerTickEvent be enabled?
+tickWorldTime: true # Should time update be server side?
+tickVoid: true # Should people that are in void take damage?
+randomTickSpeed: 1000`);
 }
 
 console.log("Starting testing...");

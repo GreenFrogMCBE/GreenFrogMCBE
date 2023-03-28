@@ -42,6 +42,15 @@ class ClientMovePacket extends PacketConstructor {
 
 		let position = packet.data.params.position;
 
+		if (this.player.x 
+			&& this.player.y
+			&& this.player.z
+			&& this.player.x == this.position.x
+			&& this.player.y == this.position.y
+			&& this.player.z == this.position.z) {
+				throw new Error("Invalid position packet!")
+		}
+
 		const playerMoveEvent = new PlayerMoveEvent();
 		playerMoveEvent.player = player;
 		playerMoveEvent.server = server;
