@@ -249,7 +249,11 @@ module.exports = {
 			GarbageCollector.clearOfflinePlayers();
 
 			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
-			Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+
+			if (player.initialised) {
+				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+			}
+
 			player.offline = true;
 		});
 	},

@@ -42,13 +42,10 @@ class ClientMovePacket extends PacketConstructor {
 
 		let position = packet.data.params.position;
 
-		if (this.player.x 
-			&& this.player.y
-			&& this.player.z
-			&& this.player.x == this.position.x
-			&& this.player.y == this.position.y
-			&& this.player.z == this.position.z) {
-				throw new Error("Invalid position packet!")
+		if (player.x == position.x
+			&& player.y == position.y
+			&& player.z == position.z) { // This code prevents a few crashers, that spam PlayerMove packet to overload the server
+			return
 		}
 
 		const playerMoveEvent = new PlayerMoveEvent();

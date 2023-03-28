@@ -76,7 +76,7 @@ module.exports = {
 			if (filename.startsWith("Client") && filename.includes(".js")) {
 				const packetPath = path.join(packetsDir, filename);
 				try {
-					if (client.packetCount++ > 50) {
+					if (client.packetCount++ > 2000) {
 						throw new Error("Too many packets!")
 					}
 
@@ -114,8 +114,12 @@ module.exports = {
 
 		client.world = null; // This gets initialised in PlayerResourcePacksCompletedEvent
 		Object.assign(client, { x: 0, y: 0, z: 0 }); // Player coordinates
-		Object.assign(client, { health: 20, chunksEnabled: true }); // Network stuff
-		Object.assign(client, { dead: false, offline: false }); // API fields
+		Object.assign(client, { health: 20, chunksEnabled: true, packetCount: 0 }); // Network stuff
+		Object.assign(client, { dead: false, offline: false, initialised: false }); // API fields
+
+		setInterval(() => {
+			client.packetCount = 0
+		}, 1000)
 
 		const playerConnectionEvent = new PlayerConnectionCreateEvent();
 		playerConnectionEvent.server = this;
@@ -215,12 +219,6 @@ module.exports = {
 			server.on("connect", (client) => {
 				client.on("join", () => {
 					this._onJoin(client, this);
-
-					client.packetCount = 0;
-
-					setInterval(() => {
-						client.packetCount++
-					}, 1000)
 				});
 
 				client.on("packet", (packet) => {
