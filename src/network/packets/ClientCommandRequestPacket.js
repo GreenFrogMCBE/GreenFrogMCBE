@@ -36,6 +36,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	 * Reads the packet from client
 	 * @param {any} player
 	 * @param {JSON} packet
+	 * @param {any} server
 	 */
 	async readPacket(player, packet, server) {
 		const command = packet.data.params.command;

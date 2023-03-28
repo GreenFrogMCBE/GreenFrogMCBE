@@ -13,7 +13,10 @@
 /* eslint-disable no-case-declarations */
 const BlockBreakEvent = require("../../events/BlockBreakEvent");
 const PacketConstructor = require("./PacketConstructor");
+
+const GameMode = require("../../api/GameMode");
 const BlockActions = require("./types/BlockActions");
+
 const Logger = require("../../server/Logger");
 
 class ClientInventoryTransactionPacket extends PacketConstructor {
@@ -49,6 +52,10 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 
 		switch (actionID) {
 			case BlockActions.BREAKBLOCK:
+				if (player.gamemode == GameMode.ADVENTURE || player.gamemode == GameMode.SPECTATOR) {
+					throw new Error("Player tried to break block, while in " + player.gamemode + " gamemode")
+				}
+				
 				const blockbreakevent = new BlockBreakEvent();
 				blockbreakevent.actions = packet.data.params.actions;
 				blockbreakevent.legacy = packet.data.params.transaction.legacy;
@@ -60,7 +67,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 				blockbreakevent.execute();
 				break;
 			default:
-				Logger.debug("Unsupported Block action from " + player.username + ": " + actionID);
+				Logger.debug("Unsupported block action from " + player.username + ": " + actionID);
 		}
 	}
 }
