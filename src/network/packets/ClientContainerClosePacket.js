@@ -38,8 +38,9 @@ class ClientContainerClosePacket extends PacketConstructor {
 	 * Reads the packet from client
 	 * @param {any} player
 	 * @param {JSON} packet
+	 * @param {any} server
 	 */
-	async readPacket(player) {
+	async readPacket(player, _packet, server) {
 		const containerclose = new ServerContainerClosePacket();
 		containerclose.setServer(false);
 		containerclose.setWindowID(WindowID.CREATIVE);
@@ -47,7 +48,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 
 		const containerCloseEvent = new PlayerContainerCloseEvent();
 		containerCloseEvent.player = player;
-		containerCloseEvent.server = require("../../Server");
+		containerCloseEvent.server = server;
 		containerCloseEvent.isRequestByServer = false;
 		containerCloseEvent.windowID = WindowID.CREATIVE;
 		containerCloseEvent.execute();
