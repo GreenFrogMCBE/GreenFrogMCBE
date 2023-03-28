@@ -12,7 +12,6 @@
  */
 const PlayerCommandExecuteEvent = require("../../events/PlayerCommandExecuteEvent");
 const { config } = require("../../api/ServerInfo");
-const assert = require("assert");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -34,24 +33,12 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Validates the packet
-	 * @param {any} player
-	 * @param {JSON} packet
-	 */
-	async validatePacket(player, command) {
-		assert(player, null);
-		assert(command, null);
-	}
-
-	/**
 	 * Reads the packet from client
 	 * @param {any} player
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet, server) {
 		const command = packet.data.params.command;
-
-		await this.validatePacket(player, command);
 
 		if (!config.commandsDisabled) {
 			const commandExecutionEvent = new PlayerCommandExecuteEvent();
