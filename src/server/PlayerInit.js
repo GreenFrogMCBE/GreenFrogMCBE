@@ -31,7 +31,6 @@ const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 const PlayerInfo = require("../api/PlayerInfo");
-const DamageCause = require("../events/types/DamageCause");
 
 module.exports = {
 	/**
@@ -101,11 +100,11 @@ module.exports = {
 		 * @param {Difficulty} difficulty
 		 */
 		player.setDifficulty = function (difficulty) {
-			const difficultyevent = new PlayerUpdateDifficultyEvent();
-			difficultyevent.server = server;
-			difficultyevent.player = player;
-			difficultyevent.difficulty = difficulty;
-			difficultyevent.execute();
+			const difficultyEvent = new PlayerUpdateDifficultyEvent();
+			difficultyEvent.server = server;
+			difficultyEvent.player = player;
+			difficultyEvent.difficulty = difficulty;
+			difficultyEvent.execute();
 		};
 
 		/**
@@ -183,20 +182,20 @@ module.exports = {
 			updateattributespacket.writePacket(player);
 		};
 
-		// /**
-		//  * Sets the XP for the player
-		//  * @param {Float} xp
-		//  */
-		// player.setXP = function (xp) {
-		// 	player.setAttribute({
-		// 		"min": 0,
-		// 		"max": 1000000,
-		// 		"current": xp,
-		// 		"default": 0,
-		// 		"name": "player.experience",
-		// 		"modifiers": []
-		// 	})
-		// }
+		/**
+		 * Sets the XP for the player
+		 * @param {Float} xp
+		 */
+		player.setXP = function (xp) {
+			player.setAttribute({
+				"min": 0,
+				"max": 1000000,
+				"current": xp,
+				"default": 0,
+				"name": "player.experience",
+				"modifiers": []
+			})
+		}
 
 		/**
 		 * Sets the health of the player

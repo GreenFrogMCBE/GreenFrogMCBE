@@ -10,8 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const FormRequest = require("../../network/packets/FormRequest");
-const Colors = require("../../player/Colors");
+const FormRequest = require("../network/packets/ServerFormRequestPacket");
 const FormTypes = require("./FormTypes");
 
 class CustomForm {
@@ -19,7 +18,7 @@ class CustomForm {
 
 	constructor() {
 		this.type = FormTypes.CUSTOMFORM;
-		this.title = Colors.red + "Invalid title!";
+		this.title = "";
 		this.buttons = [];
 		this.id = 0;
 		this.actions = [];

@@ -123,8 +123,8 @@ module.exports = {
 
 		const playerConnectionEvent = new PlayerConnectionCreateEvent();
 		playerConnectionEvent.server = this;
-		playerConnectionEvent.client = client;
-		playerConnectionEvent.execute(server, client);
+		playerConnectionEvent.player = client;
+		playerConnectionEvent.execute();
 
 		PlayerInfo.addPlayer(client);
 

@@ -10,7 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ToastRequest = require("../../network/packets/ToastRequest");
+const ServerToastRequestPacket = require("../network/packets/ServerToastRequestPacket");
+
 const Event = require("./Event");
 
 class ServerToastRequestEvent extends Event {
@@ -31,10 +32,10 @@ class ServerToastRequestEvent extends Event {
 		await this._execute(this);
 
 		if (!this.cancelled) {
-			let packet = new ToastRequest();
+			let packet = new ServerToastRequestPacket();
 			packet.setTitle(this.title);
 			packet.setMessage(this.message);
-			packet.writePacket(this.player);
+			packet.send(this.player);
 		}
 	}
 }
