@@ -13,7 +13,8 @@
 /* eslint-disable no-unused-vars */
 const Event = require("./Event");
 
-const GameMode = require("../api/GameMode")
+const GameMode = require("../api/GameMode");
+const DamageCause = require("./types/DamageCause");
 
 class PlayerMoveEvent extends Event {
 	constructor() {
@@ -31,24 +32,40 @@ class PlayerMoveEvent extends Event {
 
 	/**
 	 * Calculates fall damage
-	 * NOTE: This can be spoofed by hacked clients	 (e.g Horion/Zephyr) 
+	 * NOTE: This can be spoofed by hacked client (e.g Horion/Zephyr) 
 	 */
 	async calculateFalldamage() {
 		if (this.player.gamemode == GameMode.CREATIVE || this.player.gamemode == GameMode.SPECTATOR) return;
 
 		let falldamageY = this.player.y - this.position.y
 
-		if (this.onGround && this.player.fallDamageQueue) {
-			this.player.setHealth(this.player.health - this.player.fallDamageQueue)
+		if (this.onGround && this.player.fallDamageQueue && !this.player.___dmgCd) {
+			this.player.setHealth(this.player.health - this.player.fallDamageQueue, DamageCause.FALL_DAMAGE)
 			this.player.fallDamageQueue = 0
 		}
 
-		if (falldamageY < 0.4) { // If player moved up
+		if (falldamageY < 0.676) { // If player moved up
 			return;
 		}
 
-		this.player.sendMessage("Y" + falldamageY + 3)
-		this.player.fallDamageQueue = falldamageY + 3
+		let modifier = 0
+		
+		if (falldamageY < 2) {
+			modifier = 6
+		} else if (falldamageY < 1) {
+			modifier = 3
+		} else if (falldamageY < 0.7) {
+			modifier = 0.5
+		} else {
+			modifier = 0.25
+		}
+
+		this.player.fallDamageQueue = falldamageY + modifier
+
+		this.player.___dmgCd = true
+		setTimeout(() => {
+			this.player.___dmgCd = false
+		}, 500)
 	}
 
 	async execute() {

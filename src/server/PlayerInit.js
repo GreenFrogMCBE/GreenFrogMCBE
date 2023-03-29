@@ -31,6 +31,7 @@ const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 const PlayerInfo = require("../api/PlayerInfo");
+const DamageCause = require("../events/types/DamageCause");
 
 module.exports = {
 	/**
@@ -200,18 +201,20 @@ module.exports = {
 		/**
 		 * Sets the health of the player
 		 * @param {Float} health
+		 * @param {DamageCause} cause
 		 */
-		player.setHealth = function (health) {
+		player.setHealth = function (health, cause) {
 			if (player.dead) return;
 
 			const healthUpdateEvent = new PlayerHealthUpdateEvent();
 			healthUpdateEvent.server = server.server;
 			healthUpdateEvent.player = player;
-			healthUpdateEvent.name = "minecraft:health";
 			healthUpdateEvent.modifiers = [];
 			healthUpdateEvent.minHealth = 0;
 			healthUpdateEvent.maxHealth = 20;
 			healthUpdateEvent.health = health;
+			healthUpdateEvent.attributeName = "minecraft:health"
+			healthUpdateEvent.cause = cause
 			healthUpdateEvent.execute();
 		};
 

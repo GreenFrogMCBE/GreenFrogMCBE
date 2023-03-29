@@ -15,6 +15,7 @@ const Event = require("./Event");
 const SetHealth = require("../network/packets/ServerSetHealthPacket");
 
 const PlayerDeathEvent = require("./PlayerDeathEvent");
+const DamageCause = require("./types/DamageCause");
 
 class PlayerHealthUpdateEvent extends Event {
 	constructor() {
@@ -23,11 +24,12 @@ class PlayerHealthUpdateEvent extends Event {
 		this.name = "PlayerHealthUpdateEvent";
 		this.player = null;
 		this.server = null;
-		this.health = 0;
-		this.maxHealth = 20;
-		this.minHealth = 0;
+		this.health = null;
+		this.maxHealth = null;
+		this.minHealth = null;
 		this.modifiers = [];
-		this.attributeName = "minecraft:health";
+		this.attributeName = null;
+		this.cause = DamageCause.UNKNOWN;
 	}
 
 	cancel() {
@@ -56,6 +58,7 @@ class PlayerHealthUpdateEvent extends Event {
 			if (this.player.health <= 0) {
 				const playerDeathEvent = new PlayerDeathEvent();
 				playerDeathEvent.player = this.player
+				playerDeathEvent.server = this.server
 				playerDeathEvent.execute();
 			}
 		}
