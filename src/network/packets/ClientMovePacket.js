@@ -52,6 +52,8 @@ class ClientMovePacket extends PacketConstructor {
 		playerMoveEvent.player = player;
 		playerMoveEvent.server = server;
 		playerMoveEvent.position = position;
+		playerMoveEvent.onGround = packet.data.params.on_ground
+		playerMoveEvent.mode = packet.data.params.mode
 		playerMoveEvent.execute();
 	}
 }

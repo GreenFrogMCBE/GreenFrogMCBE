@@ -115,7 +115,7 @@ module.exports = {
 		client.world = null; // This gets initialised in PlayerResourcePacksCompletedEvent
 		Object.assign(client, { x: 0, y: 0, z: 0 }); // Player coordinates
 		Object.assign(client, { health: 20, chunksEnabled: true, packetCount: 0 }); // Network stuff
-		Object.assign(client, { dead: false, offline: false, initialised: false }); // API fields
+		Object.assign(client, { dead: false, offline: false, initialised: false, fallDamageQueue: 0 }); // API fields
 
 		setInterval(() => {
 			client.packetCount = 0
