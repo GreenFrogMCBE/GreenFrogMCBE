@@ -53,7 +53,7 @@ class CustomForm {
 
 	/**
 	 * Adds a dropdown to the form.
-	 * @param {string} text
+	 * @param {String} text
 	 * @param {JSON} options
 	 */
 	addDropdown(text, options) {
@@ -62,7 +62,7 @@ class CustomForm {
 
 	/**
 	 * Adds toggle button
-	 * @param {string} text
+	 * @param {String} text
 	 */
 	addToggle(text) {
 		this.addAction({ type: "toggle", text: text });
@@ -70,7 +70,7 @@ class CustomForm {
 
 	/**
 	 * Adds slider to the form.
-	 * @param {string} text
+	 * @param {String} text
 	 * @param {Number} min
 	 * @param {Number} max
 	 * @param {Number} step

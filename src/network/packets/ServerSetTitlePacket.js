@@ -56,7 +56,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sets the fade-in time of the title.
-	 * @param {number} fadein - The fade-in time of the title.
+	 * @param {Number} fadein - The fade-in time of the title.
 	 */
 	setFadeinTime(fadein) {
 		fadeinTime = fadein;
@@ -64,7 +64,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sets the stay time of the title.
-	 * @param {number} staytime1 - The stay time of the title.
+	 * @param {Number} staytime1 - The stay time of the title.
 	 */
 	setStaytime(staytime1) {
 		stayTime = staytime1;
@@ -72,7 +72,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sets the fade-out time of the title.
-	 * @param {number} fadeout - The fade-out time of the title.
+	 * @param {Number} fadeout - The fade-out time of the title.
 	 */
 	setFadeoutTime(fadeout) {
 		fadeoutTime = fadeout;
@@ -96,7 +96,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Gets the fade-in time of the title.
-	 * @returns {number} The fade-in time of the title.
+	 * @returns {Number} The fade-in time of the title.
 	 */
 	getFadeinTime() {
 		return fadeinTime;
@@ -104,7 +104,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Gets the stay time of the title.
-	 * @returns {number} The stay time of the title.
+	 * @returns {Number} The stay time of the title.
 	 */
 	getStaytime() {
 		return stayTime;
@@ -112,7 +112,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Gets the fade-out time of the title.
-	 * @returns {number} The fade-out time of the title.
+	 * @returns {Number} The fade-out time of the title.
 	 */
 	getFadeout() {
 		return fadeoutTime;

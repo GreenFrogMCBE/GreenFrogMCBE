@@ -84,7 +84,7 @@ module.exports = {
 		/**
 		 * Transfers the player to a different server
 		 * @param {String} address - The address of the server to transfer to
-		 * @param {number} port - The port of the server to transfer to
+		 * @param {Number} port - The port of the server to transfer to
 		 */
 		player.transfer = function (address, port) {
 			const transferEvent = new PlayerTransferEvent();
