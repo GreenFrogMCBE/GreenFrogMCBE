@@ -16,7 +16,8 @@ declare class ClientContainerClosePacket extends PacketConstructor {
 	 * Reads the packet from client
 	 * @param {any} player
 	 * @param {JSON} packet
+	 * @param {any} server
 	 */
-	readPacket(player: any): any;
+	readPacket(player: any, _packet: any, server: any): any;
 }
 import PacketConstructor = require("./PacketConstructor");

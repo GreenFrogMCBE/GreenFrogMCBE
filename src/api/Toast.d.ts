@@ -26,7 +26,7 @@ declare class Toast {
 	setMessage(message: string): void;
 	/**
 	 * Sends the toast
-	 * @param {Object} client
+	 * @param {any} client
 	 */
-	send(client: any): void;
+	send(player: any): void;
 }

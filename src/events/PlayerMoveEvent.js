@@ -32,40 +32,41 @@ class PlayerMoveEvent extends Event {
 
 	/**
 	 * Calculates fall damage
-	 * NOTE: This can be spoofed by hacked client (e.g Horion/Zephyr) 
+	 * NOTE: This can be spoofed by hacked client (e.g Horion/Zephyr)
 	 */
 	async calculateFalldamage() {
 		if (this.player.gamemode == GameMode.CREATIVE || this.player.gamemode == GameMode.SPECTATOR) return;
 
-		let falldamageY = this.player.y - this.position.y
+		let falldamageY = this.player.y - this.position.y;
 
 		if (this.onGround && this.player.fallDamageQueue && !this.player.___dmgCd) {
-			this.player.setHealth(this.player.health - this.player.fallDamageQueue, DamageCause.FALL_DAMAGE)
-			this.player.fallDamageQueue = 0
+			this.player.setHealth(this.player.health - this.player.fallDamageQueue, DamageCause.FALL_DAMAGE);
+			this.player.fallDamageQueue = 0;
 		}
 
-		if (falldamageY < 0.676 || this.player.health <= 0) { // If player moved up
+		if (falldamageY < 0.676 || this.player.health <= 0) {
+			// If player moved up
 			return;
 		}
 
-		let modifier = 0
+		let modifier = 0;
 
 		if (falldamageY < 2) {
-			modifier = 6
+			modifier = 6;
 		} else if (falldamageY < 1) {
-			modifier = 3
+			modifier = 3;
 		} else if (falldamageY < 0.7) {
-			modifier = 0.5
+			modifier = 0.5;
 		} else {
-			modifier = 0.25
+			modifier = 0.25;
 		}
 
-		this.player.fallDamageQueue = falldamageY + modifier
+		this.player.fallDamageQueue = falldamageY + modifier;
 
-		this.player.___dmgCd = true
+		this.player.___dmgCd = true;
 		setTimeout(() => {
-			this.player.___dmgCd = false
-		}, 500)
+			this.player.___dmgCd = false;
+		}, 500);
 	}
 
 	/**
@@ -74,8 +75,9 @@ class PlayerMoveEvent extends Event {
 	async calculateHungerloss() {
 		if (this.player.gamemode == GameMode.CREATIVE || this.player.gamemode == GameMode.SPECTATOR || this.player.hunger <= 0) return;
 
-		if (Math.floor(Math.random() * 50) > 48) { // TODO: Vanilla behaviour
-			this.player.setHunger(this.player.hunger - 1)
+		if (Math.floor(Math.random() * 50) > 48) {
+			// TODO: Vanilla behaviour
+			this.player.setHunger(this.player.hunger - 1);
 		}
 	}
 

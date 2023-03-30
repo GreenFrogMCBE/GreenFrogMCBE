@@ -191,14 +191,14 @@ module.exports = {
 		 */
 		player.setXP = function (xp) {
 			player.setAttribute({
-				"min": 0,
-				"max": 1000000,
-				"current": xp,
-				"default": 0,
-				"name": "player.experience",
-				"modifiers": []
-			})
-		}
+				min: 0,
+				max: 1000000,
+				current: xp,
+				default: 0,
+				name: "player.experience",
+				modifiers: [],
+			});
+		};
 
 		/**
 		 * Sets the health of the player
@@ -215,11 +215,10 @@ module.exports = {
 			healthUpdateEvent.minHealth = 0;
 			healthUpdateEvent.maxHealth = 20;
 			healthUpdateEvent.health = health;
-			healthUpdateEvent.attributeName = "minecraft:health"
-			healthUpdateEvent.cause = cause
+			healthUpdateEvent.attributeName = "minecraft:health";
+			healthUpdateEvent.cause = cause;
 			healthUpdateEvent.execute();
 		};
-
 
 		/**
 		 * Sets the hunger of the player
@@ -229,16 +228,16 @@ module.exports = {
 		player.setHunger = function (hunger, cause = HungerCause.UNKNOWN) {
 			if (player.dead) return;
 
-			const healthUpdateEvent = new PlayerHungerUpdateEvent()
+			const healthUpdateEvent = new PlayerHungerUpdateEvent();
 			healthUpdateEvent.server = server;
 			healthUpdateEvent.player = player;
 			healthUpdateEvent.modifiers = [];
-			healthUpdateEvent.minHunger = 0
+			healthUpdateEvent.minHunger = 0;
 			healthUpdateEvent.maxHunger = 20;
 			healthUpdateEvent.defaultHunger = 0;
 			healthUpdateEvent.hunger = hunger;
-			healthUpdateEvent.attributeName = "minecraft:player.hunger"
-			healthUpdateEvent.cause = cause
+			healthUpdateEvent.attributeName = "minecraft:player.hunger";
+			healthUpdateEvent.cause = cause;
 			healthUpdateEvent.execute();
 		};
 

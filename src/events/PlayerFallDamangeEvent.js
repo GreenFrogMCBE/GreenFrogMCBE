@@ -1,6 +1,6 @@
 /**
  * @deprecated Please use PlayerHealthUpdateEvent
- *	 
+ *
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
@@ -25,7 +25,7 @@ class PlayerFallDamangeEvent extends Event {
 
 	/** @deprecated Please use PlayerHealthUpdateEvent */
 	cancel() {
-		throw new UnsupportedOperationException("This event cannnot be cancelled. Please use PlayerHealthUpdateEvent")
+		throw new UnsupportedOperationException("This event cannnot be cancelled. Please use PlayerHealthUpdateEvent");
 	}
 
 	/** @deprecated Please use PlayerHealthUpdateEvent */

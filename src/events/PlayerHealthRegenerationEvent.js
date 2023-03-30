@@ -1,5 +1,5 @@
 /**
- * @deprecated Please use PlayerHealthUpdateEvent 
+ * @deprecated Please use PlayerHealthUpdateEvent
  *
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -18,7 +18,7 @@ const UnsupportedOperationException = require("./exceptions/UnsupportedOperation
 
 class PlayerHealthUpdateEvent extends Event {
 	/**
- 	 * @deprecated Please use PlayerHealthUpdateEvent
+	 * @deprecated Please use PlayerHealthUpdateEvent
 	 */
 	constructor() {
 		super();
@@ -28,14 +28,14 @@ class PlayerHealthUpdateEvent extends Event {
 	}
 
 	/**
- 	 * @deprecated Please use PlayerHealthUpdateEvent
+	 * @deprecated Please use PlayerHealthUpdateEvent
 	 */
 	cancel() {
-		throw new UnsupportedOperationException("This event cannnot be cancelled. Please use PlayerHealthUpdateEvent")
+		throw new UnsupportedOperationException("This event cannnot be cancelled. Please use PlayerHealthUpdateEvent");
 	}
 
 	/**
- 	 * @deprecated Please use PlayerHealthUpdateEvent
+	 * @deprecated Please use PlayerHealthUpdateEvent
 	 */
 	async execute() {
 		await this._execute(this);
