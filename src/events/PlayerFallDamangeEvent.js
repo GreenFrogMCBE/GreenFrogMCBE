@@ -1,4 +1,6 @@
 /**
+ * @deprecated Please use PlayerHealthUpdateEvent
+ *	 
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
@@ -10,52 +12,26 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PacketConstructor = require("./PacketConstructor");
+const Event = require("./Event");
+const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
 
-const PlayerMoveEvent = require("../../events/PlayerMoveEvent");
-
-class ClientMovePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {String} The name of the packet
-	 */
-	getPacketName() {
-		return "move_player";
+class PlayerFallDamangeEvent extends Event {
+	constructor() {
+		super();
+		this.name = "PlayerDeathEvent";
+		this.player = null;
+		this.server = null;
 	}
 
-	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
-	 */
-	isCriticalPacket() {
-		return false;
+	/** @deprecated Please use PlayerHealthUpdateEvent */
+	cancel() {
+		throw new UnsupportedOperationException("This event cannnot be cancelled. Please use PlayerHealthUpdateEvent")
 	}
 
-	/**
-	 * Reads the packet from player
-	 * @param {any} player
-	 * @param {JSON} packet
-	 * @param {any} server
-	 */
-	async readPacket(player, packet, server) {
-		await this.validatePacket(player);
-
-		let position = packet.data.params.position;
-
-		if (player.x == position.x
-			&& player.y == position.y
-			&& player.z == position.z) { // This code prevents a few crashers, that spam PlayerMove packet to overload the server
-			return
-		}
-
-		const playerMoveEvent = new PlayerMoveEvent();
-		playerMoveEvent.player = player;
-		playerMoveEvent.server = server;
-		playerMoveEvent.position = position;
-		playerMoveEvent.onGround = packet.data.params.on_ground
-		playerMoveEvent.mode = packet.data.params.mode
-		playerMoveEvent.execute();
+	/** @deprecated Please use PlayerHealthUpdateEvent */
+	execute() {
+		this._execute(this);
 	}
 }
 
-module.exports = ClientMovePacket;
+module.exports = PlayerFallDamangeEvent;

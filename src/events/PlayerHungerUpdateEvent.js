@@ -10,52 +10,46 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PacketConstructor = require("./PacketConstructor");
+const Event = require("./Event");
 
-const PlayerMoveEvent = require("../../events/PlayerMoveEvent");
+const HungerCause = require("./types/HungerCause");
 
-class ClientMovePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {String} The name of the packet
-	 */
-	getPacketName() {
-		return "move_player";
+class PlayerHungerUpdateEvent extends Event {
+	constructor() {
+		super();
+		this.cancelled = false;
+		this.name = "PlayerHungerUpdateEvent";
+		this.player = null;
+		this.server = null;
+		this.hunger = null;
+		this.maxHunger = null;
+		this.minHunger = null;
+		this.defaultHunger = null
+		this.modifiers = [];
+		this.attributeName = null;
+		this.cause = HungerCause.UNKNOWN;
 	}
 
-	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
-	 */
-	isCriticalPacket() {
-		return false;
+	cancel() {
+		this.cancelled = true;
 	}
 
-	/**
-	 * Reads the packet from player
-	 * @param {any} player
-	 * @param {JSON} packet
-	 * @param {any} server
-	 */
-	async readPacket(player, packet, server) {
-		await this.validatePacket(player);
+	async execute() {
+		await this._execute(this);
 
-		let position = packet.data.params.position;
+		if (!this.cancelled) {
+			this.player.setAttribute({
+				name: this.attributeName,
+				min: this.minHunger,
+				max: this.maxHunger,
+				current: this.hunger,
+				default: this.defaultHunger,
+				modifiers: this.modifiers,
+			});
 
-		if (player.x == position.x
-			&& player.y == position.y
-			&& player.z == position.z) { // This code prevents a few crashers, that spam PlayerMove packet to overload the server
-			return
+			this.player.hunger = this.hunger;
 		}
-
-		const playerMoveEvent = new PlayerMoveEvent();
-		playerMoveEvent.player = player;
-		playerMoveEvent.server = server;
-		playerMoveEvent.position = position;
-		playerMoveEvent.onGround = packet.data.params.on_ground
-		playerMoveEvent.mode = packet.data.params.mode
-		playerMoveEvent.execute();
 	}
 }
 
-module.exports = ClientMovePacket;
+module.exports = PlayerHungerUpdateEvent;

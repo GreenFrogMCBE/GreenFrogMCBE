@@ -12,6 +12,8 @@
  */
 const { config } = require("../api/ServerInfo");
 
+const Air = require("../block/Air")
+
 const ServerLevelChunkPacket = require("../network/packets/ServerLevelChunkPacket");
 const WorldGenerator = require("../network/packets/types/WorldGenerator");
 
@@ -28,9 +30,12 @@ class BlockBreakEvent extends Event {
 		this.player = null;
 		this.server = null;
 		this.block_position = null;
+		this.cancelled = false;
 	}
 
 	cancel() {
+		this.cancelled = true
+
 		let chunks = require(`${__dirname}/../../world/chunks${config.generator === WorldGenerator.DEFAULT ? "" : "_flat"}.json`);
 
 		for (const chunk of chunks) {
@@ -50,6 +55,17 @@ class BlockBreakEvent extends Event {
 
 	execute() {
 		this._execute(this);
+
+		if (!this.cancelled) {
+			const airBlockID = new Air().getRuntimeId()
+
+			this.player.world.placeBlock(
+				this.block_position.x, 
+				this.block_position.y,
+				this.block_position.z,
+				airBlockID 
+			)
+		}
 	}
 }
 

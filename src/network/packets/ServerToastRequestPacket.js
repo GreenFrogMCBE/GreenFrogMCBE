@@ -68,7 +68,7 @@ class ServerToastRequestPacket extends PacketConstructor {
 	 * Sends the packet to the client
 	 * @param {any} client
 	 */
-	writePacket(client) {
+	send(client) {
 		client.queue(this.getPacketName(), {
 			title: this.getTitle(),
 			message: this.getMessage(),

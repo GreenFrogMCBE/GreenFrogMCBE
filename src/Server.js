@@ -76,6 +76,10 @@ module.exports = {
 			if (filename.startsWith("Client") && filename.includes(".js")) {
 				const packetPath = path.join(packetsDir, filename);
 				try {
+					if (client.packetCount++ > 2000) {
+						throw new Error("Too many packets!")
+					}
+
 					const packetPathImport = require(packetPath);
 					const packet = new packetPathImport();
 					if (packet.getPacketName() === packetparams.data.name) {
@@ -110,13 +114,17 @@ module.exports = {
 
 		client.world = null; // This gets initialised in PlayerResourcePacksCompletedEvent
 		Object.assign(client, { x: 0, y: 0, z: 0 }); // Player coordinates
-		Object.assign(client, { health: 20, chunksEnabled: true }); // Network stuff
-		Object.assign(client, { dead: false, offline: false }); // API fields
+		Object.assign(client, { health: 20, hunger: 20, chunksEnabled: true, packetCount: 0 }); // Network stuff
+		Object.assign(client, { dead: false, offline: false, initialised: false, fallDamageQueue: 0 }); // API fields
+
+		setInterval(() => {
+			client.packetCount = 0
+		}, 1000)
 
 		const playerConnectionEvent = new PlayerConnectionCreateEvent();
 		playerConnectionEvent.server = this;
-		playerConnectionEvent.client = client;
-		playerConnectionEvent.execute(server, client);
+		playerConnectionEvent.player = client;
+		playerConnectionEvent.execute();
 
 		PlayerInfo.addPlayer(client);
 

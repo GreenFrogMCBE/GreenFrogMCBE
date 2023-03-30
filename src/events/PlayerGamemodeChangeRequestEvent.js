@@ -28,7 +28,7 @@ class PlayerGamemodeChangeRequestEvent extends Event {
 
 	async execute() {
 		if (!this.cancelled) {
-			player.setGamemode(this.gamemode);
+			this.player.setGamemode(this.gamemode);
 		}
 	}
 }
