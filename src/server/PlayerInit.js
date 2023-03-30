@@ -24,6 +24,7 @@ const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDat
 const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
 const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
+const PlayerHungerUpdateEvent = require("../events/PlayerHungerUpdateEvent");
 const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
 const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent");
@@ -31,6 +32,8 @@ const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 const PlayerInfo = require("../api/PlayerInfo");
+const DamageCause = require("../events/types/DamageCause");
+const HungerCause = require("../events/types/HungerCause");
 
 module.exports = {
 	/**
@@ -84,7 +87,7 @@ module.exports = {
 		/**
 		 * Transfers the player to a different server
 		 * @param {String} address - The address of the server to transfer to
-		 * @param {number} port - The port of the server to transfer to
+		 * @param {Number} port - The port of the server to transfer to
 		 */
 		player.transfer = function (address, port) {
 			const transferEvent = new PlayerTransferEvent();
@@ -100,11 +103,11 @@ module.exports = {
 		 * @param {Difficulty} difficulty
 		 */
 		player.setDifficulty = function (difficulty) {
-			const difficultyevent = new PlayerUpdateDifficultyEvent();
-			difficultyevent.server = server;
-			difficultyevent.player = player;
-			difficultyevent.difficulty = difficulty;
-			difficultyevent.execute();
+			const difficultyEvent = new PlayerUpdateDifficultyEvent();
+			difficultyEvent.server = server;
+			difficultyEvent.player = player;
+			difficultyEvent.difficulty = difficulty;
+			difficultyEvent.execute();
 		};
 
 		/**
@@ -182,36 +185,60 @@ module.exports = {
 			updateattributespacket.writePacket(player);
 		};
 
-		// /**
-		//  * Sets the XP for the player
-		//  * @param {Float} xp
-		//  */
-		// player.setXP = function (xp) {
-		// 	player.setAttribute({
-		// 		"min": 0,
-		// 		"max": 1000000,
-		// 		"current": xp,
-		// 		"default": 0,
-		// 		"name": "player.experience",
-		// 		"modifiers": []
-		// 	})
-		// }
+		/**
+		 * Sets the XP for the player
+		 * @param {Float} xp
+		 */
+		player.setXP = function (xp) {
+			player.setAttribute({
+				"min": 0,
+				"max": 1000000,
+				"current": xp,
+				"default": 0,
+				"name": "player.experience",
+				"modifiers": []
+			})
+		}
 
 		/**
 		 * Sets the health of the player
 		 * @param {Float} health
+		 * @param {DamageCause} cause
 		 */
-		player.setHealth = function (health) {
+		player.setHealth = function (health, cause = DamageCause.UNKNOWN) {
 			if (player.dead) return;
 
 			const healthUpdateEvent = new PlayerHealthUpdateEvent();
-			healthUpdateEvent.server = server.server;
+			healthUpdateEvent.server = server;
 			healthUpdateEvent.player = player;
-			healthUpdateEvent.name = "minecraft:health";
 			healthUpdateEvent.modifiers = [];
 			healthUpdateEvent.minHealth = 0;
 			healthUpdateEvent.maxHealth = 20;
 			healthUpdateEvent.health = health;
+			healthUpdateEvent.attributeName = "minecraft:health"
+			healthUpdateEvent.cause = cause
+			healthUpdateEvent.execute();
+		};
+
+
+		/**
+		 * Sets the hunger of the player
+		 * @param {Float} hunger
+		 * @param {HungerCause} cause
+		 */
+		player.setHunger = function (hunger, cause = HungerCause.UNKNOWN) {
+			if (player.dead) return;
+
+			const healthUpdateEvent = new PlayerHungerUpdateEvent()
+			healthUpdateEvent.server = server;
+			healthUpdateEvent.player = player;
+			healthUpdateEvent.modifiers = [];
+			healthUpdateEvent.minHunger = 0
+			healthUpdateEvent.maxHunger = 20;
+			healthUpdateEvent.defaultHunger = 0;
+			healthUpdateEvent.hunger = hunger;
+			healthUpdateEvent.attributeName = "minecraft:player.hunger"
+			healthUpdateEvent.cause = cause
 			healthUpdateEvent.execute();
 		};
 
@@ -249,7 +276,11 @@ module.exports = {
 			GarbageCollector.clearOfflinePlayers();
 
 			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
-			Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+
+			if (player.initialised) {
+				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+			}
+
 			player.offline = true;
 		});
 	},

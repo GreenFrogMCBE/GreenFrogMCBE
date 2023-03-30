@@ -21,7 +21,7 @@ module.exports = {
 	/**
 	 * Returns the minor server version (e.g 2.8.1)
 	 */
-	minorServerVersion: "3.0 (development version)",
+	minorServerVersion: "3.0 (development version 2)",
 	/**
 	 * Returns the lang as JSON
 	 */

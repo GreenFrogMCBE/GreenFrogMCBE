@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const ServerToastRequest = require("../plugin/events/ServerToastRequest");
+const ServerToastRequestEvent = require("../events/ServerToastRequestEvent");
 
 class Toast {
 	constructor() {
@@ -36,11 +36,14 @@ class Toast {
 
 	/**
 	 * Sends the toast
-	 * @param {Object} client
+	 * @param {any} client
 	 */
-	send(client) {
-		const toast = new ServerToastRequest();
-		toast.execute(require("../Server").server, client, this.title, this.message);
+	send(player) {
+		const toastRequestEvent = new ServerToastRequestEvent();
+		toastRequestEvent.message = this.message
+		toastRequestEvent.title = this.title;
+		toastRequestEvent.player = player
+		toastRequestEvent.execute();
 	}
 }
 

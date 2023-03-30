@@ -10,8 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const FormRequest = require("../../network/packets/FormRequest");
-const Colors = require("../../player/Colors");
+const FormRequest = require("../network/packets/ServerFormRequestPacket");
 const FormTypes = require("./FormTypes");
 
 class CustomForm {
@@ -19,7 +18,7 @@ class CustomForm {
 
 	constructor() {
 		this.type = FormTypes.CUSTOMFORM;
-		this.title = Colors.red + "Invalid title!";
+		this.title = "";
 		this.buttons = [];
 		this.id = 0;
 		this.actions = [];
@@ -53,7 +52,7 @@ class CustomForm {
 
 	/**
 	 * Adds a dropdown to the form.
-	 * @param {string} text
+	 * @param {String} text
 	 * @param {JSON} options
 	 */
 	addDropdown(text, options) {
@@ -62,7 +61,7 @@ class CustomForm {
 
 	/**
 	 * Adds toggle button
-	 * @param {string} text
+	 * @param {String} text
 	 */
 	addToggle(text) {
 		this.addAction({ type: "toggle", text: text });
@@ -70,7 +69,7 @@ class CustomForm {
 
 	/**
 	 * Adds slider to the form.
-	 * @param {string} text
+	 * @param {String} text
 	 * @param {Number} min
 	 * @param {Number} max
 	 * @param {Number} step

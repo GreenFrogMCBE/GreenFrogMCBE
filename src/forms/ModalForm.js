@@ -10,16 +10,15 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const FormRequest = require("../network/packets/FormRequest");
-const Colors = require("../api/PlayerColors");
+const FormRequest = require("../network/packets/ServerFormRequestPacket");
 const FormTypes = require("./FormTypes");
 
 class ModalForm {
 	constructor() {
-		this.title = Colors.red + "Invalid title!";
-		this.text = Colors.red + "Invalid text!";
-		this.button1 = Colors.red + "Invalid button1!";
-		this.button2 = Colors.red + "Invalid button2!";
+		this.title = "Invalid title!";
+		this.text = "Invalid text!";
+		this.button1 = "Invalid button1!";
+		this.button2 = "Invalid button2!";
 		this.id = 0;
 	}
 
