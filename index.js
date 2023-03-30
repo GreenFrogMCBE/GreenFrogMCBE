@@ -106,6 +106,8 @@ garbageCollectorDelay: 60000
 tickEvent: true # Should ServerTickEvent be enabled?
 tickWorldTime: true # Should time update be server side?
 tickVoid: true # Should people that are in void take damage?
+tickRegeneration: true # Should people in survival mode regenerate their health?
+tickStarvationDamage: true # Should people take damage if their food level is 0?
 randomTickSpeed: 1000`
 		);
 	}

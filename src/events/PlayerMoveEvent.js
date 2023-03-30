@@ -44,12 +44,12 @@ class PlayerMoveEvent extends Event {
 			this.player.fallDamageQueue = 0
 		}
 
-		if (falldamageY < 0.676) { // If player moved up
+		if (falldamageY < 0.676 || this.player.health <= 0) { // If player moved up
 			return;
 		}
 
 		let modifier = 0
-		
+
 		if (falldamageY < 2) {
 			modifier = 6
 		} else if (falldamageY < 1) {
@@ -68,11 +68,23 @@ class PlayerMoveEvent extends Event {
 		}, 500)
 	}
 
+	/**
+	 * This function calculates how much hunger the player must lose
+	 */
+	async calculateHungerloss() {
+		if (this.player.gamemode == GameMode.CREATIVE || this.player.gamemode == GameMode.SPECTATOR || this.player.hunger <= 0) return;
+
+		if (Math.floor(Math.random() * 50) > 48) { // TODO: Vanilla behaviour
+			this.player.setHunger(this.player.hunger - 1)
+		}
+	}
+
 	async execute() {
 		await this._execute(this);
 
 		if (!this.cancelled) {
-			this.calculateFalldamage();
+			await this.calculateFalldamage();
+			await this.calculateHungerloss();
 
 			this.player.x = this.position.x;
 			this.player.y = this.position.y;

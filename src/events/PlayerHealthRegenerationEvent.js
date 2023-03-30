@@ -1,4 +1,6 @@
 /**
+ * @deprecated Please use PlayerHealthUpdateEvent 
+ *
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
@@ -12,73 +14,31 @@
  */
 const Event = require("./Event");
 
-const SetHealth = require("../network/packets/ServerSetHealthPacket");
-
-const PlayerDeathEvent = require("./PlayerDeathEvent");
-const PlayerFallDamangeEvent = require("./PlayerFallDamangeEvent");
-const PlayerHealthRegenerationEvent = require("./PlayerHealthRegenerationEvent");
-
-const DamageCause = require("./types/DamageCause");
+const UnsupportedOperationException = require("./exceptions/UnsupportedOperationException");
 
 class PlayerHealthUpdateEvent extends Event {
+	/**
+ 	 * @deprecated Please use PlayerHealthUpdateEvent
+	 */
 	constructor() {
 		super();
-		this.cancelled = false;
-		this.name = "PlayerHealthUpdateEvent";
+		this.name = "PlayerHealthRegenerationEvent";
 		this.player = null;
 		this.server = null;
-		this.health = null;
-		this.maxHealth = null;
-		this.minHealth = null;
-		this.modifiers = [];
-		this.attributeName = null;
-		this.cause = DamageCause.UNKNOWN;
 	}
 
+	/**
+ 	 * @deprecated Please use PlayerHealthUpdateEvent
+	 */
 	cancel() {
-		this.cancelled = true;
+		throw new UnsupportedOperationException("This event cannnot be cancelled. Please use PlayerHealthUpdateEvent")
 	}
 
+	/**
+ 	 * @deprecated Please use PlayerHealthUpdateEvent
+	 */
 	async execute() {
 		await this._execute(this);
-
-		if (!this.cancelled) {
-			const setHealthPacket = new SetHealth();
-			setHealthPacket.setHealth(this.health);
-			setHealthPacket.writePacket(this.player);
-
-			if (this.cause == DamageCause.FALL_DAMAGE) {
-				const playerFallDamangeEvent = new PlayerFallDamangeEvent()
-				playerFallDamangeEvent.server = this.server
-				playerFallDamangeEvent.player = this.player
-				playerFallDamangeEvent.execute()
-			}
-
-			if (this.cause == DamageCause.REGENERATION) {
-				const playerHealthRegenerationEvent = new PlayerHealthRegenerationEvent()
-				playerHealthRegenerationEvent.server = this.server
-				playerHealthRegenerationEvent.player = this.player
-				playerHealthRegenerationEvent.execute()
-			}
-
-			this.player.setAttribute({
-				name: this.attributeName,
-				min: this.minHealth,
-				max: this.maxHealth,
-				current: this.health,
-				default: this.maxHealth,
-				modifiers: this.modifiers,
-			});
-
-			this.player.health = this.health;
-
-			if (this.player.health <= 0) {
-				const playerDeathEvent = new PlayerDeathEvent();
-				playerDeathEvent.player = this.player
-				playerDeathEvent.server = this.server
-				playerDeathEvent.execute();
-			}
-		}
 	}
 }
 

@@ -12,10 +12,13 @@
  */
 const WorldGenerator = require("../network/packets/types/WorldGenerator");
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
+const DamageCause = require("../events/types/DamageCause");
+
 const ServerTickEvent = require("../events/ServerTickEvent");
 const { config, lang } = require("../api/ServerInfo");
 const PlayerInfo = require("../api/PlayerInfo");
 const GameMode = require("../api/GameMode");
+
 const Logger = require("../server/Logger");
 
 let _time = 0;
@@ -128,6 +131,24 @@ class DefaultWorld {
 				}
 			}
 
+			if (config.tickRegeneration) {
+				for (const player of this.getPlayersInWorld()) {
+					if (player.health > 20 || player.hunger < 20 || player.gamemode == GameMode.CREATIVE || player.gamemode == GameMode.SPECTATOR) {
+						Logger.debug("Skipped regeneration task for " + player.username)
+					} else {
+						player.setHealth(player.health + 1, DamageCause.REGENERATION)
+					}
+				}
+			}
+
+			if (config.tickStarvationDamage) {
+				for (const player of this.getPlayersInWorld()) {
+					if (player.hunger <= 0) {
+						player.setHealth(player.health - 1, DamageCause.STARVATION)
+					}
+				}
+			}
+
 			if (config.tickVoid) {
 				for (const client of this.getPlayersInWorld()) {
 					const posY = Math.floor(client.y);
@@ -142,7 +163,7 @@ class DefaultWorld {
 						if (client.gamemode === GameMode.CREATIVE || client.gamemode === GameMode.SPECTATOR) {
 							if (client.damage_loop) delete client.damage_loop;
 						} else if (!client.cannotbedamagedbyvoid) {
-							client.setHealth(client.health - 5);
+							client.setHealth(client.health - 5, DamageCause.VOID);
 						}
 					} else {
 						if (client.damage_loop) delete client.damage_loop;

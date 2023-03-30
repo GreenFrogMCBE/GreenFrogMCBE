@@ -24,6 +24,7 @@ const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDat
 const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
 const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
+const PlayerHungerUpdateEvent = require("../events/PlayerHungerUpdateEvent");
 const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
 const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent");
@@ -31,6 +32,8 @@ const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 const PlayerInfo = require("../api/PlayerInfo");
+const DamageCause = require("../events/types/DamageCause");
+const HungerCause = require("../events/types/HungerCause");
 
 module.exports = {
 	/**
@@ -202,17 +205,39 @@ module.exports = {
 		 * @param {Float} health
 		 * @param {DamageCause} cause
 		 */
-		player.setHealth = function (health, cause) {
+		player.setHealth = function (health, cause = DamageCause.UNKNOWN) {
 			if (player.dead) return;
 
 			const healthUpdateEvent = new PlayerHealthUpdateEvent();
-			healthUpdateEvent.server = server.server;
+			healthUpdateEvent.server = server;
 			healthUpdateEvent.player = player;
 			healthUpdateEvent.modifiers = [];
 			healthUpdateEvent.minHealth = 0;
 			healthUpdateEvent.maxHealth = 20;
 			healthUpdateEvent.health = health;
 			healthUpdateEvent.attributeName = "minecraft:health"
+			healthUpdateEvent.cause = cause
+			healthUpdateEvent.execute();
+		};
+
+
+		/**
+		 * Sets the hunger of the player
+		 * @param {Float} hunger
+		 * @param {HungerCause} cause
+		 */
+		player.setHunger = function (hunger, cause = HungerCause.UNKNOWN) {
+			if (player.dead) return;
+
+			const healthUpdateEvent = new PlayerHungerUpdateEvent()
+			healthUpdateEvent.server = server;
+			healthUpdateEvent.player = player;
+			healthUpdateEvent.modifiers = [];
+			healthUpdateEvent.minHunger = 0
+			healthUpdateEvent.maxHunger = 20;
+			healthUpdateEvent.defaultHunger = 0;
+			healthUpdateEvent.hunger = hunger;
+			healthUpdateEvent.attributeName = "minecraft:player.hunger"
 			healthUpdateEvent.cause = cause
 			healthUpdateEvent.execute();
 		};

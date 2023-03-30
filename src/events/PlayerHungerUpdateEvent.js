@@ -12,27 +12,22 @@
  */
 const Event = require("./Event");
 
-const SetHealth = require("../network/packets/ServerSetHealthPacket");
+const HungerCause = require("./types/HungerCause");
 
-const PlayerDeathEvent = require("./PlayerDeathEvent");
-const PlayerFallDamangeEvent = require("./PlayerFallDamangeEvent");
-const PlayerHealthRegenerationEvent = require("./PlayerHealthRegenerationEvent");
-
-const DamageCause = require("./types/DamageCause");
-
-class PlayerHealthUpdateEvent extends Event {
+class PlayerHungerUpdateEvent extends Event {
 	constructor() {
 		super();
 		this.cancelled = false;
-		this.name = "PlayerHealthUpdateEvent";
+		this.name = "PlayerHungerUpdateEvent";
 		this.player = null;
 		this.server = null;
-		this.health = null;
-		this.maxHealth = null;
-		this.minHealth = null;
+		this.hunger = null;
+		this.maxHunger = null;
+		this.minHunger = null;
+		this.defaultHunger = null
 		this.modifiers = [];
 		this.attributeName = null;
-		this.cause = DamageCause.UNKNOWN;
+		this.cause = HungerCause.UNKNOWN;
 	}
 
 	cancel() {
@@ -43,43 +38,18 @@ class PlayerHealthUpdateEvent extends Event {
 		await this._execute(this);
 
 		if (!this.cancelled) {
-			const setHealthPacket = new SetHealth();
-			setHealthPacket.setHealth(this.health);
-			setHealthPacket.writePacket(this.player);
-
-			if (this.cause == DamageCause.FALL_DAMAGE) {
-				const playerFallDamangeEvent = new PlayerFallDamangeEvent()
-				playerFallDamangeEvent.server = this.server
-				playerFallDamangeEvent.player = this.player
-				playerFallDamangeEvent.execute()
-			}
-
-			if (this.cause == DamageCause.REGENERATION) {
-				const playerHealthRegenerationEvent = new PlayerHealthRegenerationEvent()
-				playerHealthRegenerationEvent.server = this.server
-				playerHealthRegenerationEvent.player = this.player
-				playerHealthRegenerationEvent.execute()
-			}
-
 			this.player.setAttribute({
 				name: this.attributeName,
-				min: this.minHealth,
-				max: this.maxHealth,
-				current: this.health,
-				default: this.maxHealth,
+				min: this.minHunger,
+				max: this.maxHunger,
+				current: this.hunger,
+				default: this.defaultHunger,
 				modifiers: this.modifiers,
 			});
 
-			this.player.health = this.health;
-
-			if (this.player.health <= 0) {
-				const playerDeathEvent = new PlayerDeathEvent();
-				playerDeathEvent.player = this.player
-				playerDeathEvent.server = this.server
-				playerDeathEvent.execute();
-			}
+			this.player.hunger = this.hunger;
 		}
 	}
 }
 
-module.exports = PlayerHealthUpdateEvent;
+module.exports = PlayerHungerUpdateEvent;
