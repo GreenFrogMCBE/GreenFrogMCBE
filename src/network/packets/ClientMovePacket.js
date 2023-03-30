@@ -42,18 +42,17 @@ class ClientMovePacket extends PacketConstructor {
 
 		let position = packet.data.params.position;
 
-		if (player.x == position.x
-			&& player.y == position.y
-			&& player.z == position.z) { // This code prevents a few crashers, that spam PlayerMove packet to overload the server
-			return
+		if (player.x == position.x && player.y == position.y && player.z == position.z) {
+			// This code prevents a few crashers, that spam PlayerMove packet to overload the server
+			return;
 		}
 
 		const playerMoveEvent = new PlayerMoveEvent();
 		playerMoveEvent.player = player;
 		playerMoveEvent.server = server;
 		playerMoveEvent.position = position;
-		playerMoveEvent.onGround = packet.data.params.on_ground
-		playerMoveEvent.mode = packet.data.params.mode
+		playerMoveEvent.onGround = packet.data.params.on_ground;
+		playerMoveEvent.mode = packet.data.params.mode;
 		playerMoveEvent.execute();
 	}
 }

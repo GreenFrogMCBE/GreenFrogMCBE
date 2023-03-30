@@ -53,9 +53,9 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 		switch (actionID) {
 			case BlockActions.BREAKBLOCK:
 				if (player.gamemode == GameMode.ADVENTURE || player.gamemode == GameMode.SPECTATOR) {
-					throw new Error("Player tried to break block, while in " + player.gamemode + " gamemode")
+					throw new Error("Player tried to break block, while in " + player.gamemode + " gamemode");
 				}
-				
+
 				const blockbreakevent = new BlockBreakEvent();
 				blockbreakevent.actions = packet.data.params.actions;
 				blockbreakevent.legacy = packet.data.params.transaction.legacy;

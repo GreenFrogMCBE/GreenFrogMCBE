@@ -16,11 +16,12 @@ declare class PlayerHealthUpdateEvent extends Event {
 	name: string;
 	player: any;
 	server: any;
-	health: number;
-	maxHealth: number;
-	minHealth: number;
+	health: any;
+	maxHealth: any;
+	minHealth: any;
 	modifiers: {};
-	attributeName: string;
+	attributeName: any;
+	cause: string;
 	execute(): any;
 }
 import Event = require("./Event");

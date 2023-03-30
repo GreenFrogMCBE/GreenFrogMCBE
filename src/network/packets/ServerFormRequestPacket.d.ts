@@ -96,7 +96,7 @@ declare class ServerFormRequestPacket extends PacketConstructor {
 	 * Sends the packet to the client
 	 * @param {any} client
 	 */
-	writePacket(client: any): void;
+	send(client: any): void;
 }
 import PacketConstructor = require("./PacketConstructor");
 import FormTypes = require("../../forms/FormTypes");

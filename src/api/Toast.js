@@ -40,9 +40,9 @@ class Toast {
 	 */
 	send(player) {
 		const toastRequestEvent = new ServerToastRequestEvent();
-		toastRequestEvent.message = this.message
+		toastRequestEvent.message = this.message;
 		toastRequestEvent.title = this.title;
-		toastRequestEvent.player = player
+		toastRequestEvent.player = player;
 		toastRequestEvent.execute();
 	}
 }

@@ -77,7 +77,7 @@ module.exports = {
 				const packetPath = path.join(packetsDir, filename);
 				try {
 					if (client.packetCount++ > 2000) {
-						throw new Error("Too many packets!")
+						throw new Error("Too many packets!");
 					}
 
 					const packetPathImport = require(packetPath);
@@ -118,8 +118,8 @@ module.exports = {
 		Object.assign(client, { dead: false, offline: false, initialised: false, fallDamageQueue: 0 }); // API fields
 
 		setInterval(() => {
-			client.packetCount = 0
-		}, 1000)
+			client.packetCount = 0;
+		}, 1000);
 
 		const playerConnectionEvent = new PlayerConnectionCreateEvent();
 		playerConnectionEvent.server = this;

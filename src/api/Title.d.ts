@@ -12,7 +12,7 @@
  */
 export = Title;
 declare class Title {
-	type: any;
+	type: string;
 	text: string;
 	fadeintime: number;
 	fadeouttime: number;

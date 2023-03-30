@@ -46,7 +46,7 @@ const replacements = [
 	// Put your replacements here
 	// example:
 	["{Number}", "{Number}"],
-	["{String}", "{String}"]
+	["{String}", "{String}"],
 ];
 
 traverseDirectory(rootDir, replacements);

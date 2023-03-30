@@ -24,7 +24,7 @@ class PlayerHungerUpdateEvent extends Event {
 		this.hunger = null;
 		this.maxHunger = null;
 		this.minHunger = null;
-		this.defaultHunger = null
+		this.defaultHunger = null;
 		this.modifiers = [];
 		this.attributeName = null;
 		this.cause = HungerCause.UNKNOWN;

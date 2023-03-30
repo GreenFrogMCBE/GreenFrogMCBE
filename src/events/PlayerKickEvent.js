@@ -23,7 +23,7 @@ class PlayerKickEvent extends Event {
 	}
 
 	execute() {
-		if (this.reason == null) return // Prevents bugs
+		if (this.reason == null) return; // Prevents bugs
 
 		this._execute(this);
 	}

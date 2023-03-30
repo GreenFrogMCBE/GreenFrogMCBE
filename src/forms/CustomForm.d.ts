@@ -36,18 +36,18 @@ declare class CustomForm {
 	addText(text: any): void;
 	/**
 	 * Adds a dropdown to the form.
-	 * @param {string} text
+	 * @param {String} text
 	 * @param {JSON} options
 	 */
 	addDropdown(text: string, options: JSON): void;
 	/**
 	 * Adds toggle button
-	 * @param {string} text
+	 * @param {String} text
 	 */
 	addToggle(text: string): void;
 	/**
 	 * Adds slider to the form.
-	 * @param {string} text
+	 * @param {String} text
 	 * @param {Number} min
 	 * @param {Number} max
 	 * @param {Number} step

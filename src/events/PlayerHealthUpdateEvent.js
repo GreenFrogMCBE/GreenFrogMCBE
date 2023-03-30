@@ -48,17 +48,17 @@ class PlayerHealthUpdateEvent extends Event {
 			setHealthPacket.writePacket(this.player);
 
 			if (this.cause == DamageCause.FALL_DAMAGE) {
-				const playerFallDamangeEvent = new PlayerFallDamangeEvent()
-				playerFallDamangeEvent.server = this.server
-				playerFallDamangeEvent.player = this.player
-				playerFallDamangeEvent.execute()
+				const playerFallDamangeEvent = new PlayerFallDamangeEvent();
+				playerFallDamangeEvent.server = this.server;
+				playerFallDamangeEvent.player = this.player;
+				playerFallDamangeEvent.execute();
 			}
 
 			if (this.cause == DamageCause.REGENERATION) {
-				const playerHealthRegenerationEvent = new PlayerHealthRegenerationEvent()
-				playerHealthRegenerationEvent.server = this.server
-				playerHealthRegenerationEvent.player = this.player
-				playerHealthRegenerationEvent.execute()
+				const playerHealthRegenerationEvent = new PlayerHealthRegenerationEvent();
+				playerHealthRegenerationEvent.server = this.server;
+				playerHealthRegenerationEvent.player = this.player;
+				playerHealthRegenerationEvent.execute();
 			}
 
 			this.player.setAttribute({
@@ -74,8 +74,8 @@ class PlayerHealthUpdateEvent extends Event {
 
 			if (this.player.health <= 0) {
 				const playerDeathEvent = new PlayerDeathEvent();
-				playerDeathEvent.player = this.player
-				playerDeathEvent.server = this.server
+				playerDeathEvent.player = this.player;
+				playerDeathEvent.server = this.server;
 				playerDeathEvent.execute();
 			}
 		}

@@ -14,34 +14,34 @@ export = ServerSetTitlePacket;
 declare class ServerSetTitlePacket extends PacketConstructor {
 	/**
 	 * Sets the type of the title.
-	 * @param {Titles} type1 - The type of the title.
+	 * @param {Titles} new_type - The type of the title.
 	 */
-	setType(type1: Titles): void;
+	setType(new_type: Titles): void;
 	/**
 	 * Sets the text of the title.
-	 * @param {String} text1 - The text of the title.
+	 * @param {String} new_text - The text of the title.
 	 */
-	setText(text1: string): void;
+	setText(new_text: string): void;
 	/**
 	 * Sets the fade-in time of the title.
-	 * @param {number} fadein - The fade-in time of the title.
+	 * @param {Number} new_fadein - The fade-in time of the title.
 	 */
-	setFadeinTime(fadein: number): void;
+	setFadeinTime(new_fadein: number): void;
 	/**
 	 * Sets the stay time of the title.
-	 * @param {number} staytime1 - The stay time of the title.
+	 * @param {Number} staytime1 - The stay time of the title.
 	 */
-	setStaytime(staytime1: number): void;
+	setStaytime(new_staytime: any): void;
 	/**
 	 * Sets the fade-out time of the title.
-	 * @param {number} fadeout - The fade-out time of the title.
+	 * @param {Number} fadeout - The fade-out time of the title.
 	 */
-	setFadeoutTime(fadeout: number): void;
+	setFadeoutTime(new_fadeout: any): void;
 	/**
 	 * Sets the xuid of the title.
 	 * @param {String} xuid1 - The xuid of the title.
 	 */
-	setXuid(xuid1: string): void;
+	setXuid(new_xuid: any): void;
 	/**
 	 * Gets the text of the title.
 	 * @returns {String} The text of the title.
@@ -49,17 +49,17 @@ declare class ServerSetTitlePacket extends PacketConstructor {
 	getText(): string;
 	/**
 	 * Gets the fade-in time of the title.
-	 * @returns {number} The fade-in time of the title.
+	 * @returns {Number} The fade-in time of the title.
 	 */
 	getFadeinTime(): number;
 	/**
 	 * Gets the stay time of the title.
-	 * @returns {number} The stay time of the title.
+	 * @returns {Number} The stay time of the title.
 	 */
 	getStaytime(): number;
 	/**
 	 * Gets the fade-out time of the title.
-	 * @returns {number} The fade-out time of the title.
+	 * @returns {Number} The fade-out time of the title.
 	 */
 	getFadeout(): number;
 	/**
@@ -81,6 +81,6 @@ declare class ServerSetTitlePacket extends PacketConstructor {
 	 * Sends the packet to the client
 	 * @param {any} client
 	 */
-	writePacket(client: any): void;
+	send(client: any): void;
 }
 import PacketConstructor = require("./PacketConstructor");

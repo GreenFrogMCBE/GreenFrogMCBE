@@ -10,11 +10,14 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-module.exports = {
-	UNKNOWN: "unknown",
-	FALL_DAMAGE: "fall_damage",
-	REGENERATION: "regeneration",
-	VOID: "void",
-	STARVATION: "starvation",
-	PLUGIN: "plugin",
-};
+export = PlayerHealthUpdateEvent;
+declare class PlayerHealthUpdateEvent extends Event {
+	name: string;
+	player: any;
+	server: any;
+	/**
+	 * @deprecated Please use PlayerHealthUpdateEvent
+	 */
+	execute(): any;
+}
+import Event = require("./Event");

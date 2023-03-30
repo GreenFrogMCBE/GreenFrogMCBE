@@ -20,5 +20,6 @@ declare class BlockBreakEvent extends Event {
 	player: any;
 	server: any;
 	block_position: any;
+	cancelled: boolean;
 }
 import Event = require("./Event");

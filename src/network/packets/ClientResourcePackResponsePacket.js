@@ -261,15 +261,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const cords =
 						config.generator === WorldGenerator.DEFAULT
 							? {
-								x: 1070,
-								y: 274,
-								z: -915,
-							}
+									x: 1070,
+									y: 274,
+									z: -915,
+							  }
 							: {
-								x: -17,
-								y: 117,
-								z: 22,
-							};
+									x: -17,
+									y: 117,
+									z: 22,
+							  };
 
 					const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 					networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
@@ -300,9 +300,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}
 
 					player.network_chunks_loop = setInterval(() => {
-						if (player.offline) {  // Do not send network_chunk_publisher_update packet to offline players
+						if (player.offline) {
+							// Do not send network_chunk_publisher_update packet to offline players
 							delete player.network_chunks_loop;
-							return
+							return;
 						}
 
 						const networkchunkpublisher = new NetworkChunkPublisherUpdate();
