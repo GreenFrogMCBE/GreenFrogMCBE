@@ -23,6 +23,8 @@ class PlayerMoveEvent extends Event {
 		this.name = "PlayerMoveEvent";
 		/** * Player coordinates */
 		this.position = null;
+		/** @deprecated Use event.position */
+		this.location = null;
 		this.server = null;
 		this.player = null;
 		/** @deprecated Can be spoofed by hacked clients */
