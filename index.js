@@ -12,6 +12,16 @@
  */
 const fs = require("fs");
 
+console.info(`
+\x1b[32m  
+	██████  ██████  ███████ ███████ ███    ██ ███████ ██████   ██████   ██████  
+	██       ██   ██ ██      ██      ████   ██ ██      ██   ██ ██    ██ ██       
+	██   ███ ██████  █████   █████   ██ ██  ██ █████   ██████  ██    ██ ██   ███ 
+	██    ██ ██   ██ ██      ██      ██  ██ ██ ██      ██   ██ ██    ██ ██    ██ 
+	 ██████  ██   ██ ███████ ███████ ██   ████ ██      ██   ██  ██████   ██████  
+																				 
+\x1b[0m`)
+
 try {
 	if (!fs.existsSync("config.yml")) {
 		fs.writeFileSync(
@@ -114,11 +124,15 @@ randomTickSpeed: 1000`
 	const Frog = require("./src/Server.js");
 	Frog.start();
 } catch (e) {
-	console.error("Failed to start the server");
-	console.error("The error was: ");
-	console.error(e.stack);
-	console.error(`Make sure that you have the required libraries. Run "npm i" to install them`);
-	console.error("If you are sure that this is a bug please report it to our repo: https://github.com/andriycraft/GreenFrogMCBE");
+	console.clear()
+
+	console.error(`\x1b[31mFailed to start server
+${e}
+
+Make sure that you have the required libraries. Run "npm i" to install them
+If you are sure that this is a bug please report it here: https://github.com/andriycraft/GreenFrogMCBE
+\x1b[0m
+`);
 	process.exit(-1);
 }
 
