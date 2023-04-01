@@ -15,12 +15,13 @@
     "pluginstructure": "node tools/generateBasePlugin.js"
   },
   "dependencies": {
+    "center-align": "1.0.1",
     "frog-protocol": "github:greenfrogmc/Protocol",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "4.1.0"
   },
   "devDependencies": {
     "eslint": "8.37.0",
-    "nodemon": "^2.0.22",
+    "nodemon": "2.0.22",
     "prettier": "2.8.6"
   }
 }

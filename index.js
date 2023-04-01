@@ -11,16 +11,15 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const fs = require("fs");
+const center = require("center-align")
 
-console.info(`
-\x1b[32m  
-	██████  ██████  ███████ ███████ ███    ██ ███████ ██████   ██████   ██████  
-	██       ██   ██ ██      ██      ████   ██ ██      ██   ██ ██    ██ ██       
-	██   ███ ██████  █████   █████   ██ ██  ██ █████   ██████  ██    ██ ██   ███ 
-	██    ██ ██   ██ ██      ██      ██  ██ ██ ██      ██   ██ ██    ██ ██    ██ 
-	 ██████  ██   ██ ███████ ███████ ██   ████ ██      ██   ██  ██████   ██████  
-																				 
-\x1b[0m`)
+console.info(center(`\x1b[32m  
+██████  ██████  ███████ ███████ ███    ██ ███████ ██████   ██████   ██████  
+██       ██   ██ ██      ██      ████   ██ ██      ██   ██ ██    ██ ██       
+██   ███ ██████  █████   █████   ██ ██  ██ █████   ██████  ██    ██ ██   ███ 
+██    ██ ██   ██ ██      ██      ██  ██ ██ ██      ██   ██ ██    ██ ██    ██ 
+██████  ██   ██ ███████ ███████ ██   ████ ██      ██   ██  ██████   ██████  
+\x1b[0m`, process.stdout.columns))
 
 try {
 	if (!fs.existsSync("config.yml")) {
@@ -136,7 +135,6 @@ If you are sure that this is a bug please report it here: https://github.com/and
 	process.exit(-1);
 }
 
-// Close server on nodemon restart
 process.once("SIGINT", async () => {
 	await require("./src/Server").shutdown();
 });

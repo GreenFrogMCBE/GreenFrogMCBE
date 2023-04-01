@@ -261,15 +261,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const cords =
 						config.generator === WorldGenerator.DEFAULT
 							? {
-									x: 1070,
-									y: 274,
-									z: -915,
-							  }
+								x: 1070,
+								y: 274,
+								z: -915,
+							}
 							: {
-									x: -17,
-									y: 117,
-									z: 22,
-							  };
+								x: -17,
+								y: 117,
+								z: 22,
+							};
 
 					const networkchunkpublisher = new NetworkChunkPublisherUpdate();
 					networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
@@ -335,6 +335,14 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setEntityData("breathing", true);
 					player.setEntityData("has_collision", true);
 					player.setEntityData("affected_by_gravity", true);
+
+					player.queue('set_display_objective', {
+						"display_slot": "sidebar",
+						"objective_name": "sb00000000000000",
+						"display_name": "scaryboard!!!",
+						"criteria_name": "dummy",
+						"sort_order": 1
+					})
 
 					ServerInfo.__addPlayer();
 					for (const onlineplayers of PlayerInfo.players) {
