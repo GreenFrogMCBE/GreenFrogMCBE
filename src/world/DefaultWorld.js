@@ -133,7 +133,7 @@ class DefaultWorld {
 
 			if (config.tickRegeneration) {
 				for (const player of this.getPlayersInWorld()) {
-					if (player.health > 20 || player.hunger < 20 || player.gamemode == GameMode.CREATIVE || player.gamemode == GameMode.SPECTATOR) {
+					if (player.health > 20 || player.hunger < 20 || player.offline || player.gamemode == GameMode.CREATIVE || player.gamemode == GameMode.SPECTATOR) {
 						Logger.debug("Skipped regeneration task for " + player.username);
 					} else {
 						player.setHealth(player.health + 1, DamageCause.REGENERATION);
