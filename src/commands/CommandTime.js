@@ -1,9 +1,9 @@
-const Logger = require("../Logger");
-const { players } = require("../../player/PlayerInfo");
-const { lang, config } = require("../../server/ServerInfo");
+const Logger = require("../server/Logger");
+const { players } = require("../api/PlayerInfo");
+const { lang, config } = require("../api/ServerInfo");
 
 /**
- * @type {import('../../base/Command').Command}
+ * @type {import('../base/Command').Command}
  */	
 module.exports = {
 	runAsConsole(_server, args) {
@@ -27,7 +27,7 @@ module.exports = {
 			client.setTime(time);
 		}
 
-		players.forEach((client) => client.setTime(setTime));
+		players.forEach((client) => client.setTime(time));
 		Logger.log(lang.commands.timeUpdated);
     },
 

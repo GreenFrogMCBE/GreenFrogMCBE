@@ -1,7 +1,7 @@
-const Logger = require("../Logger");
+const Logger = require("../server/Logger");
 
 /**
- * @type {import('../../base/Command').Command}
+ * @type {import('../base/Command').Command}
  */	
 module.exports = {
 	runAsConsole() {

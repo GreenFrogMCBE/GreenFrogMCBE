@@ -5,7 +5,7 @@ const { lang, config } = require("../api/ServerInfo");
 const PluginManager = require('../plugins/PluginManager')
 
 /**
- * @type {import('../../base/Command').Command}
+ * @type {import('../base/Command').Command}
  */
 module.exports = {
 	runAsConsole() {

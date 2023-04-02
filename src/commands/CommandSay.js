@@ -1,12 +1,12 @@
-const Logger = require("../Logger");
-const { lang, config } = require("../../server/ServerInfo");
-const PlayerInfo = require("../../player/PlayerInfo");
+const Logger = require("../server/Logger");
+const PlayerInfo = require("../api/PlayerInfo");
+const { lang, config } = require("../api/ServerInfo");
 
 /**
- * @type {import('../../base/Command').Command}
+ * @type {import('../base/Command').Command}
  */	
 module.exports = {
-	runAsConsole(server, args) {
+	runAsConsole(_server, args) {
 		let msg = lang.commands.sayCommandFormat.replace(`%message%`, args.join(' ')).replace(`%sender%`, "Server");
 
 		PlayerInfo.players.forEach((client) => {

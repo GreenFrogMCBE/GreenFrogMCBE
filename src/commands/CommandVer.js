@@ -1,8 +1,8 @@
-const Logger = require("../Logger");
-const { lang, config, serverversion } = require("../../server/ServerInfo");
+const Logger = require("../server/Logger");
+const { lang, config, serverversion } = require("../api/ServerInfo");
 
 /**
- * @type {import('../../base/Command').Command}
+ * @type {import('../base/Command').Command}
  */	
 module.exports = {
 	runAsConsole() {
