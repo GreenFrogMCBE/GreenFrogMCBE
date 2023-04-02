@@ -46,6 +46,6 @@ module.exports = {
             string = string.replace(new RegExp(color, 'g'), colors[color]);
         }
 
-        return string;
+        return string + '\x1b[0m';
     },
 };
