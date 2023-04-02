@@ -32,10 +32,10 @@ module.exports = {
 		r.setPrompt("");
 		r.prompt(true);
 
-		r.on("line", (data) => {
+		r.on("line", (command) => {
 			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
 			commandExecutedEvent.server = require("../Server");
-			commandExecutedEvent.command = data;
+			commandExecutedEvent.command = command;
 			commandExecutedEvent.execute();
 
 			if (!isclosed) r.prompt(true);
