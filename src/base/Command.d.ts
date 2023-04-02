@@ -19,4 +19,5 @@ export interface Options {
 export interface Command {
 	data: Options;
 	run(server: Server, player: Client, args: Array): void;
+	throwError(player: Client): void;
 }

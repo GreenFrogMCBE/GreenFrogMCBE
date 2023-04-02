@@ -21,13 +21,19 @@ const GameMode = require("../api/GameMode");
 
 const Logger = require("../server/Logger");
 
+/**
+ * @private
+ */
 let _time = 0;
 
 class DefaultWorld {
 	constructor() {
-		this.name;
-		this.cords = {};
-		this.chunkRadius;
+		/** World name */
+		this.worldName;
+		/** Spawn coordinates */
+		this.coords = {};
+		/** Chunk render radius */
+		this.renderDistance;
 	}
 
 	/**
@@ -35,7 +41,7 @@ class DefaultWorld {
 	 * @param {String} name
 	 */
 	setName(name) {
-		this.name = name;
+		this.worldName = name;
 	}
 
 	/**
@@ -43,7 +49,7 @@ class DefaultWorld {
 	 * @returns The world name
 	 */
 	getName() {
-		return this.name;
+		return this.worldName;
 	}
 
 	/**
@@ -61,7 +67,7 @@ class DefaultWorld {
 	 * @param {Float} z
 	 */
 	setSpawnCoordinates(x, y, z) {
-		this.cords = {
+		this.coords = {
 			x,
 			y,
 			z,
@@ -72,7 +78,7 @@ class DefaultWorld {
 	 * Returns the spawn coordinates
 	 */
 	getSpawnCoordinates() {
-		return this.cords;
+		return this.coords;
 	}
 
 	/**
@@ -80,14 +86,14 @@ class DefaultWorld {
 	 * @param {Number} radius
 	 */
 	setChunkRadius(radius) {
-		this.chunkRadius = radius;
+		this.renderDistance = radius;
 	}
 
 	/**
 	 * Returns the chunk radius
 	 */
 	getChunkRadius() {
-		return this.chunkRadius;
+		return this.renderDistance;
 	}
 
 	/**
@@ -177,9 +183,9 @@ class DefaultWorld {
 
 	toJSON() {
 		return {
-			name: this.name,
-			chunk_radius: this.chunkRadius,
-			spawn_coordinates: this.cords,
+			name: this.worldName,
+			chunk_radius: this.renderDistance,
+			spawn_coordinates: this.coords,
 		};
 	}
 }

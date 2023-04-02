@@ -32,7 +32,6 @@ class ServerConsoleCommandExecutedEvent extends Event {
 
 			for (const camd of cmds) {
 				if (camd.includes(".js")) {
-
 					const command = require(`../commands/${camd}`);
 
 					if (command.data.name === name || (command.data.aliases && command.data.aliases.includes(name))) {
@@ -49,7 +48,11 @@ class ServerConsoleCommandExecutedEvent extends Event {
 						command.execute(this.server, {
 							sendMessage: (message) => {
 								Logger.info(message)
-							}
+							},
+							op: true,
+							username: "Server",
+							ip: "127.0.0.1",
+							isConsole: true
 						}, args);
 
 						exists = true
