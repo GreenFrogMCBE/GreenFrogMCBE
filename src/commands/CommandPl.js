@@ -18,7 +18,7 @@ module.exports = {
 
 		let pluginlist = ConsoleColors.CONSOLE_GREEN + PluginManager.getPlugins().join(ConsoleColors.CONSOLE_RESET + ", " + ConsoleColors.CONSOLE_GREEN);
 
-		Logger.log(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? "No plugins available"} ${ConsoleColors.CONSOLE_RESET}`);
+		Logger.info(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? "No plugins available"} ${ConsoleColors.CONSOLE_RESET}`);
 	},
 
 	run(_server, player) {
