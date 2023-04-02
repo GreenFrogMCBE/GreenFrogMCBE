@@ -30,45 +30,42 @@ class ServerConsoleCommandExecutedEvent extends Event {
 	}
 
 	async execute() {
-		this._execute(this);
-	}
+		await this._execute(this);
 
-	isCancelled() {
-		return this.cancelled;
-	}
+		if (!this.cancelled) {
+			const cmds = await readdir("./src/commands");
 
-	async postExecute(cmd) {
-		const cmds = await readdir("./src/server/commands");
+			let exists = false;
+			const name = this.command.split(" ")[0];
+			const args = this.command.split(" ").slice(1);
 
-		let exists = false;
-		const name = cmd.split(" ")[0];
-		const args = cmd.split(" ").slice(1);
-		for (const camd of cmds) {
-			/**
-			 * @type {import('../../base/Command').Command}
-			 */
-			const command = require(`../../server/commands/${camd}`);
+			for (const camd of cmds) {
+				/**
+				 * @type {import('../../base/Command').Command}
+				 */
+				const command = require(`../../server/commands/${camd}`);
 
-			if (command.data.name === name || command.data.aliases && command.data.aliases.includes(name)) {
-				if (command.data.minArg && command.data.minArg > args.length) {
-					Logger.log(lang.commands.minArg.replace("%m%", command.data.minArg).replace("%r%", args.length));
+				if (command.data.name === name || command.data.aliases && command.data.aliases.includes(name)) {
+					if (command.data.minArg && command.data.minArg > args.length) {
+						Logger.info(lang.commands.minArg.replace("%m%", command.data.minArg).replace("%r%", args.length));
+						exists = true;
+						return;
+					}
+
+					if (command.data.maxArg && command.data.maxArg < args.length) {
+						Logger.info(lang.commands.maxArg.replace("%m%", command.data.maxArg).replace("%r%", args.length));
+						exists = true;
+						return;
+					}
+
+					command.runAsConsole(this.server, args);
 					exists = true;
-					return;
 				}
-
-				if (command.data.maxArg && command.data.maxArg < args.length) {
-					Logger.log(lang.commands.maxArg.replace("%m%", command.data.maxArg).replace("%r%", args.length));
-					exists = true;
-					return;
-				}
-
-				command.runAsConsole(this.server, args);
-				exists = true;
 			}
-		}
 
-		if (!exists && cmd) {
-			Logger.log(lang.errors.unknownCommandOrNoPermission.replace('%commandname%', cmd));
+			if (!exists && this.command) {
+				Logger.info(lang.errors.unknownCommandOrNoPermission.replace('%commandname%', this.command));
+			}
 		}
 	}
 }
