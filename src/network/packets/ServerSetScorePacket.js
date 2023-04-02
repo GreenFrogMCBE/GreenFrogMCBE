@@ -57,8 +57,6 @@ class ServerSetScorePacket extends PacketConstructor {
 	 * @param {any} client The client to send the packet to
 	 */
 	writePacket(client) {
-		console.log(this.getAction())
-
 		client.queue(this.getPacketName(), {
 			action: this.getAction(),
 			entries: this.getEntries()

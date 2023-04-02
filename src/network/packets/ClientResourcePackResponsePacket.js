@@ -58,12 +58,13 @@ const Dimension = require("./types/Dimension");
 const Logger = require("../../server/Logger");
 const Biome = require("./types/Biome");
 const fs = require("fs");
-const ServerScoreboardObjectivePacket = require("./ServerSetDisplayObjective");
+const ServerScoreboardObjectivePacket = require("./ServerSetDisplayObjectivePacket");
 const CreteriaNames = require("./types/CreteriaNames");
 const DisplaySlots = require("./types/DisplaySlots");
 const ScoreActions = require("./types/ScoreActions");
 const EntryTypes = require("./types/EntryTypes");
 const ServerSetScorePacket = require("./ServerSetScorePacket");
+const ServerRemoveObjectivePacket = require("./ServerRemoveObjectivePacket");
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
@@ -363,6 +364,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						}
 					])
 					sbshit2.writePacket(player)
+
+					const sbshit3 = new ServerRemoveObjectivePacket()
+					sbshit3.setObjectiveName("sb00000000000000")
+					sbshit3.writePacket(player)
 
 					ServerInfo.__addPlayer();
 					for (const onlineplayers of PlayerInfo.players) {
