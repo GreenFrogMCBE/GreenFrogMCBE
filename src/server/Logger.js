@@ -19,7 +19,7 @@ module.exports = {
 	 */
 	info(message) {
 		const d = new Date();
-		const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
+		const dStr = d.toLocaleString().replace(",", "").toUpperCase();
 
 		console.log(`${dStr} \x1b[32m${lang.logger.info}\x1b[0m | ${message}`);
 	},

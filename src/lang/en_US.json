@@ -1,6 +1,8 @@
 {
   "commands": {
     "thereAreNoCommands": "There are no commands.",
+    "maxArg": "§cSyntax error: Invalid argument. Required length of arguments is %m%, but received %r%",
+    "minArg": "§cSyntax error: Missing argument. Required length of arguments is %m%, but received %r%",
     "meCommandFormat": "* %username% %message%",
     "list": "Command list: ",
     "help": "help",
