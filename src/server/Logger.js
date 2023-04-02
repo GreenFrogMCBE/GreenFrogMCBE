@@ -21,7 +21,7 @@ module.exports = {
 		const d = new Date();
 		const dStr = d.toLocaleString().replace(",", "").toUpperCase();
 
-		console.log(`${dStr} \x1b[32m${lang.logger.info}\x1b[0m | ${message}`);
+		console.info(`${dStr} \x1b[32m${lang.logger.info}\x1b[0m | ${message}`);
 	},
 
 	/**
@@ -32,7 +32,7 @@ module.exports = {
 		const d = new Date();
 		const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
 
-		console.log(`${dStr} \x1b[33m${lang.logger.warning}\x1b[0m | ${message}`);
+		console.warning(`${dStr} \x1b[33m${lang.logger.warning}\x1b[0m | ${message}`);
 	},
 
 	/**
@@ -43,7 +43,7 @@ module.exports = {
 		const d = new Date();
 		const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
 
-		console.log(`${dStr} \x1b[31m${lang.logger.error}\x1b[0m | ${message}`);
+		console.error(`${dStr} \x1b[31m${lang.logger.error}\x1b[0m | ${message}`);
 	},
 
 	/**
@@ -58,6 +58,6 @@ module.exports = {
 
 		if (!(process.env.DEBUG === "minecraft-protocol" || config.debug)) return;
 
-		console.log(`${dStr} \x1b[35m${lang.logger.debug}\x1b[0m | ${message}`);
+		console.info(`${dStr} \x1b[35m${lang.logger.debug}\x1b[0m | ${message}`);
 	},
 };
