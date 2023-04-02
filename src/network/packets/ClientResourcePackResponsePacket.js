@@ -58,13 +58,6 @@ const Dimension = require("./types/Dimension");
 const Logger = require("../../server/Logger");
 const Biome = require("./types/Biome");
 const fs = require("fs");
-const ServerScoreboardObjectivePacket = require("./ServerSetDisplayObjectivePacket");
-const CreteriaNames = require("./types/CreteriaNames");
-const DisplaySlots = require("./types/DisplaySlots");
-const ScoreActions = require("./types/ScoreActions");
-const EntryTypes = require("./types/EntryTypes");
-const ServerSetScorePacket = require("./ServerSetScorePacket");
-const ServerRemoveObjectivePacket = require("./ServerRemoveObjectivePacket");
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
@@ -342,32 +335,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setEntityData("breathing", true);
 					player.setEntityData("has_collision", true);
 					player.setEntityData("affected_by_gravity", true);
-
-					const sbshit1 = new ServerScoreboardObjectivePacket()
-					sbshit1.setCriteriaName(CreteriaNames.DUMMY)
-					sbshit1.setDisplayName("whopper")
-					sbshit1.setDisplaySlot(DisplaySlots.SIDEBAR)
-					sbshit1.setObjectiveName("sb00000000000000")
-					sbshit1.setSortOrder(1)
-					sbshit1.writePacket(player)
-
-					const sbshit2 = new ServerSetScorePacket()
-					sbshit2.setAction(ScoreActions.UPDATE)
-					sbshit2.setEntries([
-						{
-							scoreboard_id: 1n,
-							objective_name: 'sb00000000000000',
-							score: 0,
-							entry_type: EntryTypes.TEXT,
-							entity_unique_id: undefined,
-							custom_name: 'text'
-						}
-					])
-					sbshit2.writePacket(player)
-
-					const sbshit3 = new ServerRemoveObjectivePacket()
-					sbshit3.setObjectiveName("sb00000000000000")
-					sbshit3.writePacket(player)
 
 					ServerInfo.__addPlayer();
 					for (const onlineplayers of PlayerInfo.players) {
