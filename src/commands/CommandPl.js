@@ -1,9 +1,8 @@
-const Logger = require("../Logger");
-const { lang, config } = require("../../server/ServerInfo");
-const PluginManager = require('../../plugin/PluginManager')
-const ConsoleColors = require("../api/ConsoleColors");
+const Logger = require("../server/Logger");
 const PlayerColors = require("../api/PlayerColors");
-
+const ConsoleColors = require("../api/ConsoleColors");
+const { lang, config } = require("../api/ServerInfo");
+const PluginManager = require('../plugins/PluginManager')
 
 /**
  * @type {import('../../base/Command').Command}
@@ -19,7 +18,7 @@ module.exports = {
 
 		let pluginlist = ConsoleColors.CONSOLE_GREEN + PluginManager.getPlugins().join(ConsoleColors.CONSOLE_RESET + ", " + ConsoleColors.CONSOLE_GREEN);
 
-		Logger.log(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? "No Plugins Available"} ${ConsoleColors.CONSOLE_RESET}`);
+		Logger.log(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? "No plugins available"} ${ConsoleColors.CONSOLE_RESET}`);
 	},
 
 	run(_server, player) {
@@ -31,7 +30,7 @@ module.exports = {
 		const plugins = PluginManager.getPlugins()?.length ?? 0;
 		const pluginList = PlayerColors.GREEN + PluginManager.getPlugins()?.join(PlayerColors.WHITE + "§7, " + PlayerColors.GREEN) || "";
 
-		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList ?? "No Plugin Available"} ${ColorsPlayer.reset}`);
+		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList ?? "No plugins available"} ${PlayerColors.RESET}`);
 	},
 
 	data: {
