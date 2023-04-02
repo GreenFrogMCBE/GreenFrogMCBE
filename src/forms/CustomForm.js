@@ -14,7 +14,7 @@ const FormRequest = require("../network/packets/ServerFormRequestPacket");
 const FormTypes = require("./FormTypes");
 
 class CustomForm {
-	// I used this code: https://github.com/Zwuiix-cmd/EasyProxy for examples
+	// I used this code: https://github.com/Zwuiix-cmd/EasyProxy for example
 
 	constructor() {
 		this.type = FormTypes.CUSTOMFORM;
@@ -84,10 +84,6 @@ class CustomForm {
 		});
 	}
 
-	/**
-	 * Sends the form to the client
-	 * @param {Object} client
-	 */
 	send(client) {
 		const FormReq = new FormRequest();
 		FormReq.setId(this.id);

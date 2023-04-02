@@ -12,6 +12,9 @@
  */
 const Block = require("./Block");
 
+/**
+ * @type {import('../base/Block')}
+ */
 class CobbleStoneWall extends Block {
 	getRuntimeId() {
 		return 3373;

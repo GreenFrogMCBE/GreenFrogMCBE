@@ -37,8 +37,8 @@ const HungerCause = require("../events/types/HungerCause");
 
 module.exports = {
 	/**
-	 * @param {any} player
-	 * @param {any} server
+	 * @param {Client} player
+	 * @param {Server} server
 	 */
 	_initPlayer(player, server) {
 		/**

@@ -12,6 +12,9 @@
  */
 const Block = require("./Block");
 
+/**
+ * @type {import('../base/Block')}
+ */
 class MangroveStairs extends Block {
 	getRuntimeId() {
 		return 6443;

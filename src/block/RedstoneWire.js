@@ -12,6 +12,9 @@
  */
 const Block = require("./Block");
 
+/**
+ * @type {import('../base/Block')}
+ */
 class RedstoneWire extends Block {
 	getRuntimeId() {
 		return 5259;

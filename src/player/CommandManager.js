@@ -51,7 +51,8 @@ class CommandManager {
 
 	/**
 	 * Adds a new command to the client's commands packet and updates the commands array.
-	 * @param {Object} client - The client.
+	 *
+	 *  @param {Client} client - The client.
 	 * @param {String} name - The name of the new command.
 	 * @param {String} description - The description of the command.
 	 */

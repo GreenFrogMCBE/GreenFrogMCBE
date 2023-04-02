@@ -12,6 +12,9 @@
  */
 const Block = require("./Block");
 
+/**
+ * @type {import('../base/Block')}
+ */
 class RedSandstoneWall2 extends Block {
 	getRuntimeId() {
 		return 3993;

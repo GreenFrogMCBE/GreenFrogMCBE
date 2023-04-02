@@ -10,6 +10,19 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-export = SmothQuartzBlock;
-declare class SmothQuartzBlock extends Block {}
-import Block = require("./Block");
+const Block = require("./Block");
+
+/**
+ * @type {import('../base/Block')}
+ */
+class SmoothQuartzBlock extends Block {
+	getRuntimeId() {
+		return 5162;
+	}
+
+	getName() {
+		return "smooth_quartz_block";
+	}
+}
+
+module.exports = SmoothQuartzBlock;

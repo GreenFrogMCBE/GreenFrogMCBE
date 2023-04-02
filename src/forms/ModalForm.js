@@ -22,10 +22,6 @@ class ModalForm {
 		this.id = 0;
 	}
 
-	/**
-	 * Sends the form to the client
-	 * @param {Object} client
-	 */
 	send(client) {
 		const FormReq = new FormRequest();
 		FormReq.setType(FormTypes.MODALFORM);

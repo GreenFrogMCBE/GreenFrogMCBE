@@ -12,6 +12,9 @@
  */
 const Block = require("./Block");
 
+/**
+ * @type {import('../base/Block')}
+ */
 class NetherBrickWall extends Block {
 	getRuntimeId() {
 		return 3362;
