@@ -1,25 +1,18 @@
 const Logger = require("../server/Logger");
+const { lang } = require("../api/ServerInfo");
 const PlayerInfo = require("../api/PlayerInfo");
-const { lang, config } = require("../api/ServerInfo");
+const CommandVerifier = require("../utils/CommandVerifier");
 
 /**
  * @type {import('../base/Command').Command}
  */
 module.exports = {
 	run(_server, player, args) {
-		if (!config.playerCommandSay) {
-			player.sendMessage(lang.errors.playerUnknownCommand);
-			return;
-		}
+		if (CommandVerifier.checkCommand(player, this.data)) return
 
 		if (!player.op) {
-			player.sendMessage(lang.errors.noPermission);
-			return;
-		}
-
-		if (!args[1]) {
-			player.sendMessage("§c" + lang.commands.usageSay);
-			return;
+			player.sendMessage("§c" + lang.errors.unknownCommandOrNoPermission)
+			return
 		}
 
 		args = args[1];
@@ -35,8 +28,8 @@ module.exports = {
 
 	data: {
 		name: "say",
-		description: "Say command.",
-		aliases: ['broadcast'],
+		description: "Sends a message in the chat to other players.",
+		aliases: [],
 		minArg: 1,
 		maxArg: 1,
 	},

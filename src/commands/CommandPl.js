@@ -21,7 +21,7 @@ module.exports = {
 
 	data: {
 		name: "plugins",
-		description: "Plugins command.",
+		description: "Shows list of plugins that the server is running.",
 		aliases: ['pl'],
 		minArg: 0,
 		maxArg: 0,
