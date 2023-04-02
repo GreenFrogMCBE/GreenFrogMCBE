@@ -53,7 +53,6 @@ class ServerConsoleCommandExecutedEvent extends Event {
 				}
 			}
 
-			console.log(exists)
 			if (!exists) Logger.info(lang.errors.unknownCommandOrNoPermission.replace('%commandname%', this.command));
 		} catch (e) {
 			Logger.error("Failed to execute command! " + e.stack)
