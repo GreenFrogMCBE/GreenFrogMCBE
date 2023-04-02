@@ -12,9 +12,9 @@
  */
 /* eslint-disable no-case-declarations */
 const Event = require("./Event");
-const { readdir } = require("fs/promises")
-const Logger = require("../../server/Logger");
-const { lang } = require("../../server/ServerInfo");
+const Logger = require("../server/Logger");
+const { readdir } = require("fs/promises");
+const { lang } = require("../api/ServerInfo");
 
 class ServerConsoleCommandExecutedEvent extends Event {
 	constructor() {
