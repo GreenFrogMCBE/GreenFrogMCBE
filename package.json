@@ -8,18 +8,20 @@
     "format": "npx prettier --write .",
     "start": "node index.js",
     "dev": "nodemon --signal SIGINT index.js --debug",
-    "gencoryrightheader": "node tools/generatelicenseheaders.js",
-    "build": "npm run gencoryrightheader && npm run format",
+    "genlicenseheaders": "node tools/generateLicenseHeaders.js",
+    "build": "npm run genlicenseheaders && npm run format",
     "autotest": "node tools/tests-auto.js",
-    "test": "node tools/tests-manual.js"
+    "test": "node tools/tests-manual.js",
+    "pluginstructure": "node tools/generateBasePlugin.js"
   },
   "dependencies": {
+    "center-align": "1.0.1",
     "frog-protocol": "github:greenfrogmc/Protocol",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "4.1.0"
   },
   "devDependencies": {
     "eslint": "8.37.0",
-    "nodemon": "^2.0.22",
+    "nodemon": "2.0.22",
     "prettier": "2.8.6"
   }
 }

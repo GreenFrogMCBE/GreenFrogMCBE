@@ -10,41 +10,41 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let value = null;
-
 const PacketConstructor = require("./PacketConstructor");
 
-class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
+let objectiveName = '';
+
+class ServerRemoveObjectivePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns The name of the packet
 	 */
 	getPacketName() {
-		return "available_entity_identifiers";
+		return "remove_objective";
 	}
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
 	}
 
 	/**
-	 * Sets the packet value
-	 * @param {JSON} new_value - The packet value data to set.
+	 * Sets the objective name
+	 * @param {String} new_objectivename
 	 */
-	setValue(new_value) {
-		value = new_value;
+	setObjectiveName(new_objectivename) {
+		objectiveName = new_objectivename;
 	}
 
 	/**
-	 * Returns the packet value
-	 * @returns {String} The packet value.
+	 * Returns the objective name
+	 * @returns {String}
 	 */
-	getValue() {
-		return value;
+	getObjectiveName() {
+		return objectiveName;
 	}
 
 	/**
@@ -52,8 +52,10 @@ class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
 	 * @param {any} client
 	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), this.getValue());
+		client.queue(this.getPacketName(), {
+			objective_name: this.getObjectiveName(),
+		});
 	}
 }
 
-module.exports = ServerAvailableEntityIdentifiersPacket;
+module.exports = ServerRemoveObjectivePacket;
