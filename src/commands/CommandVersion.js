@@ -1,4 +1,5 @@
-const { lang, config, serverversion } = require('../api/ServerInfo');
+const { lang, serverversion } = require('../api/ServerInfo');
+const CommandVerify = require('../utils/CommandVerify');
 
 /**
  * @type {import('../base/Command').Command}
@@ -9,10 +10,7 @@ module.exports = {
 	},
 
 	execute(_server, player) {
-		if (player.isConsole && !config.consoleCommandVersion) {
-			this.throwError(player);
-			return;
-		}
+		if (CommandVerify.checkCommand(player, this.data)) return
 
 		player.sendMessage(`§7${lang.commands.verInfo.replace('%version%', serverversion)}`);
 	},

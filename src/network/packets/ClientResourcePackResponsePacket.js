@@ -184,63 +184,63 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startgame.setWorldName(player.world.getName());
 				startgame.writePacket(player);
 
-				const biomedeflist = new BiomeDefinitionList();
-				biomedeflist.setValue(require("./res/biomes.json"));
-				biomedeflist.writePacket(player);
+				const biomeDefinitionList = new BiomeDefinitionList();
+				biomeDefinitionList.setValue(require("../../internalResources/biomes.json"));
+				biomeDefinitionList.writePacket(player);
 
-				const availableentityids = new AvailableEntityIdentifiers();
-				availableentityids.setValue(require("./res/entities.json"));
-				availableentityids.writePacket(player);
+				const availableEntityIDs = new AvailableEntityIdentifiers();
+				availableEntityIDs.setValue(require("../../internalResources/entities.json"));
+				availableEntityIDs.writePacket(player);
 
-				const creativecontent = new CreativeContent();
-				creativecontent.setItems(require("./res/creativeContent.json").items);
-				creativecontent.writePacket(player);
+				const creativeContent = new CreativeContent();
+				creativeContent.setItems(require("../../internalResources/creativeContent.json").items);
+				creativeContent.writePacket(player);
 
-				const commandsenabled = new SetCommandsEnabled();
-				commandsenabled.setEnabled(true);
-				commandsenabled.writePacket(player);
+				const commandsEnabled = new SetCommandsEnabled();
+				commandsEnabled.setEnabled(true);
+				commandsEnabled.writePacket(player);
 
-				const clientcachestatus = new ClientCacheStatus();
-				clientcachestatus.setEnabled(true);
-				clientcachestatus.writePacket(player);
+				const clientCacheStatus = new ClientCacheStatus();
+				clientCacheStatus.setEnabled(true);
+				clientCacheStatus.writePacket(player);
 
-				const commandmanager = new CommandManager();
-				commandmanager.init(player);
+				const commandManager = new CommandManager();
+				commandManager.init(player);
 				if (config.playerCommandVersion) {
-					commandmanager.addCommand(player, new CommandVersion().name().toLowerCase(), new CommandVersion().getPlayerDescription());
-					commandmanager.addCommand(player, new CommandVersion().aliases()[0].toLowerCase(), new CommandVersion().getPlayerDescription());
+					commandManager.addCommand(player, new CommandVersion().name().toLowerCase(), new CommandVersion().getPlayerDescription());
+					commandManager.addCommand(player, new CommandVersion().aliases()[0].toLowerCase(), new CommandVersion().getPlayerDescription());
 				}
 				if (config.playerCommandPlugins) {
-					commandmanager.addCommand(player, new CommandPl().name().toLowerCase(), new CommandPl().getPlayerDescription());
-					commandmanager.addCommand(player, new CommandPl().aliases()[0].toLowerCase(), new CommandPl().getPlayerDescription());
+					commandManager.addCommand(player, new CommandPl().name().toLowerCase(), new CommandPl().getPlayerDescription());
+					commandManager.addCommand(player, new CommandPl().aliases()[0].toLowerCase(), new CommandPl().getPlayerDescription());
 				}
 				if (config.playerCommandList) {
-					commandmanager.addCommand(player, new CommandList().name().toLowerCase(), new CommandList().getPlayerDescription());
+					commandManager.addCommand(player, new CommandList().name().toLowerCase(), new CommandList().getPlayerDescription());
 				}
 				if (config.playerCommandMe) {
-					commandmanager.addCommand(player, new CommandMe().name().toLowerCase(), new CommandMe().getPlayerDescription());
+					commandManager.addCommand(player, new CommandMe().name().toLowerCase(), new CommandMe().getPlayerDescription());
 				}
 				if (player.op) {
 					if (config.playerCommandStop) {
-						commandmanager.addCommand(player, new CommandStop().name().toLowerCase(), new CommandStop().getPlayerDescription());
+						commandManager.addCommand(player, new CommandStop().name().toLowerCase(), new CommandStop().getPlayerDescription());
 					}
 					if (config.playerCommandSay) {
-						commandmanager.addCommand(player, new CommandSay().name().toLowerCase(), new CommandSay().getPlayerDescription());
+						commandManager.addCommand(player, new CommandSay().name().toLowerCase(), new CommandSay().getPlayerDescription());
 					}
 					if (config.playerCommandOp) {
-						commandmanager.addCommand(player, new CommandOp().name().toLowerCase(), new CommandOp().getPlayerDescription());
+						commandManager.addCommand(player, new CommandOp().name().toLowerCase(), new CommandOp().getPlayerDescription());
 					}
 					if (config.playerCommandKick) {
-						commandmanager.addCommand(player, new CommandKick().name().toLowerCase(), new CommandKick().getPlayerDescription());
+						commandManager.addCommand(player, new CommandKick().name().toLowerCase(), new CommandKick().getPlayerDescription());
 					}
 					if (config.playerCommandTime) {
-						commandmanager.addCommand(player, new CommandTime().name().toLowerCase(), new CommandTime().getPlayerDescription());
+						commandManager.addCommand(player, new CommandTime().name().toLowerCase(), new CommandTime().getPlayerDescription());
 					}
 					if (config.playerCommandDeop) {
-						commandmanager.addCommand(player, new CommandDeop().name().toLowerCase(), new CommandDeop().getPlayerDescription());
+						commandManager.addCommand(player, new CommandDeop().name().toLowerCase(), new CommandDeop().getPlayerDescription());
 					}
 					if (config.playerCommandGamemode) {
-						commandmanager.addCommand(player, new CommandGamemode().name().toLowerCase(), new CommandGamemode().getPlayerDescription());
+						commandManager.addCommand(player, new CommandGamemode().name().toLowerCase(), new CommandGamemode().getPlayerDescription());
 					}
 				}
 
@@ -249,6 +249,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				try {
 					itemcomponent.setItems(require("../../../../world/custom_items.json").items);
 				} catch (e) {
+					Logger.warning("Failed to load custom items! " + e)
 					itemcomponent.setItems([]);
 				}
 				itemcomponent.writePacket(player);

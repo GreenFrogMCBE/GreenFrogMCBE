@@ -12,16 +12,15 @@
  */
 /* eslint-disable no-case-declarations */
 const UnsupportedOperationException = require("../../events/exceptions/UnsupportedOperationException");
-
 const PlayerContainerOpenEvent = require("../../events/PlayerContainerOpenEvent");
 
 const PacketConstructor = require("./PacketConstructor");
 
+const InventoryType = require("./types/InventoryType");
 const InteractType = require("./types/InteractType");
 const WindowID = require("./types/WindowID");
 
 const Logger = require("../../server/Logger");
-const InventoryType = require("./types/InventoryType");
 
 class ClientInteractPacket extends PacketConstructor {
 	/**
@@ -57,9 +56,6 @@ class ClientInteractPacket extends PacketConstructor {
 				event.windowType = InventoryType.INVENTORY;
 				event.runtimeId = 2;
 				event.execute();
-				break;
-			case InteractType.MOUSEOVERENTITY:
-				// TODO: This thing is related to PVP, but it is not implemented yet in GreenFrog
 				break;
 			default:
 				Logger.debug("Unsupported action ID: " + actionID);
