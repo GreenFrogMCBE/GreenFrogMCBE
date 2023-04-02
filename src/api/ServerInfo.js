@@ -17,11 +17,11 @@ module.exports = {
 	/**
 	 * Returns the major server version (e.g 3.0)
 	 */
-	majorServerVersion: "3.0",
+	majorServerVersion: "3.1",
 	/**
 	 * Returns the minor server version (e.g 2.8.1)
 	 */
-	minorServerVersion: "3.0 (scoreboard release)",
+	minorServerVersion: "3.1 (code cleanup)",
 	/**
 	 * Returns the lang as JSON
 	 */
