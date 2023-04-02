@@ -46,7 +46,11 @@ class ServerConsoleCommandExecutedEvent extends Event {
 							return;
 						}
 
-						command.runAsConsole(this.server, args);
+						command.execute(this.server, {
+							sendMessage: (message) => {
+								Logger.info(message)
+							}
+						}, args);
 
 						exists = true
 					}

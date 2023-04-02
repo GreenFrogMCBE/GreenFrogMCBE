@@ -1,6 +1,5 @@
 const Logger = require("../server/Logger");
 const PlayerColors = require("../api/PlayerColors");
-const ConsoleColors = require("../api/ConsoleColors");
 const { lang, config } = require("../api/ServerInfo");
 const PluginManager = require('../plugins/PluginManager')
 
@@ -8,20 +7,7 @@ const PluginManager = require('../plugins/PluginManager')
  * @type {import('../base/Command').Command}
  */
 module.exports = {
-	runAsConsole() {
-		let plugins;
-		if (PluginManager.getPlugins() == null) {
-			plugins = 0;
-		} else {
-			plugins = PluginManager.getPlugins().length;
-		}
-
-		let pluginlist = ConsoleColors.CONSOLE_GREEN + PluginManager.getPlugins().join(ConsoleColors.CONSOLE_RESET + ", " + ConsoleColors.CONSOLE_GREEN);
-
-		Logger.info(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? "No plugins available"} ${ConsoleColors.CONSOLE_RESET}`);
-	},
-
-	run(_server, player) {
+	execute(_, player) {
 		if (!config.playerCommandPlugins) {
 			Logger.log(lang.errors.playerUnknownCommand);
 			return;
