@@ -11,12 +11,13 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../server/Logger");
-const { players } = require("../api/PlayerInfo");
-const { lang, config } = require("../api/ServerInfo");
 
-class CommandTime extends require("./Command") {
+const { lang, config } = require("../api/ServerInfo");
+const { get } = require("../api/PlayerInfo");
+
+class CommandKick extends require("./Command") {
 	name() {
-		return lang.commands.time;
+		return lang.commands.kick;
 	}
 
 	aliases() {
@@ -24,44 +25,60 @@ class CommandTime extends require("./Command") {
 	}
 
 	getPlayerDescription() {
-		return lang.commands.ingameTimeDescription;
+		return lang.commands.ingameKickDescription;
 	}
 
 	execute(args) {
-		if (!args) {
-			Logger.log(lang.commands.usageTime);
+		if (!args || !args[0]) {
+			Logger.info(lang.commands.usageKick);
 			return;
 		}
 
-		const time = args[1];
-		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
+		const targetUsername = args[0];
+		const reason = args[1] || lang.kickmessages.noReason;
 
-		if (!Number.isInteger(setTime)) {
-			Logger.log(lang.commands.usageTime);
-			return;
+		const target = get(targetUsername);
+
+		if (target) {
+			target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
+			Logger.info(`${lang.kickmessages.kickedConsoleMsg.replace("%player%", targetUsername).replace("%reason%", reason)}`);
+		} else {
+			Logger.info(lang.errors.playerOffline);
 		}
-
-		players.forEach((client) => client.setTime(setTime));
-		Logger.log(lang.commands.timeUpdated);
 	}
 
 	executePlayer(client, args) {
-		if (!config.consoleCommandTime) {
-			client.sendMessage(`§c${lang.errors.unknownCommand}`);
+		if (!config.playerCommandKick) {
+			client.sendMessage(lang.errors.playerUnknownCommand);
 			return;
 		}
 
-		const time = args.split(" ")[1];
-		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
-
-		if (!Number.isInteger(setTime)) {
-			client.sendMessage(`§c${lang.commands.usageTime}`);
+		if (!client.op) {
+			client.sendMessage(lang.errors.noPermission);
 			return;
 		}
 
-		players.forEach((client) => client.setTime(setTime));
-		client.sendMessage(lang.commands.timeUpdated);
+		if (!args.split(" ") || !args.split(" ")[1]) {
+			client.sendMessage("§c" + lang.commands.usageKick);
+			return;
+		}
+
+		const targetUsername = args.split(" ")[1];
+		let reason = "";
+		for (let i = 2; i < args.split(" "); i++) {
+			reason = reason + args.split(" ")[i];
+		}
+		if (!reason) reason = lang.kickmessages.noReason;
+
+		const target = get(targetUsername);
+
+		if (target) {
+			target.kick(`${lang.kickmessages.kickedPrefix}${reason}`);
+			client.sendMessage(`${lang.kickmessages.kickedConsoleMsg.replace("%player%", targetUsername).replace("%reason%", reason)}`);
+		} else {
+			client.sendMessage("§c" + lang.errors.playerOffline);
+		}
 	}
 }
 
-module.exports = CommandTime;
+module.exports = CommandKick;

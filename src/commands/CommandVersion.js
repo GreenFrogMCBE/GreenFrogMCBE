@@ -10,35 +10,35 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-case-declarations */
-const rl = require("readline");
-const ConsoleCommandExecutedEvent = require("../events/ServerConsoleCommandExecutedEvent");
+const Logger = require("../server/Logger");
+const { lang, config, minorServerVersion } = require("../api/ServerInfo");
 
-let isclosed = false;
+class CommandVersion extends require("./Command") {
+	name() {
+		return lang.commands.version;
+	}
 
-module.exports = {
-	closed: isclosed,
+	aliases() {
+		return [lang.commands.ver];
+	}
 
-	close() {
-		isclosed = true;
-	},
+	execute() {
+		if (!config.consoleCommandVersion) {
+			Logger.info(lang.errors.unknownCommand);
+			return;
+		}
 
-	async start() {
-		const r = rl.createInterface({
-			input: process.stdin,
-			output: process.stdout,
-		});
+		Logger.info(lang.commands.verInfo.replace("%version%", minorServerVersion));
+	}
 
-		r.setPrompt("> ");
-		r.prompt(true);
+	getPlayerDescription() {
+		return lang.commands.ingameVerDescription;
+	}
 
-		r.on("line", (data) => {
-			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
-			commandExecutedEvent.server = require("../Server");
-			commandExecutedEvent.command = data;
-			commandExecutedEvent.execute();
+	executePlayer(client) {
+		client.sendMessage("§7" + lang.commands.verInfo.replace("%version%", minorServerVersion));
+		return;
+	}
+}
 
-			if (!isclosed) r.prompt(true);
-		});
-	},
-};
+module.exports = CommandVersion;

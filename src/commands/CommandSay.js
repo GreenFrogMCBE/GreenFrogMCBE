@@ -1,52 +1,72 @@
-const Logger = require("../Logger");
-const { lang, config } = require("../../server/ServerInfo");
-const PlayerInfo = require("../../player/PlayerInfo");
-
 /**
- * @type {import('../../base/Command').Command}
- */	
-module.exports = {
-	runAsConsole(server, args) {
-		let msg = lang.commands.sayCommandFormat.replace(`%message%`, args.join(' ')).replace(`%sender%`, "Server");
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
+const { lang, config } = require("../api/ServerInfo");
+const PlayerInfo = require("../api/PlayerInfo");
+const Logger = require("../server/Logger");
+
+class CommandSay extends require("./Command") {
+	name() {
+		return lang.commands.say;
+	}
+
+	aliases() {
+		return null;
+	}
+
+	execute(args) {
+		if (!args) {
+			Logger.info(lang.commands.usageSay);
+			return;
+		}
+
+		const msg = lang.commands.sayCommandFormat.replace(`%message%`, args).replace(`%sender%`, "Server");
 
 		PlayerInfo.players.forEach((client) => {
 			client.sendMessage(msg);
 		});
 
 		Logger.info(msg);
-	},
+	}
 
-	run(_server, player, args) {
+	getPlayerDescription() {
+		return lang.commands.ingameSayDescription;
+	}
+
+	executePlayer(client, args) {
 		if (!config.playerCommandSay) {
-			player.sendMessage(lang.errors.playerUnknownCommand);
+			client.sendMessage(lang.errors.playerUnknownCommand);
 			return;
 		}
 
-		if (!player.op) {
-			player.sendMessage(lang.errors.noPermission);
+		if (!client.op) {
+			client.sendMessage(lang.errors.noPermission);
 			return;
 		}
 
-		if (!args[1]) {
-			player.sendMessage("§c" + lang.commands.usageSay);
+		const message = args.split(" ")[1];
+		if (!message) {
+			client.sendMessage(`§c${lang.commands.usageSay}`);
 			return;
 		}
-		args = args[1];
 
-		let msg = lang.commands.sayCommandFormat.replace(`%message%`, args.join(' ')).replace(`%sender%`, player.username);
+		const msg = lang.commands.sayCommandFormat.replace(`%message%`, message).replace(`%sender%`, client.username);
 
-		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			player.sendMessage(msg);
-		}
+		PlayerInfo.players.forEach((client) => {
+			client.sendMessage(msg);
+		});
 
-		Logger.log(msg);
-	},
+		Logger.info(msg);
+	}
+}
 
-	data: {
-		name: "say",
-		description: "Say command.",
-        aliases: ['broadcast'],
-		minArg: 1,
-		maxArg: 1,
-	},
-};
+module.exports = CommandSay;

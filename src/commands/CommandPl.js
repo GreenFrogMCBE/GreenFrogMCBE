@@ -1,44 +1,52 @@
-const Logger = require("../Logger");
-const { lang, config } = require("../../server/ServerInfo");
-const PluginManager = require('../../plugin/PluginManager')
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
+const PluginManager = require("../plugins/PluginManager");
+const { lang, config } = require("../api/ServerInfo");
 const ConsoleColors = require("../api/ConsoleColors");
 const PlayerColors = require("../api/PlayerColors");
+const Logger = require("../server/Logger");
 
+class CommandPl extends require("./Command") {
+	name() {
+		return lang.commands.pl;
+	}
 
-/**
- * @type {import('../../base/Command').Command}
- */
-module.exports = {
-	runAsConsole() {
-		let plugins;
-		if (PluginManager.getPlugins() == null) {
-			plugins = 0;
-		} else {
-			plugins = PluginManager.getPlugins().length;
-		}
+	aliases() {
+		return [lang.commands.plugins];
+	}
 
-		let pluginlist = ConsoleColors.CONSOLE_GREEN + PluginManager.getPlugins().join(ConsoleColors.CONSOLE_RESET + ", " + ConsoleColors.CONSOLE_GREEN);
+	execute() {
+		const plugins = PluginManager.getPlugins()?.length ?? 0;
+		const pluginList = ConsoleColors.CONSOLE_GREEN + PluginManager.getPlugins()?.join(ConsoleColors.CONSOLE_RESET + ", " + ConsoleColors.CONSOLE_GREEN) || "";
 
-		Logger.log(`${lang.commands.plugins} (${plugins}): ${pluginlist ?? "No Plugins Available"} ${ConsoleColors.CONSOLE_RESET}`);
-	},
+		Logger.info(`${lang.commands.plugins} (${plugins}): ${pluginList} ${ConsoleColors.CONSOLE_RESET}`);
+	}
 
-	run(_server, player) {
+	getPlayerDescription() {
+		return lang.commands.ingamePlDescription;
+	}
+
+	executePlayer(player) {
 		if (!config.playerCommandPlugins) {
-			Logger.log(lang.errors.playerUnknownCommand);
+			Logger.info(lang.errors.playerUnknownCommand);
 			return;
 		}
 
 		const plugins = PluginManager.getPlugins()?.length ?? 0;
 		const pluginList = PlayerColors.GREEN + PluginManager.getPlugins()?.join(PlayerColors.WHITE + "§7, " + PlayerColors.GREEN) || "";
 
-		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList ?? "No Plugin Available"} ${ColorsPlayer.reset}`);
-	},
+		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList} ${PlayerColors.RESET}`);
+	}
+}
 
-	data: {
-		name: "plugins",
-		description: "Plugins command.",
-		aliases: ['pl'],
-		minArg: 0,
-		maxArg: 0,
-	},
-};
+module.exports = CommandPl;

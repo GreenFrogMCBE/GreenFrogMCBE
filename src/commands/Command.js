@@ -10,35 +10,36 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-case-declarations */
-const rl = require("readline");
-const ConsoleCommandExecutedEvent = require("../events/ServerConsoleCommandExecutedEvent");
+class Command {
+	constructor() {}
 
-let isclosed = false;
+	/**
+	 * Returns the command name
+	 * @returns {String} Command name
+	 */
+	name() {}
 
-module.exports = {
-	closed: isclosed,
+	/**
+	 * Returns the command aliases
+	 * @returns {Array} Command aliases
+	 */
+	aliases() {}
 
-	close() {
-		isclosed = true;
-	},
+	/**
+	 * It executes the command
+	 */
+	execute() {}
 
-	async start() {
-		const r = rl.createInterface({
-			input: process.stdin,
-			output: process.stdout,
-		});
+	/**
+	 * Returns the command description for in-game tab complete
+	 * @returns In-game command description
+	 */
+	getPlayerDescription() {}
 
-		r.setPrompt("> ");
-		r.prompt(true);
+	/**
+	 * It executes the command code as a player
+	 */
+	executePlayer() {}
+}
 
-		r.on("line", (data) => {
-			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
-			commandExecutedEvent.server = require("../Server");
-			commandExecutedEvent.command = data;
-			commandExecutedEvent.execute();
-
-			if (!isclosed) r.prompt(true);
-		});
-	},
-};
+module.exports = Command;

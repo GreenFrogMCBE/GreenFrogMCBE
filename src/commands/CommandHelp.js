@@ -11,57 +11,47 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("../server/Logger");
-const { players } = require("../api/PlayerInfo");
 const { lang, config } = require("../api/ServerInfo");
 
-class CommandTime extends require("./Command") {
+class CommandHelp extends require("./Command") {
 	name() {
-		return lang.commands.time;
+		return lang.commands.help;
 	}
 
 	aliases() {
-		return null;
+		return ["?"];
 	}
 
-	getPlayerDescription() {
-		return lang.commands.ingameTimeDescription;
-	}
+	execute() {
+		Logger.info(lang.commands.list);
 
-	execute(args) {
-		if (!args) {
-			Logger.log(lang.commands.usageTime);
-			return;
+		const commandHelps = [
+			{ command: "?", help: lang.commands.qmHelp },
+			{ command: lang.commands.help, help: lang.commands.opHelp },
+			{ command: lang.commands.me, help: lang.commands.meHelp },
+			{ command: lang.commands.pl, help: lang.commands.plHelp },
+			{ command: lang.commands.ver, help: lang.commands.verHelp },
+			{ command: lang.commands.kick, help: lang.commands.kickHelp },
+			{ command: lang.commands.time, help: lang.commands.timeHelp },
+			{ command: lang.commands.stop, help: lang.commands.stopHelp },
+			{ command: lang.commands.help, help: lang.commands.helpHelp },
+			{ command: lang.commands.deop, help: lang.commands.deopHelp },
+			{ command: lang.commands.listc, help: lang.commands.listHelp },
+			{ command: lang.commands.version, help: lang.commands.versionHelp },
+			{ command: lang.commands.plugins, help: lang.commands.pluginsHelp },
+			{ command: lang.commands.stop, help: lang.commands.stopHelp },
+		];
+
+		const availableCommands = commandHelps.filter((help) => config[`consoleCommand${help.command.charAt(0).toUpperCase() + help.command.slice(1)}`]);
+
+		if (availableCommands.length > 0) {
+			availableCommands.forEach((help) => {
+				Logger.info(help.help.replace("%green%", "\x1b[32m").replace("%cyan%", "\x1b[36m").replace("%white%", "\x1b[0m").replace("%blue%", "\x1b[34m") + "\x1b[0m");
+			});
+		} else {
+			Logger.info(lang.commands.thereAreNoCommands);
 		}
-
-		const time = args[1];
-		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
-
-		if (!Number.isInteger(setTime)) {
-			Logger.log(lang.commands.usageTime);
-			return;
-		}
-
-		players.forEach((client) => client.setTime(setTime));
-		Logger.log(lang.commands.timeUpdated);
-	}
-
-	executePlayer(client, args) {
-		if (!config.consoleCommandTime) {
-			client.sendMessage(`§c${lang.errors.unknownCommand}`);
-			return;
-		}
-
-		const time = args.split(" ")[1];
-		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
-
-		if (!Number.isInteger(setTime)) {
-			client.sendMessage(`§c${lang.commands.usageTime}`);
-			return;
-		}
-
-		players.forEach((client) => client.setTime(setTime));
-		client.sendMessage(lang.commands.timeUpdated);
 	}
 }
 
-module.exports = CommandTime;
+module.exports = CommandHelp;

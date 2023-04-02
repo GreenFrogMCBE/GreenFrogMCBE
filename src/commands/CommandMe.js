@@ -10,35 +10,44 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-case-declarations */
-const rl = require("readline");
-const ConsoleCommandExecutedEvent = require("../events/ServerConsoleCommandExecutedEvent");
+const Chat = require("../api/Chat");
+const Logger = require("../server/Logger");
+const { lang, config } = require("../api/ServerInfo");
 
-let isclosed = false;
+class CommandMe extends require("./Command") {
+	name = () => lang.commands.me;
+	aliases = () => null;
 
-module.exports = {
-	closed: isclosed,
+	execute(msg = "", client = { username: lang.other.server }) {
+		const message = msg.replace(/\s/g, "");
+		if (!message) {
+			Logger.info(lang.commands.usageMe);
+			return;
+		}
 
-	close() {
-		isclosed = true;
-	},
+		const broadcastMessage = lang.commands.meCommandFormat.replace("%username%", client.username).replace("%message%", msg);
+		Chat.broadcastMessage(broadcastMessage);
+	}
 
-	async start() {
-		const r = rl.createInterface({
-			input: process.stdin,
-			output: process.stdout,
-		});
+	getPlayerDescription() {
+		return lang.commands.ingameMeDescription;
+	}
 
-		r.setPrompt("> ");
-		r.prompt(true);
+	executePlayer(client, msg) {
+		if (!config.playerCommandMe) {
+			client.sendMessage(lang.errors.playerUnknownCommand);
+			return;
+		}
 
-		r.on("line", (data) => {
-			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
-			commandExecutedEvent.server = require("../Server");
-			commandExecutedEvent.command = data;
-			commandExecutedEvent.execute();
+		const message = msg.replace(`/${lang.commands.me}`, "").replace(/\s/g, "");
+		if (!message) {
+			client.sendMessage(`§c${lang.commands.usageMe}`);
+			return;
+		}
 
-			if (!isclosed) r.prompt(true);
-		});
-	},
-};
+		const broadcastMessage = lang.commands.meCommandFormat.replace("%username%", client.username).replace("%message%", message);
+		Chat.broadcastMessage(broadcastMessage);
+	}
+}
+
+module.exports = CommandMe;

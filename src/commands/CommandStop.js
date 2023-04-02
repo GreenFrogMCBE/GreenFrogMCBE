@@ -10,35 +10,33 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-case-declarations */
-const rl = require("readline");
-const ConsoleCommandExecutedEvent = require("../events/ServerConsoleCommandExecutedEvent");
+const { lang } = require("../api/ServerInfo");
 
-let isclosed = false;
+class CommandShutdown extends require("./Command") {
+	name() {
+		return lang.commands.stop;
+	}
 
-module.exports = {
-	closed: isclosed,
+	aliases() {
+		return null;
+	}
 
-	close() {
-		isclosed = true;
-	},
+	execute() {
+		require("../Server").shutdown();
+	}
 
-	async start() {
-		const r = rl.createInterface({
-			input: process.stdin,
-			output: process.stdout,
-		});
+	getPlayerDescription() {
+		return lang.commands.ingameStopDescription;
+	}
 
-		r.setPrompt("> ");
-		r.prompt(true);
+	executePlayer(client) {
+		if (!client.op) {
+			client.sendMessage(lang.errors.noPermission);
+			return;
+		}
+		client.sendMessage(lang.server.stoppingServer);
+		this.execute();
+	}
+}
 
-		r.on("line", (data) => {
-			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
-			commandExecutedEvent.server = require("../Server");
-			commandExecutedEvent.command = data;
-			commandExecutedEvent.execute();
-
-			if (!isclosed) r.prompt(true);
-		});
-	},
-};
+module.exports = CommandShutdown;

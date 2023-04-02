@@ -11,10 +11,20 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-case-declarations */
+const Version = require("../commands/CommandVersion");
+const { lang, config } = require("../api/ServerInfo");
+const Help = require("../commands/CommandHelp");
+const Time = require("../commands/CommandTime");
+const List = require("../commands/CommandList");
+const Deop = require("../commands/CommandDeop");
+const Stop = require("../commands/CommandStop");
+const Kick = require("../commands/CommandKick");
+const Say = require("../commands/CommandSay");
+const Op = require("../commands/CommandOp");
+const PL = require("../commands/CommandPl");
+const Me = require("../commands/CommandMe");
+const Logger = require("../server/Logger");
 const Event = require("./Event");
-const { readdir } = require("fs/promises")
-const Logger = require("../../server/Logger");
-const { lang } = require("../../server/ServerInfo");
 
 class ServerConsoleCommandExecutedEvent extends Event {
 	constructor() {
@@ -31,44 +41,107 @@ class ServerConsoleCommandExecutedEvent extends Event {
 
 	async execute() {
 		this._execute(this);
-	}
 
-	isCancelled() {
-		return this.cancelled;
-	}
+		if (!this.cancelled || !config.disable) {
+			const commands = {
+				stop: new Stop(),
+				kick: new Kick(),
+				version: new Version(),
+				help: new Help(),
+				time: new Time(),
+				say: new Say(),
+				op: new Op(),
+				pl: new PL(),
+				deop: new Deop(),
+				list: new List(),
+				me: new Me(),
+			};
 
-	async postExecute(cmd) {
-		const cmds = await readdir("./src/server/commands");
-
-		let exists = false;
-		const name = cmd.split(" ")[0];
-		const args = cmd.split(" ").slice(1);
-		for (const camd of cmds) {
-			/**
-			 * @type {import('../../base/Command').Command}
-			 */
-			const command = require(`../../server/commands/${camd}`);
-
-			if (command.data.name === name || command.data.aliases && command.data.aliases.includes(name)) {
-				if (command.data.minArg && command.data.minArg > args.length) {
-					Logger.log(lang.commands.minArg.replace("%m%", command.data.minArg).replace("%r%", args.length));
-					exists = true;
-					return;
-				}
-
-				if (command.data.maxArg && command.data.maxArg < args.length) {
-					Logger.log(lang.commands.maxArg.replace("%m%", command.data.maxArg).replace("%r%", args.length));
-					exists = true;
-					return;
-				}
-
-				command.runAsConsole(this.server, args);
-				exists = true;
+			if (this.command.toLowerCase().startsWith(`${lang.commands.time.toLowerCase()} `)) {
+				commands.time.execute(this.command.split(" "));
+				return;
 			}
-		}
 
-		if (!exists && cmd) {
-			Logger.log(lang.errors.unknownCommandOrNoPermission.replace('%commandname%', cmd));
+			if (this.command.toLowerCase().startsWith(`${lang.commands.say.toLowerCase()} `)) {
+				const msg = this.command.split(" ").slice(1).join(" ");
+				commands.say.execute(msg);
+				return;
+			}
+
+			if (this.command.toLowerCase().startsWith(`${lang.commands.listc.toLowerCase()} `)) {
+				commands.list.execute();
+				return;
+			}
+
+			if (this.command.toLowerCase().startsWith(`${lang.commands.kick.toLowerCase()} `)) {
+				const dataParts = this.command.split(" ");
+				const target = dataParts[1];
+				const reason = dataParts.slice(2).join(" ");
+				commands.kick.execute([target, reason]);
+				return;
+			}
+
+			if (this.command.toLowerCase().startsWith(`${lang.commands.op.toLowerCase()} `)) {
+				commands.op.execute(this.command.split(" ")[1]);
+				return;
+			}
+
+			if (this.command.toLowerCase().startsWith(`${lang.commands.deop.toLowerCase()} `)) {
+				commands.deop.execute(this.command.split(" ")[1]);
+				return;
+			}
+
+			if (this.command.toLowerCase().startsWith(`${lang.commands.me.toLowerCase()} `)) {
+				commands.me.execute(this.command.split(" ").slice(1).join(" "));
+				return;
+			}
+
+			const firstArgOfcommand = this.command.toLowerCase().split(" ")[0];
+
+			switch (firstArgOfcommand) {
+				case "":
+					break;
+				case lang.commands.listc:
+					commands.list.execute();
+					break;
+				case lang.commands.stop.toLowerCase():
+					commands.stop.execute();
+					break;
+				case lang.commands.op.toLowerCase():
+					commands.op.execute(this.command.split(" ")[1]);
+					break;
+				case lang.commands.kick.toLowerCase():
+					const reason = this.command.split(" ").slice(2).join(" ");
+					commands.kick.execute(this.command.split(" ")[1], reason);
+					break;
+				case lang.commands.pl.toLowerCase():
+				case lang.commands.plugins.toLowerCase():
+					commands.pl.execute();
+					break;
+				case lang.commands.ver.toLowerCase():
+				case lang.commands.version.toLowerCase():
+					commands.version.execute();
+					break;
+				case lang.commands.me.toLowerCase():
+					commands.me.execute();
+					break;
+				case lang.commands.time.toLowerCase():
+					commands.time.execute();
+					break;
+				case lang.commands.say.toLowerCase():
+					commands.say.execute();
+					break;
+				case lang.commands.deop.toLowerCase():
+					commands.deop.execute();
+					break;
+				case "?":
+				case lang.commands.help.toLowerCase():
+					commands.help.execute();
+					break;
+				default:
+					Logger.info(lang.errors.unknownCommandOrNoPermission.replace("§c", "").replace("%commandname%", firstArgOfcommand));
+					break;
+			}
 		}
 	}
 }

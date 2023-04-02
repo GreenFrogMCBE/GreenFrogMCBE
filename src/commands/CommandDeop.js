@@ -10,58 +10,84 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const fs = require("fs").promises;
 const Logger = require("../server/Logger");
-const { players } = require("../api/PlayerInfo");
 const { lang, config } = require("../api/ServerInfo");
 
-class CommandTime extends require("./Command") {
+class CommandDeop extends require("./Command") {
 	name() {
-		return lang.commands.time;
+		return lang.commands.deop;
 	}
 
 	aliases() {
 		return null;
 	}
 
-	getPlayerDescription() {
-		return lang.commands.ingameTimeDescription;
-	}
-
-	execute(args) {
+	async execute(args) {
 		if (!args) {
-			Logger.log(lang.commands.usageTime);
+			Logger.info(lang.commands.usageDeop);
 			return;
 		}
 
-		const time = args[1];
-		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
+		try {
+			const data = await fs.readFile("ops.yml", "utf-8");
+			const players = data.trim().split("\n");
+			const index = players.indexOf(args);
 
-		if (!Number.isInteger(setTime)) {
-			Logger.log(lang.commands.usageTime);
-			return;
+			if (index === -1) {
+				Logger.info(lang.commands.notOp.replace("%player%", args));
+				return;
+			}
+
+			players.splice(index, 1);
+			const updatedPlayers = players.join("\n") + "\n";
+
+			await fs.writeFile("ops.yml", updatedPlayers);
+			Logger.info(lang.commands.deOpped.replace("%player%", args));
+		} catch (err) {
+			Logger.info(lang.commands.deopFail);
 		}
-
-		players.forEach((client) => client.setTime(setTime));
-		Logger.log(lang.commands.timeUpdated);
 	}
 
-	executePlayer(client, args) {
-		if (!config.consoleCommandTime) {
-			client.sendMessage(`§c${lang.errors.unknownCommand}`);
+	getPlayerDescription() {
+		return lang.commands.ingameDeopDescription;
+	}
+
+	async executePlayer(client, args) {
+		if (!config.playerCommandDeop) {
+			client.sendMessage("§c" + lang.errors.playerUnknownCommand);
 			return;
 		}
 
-		const time = args.split(" ")[1];
-		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
-
-		if (!Number.isInteger(setTime)) {
-			client.sendMessage(`§c${lang.commands.usageTime}`);
+		if (!client.op) {
+			client.sendMessage(lang.errors.noPermission);
 			return;
 		}
 
-		players.forEach((client) => client.setTime(setTime));
-		client.sendMessage(lang.commands.timeUpdated);
+		if (!args.split(" ")[1]) {
+			client.sendMessage("§c" + lang.commands.usageDeop);
+			return;
+		}
+
+		try {
+			const data = await fs.readFile("ops.yml", "utf-8");
+			const players = data.trim().split("\n");
+			const index = players.indexOf(args.split(" ")[1]);
+
+			if (index === -1) {
+				client.sendMessage("§c" + lang.commands.notOp.replace("%player%", args.split(" ")[1]));
+				return;
+			}
+
+			players.splice(index, 1);
+			const updatedPlayers = players.join("\n") + "\n";
+
+			await fs.writeFile("ops.yml", updatedPlayers);
+			client.sendMessage(lang.commands.deOpped.replace("%player%", args.split(" ")[1]));
+		} catch (err) {
+			client.sendMessage("§c" + lang.commands.deopFail);
+		}
 	}
 }
 
-module.exports = CommandTime;
+module.exports = CommandDeop;

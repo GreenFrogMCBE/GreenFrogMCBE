@@ -10,35 +10,64 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable no-case-declarations */
-const rl = require("readline");
-const ConsoleCommandExecutedEvent = require("../events/ServerConsoleCommandExecutedEvent");
+const fs = require("fs").promises;
+const Logger = require("../server/Logger");
+const { lang, config } = require("../api/ServerInfo");
+const { get: getPlayerInfo } = require("../api/PlayerInfo");
 
-let isclosed = false;
+class CommandOp extends require("./Command") {
+	name() {
+		return lang.commands.op;
+	}
 
-module.exports = {
-	closed: isclosed,
+	aliases() {
+		return null;
+	}
 
-	close() {
-		isclosed = true;
-	},
+	async execute(args) {
+		if (!args) {
+			Logger.info(lang.commands.usageOp);
+			return;
+		}
 
-	async start() {
-		const r = rl.createInterface({
-			input: process.stdin,
-			output: process.stdout,
-		});
+		try {
+			await fs.appendFile("ops.yml", args + "\n");
+			Logger.info(lang.commands.opped.replace("%player%", args));
+		} catch (err) {
+			Logger.info(lang.commands.opFail);
+		}
+	}
 
-		r.setPrompt("> ");
-		r.prompt(true);
+	getPlayerDescription() {
+		return lang.commands.ingameOpDescription;
+	}
 
-		r.on("line", (data) => {
-			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
-			commandExecutedEvent.server = require("../Server");
-			commandExecutedEvent.command = data;
-			commandExecutedEvent.execute();
+	async executePlayer(client, args) {
+		if (!config.playerCommandOp) {
+			client.sendMessage(lang.errors.playerUnknownCommand);
+			return;
+		}
 
-			if (!isclosed) r.prompt(true);
-		});
-	},
-};
+		if (!client.op) {
+			client.sendMessage(lang.errors.noPermission);
+			return;
+		}
+
+		const player = args.split(" ")[1];
+		if (!player) {
+			client.sendMessage("§c" + lang.commands.usageOp);
+			return;
+		}
+
+		try {
+			await fs.appendFile("ops.yml", player + "\n");
+			client.sendMessage(lang.commands.opped.replace("%player%", player));
+			getPlayerInfo(player).op = true;
+			console.info(getPlayerInfo(player));
+		} catch (err) {
+			client.sendMessage("§c" + lang.commands.opFail);
+		}
+	}
+}
+
+module.exports = CommandOp;
