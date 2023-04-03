@@ -247,7 +247,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				// This packet is used to set custom items
 				const itemcomponent = new ItemComponent();
 				try {
-					itemcomponent.setItems(require("../../../../world/custom_items.json").items);
+					itemcomponent.setItems(require("../../../world/custom_items.json").items);
 				} catch (e) {
 					Logger.warning("Failed to load custom items! " + e)
 					itemcomponent.setItems([]);
