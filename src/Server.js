@@ -1,4 +1,5 @@
 /** This file is the main file that start the server and manages it */
+/* eslint-disable no-unsafe-finally */
 
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
@@ -12,24 +13,35 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-process.env.DEBUG = process.argv.includes("--debug") ? "minecraft-protocol" : "";
+const VersionToProtocol = require("./utils/VersionToProtocol");
 
-const fs = require("fs");
-const path = require("path");
-const bedrock = require("frog-protocol");
 const ServerInfo = require("./api/ServerInfo");
 const PlayerInfo = require("./api/PlayerInfo");
+const Frog = require('./Frog')
+
+const GarbageCollector = require("./utils/GarbageCollector");
+const ValidateClient = require("./player/ValidateClient");
+const PlayerInit = require("./server/PlayerInit");
+
+const DefaultWorld = require("./world/DefaultWorld");
+
+const Logger = require("./server/Logger");
+
 const PluginLoader = require("./plugins/PluginLoader");
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
 const ServerInternalServerErrorEvent = require("./events/ServerInternalServerErrorEvent");
 const PlayerConnectionCreateEvent = require("./events/PlayerConnectionCreateEvent");
-const VersionToProtocol = require("./utils/VersionToProtocol");
-const GarbageCollector = require("./utils/GarbageCollector");
-const ValidateClient = require("./player/ValidateClient");
-const DefaultWorld = require("./world/DefaultWorld");
-const PlayerInit = require("./server/PlayerInit");
-const Logger = require("./server/Logger");
+
+const { RateLimitError } = require("./utils/exceptions/RateLimitException");
+
+const FrogProtocol = require("frog-protocol");
+
 const assert = require("assert");
+
+const path = require("path");
+const fs = require("fs");
+
+process.env.DEBUG = Frog.isDebug ? "minecraft-protocol" : "";
 
 let clients = [];
 let server = null;
@@ -70,37 +82,54 @@ module.exports = {
 	},
 
 	/**
+	 * Handles packets
 	 * @private
 	 */
 	async __handlePacket(client, packetparams) {
-		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
+		if (client.offline) return;
 
 		const packetsDir = path.join(__dirname, "network", "packets");
 
 		let exist = false;
 
 		fs.readdirSync(packetsDir).forEach((filename) => {
-			if (filename.startsWith("Client") && filename.includes(".js")) {
+			if (filename.startsWith("Client") && filename.endsWith(".js")) {
 				const packetPath = path.join(packetsDir, filename);
 				try {
-					if (client.packetCount++ > 2000) {
-						throw new Error("Too many packets!");
+					if (++client.packetCount > 2000) {
+						Frog.eventEmitter.emit('packetRatelimit', {
+							player: client,
+							server: this,
+							cancel() {
+								return true;
+							},
+						});
+						throw new RateLimitError(`Too many packets from ${client.username} (${client.packetCount})`);
 					}
 
-					const packetPathImport = require(packetPath);
-					const packet = new packetPathImport();
+					const packet = new (require(packetPath))();
 					if (packet.getPacketName() === packetparams.data.name) {
+						Frog.eventEmitter.emit('packetRead', {
+							player: client,
+							data: packet.data,
+							server: this,
+							cancel() {
+								return true;
+							},
+						});
 						packet.readPacket(client, packetparams, this);
 						exist = true;
 					}
 				} catch (e) {
 					client.kick(lang.kickmessages.invalidPacket);
-
-					const internalerrorevent = new ServerInternalServerErrorEvent();
-					internalerrorevent.server = this;
-					internalerrorevent.error = e;
-					internalerrorevent.execute();
-
+					Frog.eventEmitter.emit('packetReadError', {
+						player: client,
+						error: e,
+						server: this,
+						cancel() {
+							return false;
+						},
+					});
 					Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
 				}
 			}
@@ -211,7 +240,7 @@ module.exports = {
 		const { host, port, version, offlineMode: offline, maxPlayers, motd } = config;
 
 		try {
-			const server = bedrock.createServer({
+			const server = FrogProtocol.createServer({
 				host,
 				port,
 				version,

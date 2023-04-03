@@ -43,7 +43,7 @@ module.exports = {
 	 * @param {String} message - The message to log
 	 */
 	warning(message) {
-		this.customLog('warning', '33', message, 'warning')
+		this.customLog('warning', '33', message, 'warn')
 	},
 
 	/**

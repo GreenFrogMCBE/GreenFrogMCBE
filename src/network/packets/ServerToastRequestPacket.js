@@ -12,8 +12,8 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let title = "";
-let message = "";
+let title;
+let message;
 
 class ServerToastRequestPacket extends PacketConstructor {
 	/**
@@ -66,7 +66,7 @@ class ServerToastRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	send(client) {
 		client.queue(this.getPacketName(), {

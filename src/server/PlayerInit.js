@@ -31,9 +31,9 @@ const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent");
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
-const PlayerInfo = require("../api/PlayerInfo");
 const DamageCause = require("../events/types/DamageCause");
 const HungerCause = require("../events/types/HungerCause");
+const PlayerInfo = require("../api/PlayerInfo");
 
 module.exports = {
 	/**
@@ -259,12 +259,16 @@ module.exports = {
 
 		player.on("close", () => {
 			for (let i = 0; i < PlayerInfo.players.length; i++) {
-				if (PlayerInfo.players[i].username !== player.username) {
-					const pl = new PlayerList();
-					pl.setType(PlayerListTypes.REMOVE);
-					pl.setUuid(player.profile.uuid);
-					pl.writePacket(PlayerInfo.players[i]);
+				const currentPlayer = PlayerInfo.players[i];
+
+				if (currentPlayer.username === player.username) {
+					continue;
 				}
+
+				const pl = new PlayerList();
+				pl.setType(PlayerListTypes.REMOVE);
+				pl.setUuid(player.profile.uuid);
+				pl.writePacket(currentPlayer);
 			}
 
 			const leaveEvent = new PlayerLeaveEvent();
@@ -276,9 +280,8 @@ module.exports = {
 
 			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
 
-			if (player.initialised) {
+			if (player.initialised) 
 				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
-			}
 
 			player.offline = true;
 		});
