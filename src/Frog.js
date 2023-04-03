@@ -14,7 +14,11 @@
  */
 const eventLib = require('events')
 
-const { config } = require("./api/ServerInfo");
+const { config, lang } = require("./api/ServerInfo");
+
+const PluginLoader = require('./plugins/PluginLoader');
+const PlayerInfo = require('./api/PlayerInfo');
+const Logger = require('./server/Logger');
 
 let _eventEmitter = new eventLib();
 
@@ -34,5 +38,39 @@ module.exports = {
      * @returns {EventEmiter}
      * @type {import('./base/EventEmitter')}
      */
-    eventEmitter: _eventEmitter
+    eventEmitter: _eventEmitter,
+
+    /**
+     * Shutdowns the server correctly
+     * Also its calls onShutdown in every
+     * single plugin that are used
+     */
+    async shutdownServer() {
+        let shouldShutdown = true
+
+        this.eventEmitter.emit('serverShutdownEvent', {
+            server: this,
+            cancel() {
+                shouldShutdown = false
+            },
+        });
+
+        if (shouldShutdown) {
+            await require("./server/ConsoleCommandSender").close();
+            
+            Logger.info(lang.server.stoppingServer);
+
+            try {
+                for (const player of PlayerInfo.players) {
+                    if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
+                }
+            } catch (ignored) {
+                /* ignored */
+            }
+
+            setTimeout(() => {
+                PluginLoader.unloadPlugins();
+            }, 1000);
+        }
+    },
 }

@@ -10,6 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const FrogJS = require('./src/Frog')
+
 const fs = require("fs");
 const center = require("center-align")
 
@@ -44,5 +46,5 @@ If you are sure that this is a bug please report it here: https://github.com/and
 }
 
 process.once("SIGINT", async () => {
-	require("./src/Server").shutdown();
+	FrogJS.shutdownServer();
 });
