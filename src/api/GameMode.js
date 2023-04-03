@@ -13,7 +13,15 @@
 module.exports = {
 	CREATIVE: "creative",
 	SURVIVAL: "survival",
+	/** 1.19.30+ */
 	SPECTATOR: "spectator",
+	
+	/** @deprecated */
+	CREATIVESPECTATOR: "spectator",
+	/** @deprecated */
+	SURVIVALSPECTATOR: "spectator",
+	
 	ADVENTURE: "adventure",
+	/** Fallbacks to the world gamemode */
 	FALLBACK: "fallback",
 };

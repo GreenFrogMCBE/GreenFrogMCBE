@@ -11,9 +11,17 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 module.exports = {
-	CONSOLE_RESET: "\x1b[0m",
-	CONSOLE_BLUE: "\x1b[34m",
-	CONSOLE_YELLOW: "\x1b[33m",
-	CONSOLE_RED: "\x1b[31m",
-	CONSOLE_GREEN: "\x1b[32m",
+	CYAN: "\x1b[36m",
+	MAGENTA: "\x1b[35m",
+	WHITE: "\x1b[37m",
+	GRAY: "\x1b[90m",
+	RED: "\x1b[91m",
+	GREEN: "\x1b[92m",
+	YELLOW: "\x1b[93m",
+	BLUE: "\x1b[94m",
+	PINK: "\x1b[95m",
+	LIGHT_CYAN: "\x1b[96m",	
+
+	/** Resets color to fallback */
+	RESET: "\x1b[0m"
 };
