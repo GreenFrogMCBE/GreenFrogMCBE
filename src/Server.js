@@ -97,7 +97,7 @@ module.exports = {
 				const packetPath = path.join(packetsDir, filename);
 				try {
 					if (++client.packetCount > 2000) {
-						Frog.eventEmitter.emit('packetRatelimit', {
+						Frog.eventEmitter.emit('packetRateLimitReached', {
 							player: client,
 							server: this,
 							cancel() {

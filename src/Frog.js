@@ -32,6 +32,7 @@ module.exports = {
      * events
      * 
      * @returns {EventEmiter}
+     * @type {import('./base/EventEmitter')}
      */
     eventEmitter: _eventEmitter
 }
