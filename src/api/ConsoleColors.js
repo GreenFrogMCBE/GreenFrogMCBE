@@ -22,6 +22,6 @@ module.exports = {
 	PINK: "\x1b[95m",
 	LIGHT_CYAN: "\x1b[96m",	
 
-	/** Resets color to fallback */
+	/** Resets color to default */
 	RESET: "\x1b[0m"
 };
