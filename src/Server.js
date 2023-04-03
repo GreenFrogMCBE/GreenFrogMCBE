@@ -109,17 +109,21 @@ module.exports = {
 
 					const packet = new (require(packetPath))();
 					if (packet.getPacketName() === packetparams.data.name) {
+						let shouldReadPacket;
 						Frog.eventEmitter.emit('packetRead', {
 							player: client,
 							data: packet.data,
 							server: this,
 							cancel() {
-								return true;
+								return shouldReadPacket = false;
 							},
 						});
-						packet.readPacket(client, packetparams, this);
+						if (shouldReadPacket) {
+							packet.readPacket(client, packetparams, this);
+						}
 						exist = true;
 					}
+
 				} catch (e) {
 					client.kick(lang.kickmessages.invalidPacket);
 					Frog.eventEmitter.emit('packetReadError', {
