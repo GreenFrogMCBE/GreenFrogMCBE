@@ -29,8 +29,6 @@ const Logger = require("./server/Logger");
 
 const PluginLoader = require("./plugins/PluginLoader");
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
-const ServerInternalServerErrorEvent = require("./events/ServerInternalServerErrorEvent");
-const PlayerConnectionCreateEvent = require("./events/PlayerConnectionCreateEvent");
 
 const { RateLimitError } = require("./utils/exceptions/RateLimitException");
 
@@ -85,7 +83,7 @@ module.exports = {
 	 * Handles packets
 	 * @private
 	 */
-	async __handlePacket(client, packetparams) {
+	async _handlePacket(client, packetparams) {
 		if (client.offline) return;
 
 		const packetsDir = path.join(__dirname, "network", "packets");
@@ -123,7 +121,6 @@ module.exports = {
 						}
 						exist = true;
 					}
-
 				} catch (e) {
 					client.kick(lang.kickmessages.invalidPacket);
 					Frog.eventEmitter.emit('packetReadError', {
@@ -146,9 +143,12 @@ module.exports = {
 	},
 
 	/**
+	 * Executes, when player joins the server
+	 * 
+	 * @param {Client} client
 	 * @private
 	 */
-	async _onJoin(client, server) {
+	async _onJoin(client) {
 		await PlayerInit._initPlayer(client, server);
 		await ValidateClient._initAndValidateClient(client);
 
@@ -161,19 +161,42 @@ module.exports = {
 			client.packetCount = 0;
 		}, 1000);
 
-		const playerConnectionEvent = new PlayerConnectionCreateEvent();
-		playerConnectionEvent.server = this;
-		playerConnectionEvent.player = client;
-		playerConnectionEvent.execute();
+		Frog.eventEmitter.emit('playerConnect', {
+			player: client,
+			server: this,
+			cancel(reason = "") {
+				client.kick(reason)
+			},
+		});
 
 		PlayerInfo.addPlayer(client);
 
 		if (PlayerInfo.players.length > config.maxPlayers) {
+			Frog.eventEmitter.emit('playerMaxPlayersDisconnect', {
+				player: client,
+				server: this,
+				onlinePlayers: PlayerInfo.players.length,
+				maxPlayers: config.maxPlayers,
+				cancel(reason = "") {
+					client.kick(reason)
+				},
+			});
 			client.kick(lang.kickmessages.serverFull);
 			return;
 		}
 
 		if (!(client.version === VersionToProtocol.getProtocol(config.version)) && !config.multiProtocol) {
+			Frog.eventEmitter.emit('playerVersionMismatchDisconnect', {
+				player: client,
+				server: this,
+				serverVersion: config.version,
+				clientProtocol: client.version,
+				serverProtocol: VersionToProtocol.getProtocol(config.version),
+				cancel(reason = "") {
+					client.kick(reason)
+				},
+			});
+
 			client.kick(lang.kickmessages.versionMismatch.replace("%version%", config.version));
 			return;
 		}
@@ -188,11 +211,12 @@ module.exports = {
 
 	/**
 	 * It logs a warning if the config.debug or config.unstable is true.
+	 * 
 	 * @private
 	 */
 	async _initDebug() {
 		if (config.unstable) Logger.warning(lang.devdebug.unstableWarning);
-		if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.debug(lang.errors.debugWarning);
+		if (Frog.isDebug) Logger.debug(lang.errors.debugWarning);
 	},
 
 	/**
@@ -260,19 +284,23 @@ module.exports = {
 
 			server.on("connect", (client) => {
 				client.on("join", () => {
-					this._onJoin(client, this);
+					Frog.eventEmitter.emit('playerPreConnectEvent', {
+						player: client,
+						server: this,
+						cancel(reason = "Server requested disconnect.") {
+							client.disconnect(reason)
+						},
+					});
+
+					this._onJoin(client);
 				});
 
 				client.on("packet", (packet) => {
 					try {
-						this.__handlePacket(client, packet);
+						this._handlePacket(client, packet);
 					} catch (e) {
 						client.kick(lang.kickmessages.invalidPacket);
 
-						const internalerrorevent = new ServerInternalServerErrorEvent();
-						internalerrorevent.server = this;
-						internalerrorevent.error = e;
-						internalerrorevent.execute();
 						Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
 					}
 				});
@@ -287,19 +315,30 @@ module.exports = {
 	 * Shutdowns the server.
 	 */
 	async shutdown() {
-		await require("./server/ConsoleCommandSender").close();
-		Logger.info(lang.server.stoppingServer);
+		let shouldShutdown = true
 
-		try {
-			for (const player of PlayerInfo.players) {
-				if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
+		Frog.eventEmitter.emit('serverShutdownEvent', {
+			server: this,
+			cancel() {
+				shouldShutdown = false
+			},
+		});
+
+		if (shouldShutdown) {
+			await require("./server/ConsoleCommandSender").close();
+			Logger.info(lang.server.stoppingServer);
+
+			try {
+				for (const player of PlayerInfo.players) {
+					if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
+				}
+			} catch (ignored) {
+				/* ignored */
 			}
-		} catch (ignored) {
-			/* ignored */
-		}
 
-		setTimeout(() => {
-			PluginLoader.unloadPlugins();
-		}, 1000);
+			setTimeout(() => {
+				PluginLoader.unloadPlugins();
+			}, 1000);
+		}
 	},
 };
