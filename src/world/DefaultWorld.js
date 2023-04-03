@@ -22,6 +22,7 @@ const GameMode = require("../api/GameMode");
 const Logger = require("../server/Logger");
 
 /**
+ * The world time
  * @private
  */
 let _time = 0;
