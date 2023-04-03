@@ -29,5 +29,7 @@ module.exports = {
 	OBFUSCATED: "§k",
 	BOLD: "§l",
 	ITALIC: "§o",
+
+	/** Resets color to default */
 	RESET: "§r",
 };
