@@ -85,8 +85,6 @@ async function _initJson() {
 async function _handlePacket(client, packetParams) {
 	if (client.offline) return;
 
-	if (client.offline) return;
-
 	const packetsDir = path.join(__dirname, "network", "packets");
 
 	let exist = false;
@@ -183,6 +181,22 @@ async function _listen() {
 						client.disconnect(reason)
 					},
 				});
+
+				client.__queue = client.queue
+				client.queue = (packetName, data) => {
+					let shouldQueue = true
+					Frog.eventEmitter.emit('packetQueueEvent', {
+						player: client,
+						server: this,
+						packetName,
+						packetData: data,
+						cancel() {
+							shouldQueue = false
+						},
+					});
+
+					if (shouldQueue) client.__queue(packetName, data)
+				}
 
 				_onJoin(client);
 			});
