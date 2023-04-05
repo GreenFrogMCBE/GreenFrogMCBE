@@ -15,7 +15,6 @@
  */
 const VersionToProtocol = require("./utils/VersionToProtocol");
 
-const ServerInfo = require("./api/ServerInfo");
 const PlayerInfo = require("./api/PlayerInfo");
 const Frog = require('./Frog')
 
@@ -72,8 +71,8 @@ async function _handleCriticalError(err) {
  * @private
  */
 async function _initJson() {
-	config = ServerInfo.config;
-	lang = ServerInfo.lang;
+	config = Frog.getConfigs().config;
+	lang = Frog.getConfigs().lang;
 }
 
 /**
@@ -288,11 +287,6 @@ async function _onJoin(client) {
 }
 
 module.exports = {
-	/** Config as JSON */
-	config: config,
-	/** Language as JSON */
-	lang: lang,
-
 	/**
 	 * It loads the config, lang files, and commands, then loads the plugins and starts the server.
 	 */
@@ -313,7 +307,7 @@ module.exports = {
 		console.clear()
 
 		Logger.info(lang.server.loadingServer);
-		Logger.info(lang.commands.verInfo.replace("%version%", ServerInfo.minorServerVersion));
+		Logger.info(lang.commands.verInfo.replace("%version%", Frog.getServerData().minorServerVersion));
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
 		process.on("uncaughtExceptionMonitor", (err) => _handleCriticalError(err));

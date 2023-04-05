@@ -12,16 +12,18 @@
  */
 const FrogJS = require('./src/Frog')
 
-const fs = require("fs");
-const center = require("center-align")
+const ConsoleColors = require('./src/api/ConsoleColors');
 
-console.info(center(`\x1b[32m  
+const fs = require("fs");
+const center = require("center-align");
+
+console.info(center(`${ConsoleColors.GREEN} 
 ██████  ██████  ███████ ███████ ███    ██ ███████ ██████   ██████   ██████  
 ██       ██   ██ ██      ██      ████   ██ ██      ██   ██ ██    ██ ██       
 ██   ███ ██████  █████   █████   ██ ██  ██ █████   ██████  ██    ██ ██   ███ 
 ██    ██ ██   ██ ██      ██      ██  ██ ██ ██      ██   ██ ██    ██ ██    ██ 
 ██████  ██   ██ ███████ ███████ ██   ████ ██      ██   ██  ██████   ██████  
-\x1b[0m`, process.stdout.columns))
+${ConsoleColors.RESET}`, process.stdout.columns))
 
 try {
 	if (!fs.existsSync("config.yml")) {
@@ -35,12 +37,12 @@ try {
 } catch (e) {
 	console.clear()
 
-	console.error(`\x1b[31mFailed to start server
+	console.error(`${ConsoleColors.RED}Failed to start server
 ${e}
 
 Make sure that you have the required libraries. Run "npm i" to install them
 If you are sure that this is a bug please report it here: https://github.com/andriycraft/GreenFrogMCBE
-\x1b[0m
+${ConsoleColors.RESET}
 `);
 	process.exit(-1);
 }

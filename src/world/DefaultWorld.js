@@ -1,3 +1,5 @@
+/** This file contains default functions for the world */
+
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -10,19 +12,24 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const WorldGenerator = require("../network/packets/types/WorldGenerator");
+const { config, lang } = require("../api/ServerInfo");
+
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
+
+const WorldGenerator = require("../network/packets/types/WorldGenerator");
 const DamageCause = require("../events/types/DamageCause");
 
-const ServerTickEvent = require("../events/ServerTickEvent");
-const { config, lang } = require("../api/ServerInfo");
-const PlayerInfo = require("../api/PlayerInfo");
 const GameMode = require("../api/GameMode");
 
 const Logger = require("../server/Logger");
 
+const PlayerInfo = require("../api/PlayerInfo");
+const Frog = require("../Frog");
+
 /**
  * The world time
+ * TODO: Please replace this with something better
+ * 
  * @private
  */
 let _time = 0;
@@ -125,13 +132,21 @@ class DefaultWorld {
 	tick() {
 		try {
 			if (config.tickEvent) {
-				const serverTickEvent = new ServerTickEvent();
-				serverTickEvent.world = this.toJSON();
-				serverTickEvent.server = require("../Server");
-				serverTickEvent.execute();
+				Frog.eventEmitter.emit('serverTickEvent', {
+					world: this.toJSON(),
+					server: require("../Server"),
+					cancel() { return false }
+				});
 			}
 
 			if (config.tickWorldTime) {
+				Frog.eventEmitter.emit('serverTimeTickEvent', {
+					world: this.toJSON(),
+					server: require("../Server"),
+					time: _time,
+					cancel() { return false }
+				});
+
 				_time = _time + 10;
 				for (const player of this.getPlayersInWorld()) {
 					if (!player.offline) player.setTime(_time);
@@ -139,6 +154,12 @@ class DefaultWorld {
 			}
 
 			if (config.tickRegeneration) {
+				Frog.eventEmitter.emit('serverRegenerationTickEvent', {
+					world: this.toJSON(),
+					server: require("../Server"),
+					cancel() { return false }
+				});
+
 				for (const player of this.getPlayersInWorld()) {
 					if (player.health > 20 || player.hunger < 20 || player.offline || player.gamemode == GameMode.CREATIVE || player.gamemode == GameMode.SPECTATOR) {
 						Logger.debug("Skipped regeneration task for " + player.username);
@@ -149,6 +170,12 @@ class DefaultWorld {
 			}
 
 			if (config.tickStarvationDamage) {
+				Frog.eventEmitter.emit('serverStarvationDamageTickEvent', {
+					world: this.toJSON(),
+					server: require("../Server"),
+					cancel() { return false }
+				});
+
 				for (const player of this.getPlayersInWorld()) {
 					if (player.hunger <= 0) {
 						player.setHealth(player.health - 1, DamageCause.STARVATION);
@@ -157,6 +184,12 @@ class DefaultWorld {
 			}
 
 			if (config.tickVoid) {
+				Frog.eventEmitter.emit('serverVoidDamageTickEvent', {
+					world: this.toJSON(),
+					server: require("../Server"),
+					cancel() { return false }
+				});
+
 				for (const client of this.getPlayersInWorld()) {
 					const posY = Math.floor(client.y);
 
