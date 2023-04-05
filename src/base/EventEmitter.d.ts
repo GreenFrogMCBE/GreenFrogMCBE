@@ -20,8 +20,6 @@ declare function on(eventName: string, listener: (...args: any[]) => void): void
 
 declare function shutdownServer(): void;
 
-//serverOfflinePlayersGarbageCollectionEvent
-
 declare const isDebug: boolean;
 declare const eventEmitter: EventEmitter;
 

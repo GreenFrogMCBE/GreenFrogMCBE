@@ -1,4 +1,4 @@
-const { lang, serverversion } = require('../api/ServerInfo');
+const Frog = require("../Frog")
 const CommandVerifier = require('../utils/CommandVerifier');
 
 /**
@@ -8,7 +8,7 @@ module.exports = {
 	execute(_server, player) {
 		if (CommandVerifier.checkCommand(player, this.data)) return
 
-		player.sendMessage(`§7${lang.commands.verInfo.replace('%version%', serverversion)}`);
+		player.sendMessage(`§7${Frog.getConfigs().lang.commands.verInfo.replace('%version%', Frog.getServerData().minorServerVersion)}`);
 	},
 
 	data: {
