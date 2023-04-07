@@ -27,7 +27,7 @@ module.exports = {
 		}
 
 		try {
-			fs.mkdirSync("./plugins_configs/");
+			fs.mkdirSync("./pluginData/");
 		} catch (ignored) {
 			/* ignored */
 		}

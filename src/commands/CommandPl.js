@@ -43,9 +43,9 @@ class CommandPl extends require("./Command") {
 		}
 
 		const plugins = PluginManager.getPlugins()?.length ?? 0;
-		const pluginList = PlayerColors.GREEN + PluginManager.getPlugins()?.join(PlayerColors.white + ", " + PlayerColors.GREEN) || "";
+		const pluginList = PlayerColors.GREEN + PluginManager.getPlugins()?.join(PlayerColors.WHITE + "§7, " + PlayerColors.GREEN) || "";
 
-		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList} ${PlayerColors.reset}`);
+		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList} ${PlayerColors.RESET}`);
 	}
 }
 
