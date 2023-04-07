@@ -41,9 +41,9 @@ const fs = require("fs");
 process.env.DEBUG = Frog.isDebug ? "minecraft-protocol" : "";
 
 let server = null;
-let config = Frog.getConfigs().config;
+let config = Frog.serverConfigurationFiles.config;
+let lang = Frog.serverConfigurationFiles.lang;
 let isDebug = Frog.isDebug;
-let lang = null;
 
 /**
  * This function executes when something is off with the server
@@ -63,17 +63,6 @@ async function _handleCriticalError(err) {
 	if (!config.unstable) {
 		process.exit(config.crashCode);
 	}
-}
-
-
-/**
- * Loads config & lang files into the server
- *  
- * @private
- */
-async function _initJson() {
-	config = Frog.getConfigs().config;
-	lang = Frog.getConfigs().lang;
 }
 
 /**
@@ -212,7 +201,7 @@ async function _listen() {
 			});
 		});
 
-		Frog.__setServer(server)
+		Frog.setServer(server)
 
 		Logger.info(`${lang.server.listeningOn.replace(`%address%`, `/${host}:${port}`)}`);
 	} catch (e) {
@@ -294,8 +283,6 @@ module.exports = {
 	 * It loads the config, lang files, and commands, then loads the plugins and starts the server.
 	 */
 	async start() {
-		await _initJson();
-
 		await assert(parseInt(config.garbageCollectorDelay), NaN);
 		await assert(parseInt(config.randomTickSpeed), NaN);
 

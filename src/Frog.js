@@ -1,25 +1,14 @@
 /** Main API functions for GreenFrog */
 
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
-const eventLib = require('events')
-const yaml = require('js-yaml')
-const fs = require('fs')
+const eventLib = require('events');
 
 const PluginLoader = require('./plugins/PluginLoader');
 const PlayerInfo = require('./api/PlayerInfo');
 
 const Logger = require('./server/Logger');
+
+const yaml = require('js-yaml')
+const fs = require('fs')
 
 /**
  * Event manager
@@ -27,7 +16,9 @@ const Logger = require('./server/Logger');
  * @private
  * @returns {EventEmitter}
  */
-let _eventEmitter = new eventLib();
+const _eventEmitter = new eventLib();
+
+let __server;
 
 /**
  * Returns the server object
@@ -35,7 +26,22 @@ let _eventEmitter = new eventLib();
  * @private
  * @returns {Server}
  */
-let __server;
+function getServer() {
+    return __server;
+}
+
+/**
+ * Returns configuration files (e.g config.yml, and language files)
+ * 
+ * @returns {ConfigurationFile}
+ * @type {import('./base/ConfigurationFile')}
+ */
+function getConfig() {
+    return {
+        config: yaml.load(fs.readFileSync("config.yml", "utf8")),
+        lang: require(`./lang/${yaml.load(fs.readFileSync("config.yml", "utf8")).lang}.json`)
+    };
+}
 
 module.exports = {
     /**
@@ -43,15 +49,32 @@ module.exports = {
      * 
      * @returns {Boolean}
      */
-    isDebug: process.argv.includes("--debug") || yaml.load(fs.readFileSync("config.yml", "utf8")).debug,
-    // TODO: ^ Make this better
+    isDebug: process.argv.includes("--debug") || getConfig().debug,
 
     /**
      * Returns the server object
      * 
      * @returns {Server}
      */
-    server: __server,
+    server: getServer(),
+
+    /**
+     * Sets the server object
+     * Not recommended to use in plugins.
+     * 
+     * @param {Server}
+     */
+    setServer: (server) => {
+        __server = server;
+    },
+
+    /**
+    * Returns configuration files (e.g config.yml, and language files)
+    * 
+    * @returns {ConfigurationFile}
+    * @type {import('./base/ConfigurationFile')}
+    */
+    serverConfigurationFiles: getConfig(),
 
     /**
      * Returns if the event emitter for plugins
@@ -74,20 +97,7 @@ module.exports = {
             minorServerVersion: "3.1 (API rewrite)",
             majorServerVersion: "3.0",
             apiServerVersion: "3.0"
-        }
-    },
-
-    /**
-     * Returns configration files (e.g config.yml, and language files)
-     * 
-     * @returns {ConfigurationFile}
-     * @type {import('./base/ConfigurationFile')}
-     */
-    getConfigs() {
-        return {
-            config: yaml.load(fs.readFileSync("config.yml", "utf8")),
-            lang: require(`./lang/${yaml.load(fs.readFileSync("config.yml", "utf8")).lang}.json`)
-        }
+        };
     },
 
     /**
@@ -108,37 +118,26 @@ module.exports = {
      * Also its calls onShutdown() in every
      * single plugin that is loaded
      */
-    async shutdownServer() {
-        let shouldShutdown = true
+    async shutdownServer(shutdownMessage) {
+        let shouldShutdown = true;
 
         this.eventEmitter.emit('serverShutdownEvent', {
             server: this,
             cancel() {
-                shouldShutdown = false
+                shouldShutdown = false;
             },
         });
 
         if (shouldShutdown) {
             await require("./server/ConsoleCommandSender").close();
 
-            Logger.info(this.getConfigs().lang.server.stoppingServer);
+            Logger.info(this.serverConfigurationFiles.lang.server.stoppingServer);
 
-            __server.close(this.getConfigs().lang.kickmessages.serverShutdown)
+            getServer().close(shutdownMessage);
 
             setTimeout(() => {
                 PluginLoader.unloadPlugins();
             }, 1000);
         }
     },
-
-    /**
-     * Do not use this in your plugin!
-     * Also no docs for you!
-     * 
-     * @deprecated
-     * @param {Server} 
-     */
-    __setServer(server) {
-        __server = server;
-    }
-}
+};
