@@ -41,7 +41,8 @@ const fs = require("fs");
 process.env.DEBUG = Frog.isDebug ? "minecraft-protocol" : "";
 
 let server = null;
-let config = null;
+let config = Frog.getConfigs().config;
+let isDebug = Frog.isDebug;
 let lang = null;
 
 /**
@@ -143,13 +144,13 @@ async function _handlePacket(client, packetParams) {
 }
 
 /**
- * It logs a warning if the config.debug or config.unstable is true.
+ * Logs a warning if the debug or unstable mode is enabled.
  * 
  * @private
  */
 async function _initDebug() {
 	if (config.unstable) Logger.warning(lang.devdebug.unstableWarning);
-	if (Frog.isDebug) Logger.debug(lang.errors.debugWarning);
+	if (isDebug) Logger.debug(lang.errors.debugWarning);
 }
 
 /**

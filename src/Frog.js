@@ -43,7 +43,7 @@ module.exports = {
      * 
      * @returns {Boolean}
      */
-    isDebug: process.argv.includes("--debug") || this.getConfigs().config.debug,
+    isDebug: process.argv.includes("--debug") || yaml.load(fs.readFileSync("config.yml", "utf8")).debug,
 
     /**
      * Returns the server object
