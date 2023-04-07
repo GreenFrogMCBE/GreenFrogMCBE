@@ -80,7 +80,7 @@ module.exports = {
         }
 
         Logger.info(lang.broadcasts.broadcastmessage.replace("%msg%", message));
-    }
+    },
 
     /**
      * Shutdowns the server correctly
