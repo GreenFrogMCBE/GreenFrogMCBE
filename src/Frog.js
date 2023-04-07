@@ -16,14 +16,26 @@ const eventLib = require('events')
 const yaml = require('js-yaml')
 const fs = require('fs')
 
-const { config, lang } = require("./api/ServerInfo");
-
 const PluginLoader = require('./plugins/PluginLoader');
 const PlayerInfo = require('./api/PlayerInfo');
 
 const Logger = require('./server/Logger');
 
+/**
+ * Event manager
+ * 
+ * @private
+ * @returns {EventEmitter}
+ */
 let _eventEmitter = new eventLib();
+
+/**
+ * Returns the server object
+ * 
+ * @private
+ * @returns {Server}
+ */
+let __server;
 
 module.exports = {
     /**
@@ -31,7 +43,14 @@ module.exports = {
      * 
      * @returns {Boolean}
      */
-    isDebug: process.argv.includes("--debug") || config.debug,
+    isDebug: process.argv.includes("--debug") || this.getConfigs().config.debug,
+
+    /**
+     * Returns the server object
+     * 
+     * @returns {Server}
+     */
+    server: __server,
 
     /**
      * Returns if the event emitter for plugins
@@ -72,6 +91,7 @@ module.exports = {
 
     /**
      * Sends message to all players
+     * 
      * @param {string} message 
      */
     broadcastMessage(message) {
@@ -79,7 +99,7 @@ module.exports = {
             player.sendMessage(message);
         }
 
-        Logger.info(lang.broadcasts.broadcastmessage.replace("%msg%", message));
+        Logger.info(this.getConfigs().lang.broadcasts.broadcastmessage.replace("%msg%", message));
     },
 
     /**
@@ -100,19 +120,24 @@ module.exports = {
         if (shouldShutdown) {
             await require("./server/ConsoleCommandSender").close();
 
-            Logger.info(lang.server.stoppingServer);
+            Logger.info(this.getConfigs().lang.server.stoppingServer);
 
-            try {
-                for (const player of PlayerInfo.players) {
-                    if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
-                }
-            } catch (ignored) {
-                /* ignored */
-            }
+            this.server.close(this.getConfigs().lang.kickmessages.serverShutdown)
 
             setTimeout(() => {
                 PluginLoader.unloadPlugins();
             }, 1000);
         }
     },
+
+    /**
+     * Do not use this in your plugin!
+     * Also no docs for you!
+     * 
+     * @deprecated
+     * @param {Server} 
+     */
+    __setServer(server) {
+        __server = server;
+    }
 }

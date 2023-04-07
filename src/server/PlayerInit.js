@@ -17,7 +17,6 @@ const GameMode = require("../api/GameMode");
 const PlayerKickEvent = require("../events/PlayerKickEvent");
 const PlayerLeaveEvent = require("../events/PlayerLeaveEvent");
 const PlayerTransferEvent = require("../events/PlayerTransferEvent");
-const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
 const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
 const PlayerHungerUpdateEvent = require("../events/PlayerHungerUpdateEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
@@ -177,7 +176,7 @@ module.exports = {
 		 * Kicks a player from the server
 		 * @param {String} [msg=lang.kickmessages.kickedByPlugin] - The reason for the kick
 		 */
-		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
+		player.kick = function (msg = Frog.getConfigs().lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
 			player.kicked = true;
 
@@ -193,7 +192,7 @@ module.exports = {
 				msg = "You were disconnected";
 			}
 
-			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", msg));
+			Logger.info(Frog.getConfigs().lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", msg));
 			player.disconnect(msg);
 		};
 
@@ -324,10 +323,10 @@ module.exports = {
 
 			GarbageCollector.clearOfflinePlayers();
 
-			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
+			Logger.info(Frog.getConfigs().lang.playerstatuses.disconnected.replace("%player%", player.username));
 
 			if (player.initialised)
-				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+				Frog.broadcastMessage(Frog.getConfigs().lang.broadcasts.leftTheGame.replace("%player%", player.username));
 
 			player.offline = true;
 		});

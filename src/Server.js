@@ -37,7 +37,6 @@ const assert = require("assert");
 
 const path = require("path");
 const fs = require("fs");
-const ServerNetworkSettingsPacket = require("./network/packets/ServerNetworkSettingsPacket");
 
 process.env.DEBUG = Frog.isDebug ? "minecraft-protocol" : "";
 
@@ -278,10 +277,6 @@ async function _onJoin(client) {
 		client.kick(lang.kickmessages.versionMismatch.replace("%version%", config.version));
 		return;
 	}
-
-	const networkSettings = new ServerNetworkSettingsPacket()
-	networkSettings.setCompressionThreshold(1)
-	networkSettings.writePacket(client)
 
 	const responsePackInfo = new ResponsePackInfo();
 	responsePackInfo.setMustAccept(true);
