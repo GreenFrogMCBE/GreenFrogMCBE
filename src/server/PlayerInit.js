@@ -20,9 +20,10 @@ const PlayerTransferEvent = require("../events/PlayerTransferEvent");
 const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
 const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
 const PlayerHungerUpdateEvent = require("../events/PlayerHungerUpdateEvent");
-const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
 const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent");
+
+const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
@@ -41,7 +42,6 @@ const HungerCause = require("../events/types/HungerCause");
 const PlayerInfo = require("../api/PlayerInfo");
 
 const Frog = require("../Frog");
-const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
 module.exports = {
 	/**
