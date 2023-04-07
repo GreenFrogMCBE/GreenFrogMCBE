@@ -12,6 +12,6 @@ export = UnsupportedOperationException;
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare class UnsupportedOperationException {
-	constructor(message: any);
-	name: string;
+    constructor(message: any);
+    name: string;
 }

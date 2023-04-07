@@ -1,23 +1,11 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
 export = PlayerContainerCloseEvent;
 declare class PlayerContainerCloseEvent extends Event {
-	name: string;
-	server: any;
-	player: any;
-	isRequestByServer: boolean;
-	windowID: number;
-	cancelled: boolean;
-	execute(): any;
+    name: string;
+    server: any;
+    player: any;
+    isRequestByServer: boolean;
+    windowID: number;
+    cancelled: boolean;
+    execute(): any;
 }
 import Event = require("./Event");

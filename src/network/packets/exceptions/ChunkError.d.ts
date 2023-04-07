@@ -12,6 +12,6 @@ export = ChunkError;
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 declare class ChunkError {
-	constructor(message: any);
-	name: string;
+    constructor(message: any);
+    name: string;
 }

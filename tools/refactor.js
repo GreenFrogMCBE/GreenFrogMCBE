@@ -45,8 +45,10 @@ function traverseDirectory(dirPath, replacements) {
 const replacements = [
 	// Put your replacements here
 	// example:
-	["{Number}", "{Number}"],
-	["{String}", "{String}"],
+	["{number}", "{number}"],
+	["{boolean}", "{boolean}"],
+	["{object}", "{object}"],
+	["{string}", "{string}"],
 ];
 
 traverseDirectory(rootDir, replacements);
