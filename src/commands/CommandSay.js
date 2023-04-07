@@ -7,7 +7,7 @@ const CommandVerifier = require("../utils/CommandVerifier");
  * @type {import('../base/Command').Command}
  */
 module.exports = {
-	run(_server, player, args) {
+	execute(_server, player, args) {
 		if (CommandVerifier.checkCommand(player, this.data)) return
 
 		if (!player.op) {

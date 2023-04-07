@@ -1,18 +1,8 @@
-const { config, lang } = require("../api/ServerInfo");
+const Frog = require("../Frog");
 
 /**
- * Throws an unknown command error.
+ * Capitalizes the first letter of a string
  * 
- * @private
- * @param {Client} player
- * @param {JSON} data 
- */
-function throwError(player, data) {
-    player.sendMessage(lang.errors.unknownCommandOrNoPermission.replace('%commandname%', data.name));
-}
-
-/**
- * Capitalizes the first letter
  * 
  * @private
  * @param {String} str 
@@ -23,27 +13,39 @@ function capitalizeFirstLetter(str) {
 }
 
 module.exports = {
+    /**
+     * Sends a unknown command (or no permission) error to the command executor.
+     * 
+     * @param {Client} commandExecutor
+     * @param {JSON} data 
+     */
+    throwError(commandExecutor, data) {
+        commandExecutor.sendMessage(Frog.serverConfigurationFiles.lang.errors.unknownCommandOrNoPermission.replace('%commandname%', data.name));
+    },
 
     /**
-     * Checks if the command is enabled or not
-     * @param {Client} player
-     * @param {JSON} data 
+     * Checks if the command is enabled or not.
+     *
+     * @param {Client} player - The player who is executing the command.
+     * @param {JSON} data - The command data.
+     * @returns {boolean} - Returns true if the command is disabled, false otherwise.
      */
     checkCommand(player, data) {
         if (player.isConsole) {
             // Console commands
-            if (!config['consoleCommand' + capitalizeFirstLetter(data.name)]) {
-                throwError(player, data);
-                return true
+            if (!Frog.serverConfigurationFiles.config[`consoleCommand${capitalizeFirstLetter(data.name)}`]) {
+                this.throwError(player, data);
+                return true;
             }
         } else {
             // Player commands
-            if (!config['playerCommand' + capitalizeFirstLetter(data.name)]) {
-                throwError(player, data);
-                return true
+            if (!Frog.serverConfigurationFiles.config[`playerCommand${capitalizeFirstLetter(data.name)}`]) {
+                this.throwError(player, data);
+                return true;
             }
         }
 
-        return false
+        return false;
     }
+
 }
