@@ -72,8 +72,8 @@ module.exports = {
 
     /**
      * Shutdowns the server correctly
-     * Also its calls onShutdown in every
-     * single plugin that are used
+     * Also its calls onShutdown() in every
+     * single plugin that is loaded
      */
     async shutdownServer() {
         let shouldShutdown = true
