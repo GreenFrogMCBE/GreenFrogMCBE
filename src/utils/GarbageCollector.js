@@ -20,10 +20,12 @@ module.exports = {
 	 * Removes data of offline players
 	 */
 	clearOfflinePlayers() {
-		Frog.eventEmitter.emit('serverOfflinePlayersGarbageCollectionEvent', {
+		Frog.eventEmitter.emit('serverOfflinePlayersGarbageCollection', {
 			server: require("../Server"),
 			players: PlayerInfo.players,
-			cancel() { return false }
+			cancel() { 
+				return false 
+			}
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
@@ -42,10 +44,12 @@ module.exports = {
 		Logger.debug("[Garbage collector] Starting Garbage-collect everything...");
 		this.clearOfflinePlayers();
 
-		Frog.eventEmitter.emit('serverGarbageCollectionEvent', {
+		Frog.eventEmitter.emit('serverGarbageCollection', {
 			server: require("../Server"),
 			players: PlayerInfo.players,
-			cancel() { return false }
+			cancel() { 
+				return false 
+			}
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
