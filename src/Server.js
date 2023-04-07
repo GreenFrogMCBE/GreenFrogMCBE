@@ -162,7 +162,7 @@ async function _listen() {
 	const { host, port, version, offlineMode: offline, maxPlayers, motd } = config;
 
 	try {
-		FrogProtocol.createServer({
+		server = FrogProtocol.createServer({
 			host,
 			port,
 			version,
@@ -211,6 +211,8 @@ async function _listen() {
 				}
 			});
 		});
+
+		Frog.__setServer(server)
 
 		Logger.info(`${lang.server.listeningOn.replace(`%address%`, `/${host}:${port}`)}`);
 	} catch (e) {

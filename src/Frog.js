@@ -44,6 +44,7 @@ module.exports = {
      * @returns {Boolean}
      */
     isDebug: process.argv.includes("--debug") || yaml.load(fs.readFileSync("config.yml", "utf8")).debug,
+    // TODO: ^ Make this better
 
     /**
      * Returns the server object
@@ -122,7 +123,7 @@ module.exports = {
 
             Logger.info(this.getConfigs().lang.server.stoppingServer);
 
-            this.server.close(this.getConfigs().lang.kickmessages.serverShutdown)
+            __server.close(this.getConfigs().lang.kickmessages.serverShutdown)
 
             setTimeout(() => {
                 PluginLoader.unloadPlugins();
