@@ -66,8 +66,8 @@ module.exports = {
 
 			if (shouldSendMessage) {
 				const text = new ServerTextPacket();
-				text.setMessage(this.message);
-				text.writePacket(this.player);
+				text.setMessage(message);
+				text.writePacket(player);
 			}
 		};
 
