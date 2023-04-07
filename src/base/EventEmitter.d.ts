@@ -18,6 +18,7 @@ declare function on(eventName: "serverGarbageCollection", listener: (...args: an
 declare function on(eventName: "serverOfflinePlayersGarbageCollection", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverToClientMessage", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverChatAsPlayerEvent", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverGamemodeChange", listener: (...args: any[]) => void): void;
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
 
 declare function shutdownServer(): void;

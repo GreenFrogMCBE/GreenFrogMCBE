@@ -42,6 +42,7 @@ const HungerCause = require("../events/types/HungerCause");
 const PlayerInfo = require("../api/PlayerInfo");
 
 const Frog = require("../Frog");
+const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
 
 module.exports = {
 	/**
@@ -63,6 +64,7 @@ module.exports = {
 					shouldSendMessage = false
 				},
 			});
+
 			if (shouldSendMessage) {
 				const text = new ServerTextPacket();
 				text.setMessage(this.message);
@@ -110,12 +112,22 @@ module.exports = {
 				throw new InvalidGamemodeException()
 			}
 
-			const gamemodeChangeEvent = new PlayerGamemodeChangeEvent();
-			gamemodeChangeEvent.player = player;
-			gamemodeChangeEvent.server = server.server;
-			gamemodeChangeEvent.gamemode = gamemode;
-			gamemodeChangeEvent.oldGamemode = player.gamemode;
-			gamemodeChangeEvent.execute();
+			let shouldChangeGamemode = true;
+			Frog.eventEmitter.emit('serverGamemodeChange', {
+				player,
+				server,
+				gamemode,
+				oldGamemode: player.gamemode,
+				cancel() {
+					shouldChangeGamemode = false
+				},
+			});
+
+			if (shouldChangeGamemode) {
+				const playerGamemode = new ServerSetPlayerGameTypePacket();
+				playerGamemode.setGamemode(gamemode);
+				playerGamemode.writePacket(this.player);
+			}
 		};
 
 		/**
