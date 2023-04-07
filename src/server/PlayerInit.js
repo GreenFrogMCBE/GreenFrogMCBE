@@ -11,29 +11,37 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Logger = require("./Logger");
-const Chat = require("../api/Chat");
+
 const GameMode = require("../api/GameMode");
-const { lang } = require("../api/ServerInfo");
+
 const PlayerKickEvent = require("../events/PlayerKickEvent");
 const PlayerLeaveEvent = require("../events/PlayerLeaveEvent");
 const PlayerTransferEvent = require("../events/PlayerTransferEvent");
-const ServerToClientChatEvent = require("../events/ServerToClientChatEvent");
 const PlayerGamemodeChangeEvent = require("../events/PlayerGamemodeChangeEvent");
-const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
-const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
-const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
 const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
-const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
 const PlayerHungerUpdateEvent = require("../events/PlayerHungerUpdateEvent");
 const PluginChatAsPlayerEvent = require("../events/PluginChatAsPlayerEvent");
 const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
 const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent");
+
+const ServerTextPacket = require("../network/packets/ServerTextPacket");
+const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
+const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
+const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
+const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
+
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
+
 const GarbageCollector = require("../utils/GarbageCollector");
+
 const DamageCause = require("../events/types/DamageCause");
 const HungerCause = require("../events/types/HungerCause");
+
 const PlayerInfo = require("../api/PlayerInfo");
+
+const Frog = require("../Frog");
+const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
 module.exports = {
 	/**
@@ -46,11 +54,20 @@ module.exports = {
 		 * @param {String} message - The message to send
 		 */
 		player.sendMessage = function (message) {
-			const sendMessageEvent = new ServerToClientChatEvent();
-			sendMessageEvent.message = message;
-			sendMessageEvent.player = player;
-			sendMessageEvent.server = server;
-			sendMessageEvent.execute();
+			let shouldSendMessage = true
+			Frog.eventEmitter.emit('serverToClientMessage', {
+				player,
+				server,
+				message,
+				cancel() {
+					shouldSendMessage = false
+				},
+			});
+			if (shouldSendMessage) {
+				const text = new ServerTextPacket();
+				text.setMessage(this.message);
+				text.writePacket(this.player);
+			}
 		};
 
 		/**
@@ -58,22 +75,39 @@ module.exports = {
 		 * @param {String} message - The message to send as a player
 		 */
 		player.chat = function (message) {
-			const chatAsPlayerEvent = new PluginChatAsPlayerEvent();
-			chatAsPlayerEvent.player = player;
-			chatAsPlayerEvent.message = message;
-			chatAsPlayerEvent.server = server.server;
-			chatAsPlayerEvent.execute();
+			let shouldSendMessage = true;
+			Frog.eventEmitter.emit('serverChatAsPlayerEvent', {
+				player,
+				server,
+				message,
+				cancel() {
+					shouldSendMessage = false
+				},
+			});
+
+			if (shouldSendMessage) {
+				Frog.broadcastMessage(Frog.getConfigs().lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message));
+			}
 		};
 
 		/**
 		 * Sets a player gamemode
+		 * 
 		 * @param {Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
+		 * @type {import('../api/GameMode')}
 		 */
+		// prettier-ignore
 		player.setGamemode = function (gamemode) {
-			const allowedGameModes = [GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR, GameMode.FALLBACK];
+			const allowedGameModes = [
+				GameMode.SURVIVAL,
+				GameMode.CREATIVE,
+				GameMode.ADVENTURE,
+				GameMode.SPECTATOR,
+				GameMode.FALLBACK
+			];
 
 			if (!allowedGameModes.includes(gamemode)) {
-				throw new Error("Invalid game mode!");
+				throw new InvalidGamemodeException()
 			}
 
 			const gamemodeChangeEvent = new PlayerGamemodeChangeEvent();
@@ -280,7 +314,7 @@ module.exports = {
 
 			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
 
-			if (player.initialised) 
+			if (player.initialised)
 				Chat.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
 
 			player.offline = true;

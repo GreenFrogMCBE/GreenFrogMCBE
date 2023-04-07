@@ -71,6 +71,18 @@ module.exports = {
     },
 
     /**
+     * Sends message to all players
+     * @param {string} message 
+     */
+    broadcastMessage(message) {
+        for (const player of PlayerInfo.players) {
+            player.sendMessage(message);
+        }
+
+        Logger.info(lang.broadcasts.broadcastmessage.replace("%msg%", message));
+    }
+
+    /**
      * Shutdowns the server correctly
      * Also its calls onShutdown() in every
      * single plugin that is loaded
@@ -87,7 +99,7 @@ module.exports = {
 
         if (shouldShutdown) {
             await require("./server/ConsoleCommandSender").close();
-            
+
             Logger.info(lang.server.stoppingServer);
 
             try {
