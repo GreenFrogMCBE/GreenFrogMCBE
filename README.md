@@ -12,6 +12,8 @@ Please note that this software is still in beta, so do not stare directly at the
 + Example block generator plugin: https://github.com/greenfrogmc/RBG
 + Support me: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
++ We are working hard on this software, please support us: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
+
 + Generate plugin structure: 'npm run pluginstructure'
 
 You can install it by downloading this repo,
