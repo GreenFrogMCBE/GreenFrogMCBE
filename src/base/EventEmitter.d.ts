@@ -22,6 +22,9 @@ declare function on(eventName: "serverGamemodeChange", listener: (...args: any[]
 declare function on(eventName: "serverCommandProcess", listener: (...args: any[]) => void): void;
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
 
+declare function once(eventName: string, listener: (...args: any[]) => void): void;
+declare function emit(eventName: string): void;
+
 declare function shutdownServer(): void;
 
 declare const isDebug: boolean;
@@ -29,6 +32,8 @@ declare const eventEmitter: EventEmitter;
 
 export {
   on,
+  once,
+  emit,
   isDebug,
   eventEmitter,
   shutdownServer,
