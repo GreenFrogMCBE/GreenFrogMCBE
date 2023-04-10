@@ -296,7 +296,7 @@ module.exports = {
 
 		if (!fs.existsSync("world")) fs.mkdirSync("world");
 
-		console.clear()
+		//console.clear()
 
 		Logger.info(lang.server.loadingServer);
 		Logger.info(lang.commands.verInfo.replace("%version%", Frog.getServerData().minorServerVersion));

@@ -1,8 +1,9 @@
 const { readdir } = require("fs/promises");
-const Logger = require("../server/Logger");
 const rl = require("readline");
 
-const lang = require("../Frog").serverConfigurationFiles
+const Logger = require("./Logger");
+
+const { lang } = require("../Frog").serverConfigurationFiles;
 
 let isclosed = false;
 let readLineInterface;

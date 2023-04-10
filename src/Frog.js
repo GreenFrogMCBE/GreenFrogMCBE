@@ -74,7 +74,10 @@ module.exports = {
     * @returns {ConfigurationFile}
     * @type {import('./base/ConfigurationFile')}
     */
-    serverConfigurationFiles: getConfig(),
+    serverConfigurationFiles: () => {
+        console.log(`returning: ` + getConfig())
+        return getConfig()
+    },
 
     /**
      * Returns if the event emitter for plugins

@@ -27,6 +27,7 @@ const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeExc
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
 const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
+const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
 const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
 
@@ -41,7 +42,6 @@ const HungerCause = require("../events/types/HungerCause");
 const PlayerInfo = require("../api/PlayerInfo");
 
 const Frog = require("../Frog");
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
 
 /**
  * @private
