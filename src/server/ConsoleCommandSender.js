@@ -34,14 +34,11 @@ module.exports = {
 		r.prompt(true);
 
 		r.on("line", (command) => {
-			Frog.eventEmitter.emit('command', {
-				server: this,
-				command,
-				packetData: data,
-				cancel() {
-					shouldQueue = false
-				},
-			});
+			Frog.eventEmitter.on()
+			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
+			commandExecutedEvent.server = require("../Server");
+			commandExecutedEvent.command = command;
+			commandExecutedEvent.execute();
 
 			if (!isclosed) r.prompt(true);
 		});

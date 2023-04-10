@@ -19,16 +19,10 @@ declare function on(eventName: "serverOfflinePlayersGarbageCollection", listener
 declare function on(eventName: "serverToClientMessage", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverChatAsPlayer", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverGamemodeChange", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverCommandPreProcess", listener: (...args: any[]) => void): void;
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
-
-declare function shutdownServer(): void;
-
-declare const isDebug: boolean;
-declare const eventEmitter: EventEmitter;
 
 export {
   on,
-  isDebug,
   eventEmitter,
-  shutdownServer,
 };
