@@ -29,7 +29,7 @@ module.exports = {
 		readLineInterface.on("line", (command) => {
 			let shouldProcessCommand = false;
 
-			Frog.eventEmitter.on('serverCommandProcessEvent', {
+			Frog.eventEmitter.on('serverCommandProcess', {
 				server: require("../Frog").server,
 				command,
 				cancel() {
