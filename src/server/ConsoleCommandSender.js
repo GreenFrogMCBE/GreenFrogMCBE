@@ -47,31 +47,14 @@ module.exports = {
 						if (camd.endsWith(".js")) {
 							const command = require(`../commands/${camd}`);
 
-							if (
-								command.data.name === name ||
-								(command.data.aliases && command.data.aliases.includes(name))
-							) {
-								if (
-									command.data.minArgs !== undefined &&
-									command.data.minArgs > args.length
-								) {
-									Logger.info(
-										lang.commands.minArg
-											.replace("%m%", command.data.minArgs)
-											.replace("%r%", args.length)
-									);
+							if (command.data.name === name || (command.data.aliases && command.data.aliases.includes(name))) {
+								if (command.data.minArgs !== undefined &&command.data.minArgs > args.length) {
+									Logger.info(lang.commands.minArg.replace("%m%", command.data.minArgs).replace("%r%", args.length));
 									return;
 								}
 
-								if (
-									command.data.maxArgs !== undefined &&
-									command.data.maxArgs < args.length
-								) {
-									Logger.info(
-										lang.commands.maxArg
-											.replace("%m%", command.data.maxArgs)
-											.replace("%r%", args.length)
-									);
+								if (command.data.maxArgs !== undefined &&command.data.maxArgs < args.length) {
+									Logger.info(lang.commands.maxArg.replace("%m%", command.data.maxArgs).replace("%r%", args.length));
 									return;
 								}
 
@@ -92,13 +75,9 @@ module.exports = {
 						}
 					}
 
-					if (!exists)
-						Logger.info(
-							lang.errors.unknownCommandOrNoPermission.replace(
-								"%commandname%",
-								name
-							)
-						);
+					if (!exists) {
+						Logger.info(lang.errors.unknownCommandOrNoPermission.replace("%commandname%",name));
+					}
 				} catch (e) {
 					Logger.error("Failed to execute command! " + e.stack);
 				}
