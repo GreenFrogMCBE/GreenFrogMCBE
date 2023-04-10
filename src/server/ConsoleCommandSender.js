@@ -26,7 +26,7 @@ module.exports = {
 		readLineInterface.setPrompt("");
 		readLineInterface.prompt(true);
 
-		for await (const command of readLineInterface) {
+		readLineInterface.on("line", (command) => {
 			let shouldProcessCommand = false;
 
 			Frog.eventEmitter.on("serverCommandProcessEvent", (event) => {
@@ -38,7 +38,7 @@ module.exports = {
 
 			if (shouldProcessCommand) {
 				try {
-					const cmds = await readdir("./src/commands");
+					const cmds = readdir("./src/commands");
 					const name = command.split(" ")[0];
 					const args = command.split(" ").slice(1);
 
@@ -87,6 +87,6 @@ module.exports = {
 			}
 
 			if (!isclosed) readLineInterface.prompt(true);
-		}
+		})
 	},
 };
