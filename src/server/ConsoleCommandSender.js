@@ -7,12 +7,14 @@ const lang = require("../lang");
 let isclosed = false;
 
 module.exports = {
-	get closed() {
+	get isClosed() {
 		return isclosed;
 	},
+
 	close() {
 		isclosed = true;
 	},
+
 	async start() {
 		const r = rl.createInterface({
 			input: process.stdin,
@@ -47,25 +49,25 @@ module.exports = {
 							const command = require(`../commands/${camd}`);
 
 							if (command.data.name === name || (command.data.aliases && command.data.aliases.includes(name))) {
-								if (command.data.minArgs !== undefined &&command.data.minArgs > args.length) {
+								if (command.data.minArgs !== undefined && command.data.minArgs > args.length) {
 									Logger.info(lang.commands.minArg.replace("%m%", command.data.minArgs).replace("%r%", args.length));
 									return;
 								}
 
-								if (command.data.maxArgs !== undefined &&command.data.maxArgs < args.length) {
+								if (command.data.maxArgs !== undefined && command.data.maxArgs < args.length) {
 									Logger.info(lang.commands.maxArg.replace("%m%", command.data.maxArgs).replace("%r%", args.length));
 									return;
 								}
 
 								command.execute(this.server, {
-										sendMessage: (message) => {
-											Logger.info(message);
-										},
-										op: true,
-										username: "Server",
-										ip: "127.0.0.1",
-										isConsole: true,
+									sendMessage: (message) => {
+										Logger.info(message);
 									},
+									op: true,
+									username: "Server",
+									ip: "127.0.0.1",
+									isConsole: true,
+								},
 									args
 								);
 
@@ -75,7 +77,7 @@ module.exports = {
 					}
 
 					if (!exists) {
-						Logger.info(lang.errors.unknownCommandOrNoPermission.replace("%commandname%",name));
+						Logger.info(lang.errors.unknownCommandOrNoPermission.replace("%commandname%", name));
 					}
 				} catch (e) {
 					Logger.error("Failed to execute command! " + e.stack);
