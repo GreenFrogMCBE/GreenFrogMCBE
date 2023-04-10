@@ -1,16 +1,39 @@
+/** This class handles console commands **/
+
 const { readdir } = require("fs/promises");
 const rl = require("readline");
 const Logger = require("./Logger");
 
-let isclosed = false;
+let isClosed = false;
+/** @private */
 let lang;
 let readLineInterface;
 
 module.exports = {
-	async close() {
-		isclosed = true;
+	/**
+	 * Closes the console
+	 */
+	close() {
+		isClosed = true;
 	},
 
+	/**
+	 * Returns if the console is closed or not
+	 * 
+	 * @returns {Boolean}
+	 */
+	isClosed,
+
+	/**
+	 * Returns the command handler interface
+	 * 
+	 * @type {import('../base/ReadLineInterface')}
+	 */
+	readLineInterface,
+
+	/**
+	 * Starts the console
+	 */
 	async start() {
 		lang = require("../Frog").serverConfigurationFiles.lag;
 
@@ -38,10 +61,6 @@ module.exports = {
 					const cmds = await readdir("./src/commands");
 					const name = command.split(" ")[0];
 					const args = command.split(" ").slice(1);
-
-					console.log('name: ' + name)
-					console.log('cmds: ' + cmds)
-
 
 					if (!name.replace(" ", "")) return;
 
@@ -87,7 +106,7 @@ module.exports = {
 				}
 			}
 
-			if (!isclosed) readLineInterface.prompt(true);
+			if (!isClosed) readLineInterface.prompt(true);
 		});
 	},
 };
