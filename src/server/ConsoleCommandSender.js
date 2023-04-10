@@ -1,5 +1,4 @@
 const rl = require("readline");
-const ConsoleCommandExecutedEvent = require("../events/ServerConsoleCommandExecutedEvent");
 const Frog = require("../Frog");
 const { readdir } = require("fs/promises");
 const Logger = require("../Logger");
@@ -82,11 +81,6 @@ module.exports = {
 					Logger.error("Failed to execute command! " + e.stack);
 				}
 			}
-
-			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
-			commandExecutedEvent.server = require("../Server");
-			commandExecutedEvent.command = command;
-			commandExecutedEvent.execute();
 
 			if (!isclosed) r.prompt(true);
 		}
