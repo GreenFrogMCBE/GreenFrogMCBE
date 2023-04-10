@@ -330,8 +330,9 @@ module.exports = {
 
 			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
 
-			if (player.initialised)
+			if (player.initialised) {
 				Frog.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+			}
 
 			player.offline = true;
 		});
