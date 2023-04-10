@@ -29,12 +29,13 @@ module.exports = {
 		readLineInterface.on("line", (command) => {
 			let shouldProcessCommand = false;
 
-			Frog.eventEmitter.on("serverCommandProcessEvent", (event) => {
-				if (event.command === command) {
-					event.cancel();
-					shouldProcessCommand = true;
+			Frog.eventEmitter.on('serverCommandProcessEvent', {
+				server: require("../Frog").server,
+				command,
+				cancel() {
+					shouldProcessCommand = true
 				}
-			});
+			})
 
 			if (shouldProcessCommand) {
 				try {
