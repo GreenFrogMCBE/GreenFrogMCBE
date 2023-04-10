@@ -1,5 +1,4 @@
 /** This file is the main file that start the server and manages it */
-/* eslint-disable no-unsafe-finally */
 
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
@@ -13,6 +12,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+
+/* eslint-disable no-unsafe-finally */
+
 const VersionToProtocol = require("./utils/VersionToProtocol");
 
 const PlayerInfo = require("./api/PlayerInfo");
