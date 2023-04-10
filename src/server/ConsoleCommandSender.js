@@ -1,7 +1,5 @@
-/** This class handles console commands **/
-
 const { readdir } = require("fs/promises");
-const rl = require("readline");
+const readline = require("readline");
 const Logger = require("./Logger");
 
 let isClosed = false;
@@ -11,33 +9,33 @@ let readLineInterface;
 
 module.exports = {
 	/**
-	 * Closes the console
+	 * Closes the console.
 	 */
 	close() {
 		isClosed = true;
 	},
 
 	/**
-	 * Returns if the console is closed or not
+	 * Returns true if the console is closed, false otherwise.
 	 * 
 	 * @returns {Boolean}
 	 */
 	isClosed,
 
 	/**
-	 * Returns the command handler interface
+	 * Returns the command handler interface.
 	 * 
-	 * @type {import('../base/ReadLineInterface')}
+	 * @type {readline.Interface}
 	 */
 	readLineInterface,
 
 	/**
-	 * Starts the console
+	 * Starts the console.
 	 */
 	async start() {
-		lang = require("../Frog").serverConfigurationFiles.lag;
+		lang = require("../Frog").serverConfigurationFiles.lang;
 
-		readLineInterface = rl.createInterface({
+		readLineInterface = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout,
 		});
@@ -45,39 +43,39 @@ module.exports = {
 		readLineInterface.setPrompt("");
 		readLineInterface.prompt(true);
 
-		readLineInterface.on("line", async (command) => {
+		readLineInterface.on("line", async (input) => {
 			let shouldProcessCommand = true;
 
-			require("../Frog").eventEmitter.emit('serverCommandProcess', {
+			require("../Frog").eventEmitter.emit("serverCommandProcess", {
 				server: require("../Frog").server,
-				command,
+				command: input,
 				cancel() {
-					shouldProcessCommand = false
+					shouldProcessCommand = false;
 				}
-			})
+			});
 
 			if (shouldProcessCommand) {
 				try {
-					const cmds = await readdir("./src/commands");
-					const name = command.split(" ")[0];
-					const args = command.split(" ").slice(1);
+					const commandFilenames = await readdir("./src/commands");
+					const commandName = input.split(" ")[0];
+					const commandArgs = input.split(" ").slice(1);
 
-					if (!name.replace(" ", "")) return;
+					if (!commandName.replace(" ", "")) return;
 
-					let exists = false;
+					let commandFound = false;
 
-					for (const camd of cmds) {
-						if (camd.endsWith(".js")) {
-							const command = require(`../commands/${camd}`);
+					for (const commandFilename of commandFilenames) {
+						if (commandFilename.endsWith(".js")) {
+							const command = require(`../commands/${commandFilename}`);
 
-							if (command.data.name === name || (command.data.aliases && command.data.aliases.includes(name))) {
-								if (command.data.minArgs !== undefined && command.data.minArgs > args.length) {
-									Logger.info(lang.commands.minArg.replace("%m%", command.data.minArgs).replace("%r%", args.length));
+							if (command.data.name === commandName || (command.data.aliases && command.data.aliases.includes(commandName))) {
+								if (command.data.minArgs !== undefined && command.data.minArgs > commandArgs.length) {
+									Logger.info(lang.commands.minArg.replace("%m%", command.data.minArgs).replace("%r%", commandArgs.length));
 									return;
 								}
 
-								if (command.data.maxArgs !== undefined && command.data.maxArgs < args.length) {
-									Logger.info(lang.commands.maxArg.replace("%m%", command.data.maxArgs).replace("%r%", args.length));
+								if (command.data.maxArgs !== undefined && command.data.maxArgs < commandArgs.length) {
+									Logger.info(lang.commands.maxArg.replace("%m%", command.data.maxArgs).replace("%r%", commandArgs.length));
 									return;
 								}
 
@@ -90,19 +88,19 @@ module.exports = {
 									ip: "127.0.0.1",
 									isConsole: true,
 								},
-									args
+									commandArgs
 								);
 
-								exists = true;
+								commandFound = true;
 							}
 						}
 					}
 
-					if (!exists) {
-						Logger.info(lang.errors.unknownCommandOrNoPermission.replace("%commandname%", name));
+					if (!commandFound) {
+						Logger.info(lang.errors.unknownCommandOrNoPermission.replace("%commandname%", commandName));
 					}
-				} catch (e) {
-					Logger.error("Failed to execute command! " + e.stack);
+				} catch (error) {
+					Logger.error(`Failed to execute command! ${error.stack}`);
 				}
 			}
 
