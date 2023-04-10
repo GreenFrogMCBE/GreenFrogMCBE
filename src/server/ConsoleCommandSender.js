@@ -1,6 +1,5 @@
 const { readdir } = require("fs/promises");
 const rl = require("readline");
-
 const Logger = require("./Logger");
 
 let isclosed = false;
@@ -8,12 +7,8 @@ let lang;
 let readLineInterface;
 
 module.exports = {
-	close() {
+	async close() {
 		isclosed = true;
-	},
-
-	get readLineInterface() {
-		return readLineInterface;
 	},
 
 	async start() {
@@ -27,22 +22,26 @@ module.exports = {
 		readLineInterface.setPrompt("");
 		readLineInterface.prompt(true);
 
-		readLineInterface.on("line", (command) => {
-			let shouldProcessCommand = false;
+		readLineInterface.on("line", async (command) => {
+			let shouldProcessCommand = true;
 
 			require("../Frog").eventEmitter.emit('serverCommandProcess', {
 				server: require("../Frog").server,
 				command,
 				cancel() {
-					shouldProcessCommand = true
+					shouldProcessCommand = false
 				}
 			})
 
 			if (shouldProcessCommand) {
 				try {
-					const cmds = readdir("./src/commands");
+					const cmds = await readdir("./src/commands");
 					const name = command.split(" ")[0];
 					const args = command.split(" ").slice(1);
+
+					console.log('name: ' + name)
+					console.log('cmds: ' + cmds)
+
 
 					if (!name.replace(" ", "")) return;
 
@@ -89,6 +88,6 @@ module.exports = {
 			}
 
 			if (!isclosed) readLineInterface.prompt(true);
-		})
+		});
 	},
 };
