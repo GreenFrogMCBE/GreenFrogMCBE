@@ -43,6 +43,11 @@ const PlayerInfo = require("../api/PlayerInfo");
 const Frog = require("../Frog");
 const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
 
+/**
+ * @private
+ */
+let lang = Frog.serverConfigurationFiles.lang;
+
 module.exports = {
 	/**
 	 * @param {Client} player
@@ -87,7 +92,7 @@ module.exports = {
 			});
 
 			if (shouldSendMessage) {
-				Frog.broadcastMessage(Frog.getConfigs().lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message));
+				Frog.broadcastMessage(lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message));
 			}
 		};
 
@@ -176,7 +181,7 @@ module.exports = {
 		 * Kicks a player from the server
 		 * @param {String} [msg=lang.kickmessages.kickedByPlugin] - The reason for the kick
 		 */
-		player.kick = function (msg = Frog.getConfigs().lang.kickmessages.kickedByPlugin) {
+		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
 			player.kicked = true;
 
@@ -192,7 +197,7 @@ module.exports = {
 				msg = "You were disconnected";
 			}
 
-			Logger.info(Frog.getConfigs().lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", msg));
+			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", msg));
 			player.disconnect(msg);
 		};
 
@@ -323,10 +328,10 @@ module.exports = {
 
 			GarbageCollector.clearOfflinePlayers();
 
-			Logger.info(Frog.getConfigs().lang.playerstatuses.disconnected.replace("%player%", player.username));
+			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
 
 			if (player.initialised)
-				Frog.broadcastMessage(Frog.getConfigs().lang.broadcasts.leftTheGame.replace("%player%", player.username));
+				Frog.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
 
 			player.offline = true;
 		});
