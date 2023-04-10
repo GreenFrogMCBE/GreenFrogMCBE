@@ -3,23 +3,30 @@ const Logger = require("../server/Logger");
 const Frog = require("../Frog");
 const rl = require("readline");
 
+const lang = Frog.serverConfigurationFiles
+
 let isclosed = false;
+let readLineInterface;
 
 module.exports = {
 	close() {
 		isclosed = true;
 	},
 
+	get readLineInterface() {
+		return readLineInterface;
+	},
+
 	async start() {
-		const r = rl.createInterface({
+		readLineInterface = rl.createInterface({
 			input: process.stdin,
 			output: process.stdout,
 		});
 
-		r.setPrompt("");
-		r.prompt(true);
+		readLineInterface.setPrompt("");
+		readLineInterface.prompt(true);
 
-		for await (const command of r) {
+		for await (const command of readLineInterface) {
 			let shouldProcessCommand = false;
 
 			Frog.eventEmitter.on("serverCommandProcessEvent", (event) => {
@@ -79,7 +86,7 @@ module.exports = {
 				}
 			}
 
-			if (!isclosed) r.prompt(true);
+			if (!isclosed) readLineInterface.prompt(true);
 		}
 	},
 };
