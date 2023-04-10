@@ -7,10 +7,6 @@ const lang = require("../lang");
 let isclosed = false;
 
 module.exports = {
-	get isClosed() {
-		return isclosed;
-	},
-
 	close() {
 		isclosed = true;
 	},
