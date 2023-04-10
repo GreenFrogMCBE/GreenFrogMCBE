@@ -1,8 +1,7 @@
-const rl = require("readline");
-const Frog = require("../Frog");
 const { readdir } = require("fs/promises");
-const Logger = require("../Logger");
-const lang = require("../lang");
+const Logger = require("../server/Logger");
+const Frog = require("../Frog");
+const rl = require("readline");
 
 let isclosed = false;
 
