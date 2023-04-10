@@ -3,9 +3,8 @@ const rl = require("readline");
 
 const Logger = require("./Logger");
 
-const { lang } = require("../Frog").serverConfigurationFiles;
-
 let isclosed = false;
+let lang;
 let readLineInterface;
 
 module.exports = {
@@ -18,6 +17,8 @@ module.exports = {
 	},
 
 	async start() {
+		lang = require("../Frog").serverConfigurationFiles.lag;
+
 		readLineInterface = rl.createInterface({
 			input: process.stdin,
 			output: process.stdout,
