@@ -1,9 +1,8 @@
 const { readdir } = require("fs/promises");
 const Logger = require("../server/Logger");
-const Frog = require("../Frog");
 const rl = require("readline");
 
-const lang = Frog.serverConfigurationFiles
+const lang = require("../Frog").serverConfigurationFiles
 
 let isclosed = false;
 let readLineInterface;
@@ -29,7 +28,7 @@ module.exports = {
 		readLineInterface.on("line", (command) => {
 			let shouldProcessCommand = false;
 
-			Frog.eventEmitter.on('serverCommandProcess', {
+			require("../Frog").eventEmitter.emit('serverCommandProcess', {
 				server: require("../Frog").server,
 				command,
 				cancel() {
