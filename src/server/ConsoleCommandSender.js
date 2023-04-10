@@ -13,6 +13,7 @@
 /* eslint-disable no-case-declarations */
 const rl = require("readline");
 const ConsoleCommandExecutedEvent = require("../events/ServerConsoleCommandExecutedEvent");
+const Frog = require("../Frog");
 
 let isclosed = false;
 
@@ -33,10 +34,14 @@ module.exports = {
 		r.prompt(true);
 
 		r.on("line", (command) => {
-			const commandExecutedEvent = new ConsoleCommandExecutedEvent();
-			commandExecutedEvent.server = require("../Server");
-			commandExecutedEvent.command = command;
-			commandExecutedEvent.execute();
+			Frog.eventEmitter.emit('command', {
+				server: this,
+				command,
+				packetData: data,
+				cancel() {
+					shouldQueue = false
+				},
+			});
 
 			if (!isclosed) r.prompt(true);
 		});

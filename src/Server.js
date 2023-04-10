@@ -174,7 +174,7 @@ async function _listen() {
 				client.__queue = client.queue
 				client.queue = (packetName, data) => {
 					let shouldQueue = true
-					Frog.eventEmitter.emit('packetQueueEvent', {
+					Frog.eventEmitter.emit('packetQueue', {
 						player: client,
 						server: this,
 						packetName,
@@ -221,7 +221,7 @@ async function _onJoin(client) {
 	await PlayerInit._initPlayer(client, server);
 	await ValidateClient._initAndValidateClient(client);
 
-	client.world = null; // This gets initialised in PlayerResourcePacksCompletedEvent
+	client.world = null; // This gets initialised in PlayerResourcePacksCompleted event
 	Object.assign(client, { x: 0, y: 0, z: 0 }); // Player coordinates
 	Object.assign(client, { health: 20, hunger: 20, chunksEnabled: true, packetCount: 0 }); // Network stuff
 	Object.assign(client, { dead: false, offline: false, initialised: false, isConsole: true, fallDamageQueue: 0 }); // API fields

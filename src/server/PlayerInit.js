@@ -77,7 +77,7 @@ module.exports = {
 		 */
 		player.chat = function (message) {
 			let shouldSendMessage = true;
-			Frog.eventEmitter.emit('serverChatAsPlayerEvent', {
+			Frog.eventEmitter.emit('serverChatAsPlayer', {
 				player,
 				server,
 				message,
