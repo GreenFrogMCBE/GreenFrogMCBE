@@ -144,6 +144,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				player.world = new DefaultWorld();
 				player.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
 				player.world.setName(require("../../../world/world_settings.json").worldName);
+
 				if (config.generator === WorldGenerator.DEFAULT) {
 					player.world.setSpawnCoordinates(1070, 139, -914);
 				} else if (config.generator === WorldGenerator.VOID) {
