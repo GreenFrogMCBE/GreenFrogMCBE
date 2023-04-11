@@ -36,7 +36,7 @@ module.exports = {
 	isDebugEnabled: require("../Frog").isDebug,
 
 	/**
-	 * Logs a message with custom message
+	 * Logs a message
 	 * 
 	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
 	 * @throws {LoggingException} - If the log type is 'warning' (common Node.JS mistake) (must be 'warn')
