@@ -91,8 +91,14 @@ async function executeConsoleCommand(command) {
 module.exports = {
 	/**
 	 * Closes the console.
+	 * 
+	 * @throws {ConsoleSetupException}
 	 */
 	close() {
+		if (isClosed) {
+			throw new ConsoleSetupException("Console is already closed!");
+		}
+
 		isClosed = true;
 	},
 
