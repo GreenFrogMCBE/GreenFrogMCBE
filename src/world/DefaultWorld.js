@@ -200,15 +200,15 @@ class DefaultWorld {
 
 				if (posY <= min) {
 					if (client.gamemode === GameMode.CREATIVE || client.gamemode === GameMode.SPECTATOR) {
-						if (client.damage_loop) {
-							delete client.damage_loop;
+						if (client.damageLoop) {
+							delete client.damageLoop;
 						}
 					} else if (!client.cannotbedamagedbyvoid) {
 						client.setHealth(client.health - 5, DamageCause.VOID);
 					}
 				} else {
-					if (client.damage_loop) {
-						delete client.damage_loop;
+					if (client.damageLoop) {
+						delete client.damageLoop;
 					}
 				}
 			}
