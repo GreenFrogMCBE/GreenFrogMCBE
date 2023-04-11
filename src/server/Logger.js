@@ -10,6 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+
 const { convertConsoleColor } = require("../utils/ConsoleColorConvertor");
 
 /* const Frog = require("../Frog") <--- This code does not work
@@ -19,6 +20,21 @@ It throws:
 const LoggingException = require("../utils/exceptions/LoggingException");
 
 let lang;
+
+function fireEvent(langString, color, message, consoleType) {
+	require("../Frog").eventEmitter.emit('serverLogMessage', {
+		type: langString,
+		message,
+		server: require("../Frog"),
+		legacy: {
+			color,
+			consoleType,
+		},
+		cancel() {
+			return false; // You can't do that here...
+		}
+	})
+}
 
 module.exports = {
 	/**
@@ -57,6 +73,7 @@ module.exports = {
 			throw new LoggingException("Bad log type: " + console[consoleType] + ". Valid types are info, warn, error, debug")
 		}
 
+		fireEvent(langString, color, message, consoleType)
 		console[consoleType](convertConsoleColor(`${date} \x1b[${color}m${lang.logger[langString]}\x1b[0m | ${message}`))
 	},
 
