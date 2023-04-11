@@ -43,9 +43,7 @@ const PlayerInfo = require("../api/PlayerInfo");
 
 const Frog = require("../Frog");
 
-/**
- * @private
- */
+/** @private */
 let lang = Frog.serverConfigurationFiles.lang;
 
 module.exports = {
