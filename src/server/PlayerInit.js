@@ -50,12 +50,14 @@ let lang = Frog.serverConfigurationFiles.lang;
 
 module.exports = {
 	/**
+	 * @async
 	 * @param {Client} player
 	 * @param {Server} server
 	 */
-	_initPlayer(player, server) {
+	async _initPlayer(player, server) {
 		/**
 		 * Sends a message to the player
+		 * 
 		 * @param {String} message - The message to send
 		 */
 		player.sendMessage = function (message) {
@@ -78,6 +80,7 @@ module.exports = {
 
 		/**
 		 * Sends a chat message as a player
+		 * 
 		 * @param {String} message - The message to send as a player
 		 */
 		player.chat = function (message) {
