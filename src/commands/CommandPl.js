@@ -13,8 +13,8 @@ module.exports = {
 			return;
 		}
 
-		const plugins = PluginManager.getPlugins()?.length ?? 0;
-		const pluginList = PlayerColors.GREEN + PluginManager.getPlugins()?.join(PlayerColors.WHITE + "§7, " + PlayerColors.GREEN) || "";
+		const plugins = PluginManager.plugins?.length ?? 0;
+		const pluginList = PlayerColors.GREEN + PluginManager.plugins?.join(PlayerColors.WHITE + "§7, " + PlayerColors.GREEN) || "";
 
 		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList ?? "No plugins available"} ${PlayerColors.RESET}`);
 	},
