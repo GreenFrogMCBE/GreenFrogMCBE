@@ -10,10 +10,11 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Frog = require("../Frog");
-const Logger = require("../server/Logger");
 
-const PlayerInfo = require("../api/PlayerInfo");
+const Frog = require('../Frog');
+const Logger = require('../server/Logger');
+
+const PlayerInfo = require('../api/PlayerInfo');
 
 module.exports = {
 	/**
@@ -21,16 +22,16 @@ module.exports = {
 	 */
 	clearOfflinePlayers() {
 		Frog.eventEmitter.emit('serverOfflinePlayersGarbageCollection', {
-			server: require("../Server"),
+			server: require('../Server'),
 			players: PlayerInfo.players,
-			cancel() { 
-				return false 
-			}
+			cancel() {
+				return false;
+			},
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
 			if (PlayerInfo.players[i].offline) {
-				Logger.debug("[Garbage collector] Deleted " + PlayerInfo.players[i].username);
+				Logger.debug('[Garbage collector] Deleted ' + PlayerInfo.players[i].username);
 				PlayerInfo.players.splice(i, 1);
 				i--;
 			}
@@ -41,25 +42,26 @@ module.exports = {
 	 * Clears RAM from useless entries
 	 */
 	gc() {
-		Logger.debug("[Garbage collector] Starting Garbage-collect everything...");
+		Logger.debug('[Garbage collector] Starting Garbage-collect everything...');
 		this.clearOfflinePlayers();
 
 		Frog.eventEmitter.emit('serverGarbageCollection', {
-			server: require("../Server"),
+			server: require('../Server'),
 			players: PlayerInfo.players,
-			cancel() { 
-				return false 
-			}
+			cancel() {
+				return false;
+			},
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			delete PlayerInfo.players[i].q;
-			delete PlayerInfo.players[i].q2;
-			delete PlayerInfo.players[i].profile;
-			delete PlayerInfo.players[i].skinData;
-			delete PlayerInfo.players[i].userData;
+			const player = PlayerInfo.players[i];
+			delete player.q;
+			delete player.q2;
+			delete player.profile;
+			delete player.skinData;
+			delete player.userData;
 		}
 
-		Logger.debug("[Garbage collector] Finished");
+		Logger.debug('[Garbage collector] Finished');
 	},
 };
