@@ -31,7 +31,7 @@ module.exports = {
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
 			if (PlayerInfo.players[i].offline) {
-				Logger.debug('[Garbage collector] Deleted ' + PlayerInfo.players[i].username);
+				Logger.debug('[Garbage collector] Deleted player: ' + PlayerInfo.players[i].username);
 				PlayerInfo.players.splice(i, 1);
 				i--;
 			}
@@ -39,10 +39,10 @@ module.exports = {
 	},
 
 	/**
-	 * Clears RAM from useless entries
+	 * Clears RAM from useless stuff
 	 */
 	gc() {
-		Logger.debug('[Garbage collector] Starting Garbage-collect everything...');
+		Logger.debug('[Garbage collector] Started garbage collection...');
 		this.clearOfflinePlayers();
 
 		Frog.eventEmitter.emit('serverGarbageCollection', {
@@ -55,13 +55,33 @@ module.exports = {
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
 			const player = PlayerInfo.players[i];
-			delete player.q;
-			delete player.q2;
-			delete player.profile;
-			delete player.skinData;
-			delete player.userData;
+
+			this.removePlayerData(player, player.q)
+			this.removePlayerData(player, player.q2)
+			this.removePlayerData(player, player.profile)
+			this.removePlayerData(player, player.skinData)
+			this.removePlayerData(player, player.userData)
+			this.removePlayerData(player, player.transfer)
+			this.removePlayerData(player, player.kick)
+			this.removePlayerData(player, player.disconnect)
+			this.removePlayerData(player, player.sendMessage)
+			this.removePlayerData(player, player.chat)
 		}
 
 		Logger.debug('[Garbage collector] Finished');
 	},
+
+	/**
+	 * Removes player data
+	 * 
+	 * @param {Client} player 
+	 * @param {String} data 
+	 */
+	removePlayerData(player, data) {
+		if (player[data]) {
+			Logger.info(`Removed ${data} from ${player.username}'s object`)
+
+			delete player[data]
+		}
+	}
 };

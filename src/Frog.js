@@ -131,11 +131,10 @@ module.exports = {
         });
 
         if (shouldShutdown) {
-            await require("./server/ConsoleCommandSender").close();
-
             Logger.info(this.serverConfigurationFiles.lang.server.stoppingServer);
 
-            getServer().close(shutdownMessage);
+            await require("./server/ConsoleCommandSender").close();
+            await getServer().close(shutdownMessage);
 
             setTimeout(() => {
                 PluginLoader.unloadPlugins();

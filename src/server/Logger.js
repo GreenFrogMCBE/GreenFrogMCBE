@@ -12,6 +12,7 @@
  */
 const { lang, config } = require("../api/ServerInfo");
 const { convertConsoleColor } = require("../utils/ConsoleColorConvertor");
+const LoggingException = require("../utils/exceptions/LoggingException");
 
 
 module.exports = {
@@ -23,46 +24,55 @@ module.exports = {
 	 * @param {String} message 
 	 * @param {String} consoleType
 	 */
-	customLog(langString, color, message, consoleType) {
-		const d = new Date();
-		const dStr = d.toLocaleString().replace(",", "").toUpperCase();
+	log(langString, color, message, consoleType) {
+		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
 
-		console[consoleType](convertConsoleColor(`${dStr} \x1b[${color}m${lang.logger[langString]}\x1b[0m | ${message}`))
+		if (consoleType === "warning") {
+			throw new LoggingException("Bad log type: warning. Its 'warn', not 'warning'")
+		}
+
+		if (!console[consoleType]) {
+			throw new LoggingException("Bad log type: " + console[consoleType] + ". Valid types are info, warn, error, debug")
+		}
+
+		console[consoleType](convertConsoleColor(`${date} \x1b[${color}m${lang.logger[langString]}\x1b[0m | ${message}`))
 	},
 
 	/**
 	 * Logs a message to the console as info
-	 * @param {String} message - The message to log
+	 * 
+	 * @param {String} message
 	 */
 	info(message) {
-		this.customLog('info', '32', message, 'info');
+		this.log('info', '32', message, 'info');
 	},
 
 	/**
 	 * Logs a message to the console as warning
-	 * @param {String} message - The message to log
+	 * 
+	 * @param {String} message
 	 */
 	warning(message) {
-		this.customLog('warning', '33', message, 'warn')
+		this.log('warning', '33', message, 'warn')
 	},
 
 	/**
 	 * Logs a message to the console as error
-	 * @param {String} message - The message to log
+	 * @param {String} message
 	 */
 	error(message) {
-		this.customLog('error', '31', message, 'error')
+		this.log('error', '31', message, 'error')
 	},
 
 	/**
 	 * Logs a message to the console as debug
 	 * Requires for debug to be enabled in config
 	 *
-	 * @param {String} message - The message to log
+	 * @param {String} message
 	 */
 	debug(message) {
 		if (!(process.env.DEBUG === "minecraft-protocol" || config.debug)) return;
 
-		this.customLog('debug', '35', message, 'info')
+		this.log('debug', '35', message, 'info')
 	},
 };

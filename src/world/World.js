@@ -32,7 +32,7 @@ class World {
 
 		/**
 		 * The coordinates of the spawn point.
-		 * @type {{ x: number, y: number, z: number }}
+		 * @type {{ x: Number, y: Number, z: Number }}
 		 */
 		this.coords = {};
 
@@ -79,7 +79,7 @@ class World {
 
 	/**
 	 * Gets the coordinates of the spawn point.
-	 * @returns {{ x: number, y: number, z: number }} - The coordinates of the spawn point.
+	 * @returns {{ x: Number, y: Number, z: Number }} - The coordinates of the spawn point.
 	 */
 	getSpawnCoordinates() {
 		return this.coords;
@@ -129,7 +129,7 @@ class World {
 		const { config } = Frog.serverConfigurationFiles
 
 		if (config.tickEvent) {
-			Frog.eventEmitter.emit('serverTickEvent', {
+			Frog.eventEmitter.emit('serverTick', {
 				world: this.getWorldData(),
 				server: Frog.server,
 				cancel() { return false }
@@ -137,7 +137,7 @@ class World {
 		}
 
 		if (config.tickWorldTime) {
-			Frog.eventEmitter.emit('serverTimeTickEvent', {
+			Frog.eventEmitter.emit('serverTimeTick', {
 				world: this.getWorldData(),
 				server: Frog.server,
 				time: _time,
@@ -153,7 +153,7 @@ class World {
 		}
 
 		if (config.tickRegeneration) {
-			Frog.eventEmitter.emit('serverRegenerationTickEvent', {
+			Frog.eventEmitter.emit('serverRegenerationTick', {
 				world: this.getWorldData(),
 				server: Frog.server,
 				cancel() { return false }
@@ -169,7 +169,7 @@ class World {
 		}
 
 		if (config.tickStarvationDamage) {
-			Frog.eventEmitter.emit('serverStarvationDamageTickEvent', {
+			Frog.eventEmitter.emit('serverStarvationDamageTick', {
 				world: this.getWorldData(),
 				server: Frog.server,
 				cancel() { return false }
@@ -183,7 +183,7 @@ class World {
 		}
 
 		if (config.tickVoid) {
-			Frog.eventEmitter.emit('serverVoidDamageTickEvent', {
+			Frog.eventEmitter.emit('serverVoidDamageTick', {
 				world: this.getWorldData(),
 				server: Frog.server,
 				cancel() { return false }
@@ -218,7 +218,7 @@ class World {
 	/**
 	 * Returns world data.
 	 *
-	 * @returns {{ name: string, chunk_radius: number, spawn_coordinates: { x: number, y: number, z: number } }} An object containing the world's name, chunk radius, and spawn coordinates.
+	 * @returns {{ name: string, chunk_radius: Number, spawn_coordinates: { x: Number, y: Number, z: Number } }} An object containing the world's name, chunk radius, and spawn coordinates.
 	 */
 	getWorldData() {
 		return {
