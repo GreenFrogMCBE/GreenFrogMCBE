@@ -42,7 +42,7 @@ const ItemComponent = require("./ServerItemComponentPacket");
 //const CommandTime = require("../../commands/CommandTime");
 const WorldGenerator = require("./types/WorldGenerator");
 const { config, lang } = require("../../api/ServerInfo");
-const DefaultWorld = require("../../world/DefaultWorld");
+const World = require("../../world/World");
 //const CommandSay = require("../../commands/CommandSay");
 const LevelChunk = require("./ServerLevelChunkPacket");
 //const CommandMe = require("../../commands/CommandMe");
@@ -141,7 +141,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				completeEvent.player = player;
 				completeEvent.execute();
 
-				player.world = new DefaultWorld();
+				player.world = new World();
 				player.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
 				player.world.setName(require("../../../world/world_settings.json").worldName);
 

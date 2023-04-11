@@ -103,7 +103,7 @@ module.exports = {
     /**
      * Sends message to all players
      * 
-     * @param {string} message 
+     * @param {String} message 
      */
     broadcastMessage(message) {
         for (const player of PlayerInfo.players) {

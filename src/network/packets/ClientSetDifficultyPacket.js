@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const DefaultWorld = require("../../world/DefaultWorld");
+const World = require("../../world/World");
 
 const PacketHandlingError = require("./exceptions/PacketHandlingError");
 
@@ -46,7 +46,7 @@ class ClientSetDifficultyPacket extends PacketConstructor {
 	async readPacket(player, packet) {
 		await this.validatePacket(player);
 
-		for (const player of new DefaultWorld().getPlayersInWorld()) {
+		for (const player of new World().getPlayersInWorld()) {
 			player.setDifficulty(packet.data.params.difficulty);
 		}
 	}

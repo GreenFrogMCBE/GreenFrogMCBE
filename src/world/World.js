@@ -1,6 +1,6 @@
 /**
- * This file contains dАefault functions for the world.
- * @module DefaultWorld
+ * This file contains API functions for the world.
+ * @module World
  */
 
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
@@ -22,11 +22,11 @@ const Frog = require("../Frog");
  */
 let _time = 0;
 
-class DefaultWorld {
+class World {
 	constructor() {
 		/**
 		 * The name of the world.
-		 * @type {string}
+		 * @type {String}
 		 */
 		this.worldName;
 
@@ -38,14 +38,14 @@ class DefaultWorld {
 
 		/**
 		 * The chunk render radius.
-		 * @type {number}
+		 * @type {Number}
 		 */
 		this.renderDistance;
 	}
 
 	/**
 	 * Sets the name of the world.
-	 * @param {string} name - The new name of the world.
+	 * @param {String} name - The new name of the world.
 	 */
 	setName(name) {
 		this.worldName = name;
@@ -53,7 +53,7 @@ class DefaultWorld {
 
 	/**
 	 * Gets the name of the world.
-	 * @returns {string} - The name of the world.
+	 * @returns {String} - The name of the world.
 	 */
 	getName() {
 		return this.worldName;
@@ -69,9 +69,9 @@ class DefaultWorld {
 
 	/**
 	 * Sets the coordinates of the spawn point.
-	 * @param {number} x - The x-coordinate of the spawn point.
-	 * @param {number} y - The y-coordinate of the spawn point.
-	 * @param {number} z - The z-coordinate of the spawn point.
+	 * @param {Number} x - The x-coordinate of the spawn point.
+	 * @param {Number} y - The y-coordinate of the spawn point.
+	 * @param {Number} z - The z-coordinate of the spawn point.
 	 */
 	setSpawnCoordinates(x, y, z) {
 		this.coords = { x, y, z };
@@ -87,7 +87,7 @@ class DefaultWorld {
 
 	/**
 	 * Sets the chunk render radius.
-	 * @param {number} radius - The new chunk render radius.
+	 * @param {Number} radius - The new chunk render radius.
 	 */
 	setChunkRadius(radius) {
 		this.renderDistance = radius;
@@ -95,7 +95,7 @@ class DefaultWorld {
 
 	/**
 	 * Gets the chunk render radius.
-	 * @returns {number} - The chunk render radius.
+	 * @returns {Number} - The chunk render radius.
 	 */
 	getChunkRadius() {
 		return this.renderDistance;
@@ -103,10 +103,10 @@ class DefaultWorld {
 
 	/**
 	 * Places a block at the specified coordinates.
-	 * @param {number} x - The x-coordinate of the block.
-	 * @param {number} y - The y-coordinate of the block.
-	 * @param {number} z - The z-coordinate of the block.
-	 * @param {number} id - The ID of the block to place.
+	 * @param {Number} x - The x-coordinate of the block.
+	 * @param {Number} y - The y-coordinate of the block.
+	 * @param {Number} z - The z-coordinate of the block.
+	 * @param {Number} id - The ID of the block to place.
 	 */
 	placeBlock(x, y, z, id) {
 		for (const player of this.getPlayersInWorld()) {
@@ -229,4 +229,4 @@ class DefaultWorld {
 	}
 }
 
-module.exports = DefaultWorld;
+module.exports = World;

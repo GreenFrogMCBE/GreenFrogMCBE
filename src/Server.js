@@ -24,7 +24,7 @@ const GarbageCollector = require("./utils/GarbageCollector");
 const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 
-const DefaultWorld = require("./world/DefaultWorld");
+const World = require("./world/World");
 
 const Logger = require("./server/Logger");
 
@@ -324,7 +324,7 @@ module.exports = {
 		}, parseInt(config.garbageCollectorDelay));
 
 		setInterval(() => {
-			const serverLocalWorld = new DefaultWorld();
+			const serverLocalWorld = new World();
 			serverLocalWorld.tick();
 		}, parseInt(config.randomTickSpeed));
 	},
