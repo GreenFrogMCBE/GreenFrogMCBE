@@ -226,7 +226,7 @@ async function _listen() {
  * @private
  */
 async function _onJoin(client) {
-	await PlayerInit._initPlayer(client, server);
+	await PlayerInit.initPlayer(client, server);
 	await ValidateClient._initAndValidateClient(client);
 
 	client.world = null; // This gets initialised in PlayerResourcePacksCompleted event
