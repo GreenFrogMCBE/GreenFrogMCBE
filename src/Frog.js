@@ -8,10 +8,10 @@ const PlayerInfo = require('./api/PlayerInfo');
 const Logger = require('./server/Logger');
 
 const yaml = require('js-yaml')
-const fs = require('fs')
+const fs = require('fs');
 
 /**
- * Event manager
+ * Event emitter
  * 
  * @private
  * @returns {EventEmitter}
@@ -81,7 +81,7 @@ module.exports = {
      * to listen for, and for server to execute
      * events
      * 
-     * @returns {EventEmiter}
+     * @returns {EventEmitter}
      * @type {import('./base/EventEmitter')}
      */
     eventEmitter: _eventEmitter,
