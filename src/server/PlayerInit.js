@@ -54,7 +54,7 @@ module.exports = {
 	 * @param {Client} player
 	 * @param {Server} server
 	 */
-	async _initPlayer(player, server) {
+	async initPlayer(player, server) {
 		/**
 		 * Sends a message to the player
 		 * 
