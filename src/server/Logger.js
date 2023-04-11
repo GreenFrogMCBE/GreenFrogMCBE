@@ -10,12 +10,31 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { lang, config } = require("../api/ServerInfo");
 const { convertConsoleColor } = require("../utils/ConsoleColorConvertor");
+
+/* const Frog = require("../Frog") <--- This code does not work
+It throws:
+(node:13208) Warning: Accessing non-existent property 'serverConfigurationFiles' of module exports inside circular dependency  */
+
 const LoggingException = require("../utils/exceptions/LoggingException");
 
+let lang;
 
 module.exports = {
+	/**
+	 * Setups logger
+	 */
+	setupLogger() {
+		lang = require("../Frog").serverConfigurationFiles.lang;
+	},
+
+	/**
+	 * Returns if debug is enabled or not
+	 * 
+	 * @returns {Boolean}
+	 */
+	isDebugEnabled: require("../Frog").isDebug,
+
 	/**
 	 * Logs a message with custom message
 	 * 
@@ -74,7 +93,7 @@ module.exports = {
 	 * @param {String} message
 	 */
 	debug(message) {
-		if (!(process.env.DEBUG === "minecraft-protocol" || config.debug)) return;
+		if (!(process.env.DEBUG === "minecraft-protocol" || this.isDebugEnabled)) return;
 
 		this.log('debug', '35', message, 'info')
 	},

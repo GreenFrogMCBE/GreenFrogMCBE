@@ -306,6 +306,8 @@ module.exports = {
 
 		console.clear()
 
+		Logger.setupLogger()
+
 		Logger.info(lang.server.loadingServer);
 		Logger.info(lang.commands.verInfo.replace("%version%", Frog.getServerData().minorServerVersion));
 
