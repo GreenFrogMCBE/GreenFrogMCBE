@@ -62,6 +62,8 @@ module.exports = {
 							name = packageJson.displayName;
 							version = packageJson.version;
 							main = packageJson.main;
+
+							Logger.info(`Loading ${name} v${version}...`)
 						} catch (error) {
 							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
 							return;
@@ -95,7 +97,7 @@ module.exports = {
 	},
 
 	async unloadPlugins() {
-		fs.readdir("./plugins", (err, files) => {
+		fs.readdir("./plugins", (_err, files) => {
 			if (files.length === 0) this.killServer();
 
 			files.forEach((file) => {
