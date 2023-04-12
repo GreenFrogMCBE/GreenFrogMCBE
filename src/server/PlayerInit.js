@@ -14,14 +14,6 @@ const Logger = require("./Logger");
 
 const GameMode = require("../api/GameMode");
 
-const PlayerKickEvent = require("../events/PlayerKickEvent");
-const PlayerLeaveEvent = require("../events/PlayerLeaveEvent");
-const PlayerTransferEvent = require("../events/PlayerTransferEvent");
-const PlayerUpdateDifficultyEvent = require("../events/PlayerUpdateDifficultyEvent");
-const PlayerHungerUpdateEvent = require("../events/PlayerHungerUpdateEvent");
-const PlayerHealthUpdateEvent = require("../events/PlayerHealthUpdateEvent");
-const PlayerTimeUpdateEvent = require("../events/PlayerTimeUpdateEvent");
-
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
@@ -36,7 +28,7 @@ const PlayerListTypes = require("../network/packets/types/PlayerList");
 
 const GarbageCollector = require("../utils/GarbageCollector");
 
-const DamageCause = require("../events/types/DamageCause");
+const DamageCause = require("../type/health/DamageCause");
 const HungerCause = require("../events/types/HungerCause");
 
 const PlayerInfo = require("../api/PlayerInfo");
@@ -60,6 +52,7 @@ module.exports = {
 		 */
 		player.sendMessage = function (message) {
 			let shouldSendMessage = true
+
 			Frog.eventEmitter.emit('serverToClientMessage', {
 				player,
 				server,
@@ -118,6 +111,7 @@ module.exports = {
 			}
 
 			let shouldChangeGamemode = true;
+
 			Frog.eventEmitter.emit('serverGamemodeChange', {
 				player,
 				server,
@@ -141,6 +135,16 @@ module.exports = {
 		 * @param {Number} port - The port of the server to transfer to
 		 */
 		player.transfer = function (address, port) {
+			Frog.eventEmitter.emit('PlayerTransferEvent', {
+				player,
+				port,
+				address,
+				server: Frog.server,
+				cancel() {
+					shouldSendMessage = false
+				},
+			});
+
 			const transferEvent = new PlayerTransferEvent();
 			transferEvent.address = address;
 			transferEvent.port = port;

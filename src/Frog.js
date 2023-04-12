@@ -34,7 +34,7 @@ function getServer() {
  * Returns configuration files (e.g config.yml, and language files)
  * 
  * @returns {ConfigurationFile}
- * @type {import('./base/ConfigurationFile')}
+ * @type {import('./type/ConfigurationFile')}
  */
 function getConfig() {
     return {
@@ -72,7 +72,7 @@ module.exports = {
     * Returns configuration files (e.g config.yml, and language files)
     * 
     * @returns {ConfigurationFile}
-    * @type {import('./base/ConfigurationFile')}
+    * @type {import('./type/ConfigurationFile')}
     */
     serverConfigurationFiles: getConfig(),
 
@@ -82,7 +82,7 @@ module.exports = {
      * events
      * 
      * @returns {EventEmitter}
-     * @type {import('./base/EventEmitter')}
+     * @type {import('./type/EventEmitter')}
      */
     eventEmitter: _eventEmitter,
 
@@ -90,7 +90,7 @@ module.exports = {
      * Returns server data
      * 
      * @returns {ServerData}
-     * @type {import('./base/ServerData')}
+     * @type {import('./type/ServerData')}
      */
     getServerData() {
         return {
