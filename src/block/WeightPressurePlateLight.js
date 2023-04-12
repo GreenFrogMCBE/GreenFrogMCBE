@@ -13,7 +13,7 @@
 const Block = require("./Block");
 
 /**
- * @type {import('../base/Block')}
+ * @type {import('../type/Block')}
  */
 class WeightPressurePlateLight extends Block {
 	getRuntimeId() {

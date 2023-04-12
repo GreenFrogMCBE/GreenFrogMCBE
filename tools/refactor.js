@@ -13,7 +13,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const rootDir = __dirname + "/../";
+const rootDir = path.join(__dirname, "..");
 
 console.info("Started refactoring");
 console.time("Finished refactoring in");
@@ -48,7 +48,7 @@ async function traverseDirectory(dirPath, replacements) {
 
 const replacements = [
 	// Put your replacements here, example:
-	["Something2", "Something2"]
+	["/base/", "/type/"]
 ];
 
 traverseDirectory(rootDir, replacements);

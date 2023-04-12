@@ -2,7 +2,7 @@ const Frog = require("../Frog");
 const CommandVerifier = require("../utils/CommandVerifier");
 
 /**
- * @type {import('../base/Command').Command}
+ * @type {import('../type/Command').Command}
  */
 module.exports = {
 	execute(_server, player) {

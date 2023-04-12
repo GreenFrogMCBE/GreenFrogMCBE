@@ -4,7 +4,7 @@ const { lang, config } = require("../api/ServerInfo");
 const PluginManager = require('../plugins/PluginManager')
 
 /**
- * @type {import('../base/Command').Command}
+ * @type {import('../type/Command').Command}
  */
 module.exports = {
 	execute(_, player) {
