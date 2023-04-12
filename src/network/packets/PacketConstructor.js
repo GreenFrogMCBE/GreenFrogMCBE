@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const UnsupportedOperationException = require("../../events/exceptions/UnsupportedOperationException");
+const UnsupportedOperationException = require("../../utils/exceptions/UnsupportedOperationException");
 
 class PacketConstructor {
 	constructor() {}
