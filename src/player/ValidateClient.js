@@ -19,6 +19,7 @@ module.exports = {
 		client.port = client.connection.address.split("/")[1];
 		client.fullip = client.connection.address;
 		client.username = client.getUserData().displayName;
+		client.usernameold = client.username;
 		client.offline = false;
 		client.items = [];
 		client.gamemode = config.gamemode;

@@ -1,24 +1,36 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
 const AvailableCommands = require("../network/packets/ServerAvailableCommandsPacket");
+
+/**
+ * @typedef {Object} CommandData - Data for a command.
+ * @property {String} name - The name of the command.
+ * @property {String} description - The description of the command.
+ * @property {Number} flags - The flags for the command.
+ * @property {Number} permission_level - The permission level required to use the command.
+ * @property {Number} alias - The alias of the command.
+ * @property {Array<Array<Object>>} overloads - The overloads for the command.
+ */
+
+/**
+ * @typedef {Object} CommandsPacket - The commands packet.
+ * @property {Number} values_len - The length of the values.
+ * @property {String} _enum_type - The type of the enum.
+ * @property {Array} enum_values - The enum values.
+ * @property {Array} suffixes - The suffixes.
+ * @property {Array} enums - The enums.
+ * @property {Array<CommandData>} command_data - The command data.
+ * @property {Array} dynamic_enums - The dynamic enums.
+ * @property {Array} enum_constraints - The enum constraints.
+ */
 
 let commands = [];
 
+/** Manages commands */
 class CommandManager {
 	/**
 	 * Retrieves the commands packet of a client.
+	 * 
 	 * @param {Object} client - The client object.
-	 * @returns {Object} The client's commands packet.
+	 * @returns {CommandsPacket} The client's commands packet.
 	 */
 	getPacket(client) {
 		return client.commands;
@@ -26,6 +38,7 @@ class CommandManager {
 
 	/**
 	 * Initializes the commands.
+	 * 
 	 * @param {Object} client - The client.
 	 */
 	init(client) {
@@ -43,6 +56,7 @@ class CommandManager {
 
 	/**
 	 * Retrieves the commands array.
+	 * 
 	 * @returns {Array} The commands array.
 	 */
 	getCommands() {
@@ -52,7 +66,7 @@ class CommandManager {
 	/**
 	 * Adds a new command to the client's commands packet and updates the commands array.
 	 *
-	 *  @param {Client} client - The client.
+	 * @param {Object} client - The client.
 	 * @param {String} name - The name of the new command.
 	 * @param {String} description - The description of the command.
 	 */
@@ -81,13 +95,15 @@ class CommandManager {
 				],
 			],
 		});
+
 		commands.push({
 			name,
 			description,
 		});
-		const availablecommands = new AvailableCommands();
-		availablecommands.setData(client.commands);
-		availablecommands.writePacket(client);
+
+		const availableCommandsPacket = new AvailableCommands();
+		availableCommandsPacket.setData(client.commands);
+		availableCommandsPacket.writePacket(client);
 	}
 }
 
