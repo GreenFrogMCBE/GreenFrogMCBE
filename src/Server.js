@@ -314,7 +314,7 @@ module.exports = {
 			Logger.error("You are running node.JS version that is too old to run GreenFrogMCBE and bedrock-protocol")
 			Logger.error("Please update it to 14.0.0+, from https://nodejs.org/")
 
-			return;
+			process.exit(-1)
 		}
 
 		Logger.info(lang.commands.verInfo.replace("%version%", Frog.getServerData().minorServerVersion));
