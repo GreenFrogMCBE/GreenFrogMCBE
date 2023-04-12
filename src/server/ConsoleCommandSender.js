@@ -9,6 +9,7 @@ const Logger = require("./Logger");
 let isClosed = false;
 /** @private */
 let lang;
+/** @private */
 let readLineInterface;
 
 /**
@@ -143,6 +144,16 @@ module.exports = {
 
 					if (!isClosed) readLineInterface.prompt(true);
 				} catch (error) {
+					require("../Frog").eventEmitter.emit('serverCommandProcessError', {
+						server: require("../Frog").server,
+						command,
+						error,
+						cancel() {
+							return false;
+						}
+					});
+
+
 					Logger.error(`Failed to execute command! ${error.stack}`);
 				}
 			}

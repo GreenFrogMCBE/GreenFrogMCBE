@@ -18,7 +18,10 @@ const LICENSE_HEADER = `/**
 const srcPath = path.join(__dirname, "..");
 
 const addHeader = async (filePath) => {
-	if (filePath.includes("node_modules")) return;
+	if (filePath.includes("node_modules")) {
+		return;
+	}
+
 	try {
 		const data = await fs.readFile(filePath);
 		let contents = data.toString();

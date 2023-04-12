@@ -26,6 +26,7 @@ class CustomForm {
 
 	/**
 	 * Add an action.
+	 * 
 	 * @param action - The action to add to the list of actions.
 	 */
 	addAction(action) {
@@ -34,6 +35,7 @@ class CustomForm {
 
 	/**
 	 * Adds an input to the form.
+	 * 
 	 * @param text - The text that will be displayed in the input field.
 	 * @param [placeholder] - The text that will be displayed in the input box before the user types
 	 * anything.
@@ -44,6 +46,7 @@ class CustomForm {
 
 	/**
 	 * It adds a label to the form
+	 * 
 	 * @param text - The text to display.
 	 */
 	addText(text) {
@@ -52,6 +55,7 @@ class CustomForm {
 
 	/**
 	 * Adds a dropdown to the form.
+	 * 
 	 * @param {String} text
 	 * @param {JSON} options
 	 */
@@ -69,6 +73,7 @@ class CustomForm {
 
 	/**
 	 * Adds slider to the form.
+	 * 
 	 * @param {String} text
 	 * @param {Number} min
 	 * @param {Number} max
