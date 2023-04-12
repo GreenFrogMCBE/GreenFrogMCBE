@@ -121,11 +121,11 @@
     "listeningOn": "Listening on port %address%",
     "loadingPlugins": "Loading plugins...",
     "loadingServer": "Loading server...",
-    "unloadingPlugin": "Unloading %plugin%",
+    "unloadingPlugin": "Unloading %plugin%...",
     "unloadedPlugin": "Unloaded %plugin%",
     "stoppingServer": "Stopping server...",
     "loadingPlugin": "Loading %plugin%...",
-    "loadedPlugin": "Plugin %name% v%version% loaded"
+    "loadedPlugin": "Plugin %name% v%version% loaded!"
   },
   "devdebug": {
     "ignoredPacket": "Ignored packet: %packet%",
