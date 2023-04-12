@@ -304,11 +304,19 @@ module.exports = {
 
 		if (!fs.existsSync("world")) fs.mkdirSync("world");
 
-		//console.clear()
+		console.clear()
 
 		Logger.setupLogger()
 
 		Logger.info(lang.server.loadingServer);
+
+		if (process.versions.node.split('.')[0] < 14) {
+			Logger.error("You are running node.JS version that is too old to run GreenFrogMCBE and bedrock-protocol")
+			Logger.error("Please update it to 14.0.0+, from https://nodejs.org/")
+
+			return;
+		}
+
 		Logger.info(lang.commands.verInfo.replace("%version%", Frog.getServerData().minorServerVersion));
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
