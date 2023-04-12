@@ -1,6 +1,6 @@
 ## Language system
 
-Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese, Turkish
+Our language system currently supports those languages: English, Lithuanian, Ukrainian, Vietnamese
 
 #### English > set language in config.yml to "en_US"
 
