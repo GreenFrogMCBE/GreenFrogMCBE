@@ -18,17 +18,17 @@ const rootDir = __dirname + "/../";
 console.info("Started refactoring");
 console.time("Finished refactoring in");
 
-function replaceInFile(filePath, replacements) {
+async function replaceInFile(filePath, replacements) {
 	let fileContent = fs.readFileSync(filePath, "utf8");
 
 	for (const [searchValue, replaceValue] of replacements) {
 		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
 	}
 
-	fs.writeFileSync(filePath, fileContent);
+	fs.writeFile(filePath, fileContent);
 }
 
-function traverseDirectory(dirPath, replacements) {
+async function traverseDirectory(dirPath, replacements) {
 	const entries = fs.readdirSync(dirPath, { withFileTypes: true });
 
 	for (const entry of entries) {
@@ -45,8 +45,7 @@ function traverseDirectory(dirPath, replacements) {
 const replacements = [
 	// Put your replacements here
 	// example:
-	["{Number}", "{Number}"],
-	["{String}", "{String}"],
+	["Something1", "Something2"]
 ];
 
 traverseDirectory(rootDir, replacements);

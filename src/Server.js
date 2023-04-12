@@ -21,7 +21,6 @@ const PlayerInfo = require("./api/PlayerInfo");
 const Frog = require('./Frog')
 
 const GarbageCollector = require("./utils/GarbageCollector");
-const ValidateClient = require("./player/ValidateClient");
 const PlayerInit = require("./server/PlayerInit");
 
 const World = require("./world/World");
@@ -227,12 +226,13 @@ async function _listen() {
  */
 async function _onJoin(client) {
 	await PlayerInit.initPlayer(client, server);
-	await ValidateClient._initAndValidateClient(client);
 
-	client.world = null; // This gets initialised in PlayerResourcePacksCompleted event
+	Object.assign(client, { items: [] }); // Inventory
 	Object.assign(client, { x: 0, y: 0, z: 0 }); // Player coordinates
-	Object.assign(client, { health: 20, hunger: 20, chunksEnabled: true, packetCount: 0 }); // Network stuff
-	Object.assign(client, { dead: false, offline: false, initialised: false, isConsole: true, fallDamageQueue: 0 }); // API fields
+	Object.assign(client, { health: 20, hunger: 20, packetCount: 0 }); // API
+	Object.assign(client, { world: null, chunksEnabled: true, gamemode: Frog.serverConfigurationFiles.config }); // World-related stuff
+	Object.assign(client, { dead: false, offline: false, initialised: false, isConsole: true, fallDamageQueue: 0 }); // More API stuff
+	Object.assign(client, { ip: client.connection.address.split("/")[0], port: client.connection.address.split("/")[0] }); // Network
 
 	setInterval(() => {
 		client.packetCount = 0;
