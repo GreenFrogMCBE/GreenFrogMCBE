@@ -49,7 +49,7 @@ module.exports = {
 	 * 
 	 * @returns {Boolean}
 	 */
-	isDebugEnabled: require("../Frog").isDebug,
+	isDebugEnabled() { require("../Frog").isDebug },
 
 	/**
 	 * Logs a message

@@ -304,7 +304,7 @@ module.exports = {
 
 		if (!fs.existsSync("world")) fs.mkdirSync("world");
 
-		console.clear()
+		//console.clear()
 
 		Logger.setupLogger()
 
