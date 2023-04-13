@@ -12,7 +12,7 @@
  */
 const Logger = require("./Logger");
 
-const GameMode = require("../api/GameMode");
+const GameMode = require("../api/player/GameMode");
 
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
