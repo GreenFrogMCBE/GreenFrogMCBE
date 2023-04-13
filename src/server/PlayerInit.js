@@ -42,6 +42,7 @@ let lang = Frog.serverConfigurationFiles.lang;
 module.exports = {
 	/**
 	 * @async
+	 * 
 	 * @param {Client} player
 	 * @param {Server} server
 	 */
