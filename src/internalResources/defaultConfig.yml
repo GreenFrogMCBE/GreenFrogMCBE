@@ -1,13 +1,13 @@
 network:
-  host: "0.0.0.0"
+  host: '0.0.0.0'
   port: 19132
 serverInfo:
-  motd: "§aGreenFrog server"
-  levelName: "GreenFrog"
-  version: "1.19.70"
+  motd: '§aGreenFrog server'
+  levelName: 'GreenFrog'
+  version: '1.19.70'
   offlineMode: true
 chat:
-  lang: "en_US"
+  lang: 'en_US'
   disable: false
   commandsDisabled: false
   blockInvalidMessages: true # Kicks the player if the player tried to send an too long or empty message and also prevents from using colors in chat
@@ -42,7 +42,7 @@ dev:
   exitCode: 0
   logUnhandledPackets: false
   defaultPermissionLevel: 2
-  # Permission levels are:
+  # Permission levels are: 
   # 4 - operator
   # 3 - unknown
   # 2 - member
@@ -53,7 +53,7 @@ world:
   gamemode: "creative"
   worldGamemode: "creative"
   difficulty: 0
-  generator: "default"
+  generator: "default" # can be default, flat or void
 
   tickEvent: true # Should ServerTickEvent be enabled?
   tickWorldTime: true # Should time update be server side?
