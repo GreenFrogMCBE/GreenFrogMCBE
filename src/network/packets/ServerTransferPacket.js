@@ -10,8 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable use-isnan */
-/* eslint-disable no-dupe-class-members */
 const PacketConstructor = require("./PacketConstructor");
 
 let server_address = null;
