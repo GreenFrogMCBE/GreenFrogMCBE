@@ -141,4 +141,14 @@ module.exports = {
             }, 1000);
         }
     },
+
+    __playercount: 0,
+    
+    __addPlayer() {
+        this.__playercount++;
+    },
+    
+    __deletePlayer() {
+        this.__playercount--;
+    },
 };
