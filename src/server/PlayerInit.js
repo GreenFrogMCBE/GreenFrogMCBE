@@ -231,11 +231,11 @@ module.exports = {
 		 * @param {Number} time - The time to set the player to
 		 */
 		player.setTime = function (time) {
-			const timeevent = new PlayerTimeUpdateEvent();
-			timeevent.player = player;
-			timeevent.server = server;
-			timeevent.time = time;
-			timeevent.execute();
+			const timeEvent = new PlayerTimeUpdateEvent();
+			timeEvent.player = player;
+			timeEvent.server = server;
+			timeEvent.time = time;
+			timeEvent.execute();
 		};
 
 		/**
