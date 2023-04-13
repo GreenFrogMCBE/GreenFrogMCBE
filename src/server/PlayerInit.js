@@ -227,7 +227,8 @@ module.exports = {
 		};
 
 		/**
-		 * Sets the player's time
+		 * Sets the client side time
+		 * 
 		 * @param {Number} time - The time to set the player to
 		 */
 		player.setTime = function (time) {
@@ -240,6 +241,7 @@ module.exports = {
 
 		/**
 		 * Sets some attribute for the player
+		 * 
 		 * @param {JSON} attribute
 		 */
 		player.setAttribute = function (attribute) {
@@ -252,6 +254,7 @@ module.exports = {
 
 		/**
 		 * Sets the XP for the player
+		 * 
 		 * @param {Float} xp
 		 */
 		player.setXP = function (xp) {
@@ -267,6 +270,7 @@ module.exports = {
 
 		/**
 		 * Sets the health of the player
+		 * 
 		 * @param {Float} health
 		 * @param {DamageCause} cause
 		 */
@@ -287,6 +291,7 @@ module.exports = {
 
 		/**
 		 * Sets the hunger of the player
+		 * 
 		 * @param {Float} hunger
 		 * @param {HungerCause} cause
 		 */
@@ -308,6 +313,7 @@ module.exports = {
 
 		/**
 		 * Updates the dimension for the player
+		 * 
 		 * @param {Float} x
 		 * @param {Float} y
 		 * @param {Float} z
@@ -322,6 +328,9 @@ module.exports = {
 			dimensionpacket.writePacket(player);
 		};
 
+		/**
+		 * Listens for player disconnects
+		 */
 		player.on("close", () => {
 			for (let i = 0; i < PlayerInfo.players.length; i++) {
 				const currentPlayer = PlayerInfo.players[i];
