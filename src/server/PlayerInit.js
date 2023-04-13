@@ -29,7 +29,7 @@ const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 
 const DamageCause = require("../type/health/DamageCause");
-const HungerCause = require("../events/types/HungerCause");
+const HungerCause = require("../type/health/HungerCause");
 
 const PlayerInfo = require("../api/PlayerInfo");
 
@@ -135,15 +135,24 @@ module.exports = {
 		 * @param {Number} port - The port of the server to transfer to
 		 */
 		player.transfer = function (address, port) {
-			Frog.eventEmitter.emit('PlayerTransferEvent', {
+			let shouldTransfer = true;
+
+			Frog.eventEmitter.emit('playerTransferEvent', {
 				player,
 				port,
 				address,
 				server: Frog.server,
 				cancel() {
-					shouldSendMessage = false
+					shouldTransfer = false
 				},
 			});
+
+			if (shouldTransfer) {
+				const trpk = new Transfer();
+				trpk.setServerAddress(this.address);
+				trpk.setPort(this.port);
+				trpk.send(this.player);
+			}
 
 			const transferEvent = new PlayerTransferEvent();
 			transferEvent.address = address;
