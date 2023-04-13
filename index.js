@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 
-const ConsoleColors = require('./src/api/ConsoleColors');
+const ConsoleColors = require('./src/api/colors/ConsoleColors');
 
 const fs = require("fs");
 const center = require("center-align");

@@ -3,12 +3,12 @@
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 
 const WorldGenerator = require("../network/packets/types/WorldGenerator");
-const DamageCause = require("../type/health/DamageCause");
+const DamageCause = require("../api/health/DamageCause");
 const GameMode = require("../api/player/GameMode");
 
 const Logger = require("../server/Logger");
 
-const PlayerInfo = require("../api/PlayerInfo");
+const PlayerInfo = require("../api/player/PlayerInfo");
 
 const Frog = require("../Frog");
 

@@ -3,7 +3,7 @@
 const eventLib = require('events');
 
 const PluginLoader = require('./plugins/PluginLoader');
-const PlayerInfo = require('./api/PlayerInfo');
+const PlayerInfo = require('./api/player/PlayerInfo');
 
 const Logger = require('./server/Logger');
 

@@ -14,7 +14,7 @@
 const Frog = require('../Frog');
 const Logger = require('../server/Logger');
 
-const PlayerInfo = require('../api/PlayerInfo');
+const PlayerInfo = require('../api/player/PlayerInfo');
 
 module.exports = {
 	/**

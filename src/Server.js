@@ -17,7 +17,7 @@
 
 const VersionToProtocol = require("./utils/VersionToProtocol");
 
-const PlayerInfo = require("./api/PlayerInfo");
+const PlayerInfo = require("./api/player/PlayerInfo");
 const Frog = require('./Frog')
 
 const GarbageCollector = require("./utils/GarbageCollector");
