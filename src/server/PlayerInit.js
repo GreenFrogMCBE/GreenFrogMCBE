@@ -35,6 +35,7 @@ const PlayerInfo = require("../api/PlayerInfo");
 
 const Frog = require("../Frog");
 const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
+const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
 
 /** @private */
 let lang = Frog.serverConfigurationFiles.lang;
@@ -165,11 +166,9 @@ module.exports = {
 		 * @type {import('../type/Difficulty')}
 		 */
 		player.setDifficulty = function (difficulty) {
-			const difficultyEvent = new PlayerUpdateDifficultyEvent();
-			difficultyEvent.server = server;
-			difficultyEvent.player = player;
-			difficultyEvent.difficulty = difficulty;
-			difficultyEvent.execute();
+			const difficultypacket = new ServerSetDifficultyPacket();
+			difficultypacket.setDifficulty(difficulty);
+			difficultypacket.writePacket(player);
 		};
 
 		/**
