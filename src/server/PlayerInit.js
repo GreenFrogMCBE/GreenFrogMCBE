@@ -34,6 +34,7 @@ const HungerCause = require("../type/health/HungerCause");
 const PlayerInfo = require("../api/PlayerInfo");
 
 const Frog = require("../Frog");
+const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
 
 /** @private */
 let lang = Frog.serverConfigurationFiles.lang;
@@ -131,6 +132,7 @@ module.exports = {
 
 		/**
 		 * Transfers the player to a different server
+		 * 
 		 * @param {String} address - The address of the server to transfer to
 		 * @param {Number} port - The port of the server to transfer to
 		 */
@@ -148,18 +150,11 @@ module.exports = {
 			});
 
 			if (shouldTransfer) {
-				const trpk = new Transfer();
-				trpk.setServerAddress(this.address);
-				trpk.setPort(this.port);
-				trpk.send(this.player);
+				const transferPacket = new ServerTransferPacket();
+				transferPacket.setServerAddress(address);
+				transferPacket.setPort(port);
+				transferPacket.writePacket(player);
 			}
-
-			const transferEvent = new PlayerTransferEvent();
-			transferEvent.address = address;
-			transferEvent.port = port;
-			transferEvent.player = player;
-			transferEvent.server = server;
-			transferEvent.execute();
 		};
 
 		/**
