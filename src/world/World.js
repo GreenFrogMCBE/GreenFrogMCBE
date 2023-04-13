@@ -1,13 +1,10 @@
-/**
- * This file contains API functions for the world.
- * @module World
- */
+/** This file contains API functions for the world. */
 
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 
 const WorldGenerator = require("../network/packets/types/WorldGenerator");
-const DamageCause = require("../events/types/DamageCause");
-const GameMode = require("../api/GameMode");
+const DamageCause = require("../type/health/DamageCause");
+const GameMode = require("../api/player/GameMode");
 
 const Logger = require("../server/Logger");
 
