@@ -19,6 +19,8 @@ const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeExc
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
 const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
 const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
+const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
+const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
 const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
 const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
@@ -34,8 +36,6 @@ const HungerCause = require("../type/health/HungerCause");
 const PlayerInfo = require("../api/PlayerInfo");
 
 const Frog = require("../Frog");
-const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
-const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
 
 /** @private */
 let lang = Frog.serverConfigurationFiles.lang;
