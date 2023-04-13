@@ -221,9 +221,9 @@ module.exports = {
 		 * @param {Number} radius
 		 */
 		player.setChunkRadius = function (radius) {
-			const chunkradiusupdate = new ServerChunkRadiusUpdatePacket();
-			chunkradiusupdate.setChunkRadius(radius);
-			chunkradiusupdate.writePacket(player);
+			const chunkRadiusUpdate = new ServerChunkRadiusUpdatePacket();
+			chunkRadiusUpdate.setChunkRadius(radius);
+			chunkRadiusUpdate.writePacket(player);
 		};
 
 		/**
