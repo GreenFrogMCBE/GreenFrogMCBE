@@ -62,6 +62,8 @@ module.exports = {
 				message,
 				cancel() {
 					shouldSendMessage = false
+
+					return true;
 				},
 			});
 
@@ -69,6 +71,8 @@ module.exports = {
 				const text = new ServerTextPacket();
 				text.setMessage(message);
 				text.writePacket(player);
+				
+				return true;
 			}
 		};
 
@@ -90,6 +94,8 @@ module.exports = {
 
 			if (shouldSendMessage) {
 				Frog.broadcastMessage(lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message));
+
+				return true;
 			}
 		};
 
@@ -129,6 +135,8 @@ module.exports = {
 				const playerGamemode = new ServerSetPlayerGameTypePacket();
 				playerGamemode.setGamemode(gamemode);
 				playerGamemode.writePacket(this.player);
+				
+				return true;
 			}
 		};
 
@@ -148,6 +156,8 @@ module.exports = {
 				server: Frog.server,
 				cancel() {
 					shouldTransfer = false
+
+					return true;
 				},
 			});
 
@@ -156,6 +166,8 @@ module.exports = {
 				transferPacket.setServerAddress(address);
 				transferPacket.setPort(port);
 				transferPacket.writePacket(player);
+				
+				return true;
 			}
 		};
 

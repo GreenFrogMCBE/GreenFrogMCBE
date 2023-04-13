@@ -139,15 +139,17 @@ module.exports = {
             setTimeout(() => {
                 PluginLoader.unloadPlugins();
             }, 1000);
+
+            return true;
         }
     },
 
     __playercount: 0,
-    
+
     __addPlayer() {
         this.__playercount++;
     },
-    
+
     __deletePlayer() {
         this.__playercount--;
     },

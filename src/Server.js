@@ -174,6 +174,8 @@ async function _listen() {
 					server: this,
 					cancel(reason = "Server requested disconnect.") {
 						client.disconnect(reason)
+
+						return true;
 					},
 				});
 
@@ -187,6 +189,8 @@ async function _listen() {
 						packetData: data,
 						cancel() {
 							shouldQueue = false
+
+							return true;
 						},
 					});
 
@@ -243,6 +247,8 @@ async function _onJoin(client) {
 		server: this,
 		cancel(reason = "") {
 			client.kick(reason)
+
+			return true;
 		},
 	});
 
@@ -256,6 +262,8 @@ async function _onJoin(client) {
 			maxPlayers: config.maxPlayers,
 			cancel(reason = "") {
 				client.kick(reason)
+
+				return true;
 			},
 		});
 		client.kick(lang.kickmessages.serverFull);
@@ -271,6 +279,8 @@ async function _onJoin(client) {
 			serverProtocol: VersionToProtocol.getProtocol(config.version),
 			cancel(reason = "") {
 				client.kick(reason)
+
+				return true;
 			},
 		});
 
