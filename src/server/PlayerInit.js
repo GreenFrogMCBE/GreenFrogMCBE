@@ -29,7 +29,7 @@ const PlayerListTypes = require("../network/packets/types/PlayerList");
 const GarbageCollector = require("../utils/GarbageCollector");
 
 const DamageCause = require("../type/health/DamageCause");
-const HungerCause = require("../events/types/HungerCause");
+const HungerCause = require("../type/health/HungerCause");
 
 const PlayerInfo = require("../api/PlayerInfo");
 
