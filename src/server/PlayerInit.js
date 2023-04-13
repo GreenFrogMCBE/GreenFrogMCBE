@@ -190,17 +190,21 @@ module.exports = {
 
 		/**
 		 * Kicks a player from the server
+		 * 
 		 * @param {String} [msg=lang.kickmessages.kickedByPlugin] - The reason for the kick
 		 */
 		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
 			player.kicked = true;
 
-			const kickEvent = new PlayerKickEvent();
-			kickEvent.server = server;
-			kickEvent.player = player;
-			kickEvent.message = msg;
-			kickEvent.execute();
+			Frog.eventEmitter.emit('playerKickEvent', {
+				player,
+				message: msg,
+				server: Frog.server,
+				cancel() {
+					return false
+				},
+			});
 
 			if (msg === "disconnectionScreen.serverFull") {
 				msg = "Wow this server is popular! Check back later to see if space opens up.";
