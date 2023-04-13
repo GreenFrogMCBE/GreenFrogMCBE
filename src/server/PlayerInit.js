@@ -17,13 +17,13 @@ const GameMode = require("../api/player/GameMode");
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
-const ChangeDimension = require("../network/packets/ServerChangeDimensionPacket");
-const UpdateAttributes = require("../network/packets/ServerUpdateAttributesPacket");
+const ServerChangeDimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
+const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket");
 const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
 const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
 const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
 const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
-const ChunkRadiusUpdate = require("../network/packets/ServerChunkRadiusUpdatePacket");
+const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
 
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
@@ -221,7 +221,7 @@ module.exports = {
 		 * @param {Number} radius
 		 */
 		player.setChunkRadius = function (radius) {
-			const chunkradiusupdate = new ChunkRadiusUpdate();
+			const chunkradiusupdate = new ServerChunkRadiusUpdatePacket();
 			chunkradiusupdate.setChunkRadius(radius);
 			chunkradiusupdate.writePacket(player);
 		};
@@ -243,7 +243,7 @@ module.exports = {
 		 * @param {JSON} attribute
 		 */
 		player.setAttribute = function (attribute) {
-			const updateattributespacket = new UpdateAttributes();
+			const updateattributespacket = new ServerUpdateAttributesPacket();
 			updateattributespacket.setPlayerID(0); // 0 - Means local player
 			updateattributespacket.setTick(0);
 			updateattributespacket.setAttributes([attribute]);
@@ -315,7 +315,7 @@ module.exports = {
 		 * @param {Boolean} respawn
 		 */
 		player.setDimension = function (x, y, z, dimension, respawn) {
-			const dimensionpacket = new ChangeDimension();
+			const dimensionpacket = new ServerChangeDimensionPacket();
 			dimensionpacket.setPosition(x, y, z);
 			dimensionpacket.setDimension(dimension);
 			dimensionpacket.setRespawn(respawn);
