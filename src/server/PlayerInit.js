@@ -243,11 +243,11 @@ module.exports = {
 		 * @param {JSON} attribute
 		 */
 		player.setAttribute = function (attribute) {
-			const updateattributespacket = new ServerUpdateAttributesPacket();
-			updateattributespacket.setPlayerID(0); // 0 - Means local player
-			updateattributespacket.setTick(0);
-			updateattributespacket.setAttributes([attribute]);
-			updateattributespacket.writePacket(player);
+			const updateAttributesPacket = new ServerUpdateAttributesPacket();
+			updateAttributesPacket.setPlayerID(0); // 0 - Means local player
+			updateAttributesPacket.setTick(0);
+			updateAttributesPacket.setAttributes([attribute]);
+			updateAttributesPacket.writePacket(player);
 		};
 
 		/**
