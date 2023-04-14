@@ -161,8 +161,6 @@ module.exports = {
 			transferPacket.setServerAddress(address);
 			transferPacket.setPort(port);
 			transferPacket.writePacket(player);
-
-			return true;
 		};
 
 		/**
