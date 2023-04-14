@@ -265,10 +265,23 @@ module.exports = {
 		 * @param {Number} radius
 		 */
 		player.setChunkRadius = function (radius) {
-			const chunkRadiusUpdate = new ServerChunkRadiusUpdatePacket();
-			chunkRadiusUpdate.setChunkRadius(radius);
-			chunkRadiusUpdate.writePacket(player);
-		};
+			let shouldUpdateRadius = false
+
+			Frog.eventEmitter.emit('serverUpdateChunkRadius', {
+				player,
+				radius,
+				server: Frog.server,
+				cancel() {
+					return false
+				},
+			});
+
+			if (shouldUpdateRadius) {
+				const chunkRadiusUpdate = new ServerChunkRadiusUpdatePacket();
+				chunkRadiusUpdate.setChunkRadius(radius);
+				chunkRadiusUpdate.writePacket(player);
+			}
+		}
 
 		/**
 		 * Sets the client side time
