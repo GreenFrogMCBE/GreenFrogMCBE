@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 
-const Gamemode = require("../../api/GameMode");
+const Gamemode = require("../../api/player/GameMode");
 const PacketConstructor = require("./PacketConstructor");
 
 let gamemode = Gamemode.FALLBACK;
