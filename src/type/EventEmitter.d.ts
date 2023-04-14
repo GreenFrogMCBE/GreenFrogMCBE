@@ -24,11 +24,12 @@ declare function on(eventName: "serverCommandProcessError", listener: (...args: 
 declare function on(eventName: "serverLogMessage", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetEntityData", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverUpdateChunkRadius", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverTimeUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetDifficulty", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerTransferEvent", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerKickEvent", listener: (...args: any[]) => void): void;
 
-//serverUpdateChunkRadius
+//serverTimeUpdate
 
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
 

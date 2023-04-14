@@ -24,6 +24,7 @@ const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficult
 const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
 const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
+const ServerUpdateTimePacket = require("../network/packets/ServerUpdateTimePacket");
 
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
@@ -272,7 +273,9 @@ module.exports = {
 				radius,
 				server: Frog.server,
 				cancel() {
-					return false
+					shouldUpdateRadius = true
+
+					return true
 				},
 			});
 
@@ -289,11 +292,24 @@ module.exports = {
 		 * @param {Number} time - The time to set the player to
 		 */
 		player.setTime = function (time) {
-			const timeEvent = new PlayerTimeUpdateEvent();
-			timeEvent.player = player;
-			timeEvent.server = server;
-			timeEvent.time = time;
-			timeEvent.execute();
+			let shouldUpdateTime = false;
+
+			Frog.eventEmitter.emit('serverTimeUpdate', {
+				player,
+				time,
+				server: Frog.server,
+				cancel() {
+					shouldUpdateTime = true
+
+					return true
+				},
+			});
+
+			if (shouldUpdateTime) {
+				const timePacket = new ServerUpdateTimePacket();
+				timePacket.setTime(time);
+				timePacket.writePacket(player);
+			}
 		};
 
 		/**
