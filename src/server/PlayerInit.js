@@ -62,19 +62,15 @@ module.exports = {
 				server,
 				message,
 				cancel() {
-					shouldSendMessage = false
-
-					return true;
+					shouldSendMessage = true;
 				},
 			});
 
-			if (shouldSendMessage) {
-				const text = new ServerTextPacket();
-				text.setMessage(message);
-				text.writePacket(player);
+			if (!shouldSendMessage) return
 
-				return true;
-			}
+			const text = new ServerTextPacket();
+			text.setMessage(message);
+			text.writePacket(player);
 		};
 
 		/**
@@ -84,6 +80,7 @@ module.exports = {
 		 */
 		player.chat = function (message) {
 			let shouldSendMessage = true;
+
 			Frog.eventEmitter.emit('serverChatAsPlayer', {
 				player,
 				server,
@@ -93,11 +90,9 @@ module.exports = {
 				},
 			});
 
-			if (shouldSendMessage) {
-				Frog.broadcastMessage(lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message));
+			if (!shouldSendMessage) return;
 
-				return true;
-			}
+			Frog.broadcastMessage(lang.chat.chatFormat.replace("%username%", this.player.username).replace("%message%", this.message));
 		};
 
 		/**
