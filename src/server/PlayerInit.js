@@ -219,15 +219,15 @@ module.exports = {
 			});
 
 			if (shouldSetED) {
-				const playerEntityPacket = new ServerSetEntityDataPacket();
-				playerEntityPacket.setProperties({
+				const playerSetEntityDataPacket = new ServerSetEntityDataPacket();
+				playerSetEntityDataPacket.setProperties({
 					ints: [],
 					floats: [],
 				});
-				playerEntityPacket.setRuntimeEntityID(0); // Local player
-				playerEntityPacket.setTick(0);
-				playerEntityPacket.setValue(field, value);
-				playerEntityPacket.writePacket(player);
+				playerSetEntityDataPacket.setRuntimeEntityID(0); // Local player
+				playerSetEntityDataPacket.setTick(0);
+				playerSetEntityDataPacket.setValue(field, value);
+				playerSetEntityDataPacket.writePacket(player);
 			}
 		};
 
