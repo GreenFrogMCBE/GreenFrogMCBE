@@ -181,11 +181,10 @@ module.exports = {
 				},
 			});
 
-			if (shouldChangeDifficulty) {
-				const difficultypacket = new ServerSetDifficultyPacket();
-				difficultypacket.setDifficulty(difficulty);
-				difficultypacket.writePacket(player);
-			}
+			if (!shouldChangeDifficulty) return
+			const difficultypacket = new ServerSetDifficultyPacket();
+			difficultypacket.setDifficulty(difficulty);
+			difficultypacket.writePacket(player);
 		};
 
 		/**
