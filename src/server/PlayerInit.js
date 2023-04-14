@@ -71,7 +71,7 @@ module.exports = {
 				const text = new ServerTextPacket();
 				text.setMessage(message);
 				text.writePacket(player);
-				
+
 				return true;
 			}
 		};
@@ -135,7 +135,7 @@ module.exports = {
 				const playerGamemode = new ServerSetPlayerGameTypePacket();
 				playerGamemode.setGamemode(gamemode);
 				playerGamemode.writePacket(this.player);
-				
+
 				return true;
 			}
 		};
@@ -166,7 +166,7 @@ module.exports = {
 				transferPacket.setServerAddress(address);
 				transferPacket.setPort(port);
 				transferPacket.writePacket(player);
-				
+
 				return true;
 			}
 		};
@@ -178,9 +178,24 @@ module.exports = {
 		 * @type {import('../type/Difficulty')}
 		 */
 		player.setDifficulty = function (difficulty) {
-			const difficultypacket = new ServerSetDifficultyPacket();
-			difficultypacket.setDifficulty(difficulty);
-			difficultypacket.writePacket(player);
+			let shouldChangeDifficulty = true;
+
+			Frog.eventEmitter.emit('serverSetDifficulty', {
+				player,
+				difficulty,
+				server: Frog.server,
+				cancel() {
+					shouldChangeDifficulty = false;
+
+					return true;
+				},
+			});
+
+			if (shouldChangeDifficulty) {
+				const difficultypacket = new ServerSetDifficultyPacket();
+				difficultypacket.setDifficulty(difficulty);
+				difficultypacket.writePacket(player);
+			}
 		};
 
 		/**
@@ -189,6 +204,25 @@ module.exports = {
 		 * @param {Boolean} value
 		 */
 		player.setEntityData = function (field, value) {
+			let shouldChangeDifficulty = true;
+
+			Frog.eventEmitter.emit('serverSetDifficulty', {
+				player,
+				difficulty,
+				server: Frog.server,
+				cancel() {
+					shouldChangeDifficulty = false;
+
+					return true;
+				},
+			});
+
+			if (shouldChangeDifficulty) {
+				const difficultypacket = new ServerSetDifficultyPacket();
+				difficultypacket.setDifficulty(difficulty);
+				difficultypacket.writePacket(player);
+			}
+
 			const playerEntityPacket = new ServerSetEntityDataPacket();
 			playerEntityPacket.setProperties({
 				ints: [],
