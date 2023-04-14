@@ -127,13 +127,13 @@ module.exports = {
 				},
 			});
 
-			if (shouldChangeGamemode) {
-				const playerGamemode = new ServerSetPlayerGameTypePacket();
-				playerGamemode.setGamemode(gamemode);
-				playerGamemode.writePacket(this.player);
+			if (!shouldChangeGamemode) return;
 
-				return true;
-			}
+			const playerGamemode = new ServerSetPlayerGameTypePacket();
+			playerGamemode.setGamemode(gamemode);
+			playerGamemode.writePacket(this.player);
+
+			return true;
 		};
 
 		/**
