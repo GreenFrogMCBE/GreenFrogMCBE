@@ -291,7 +291,7 @@ module.exports = {
 		 * 
 		 * @param {Number} time - The time to set the player to
 		 */
-		player.setTime = function (time) {
+		player.setTime = function (time = 0) {
 			let shouldUpdateTime = false;
 
 			Frog.eventEmitter.emit('serverTimeUpdate', {
