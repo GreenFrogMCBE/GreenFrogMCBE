@@ -22,6 +22,8 @@ declare function on(eventName: "serverGamemodeChange", listener: (...args: any[]
 declare function on(eventName: "serverCommandProcess", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverCommandProcessError", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverLogMessage", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverSetEntityData", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverSetDifficulty", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerTransferEvent", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerKickEvent", listener: (...args: any[]) => void): void;
 
