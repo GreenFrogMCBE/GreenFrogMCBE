@@ -178,8 +178,6 @@ module.exports = {
 				server: Frog.server,
 				cancel() {
 					shouldChangeDifficulty = false;
-
-					return true;
 				},
 			});
 
