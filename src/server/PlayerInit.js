@@ -152,19 +152,17 @@ module.exports = {
 				server: Frog.server,
 				cancel() {
 					shouldTransfer = false
-
-					return true;
 				},
 			});
 
-			if (shouldTransfer) {
-				const transferPacket = new ServerTransferPacket();
-				transferPacket.setServerAddress(address);
-				transferPacket.setPort(port);
-				transferPacket.writePacket(player);
+			if (!shouldTransfer) return;
 
-				return true;
-			}
+			const transferPacket = new ServerTransferPacket();
+			transferPacket.setServerAddress(address);
+			transferPacket.setPort(port);
+			transferPacket.writePacket(player);
+
+			return true;
 		};
 
 		/**
