@@ -204,34 +204,31 @@ module.exports = {
 		 * @param {Boolean} value
 		 */
 		player.setEntityData = function (field, value) {
-			let shouldChangeDifficulty = true;
+			let shouldSetED = true;
 
-			Frog.eventEmitter.emit('serverSetDifficulty', {
+			Frog.eventEmitter.emit('serverSetEntityData', {
 				player,
-				difficulty,
+				field,
+				value,
 				server: Frog.server,
 				cancel() {
-					shouldChangeDifficulty = false;
+					shouldSetED = false;
 
 					return true;
 				},
 			});
 
-			if (shouldChangeDifficulty) {
-				const difficultypacket = new ServerSetDifficultyPacket();
-				difficultypacket.setDifficulty(difficulty);
-				difficultypacket.writePacket(player);
+			if (shouldSetED) {
+				const playerEntityPacket = new ServerSetEntityDataPacket();
+				playerEntityPacket.setProperties({
+					ints: [],
+					floats: [],
+				});
+				playerEntityPacket.setRuntimeEntityID(0); // Local player
+				playerEntityPacket.setTick(0);
+				playerEntityPacket.setValue(field, value);
+				playerEntityPacket.writePacket(player);
 			}
-
-			const playerEntityPacket = new ServerSetEntityDataPacket();
-			playerEntityPacket.setProperties({
-				ints: [],
-				floats: [],
-			});
-			playerEntityPacket.setRuntimeEntityID(0); // Local player
-			playerEntityPacket.setTick(0);
-			playerEntityPacket.setValue(field, value);
-			playerEntityPacket.writePacket(player);
 		};
 
 		/**
