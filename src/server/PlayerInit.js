@@ -232,9 +232,9 @@ module.exports = {
 		};
 
 		/**
-		 * Kicks a player from the server
+		 * Disconnect a player from the server
 		 * 
-		 * @param {String} [msg=lang.kickmessages.kickedByPlugin] - The reason for the kick
+		 * @param {String} [msg=lang.kickmessages.kickedByPlugin]
 		 */
 		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
@@ -261,6 +261,7 @@ module.exports = {
 
 		/**
 		 * Updates the client chunk render radius
+		 * 
 		 * @param {Number} radius
 		 */
 		player.setChunkRadius = function (radius) {
