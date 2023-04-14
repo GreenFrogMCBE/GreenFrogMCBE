@@ -318,11 +318,26 @@ module.exports = {
 		 * @param {JSON} attribute
 		 */
 		player.setAttribute = function (attribute) {
-			const updateAttributesPacket = new ServerUpdateAttributesPacket();
-			updateAttributesPacket.setPlayerID(0); // 0 - Means local player
-			updateAttributesPacket.setTick(0);
-			updateAttributesPacket.setAttributes([attribute]);
-			updateAttributesPacket.writePacket(player);
+			let shouldSetAttribute = false;
+
+			Frog.eventEmitter.emit('playerSetAttribute', {
+				player,
+				attribute,
+				server: Frog.server,
+				cancel() {
+					shouldSetAttribute = true
+
+					return true
+				},
+			});
+
+			if (shouldSetAttribute) {
+				const updateAttributesPacket = new ServerUpdateAttributesPacket();
+				updateAttributesPacket.setPlayerID(0); // 0 - Means local player
+				updateAttributesPacket.setTick(0);
+				updateAttributesPacket.setAttributes([attribute]);
+				updateAttributesPacket.writePacket(player);
+			}
 		};
 
 		/**
