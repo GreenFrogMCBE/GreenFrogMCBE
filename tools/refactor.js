@@ -48,7 +48,7 @@ async function traverseDirectory(dirPath, replacements) {
 
 const replacements = [
 	// Put your replacements here, example:
-	["/base/", "/type/"]
+	["{any} player", "{Client} player"]
 ];
 
 traverseDirectory(rootDir, replacements);

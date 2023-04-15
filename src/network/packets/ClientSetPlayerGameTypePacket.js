@@ -35,7 +35,7 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Validates the packet
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
 	 */
 	async validatePacket(player, packet) {
@@ -46,9 +46,9 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		await this.validatePacket(player, packet);

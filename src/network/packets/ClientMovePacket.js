@@ -33,9 +33,9 @@ class ClientMovePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		await this.validatePacket(player);

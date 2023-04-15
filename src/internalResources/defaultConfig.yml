@@ -6,6 +6,7 @@ serverInfo:
   levelName: 'GreenFrog'
   version: '1.19.70'
   offlineMode: true
+  maxPlayers: 20
 chat:
   lang: 'en_US'
   disable: false
@@ -53,7 +54,7 @@ world:
   gamemode: "creative"
   worldGamemode: "creative"
   difficulty: 0
-  generator: "default" # can be default, flat or void
+  generator: "default" 
 
   tickEvent: true # Should ServerTickEvent be enabled?
   tickWorldTime: true # Should time update be server side?

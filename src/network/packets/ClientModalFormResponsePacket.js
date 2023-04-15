@@ -33,7 +33,7 @@ class ClientModalFormResponsePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet, server) {

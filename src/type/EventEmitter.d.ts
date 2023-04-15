@@ -22,6 +22,15 @@ declare function on(eventName: "serverSetEntityData", listener: (...args: any[])
 declare function on(eventName: "serverUpdateChunkRadius", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverTimeUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetDifficulty", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverSetXP", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverSetHealth", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerFallDamageEvent", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerRegenerationEvent", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerDeathEvent", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerHungerUpdate", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerHealthUpdate", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerLeave", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverSetDimension", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerSetAttribute", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerTransferEvent", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerKickEvent", listener: (...args: any[]) => void): void;
@@ -29,8 +38,6 @@ declare function on(eventName: "playerConnect", listener: (...args: any[]) => vo
 declare function on(eventName: "playerPreConnect", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerMaxPlayersDisconnect", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerVersionMismatchDisconnect", listener: (...args: any[]) => void): void;
-
-//serverTimeUpdate
 
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
 

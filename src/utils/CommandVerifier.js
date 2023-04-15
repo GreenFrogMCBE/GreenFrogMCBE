@@ -33,13 +33,13 @@ module.exports = {
     checkCommand(player, data) {
         if (player.isConsole) {
             // Console commands
-            if (!Frog.serverConfigurationFiles.config[`consoleCommand${capitalizeFirstLetter(data.name)}`]) {
+            if (!Frog.serverConfigurationFiles.config.chat.commands[`consoleCommand${capitalizeFirstLetter(data.name)}`]) {
                 this.throwError(player, data);
                 return true;
             }
         } else {
             // Player commands
-            if (!Frog.serverConfigurationFiles.config[`playerCommand${capitalizeFirstLetter(data.name)}`]) {
+            if (!Frog.serverConfigurationFiles.config.chat.commands[`playerCommand${capitalizeFirstLetter(data.name)}`]) {
                 this.throwError(player, data);
                 return true;
             }

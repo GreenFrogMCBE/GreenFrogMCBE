@@ -17,7 +17,7 @@ const GameMode = require("../api/player/GameMode");
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
-const ServerChangeDimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
+const ServerChangedimensionPacket = require("../network/packets/ServerChangedimensionPacket");
 const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket");
 const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
 const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
@@ -25,6 +25,7 @@ const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlaye
 const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
 const ServerUpdateTimePacket = require("../network/packets/ServerUpdateTimePacket");
+const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket");
 
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
@@ -34,9 +35,10 @@ const GarbageCollector = require("../utils/GarbageCollector");
 const DamageCause = require("../api/health/DamageCause");
 const HungerCause = require("../api/health/HungerCause");
 
-const PlayerInfo = require("../api/PlayerInfo");
+const PlayerInfo = require("../api/player/PlayerInfo");
 
 const Frog = require("../Frog");
+const PlayerAttribute = require("../api/attribute/PlayerAttribute");
 
 /** @private */
 let lang = Frog.serverConfigurationFiles.lang;
@@ -62,7 +64,7 @@ module.exports = {
 				server,
 				message,
 				cancel() {
-					shouldSendMessage = true;
+					shouldSendMessage = false;
 				},
 			});
 
@@ -132,8 +134,6 @@ module.exports = {
 			const playerGamemode = new ServerSetPlayerGameTypePacket();
 			playerGamemode.setGamemode(gamemode);
 			playerGamemode.writePacket(this.player);
-
-			return true;
 		};
 
 		/**
@@ -194,7 +194,7 @@ module.exports = {
 		 * @param {Boolean} value
 		 */
 		player.setEntityData = function (field, value) {
-			let shouldSetED = true;
+			let shouldSetEd = true;
 
 			Frog.eventEmitter.emit('serverSetEntityData', {
 				player,
@@ -202,13 +202,11 @@ module.exports = {
 				value,
 				server: Frog.server,
 				cancel() {
-					shouldSetED = false;
-
-					return true;
+					shouldSetEd = false;
 				},
 			});
 
-			if (shouldSetED) {
+			if (shouldSetEd) {
 				const playerSetEntityDataPacket = new ServerSetEntityDataPacket();
 				playerSetEntityDataPacket.setProperties({
 					ints: [],
@@ -228,15 +226,13 @@ module.exports = {
 		 */
 		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
+			
 			player.kicked = true;
 
 			Frog.eventEmitter.emit('playerKickEvent', {
 				player,
 				message: msg,
-				server: Frog.server,
-				cancel() {
-					return false
-				},
+				server: Frog.server
 			});
 
 			if (msg === "disconnectionScreen.serverFull") {
@@ -255,16 +251,14 @@ module.exports = {
 		 * @param {Number} radius
 		 */
 		player.setChunkRadius = function (radius) {
-			let shouldUpdateRadius = false
+			let shouldUpdateRadius = true
 
 			Frog.eventEmitter.emit('serverUpdateChunkRadius', {
 				player,
 				radius,
 				server: Frog.server,
 				cancel() {
-					shouldUpdateRadius = true
-
-					return true
+					shouldUpdateRadius = false
 				},
 			});
 
@@ -281,16 +275,14 @@ module.exports = {
 		 * @param {Number} time - The time to set the player to
 		 */
 		player.setTime = function (time = 0) {
-			let shouldUpdateTime = false;
+			let shouldUpdateTime = true;
 
 			Frog.eventEmitter.emit('serverTimeUpdate', {
 				player,
 				time,
 				server: Frog.server,
 				cancel() {
-					shouldUpdateTime = true
-
-					return true
+					shouldUpdateTime = false
 				},
 			});
 
@@ -307,16 +299,14 @@ module.exports = {
 		 * @param {JSON} attribute
 		 */
 		player.setAttribute = function (attribute) {
-			let shouldSetAttribute = false;
+			let shouldSetAttribute = true;
 
 			Frog.eventEmitter.emit('playerSetAttribute', {
 				player,
 				attribute,
 				server: Frog.server,
 				cancel() {
-					shouldSetAttribute = true
-
-					return true
+					shouldSetAttribute = false
 				},
 			});
 
@@ -335,12 +325,25 @@ module.exports = {
 		 * @param {Float} xp
 		 */
 		player.setXP = function (xp) {
+			let shouldSetXP = true
+
+			Frog.eventEmitter.emit('serverSetXP', {
+				player,
+				xp,
+				server: Frog.server,
+				cancel() {
+					shouldSetXP = false
+				},
+			});
+
+			if (!shouldSetXP) return;
+
 			player.setAttribute({
 				min: 0,
 				max: 1000000,
 				current: xp,
 				default: 0,
-				name: "player.experience",
+				name: PlayerAttribute.EXPERIENCE,
 				modifiers: [],
 			});
 		};
@@ -353,17 +356,60 @@ module.exports = {
 		 */
 		player.setHealth = function (health, cause = DamageCause.UNKNOWN) {
 			if (player.dead) return;
+			
+			let shouldSetHealth = true
 
-			const healthUpdateEvent = new PlayerHealthUpdateEvent();
-			healthUpdateEvent.server = server;
-			healthUpdateEvent.player = player;
-			healthUpdateEvent.modifiers = [];
-			healthUpdateEvent.minHealth = 0;
-			healthUpdateEvent.maxHealth = 20;
-			healthUpdateEvent.health = health;
-			healthUpdateEvent.attributeName = "minecraft:health";
-			healthUpdateEvent.cause = cause;
-			healthUpdateEvent.execute();
+			Frog.eventEmitter.emit('serverSetHealth', {
+				player,
+				health,
+				cause,
+				server: Frog.server,
+				cancel() {
+					shouldSetHealth = false
+				},
+			});
+
+			if (!shouldSetHealth) return;
+
+			const setHealthPacket = new ServerSetHealthPacket();
+			setHealthPacket.setHealth(this.health);
+			setHealthPacket.writePacket(this.player);
+
+			if (this.cause == DamageCause.FALL_DAMAGE) {
+				Frog.eventEmitter.emit('playerFallDamageEvent', {
+					player,
+					health,
+					cause,
+					server: Frog.server
+				});
+			}
+
+			if (this.cause == DamageCause.REGENERATION) {
+				Frog.eventEmitter.emit('playerRegenerationEvent', {
+					player,
+					health,
+					cause,
+					server: Frog.server
+				});
+			}
+
+			player.setAttribute({
+				name: PlayerAttribute.HEALTH,
+				min: 0,
+				max: 20,
+				current: health,
+				default: 0,
+				modifiers: [],
+			});
+
+			player.health = health;
+
+			if (player.health <= 0) {
+				Frog.eventEmitter.emit('playerDeathEvent', {
+					player,
+					server: Frog.server
+				})
+			}
 		};
 
 		/**
@@ -373,19 +419,30 @@ module.exports = {
 		 * @param {HungerCause} cause
 		 */
 		player.setHunger = function (hunger, cause = HungerCause.UNKNOWN) {
-			if (player.dead) return;
+			let shouldUpdateHunger = true 
 
-			const healthUpdateEvent = new PlayerHungerUpdateEvent();
-			healthUpdateEvent.server = server;
-			healthUpdateEvent.player = player;
-			healthUpdateEvent.modifiers = [];
-			healthUpdateEvent.minHunger = 0;
-			healthUpdateEvent.maxHunger = 20;
-			healthUpdateEvent.defaultHunger = 0;
-			healthUpdateEvent.hunger = hunger;
-			healthUpdateEvent.attributeName = "minecraft:player.hunger";
-			healthUpdateEvent.cause = cause;
-			healthUpdateEvent.execute();
+			Frog.eventEmitter.emit('playerHungerUpdate', {
+				player,
+				server: Frog.server,
+				hunger,
+				cause,
+				cancel() {
+					shouldUpdateHunger = false;
+				}
+			})
+
+			if (!shouldUpdateHunger) return
+
+			player.setAttribute({
+				name: PlayerAttribute.HUNGER,
+				min: 0,
+				max: 20,
+				current: this.hunger,
+				default: 0,
+				modifiers: [],
+			});
+
+			player.hunger = hunger;
 		};
 
 		/**
@@ -394,15 +451,32 @@ module.exports = {
 		 * @param {Float} x
 		 * @param {Float} y
 		 * @param {Float} z
-		 * @param {Dimensions} dimension
+		 * @param {Dimension} dimension
 		 * @param {Boolean} respawn
+		 * 
+		 * @type {import('../network/packets/types/Dimension')}
 		 */
 		player.setDimension = function (x, y, z, dimension, respawn) {
-			const dimensionpacket = new ServerChangeDimensionPacket();
-			dimensionpacket.setPosition(x, y, z);
-			dimensionpacket.setDimension(dimension);
-			dimensionpacket.setRespawn(respawn);
-			dimensionpacket.writePacket(player);
+			let shouldChangeDimension = true
+
+			Frog.eventEmitter.emit('serverSetDimension', {
+				player,
+				dimension,
+				coordinates: { x, y, z },
+				respawnAfterSwitch: respawn,
+				server: Frog.server,
+				cancel() {
+					shouldChangeDimension = false
+				},
+			});
+
+			if (!shouldChangeDimension) return
+
+			const dimensionPacket = new ServerChangedimensionPacket();
+			dimensionPacket.setPosition(x, y, z);
+			dimensionPacket.setDimension(dimension);
+			dimensionPacket.setRespawn(respawn);
+			dimensionPacket.writePacket(player);
 		};
 
 		/**
@@ -418,14 +492,14 @@ module.exports = {
 
 				const pl = new PlayerList();
 				pl.setType(PlayerListTypes.REMOVE);
-				pl.setUuid(player.profile.uuid);
+				pl.setUUID(player.profile.uuid);
 				pl.writePacket(currentPlayer);
 			}
 
-			const leaveEvent = new PlayerLeaveEvent();
-			leaveEvent.player = player;
-			leaveEvent.server = server;
-			leaveEvent.execute();
+			Frog.eventEmitter.emit('playerLeave', {
+				player,
+				server: Frog.server
+			})
 
 			GarbageCollector.clearOfflinePlayers();
 
@@ -434,8 +508,6 @@ module.exports = {
 			if (player.initialised) {
 				Frog.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
 			}
-
-			player.offline = true;
 		});
 	},
 };

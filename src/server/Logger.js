@@ -29,9 +29,6 @@ function fireEvent(langString, color, message, consoleType) {
 		legacy: {
 			color,
 			consoleType,
-		},
-		cancel() {
-			return false; // You can't do that here...
 		}
 	})
 }
@@ -66,11 +63,11 @@ module.exports = {
 		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
 
 		if (consoleType === "warning") {
-			throw new LoggingException("Bad log type: warning. Its 'warn', not 'warning'")
+			throw new LoggingException("Invalid log type: warning. Its 'warn', not 'warning'")
 		}
 
 		if (!console[consoleType]) {
-			throw new LoggingException("Bad log type: " + console[consoleType] + ". Valid types are info, warn, error, debug")
+			throw new LoggingException("Invalid log type: " + console[consoleType] + ". Valid types are info, warn, error, debug")
 		}
 
 		fireEvent(langString, color, message, consoleType)

@@ -33,8 +33,9 @@ class ClientTextPacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		let message = packet.data.params.message;

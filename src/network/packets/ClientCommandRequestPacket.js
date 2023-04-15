@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerCommandExecuteEvent = require("../../events/PlayerCommandExecuteEvent");
 const { config } = require("../../api/ServerInfo");
 
 const PacketConstructor = require("./PacketConstructor");
@@ -34,20 +33,13 @@ class ClientCommandRequestPacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from client
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		const command = packet.data.params.command;
 
-		if (!config.commandsDisabled) {
-			const commandExecutionEvent = new PlayerCommandExecuteEvent();
-			commandExecutionEvent.command = command;
-			commandExecutionEvent.player = player;
-			commandExecutionEvent.server = server;
-			commandExecutionEvent.execute();
-		}
 	}
 }
 

@@ -63,6 +63,7 @@ module.exports = {
 							version = packageJson.version;
 							main = packageJson.main;
 
+							PluginManager.addPlugin(name, version)
 							Logger.info(`Loading ${name} v${version}...`)
 						} catch (error) {
 							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
@@ -75,8 +76,13 @@ module.exports = {
 							PluginManager.addPlugin(name, version);
 
 							Logger.info(lang.server.loadedPlugin.replace("%name%", name).replace("%version%", version));
-						} catch (err) {
-							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", err.stack));
+						} catch (error) {
+							if (error.toString().includes("onLoad is not a function")) {
+								Logger.error(`Failed to load ${name}: Plugin does not contain onLoad() function!`)
+								return;
+							}
+
+							Logger.error(`Failed to load ${name}: ${error.stack}`);
 						}
 					}
 				});
@@ -124,8 +130,13 @@ module.exports = {
 						try {
 							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
 							Logger.info(lang.server.unloadedPlugin.replace("%plugin%", name));
-						} catch (e) {
-							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack));
+						} catch (error) {
+							if (error.toString().includes("onShutdown is not a function")) {
+								Logger.error(`Failed to load ${name}: Plugin does not contain onShutdown() function!`)
+								return;
+							}
+
+							Logger.error(`Failed to load ${name}: ${error.stack}`);
 						}
 
 						this.initPluginShutdown();

@@ -18,7 +18,7 @@ You can install it by downloading this repo,
 then running "npm install"
 to start the server, use "npm run start"
 
-- We have the rights to take down your repo, if you copy our code, and don't credit us, so don't steal it
+- If you use our code, please credit us
 
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/Credits.md
 + Multilang docs: https://github.com/bufferfishq/GreenFrogMCBE/blob/main/docs/Multilang.md

@@ -36,9 +36,9 @@ class ClientContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from client
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {Server} server
 	 */
 	async readPacket(player, _packet, server) {
 		const containerclose = new ServerContainerClosePacket();

@@ -5,6 +5,7 @@ const ConsoleSetupException = require("../utils/exceptions/ConsoleSetupException
 const CommandHandlingException = require("../utils/exceptions/CommandHandlingException");
 
 const Logger = require("./Logger");
+const Frog = require("../Frog");
 
 let isClosed = false;
 /** @private */
@@ -66,7 +67,7 @@ async function executeConsoleCommand(command) {
 						return;
 					}
 
-					command.execute(this.server, {
+					command.execute(Frog, {
 						sendMessage: (message) => {
 							Logger.info(message);
 						},
@@ -85,7 +86,7 @@ async function executeConsoleCommand(command) {
 			Logger.info(lang.errors.unknownCommandOrNoPermission.replace("%commandname%", commandName));
 		}
 	} catch (e) {
-		throw CommandHandlingException(e)
+		throw new CommandHandlingException(e)
 	}
 }
 

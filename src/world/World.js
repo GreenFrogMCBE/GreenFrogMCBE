@@ -12,11 +12,7 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 
 const Frog = require("../Frog");
 
-/**
- * The world time.
- * 
- * @private
- */
+/** @private */
 let _time = 0;
 
 class World {

@@ -90,9 +90,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		const responseStatus = packet.data.params.response_status;
@@ -351,7 +351,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							pl.setUsername(player.username);
 							pl.setXboxID(xuid);
 							pl.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-							pl.setUuid(uuid);
+							pl.setUUID(uuid);
 							pl.writePacket(onlineplayers);
 						}
 					}

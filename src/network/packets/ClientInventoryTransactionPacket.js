@@ -38,7 +38,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from client
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet, server) {
