@@ -69,9 +69,9 @@
 > For helping me with chunk support <br>
 > For suggesting modal form support
 
-10. Bedrock-protocol
+10. Bedrock-protocol (https://github.com/PrismarineJS/bedrock-protocol)
 
-> Packet handler and raknet
+> Protocol library
 
 11. Wiki.vg (https://wiki.vg/Bedrock_Protocol)
 
