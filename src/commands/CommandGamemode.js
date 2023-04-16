@@ -35,6 +35,7 @@ module.exports = {
 
         try {
             player.setGamemode(gamemode);
+
             player.sendMessage(`Your game mode has been updated to ${gamemode.charAt(0).toUpperCase()}${gamemode.slice(1)}.`);
             player.sendMessage(`Set own gamemode to ${gamemode.charAt(0).toUpperCase()}${gamemode.slice(1)}.`);
         } catch {
