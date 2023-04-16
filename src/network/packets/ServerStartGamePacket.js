@@ -14,16 +14,17 @@ const Gamemode = require("../../api/player/GameMode");
 const Difficulty = require("./types/Difficulty");
 const Dimension = require("./types/Dimension");
 const Generator = require("./types/Generator");
+
 const PacketConstructor = require("./PacketConstructor");
 
 let entity_id = 0;
 let runtimeentity_id = 0;
 let gamemode = Gamemode.FALLBACK;
-let playerx = 0;
-let playery = 0;
-let playerz = 0;
-let rotationx = 0;
-let rotationz = 0;
+let playerX = 0;
+let playerY = 0;
+let playerZ = 0;
+let rotationX = 0;
+let rotationZ = 0;
 let seed = [];
 let biome_type = 0;
 let biome_name = "";
@@ -87,9 +88,9 @@ class ServerStartGamePacket extends PacketConstructor {
 	 * @param {Number} z - The player Z
 	 */
 	setPlayerPosition(x, y, z) {
-		playerx = x;
-		playery = y;
-		playerz = z;
+		playerX = x;
+		playerY = y;
+		playerZ = z;
 	}
 
 	/**
@@ -98,8 +99,8 @@ class ServerStartGamePacket extends PacketConstructor {
 	 * @param {Number} z - The player rotation (Z)
 	 */
 	setPlayerRotation(x, z) {
-		rotationx = x;
-		rotationz = z;
+		rotationX = x;
+		rotationZ = z;
 	}
 
 	/**
@@ -226,9 +227,9 @@ class ServerStartGamePacket extends PacketConstructor {
 	 */
 	getPlayerPosition() {
 		return {
-			x: playerx,
-			y: playery,
-			z: playerz,
+			x: playerX,
+			y: playerY,
+			z: playerZ,
 		};
 	}
 
@@ -239,8 +240,8 @@ class ServerStartGamePacket extends PacketConstructor {
 	 */
 	getPlayerRotation() {
 		return {
-			x: rotationx,
-			z: rotationz,
+			x: rotationX,
+			z: rotationZ,
 		};
 	}
 
@@ -382,7 +383,7 @@ class ServerStartGamePacket extends PacketConstructor {
 			world_name: this.getWorldName(),
 			premium_world_template_id: "00000000-0000-0000-0000-000000000000",
 			is_trial: false,
-			movement_authority: "client",
+			movement_authority: "server",
 			rewind_history_size: 0,
 			server_authoritative_block_breaking: false,
 			current_tick: [-1, -1],

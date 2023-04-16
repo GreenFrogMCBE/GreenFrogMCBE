@@ -39,7 +39,7 @@ const assert = require("assert");
 const path = require("path");
 const fs = require("fs");
 
-process.env.DEBUG = Frog.isDebug ? "minecraft-protocol" : "";
+if (Frog.isDebug) process.env.DEBUG = 'minecraft-protocol'
 
 let server = null;
 let config = Frog.serverConfigurationFiles.config;
@@ -195,8 +195,8 @@ async function _listen() {
 						error,
 						server: Frog.server
 					});
-	
-					Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", error.stack)}`);	
+
+					Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", error.stack)}`);
 				}
 			});
 		});
@@ -311,6 +311,7 @@ module.exports = {
 
 		setInterval(() => {
 			const world = new World();
+
 			world.tick();
 		}, parseInt(config.world.randomTickSpeed));
 	},

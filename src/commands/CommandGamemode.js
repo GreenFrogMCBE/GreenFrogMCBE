@@ -20,7 +20,7 @@ module.exports = {
         if (CommandVerifier.checkCommand(player, this.data)) return;
 
         try {
-            player.setGamemode("survival");
+            player.setGamemode(args[0]);
 
             player.sendMessage(`Your game mode has been updated to ${args[0]}.`);
         } catch {
