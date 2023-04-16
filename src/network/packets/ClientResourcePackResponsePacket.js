@@ -219,7 +219,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}
 				}
 
-
 				// This packet is used to set custom items
 				const itemcomponent = new ItemComponent();
 				try {
