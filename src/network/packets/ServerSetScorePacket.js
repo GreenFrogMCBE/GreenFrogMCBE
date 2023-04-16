@@ -54,7 +54,7 @@ class ServerSetScorePacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client The client to send the packet to
+	 * @param {Client} client The client to send the packet to
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

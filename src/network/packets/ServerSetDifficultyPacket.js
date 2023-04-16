@@ -51,7 +51,7 @@ class ServerSetDifficultyPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), { difficulty: this.getDifficulty() });

@@ -39,7 +39,7 @@ class Toast {
 
 	/**
 	 * Sends the toast
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	send(player) {
 		eventEmitter.emit('', {

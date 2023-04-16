@@ -144,7 +144,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	send(client) {
 		if (this.getType() === TitleType.CLEAR) this.setText("");

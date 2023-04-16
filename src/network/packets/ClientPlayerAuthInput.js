@@ -31,7 +31,7 @@ class ClientMovePacket extends PacketConstructor {
 
 		if (player.x == x && player.y == y && player.z == z && player.yaw == yaw && player.pitch == pitch) return
 
-		player.queue('set_entity_motion', { runtime_entity_id: 0n, velocity: { x: 0, y: -255, z: 0 } })
+		player.queue('set_entity_motion', { runtime_entity_id: 0n, velocity: { x: 0, y: Math.floor(Math.random() * 5) - 10, z: 0 } })
 		// player.queue('move_player', {
 		// 	runtime_id: 0,
 		// 	position: { x: 0, y: 101.62100219726562, z: 0 },
