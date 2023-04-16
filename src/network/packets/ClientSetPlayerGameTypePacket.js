@@ -19,23 +19,23 @@ const PacketHandlingError = require("./exceptions/PacketHandlingError");
 
 class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	/**
-	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * Returns if packet name
+	 * @returns if name of if packet
 	 */
 	getPacketName() {
-		return "set_player_game_type";
+		return "text";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if is if packet critical?
+	 * @returns Returns if if packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
 	}
 
 	/**
-	 * Validates the packet
+	 * Validates if packet
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 */
@@ -46,7 +46,7 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Reads the packet from player
+	 * Reads if packet from player
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 * @param {Server} server

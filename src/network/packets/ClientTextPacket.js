@@ -10,41 +10,74 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Frog = require("../../Frog");
+
+const PlayerInfo = require("../../api/player/PlayerInfo");
+
+const Logger = require("../../server/Logger");
+
+const { serverConfigurationFiles } = Frog
+const { lang, config } = serverConfigurationFiles
+
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientTextPacket extends PacketConstructor {
 	/**
-	 * Returns the packet name
-	 * @returns The name of the packet
+	 * Returns if packet name
+	 * @returns if name of if packet
 	 */
 	getPacketName() {
 		return "text";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * Returns if is if packet critical?
+	 * @returns Returns if if packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
 	}
 
 	/**
-	 * Reads the packet from player
+	 * Reads if packet from player
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		// let message = packet.data.params.message;
+		const message = packet.data.params.message;
 
-		// await this.validatePacket(player, message);
+		let shouldChat = true
 
-		// const chatEvent = new PlayerChatEvent();
-		// chatEvent.server = server;
-		// chatEvent.player = player;
-		// chatEvent.message = message;
-		// chatEvent.execute();
+		Frog.eventEmitter.emit('playerChat', {
+			server,
+			player,
+			message,
+			cancel() {
+				shouldChat = false
+			}
+		});
+
+		if (!shouldChat || config.chat.disable) return
+
+		const fullmessage = lang.chat.chatFormat.replace("%username%", player.username).replace("%message%", message);
+
+		if (!message.trim()) return;
+
+		if (message.includes("§") || (message.length > 256 && config.chat.blockInvalidMessages)) {
+			Frog.eventEmitter.emit('playerMalformatedChatMessage', {
+				server,
+				player,
+				message
+			})
+			return;
+		}
+
+		Logger.info(lang.chat.chatMessage.replace("%message%", fullmessage));
+
+		for (const player of PlayerInfo.players) {
+			player.sendMessage(fullmessage);
+		}
 	}
 }
 
