@@ -159,7 +159,6 @@ async function _listen() {
 					server: this,
 					cancel(reason = "Server requested disconnect.") {
 						client.disconnect(reason);
-						return true;
 					},
 				});
 
@@ -247,32 +246,12 @@ async function _onJoin(client) {
 	PlayerInfo.addPlayer(client);
 
 	if (PlayerInfo.players.length > config.maxPlayers) {
-		Frog.eventEmitter.emit('playerMaxPlayersDisconnect', {
-			player: client,
-			server: this,
-			onlinePlayers: PlayerInfo.players.length,
-			maxPlayers: config.maxPlayers,
-			cancel(reason = "") {
-				client.kick(reason)
-			},
-		});
 		client.kick(lang.kickmessages.serverFull);
 		return;
 	}
 
-	if (!(client.version === VersionToProtocol.getProtocol(config.version)) && !config.multiProtocol) {
-		Frog.eventEmitter.emit('playerVersionMismatchDisconnect', {
-			player: client,
-			server: this,
-			serverVersion: config.version,
-			clientProtocol: client.version,
-			serverProtocol: VersionToProtocol.getProtocol(config.version),
-			cancel(reason = "") {
-				client.kick(reason)
-			},
-		});
-
-		client.kick(lang.kickmessages.versionMismatch.replace("%version%", config.version));
+	if (!(client.version === VersionToProtocol.getProtocol(config.serverInfo.version)) && !config.multiProtocol) {
+		client.kick(lang.kickmessages.versionMismatch.replace("%version%", config.serverInfo.version));
 		return;
 	}
 

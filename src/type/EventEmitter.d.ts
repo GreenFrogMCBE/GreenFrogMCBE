@@ -36,8 +36,17 @@ declare function on(eventName: "playerTransferEvent", listener: (...args: any[])
 declare function on(eventName: "playerKickEvent", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerConnect", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerPreConnect", listener: (...args: any[]) => void): void;
-declare function on(eventName: "playerMaxPlayersDisconnect", listener: (...args: any[]) => void): void;
-declare function on(eventName: "playerVersionMismatchDisconnect", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerContainerOpen", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerContainerClose", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerInteractEvent", listener: (...args: any[]) => void): void;
+declare function on(eventName: "blockBreakEvent", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerFormResponse", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerHasAllResourcePacks", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerResourcePacksRefused", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerHasNoResourcePacksInstalled", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerSpawnEvent", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerResourcePacksCompleted", listener: (...args: any[]) => void): void;
+
 
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
 
