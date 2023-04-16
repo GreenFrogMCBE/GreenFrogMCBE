@@ -1,15 +1,18 @@
 ---
 name: Bug report
-about: Report a bug/issue
+about: Report a bug/issue or something broken
 title: ""
 labels: Bug
 assignees: ""
 ---
 
-## What is wrong?
+- [ ] I checked if the bug still happens in the latest version of Greenfrog
+- [ ] I am sure that this isn't caused by other plugins
 
-[Type ur response]
+## What is broken
 
-## How should we fix it?
+[Enter your answer]
 
-[Type ur response]
+## Error (if it is logged in the server's console)
+
+[Enter your error, leave blank if it isn't logged]
