@@ -39,8 +39,6 @@ const assert = require("assert");
 const path = require("path");
 const fs = require("fs");
 
-if (Frog.isDebug) process.env.DEBUG = 'minecraft-protocol'
-
 let server = null;
 let config = Frog.serverConfigurationFiles.config;
 let lang = Frog.serverConfigurationFiles.lang;

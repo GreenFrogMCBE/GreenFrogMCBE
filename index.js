@@ -13,6 +13,8 @@
 
 const ConsoleColors = require('./src/api/colors/ConsoleColors');
 
+const Frog = require('./src/Frog');
+
 const fs = require("fs");
 const center = require("center-align");
 
@@ -32,6 +34,8 @@ try {
 
 		fs.writeFileSync('config.yml', config, () => { })
 	}
+
+	if (Frog.isDebug) process.env.DEBUG = 'minecraft-protocol'
 
 	const Server = require("./src/Server.js");
 	Server.start();
