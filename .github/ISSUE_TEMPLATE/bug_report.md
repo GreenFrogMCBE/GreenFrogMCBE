@@ -13,6 +13,6 @@ assignees: ""
 
 [Enter your answer]
 
-## Error (if it is logged in the server console)
+## Error (if it is logged in the server's console)
 
 [Enter your error, leave blank if it isn't logged]
