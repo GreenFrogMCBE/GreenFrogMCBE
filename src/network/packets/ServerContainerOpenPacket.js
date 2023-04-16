@@ -11,7 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let window_id = 0;
-let cords = {
+let coordinates = {
 	x: 0,
 	y: 0,
 	z: 0,
@@ -40,14 +40,14 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * Sets the coordinates of the container
-	 * If the container is creative menu then the cords are xyz: 0, 0, 0
+	 * If the container is creative menu then the coordinates are xyz: 0, 0, 0
 	 *
 	 * @param {Number} x
 	 * @param {Number} y
 	 * @param {Number} z
 	 */
 	setCoordinates(x, y, z) {
-		cords = {
+		coordinates = {
 			x: x,
 			y: y,
 			z: z,
@@ -91,7 +91,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	 * @returns {String} The runtime entity ID
 	 */
 	getCoordinates() {
-		return cords;
+		return coordinates;
 	}
 
 	/**

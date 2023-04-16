@@ -232,7 +232,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				if (player.chunksEnabled) {
 					player.setChunkRadius(player.world.getChunkRadius())
 
-					const cords =
+					const coordinates =
 						config.world.generator === FrogWorldGenerators.DEFAULT
 							? {
 								x: 1070,
@@ -246,7 +246,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							};
 
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
-					networkChunkPublisher.setCoordinates(cords.x, cords.y, cords.z);
+					networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);
 					networkChunkPublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
 					networkChunkPublisher.setSavedChunks([]);
 					networkChunkPublisher.writePacket(player);
@@ -281,7 +281,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						}
 
 						const networkChunkPublisher = new NetworkChunkPublisherUpdate();
-						networkChunkPublisher.setCoordinates(cords.x, cords.y, cords.z);
+						networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);
 						networkChunkPublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
 						networkChunkPublisher.setSavedChunks([]);
 						networkChunkPublisher.writePacket(player);

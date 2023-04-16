@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let cords = {
+let coordinates = {
 	x: 0,
 	y: 0,
 	z: 0,
@@ -45,9 +45,9 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	 * @param z - The Z coordinate.
 	 */
 	setCoordinates(x, y, z) {
-		cords.x = x;
-		cords.y = y;
-		cords.z = z;
+		coordinates.x = x;
+		coordinates.y = y;
+		coordinates.z = z;
 	}
 
 	/**
@@ -71,7 +71,7 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	 * @returns {JSON} The coordinates.
 	 */
 	getCords() {
-		return cords;
+		return coordinates;
 	}
 
 	/**

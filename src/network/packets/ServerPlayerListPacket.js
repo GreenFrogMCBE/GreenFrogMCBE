@@ -126,10 +126,10 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 		if (this.getType() === PlayerListTypes.REMOVE) {
 			data = {
-				records: {
+				recoordinates: {
 					type: PlayerListTypes.REMOVE,
-					records_count: 1,
-					records: [
+					recoordinates_count: 1,
+					recoordinates: [
 						{
 							uuid: this.getUuid(),
 						},
@@ -138,10 +138,10 @@ class ServerPlayerListPacket extends PacketConstructor {
 			};
 		} else {
 			data = {
-				records: {
+				recoordinates: {
 					type: PlayerListTypes.ADD,
-					records_count: 1,
-					records: [
+					recoordinates_count: 1,
+					recoordinates: [
 						{
 							uuid: this.getUuid(),
 							entity_unique_id: "-" + this.getId(),
