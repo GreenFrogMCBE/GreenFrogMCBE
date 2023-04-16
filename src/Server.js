@@ -87,7 +87,7 @@ async function _handlePacket(client, packetParams) {
 			if (++client.packetCount > 2000) {
 				Frog.eventEmitter.emit('packetRatelimit', {
 					player: client,
-					server: Frog.server
+					server: this
 				});
 
 				throw new RateLimitException(`Too many packets from ${client.username} (${client.packetCount})`);
@@ -100,10 +100,7 @@ async function _handlePacket(client, packetParams) {
 				Frog.eventEmitter.emit('packetRead', {
 					player: client,
 					data: packet.data,
-					server: this,
-					cancel() {
-						return false;
-					},
+					server: this
 				});
 
 				if (shouldReadPacket) {
@@ -193,7 +190,7 @@ async function _listen() {
 					Frog.eventEmitter.emit('packetReadError', {
 						player: client,
 						error,
-						server: Frog.server
+						server: this
 					});
 
 					Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", error.stack)}`);

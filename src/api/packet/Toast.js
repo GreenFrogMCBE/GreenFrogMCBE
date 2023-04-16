@@ -41,7 +41,7 @@ class Toast {
 	 */
 	send(player) {
 		Frog.eventEmitter.emit('serverToast', {
-			server: require,
+			server: require("../../Server"),
 			title: this.title,
 			message: this.message,
 			player: player
