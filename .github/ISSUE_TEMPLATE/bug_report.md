@@ -6,6 +6,6 @@ labels: Bug
 assignees: ""
 ---
 
-## What is broken/What is your issue?
+## What is broken
 
 [Enter your answer]
