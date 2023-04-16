@@ -158,7 +158,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}
 				}
 
-				if (!player.op) player.permissionLevel = config.defaultPermissionLevel;
+				if (!player.op) player.permissionLevel = config.dev.defaultPermissionLevel;
 
 				Logger.info(lang.playerstatuses.joined.replace("%player%", player.username));
 
