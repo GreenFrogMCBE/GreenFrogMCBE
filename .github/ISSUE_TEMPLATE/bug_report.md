@@ -1,15 +1,11 @@
 ---
 name: Bug report
-about: Report a bug/issue
+about: Report a bug/issue or something broken
 title: ""
 labels: Bug
 assignees: ""
 ---
 
-## What is wrong?
+## What is broken/What is your issue?
 
-[Type ur response]
-
-## How should we fix it?
-
-[Type ur response]
+[Enter your answer]
