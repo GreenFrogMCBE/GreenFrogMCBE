@@ -12,6 +12,7 @@
  */
 //const PlayerGamemodeChangeRequest = require("../../events/PlayerGamemodeChangeRequestEvent");
 
+const Frog = require("../../Frog");
 const PacketConstructor = require("./PacketConstructor");
 
 const PacketHandlingError = require("./exceptions/PacketHandlingError");
@@ -53,11 +54,21 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	async readPacket(player, packet, server) {
 		await this.validatePacket(player, packet);
 
-		// const gamemodeChangeEvent = new PlayerGamemodeChangeRequest();
-		// gamemodeChangeEvent.server = server;
-		// gamemodeChangeEvent.player = player;
-		// gamemodeChangeEvent.gamemode = packet.data.params.gamemode;
-		// gamemodeChangeEvent.execute();
+		let shouldChange = true;
+		const gamemode = packet.data.params.gamemode
+
+		Frog.eventEmitter.emit('playerChangeGamemodeRequest', {
+			server,
+			player,
+			gamemode,
+			cancel() {
+				shouldChange = false
+			}
+		})
+
+		if (!shouldChange) return
+
+		player.setGamemode(gamemode)
 	}
 }
 
