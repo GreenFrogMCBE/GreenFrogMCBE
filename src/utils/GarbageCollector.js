@@ -23,10 +23,7 @@ module.exports = {
 	clearOfflinePlayers() {
 		Frog.eventEmitter.emit('serverOfflinePlayersGarbageCollection', {
 			server: require('../Server'),
-			players: PlayerInfo.players,
-			cancel() {
-				return false;
-			},
+			players: PlayerInfo.players
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
@@ -47,10 +44,7 @@ module.exports = {
 
 		Frog.eventEmitter.emit('serverGarbageCollection', {
 			server: require('../Server'),
-			players: PlayerInfo.players,
-			cancel() {
-				return false;
-			},
+			players: PlayerInfo.players
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
@@ -78,7 +72,7 @@ module.exports = {
 	 * @param {String} data 
 	 */
 	removePlayerData(player, data) {
-		if (player[data]) {
+		if (player[data] !== undefined) {
 			Logger.info(`Removed ${data} from ${player.username}'s object`)
 
 			delete player[data]
