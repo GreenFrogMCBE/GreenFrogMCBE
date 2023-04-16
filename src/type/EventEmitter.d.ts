@@ -49,6 +49,7 @@ declare function on(eventName: "playerResourcePacksCompleted", listener: (...arg
 declare function on(eventName: "playerChangeGamemodeRequest", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerChat", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerMalformatedChatMessage", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerItemStackRequest", listener: (...args: any[]) => void): void;
 
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
 

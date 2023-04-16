@@ -10,6 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Frog = require("../../Frog");
+
 const PacketConstructor = require("./PacketConstructor");
 
 const ItemException = require("../../utils/exceptions/ItemException");
@@ -17,7 +19,7 @@ const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
 const GameModeLegacy = require("./types/GameModeLegacy");
 const InventoryType = require("./types/InventoryType");
 
-const { serverConfigurationFiles } = require("../../Frog");
+const { serverConfigurationFiles } = Frog;
 const { lang } = serverConfigurationFiles
 
 const Logger = require("../../server/Logger");
@@ -74,6 +76,20 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 			const count = request.count;
 			const network_id = request.network_id;
 			const block_runtime_id = request.block_runtime_id;
+
+			let shouldGiveItem = true
+
+			Frog.eventEmitter.emit('playerItemStackRequest', {
+				count,
+				network_id,
+				block_runtime_id,
+				items: player.items,
+				cancel() {
+					shouldGiveItem = true
+				}
+			})
+
+			if (!shouldGiveItem) return
 
 			const jsondata = { count, network_id, block_runtime_id };
 			player.items.push(jsondata);
