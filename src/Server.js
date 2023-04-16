@@ -30,7 +30,7 @@ const Logger = require("./server/Logger");
 const PluginLoader = require("./plugins/PluginLoader");
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
 
-const { RateLimitError } = require("./utils/exceptions/RateLimitException");
+const { RateLimitException } = require("./utils/exceptions/RateLimitException");
 
 const FrogProtocol = require("frog-protocol");
 
@@ -73,7 +73,7 @@ async function _handleCriticalError(err) {
  * @async
  * @param {Client} client 
  * @param {JSON} packetParams 
- * @throws {RateLimitError} - In case if the client is ratelimited
+ * @throws {RateLimitException} - In case if the client is ratelimited
  */
 async function _handlePacket(client, packetParams) {
 	const packetsDir = path.join(__dirname, "network", "packets");
@@ -91,7 +91,7 @@ async function _handlePacket(client, packetParams) {
 						server: Frog.server
 					});
 
-					throw new RateLimitError(`Too many packets from ${client.username} (${client.packetCount})`);
+					throw new RateLimitException(`Too many packets from ${client.username} (${client.packetCount})`);
 				}
 
 				const packet = new (require(packetPath))();
@@ -235,7 +235,7 @@ async function _onJoin(client) {
 
 	Object.assign(client, { items: [] }); // Inventory
 	Object.assign(client, { x: 0, y: 0, z: 0 }); // Player coordinates
-	Object.assign(client, { health: 20, hunger: 20, packetCount: 0, username: client.getUserData().username }); // API
+	Object.assign(client, { health: 20, hunger: 20, packetCount: 0, username: client.profile.name }); // API
 	Object.assign(client, { world: null, chunksEnabled: true, gamemode: Frog.serverConfigurationFiles.config }); // World-related stuff
 	Object.assign(client, { dead: false, initialised: false, isConsole: true, fallDamageQueue: 0 }); // More API stuff
 	Object.assign(client, { ip: client.connection.address.split("/")[0], port: client.connection.address.split("/")[0] }); // Network

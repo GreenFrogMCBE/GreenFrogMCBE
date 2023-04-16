@@ -14,7 +14,7 @@
 const BlockBreakException = require("../../utils/exceptions/BlockBreakException");
 const PacketConstructor = require("./PacketConstructor");
 
-const GameMode = require("../../api/GameMode");
+const GameMode = require("../../api/player/GameMode");
 const BlockActions = require("./types/BlockActions");
 
 const Logger = require("../../server/Logger");
