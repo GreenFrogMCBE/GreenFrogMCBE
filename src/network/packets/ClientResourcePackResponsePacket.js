@@ -167,7 +167,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.setRunTimeEntityId(0);
 				startGame.setGamemode(config.world.gamemode);
 				startGame.setPlayerPosition(player.world.getSpawnCoordinates().x, player.world.getSpawnCoordinates().y, player.world.getSpawnCoordinates().z);
-				startGame.setPlayerRotation(1, 1);
+				startGame.setPlayerRotation(0, 0);
 				startGame.setSeed(-1);
 				startGame.setBiomeType(0);
 				startGame.setBiomeName(Biome.PLAINS);
