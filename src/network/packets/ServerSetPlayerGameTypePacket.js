@@ -12,6 +12,7 @@
  */
 
 const Gamemode = require("../../api/player/GameMode");
+
 const PacketConstructor = require("./PacketConstructor");
 
 let gamemode = Gamemode.FALLBACK;

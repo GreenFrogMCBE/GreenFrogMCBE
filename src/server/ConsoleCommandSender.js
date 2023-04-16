@@ -43,10 +43,23 @@ async function setupConsoleReader() {
 async function executeConsoleCommand(input) {
 	if (isClosed) return;
 
+	let shouldExecCommand = true
+
+	const args = input.split(" ").slice(1);
+
+	Frog.eventEmitter.emit('consoleExecutedCommand', {
+		server: Frog.server,
+		args,
+		command: input,
+		cancel() {
+			shouldExecCommand = false
+		}
+	})
+
+	if (!shouldExecCommand) return
+
 	try {
 		if (!input.replace(" ", "")) return;
-
-		const args = input.split(" ").slice(1);
 
 		let commandFound = false;
 

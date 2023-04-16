@@ -10,6 +10,17 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const CommandHandlingException = require("../../utils/exceptions/CommandHandlingException");
+
+const Frog = require("../../Frog");
+
+const Logger = require("../../server/Logger");
+
+const { serverConfigurationFiles } = Frog
+const { lang } = serverConfigurationFiles
+
+const Commands = require("../../server/Commands");
+
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientCommandRequestPacket extends PacketConstructor {
@@ -36,9 +47,90 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		const command = packet.data.params.command;
+		const input = packet.data.params.command.replace('/', '');
 
-		
+		const args = input.split(" ").slice(1);
+
+		let shouldExecCommand = true
+
+		Frog.eventEmitter.emit('playerExecutedCommand', {
+			player,
+			server,
+			args,
+			command: input,
+			cancel() { 
+				shouldExecCommand = false
+			}
+		})
+
+		if (!shouldExecCommand) return
+
+		try {
+			Logger.info(`${player.username} executed server command: ${input}`)
+
+			if (!input.replace(" ", "")) return;
+
+			let commandFound = false;
+
+			for (const command of Commands.commandList) {
+				if (
+					command.data.name === input.split(" ")[0] ||
+					(command.data.aliases && command.data.aliases.includes(input.split(" ")[0]))
+				) {
+					if (
+						command.data.minArgs !== undefined &&
+						command.data.minArgs > args.length
+					) {
+						player.sendMessage(
+							lang.commands.minArg
+								.replace("%m%", command.data.minArgs)
+								.replace("%r%", args.length)
+						);
+						return;
+					}
+
+					if (
+						command.data.maxArgs !== undefined &&
+						command.data.maxArgs < args.length
+					) {
+						player.sendMessage(
+							lang.commands.maxArg
+								.replace("%m%", command.data.maxArgs)
+								.replace("%r%", args.length)
+						);
+						return;
+					}
+
+					command.execute(
+						Frog,
+						{
+							sendMessage: (message) => {
+								player.sendMessage(message);
+							},
+							op: true,
+							username: "Server",
+							ip: "127.0.0.1",
+							isConsole: true,
+						},
+						args
+					);
+
+					commandFound = true;
+					break; // Exit loop once command has been found and executed
+				}
+			}
+
+			if (!commandFound) {
+				player.sendMessage(
+					lang.errors.unknownCommandOrNoPermission.replace(
+						"%commandname%",
+						input.split(" ")[0]
+					)
+				);
+			}
+		} catch (e) {
+			throw new CommandHandlingException(`Failed to execute command from ${player.username}. Error: ${e.stack}`);
+		}
 	}
 }
 

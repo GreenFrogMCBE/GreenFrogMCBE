@@ -43,12 +43,16 @@ const ResourcePackStack = require("./ServerResourcePackStackPacket");
 const SetCommandsEnabled = require("./ServerSetCommandsEnabledPacket");
 const StartGame = require("./ServerStartGamePacket");
 
+const CommandManager = require("../../player/CommandManager");
+
 const World = require("../../world/World");
 
 const Logger = require("../../server/Logger");
 
-const { serverConfigurationFiles } = require("../../Frog")
+const { serverConfigurationFiles } = require("../../Frog");
 const { lang, config } = serverConfigurationFiles
+
+const Commands = require("../../server/Commands");
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
@@ -200,45 +204,21 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				clientCacheStatus.setEnabled(true);
 				clientCacheStatus.writePacket(player);
 
-				// const commandManager = new CommandManager();
-				// commandManager.init(player);
-				// if (config.playerCommandVersion) {
-				// 	commandManager.addCommand(player, new CommandVersion().name().toLowerCase(), new CommandVersion().getPlayerDescription());
-				// 	commandManager.addCommand(player, new CommandVersion().aliases()[0].toLowerCase(), new CommandVersion().getPlayerDescription());
-				// }
-				// if (config.playerCommandPlugins) {
-				// 	commandManager.addCommand(player, new CommandPl().name().toLowerCase(), new CommandPl().getPlayerDescription());
-				// 	commandManager.addCommand(player, new CommandPl().aliases()[0].toLowerCase(), new CommandPl().getPlayerDescription());
-				// }
-				// if (config.playerCommandList) {
-				// 	commandManager.addCommand(player, new CommandList().name().toLowerCase(), new CommandList().getPlayerDescription());
-				// }
-				// if (config.playerCommandMe) {
-				// 	commandManager.addCommand(player, new CommandMe().name().toLowerCase(), new CommandMe().getPlayerDescription());
-				// }
-				// if (player.op) {
-				// 	if (config.playerCommandStop) {
-				// 		commandManager.addCommand(player, new CommandStop().name().toLowerCase(), new CommandStop().getPlayerDescription());
-				// 	}
-				// 	if (config.playerCommandSay) {
-				// 		commandManager.addCommand(player, new CommandSay().name().toLowerCase(), new CommandSay().getPlayerDescription());
-				// 	}
-				// 	if (config.playerCommandOp) {
-				// 		commandManager.addCommand(player, new CommandOp().name().toLowerCase(), new CommandOp().getPlayerDescription());
-				// 	}
-				// 	if (config.playerCommandKick) {
-				// 		commandManager.addCommand(player, new CommandKick().name().toLowerCase(), new CommandKick().getPlayerDescription());
-				// 	}
-				// 	if (config.playerCommandTime) {
-				// 		commandManager.addCommand(player, new CommandTime().name().toLowerCase(), new CommandTime().getPlayerDescription());
-				// 	}
-				// 	if (config.playerCommandDeop) {
-				// 		commandManager.addCommand(player, new CommandDeop().name().toLowerCase(), new CommandDeop().getPlayerDescription());
-				// 	}
-				// 	if (config.playerCommandGamemode) {
-				// 		commandManager.addCommand(player, new CommandGamemode().name().toLowerCase(), new CommandGamemode().getPlayerDescription());
-				// 	}
-				// }
+				const commandManager = new CommandManager();
+				commandManager.init(player);
+
+				for (const command of Commands.commandList) {
+					commandManager.addCommand(player, command.data.name, command.data.description)
+
+					const aliases = command.data.aliases;
+
+					if (aliases) {
+						for (const alias of aliases) {
+							commandManager.addCommand(player, alias, command.data.description)
+						}
+					}
+				}
+
 
 				// This packet is used to set custom items
 				const itemcomponent = new ItemComponent();
