@@ -12,8 +12,6 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-const PlayerChatEvent = require("../../events/PlayerChatEvent");
-
 class ClientTextPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
@@ -38,15 +36,15 @@ class ClientTextPacket extends PacketConstructor {
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		let message = packet.data.params.message;
+		// let message = packet.data.params.message;
 
-		await this.validatePacket(player, message);
+		// await this.validatePacket(player, message);
 
-		const chatEvent = new PlayerChatEvent();
-		chatEvent.server = server;
-		chatEvent.player = player;
-		chatEvent.message = message;
-		chatEvent.execute();
+		// const chatEvent = new PlayerChatEvent();
+		// chatEvent.server = server;
+		// chatEvent.player = player;
+		// chatEvent.message = message;
+		// chatEvent.execute();
 	}
 }
 

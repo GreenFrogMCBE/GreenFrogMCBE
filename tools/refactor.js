@@ -13,6 +13,12 @@
 const fs = require("fs");
 const path = require("path");
 
+if (process.argv.length < 4) {
+	console.error('Usage: node refactor.js [what to refactor] [new name for stuff that gets refactored]')
+
+	process.exit(-1)
+}
+
 const rootDir = path.join(__dirname, "..");
 
 console.info("Started refactoring");
@@ -47,8 +53,7 @@ async function traverseDirectory(dirPath, replacements) {
 }
 
 const replacements = [
-	// Put your replacements here, example:
-	["{any} player", "{Client} player"]
+	[process.argv[2], process.argv[3]]
 ];
 
 traverseDirectory(rootDir, replacements);

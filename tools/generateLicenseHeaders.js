@@ -28,7 +28,7 @@ const addHeader = async (filePath) => {
 		if (!contents.includes("Copyright 2023 andriycraft")) {
 			contents = LICENSE_HEADER + contents;
 			await fs.writeFile(filePath, contents);
-			console.log(`Added license header to file ${filePath}`);
+			console.info(`Added license header to file ${filePath}`);
 		}
 	} catch (err) {
 		console.error(`Error adding license header to file ${filePath}:`, err);

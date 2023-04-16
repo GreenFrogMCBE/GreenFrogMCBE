@@ -115,7 +115,7 @@ module.exports = {
 	/**
 	 * Closes the console.
 	 * 
-	 * @throws {ConsoleSetupException}
+	 * @throws {ConsoleSetupException} - If the console is already closed
 	 */
 	close() {
 		if (isClosed) {

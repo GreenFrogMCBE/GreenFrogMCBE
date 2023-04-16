@@ -10,9 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PacketConstructor = require("./PacketConstructor");
+const Frog = require("../../Frog");
 
-const PlayerFormResponseEvent = require("../../events/PlayerFormResponseEvent");
+const PacketConstructor = require("./PacketConstructor");
 
 class ClientModalFormResponsePacket extends PacketConstructor {
 	/**
@@ -33,15 +33,17 @@ class ClientModalFormResponsePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
+	 * 
 	 * @param {Client} player
 	 * @param {JSON} packet
+	 * @param {Server} player
 	 */
 	async readPacket(player, packet, server) {
-		const modalFormResponseEvent = new PlayerFormResponseEvent();
-		modalFormResponseEvent.player = player;
-		modalFormResponseEvent.server = server;
-		modalFormResponseEvent.formData = packet;
-		modalFormResponseEvent.execute();
+		Frog.eventEmitter.emit('playerFormResponse', {
+			player,
+			formData: packet,
+			server
+		})
 	}
 }
 

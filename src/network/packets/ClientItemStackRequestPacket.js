@@ -12,13 +12,14 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
+const ItemException = require("../../utils/exceptions/ItemException");
 const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
 const GameModeLegacy = require("./types/GameModeLegacy");
 const InventoryType = require("./types/InventoryType");
 
-const PacketHandlingError = require("./exceptions/PacketHandlingError");
+const { serverConfigurationFiles } = require("../../Frog");
+const { lang } = serverConfigurationFiles
 
-const { lang } = require("../../api/ServerInfo");
 const Logger = require("../../server/Logger");
 
 class ClientItemStackRequestPacket extends PacketConstructor {
@@ -38,24 +39,29 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 		return false;
 	}
 
+	/**
+	 * Validates the packet
+	 * 
+	 * @param {Client} player 
+	 */
 	validatePacket(player) {
 		if (player.gamemode == !GameModeLegacy.CREATIVE) {
-			throw new PacketHandlingError("Impossible ItemStackRequest");
+			throw new ItemException("player.gamemode must be GameModeLegacy.CREATIVE!");
 		}
 	}
 
 	/**
 	 * Reads the packet from player
+	 * 
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet) {
-		// TODO: Event
-
 		await this.validatePacket(player);
 
 		try {
 			let request = null;
+
 			try {
 				request = packet.data.params.requests[0].actions[1].result_items[0];
 			} catch {
@@ -73,10 +79,11 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 			player.items.push(jsondata);
 
 			for (const [i, item] of player.items.entries()) {
-				const is = new ServerInventorySlotPacket();
-				is.setWindowID(InventoryType.INVENTORY);
-				is.setSlot(i);
-				is.setItemData({
+				const inventorySlotPacket = new ServerInventorySlotPacket();
+
+				inventorySlotPacket.setWindowID(InventoryType.INVENTORY);
+				inventorySlotPacket.setSlot(i);
+				inventorySlotPacket.setItemData({
 					network_id: item.network_id,
 					count: item.count,
 					metadata: 0,
@@ -89,7 +96,8 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 						can_destroy: [],
 					},
 				});
-				is.writePacket(player);
+
+				inventorySlotPacket.writePacket(player);
 			}
 		} catch (e) {
 			Logger.error(lang.errors.failedToHandleItemRequest.replace("%data%", `${player.username}: ${e.stack}`));

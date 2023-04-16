@@ -14,7 +14,7 @@ const bedrock = require("frog-protocol");
 
 module.exports = {
 	async test() {
-		console.log("[client] joining...");
+		console.info("[client] joining...");
 		await bedrock.createClient({
 			host: "127.0.0.1",
 			port: 19132,
@@ -22,6 +22,6 @@ module.exports = {
 			offline: true,
 			version: "1.19.70",
 		});
-		console.log("[client] joined");
+		console.info("[client] joined");
 	},
 };

@@ -23,12 +23,12 @@ if (!fs.existsSync("../config.yml")) {
 	fs.writeFileSync('../config.yml', config, () => { })
 }
 
-console.log("Starting testing...");
+console.info("Starting testing...");
 
 try {
 	StartServer.test();
 } catch (e) {
-	console.log("Tests failed! Failed to start the server! " + e.stack);
+	console.info("Tests failed! Failed to start the server! " + e.stack);
 	process.exit(-1);
 }
 
@@ -36,21 +36,21 @@ setTimeout(() => {
 	try {
 		TestConfigs.test();
 	} catch (e) {
-		console.log("Tests failed! Failed to test the configs! " + e.stack);
+		console.info("Tests failed! Failed to test the configs! " + e.stack);
 		process.exit(-1);
 	} finally {
 		setTimeout(() => {
 			try {
 				ClientJoin.test();
 			} catch (e) {
-				console.log("Tests failed! Failed to join with client! " + e.stack);
+				console.info("Tests failed! Failed to join with client! " + e.stack);
 				process.exit(-1);
 			} finally {
 				setTimeout(() => {
 					try {
 						ClientRunCommand.test();
 					} catch (e) {
-						console.log("Tests failed! Failed to run command: /pl! " + e.stack);
+						console.info("Tests failed! Failed to run command: /pl! " + e.stack);
 						process.exit(-1);
 					} finally {
 						setTimeout(() => {
@@ -58,11 +58,11 @@ setTimeout(() => {
 								try {
 									ClientSendMessage.test();
 								} catch (e) {
-									console.log("Tests failed! Failed to send a chat message! " + e.stack);
+									console.info("Tests failed! Failed to send a chat message! " + e.stack);
 									process.exit(-1);
 								} finally {
 									setTimeout(() => {
-										console.log("Tests passed");
+										console.info("Tests passed");
 										process.exit(0);
 									}, 10000);
 								}

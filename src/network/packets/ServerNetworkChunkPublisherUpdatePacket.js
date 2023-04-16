@@ -44,7 +44,7 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	 * @param y - The Y coordinate.
 	 * @param z - The Z coordinate.
 	 */
-	setCords(x, y, z) {
+	setCoordinates(x, y, z) {
 		cords.x = x;
 		cords.y = y;
 		cords.z = z;

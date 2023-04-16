@@ -124,8 +124,7 @@ class World {
 		if (config.tickEvent) {
 			Frog.eventEmitter.emit('serverTick', {
 				world: this.getWorldData(),
-				server: Frog.server,
-				cancel() { return false }
+				server: Frog.server
 			});
 		}
 
@@ -133,8 +132,7 @@ class World {
 			Frog.eventEmitter.emit('serverTimeTick', {
 				world: this.getWorldData(),
 				server: Frog.server,
-				time: _time,
-				cancel() { return false }
+				time: _time
 			});
 
 			_time += 10;
@@ -148,8 +146,7 @@ class World {
 		if (config.tickRegeneration) {
 			Frog.eventEmitter.emit('serverRegenerationTick', {
 				world: this.getWorldData(),
-				server: Frog.server,
-				cancel() { return false }
+				server: Frog.server
 			});
 
 			for (const player of this.getPlayersInWorld()) {
@@ -164,8 +161,7 @@ class World {
 		if (config.tickStarvationDamage) {
 			Frog.eventEmitter.emit('serverStarvationDamageTick', {
 				world: this.getWorldData(),
-				server: Frog.server,
-				cancel() { return false }
+				server: Frog.server
 			});
 
 			for (const player of this.getPlayersInWorld()) {
@@ -178,8 +174,7 @@ class World {
 		if (config.tickVoid) {
 			Frog.eventEmitter.emit('serverVoidDamageTick', {
 				world: this.getWorldData(),
-				server: Frog.server,
-				cancel() { return false }
+				server: Frog.server
 			});
 
 			for (const client of this.getPlayersInWorld()) {
@@ -188,7 +183,7 @@ class World {
 				let min = -64;
 
 				if (config.generator === WorldGenerator.VOID) {
-					min = NaN;
+					return;
 				}
 
 				if (posY <= min) {

@@ -11,13 +11,14 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-case-declarations */
-const BlockBreakEvent = require("../../events/BlockBreakEvent");
+const BlockBreakException = require("../../utils/exceptions/BlockBreakException");
 const PacketConstructor = require("./PacketConstructor");
 
 const GameMode = require("../../api/GameMode");
 const BlockActions = require("./types/BlockActions");
 
 const Logger = require("../../server/Logger");
+const Frog = require("../../Frog");
 
 class ClientInventoryTransactionPacket extends PacketConstructor {
 	/**
@@ -51,20 +52,20 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 		}
 
 		switch (actionID) {
-			case BlockActions.BREAKBLOCK:
+			case BlockActions.BLOCKBREAK:
 				if (player.gamemode == GameMode.ADVENTURE || player.gamemode == GameMode.SPECTATOR) {
-					throw new Error("Player tried to break block, while in " + player.gamemode + " gamemode");
+					throw new BlockBreakException("Player tried to break block, while in " + player.gamemode + " gamemode");
 				}
 
-				const blockbreakevent = new BlockBreakEvent();
-				blockbreakevent.actions = packet.data.params.actions;
-				blockbreakevent.legacy = packet.data.params.transaction.legacy;
-				blockbreakevent.player = player;
-				blockbreakevent.server = server;
-				blockbreakevent.action = packet.data.params.transaction.transaction_data.action_type;
-				blockbreakevent.block_position = packet.data.params.transaction.transaction_data.block_position;
-				blockbreakevent.transaction_type = packet.data.params.transaction.transaction_type;
-				blockbreakevent.execute();
+				Frog.eventEmitter.emit('blockBreakEvent', {
+					actions: packet.data.params.actions,
+					legacy: packet.data.params.transaction.legacy,
+					player: player,
+					server: server,
+					action: packet.data.params.transaction.transaction_data.actionType,
+					blockPosition: packet.data.params.transaction.transaction_data.blockPosition,
+					transactionType: packet.data.params.transaction.transactionType,
+				})
 				break;
 			default:
 				Logger.debug("Unsupported block action from " + player.username + ": " + actionID);

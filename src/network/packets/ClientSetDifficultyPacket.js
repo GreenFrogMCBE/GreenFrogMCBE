@@ -10,6 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Frog = require("../../Frog");
 const World = require("../../world/World");
 
 const PacketHandlingError = require("./exceptions/PacketHandlingError");
@@ -43,11 +44,19 @@ class ClientSetDifficultyPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 * @param {Server} server
 	 */
-	async readPacket(player, packet) {
+	async readPacket(player, packet, server) {
 		await this.validatePacket(player);
 
+		const difficulty = packet.data.params.difficulty;
+
+		Frog.eventEmitter.emit('playerSetDifficulty', {
+			player,
+			server,
+			difficulty
+		})
+
 		for (const player of new World().getPlayersInWorld()) {
-			player.setDifficulty(packet.data.params.difficulty);
+			player.setDifficulty(difficulty);
 		}
 	}
 }

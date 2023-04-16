@@ -83,15 +83,14 @@ async function _handlePacket(client, packetParams) {
 	fs.readdirSync(packetsDir).forEach((filename) => {
 		if (filename.startsWith("Client") && filename.endsWith(".js")) {
 			const packetPath = path.join(packetsDir, filename);
+
 			try {
 				if (++client.packetCount > 2000) {
-					Frog.eventEmitter.emit('packetRateLimitReached', {
+					Frog.eventEmitter.emit('packetRatelimit', {
 						player: client,
-						server: this,
-						cancel() {
-							return true;
-						},
+						server: Frog.server
 					});
+
 					throw new RateLimitError(`Too many packets from ${client.username} (${client.packetCount})`);
 				}
 
@@ -113,17 +112,16 @@ async function _handlePacket(client, packetParams) {
 					}
 					exist = true;
 				}
-			} catch (e) {
+			} catch (error) {
 				client.kick(lang.kickmessages.invalidPacket);
+
 				Frog.eventEmitter.emit('packetReadError', {
 					player: client,
-					error: e,
-					server: this,
-					cancel() {
-						return false;
-					},
+					error,
+					server: Frog.server
 				});
-				Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
+
+				Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", error.stack)}`);
 			}
 		}
 	});
@@ -237,7 +235,7 @@ async function _onJoin(client) {
 
 	Object.assign(client, { items: [] }); // Inventory
 	Object.assign(client, { x: 0, y: 0, z: 0 }); // Player coordinates
-	Object.assign(client, { health: 20, hunger: 20, packetCount: 0 }); // API
+	Object.assign(client, { health: 20, hunger: 20, packetCount: 0, username: client.getUserData().username }); // API
 	Object.assign(client, { world: null, chunksEnabled: true, gamemode: Frog.serverConfigurationFiles.config }); // World-related stuff
 	Object.assign(client, { dead: false, initialised: false, isConsole: true, fallDamageQueue: 0 }); // More API stuff
 	Object.assign(client, { ip: client.connection.address.split("/")[0], port: client.connection.address.split("/")[0] }); // Network

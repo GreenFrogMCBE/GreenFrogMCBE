@@ -110,6 +110,6 @@ garbageCollectorDelay: 60000`
 		}
 		const Frog = require("../src/Server");
 		Frog.start();
-		console.log("[server] started");
+		console.info("[server] started");
 	},
 };

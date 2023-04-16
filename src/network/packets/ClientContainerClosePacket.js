@@ -10,12 +10,12 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerContainerCloseEvent = require("../../events/PlayerContainerCloseEvent");
 const ServerContainerClosePacket = require("./ServerContainerClosePacket");
 
 const PacketConstructor = require("./PacketConstructor");
 
 const WindowID = require("./types/WindowID");
+const Frog = require("../../Frog");
 
 class ClientContainerClosePacket extends PacketConstructor {
 	/**
@@ -40,18 +40,26 @@ class ClientContainerClosePacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 * @param {Server} server
 	 */
-	async readPacket(player, _packet, server) {
-		const containerclose = new ServerContainerClosePacket();
-		containerclose.setServer(false);
-		containerclose.setWindowID(WindowID.CREATIVE);
-		containerclose.writePacket(player);
+	async readPacket(player, packet, server) {
+		let shouldClose = true
 
-		const containerCloseEvent = new PlayerContainerCloseEvent();
-		containerCloseEvent.player = player;
-		containerCloseEvent.server = server;
-		containerCloseEvent.isRequestByServer = false;
-		containerCloseEvent.windowID = WindowID.CREATIVE;
-		containerCloseEvent.execute();
+		Frog.eventEmitter.emit('playerContainerClose', {
+			windowID: WindowID.CREATIVE,
+			isSentByServer: false,
+			player,
+			packet,
+			server,
+			cancel() {
+				shouldClose = false
+			}
+		})
+
+		if (!shouldClose) return
+
+		const containerClose = new ServerContainerClosePacket();
+		containerClose.setServer(false);
+		containerClose.setWindowID(WindowID.CREATIVE);
+		containerClose.writePacket(player);
 	}
 }
 
