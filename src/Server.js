@@ -84,44 +84,32 @@ async function _handlePacket(client, packetParams) {
 		if (filename.startsWith("Client") && filename.endsWith(".js")) {
 			const packetPath = path.join(packetsDir, filename);
 
-			try {
-				if (++client.packetCount > 2000) {
-					Frog.eventEmitter.emit('packetRatelimit', {
-						player: client,
-						server: Frog.server
-					});
-
-					throw new RateLimitException(`Too many packets from ${client.username} (${client.packetCount})`);
-				}
-
-				const packet = new (require(packetPath))();
-				if (packet.getPacketName() === packetParams.data.name) {
-					let shouldReadPacket = true;
-
-					Frog.eventEmitter.emit('packetRead', {
-						player: client,
-						data: packet.data,
-						server: this,
-						cancel() {
-							return false;
-						},
-					});
-
-					if (shouldReadPacket) {
-						packet.readPacket(client, packetParams, this);
-					}
-					exist = true;
-				}
-			} catch (error) {
-				client.kick(lang.kickmessages.invalidPacket);
-
-				Frog.eventEmitter.emit('packetReadError', {
+			if (++client.packetCount > 2000) {
+				Frog.eventEmitter.emit('packetRatelimit', {
 					player: client,
-					error,
 					server: Frog.server
 				});
 
-				Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", error.stack)}`);
+				throw new RateLimitException(`Too many packets from ${client.username} (${client.packetCount})`);
+			}
+
+			const packet = new (require(packetPath))();
+			if (packet.getPacketName() === packetParams.data.name) {
+				let shouldReadPacket = true;
+
+				Frog.eventEmitter.emit('packetRead', {
+					player: client,
+					data: packet.data,
+					server: this,
+					cancel() {
+						return false;
+					},
+				});
+
+				if (shouldReadPacket) {
+					packet.readPacket(client, packetParams, this);
+				}
+				exist = true;
 			}
 		}
 	});
@@ -200,14 +188,16 @@ async function _listen() {
 			client.on("packet", (packet) => {
 				try {
 					_handlePacket(client, packet);
-				} catch (e) {
+				} catch (error) {
 					client.kick(lang.kickmessages.invalidPacket);
-					Logger.error(
-						`${lang.errors.packetHandlingException.replace(
-							"%player%",
-							client.username
-						).replace("%error%", e.stack)}`
-					);
+
+					Frog.eventEmitter.emit('packetReadError', {
+						player: client,
+						error,
+						server: Frog.server
+					});
+	
+					Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", error.stack)}`);	
 				}
 			});
 		});
