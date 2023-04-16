@@ -1,7 +1,6 @@
 const readline = require("readline");
 
 const ConsoleSetupException = require("../utils/exceptions/ConsoleSetupException");
-const CommandHandlingException = require("../utils/exceptions/CommandHandlingException");
 
 const Logger = require("./Logger");
 const Frog = require("../Frog");
@@ -98,6 +97,8 @@ async function executeConsoleCommand(input) {
 						sendMessage: (message) => {
 							Logger.info(message);
 						},
+						// eslint-disable-next-line no-unused-vars
+						setGamemode: (gamemode) => {},
 						op: true,
 						username: "Server",
 						ip: "127.0.0.1",
@@ -119,8 +120,8 @@ async function executeConsoleCommand(input) {
 				)
 			);
 		}
-	} catch (e) {
-		throw new CommandHandlingException(e);
+	} catch (error) {
+		Logger.error(`Failed to execute command from Server. Error: ${error.stack}`);
 	}
 }
 
@@ -184,12 +185,8 @@ module.exports = {
 					require("../Frog").eventEmitter.emit('serverCommandProcessError', {
 						server: require("../Frog").server,
 						command,
-						error,
-						cancel() {
-							return false;
-						}
+						error
 					});
-
 
 					Logger.error(`Failed to execute command! ${error.stack}`);
 				}

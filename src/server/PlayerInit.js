@@ -110,7 +110,12 @@ module.exports = {
 				GameMode.CREATIVE,
 				GameMode.ADVENTURE,
 				GameMode.SPECTATOR,
-				GameMode.FALLBACK
+				GameMode.FALLBACK,
+				0,
+				1,
+				2,
+				3,
+				6
 			];
 
 			if (!allowedGameModes.includes(gamemode)) {
@@ -133,7 +138,7 @@ module.exports = {
 
 			const playerGamemode = new ServerSetPlayerGameTypePacket();
 			playerGamemode.setGamemode(gamemode);
-			playerGamemode.writePacket(this.player);
+			playerGamemode.writePacket(player);
 		};
 
 		/**

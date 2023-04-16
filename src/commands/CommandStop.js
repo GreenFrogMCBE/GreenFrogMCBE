@@ -9,7 +9,7 @@ const CommandVerifier = require("../utils/CommandVerifier");
 module.exports = {
 	data: {
 		name: "stop",
-		description: "Shutdowns the server",
+		description: "Shut downs the server.",
 		minArg: 0,
 		maxArg: 0,
 	},

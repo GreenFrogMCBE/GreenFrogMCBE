@@ -14,11 +14,9 @@ chat:
   blockInvalidMessages: true # Kicks the player if the player tried to send an too long or empty message and also prevents from using colors in chat
   commands:
     consoleCommandKick: true
-    consoleCommandVer: true
     consoleCommandShutdown: true
     consoleCommandVersion: true
     consoleCommandTime: true
-    consoleCommandPl: true
     consoleCommandPlugins: true
     consoleCommandStop: true # Will only stop showing in /help, if disabled
     consoleCommandSay: true
@@ -26,7 +24,8 @@ chat:
     consoleCommandDeop: true
     consoleCommandHelp: true
     consoleCommandList: true
-    playerCommandVersion: false
+    consoleCommandGamemode: true
+    playerCommandVersion: true
     playerCommandPlugins: true
     playerCommandStop: true
     playerCommandSay: true

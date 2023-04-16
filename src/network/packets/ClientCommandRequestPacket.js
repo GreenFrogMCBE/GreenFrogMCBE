@@ -10,8 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const CommandHandlingException = require("../../utils/exceptions/CommandHandlingException");
-
 const Frog = require("../../Frog");
 
 const Logger = require("../../server/Logger");
@@ -58,7 +56,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			server,
 			args,
 			command: input,
-			cancel() { 
+			cancel() {
 				shouldExecCommand = false
 			}
 		})
@@ -66,7 +64,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 		if (!shouldExecCommand) return
 
 		try {
-			Logger.info(`${player.username} executed server command: ${input}`)
+			Logger.info(`${player.username} executed server command: /${input}`)
 
 			if (!input.replace(" ", "")) return;
 
@@ -101,19 +99,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 						return;
 					}
 
-					command.execute(
-						Frog,
-						{
-							sendMessage: (message) => {
-								player.sendMessage(message);
-							},
-							op: true,
-							username: "Server",
-							ip: "127.0.0.1",
-							isConsole: true,
-						},
-						args
-					);
+					command.execute(Frog, player, args);
 
 					commandFound = true;
 					break; // Exit loop once command has been found and executed
@@ -128,8 +114,9 @@ class ClientCommandRequestPacket extends PacketConstructor {
 					)
 				);
 			}
-		} catch (e) {
-			throw new CommandHandlingException(`Failed to execute command from ${player.username}. Error: ${e.stack}`);
+		} catch (error) {
+			player.sendMessage("§cSomething went wrong while trying to execute that command")
+			Logger.error(`Failed to execute command from ${player.username}. Error: ${error.stack}`);
 		}
 	}
 }

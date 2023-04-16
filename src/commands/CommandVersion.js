@@ -16,7 +16,7 @@ module.exports = {
 
 	data: {
 		name: 'version',
-		description: 'Shows the server version',
+		description: 'Shows the server version.',
 		aliases: ['ver', 'about'],
 		minArg: 0,
 		maxArg: 0,
