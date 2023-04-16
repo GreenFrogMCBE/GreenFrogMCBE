@@ -1,4 +1,3 @@
-const { readdir } = require("fs/promises");
 const readline = require("readline");
 
 const ConsoleSetupException = require("../utils/exceptions/ConsoleSetupException");
@@ -6,6 +5,7 @@ const CommandHandlingException = require("../utils/exceptions/CommandHandlingExc
 
 const Logger = require("./Logger");
 const Frog = require("../Frog");
+const Commands = require("./Commands");
 
 let isClosed = false;
 /** @private */
@@ -37,37 +37,51 @@ async function setupConsoleReader() {
  * Executes a command that the user typed in the console.
  *
  * @async
- * @param {String} command - The command to execute.
+ * @param {String} input - The command to execute.
  * @throws {CommandHandlingException} Throws an error if the command cannot be executed.
  */
-async function executeConsoleCommand(command) {
+async function executeConsoleCommand(input) {
 	if (isClosed) return;
 
 	try {
-		const commandFilenames = await readdir("./src/commands");
-		const commandName = command.split(" ")[0];
-		const commandArgs = command.split(" ").slice(1);
+		if (!input.replace(" ", "")) return;
 
-		if (!commandName.replace(" ", "")) return;
+		const args = input.split(" ").slice(1);
 
 		let commandFound = false;
 
-		for (const commandFilename of commandFilenames) {
-			if (commandFilename.endsWith(".js")) {
-				const command = require(`../commands/${commandFilename}`);
+		for (const command of Commands.commandList) {
+			if (
+				command.data.name === input.split(" ")[0] ||
+				(command.data.aliases && command.data.aliases.includes(input.split(" ")[0]))
+			) {
+				if (
+					command.data.minArgs !== undefined &&
+					command.data.minArgs > args.length
+				) {
+					Logger.info(
+						lang.commands.minArg
+							.replace("%m%", command.data.minArgs)
+							.replace("%r%", args.length)
+					);
+					return;
+				}
 
-				if (command.data.name === commandName || (command.data.aliases && command.data.aliases.includes(commandName))) {
-					if (command.data.minArgs !== undefined && command.data.minArgs > commandArgs.length) {
-						Logger.info(lang.commands.minArg.replace("%m%", command.data.minArgs).replace("%r%", commandArgs.length));
-						return;
-					}
+				if (
+					command.data.maxArgs !== undefined &&
+					command.data.maxArgs < args.length
+				) {
+					Logger.info(
+						lang.commands.maxArg
+							.replace("%m%", command.data.maxArgs)
+							.replace("%r%", args.length)
+					);
+					return;
+				}
 
-					if (command.data.maxArgs !== undefined && command.data.maxArgs < commandArgs.length) {
-						Logger.info(lang.commands.maxArg.replace("%m%", command.data.maxArgs).replace("%r%", commandArgs.length));
-						return;
-					}
-
-					command.execute(Frog, {
+				command.execute(
+					Frog,
+					{
 						sendMessage: (message) => {
 							Logger.info(message);
 						},
@@ -75,18 +89,25 @@ async function executeConsoleCommand(command) {
 						username: "Server",
 						ip: "127.0.0.1",
 						isConsole: true,
-					}, commandArgs);
+					},
+					args
+				);
 
-					commandFound = true;
-				}
+				commandFound = true;
+				break; // Exit loop once command has been found and executed
 			}
 		}
 
 		if (!commandFound) {
-			Logger.info(lang.errors.unknownCommandOrNoPermission.replace("%commandname%", commandName));
+			Logger.info(
+				lang.errors.unknownCommandOrNoPermission.replace(
+					"%commandname%",
+					input.split(" ")[0]
+				)
+			);
 		}
 	} catch (e) {
-		throw new CommandHandlingException(e)
+		throw new CommandHandlingException(e);
 	}
 }
 
@@ -127,6 +148,8 @@ module.exports = {
 		lang = require("../Frog").serverConfigurationFiles.lang;
 
 		await setupConsoleReader();
+
+		await Commands.loadAllCommands()
 
 		readLineInterface.on("line", async (command) => {
 			let shouldProcessCommand = true;

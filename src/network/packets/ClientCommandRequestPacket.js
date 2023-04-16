@@ -10,8 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { config } = require("../../api/ServerInfo");
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientCommandRequestPacket extends PacketConstructor {
@@ -40,6 +38,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	async readPacket(player, packet, server) {
 		const command = packet.data.params.command;
 
+		
 	}
 }
 
