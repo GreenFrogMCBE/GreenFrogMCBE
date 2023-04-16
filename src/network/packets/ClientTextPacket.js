@@ -60,7 +60,7 @@ class ClientTextPacket extends PacketConstructor {
 
 		if (!shouldChat || config.chat.disable) return
 
-		const fullmessage = lang.chat.chatFormat.replace("%username%", player.username).replace("%message%", message);
+		const formattedMessage = lang.chat.chatFormat.replace("%username%", player.username).replace("%message%", message);
 
 		if (!message.trim()) return;
 
@@ -73,10 +73,10 @@ class ClientTextPacket extends PacketConstructor {
 			return;
 		}
 
-		Logger.info(lang.chat.chatMessage.replace("%message%", fullmessage));
+		Logger.info(formattedMessage);
 
 		for (const player of PlayerInfo.players) {
-			player.sendMessage(fullmessage);
+			player.sendMessage(formattedMessage);
 		}
 	}
 }

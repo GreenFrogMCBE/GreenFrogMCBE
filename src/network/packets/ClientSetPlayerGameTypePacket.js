@@ -55,6 +55,7 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 		await this.validatePacket(player, packet);
 
 		let shouldChange = true;
+
 		const gamemode = packet.data.params.gamemode
 
 		Frog.eventEmitter.emit('playerChangeGamemodeRequest', {
