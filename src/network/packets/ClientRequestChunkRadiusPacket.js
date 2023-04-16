@@ -51,7 +51,7 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 
 		if (!shouldChange) return
 	
-		this.player.setChunkRadius = 32;
+		this.player.setChunkRadius(32);
 	}
 }
 
