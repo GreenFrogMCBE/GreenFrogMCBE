@@ -88,7 +88,7 @@ class ClientInteractPacket extends PacketConstructor {
 					actionID
 				})
 
-				Logger.debug("Unsupported action ID: " + actionID);
+				Logger.debug(`Unsupported action ID from ${player.username}: ${actionID}`);
 		}
 	}
 }

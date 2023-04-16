@@ -120,7 +120,7 @@ module.exports = {
      * 
      * @async
      */
-    async shutdownServer(shutdownMessage) {
+    async shutdownServer(shutdownMessage = this.serverConfigurationFiles.lang.kickmessages.serverShutdown) {
         let shouldShutdown = true;
 
         this.eventEmitter.emit('serverShutdownEvent', {

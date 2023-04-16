@@ -2,7 +2,7 @@
 
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 
-const WorldGenerator = require("../network/packets/types/WorldGenerator");
+const FrogWorldGenerators = require("../network/packets/types/FrogWorldGenerators");
 const DamageCause = require("../api/health/DamageCause");
 const GameMode = require("../api/player/GameMode");
 
@@ -182,7 +182,7 @@ class World {
 
 				let min = -64;
 
-				if (config.generator === WorldGenerator.VOID) {
+				if (config.world.generator === FrogWorldGenerators.VOID) {
 					return;
 				}
 

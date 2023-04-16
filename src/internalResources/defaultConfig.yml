@@ -54,7 +54,7 @@ world:
   gamemode: "creative"
   worldGamemode: "creative"
   difficulty: 0
-  generator: "default" 
+  generator: "default" # Can be default, flat, or void
 
   tickEvent: true # Should ServerTickEvent be enabled?
   tickWorldTime: true # Should time update be server side?

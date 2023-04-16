@@ -22,7 +22,7 @@ const Generator = require("./types/Generator");
 const PlayStatusType = require("./types/PlayStatus");
 const PlayerListTypes = require("./types/PlayerList");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
-const WorldGenerator = require("./types/WorldGenerator");
+const FrogWorldGenerators = require("./types/FrogWorldGenerators");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
 
@@ -137,12 +137,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				});
 
 				player.world = new World();
-				player.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
+				player.world.setChunkRadius(require("../../../world/world_settings.json").chunkLoadRadius);
 				player.world.setName(require("../../../world/world_settings.json").worldName);
 
-				if (config.generator === WorldGenerator.DEFAULT) {
-					player.world.setSpawnCoordinates(1070, 139, -914);
-				} else if (config.generator === WorldGenerator.VOID) {
+				if (config.world.generator === FrogWorldGenerators.DEFAULT) {
+					player.world.setSpawnCoordinates(1070, 87, -914);
+				} else if (config.world.generator === FrogWorldGenerators.VOID) {
 					player.world.setSpawnCoordinates(0, 100, 0);
 				} else {
 					player.world.setSpawnCoordinates(0, -58, 0);
@@ -254,7 +254,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setChunkRadius(player.world.getChunkRadius())
 
 					const cords =
-						config.generator === WorldGenerator.DEFAULT
+						config.world.generator === FrogWorldGenerators.DEFAULT
 							? {
 								x: 1070,
 								y: 274,
@@ -275,7 +275,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					let chunks = null;
 
 					try {
-						chunks = require(`${__dirname}/../../../world/chunks${config.generator === WorldGenerator.DEFAULT ? "" : "_flat"}.json`);
+						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === FrogWorldGenerators.DEFAULT ? "" : "_flat"}.json`);
 					} catch (e) {
 						throw new ChunkLoadException(`${lang.errors.failedToLoadWorld} ${e}`);
 					}
