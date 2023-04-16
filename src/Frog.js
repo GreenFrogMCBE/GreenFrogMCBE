@@ -49,7 +49,7 @@ module.exports = {
      * 
      * @returns {Boolean}
      */
-    isDebug: process.argv.includes("--debug") || this.serverConfigurationFiles.config.dev.debug,
+    isDebug: process.argv.includes("--debug") || getConfig().config.dev.debug,
 
     /**
      * Returns the server object
