@@ -1,116 +1,146 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
+const Frog = require("../../Frog");
 const TitlePacket = require("../../network/packets/ServerSetTitlePacket");
 const TitleType = require("../../network/packets/types/TitleType");
 
+/**
+ * Represents a title that can be sent to a client.
+ */
 class Title {
+	/**
+	 * Constructs a new Title object.
+	 */
 	constructor() {
+		/** @type {Titles} The type of the title */
 		this.type = TitleType.TITLE;
+		/** @type {string} The text to display in the title */
 		this.text = "";
-		this.fadeintime = 0;
-		this.fadeouttime = 0;
-		this.staytime = 0;
+		/** @type {number} The time it takes for the title to fade in */
+		this.fadeInTime = 0;
+		/** @type {number} The time the title will stay on the screen */
+		this.stayTime = 0;
+		/** @type {number} The time it takes for the title to fade out */
+		this.fadeOutTime = 0;
 	}
 
 	/**
-	 * Sets the title
-	 * @param {Titles} type
+	 * Sets the type of the title.
+	 *
+	 * @param {Titles} type - The type of the title.
 	 */
 	setType(type) {
 		this.type = type;
 	}
 
 	/**
-	 * Sets the text
-	 * @param {String} text
+	 * Sets the text to display in the title.
+	 *
+	 * @param {string} text - The text to display in the title.
 	 */
 	setText(text) {
 		this.text = text;
 	}
 
 	/**
-	 * Sets the fade in time.
-	 * @param {Number} fadein
+	 * Sets the time it takes for the title to fade in.
+	 *
+	 * @param {number} fadeInTime - The time it takes for the title to fade in.
 	 */
-	setFadeinTime(fadein) {
-		this.fadeintime = fadein;
+	setFadeInTime(fadeInTime) {
+		this.fadeInTime = fadeInTime;
 	}
 
 	/**
-	 * Sets the stay time
-	 * @param {Number} staytime
+	 * Sets the time the title will stay on the screen.
+	 *
+	 * @param {number} stayTime - The time the title will stay on the screen.
 	 */
-	setStayTime(staytime) {
-		this.staytime = staytime;
+	setStayTime(stayTime) {
+		this.stayTime = stayTime;
 	}
 
 	/**
-	 * Sets the fadeout time
-	 * @param {Number} fadeout
+	 * Sets the time it takes for the title to fade out.
+	 *
+	 * @param {number} fadeOutTime - The time it takes for the title to fade out.
 	 */
-	setFadeoutTime(fadeout) {
-		this.fadeouttime = fadeout;
+	setFadeOutTime(fadeOutTime) {
+		this.fadeOutTime = fadeOutTime;
 	}
 
 	/**
-	 * Returns the title type
-	 * @returns {Titles} The title type
+	 * Returns the type of the title.
+	 *
+	 * @returns {Titles} The type of the title.
 	 */
 	getType() {
 		return this.type;
 	}
 
 	/**
-	 * Returns the title text
-	 * @returns {String} The title text
+	 * Returns the text to display in the title.
+	 *
+	 * @returns {string} The text to display in the title.
 	 */
 	getText() {
 		return this.text;
 	}
 
 	/**
-	 * Returns the fade in time
-	 * @returns The fade in time
+	 * Returns the time it takes for the title to fade in.
+	 *
+	 * @returns {number} The time it takes for the title to fade in.
 	 */
-	getFadeinTime() {
-		return this.fadeintime;
+	getFadeInTime() {
+		return this.fadeInTime;
 	}
 
 	/**
-	 * Returns the stay time
-	 * @returns The stay time
+	 * Returns the time the title will stay on the screen.
+	 *
+	 * @returns {number} The time the title will stay on the screen.
 	 */
 	getStayTime() {
-		return this.staytime;
+		return this.stayTime;
 	}
 
 	/**
-	 * Returns the fade out time
-	 * @returns The fade out time
+	 * Returns the time it takes for the title to fade out.
+	 *
+	 * @returns {number} The time it takes for the title to fade out.
 	 */
-	getFadeoutTime() {
-		return this.fadeouttime;
+	getFadeOutTime() {
+		return this.fadeOutTime;
 	}
 
+	/**
+	 * Sends the title to the client
+	 * 
+	 * @param {Client} client The client to send the title to
+	 */
 	send(client) {
-		const titlepk = new TitlePacket();
-		titlepk.setFadeinTime(this.getFadeinTime());
-		titlepk.setStaytime(this.getStayTime());
-		titlepk.setText(this.getText());
-		titlepk.setType(this.getType());
-		titlepk.setFadeoutTime(this.getFadeoutTime());
-		titlepk.send(client);
+		let shouldSendTitle = true
+
+		Frog.eventEmitter.emit('serverTitle', {
+			fadeinTime: this.getFadeinTime(),
+			fadeoutTime: this.getFadeoutTime(),
+			stayTime: this.getStayTime(),
+			text: this.getText(),
+			type: this.getType(),
+			cancel() {
+				shouldSendTitle = false
+			}
+		})
+
+		if (!shouldSendTitle) return
+
+		const titlePacket = new TitlePacket();
+		titlePacket.setFadeinTime(this.getFadeinTime());
+		titlePacket.setStaytime(this.getStayTime());
+		titlePacket.setText(this.getText());
+		titlePacket.setType(this.getType());
+		titlePacket.setFadeoutTime(this.getFadeoutTime());
+		titlePacket.send(client);
 	}
 }
 
-module.exports = Title;
+module.exports = Title
