@@ -17,7 +17,7 @@ const GameMode = require("../api/player/GameMode");
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
-const ServerChangedimensionPacket = require("../network/packets/ServerChangedimensionPacket");
+const ServerChangedimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
 const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket");
 const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
 const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
@@ -154,7 +154,7 @@ module.exports = {
 				player,
 				port,
 				address,
-				server: Frog.server,
+				server: server,
 				cancel() {
 					shouldTransfer = false
 				},
@@ -180,7 +180,7 @@ module.exports = {
 			Frog.eventEmitter.emit('serverSetDifficulty', {
 				player,
 				difficulty,
-				server: Frog.server,
+				server: require,
 				cancel() {
 					shouldChangeDifficulty = false;
 				},
@@ -205,7 +205,7 @@ module.exports = {
 				player,
 				field,
 				value,
-				server: Frog.server,
+				server: require,
 				cancel() {
 					shouldSetEd = false;
 				},
@@ -237,7 +237,7 @@ module.exports = {
 			Frog.eventEmitter.emit('playerKickEvent', {
 				player,
 				message: msg,
-				server: Frog.server
+				server: require
 			});
 
 			if (msg === "disconnectionScreen.serverFull") {
@@ -261,7 +261,7 @@ module.exports = {
 			Frog.eventEmitter.emit('serverUpdateChunkRadius', {
 				player,
 				radius,
-				server: Frog.server,
+				server: require,
 				cancel() {
 					shouldUpdateRadius = false
 				},
@@ -285,7 +285,7 @@ module.exports = {
 			Frog.eventEmitter.emit('serverTimeUpdate', {
 				player,
 				time,
-				server: Frog.server,
+				server: require,
 				cancel() {
 					shouldUpdateTime = false
 				},
@@ -309,7 +309,7 @@ module.exports = {
 			Frog.eventEmitter.emit('playerSetAttribute', {
 				player,
 				attribute,
-				server: Frog.server,
+				server: require,
 				cancel() {
 					shouldSetAttribute = false
 				},
@@ -335,7 +335,7 @@ module.exports = {
 			Frog.eventEmitter.emit('serverSetXP', {
 				player,
 				xp,
-				server: Frog.server,
+				server: require,
 				cancel() {
 					shouldSetXP = false
 				},
@@ -368,7 +368,7 @@ module.exports = {
 				player,
 				health,
 				cause,
-				server: Frog.server,
+				server: require,
 				cancel() {
 					shouldSetHealth = false
 				},
@@ -385,7 +385,7 @@ module.exports = {
 					player,
 					health,
 					cause,
-					server: Frog.server
+					server: require
 				});
 			}
 
@@ -394,7 +394,7 @@ module.exports = {
 					player,
 					health,
 					cause,
-					server: Frog.server
+					server: require
 				});
 			}
 
@@ -412,7 +412,7 @@ module.exports = {
 			if (player.health <= 0) {
 				Frog.eventEmitter.emit('playerDeathEvent', {
 					player,
-					server: Frog.server
+					server: require
 				})
 			}
 		};
@@ -428,7 +428,7 @@ module.exports = {
 
 			Frog.eventEmitter.emit('playerHungerUpdate', {
 				player,
-				server: Frog.server,
+				server: require,
 				hunger,
 				cause,
 				cancel() {
@@ -469,7 +469,7 @@ module.exports = {
 				dimension,
 				coordinates: { x, y, z },
 				respawnAfterSwitch: respawn,
-				server: Frog.server,
+				server: require,
 				cancel() {
 					shouldChangeDimension = false
 				},
@@ -503,7 +503,7 @@ module.exports = {
 
 			Frog.eventEmitter.emit('playerLeave', {
 				player,
-				server: Frog.server
+				server: require
 			})
 
 			GarbageCollector.clearOfflinePlayers();

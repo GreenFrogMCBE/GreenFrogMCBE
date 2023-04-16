@@ -10,10 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Frog = require("../../Frog");
 const ServerToastRequestPacket = require("../network/packets/ServerToastRequestPacket");
-const EventEmitter = require('events');
-
-const eventEmitter = new EventEmitter();
 
 class Toast {
 	constructor() {
@@ -39,11 +37,11 @@ class Toast {
 
 	/**
 	 * Sends the toast
-	 * @param {Client} client
+	 * @param {Client} player
 	 */
 	send(player) {
-		eventEmitter.emit('', {
-			server: require("../Server"),
+		Frog.eventEmitter.emit('serverToast', {
+			server: require,
 			title: this.title,
 			message: this.message,
 			player: player
