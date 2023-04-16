@@ -153,32 +153,32 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				for (const op of ops) {
 					if (op.replace(/\r/g, "") === player.username) {
 						player.op = true;
-						player.permlevel = 4;
+						player.permissionLevel = 4;
 						break;
 					}
 				}
 
-				if (!player.op) player.permlevel = config.defaultPermissionLevel;
+				if (!player.op) player.permissionLevel = config.defaultPermissionLevel;
 
 				Logger.info(lang.playerstatuses.joined.replace("%player%", player.username));
 
-				const startgame = new StartGame();
-				startgame.setEntityId(0);
-				startgame.setRunTimeEntityId(0);
-				startgame.setGamemode(config.gamemode);
-				startgame.setPlayerPosition(player.world.getSpawnCoordinates().x, player.world.getSpawnCoordinates().y, player.world.getSpawnCoordinates().z);
-				startgame.setPlayerRotation(1, 1);
-				startgame.setSeed(-1);
-				startgame.setBiomeType(0);
-				startgame.setBiomeName(Biome.PLAINS);
-				startgame.setDimension(Dimension.OVERWORLD);
-				startgame.setGenerator(Generator.FLAT);
-				startgame.setWorldGamemode(config.worldGamemode);
-				startgame.setDifficulty(Difficulty.NORMAL);
-				startgame.setSpawnPosition(0, 0, 0);
-				startgame.setPlayerPermissionLevel(player.permlevel);
-				startgame.setWorldName(player.world.getName());
-				startgame.writePacket(player);
+				const startGame = new StartGame();
+				startGame.setEntityId(0);
+				startGame.setRunTimeEntityId(0);
+				startGame.setGamemode(config.world.gamemode);
+				startGame.setPlayerPosition(player.world.getSpawnCoordinates().x, player.world.getSpawnCoordinates().y, player.world.getSpawnCoordinates().z);
+				startGame.setPlayerRotation(1, 1);
+				startGame.setSeed(-1);
+				startGame.setBiomeType(0);
+				startGame.setBiomeName(Biome.PLAINS);
+				startGame.setDimension(Dimension.OVERWORLD);
+				startGame.setGenerator(Generator.FLAT);
+				startGame.setWorldGamemode(config.world.worldGamemode);
+				startGame.setDifficulty(Difficulty.NORMAL);
+				startGame.setSpawnPosition(0, 0, 0);
+				startGame.setPlayerPermissionLevel(player.permissionLevel);
+				startGame.setWorldName(player.world.getName());
+				startGame.writePacket(player);
 
 				const biomeDefinitionList = new BiomeDefinitionList();
 				biomeDefinitionList.setValue(require("../../internalResources/biomes.json"));
