@@ -8,7 +8,7 @@ const CommandVerifier = require("../utils/CommandVerifier");
 module.exports = {
     data: {
         name: "gamemode",
-        description: "Changes the player's game mode",
+        description: "Sets a player's game mode",
         aliases: ["gm"],
         minArg: 1,
         maxArg: 1

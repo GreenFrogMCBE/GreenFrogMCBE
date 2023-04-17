@@ -10,7 +10,7 @@ const CommandVerifier = require("../utils/CommandVerifier");
 module.exports = {
     data: {
         name: "me",
-        description: "Performs an action in the chat as the player.",
+        description: "Displays message about yourself.",
         aliases: [],
         minArg: 1,
         maxArg: 1,
