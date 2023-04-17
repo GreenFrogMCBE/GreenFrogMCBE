@@ -8,6 +8,13 @@ const { lang } = serverConfigurationFiles;
  * @type {import('../type/Command').Command}
  */
 module.exports = {
+	data: {
+		name: "time",
+		description: "Changes the world's time.",
+		minArg: 1,
+		maxArg: 1,
+	},
+
 	execute(_server, player, args) {
 		if (CommandVerifier.checkCommand(player, this.data)) {
 			return;
@@ -26,12 +33,5 @@ module.exports = {
 		}
 
 		player.sendMessage(lang.commands.timeUpdated);
-	},
-
-	data: {
-		name: "time",
-		description: "Changes the world's time.",
-		minArg: 1,
-		maxArg: 1,
-	},
+	}
 };

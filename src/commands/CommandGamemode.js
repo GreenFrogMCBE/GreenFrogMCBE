@@ -6,6 +6,14 @@ const CommandVerifier = require("../utils/CommandVerifier");
  * @type {import('../type/Command').Command}
  */
 module.exports = {
+    data: {
+        name: "gamemode",
+        description: "Changes the player's game mode",
+        aliases: ["gm"],
+        minArg: 1,
+        maxArg: 1
+    },
+
     execute(server, player, args) {
         if (player.isConsole) {
             player.sendMessage("§cYou can't execute this command from console");
@@ -41,13 +49,5 @@ module.exports = {
         } catch {
             player.sendMessage("§cInvalid gamemode!");
         }
-    },
-
-    data: {
-        name: "gamemode",
-        description: "Changes the player's game mode",
-        aliases: ["gm"],
-        minArg: 1,
-        maxArg: 1
     }
 };
