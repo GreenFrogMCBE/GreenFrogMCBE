@@ -64,7 +64,7 @@ module.exports = {
 							main = packageJson.main;
 
 							PluginManager.addPlugin(name, version)
-							Logger.info(`Loading ${name} v${version}...`)
+							Logger.info(`Loading plugin ${name} v${version}...`)
 						} catch (error) {
 							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
 							return;
@@ -75,7 +75,7 @@ module.exports = {
 
 							PluginManager.addPlugin(name, version);
 
-							Logger.info(lang.server.loadedPlugin.replace("%name%", name).replace("%version%", version));
+							Logger.info(`Plugin ${name} v${version} loaded`);
 						} catch (error) {
 							if (error.toString().includes("onLoad is not a function")) {
 								Logger.error(`Failed to load ${name}: Plugin does not contain onLoad() function!`)

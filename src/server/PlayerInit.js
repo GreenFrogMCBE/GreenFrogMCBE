@@ -39,6 +39,7 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 
 const Frog = require("../Frog");
 const PlayerAttribute = require("../api/attribute/PlayerAttribute");
+const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
 
 /** @private */
 let lang = Frog.serverConfigurationFiles.lang;
@@ -98,7 +99,7 @@ module.exports = {
 		};
 
 		/**
-		 * Sets a player gamemode
+		 * Sets player's gamemode
 		 * 
 		 * @param {Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 * @type {import('../api/GameMode')}
@@ -142,6 +143,38 @@ module.exports = {
 		};
 
 		/**
+		 * Sets player's velocity
+		 * NOTE: This is handled by the client, and not server-side
+		 * 
+		 * @param {Float} x 
+		 * @param {Float} y 
+		 * @param {Float} z 
+		 */
+		player.setVelocity = function (x, y, z) {
+			let shouldSetVelocity = true
+
+			Frog.eventEmitter.emit('serverVelocityUpdate', {
+				player,
+				server: require("../Server"),
+				coordinates: {
+					x,
+					y,
+					z
+				},
+				cancel() {
+					shouldSetVelocity = false
+				}
+			})
+
+			if (!shouldSetVelocity) return
+
+			const setEntityMotionPacket = new ServerSetEntityMotion()
+			setEntityMotionPacket.setRuntimeEntityID(0)
+			setEntityMotionPacket.setVelocity({ x, y, z })
+			setEntityMotionPacket.writePacket(player)
+		}
+
+		/**
 		 * Transfers the player to a different server
 		 * 
 		 * @param {String} address - The address of the server to transfer to
@@ -169,7 +202,7 @@ module.exports = {
 		};
 
 		/**
-		 * Sets the player local difficulty
+		 * Sets player's local difficulty 
 		 * 
 		 * @param {Difficulty} difficulty
 		 * @type {import('../type/Difficulty')}
@@ -231,7 +264,7 @@ module.exports = {
 		 */
 		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
-			
+
 			player.kicked = true;
 
 			Frog.eventEmitter.emit('playerKickEvent', {
@@ -361,7 +394,7 @@ module.exports = {
 		 */
 		player.setHealth = function (health, cause = DamageCause.UNKNOWN) {
 			if (player.dead) return;
-			
+
 			let shouldSetHealth = true
 
 			Frog.eventEmitter.emit('serverSetHealth', {
@@ -424,7 +457,7 @@ module.exports = {
 		 * @param {HungerCause} cause
 		 */
 		player.setHunger = function (hunger, cause = HungerCause.UNKNOWN) {
-			let shouldUpdateHunger = true 
+			let shouldUpdateHunger = true
 
 			Frog.eventEmitter.emit('playerHungerUpdate', {
 				player,
