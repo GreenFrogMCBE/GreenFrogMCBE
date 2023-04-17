@@ -37,7 +37,12 @@ class ClientMovePacket extends PacketConstructor {
             z,
             pitch,
             yaw,
-            legacyPacket: true
+            legacyPacket: true,
+            cancel() {
+				if (player.x === 0 && player.y === 0 && player.z === 0) return
+
+				player.teleport(player.x, player.y, player.z)
+			}
         })
     }
 }

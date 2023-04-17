@@ -26,6 +26,8 @@ const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDat
 const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
 const ServerUpdateTimePacket = require("../network/packets/ServerUpdateTimePacket");
 const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket");
+const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
+const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
 
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
@@ -35,11 +37,11 @@ const GarbageCollector = require("../utils/GarbageCollector");
 const DamageCause = require("../api/health/DamageCause");
 const HungerCause = require("../api/health/HungerCause");
 
+const PlayerAttribute = require("../api/attribute/PlayerAttribute");
+
 const PlayerInfo = require("../api/player/PlayerInfo");
 
 const Frog = require("../Frog");
-const PlayerAttribute = require("../api/attribute/PlayerAttribute");
-const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
 
 /** @private */
 let lang = Frog.serverConfigurationFiles.lang;
@@ -173,6 +175,57 @@ module.exports = {
 			setEntityMotionPacket.setVelocity({ x, y, z })
 			setEntityMotionPacket.writePacket(player)
 		}
+
+		/**
+		 * Teleports player
+		 * 
+		 * @param {Float} x 
+		 * @param {Float} y 
+		 * @param {Float} z 
+		 * @param {Float} rot_x 
+		 * @param {Float} rot_y 
+		 * @param {Float} rot_z 
+		 */
+		player.teleport = function (x, y, z, rot_x = undefined, rot_y = undefined, rot_z = undefined) {
+			let shouldTeleport = true
+
+			Frog.eventEmitter.emit('playerTeleport', {
+				x,
+				y,
+				z,
+				has_rot_x: (rot_x !== undefined),
+				has_rot_y: (rot_y !== undefined),
+				has_rot_z: (rot_z !== undefined),
+				player,
+				server: require("../Server"),
+				cancel() {
+					shouldTeleport = false
+				}
+			})
+			
+			if (!shouldTeleport) return
+
+			const movePacket = new ServerMoveEntityDataPacket();
+			movePacket.setFlags({
+				has_x: true,
+				has_y: true,
+				has_z: true,
+				has_rot_x: false,
+				has_rot_y: false,
+				has_rot_z: false,
+				on_ground: false,
+				teleport: false,
+				force_move: true
+			});
+			movePacket.setRuntimeEntityId(0);
+			movePacket.setX(x);
+			movePacket.setY(y);
+			movePacket.setZ(z);
+			movePacket.setRotX(rot_x);
+			movePacket.setRotY(rot_y);
+			movePacket.setRotZ(rot_z);
+			movePacket.writePacket(player);
+		};
 
 		/**
 		 * Transfers the player to a different server

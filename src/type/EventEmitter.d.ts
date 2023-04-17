@@ -53,8 +53,9 @@ declare function on(eventName: "playerMove", listener: (...args: any[]) => void)
 declare function on(eventName: "playerMalformatedChatMessage", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerItemStackRequest", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerExecutedCommand", listener: (...args: any[]) => void): void;
-declare function on(eventName: "consoleExecutedCommand", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverExecutedCommand", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverVelocityUpdate", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerTeleport", listener: (...args: any[]) => void): void;
 
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
 

@@ -46,7 +46,7 @@ async function executeConsoleCommand(input) {
 
 	const args = input.split(" ").slice(1);
 
-	require("../Frog").eventEmitter.emit('consoleExecutedCommand', {
+	require("../Frog").eventEmitter.emit('serverExecutedCommand', {
 		server: require("../Frog").server,
 		args,
 		command: input,

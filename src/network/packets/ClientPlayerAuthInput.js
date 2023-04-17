@@ -1,4 +1,5 @@
 const Frog = require("../../Frog");
+
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientMovePacket extends PacketConstructor {
@@ -31,19 +32,6 @@ class ClientMovePacket extends PacketConstructor {
 
 		if (player.x == x && player.y == y && player.z == z && player.yaw == yaw && player.pitch == pitch) return
 
-		// player.queue('move_player', {
-		// 	runtime_id: 0,
-		// 	position: { x: 0, y: 101.62100219726562, z: 0 },
-		// 	pitch: 0,
-		// 	yaw: 0,
-		// 	head_yaw: 0,
-		// 	mode: 'teleport',
-		// 	on_ground: true,
-		// 	ridden_runtime_id: 0,
-		// 	teleport: { cause: 'unknown', source_entity_type: 0 },
-		// 	tick: 0n
-		// })
-
 		player.x = x;
 		player.y = y;
 		player.z = z;
@@ -58,7 +46,12 @@ class ClientMovePacket extends PacketConstructor {
 			z,
 			pitch,
 			yaw,
-			legacyPacket: false
+			legacyPacket: false,
+			cancel() {
+				if (player.x === 0 && player.y === 0 && player.z === 0) return
+
+				player.teleport(player.x, player.y, player.z)
+			}
 		})
 	}
 }
