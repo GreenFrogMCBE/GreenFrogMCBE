@@ -21,8 +21,6 @@ module.exports = {
         const playerName = args[0];
         const reason = (args.slice(1).join(' ') || lang.kickmessages.noReason).trim();
 
-        console.log(reason);
-
         const target = PlayerInfo.getPlayer(playerName);
 
         if (!target) {

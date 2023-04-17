@@ -1,3 +1,5 @@
+const Colors = require("../api/colors/Colors");
+
 const CommandVerifier = require("../utils/CommandVerifier");
 
 /**
@@ -16,12 +18,7 @@ module.exports = {
 
     execute(server, player, args) {
         if (player.isConsole) {
-            player.sendMessage("§cYou can't execute this command from console");
-            return;
-        }
-
-        if (args.length === 0) {
-            player.sendMessage("§cPlease enter a gamemode");
+            player.sendMessage(`${Colors.RED}This type of sender does not support this command`);
             return;
         }
 
@@ -37,7 +34,7 @@ module.exports = {
 
         const gamemode = gamemodeMap[args[0]];
         if (!gamemode) {
-            player.sendMessage("§cInvalid gamemode!");
+            player.sendMessage(`${Colors.RED}Invalid gamemode!`);
             return;
         }
 
@@ -47,7 +44,7 @@ module.exports = {
             player.sendMessage(`Your game mode has been updated to ${gamemode.charAt(0).toUpperCase()}${gamemode.slice(1)}.`);
             player.sendMessage(`Set own gamemode to ${gamemode.charAt(0).toUpperCase()}${gamemode.slice(1)}.`);
         } catch {
-            player.sendMessage("§cInvalid gamemode!");
+            player.sendMessage(`${Colors.RED}Invalid gamemode!`);
         }
     }
 };

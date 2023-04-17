@@ -1,5 +1,6 @@
 const fs = require("fs").promises;
 
+const Colors = require("../api/colors/Colors");
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
 const Frog = require("../Frog");
@@ -33,7 +34,7 @@ module.exports = {
 
             player.sendMessage("Succeeded in revoking operator level for player " + playerName);
         } catch {
-            player.sendMessage("§cFailed to deop " + playerName);
+            player.sendMessage(`${Colors.RED}Failed to deop ${playerName}`);
         }
     }
 };
