@@ -28,47 +28,48 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
     }
 
     /**
-     * Returns the runtime entity id
-     * @returns {Number} The runtime entity id
+     * Returns the runtime entity ID
+     * @returns {Float} The runtime entity ID
      */
     getRuntimeEntityId() {
         return runtime_entity_id;
     }
 
     /**
-    * @param {Number} value - The runtime entity id value to set
+     * Sets the runtime entity ID
+     * @param {Float} value - The runtime entity ID value to set
      */
     setRuntimeEntityId(value) {
         runtime_entity_id = value;
     }
 
     /**
-     * Returns the x coordinate
-     * @returns {Number} The x coordinate
+     * Returns The X coordinate
+     * @returns {Float} The X coordinate
      */
     getX() {
         return x;
     }
 
     /**
-     * Sets the x coordinate
-     * @param {Number} value - The x coordinate value to set
+     * Sets the X coordinate
+     * @param {Float} value - The X coordinate value to set
      */
     setX(value) {
         x = value;
     }
 
     /**
-     * Returns the y coordinate
-     * @returns {Number} The y coordinate
+     * Returns the Y coordinate
+     * @returns {Float} The Y coordinate
      */
     getY() {
         return y;
     }
 
     /**
-     * Sets the y coordinate
-     * @param {Number} value - The y coordinate value to set
+     * Sets the Y coordinate
+     * @param {Float} value - The Y coordinate value to set
      */
     setY(value) {
         y = value;
@@ -76,7 +77,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns the z coordinate
-     * @returns {Number} The z coordinate
+     * @returns {Float} The z coordinate
      */
     getZ() {
         return z;
@@ -84,55 +85,55 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the z coordinate
-     * @param {Number} value - The z coordinate value to set
+     * @param {Float} value - The z coordinate value to set
      */
     setZ(value) {
         z = value;
     }
 
     /**
-     * Returns the x rotation
-     * @returns {Number} The x rotation
+     * Returns the X rotation
+     * @returns {Float} The X rotation
      */
     getRotX() {
         return rot_x;
     }
 
     /**
-     * Sets the x rotation
-     * @param {Number} value - The x rotation value to set
+     * Sets the X rotation
+     * @param {Float} value - The X rotation value to set
      */
     setRotX(value) {
         rot_x = value;
     }
 
     /**
-     * Returns the y rotation
-     * @returns {Number} The y rotation
+     * Returns the Y rotation
+     * @returns {Float} The Y rotation
      */
     getRotY() {
         return rot_y;
     }
 
     /**
-     * Sets the y rotation
-     * @param {Number} value - The y rotation value to set
+     * Sets the Y rotation
+     * @param {Float} value - The Y rotation value to set
      */
     setRotY(value) {
         rot_y = value;
     }
 
     /**
-     * Returns the z rotation
-     * @returns {Number} The z rotation
+     * Returns the Z rotation
+     * @returns {Float} The Z rotation
      */
     getRotZ() {
         return rot_z;
     }
 
     /**
-     * Sets the z rotation
-     * @param {Number} value - The z rotation value to set
+     * Sets the Z rotation
+     * @param {Float} value - The Z rotation value to set
      */
     setRotZ(value) {
         rot_z = value;
@@ -140,7 +141,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the flags
-     * @param {Number} value - The flags value to set
+     * @param {Float} value - The flags value to set
      */
     setFlags(value) {
         flags = value
@@ -148,7 +149,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns the flags
-     * @returns {Number} The flags
+     * @returns {Float} The flags
      */
     getFlags() {
         return flags
