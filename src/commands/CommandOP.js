@@ -35,11 +35,6 @@ module.exports = {
 
         const playerName = args[0];
 
-        if (!playerName) {
-            player.sendMessage("§cPlease enter a player name");
-            return;
-        }
-
         try {
             await fs.appendFile("ops.yml", playerName + "\n");
             

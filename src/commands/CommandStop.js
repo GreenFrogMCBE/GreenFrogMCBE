@@ -21,8 +21,9 @@ module.exports = {
 
 		if (player.isConsole || player.isOp) {
 			Frog.shutdownServer();
-		} else {
-			CommandVerifier.throwError(player, this.data);
+			return
 		}
+
+		CommandVerifier.throwError(player, this.data);
 	},
 };
