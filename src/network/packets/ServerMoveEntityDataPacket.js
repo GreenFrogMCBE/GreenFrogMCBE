@@ -149,7 +149,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns the flags
-     * @returns {Float} The flags
+     * @returns {JSON} The flags
      */
     getFlags() {
         return flags
@@ -157,7 +157,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Writes the packet to the client queue
-     * @param {Object} client - The client to send the packet to
+     * @param {Client} client - The client to send the packet to
      */
     writePacket(client) {
         client.queue(this.getPacketName(), {
