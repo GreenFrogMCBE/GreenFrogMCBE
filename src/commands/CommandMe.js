@@ -13,17 +13,12 @@ module.exports = {
         description: "Displays message about yourself.",
         aliases: [],
         minArg: 1,
-        maxArg: 1,
+        maxArg: undefined,
     },
 
     execute(_server, player, args) {
         if (CommandVerifier.checkCommand(player, this.data)) {
             return;
-        }
-
-        if (!args[0]) {
-            player.sendMessage("§cUsage: /me [message]")
-            return
         }
 
         const msg = `* ${player.username} ${args.join(" ")}`;
