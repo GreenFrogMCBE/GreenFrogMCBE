@@ -50,32 +50,18 @@ module.exports = {
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
 			const player = PlayerInfo.players[i];
 
-			this.removePlayerData(player, player.q)
-			this.removePlayerData(player, player.q2)
-			this.removePlayerData(player, player.profile)
-			this.removePlayerData(player, player.skinData)
-			this.removePlayerData(player, player.userData)
-			this.removePlayerData(player, player.transfer)
-			this.removePlayerData(player, player.kick)
-			this.removePlayerData(player, player.disconnect)
-			this.removePlayerData(player, player.sendMessage)
-			this.removePlayerData(player, player.chat)
+			delete player.q
+			delete player.q2
+			delete player.profile
+			delete player.skinData
+			delete player.userData
+			delete player.transfer
+			delete player.kick
+			delete player.disconnect
+			delete player.sendMessage
+			delete player.chat
 		}
 
 		Logger.debug('[Garbage collector] Finished');
-	},
-
-	/**
-	 * Removes player data
-	 * 
-	 * @param {Client} player 
-	 * @param {String} data 
-	 */
-	removePlayerData(player, data) {
-		if (player[data] !== undefined) {
-			Logger.info(`Removed ${data} from ${player.username}'s object`)
-
-			delete player[data]
-		}
 	}
 };
