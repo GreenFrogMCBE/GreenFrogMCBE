@@ -25,6 +25,7 @@ chat:
     consoleCommandHelp: true
     consoleCommandList: true
     consoleCommandGamemode: true
+    consoleCommandMe: true
     playerCommandVersion: true
     playerCommandPlugins: true
     playerCommandStop: true
@@ -35,6 +36,7 @@ chat:
     playerCommandDeop: true
     playerCommandList: true
     playerCommandGamemode: true
+    playerCommandMe: true
 dev:
   unstable: false # Makes your server not crash on critical errors
   debug: false

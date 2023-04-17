@@ -21,8 +21,12 @@ module.exports = {
             return;
         }
 
-        const message = args[0];
-        const msg = `* ${player.username} ${message}`;
+        if (!args[0]) {
+            player.sendMessage("§cUsage: /me [message]")
+            return
+        }
+
+        const msg = `* ${player.username} ${args.join(" ")}`;
 
         for (const p of PlayerInfo.players) {
             p.sendMessage(msg);
