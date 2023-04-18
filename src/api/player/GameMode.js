@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-module.exports = {
+module.exports = /** @type {const} */ ({
 	CREATIVE: "creative",
 	SURVIVAL: "survival",
 	/** 1.19.30+ */
@@ -24,4 +24,4 @@ module.exports = {
 	ADVENTURE: "adventure",
 	/** Fallbacks to the world gamemode */
 	FALLBACK: "fallback",
-};
+});

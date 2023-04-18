@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-module.exports = {
+module.exports = /** @type {const} */ ({
 	OCEAN: "ocean",
 	PLAINS: "plains",
 	DESERT: "desert",
@@ -48,4 +48,4 @@ module.exports = {
 	EXTREMEHILLSPLUSTREES: "extreme_hills_plains_trees",
 	SAVANNA: "savanna",
 	MESA: "mesa",
-};
+});
