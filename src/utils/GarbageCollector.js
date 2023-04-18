@@ -55,11 +55,6 @@ module.exports = {
 			delete player.profile
 			delete player.skinData
 			delete player.userData
-			delete player.transfer
-			delete player.kick
-			delete player.disconnect
-			delete player.sendMessage
-			delete player.chat
 		}
 
 		Logger.debug('[Garbage collector] Finished');

@@ -463,8 +463,8 @@ module.exports = {
 			if (!shouldSetHealth) return;
 
 			const setHealthPacket = new ServerSetHealthPacket();
-			setHealthPacket.setHealth(this.health);
-			setHealthPacket.writePacket(this.player);
+			setHealthPacket.setHealth(health);
+			setHealthPacket.writePacket(player);
 
 			if (this.cause == DamageCause.FALL_DAMAGE) {
 				Frog.eventEmitter.emit('playerFallDamageEvent', {
@@ -528,7 +528,7 @@ module.exports = {
 				name: PlayerAttribute.HUNGER,
 				min: 0,
 				max: 20,
-				current: this.hunger,
+				current: hunger,
 				default: 0,
 				modifiers: [],
 			});

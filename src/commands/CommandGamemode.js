@@ -11,7 +11,6 @@ module.exports = {
     data: {
         name: "gamemode",
         description: "Sets a player's game mode",
-        aliases: ["gm"],
         minArg: 1,
         maxArg: 1
     },
