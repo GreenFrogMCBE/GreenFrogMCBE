@@ -32,6 +32,8 @@ const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket
 
 const { RateLimitException } = require("./utils/exceptions/RateLimitException");
 
+const Language = require("./utils/Language");
+
 const FrogProtocol = require("frog-protocol");
 
 const assert = require("assert");
@@ -281,6 +283,8 @@ module.exports = {
 		console.clear()
 
 		Logger.setupLogger()
+		
+		Language.getLanguage(Frog.serverConfigurationFiles.config.chat.lang)
 
 		Logger.info(lang.server.loadingServer);
 

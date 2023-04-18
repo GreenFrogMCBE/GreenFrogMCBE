@@ -39,7 +39,7 @@ function getServer() {
 function getConfig() {
     return {
         config: yaml.load(fs.readFileSync("config.yml", "utf8")),
-        lang: require(`./lang/${yaml.load(fs.readFileSync("config.yml", "utf8")).chat.lang}.json`)
+        lang: null
     };
 }
 
