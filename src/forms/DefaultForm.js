@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -15,10 +16,42 @@ const FormTypes = require("./FormTypes");
 
 class Form {
 	constructor() {
+		/**
+		 * The type of form.
+		 * @type {number}
+		 */
 		this.type = FormTypes.FORM;
+
+		/**
+		 * The title of the form.
+		 * @type {string}
+		 */
 		this.title = "";
+
+		/**
+		 * The buttons in the form.
+		 * @type {Array}
+		 */
 		this.buttons = [];
+
+		/**
+		 * @type {void}
+		 * 
+		 * @param {Class} form
+		 * @param {Client} client
+		 */
+		this.onSend = (form, client) => { }
+
+		/**
+		 * The ID of the form.
+		 * @type {number}
+		 */
 		this.id = 0;
+
+		/**
+		 * The text in the form.
+		 * @type {Array}
+		 */
 		this.text = [];
 	}
 
@@ -30,6 +63,8 @@ class Form {
 		FormReq.setButtons(JSON.stringify(this.buttons));
 		FormReq.setType(this.type);
 		FormReq.send(client);
+
+		this.onSend(this, client)
 	}
 }
 
