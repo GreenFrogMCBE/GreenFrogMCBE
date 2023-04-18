@@ -1,102 +1,122 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
-const FormRequest = require("../network/packets/ServerFormRequestPacket");
+/* eslint-disable no-unused-vars */
+const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 const FormTypes = require("./FormTypes");
 
 class CustomForm {
-	// I used this code: https://github.com/Zwuiix-cmd/EasyProxy for example
-
 	constructor() {
+		/**
+		 * @type {string}
+		 */
 		this.type = FormTypes.CUSTOMFORM;
+
+		/**
+		 * @type {function}
+		 * 
+		 * @param {Class} form
+		 * @param {Client} client
+		 */
+		this.onSend = (form, client) => { }
+
+		/**
+		 * @type {string}
+		 */
 		this.title = "";
-		this.buttons = [];
-		this.id = 0;
+
+		/**
+		 * @type {Array.<{ type: string, text: string, [placeholder]: string, [options]: JSON, [min]: number, [max]: number, [step]: number }>}
+		 */
 		this.actions = [];
+
+		/**
+		 * @type {Array.<{ text: string, image?: { type: string, data: string } }>}
+		 */
+		this.buttons = [];
+
+		/**
+		 * @type {number}
+		 */
+		this.id = 0;
 	}
 
 	/**
-	 * Add an action.
+	 * Add an action to the form.
 	 * 
-	 * @param action - The action to add to the list of actions.
+	 * @param {object} action - The action to add to the list of actions.
+	 * @param {string} action.type - The type of action, e.g. "input", "label", "dropdown", "toggle", or "slider".
+	 * @param {string} action.text - The text to display for the action.
+	 * @param {string} [action.placeholder] - The text to display as a placeholder in an input field.
+	 * @param {JSON} [action.options] - An object containing key-value pairs that define the options for a dropdown menu.
+	 * @param {number} [action.min] - The minimum value for a slider.
+	 * @param {number} [action.max] - The maximum value for a slider.
+	 * @param {number} [action.step] - The step value for a slider.
 	 */
 	addAction(action) {
 		this.actions.push(action);
 	}
 
 	/**
-	 * Adds an input to the form.
+	 * Add an input to the form.
 	 * 
-	 * @param text - The text that will be displayed in the input field.
-	 * @param [placeholder] - The text that will be displayed in the input box before the user types
-	 * anything.
+	 * @param {string} text - The text that will be displayed in the input field.
+	 * @param {string} [placeholder] - The text that will be displayed in the input box before the user types anything.
 	 */
 	addInput(text, placeholder = "") {
 		this.addAction({ type: "input", text: text, placeholder: placeholder });
 	}
 
 	/**
-	 * It adds a label to the form
+	 * Add a label to the form.
 	 * 
-	 * @param text - The text to display.
+	 * @param {string} text - The text to display.
 	 */
-	addText(text) {
+	addLabel(text) {
 		this.addAction({ type: "label", text: text });
 	}
 
 	/**
-	 * Adds a dropdown to the form.
+	 * Add a dropdown menu to the form.
 	 * 
-	 * @param {String} text
-	 * @param {JSON} options
+	 * @param {string} text - The text to display for the dropdown.
+	 * @param {JSON} options - An object containing key-value pairs that define the options for the dropdown.
 	 */
 	addDropdown(text, options) {
 		this.addAction({ type: "dropdown", text: text, options: options });
 	}
 
 	/**
-	 * Adds toggle button
-	 * @param {String} text
+	 * Add a toggle button to the form.
+	 * 
+	 * @param {string} text - The text to display for the toggle.
 	 */
 	addToggle(text) {
 		this.addAction({ type: "toggle", text: text });
 	}
 
 	/**
-	 * Adds slider to the form.
+	 * Add a slider to the form.
 	 * 
-	 * @param {String} text
-	 * @param {Number} min
-	 * @param {Number} max
-	 * @param {Number} step
+	 * @param {string} text - The text to display for the slider.
+	 * @param {number} min - The minimum value for the slider.
 	 */
 	addSlider(text, min, max, step = -1) {
-		this.addAction({
-			type: "slider",
-			text: text,
-			min: min,
-			max: max,
-			step: step,
-		});
+		this.addAction({ type: "slider", text: text, min: min, max: max, step: step });
 	}
 
+	/**
+	 * Sends the custom form to a player.
+	 * 
+	 * @param {Client} client
+	 */
 	send(client) {
-		const FormReq = new FormRequest();
-		FormReq.setId(this.id);
-		FormReq.setTitle(this.title);
-		FormReq.setContent(JSON.stringify(this.actions));
-		FormReq.setButtons(JSON.stringify(this.buttons));
-		FormReq.setType(this.type);
-		FormReq.send(client);
+		const packet = new ServerFormRequestPacket();
+		packet.setId(this.id);
+		packet.setTitle(this.title);
+		packet.setContent(JSON.stringify(this.actions));
+		packet.setButtons(JSON.stringify(this.buttons));
+		packet.setType(this.type);
+		packet.send(client);
+
+		this.onSend(this, client)
 	}
 }
 
