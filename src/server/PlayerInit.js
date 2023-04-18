@@ -202,7 +202,7 @@ module.exports = {
 					shouldTeleport = false
 				}
 			})
-			
+
 			if (!shouldTeleport) return
 
 			const movePacket = new ServerMoveEntityDataPacket();
@@ -266,7 +266,7 @@ module.exports = {
 			Frog.eventEmitter.emit('serverSetDifficulty', {
 				player,
 				difficulty,
-				server: require,
+				server: require("../Server"),
 				cancel() {
 					shouldChangeDifficulty = false;
 				},
@@ -285,19 +285,19 @@ module.exports = {
 		 * @param {Boolean} value
 		 */
 		player.setEntityData = function (field, value) {
-			let shouldSetEd = true;
+			let shouldSetEntityData = true;
 
 			Frog.eventEmitter.emit('serverSetEntityData', {
 				player,
 				field,
 				value,
-				server: require,
+				server: require("../Server"),
 				cancel() {
-					shouldSetEd = false;
+					shouldSetEntityData = false;
 				},
 			});
 
-			if (shouldSetEd) {
+			if (shouldSetEntityData) {
 				const playerSetEntityDataPacket = new ServerSetEntityDataPacket();
 				playerSetEntityDataPacket.setProperties({
 					ints: [],
@@ -313,27 +313,27 @@ module.exports = {
 		/**
 		 * Disconnect a player from the server
 		 * 
-		 * @param {string} [msg=lang.kickmessages.kickedByPlugin]
+		 * @param {string} [message=lang.kickmessages.kickedByPlugin]
 		 */
-		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
+		player.kick = function (message = lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
 
 			player.kicked = true;
 
 			Frog.eventEmitter.emit('playerKickEvent', {
 				player,
-				message: msg,
-				server: require
+				message,
+				server: require("../Server")
 			});
 
-			if (msg === "disconnectionScreen.serverFull") {
-				msg = "Wow this server is popular! Check back later to see if space opens up.";
-			} else if (msg === "disconnectionScreen.noReason") {
-				msg = "You were disconnected";
+			if (message === "disconnectionScreen.serverFull") {
+				message = "Wow this server is popular! Check back later to see if space opens up.";
+			} else if (message === "disconnectionScreen.noReason") {
+				message = "You were disconnected";
 			}
 
 			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", msg));
-			player.disconnect(msg);
+			player.disconnect(message);
 		};
 
 		/**
@@ -347,7 +347,7 @@ module.exports = {
 			Frog.eventEmitter.emit('serverUpdateChunkRadius', {
 				player,
 				radius,
-				server: require,
+				server: require("../Server"),
 				cancel() {
 					shouldUpdateRadius = false
 				},
@@ -371,7 +371,7 @@ module.exports = {
 			Frog.eventEmitter.emit('serverTimeUpdate', {
 				player,
 				time,
-				server: require,
+				server: require("../Server"),
 				cancel() {
 					shouldUpdateTime = false
 				},
@@ -395,7 +395,7 @@ module.exports = {
 			Frog.eventEmitter.emit('playerSetAttribute', {
 				player,
 				attribute,
-				server: require,
+				server: require("../Server"),
 				cancel() {
 					shouldSetAttribute = false
 				},
@@ -421,7 +421,7 @@ module.exports = {
 			Frog.eventEmitter.emit('serverSetXP', {
 				player,
 				xp,
-				server: require,
+				server: require("../Server"),
 				cancel() {
 					shouldSetXP = false
 				},
@@ -454,7 +454,7 @@ module.exports = {
 				player,
 				health,
 				cause,
-				server: require,
+				server: require("../Server"),
 				cancel() {
 					shouldSetHealth = false
 				},
@@ -471,7 +471,7 @@ module.exports = {
 					player,
 					health,
 					cause,
-					server: require
+					server: require("../Server")
 				});
 			}
 
@@ -480,7 +480,7 @@ module.exports = {
 					player,
 					health,
 					cause,
-					server: require
+					server: require("../Server")
 				});
 			}
 
@@ -498,8 +498,10 @@ module.exports = {
 			if (player.health <= 0) {
 				Frog.eventEmitter.emit('playerDeathEvent', {
 					player,
-					server: require
+					server: require("../Server")
 				})
+
+				player.dead = true
 			}
 		};
 
@@ -514,7 +516,7 @@ module.exports = {
 
 			Frog.eventEmitter.emit('playerHungerUpdate', {
 				player,
-				server: require,
+				server: require("../Server"),
 				hunger,
 				cause,
 				cancel() {
@@ -555,7 +557,7 @@ module.exports = {
 				dimension,
 				coordinates: { x, y, z },
 				respawnAfterSwitch: respawn,
-				server: require,
+				server: require("../Server"),
 				cancel() {
 					shouldChangeDimension = false
 				},
@@ -589,7 +591,7 @@ module.exports = {
 
 			Frog.eventEmitter.emit('playerLeave', {
 				player,
-				server: require
+				server: require("../Server")
 			})
 
 			GarbageCollector.clearOfflinePlayers();

@@ -188,16 +188,17 @@ class World {
 
 				if (posY <= min) {
 					if (client.gamemode === GameMode.CREATIVE || client.gamemode === GameMode.SPECTATOR) {
-						if (client.damageLoop) {
-							delete client.damageLoop;
-						}
-					} else if (!client.cannotbedamagedbyvoid) {
+						delete client.damageLoop;
+						client.cannotBeDamagedByVoid = true
+					} else {
+						client.cannotBeDamagedByVoid = false
+					}
+					
+					if (!client.cannotBeDamagedByVoid && !client.dead) {
 						client.setHealth(client.health - 5, DamageCause.VOID);
 					}
 				} else {
-					if (client.damageLoop) {
-						delete client.damageLoop;
-					}
+					delete client.damageLoop;
 				}
 			}
 		}
