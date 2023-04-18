@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 const FormTypes = require("./FormTypes");
 
@@ -41,8 +42,8 @@ class ModalForm {
 
 	/**
 	 * Sends the modal form to the specified client.
-	 * @param {Client} client - The client object to send the modal form to.
-	 * @returns {void}
+	 * 
+	 * @param {Client} client
 	 */
 	send(client) {
 		const FormReq = new ServerFormRequestPacket();

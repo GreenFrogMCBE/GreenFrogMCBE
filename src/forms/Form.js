@@ -17,8 +17,9 @@ const FormTypes = require("./FormTypes");
 class Form {
 	constructor() {
 		/**
-		 * The type of form.
-		 * @type {number}
+		 * @type {FormTypes}
+		 * 
+		 * @type {import("./FormTypes")}
 		 */
 		this.type = FormTypes.FORM;
 
