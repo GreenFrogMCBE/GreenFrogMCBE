@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-module.exports = {
+module.exports = /** @type {const} */ ({
 	BLACK: "§0",
 	DARKBLUE: "§1",
 	DARKGREEN: "§2",
@@ -32,4 +32,4 @@ module.exports = {
 
 	/** Resets color to default */
 	RESET: "§r",
-};
+});
