@@ -8,6 +8,7 @@ const ScoreActions = require("./types/ScoreActions");
 const ServerScoreboardObjectivePacket = require("../network/packets/ServerSetDisplayObjectivePacket");
 const ServerSetScorePacket = require("../network/packets/ServerSetScorePacket");
 const ServerRemoveObjectivePacket = require("../network/packets/ServerRemoveObjectivePacket");
+const Frog = require("../Frog");
 
 /**
  * Represents a scoreboard that can be displayed to a player.
@@ -41,6 +42,18 @@ class Scoreboard {
      * Sends the scoreboard to the player.
      */
     sendScoreboard() {
+        let shouldCreateScoreboard = true
+        
+        Frog.eventEmitter.emit('scoreboardCreation', {
+            server: require("../Server"),
+            scoreboard: this,
+            cancel() {
+                shouldCreateScoreboard = false
+            }
+        })
+
+        if (!shouldCreateScoreboard) return
+
         const scoreboard = new ServerScoreboardObjectivePacket();
         scoreboard.setCriteriaName(this.criteriaName);
         scoreboard.setDisplayName(this.displayName);
@@ -60,6 +73,18 @@ class Scoreboard {
      * @param {number} [entity_unique_id] - The unique ID of the entity associated with the score.
      */
     setScore(score, text, entry_type = EntryTypes.TEXT, entity_unique_id = undefined) {
+        let shouldSetScore = true
+        
+        Frog.eventEmitter.emit('scoreboardSetScore', {
+            server: require("../Server"),
+            scoreboard: this,
+            cancel() {
+                shouldSetScore = false
+            }
+        })
+
+        if (!shouldSetScore) return
+
         const setScorePacket = new ServerSetScorePacket()
         setScorePacket.setAction(ScoreActions.UPDATE)
         setScorePacket.setEntries([
@@ -81,6 +106,18 @@ class Scoreboard {
      * @param {number} score - The score to set.
      */
     deleteScore(score) {
+        let shouldDeleteScore = true
+        
+        Frog.eventEmitter.emit('scoreboardScoreDelete', {
+            server: require("../Server"),
+            scoreboard: this,
+            cancel() {
+                shouldDeleteScore = false
+            }
+        })
+
+        if (!shouldDeleteScore) return
+
         const setScorePacket = new ServerSetScorePacket()
         setScorePacket.setAction(ScoreActions.REMOVE)
         setScorePacket.setEntries([
@@ -100,6 +137,18 @@ class Scoreboard {
      * Deletes the scoreboard.
      */
     deleteScoreboard() {
+        let shouldDelete = true
+        
+        Frog.eventEmitter.emit('scoreboardDelete', {
+            server: require("../Server"),
+            scoreboard: this,
+            cancel() {
+                shouldDelete = false
+            }
+        })
+
+        if (!shouldDelete) return
+
         const removeScoreboard = new ServerRemoveObjectivePacket()
         removeScoreboard.setObjectiveName(this.objectiveName)
         removeScoreboard.writePacket(this.player)

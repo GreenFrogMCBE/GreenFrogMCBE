@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 
+declare function on(eventName: "blockBreak", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetRead", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetReadError", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetRateLimitReached", listener: (...args: any[]) => void): void;
@@ -10,6 +11,7 @@ declare function on(eventName: "serverTimeTick", listener: (...args: any[]) => v
 declare function on(eventName: "serverRegenerationTick", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverStarvationDamageTick", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverVoidDamageTick", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverSetDimension", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverGarbageCollection", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverOfflinePlayersGarbageCollection", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverToClientMessage", listener: (...args: any[]) => void): void;
@@ -23,15 +25,20 @@ declare function on(eventName: "serverSetEntityData", listener: (...args: any[])
 declare function on(eventName: "serverUpdateChunkRadius", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverTimeUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetDifficulty", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverExecutedCommand", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverVelocityUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetXP", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetHealth", listener: (...args: any[]) => void): void;
+declare function on(eventName: "scoreboardCreation", listener: (...args: any[]) => void): void;
+declare function on(eventName: "scoreboardSetScore", listener: (...args: any[]) => void): void;
+declare function on(eventName: "scoreboardScoreDelete", listener: (...args: any[]) => void): void;
+declare function on(eventName: "scoreboardDelete", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerFallDamage", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerRegeneration", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerDeath", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerHungerUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerHealthUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerLeave", listener: (...args: any[]) => void): void;
-declare function on(eventName: "serverSetDimension", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerSetAttribute", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerTransfer", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerKick", listener: (...args: any[]) => void): void;
@@ -40,7 +47,6 @@ declare function on(eventName: "playerPreConnect", listener: (...args: any[]) =>
 declare function on(eventName: "playerContainerOpen", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerContainerClose", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerInteract", listener: (...args: any[]) => void): void;
-declare function on(eventName: "blockBreak", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerFormResponse", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerHasAllResourcePacks", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerResourcePacksRefused", listener: (...args: any[]) => void): void;
@@ -53,8 +59,6 @@ declare function on(eventName: "playerMove", listener: (...args: any[]) => void)
 declare function on(eventName: "playerMalformatedChatMessage", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerItemStackRequest", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerExecutedCommand", listener: (...args: any[]) => void): void;
-declare function on(eventName: "serverExecutedCommand", listener: (...args: any[]) => void): void;
-declare function on(eventName: "serverVelocityUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerTeleport", listener: (...args: any[]) => void): void;
 
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
