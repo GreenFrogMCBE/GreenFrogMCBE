@@ -113,12 +113,7 @@ module.exports = {
 				GameMode.CREATIVE,
 				GameMode.ADVENTURE,
 				GameMode.SPECTATOR,
-				GameMode.FALLBACK,
-				0,
-				1,
-				2,
-				3,
-				6
+				GameMode.FALLBACK
 			];
 
 			if (!allowedGameModes.includes(gamemode)) {
@@ -332,7 +327,7 @@ module.exports = {
 				message = "You were disconnected";
 			}
 
-			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", msg));
+			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", message));
 			player.disconnect(message);
 		};
 

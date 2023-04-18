@@ -2,6 +2,8 @@
 
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 
+const GameModeLegacy = require("../network/packets/types/GameModeLegacy");
+
 const FrogWorldGenerators = require("../network/packets/types/FrogWorldGenerators");
 const DamageCause = require("../api/health/DamageCause");
 const GameMode = require("../api/player/GameMode");
@@ -187,18 +189,18 @@ class World {
 				}
 
 				if (posY <= min) {
-					if (client.gamemode === GameMode.CREATIVE || client.gamemode === GameMode.SPECTATOR) {
-						delete client.damageLoop;
+					console.log(client)
+
+					if (client.gamemode === GameMode.CREATIVE || 
+						client.gamemode === GameMode.SPECTATOR) {
 						client.cannotBeDamagedByVoid = true
 					} else {
 						client.cannotBeDamagedByVoid = false
 					}
 					
 					if (!client.cannotBeDamagedByVoid && !client.dead) {
-						client.setHealth(client.health - 5, DamageCause.VOID);
+						client.setHealth(client.health - 6, DamageCause.VOID);
 					}
-				} else {
-					delete client.damageLoop;
 				}
 			}
 		}

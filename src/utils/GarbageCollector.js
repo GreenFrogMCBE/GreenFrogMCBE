@@ -27,7 +27,7 @@ module.exports = {
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			if (PlayerInfo.players[i].offline) {
+			if (PlayerInfo.players[i].q) {
 				Logger.debug('[Garbage collector] Deleted player: ' + PlayerInfo.players[i].username);
 				PlayerInfo.players.splice(i, 1);
 				i--;
