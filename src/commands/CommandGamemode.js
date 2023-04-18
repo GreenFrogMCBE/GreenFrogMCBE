@@ -15,7 +15,7 @@ module.exports = {
         maxArg: 1
     },
 
-    execute(server, player, args) {
+    execute(_server, player, args) {
         if (player.isConsole) {
             player.sendMessage(`${Colors.RED}This type of sender does not support this command`);
             return;

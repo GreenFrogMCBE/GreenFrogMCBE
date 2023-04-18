@@ -2,13 +2,9 @@
 
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 
-const GameModeLegacy = require("../network/packets/types/GameModeLegacy");
-
 const FrogWorldGenerators = require("../network/packets/types/FrogWorldGenerators");
 const DamageCause = require("../api/health/DamageCause");
 const GameMode = require("../api/player/GameMode");
-
-const Logger = require("../server/Logger");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
@@ -98,9 +94,9 @@ class World {
 
 	/**
 	 * Places a block at the specified coordinates.
-	 * @param {number} x - The x-coordinate of the block.
-	 * @param {number} y - The y-coordinate of the block.
-	 * @param {number} z - The z-coordinate of the block.
+	 * @param {number} x - The X-coordinate of the block.
+	 * @param {number} y - The Y-coordinate of the block.
+	 * @param {number} z - The Z-coordinate of the block.
 	 * @param {number} id - The ID of the block to place.
 	 */
 	placeBlock(x, y, z, id) {
@@ -152,9 +148,7 @@ class World {
 			});
 
 			for (const player of this.getPlayersInWorld()) {
-				if (player.health > 20 || player.hunger < 20 || player.offline || player.gamemode === GameMode.CREATIVE || player.gamemode === GameMode.SPECTATOR) {
-					Logger.debug("Skipped regeneration task for " + player.username);
-				} else {
+				if (!(player.health > 20 || player.hunger < 20 || player.offline || player.gamemode === GameMode.CREATIVE || player.gamemode === GameMode.SPECTATOR)) {
 					player.setHealth(player.health + 1, DamageCause.REGENERATION);
 				}
 			}
@@ -189,7 +183,7 @@ class World {
 				}
 
 				if (posY <= min) {
-					console.log(client)
+					console.log(client.gamemode)
 
 					if (client.gamemode === GameMode.CREATIVE || 
 						client.gamemode === GameMode.SPECTATOR) {
@@ -198,7 +192,7 @@ class World {
 						client.cannotBeDamagedByVoid = false
 					}
 					
-					if (!client.cannotBeDamagedByVoid && !client.dead) {
+					if (client.cannotBeDamagedByVoid && !client.dead) {
 						client.setHealth(client.health - 6, DamageCause.VOID);
 					}
 				}
