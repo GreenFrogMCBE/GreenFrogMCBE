@@ -256,9 +256,9 @@ async function _onJoin(client) {
 	Frog.eventEmitter.emit('playerJoin', {
 		player: client,
 		server: this,
-		cancel(reason = "Server requested disconnect.") {
-			client.kick(reason)
-		},
+		cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
+			client.kick(reason);
+		}
 	});
 }
 
@@ -282,20 +282,20 @@ module.exports = {
 
 		console.clear()
 
-		Logger.setupLogger()
-		
 		Language.getLanguage(Frog.serverConfigurationFiles.config.chat.lang)
 
-		Logger.info(lang.server.loadingServer);
+		Logger.info(Language.getKey("server.loading"));
+		Logger.info(Language.getKey("server.license"))
+		Logger.info(Language.getKey("server.copyNotice"))
 
 		if (process.versions.node.split('.')[0] < 14) {
-			Logger.error("You are running nodeJS version that is too old to run GreenFrogMCBE and bedrock-protocol")
-			Logger.error("Please update it to 14.0.0+, from https://nodejs.org/")
+			Logger.error(Language.getKey("errors.nodeJS.tooOld"))
+			Logger.error(Language.getKey("errors.nodeJS.tooOld.update"))
 
 			process.exit(-1)
 		}
 
-		Logger.info(lang.commands.verInfo.replace("%version%", Frog.getServerData().minorServerVersion));
+		Logger.info(Language.getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion))
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
 		process.on("unhandledRejection", (err) => _handleCriticalError(err));

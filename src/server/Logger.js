@@ -12,14 +12,13 @@
  */
 
 const { convertConsoleColor } = require("../utils/ConsoleColorConvertor");
+const { getKey } = require("../utils/Language");
 
 /* const Frog = require("../Frog") <--- This code does not work
 It throws:
 (node:13208) Warning: Accessing non-existent property 'serverConfigurationFiles' of module exports inside circular dependency  */
 
 const LoggingException = require("../utils/exceptions/LoggingException");
-
-let lang;
 
 function fireEvent(langString, color, message, consoleType) {
 	require("../Frog").eventEmitter.emit('serverLogMessage', {
@@ -34,13 +33,6 @@ function fireEvent(langString, color, message, consoleType) {
 }
 
 module.exports = {
-	/**
-	 * Setups logger
-	 */
-	setupLogger() {
-		lang = require("../Frog").serverConfigurationFiles.lang;
-	},
-
 	/**
 	 * Returns if debug is enabled or not
 	 * 
@@ -63,15 +55,15 @@ module.exports = {
 		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
 
 		if (consoleType === "warning") {
-			throw new LoggingException("Invalid log type: warning. Its 'warn', not 'warning'")
+			throw new LoggingException(getKey("exceptions.logger.invalidWarning"))
 		}
 
 		if (!console[consoleType]) {
-			throw new LoggingException("Invalid log type: " + console[consoleType] + ". Valid types are info, warn, error, debug")
+			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s%", consoleType))
 		}
 
 		fireEvent(langString, color, message, consoleType)
-		console[consoleType](convertConsoleColor(`${date} \x1b[${color}m${lang.logger[langString]}\x1b[0m | ${message}`))
+		console[consoleType](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`))
 	},
 
 	/**
@@ -80,7 +72,7 @@ module.exports = {
 	 * @param {string} message
 	 */
 	info(message) {
-		this.log('info', '32', message, 'info');
+		this.log(getKey('logger.info'), '32', message, 'info');
 	},
 
 	/**
@@ -89,7 +81,7 @@ module.exports = {
 	 * @param {string} message
 	 */
 	warning(message) {
-		this.log('warning', '33', message, 'warn')
+		this.log(getKey('logger.warn'), '33', message, 'warn')
 	},
 
 	/**
@@ -97,7 +89,7 @@ module.exports = {
 	 * @param {string} message
 	 */
 	error(message) {
-		this.log('error', '31', message, 'error')
+		this.log(getKey('logger.error'), '31', message, 'error')
 	},
 
 	/**
@@ -109,6 +101,6 @@ module.exports = {
 	debug(message) {
 		if (!(process.env.DEBUG === "minecraft-protocol" || this.isDebugEnabled())) return;
 
-		this.log('debug', '35', message, 'info')
+		this.log(getKey('logger.debug'), '35', message, 'info')
 	},
 };

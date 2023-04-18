@@ -1,0 +1,20 @@
+{
+    "server.loading": "Loading server...",
+    "server.license": "GreenFrog is licensed under Creative Commons Attribution 4.0 International license. More info: https://creativecommons.org",
+    "server.copyNotice": "You may copy this, only if you credit us",
+    
+    "frog.version": "This server is running GreenFrogMCBE. Version: %s%",
+
+    "errors.nodeJS.tooOld": "You are running nodeJS version that is too old to run GreenFrogMCBE",
+    "errors.nodeJS.tooOld.update": "Please update it to 14.0.0+, from https://nodejs.org/",
+
+    "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
+
+    "logger.info": "INFO",
+    "logger.warn": "WARNING",
+    "logger.error": "ERROR",
+    "logger.debug": "DEBUG",
+
+    "exceptions.logger.invalidWarning": "Invalid log type: warning. Its 'warn', and not 'warning'",
+    "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug"
+}

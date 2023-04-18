@@ -5,6 +5,8 @@ const eventLib = require('events');
 const PluginLoader = require('./plugins/PluginLoader');
 const PlayerInfo = require('./api/player/PlayerInfo');
 
+const { getLanguage } = require('./utils/Language');
+
 const Logger = require('./server/Logger');
 
 const yaml = require('js-yaml')
@@ -39,7 +41,7 @@ function getServer() {
 function getConfig() {
     return {
         config: yaml.load(fs.readFileSync("config.yml", "utf8")),
-        lang: null
+        lang: getLanguage(yaml.load(fs.readFileSync("config.yml", "utf8")).chat.lang)
     };
 }
 
