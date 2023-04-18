@@ -33,9 +33,9 @@ class ModalForm {
 
 		/**
 		 * @type {function}
+		 * 
 		 * @param {ModalForm} form
 		 * @param {Client} client
-		 * @returns {void}
 		 */
 		this.onSend = (form, client) => { };
 	}

@@ -36,9 +36,9 @@ class Form {
 		this.buttons = [];
 
 		/**
-		 * @type {void}
+		 * @type {function}
 		 * 
-		 * @param {Class} form
+		 * @param {Form} form
 		 * @param {Client} client
 		 */
 		this.onSend = (form, client) => { }

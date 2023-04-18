@@ -13,9 +13,9 @@ class CustomForm {
 
 		/**
 		 * @type {function}
-		 * @param {ModalForm} form
+		 * 
+		 * @param {CustomForm} form
 		 * @param {Client} client
-		 * @returns {void}
 		 */
 		this.onSend = (form, client) => { }
 
