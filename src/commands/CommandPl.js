@@ -1,7 +1,8 @@
 const CommandVerifier = require("../utils/CommandVerifier");
 
-const PlayerColors = require("../api/colors/PlayerColors");
 const PluginManager = require('../plugins/PluginManager');
+
+const Colors = require("../api/colors/Colors");
 
 const { serverConfigurationFiles } = require("../Frog");
 const { lang } = serverConfigurationFiles;
@@ -26,8 +27,8 @@ module.exports = {
 		}
 
 		const plugins = PluginManager.plugins?.length ?? 0;
-		const pluginList = PlayerColors.GREEN + PluginManager.plugins?.join(PlayerColors.WHITE + "§7, " + PlayerColors.GREEN) || "";
+		const pluginList = Colors.GREEN + PluginManager.plugins?.join(Colors.WHITE + "§7, " + Colors.GREEN) || "";
 
-		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList || "No plugins available"} ${PlayerColors.RESET}`);
+		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList || "No plugins available"} ${Colors.RESET}`);
 	},
 };
