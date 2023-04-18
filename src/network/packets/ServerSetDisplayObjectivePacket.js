@@ -1,8 +1,9 @@
-const DisplaySlots = require("./types/DisplaySlots");
+const DisplaySlots = require("../../scoreboard/types/DisplaySlots");
+
 const PacketConstructor = require("./PacketConstructor");
 
 let displaySlot = DisplaySlots.SIDEBAR;
-let objectiveName = 's' + (Math.random() + 1).toString(36).substring(7);
+let objectiveName = '';
 let displayName = null;
 let criteriaName = null;
 let sortOrder = 0;
