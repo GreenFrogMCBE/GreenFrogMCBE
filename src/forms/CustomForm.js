@@ -5,15 +5,17 @@ const FormTypes = require("./FormTypes");
 class CustomForm {
 	constructor() {
 		/**
-		 * @type {string}
+		 * @type {FormTypes}
+		 * 
+		 * @type {import("./FormTypes")}
 		 */
 		this.type = FormTypes.CUSTOMFORM;
 
 		/**
 		 * @type {function}
-		 * 
-		 * @param {Class} form
+		 * @param {ModalForm} form
 		 * @param {Client} client
+		 * @returns {void}
 		 */
 		this.onSend = (form, client) => { }
 

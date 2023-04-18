@@ -3,9 +3,10 @@ const FormTypes = require("./FormTypes");
 
 class ModalForm {
 	constructor() {
-
 		/**
-		 * @type {string}
+		 * @type {FormTypes}
+		 * 
+		 * @type {import("./FormTypes")}
 		 */
 		this.title = "";
 
