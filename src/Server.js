@@ -162,6 +162,7 @@ async function _listen() {
 				client.__queue = client.queue;
 				client.queue = (packetName, data) => {
 					let shouldQueue = true;
+
 					Frog.eventEmitter.emit("packetQueue", {
 						player: client,
 						server: this,
@@ -231,16 +232,6 @@ async function _onJoin(client) {
 		client.packetCount = 0;
 	}, 1000);
 
-	Frog.eventEmitter.emit('playerConnect', {
-		player: client,
-		server: this,
-		cancel(reason = "") {
-			client.kick(reason)
-
-			return true;
-		},
-	});
-
 	PlayerInfo.addPlayer(client);
 
 	if (PlayerInfo.players.length > config.maxPlayers) {
@@ -259,6 +250,14 @@ async function _onJoin(client) {
 	responsePackInfo.setBehaviorPacks([]);
 	responsePackInfo.setTexturePacks([]);
 	responsePackInfo.writePacket(client);
+
+	Frog.eventEmitter.emit('playerJoin', {
+		player: client,
+		server: this,
+		cancel(reason = "Server requested disconnect.") {
+			client.kick(reason)
+		},
+	});
 }
 
 module.exports = {

@@ -35,7 +35,7 @@ declare function on(eventName: "serverSetDimension", listener: (...args: any[]) 
 declare function on(eventName: "playerSetAttribute", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerTransfer", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerKick", listener: (...args: any[]) => void): void;
-declare function on(eventName: "playerConnect", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerJoin", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerPreConnect", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerContainerOpen", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerContainerClose", listener: (...args: any[]) => void): void;

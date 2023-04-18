@@ -297,7 +297,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					ps.setStatus(PlayStatusType.PLAYERSPAWN);
 					ps.writePacket(player);
 
-					Frog.eventEmitter.emit('playerSpawnEvent', {
+					Frog.eventEmitter.emit('playerSpawn', {
 						player,
 						server
 					})
