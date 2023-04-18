@@ -6,7 +6,7 @@ let velocity = {}
 class ServerSetEntityMotion extends PacketConstructor {
     /**
      * Returns the name of the packet
-     * @returns {String} The name of the packet
+     * @returns {string} The name of the packet
      */
     getPacketName() {
         return "set_entity_motion";
@@ -38,7 +38,7 @@ class ServerSetEntityMotion extends PacketConstructor {
 
     /**
      * Returns the runtime entity ID
-     * @returns {Number}
+     * @returns {number}
      */
     getRuntimeEntityID() {
         return runtimeEntityID
@@ -46,7 +46,7 @@ class ServerSetEntityMotion extends PacketConstructor {
 
     /**
      * Sets the runtime entity ID
-     * @param {Number} value
+     * @param {number} value
      */
     setRuntimeEntityID(value) {
         runtimeEntityID = value

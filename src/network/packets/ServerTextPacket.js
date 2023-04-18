@@ -23,7 +23,7 @@ let platform_chat_id = "";
 class ServerTextPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {String} The name of the packet.
+	 * @returns {string} The name of the packet.
 	 */
 	getPacketName() {
 		return "text";
@@ -39,7 +39,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the message to be sent
-	 * @param {String} new_message
+	 * @param {string} new_message
 	 */
 	setMessage(new_message) {
 		message = new_message;
@@ -63,7 +63,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the source name
-	 * @param {String} new_source_name
+	 * @param {string} new_source_name
 	 */
 	setSourceName(new_source_name) {
 		source_name = new_source_name;
@@ -71,7 +71,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the XUID
-	 * @param {String} new_xuid
+	 * @param {string} new_xuid
 	 */
 	setXuid(new_xuid) {
 		xuid = new_xuid;
@@ -79,7 +79,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the platform chat id
-	 * @param {String} new_platform_chat_id
+	 * @param {string} new_platform_chat_id
 	 */
 	setPlatformChatId(new_platform_chat_id) {
 		platform_chat_id = new_platform_chat_id;
@@ -87,7 +87,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the message
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getMessage() {
 		return message;
@@ -111,7 +111,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the source name
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getSourceName() {
 		return source_name;
@@ -119,7 +119,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the XUID
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getXuid() {
 		return xuid;
@@ -127,7 +127,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the platform chat id
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getPlatformChatId() {
 		return platform_chat_id;

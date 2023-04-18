@@ -43,7 +43,7 @@ let world = "";
 class ServerStartGamePacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {String} The name of the packet.
+	 * @returns {string} The name of the packet.
 	 */
 	getPacketName() {
 		return "start_game";
@@ -59,7 +59,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the entity ID
-	 * @param {Number} new_entity_id - The entity ID
+	 * @param {number} new_entity_id - The entity ID
 	 */
 	setEntityId(new_entity_id) {
 		entity_id = new_entity_id;
@@ -67,7 +67,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the runtime entity ID
-	 * @param {Number} new_runtime_entity_id - The runtime entity ID
+	 * @param {number} new_runtime_entity_id - The runtime entity ID
 	 */
 	setRunTimeEntityId(new_runtime_entity_id) {
 		runtimeentity_id = new_runtime_entity_id;
@@ -83,9 +83,9 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the player spawn position X, Y, and Z
-	 * @param {Number} x - The player X
-	 * @param {Number} y - The player Y
-	 * @param {Number} z - The player Z
+	 * @param {number} x - The player X
+	 * @param {number} y - The player Y
+	 * @param {number} z - The player Z
 	 */
 	setPlayerPosition(x, y, z) {
 		playerX = x;
@@ -95,8 +95,8 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the player rotation X and Z
-	 * @param {Number} x - The player rotation (X)
-	 * @param {Number} z - The player rotation (Z)
+	 * @param {number} x - The player rotation (X)
+	 * @param {number} z - The player rotation (Z)
 	 */
 	setPlayerRotation(x, z) {
 		rotationX = x;
@@ -113,7 +113,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the biome type
-	 * @param {String} new_biome_type - The biome type
+	 * @param {string} new_biome_type - The biome type
 	 */
 	setBiomeType(new_biome_type) {
 		biome_type = new_biome_type;
@@ -161,9 +161,9 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the spawn position X, Y, and Z
-	 * @param {Number} x - The spawn X
-	 * @param {Number} y - The spawn Y
-	 * @param {Number} z - The spawn Z
+	 * @param {number} x - The spawn X
+	 * @param {number} y - The spawn Y
+	 * @param {number} z - The spawn Z
 	 */
 	setSpawnPosition(x, y, z) {
 		spawn.x = x;
@@ -173,7 +173,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the spawn position
-	 * @param {Number} new_permission_level - The permission level
+	 * @param {number} new_permission_level - The permission level
 	 */
 	setPlayerPermissionLevel(new_permission_level) {
 		permission_level = new_permission_level;
@@ -181,7 +181,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the world name
-	 * @param {String} worldname
+	 * @param {string} worldname
 	 */
 	setWorldName(new_worldname) {
 		world = new_worldname;
@@ -189,7 +189,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the spawn position
-	 * @returns {Number} - The permission level
+	 * @returns {number} - The permission level
 	 */
 	getPlayerPermissionLevel() {
 		return permission_level;
@@ -197,7 +197,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the entity id
-	 * @returns {Number} - The entity id
+	 * @returns {number} - The entity id
 	 */
 	getEntityId() {
 		return entity_id;
@@ -205,7 +205,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the runtime entity id
-	 * @returns {Number} - The runtime entity id
+	 * @returns {number} - The runtime entity id
 	 */
 	getRunTimeEntityId() {
 		return runtimeentity_id;
@@ -221,9 +221,9 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the player spawn position X, Y, and Z
-	 * @returns {Number} - The player X
-	 * @returns {Number} - The player Y
-	 * @returns {Number} - The player Z
+	 * @returns {number} - The player X
+	 * @returns {number} - The player Y
+	 * @returns {number} - The player Z
 	 */
 	getPlayerPosition() {
 		return {
@@ -235,8 +235,8 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the player rotation X and Z
-	 * @returns {Number} - The player rotation X
-	 * @returns {Number} - The player rotation Z
+	 * @returns {number} - The player rotation X
+	 * @returns {number} - The player rotation Z
 	 */
 	getPlayerRotation() {
 		return {
@@ -263,7 +263,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the biome name
-	 * @returns {String} - The biome name
+	 * @returns {string} - The biome name
 	 */
 	getBiomeName() {
 		return biome_name;

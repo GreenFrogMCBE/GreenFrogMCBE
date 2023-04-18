@@ -17,7 +17,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "chunk_radius_update";
@@ -33,7 +33,7 @@ class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 
 	/**
 	 * Sets the chunk radius
-	 * @param {Number} radius
+	 * @param {number} radius
 	 */
 	setChunkRadius(new_radius) {
 		chunk_radius = new_radius;
@@ -41,7 +41,7 @@ class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 
 	/**
 	 * Returns the chunk radius
-	 * @returns {Number} The chunk radius
+	 * @returns {number} The chunk radius
 	 */
 	getChunkRadius() {
 		return chunk_radius;

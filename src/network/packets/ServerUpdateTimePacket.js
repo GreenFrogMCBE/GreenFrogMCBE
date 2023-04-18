@@ -33,7 +33,7 @@ class ServerUpdateTimePacket extends PacketConstructor {
 
 	/**
 	 * Sets the time
-	 * @param {Number} time
+	 * @param {number} time
 	 */
 	setTime(new_time) {
 		time = new_time;
@@ -41,7 +41,7 @@ class ServerUpdateTimePacket extends PacketConstructor {
 
 	/**
 	 * Returns the time
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getTime() {
 		return time;

@@ -33,7 +33,7 @@ class ServerRemoveObjectivePacket extends PacketConstructor {
 
 	/**
 	 * Sets the objective name
-	 * @param {String} new_objectivename
+	 * @param {string} new_objectivename
 	 */
 	setObjectiveName(new_objectivename) {
 		objectiveName = new_objectivename;
@@ -41,7 +41,7 @@ class ServerRemoveObjectivePacket extends PacketConstructor {
 
 	/**
 	 * Returns the objective name
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getObjectiveName() {
 		return objectiveName;

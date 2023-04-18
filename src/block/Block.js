@@ -13,7 +13,7 @@
 class Block {
 	/**
 	 * Returns the runtime id of the block
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getRuntimeId() {
 		return null;
@@ -21,7 +21,7 @@ class Block {
 
 	/**
 	 * Returns the block name
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getName() {
 		return null;

@@ -18,7 +18,7 @@ class PacketConstructor {
 	/**
 	 * Returns the packet name
 	 * 
-	 * @returns {String} 
+	 * @returns {string} 
 	 */
 	getPacketName() {
 		return "unknown_packet";

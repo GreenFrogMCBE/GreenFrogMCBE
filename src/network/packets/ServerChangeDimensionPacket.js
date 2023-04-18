@@ -25,7 +25,7 @@ let respawn = false;
 class ServerChangeDimensionPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "change_dimension";

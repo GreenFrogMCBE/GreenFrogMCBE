@@ -36,7 +36,7 @@ async function setupConsoleReader() {
  * Executes a command that the user typed in the console.
  *
  * @async
- * @param {String} input - The command to execute.
+ * @param {string} input - The command to execute.
  * @throws {CommandHandlingException} Throws an error if the command cannot be executed.
  */
 async function executeConsoleCommand(input) {

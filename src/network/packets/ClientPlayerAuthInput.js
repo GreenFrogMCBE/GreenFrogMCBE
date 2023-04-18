@@ -5,7 +5,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ClientMovePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "player_auth_input";

@@ -30,8 +30,8 @@ module.exports = {
 	 * @throws {PluginSetupException} - If there is no plugin name
 	 * @throws {PluginSetupException} - If there is no plugin version
 	 * 
-	 * @param {String} name 
-	 * @param {String} version 
+	 * @param {string} name 
+	 * @param {string} version 
 	 */
 	addPlugin: (name, version) => {
 		let pluginString = `${name} v${version}`

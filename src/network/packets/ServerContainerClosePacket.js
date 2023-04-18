@@ -18,7 +18,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerContainerClosePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "container_close";
@@ -34,7 +34,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Sets the window ID
-	 * @param {Number} new_id
+	 * @param {number} new_id
 	 */
 	setWindowID(new_id) {
 		window_id = new_id;
@@ -50,7 +50,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * It returns the window ID
-	 * @returns {Number} The window ID
+	 * @returns {number} The window ID
 	 */
 	getWindowID() {
 		return window_id;

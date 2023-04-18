@@ -17,7 +17,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerSetHealthPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "set_health";
@@ -33,7 +33,7 @@ class ServerSetHealthPacket extends PacketConstructor {
 
 	/**
 	 * Sets the health
-	 * @param {Number} new_health
+	 * @param {number} new_health
 	 */
 	setHealth(new_health) {
 		health = new_health;
@@ -41,7 +41,7 @@ class ServerSetHealthPacket extends PacketConstructor {
 
 	/**
 	 * Returns health of the player
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getHealth() {
 		return health;

@@ -17,7 +17,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerAvailableCommandsPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "available_commands";
@@ -49,7 +49,7 @@ class ServerAvailableCommandsPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {Object} client
+	 * @param {object} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), this.getData());

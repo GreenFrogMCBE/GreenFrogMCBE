@@ -17,7 +17,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "available_entity_identifiers";
@@ -41,7 +41,7 @@ class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
 
 	/**
 	 * Returns the packet value
-	 * @returns {String} The packet value.
+	 * @returns {string} The packet value.
 	 */
 	getValue() {
 		return value;

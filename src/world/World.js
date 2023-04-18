@@ -19,7 +19,7 @@ class World {
 	constructor() {
 		/**
 		 * The name of the world.
-		 * @type {String}
+		 * @type {string}
 		 */
 		this.worldName;
 
@@ -31,14 +31,14 @@ class World {
 
 		/**
 		 * The chunk render radius.
-		 * @type {Number}
+		 * @type {number}
 		 */
 		this.renderDistance;
 	}
 
 	/**
 	 * Sets the name of the world.
-	 * @param {String} name - The new name of the world.
+	 * @param {string} name - The new name of the world.
 	 */
 	setName(name) {
 		this.worldName = name;
@@ -46,7 +46,7 @@ class World {
 
 	/**
 	 * Gets the name of the world.
-	 * @returns {String} - The name of the world.
+	 * @returns {string} - The name of the world.
 	 */
 	getName() {
 		return this.worldName;
@@ -62,9 +62,9 @@ class World {
 
 	/**
 	 * Sets the coordinates of the spawn point.
-	 * @param {Number} x - The x-coordinate of the spawn point.
-	 * @param {Number} y - The y-coordinate of the spawn point.
-	 * @param {Number} z - The z-coordinate of the spawn point.
+	 * @param {number} x - The x-coordinate of the spawn point.
+	 * @param {number} y - The y-coordinate of the spawn point.
+	 * @param {number} z - The z-coordinate of the spawn point.
 	 */
 	setSpawnCoordinates(x, y, z) {
 		this.coords = { x, y, z };
@@ -80,7 +80,7 @@ class World {
 
 	/**
 	 * Sets the chunk render radius.
-	 * @param {Number} radius - The new chunk render radius.
+	 * @param {number} radius - The new chunk render radius.
 	 */
 	setChunkRadius(radius) {
 		this.renderDistance = radius;
@@ -88,7 +88,7 @@ class World {
 
 	/**
 	 * Gets the chunk render radius.
-	 * @returns {Number} - The chunk render radius.
+	 * @returns {number} - The chunk render radius.
 	 */
 	getChunkRadius() {
 		return this.renderDistance;
@@ -96,10 +96,10 @@ class World {
 
 	/**
 	 * Places a block at the specified coordinates.
-	 * @param {Number} x - The x-coordinate of the block.
-	 * @param {Number} y - The y-coordinate of the block.
-	 * @param {Number} z - The z-coordinate of the block.
-	 * @param {Number} id - The ID of the block to place.
+	 * @param {number} x - The x-coordinate of the block.
+	 * @param {number} y - The y-coordinate of the block.
+	 * @param {number} z - The z-coordinate of the block.
+	 * @param {number} id - The ID of the block to place.
 	 */
 	placeBlock(x, y, z, id) {
 		for (const player of this.getPlayersInWorld()) {

@@ -21,7 +21,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerLevelChunkPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "level_chunk";
@@ -37,7 +37,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Sets the X coordinate
-	 * @param {Number} new_x
+	 * @param {number} new_x
 	 */
 	setX(new_x) {
 		x = new_x;
@@ -45,7 +45,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Sets the Z coordinate
-	 * @param {Number} new_z
+	 * @param {number} new_z
 	 */
 	setZ(new_z) {
 		z = new_z;
@@ -53,7 +53,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Sets the sub chunk count
-	 * @param {Number} new_sub_chunk_count
+	 * @param {number} new_sub_chunk_count
 	 */
 	setSubChunkCount(new_sub_chunk_count) {
 		sub_chunk_count = new_sub_chunk_count;
@@ -77,7 +77,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * It gets the X coordinate
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getX() {
 		return x;
@@ -85,7 +85,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * It gets the Z coordinate
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getZ() {
 		return z;
@@ -93,7 +93,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * It gets the sub chunk count
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getSubChunkCount() {
 		return sub_chunk_count;

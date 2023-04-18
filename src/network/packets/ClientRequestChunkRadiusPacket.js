@@ -17,7 +17,7 @@ const Frog = require("../../Frog");
 class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "request_chunk_radius";

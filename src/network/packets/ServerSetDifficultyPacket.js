@@ -19,7 +19,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerSetDifficultyPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "set_difficulty";

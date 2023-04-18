@@ -20,7 +20,7 @@ let gamemode = Gamemode.FALLBACK;
 class ServerSetPlayerGameTypePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name.
-	 * @returns {String} The name of the packet.
+	 * @returns {string} The name of the packet.
 	 */
 	getPacketName() {
 		return "set_player_game_type";

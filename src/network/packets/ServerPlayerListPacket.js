@@ -23,7 +23,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerPlayerListPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "player_list";
@@ -39,7 +39,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Returns the player username
-	 * @returns {String} The player username
+	 * @returns {string} The player username
 	 */
 	getUsername() {
 		return username;
@@ -47,7 +47,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Sets the player username
-	 * @param {String} new_username The player username
+	 * @param {string} new_username The player username
 	 */
 	setUsername(new_username) {
 		username = new_username;
@@ -55,7 +55,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Returns the ID of the player
-	 * @returns {Number} The ID of the player
+	 * @returns {number} The ID of the player
 	 */
 	getId() {
 		return id;
@@ -103,7 +103,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Sets the xbox id of user
-	 * @param {String} id
+	 * @param {string} id
 	 */
 	setXboxID(new_id) {
 		xboxid = new_id;
@@ -111,7 +111,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Returns the xbox id of user
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getXboxID() {
 		return xboxid;

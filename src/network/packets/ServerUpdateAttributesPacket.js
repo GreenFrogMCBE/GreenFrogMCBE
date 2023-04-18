@@ -19,7 +19,7 @@ let tick = -1;
 class ServerUpdateAttributesPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {String} The name of the packet.
+	 * @returns {string} The name of the packet.
 	 */
 	getPacketName() {
 		return "update_attributes";
@@ -35,7 +35,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 
 	/**
 	 * Sets the player ID
-	 * @param {Number} new_playerid
+	 * @param {number} new_playerid
 	 */
 	setPlayerID(new_playerid) {
 		id = new_playerid;
@@ -43,7 +43,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 
 	/**
 	 * Returns the player ID
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getPlayerID() {
 		return id;
@@ -67,7 +67,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 
 	/**
 	 * Sets the current tick
-	 * @param {Number} new_tick - The tick
+	 * @param {number} new_tick - The tick
 	 */
 	setTick(new_tick) {
 		tick = new_tick;
@@ -75,7 +75,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 
 	/**
 	 * Returns the current tick
-	 * @returns {Number};
+	 * @returns {number};
 	 */
 	getTick() {
 		return tick;

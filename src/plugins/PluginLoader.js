@@ -28,7 +28,7 @@ module.exports = {
 	/**
 	 * Returns plugin count
 	 * 
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	pluginCount,
 

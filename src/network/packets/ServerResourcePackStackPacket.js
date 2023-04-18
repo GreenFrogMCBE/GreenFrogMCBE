@@ -22,7 +22,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerResourcePackStackPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "resource_pack_stack";
@@ -62,7 +62,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Sets the game version
-	 * @param {String} new_game_version - The game version
+	 * @param {string} new_game_version - The game version
 	 */
 	setGameVersion(new_game_version) {
 		game_version = new_game_version;
@@ -110,7 +110,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Returns the game version that the resource pack was made for
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getGameVersion() {
 		return game_version;

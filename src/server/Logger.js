@@ -54,10 +54,10 @@ module.exports = {
 	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
 	 * @throws {LoggingException} - If the log type is 'warning' (common Node.JS mistake) (must be 'warn')
 	 * 
-	 * @param {String} langString 
-	 * @param {Number} color 
-	 * @param {String} message 
-	 * @param {String} consoleType
+	 * @param {string} langString 
+	 * @param {number} color 
+	 * @param {string} message 
+	 * @param {string} consoleType
 	 */
 	log(langString, color, message, consoleType) {
 		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
@@ -77,7 +77,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as info
 	 * 
-	 * @param {String} message
+	 * @param {string} message
 	 */
 	info(message) {
 		this.log('info', '32', message, 'info');
@@ -86,7 +86,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as warning
 	 * 
-	 * @param {String} message
+	 * @param {string} message
 	 */
 	warning(message) {
 		this.log('warning', '33', message, 'warn')
@@ -94,7 +94,7 @@ module.exports = {
 
 	/**
 	 * Logs a message to the console as error
-	 * @param {String} message
+	 * @param {string} message
 	 */
 	error(message) {
 		this.log('error', '31', message, 'error')
@@ -104,7 +104,7 @@ module.exports = {
 	 * Logs a message to the console as debug
 	 * Requires for debug to be enabled in config
 	 *
-	 * @param {String} message
+	 * @param {string} message
 	 */
 	debug(message) {
 		if (!(process.env.DEBUG === "minecraft-protocol" || this.isDebugEnabled)) return;

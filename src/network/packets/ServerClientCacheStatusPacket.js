@@ -17,7 +17,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerClientCacheStatusPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	name() {
 		return "client_cache_status";

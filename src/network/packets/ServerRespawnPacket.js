@@ -24,7 +24,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerRespawnPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "respawn";
@@ -48,7 +48,7 @@ class ServerRespawnPacket extends PacketConstructor {
 
 	/**
 	 * Returns the packet state.
-	 * @returns {String} The state.
+	 * @returns {string} The state.
 	 */
 	getState() {
 		return state;
@@ -56,7 +56,7 @@ class ServerRespawnPacket extends PacketConstructor {
 
 	/**
 	 * Returns the runtime entity id.
-	 * @returns {Number} The runtime entity id.
+	 * @returns {number} The runtime entity id.
 	 */
 	getRuntimeEntityId() {
 		return runtime_entity_id;
@@ -64,9 +64,9 @@ class ServerRespawnPacket extends PacketConstructor {
 
 	/**
 	 * Sets the respawn position.
-	 * @param {Number} x - The X coordinate.
-	 * @param {Number} y - The Y coordinate.
-	 * @param {Number} z - The Z coordinate.
+	 * @param {number} x - The X coordinate.
+	 * @param {number} y - The Y coordinate.
+	 * @param {number} z - The Z coordinate.
 	 */
 	setPosition(x, y, z) {
 		pos.x = x;
@@ -76,7 +76,7 @@ class ServerRespawnPacket extends PacketConstructor {
 
 	/**
 	 * Sets the packet state.
-	 * @param {Number} new_packet_state
+	 * @param {number} new_packet_state
 	 */
 	setState(new_packet_state) {
 		state = new_packet_state;
@@ -84,7 +84,7 @@ class ServerRespawnPacket extends PacketConstructor {
 
 	/**
 	 * Sets the runtime entity id
-	 * @param {Number} new_id
+	 * @param {number} new_id
 	 */
 	setRuntimeEntityId(new_id) {
 		runtime_entity_id = new_id;

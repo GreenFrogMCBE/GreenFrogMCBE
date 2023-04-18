@@ -57,7 +57,7 @@ module.exports = {
 		/**
 		 * Sends a message to the player
 		 * 
-		 * @param {String} message - The message to send
+		 * @param {string} message - The message to send
 		 */
 		player.sendMessage = function (message) {
 			let shouldSendMessage = true
@@ -81,7 +81,7 @@ module.exports = {
 		/**
 		 * Sends a chat message as a player
 		 * 
-		 * @param {String} message - The message to send as a player
+		 * @param {string} message - The message to send as a player
 		 */
 		player.chat = function (message) {
 			let shouldSendMessage = true;
@@ -230,8 +230,8 @@ module.exports = {
 		/**
 		 * Transfers the player to a different server
 		 * 
-		 * @param {String} address - The address of the server to transfer to
-		 * @param {Number} port - The port of the server to transfer to
+		 * @param {string} address - The address of the server to transfer to
+		 * @param {number} port - The port of the server to transfer to
 		 */
 		player.transfer = function (address, port) {
 			let shouldTransfer = true;
@@ -281,7 +281,7 @@ module.exports = {
 
 		/**
 		 * Sets the data of the player/entity (eg on_fire, etc)
-		 * @param {String} field
+		 * @param {string} field
 		 * @param {Boolean} value
 		 */
 		player.setEntityData = function (field, value) {
@@ -313,7 +313,7 @@ module.exports = {
 		/**
 		 * Disconnect a player from the server
 		 * 
-		 * @param {String} [msg=lang.kickmessages.kickedByPlugin]
+		 * @param {string} [msg=lang.kickmessages.kickedByPlugin]
 		 */
 		player.kick = function (msg = lang.kickmessages.kickedByPlugin) {
 			if (player.kicked) return;
@@ -339,7 +339,7 @@ module.exports = {
 		/**
 		 * Updates the client chunk render radius
 		 * 
-		 * @param {Number} radius
+		 * @param {number} radius
 		 */
 		player.setChunkRadius = function (radius) {
 			let shouldUpdateRadius = true
@@ -363,7 +363,7 @@ module.exports = {
 		/**
 		 * Sets the client side time
 		 * 
-		 * @param {Number} time - The time to set the player to
+		 * @param {number} time - The time to set the player to
 		 */
 		player.setTime = function (time = 0) {
 			let shouldUpdateTime = true;

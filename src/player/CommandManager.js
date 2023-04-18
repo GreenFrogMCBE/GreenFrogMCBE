@@ -1,9 +1,9 @@
 const AvailableCommands = require("../network/packets/ServerAvailableCommandsPacket");
 
 /**
- * @typedef {Object} CommandsPacket - The commands packet.
- * @property {Number} values_len - The length of the values.
- * @property {String} _enum_type - The type of the enum.
+ * @typedef {object} CommandsPacket - The commands packet.
+ * @property {number} values_len - The length of the values.
+ * @property {string} _enum_type - The type of the enum.
  * @property {Array} enum_values - The enum values.
  * @property {Array} suffixes - The suffixes.
  * @property {Array} enums - The enums.
@@ -57,8 +57,8 @@ class CommandManager {
 	 * Adds a new command to the client's commands packet and updates the commands array.
 	 *
 	 * @param {Client} client - The client.
-	 * @param {String} name - The name of the new command.
-	 * @param {String} description - The description of the command.
+	 * @param {string} name - The name of the new command.
+	 * @param {string} description - The description of the command.
 	 */
 	addCommand(client, name, description) {
 		client.commands.command_data.push({

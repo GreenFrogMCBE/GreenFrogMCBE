@@ -24,7 +24,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerContainerOpenPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "container_open";
@@ -42,9 +42,9 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	 * Sets the coordinates of the container
 	 * If the container is creative menu then the coordinates are xyz: 0, 0, 0
 	 *
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Number} z
+	 * @param {number} x
+	 * @param {number} y
+	 * @param {number} z
 	 */
 	setCoordinates(x, y, z) {
 		coordinates = {
@@ -72,7 +72,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * It sets the runtime entity id
-	 * @param {String} new_runtime_entity_id
+	 * @param {string} new_runtime_entity_id
 	 */
 	setRuntimeEntityId(new_runtime_entity_id) {
 		runtime_entity_id = new_runtime_entity_id;
@@ -80,7 +80,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * It returns the window ID
-	 * @returns {Number} The window ID
+	 * @returns {number} The window ID
 	 */
 	getWindowID() {
 		return window_id;
@@ -88,7 +88,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * It returns the runtime entity ID
-	 * @returns {String} The runtime entity ID
+	 * @returns {string} The runtime entity ID
 	 */
 	getCoordinates() {
 		return coordinates;
@@ -104,7 +104,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * Returns the runtime entity id
-	 * @returns {String} The runtime entity id
+	 * @returns {string} The runtime entity id
 	 */
 	getRuntimeEntityId() {
 		return runtime_entity_id;

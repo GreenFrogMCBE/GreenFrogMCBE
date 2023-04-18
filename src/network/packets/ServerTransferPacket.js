@@ -18,7 +18,7 @@ let port = null;
 class ServerTransferPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {String} The name of the packet.
+	 * @returns {string} The name of the packet.
 	 */
 	getPacketName() {
 		return "transfer";
@@ -34,7 +34,7 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Sets the server address
-	 * @param {String} address
+	 * @param {string} address
 	 */
 	setServerAddress(address) {
 		server_address = address;
@@ -42,7 +42,7 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Sets the server port
-	 * @param {Number} new_port
+	 * @param {number} new_port
 	 */
 	setPort(new_port) {
 		port = new_port;
@@ -50,7 +50,7 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Returns the server address.
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getServerAddress() {
 		return server_address;
@@ -58,7 +58,7 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Returns the server port.
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getPort() {
 		return port;

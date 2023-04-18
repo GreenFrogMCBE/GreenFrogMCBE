@@ -23,7 +23,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "network_chunk_publisher_update";
@@ -76,7 +76,7 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 
 	/**
 	 * Returns the radius of chunks to load.
-	 * @returns {Number} The radius.
+	 * @returns {number} The radius.
 	 */
 	getRadius() {
 		return radius;
