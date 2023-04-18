@@ -1,6 +1,8 @@
 const Frog = require("../Frog");
+
 const CommandVerifier = require('../utils/CommandVerifier');
 
+const Colors = require("../api/colors/Colors");
 /**
  * @type {import('../type/Command').Command}
  */
@@ -19,6 +21,6 @@ module.exports = {
 		}
 
 		const versionMsg = Frog.serverConfigurationFiles.lang.commands.verInfo.replace('%version%', Frog.getServerData().minorServerVersion);
-		player.sendMessage(`§7${versionMsg}`);
+		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
 	}
 };

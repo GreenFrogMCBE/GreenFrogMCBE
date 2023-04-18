@@ -1,4 +1,5 @@
 const Frog = require("../Frog");
+const Colors = require("../api/colors/Colors");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
@@ -24,7 +25,7 @@ module.exports = {
         const target = PlayerInfo.getPlayer(playerName);
 
         if (!target) {
-            player.sendMessage(`§c${playerName} is not online`);
+            player.sendMessage(`${Colors.RED}${playerName} is not online`);
             return;
         }
 

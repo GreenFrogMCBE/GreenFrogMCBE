@@ -13,9 +13,12 @@
 
 const fs = require("fs").promises;
 
+const Colors = require("../api/colors/Colors");
+
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
 const Frog = require("../Frog");
+
 const { serverConfigurationFiles } = Frog
 const { lang } = serverConfigurationFiles
 
@@ -44,7 +47,7 @@ module.exports = {
             
             player.sendMessage("Succeeded in setting operator level for player " + playerName);
         } catch {
-            player.sendMessage("Failed to OP " + playerName);
+            player.sendMessage(`${Colors.RED}Failed to OP ${playerName}`);
         }
     }
 };
