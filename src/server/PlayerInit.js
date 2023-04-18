@@ -134,6 +134,8 @@ module.exports = {
 
 			if (!shouldChangeGamemode) return;
 
+			player.gamemode = gamemode
+
 			const playerGamemode = new ServerSetPlayerGameTypePacket();
 			playerGamemode.setGamemode(gamemode);
 			playerGamemode.writePacket(player);
@@ -461,7 +463,7 @@ module.exports = {
 			setHealthPacket.setHealth(health);
 			setHealthPacket.writePacket(player);
 
-			if (this.cause == DamageCause.FALL_DAMAGE) {
+			if (this.cause == DamageCause.FALL) {
 				Frog.eventEmitter.emit('playerFallDamageEvent', {
 					player,
 					health,

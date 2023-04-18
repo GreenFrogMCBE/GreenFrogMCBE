@@ -1,5 +1,7 @@
 const Frog = require("../../Frog");
 
+const Falldamage = require("../../world/Falldamage");
+
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientMovePacket extends PacketConstructor {
@@ -38,6 +40,9 @@ class ClientMovePacket extends PacketConstructor {
 		player.pitch = pitch;
 		player.yaw = yaw;
 
+		Falldamage.calculateFalldamage(player, { x, y, z })
+		Falldamage.calculateHungerloss(player, { x, y, z })
+
 		Frog.eventEmitter.emit('playerMove', {
 			player,
 			server,
@@ -47,6 +52,7 @@ class ClientMovePacket extends PacketConstructor {
 			pitch,
 			yaw,
 			legacyPacket: false,
+			onGround: player.onGround,
 			cancel() {
 				if (player.x === 0 && player.y === 0 && player.z === 0) return
 

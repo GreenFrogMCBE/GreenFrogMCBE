@@ -107,7 +107,7 @@ module.exports = {
 	 * @param {string} message
 	 */
 	debug(message) {
-		if (!(process.env.DEBUG === "minecraft-protocol" || this.isDebugEnabled)) return;
+		if (!(process.env.DEBUG === "minecraft-protocol" || this.isDebugEnabled())) return;
 
 		this.log('debug', '35', message, 'info')
 	},

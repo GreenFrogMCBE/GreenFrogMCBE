@@ -154,6 +154,8 @@ class World {
 			}
 		}
 
+		
+
 		if (config.world.tickStarvationDamage) {
 			Frog.eventEmitter.emit('serverStarvationDamageTick', {
 				world: this.getWorldData(),
@@ -183,8 +185,6 @@ class World {
 				}
 
 				if (posY <= min) {
-					console.log(client.gamemode)
-
 					if (client.gamemode === GameMode.CREATIVE || 
 						client.gamemode === GameMode.SPECTATOR) {
 						client.cannotBeDamagedByVoid = true
@@ -192,7 +192,7 @@ class World {
 						client.cannotBeDamagedByVoid = false
 					}
 					
-					if (client.cannotBeDamagedByVoid && !client.dead) {
+					if (!client.cannotBeDamagedByVoid && !client.dead) {
 						client.setHealth(client.health - 6, DamageCause.VOID);
 					}
 				}

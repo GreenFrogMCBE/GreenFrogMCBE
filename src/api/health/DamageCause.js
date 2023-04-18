@@ -12,7 +12,7 @@
  */
 module.exports = {
 	UNKNOWN: "unknown",
-	FALL_DAMAGE: "fall_damage",
+	FALL: "fall_damage",
 	REGENERATION: "regeneration",
 	VOID: "void",
 	STARVATION: "starvation",
