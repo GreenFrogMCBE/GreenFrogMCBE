@@ -5,9 +5,7 @@ const Language = require("./Language");
 /**
  * Capitalizes the first letter of a string
  * 
- * 
  * @private
- * 
  * @param {string} str 
  * @returns {string}
  */
@@ -50,5 +48,4 @@ module.exports = {
 
         return false;
     }
-
 }

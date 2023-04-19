@@ -4,7 +4,6 @@ module.exports = {
      * 
      * @param {string} string The string with Minecraft color codes to convert
      * @returns {string} The converted string with NodeJS console color codes
-     * 
      */
     convertConsoleColor(string) {
         const colors = {
