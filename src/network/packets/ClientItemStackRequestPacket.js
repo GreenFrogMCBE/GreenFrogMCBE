@@ -46,9 +46,6 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	 * 
 	 * @param {Client} player
 	 * @param {JSON} packet
-	 * 
-	 * @function
-	 * @returns {boolean} Returns if the packet is critical
 	 */
 	async readPacket(player, packet) {
 		if (player.gamemode == !GameModeLegacy.CREATIVE) {

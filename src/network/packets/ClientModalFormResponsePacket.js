@@ -17,7 +17,6 @@ const PacketConstructor = require("./PacketConstructor");
 class ClientModalFormResponsePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * 
 	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
@@ -26,8 +25,6 @@ class ClientModalFormResponsePacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * 
-	 * @function
 	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
@@ -40,8 +37,6 @@ class ClientModalFormResponsePacket extends PacketConstructor {
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 * @param {Server} player
-	 * @function
-	 * @asyncs
 	 */
 	async readPacket(player, packet, server) {
 		Frog.eventEmitter.emit('playerFormResponse', {

@@ -17,7 +17,6 @@ const Frog = require("../../Frog");
 class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * 
 	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
@@ -26,7 +25,6 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * 
 	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
@@ -35,9 +33,9 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * 
 	 * @param {Client} player
 	 * @param {JSON} packet
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		let shouldChange = true

@@ -58,7 +58,6 @@ const Commands = require("../../server/Commands");
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * 
 	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
@@ -67,7 +66,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * 
 	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
@@ -76,7 +74,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 	/**
 	 * Validates the packet
-	 * 
 	 * @param {ResourcePackStatus} response_status
 	 */
 	async validatePacket(response_status) {
@@ -89,7 +86,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * 
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 * @param {Server} server

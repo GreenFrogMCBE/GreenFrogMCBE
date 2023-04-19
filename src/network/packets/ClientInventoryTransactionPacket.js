@@ -32,9 +32,7 @@ const { config } = serverConfigurationFiles
 class ClientInventoryTransactionPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * 
 	 * @returns {string} The name of the packet
-	 * @function
 	 */
 	getPacketName() {
 		return "inventory_transaction";
@@ -42,9 +40,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * 
 	 * @returns {boolean} Returns if the packet is critical
-	 * @function
 	 */
 	isCriticalPacket() {
 		return false;
@@ -55,9 +51,6 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 	 * 
 	 * @param {Client} player
 	 * @param {JSON} packet
-	 * 
-	 * @function
-	 * @async
 	 */
 	async readPacket(player, packet, server) {
 		let actionID = null;
