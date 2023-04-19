@@ -17,15 +17,15 @@ const Frog = require("../../Frog");
 class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {string} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "request_chunk_radius";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;

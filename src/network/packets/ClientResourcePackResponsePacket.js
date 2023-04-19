@@ -59,22 +59,22 @@ const { getKey } = require("../../utils/Language");
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {string} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "resource_pack_client_response";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return true;
 	}
 
 	/**
-	 * Reads the packet from player
+	 * Reads the packet from the player
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 * @param {Server} server

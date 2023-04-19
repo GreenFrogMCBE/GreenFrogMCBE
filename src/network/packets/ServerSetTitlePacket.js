@@ -24,7 +24,7 @@ let platformOnlineId = "";
 class ServerSetTitlePacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {string} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "set_title";

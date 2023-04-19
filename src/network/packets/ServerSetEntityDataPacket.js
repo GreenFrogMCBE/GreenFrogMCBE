@@ -20,7 +20,7 @@ let runtime_entity_id;
 class ServerSetEntityDataPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {string} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_entity_data";
@@ -28,7 +28,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {boolean} Returns if the packet is critical
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;

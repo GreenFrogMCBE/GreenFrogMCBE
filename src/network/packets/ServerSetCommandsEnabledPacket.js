@@ -18,7 +18,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerSetCommandsEnabledPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {string} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_commands_enabled";
@@ -26,7 +26,7 @@ class ServerSetCommandsEnabledPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {boolean} Returns if the packet is critical
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;

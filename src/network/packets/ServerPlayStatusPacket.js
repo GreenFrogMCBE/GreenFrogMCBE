@@ -17,7 +17,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerPlayStatusPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {string} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "play_status";
@@ -25,7 +25,7 @@ class ServerPlayStatusPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {boolean} Returns if the packet is critical
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return true;

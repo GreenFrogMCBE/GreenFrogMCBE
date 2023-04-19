@@ -18,7 +18,7 @@ let port = 0;
 class ServerTransferPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {string} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "transfer";

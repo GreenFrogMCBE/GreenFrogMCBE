@@ -19,7 +19,7 @@ let gamemode = Gamemode.FALLBACK;
 class ServerSetPlayerGameTypePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name.
-	 * @returns {string} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "set_player_game_type";
@@ -27,7 +27,7 @@ class ServerSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Returns whether the packet is critical.
-	 * @returns {boolean} Returns if the packet is critical.
+	 * @returns {boolean}.
 	 */
 	isCriticalPacket() {
 		return false;

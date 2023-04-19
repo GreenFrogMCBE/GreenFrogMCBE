@@ -19,7 +19,7 @@ let tick = -1;
 class ServerUpdateAttributesPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {string} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "update_attributes";

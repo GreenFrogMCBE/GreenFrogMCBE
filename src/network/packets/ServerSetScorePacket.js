@@ -8,7 +8,7 @@ let entries = [];
 class ServerSetScorePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {string} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_score";
@@ -16,7 +16,7 @@ class ServerSetScorePacket extends PacketConstructor {
 
 	/**
 	 * Returns if the packet is critical
-	 * @returns {boolean} Returns if the packet is critical
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;

@@ -17,7 +17,7 @@ let time = 0;
 class ServerUpdateTimePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {string} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "update_time";
@@ -25,7 +25,7 @@ class ServerUpdateTimePacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {boolean} Returns if the packet is critical
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;

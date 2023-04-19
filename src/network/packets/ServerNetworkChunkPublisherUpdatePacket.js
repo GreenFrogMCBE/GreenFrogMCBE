@@ -19,7 +19,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {string} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "network_chunk_publisher_update";
@@ -27,7 +27,7 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {boolean} Returns if the packet is critical
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;

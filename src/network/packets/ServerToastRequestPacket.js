@@ -18,7 +18,7 @@ let message;
 class ServerToastRequestPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {string} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "toast_request";

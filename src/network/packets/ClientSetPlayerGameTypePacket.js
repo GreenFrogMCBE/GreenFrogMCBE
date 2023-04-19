@@ -28,8 +28,8 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the is packet critical?
-	 * @returns {boolean} Returns if the packet is critical
+	 * Returns if the packet critical??
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;

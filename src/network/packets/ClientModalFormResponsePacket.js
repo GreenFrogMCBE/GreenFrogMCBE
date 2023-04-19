@@ -17,15 +17,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ClientModalFormResponsePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {string} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "modal_form_response";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
