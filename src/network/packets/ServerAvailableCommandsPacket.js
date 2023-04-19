@@ -24,7 +24,7 @@ class ServerAvailableCommandsPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if is the packet critical?
+	 * Returns if the packet is critical??
 	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
@@ -32,7 +32,7 @@ class ServerAvailableCommandsPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Sets the packet data
+	 * Sets the command data
 	 * @param {JSON} new_data - The new command data
 	 */
 	setData(new_data) {

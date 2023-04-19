@@ -26,7 +26,7 @@ class ServerInventorySlotPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if is the packet critical?
+	 * Returns if the packet is critical??
 	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
