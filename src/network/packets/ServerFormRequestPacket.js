@@ -171,7 +171,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 	 * Sends the packet to the client
 	 * @param {Client} client
 	 */
-	send(client) {
+	writePacket(client) {
 		if (type === FormTypes.MODALFORM) {
 			client.queue(this.getPacketName(), {
 				form_id: this.getId(),

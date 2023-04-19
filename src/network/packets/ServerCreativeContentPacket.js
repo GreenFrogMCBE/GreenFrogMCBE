@@ -53,7 +53,7 @@ class ServerCreativeContentPacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			items: items,
+			items: this.getItems(),
 		});
 	}
 }
