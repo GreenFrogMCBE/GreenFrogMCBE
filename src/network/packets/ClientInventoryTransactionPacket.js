@@ -79,7 +79,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 						let chunks = require(`${__dirname}/../../world/chunks${config.generator === FrogWorldGenerators.DEFAULT ? "" : "_flat"}.json`);
 
 						for (const chunk of chunks) {
-							for (let x = 0; x < 80; x++) {
+							for (let x = 0; x < 80 /** magic value */; x++) {
 								if (chunk.x == x) {
 									const levelchunk = new ServerLevelChunkPacket();
 									levelchunk.setX(chunk.x);

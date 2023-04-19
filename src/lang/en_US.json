@@ -39,6 +39,15 @@
     "kickMessages.versionMismatch": "Your client version does not match with server version! Server is currently running on %s%",
     "kickMessages.invalidPacket": "Invalid packet",
     "kickMessages.serverClosed": "Server closed",
+    "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",
+
+    "status.resourcePacks.refused": "%s% refused server resource packs",
+    "status.resourcePacks.none": "%s% has no resource packs",
+    "status.resourcePacks.installed": "%s% has all the resource packs installed",
+    "status.resourcePacks.joined": "%s% joined",
+    "status.resourcePacks.spawned": "%s% spawned",
+
+    "warning.customItems.loading.failed": "Failed to load custom items! Error: %s%",
 
     "logger.info": "INFO",
     "logger.warn": "WARNING",
@@ -51,6 +60,8 @@
 
     "debug.player.unsupportedActionID": "Unsupported action ID from %s%: %d%",
     "debug.player.unsupportedActionID.block": "Unsupported block action ID from %s%: %d%",
+
+    "debug.playerlist.invalid": "Ignored invalid PlayerList packet",
 
     "chat.format": "<%s%> %d%",
     "chat.format.plugin": "%s%",
@@ -73,6 +84,11 @@
 
     "exceptions.plugin.noName": "No plugin name!",
     "exceptions.plugin.noVersion": "No plugin version!",
+
+    "exceptions.world.loading.failed": "Failed to load world! Error: %s%",
+    "exceptions.world.loading.failed.invalidChunkData": "Failed to load world (Invalid chunk data)!",
+
+    "exceptions.console.alreadyClosed": "Console is already closed!",
 
     "exceptions.logger.invalidWarning": "Invalid log type: warning. Its 'warn', and not 'warning'",
     "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug"

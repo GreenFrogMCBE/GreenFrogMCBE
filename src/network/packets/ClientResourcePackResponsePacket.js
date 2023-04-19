@@ -27,7 +27,6 @@ const FrogWorldGenerators = require("./types/FrogWorldGenerators");
 const PlayerInfo = require("../../api/player/PlayerInfo");
 
 const ChunkLoadException = require("../../utils/exceptions/ChunkLoadException");
-const PacketHandlingError = require("./exceptions/PacketHandlingError");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -54,6 +53,7 @@ const { serverConfigurationFiles } = require("../../Frog");
 const { lang, config } = serverConfigurationFiles
 
 const Commands = require("../../server/Commands");
+const { getKey } = require("../../utils/Language");
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
@@ -73,18 +73,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Validates the packet
-	 * @param {ResourcePackStatus} response_status
-	 */
-	async validatePacket(response_status) {
-		const valid = [ResourcePackStatus.NONE, ResourcePackStatus.REFUSED, ResourcePackStatus.HAVEALLPACKS, ResourcePackStatus.COMPLETED];
-
-		if (!valid.includes(response_status)) {
-			throw new PacketHandlingError("Invalid resource pack status! " + response_status);
-		}
-	}
-
-	/**
 	 * Reads the packet from player
 	 * @param {Client} player
 	 * @param {JSON} packet
@@ -92,29 +80,24 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 	 */
 	async readPacket(player, packet, server) {
 		const responseStatus = packet.data.params.response_status;
-		await this.validatePacket(responseStatus);
 
 		switch (responseStatus) {
 			case ResourcePackStatus.NONE:
 				Frog.eventEmitter.emit('playerHasNoResourcePacksInstalled', {
 					resourcePacksIds: [],
 					resourcePacksRequired: true,
-					server: server,
-					player: player
+					server,
+					player,
+					cancel: () => player.kick(getKey("kickMessages.serverDisconnect"))
 				});
-
-				Logger.info(lang.playerstatuses.noRpsInstalled.replace("%player%", player.username));
+				Logger.info(getKey("status.resourcePacks.none").replace("%s%", player.username));
 				break;
 			case ResourcePackStatus.REFUSED:
-				Frog.eventEmitter.emit('playerResourcePacksRefused', {
-					server: server,
-					player: player
-				});
-
-				Logger.info(lang.playerstatuses.rpsrefused.replace("%player%", player.username));
-				player.kick(lang.kickmessages.resourcePacksRefused);
+				Frog.eventEmitter.emit('playerResourcePacksRefused', { server, player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
+				Logger.info(getKey("status.resourcePacks.refused").replace("%s%", player.username));
+				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
-			case ResourcePackStatus.HAVEALLPACKS: {
+			case ResourcePackStatus.HAVEALLPACKS:
 				Frog.eventEmitter.emit('playerHasAllResourcePacks', {
 					resourcePacksIds: [],
 					resourcePacksRequired: true,
@@ -122,7 +105,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player: player
 				});
 
-				Logger.info(lang.playerstatuses.rpsInstalled.replace("%player%", player.username));
+				Logger.info(getKey("status.resourcePacks.installed").replace("%s%", player.username));
 
 				const resourcePackStack = new ResourcePackStack();
 				resourcePackStack.setMustAccept(false);
@@ -133,7 +116,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				resourcePackStack.setExperimentsPreviouslyUsed(false);
 				resourcePackStack.writePacket(player);
 				break;
-			}
 			case ResourcePackStatus.COMPLETED:
 				Frog.eventEmitter.emit('playerResourcePacksCompleted', {
 					server: server,
@@ -164,7 +146,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				if (!player.op) player.permissionLevel = config.dev.defaultPermissionLevel;
 
-				Logger.info(lang.playerstatuses.joined.replace("%player%", player.username));
+				Logger.info(getKey("status.resourcePacks.joined").replace("%s%", player.username));
 
 				const startGame = new StartGame();
 				startGame.setEntityId(0);
@@ -223,8 +205,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				const itemcomponent = new ItemComponent();
 				try {
 					itemcomponent.setItems(require("../../../world/custom_items.json").items);
-				} catch (e) {
-					Logger.warning("Failed to load custom items! " + e)
+				} catch (error) {
+					Logger.warning(getKey("warning.customItems.loading.failed").replace("%s%", error.stack))
 					itemcomponent.setItems([]);
 				}
 				itemcomponent.writePacket(player);
@@ -255,8 +237,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 					try {
 						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === FrogWorldGenerators.DEFAULT ? "" : "_flat"}.json`);
-					} catch (e) {
-						throw new ChunkLoadException(`${lang.errors.failedToLoadWorld} ${e}`);
+					} catch (error) {
+						throw new ChunkLoadException(getKey("exceptions.world.loading.failed").replace("%s%", error.stack));
 					}
 
 					for (const chunk of chunks) {
@@ -268,7 +250,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						try {
 							levelChunk.setPayload(chunk.payload.data);
 						} catch (e) {
-							throw new ChunkLoadException(lang.errors.failedToLoadWorld_InvalidChunkData);
+							throw new ChunkLoadException(getKey("exceptions.world.loading.failed.invalidChunkData"));
 						}
 						levelChunk.writePacket(player);
 					}
@@ -288,14 +270,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}, 4500);
 				}
 
-				Logger.info(lang.playerstatuses.spawned.replace("%player%", player.username));
+				Logger.info(getKey("status.resourcePacks.spawned").replace("%s%", player.username));
 
 				setTimeout(() => {
-					if (player.offline) return;
-
-					const ps = new PlayStatus();
-					ps.setStatus(PlayStatusType.PLAYERSPAWN);
-					ps.writePacket(player);
+					const playStatus = new PlayStatus();
+					playStatus.setStatus(PlayStatusType.PLAYERSPAWN);
+					playStatus.writePacket(player);
 
 					Frog.eventEmitter.emit('playerSpawn', {
 						player,
@@ -314,18 +294,18 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 					for (const onlineplayers of PlayerInfo.players) {
 						if (onlineplayers.username == player.username) {
-							Logger.debug("Ignored invalid PlayerList packet");
+							Logger.debug(getKey("debug.playerlist.invalid"));
 						} else {
 							let xuid = player.profile.xuid;
 							let uuid = player.profile.uuid;
 
-							const pl = new PlayerList();
-							pl.setType(PlayerListTypes.ADD);
-							pl.setUsername(player.username);
-							pl.setXboxID(xuid);
-							pl.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-							pl.setUUID(uuid);
-							pl.writePacket(onlineplayers);
+							const playerList = new PlayerList();
+							playerList.setType(PlayerListTypes.ADD);
+							playerList.setUsername(player.username);
+							playerList.setXboxID(xuid);
+							playerList.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							playerList.setUUID(uuid);
+							playerList.writePacket(onlineplayers);
 						}
 					}
 				}, 2000);

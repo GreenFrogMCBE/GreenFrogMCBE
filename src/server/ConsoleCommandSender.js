@@ -36,39 +36,33 @@ async function setupConsoleReader() {
 
 /**
  * Executes a command that the user typed in the console.
- *
  * 
- * 
- * @param {string} input - The command to execute.
+ * @param {string} executedCommand - The command to execute.
  * @throws {CommandHandlingException} Throws an error if the command cannot be executed.
  */
-async function executeConsoleCommand(input) {
-	if (isClosed) return;
-
+async function executeConsoleCommand(executedCommand) {
 	let shouldExecCommand = true
 
-	const args = input.split(" ").slice(1);
+	const args = executedCommand.split(" ").slice(1);
 
 	require("../Frog").eventEmitter.emit('serverExecutedCommand', {
 		server: require("../Frog").server,
 		args,
-		command: input,
+		command: executedCommand,
 		cancel() {
 			shouldExecCommand = false
 		}
 	})
 
-	if (!shouldExecCommand) return
+	if (isClosed || !shouldExecCommand || !executedCommand.replace(" ", "")) return
 
 	try {
-		if (!input.replace(" ", "")) return;
-
 		let commandFound = false;
 
 		for (const command of Commands.commandList) {
 			if (
-				command.data.name === input.split(" ")[0] ||
-				(command.data.aliases && command.data.aliases.includes(input.split(" ")[0]))
+				command.data.name === executedCommand.split(" ")[0] ||
+				(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
 			) {
 				if (
 					command.data.minArgs !== undefined &&
@@ -101,7 +95,7 @@ async function executeConsoleCommand(input) {
 							Logger.info(message);
 						},
 						// eslint-disable-next-line no-unused-vars
-						setGamemode: (gamemode) => {},
+						setGamemode: (gamemode) => { },
 						op: true,
 						username: "Server",
 						ip: "127.0.0.1",
@@ -119,12 +113,18 @@ async function executeConsoleCommand(input) {
 			Logger.info(
 				Language.getKey("commands.unknown").replace(
 					"%s%",
-					input.split(" ")[0]
+					executedCommand.split(" ")[0]
 				)
 			);
 		}
 	} catch (error) {
-		Logger.error(Language.getKey("commands.internalError".replace("%s", error.stack)));
+		require("../Frog").eventEmitter.emit('serverCommandProcessError', {
+			server: require("../Frog").server,
+			command: executedCommand,
+			error
+		});
+
+		Logger.error(Language.getKey("commands.internalError").replace("%s%", error.stack));
 	}
 }
 
@@ -132,12 +132,11 @@ module.exports = {
 	/**
 	 * Closes the console.
 	 * 
-	 * 
 	 * @throws {ConsoleSetupException} - If the console is already closed
 	 */
 	close() {
 		if (isClosed) {
-			throw new ConsoleSetupException("Console is already closed!");
+			throw new ConsoleSetupException(Language.getKey("exceptions.console.alreadyClosed"));
 		}
 
 		isClosed = true;
@@ -159,9 +158,6 @@ module.exports = {
 
 	/**
 	 * Starts the console.
-	 * 
-	 * 
-	 * 
 	 */
 	async start() {
 		lang = require("../Frog").serverConfigurationFiles.lang;
@@ -182,19 +178,9 @@ module.exports = {
 			});
 
 			if (shouldProcessCommand) {
-				try {
-					executeConsoleCommand(command)
+				executeConsoleCommand(command)
 
-					if (!isClosed) readLineInterface.prompt(true);
-				} catch (error) {
-					require("../Frog").eventEmitter.emit('serverCommandProcessError', {
-						server: require("../Frog").server,
-						command,
-						error
-					});
-
-					Logger.error(`Failed to execute command! ${error.stack}`);
-				}
+				if (!isClosed) readLineInterface.prompt(true);
 			}
 		});
 	},
