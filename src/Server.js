@@ -285,7 +285,6 @@ module.exports = {
 
 		Logger.info(Language.getKey("server.loading"));
 		Logger.info(Language.getKey("server.license"))
-		Logger.info(Language.getKey("server.copyNotice"))
 
 		if (process.versions.node.split('.')[0] < 14) {
 			Logger.error(Language.getKey("errors.nodeJS.tooOld"))

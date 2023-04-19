@@ -1,7 +1,6 @@
 {
     "server.loading": "Loading server...",
     "server.license": "GreenFrog is licensed under Creative Commons Attribution 4.0 International license. More info: https://creativecommons.org",
-    "server.copyNotice": "You may copy our code, only if you credit us",
 
     "server.shuttingDown": "Shutting down...",
 

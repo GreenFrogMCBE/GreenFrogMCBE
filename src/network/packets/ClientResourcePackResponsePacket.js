@@ -191,13 +191,17 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				commandManager.init(player);
 
 				for (const command of Commands.commandList) {
-					commandManager.addCommand(player, command.data.name, command.data.description)
+					if (!command.data.name == 'help') {
+						commandManager.addCommand(player, command.data.name, command.data.description)
+					}
 
 					const aliases = command.data.aliases;
 
 					if (aliases) {
 						for (const alias of aliases) {
-							commandManager.addCommand(player, alias, command.data.description)
+							if (alias == ! '?') {
+								commandManager.addCommand(player, alias, command.data.description)
+							}
 						}
 					}
 				}
