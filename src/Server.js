@@ -48,7 +48,6 @@ let isDebug = Frog.isDebug;
 /**
  * This function executes when something is off with the server
  * 
- * 
  * @private
  * @param {Error} error 
  */
@@ -70,7 +69,6 @@ async function _handleCriticalError(error) {
 
 /**
  * Handles packets
- * 
  * 
  * @param {Client} client 
  * @param {JSON} packetParams 
@@ -127,7 +125,6 @@ async function _handlePacket(client, packetParams) {
  * Logs a warning if the debug or unstable mode is enabled.
  * 
  * @private
- * 
  */
 async function _initDebug() {
 	if (config.unstable) {
@@ -142,7 +139,6 @@ async function _initDebug() {
  * Listens the server
  * 
  * @private
- * 
  */
 async function _listen() {
 	const { host, port } = config.network;
@@ -221,7 +217,6 @@ async function _listen() {
 /**
  * Executes, when player joins the server
  * 
- * 
  * @param {Client} client
  * @private
  */
@@ -271,8 +266,6 @@ async function _onJoin(client) {
 module.exports = {
 	/**
 	 * Starts the server
-	 * 
-	 *  
 	 */
 	async start() {
 		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);

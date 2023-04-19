@@ -119,8 +119,7 @@ module.exports = {
      * Also its calls onShutdown() in every
      * single plugin that is loaded
      * 
-     * 
-     * @param {string} shutdownMessage
+     * @param {string} shutdownMessage 
      */
     async shutdownServer(shutdownMessage = getKey("kickMessages.serverClosed")) {
         let shouldShutdown = true;
