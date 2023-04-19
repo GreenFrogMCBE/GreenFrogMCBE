@@ -1,5 +1,5 @@
 const DamageCause = require("../api/health/DamageCause");
-const GameMode = require("../api/player/GameMode");
+const Gamemode = require("../api/player/Gamemode");
 
 module.exports = {
     /**
@@ -10,7 +10,7 @@ module.exports = {
      * @param {JSON} position
      */
     async calculateFalldamage(player, position) {
-        if (player.gamemode == GameMode.CREATIVE || player.gamemode == GameMode.SPECTATOR) return;
+        if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
 
         let falldamageY = player.y - position.y;
 
@@ -34,7 +34,7 @@ module.exports = {
      * @param {JSON} position
      */
     async calculateHungerloss(player, position) {
-        if (player.gamemode == GameMode.CREATIVE || player.gamemode == GameMode.SPECTATOR) return;
+        if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
 
         if (position == !undefined && position.y == !player.y) return
 

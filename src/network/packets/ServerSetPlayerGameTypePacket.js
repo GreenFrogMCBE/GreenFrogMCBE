@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Gamemode = require("../../api/player/GameMode");
+const Gamemode = require("../../api/player/Gamemode");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -35,7 +35,7 @@ class ServerSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Sets the gamemode.
-	 * @param {GameMode} gamemode1 The gamemode to be set.
+	 * @param {Gamemode} gamemode1 The gamemode to be set.
 	 */
 	setGamemode(gamemode1) {
 		gamemode = gamemode1;
@@ -43,7 +43,7 @@ class ServerSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Returns the current gamemode.
-	 * @returns {GameMode} The current gamemode.
+	 * @returns {Gamemode} The current gamemode.
 	 */
 	getGamemode() {
 		return gamemode;

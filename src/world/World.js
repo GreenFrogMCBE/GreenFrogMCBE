@@ -2,9 +2,9 @@
 
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 
-const FrogWorldGenerators = require("../network/packets/types/FrogWorldGenerators");
+const WorldGenerators = require("../network/packets/types/WorldGenerators");
 const DamageCause = require("../api/health/DamageCause");
-const GameMode = require("../api/player/GameMode");
+const Gamemode = require("../api/player/Gamemode");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
@@ -172,7 +172,7 @@ class World {
 			});
 
 			for (const player of this.getPlayersInWorld()) {
-				if (!(player.health > 20 || player.hunger < 20 || player.offline || player.gamemode === GameMode.CREATIVE || player.gamemode === GameMode.SPECTATOR)) {
+				if (!(player.health > 20 || player.hunger < 20 || player.offline || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR)) {
 					player.setHealth(player.health + 1, DamageCause.REGENERATION);
 				}
 			}
@@ -202,13 +202,13 @@ class World {
 
 				let min = -64;
 
-				if (config.world.generator === FrogWorldGenerators.VOID) {
+				if (config.world.generator === WorldGenerators.VOID) {
 					min = undefined;
 				}
 
 				if (posY <= min) {
-					if (client.gamemode === GameMode.CREATIVE ||
-						client.gamemode === GameMode.SPECTATOR) {
+					if (client.gamemode === Gamemode.CREATIVE ||
+						client.gamemode === Gamemode.SPECTATOR) {
 						client.cannotBeDamagedByVoid = true
 					} else {
 						client.cannotBeDamagedByVoid = false

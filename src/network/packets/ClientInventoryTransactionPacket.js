@@ -14,7 +14,7 @@
 const BlockBreakException = require("../../utils/exceptions/BlockBreakException");
 const PacketConstructor = require("./PacketConstructor");
 
-const GameMode = require("../../api/player/GameMode");
+const Gamemode = require("../../api/player/Gamemode");
 const BlockActions = require("./types/BlockActions");
 
 const Logger = require("../../server/Logger");
@@ -22,7 +22,7 @@ const Frog = require("../../Frog");
 
 const ServerLevelChunkPacket = require("./ServerLevelChunkPacket");
 
-const FrogWorldGenerators = require("./types/FrogWorldGenerators");
+const WorldGenerators = require("./types/WorldGenerators");
 
 const { getKey } = require("../../utils/Language");
 
@@ -63,7 +63,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 
 		switch (actionID) {
 			case BlockActions.BLOCKBREAK:
-				if (player.gamemode == GameMode.ADVENTURE || player.gamemode == GameMode.SPECTATOR) {
+				if (player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
 					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s%", player.username));
 				}
 
@@ -76,7 +76,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 					blockPosition: packet.data.params.transaction.transaction_data.block_position,
 					transactionType: packet.data.params.transaction.transaction_type,
 					cancel: () => {
-						let chunks = require(`${__dirname}/../../world/chunks${config.generator === FrogWorldGenerators.DEFAULT ? "" : "_flat"}.json`);
+						let chunks = require(`${__dirname}/../../world/chunks${config.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`);
 
 						for (const chunk of chunks) {
 							for (let x = 0; x < 80 /** magic value */; x++) {

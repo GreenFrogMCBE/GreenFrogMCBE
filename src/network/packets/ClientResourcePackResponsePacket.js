@@ -22,7 +22,7 @@ const Generator = require("./types/Generator");
 const PlayStatusType = require("./types/PlayStatus");
 const PlayerListTypes = require("./types/PlayerList");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
-const FrogWorldGenerators = require("./types/FrogWorldGenerators");
+const WorldGenerators = require("./types/WorldGenerators");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
 
@@ -127,9 +127,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				player.world.setChunkRadius(require("../../../world/world_settings.json").chunkLoadRadius);
 				player.world.setName(require("../../../world/world_settings.json").worldName);
 
-				if (config.world.generator === FrogWorldGenerators.DEFAULT) {
+				if (config.world.generator === WorldGenerators.DEFAULT) {
 					player.world.setSpawnCoordinates(1070, 87, -914);
-				} else if (config.world.generator === FrogWorldGenerators.VOID) {
+				} else if (config.world.generator === WorldGenerators.VOID) {
 					player.world.setSpawnCoordinates(0, 100, 0);
 				} else {
 					player.world.setSpawnCoordinates(0, -58, 0);
@@ -216,7 +216,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setChunkRadius(player.world.getChunkRadius())
 
 					const coordinates =
-						config.world.generator === FrogWorldGenerators.DEFAULT
+						config.world.generator === WorldGenerators.DEFAULT
 							? {
 								x: 1070,
 								y: 274,
@@ -237,7 +237,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					let chunks = null;
 
 					try {
-						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === FrogWorldGenerators.DEFAULT ? "" : "_flat"}.json`);
+						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`);
 					} catch (error) {
 						throw new ChunkLoadException(getKey("exceptions.world.loading.failed").replace("%s%", error.stack));
 					}

@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Gamemode = require("../../api/player/GameMode");
+const Gamemode = require("../../api/player/Gamemode");
 const Difficulty = require("./types/Difficulty");
 const Dimension = require("./types/Dimension");
 const Generator = require("./types/Generator");

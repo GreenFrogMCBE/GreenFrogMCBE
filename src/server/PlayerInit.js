@@ -12,7 +12,7 @@
  */
 const Logger = require("./Logger");
 
-const GameMode = require("../api/player/GameMode");
+const Gamemode = require("../api/player/Gamemode");
 
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
@@ -107,19 +107,19 @@ module.exports = {
 		 * Sets player's gamemode
 		 * 
 		 * @param {Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
-		 * @type {import('../api/GameMode')}
+		 * @type {import('../api/Gamemode')}
 		 */
 		// prettier-ignore
 		player.setGamemode = function (gamemode) {
-			const allowedGameModes = [
-				GameMode.SURVIVAL,
-				GameMode.CREATIVE,
-				GameMode.ADVENTURE,
-				GameMode.SPECTATOR,
-				GameMode.FALLBACK
+			const allowedGamemodes = [
+				Gamemode.SURVIVAL,
+				Gamemode.CREATIVE,
+				Gamemode.ADVENTURE,
+				Gamemode.SPECTATOR,
+				Gamemode.FALLBACK
 			];
 
-			if (!allowedGameModes.includes(gamemode)) {
+			if (!allowedGamemodes.includes(gamemode)) {
 				throw new InvalidGamemodeException()
 			}
 
