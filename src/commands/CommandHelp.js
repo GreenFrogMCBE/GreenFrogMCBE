@@ -18,7 +18,6 @@ module.exports = {
             return;
         }
 
-        player.sendMessage(getKey("commands.help.execution.success.commandList"))
         for (const command of Commands.commandList) {
             player.sendMessage(`${command.data.name} - ${command.data.description}`)
         }        
