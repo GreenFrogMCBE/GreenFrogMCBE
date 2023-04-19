@@ -76,7 +76,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 					blockPosition: packet.data.params.transaction.transaction_data.block_position,
 					transactionType: packet.data.params.transaction.transaction_type,
 					cancel: () => {
-						let chunks = require(`${__dirname}/../../world/chunks${config.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`);
+						let chunks = require(`${__dirname}/../../world/chunks${config.generator === WorldGenerators.DEFAULT ? "" : "_flat"}json`);
 
 						for (const chunk of chunks) {
 							for (let x = 0; x < 80 /** magic value */; x++) {

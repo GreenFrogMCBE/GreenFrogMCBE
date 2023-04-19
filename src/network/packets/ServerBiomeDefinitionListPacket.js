@@ -41,7 +41,7 @@ class ServerBiomeDefinitionListPacket extends PacketConstructor {
 
 	/**
 	 * Returns the packet value
-	 * @returns {JSON}.
+	 * @returns {JSON}
 	 */
 	getValue() {
 		return value;
