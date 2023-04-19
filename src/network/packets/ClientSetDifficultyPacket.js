@@ -13,8 +13,6 @@
 const Frog = require("../../Frog");
 const World = require("../../world/World");
 
-const PacketHandlingError = require("./exceptions/PacketHandlingError");
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientSetDifficultyPacket extends PacketConstructor {
@@ -34,10 +32,6 @@ class ClientSetDifficultyPacket extends PacketConstructor {
 		return false;
 	}
 
-	async validatePacket(player) {
-		if (!player.op) throw new PacketHandlingError("Invalid set difficulty packet! Cannot update the server difficulty without being OP");
-	}
-
 	/**
 	 * Reads the packet from player
 	 * @param {Client} player
@@ -45,8 +39,6 @@ class ClientSetDifficultyPacket extends PacketConstructor {
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		await this.validatePacket(player);
-
 		const difficulty = packet.data.params.difficulty;
 
 		Frog.eventEmitter.emit('playerSetDifficulty', {

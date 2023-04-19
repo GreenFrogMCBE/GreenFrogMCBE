@@ -66,6 +66,9 @@
     "chat.format": "<%s%> %d%",
     "chat.format.plugin": "%s%",
 
+    "chat.broadcasts.joined": "%s% joined the game",
+    "chat.broadcasts.left": "%s% left the game",
+
     "creativemenu.badPacket": "Failed to handle ItemStackRequest from %s%. Error: %d%",
 
     "network.packet.unhandledPacket": "Unhandled packet!",
@@ -81,7 +84,8 @@
     "exceptions.network.packetHandlingError": "Failed to handle packet from %s%! Error: %d%",
     "exceptions.network.itemStackRequest.badGamemode": "Cannot get an item from creative menu, while not in creative",
     "exceptions.network.inventoryTransaction.invalid": "Bad InventoryTransaction packet from %s%",
-
+    "exceptions.network.invalidGamemodePacket": "Bad gamemode packet - Tried to switch gamemode, while not opped",
+    
     "exceptions.plugin.noName": "No plugin name!",
     "exceptions.plugin.noVersion": "No plugin version!",
 

@@ -11,9 +11,12 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Frog = require("../../Frog");
+
 const PacketConstructor = require("./PacketConstructor");
 
-const PacketHandlingError = require("./exceptions/PacketHandlingError");
+const InvalidGamemodeException = require("../../utils/exceptions/InvalidGamemodeException");
+
+const { getKey } = require("../../utils/Language");
 
 class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	/**
@@ -35,12 +38,9 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	/**
 	 * Validates if packet
 	 * @param {Client} player
-	 * @param {JSON} packet
 	 */
-	async validatePacket(player, packet) {
-		if (!packet.data.params.gamemode) throw new PacketHandlingError("Bad gamemode packet - Bad gamemode");
-
-		if (!player.op) throw new PacketHandlingError("Bad gamemode packet - Tried to switch gamemode, while not opped");
+	async validatePacket(player) {
+		if (!player.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"));
 	}
 
 	/**
@@ -60,7 +60,7 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 			server,
 			player,
 			gamemode,
-			cancel() {
+			cancel: () => {
 				shouldChange = false
 			}
 		})

@@ -50,9 +50,10 @@ const World = require("../../world/World");
 const Logger = require("../../server/Logger");
 
 const { serverConfigurationFiles } = require("../../Frog");
-const { lang, config } = serverConfigurationFiles
+const { config } = serverConfigurationFiles
 
 const Commands = require("../../server/Commands");
+
 const { getKey } = require("../../utils/Language");
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
@@ -311,10 +312,14 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				}, 2000);
 
 				setTimeout(() => {
-					if (player.offline) return;
-					for (let i = 0; i < PlayerInfo.players.length; i++) {
-						if (PlayerInfo.players[i].username == player.username) return; // Vanilla behaviour
-						PlayerInfo.players[i].sendMessage(lang.broadcasts.joinedTheGame.replace("%username%", player.username));
+					// NOTE: We can't use FrogJS.broadcastMessage here, because we need additional logic here (if PlayerInfo...)
+
+					for (const playerInfo of PlayerInfo.players) {
+						if (playerInfo.username === player.username) {
+							return; // Vanilla behaviour
+						}
+
+						playerInfo.sendMessage(getKey("chat.broadcasts.joined").replace("%s%", playerInfo.username));
 					}
 				}, 1000);
 		}

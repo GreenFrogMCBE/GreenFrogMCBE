@@ -1,6 +1,6 @@
 class InvalidGamemodeException extends Error {
-    constructor() {
-        super("Invalid gamemode provided.");
+    constructor(message = "Invalid gamemode provided.") {
+        super(message);
         this.name = "InvalidGamemodeException";
     }
 }
