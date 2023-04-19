@@ -55,7 +55,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			server,
 			args,
 			command: executedCommand,
-			cancel() {
+			cancel: () => {() {
 				shouldExecuteCommand = false
 			}
 		})

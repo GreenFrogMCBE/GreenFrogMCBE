@@ -44,7 +44,7 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 			radius: packet.data.params.radius,
 			player,
 			server,
-			cancel() {
+			cancel: () => {() {
 				shouldChange = false
 			}
 		})

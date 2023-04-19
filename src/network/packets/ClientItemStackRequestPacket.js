@@ -75,7 +75,7 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 				network_id,
 				block_runtime_id,
 				items: player.items,
-				cancel() {
+				cancel: () => {() {
 					shouldGiveItem = true
 				}
 			})

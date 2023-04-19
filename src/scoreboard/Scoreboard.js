@@ -52,7 +52,7 @@ class Scoreboard {
         Frog.eventEmitter.emit('scoreboardCreation', {
             server: require("../Server"),
             scoreboard: this,
-            cancel() {
+            cancel: () => {
                 shouldCreateScoreboard = false
             }
         })
@@ -85,7 +85,7 @@ class Scoreboard {
         Frog.eventEmitter.emit('scoreboardSetScore', {
             server: require("../Server"),
             scoreboard: this,
-            cancel() {
+            cancel: () => {
                 shouldSetScore = false
             }
         })
@@ -119,7 +119,7 @@ class Scoreboard {
         Frog.eventEmitter.emit('scoreboardScoreDelete', {
             server: require("../Server"),
             scoreboard: this,
-            cancel() {
+            cancel: () => {
                 shouldDeleteScore = false
             }
         })
@@ -152,7 +152,7 @@ class Scoreboard {
         Frog.eventEmitter.emit('scoreboardDelete', {
             server: require("../Server"),
             scoreboard: this,
-            cancel() {
+            cancel: () => {
                 shouldDelete = false
             }
         })

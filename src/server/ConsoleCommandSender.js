@@ -49,7 +49,7 @@ async function executeConsoleCommand(executedCommand) {
 		server: require("../Frog").server,
 		args,
 		command: executedCommand,
-		cancel() {
+		cancel: () => {
 			shouldExecCommand = false
 		}
 	})
@@ -172,7 +172,7 @@ module.exports = {
 			require("../Frog").eventEmitter.emit("serverCommandProcess", {
 				server: require("../Frog").server,
 				command,
-				cancel() {
+				cancel: () => {
 					shouldProcessCommand = false;
 				}
 			});

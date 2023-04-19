@@ -174,7 +174,7 @@ async function _listen() {
 						server: this,
 						packetName,
 						packetData: data,
-						cancel() {
+						cancel: () => {
 							shouldQueue = false;
 						},
 					});

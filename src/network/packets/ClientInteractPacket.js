@@ -73,7 +73,7 @@ class ClientInteractPacket extends PacketConstructor {
 					player,
 					server,
 					containerCoordinates,
-					cancel() {
+					cancel: () => {() {
 						shouldOpen = false
 					}
 				})

@@ -69,7 +69,7 @@ module.exports = {
 				player,
 				server,
 				message,
-				cancel() {
+				cancel: () => {() {
 					shouldSendMessage = false;
 				},
 			});
@@ -93,7 +93,7 @@ module.exports = {
 				player,
 				server,
 				message,
-				cancel() {
+				cancel: () => {() {
 					shouldSendMessage = false
 				},
 			});
@@ -130,7 +130,7 @@ module.exports = {
 				server,
 				gamemode,
 				oldGamemode: player.gamemode,
-				cancel() {
+				cancel: () => {() {
 					shouldChangeGamemode = false
 				},
 			});
@@ -163,7 +163,7 @@ module.exports = {
 					y,
 					z
 				},
-				cancel() {
+				cancel: () => {() {
 					shouldSetVelocity = false
 				}
 			})
@@ -198,7 +198,7 @@ module.exports = {
 				has_rot_z: (rot_z !== undefined),
 				player,
 				server: require("../Server"),
-				cancel() {
+				cancel: () => {() {
 					shouldTeleport = false
 				}
 			})
@@ -241,7 +241,7 @@ module.exports = {
 				port,
 				address,
 				server: server,
-				cancel() {
+				cancel: () => {() {
 					shouldTransfer = false
 				},
 			});
@@ -267,7 +267,7 @@ module.exports = {
 				player,
 				difficulty,
 				server: require("../Server"),
-				cancel() {
+				cancel: () => {() {
 					shouldChangeDifficulty = false;
 				},
 			});
@@ -293,7 +293,7 @@ module.exports = {
 				field,
 				value,
 				server: require("../Server"),
-				cancel() {
+				cancel: () => {() {
 					shouldSetEntityData = false;
 				},
 			});
@@ -349,7 +349,7 @@ module.exports = {
 				player,
 				radius,
 				server: require("../Server"),
-				cancel() {
+				cancel: () => {() {
 					shouldUpdateRadius = false
 				},
 			});
@@ -373,7 +373,7 @@ module.exports = {
 				player,
 				time,
 				server: require("../Server"),
-				cancel() {
+				cancel: () => {() {
 					shouldUpdateTime = false
 				},
 			});
@@ -397,7 +397,7 @@ module.exports = {
 				player,
 				attribute,
 				server: require("../Server"),
-				cancel() {
+				cancel: () => {() {
 					shouldSetAttribute = false
 				},
 			});
@@ -423,7 +423,7 @@ module.exports = {
 				player,
 				xp,
 				server: require("../Server"),
-				cancel() {
+				cancel: () => {() {
 					shouldSetXP = false
 				},
 			});
@@ -456,7 +456,7 @@ module.exports = {
 				health,
 				cause,
 				server: require("../Server"),
-				cancel() {
+				cancel: () => {() {
 					shouldSetHealth = false
 				},
 			});
@@ -520,7 +520,7 @@ module.exports = {
 				server: require("../Server"),
 				hunger,
 				cause,
-				cancel() {
+				cancel: () => {() {
 					shouldUpdateHunger = false;
 				}
 			})
@@ -559,7 +559,7 @@ module.exports = {
 				coordinates: { x, y, z },
 				respawnAfterSwitch: respawn,
 				server: require("../Server"),
-				cancel() {
+				cancel: () => {() {
 					shouldChangeDimension = false
 				},
 			});

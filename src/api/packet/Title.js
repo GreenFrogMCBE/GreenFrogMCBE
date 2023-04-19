@@ -126,7 +126,7 @@ class Title {
 			stayTime: this.getStayTime(),
 			text: this.getText(),
 			type: this.getType(),
-			cancel() {
+			cancel: () => {
 				shouldSendTitle = false
 			}
 		})

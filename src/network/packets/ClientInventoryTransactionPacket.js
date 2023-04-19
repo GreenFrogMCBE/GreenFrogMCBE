@@ -75,7 +75,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 					action: packet.data.params.transaction.transaction_data.actionType,
 					blockPosition: packet.data.params.transaction.transaction_data.block_position,
 					transactionType: packet.data.params.transaction.transaction_type,
-					cancel() {
+					cancel: () => {
 						let chunks = require(`${__dirname}/../../world/chunks${config.generator === FrogWorldGenerators.DEFAULT ? "" : "_flat"}.json`);
 
 						for (const chunk of chunks) {

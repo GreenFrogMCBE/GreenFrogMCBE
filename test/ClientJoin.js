@@ -10,12 +10,13 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const bedrock = require("frog-protocol");
+const protocol = require("frog-protocol");
 
 module.exports = {
 	async test() {
 		console.info("[client] joining...");
-		await bedrock.createClient({
+
+		await protocol.createClient({
 			host: "127.0.0.1",
 			port: 19132,
 			username: "bot",
