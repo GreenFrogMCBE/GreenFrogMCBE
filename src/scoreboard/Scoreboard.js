@@ -44,7 +44,7 @@ class Scoreboard {
     /**
      * Sends the scoreboard to the player.
      * 
-     * @function
+     * 
      */
     sendScoreboard() {
         let shouldCreateScoreboard = true
@@ -77,7 +77,7 @@ class Scoreboard {
      * @param {EntryTypes} [entry_type=EntryTypes.TEXT] - The type of the score entry.
      * @param {number} [entity_unique_id] - The unique ID of the entity associated with the score.
      * 
-     * @function
+     * 
      */
     setScore(score, text, entry_type = EntryTypes.TEXT, entity_unique_id = undefined) {
         let shouldSetScore = true
@@ -111,7 +111,7 @@ class Scoreboard {
      * Deletes a score on the scoreboard.
      *
      * @param {number} score - The score to set.
-     * @function
+     * 
      */
     deleteScore(score) {
         let shouldDeleteScore = true
@@ -144,7 +144,7 @@ class Scoreboard {
     /**
      * Deletes the scoreboard.
      * 
-     * @function
+     * 
      */
     deleteScoreboard() {
         let shouldDelete = true

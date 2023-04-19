@@ -5,8 +5,7 @@ class Random {
      * Generates random string
      * 
      * @param {number} length 
-     * @returns {string} 
-     * @function
+     * @returns {string} Randmo string
      */
     generateRandomString(length) {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

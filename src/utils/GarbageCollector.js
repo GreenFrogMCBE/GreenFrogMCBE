@@ -21,8 +21,6 @@ const Language = require('./Language');
 module.exports = {
 	/**
 	 * Removes data of offline players
-	 * 
-	 * @function
 	 */
 	clearOfflinePlayers() {
 		Frog.eventEmitter.emit('serverOfflinePlayersGarbageCollection', {
@@ -43,8 +41,6 @@ module.exports = {
 
 	/**
 	 * Clears RAM from useless data
-	 * 
-	 * @function
 	 */
 	gc() {
 		Logger.debug(Language.getKey("garbageCollector.started"));

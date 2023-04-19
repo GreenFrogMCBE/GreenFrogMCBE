@@ -32,7 +32,7 @@ async function replaceInFile(filePath, replacements) {
 	let fileContent = fs.readFileSync(filePath, "utf8");
 
 	for (const [searchValue, replaceValue] of replacements) {
-		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
+		fileContent = fileContent.replace(new RegExp("", "g"), "");
 	}
 
 	fs.writeFile(filePath, fileContent, {}, () => { });

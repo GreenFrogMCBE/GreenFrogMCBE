@@ -50,8 +50,8 @@ module.exports = {
 	/**
 	 * Adds API functions to the client object
 	 * 
-	 * @async
-	 * @function
+	 * 
+	 * 
 	 * 
 	 * @param {Client} player
 	 * @param {Server} server

@@ -18,7 +18,7 @@ let readLineInterface;
  * Set ups the console command reader that is used to handle commands
  * 
  * @throws {ConsoleSetupException} - If the console is closed
- * @async
+ * 
  */
 async function setupConsoleReader() {
 	if (isClosed) {
@@ -37,8 +37,8 @@ async function setupConsoleReader() {
 /**
  * Executes a command that the user typed in the console.
  *
- * @async
- * @function
+ * 
+ * 
  * @param {string} input - The command to execute.
  * @throws {CommandHandlingException} Throws an error if the command cannot be executed.
  */
@@ -132,7 +132,7 @@ module.exports = {
 	/**
 	 * Closes the console.
 	 * 
-	 * @function
+	 * 
 	 * @throws {ConsoleSetupException} - If the console is already closed
 	 */
 	close() {
@@ -160,8 +160,8 @@ module.exports = {
 	/**
 	 * Starts the console.
 	 * 
-	 * @async
-	 * @function
+	 * 
+	 * 
 	 */
 	async start() {
 		lang = require("../Frog").serverConfigurationFiles.lang;

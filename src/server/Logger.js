@@ -51,7 +51,7 @@ module.exports = {
 	 * @param {string} message 
 	 * @param {string} consoleType
 	 * 
-	 * @function
+	 * 
 	 */
 	log(langString, color, message, consoleType) {
 		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
@@ -81,7 +81,7 @@ module.exports = {
 	 * Logs a message to the console as warning
 	 * 
 	 * @param {string} message
-	 * @function
+	 * 
 	 */
 	warning(message) {
 		this.log(getKey('logger.warn'), '33', message, 'warn')
@@ -91,7 +91,7 @@ module.exports = {
 	 * Logs a message to the console as error
 	 * 
 	 * @param {string} message
-	 * @function
+	 * 
 	 */
 	error(message) {
 		this.log(getKey('logger.error'), '31', message, 'error')
@@ -102,7 +102,7 @@ module.exports = {
 	 * Requires for debug to be enabled in the server settings
 	 *
 	 * @param {string} message
-	 * @function
+	 * 
 	 */
 	debug(message) {
 		if (!(process.env.DEBUG === "minecraft-protocol" || this.isDebugEnabled())) return;

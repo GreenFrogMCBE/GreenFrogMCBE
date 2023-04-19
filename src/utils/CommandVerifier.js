@@ -7,7 +7,7 @@ const Language = require("./Language");
  * 
  * 
  * @private
- * @function
+ * 
  * @param {string} str 
  * @returns {string}
  */
