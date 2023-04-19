@@ -228,7 +228,7 @@ async function _onJoin(client) {
 	Object.assign(client, { pitch: 0, yaw: 0 }); // Player rotation 
 	Object.assign(client, { health: 20, hunger: 20, packetCount: 0, username: client.profile.name }); // API
 	Object.assign(client, { world: null, chunksEnabled: true, gamemode: Frog.serverConfigurationFiles.config.world.gamemode }); // World-related stuff
-	Object.assign(client, { dead: false, initialised: false, isConsole: false, fallDamageQueue: 0 }); // More API stuff
+	Object.assign(client, { op: null, dead: false, initialised: false, isConsole: false, fallDamageQueue: 0 }); // More API stuff
 	Object.assign(client, { ip: client.connection.address.split("/")[0], port: client.connection.address.split("/")[0] }); // Network
 
 	setInterval(() => {

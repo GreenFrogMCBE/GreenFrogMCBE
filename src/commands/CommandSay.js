@@ -17,17 +17,11 @@ module.exports = {
 		description: getKey("commands.say.description"),
 		minArg: 1,
 		maxArg: 1,
+        requiresOp: true
 	},
 
 	execute(_server, player, args) {
-		if (CommandVerifier.checkCommand(player, this.data) || !player.op) {
-			return;
-		}
-
-		if (!player.op) {
-            player.sendMessage(getKey("commands.unknown"));
-            return;
-        }
+		if (CommandVerifier.checkCommand(player, this.data )) { return; }
 
 		const message = args[0];
 		const msg = getKey("chat.format.say")

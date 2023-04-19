@@ -15,23 +15,12 @@ module.exports = {
 		description: getKey("commands.stop.description"),
 		minArg: 0,
 		maxArg: 0,
+        requiresOp: true
 	},
 
 	execute(_server, player) {
-		if (CommandVerifier.checkCommand(player, this.data)) {
-			return;
-		}
+		if (CommandVerifier.checkCommand(player, this.data )) { return; }
 
-		if (!player.op) {
-            player.sendMessage(getKey("commands.unknown"));
-            return;
-        }
-
-		if (player.isConsole) {
-			Frog.shutdownServer();
-			return
-		}
-
-		CommandVerifier.throwError(player, this.data);
+		Frog.shutdownServer();
 	},
 };

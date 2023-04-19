@@ -12,17 +12,11 @@ module.exports = {
 		description: getKey("commands.time.description"),
 		minArg: 1,
 		maxArg: 1,
+        requiresOp: true
 	},
 
 	execute(_server, player, args) {
-		if (CommandVerifier.checkCommand(player, this.data)) {
-			return;
-		}
-
-		if (!player.op) {
-            player.sendMessage(getKey("commands.unknown"));
-            return;
-        }
+		if (CommandVerifier.checkCommand(player, this.data )) { return; }
 
 		const time = args[1];
 		const setTime = time === getKey("commands.time.times.day") ? 1000 : time === getKey("commands.time.times.night") ? 17000 : parseInt(time, 10);

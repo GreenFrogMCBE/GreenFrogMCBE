@@ -12,7 +12,8 @@ module.exports = {
         name: getKey("commands.gamemode.name"),
         description: getKey("commands.gamemode.description"),
         minArg: 1,
-        maxArg: 1
+        maxArg: 1,
+        requiresOp: true
     },
 
     execute(_server, player, args) {
@@ -21,12 +22,7 @@ module.exports = {
             return;
         }
 
-        if (!player.op) {
-            player.sendMessage(getKey("commands.unknown"));
-            return;
-        }
-
-        if (CommandVerifier.checkCommand(player, this.data)) return;
+        if (CommandVerifier.checkCommand(player, this.data)) { return; }
 
         const gamemodeMap = {
             "0": "survival",

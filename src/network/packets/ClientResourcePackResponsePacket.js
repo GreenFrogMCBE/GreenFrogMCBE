@@ -141,7 +141,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					if (op.replace(/\r/g, "") === player.username) {
 						player.op = true;
 						player.permissionLevel = 4;
-						break;
+					} else {
+						player.op = false
 					}
 				}
 
@@ -191,13 +192,19 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				commandManager.init(player);
 
 				for (const command of Commands.commandList) {
-					commandManager.addCommand(player, command.data.name, command.data.description)
+					if (command.data.requiresOp == true && player.op == false) {
+						player.sendMessage("Ingnored command: " + command.data.name)
+						// ignore
+					} else {
+						player.sendMessage("UnIngnored command: " + command.data.name)
+						commandManager.addCommand(player, command.data.name, command.data.description)
 
-					const aliases = command.data.aliases;
+						const aliases = command.data.aliases;
 
-					if (aliases) {
-						for (const alias of aliases) {
-							commandManager.addCommand(player, alias, command.data.description)
+						if (aliases) {
+							for (const alias of aliases) {
+								commandManager.addCommand(player, alias, command.data.description)
+							}
 						}
 					}
 				}

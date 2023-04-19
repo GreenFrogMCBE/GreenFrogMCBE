@@ -29,19 +29,26 @@ module.exports = {
      *
      * @param {Client} player - The player who is executing the command.
      * @param {JSON} data - The command data.
+     * @param {boolean} oprequired - If OP is required to execute this command
      * @returns {boolean} - Returns true if the command is disabled, false otherwise.
      */
-    checkCommand(player, data) {
+    checkCommand(player, data, oprequired) {
+        if (!(player.isConsole || player.op) && oprequired) {
+            this.throwError(player, data);
+
+            return true
+        }
+
         if (player.isConsole) {
-            // Console commands
             if (!Frog.serverConfigurationFiles.config.chat.commands[`consoleCommand${capitalizeFirstLetter(data.name)}`]) {
                 this.throwError(player, data);
+
                 return true;
             }
         } else {
-            // Player commands
             if (!Frog.serverConfigurationFiles.config.chat.commands[`playerCommand${capitalizeFirstLetter(data.name)}`]) {
                 this.throwError(player, data);
+
                 return true;
             }
         }
