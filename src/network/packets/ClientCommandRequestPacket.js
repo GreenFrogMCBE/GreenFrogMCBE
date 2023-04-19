@@ -70,10 +70,12 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			let commandFound = false;
 
 			for (const command of Commands.commandList) {
+				console.log(command.data.name, executedCommand.split(" ")[0].replace(" ", "!"), command.data.name === executedCommand.split(" ")[0])
 				if (
-					command.data.name === executedCommand.split(" ")[0] ||
-					(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
+					command.data.name === executedCommand.split(" ")[0]
 				) {
+					commandFound = true;
+
 					if (
 						command.data.minArgs !== undefined &&
 						command.data.minArgs > args.length
@@ -104,6 +106,8 @@ class ClientCommandRequestPacket extends PacketConstructor {
 					break; // Exit loop once command has been found and executed
 				}
 			}
+
+			console.log("command found" + commandFound)
 
 			if (!commandFound) {
 				player.sendMessage(
