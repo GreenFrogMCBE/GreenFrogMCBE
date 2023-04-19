@@ -27,7 +27,7 @@ let layer = 0;
 class ServerUpdateBlockPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
+	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
 		return "update_block";
@@ -35,7 +35,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
