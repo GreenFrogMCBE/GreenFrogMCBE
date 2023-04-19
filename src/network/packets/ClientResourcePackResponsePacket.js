@@ -191,22 +191,20 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				commandManager.init(player);
 
 				for (const command of Commands.commandList) {
-					if (!command.data.name == 'help') {
-						commandManager.addCommand(player, command.data.name, command.data.description)
-					}
+					if (command.data.name == 'help') return
+
+					commandManager.addCommand(player, command.data.name, command.data.description)
 
 					const aliases = command.data.aliases;
 
 					if (aliases) {
 						for (const alias of aliases) {
-							if (alias == ! '?') {
-								commandManager.addCommand(player, alias, command.data.description)
-							}
+							commandManager.addCommand(player, alias, command.data.description)
 						}
 					}
 				}
 
-				// This packet is used to set custom items
+				// This packet is used to create custom items
 				const itemcomponent = new ItemComponent();
 				try {
 					itemcomponent.setItems(require("../../../world/custom_items.json").items);
