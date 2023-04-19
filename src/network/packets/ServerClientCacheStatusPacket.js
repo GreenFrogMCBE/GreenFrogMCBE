@@ -19,7 +19,7 @@ class ServerClientCacheStatusPacket extends PacketConstructor {
 	 * Returns the packet name
 	 * @returns {string}
 	 */
-	name() {
+	getPacketName() {
 		return "client_cache_status";
 	}
 
