@@ -76,6 +76,9 @@ module.exports = {
 
 			const text = new ServerTextPacket();
 			text.setMessage(message);
+			text.setPlatformChatId('')
+			text.setSourceName('')
+			text.setXuid('')
 			text.writePacket(player);
 		};
 

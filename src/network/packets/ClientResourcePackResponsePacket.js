@@ -191,7 +191,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				commandManager.init(player);
 
 				for (const command of Commands.commandList) {
-					if (command.data.name == 'help') return
+					if (command.data.name == 'help') break
 
 					commandManager.addCommand(player, command.data.name, command.data.description)
 
