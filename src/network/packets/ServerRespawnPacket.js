@@ -11,11 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 
-let pos = {
-	x: 0,
-	y: 0,
-	z: 0,
-};
+let position = {};
 let state = 0;
 let runtime_entity_id = 0;
 
@@ -31,7 +27,7 @@ class ServerRespawnPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical??
+	 * Returns if the packet is critical?
 	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
@@ -43,7 +39,7 @@ class ServerRespawnPacket extends PacketConstructor {
 	 * @returns {JSON} The position.
 	 */
 	getPosition() {
-		return pos;
+		return position;
 	}
 
 	/**
@@ -69,9 +65,9 @@ class ServerRespawnPacket extends PacketConstructor {
 	 * @param {number} z - The Z coordinate.
 	 */
 	setPosition(x, y, z) {
-		pos.x = x;
-		pos.y = y;
-		pos.z = z;
+		position.x = x;
+		position.y = y;
+		position.z = z;
 	}
 
 	/**

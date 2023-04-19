@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let value = null;
+let value = {}
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -24,7 +24,7 @@ class ServerBiomeDefinitionListPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical??
+	 * Returns if the packet is critical?
 	 * @returns {boolean}
 	 */
 	isCriticalPacket() {

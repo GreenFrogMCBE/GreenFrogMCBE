@@ -10,7 +10,6 @@ let rot_y = 0
 let rot_z = 0
 
 class ServerMoveEntityDataPacket extends PacketConstructor {
-
     /**
      * Returns the name of the packet
      * @returns {string}

@@ -12,7 +12,7 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let objectiveName = '';
+let objective_name;
 
 class ServerRemoveObjectivePacket extends PacketConstructor {
 	/**
@@ -24,7 +24,7 @@ class ServerRemoveObjectivePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical??
+	 * Returns if the packet is critical?
 	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
@@ -36,7 +36,7 @@ class ServerRemoveObjectivePacket extends PacketConstructor {
 	 * @param {string} new_objectivename
 	 */
 	setObjectiveName(new_objectivename) {
-		objectiveName = new_objectivename;
+		objective_name = new_objectivename;
 	}
 
 	/**
@@ -44,7 +44,7 @@ class ServerRemoveObjectivePacket extends PacketConstructor {
 	 * @returns {string}
 	 */
 	getObjectiveName() {
-		return objectiveName;
+		return objective_name;
 	}
 
 	/**

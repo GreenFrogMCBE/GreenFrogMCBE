@@ -24,7 +24,7 @@ class ServerItemComponentPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical??
+	 * Returns if the packet is critical?
 	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
