@@ -16,9 +16,9 @@ const ServerToastRequestPacket = require("../network/packets/ServerToastRequestP
 class Toast {
 	constructor() {
 		/** @type {string} */
-		this.title = null;
+		this.title;
 		/** @type {string} */
-		this.message = null;
+		this.message;
 	}
 
 	/**

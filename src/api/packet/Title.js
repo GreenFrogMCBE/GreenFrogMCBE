@@ -13,7 +13,7 @@ class Title {
 		/** @type {Titles} The type of the title */
 		this.type = TitleType.TITLE;
 		/** @type {string} The text to display in the title */
-		this.text = "";
+		this.text;
 		/** @type {number} The time it takes for the title to fade in */
 		this.fadeInTime = 0;
 		/** @type {number} The time the title will stay on the screen */
