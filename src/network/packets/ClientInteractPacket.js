@@ -49,10 +49,7 @@ class ClientInteractPacket extends PacketConstructor {
 	 * 
 	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {Server} server 
-	 * 
-	 * @function
-	 * @async
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		const actionID = packet.data.params.action_id;
