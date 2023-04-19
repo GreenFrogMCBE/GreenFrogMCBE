@@ -65,7 +65,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Sets the ID of the player
 	 * @param new_id
 	 */
-	setId(new_id) {
+	setID(new_id) {
 		id = new_id;
 	}
 

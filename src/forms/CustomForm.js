@@ -111,7 +111,7 @@ class CustomForm {
 	 */
 	send(client) {
 		const packet = new ServerFormRequestPacket();
-		packet.setId(this.id);
+		packet.setID(this.id);
 		packet.setTitle(this.title);
 		packet.setContent(JSON.stringify(this.actions));
 		packet.setButtons(JSON.stringify(this.buttons));

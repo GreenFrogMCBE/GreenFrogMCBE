@@ -58,7 +58,7 @@ class Form {
 
 	send(client) {
 		const FormReq = new FormRequest();
-		FormReq.setId(this.id);
+		FormReq.setID(this.id);
 		FormReq.setTitle(this.title);
 		FormReq.setContent(this.text);
 		FormReq.setButtons(JSON.stringify(this.buttons));

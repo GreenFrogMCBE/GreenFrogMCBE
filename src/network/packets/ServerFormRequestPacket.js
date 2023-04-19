@@ -43,7 +43,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 	 * Sets the ID for the form
 	 * @param {number} new_id
 	 */
-	setId(new_id) {
+	setID(new_id) {
 		id = new_id;
 	}
 
