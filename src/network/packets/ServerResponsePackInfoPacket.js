@@ -85,7 +85,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Returns the list of behavior packs.
-	 * @returns {Array}.
+	 * @returns {Array}
 	 */
 	getBehaviorPacks() {
 		return behavior_packs;
@@ -93,7 +93,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Returns the list of texture packs.
-	 * @returns {Array}.
+	 * @returns {Array}
 	 */
 	getTexturePacks() {
 		return texture_packs;

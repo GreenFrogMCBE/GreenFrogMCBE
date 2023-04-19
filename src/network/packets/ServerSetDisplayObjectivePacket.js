@@ -11,7 +11,7 @@ let sortOrder = 0;
 class ServerScoreboardObjectivePacket extends PacketConstructor {
     /**
      * Returns the packet name.
-     * @returns {string}.
+     * @returns {string}
      */
     getPacketName() {
         return "set_display_objective";
@@ -19,7 +19,7 @@ class ServerScoreboardObjectivePacket extends PacketConstructor {
 
     /**
      * Returns if the packet is critical?.
-     * @returns {boolean}.
+     * @returns {boolean}
      */
     isCriticalPacket() {
         return false;
