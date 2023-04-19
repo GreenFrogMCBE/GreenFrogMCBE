@@ -46,11 +46,16 @@
     "logger.debug": "DEBUG",
 
     "debug.debugEnabled": "Debug mode is enabled. This may cause lag when sending large packets",
-    "debug.unstable": "Unstabe mode is enabled. This will recover server from critical errors, but it may cause plugin data corruption",
+    "debug.unstable": "Unstable mode is enabled. This will recover server from critical errors, but it may cause plugin data corruption",
     "debug.unstable.unsupported": "Also, unstable mode is not supported by GreenFrog developers and you are the responsive for the data corruption if it occurs",
 
     "debug.player.unsupportedActionID": "Unsupported action ID from %s%: %d%",
     "debug.player.unsupportedActionID.block": "Unsupported block action ID from %s%: %d%",
+
+    "chat.format": "<%s%> %d%",
+    "chat.format.plugin": "%s%",
+
+    "creativemenu.badPacket": "Failed to handle ItemStackRequest from %s%. Error: %d%",
 
     "network.packet.unhandledPacket": "Unhandled packet!",
    
@@ -58,19 +63,16 @@
     "network.server.listening.failed": "Failed to listen on %s%. Error: %d%",
     "network.server.listening.failed.otherServerRunning": "Mabye another server is running on the same port?",
 
-    "chat.format": "<%s%> %d%",
-    "chat.format.plugin": "%s%",
+    "network.packet.failed.clientSide": "Cannot write a client-side packet",
+    "network.packet.failed.serverSide": "Cannot read a server-side packet",
 
     "exceptions.network.rateLimited": "Too many packets from %s% (%d%)",
     "exceptions.network.packetHandlingError": "Failed to handle packet from %s%! Error: %d%",
-    
+    "exceptions.network.itemStackRequest.badGamemode": "Cannot get an item from creative menu, while not in creative",
     "exceptions.network.inventoryTransaction.invalid": "Bad InventoryTransaction packet from %s%",
 
     "exceptions.plugin.noName": "No plugin name!",
     "exceptions.plugin.noVersion": "No plugin version!",
-
-    "network.packet.failed.clientSide": "Cannot write a client-side packet",
-    "network.packet.failed.serverSide": "Cannot read a server-side packet",
 
     "exceptions.logger.invalidWarning": "Invalid log type: warning. Its 'warn', and not 'warning'",
     "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug"

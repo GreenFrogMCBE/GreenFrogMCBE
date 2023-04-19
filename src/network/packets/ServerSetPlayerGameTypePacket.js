@@ -28,7 +28,7 @@ class ServerSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Returns whether the packet is critical.
-	 * @returns {Boolean} Returns if the packet is critical.
+	 * @returns {boolean} Returns if the packet is critical.
 	 */
 	isCriticalPacket() {
 		return false;

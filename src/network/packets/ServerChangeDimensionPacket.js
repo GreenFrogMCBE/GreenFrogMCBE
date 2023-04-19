@@ -33,7 +33,7 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
@@ -77,7 +77,7 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the player needs the be respawned
-	 * @returns {Boolean} If the player needs to be respawned
+	 * @returns {boolean} If the player needs to be respawned
 	 */
 	getRespawn() {
 		return respawn;

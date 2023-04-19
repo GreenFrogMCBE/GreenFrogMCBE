@@ -48,7 +48,7 @@ module.exports = {
     /**
      * Returns if the server is in debug mode
      * 
-     * @returns {Boolean}
+     * @returns {boolean}
      */
     isDebug: process.argv.includes("--debug") || getConfig().config.dev.debug,
 

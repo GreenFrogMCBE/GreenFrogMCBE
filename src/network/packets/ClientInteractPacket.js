@@ -26,7 +26,9 @@ const { getKey } = require("../../utils/Language");
 class ClientInteractPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
+	 * 
 	 * @returns {string} The name of the packet
+	 * @function
 	 */
 	getPacketName() {
 		return "interact";
@@ -34,7 +36,9 @@ class ClientInteractPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * 
+	 * @returns {boolean} Returns if the packet is critical
+	 * @function
 	 */
 	isCriticalPacket() {
 		return false;
@@ -46,6 +50,9 @@ class ClientInteractPacket extends PacketConstructor {
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 * @param {Server} server 
+	 * 
+	 * @function
+	 * @async
 	 */
 	async readPacket(player, packet, server) {
 		const actionID = packet.data.params.action_id;

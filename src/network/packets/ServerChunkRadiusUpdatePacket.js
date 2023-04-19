@@ -25,7 +25,7 @@ class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false;

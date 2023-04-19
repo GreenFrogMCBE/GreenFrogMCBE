@@ -146,7 +146,7 @@ module.exports = {
 	/**
 	 * Returns true if the console is closed, false otherwise.
 	 * 
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	isClosed,
 

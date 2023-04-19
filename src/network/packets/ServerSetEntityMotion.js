@@ -14,7 +14,7 @@ class ServerSetEntityMotion extends PacketConstructor {
 
     /**
      * Returns whether the packet is critical or not
-     * @returns {Boolean} True if the packet is critical, false otherwise
+     * @returns {boolean} True if the packet is critical, false otherwise
      */
     isCriticalPacket() {
         return false;

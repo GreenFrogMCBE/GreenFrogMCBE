@@ -29,7 +29,7 @@ class PacketConstructor {
 	/**
 	 * Returns if the packet is critical
 	 * 
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;

@@ -14,15 +14,15 @@ const Frog = require("../../Frog");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const ItemException = require("../../utils/exceptions/ItemException");
 const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
 const GameModeLegacy = require("./types/GameModeLegacy");
 const InventoryType = require("./types/InventoryType");
 
-const { serverConfigurationFiles } = Frog;
-const { lang } = serverConfigurationFiles
-
 const Logger = require("../../server/Logger");
+
+const InvalidItemStackException = require("../../utils/exceptions/InvalidItemStackException");
+
+const { getKey } = require("../../utils/Language");
 
 class ClientItemStackRequestPacket extends PacketConstructor {
 	/**
@@ -35,7 +35,7 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
@@ -46,10 +46,13 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	 * 
 	 * @param {Client} player
 	 * @param {JSON} packet
+	 * 
+	 * @function
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	async readPacket(player, packet) {
 		if (player.gamemode == !GameModeLegacy.CREATIVE) {
-			return
+			throw new InvalidItemStackException(getKey("exceptions.network.itemStackRequest.badGamemode"))
 		}
 
 		try {
@@ -106,8 +109,8 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 
 				inventorySlotPacket.writePacket(player);
 			}
-		} catch (e) {
-			Logger.error(lang.errors.failedToHandleItemRequest.replace("%data%", `${player.username}: ${e.stack}`));
+		} catch (error) {
+			Logger.error(getKey("creativemenu.badPacket").replace("%s%", player.username).replace("%e%", error.stack));
 		}
 	}
 }

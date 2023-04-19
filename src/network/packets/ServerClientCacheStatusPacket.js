@@ -25,7 +25,7 @@ class ServerClientCacheStatusPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
@@ -33,7 +33,7 @@ class ServerClientCacheStatusPacket extends PacketConstructor {
 
 	/**
 	 * Sets if the caching is enabled?
-	 * @param {Boolean} new_enabled - Caching enabled?
+	 * @param {boolean} new_enabled - Caching enabled?
 	 */
 	setEnabled(new_enabled) {
 		enabled = new_enabled;
@@ -41,7 +41,7 @@ class ServerClientCacheStatusPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the caching is enabled
-	 * @returns {Boolean} If the caching is enabled.
+	 * @returns {boolean} If the caching is enabled.
 	 */
 	getEnabled() {
 		return enabled;

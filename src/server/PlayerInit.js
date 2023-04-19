@@ -283,7 +283,7 @@ module.exports = {
 		 * Sets the data of the player/entity (eg on_fire, etc)
 		 * 
 		 * @param {string} field
-		 * @param {Boolean} value
+		 * @param {boolean} value
 		 */
 		player.setEntityData = function (field, value) {
 			let shouldSetEntityData = true;
@@ -546,7 +546,7 @@ module.exports = {
 		 * @param {Float} y
 		 * @param {Float} z
 		 * @param {Dimension} dimension
-		 * @param {Boolean} respawn
+		 * @param {boolean} respawn
 		 * 
 		 * @type {import('../network/packets/types/Dimension')}
 		 */

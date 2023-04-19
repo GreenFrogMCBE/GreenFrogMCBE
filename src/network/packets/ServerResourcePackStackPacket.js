@@ -30,7 +30,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return true;
@@ -38,7 +38,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Sets if the client must accept the packet
-	 * @param {Boolean} new_must_accept
+	 * @param {boolean} new_must_accept
 	 */
 	setMustAccept(new_must_accept) {
 		must_accept = new_must_accept;
@@ -78,7 +78,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Sets the if the experiments were previously used
-	 * @param {Boolean} new_experiments_previously_used
+	 * @param {boolean} new_experiments_previously_used
 	 */
 	setExperimentsPreviouslyUsed(new_experiments_previously_used) {
 		experiments_previously_used = new_experiments_previously_used;
@@ -86,7 +86,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Returns the if the client must accept the packet
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getMustAccept() {
 		return must_accept;
@@ -126,7 +126,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the experiments were previously used
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getExperimentsPreviouslyUsed() {
 		return experiments_previously_used;

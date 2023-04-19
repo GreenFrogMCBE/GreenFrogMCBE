@@ -31,7 +31,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns whether the packet is critical or not.
-	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
+	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return false;
@@ -55,7 +55,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the if the message needs translation
-	 * @param {Boolean} new_needs_translation
+	 * @param {boolean} new_needs_translation
 	 */
 	setNeedsTranslation(new_needs_translation) {
 		needs_translation = new_needs_translation;
@@ -103,7 +103,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the needs translation
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getNeedsTranslation() {
 		return needs_translation;

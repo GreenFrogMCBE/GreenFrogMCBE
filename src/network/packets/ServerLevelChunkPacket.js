@@ -29,7 +29,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
@@ -61,7 +61,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Sets if the cache is enabled
-	 * @param {Boolean} new_cache_enabled
+	 * @param {boolean} new_cache_enabled
 	 */
 	setCacheEnabled(new_cache_enabled) {
 		cache_enabled = new_cache_enabled;
@@ -101,7 +101,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the cache is enabled
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getCacheEnabled() {
 		return cache_enabled;

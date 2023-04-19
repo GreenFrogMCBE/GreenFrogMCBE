@@ -29,7 +29,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return true;
@@ -37,7 +37,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Sets if the client must accept the packet
-	 * @param {Boolean} new_must_accept
+	 * @param {boolean} new_must_accept
 	 */
 	setMustAccept(new_must_accept) {
 		must_accept = new_must_accept;
@@ -45,7 +45,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Sets, if the resource pack has scripts
-	 * @param {Boolean} new_has_scripts
+	 * @param {boolean} new_has_scripts
 	 */
 	setHasScripts(new_has_scripts) {
 		has_scripts = new_has_scripts;
@@ -69,7 +69,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the resource pack is forced to accept.
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getMustAccept() {
 		return must_accept;
@@ -77,7 +77,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the resource pack has scripts.
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getHasScripts() {
 		return has_scripts;

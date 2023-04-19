@@ -7,6 +7,8 @@ const PacketConstructor = require("./PacketConstructor");
 class ClientMovePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
+	 * 
+	 * @function
 	 * @returns {string} The name of the packet
 	 */
 	getPacketName() {
@@ -15,7 +17,9 @@ class ClientMovePacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * 
+	 * @function
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
@@ -27,6 +31,8 @@ class ClientMovePacket extends PacketConstructor {
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 * @param {Server} server
+	 * @function
+	 * @async
 	 */
 	async readPacket(player, packet, server) {
 		const { x, y, z } = packet.data.params.position

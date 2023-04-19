@@ -26,7 +26,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns {boolean} Returns if the packet is critical
 	 */
 	isCriticalPacket() {
 		return false;
@@ -42,7 +42,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Sets if the request is coming from server
-	 * @param {Boolean} new_server
+	 * @param {boolean} new_server
 	 */
 	setServer(new_server) {
 		server = new_server;
@@ -58,7 +58,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Returns if request is coming from server
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getServer() {
 		return server;

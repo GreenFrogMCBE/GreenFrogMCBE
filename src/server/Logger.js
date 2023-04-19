@@ -36,7 +36,7 @@ module.exports = {
 	/**
 	 * Returns if debug is enabled or not
 	 * 
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	isDebugEnabled() { require("../Frog").isDebug },
 
