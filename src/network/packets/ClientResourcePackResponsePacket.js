@@ -49,12 +49,12 @@ const World = require("../../world/World");
 
 const Logger = require("../../server/Logger");
 
-const { serverConfigurationFiles } = require("../../Frog");
-const { config } = serverConfigurationFiles
-
 const Commands = require("../../server/Commands");
 
 const { getKey } = require("../../utils/Language");
+
+const { serverConfigurationFiles } = require("../../Frog");
+const { config } = serverConfigurationFiles
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
