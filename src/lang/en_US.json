@@ -9,14 +9,14 @@
     "garbageCollector.deleted": "[Garbage collector] Deleted %s%",
     "garbageCollector.finished": "[Garbage collector] Finished",
 
-    "commands.unknown": "Unknown command: %s%. Please check that the command exists and that you have permission to use it.",
+    "commands.unknown": "§cUnknown command: %s%. Please check that the command exists and that you have permission to use it.",
     "commands.internalError": "Failed to execute command! Error: %s%",
     "commands.internalError.player": "Failed to execute command from %s%. Error: %d%",
 
     "commands.ingame.executed": "%s% executed server command: /%d%",
 
-    "commands.errors.syntaxError.minArg": "SyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
-    "commands.errors.syntaxError.maxArg": "SyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
+    "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
+    "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
     
     "scoreboard.name.default": "Scoreboard",
 
