@@ -10,6 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const { getKey } = require("../utils/Language");
+
 const PluginSetupException = require("../utils/exceptions/PluginSetupException");
 
 /** @private */
@@ -37,11 +39,11 @@ module.exports = {
 		let pluginString = `${name} v${version}`
 
 		if (!name) {
-			throw new PluginSetupException(pluginString, "No plugin name!")
+			throw new PluginSetupException(pluginString, getKey("exceptions.plugin.noName"))
 		}
 
 		if (!version) {
-			throw new PluginSetupException(pluginString, "No plugin version!")
+			throw new PluginSetupException(pluginString, getKey("exceptions.plugin.noVersion"))
 		}
 
 		plugins.push(pluginString)

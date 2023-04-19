@@ -1,10 +1,13 @@
 const Frog = require("../Frog");
 
+const Language = require("./Language");
+
 /**
  * Capitalizes the first letter of a string
  * 
  * 
  * @private
+ * @function
  * @param {string} str 
  * @returns {string}
  */
@@ -20,7 +23,7 @@ module.exports = {
      * @param {JSON} data 
      */
     throwError(commandExecutor, data) {
-        commandExecutor.sendMessage(Frog.serverConfigurationFiles.lang.errors.unknownCommandOrNoPermission.replace('%commandname%', data.name));
+        commandExecutor.sendMessage(Language.getKey("commands.unknown").replace('%s%', data.name));
     },
 
     /**

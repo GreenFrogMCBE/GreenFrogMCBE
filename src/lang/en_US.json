@@ -2,6 +2,32 @@
     "server.loading": "Loading server...",
     "server.license": "GreenFrog is licensed under Creative Commons Attribution 4.0 International license. More info: https://creativecommons.org",
     "server.copyNotice": "You may copy this, only if you credit us",
+
+    "server.shuttingDown": "Shutting down...",
+
+    "garbageCollector.started": "[Garbage collector] Started garbage collection...",
+    "garbageCollector.deleted": "[Garbage collector] Deleted %s%",
+    "garbageCollector.finished": "[Garbage collector] Finished",
+
+    "commands.unknown": "Unknown command: %s%. Please check that the command exists and that you have permission to use it.",
+    "commands.internalError": "Failed to execute command! Error: %s%",
+    "commands.internalError.player": "Failed to execute command from %s%. Error: %d%",
+
+    "commands.ingame.executed": "%s% executed server command: /%d%",
+
+    "commands.errors.syntaxError.minArg": "SyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
+    "commands.errors.syntaxError.maxArg": "SyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
+    
+    "scoreboard.name.default": "Scoreboard",
+
+    "plugin.loading.failed": "Failed to load %s%. Error: %d%",
+    "plugin.loading.loading": "Loading plugin %s% v%d%",
+    "plugin.loading.loaded": "Loaded plugin %s% v%d%",
+    "plugin.loading.warning.invalidJson": "Invalid JSON data provided for %s%. Error: %d%",
+
+    "plugin.unloading.failed": "Failed to unload %s%. Error: %d%",
+    "plugin.unloading.success": "Unloaded %s%",
+    "plugin.unloading.unloading": "Unloading %s%...",
     
     "frog.version": "This server is running GreenFrogMCBE. Version: %s%",
 
@@ -9,11 +35,42 @@
     "errors.nodeJS.tooOld.update": "Please update it to 14.0.0+, from https://nodejs.org/",
 
     "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
+    "kickMessages.serverFull": "disconnectionScreen.serverFull",
+    "kickMessages.versionMismatch": "Your client version does not match with server version! Server is currently running on %s%",
+    "kickMessages.invalidPacket": "Invalid packet",
+    "kickMessages.serverClosed": "Server closed",
 
     "logger.info": "INFO",
     "logger.warn": "WARNING",
     "logger.error": "ERROR",
     "logger.debug": "DEBUG",
+
+    "debug.debugEnabled": "Debug mode is enabled. This may cause lag when sending large packets",
+    "debug.unstable": "Unstabe mode is enabled. This will recover server from critical errors, but it may cause plugin data corruption",
+    "debug.unstable.unsupported": "Also, unstable mode is not supported by GreenFrog developers and you are the responsive for the data corruption if it occurs",
+
+    "debug.player.unsupportedActionID": "Unsupported action ID from %s%: %d%",
+    "debug.player.unsupportedActionID.block": "Unsupported block action ID from %s%: %d%",
+
+    "network.packet.unhandledPacket": "Unhandled packet!",
+   
+    "network.server.listening.success": "Listening on %s%",
+    "network.server.listening.failed": "Failed to listen on %s%. Error: %d%",
+    "network.server.listening.failed.otherServerRunning": "Mabye another server is running on the same port?",
+
+    "chat.format": "<%s%> %d%",
+    "chat.format.plugin": "%s%",
+
+    "exceptions.network.rateLimited": "Too many packets from %s% (%d%)",
+    "exceptions.network.packetHandlingError": "Failed to handle packet from %s%! Error: %d%",
+    
+    "exceptions.network.inventoryTransaction.invalid": "Bad InventoryTransaction packet from %s%",
+
+    "exceptions.plugin.noName": "No plugin name!",
+    "exceptions.plugin.noVersion": "No plugin version!",
+
+    "network.packet.failed.clientSide": "Cannot write a client-side packet",
+    "network.packet.failed.serverSide": "Cannot read a server-side packet",
 
     "exceptions.logger.invalidWarning": "Invalid log type: warning. Its 'warn', and not 'warning'",
     "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug"

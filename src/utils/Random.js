@@ -6,6 +6,7 @@ class Random {
      * 
      * @param {number} length 
      * @returns {string} 
+     * @function
      */
     generateRandomString(length) {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

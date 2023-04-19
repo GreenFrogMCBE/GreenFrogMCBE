@@ -15,7 +15,8 @@ module.exports = {
 	 * Returns the version as a protocol number
 	 * 
 	 * @param {string} version
-	 * @returns The version as a protocol number
+	 * @returns {number} The version as a protocol number
+	 * @function
 	 */
 	getProtocol(version) {
 		switch (version) {

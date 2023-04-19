@@ -7,8 +7,9 @@ const LanguageException = require("./exceptions/LanguageException")
  */
 
 /**
- * Get the content of a language file.
+ * Returns the content of a language file.
  *
+ * @function
  * @param {string} lang - The language code.
  * @returns {LanguageContent} The content of the language file.
  * @throws {LanguageException} If the language file is not found or is not valid JSON.
@@ -31,8 +32,9 @@ function getLanguage(lang) {
 }
 
 /**
- * Get a specific key from the current language file.
+ * Returns a specific key from the current language file.
  *
+ * @function
  * @param {string} key - The key to retrieve.
  * @returns {string} The value associated with the key.
  */

@@ -8,6 +8,8 @@ const GameMode = require("../api/player/GameMode");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
+const Air = require("../block/Air");
+
 const Frog = require("../Frog");
 
 /** @private */
@@ -17,18 +19,21 @@ class World {
 	constructor() {
 		/**
 		 * The name of the world.
+		 * 
 		 * @type {string}
 		 */
 		this.worldName;
 
 		/**
 		 * The coordinates of the spawn point.
-		 * @type {{ x: Number, y: Number, z: Number }}
+		 * 
+		 * @type {{ x: number, y: number, z: number }}
 		 */
 		this.coords = {};
 
 		/**
 		 * The chunk render radius.
+		 * 
 		 * @type {number}
 		 */
 		this.renderDistance;
@@ -36,6 +41,7 @@ class World {
 
 	/**
 	 * Sets the name of the world.
+	 * 
 	 * @param {string} name - The new name of the world.
 	 */
 	setName(name) {
@@ -44,6 +50,7 @@ class World {
 
 	/**
 	 * Gets the name of the world.
+	 * 
 	 * @returns {string} - The name of the world.
 	 */
 	getName() {
@@ -52,6 +59,7 @@ class World {
 
 	/**
 	 * Gets the players that are currently in the world.
+	 * 
 	 * @returns {Array<Player>} - The players in the world.
 	 */
 	getPlayersInWorld() {
@@ -60,6 +68,7 @@ class World {
 
 	/**
 	 * Sets the coordinates of the spawn point.
+	 * 
 	 * @param {number} x - The x-coordinate of the spawn point.
 	 * @param {number} y - The y-coordinate of the spawn point.
 	 * @param {number} z - The z-coordinate of the spawn point.
@@ -70,7 +79,8 @@ class World {
 
 	/**
 	 * Gets the coordinates of the spawn point.
-	 * @returns {{ x: Number, y: Number, z: Number }} - The coordinates of the spawn point.
+	 * 
+	 * @returns {{ x: number, y: number, z: number }} - The coordinates of the spawn point.
 	 */
 	getSpawnCoordinates() {
 		return this.coords;
@@ -78,6 +88,7 @@ class World {
 
 	/**
 	 * Sets the chunk render radius.
+	 * 
 	 * @param {number} radius - The new chunk render radius.
 	 */
 	setChunkRadius(radius) {
@@ -86,6 +97,7 @@ class World {
 
 	/**
 	 * Gets the chunk render radius.
+	 * 
 	 * @returns {number} - The chunk render radius.
 	 */
 	getChunkRadius() {
@@ -94,6 +106,7 @@ class World {
 
 	/**
 	 * Places a block at the specified coordinates.
+	 * 
 	 * @param {number} x - The X-coordinate of the block.
 	 * @param {number} y - The Y-coordinate of the block.
 	 * @param {number} z - The Z-coordinate of the block.
@@ -111,6 +124,17 @@ class World {
 			updateblock.setFlagsValue(3);
 			updateblock.writePacket(player);
 		}
+	}
+
+	/**
+	 * Breaks a block at the specified coordinates.
+	 * 
+	 * @param {number} x - The X-coordinate of the block.
+	 * @param {number} y - The Y-coordinate of the block.
+	 * @param {number} z - The Z-coordinate of the block.
+	 */
+	breakBlock(x, y, z) {
+		this.placeBlock(x, y, z, new Air().getRuntimeId())
 	}
 
 	/**
@@ -154,8 +178,6 @@ class World {
 			}
 		}
 
-		
-
 		if (config.world.tickStarvationDamage) {
 			Frog.eventEmitter.emit('serverStarvationDamageTick', {
 				world: this.getWorldData(),
@@ -185,13 +207,13 @@ class World {
 				}
 
 				if (posY <= min) {
-					if (client.gamemode === GameMode.CREATIVE || 
+					if (client.gamemode === GameMode.CREATIVE ||
 						client.gamemode === GameMode.SPECTATOR) {
 						client.cannotBeDamagedByVoid = true
 					} else {
 						client.cannotBeDamagedByVoid = false
 					}
-					
+
 					if (!client.cannotBeDamagedByVoid && !client.dead) {
 						client.setHealth(client.health - 6, DamageCause.VOID);
 					}
@@ -203,7 +225,7 @@ class World {
 	/**
 	 * Returns world data.
 	 *
-	 * @returns {{ name: string, chunk_radius: Number, spawn_coordinates: { x: Number, y: Number, z: Number } }} An object containing the world's name, chunk radius, and spawn coordinates.
+	 * @returns {{ name: string, chunk_radius: number, spawn_coordinates: { x: number, y: number, z: number } }} An object containing the world's name, chunk radius, and spawn coordinates.
 	 */
 	getWorldData() {
 		return {

@@ -8,7 +8,10 @@ const ScoreActions = require("./types/ScoreActions");
 const ServerScoreboardObjectivePacket = require("../network/packets/ServerSetDisplayObjectivePacket");
 const ServerSetScorePacket = require("../network/packets/ServerSetScorePacket");
 const ServerRemoveObjectivePacket = require("../network/packets/ServerRemoveObjectivePacket");
+
 const Frog = require("../Frog");
+
+const { getKey } = require("../utils/Language");
 
 /**
  * Represents a scoreboard that can be displayed to a player.
@@ -16,7 +19,7 @@ const Frog = require("../Frog");
 class Scoreboard {
     constructor() {
         /** @type {string} - The display name of the scoreboard. */
-        this.displayName = 'Scoreboard';
+        this.displayName = getKey("scoreboard.name.default");
 
         /** @type {DisplaySlots} - The display slot of the scoreboard. */
         this.displaySlot = DisplaySlots.SIDEBAR;
@@ -40,6 +43,8 @@ class Scoreboard {
 
     /**
      * Sends the scoreboard to the player.
+     * 
+     * @function
      */
     sendScoreboard() {
         let shouldCreateScoreboard = true
@@ -71,6 +76,8 @@ class Scoreboard {
      * @param {ScoreActions} [action=ScoreActions.UPDATE] - The action to perform when setting the score.
      * @param {EntryTypes} [entry_type=EntryTypes.TEXT] - The type of the score entry.
      * @param {number} [entity_unique_id] - The unique ID of the entity associated with the score.
+     * 
+     * @function
      */
     setScore(score, text, entry_type = EntryTypes.TEXT, entity_unique_id = undefined) {
         let shouldSetScore = true
@@ -104,6 +111,7 @@ class Scoreboard {
      * Deletes a score on the scoreboard.
      *
      * @param {number} score - The score to set.
+     * @function
      */
     deleteScore(score) {
         let shouldDeleteScore = true
@@ -135,6 +143,8 @@ class Scoreboard {
 
     /**
      * Deletes the scoreboard.
+     * 
+     * @function
      */
     deleteScoreboard() {
         let shouldDelete = true

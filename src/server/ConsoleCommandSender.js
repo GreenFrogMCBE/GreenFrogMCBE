@@ -6,6 +6,8 @@ const Logger = require("./Logger");
 const Frog = require("../Frog");
 const Commands = require("./Commands");
 
+const Language = require("../utils/Language");
+
 let isClosed = false;
 /** @private */
 let lang;
@@ -36,6 +38,7 @@ async function setupConsoleReader() {
  * Executes a command that the user typed in the console.
  *
  * @async
+ * @function
  * @param {string} input - The command to execute.
  * @throws {CommandHandlingException} Throws an error if the command cannot be executed.
  */
@@ -114,14 +117,14 @@ async function executeConsoleCommand(input) {
 
 		if (!commandFound) {
 			Logger.info(
-				lang.errors.unknownCommandOrNoPermission.replace(
-					"%commandname%",
+				Language.getKey("commands.unknown").replace(
+					"%s%",
 					input.split(" ")[0]
 				)
 			);
 		}
 	} catch (error) {
-		Logger.error(`Failed to execute command from Server. Error: ${error.stack}`);
+		Logger.error(Language.getKey("commands.internalError".replace("%s", error.stack)));
 	}
 }
 
@@ -129,6 +132,7 @@ module.exports = {
 	/**
 	 * Closes the console.
 	 * 
+	 * @function
 	 * @throws {ConsoleSetupException} - If the console is already closed
 	 */
 	close() {
@@ -157,6 +161,7 @@ module.exports = {
 	 * Starts the console.
 	 * 
 	 * @async
+	 * @function
 	 */
 	async start() {
 		lang = require("../Frog").serverConfigurationFiles.lang;

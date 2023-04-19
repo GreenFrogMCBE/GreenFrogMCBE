@@ -48,7 +48,10 @@ let lang = Frog.serverConfigurationFiles.lang;
 
 module.exports = {
 	/**
+	 * Adds API functions to the client object
+	 * 
 	 * @async
+	 * @function
 	 * 
 	 * @param {Client} player
 	 * @param {Server} server
@@ -278,6 +281,7 @@ module.exports = {
 
 		/**
 		 * Sets the data of the player/entity (eg on_fire, etc)
+		 * 
 		 * @param {string} field
 		 * @param {Boolean} value
 		 */

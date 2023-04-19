@@ -14,12 +14,11 @@ const Frog = require("../../Frog");
 
 const Logger = require("../../server/Logger");
 
-const { serverConfigurationFiles } = Frog
-const { lang } = serverConfigurationFiles
-
 const Commands = require("../../server/Commands");
 
 const PacketConstructor = require("./PacketConstructor");
+
+const { getKey } = require("../../utils/Language");
 
 class ClientCommandRequestPacket extends PacketConstructor {
 	/**
@@ -45,44 +44,44 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		const input = packet.data.params.command.replace('/', '');
+		const executedCommand = packet.data.params.command.replace('/', '');
 
-		const args = input.split(" ").slice(1);
+		const args = executedCommand.split(" ").slice(1);
 
-		let shouldExecCommand = true
+		let shouldExecuteCommand = true
 
 		Frog.eventEmitter.emit('playerExecutedCommand', {
 			player,
 			server,
 			args,
-			command: input,
+			command: executedCommand,
 			cancel() {
-				shouldExecCommand = false
+				shouldExecuteCommand = false
 			}
 		})
 
-		if (!shouldExecCommand) return
+		if (!shouldExecuteCommand) return
 
 		try {
-			Logger.info(`${player.username} executed server command: /${input}`)
+			Logger.info(getKey("commands.ingame.executed").replace("%s%", player.username).replace("%d%", executedCommand))
 
-			if (!input.replace(" ", "")) return;
+			if (!executedCommand.replace(" ", "")) return;
 
 			let commandFound = false;
 
 			for (const command of Commands.commandList) {
 				if (
-					command.data.name === input.split(" ")[0] ||
-					(command.data.aliases && command.data.aliases.includes(input.split(" ")[0]))
+					command.data.name === executedCommand.split(" ")[0] ||
+					(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
 				) {
 					if (
 						command.data.minArgs !== undefined &&
 						command.data.minArgs > args.length
 					) {
 						player.sendMessage(
-							lang.commands.minArg
-								.replace("%m%", command.data.minArgs)
-								.replace("%r%", args.length)
+							getKey("commands.errors.syntaxError.minArg")
+								.replace("%s%", command.data.minArgs)
+								.replace("%d%", args.length)
 						);
 						return;
 					}
@@ -92,9 +91,9 @@ class ClientCommandRequestPacket extends PacketConstructor {
 						command.data.maxArgs < args.length
 					) {
 						player.sendMessage(
-							lang.commands.maxArg
-								.replace("%m%", command.data.maxArgs)
-								.replace("%r%", args.length)
+							getKey("commands.errors.syntaxError.maxArg")
+								.replace("%s%", command.data.maxArgs)
+								.replace("%d%", args.length)
 						);
 						return;
 					}
@@ -108,15 +107,14 @@ class ClientCommandRequestPacket extends PacketConstructor {
 
 			if (!commandFound) {
 				player.sendMessage(
-					lang.errors.unknownCommandOrNoPermission.replace(
-						"%commandname%",
-						input.split(" ")[0]
+					getKey("commands.unknown").replace(
+						"%s%",
+						executedCommand.split(" ")[0]
 					)
 				);
 			}
 		} catch (error) {
-			player.sendMessage("§cSomething went wrong while trying to execute that command")
-			Logger.error(`Failed to execute command from ${player.username}. Error: ${error.stack}`);
+			Logger.error(getKey("commands.internalError.player").replace("%s%", player.username).replace("%d%", error.stack));
 		}
 	}
 }

@@ -10,6 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const { getKey } = require("../../utils/Language");
+
 const UnsupportedOperationException = require("../../utils/exceptions/UnsupportedOperationException");
 
 class PacketConstructor {
@@ -42,14 +44,14 @@ class PacketConstructor {
 	 * Writes the packet
 	 */
 	writePacket() {
-		throw new UnsupportedOperationException("Can't write a client-side packet");
+		throw new UnsupportedOperationException(getKey("network.packet.failed.clientSide"));
 	}
 
 	/**
 	 * Reads the packet
 	 */
 	readPacket() {
-		throw new UnsupportedOperationException("Can't read a server-side packet");
+		throw new UnsupportedOperationException(getKey("network.packet.failed.serverSide"));
 	}
 }
 

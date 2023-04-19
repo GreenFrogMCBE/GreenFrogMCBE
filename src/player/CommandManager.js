@@ -11,7 +11,6 @@ const AvailableCommands = require("../network/packets/ServerAvailableCommandsPac
  * @property {Array} dynamic_enums - The dynamic enums.
  * @property {Array} enum_constraints - The enum constraints.
  */
-
 let commands = [];
 
 /** Manages commands */

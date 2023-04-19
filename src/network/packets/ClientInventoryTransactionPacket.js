@@ -17,14 +17,14 @@ const PacketConstructor = require("./PacketConstructor");
 const GameMode = require("../../api/player/GameMode");
 const BlockActions = require("./types/BlockActions");
 
-const Air = require("../../block/Air");
-
 const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
 
 const ServerLevelChunkPacket = require("./ServerLevelChunkPacket");
 
 const FrogWorldGenerators = require("./types/FrogWorldGenerators");
+
+const { getKey } = require("../../utils/Language");
 
 const { serverConfigurationFiles } = Frog
 const { config } = serverConfigurationFiles
@@ -63,7 +63,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 		switch (actionID) {
 			case BlockActions.BLOCKBREAK:
 				if (player.gamemode == GameMode.ADVENTURE || player.gamemode == GameMode.SPECTATOR) {
-					throw new BlockBreakException("Player tried to break block, while in " + player.gamemode + " gamemode");
+					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s%", player.username));
 				}
 
 				Frog.eventEmitter.emit('blockBreakEvent', {
@@ -93,12 +93,10 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 					}
 				})
 
-				const airBlockID = new Air().getRuntimeId();
-
-				player.world.placeBlock(packet.data.params.transaction.transaction_data.block_position.x, packet.data.params.transaction.transaction_data.block_position.y, packet.data.params.transaction.transaction_data.block_position.z, airBlockID);
+				player.world.breakBlock(packet.data.params.transaction.transaction_data.block_position.x, packet.data.params.transaction.transaction_data.block_position.y, packet.data.params.transaction.transaction_data.block_position.z);
 				break;
 			default:
-				Logger.debug("Unsupported block action from " + player.username + ": " + actionID);
+				Logger.debug(getKey("debug.player.unsupportedActionID.block").replace("%s%", player.username).replace("%d%", actionID));
 		}
 	}
 }

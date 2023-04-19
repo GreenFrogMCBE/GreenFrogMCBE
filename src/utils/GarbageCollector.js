@@ -16,9 +16,13 @@ const Logger = require('../server/Logger');
 
 const PlayerInfo = require('../api/player/PlayerInfo');
 
+const Language = require('./Language');
+
 module.exports = {
 	/**
 	 * Removes data of offline players
+	 * 
+	 * @function
 	 */
 	clearOfflinePlayers() {
 		Frog.eventEmitter.emit('serverOfflinePlayersGarbageCollection', {
@@ -27,8 +31,10 @@ module.exports = {
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			if (PlayerInfo.players[i].q) {
-				Logger.debug('[Garbage collector] Deleted player: ' + PlayerInfo.players[i].username);
+			const player = PlayerInfo.players[i].q
+
+			if (player) {
+				Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s%", player.username));
 				PlayerInfo.players.splice(i, 1);
 				i--;
 			}
@@ -36,10 +42,13 @@ module.exports = {
 	},
 
 	/**
-	 * Clears RAM from useless stuff
+	 * Clears RAM from useless data
+	 * 
+	 * @function
 	 */
 	gc() {
-		Logger.debug('[Garbage collector] Started garbage collection...');
+		Logger.debug(Language.getKey("garbageCollector.started"));
+
 		this.clearOfflinePlayers();
 
 		Frog.eventEmitter.emit('serverGarbageCollection', {
@@ -57,6 +66,6 @@ module.exports = {
 			delete player.userData
 		}
 
-		Logger.debug('[Garbage collector] Finished');
+		Logger.debug(Language.getKey("garbageCollector.finished"));
 	}
 };

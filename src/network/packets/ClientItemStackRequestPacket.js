@@ -42,24 +42,15 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Validates the packet
-	 * 
-	 * @param {Client} player 
-	 */
-	validatePacket(player) {
-		if (player.gamemode == !GameModeLegacy.CREATIVE) {
-			throw new ItemException("player.gamemode must be GameModeLegacy.CREATIVE!");
-		}
-	}
-
-	/**
 	 * Reads the packet from player
 	 * 
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet) {
-		await this.validatePacket(player);
+		if (player.gamemode == !GameModeLegacy.CREATIVE) {
+			return
+		}
 
 		try {
 			let request = null;

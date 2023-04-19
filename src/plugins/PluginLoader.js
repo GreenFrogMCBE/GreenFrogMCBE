@@ -16,11 +16,10 @@ const Logger = require("../server/Logger");
 const PluginManager = require("./PluginManager");
 
 const CCH = require("../server/ConsoleCommandSender");
+const { getKey } = require("../utils/Language");
 
 /** @private */
 let pluginCount = 0;
-/** @private */
-let lang;
 /** @private */
 let config;
 
@@ -34,10 +33,10 @@ module.exports = {
 
 	/**
 	 * Loads all plugins
+	 * 
+	 * @function
 	 */
 	loadPlugins() {
-		lang = require("../Frog").serverConfigurationFiles.lang;
-
 		fs.mkdirSync('./plugins/', { recursive: true });
 		fs.mkdirSync('./pluginData/', { recursive: true });
 
@@ -45,11 +44,11 @@ module.exports = {
 			CCH.start();
 		}, 1500);
 
-		fs.readdir("./plugins", (err, files) => {
+		fs.readdir("./plugins", (_err, files) => {
 			files.forEach((file) => {
-				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
-					if (err) {
-						Logger.error(lang.errors.failedToLoadPlugin.replace("%name%", file).replace("%errorstack%", err.stack));
+				fs.stat(`${__dirname}/../../plugins/${file}`, (error, stats) => {
+					if (error) {
+						Logger.error(getKey("plugin.loading.failed").replace("%s%", file).replace("%d%", error.stack));
 						return;
 					}
 
@@ -64,9 +63,9 @@ module.exports = {
 							main = packageJson.main;
 
 							PluginManager.addPlugin(name, version)
-							Logger.info(`Loading plugin ${name} v${version}...`)
+							Logger.info(getKey("plugin.loading.loading").replace('%s%', name).replace('%d%', version))
 						} catch (error) {
-							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
+							Logger.warning(getKey("plugin.loading.warning.invalidJson").replace("%s%", file).replace("%d%", error.stack));
 							return;
 						}
 
@@ -74,15 +73,9 @@ module.exports = {
 							require(`${__dirname}/../../plugins/${file}/${main}`).onLoad();
 
 							PluginManager.addPlugin(name, version);
-
-							Logger.info(`Plugin ${name} v${version} loaded`);
+							Logger.info(getKey("plugin.loading.loaded").replace('%s%', name).replace('%d%', version))
 						} catch (error) {
-							if (error.toString().includes("onLoad is not a function")) {
-								Logger.error(`Failed to load ${name}: Plugin does not contain onLoad() function!`)
-								return;
-							}
-
-							Logger.error(`Failed to load ${name}: ${error.stack}`);
+							Logger.error(getKey("plugin.loading.failed").replace("%s%", name).replace("%d%", error.stack));
 						}
 					}
 				});
@@ -90,26 +83,42 @@ module.exports = {
 		});
 	},
 
+	/**
+	 * Kills the server
+	 * 
+	 * @function
+	 */
 	async killServer() {
 		config = require("../Frog").serverConfigurationFiles.config;
 
 		process.exit(config.exitCode);
 	},
 
+	/**
+	 * Prepares plugins for shutdown
+	 * 
+	 * @function
+	 */
 	initPluginShutdown() {
 		pluginCount--;
 
 		if (pluginCount <= 0) this.killServer();
 	},
 
+	/**
+	 * Unloads plugins
+	 * 
+	 * @function
+	 * @async
+	 */
 	async unloadPlugins() {
 		fs.readdir("./plugins", (_err, files) => {
 			if (files.length === 0) this.killServer();
 
 			files.forEach((file) => {
-				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
-					if (err) {
-						Logger.error(lang.errors.failedToLoadPlugin.replace("%name%", file).replace("%errorstack%", err.stack));
+				fs.stat(`${__dirname}/../../plugins/${file}`, (error, stats) => {
+					if (error) {
+						Logger.error(getKey("plugin.unloading.failed").replace('%s%', file).replace('%d%', error.stack))
 						return;
 					}
 
@@ -122,21 +131,17 @@ module.exports = {
 							name = packageJson.displayName;
 							main = packageJson.main;
 
-							Logger.info(lang.server.unloadingPlugin.replace("%plugin%", name));
+							Logger.info(getKey("plugin.unloading.unloading").replace("%s%", name));
 						} catch (error) {
 							return;
 						}
 
 						try {
 							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
-							Logger.info(lang.server.unloadedPlugin.replace("%plugin%", name));
-						} catch (error) {
-							if (error.toString().includes("onShutdown is not a function")) {
-								Logger.error(`Failed to load ${name}: Plugin does not contain onShutdown() function!`)
-								return;
-							}
 
-							Logger.error(`Failed to load ${name}: ${error.stack}`);
+							Logger.info(getKey("plugin.unloading.success").replace("%s%", name));
+						} catch (error) {
+							Logger.error(getKey("plugin.unloading.failed").replace('%s%', name).replace('%d%', error.stack))
 						}
 
 						this.initPluginShutdown();

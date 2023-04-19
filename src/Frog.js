@@ -5,7 +5,7 @@ const eventLib = require('events');
 const PluginLoader = require('./plugins/PluginLoader');
 const PlayerInfo = require('./api/player/PlayerInfo');
 
-const { getLanguage } = require('./utils/Language');
+const { getKey } = require('./utils/Language');
 
 const Logger = require('./server/Logger');
 
@@ -33,15 +33,14 @@ function getServer() {
 }
 
 /**
- * Returns configuration files (e.g config.yml, and language files)
+ * Returns configuration files
  * 
  * @returns {ConfigurationFile}
  * @type {import('./type/ConfigurationFile')}
  */
 function getConfig() {
     return {
-        config: yaml.load(fs.readFileSync("config.yml", "utf8")),
-        lang: getLanguage(yaml.load(fs.readFileSync("config.yml", "utf8")).chat.lang)
+        config: yaml.load(fs.readFileSync("config.yml", "utf8"))
     };
 }
 
@@ -112,7 +111,7 @@ module.exports = {
             player.sendMessage(message);
         }
 
-        Logger.info(this.getConfigs().lang.broadcasts.broadcastmessage.replace("%msg%", message));
+        Logger.info(getKey("chat.format.plugin").replace("%s%", message));
     },
 
     /**
@@ -121,8 +120,9 @@ module.exports = {
      * single plugin that is loaded
      * 
      * @async
+     * @param {string} shutdownMessage
      */
-    async shutdownServer(shutdownMessage = this.serverConfigurationFiles.lang.kickmessages.serverShutdown) {
+    async shutdownServer(shutdownMessage = getKey("kickMessages.serverClosed")) {
         let shouldShutdown = true;
 
         this.eventEmitter.emit('serverShutdownEvent', {
@@ -133,7 +133,7 @@ module.exports = {
         });
 
         if (shouldShutdown) {
-            Logger.info(this.serverConfigurationFiles.lang.server.stoppingServer);
+            Logger.info(getKey("server.shuttingDown"));
 
             await require("./server/ConsoleCommandSender").close();
             await getServer().close(shutdownMessage);
@@ -141,17 +141,18 @@ module.exports = {
             setTimeout(() => {
                 PluginLoader.unloadPlugins();
             }, 1000);
-
-            return true;
         }
     },
 
+    /** Player count. Do not use this in your plugin, please */
     __playercount: 0,
 
+    /** Adds player to player count. Do not use this in your plugin, please */
     __addPlayer() {
         this.__playercount++;
     },
 
+    /** Removes player from player count. Do not use this in your plugin, please */
     __deletePlayer() {
         this.__playercount--;
     },

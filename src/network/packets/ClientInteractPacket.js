@@ -21,6 +21,7 @@ const WindowID = require("./types/WindowID");
 
 const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
+const { getKey } = require("../../utils/Language");
 
 class ClientInteractPacket extends PacketConstructor {
 	/**
@@ -48,6 +49,12 @@ class ClientInteractPacket extends PacketConstructor {
 	 */
 	async readPacket(player, packet, server) {
 		const actionID = packet.data.params.action_id;
+
+		Frog.eventEmitter.emit('playerInteractEvent', {
+			player,
+			server,
+			actionID
+		})
 
 		switch (actionID) {
 			case InteractType.INVENTORYOPEN:
@@ -82,13 +89,7 @@ class ClientInteractPacket extends PacketConstructor {
 				containerOpen.writePacket(player);
 				break;
 			default:
-				Frog.eventEmitter.emit('playerInteractEvent', {
-					player,
-					server,
-					actionID
-				})
-
-				Logger.debug(`Unsupported action ID from ${player.username}: ${actionID}`);
+				Logger.debug(getKey("debug.player.unsupportedActionID").replace("%s%", actionID).replace("%d%", player.username));
 		}
 	}
 }

@@ -4,7 +4,7 @@ const GameMode = require("../api/player/GameMode");
 module.exports = {
     /**
      * Calculates fall damage
-     * NOTE: This can be spoofed by hacked client (e.g Horion/Zephyr)
+     * NOTE: This can be spoofed by hacked client
      * 
      * @param {Client} player
      * @param {JSON} position
