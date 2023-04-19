@@ -1,7 +1,7 @@
 {
     "server.loading": "Loading server...",
     "server.license": "GreenFrog is licensed under Creative Commons Attribution 4.0 International license. More info: https://creativecommons.org",
-    "server.copyNotice": "You may copy this, only if you credit us",
+    "server.copyNotice": "You may copy our code, only if you credit us",
 
     "server.shuttingDown": "Shutting down...",
 
@@ -12,8 +12,60 @@
     "commands.unknown": "§cUnknown command: %s%. Please check that the command exists and that you have permission to use it.",
     "commands.internalError": "Failed to execute command! Error: %s%",
     "commands.internalError.player": "Failed to execute command from %s%. Error: %d%",
+    "commands.internalError.badSender": "§cThis type of sender does not support this command",
 
     "commands.ingame.executed": "%s% executed server command: /%d%",
+
+    "commands.deop.name": "deop",
+    "commands.deop.description": "Revokes operator status from a player.",
+    "commands.deop.execution.success": "Succeeded in revoking operator level for player %s%",
+    "commands.deop.execution.fail": "Failed in revoking operator level for player %s%",
+
+    "commands.gamemode.name": "gamemode",
+    "commands.gamemode.description": "Sets a player's game mode",
+    "commands.gamemode.execution.failed": "§cGame mode '%s%' is invalid",
+    "commands.gamemode.execution.success.updated": "Your game mode has been updated to %s%.",
+    "commands.gamemode.execution.success.set": "Set own gamemode to %s%.",
+
+    "commands.help.name": "help",
+    "commands.help.description": "Command list.",
+    "commands.help.execution.success.commandList": "Command list:",
+
+    "commands.kick.name": "kick",
+    "commands.kick.description": "Kicks a player from the server.",
+    "commands.kick.execution.failed.notOnline": "%s% is not online",
+
+    "commands.list.name": "list",
+    "commands.list.description": "Lists players on the server.",
+    "commands.list.execution.success.commandList": "There are %s% players online: %d%",
+
+    "commands.op.name": "op",
+    "commands.op.description": "Grants operator status to a player.",
+    "commands.op.execution.success": "Succeeded in setting operator level for player %s%",
+    "commands.op.execution.failed": "§cFailed to OP %s%",
+
+    "commands.plugins.name": "plugins",
+    "commands.plugins.aliases.pl": "pl",
+    "commands.plugins.description": "Shows list of plugins that the server is running.",
+    "commands.plugins.execution.success": "Plugins: %s^1%",
+
+    "commands.say.name": "say",
+    "commands.say.description": "Sends a message in the chat to other players.",
+
+    "commands.stop.name": "stop",
+    "commands.stop.description": "Shut downs the server.",
+    
+    "commands.time.name": "time",
+    "commands.time.description": "Changes the world's time",
+    "commands.time.execution.success": "Time set to %s%",
+    "commands.time.execution.failed": "Time must be a Number",
+    "commands.time.times.day": "day",
+    "commands.time.times.night": "night",
+
+    "commands.version.name": "version",
+    "commands.version.description": "Shows the server version.",
+    "commands.version.aliases.ver": "ver",
+    "commands.version.aliases.about": "about",
 
     "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
     "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
@@ -36,16 +88,21 @@
 
     "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
     "kickMessages.serverFull": "disconnectionScreen.serverFull",
-    "kickMessages.versionMismatch": "Your client version does not match with server version! Server is currently running on %s%",
+    "kickMessages.versionMismatch": "Your client version does not match with the server version! Server is currently running on %s%",
     "kickMessages.invalidPacket": "Invalid packet",
     "kickMessages.serverClosed": "Server closed",
     "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",
+    "kickMessages.noReason": "No reason",
+    "kickMessages.wereKicked": "You were kicked: %s%",
+
+    "player.kicked": "Kicked %s% for %d%",
 
     "status.resourcePacks.refused": "%s% refused server resource packs",
     "status.resourcePacks.none": "%s% has no resource packs",
     "status.resourcePacks.installed": "%s% has all the resource packs installed",
     "status.resourcePacks.joined": "%s% joined",
     "status.resourcePacks.spawned": "%s% spawned",
+    "status.resourcePacks.disconnected": "%s% disconnected",
 
     "warning.customItems.loading.failed": "Failed to load custom items! Error: %s%",
 
@@ -65,6 +122,8 @@
 
     "chat.format": "<%s%> %d%",
     "chat.format.plugin": "%s%",
+    "chat.format.me": "* %s% %d%",
+    "chat.format.say": "* %s% %d%",
 
     "chat.broadcasts.joined": "%s% joined the game",
     "chat.broadcasts.left": "%s% left the game",
@@ -89,7 +148,7 @@
     "exceptions.plugin.noName": "No plugin name!",
     "exceptions.plugin.noVersion": "No plugin version!",
 
-    "exceptions.world.loading.failed": "Failed to load world! Error: %s%",
+    "exceptions.world.loading.failed": "Failed to load world! %s%",
     "exceptions.world.loading.failed.invalidChunkData": "Failed to load world (Invalid chunk data)!",
 
     "exceptions.console.alreadyClosed": "Console is already closed!",

@@ -43,6 +43,8 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 
 const Frog = require("../Frog");
 
+const { getKey } = require("../utils/Language");
+
 /** @private */
 let lang = Frog.serverConfigurationFiles.lang;
 
@@ -50,16 +52,12 @@ module.exports = {
 	/**
 	 * Adds API functions to the client object
 	 * 
-	 * 
-	 * 
-	 * 
 	 * @param {Client} player
 	 * @param {Server} server
 	 */
 	async initPlayer(player, server) {
 		/**
 		 * Sends a message to the player
-		 * 
 		 * @param {string} message - The message to send
 		 */
 		player.sendMessage = function (message) {
@@ -69,7 +67,7 @@ module.exports = {
 				player,
 				server,
 				message,
-				cancel: () => {() {
+				cancel: () => {
 					shouldSendMessage = false;
 				},
 			});
@@ -83,7 +81,6 @@ module.exports = {
 
 		/**
 		 * Sends a chat message as a player
-		 * 
 		 * @param {string} message - The message to send as a player
 		 */
 		player.chat = function (message) {
@@ -93,7 +90,7 @@ module.exports = {
 				player,
 				server,
 				message,
-				cancel: () => {() {
+				cancel: () => {
 					shouldSendMessage = false
 				},
 			});
@@ -130,7 +127,7 @@ module.exports = {
 				server,
 				gamemode,
 				oldGamemode: player.gamemode,
-				cancel: () => {() {
+				cancel: () => {
 					shouldChangeGamemode = false
 				},
 			});
@@ -163,7 +160,7 @@ module.exports = {
 					y,
 					z
 				},
-				cancel: () => {() {
+				cancel: () => {
 					shouldSetVelocity = false
 				}
 			})
@@ -198,7 +195,7 @@ module.exports = {
 				has_rot_z: (rot_z !== undefined),
 				player,
 				server: require("../Server"),
-				cancel: () => {() {
+				cancel: () => {
 					shouldTeleport = false
 				}
 			})
@@ -241,7 +238,7 @@ module.exports = {
 				port,
 				address,
 				server: server,
-				cancel: () => {() {
+				cancel: () => {
 					shouldTransfer = false
 				},
 			});
@@ -267,7 +264,7 @@ module.exports = {
 				player,
 				difficulty,
 				server: require("../Server"),
-				cancel: () => {() {
+				cancel: () => {
 					shouldChangeDifficulty = false;
 				},
 			});
@@ -293,7 +290,7 @@ module.exports = {
 				field,
 				value,
 				server: require("../Server"),
-				cancel: () => {() {
+				cancel: () => {
 					shouldSetEntityData = false;
 				},
 			});
@@ -333,7 +330,7 @@ module.exports = {
 				message = "You were disconnected";
 			}
 
-			Logger.info(lang.kickmessages.kickedConsoleMsg.replace("%player%", player.username).replace("%reason%", message));
+			Logger.info(getKey("player.kicked").replace("%s%", player.username).replace("%d%", message));
 			player.disconnect(message);
 		};
 
@@ -349,7 +346,7 @@ module.exports = {
 				player,
 				radius,
 				server: require("../Server"),
-				cancel: () => {() {
+				cancel: () => {
 					shouldUpdateRadius = false
 				},
 			});
@@ -373,7 +370,7 @@ module.exports = {
 				player,
 				time,
 				server: require("../Server"),
-				cancel: () => {() {
+				cancel: () => {
 					shouldUpdateTime = false
 				},
 			});
@@ -397,7 +394,7 @@ module.exports = {
 				player,
 				attribute,
 				server: require("../Server"),
-				cancel: () => {() {
+				cancel: () => {
 					shouldSetAttribute = false
 				},
 			});
@@ -423,7 +420,7 @@ module.exports = {
 				player,
 				xp,
 				server: require("../Server"),
-				cancel: () => {() {
+				cancel: () => {
 					shouldSetXP = false
 				},
 			});
@@ -456,7 +453,7 @@ module.exports = {
 				health,
 				cause,
 				server: require("../Server"),
-				cancel: () => {() {
+				cancel: () => {
 					shouldSetHealth = false
 				},
 			});
@@ -520,7 +517,7 @@ module.exports = {
 				server: require("../Server"),
 				hunger,
 				cause,
-				cancel: () => {() {
+				cancel: () => {
 					shouldUpdateHunger = false;
 				}
 			})
@@ -559,7 +556,7 @@ module.exports = {
 				coordinates: { x, y, z },
 				respawnAfterSwitch: respawn,
 				server: require("../Server"),
-				cancel: () => {() {
+				cancel: () => {
 					shouldChangeDimension = false
 				},
 			});
@@ -597,10 +594,10 @@ module.exports = {
 
 			GarbageCollector.clearOfflinePlayers();
 
-			Logger.info(lang.playerstatuses.disconnected.replace("%player%", player.username));
+			Logger.info(getKey("status.resourcePacks.disconnected").replace("%s%", player.username));
 
 			if (player.initialised) {
-				Frog.broadcastMessage(lang.broadcasts.leftTheGame.replace("%player%", player.username));
+				Frog.broadcastMessage(getKey("chat.broadcasts.left").replace("%s%", player.username));
 			}
 		});
 	},

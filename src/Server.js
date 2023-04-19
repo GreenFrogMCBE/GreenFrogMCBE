@@ -115,7 +115,7 @@ async function _handlePacket(client, packetParams) {
 		}
 	});
 
-	if (!exists && config.logUnhandledPackets) {
+	if (!exists && config.dev.logUnhandledPackets) {
 		Logger.warning(Language.getKey("network.packet.unhandledPacket"));
 		console.info("%o", packetParams);
 	}

@@ -1,5 +1,8 @@
 const Frog = require("../Frog");
+
 const CommandVerifier = require("../utils/CommandVerifier");
+
+const { getKey } = require("../utils/Language");
 
 /**
  * Command to shutdown the server.
@@ -8,8 +11,8 @@ const CommandVerifier = require("../utils/CommandVerifier");
  */
 module.exports = {
 	data: {
-		name: "stop",
-		description: "Shut downs the server.",
+		name: getKey("commands.stop.name"),
+		description: getKey("commands.stop.description"),
 		minArg: 0,
 		maxArg: 0,
 	},
@@ -19,7 +22,12 @@ module.exports = {
 			return;
 		}
 
-		if (player.isConsole || player.isOp) {
+		if (!player.op) {
+            player.sendMessage(getKey("commands.unknown"));
+            return;
+        }
+
+		if (player.isConsole) {
 			Frog.shutdownServer();
 			return
 		}

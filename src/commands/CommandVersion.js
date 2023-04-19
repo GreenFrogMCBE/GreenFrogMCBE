@@ -3,14 +3,16 @@ const Frog = require("../Frog");
 const CommandVerifier = require('../utils/CommandVerifier');
 
 const Colors = require("../api/colors/Colors");
+const { getKey } = require("../utils/Language");
+
 /**
  * @type {import('../type/Command').Command}
  */
 module.exports = {
 	data: {
-		name: 'version',
-		description: 'Shows the server version.',
-		aliases: ['ver', 'about'],
+		name: getKey("commands.version.name"),
+		description: getKey("commands.version.description"),
+		aliases: [getKey("commands.version.aliases.ver"), getKey("commands.version.aliases.about")],
 		minArg: 0,
 		maxArg: 0,
 	},
@@ -20,7 +22,7 @@ module.exports = {
 			return;
 		}
 
-		const versionMsg = Frog.serverConfigurationFiles.lang.commands.verInfo.replace('%version%', Frog.getServerData().minorServerVersion);
+		const versionMsg = getKey("frog.version").replace('%s%', Frog.getServerData().minorServerVersion);
 		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
 	}
 };

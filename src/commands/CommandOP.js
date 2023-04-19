@@ -13,26 +13,21 @@
 
 const fs = require("fs").promises;
 
-const Colors = require("../api/colors/Colors");
-
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
-const Frog = require("../Frog");
-
-const { serverConfigurationFiles } = Frog
-const { lang } = serverConfigurationFiles
+const { getKey } = require("../utils/Language");
 
 module.exports = {
     data: {
-        name: "op",
-        description: "Grants operator status to a player.",
+        name: getKey("commands.op.name"),
+        description: getKey("commands.op.description"),
         minArgs: 1,
         maxArgs: 1,
     },
 
     async execute(_server, player, args) {
         if (!player.op) {
-            player.sendMessage(lang.errors.unknownCommandOrNoPermission);
+            player.sendMessage(getKey("commands.unknown"));
             return;
         }
 
@@ -40,14 +35,14 @@ module.exports = {
 
         try {
             await fs.appendFile("ops.yml", playerName + "\n");
-            
+
             try {
                 getPlayerInfo(playerName).op = true;
             } catch { /** player is offline */ }
-            
-            player.sendMessage("Succeeded in setting operator level for player " + playerName);
+
+            player.sendMessage(getKey("commands.op.execution.success").replace("%s%", playerName));
         } catch {
-            player.sendMessage(`${Colors.RED}Failed to OP ${playerName}`);
+            player.sendMessage(getKey("commands.op.execution.failed").replace("%s%", playerName));
         }
     }
 };

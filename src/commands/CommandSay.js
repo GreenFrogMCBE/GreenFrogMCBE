@@ -1,9 +1,10 @@
 const Logger = require("../server/Logger");
+
 const PlayerInfo = require("../api/player/PlayerInfo");
+
 const CommandVerifier = require("../utils/CommandVerifier");
 
-const { serverConfigurationFiles } = require("../Frog");
-const { lang } = serverConfigurationFiles;
+const { getKey } = require("../utils/Language");
 
 /**
  * Command to send a message in the chat to other players.
@@ -12,9 +13,8 @@ const { lang } = serverConfigurationFiles;
  */
 module.exports = {
 	data: {
-		name: "say",
-		description: "Sends a message in the chat to other players.",
-		aliases: [],
+		name: getKey("commands.say.name"),
+		description: getKey("commands.say.description"),
 		minArg: 1,
 		maxArg: 1,
 	},
@@ -24,10 +24,15 @@ module.exports = {
 			return;
 		}
 
+		if (!player.op) {
+            player.sendMessage(getKey("commands.unknown"));
+            return;
+        }
+
 		const message = args[0];
-		const msg = lang.commands.sayCommandFormat
-			.replace(`%message%`, message)
-			.replace(`%sender%`, player.username);
+		const msg = getKey("chat.format.say")
+			.replace(`%s%`, message)
+			.replace(`%d%`, player.username);
 
 		for (const p of PlayerInfo.players) {
 			p.sendMessage(msg);

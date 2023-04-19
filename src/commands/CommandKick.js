@@ -1,34 +1,31 @@
-const Frog = require("../Frog");
-const Colors = require("../api/colors/Colors");
+const { getKey } = require("../utils/Language");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
-const { serverConfigurationFiles } = Frog;
-const { lang } = serverConfigurationFiles;
-
 module.exports = {
     data: {
-        name: "kick",
-        description: "Kicks a player from the server.",
+        name: getKey("commands.kick.name"),
+        description: getKey("commands.kick.description"),
         minArgs: 1,
+        maxArgs: 1,
     },
 
     execute(_server, player, args) {
         if (!player.op) {
-            player.sendMessage(lang.errors.unknownCommandOrNoPermission);
+            player.sendMessage(getKey("commands.unknown"));
             return;
         }
 
         const playerName = args[0];
-        const reason = (args.slice(1).join(' ') || lang.kickmessages.noReason).trim();
+        const reason = (args.slice(1).join(' ') || getKey("kickMessages.noReason")).trim();
 
         const target = PlayerInfo.getPlayer(playerName);
 
         if (!target) {
-            player.sendMessage(`${Colors.RED}${playerName} is not online`);
+            player.sendMessage(getKey("commands.kick.execution.failed.notOnline").replace("%s%", playerName));
             return;
         }
 
-        target.disconnect(`You were kicked: ${reason}`);
+        target.disconnect(getKey("kickMessages.wereKicked").replace("%s%", reason));
     },
 };

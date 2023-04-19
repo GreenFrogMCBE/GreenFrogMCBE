@@ -1,6 +1,6 @@
 class ChunkLoadException extends Error {
     constructor(message) {
-        super("Failed to load chunk: " + message)
+        super(message)
         this.name = 'ChunkLoadException'
     }
 }

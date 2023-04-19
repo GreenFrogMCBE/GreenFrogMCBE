@@ -1,5 +1,8 @@
 const Frog = require("../Frog");
+
 const { players } = require("../api/player/PlayerInfo");
+
+const { getKey } = require("../utils/Language");
 
 const { serverConfigurationFiles } = Frog
 const { config } = serverConfigurationFiles
@@ -11,8 +14,8 @@ const { config } = serverConfigurationFiles
  */
 module.exports = {
     data: {
-        name: "list",
-        description: "Lists players on the server.",
+        name: getKey("commands.list.name"),
+        description: getKey("commands.list.description"),
         minArg: 0,
         maxArg: 0,
     },
@@ -21,6 +24,6 @@ module.exports = {
         const playerCount = players.length;
         const playerList = players.map((p) => p.username).join(", ");
 
-        player.sendMessage(`There are ${playerCount}/${config.serverInfo.maxPlayers} players online: ${playerList}`);
+        player.sendMessage(getKey("commands.list.execution.success.commandList").replace("%s%", `${playerCount}/${config.serverInfo.maxPlayers}`).replace("%d%", playerList));
     },
 };

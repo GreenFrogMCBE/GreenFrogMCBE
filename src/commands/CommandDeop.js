@@ -1,23 +1,20 @@
 const fs = require("fs").promises;
 
-const Colors = require("../api/colors/Colors");
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
-const Frog = require("../Frog");
-const { serverConfigurationFiles } = Frog;
-const { lang } = serverConfigurationFiles;
+const { getKey } = require("../utils/Language");
 
 module.exports = {
     data: {
-        name: "deop",
-        description: "Revokes operator status from a player.",
+        name: getKey("commands.deop.name"),
+        description: getKey("commands.deop.description"),
         minArgs: 1,
         maxArgs: 1,
     },
 
     async execute(_server, player, args) {
         if (!player.op) {
-            player.sendMessage(lang.errors.unknownCommandOrNoPermission);
+            player.sendMessage(getKey("commands.unknown"));
             return;
         }
 
@@ -26,15 +23,16 @@ module.exports = {
         try {
             const ops = await fs.readFile("ops.yml", "utf-8");
             const updatedOps = ops.split("\n").filter(op => op !== playerName).join("\n");
+
             await fs.writeFile("ops.yml", updatedOps);
 
             try {
                 getPlayerInfo(playerName).op = false;
             } catch { /** player is offline */ }
 
-            player.sendMessage("Succeeded in revoking operator level for player " + playerName);
+            player.sendMessage(getKey("commands.deop.execution.success").replace("%s%", playerName));
         } catch {
-            player.sendMessage(`${Colors.RED}Failed to deop ${playerName}`);
+            player.sendMessage(getKey("commands.deop.execution.fail").replace("%s%", player));
         }
     }
 };

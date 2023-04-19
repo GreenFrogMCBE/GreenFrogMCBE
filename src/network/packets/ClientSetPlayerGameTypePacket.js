@@ -21,14 +21,14 @@ const { getKey } = require("../../utils/Language");
 class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	/**
 	 * Returns packet name
-	 * @returns Returns the packet name
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_player_game_type";
 	}
 
 	/**
-	 * Returns if the packet is critical?
+	 * Returns if the packet is critical
 	 * @returns {boolean}
 	 */
 	isCriticalPacket() {

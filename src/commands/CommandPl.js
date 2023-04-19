@@ -1,8 +1,10 @@
 const CommandVerifier = require("../utils/CommandVerifier");
+
 const PluginManager = require('../plugins/PluginManager');
+
 const Colors = require("../api/colors/Colors");
-const { serverConfigurationFiles } = require("../Frog");
-const { lang } = serverConfigurationFiles;
+
+const { getKey } = require("../utils/Language");
 
 /**
  * Command to show list of plugins that the server is running.
@@ -11,9 +13,9 @@ const { lang } = serverConfigurationFiles;
  */
 module.exports = {
     data: {
-        name: "plugins",
-        description: "Shows list of plugins that the server is running.",
-        aliases: ['pl'],
+        name: getKey("commands.plugins.name"),
+        description: getKey("commands.plugins.description"),
+        aliases: [getKey("commands.plugins.aliases.pl")],
         minArg: 0,
         maxArg: 0,
     },
@@ -26,6 +28,6 @@ module.exports = {
         const pluginSet = new Set(PluginManager.plugins);
         const pluginList = Colors.GREEN + [...pluginSet].join(Colors.WHITE + "§7, " + Colors.GREEN) || "";
 
-        player.sendMessage(`${lang.commands.plugins} (${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`);
+        player.sendMessage(getKey("commands.plugins.execution.success").replace("%s^1%", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`));
     },
 };

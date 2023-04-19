@@ -16,15 +16,17 @@ const PlayerInfo = require("../../api/player/PlayerInfo");
 
 const Logger = require("../../server/Logger");
 
+const { getKey } = require("../../utils/Language");
+
 const { serverConfigurationFiles } = Frog
-const { lang, config } = serverConfigurationFiles
+const { config } = serverConfigurationFiles
 
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientTextPacket extends PacketConstructor {
 	/**
-	 * Returns if packet name
-	 * @returns if name of if packet
+	 * Returns packet name
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "text";
@@ -32,7 +34,7 @@ class ClientTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns if is if packet critical?
-	 * @returns Returns if if packet is critical
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -60,7 +62,7 @@ class ClientTextPacket extends PacketConstructor {
 
 		if (!shouldChat || config.chat.disable) return
 
-		const formattedMessage = lang.chat.chatFormat.replace("%username%", player.username).replace("%message%", message);
+		const formattedMessage = getKey("chat.format").replace("%s%", player.username).replace("%d%", message);
 
 		if (!message.trim()) return;
 

@@ -8,9 +8,8 @@ const Commands = require("./Commands");
 
 const Language = require("../utils/Language");
 
-let isClosed = false;
 /** @private */
-let lang;
+let isClosed = false;
 /** @private */
 let readLineInterface;
 
@@ -65,25 +64,23 @@ async function executeConsoleCommand(executedCommand) {
 				(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
 			) {
 				if (
-					command.data.minArgs !== undefined &&
 					command.data.minArgs > args.length
 				) {
 					Logger.info(
-						lang.commands.minArg
-							.replace("%m%", command.data.minArgs)
-							.replace("%r%", args.length)
+						Language.getKey('commands.errors.syntaxError.minArg')
+							.replace("%s%", command.data.minArgs)
+							.replace("%d%", args.length)
 					);
 					return;
 				}
 
 				if (
-					command.data.maxArgs !== undefined &&
 					command.data.maxArgs < args.length
 				) {
 					Logger.info(
-						lang.commands.maxArg
-							.replace("%m%", command.data.maxArgs)
-							.replace("%r%", args.length)
+						Language.getKey('commands.errors.syntaxError.maxArg')
+							.replace("%s%", command.data.maxArgs)
+							.replace("%d%", args.length)
 					);
 					return;
 				}
@@ -94,8 +91,7 @@ async function executeConsoleCommand(executedCommand) {
 						sendMessage: (message) => {
 							Logger.info(message);
 						},
-						// eslint-disable-next-line no-unused-vars
-						setGamemode: (gamemode) => { },
+						setGamemode: () => { },
 						op: true,
 						username: "Server",
 						ip: "127.0.0.1",
@@ -160,8 +156,6 @@ module.exports = {
 	 * Starts the console.
 	 */
 	async start() {
-		lang = require("../Frog").serverConfigurationFiles.lang;
-
 		await setupConsoleReader();
 
 		await Commands.loadAllCommands()

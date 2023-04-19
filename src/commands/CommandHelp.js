@@ -1,11 +1,14 @@
 const Commands = require("../server/Commands");
 
+const { getKey } = require("../utils/Language");
+
 const CommandVerifier = require("../utils/CommandVerifier");
 
 module.exports = {
     data: {
-        name: "help",
-        description: "Command list.",
+        name: getKey("commands.help.name"),
+        description: getKey("commands.help.description"),
+        aliases: ['?'],
         minArgs: 0,
         maxArgs: 0
     },
@@ -15,7 +18,7 @@ module.exports = {
             return;
         }
 
-        player.sendMessage(`Command list: `)
+        player.sendMessage(getKey("commands.help.execution.success.commandList"))
         for (const command of Commands.commandList) {
             player.sendMessage(`${command.data.name} - ${command.data.description}`)
         }        

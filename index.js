@@ -47,7 +47,7 @@ try {
 	console.clear()
 
 	console.error(convertConsoleColor(`${Colors.RED}Failed to start server
-${e}
+${e.stack}
 
 Make sure that you have the required libraries. Run "npm i" to install them
 If you are sure that this is a bug please report it here: https://github.com/andriycraft/GreenFrogMCBE

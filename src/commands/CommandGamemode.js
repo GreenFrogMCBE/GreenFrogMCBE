@@ -1,6 +1,6 @@
-const Colors = require("../api/colors/Colors");
-
 const CommandVerifier = require("../utils/CommandVerifier");
+
+const { getKey } = require("../utils/Language");
 
 /**
  * Command to change the player's game mode.
@@ -9,15 +9,20 @@ const CommandVerifier = require("../utils/CommandVerifier");
  */
 module.exports = {
     data: {
-        name: "gamemode",
-        description: "Sets a player's game mode",
+        name: getKey("commands.gamemode.name"),
+        description: getKey("commands.gamemode.description"),
         minArg: 1,
         maxArg: 1
     },
 
     execute(_server, player, args) {
         if (player.isConsole) {
-            player.sendMessage(`${Colors.RED}This type of sender does not support this command`);
+            player.sendMessage(getKey("commands.internalError.badSender"));
+            return;
+        }
+
+        if (!player.op) {
+            player.sendMessage(getKey("commands.unknown"));
             return;
         }
 
@@ -27,23 +32,25 @@ module.exports = {
             "0": "survival",
             "1": "creative",
             "2": "adventure",
-            "5": "fallback",
-            "6": "spectator"
+            "3": "spectator",
+            "5": "fallback"
         };
 
         const gamemode = gamemodeMap[args[0]];
         if (!gamemode) {
-            player.sendMessage(`${Colors.RED}Invalid gamemode!`);
+            player.sendMessage(getKey("commands.gamemode.execution.failed"));
             return;
         }
 
         try {
             player.setGamemode(gamemode);
 
-            player.sendMessage(`Your game mode has been updated to ${gamemode.charAt(0).toUpperCase()}${gamemode.slice(1)}.`);
-            player.sendMessage(`Set own gamemode to ${gamemode.charAt(0).toUpperCase()}${gamemode.slice(1)}.`);
+            const gmStr = gamemode.charAt(0).toUpperCase() + gamemode.slice(1)
+
+            player.sendMessage(getKey("commands.gamemode.execution.success.updated").replace("%s%", gmStr));
+            player.sendMessage(getKey("commands.gamemode.execution.success.set").replace("%s%", gmStr))
         } catch {
-            player.sendMessage(`${Colors.RED}Invalid gamemode!`);
+            player.sendMessage(getKey("commands.gamemode.execution.invalidGamemode"));
         }
     }
 };

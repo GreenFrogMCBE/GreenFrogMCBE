@@ -237,7 +237,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					let chunks = null;
 
 					try {
-						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === WorldGenerators.DEFAULT ? "" : "_flat"}json`);
+						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`);
 					} catch (error) {
 						throw new ChunkLoadException(getKey("exceptions.world.loading.failed").replace("%s%", error.stack));
 					}
