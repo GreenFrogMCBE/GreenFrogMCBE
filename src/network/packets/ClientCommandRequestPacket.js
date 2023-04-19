@@ -63,8 +63,6 @@ class ClientCommandRequestPacket extends PacketConstructor {
 		if (!shouldExecuteCommand) return
 
 		try {
-			Logger.info(getKey("commands.ingame.executed").replace("%s%", player.username).replace("%d%", executedCommand))
-
 			if (!executedCommand.replace(" ", "")) return;
 
 			let commandFound = false;
@@ -72,7 +70,8 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			for (const command of Commands.commandList) {
 				console.log(command.data.name, executedCommand.split(" ")[0].replace(" ", "!"), command.data.name === executedCommand.split(" ")[0])
 				if (
-					command.data.name === executedCommand.split(" ")[0]
+					command.data.name === executedCommand.split(" ")[0] ||
+					(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
 				) {
 					commandFound = true;
 

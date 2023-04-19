@@ -192,18 +192,17 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				commandManager.init(player);
 
 				for (const command of Commands.commandList) {
-					if (command.data.requiresOp == true && player.op == false) {
-						player.sendMessage("Ingnored command: " + command.data.name)
-						// ignore
-					} else {
-						player.sendMessage("UnIngnored command: " + command.data.name)
-						commandManager.addCommand(player, command.data.name, command.data.description)
+					const requiresOp = command.data.requiresOp;
+					const name = command.data.name;
+					const description = command.data.description;
+					const aliases = command.data.aliases;
 
-						const aliases = command.data.aliases;
+					if (!(requiresOp && !player.op)) {
+						commandManager.addCommand(player, name, description);
 
 						if (aliases) {
 							for (const alias of aliases) {
-								commandManager.addCommand(player, alias, command.data.description)
+								commandManager.addCommand(player, alias, description);
 							}
 						}
 					}

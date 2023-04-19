@@ -1,5 +1,7 @@
 const AvailableCommands = require("../network/packets/ServerAvailableCommandsPacket");
 
+const { getKey } = require("../utils/Language");
+
 /**
  * @typedef {object} CommandsPacket - The commands packet.
  * @property {number} values_len - The length of the values.
@@ -60,6 +62,8 @@ class CommandManager {
 	 * @param {string} description - The description of the command.
 	 */
 	addCommand(client, name, description) {
+		if (name === getKey("commands.help.name") || name === "?") return
+
 		client.commands.command_data.push({
 			name: name,
 			description: description,
