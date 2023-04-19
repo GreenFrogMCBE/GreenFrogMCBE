@@ -10,11 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let coordinates = {
-	x: 0,
-	y: 0,
-	z: 0,
-};
+let coordinates = {};
 let radius = 64;
 let saved_chunks = [];
 

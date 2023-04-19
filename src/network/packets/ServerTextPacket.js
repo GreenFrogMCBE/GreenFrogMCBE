@@ -13,12 +13,12 @@
 const TextType = require("./types/TextType");
 const PacketConstructor = require("./PacketConstructor");
 
-let message = "";
+let message;
 let type = TextType.ANNOUNCEMENT;
 let needs_translation = false;
-let source_name = "";
-let xuid = "";
-let platform_chat_id = "";
+let source_name;
+let xuid;
+let platform_chat_id;
 
 class ServerTextPacket extends PacketConstructor {
 	/**

@@ -1,6 +1,6 @@
 const PacketConstructor = require("./PacketConstructor");
 
-let runtimeEntityID = 0;
+let runtime_entity_ID = 0;
 let velocity = {}
 
 class ServerSetEntityMotion extends PacketConstructor {
@@ -40,16 +40,16 @@ class ServerSetEntityMotion extends PacketConstructor {
      * Returns the runtime entity ID
      * @returns {number}
      */
-    getRuntimeEntityID() {
-        return runtimeEntityID
+    getruntime_entity_ID() {
+        return runtime_entity_ID
     }
 
     /**
      * Sets the runtime entity ID
      * @param {number} value
      */
-    setRuntimeEntityID(value) {
-        runtimeEntityID = value
+    setruntime_entity_ID(value) {
+        runtime_entity_ID = value
     }
 
     /**
@@ -58,7 +58,7 @@ class ServerSetEntityMotion extends PacketConstructor {
      */
     writePacket(client) {
         client.queue(this.getPacketName(), {
-            runtime_entity_id: this.getRuntimeEntityID(),
+            runtime_entity_id: this.getruntime_entity_ID(),
             velocity: this.getVelocity()
         })
     }

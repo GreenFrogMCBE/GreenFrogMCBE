@@ -10,7 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-
 const Gamemode = require("../../api/player/GameMode");
 
 const PacketConstructor = require("./PacketConstructor");

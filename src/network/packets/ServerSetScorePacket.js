@@ -1,7 +1,9 @@
+const ScoreActions = require("../../scoreboard/types/ScoreActions");
+
 const PacketConstructor = require("./PacketConstructor");
 
-let action;
-let entries;
+let action = ScoreActions.UNKNOWN;
+let entries = [];
 
 class ServerSetScorePacket extends PacketConstructor {
 	/**

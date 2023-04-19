@@ -14,8 +14,8 @@ const PacketConstructor = require("./PacketConstructor");
 
 let value = {};
 let properties = {};
-let tick = -1;
-let runtime_entity_id = "";
+let tick;
+let runtime_entity_id;
 
 class ServerSetEntityDataPacket extends PacketConstructor {
 	/**

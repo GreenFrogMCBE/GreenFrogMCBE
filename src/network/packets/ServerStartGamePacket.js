@@ -27,7 +27,7 @@ let rotationX = 0;
 let rotationZ = 0;
 let seed = [];
 let biome_type = 0;
-let biome_name = "";
+let biome_name;
 let dimension = Dimension.OVERWORLD;
 let generator = Generator.INFINITE;
 let world_gamemode = Gamemode.SURVIVAL;
@@ -38,7 +38,7 @@ let spawn = {
 	z: 0,
 };
 let permission_level = 0;
-let world = "";
+let world;
 
 class ServerStartGamePacket extends PacketConstructor {
 	/**

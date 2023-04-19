@@ -12,8 +12,8 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let server_address = null;
-let port = null;
+let server_address;
+let port = 0;
 
 class ServerTransferPacket extends PacketConstructor {
 	/**

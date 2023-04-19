@@ -3,7 +3,7 @@ const DisplaySlots = require("../../scoreboard/types/DisplaySlots");
 const PacketConstructor = require("./PacketConstructor");
 
 let displaySlot = DisplaySlots.SIDEBAR;
-let objectiveName = '';
+let objectiveName;
 let displayName = null;
 let criteriaName = null;
 let sortOrder = 0;

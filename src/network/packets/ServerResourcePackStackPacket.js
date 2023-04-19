@@ -13,7 +13,7 @@
 let must_accept = false;
 let behavior_packs = [];
 let resource_packs = [];
-let game_version = "";
+let game_version;
 let experiments = [];
 let experiments_previously_used = false;
 
