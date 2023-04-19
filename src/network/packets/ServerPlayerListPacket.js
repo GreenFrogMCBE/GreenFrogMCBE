@@ -12,11 +12,11 @@
  */
 const PlayerListTypes = require("./types/PlayerList");
 
-let username = "unknown";
-let uuid = "";
+let username;
+let uuid;
 let id = 0;
 let type = PlayerListTypes.ADD;
-let xboxid = "0";
+let xboxid;
 
 const PacketConstructor = require("./PacketConstructor");
 

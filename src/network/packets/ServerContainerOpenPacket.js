@@ -11,12 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let window_id = 0;
-let coordinates = {
-	x: 0,
-	y: 0,
-	z: 0,
-};
-let window_type = "";
+let coordinates = {};
+let window_type;
 let runtime_entity_id = 0;
 
 const PacketConstructor = require("./PacketConstructor");

@@ -15,12 +15,12 @@ const FormTypes = require("../../forms/FormTypes");
 const PacketConstructor = require("./PacketConstructor");
 
 let id = 0;
-let content = "";
-let buttons = null;
-let title = "";
+let content;
+let buttons;
+let title;
 let type = FormTypes.FORM;
-let button1 = "";
-let button2 = "";
+let button1;
+let button2;
 
 class ServerFormRequestPacket extends PacketConstructor {
 	/**

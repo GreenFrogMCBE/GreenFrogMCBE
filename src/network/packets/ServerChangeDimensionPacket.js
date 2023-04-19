@@ -14,7 +14,7 @@ const Dimensions = require("./types/DimensionLegacy");
 
 const PacketConstructor = require("./PacketConstructor");
 
-let dim = Dimensions.OVERWORLD;
+let dimension = Dimensions.OVERWORLD;
 let pos = {
 	x: 0,
 	y: 0,
@@ -44,7 +44,7 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 	 * @param {Dimensions} new_dimension
 	 */
 	setDimension(new_dimension) {
-		dim = new_dimension;
+		dimension = new_dimension;
 	}
 
 	/**
@@ -70,9 +70,10 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 	/**
 	 * Returns the dimension
 	 * @returns {Dimensions} The dimension
+	 * @type {import("./types/Dimension")}
 	 */
 	getDimension() {
-		return dim;
+		return dimension;
 	}
 
 	/**
