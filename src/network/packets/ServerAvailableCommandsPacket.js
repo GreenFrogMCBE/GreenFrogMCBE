@@ -49,7 +49,7 @@ class ServerAvailableCommandsPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {object} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), this.getData());

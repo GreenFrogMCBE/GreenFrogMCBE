@@ -50,7 +50,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 			player,
 			packet,
 			server,
-			cancel: () => {() {
+			cancel: () => {
 				shouldClose = false
 			}
 		})

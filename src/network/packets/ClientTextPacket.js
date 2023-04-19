@@ -53,7 +53,7 @@ class ClientTextPacket extends PacketConstructor {
 			server,
 			player,
 			message,
-			cancel: () => {() {
+			cancel: () => {
 				shouldChat = false
 			}
 		});

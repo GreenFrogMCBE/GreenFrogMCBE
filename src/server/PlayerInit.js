@@ -148,9 +148,9 @@ module.exports = {
 		 * Sets player's velocity
 		 * NOTE: This is handled by the client, and not server-side
 		 * 
-		 * @param {Float} x 
-		 * @param {Float} y 
-		 * @param {Float} z 
+		 * @param {float} x 
+		 * @param {float} y 
+		 * @param {float} z 
 		 */
 		player.setVelocity = function (x, y, z) {
 			let shouldSetVelocity = true
@@ -179,12 +179,12 @@ module.exports = {
 		/**
 		 * Teleports player
 		 * 
-		 * @param {Float} x 
-		 * @param {Float} y 
-		 * @param {Float} z 
-		 * @param {Float} rot_x 
-		 * @param {Float} rot_y 
-		 * @param {Float} rot_z 
+		 * @param {float} x 
+		 * @param {float} y 
+		 * @param {float} z 
+		 * @param {float} rot_x 
+		 * @param {float} rot_y 
+		 * @param {float} rot_z 
 		 */
 		player.teleport = function (x, y, z, rot_x = undefined, rot_y = undefined, rot_z = undefined) {
 			let shouldTeleport = true
@@ -414,7 +414,7 @@ module.exports = {
 		/**
 		 * Sets the XP for the player
 		 * 
-		 * @param {Float} xp
+		 * @param {float} xp
 		 */
 		player.setXP = function (xp) {
 			let shouldSetXP = true
@@ -443,7 +443,7 @@ module.exports = {
 		/**
 		 * Sets the health of the player
 		 * 
-		 * @param {Float} health
+		 * @param {float} health
 		 * @param {DamageCause} cause
 		 */
 		player.setHealth = function (health, cause = DamageCause.UNKNOWN) {
@@ -509,7 +509,7 @@ module.exports = {
 		/**
 		 * Sets the hunger of the player
 		 * 
-		 * @param {Float} hunger
+		 * @param {float} hunger
 		 * @param {HungerCause} cause
 		 */
 		player.setHunger = function (hunger, cause = HungerCause.UNKNOWN) {
@@ -542,9 +542,9 @@ module.exports = {
 		/**
 		 * Updates the dimension for the player
 		 * 
-		 * @param {Float} x
-		 * @param {Float} y
-		 * @param {Float} z
+		 * @param {float} x
+		 * @param {float} y
+		 * @param {float} z
 		 * @param {Dimension} dimension
 		 * @param {boolean} respawn
 		 * 

@@ -29,7 +29,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns the runtime entity ID
-     * @returns {Float} The runtime entity ID
+     * @returns {float} The runtime entity ID
      */
     getRuntimeEntityId() {
         return runtime_entity_id;
@@ -37,7 +37,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the runtime entity ID
-     * @param {Float} value - The runtime entity ID value to set
+     * @param {float} value - The runtime entity ID value to set
      */
     setRuntimeEntityId(value) {
         runtime_entity_id = value;
@@ -45,7 +45,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns The X coordinate
-     * @returns {Float} The X coordinate
+     * @returns {float} The X coordinate
      */
     getX() {
         return x;
@@ -53,7 +53,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the X coordinate
-     * @param {Float} value - The X coordinate value to set
+     * @param {float} value - The X coordinate value to set
      */
     setX(value) {
         x = value;
@@ -61,7 +61,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns the Y coordinate
-     * @returns {Float} The Y coordinate
+     * @returns {float} The Y coordinate
      */
     getY() {
         return y;
@@ -69,7 +69,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the Y coordinate
-     * @param {Float} value - The Y coordinate value to set
+     * @param {float} value - The Y coordinate value to set
      */
     setY(value) {
         y = value;
@@ -77,7 +77,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns the z coordinate
-     * @returns {Float} The z coordinate
+     * @returns {float} The z coordinate
      */
     getZ() {
         return z;
@@ -85,7 +85,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the z coordinate
-     * @param {Float} value - The z coordinate value to set
+     * @param {float} value - The z coordinate value to set
      */
     setZ(value) {
         z = value;
@@ -93,7 +93,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns the X rotation
-     * @returns {Float} The X rotation
+     * @returns {float} The X rotation
      */
     getRotX() {
         return rot_x;
@@ -101,7 +101,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the X rotation
-     * @param {Float} value - The X rotation value to set
+     * @param {float} value - The X rotation value to set
      */
     setRotX(value) {
         rot_x = value;
@@ -109,7 +109,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns the Y rotation
-     * @returns {Float} The Y rotation
+     * @returns {float} The Y rotation
      */
     getRotY() {
         return rot_y;
@@ -117,7 +117,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the Y rotation
-     * @param {Float} value - The Y rotation value to set
+     * @param {float} value - The Y rotation value to set
      */
     setRotY(value) {
         rot_y = value;
@@ -125,7 +125,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Returns the Z rotation
-     * @returns {Float} The Z rotation
+     * @returns {float} The Z rotation
      */
     getRotZ() {
         return rot_z;
@@ -133,7 +133,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the Z rotation
-     * @param {Float} value - The Z rotation value to set
+     * @param {float} value - The Z rotation value to set
      */
     setRotZ(value) {
         rot_z = value;
@@ -141,7 +141,7 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 
     /**
      * Sets the flags
-     * @param {Float} value - The flags value to set
+     * @param {float} value - The flags value to set
      */
     setFlags(value) {
         flags = value
