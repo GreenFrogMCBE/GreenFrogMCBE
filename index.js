@@ -15,7 +15,14 @@ const crashFileName = `./crash-reports/server-crash-${Math.floor(Math.random() *
 
 async function createConfigFilesAndDebug() {
 	if (!fs.existsSync("config.yml")) {
-		const config = fs.readFileSync('./src/internalResources/defaultConfig.yml');
+		let config = null
+
+		if (process.argv.includes('--test')) {
+			config = fs.readFileSync('../src/internalResources/defaultConfig.yml');
+		} else {
+			config = fs.readFileSync('./src/internalResources/defaultConfig.yml');
+		}
+
 		fs.writeFileSync('config.yml', config, () => { });
 	}
 
