@@ -28,7 +28,7 @@ async function createConfigFilesAndDebug() {
 	if (!fs.existsSync("config.yml")) {
 		let config = null;
 
-		if (process.argv.includes('--test')) {
+		if (process.env.TEST) { // TODO: Better way to do this
 			config = fs.readFileSync('../src/internalResources/defaultConfig.yml');
 		} else {
 			config = fs.readFileSync('./src/internalResources/defaultConfig.yml');
