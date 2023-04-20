@@ -142,14 +142,19 @@ async function _initDebug() {
  */
 async function _listen() {
 	const { host, port } = config.network;
-	const { levelName, motd, maxPlayers, offlineMode, version } = config.serverInfo;
+	const { levelName, motd, maxPlayers, version } = config.serverInfo;
+	let { offlineMode } = config.serverInfo
+
+	if (process.argv.includes('--test')) {
+		offlineMode = true
+	}
 
 	try {
 		server = FrogProtocol.createServer({
 			host,
 			port,
 			version,
-			offlineMode,
+			offline: offlineMode,
 			maxPlayers,
 			motd: {
 				motd,
