@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const readline = require("readline");
 
 const ConsoleSetupException = require("../utils/exceptions/ConsoleSetupException");
@@ -17,13 +29,13 @@ let readLineInterface;
 
 /**
  * Set ups the console command reader that is used to handle commands
- * 
+ *
  * @throws {ConsoleSetupException} - If the console is closed
- * 
+ *
  */
 async function setupConsoleReader() {
 	if (isClosed) {
-		throw new ConsoleSetupException("Console is closed!")
+		throw new ConsoleSetupException("Console is closed!");
 	}
 
 	readLineInterface = await readline.createInterface({
@@ -37,68 +49,55 @@ async function setupConsoleReader() {
 
 /**
  * Executes a command that the user typed in the console.
- * 
+ *
  * @param {string} executedCommand - The command to execute.
  * @throws {CommandHandlingException} Throws an error if the command cannot be executed.
  */
 async function executeConsoleCommand(executedCommand) {
-	let shouldExecCommand = true
+	let shouldExecCommand = true;
 
 	const args = executedCommand.split(" ").slice(1);
 
-	require("../Frog").eventEmitter.emit('serverExecutedCommand', {
+	require("../Frog").eventEmitter.emit("serverExecutedCommand", {
 		server: require("../Frog").server,
 		args,
 		command: executedCommand,
 		cancel: () => {
-			shouldExecCommand = false
-		}
-	})
+			shouldExecCommand = false;
+		},
+	});
 
-	if (isClosed || !shouldExecCommand || !executedCommand.replace(" ", "")) return
+	if (isClosed || !shouldExecCommand || !executedCommand.replace(" ", "")) return;
 
 	try {
 		let commandFound = false;
 
 		for (const command of Commands.commandList) {
-			if (
-				command.data.name === executedCommand.split(" ")[0] ||
-				(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
-			) {
-				if (
-					command.data.minArgs !== undefined &&
-					command.data.minArgs > args.length
-				) {
-					Logger.info(
-						Language.getKey("commands.errors.syntaxError.minArg")
-							.replace("%s%", command.data.minArgs)
-							.replace("%d%", args.length)
-					);
+			if (command.data.name === executedCommand.split(" ")[0] || (command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))) {
+				if (command.data.minArgs !== undefined && command.data.minArgs > args.length) {
+					Logger.info(Language.getKey("commands.errors.syntaxError.minArg").replace("%s%", command.data.minArgs).replace("%d%", args.length));
 					return;
 				}
 
-				if (
-					command.data.maxArgs !== undefined &&
-					command.data.maxArgs < args.length
-				) {
-					Logger.info(
-						Language.getKey("commands.errors.syntaxError.maxArg")
-							.replace("%s%", command.data.maxArgs)
-							.replace("%d%", args.length)
-					);
+				if (command.data.maxArgs !== undefined && command.data.maxArgs < args.length) {
+					Logger.info(Language.getKey("commands.errors.syntaxError.maxArg").replace("%s%", command.data.maxArgs).replace("%d%", args.length));
 					return;
 				}
 
-				command.execute(Frog, {
-					sendMessage: (message) => {
-						Logger.info(message);
+				command.execute(
+					Frog,
+					{
+						sendMessage: (message) => {
+							Logger.info(message);
+						},
+						setGamemode: () => {},
+						op: true,
+						username: "Server",
+						ip: "127.0.0.1",
+						isConsole: true,
 					},
-					setGamemode: () => { },
-					op: true,
-					username: "Server",
-					ip: "127.0.0.1",
-					isConsole: true,
-				}, args);
+					args
+				);
 
 				commandFound = true;
 				break; // Exit loop once command has been found and executed
@@ -106,13 +105,20 @@ async function executeConsoleCommand(executedCommand) {
 		}
 
 		if (!commandFound) {
-			CommandVerifier.throwError({ sendMessage: (msg) => { Logger.info(msg) } }, executedCommand.split(" ")[0])
+			CommandVerifier.throwError(
+				{
+					sendMessage: (msg) => {
+						Logger.info(msg);
+					},
+				},
+				executedCommand.split(" ")[0]
+			);
 		}
 	} catch (error) {
-		require("../Frog").eventEmitter.emit('serverCommandProcessError', {
+		require("../Frog").eventEmitter.emit("serverCommandProcessError", {
 			server: require("../Frog").server,
 			command: executedCommand,
-			error
+			error,
 		});
 
 		Logger.error(Language.getKey("commands.internalError").replace("%s%", error.stack));
@@ -122,7 +128,7 @@ async function executeConsoleCommand(executedCommand) {
 module.exports = {
 	/**
 	 * Closes the console.
-	 * 
+	 *
 	 * @throws {ConsoleSetupException} - If the console is already closed
 	 */
 	close() {
@@ -135,14 +141,14 @@ module.exports = {
 
 	/**
 	 * Returns true if the console is closed, false otherwise.
-	 * 
+	 *
 	 * @returns {boolean}
 	 */
 	isClosed,
 
 	/**
 	 * Returns the command handler interface.
-	 * 
+	 *
 	 * @type {readline.Interface}
 	 */
 	readLineInterface,
@@ -153,7 +159,7 @@ module.exports = {
 	async start() {
 		await setupConsoleReader();
 
-		await Commands.loadAllCommands()
+		await Commands.loadAllCommands();
 
 		readLineInterface.on("line", async (command) => {
 			let shouldProcessCommand = true;
@@ -163,11 +169,11 @@ module.exports = {
 				command,
 				cancel: () => {
 					shouldProcessCommand = false;
-				}
+				},
 			});
 
 			if (shouldProcessCommand) {
-				executeConsoleCommand(command)
+				executeConsoleCommand(command);
 
 				if (!isClosed) readLineInterface.prompt(true);
 			}

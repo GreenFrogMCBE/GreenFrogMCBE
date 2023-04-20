@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const ScoreActions = require("../../scoreboard/types/ScoreActions");
 
 const PacketConstructor = require("./PacketConstructor");
@@ -61,7 +73,7 @@ class ServerSetScorePacket extends PacketConstructor {
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			action: this.getAction(),
-			entries: this.getEntries()
+			entries: this.getEntries(),
 		});
 	}
 }

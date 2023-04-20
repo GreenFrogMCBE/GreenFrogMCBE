@@ -26,19 +26,19 @@ let config;
 module.exports = {
 	/**
 	 * Returns plugin count
-	 * 
+	 *
 	 * @returns {number}
 	 */
 	pluginCount,
 
 	/**
 	 * Loads all plugins
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	loadPlugins() {
-		fs.mkdirSync('./plugins/', { recursive: true });
-		fs.mkdirSync('./pluginData/', { recursive: true });
+		fs.mkdirSync("./plugins/", { recursive: true });
+		fs.mkdirSync("./pluginData/", { recursive: true });
 
 		setTimeout(() => {
 			CCH.start();
@@ -62,8 +62,8 @@ module.exports = {
 							version = packageJson.version;
 							main = packageJson.main;
 
-							PluginManager.addPlugin(name, version)
-							Logger.info(getKey("plugin.loading.loading").replace('%s%', name).replace('%d%', version))
+							PluginManager.addPlugin(name, version);
+							Logger.info(getKey("plugin.loading.loading").replace("%s%", name).replace("%d%", version));
 						} catch (error) {
 							Logger.warning(getKey("plugin.loading.warning.invalidJson").replace("%s%", file).replace("%d%", error.stack));
 							return;
@@ -73,7 +73,7 @@ module.exports = {
 							require(`${__dirname}/../../plugins/${file}/${main}`).onLoad();
 
 							PluginManager.addPlugin(name, version);
-							Logger.info(getKey("plugin.loading.loaded").replace('%s%', name).replace('%d%', version))
+							Logger.info(getKey("plugin.loading.loaded").replace("%s%", name).replace("%d%", version));
 						} catch (error) {
 							Logger.error(getKey("plugin.loading.failed").replace("%s%", name).replace("%d%", error.stack));
 						}
@@ -85,8 +85,8 @@ module.exports = {
 
 	/**
 	 * Kills the server
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	async killServer() {
 		config = require("../Frog").serverConfigurationFiles.config;
@@ -96,8 +96,8 @@ module.exports = {
 
 	/**
 	 * Prepares plugins for shutdown
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	initPluginShutdown() {
 		pluginCount--;
@@ -107,9 +107,9 @@ module.exports = {
 
 	/**
 	 * Unloads plugins
-	 * 
-	 * 
-	 * 
+	 *
+	 *
+	 *
 	 */
 	async unloadPlugins() {
 		fs.readdir("./plugins", (_err, files) => {
@@ -118,7 +118,7 @@ module.exports = {
 			files.forEach((file) => {
 				fs.stat(`${__dirname}/../../plugins/${file}`, (error, stats) => {
 					if (error) {
-						Logger.error(getKey("plugin.unloading.failed").replace('%s%', file).replace('%d%', error.stack))
+						Logger.error(getKey("plugin.unloading.failed").replace("%s%", file).replace("%d%", error.stack));
 						return;
 					}
 
@@ -141,7 +141,7 @@ module.exports = {
 
 							Logger.info(getKey("plugin.unloading.success").replace("%s%", name));
 						} catch (error) {
-							Logger.error(getKey("plugin.unloading.failed").replace('%s%', name).replace('%d%', error.stack))
+							Logger.error(getKey("plugin.unloading.failed").replace("%s%", name).replace("%d%", error.stack));
 						}
 
 						this.initPluginShutdown();

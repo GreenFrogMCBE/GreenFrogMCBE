@@ -18,7 +18,7 @@ class Form {
 	constructor() {
 		/**
 		 * @type {FormTypes}
-		 * 
+		 *
 		 * @type {import("./FormTypes")}
 		 */
 		this.type = FormTypes.FORM;
@@ -37,11 +37,11 @@ class Form {
 
 		/**
 		 * @type {function}
-		 * 
+		 *
 		 * @param {Form} form
 		 * @param {Client} client
 		 */
-		this.onSend = (form, client) => { }
+		this.onSend = (form, client) => {};
 
 		/**
 		 * The ID of the form.
@@ -65,7 +65,7 @@ class Form {
 		FormReq.setType(this.type);
 		FormReq.send(client);
 
-		this.onSend(this, client)
+		this.onSend(this, client);
 	}
 }
 

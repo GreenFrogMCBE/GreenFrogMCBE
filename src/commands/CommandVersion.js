@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const Frog = require("../Frog");
 
 const Colors = require("../api/colors/Colors");
@@ -16,7 +28,7 @@ module.exports = {
 	},
 
 	execute(_server, player) {
-		const versionMsg = getKey("frog.version").replace('%s%', Frog.getServerData().minorServerVersion);
+		const versionMsg = getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion);
 		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
-	}
+	},
 };

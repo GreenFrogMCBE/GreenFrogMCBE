@@ -50,23 +50,23 @@ class ClientInteractPacket extends PacketConstructor {
 	async readPacket(player, packet, server) {
 		const actionID = packet.data.params.action_id;
 
-		Frog.eventEmitter.emit('playerInteractEvent', {
+		Frog.eventEmitter.emit("playerInteractEvent", {
 			player,
 			server,
-			actionID
-		})
+			actionID,
+		});
 
 		switch (actionID) {
 			case InteractType.INVENTORYOPEN:
-				let shouldOpen = true
+				let shouldOpen = true;
 
 				const containerCoordinates = {
 					x: 0,
 					y: 0,
-					z: 0
-				}
+					z: 0,
+				};
 
-				Frog.eventEmitter.emit('playerContainerOpen', {
+				Frog.eventEmitter.emit("playerContainerOpen", {
 					windowID: WindowID.CREATIVE,
 					windowType: InventoryType.INVENTORY,
 					isSentByServer: false,
@@ -75,11 +75,11 @@ class ClientInteractPacket extends PacketConstructor {
 					server,
 					containerCoordinates,
 					cancel: () => {
-						shouldOpen = false
-					}
-				})
+						shouldOpen = false;
+					},
+				});
 
-				if (!shouldOpen) return
+				if (!shouldOpen) return;
 
 				const containerOpen = new ServerContainerOpenPacket();
 				containerOpen.setWindowID(WindowID.CREATIVE);

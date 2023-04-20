@@ -19,8 +19,8 @@ class PacketConstructor {
 
 	/**
 	 * Returns the packet name
-	 * 
-	 * @returns {string} 
+	 *
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "unknown_packet";
@@ -28,7 +28,7 @@ class PacketConstructor {
 
 	/**
 	 * Returns if the packet is critical
-	 * 
+	 *
 	 * @returns {boolean}
 	 */
 	isCriticalPacket() {

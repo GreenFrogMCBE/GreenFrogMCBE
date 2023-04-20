@@ -31,7 +31,7 @@ const ChunkLoadException = require("../../utils/exceptions/ChunkLoadException");
 const PacketConstructor = require("./PacketConstructor");
 
 const NetworkChunkPublisherUpdate = require("./ServerNetworkChunkPublisherUpdatePacket");
-const AvailableEntityIdentifiers = require("./ServerAvailableEntityIdentifiersPacket")
+const AvailableEntityIdentifiers = require("./ServerAvailableEntityIdentifiersPacket");
 const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket");
 const SetCommandsEnabled = require("./ServerSetCommandsEnabledPacket");
 const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
@@ -54,7 +54,7 @@ const Commands = require("../../server/Commands");
 const { getKey } = require("../../utils/Language");
 
 const { serverConfigurationFiles } = require("../../Frog");
-const { config } = serverConfigurationFiles
+const { config } = serverConfigurationFiles;
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
@@ -84,26 +84,26 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 		switch (responseStatus) {
 			case ResourcePackStatus.NONE:
-				Frog.eventEmitter.emit('playerHasNoResourcePacksInstalled', {
+				Frog.eventEmitter.emit("playerHasNoResourcePacksInstalled", {
 					resourcePacksIds: [],
 					resourcePacksRequired: true,
 					server,
 					player,
-					cancel: () => player.kick(getKey("kickMessages.serverDisconnect"))
+					cancel: () => player.kick(getKey("kickMessages.serverDisconnect")),
 				});
 				Logger.info(getKey("status.resourcePacks.none").replace("%s%", player.username));
 				break;
 			case ResourcePackStatus.REFUSED:
-				Frog.eventEmitter.emit('playerResourcePacksRefused', { server, player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
+				Frog.eventEmitter.emit("playerResourcePacksRefused", { server, player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
 				Logger.info(getKey("status.resourcePacks.refused").replace("%s%", player.username));
 				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
 			case ResourcePackStatus.HAVEALLPACKS:
-				Frog.eventEmitter.emit('playerHasAllResourcePacks', {
+				Frog.eventEmitter.emit("playerHasAllResourcePacks", {
 					resourcePacksIds: [],
 					resourcePacksRequired: true,
 					server: server,
-					player: player
+					player: player,
 				});
 
 				Logger.info(getKey("status.resourcePacks.installed").replace("%s%", player.username));
@@ -118,9 +118,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				resourcePackStack.writePacket(player);
 				break;
 			case ResourcePackStatus.COMPLETED:
-				Frog.eventEmitter.emit('playerResourcePacksCompleted', {
+				Frog.eventEmitter.emit("playerResourcePacksCompleted", {
 					server: server,
-					player: player
+					player: player,
 				});
 
 				player.world = new World();
@@ -141,9 +141,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.op = true;
 					player.permissionLevel = 4;
 				} else {
-					player.op = false
+					player.op = false;
 				}
-
 
 				if (!player.op) player.permissionLevel = config.dev.defaultPermissionLevel;
 
@@ -222,26 +221,26 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				try {
 					itemcomponent.setItems(require("../../../world/custom_items.json").items);
 				} catch (error) {
-					Logger.warning(getKey("warning.customItems.loading.failed").replace("%s%", error.stack))
+					Logger.warning(getKey("warning.customItems.loading.failed").replace("%s%", error.stack));
 					itemcomponent.setItems([]);
 				}
 				itemcomponent.writePacket(player);
 
 				if (player.chunksEnabled) {
-					player.setChunkRadius(player.world.getChunkRadius())
+					player.setChunkRadius(player.world.getChunkRadius());
 
 					const coordinates =
 						config.world.generator === WorldGenerators.DEFAULT
 							? {
-								x: 1070,
-								y: 274,
-								z: -915,
-							}
+									x: 1070,
+									y: 274,
+									z: -915,
+							  }
 							: {
-								x: -17,
-								y: 117,
-								z: 22,
-							};
+									x: -17,
+									y: 117,
+									z: 22,
+							  };
 
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
 					networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);
@@ -293,10 +292,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					playStatus.setStatus(PlayStatusType.PLAYERSPAWN);
 					playStatus.writePacket(player);
 
-					Frog.eventEmitter.emit('playerSpawn', {
+					Frog.eventEmitter.emit("playerSpawn", {
 						player,
-						server
-					})
+						server,
+					});
 
 					player.setEntityData("can_climb", true);
 					player.setEntityData("can_fly", false);

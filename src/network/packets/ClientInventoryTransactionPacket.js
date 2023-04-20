@@ -26,8 +26,8 @@ const WorldGenerators = require("../../world/types/WorldGenerators");
 
 const { getKey } = require("../../utils/Language");
 
-const { serverConfigurationFiles } = Frog
-const { config } = serverConfigurationFiles
+const { serverConfigurationFiles } = Frog;
+const { config } = serverConfigurationFiles;
 
 class ClientInventoryTransactionPacket extends PacketConstructor {
 	/**
@@ -48,7 +48,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from client
-	 * 
+	 *
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 */
@@ -67,7 +67,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s%", player.username));
 				}
 
-				Frog.eventEmitter.emit('blockBreakEvent', {
+				Frog.eventEmitter.emit("blockBreakEvent", {
 					actions: packet.data.params.actions,
 					legacy: packet.data.params.transaction.legacy,
 					player: player,
@@ -91,8 +91,8 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 								}
 							}
 						}
-					}
-				})
+					},
+				});
 
 				player.world.breakBlock(packet.data.params.transaction.transaction_data.block_position.x, packet.data.params.transaction.transaction_data.block_position.y, packet.data.params.transaction.transaction_data.block_position.z);
 				break;

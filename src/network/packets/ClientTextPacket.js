@@ -18,8 +18,8 @@ const Logger = require("../../server/Logger");
 
 const { getKey } = require("../../utils/Language");
 
-const { serverConfigurationFiles } = Frog
-const { config } = serverConfigurationFiles
+const { serverConfigurationFiles } = Frog;
+const { config } = serverConfigurationFiles;
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -49,29 +49,29 @@ class ClientTextPacket extends PacketConstructor {
 	async readPacket(player, packet, server) {
 		const message = packet.data.params.message;
 
-		let shouldChat = true
+		let shouldChat = true;
 
-		Frog.eventEmitter.emit('playerChat', {
+		Frog.eventEmitter.emit("playerChat", {
 			server,
 			player,
 			message,
 			cancel: () => {
-				shouldChat = false
-			}
+				shouldChat = false;
+			},
 		});
 
-		if (!shouldChat || config.chat.disable) return
+		if (!shouldChat || config.chat.disable) return;
 
 		const formattedMessage = getKey("chat.format").replace("%s%", player.username).replace("%d%", message);
 
 		if (!message.trim()) return;
 
 		if (message.includes("§") || (message.length > 256 && config.chat.blockInvalidMessages)) {
-			Frog.eventEmitter.emit('playerMalformatedChatMessage', {
+			Frog.eventEmitter.emit("playerMalformatedChatMessage", {
 				server,
 				player,
-				message
-			})
+				message,
+			});
 			return;
 		}
 

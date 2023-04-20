@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const { players } = require("../api/player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
@@ -11,7 +23,7 @@ module.exports = {
 		description: getKey("commands.time.description"),
 		minArgs: 1,
 		maxArgs: 1,
-		requiresOp: true
+		requiresOp: true,
 	},
 
 	execute(_server, player, args) {
@@ -25,12 +37,12 @@ module.exports = {
 		}
 
 		for (const player of players) {
-			const parsedTime = parseInt(time)
+			const parsedTime = parseInt(time);
 
-			player.world.setTime(parsedTime)
+			player.world.setTime(parsedTime);
 			player.setTime(parsedTime);
 		}
 
 		player.sendMessage(getKey("commands.time.execution.success").replace("%s%", time));
-	}
+	},
 };

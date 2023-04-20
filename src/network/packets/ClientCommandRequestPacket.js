@@ -45,23 +45,23 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		const executedCommand = packet.data.params.command.replace('/', '');
+		const executedCommand = packet.data.params.command.replace("/", "");
 
 		const args = executedCommand.split(" ").slice(1);
 
-		let shouldExecuteCommand = true
+		let shouldExecuteCommand = true;
 
-		Frog.eventEmitter.emit('playerExecutedCommand', {
+		Frog.eventEmitter.emit("playerExecutedCommand", {
 			player,
 			server,
 			args,
 			command: executedCommand,
 			cancel: () => {
-				shouldExecuteCommand = false
-			}
-		})
+				shouldExecuteCommand = false;
+			},
+		});
 
-		if (!shouldExecuteCommand) return
+		if (!shouldExecuteCommand) return;
 
 		try {
 			if (!executedCommand.replace(" ", "")) return;
@@ -69,36 +69,19 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			let commandFound = false;
 
 			for (const command of Commands.commandList) {
-				if (
-					command.data.name === executedCommand.split(" ")[0] ||
-					(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
-				) {
+				if (command.data.name === executedCommand.split(" ")[0] || (command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))) {
 					if (command.data.requiresOp && !player.op) {
-						CommandVerifier.throwError(player, executedCommand.split(" ")[0])
-						return
-					}
-
-					if (
-						command.data.minArgs !== undefined &&
-						command.data.minArgs > args.length
-					) {
-						player.sendMessage(
-							getKey("commands.errors.syntaxError.minArg")
-								.replace("%s%", command.data.minArgs)
-								.replace("%d%", args.length)
-						);
+						CommandVerifier.throwError(player, executedCommand.split(" ")[0]);
 						return;
 					}
 
-					if (
-						command.data.maxArgs !== undefined &&
-						command.data.maxArgs < args.length
-					) {
-						player.sendMessage(
-							getKey("commands.errors.syntaxError.maxArg")
-								.replace("%s%", command.data.maxArgs)
-								.replace("%d%", args.length)
-						);
+					if (command.data.minArgs !== undefined && command.data.minArgs > args.length) {
+						player.sendMessage(getKey("commands.errors.syntaxError.minArg").replace("%s%", command.data.minArgs).replace("%d%", args.length));
+						return;
+					}
+
+					if (command.data.maxArgs !== undefined && command.data.maxArgs < args.length) {
+						player.sendMessage(getKey("commands.errors.syntaxError.maxArg").replace("%s%", command.data.maxArgs).replace("%d%", args.length));
 						return;
 					}
 
@@ -110,7 +93,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			}
 
 			if (!commandFound) {
-				CommandVerifier.throwError(player, executedCommand.split(" ")[0])
+				CommandVerifier.throwError(player, executedCommand.split(" ")[0]);
 			}
 		} catch (error) {
 			Logger.error(getKey("commands.internalError.player").replace("%s%", player.username).replace("%d%", error.stack));

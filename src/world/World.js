@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 /** This file contains API functions for the world. */
 
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
@@ -19,21 +31,21 @@ class World {
 	constructor() {
 		/**
 		 * The name of the world.
-		 * 
+		 *
 		 * @type {string}
 		 */
 		this.worldName;
 
 		/**
 		 * The coordinates of the spawn point.
-		 * 
+		 *
 		 * @type {{ x: number, y: number, z: number }}
 		 */
 		this.coords = {};
 
 		/**
 		 * The chunk render radius.
-		 * 
+		 *
 		 * @type {number}
 		 */
 		this.renderDistance;
@@ -41,7 +53,7 @@ class World {
 
 	/**
 	 * Sets the name of the world.
-	 * 
+	 *
 	 * @param {string} name - The new name of the world.
 	 */
 	setName(name) {
@@ -50,7 +62,7 @@ class World {
 
 	/**
 	 * Gets the name of the world.
-	 * 
+	 *
 	 * @returns {string} - The name of the world.
 	 */
 	getName() {
@@ -59,7 +71,7 @@ class World {
 
 	/**
 	 * Gets the players that are currently in the world.
-	 * 
+	 *
 	 * @returns {Array<Player>} - The players in the world.
 	 */
 	getPlayersInWorld() {
@@ -68,7 +80,7 @@ class World {
 
 	/**
 	 * Sets the coordinates of the spawn point.
-	 * 
+	 *
 	 * @param {number} x - The x-coordinate of the spawn point.
 	 * @param {number} y - The y-coordinate of the spawn point.
 	 * @param {number} z - The z-coordinate of the spawn point.
@@ -79,7 +91,7 @@ class World {
 
 	/**
 	 * Gets the coordinates of the spawn point.
-	 * 
+	 *
 	 * @returns {{ x: number, y: number, z: number }} - The coordinates of the spawn point.
 	 */
 	getSpawnCoordinates() {
@@ -88,7 +100,7 @@ class World {
 
 	/**
 	 * Sets the chunk render radius.
-	 * 
+	 *
 	 * @param {number} radius - The new chunk render radius.
 	 */
 	setChunkRadius(radius) {
@@ -97,7 +109,7 @@ class World {
 
 	/**
 	 * Gets the chunk render radius.
-	 * 
+	 *
 	 * @returns {number} - The chunk render radius.
 	 */
 	getChunkRadius() {
@@ -106,25 +118,25 @@ class World {
 
 	/**
 	 * Sets the world time
-	 * 
-	 * @param {number} new_time 
+	 *
+	 * @param {number} new_time
 	 */
 	setTime(new_time) {
-		time = new_time
+		time = new_time;
 	}
 
 	/**
 	 * Returns the world time
-	 * 
+	 *
 	 * @return {number}
 	 */
 	getTime() {
-		return time
+		return time;
 	}
 
 	/**
 	 * Places a block at the specified coordinates.
-	 * 
+	 *
 	 * @param {number} x - The X-coordinate of the block.
 	 * @param {number} y - The Y-coordinate of the block.
 	 * @param {number} z - The Z-coordinate of the block.
@@ -146,48 +158,48 @@ class World {
 
 	/**
 	 * Breaks a block at the specified coordinates.
-	 * 
+	 *
 	 * @param {number} x - The X-coordinate of the block.
 	 * @param {number} y - The Y-coordinate of the block.
 	 * @param {number} z - The Z-coordinate of the block.
 	 */
 	breakBlock(x, y, z) {
-		this.placeBlock(x, y, z, new Air().getRuntimeId())
+		this.placeBlock(x, y, z, new Air().getRuntimeId());
 	}
 
 	/**
 	 * Ticks the world
 	 */
 	tick() {
-		const { config } = Frog.serverConfigurationFiles
+		const { config } = Frog.serverConfigurationFiles;
 
 		if (config.world.tickEvent) {
-			Frog.eventEmitter.emit('serverTick', {
+			Frog.eventEmitter.emit("serverTick", {
 				world: this.getWorldData(),
-				server: require("../Server")
+				server: require("../Server"),
 			});
 		}
 
 		if (config.world.tickWorldTime) {
-			this.setTime(this.getTime() + 10)
-		
-			Frog.eventEmitter.emit('serverTimeTick', {
+			this.setTime(this.getTime() + 10);
+
+			Frog.eventEmitter.emit("serverTimeTick", {
 				world: this.getWorldData(),
 				server: require("../Server"),
-				time: this.getTime()
+				time: this.getTime(),
 			});
-		
+
 			for (const player of this.getPlayersInWorld()) {
 				if (!player.offline) {
 					player.setTime(this.getTime());
 				}
 			}
-		}			
+		}
 
 		if (config.world.tickRegeneration) {
-			Frog.eventEmitter.emit('serverRegenerationTick', {
+			Frog.eventEmitter.emit("serverRegenerationTick", {
 				world: this.getWorldData(),
-				server: require("../Server")
+				server: require("../Server"),
 			});
 
 			for (const player of this.getPlayersInWorld()) {
@@ -198,9 +210,9 @@ class World {
 		}
 
 		if (config.world.tickStarvationDamage) {
-			Frog.eventEmitter.emit('serverStarvationDamageTick', {
+			Frog.eventEmitter.emit("serverStarvationDamageTick", {
 				world: this.getWorldData(),
-				server: require("../Server")
+				server: require("../Server"),
 			});
 
 			for (const player of this.getPlayersInWorld()) {
@@ -211,9 +223,9 @@ class World {
 		}
 
 		if (config.world.tickVoid) {
-			Frog.eventEmitter.emit('serverVoidDamageTick', {
+			Frog.eventEmitter.emit("serverVoidDamageTick", {
 				world: this.getWorldData(),
-				server: require("../Server")
+				server: require("../Server"),
 			});
 
 			for (const client of this.getPlayersInWorld()) {
@@ -226,11 +238,10 @@ class World {
 				}
 
 				if (posY <= min) {
-					if (client.gamemode === Gamemode.CREATIVE ||
-						client.gamemode === Gamemode.SPECTATOR) {
-						client.cannotBeDamagedByVoid = true
+					if (client.gamemode === Gamemode.CREATIVE || client.gamemode === Gamemode.SPECTATOR) {
+						client.cannotBeDamagedByVoid = true;
 					} else {
-						client.cannotBeDamagedByVoid = false
+						client.cannotBeDamagedByVoid = false;
 					}
 
 					if (!client.cannotBeDamagedByVoid && !client.dead) {

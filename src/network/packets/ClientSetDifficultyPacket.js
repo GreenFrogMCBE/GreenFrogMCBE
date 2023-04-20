@@ -41,11 +41,11 @@ class ClientSetDifficultyPacket extends PacketConstructor {
 	async readPacket(player, packet, server) {
 		const difficulty = packet.data.params.difficulty;
 
-		Frog.eventEmitter.emit('playerSetDifficulty', {
+		Frog.eventEmitter.emit("playerSetDifficulty", {
 			player,
 			server,
-			difficulty
-		})
+			difficulty,
+		});
 
 		for (const player of new World().getPlayersInWorld()) {
 			player.setDifficulty(difficulty);

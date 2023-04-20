@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const fs = require("fs").promises;
 
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
@@ -10,7 +22,7 @@ module.exports = {
 		description: getKey("commands.op.description"),
 		minArgs: 1,
 		maxArgs: 1,
-		requiresOp: true
+		requiresOp: true,
 	},
 
 	async execute(_server, player, args) {
@@ -21,11 +33,13 @@ module.exports = {
 
 			try {
 				getPlayerInfo(playerName).op = true;
-			} catch { /** player is offline */ }
+			} catch {
+				/** player is offline */
+			}
 
 			player.sendMessage(getKey("commands.op.execution.success").replace("%s%", playerName));
 		} catch {
 			player.sendMessage(getKey("commands.op.execution.failed").replace("%s%", playerName));
 		}
-	}
+	},
 };

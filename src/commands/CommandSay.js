@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const Logger = require("../server/Logger");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
@@ -14,14 +26,12 @@ module.exports = {
 		name: getKey("commands.say.name"),
 		description: getKey("commands.say.description"),
 		minArgs: 0,
-        requiresOp: true
+		requiresOp: true,
 	},
 
 	execute(_server, player, args) {
-		const message = args.join(" ");		
-		const msg = getKey("chat.format.say")
-			.replace(`%s%`, player.username)
-			.replace(`%d%`, message)
+		const message = args.join(" ");
+		const msg = getKey("chat.format.say").replace(`%s%`, player.username).replace(`%d%`, message);
 
 		for (const p of PlayerInfo.players) {
 			p.sendMessage(msg);
