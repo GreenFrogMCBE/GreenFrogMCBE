@@ -13,16 +13,15 @@ module.exports = {
 	data: {
 		name: getKey("commands.say.name"),
 		description: getKey("commands.say.description"),
-		minArg: 1,
-		maxArg: 1,
+		minArgs: 0,
         requiresOp: true
 	},
 
 	execute(_server, player, args) {
-		const message = args[0];
+		const message = args.join(" ");		
 		const msg = getKey("chat.format.say")
-			.replace(`%s%`, message)
-			.replace(`%d%`, player.username);
+			.replace(`%s%`, player.username)
+			.replace(`%d%`, message)
 
 		for (const p of PlayerInfo.players) {
 			p.sendMessage(msg);

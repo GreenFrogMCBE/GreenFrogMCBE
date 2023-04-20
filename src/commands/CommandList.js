@@ -16,13 +16,14 @@ module.exports = {
     data: {
         name: getKey("commands.list.name"),
         description: getKey("commands.list.description"),
-        minArg: 0,
-        maxArg: 0,
+        minArgs: 0,
+        maxArgs: 0,
     },
 
     execute(_server, player) {
         const playerCount = players.length;
-        const playerList = players.map((p) => p.username).join(", ");
+        const playerSet = new Set(players.map((p) => p.username));
+        const playerList = [...playerSet].join(", ") || ""
 
         player.sendMessage(getKey("commands.list.execution.success.commandList").replace("%s%", `${playerCount}/${config.serverInfo.maxPlayers}`).replace("%d%", playerList));
     },

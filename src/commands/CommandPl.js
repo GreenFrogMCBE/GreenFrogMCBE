@@ -14,8 +14,8 @@ module.exports = {
         name: getKey("commands.plugins.name"),
         description: getKey("commands.plugins.description"),
         aliases: [getKey("commands.plugins.aliases.pl")],
-        minArg: 0,
-        maxArg: 0,
+        minArgs: 0,
+        maxArgs: 0,
     },
 
     execute(_server, player) {

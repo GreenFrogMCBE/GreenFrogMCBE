@@ -7,7 +7,6 @@ module.exports = {
         name: getKey("commands.kick.name"),
         description: getKey("commands.kick.description"),
         minArgs: 1,
-        maxArgs: 1,
         requiresOp: true
     },
 
@@ -15,7 +14,7 @@ module.exports = {
         const playerName = args[0];
         let reason = ': ' + args.slice(1).join(' ')
 
-        if (args.length === 0) {
+        if (reason === ': ') {
             reason = ''
         }
 
@@ -26,6 +25,6 @@ module.exports = {
             return;
         }
 
-        target.disconnect(getKey("kickMessages.wereKicked").replace("%s%", reason));
+        target.kick(getKey("kickMessages.wereKicked").replace("%s%", reason));
     },
 };

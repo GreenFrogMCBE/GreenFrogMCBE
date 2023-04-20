@@ -9,13 +9,14 @@ module.exports = {
 	data: {
 		name: getKey("commands.time.name"),
 		description: getKey("commands.time.description"),
-		minArg: 1,
-		maxArg: 1,
-        requiresOp: true
+		minArgs: 1,
+		maxArgs: 1,
+		requiresOp: true
 	},
 
 	execute(_server, player, args) {
 		const time = args[0];
+
 		const setTime = time === getKey("commands.time.times.day") ? 1000 : time === getKey("commands.time.times.night") ? 17000 : parseInt(time, 10);
 
 		if (!Number.isInteger(setTime)) {
@@ -23,8 +24,9 @@ module.exports = {
 			return;
 		}
 
-		for (const client of players) {
-			client.setTime(time);
+		for (const player of players) {
+			player.world.setTime(parseInt(time))
+			player.setTime(parseInt(time));
 		}
 
 		player.sendMessage(getKey("commands.time.execution.success").replace("%s%", time));

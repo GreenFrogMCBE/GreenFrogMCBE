@@ -15,14 +15,14 @@ const fs = require("fs");
 
 const Frog = require("../../Frog");
 
-const Biome = require("./types/Biome");
-const Dimension = require("./types/Dimension");
-const Difficulty = require("./types/Difficulty");
-const Generator = require("./types/Generator");
+const Biome = require("../../world/types/Biome");
 const PlayStatusType = require("./types/PlayStatus");
 const PlayerListTypes = require("./types/PlayerList");
+const Dimension = require("../../world/types/Dimension");
+const Difficulty = require("../../api/types/Difficulty");
+const Generator = require("../../world/types/Generator");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
-const WorldGenerators = require("./types/WorldGenerators");
+const WorldGenerators = require("../../world/types/WorldGenerators");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
 
@@ -195,8 +195,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const name = command.data.name;
 					const description = command.data.description;
 					const aliases = command.data.aliases;
-
-					console.log(player.op)
 
 					if (player.op) {
 						commandManager.addCommand(player, name, description);

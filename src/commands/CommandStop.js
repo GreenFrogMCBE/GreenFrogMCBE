@@ -11,8 +11,8 @@ module.exports = {
 	data: {
 		name: getKey("commands.stop.name"),
 		description: getKey("commands.stop.description"),
-		minArg: 0,
-		maxArg: 0,
+		minArgs: 0,
+		maxArgs: 0,
         requiresOp: true
 	},
 

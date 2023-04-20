@@ -15,7 +15,7 @@ const Frog = require("../../Frog");
 const PacketConstructor = require("./PacketConstructor");
 
 const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
-const GameModeLegacy = require("./types/GamemodeLegacy");
+const GameModeLegacy = require("../../api/player/GamemodeLegacy");
 const InventoryType = require("./types/InventoryType");
 
 const Logger = require("../../server/Logger");

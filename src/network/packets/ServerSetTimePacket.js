@@ -14,13 +14,13 @@ const PacketConstructor = require("./PacketConstructor");
 
 let time = 0;
 
-class ServerUpdateTimePacket extends PacketConstructor {
+class ServerSetTimePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
 	 * @returns {string}
 	 */
 	getPacketName() {
-		return "update_time";
+		return "set_time";
 	}
 
 	/**
@@ -58,4 +58,4 @@ class ServerUpdateTimePacket extends PacketConstructor {
 	}
 }
 
-module.exports = ServerUpdateTimePacket;
+module.exports = ServerSetTimePacket;

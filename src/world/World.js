@@ -13,7 +13,7 @@ const Air = require("../block/Air");
 const Frog = require("../Frog");
 
 /** @private */
-let _time = 0;
+let time = 0;
 
 class World {
 	constructor() {
@@ -105,6 +105,24 @@ class World {
 	}
 
 	/**
+	 * Sets the world time
+	 * 
+	 * @param {number} new_time 
+	 */
+	setTime(new_time) {
+		time = new_time
+	}
+
+	/**
+	 * Returns the world time
+	 * 
+	 * @return {number}
+	 */
+	getTime() {
+		return time
+	}
+
+	/**
 	 * Places a block at the specified coordinates.
 	 * 
 	 * @param {number} x - The X-coordinate of the block.
@@ -151,19 +169,20 @@ class World {
 		}
 
 		if (config.world.tickWorldTime) {
+			this.setTime(this.getTime() + 10)
+		
 			Frog.eventEmitter.emit('serverTimeTick', {
 				world: this.getWorldData(),
 				server: require("../Server"),
-				time: _time
+				time: this.getTime()
 			});
-
-			_time += 10;
+		
 			for (const player of this.getPlayersInWorld()) {
 				if (!player.offline) {
-					player.setTime(_time);
+					player.setTime(this.getTime());
 				}
 			}
-		}
+		}			
 
 		if (config.world.tickRegeneration) {
 			Frog.eventEmitter.emit('serverRegenerationTick', {

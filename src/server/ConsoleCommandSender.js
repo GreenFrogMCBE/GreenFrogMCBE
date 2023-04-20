@@ -66,10 +66,11 @@ async function executeConsoleCommand(executedCommand) {
 				(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
 			) {
 				if (
+					command.data.minArgs !== undefined &&
 					command.data.minArgs > args.length
 				) {
 					Logger.info(
-						Language.getKey('commands.errors.syntaxError.minArg')
+						Language.getKey("commands.errors.syntaxError.minArg")
 							.replace("%s%", command.data.minArgs)
 							.replace("%d%", args.length)
 					);
@@ -77,30 +78,27 @@ async function executeConsoleCommand(executedCommand) {
 				}
 
 				if (
+					command.data.maxArgs !== undefined &&
 					command.data.maxArgs < args.length
 				) {
 					Logger.info(
-						Language.getKey('commands.errors.syntaxError.maxArg')
+						Language.getKey("commands.errors.syntaxError.maxArg")
 							.replace("%s%", command.data.maxArgs)
 							.replace("%d%", args.length)
 					);
 					return;
 				}
 
-				command.execute(
-					Frog,
-					{
-						sendMessage: (message) => {
-							Logger.info(message);
-						},
-						setGamemode: () => { },
-						op: true,
-						username: "Server",
-						ip: "127.0.0.1",
-						isConsole: true,
+				command.execute(Frog, {
+					sendMessage: (message) => {
+						Logger.info(message);
 					},
-					args
-				);
+					setGamemode: () => { },
+					op: true,
+					username: "Server",
+					ip: "127.0.0.1",
+					isConsole: true,
+				}, args);
 
 				commandFound = true;
 				break; // Exit loop once command has been found and executed

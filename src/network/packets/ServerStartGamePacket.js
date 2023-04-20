@@ -340,7 +340,7 @@ class ServerStartGamePacket extends PacketConstructor {
 			spawn_position: this.getSpawnPosition(),
 			achievements_disabled: true,
 			editor_world: false,
-			day_cycle_stop_time: 0,
+			day_cycle_stop_time: 1,
 			edu_offer: 0,
 			edu_features_enabled: false,
 			edu_product_uuid: "",

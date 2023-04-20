@@ -9,7 +9,6 @@ module.exports = {
         name: getKey("commands.deop.name"),
         description: getKey("commands.deop.description"),
         minArgs: 1,
-        maxArgs: 1,
         requiresOp: true
     },
 

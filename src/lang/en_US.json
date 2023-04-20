@@ -94,7 +94,7 @@
     "kickMessages.invalidPacket": "Invalid packet",
     "kickMessages.serverClosed": "Server closed",
     "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",
-    "kickMessages.wereKicked": "You were kicked: %s%",
+    "kickMessages.wereKicked": "You were kicked from the game%s%",
 
     "player.kicked": "Kicked %s% for %d%",
 
@@ -124,7 +124,7 @@
     "chat.format": "<%s%> %d%",
     "chat.format.plugin": "%s%",
     "chat.format.me": "* %s% %d%",
-    "chat.format.say": "* %s% %d%",
+    "chat.format.say": "[%s%] %d%",
 
     "chat.broadcasts.joined": "%s% joined the game",
     "chat.broadcasts.left": "%s% left the game",

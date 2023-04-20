@@ -75,6 +75,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 				) {
 					if (command.data.requiresOp && !player.op) {
 						CommandVerifier.throwError(player, executedCommand.split(" ")[0])
+						return
 					}
 
 					if (
@@ -109,7 +110,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			}
 
 			if (!commandFound) {
-				CommandVerifier.throwError(player, { data: { name: executedCommand.split(" ")[0] } })
+				CommandVerifier.throwError(player, executedCommand.split(" ")[0])
 			}
 		} catch (error) {
 			Logger.error(getKey("commands.internalError.player").replace("%s%", player.username).replace("%d%", error.stack));

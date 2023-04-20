@@ -9,8 +9,8 @@ module.exports = {
     data: {
         name: getKey("commands.gamemode.name"),
         description: getKey("commands.gamemode.description"),
-        minArg: 1,
         maxArg: 1,
+        minArgs: 1,
         requiresOp: true
     },
 
@@ -25,12 +25,24 @@ module.exports = {
             "1": "creative",
             "2": "adventure",
             "3": "spectator",
-            "5": "fallback"
+            "4": "fallback",
+
+            "s": "survival",
+            "c": "creative",
+            "a": "adventure",
+            "sp": "spectator",
+            "d": "fallback",
+
+            "survival": "survival",
+            "creative": "creative",
+            "adventure": "adventure",
+            "spectator": "spectator",
+            "default": "fallback"
         };
 
         const gamemode = gamemodeMap[args[0]];
         if (!gamemode) {
-            player.sendMessage(getKey("commands.gamemode.execution.failed"));
+            player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s%", args[0]));
             return;
         }
 

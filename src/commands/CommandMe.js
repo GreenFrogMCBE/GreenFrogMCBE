@@ -11,7 +11,7 @@ module.exports = {
     data: {
         name: getKey("commands.me.name"),
         description: getKey("commands.me.description"),
-        maxArg: undefined,
+        maxArgs: undefined,
         minArgs: 1
     },
 
@@ -21,7 +21,5 @@ module.exports = {
         for (const p of PlayerInfo.players) {
             p.sendMessage(msg);
         }
-
-        player.sendMessage(msg);
     },
 };

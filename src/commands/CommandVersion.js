@@ -11,8 +11,8 @@ module.exports = {
 		name: getKey("commands.version.name"),
 		description: getKey("commands.version.description"),
 		aliases: [getKey("commands.version.aliases.ver"), getKey("commands.version.aliases.about")],
-		minArg: 0,
-		maxArg: 0,
+		minArgs: 0,
+		maxArgs: 0,
 	},
 
 	execute(_server, player) {
