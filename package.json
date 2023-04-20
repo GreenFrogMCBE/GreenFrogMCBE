@@ -10,8 +10,8 @@
     "dev": "nodemon --signal SIGINT index.js --debug",
     "genlicenseheaders": "node tools/generateLicenseHeaders.js",
     "build": "npm run genlicenseheaders && npm run format",
-    "autotest": "node tools/tests-auto.js",
-    "test": "node tools/tests-manual.js",
+    "autotest": "node tools/tests-auto.js --test",
+    "test": "node tools/tests-manual.js --test",
     "pluginstructure": "node tools/generateBasePlugin.js"
   },
   "dependencies": {

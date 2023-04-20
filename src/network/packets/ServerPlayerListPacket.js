@@ -57,7 +57,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Returns the ID of the player
 	 * @returns {number} The ID of the player
 	 */
-	getId() {
+	getID() {
 		return id;
 	}
 
@@ -144,12 +144,12 @@ class ServerPlayerListPacket extends PacketConstructor {
 					recoordinates: [
 						{
 							uuid: this.getUuid(),
-							entity_unique_id: "-" + this.getId(),
+							entity_unique_id: "-" + this.getID(),
 							username: this.getUsername(),
 							xbox_user_id: this.getXboxID(),
 							platform_chat_id: "",
 							build_platform: 7,
-							skin_data: require("./res/skinData.json"),
+							skin_data: require("../../internalResources/skinData.json"),
 							is_teacher: false,
 							is_host: false,
 						},
@@ -158,6 +158,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 				},
 			};
 		}
+
 		client.queue(this.getPacketName(), data);
 	}
 }
