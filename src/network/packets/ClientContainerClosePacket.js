@@ -36,26 +36,26 @@ class ClientContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from client
-	 * 
+	 *
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		let shouldClose = true
+		let shouldClose = true;
 
-		Frog.eventEmitter.emit('playerContainerClose', {
+		Frog.eventEmitter.emit("playerContainerClose", {
 			windowID: WindowID.CREATIVE,
 			isSentByServer: false,
 			player,
 			packet,
 			server,
 			cancel: () => {
-				shouldClose = false
-			}
-		})
+				shouldClose = false;
+			},
+		});
 
-		if (!shouldClose) return
+		if (!shouldClose) return;
 
 		const containerClose = new ServerContainerClosePacket();
 		containerClose.setServer(false);

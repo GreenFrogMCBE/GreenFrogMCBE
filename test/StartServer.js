@@ -13,7 +13,7 @@
 
 module.exports = {
 	test() {
-		process.env.TEST = true
+		process.env.TEST = true;
 
 		require("../index");
 

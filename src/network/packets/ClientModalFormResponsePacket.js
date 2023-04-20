@@ -33,17 +33,17 @@ class ClientModalFormResponsePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * 
+	 *
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 * @param {Server} player
 	 */
 	async readPacket(player, packet, server) {
-		Frog.eventEmitter.emit('playerFormResponse', {
+		Frog.eventEmitter.emit("playerFormResponse", {
 			player,
 			formData: packet,
-			server
-		})
+			server,
+		});
 	}
 }
 

@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const AvailableCommands = require("../network/packets/ServerAvailableCommandsPacket");
 
 const { getKey } = require("../utils/Language");
@@ -19,7 +31,7 @@ let commands = [];
 class CommandManager {
 	/**
 	 * Retrieves the commands packet of a client.
-	 * 
+	 *
 	 * @param {Client} client - The client object.
 	 * @returns {CommandsPacket} The client's commands packet.
 	 */
@@ -29,7 +41,7 @@ class CommandManager {
 
 	/**
 	 * Initializes the commands.
-	 * 
+	 *
 	 * @param {Client} client - The client.
 	 */
 	init(client) {
@@ -47,7 +59,7 @@ class CommandManager {
 
 	/**
 	 * Retrieves the commands array.
-	 * 
+	 *
 	 * @returns {Array} The commands array.
 	 */
 	getCommands() {
@@ -62,7 +74,7 @@ class CommandManager {
 	 * @param {string} description - The description of the command.
 	 */
 	addCommand(client, name, description) {
-		if (name === getKey("commands.help.name") || name === "?") return
+		if (name === getKey("commands.help.name") || name === "?") return;
 
 		client.commands.command_data.push({
 			name: name,

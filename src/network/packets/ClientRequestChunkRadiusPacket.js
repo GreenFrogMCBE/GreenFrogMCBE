@@ -38,19 +38,19 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		let shouldChange = true
-		
-		Frog.eventEmitter.emit('playerRequestChunkRadius', {
+		let shouldChange = true;
+
+		Frog.eventEmitter.emit("playerRequestChunkRadius", {
 			radius: packet.data.params.radius,
 			player,
 			server,
 			cancel: () => {
-				shouldChange = false
-			}
-		})
+				shouldChange = false;
+			},
+		});
 
-		if (!shouldChange) return
-	
+		if (!shouldChange) return;
+
 		player.setChunkRadius(32);
 	}
 }

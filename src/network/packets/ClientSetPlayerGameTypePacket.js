@@ -54,20 +54,20 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 
 		let shouldChange = true;
 
-		const gamemode = packet.data.params.gamemode
+		const gamemode = packet.data.params.gamemode;
 
-		Frog.eventEmitter.emit('playerChangeGamemodeRequest', {
+		Frog.eventEmitter.emit("playerChangeGamemodeRequest", {
 			server,
 			player,
 			gamemode,
 			cancel: () => {
-				shouldChange = false
-			}
-		})
+				shouldChange = false;
+			},
+		});
 
-		if (!shouldChange) return
+		if (!shouldChange) return;
 
-		player.setGamemode(gamemode)
+		player.setGamemode(gamemode);
 	}
 }
 

@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const PlayerInfo = require("../api/player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
@@ -8,18 +20,18 @@ const { getKey } = require("../utils/Language");
  * @type {import('../type/Command').Command}
  */
 module.exports = {
-    data: {
-        name: getKey("commands.me.name"),
-        description: getKey("commands.me.description"),
-        maxArgs: undefined,
-        minArgs: 1
-    },
+	data: {
+		name: getKey("commands.me.name"),
+		description: getKey("commands.me.description"),
+		maxArgs: undefined,
+		minArgs: 1,
+	},
 
-    execute(_server, player, args) {
-        const msg = getKey("chat.format.me").replace("%s%", player.username).replace("%d%", args.join(" "))
+	execute(_server, player, args) {
+		const msg = getKey("chat.format.me").replace("%s%", player.username).replace("%d%", args.join(" "));
 
-        for (const p of PlayerInfo.players) {
-            p.sendMessage(msg);
-        }
-    },
+		for (const p of PlayerInfo.players) {
+			p.sendMessage(msg);
+		}
+	},
 };

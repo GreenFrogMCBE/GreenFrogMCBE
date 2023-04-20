@@ -43,13 +43,13 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * 
+	 *
 	 * @param {Client} player
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet) {
 		if (player.gamemode == !GamemodeLegacy.CREATIVE) {
-			throw new InvalidItemStackException(getKey("exceptions.network.itemStackRequest.badGamemode"))
+			throw new InvalidItemStackException(getKey("exceptions.network.itemStackRequest.badGamemode"));
 		}
 
 		try {
@@ -68,19 +68,19 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 			const network_id = request.network_id;
 			const block_runtime_id = request.block_runtime_id;
 
-			let shouldGiveItem = true
+			let shouldGiveItem = true;
 
-			Frog.eventEmitter.emit('playerItemStackRequest', {
+			Frog.eventEmitter.emit("playerItemStackRequest", {
 				count,
 				network_id,
 				block_runtime_id,
 				items: player.items,
 				cancel: () => {
-					shouldGiveItem = true
-				}
-			})
+					shouldGiveItem = true;
+				},
+			});
 
-			if (!shouldGiveItem) return
+			if (!shouldGiveItem) return;
 
 			const jsondata = { count, network_id, block_runtime_id };
 			player.items.push(jsondata);

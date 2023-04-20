@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 /* eslint-disable no-unused-vars */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 const FormTypes = require("./FormTypes");
@@ -6,18 +18,18 @@ class CustomForm {
 	constructor() {
 		/**
 		 * @type {FormTypes}
-		 * 
+		 *
 		 * @type {import("./FormTypes")}
 		 */
 		this.type = FormTypes.CUSTOMFORM;
 
 		/**
 		 * @type {function}
-		 * 
+		 *
 		 * @param {CustomForm} form
 		 * @param {Client} client
 		 */
-		this.onSend = (form, client) => { }
+		this.onSend = (form, client) => {};
 
 		/**
 		 * @type {string}
@@ -42,7 +54,7 @@ class CustomForm {
 
 	/**
 	 * Add an action to the form.
-	 * 
+	 *
 	 * @param {object} action - The action to add to the list of actions.
 	 * @param {string} action.type - The type of action, e.g. "input", "label", "dropdown", "toggle", or "slider".
 	 * @param {string} action.text - The text to display for the action.
@@ -58,7 +70,7 @@ class CustomForm {
 
 	/**
 	 * Add an input to the form.
-	 * 
+	 *
 	 * @param {string} text - The text that will be displayed in the input field.
 	 * @param {string} [placeholder] - The text that will be displayed in the input box before the user types anything.
 	 */
@@ -68,7 +80,7 @@ class CustomForm {
 
 	/**
 	 * Add a label to the form.
-	 * 
+	 *
 	 * @param {string} text - The text to display.
 	 */
 	addLabel(text) {
@@ -77,7 +89,7 @@ class CustomForm {
 
 	/**
 	 * Add a dropdown menu to the form.
-	 * 
+	 *
 	 * @param {string} text - The text to display for the dropdown.
 	 * @param {JSON} options - An object containing key-value pairs that define the options for the dropdown.
 	 */
@@ -87,7 +99,7 @@ class CustomForm {
 
 	/**
 	 * Add a toggle button to the form.
-	 * 
+	 *
 	 * @param {string} text - The text to display for the toggle.
 	 */
 	addToggle(text) {
@@ -96,7 +108,7 @@ class CustomForm {
 
 	/**
 	 * Add a slider to the form.
-	 * 
+	 *
 	 * @param {string} text - The text to display for the slider.
 	 * @param {number} min - The minimum value for the slider.
 	 */
@@ -106,7 +118,7 @@ class CustomForm {
 
 	/**
 	 * Sends the custom form to a player.
-	 * 
+	 *
 	 * @param {Client} client
 	 */
 	send(client) {
@@ -118,7 +130,7 @@ class CustomForm {
 		packet.setType(this.type);
 		packet.send(client);
 
-		this.onSend(this, client)
+		this.onSend(this, client);
 	}
 }
 

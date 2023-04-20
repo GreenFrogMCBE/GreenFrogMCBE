@@ -12,7 +12,7 @@
  */
 const Gamemode = require("../../api/player/Gamemode");
 
-const Difficulty = require("../../api/types/Difficulty")
+const Difficulty = require("../../api/types/Difficulty");
 
 const Dimension = require("../../world/types/Dimension");
 const Generator = require("../../world/types/Generator");

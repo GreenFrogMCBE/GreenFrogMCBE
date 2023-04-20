@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 /* eslint-disable no-unused-vars */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 const FormTypes = require("./FormTypes");
@@ -6,7 +18,7 @@ class ModalForm {
 	constructor() {
 		/**
 		 * @type {FormTypes}
-		 * 
+		 *
 		 * @type {import("./FormTypes")}
 		 */
 		this.title = "";
@@ -33,16 +45,16 @@ class ModalForm {
 
 		/**
 		 * @type {function}
-		 * 
+		 *
 		 * @param {ModalForm} form
 		 * @param {Client} client
 		 */
-		this.onSend = (form, client) => { };
+		this.onSend = (form, client) => {};
 	}
 
 	/**
 	 * Sends the modal form to the specified client.
-	 * 
+	 *
 	 * @param {Client} client
 	 */
 	send(client) {

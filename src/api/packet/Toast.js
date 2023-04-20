@@ -42,16 +42,16 @@ class Toast {
 	 * @param {Client} player
 	 */
 	send(player) {
-		Frog.eventEmitter.emit('serverToast', {
+		Frog.eventEmitter.emit("serverToast", {
 			server: require("../../Server"),
 			title: this.title,
 			message: this.message,
-			player: player
-		})
+			player: player,
+		});
 
 		const toast = new ServerToastRequestPacket();
-		toast.setMessage(this.message)
-		toast.setTitle(this.title)
+		toast.setMessage(this.message);
+		toast.setTitle(this.title);
 		toast.execute(player);
 	}
 }

@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const Frog = require("../../Frog");
 
 const Falldamage = require("../../world/Falldamage");
@@ -28,10 +40,10 @@ class ClientMovePacket extends PacketConstructor {
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		const { x, y, z } = packet.data.params.position
-		const { pitch, yaw } = packet.data.params
+		const { x, y, z } = packet.data.params.position;
+		const { pitch, yaw } = packet.data.params;
 
-		if (player.x == x && player.y == y && player.z == z && player.yaw == yaw && player.pitch == pitch) return
+		if (player.x == x && player.y == y && player.z == z && player.yaw == yaw && player.pitch == pitch) return;
 
 		player.x = x;
 		player.y = y;
@@ -39,10 +51,10 @@ class ClientMovePacket extends PacketConstructor {
 		player.pitch = pitch;
 		player.yaw = yaw;
 
-		Falldamage.calculateFalldamage(player, { x, y, z })
-		Falldamage.calculateHungerloss(player, { x, y, z })
+		Falldamage.calculateFalldamage(player, { x, y, z });
+		Falldamage.calculateHungerloss(player, { x, y, z });
 
-		Frog.eventEmitter.emit('playerMove', {
+		Frog.eventEmitter.emit("playerMove", {
 			player,
 			server,
 			x,
@@ -53,12 +65,12 @@ class ClientMovePacket extends PacketConstructor {
 			legacyPacket: false,
 			onGround: player.onGround,
 			cancel: () => {
-				if (player.x === 0 && player.y === 0 && player.z === 0) return
+				if (player.x === 0 && player.y === 0 && player.z === 0) return;
 
-				player.teleport(player.x, player.y, player.z)
-			}
-		})
+				player.teleport(player.x, player.y, player.z);
+			},
+		});
 	}
 }
 
-module.exports = ClientMovePacket
+module.exports = ClientMovePacket;

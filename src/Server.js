@@ -18,7 +18,7 @@
 const VersionToProtocol = require("./utils/VersionToProtocol");
 
 const PlayerInfo = require("./api/player/PlayerInfo");
-const Frog = require('./Frog')
+const Frog = require("./Frog");
 
 const GarbageCollector = require("./utils/GarbageCollector");
 const PlayerInit = require("./server/PlayerInit");
@@ -47,9 +47,9 @@ let isDebug = Frog.isDebug;
 
 /**
  * This function executes when something is off with the server
- * 
+ *
  * @private
- * @param {Error} error 
+ * @param {Error} error
  */
 async function _handleCriticalError(error) {
 	const { host, port } = config.network;
@@ -69,9 +69,9 @@ async function _handleCriticalError(error) {
 
 /**
  * Handles packets
- * 
- * @param {Client} client 
- * @param {JSON} packetParams 
+ *
+ * @param {Client} client
+ * @param {JSON} packetParams
  * @throws {RateLimitException} - In case if the client is ratelimited
  */
 async function _handlePacket(client, packetParams) {
@@ -84,26 +84,22 @@ async function _handlePacket(client, packetParams) {
 			const packetPath = path.join(packetsDir, filename);
 
 			if (++client.packetCount > 2000) {
-				Frog.eventEmitter.emit('packetRatelimit', {
+				Frog.eventEmitter.emit("packetRatelimit", {
 					player: client,
-					server: this
+					server: this,
 				});
 
-				throw new RateLimitException(
-					Language.getKey("exceptions.network.rateLimited")
-						.replace("%s%", client.username)
-						.replace("%d%", client.packetCount)
-				);
+				throw new RateLimitException(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
 			}
 
 			const packet = new (require(packetPath))();
 			if (packet.getPacketName() === packetParams.data.name) {
 				let shouldReadPacket = true;
 
-				Frog.eventEmitter.emit('packetRead', {
+				Frog.eventEmitter.emit("packetRead", {
 					player: client,
 					data: packet.data,
-					server: this
+					server: this,
 				});
 
 				if (shouldReadPacket) {
@@ -123,13 +119,13 @@ async function _handlePacket(client, packetParams) {
 
 /**
  * Logs a warning if the debug or unstable mode is enabled.
- * 
+ *
  * @private
  */
 async function _initDebug() {
 	if (config.unstable) {
 		Logger.warning(Language.getKey("debug.unstable"));
-		Logger.warning(Language.getKey("debug.unstable.unsupported"))
+		Logger.warning(Language.getKey("debug.unstable.unsupported"));
 	}
 
 	if (isDebug) Logger.debug(Language.getKey("debug.debugEnabled"));
@@ -137,16 +133,16 @@ async function _initDebug() {
 
 /**
  * Listens the server
- * 
+ *
  * @private
  */
 async function _listen() {
 	const { host, port } = config.network;
 	const { levelName, motd, maxPlayers, version } = config.serverInfo;
-	let { offlineMode } = config.serverInfo
+	let { offlineMode } = config.serverInfo;
 
-	if (process.argv.includes('--test')) {
-		offlineMode = true
+	if (process.argv.includes("--test")) {
+		offlineMode = true;
 	}
 
 	try {
@@ -167,7 +163,7 @@ async function _listen() {
 					server: this,
 					cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
 						client.kick(reason);
-					}
+					},
 				});
 
 				client.__queue = client.queue;
@@ -198,10 +194,10 @@ async function _listen() {
 				} catch (error) {
 					client.kick(Language.getKey("kickMessages.invalidPacket"));
 
-					Frog.eventEmitter.emit('packetReadError', {
+					Frog.eventEmitter.emit("packetReadError", {
 						player: client,
 						error,
-						server: this
+						server: this,
 					});
 
 					Logger.error(Language.getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
@@ -221,7 +217,7 @@ async function _listen() {
 
 /**
  * Executes, when player joins the server
- * 
+ *
  * @param {Client} client
  * @private
  */
@@ -229,8 +225,8 @@ async function _onJoin(client) {
 	await PlayerInit.initPlayer(client, server);
 
 	Object.assign(client, { items: [] }); // Inventory
-	Object.assign(client, { x: 0, y: 0, z: 0, on_ground: false }); // Player coordinates 
-	Object.assign(client, { pitch: 0, yaw: 0 }); // Player rotation 
+	Object.assign(client, { x: 0, y: 0, z: 0, on_ground: false }); // Player coordinates
+	Object.assign(client, { pitch: 0, yaw: 0 }); // Player rotation
 	Object.assign(client, { health: 20, hunger: 20, packetCount: 0, username: client.profile.name }); // API
 	Object.assign(client, { world: null, chunksEnabled: true, gamemode: Frog.serverConfigurationFiles.config.world.gamemode }); // World-related stuff
 	Object.assign(client, { op: null, dead: false, initialised: false, isConsole: false, fallDamageQueue: 0 }); // More API stuff
@@ -259,12 +255,12 @@ async function _onJoin(client) {
 	responsePackInfo.setTexturePacks([]);
 	responsePackInfo.writePacket(client);
 
-	Frog.eventEmitter.emit('playerJoin', {
+	Frog.eventEmitter.emit("playerJoin", {
 		player: client,
 		server: this,
 		cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
 			client.kick(reason);
-		}
+		},
 	});
 }
 
@@ -284,21 +280,21 @@ module.exports = {
 
 		if (!fs.existsSync("world")) fs.mkdirSync("world");
 
-		console.clear()
+		console.clear();
 
-		Language.getLanguage(Frog.serverConfigurationFiles.config.chat.lang)
+		Language.getLanguage(Frog.serverConfigurationFiles.config.chat.lang);
 
 		Logger.info(Language.getKey("server.loading"));
-		Logger.info(Language.getKey("server.license"))
+		Logger.info(Language.getKey("server.license"));
 
-		if (process.versions.node.split('.')[0] < 14) {
-			Logger.error(Language.getKey("errors.nodeJS.tooOld"))
-			Logger.error(Language.getKey("errors.nodeJS.tooOld.update"))
+		if (process.versions.node.split(".")[0] < 14) {
+			Logger.error(Language.getKey("errors.nodeJS.tooOld"));
+			Logger.error(Language.getKey("errors.nodeJS.tooOld.update"));
 
-			process.exit(-1)
+			process.exit(-1);
 		}
 
-		Logger.info(Language.getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion))
+		Logger.info(Language.getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion));
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
 		process.on("unhandledRejection", (err) => _handleCriticalError(err));

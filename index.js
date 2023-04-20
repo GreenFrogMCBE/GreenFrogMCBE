@@ -1,8 +1,20 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 // Import required modules
 const fs = require("fs");
 const center = require("center-align");
-const Colors = require('./src/api/colors/Colors');
-const { convertConsoleColor } = require('./src/utils/ConsoleColorConvertor');
+const Colors = require("./src/api/colors/Colors");
+const { convertConsoleColor } = require("./src/utils/ConsoleColorConvertor");
 
 // Print a centered header to the console
 console.info(
@@ -28,17 +40,18 @@ async function createConfigFilesAndDebug() {
 	if (!fs.existsSync("config.yml")) {
 		let config = null;
 
-		if (process.env.TEST) { // TODO: Better way to do this
-			config = fs.readFileSync('../src/internalResources/defaultConfig.yml');
+		if (process.env.TEST) {
+			// TODO: Better way to do this
+			config = fs.readFileSync("../src/internalResources/defaultConfig.yml");
 		} else {
-			config = fs.readFileSync('./src/internalResources/defaultConfig.yml');
+			config = fs.readFileSync("./src/internalResources/defaultConfig.yml");
 		}
 
-		fs.writeFileSync('config.yml', config, () => { });
+		fs.writeFileSync("config.yml", config, () => {});
 	}
 
-	if (require('./src/Frog').isDebug) {
-		process.env.DEBUG = 'minecraft-protocol';
+	if (require("./src/Frog").isDebug) {
+		process.env.DEBUG = "minecraft-protocol";
 	}
 }
 
@@ -67,8 +80,8 @@ If you are sure that this is a bug please report it here: https://github.com/and
 ${Colors.RESET}`
 			)
 		);
-		fs.mkdir('crash-reports', { recursive: true }, () => { });
-		fs.writeFileSync(crashFileName, `Error: ${error.stack}`, () => { });
+		fs.mkdir("crash-reports", { recursive: true }, () => {});
+		fs.writeFileSync(crashFileName, `Error: ${error.stack}`, () => {});
 
 		process.exit(-1);
 	}

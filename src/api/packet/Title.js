@@ -1,3 +1,15 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
 const Frog = require("../../Frog");
 const TitlePacket = require("../../network/packets/ServerSetTitlePacket");
 const TitleType = require("../../network/packets/types/TitleType");
@@ -114,24 +126,24 @@ class Title {
 
 	/**
 	 * Sends the title to the client
-	 * 
+	 *
 	 * @param {Client} client The client to send the title to
 	 */
 	send(client) {
-		let shouldSendTitle = true
+		let shouldSendTitle = true;
 
-		Frog.eventEmitter.emit('serverTitle', {
+		Frog.eventEmitter.emit("serverTitle", {
 			fadeinTime: this.getFadeinTime(),
 			fadeoutTime: this.getFadeoutTime(),
 			stayTime: this.getStayTime(),
 			text: this.getText(),
 			type: this.getType(),
 			cancel: () => {
-				shouldSendTitle = false
-			}
-		})
+				shouldSendTitle = false;
+			},
+		});
 
-		if (!shouldSendTitle) return
+		if (!shouldSendTitle) return;
 
 		const titlePacket = new TitlePacket();
 		titlePacket.setFadeinTime(this.getFadeinTime());
@@ -143,4 +155,4 @@ class Title {
 	}
 }
 
-module.exports = Title
+module.exports = Title;
