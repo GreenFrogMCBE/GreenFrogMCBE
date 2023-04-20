@@ -81,7 +81,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Returns the UUID of the player
 	 * @returns {UUID} The UUID of the player
 	 */
-	getUuid() {
+	getUUID() {
 		return uuid;
 	}
 
@@ -126,24 +126,24 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 		if (this.getType() === PlayerListTypes.REMOVE) {
 			data = {
-				recoordinates: {
+				records: {
 					type: PlayerListTypes.REMOVE,
-					recoordinates_count: 1,
-					recoordinates: [
+					records_count: 1,
+					records: [
 						{
-							uuid: this.getUuid(),
+							uuid: this.getUUID(),
 						},
 					],
 				},
 			};
 		} else {
 			data = {
-				recoordinates: {
+				records: {
 					type: PlayerListTypes.ADD,
-					recoordinates_count: 1,
-					recoordinates: [
+					records_count: 1,
+					records: [
 						{
-							uuid: this.getUuid(),
+							uuid: this.getUUID(),
 							entity_unique_id: "-" + this.getID(),
 							username: this.getUsername(),
 							xbox_user_id: this.getXboxID(),
