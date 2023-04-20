@@ -25,8 +25,10 @@ module.exports = {
 		}
 
 		for (const player of players) {
-			player.world.setTime(parseInt(time))
-			player.setTime(parseInt(time));
+			const parsedTime = parseInt(time)
+
+			player.world.setTime(parsedTime)
+			player.setTime(parsedTime);
 		}
 
 		player.sendMessage(getKey("commands.time.execution.success").replace("%s%", time));
