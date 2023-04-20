@@ -24,7 +24,7 @@ const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficult
 const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
 const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
-const ServerUpdateTimePacket = require("../network/packets/ServerUpdateTimePacket");
+const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket");
 const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket");
 const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
 const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
@@ -298,17 +298,17 @@ module.exports = {
 				},
 			});
 
-			if (shouldSetEntityData) {
-				const playerSetEntityDataPacket = new ServerSetEntityDataPacket();
-				playerSetEntityDataPacket.setProperties({
-					ints: [],
-					floats: [],
-				});
-				playerSetEntityDataPacket.setRuntimeEntityID(0); // Local player
-				playerSetEntityDataPacket.setTick(0);
-				playerSetEntityDataPacket.setValue(field, value);
-				playerSetEntityDataPacket.writePacket(player);
-			}
+			if (!shouldSetEntityData) return
+
+			const playerSetEntityDataPacket = new ServerSetEntityDataPacket();
+			playerSetEntityDataPacket.setProperties({
+				ints: [],
+				floats: [],
+			});
+			playerSetEntityDataPacket.setRuntimeEntityID(0); // Local player
+			playerSetEntityDataPacket.setTick(0);
+			playerSetEntityDataPacket.setValue(field, value);
+			playerSetEntityDataPacket.writePacket(player);
 		};
 
 		/**
@@ -354,11 +354,11 @@ module.exports = {
 				},
 			});
 
-			if (shouldUpdateRadius) {
-				const chunkRadiusUpdate = new ServerChunkRadiusUpdatePacket();
-				chunkRadiusUpdate.setChunkRadius(radius);
-				chunkRadiusUpdate.writePacket(player);
-			}
+			if (!shouldUpdateRadius) return
+
+			const chunkRadiusUpdate = new ServerChunkRadiusUpdatePacket();
+			chunkRadiusUpdate.setChunkRadius(radius);
+			chunkRadiusUpdate.writePacket(player);
 		}
 
 		/**
@@ -378,11 +378,11 @@ module.exports = {
 				},
 			});
 
-			if (shouldUpdateTime) {
-				const timePacket = new ServerUpdateTimePacket();
-				timePacket.setTime(time);
-				timePacket.writePacket(player);
-			}
+			if (!shouldUpdateTime) return
+
+			const timePacket = new ServerSetTimePacket();
+			timePacket.setTime(time);
+			timePacket.writePacket(player);
 		};
 
 		/**
@@ -602,6 +602,8 @@ module.exports = {
 			if (player.initialised) {
 				Frog.broadcastMessage(getKey("chat.broadcasts.left").replace("%s%", player.username));
 			}
+
+			player.offline = true
 		});
 	},
 };
