@@ -10,14 +10,10 @@ module.exports = {
         description: getKey("commands.deop.description"),
         minArgs: 1,
         maxArgs: 1,
+        requiresOp: true
     },
 
     async execute(_server, player, args) {
-        if (!player.op) {
-            player.sendMessage(getKey("commands.unknown"));
-            return;
-        }
-
         const playerName = args[0];
 
         try {

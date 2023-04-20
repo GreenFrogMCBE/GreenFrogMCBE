@@ -1,7 +1,5 @@
 const Frog = require("../Frog");
 
-const CommandVerifier = require('../utils/CommandVerifier');
-
 const Colors = require("../api/colors/Colors");
 const { getKey } = require("../utils/Language");
 
@@ -18,10 +16,6 @@ module.exports = {
 	},
 
 	execute(_server, player) {
-		if (CommandVerifier.checkCommand(player, this.data)) {
-			return;
-		}
-
 		const versionMsg = getKey("frog.version").replace('%s%', Frog.getServerData().minorServerVersion);
 		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
 	}

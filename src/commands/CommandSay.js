@@ -2,8 +2,6 @@ const Logger = require("../server/Logger");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
-const CommandVerifier = require("../utils/CommandVerifier");
-
 const { getKey } = require("../utils/Language");
 
 /**
@@ -21,8 +19,6 @@ module.exports = {
 	},
 
 	execute(_server, player, args) {
-		if (CommandVerifier.checkCommand(player, this.data )) { return; }
-
 		const message = args[0];
 		const msg = getKey("chat.format.say")
 			.replace(`%s%`, message)

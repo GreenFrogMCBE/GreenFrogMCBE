@@ -26,6 +26,9 @@
     "commands.gamemode.execution.success.updated": "Your game mode has been updated to %s%.",
     "commands.gamemode.execution.success.set": "Set own gamemode to %s%.",
 
+    "commands.me.name": "me",
+    "commands.me.description": "Displays message about yourself.",
+
     "commands.help.name": "help",
     "commands.help.description": "Command list.",
     "commands.help.execution.success.commandList": "Command list:",
@@ -91,7 +94,6 @@
     "kickMessages.invalidPacket": "Invalid packet",
     "kickMessages.serverClosed": "Server closed",
     "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",
-    "kickMessages.noReason": "No reason",
     "kickMessages.wereKicked": "You were kicked: %s%",
 
     "player.kicked": "Kicked %s% for %d%",

@@ -19,6 +19,7 @@ const Commands = require("../../server/Commands");
 const PacketConstructor = require("./PacketConstructor");
 
 const { getKey } = require("../../utils/Language");
+const CommandVerifier = require("../../utils/CommandVerifier");
 
 class ClientCommandRequestPacket extends PacketConstructor {
 	/**
@@ -68,12 +69,13 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			let commandFound = false;
 
 			for (const command of Commands.commandList) {
-				console.log(command.data.name, executedCommand.split(" ")[0].replace(" ", "!"), command.data.name === executedCommand.split(" ")[0])
 				if (
 					command.data.name === executedCommand.split(" ")[0] ||
 					(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
 				) {
-					commandFound = true;
+					if (command.data.requiresOp && !player.op) {
+						CommandVerifier.throwError(player, executedCommand.split(" ")[0])
+					}
 
 					if (
 						command.data.minArgs !== undefined &&
@@ -106,15 +108,8 @@ class ClientCommandRequestPacket extends PacketConstructor {
 				}
 			}
 
-			console.log("command found" + commandFound)
-
 			if (!commandFound) {
-				player.sendMessage(
-					getKey("commands.unknown").replace(
-						"%s%",
-						executedCommand.split(" ")[0]
-					)
-				);
+				CommandVerifier.throwError(player, { data: { name: executedCommand.split(" ")[0] } })
 			}
 		} catch (error) {
 			Logger.error(getKey("commands.internalError.player").replace("%s%", player.username).replace("%d%", error.stack));

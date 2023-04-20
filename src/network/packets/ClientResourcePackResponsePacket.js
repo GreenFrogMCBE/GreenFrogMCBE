@@ -137,14 +137,13 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
 
-				for (const op of ops) {
-					if (op.replace(/\r/g, "") === player.username) {
-						player.op = true;
-						player.permissionLevel = 4;
-					} else {
-						player.op = false
-					}
+				if (ops.includes(player.username)) {
+					player.op = true;
+					player.permissionLevel = 4;
+				} else {
+					player.op = false
 				}
+
 
 				if (!player.op) player.permissionLevel = config.dev.defaultPermissionLevel;
 
@@ -197,12 +196,24 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const description = command.data.description;
 					const aliases = command.data.aliases;
 
-					if (!(requiresOp && !player.op)) {
+					console.log(player.op)
+
+					if (player.op) {
 						commandManager.addCommand(player, name, description);
 
 						if (aliases) {
 							for (const alias of aliases) {
 								commandManager.addCommand(player, alias, description);
+							}
+						}
+					} else {
+						if (!requiresOp) {
+							commandManager.addCommand(player, name, description);
+
+							if (aliases) {
+								for (const alias of aliases) {
+									commandManager.addCommand(player, alias, description);
+								}
 							}
 						}
 					}

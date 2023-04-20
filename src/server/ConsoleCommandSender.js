@@ -8,6 +8,8 @@ const Commands = require("./Commands");
 
 const Language = require("../utils/Language");
 
+const CommandVerifier = require("../utils/CommandVerifier");
+
 /** @private */
 let isClosed = false;
 /** @private */
@@ -106,12 +108,7 @@ async function executeConsoleCommand(executedCommand) {
 		}
 
 		if (!commandFound) {
-			Logger.info(
-				Language.getKey("commands.unknown").replace(
-					"%s%",
-					executedCommand.split(" ")[0]
-				)
-			);
+			CommandVerifier.throwError({ sendMessage: (msg) => { Logger.info(msg) } }, executedCommand.split(" ")[0])
 		}
 	} catch (error) {
 		require("../Frog").eventEmitter.emit('serverCommandProcessError', {

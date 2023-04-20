@@ -1,6 +1,5 @@
 const { players } = require("../api/player/PlayerInfo");
 
-const CommandVerifier = require("../utils/CommandVerifier");
 const { getKey } = require("../utils/Language");
 
 /**
@@ -16,8 +15,6 @@ module.exports = {
 	},
 
 	execute(_server, player, args) {
-		if (CommandVerifier.checkCommand(player, this.data )) { return; }
-
 		const time = args[1];
 		const setTime = time === getKey("commands.time.times.day") ? 1000 : time === getKey("commands.time.times.night") ? 17000 : parseInt(time, 10);
 

@@ -2,8 +2,6 @@ const { getKey } = require("../utils/Language");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
-const CommandVerifier = require("../utils/CommandVerifier");
-
 module.exports = {
     data: {
         name: getKey("commands.kick.name"),
@@ -14,12 +12,14 @@ module.exports = {
     },
 
     execute(_server, player, args) {
-        if (CommandVerifier.checkCommand(player, this.data)) { return; }
-
         const playerName = args[0];
-        const reason = (args.slice(1).join(' ') || getKey("kickMessages.noReason")).trim();
+        let reason = ': ' + args.slice(1).join(' ')
 
-        const target = PlayerInfo.getPlayer(playerName);
+        if (args.length === 0) {
+            reason = ''
+        }
+
+        const target = PlayerInfo.get(playerName);
 
         if (!target) {
             player.sendMessage(getKey("commands.kick.execution.failed.notOnline").replace("%s%", playerName));

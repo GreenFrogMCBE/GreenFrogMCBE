@@ -15,8 +15,6 @@ const fs = require("fs").promises;
 
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
-const CommandVerifier = require("../utils/CommandVerifier");
-
 const { getKey } = require("../utils/Language");
 
 module.exports = {
@@ -29,8 +27,6 @@ module.exports = {
     },
 
     async execute(_server, player, args) {
-        if (CommandVerifier.checkCommand(player, this.data)) { return; }
-
         const playerName = args[0];
 
         try {

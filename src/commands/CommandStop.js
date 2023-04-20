@@ -1,7 +1,5 @@
 const Frog = require("../Frog");
 
-const CommandVerifier = require("../utils/CommandVerifier");
-
 const { getKey } = require("../utils/Language");
 
 /**
@@ -18,9 +16,7 @@ module.exports = {
         requiresOp: true
 	},
 
-	execute(_server, player) {
-		if (CommandVerifier.checkCommand(player, this.data )) { return; }
-
+	execute() {
 		Frog.shutdownServer();
 	},
 };

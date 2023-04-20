@@ -1,5 +1,3 @@
-const CommandVerifier = require("../utils/CommandVerifier");
-
 const PluginManager = require('../plugins/PluginManager');
 
 const Colors = require("../api/colors/Colors");
@@ -21,10 +19,6 @@ module.exports = {
     },
 
     execute(_server, player) {
-        if (CommandVerifier.checkCommand(player, this.data)) {
-            return;
-        }
-
         const pluginSet = new Set(PluginManager.plugins);
         const pluginList = Colors.GREEN + [...pluginSet].join(Colors.WHITE + "§7, " + Colors.GREEN) || "";
 

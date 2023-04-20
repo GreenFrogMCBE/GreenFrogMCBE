@@ -1,5 +1,3 @@
-const CommandVerifier = require("../utils/CommandVerifier");
-
 const { getKey } = require("../utils/Language");
 
 /**
@@ -21,8 +19,6 @@ module.exports = {
             player.sendMessage(getKey("commands.internalError.badSender"));
             return;
         }
-
-        if (CommandVerifier.checkCommand(player, this.data)) { return; }
 
         const gamemodeMap = {
             "0": "survival",

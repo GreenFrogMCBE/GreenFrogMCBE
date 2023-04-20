@@ -1,5 +1,3 @@
-const Frog = require("../Frog");
-
 const Language = require("./Language");
 
 /**
@@ -18,36 +16,36 @@ module.exports = {
      * Sends a unknown command (or no permission) error to the command executor.
      * 
      * @param {Client} commandExecutor
-     * @param {JSON} data 
+     * @param {string} command
      */
-    throwError(commandExecutor, data) {
-        commandExecutor.sendMessage(Language.getKey("commands.unknown").replace('%s%', data.name));
+    throwError(commandExecutor, command) {
+        commandExecutor.sendMessage(Language.getKey("commands.unknown").replace('%s%', command));
     },
 
     /**
      * Checks if the command is enabled or not.
      *
      * @param {Client} player - The player who is executing the command.
-     * @param {JSON} data - The command data.
+     * @param {JSON} command - The command data.
      * @param {boolean} oprequired - If OP is required to execute this command
      * @returns {boolean} - Returns true if the command is disabled, false otherwise.
      */
-    checkCommand(player, data, oprequired) {
+    isDisabled(player, command, oprequired) {
         if (!(player.isConsole || player.op) && oprequired) {
-            this.throwError(player, data);
+            this.throwError(player, command);
 
             return true
         }
 
         if (player.isConsole) {
-            if (!Frog.serverConfigurationFiles.config.chat.commands[`consoleCommand${capitalizeFirstLetter(data.name)}`]) {
-                this.throwError(player, data);
+            if (!require("../Frog").serverConfigurationFiles.config.chat.commands[`consoleCommand${capitalizeFirstLetter(oprequired)}`]) {
+                this.throwError(player, command);
 
                 return true;
             }
         } else {
-            if (!Frog.serverConfigurationFiles.config.chat.commands[`playerCommand${capitalizeFirstLetter(data.name)}`]) {
-                this.throwError(player, data);
+            if (!require("../Frog").serverConfigurationFiles.config.chat.commands[`playerCommand${capitalizeFirstLetter(oprequired)}`]) {
+                this.throwError(player, command);
 
                 return true;
             }
