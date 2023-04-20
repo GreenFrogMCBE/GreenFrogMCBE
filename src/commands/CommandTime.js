@@ -1,67 +1,36 @@
+const { players } = require("../api/player/PlayerInfo");
+
+const { getKey } = require("../utils/Language");
+
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * @type {import('../type/Command').Command}
  */
-const Logger = require("../server/Logger");
-const { players } = require("../api/PlayerInfo");
-const { lang, config } = require("../api/ServerInfo");
+module.exports = {
+	data: {
+		name: getKey("commands.time.name"),
+		description: getKey("commands.time.description"),
+		minArgs: 1,
+		maxArgs: 1,
+		requiresOp: true
+	},
 
-class CommandTime extends require("./Command") {
-	name() {
-		return lang.commands.time;
-	}
+	execute(_server, player, args) {
+		const time = args[0];
 
-	aliases() {
-		return null;
-	}
-
-	getPlayerDescription() {
-		return lang.commands.ingameTimeDescription;
-	}
-
-	execute(args) {
-		if (!args) {
-			Logger.log(lang.commands.usageTime);
-			return;
-		}
-
-		const time = args[1];
-		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
+		const setTime = time === getKey("commands.time.times.day") ? 1000 : time === getKey("commands.time.times.night") ? 17000 : parseInt(time, 10);
 
 		if (!Number.isInteger(setTime)) {
-			Logger.log(lang.commands.usageTime);
+			player.sendMessage(getKey("commands.time.execution.failed"));
 			return;
 		}
 
-		players.forEach((client) => client.setTime(setTime));
-		Logger.log(lang.commands.timeUpdated);
+		for (const player of players) {
+			const parsedTime = parseInt(time)
+
+			player.world.setTime(parsedTime)
+			player.setTime(parsedTime);
+		}
+
+		player.sendMessage(getKey("commands.time.execution.success").replace("%s%", time));
 	}
-
-	executePlayer(client, args) {
-		if (!config.consoleCommandTime) {
-			client.sendMessage(`§c${lang.errors.unknownCommand}`);
-			return;
-		}
-
-		const time = args.split(" ")[1];
-		const setTime = time === "day" ? 1000 : time === "night" ? 17000 : parseInt(time, 10);
-
-		if (!Number.isInteger(setTime)) {
-			client.sendMessage(`§c${lang.commands.usageTime}`);
-			return;
-		}
-
-		players.forEach((client) => client.setTime(setTime));
-		client.sendMessage(lang.commands.timeUpdated);
-	}
-}
-
-module.exports = CommandTime;
+};

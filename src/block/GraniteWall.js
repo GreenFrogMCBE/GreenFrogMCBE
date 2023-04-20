@@ -12,6 +12,9 @@
  */
 const Block = require("./Block");
 
+/**
+ * @type {import('../type/Block')}
+ */
 class GraniteWall extends Block {
 	getRuntimeId() {
 		return 3035;

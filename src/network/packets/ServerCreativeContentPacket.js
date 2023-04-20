@@ -17,15 +17,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerCreativeContentPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "creative_content";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return true;
@@ -49,11 +49,11 @@ class ServerCreativeContentPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			items: items,
+			items: this.getItems(),
 		});
 	}
 }

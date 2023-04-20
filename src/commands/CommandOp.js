@@ -1,73 +1,31 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
 const fs = require("fs").promises;
-const Logger = require("../server/Logger");
-const { lang, config } = require("../api/ServerInfo");
-const { get: getPlayerInfo } = require("../api/PlayerInfo");
 
-class CommandOp extends require("./Command") {
-	name() {
-		return lang.commands.op;
-	}
+const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
-	aliases() {
-		return null;
-	}
+const { getKey } = require("../utils/Language");
 
-	async execute(args) {
-		if (!args) {
-			Logger.info(lang.commands.usageOp);
-			return;
-		}
+module.exports = {
+	data: {
+		name: getKey("commands.op.name"),
+		description: getKey("commands.op.description"),
+		minArgs: 1,
+		maxArgs: 1,
+		requiresOp: true
+	},
+
+	async execute(_server, player, args) {
+		const playerName = args[0];
 
 		try {
-			await fs.appendFile("ops.yml", args + "\n");
-			Logger.info(lang.commands.opped.replace("%player%", args));
-		} catch (err) {
-			Logger.info(lang.commands.opFail);
+			await fs.appendFile("ops.yml", playerName + "\n");
+
+			try {
+				getPlayerInfo(playerName).op = true;
+			} catch { /** player is offline */ }
+
+			player.sendMessage(getKey("commands.op.execution.success").replace("%s%", playerName));
+		} catch {
+			player.sendMessage(getKey("commands.op.execution.failed").replace("%s%", playerName));
 		}
 	}
-
-	getPlayerDescription() {
-		return lang.commands.ingameOpDescription;
-	}
-
-	async executePlayer(client, args) {
-		if (!config.playerCommandOp) {
-			client.sendMessage(lang.errors.playerUnknownCommand);
-			return;
-		}
-
-		if (!client.op) {
-			client.sendMessage(lang.errors.noPermission);
-			return;
-		}
-
-		const player = args.split(" ")[1];
-		if (!player) {
-			client.sendMessage("§c" + lang.commands.usageOp);
-			return;
-		}
-
-		try {
-			await fs.appendFile("ops.yml", player + "\n");
-			client.sendMessage(lang.commands.opped.replace("%player%", player));
-			getPlayerInfo(player).op = true;
-			console.info(getPlayerInfo(player));
-		} catch (err) {
-			client.sendMessage("§c" + lang.commands.opFail);
-		}
-	}
-}
-
-module.exports = CommandOp;
+};

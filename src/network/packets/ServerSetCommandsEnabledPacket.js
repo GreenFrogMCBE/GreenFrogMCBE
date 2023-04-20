@@ -18,15 +18,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerSetCommandsEnabledPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_commands_enabled";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -34,7 +34,7 @@ class ServerSetCommandsEnabledPacket extends PacketConstructor {
 
 	/**
 	 * Sets if commands are enabled
-	 * @param {Boolean} new_enabled
+	 * @param {boolean} new_enabled
 	 */
 	setEnabled(new_enabled) {
 		enabled = new_enabled;
@@ -42,7 +42,7 @@ class ServerSetCommandsEnabledPacket extends PacketConstructor {
 
 	/**
 	 * Returns if commands are enabled
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getEnabled() {
 		return enabled;
@@ -50,7 +50,7 @@ class ServerSetCommandsEnabledPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

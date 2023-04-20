@@ -1,155 +1,159 @@
 {
-  "commands": {
-    "thereAreNoCommands": "There are no commands.",
-    "meCommandFormat": "* %username% %message%",
-    "list": "Command list: ",
-    "help": "help",
-    "kick": "kick",
-    "me": "me",
-    "op": "op",
-    "pl": "pl",
-    "say": "say",
-    "stop": "stop",
-    "time": "time",
-    "ver": "ver",
-    "deop": "deop",
-    "version": "version",
-    "listc": "list",
-    "gamemode": "gamemode",
-    "usageGamemode": "§cSyntax error: Unexpected \"\": at /gamemode>><<",
-    "usageKick": "Usage: kick [player] [reason]",
-    "usageTime": "Usage: time [time]",
-    "usageSay": "Usage: say [message]",
-    "usageOp": "Usage: op [player]",
-    "usageDeop": "Usage: deop [player]",
-    "usageMe": "Usage: me [message]",
-    "helpHelp": "%green%help %white%- %blue%Provides help for commands",
-    "kickHelp": "%green%kick %cyan%[player] [reason] %white%- %blue%Kick player",
-    "pluginsHelp": "%green%plugins %white%- %blue%Shows the server plugins",
-    "qmHelp": "%green%? %white%- %blue%Provides help for commands",
-    "stopHelp": "%green%stop %white%- %blue%Stops a server",
-    "verHelp": "%green%ver %white%- %blue%Shows the server version",
-    "versionHelp": "%green%version %white%- %blue%Shows the server version",
-    "timeHelp": "%green%time %cyan%[time] %white%- %blue%Changes the world's game time",
-    "meHelp": "%green%me %cyan%[message] %white%- %blue%Displays message about yourself",
-    "plHelp": "%green%pl %white%- %blue%Shows the server plugins",
-    "opHelp": "%green%op %white%- %blue%Grants operator status to a player",
-    "deopHelp": "%green%deop %white%- %blue%Revokes operator status from a player",
-    "listHelp": "%green%list %white%- %blue%Lists players on the server",
-    "verInfo": "This server runs GreenFrogMCBE. Version: %version% | Repository: https://github.com/andriycraft/GreenFrogMCBE",
-    "ingameVerDescription": "Shows the server version",
-    "ingamePlDescription": "Shows the server plugins",
-    "ingameStopDescription": "Stops a server",
-    "ingameOpDescription": "Grants operator status to a player",
-    "ingameKickDescription": "Kicks a player off a server",
-    "ingameSayDescription": "Displays a message to multiple players",
-    "ingameTimeDescription": "Changes the world's game time",
-    "ingameDeopDescription": "Revokes operator status from a player",
-    "ingameListDescription": "Lists players on the server",
-    "ingameMeDescription": "Displays message about yourself",
-    "ingameGamemodeDescription": "Sets a player's gamemode",
-    "timeUpdated": "Time updated",
-    "plugins": "Plugins",
-    "sayCommandFormat": "[%sender%] %message%",
-    "opped": "Opped %player%",
-    "deOpped": "Deopped %player%",
-    "notOp": "The player is not opped!",
-    "deopFail": "Failed to remove OP status from that player",
-    "opFail": "Failed to give OP status to that player",
-    "executedCommand": "%player% executed a server command: %cmd%",
-    "playerList": "There are %info% players online:",
-    "gamemodeInvalid": "§cGame mode '%gm%' is invalid",
-    "gamemodeSurvival": "Your gamemode has been updated to Survival",
-    "setOwnGamemodeSurvival": "Set own gamemode to Survival",
-    "gamemodeCreative": "Your gamemode has been updated to Creative",
-    "setOwnGamemodeCreative": "Set own gamemode to Creative",
-    "gamemodeAdventure": "Your gamemode has been updated to Adventure",
-    "setOwnGamemodeAdventure": "Set own gamemode to Adventure",
-    "gamemodeSpectator": "Your gamemode has been updated to Spectator",
-    "setOwnGamemodeSpectator": "Set own gamemode to Spectator",
-    "gamemodeUpdated": "Your gamemode has been updated to ",
-    "setOwnGamemode": "Set own gamemode to "
-  },
-  "chat": {
-    "chatFormat": "<%username%> %message%",
-    "chatMessage": "(chat message) %message%"
-  },
-  "playerstatuses": {
-    "joined": "%player% joined",
-    "rpsInstalled": "%player% has resource packs installed",
-    "rpsRefused": "%player% refused resource packs",
-    "disconnected": "%player% disconnected",
-    "spawned": "%player% spawned",
-    "norpsInstalled": "%player% has no resource packs installed.",
-    "playerConnected": "%player% connected (%ip%)"
-  },
-  "kickmessages": {
-    "noReason": "No reason",
-    "serverShutdown": "§cServer closed",
-    "kickedPrefix": "You were kicked for: ",
-    "playerDisconnected": "Client disconnected",
-    "kickedByPlugin": "disconnectionScreen.noReason",
-    "serverFull": "disconnectionScreen.serverFull",
-    "internalServerError": "§cInternal server error",
-    "invalidChatMessage": "§cInvalid message in chat",
-    "kickedConsoleMsg": "Kicked %player% for: %reason%",
-    "invalidUsername": "§cThe username you sent is invalid",
-    "resourcePacksRefused": "§cYou must accept resource packs to join this server",
-    "invalidPacket": "§cEncountered an error while trying to handle packet from your client",
-    "versionMismatch": "§cUnsupported version! Please use %version%"
-  },
-  "errors": {
-    "debugWarning": "Debug is enabled! Use this only if you are developer and never use this thing in production",
-    "failedToExecuteEvent": "Failed to execute %event% event for plugin \"%plugin%\". The error was: %e%",
-    "failedToShutdownPlugin": "Failed to shutdown plugin %plugin%. Error: %e%",
-    "packetHandlingException": "Exception while trying to handle packet from %player%: %error%",
-    "illegalMessage": "%player% sent an invalid message. Message content was: %msg%",
-    "listeningFailed": "Failed to listen on %address% | Error: %error%",
-    "playerOffline": "Player not found",
-    "unknownCommandOrNoPermission": "§cUnknown command: %commandname%. Please check that the command exists and that you have permission to use it.",
-    "failedToLoadPlugin": "Failed to load plugin \"%name%\". The error was: %errorstack%",
-    "failedToExecFunction": "Failed to execute function in plugin \"%plugin%\". Error: %e%",
-    "noPluginName": "No plugin name! %plugin%",
-    "invalidUsernameWarning": "I am sorry, but %player%'s username contains spaces, but they are not implemented in GreenFrog yet, so i replaced spaces with underscores",
-    "opFailAlreadyOpped": "This player is already opped.",
-    "failedToBind": "Failed to bind port on %address%",
-    "otherServerRunning": "This usually means that another server is already running on this port",
-    "failedToHandleItemRequest": "Failed to handle item request from %data%",
-    "packageJSONError": "Failed to find/read or parse package.json for this plugin %plugin%. Make sure that the package.json contains version, name, and main file",
-    "failedToLoadWorld": "Make sure the chunks.json and gamerules.json exist, and make sure that the file is valid JSON!",
-    "failedToLoadWorld_InvalidChunkData": "The chunks are corrupted",
-    "failedToLoadWorld_InvalidGenerator": "Invalid generator!",
-    "errorTickingWorld": "Error ticking world! %e.stack%"
-  },
-  "server": {
-    "listeningOn": "Listening on port %address%",
-    "loadingPlugins": "Loading plugins...",
-    "loadingServer": "Loading server...",
-    "unloadingPlugin": "Unloading %plugin%",
-    "unloadedPlugin": "Unloaded %plugin%",
-    "stoppingServer": "Stopping server...",
-    "loadingPlugin": "Loading %plugin%...",
-    "loadedPlugin": "Plugin %name% v%version% loaded"
-  },
-  "devdebug": {
-    "ignoredPacket": "Ignored packet: %packet%",
-    "unhandledPacket": "Unhandled packet",
-    "unhandledPacketData": "Unhandled packet data: ",
-    "unstableWarning": "Unstable mode is enabled! This may make your server unstable and will cause more lag"
-  },
-  "logger": {
-    "info": "INFO",
-    "warning": "WARN",
-    "error": "ERROR",
-    "debug": "DEBUG"
-  },
-  "broadcasts": {
-    "joinedTheGame": "§e%username% joined the game",
-    "leftTheGame": "§e%player% left the game",
-    "broadcastmessage": "(broadcast) %msg%"
-  },
-  "other": {
-    "unknown": "unknown",
-    "server": "Server"
-  }
+    "server.loading": "Loading server...",
+    "server.license": "GreenFrog is licensed under Creative Commons Attribution 4.0 International license. More info: https://creativecommons.org",
+
+    "server.shuttingDown": "Shutting down...",
+
+    "garbageCollector.started": "[Garbage collector] Started garbage collection...",
+    "garbageCollector.deleted": "[Garbage collector] Deleted %s%",
+    "garbageCollector.finished": "[Garbage collector] Finished",
+
+    "commands.unknown": "§cUnknown command: %s%. Please check that the command exists and that you have permission to use it.",
+    "commands.internalError": "Failed to execute command! Error: %s%",
+    "commands.internalError.player": "Failed to execute command from %s%. Error: %d%",
+    "commands.internalError.badSender": "§cThis type of sender does not support this command",
+
+    "commands.ingame.executed": "%s% executed server command: /%d%",
+
+    "commands.deop.name": "deop",
+    "commands.deop.description": "Revokes operator status from a player.",
+    "commands.deop.execution.success": "Succeeded in revoking operator level for player %s%",
+    "commands.deop.execution.fail": "Failed in revoking operator level for player %s%",
+
+    "commands.gamemode.name": "gamemode",
+    "commands.gamemode.description": "Sets a player's game mode",
+    "commands.gamemode.execution.failed": "§cGame mode '%s%' is invalid",
+    "commands.gamemode.execution.success.updated": "Your game mode has been updated to %s%.",
+    "commands.gamemode.execution.success.set": "Set own gamemode to %s%.",
+
+    "commands.me.name": "me",
+    "commands.me.description": "Displays message about yourself.",
+
+    "commands.help.name": "help",
+    "commands.help.description": "Command list.",
+    "commands.help.execution.success": "Command list:",
+
+    "commands.kick.name": "kick",
+    "commands.kick.description": "Kicks a player from the server.",
+    "commands.kick.execution.failed.notOnline": "§c%s% is not online",
+
+    "commands.list.name": "list",
+    "commands.list.description": "Lists players on the server.",
+    "commands.list.execution.success.commandList": "There are %s% players online: %d%",
+
+    "commands.op.name": "op",
+    "commands.op.description": "Grants operator status to a player.",
+    "commands.op.execution.success": "Succeeded in setting operator level for player %s%",
+    "commands.op.execution.failed": "§cFailed to OP %s%",
+
+    "commands.plugins.name": "plugins",
+    "commands.plugins.aliases.pl": "pl",
+    "commands.plugins.description": "Shows list of plugins that the server is running.",
+    "commands.plugins.execution.success": "Plugins: %s^1%",
+
+    "commands.say.name": "say",
+    "commands.say.description": "Sends a message in the chat to other players.",
+
+    "commands.stop.name": "stop",
+    "commands.stop.description": "Shut downs the server.",
+    
+    "commands.time.name": "time",
+    "commands.time.description": "Changes the world's time",
+    "commands.time.execution.success": "Time set to %s%",
+    "commands.time.execution.failed": "§cTime must be a number",
+    "commands.time.times.day": "day",
+    "commands.time.times.night": "night",
+
+    "commands.version.name": "version",
+    "commands.version.description": "Shows the server version.",
+    "commands.version.aliases.ver": "ver",
+    "commands.version.aliases.about": "about",
+
+    "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
+    "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
+    
+    "scoreboard.name.default": "Scoreboard",
+
+    "plugin.loading.failed": "Failed to load %s%. Error: %d%",
+    "plugin.loading.loading": "Loading plugin %s% v%d%",
+    "plugin.loading.loaded": "Loaded plugin %s% v%d%",
+    "plugin.loading.warning.invalidJson": "Invalid JSON data provided for %s%. Error: %d%",
+
+    "plugin.unloading.failed": "Failed to unload %s%. Error: %d%",
+    "plugin.unloading.success": "Unloaded %s%",
+    "plugin.unloading.unloading": "Unloading %s%...",
+    
+    "frog.version": "This server is running GreenFrogMCBE. Version: %s%",
+
+    "errors.nodeJS.tooOld": "You are running nodeJS version that is too old to run GreenFrogMCBE",
+    "errors.nodeJS.tooOld.update": "Please update it to 14.0.0+, from https://nodejs.org/",
+
+    "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
+    "kickMessages.serverFull": "disconnectionScreen.serverFull",
+    "kickMessages.versionMismatch": "Your client version does not match with the server version! Server is currently running on %s%",
+    "kickMessages.invalidPacket": "Invalid packet",
+    "kickMessages.serverClosed": "Server closed",
+    "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",
+    "kickMessages.wereKicked": "You were kicked from the game%s%",
+
+    "player.kicked": "Kicked %s% for %d%",
+
+    "status.resourcePacks.refused": "%s% refused server resource packs",
+    "status.resourcePacks.none": "%s% has no resource packs",
+    "status.resourcePacks.installed": "%s% has all the resource packs installed",
+    "status.resourcePacks.joined": "%s% joined",
+    "status.resourcePacks.spawned": "%s% spawned",
+    "status.resourcePacks.disconnected": "%s% disconnected",
+
+    "warning.customItems.loading.failed": "Failed to load custom items! Error: %s%",
+
+    "logger.info": "INFO",
+    "logger.warn": "WARNING",
+    "logger.error": "ERROR",
+    "logger.debug": "DEBUG",
+
+    "debug.debugEnabled": "Debug mode is enabled. This may cause lag when sending large packets",
+    "debug.unstable": "Unstable mode is enabled. This will recover server from critical errors, but it may cause plugin data corruption",
+    "debug.unstable.unsupported": "Also, unstable mode is not supported by GreenFrog developers and you are the responsive for the data corruption if it occurs",
+
+    "debug.player.unsupportedActionID": "Unsupported action ID from %s%: %d%",
+    "debug.player.unsupportedActionID.block": "Unsupported block action ID from %s%: %d%",
+
+    "debug.playerlist.invalid": "Ignored invalid PlayerList packet",
+
+    "chat.format": "<%s%> %d%",
+    "chat.format.plugin": "%s%",
+    "chat.format.me": "* %s% %d%",
+    "chat.format.say": "[%s%] %d%",
+
+    "chat.broadcasts.joined": "%s% joined the game",
+    "chat.broadcasts.left": "%s% left the game",
+
+    "creativemenu.badPacket": "Failed to handle ItemStackRequest from %s%. Error: %d%",
+
+    "network.packet.unhandledPacket": "Unhandled packet!",
+   
+    "network.server.listening.success": "Listening on %s%",
+    "network.server.listening.failed": "Failed to listen on %s%. Error: %d%",
+    "network.server.listening.failed.otherServerRunning": "Mabye another server is running on the same port?",
+
+    "network.packet.failed.clientSide": "Cannot write a client-side packet",
+    "network.packet.failed.serverSide": "Cannot read a server-side packet",
+
+    "exceptions.network.rateLimited": "Too many packets from %s% (%d%)",
+    "exceptions.network.packetHandlingError": "Failed to handle packet from %s%! Error: %d%",
+    "exceptions.network.itemStackRequest.badGamemode": "Cannot get an item from creative menu, while not in creative",
+    "exceptions.network.inventoryTransaction.invalid": "Bad InventoryTransaction packet from %s%",
+    "exceptions.network.invalidGamemodePacket": "Bad gamemode packet - Tried to switch gamemode, while not opped",
+    
+    "exceptions.plugin.noName": "No plugin name!",
+    "exceptions.plugin.noVersion": "No plugin version!",
+
+    "exceptions.world.loading.failed": "Failed to load world! %s%",
+    "exceptions.world.loading.failed.invalidChunkData": "Failed to load world (Invalid chunk data)!",
+
+    "exceptions.console.alreadyClosed": "Console is already closed!",
+
+    "exceptions.logger.invalidWarning": "Invalid log type: warning. Its 'warn', and not 'warning'",
+    "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug"
 }

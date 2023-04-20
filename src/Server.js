@@ -1,3 +1,5 @@
+/** This file is the main file that start the server and manages it */
+
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -10,159 +12,264 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-process.env.DEBUG = process.argv.includes("--debug") ? "minecraft-protocol" : "";
 
-const fs = require("fs");
-const path = require("path");
-const bedrock = require("frog-protocol");
-const ServerInfo = require("./api/ServerInfo");
-const PlayerInfo = require("./api/PlayerInfo");
+/* eslint-disable no-unsafe-finally */
+
+const VersionToProtocol = require("./utils/VersionToProtocol");
+
+const PlayerInfo = require("./api/player/PlayerInfo");
+const Frog = require('./Frog')
+
+const GarbageCollector = require("./utils/GarbageCollector");
+const PlayerInit = require("./server/PlayerInit");
+
+const World = require("./world/World");
+
+const Logger = require("./server/Logger");
+
 const PluginLoader = require("./plugins/PluginLoader");
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
-const ServerInternalServerErrorEvent = require("./events/ServerInternalServerErrorEvent");
-const PlayerConnectionCreateEvent = require("./events/PlayerConnectionCreateEvent");
-const VersionToProtocol = require("./utils/VersionToProtocol");
-const GarbageCollector = require("./utils/GarbageCollector");
-const ValidateClient = require("./player/ValidateClient");
-const DefaultWorld = require("./world/DefaultWorld");
-const PlayerInit = require("./server/PlayerInit");
-const Logger = require("./server/Logger");
+
+const { RateLimitException } = require("./utils/exceptions/RateLimitException");
+
+const Language = require("./utils/Language");
+
+const FrogProtocol = require("frog-protocol");
+
 const assert = require("assert");
 
-let clients = [];
+const path = require("path");
+const fs = require("fs");
+
 let server = null;
-let config = null;
-let lang = null;
+let config = Frog.serverConfigurationFiles.config;
+let isDebug = Frog.isDebug;
 
-module.exports = {
-	clients: clients,
-	server: server,
-	config: config,
-	lang: lang,
+/**
+ * This function executes when something is off with the server
+ * 
+ * @private
+ * @param {Error} error 
+ */
+async function _handleCriticalError(error) {
+	const { host, port } = config.network;
 
-	/**
-	 * @private
-	 */
-	async _initJson() {
-		config = ServerInfo.config;
-		lang = ServerInfo.lang;
-	},
+	if (error.toString().includes("Server failed to start")) {
+		Logger.error(Language.getKey("network.server.listening.failed").replace("%s%", `${host}:${port}`).replace("%d%", error));
+		Logger.error(Language.getKey("network.server.listening.failed.otherServerRunning"));
+		process.exit(config.dev.crashCode);
+	}
 
-	/**
-	 * @private
-	 */
-	async _handleCriticalError(err) {
-		if (err.toString().includes("Server failed to start")) {
-			Logger.error(lang.errors.failedToBind.replace("%address%", `${config.host}:${config.port}`));
-			Logger.error(lang.errors.otherServerRunning);
-			process.exit(config.crashCode);
-		} else {
-			Logger.error(`Server error: \n${err.stack}`);
-			if (!config.unstable) process.exit(config.crashCode);
-		}
-	},
+	Logger.error(`Server error: ${error.stack}`);
 
-	/**
-	 * @private
-	 */
-	async _handlepk(client, packetparams) {
-		if (client.offline) throw new Error(lang.errors.packetErrorOffline);
+	if (!config.unstable) {
+		process.exit(config.crashCode);
+	}
+}
 
-		const packetsDir = path.join(__dirname, "network", "packets");
+/**
+ * Handles packets
+ * 
+ * @param {Client} client 
+ * @param {JSON} packetParams 
+ * @throws {RateLimitException} - In case if the client is ratelimited
+ */
+async function _handlePacket(client, packetParams) {
+	const packetsDir = path.join(__dirname, "network", "packets");
 
-		let exist = false;
+	let exists = false;
 
-		fs.readdirSync(packetsDir).forEach((filename) => {
-			if (filename.startsWith("Client") && filename.includes(".js")) {
-				const packetPath = path.join(packetsDir, filename);
-				try {
-					if (client.packetCount++ > 2000) {
-						throw new Error("Too many packets!");
-					}
+	fs.readdirSync(packetsDir).forEach((filename) => {
+		if (filename.startsWith("Client") && filename.endsWith(".js")) {
+			const packetPath = path.join(packetsDir, filename);
 
-					const packetPathImport = require(packetPath);
-					const packet = new packetPathImport();
-					if (packet.getPacketName() === packetparams.data.name) {
-						packet.readPacket(client, packetparams, this);
-						exist = true;
-					}
-				} catch (e) {
-					client.kick(lang.kickmessages.invalidPacket);
+			if (++client.packetCount > 2000) {
+				Frog.eventEmitter.emit('packetRatelimit', {
+					player: client,
+					server: this
+				});
 
-					const internalerrorevent = new ServerInternalServerErrorEvent();
-					internalerrorevent.server = this;
-					internalerrorevent.error = e;
-					internalerrorevent.execute();
-
-					Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
-				}
+				throw new RateLimitException(
+					Language.getKey("exceptions.network.rateLimited")
+						.replace("%s%", client.username)
+						.replace("%d%", client.packetCount)
+				);
 			}
+
+			const packet = new (require(packetPath))();
+			if (packet.getPacketName() === packetParams.data.name) {
+				let shouldReadPacket = true;
+
+				Frog.eventEmitter.emit('packetRead', {
+					player: client,
+					data: packet.data,
+					server: this
+				});
+
+				if (shouldReadPacket) {
+					packet.readPacket(client, packetParams, this);
+				}
+
+				exists = true;
+			}
+		}
+	});
+
+	if (!exists && config.dev.logUnhandledPackets) {
+		Logger.warning(Language.getKey("network.packet.unhandledPacket"));
+		console.info("%o", packetParams);
+	}
+}
+
+/**
+ * Logs a warning if the debug or unstable mode is enabled.
+ * 
+ * @private
+ */
+async function _initDebug() {
+	if (config.unstable) {
+		Logger.warning(Language.getKey("debug.unstable"));
+		Logger.warning(Language.getKey("debug.unstable.unsupported"))
+	}
+
+	if (isDebug) Logger.debug(Language.getKey("debug.debugEnabled"));
+}
+
+/**
+ * Listens the server
+ * 
+ * @private
+ */
+async function _listen() {
+	const { host, port } = config.network;
+	const { levelName, motd, maxPlayers, offlineMode, version } = config.serverInfo;
+
+	try {
+		server = FrogProtocol.createServer({
+			host,
+			port,
+			version,
+			offlineMode,
+			maxPlayers,
+			motd: {
+				motd,
+				levelName,
+			},
+		}).on("connect", (client) => {
+			client.on("join", () => {
+				Frog.eventEmitter.emit("playerPreConnectEvent", {
+					player: client,
+					server: this,
+					cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
+						client.kick(reason);
+					}
+				});
+
+				client.__queue = client.queue;
+				client.queue = (packetName, data) => {
+					let shouldQueue = true;
+
+					Frog.eventEmitter.emit("packetQueue", {
+						player: client,
+						server: this,
+						packetName,
+						packetData: data,
+						cancel: () => {
+							shouldQueue = false;
+						},
+					});
+
+					if (shouldQueue) {
+						client.__queue(packetName, data);
+					}
+				};
+
+				_onJoin(client);
+			});
+
+			client.on("packet", (packet) => {
+				try {
+					_handlePacket(client, packet);
+				} catch (error) {
+					client.kick(Language.getKey("kickMessages.invalidPacket"));
+
+					Frog.eventEmitter.emit('packetReadError', {
+						player: client,
+						error,
+						server: this
+					});
+
+					Logger.error(Language.getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
+				}
+			});
 		});
 
-		if (!exist && config.logUnhandledPackets) {
-			Logger.warning(lang.devdebug.unhandledPacket);
-			console.info("%o", packetparams);
+		Frog.setServer(server);
+
+		Logger.info(Language.getKey("network.server.listening.success").replace(`%s%`, `/${host}:${port}`));
+	} catch (e) {
+		Logger.error(Language.getKey("network.server.listening.failed").replace(`%s%`, `/${host}:${port}`).replace("%d%", e.stack));
+
+		process.exit(config.dev.crashCode);
+	}
+}
+
+/**
+ * Executes, when player joins the server
+ * 
+ * @param {Client} client
+ * @private
+ */
+async function _onJoin(client) {
+	await PlayerInit.initPlayer(client, server);
+
+	Object.assign(client, { items: [] }); // Inventory
+	Object.assign(client, { x: 0, y: 0, z: 0, on_ground: false }); // Player coordinates 
+	Object.assign(client, { pitch: 0, yaw: 0 }); // Player rotation 
+	Object.assign(client, { health: 20, hunger: 20, packetCount: 0, username: client.profile.name }); // API
+	Object.assign(client, { world: null, chunksEnabled: true, gamemode: Frog.serverConfigurationFiles.config.world.gamemode }); // World-related stuff
+	Object.assign(client, { op: null, dead: false, initialised: false, isConsole: false, fallDamageQueue: 0 }); // More API stuff
+	Object.assign(client, { ip: client.connection.address.split("/")[0], port: client.connection.address.split("/")[0] }); // Network
+
+	setInterval(() => {
+		client.packetCount = 0;
+	}, 1000);
+
+	PlayerInfo.addPlayer(client);
+
+	if (PlayerInfo.players.length > config.maxPlayers) {
+		client.kick(Language.getKey("kickMessages.serverFull"));
+		return;
+	}
+
+	if (!(client.version === VersionToProtocol.getProtocol(config.serverInfo.version)) && !config.multiProtocol) {
+		client.kick(Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version));
+		return;
+	}
+
+	const responsePackInfo = new ResponsePackInfo();
+	responsePackInfo.setMustAccept(true);
+	responsePackInfo.setHasScripts(false);
+	responsePackInfo.setBehaviorPacks([]);
+	responsePackInfo.setTexturePacks([]);
+	responsePackInfo.writePacket(client);
+
+	Frog.eventEmitter.emit('playerJoin', {
+		player: client,
+		server: this,
+		cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
+			client.kick(reason);
 		}
-	},
+	});
+}
 
+module.exports = {
 	/**
-	 * @private
-	 */
-	async _onJoin(client, server) {
-		await PlayerInit._initPlayer(client, server);
-		await ValidateClient._initAndValidateClient(client);
-
-		client.world = null; // This gets initialised in PlayerResourcePacksCompletedEvent
-		Object.assign(client, { x: 0, y: 0, z: 0 }); // Player coordinates
-		Object.assign(client, { health: 20, hunger: 20, chunksEnabled: true, packetCount: 0 }); // Network stuff
-		Object.assign(client, { dead: false, offline: false, initialised: false, fallDamageQueue: 0 }); // API fields
-
-		setInterval(() => {
-			client.packetCount = 0;
-		}, 1000);
-
-		const playerConnectionEvent = new PlayerConnectionCreateEvent();
-		playerConnectionEvent.server = this;
-		playerConnectionEvent.player = client;
-		playerConnectionEvent.execute();
-
-		PlayerInfo.addPlayer(client);
-
-		if (PlayerInfo.players.length > config.maxPlayers) {
-			client.kick(lang.kickmessages.serverFull);
-			return;
-		}
-
-		if (!(client.version === VersionToProtocol.getProtocol(config.version)) && !config.multiProtocol) {
-			client.kick(lang.kickmessages.versionMismatch.replace("%version%", config.version));
-			return;
-		}
-
-		const responsepackinfo = new ResponsePackInfo();
-		responsepackinfo.setMustAccept(true);
-		responsepackinfo.setHasScripts(false);
-		responsepackinfo.setBehaviorPacks([]);
-		responsepackinfo.setTexturePacks([]);
-		responsepackinfo.writePacket(client);
-	},
-
-	/**
-	 * It logs a warning if the config.debug or config.unstable is true.
-	 * @private
-	 */
-	async _initDebug() {
-		if (config.unstable) Logger.warning(lang.devdebug.unstableWarning);
-		if (process.env.DEBUG === "minecraft-protocol" || config.debug) Logger.debug(lang.errors.debugWarning);
-	},
-
-	/**
-	 * It loads the config, lang files, and commands, then loads the plugins and starts the server.
+	 * Starts the server
 	 */
 	async start() {
-		await this._initJson();
-
-		await assert(parseInt(config.garbageCollectorDelay), NaN);
-		await assert(parseInt(config.randomTickSpeed), NaN);
+		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
+		await assert(parseInt(config.world.randomTickSpeed), NaN);
 
 		if (!fs.existsSync("ops.yml")) {
 			fs.writeFile("ops.yml", "", (err) => {
@@ -174,92 +281,37 @@ module.exports = {
 
 		console.clear()
 
-		Logger.info(lang.server.loadingServer);
-		Logger.info(lang.commands.verInfo.replace("%version%", ServerInfo.minorServerVersion));
+		Language.getLanguage(Frog.serverConfigurationFiles.config.chat.lang)
 
-		process.on("uncaughtException", (err) => this._handleCriticalError(err));
-		process.on("uncaughtExceptionMonitor", (err) => this._handleCriticalError(err));
-		process.on("unhandledRejection", (err) => this._handleCriticalError(err));
+		Logger.info(Language.getKey("server.loading"));
+		Logger.info(Language.getKey("server.license"))
 
-		this._initDebug();
+		if (process.versions.node.split('.')[0] < 14) {
+			Logger.error(Language.getKey("errors.nodeJS.tooOld"))
+			Logger.error(Language.getKey("errors.nodeJS.tooOld.update"))
+
+			process.exit(-1)
+		}
+
+		Logger.info(Language.getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion))
+
+		process.on("uncaughtException", (err) => _handleCriticalError(err));
+		process.on("unhandledRejection", (err) => _handleCriticalError(err));
+
+		await _initDebug();
 
 		PluginLoader.loadPlugins();
 
-		this._listen();
+		await _listen();
 
 		setInterval(() => {
 			GarbageCollector.gc();
-		}, parseInt(config.garbageCollectorDelay));
+		}, parseInt(config.performance.garbageCollectorDelay));
 
 		setInterval(() => {
-			const serverLocalWorld = new DefaultWorld();
-			serverLocalWorld.tick();
-		}, parseInt(config.randomTickSpeed));
-	},
+			const world = new World();
 
-	/**
-	 * @private
-	 */
-	_listen() {
-		const { host, port, version, offlineMode: offline, maxPlayers, motd } = config;
-
-		try {
-			const server = bedrock.createServer({
-				host,
-				port,
-				version,
-				offline,
-				maxPlayers,
-				motd: {
-					motd: motd,
-					levelName: "GreenFrog",
-				},
-			});
-
-			Logger.info(`${lang.server.listeningOn.replace(`%address%`, `/${host}:${port}`)}`);
-
-			server.on("connect", (client) => {
-				client.on("join", () => {
-					this._onJoin(client, this);
-				});
-
-				client.on("packet", (packet) => {
-					try {
-						this._handlepk(client, packet);
-					} catch (e) {
-						client.kick(lang.kickmessages.invalidPacket);
-
-						const internalerrorevent = new ServerInternalServerErrorEvent();
-						internalerrorevent.server = this;
-						internalerrorevent.error = e;
-						internalerrorevent.execute();
-						Logger.error(`${lang.errors.packetHandlingException.replace("%player%", client.username).replace("%error%", e.stack)}`);
-					}
-				});
-			});
-		} catch (e) {
-			Logger.error(`${lang.errors.listeningFailed.replace(`%address%`, `/${host}:${port}`).replace("%error%", e.stack)}`);
-			process.exit(config.exitCode);
-		}
-	},
-
-	/**
-	 * Shutdowns the server.
-	 */
-	async shutdown() {
-		await require("./server/ConsoleCommandSender").close();
-		Logger.info(lang.server.stoppingServer);
-
-		try {
-			for (const player of PlayerInfo.players) {
-				if (!player.offline) player.kick(lang.kickmessages.serverShutdown);
-			}
-		} catch (ignored) {
-			/* ignored */
-		}
-
-		setTimeout(() => {
-			PluginLoader.unloadPlugins();
-		}, 1000);
+			world.tick();
+		}, parseInt(config.world.randomTickSpeed));
 	},
 };

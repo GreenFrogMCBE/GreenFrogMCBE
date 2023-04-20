@@ -27,15 +27,15 @@ let layer = 0;
 class ServerUpdateBlockPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "update_block";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -43,7 +43,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the X coordinate
-	 * @param {Number} new_x
+	 * @param {number} new_x
 	 */
 	setX(new_x) {
 		x = parseInt(new_x);
@@ -51,7 +51,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the Y coordinate
-	 * @param {Number} new_y
+	 * @param {number} new_y
 	 */
 	setY(new_y) {
 		y = parseInt(new_y);
@@ -59,7 +59,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the Z coordinate
-	 * @param {Number} new_z
+	 * @param {number} new_z
 	 */
 	setZ(new_z) {
 		z = parseInt(new_z);
@@ -67,7 +67,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the block runtime id
-	 * @param {Number} new_block_runtime_id
+	 * @param {number} new_block_runtime_id
 	 */
 	setBlockRuntimeId(new_block_runtime_id) {
 		block_runtime_id = parseInt(new_block_runtime_id);
@@ -75,7 +75,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the flags count (aka flags value).
-	 * @param {Number} new_flags_value
+	 * @param {number} new_flags_value
 	 */
 	setFlagsValue(new_flags_value) {
 		flagsvalue = parseInt(new_flags_value);
@@ -83,7 +83,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the flag value called "neighbors".
-	 * @param {Number} new_neighbors
+	 * @param {number} new_neighbors
 	 */
 	setNeighbors(new_neighbors) {
 		neighbors = new_neighbors;
@@ -91,14 +91,14 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the flag value called "network".
-	 * @param {Number} new_network
+	 * @param {number} new_network
 	 */
 	setNetwork(new_network) {
 		network = new_network;
 	}
 	/**
 	 * Sets the flag value called "no_graphic".
-	 * @param {Number} new_no_graphic
+	 * @param {number} new_no_graphic
 	 */
 	setNoGraphic(new_no_graphic) {
 		no_graphic = new_no_graphic;
@@ -106,7 +106,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the flags value called "unused".
-	 * @param {Number} new_unused
+	 * @param {number} new_unused
 	 */
 	setUnused(new_unused) {
 		unused = new_unused;
@@ -114,7 +114,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the flag value called "priority".
-	 * @param {Number} new_priority
+	 * @param {number} new_priority
 	 */
 	setPriority(new_priority) {
 		priority = new_priority;
@@ -122,14 +122,14 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sets the layer.
-	 * @param {Number} new_layer
+	 * @param {number} new_layer
 	 */
 	setLayer(new_layer) {
 		layer = parseInt(new_layer);
 	}
 	/**
 	 * Returns the X coordinate.
-	 * @returns {Number} The X coordinate.
+	 * @returns {number} The X coordinate.
 	 */
 	getX() {
 		return x;
@@ -137,7 +137,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the Y coordinate.
-	 * @returns {Number} The Y coordinate.
+	 * @returns {number} The Y coordinate.
 	 */
 	getY() {
 		return y;
@@ -145,7 +145,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the Z coordinate.
-	 * @returns {Number} The Z coordinate.
+	 * @returns {number} The Z coordinate.
 	 */
 	getZ() {
 		return z;
@@ -153,7 +153,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the block runtime id.
-	 * @returns {Number} The block runtime id.
+	 * @returns {number} The block runtime id.
 	 */
 	getBlockRuntimeId() {
 		return block_runtime_id;
@@ -161,7 +161,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the flags value.
-	 * @returns {Number} The flags value.
+	 * @returns {number} The flags value.
 	 */
 	getFlagsValue() {
 		return flagsvalue;
@@ -169,7 +169,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the flag value called "neighbors".
-	 * @returns {Number} The flag value called "neighbors".
+	 * @returns {number} The flag value called "neighbors".
 	 */
 	getNeighbors() {
 		return neighbors;
@@ -177,7 +177,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the flag value called "network".
-	 * @returns {Number} The flag value called "network".
+	 * @returns {number} The flag value called "network".
 	 */
 	getNetwork() {
 		return network;
@@ -185,7 +185,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the flag value called "no_graphic".
-	 * @returns {Number} The flag value called "no_graphic".
+	 * @returns {number} The flag value called "no_graphic".
 	 */
 	getNoGraphic() {
 		return no_graphic;
@@ -193,7 +193,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the flags value called "unused".
-	 * @returns {Number} The flags value called "unused".
+	 * @returns {number} The flags value called "unused".
 	 */
 	getUnused() {
 		return unused;
@@ -201,7 +201,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the flags value called "priority".
-	 * @returns {Number} The flags value called "priority".
+	 * @returns {number} The flags value called "priority".
 	 */
 	getPriority() {
 		return priority;
@@ -209,7 +209,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Returns the layer.
-	 * @returns {Number} The layer.
+	 * @returns {number} The layer.
 	 */
 	getLayer() {
 		return layer;
@@ -217,7 +217,7 @@ class ServerUpdateBlockPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

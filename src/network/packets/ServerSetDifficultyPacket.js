@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Difficulty = require("./types/Difficulty");
+const Difficulty = require("../../api/types/Difficulty");
 
 let difficulty = Difficulty.PEACEFUL;
 
@@ -19,15 +19,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerSetDifficultyPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_difficulty";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -51,7 +51,7 @@ class ServerSetDifficultyPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), { difficulty: this.getDifficulty() });

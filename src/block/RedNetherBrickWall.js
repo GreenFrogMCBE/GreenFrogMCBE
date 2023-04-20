@@ -12,6 +12,9 @@
  */
 const Block = require("./Block");
 
+/**
+ * @type {import('../type/Block')}
+ */
 class RedNetherBrickWall extends Block {
 	getRuntimeId() {
 		return 3394;

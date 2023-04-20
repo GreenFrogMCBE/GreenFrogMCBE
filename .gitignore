@@ -3,6 +3,6 @@ ops.yml
 config.yml
 *_packetReadError.txt
 TODO
-tools/refactor.js
 plugins/
 pluginData/
+crash-reports/

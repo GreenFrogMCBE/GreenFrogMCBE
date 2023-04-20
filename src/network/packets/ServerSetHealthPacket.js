@@ -17,15 +17,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerSetHealthPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_health";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -33,7 +33,7 @@ class ServerSetHealthPacket extends PacketConstructor {
 
 	/**
 	 * Sets the health
-	 * @param {Number} new_health
+	 * @param {number} new_health
 	 */
 	setHealth(new_health) {
 		health = new_health;
@@ -41,7 +41,7 @@ class ServerSetHealthPacket extends PacketConstructor {
 
 	/**
 	 * Returns health of the player
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getHealth() {
 		return health;
@@ -49,7 +49,7 @@ class ServerSetHealthPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), { health: this.getHealth() });

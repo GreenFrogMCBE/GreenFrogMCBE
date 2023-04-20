@@ -19,15 +19,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerInventorySlotPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "inventory_slot";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -35,7 +35,7 @@ class ServerInventorySlotPacket extends PacketConstructor {
 
 	/**
 	 * Sets the window ID.
-	 * @param {Number} ID
+	 * @param {number} ID
 	 */
 	setWindowID(new_id) {
 		window_id = new_id;
@@ -43,7 +43,7 @@ class ServerInventorySlotPacket extends PacketConstructor {
 
 	/**
 	 * Sets the slot of the item.
-	 * @param {Number} new_slot
+	 * @param {number} new_slot
 	 */
 	setSlot(new_slot) {
 		slot = new_slot;
@@ -59,7 +59,7 @@ class ServerInventorySlotPacket extends PacketConstructor {
 
 	/**
 	 * Returns the window ID.
-	 * @returns {Number} The window ID.
+	 * @returns {number} The window ID.
 	 */
 	getWindowID() {
 		return window_id;
@@ -67,7 +67,7 @@ class ServerInventorySlotPacket extends PacketConstructor {
 
 	/**
 	 * Returns the slot of the item.
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getSlot() {
 		return slot;
@@ -83,7 +83,7 @@ class ServerInventorySlotPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

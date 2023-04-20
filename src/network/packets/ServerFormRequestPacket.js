@@ -15,25 +15,25 @@ const FormTypes = require("../../forms/FormTypes");
 const PacketConstructor = require("./PacketConstructor");
 
 let id = 0;
-let content = "";
-let buttons = null;
-let title = "";
+let content;
+let buttons;
+let title;
 let type = FormTypes.FORM;
-let button1 = "";
-let button2 = "";
+let button1;
+let button2;
 
 class ServerFormRequestPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "modal_form_request";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -41,9 +41,9 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sets the ID for the form
-	 * @param {Number} new_id
+	 * @param {number} new_id
 	 */
-	setId(new_id) {
+	setID(new_id) {
 		id = new_id;
 	}
 
@@ -65,7 +65,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sets the title of the form
-	 * @param {String} new_title - The new title
+	 * @param {string} new_title - The new title
 	 */
 	setTitle(new_title) {
 		title = new_title;
@@ -97,7 +97,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sets the text of the form
-	 * @param {String} new_text
+	 * @param {string} new_text
 	 */
 	setText(new_text) {
 		content = new_text;
@@ -105,7 +105,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Returns the form text
-	 * @returns {String} - The form text
+	 * @returns {string} - The form text
 	 */
 	getText() {
 		return content;
@@ -113,7 +113,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Returns the ID of the form
-	 * @returns {Number} - The ID of the form
+	 * @returns {number} - The ID of the form
 	 */
 	getId() {
 		return id;
@@ -121,7 +121,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Returns the content of the form
-	 * @returns {String} - The content of the form
+	 * @returns {string} - The content of the form
 	 */
 	getContent() {
 		return content;
@@ -137,7 +137,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Returns the form title
-	 * @returns {String} - The title
+	 * @returns {string} - The title
 	 */
 	getTitle() {
 		return title;
@@ -169,9 +169,9 @@ class ServerFormRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
-	send(client) {
+	writePacket(client) {
 		if (type === FormTypes.MODALFORM) {
 			client.queue(this.getPacketName(), {
 				form_id: this.getId(),

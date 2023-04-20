@@ -21,15 +21,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerLevelChunkPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "level_chunk";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -37,7 +37,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Sets the X coordinate
-	 * @param {Number} new_x
+	 * @param {number} new_x
 	 */
 	setX(new_x) {
 		x = new_x;
@@ -45,7 +45,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Sets the Z coordinate
-	 * @param {Number} new_z
+	 * @param {number} new_z
 	 */
 	setZ(new_z) {
 		z = new_z;
@@ -53,7 +53,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Sets the sub chunk count
-	 * @param {Number} new_sub_chunk_count
+	 * @param {number} new_sub_chunk_count
 	 */
 	setSubChunkCount(new_sub_chunk_count) {
 		sub_chunk_count = new_sub_chunk_count;
@@ -61,7 +61,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Sets if the cache is enabled
-	 * @param {Boolean} new_cache_enabled
+	 * @param {boolean} new_cache_enabled
 	 */
 	setCacheEnabled(new_cache_enabled) {
 		cache_enabled = new_cache_enabled;
@@ -77,7 +77,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * It gets the X coordinate
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getX() {
 		return x;
@@ -85,7 +85,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * It gets the Z coordinate
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getZ() {
 		return z;
@@ -93,7 +93,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * It gets the sub chunk count
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getSubChunkCount() {
 		return sub_chunk_count;
@@ -101,7 +101,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the cache is enabled
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getCacheEnabled() {
 		return cache_enabled;
@@ -117,7 +117,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

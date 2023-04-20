@@ -11,57 +11,71 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const fs = require("fs");
+
 const Logger = require("../server/Logger");
 const PluginManager = require("./PluginManager");
-const CCH = require("../server/ConsoleCommandSender");
-const { lang, config } = require("../api/ServerInfo");
 
-let count = null;
+const CCH = require("../server/ConsoleCommandSender");
+const { getKey } = require("../utils/Language");
+
+/** @private */
+let pluginCount = 0;
+/** @private */
+let config;
 
 module.exports = {
-	loadPlugins() {
-		try {
-			fs.mkdirSync("./plugins/");
-		} catch (ignored) {
-			/* ignored */
-		}
+	/**
+	 * Returns plugin count
+	 * 
+	 * @returns {number}
+	 */
+	pluginCount,
 
-		try {
-			fs.mkdirSync("./pluginData/");
-		} catch (ignored) {
-			/* ignored */
-		}
+	/**
+	 * Loads all plugins
+	 * 
+	 * 
+	 */
+	loadPlugins() {
+		fs.mkdirSync('./plugins/', { recursive: true });
+		fs.mkdirSync('./pluginData/', { recursive: true });
 
 		setTimeout(() => {
 			CCH.start();
 		}, 1500);
 
-		fs.readdir("./plugins", (err, files) => {
+		fs.readdir("./plugins", (_err, files) => {
 			files.forEach((file) => {
-				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
-					if (err) {
-						Logger.error(lang.errors.failedToLoadPlugin.replace("%name%", file).replace("%errorstack%", err.stack));
+				fs.stat(`${__dirname}/../../plugins/${file}`, (error, stats) => {
+					if (error) {
+						Logger.error(getKey("plugin.loading.failed").replace("%s%", file).replace("%d%", error.stack));
 						return;
 					}
+
 					if (stats.isDirectory()) {
-						let name,
-							version,
-							main = null;
+						let name, version, main;
+
 						try {
 							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
+
 							name = packageJson.displayName;
 							version = packageJson.version;
 							main = packageJson.main;
+
+							PluginManager.addPlugin(name, version)
+							Logger.info(getKey("plugin.loading.loading").replace('%s%', name).replace('%d%', version))
 						} catch (error) {
-							Logger.warning(lang.errors.packageJSONError.replace("%plugin%", file));
+							Logger.warning(getKey("plugin.loading.warning.invalidJson").replace("%s%", file).replace("%d%", error.stack));
 							return;
 						}
+
 						try {
 							require(`${__dirname}/../../plugins/${file}/${main}`).onLoad();
-							Logger.info(lang.server.loadedPlugin.replace("%name%", name).replace("%version%", version));
+
 							PluginManager.addPlugin(name, version);
-						} catch (err) {
-							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", err.stack));
+							Logger.info(getKey("plugin.loading.loaded").replace('%s%', name).replace('%d%', version))
+						} catch (error) {
+							Logger.error(getKey("plugin.loading.failed").replace("%s%", name).replace("%d%", error.stack));
 						}
 					}
 				});
@@ -69,49 +83,68 @@ module.exports = {
 		});
 	},
 
+	/**
+	 * Kills the server
+	 * 
+	 * 
+	 */
 	async killServer() {
+		config = require("../Frog").serverConfigurationFiles.config;
+
 		process.exit(config.exitCode);
 	},
 
+	/**
+	 * Prepares plugins for shutdown
+	 * 
+	 * 
+	 */
 	initPluginShutdown() {
-		count--;
-		if (count <= 0) this.killServer();
+		pluginCount--;
+
+		if (pluginCount <= 0) this.killServer();
 	},
 
+	/**
+	 * Unloads plugins
+	 * 
+	 * 
+	 * 
+	 */
 	async unloadPlugins() {
-		fs.readdir("./plugins", (err, files) => {
+		fs.readdir("./plugins", (_err, files) => {
 			if (files.length === 0) this.killServer();
+
 			files.forEach((file) => {
-				fs.stat(`${__dirname}/../../plugins/${file}`, (err, stats) => {
-					if (err) {
-						Logger.error(lang.errors.failedToLoadPlugin.replace("%name%", file).replace("%errorstack%", err.stack));
+				fs.stat(`${__dirname}/../../plugins/${file}`, (error, stats) => {
+					if (error) {
+						Logger.error(getKey("plugin.unloading.failed").replace('%s%', file).replace('%d%', error.stack))
 						return;
 					}
 
 					if (stats.isDirectory()) {
-						count++;
-						let name,
-							main = null;
+						pluginCount++;
+						let name, main;
 
 						try {
 							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
 							name = packageJson.displayName;
 							main = packageJson.main;
 
-							Logger.info(lang.server.unloadingPlugin.replace("%plugin%", name));
+							Logger.info(getKey("plugin.unloading.unloading").replace("%s%", name));
 						} catch (error) {
-							this.initPluginShutdown();
 							return;
 						}
 
 						try {
 							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
-							Logger.info(lang.server.unloadedPlugin.replace("%plugin%", name));
-							this.initPluginShutdown();
-						} catch (e) {
-							Logger.error(lang.errors.failedToExecFunction.replace("%plugin%", file).replace("%e%", e.stack));
-							this.initPluginShutdown();
+
+							Logger.info(getKey("plugin.unloading.success").replace("%s%", name));
+						} catch (error) {
+							Logger.error(getKey("plugin.unloading.failed").replace('%s%', name).replace('%d%', error.stack))
 						}
+
+						this.initPluginShutdown();
 					}
 				});
 			});

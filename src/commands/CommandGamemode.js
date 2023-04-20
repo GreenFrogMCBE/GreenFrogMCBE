@@ -1,85 +1,60 @@
+const { getKey } = require("../utils/Language");
+
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ * Command to change the player's game mode.
  *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * @type {import('../type/Command').Command}
  */
-const { lang } = require("../api/ServerInfo");
-const GameMode = require("../api/GameMode");
-const Command = require("./Command");
+module.exports = {
+    data: {
+        name: getKey("commands.gamemode.name"),
+        description: getKey("commands.gamemode.description"),
+        maxArg: 1,
+        minArgs: 1,
+        requiresOp: true
+    },
 
-class CommandGamemode extends Command {
-	name() {
-		return lang.commands.gamemode;
-	}
+    execute(_server, player, args) {
+        if (player.isConsole) {
+            player.sendMessage(getKey("commands.internalError.badSender"));
+            return;
+        }
 
-	aliases() {
-		return null;
-	}
+        const gamemodeMap = {
+            "0": "survival",
+            "1": "creative",
+            "2": "adventure",
+            "3": "spectator",
+            "4": "fallback",
 
-	getPlayerDescription() {
-		return lang.commands.ingameGamemodeDescription;
-	}
+            "s": "survival",
+            "c": "creative",
+            "a": "adventure",
+            "sp": "spectator",
+            "d": "fallback",
 
-	executePlayer(client, gamemode) {
-		const gamemodeArg = gamemode.split(" ")[1];
-		if (!gamemodeArg) {
-			client.sendMessage(lang.commands.usageGamemode);
-			return;
-		}
+            "survival": "survival",
+            "creative": "creative",
+            "adventure": "adventure",
+            "spectator": "spectator",
+            "default": "fallback"
+        };
 
-		const gamemodeMap = {
-			s: GameMode.SURVIVAL,
-			survival: GameMode.SURVIVAL,
-			c: GameMode.CREATIVE,
-			creative: GameMode.CREATIVE,
-			a: GameMode.ADVENTURE,
-			adventure: GameMode.ADVENTURE,
-			sp: GameMode.SPECTATOR,
-			spectator: GameMode.SPECTATOR,
-		};
+        const gamemode = gamemodeMap[args[0]];
+        if (!gamemode) {
+            player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s%", args[0]));
+            return;
+        }
 
-		const selectedGamemode = gamemodeMap[gamemodeArg.toLowerCase()];
-		if (selectedGamemode == null) {
-			const numdata = parseInt(gamemodeArg);
-			switch (numdata) {
-				case 0:
-					client.sendMessage(lang.commands.gamemodeSurvival);
-					client.sendMessage(lang.commands.setOwnGamemodeSurvival);
-					client.setGamemode(GameMode.SURVIVAL);
-					break;
-				case 1:
-					client.sendMessage(lang.commands.gamemodeCreative);
-					client.sendMessage(lang.commands.setOwnGamemodeCreative);
-					client.setGamemode(GameMode.CREATIVE);
-					break;
-				case 2:
-					client.sendMessage(lang.commands.gamemodeAdventure);
-					client.sendMessage(lang.commands.setOwnGamemodeAdventure);
-					client.setGamemode(GameMode.ADVENTURE);
-					break;
-				case 6:
-					client.sendMessage(lang.commands.gamemodeSpectator);
-					client.sendMessage(lang.commands.setOwnGamemodeSpectator);
-					client.setGamemode(GameMode.SPECTATOR);
-					break;
-				default:
-					client.sendMessage(lang.commands.gamemodeInvalid.replace("%gm%", gamemodeArg));
-					break;
-			}
-		} else {
-			const selectedGamemodeName = selectedGamemode.charAt(0).toUpperCase() + selectedGamemode.slice(1);
-			client.sendMessage(`${lang.commands.gamemodeUpdated}${selectedGamemodeName}`);
-			client.sendMessage(`${lang.commands.setOwnGamemode}${selectedGamemodeName}`);
-			client.setGamemode(selectedGamemode);
-		}
-	}
-}
+        try {
+            player.setGamemode(gamemode);
 
-module.exports = CommandGamemode;
+            const gmStr = gamemode.charAt(0).toUpperCase() + gamemode.slice(1)
+
+            player.sendMessage(getKey("commands.gamemode.execution.success.updated").replace("%s%", gmStr));
+            player.sendMessage(getKey("commands.gamemode.execution.success.set").replace("%s%", gmStr))
+        } catch {
+            player.sendMessage(getKey("commands.gamemode.execution.invalidGamemode"));
+        }
+    }
+};

@@ -1,0 +1,44 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ *
+ * Copyright 2023 andriycraft
+ * Github: https://github.com/andriycraft/GreenFrogMCBE
+ */
+let playersOnline = [];
+
+module.exports = {
+	/**
+	 * Adds player
+	 * @param player
+	 */
+	addPlayer(player) {
+		playersOnline.push(player);
+	},
+
+	/**
+	 * @param {object} player
+	 * @returns The player if the player is online, null otherwise.
+	 */
+	get(player) {
+		try {
+			for (let i = 0; i < playersOnline.length; i++) {
+				if (playersOnline[i].username === player) {
+					return playersOnline[i];
+				}
+			}
+		} catch (e) {
+			return null;
+		}
+	},
+
+	/**
+	 * @returns The players array.
+	 */
+	players: playersOnline,
+};

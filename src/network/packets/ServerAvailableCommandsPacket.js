@@ -17,22 +17,22 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerAvailableCommandsPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "available_commands";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
 	}
 
 	/**
-	 * Sets the packet data
+	 * Sets the command data
 	 * @param {JSON} new_data - The new command data
 	 */
 	setData(new_data) {
@@ -49,7 +49,7 @@ class ServerAvailableCommandsPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {Object} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), this.getData());

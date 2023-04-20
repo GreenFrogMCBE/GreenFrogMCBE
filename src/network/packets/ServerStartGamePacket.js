@@ -10,23 +10,26 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Gamemode = require("../../api/GameMode");
-const Difficulty = require("./types/Difficulty");
-const Dimension = require("./types/Dimension");
-const Generator = require("./types/Generator");
+const Gamemode = require("../../api/player/Gamemode");
+
+const Difficulty = require("../../api/types/Difficulty")
+
+const Dimension = require("../../world/types/Dimension");
+const Generator = require("../../world/types/Generator");
+
 const PacketConstructor = require("./PacketConstructor");
 
 let entity_id = 0;
 let runtimeentity_id = 0;
 let gamemode = Gamemode.FALLBACK;
-let playerx = 0;
-let playery = 0;
-let playerz = 0;
-let rotationx = 0;
-let rotationz = 0;
+let playerX = 0;
+let playerY = 0;
+let playerZ = 0;
+let rotationX = 0;
+let rotationZ = 0;
 let seed = [];
 let biome_type = 0;
-let biome_name = "";
+let biome_name;
 let dimension = Dimension.OVERWORLD;
 let generator = Generator.INFINITE;
 let world_gamemode = Gamemode.SURVIVAL;
@@ -37,12 +40,12 @@ let spawn = {
 	z: 0,
 };
 let permission_level = 0;
-let world = "";
+let world;
 
 class ServerStartGamePacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {String} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "start_game";
@@ -50,7 +53,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns whether the packet is critical or not.
-	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
+	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return true;
@@ -58,7 +61,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the entity ID
-	 * @param {Number} new_entity_id - The entity ID
+	 * @param {number} new_entity_id - The entity ID
 	 */
 	setEntityId(new_entity_id) {
 		entity_id = new_entity_id;
@@ -66,7 +69,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the runtime entity ID
-	 * @param {Number} new_runtime_entity_id - The runtime entity ID
+	 * @param {number} new_runtime_entity_id - The runtime entity ID
 	 */
 	setRunTimeEntityId(new_runtime_entity_id) {
 		runtimeentity_id = new_runtime_entity_id;
@@ -82,24 +85,24 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the player spawn position X, Y, and Z
-	 * @param {Number} x - The player X
-	 * @param {Number} y - The player Y
-	 * @param {Number} z - The player Z
+	 * @param {number} x - The player X
+	 * @param {number} y - The player Y
+	 * @param {number} z - The player Z
 	 */
 	setPlayerPosition(x, y, z) {
-		playerx = x;
-		playery = y;
-		playerz = z;
+		playerX = x;
+		playerY = y;
+		playerZ = z;
 	}
 
 	/**
 	 * Sets the player rotation X and Z
-	 * @param {Number} x - The player rotation (X)
-	 * @param {Number} z - The player rotation (Z)
+	 * @param {number} x - The player rotation (X)
+	 * @param {number} z - The player rotation (Z)
 	 */
 	setPlayerRotation(x, z) {
-		rotationx = x;
-		rotationz = z;
+		rotationX = x;
+		rotationZ = z;
 	}
 
 	/**
@@ -112,7 +115,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the biome type
-	 * @param {String} new_biome_type - The biome type
+	 * @param {string} new_biome_type - The biome type
 	 */
 	setBiomeType(new_biome_type) {
 		biome_type = new_biome_type;
@@ -160,9 +163,9 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the spawn position X, Y, and Z
-	 * @param {Number} x - The spawn X
-	 * @param {Number} y - The spawn Y
-	 * @param {Number} z - The spawn Z
+	 * @param {number} x - The spawn X
+	 * @param {number} y - The spawn Y
+	 * @param {number} z - The spawn Z
 	 */
 	setSpawnPosition(x, y, z) {
 		spawn.x = x;
@@ -172,7 +175,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the spawn position
-	 * @param {Number} new_permission_level - The permission level
+	 * @param {number} new_permission_level - The permission level
 	 */
 	setPlayerPermissionLevel(new_permission_level) {
 		permission_level = new_permission_level;
@@ -180,7 +183,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sets the world name
-	 * @param {String} worldname
+	 * @param {string} worldname
 	 */
 	setWorldName(new_worldname) {
 		world = new_worldname;
@@ -188,7 +191,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the spawn position
-	 * @returns {Number} - The permission level
+	 * @returns {number} - The permission level
 	 */
 	getPlayerPermissionLevel() {
 		return permission_level;
@@ -196,7 +199,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the entity id
-	 * @returns {Number} - The entity id
+	 * @returns {number} - The entity id
 	 */
 	getEntityId() {
 		return entity_id;
@@ -204,7 +207,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the runtime entity id
-	 * @returns {Number} - The runtime entity id
+	 * @returns {number} - The runtime entity id
 	 */
 	getRunTimeEntityId() {
 		return runtimeentity_id;
@@ -220,27 +223,27 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the player spawn position X, Y, and Z
-	 * @returns {Number} - The player X
-	 * @returns {Number} - The player Y
-	 * @returns {Number} - The player Z
+	 * @returns {number} - The player X
+	 * @returns {number} - The player Y
+	 * @returns {number} - The player Z
 	 */
 	getPlayerPosition() {
 		return {
-			x: playerx,
-			y: playery,
-			z: playerz,
+			x: playerX,
+			y: playerY,
+			z: playerZ,
 		};
 	}
 
 	/**
 	 * Returns the player rotation X and Z
-	 * @returns {Number} - The player rotation X
-	 * @returns {Number} - The player rotation Z
+	 * @returns {number} - The player rotation X
+	 * @returns {number} - The player rotation Z
 	 */
 	getPlayerRotation() {
 		return {
-			x: rotationx,
-			z: rotationz,
+			x: rotationX,
+			z: rotationZ,
 		};
 	}
 
@@ -262,7 +265,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Returns the biome name
-	 * @returns {String} - The biome name
+	 * @returns {string} - The biome name
 	 */
 	getBiomeName() {
 		return biome_name;
@@ -318,7 +321,7 @@ class ServerStartGamePacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
@@ -337,7 +340,7 @@ class ServerStartGamePacket extends PacketConstructor {
 			spawn_position: this.getSpawnPosition(),
 			achievements_disabled: true,
 			editor_world: false,
-			day_cycle_stop_time: 0,
+			day_cycle_stop_time: 1,
 			edu_offer: 0,
 			edu_features_enabled: false,
 			edu_product_uuid: "",
@@ -382,7 +385,7 @@ class ServerStartGamePacket extends PacketConstructor {
 			world_name: this.getWorldName(),
 			premium_world_template_id: "00000000-0000-0000-0000-000000000000",
 			is_trial: false,
-			movement_authority: "client",
+			movement_authority: "server",
 			rewind_history_size: 0,
 			server_authoritative_block_breaking: false,
 			current_tick: [-1, -1],

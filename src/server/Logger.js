@@ -10,54 +10,103 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const { lang, config } = require("../api/ServerInfo");
+
+const { convertConsoleColor } = require("../utils/ConsoleColorConvertor");
+const { getKey } = require("../utils/Language");
+
+/* const Frog = require("../Frog") <--- This code does not work
+It throws:
+(node:13208) Warning: Accessing non-existent property 'serverConfigurationFiles' of module exports inside circular dependency  */
+
+const LoggingException = require("../utils/exceptions/LoggingException");
+
+function fireEvent(langString, color, message, consoleType) {
+	require("../Frog").eventEmitter.emit('serverLogMessage', {
+		type: langString,
+		message,
+		server: require("../Frog"),
+		legacy: {
+			color,
+			consoleType,
+		}
+	})
+}
 
 module.exports = {
 	/**
+	 * Returns if debug is enabled or not
+	 * 
+	 * @returns {boolean}
+	 */
+	isDebugEnabled() { require("../Frog").isDebug },
+
+	/**
+	 * Logs a message
+	 * 
+	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
+	 * @throws {LoggingException} - If the log type is 'warning' (common Node.JS mistake) (must be 'warn')
+	 * 
+	 * @param {string} langString 
+	 * @param {number} color 
+	 * @param {string} message 
+	 * @param {string} consoleType
+	 * 
+	 * 
+	 */
+	log(langString, color, message, consoleType) {
+		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
+
+		if (consoleType === "warning") {
+			throw new LoggingException(getKey("exceptions.logger.invalidWarning"))
+		}
+
+		if (!console[consoleType]) {
+			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s%", consoleType))
+		}
+
+		fireEvent(langString, color, message, consoleType)
+		console[consoleType](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`))
+	},
+
+	/**
 	 * Logs a message to the console as info
-	 * @param {String} message - The message to log
+	 * 
+	 * @param {string} message
 	 */
 	info(message) {
-		const d = new Date();
-		const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
-
-		console.log(`${dStr} \x1b[32m${lang.logger.info}\x1b[0m | ${message}`);
+		this.log(getKey('logger.info'), '32', message, 'info');
 	},
 
 	/**
 	 * Logs a message to the console as warning
-	 * @param {String} message - The message to log
+	 * 
+	 * @param {string} message
+	 * 
 	 */
 	warning(message) {
-		const d = new Date();
-		const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
-
-		console.log(`${dStr} \x1b[33m${lang.logger.warning}\x1b[0m | ${message}`);
+		this.log(getKey('logger.warn'), '33', message, 'warn')
 	},
 
 	/**
 	 * Logs a message to the console as error
-	 * @param {String} message - The message to log
+	 * 
+	 * @param {string} message
+	 * 
 	 */
 	error(message) {
-		const d = new Date();
-		const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
-
-		console.log(`${dStr} \x1b[31m${lang.logger.error}\x1b[0m | ${message}`);
+		this.log(getKey('logger.error'), '31', message, 'error')
 	},
 
 	/**
-	 * Logs a message to the console as error
-	 * Requires for debug to be enabled in config
+	 * Logs a message to the console as debug
+	 * Requires for debug to be enabled in the server settings
 	 *
-	 * @param {String} message - The message to log
+	 * @param {string} message
+	 * 
 	 */
 	debug(message) {
-		const d = new Date();
-		const dStr = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
+		if (!(process.env.DEBUG === "minecraft-protocol" || this.isDebugEnabled())) return;
 
-		if (!(process.env.DEBUG === "minecraft-protocol" || config.debug)) return;
-
-		console.log(`${dStr} \x1b[35m${lang.logger.debug}\x1b[0m | ${message}`);
+		this.log(getKey('logger.debug'), '35', message, 'info')
 	},
 };

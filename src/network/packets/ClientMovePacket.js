@@ -1,61 +1,58 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
+const Frog = require("../../Frog");
+
+const Falldamage = require("../../world/Falldamage");
+
 const PacketConstructor = require("./PacketConstructor");
 
-const PlayerMoveEvent = require("../../events/PlayerMoveEvent");
-
 class ClientMovePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {String} The name of the packet
-	 */
-	getPacketName() {
-		return "move_player";
-	}
+    /**
+     * Returns the packet name
+     * @returns {string}
+     */
+    getPacketName() {
+        return "move_player";
+    }
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
-	isCriticalPacket() {
-		return false;
-	}
+    isCriticalPacket() {
+        return false;
+    }
 
-	/**
-	 * Reads the packet from player
-	 * @param {any} player
-	 * @param {JSON} packet
-	 * @param {any} server
-	 */
-	async readPacket(player, packet, server) {
-		await this.validatePacket(player);
+    /**
+     * Reads the packet from player
+     * @param {Client} player
+     * @param {JSON} packet
+     * @param {Server} server
+     */
+    async readPacket(player, packet, server) {
+        const { x, y, z } = packet.data.params.position
+        const { pitch, yaw, on_ground } = packet.data.params
 
-		let position = packet.data.params.position;
+        player.on_ground = on_ground
 
-		if (player.x == position.x && player.y == position.y && player.z == position.z) {
-			// This code prevents a few crashers, that spam PlayerMove packet to overload the server
-			return;
-		}
+        Falldamage.calculateFalldamage(player, { x, y, z })
+        Falldamage.calculateHungerloss(player)
 
-		const playerMoveEvent = new PlayerMoveEvent();
-		playerMoveEvent.player = player;
-		playerMoveEvent.server = server;
-		playerMoveEvent.position = position;
-		playerMoveEvent.location = position;
-		playerMoveEvent.onGround = packet.data.params.on_ground;
-		playerMoveEvent.mode = packet.data.params.mode;
-		playerMoveEvent.execute();
-	}
+        Frog.eventEmitter.emit('playerMove', {
+            player,
+            server,
+            x,
+            y,
+            z,
+            pitch,
+            yaw,
+            legacyPacket: false,
+            onGround: player.onGround,
+            cancel: () => {
+                if (player.x === 0 && player.y === 0 && player.z === 0) return
+
+                player.teleport(player.x, player.y, player.z)
+            }
+        })
+    }
 }
 
-module.exports = ClientMovePacket;
+module.exports = ClientMovePacket

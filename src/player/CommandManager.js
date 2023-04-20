@@ -1,24 +1,27 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
 const AvailableCommands = require("../network/packets/ServerAvailableCommandsPacket");
 
+const { getKey } = require("../utils/Language");
+
+/**
+ * @typedef {object} CommandsPacket - The commands packet.
+ * @property {number} values_len - The length of the values.
+ * @property {string} _enum_type - The type of the enum.
+ * @property {Array} enum_values - The enum values.
+ * @property {Array} suffixes - The suffixes.
+ * @property {Array} enums - The enums.
+ * @property {Array<CommandData>} command_data - The command data.
+ * @property {Array} dynamic_enums - The dynamic enums.
+ * @property {Array} enum_constraints - The enum constraints.
+ */
 let commands = [];
 
+/** Manages commands */
 class CommandManager {
 	/**
 	 * Retrieves the commands packet of a client.
-	 * @param {Object} client - The client object.
-	 * @returns {Object} The client's commands packet.
+	 * 
+	 * @param {Client} client - The client object.
+	 * @returns {CommandsPacket} The client's commands packet.
 	 */
 	getPacket(client) {
 		return client.commands;
@@ -26,7 +29,8 @@ class CommandManager {
 
 	/**
 	 * Initializes the commands.
-	 * @param {Object} client - The client.
+	 * 
+	 * @param {Client} client - The client.
 	 */
 	init(client) {
 		client.commands = {
@@ -43,6 +47,7 @@ class CommandManager {
 
 	/**
 	 * Retrieves the commands array.
+	 * 
 	 * @returns {Array} The commands array.
 	 */
 	getCommands() {
@@ -51,11 +56,14 @@ class CommandManager {
 
 	/**
 	 * Adds a new command to the client's commands packet and updates the commands array.
-	 * @param {Object} client - The client.
-	 * @param {String} name - The name of the new command.
-	 * @param {String} description - The description of the command.
+	 *
+	 * @param {Client} client - The client.
+	 * @param {string} name - The name of the new command.
+	 * @param {string} description - The description of the command.
 	 */
 	addCommand(client, name, description) {
+		if (name === getKey("commands.help.name") || name === "?") return
+
 		client.commands.command_data.push({
 			name: name,
 			description: description,
@@ -80,13 +88,15 @@ class CommandManager {
 				],
 			],
 		});
+
 		commands.push({
 			name,
 			description,
 		});
-		const availablecommands = new AvailableCommands();
-		availablecommands.setData(client.commands);
-		availablecommands.writePacket(client);
+
+		const availableCommandsPacket = new AvailableCommands();
+		availableCommandsPacket.setData(client.commands);
+		availableCommandsPacket.writePacket(client);
 	}
 }
 

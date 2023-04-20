@@ -10,12 +10,13 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const bedrock = require("frog-protocol");
+const protocol = require("frog-protocol");
 
 module.exports = {
 	async test() {
-		console.log("[sendmessage bot] joining...");
-		let bot = bedrock.createClient({
+		console.info("[sendmessage bot] joining...");
+
+		const bot = protocol.createClient({
 			host: "127.0.0.1",
 			port: 19132,
 			username: "sendmessagebot",
@@ -23,7 +24,7 @@ module.exports = {
 			version: "1.19.70",
 		});
 
-		console.log("[sendmessage bot] joined");
+		console.info("[sendmessage bot] joined");
 		bot.on("spawn", () => {
 			bot.queue("text", {
 				type: "chat",

@@ -17,15 +17,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerClientCacheStatusPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
-	name() {
+	getPacketName() {
 		return "client_cache_status";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -33,7 +33,7 @@ class ServerClientCacheStatusPacket extends PacketConstructor {
 
 	/**
 	 * Sets if the caching is enabled?
-	 * @param {Boolean} new_enabled - Caching enabled?
+	 * @param {boolean} new_enabled - Caching enabled?
 	 */
 	setEnabled(new_enabled) {
 		enabled = new_enabled;
@@ -41,7 +41,7 @@ class ServerClientCacheStatusPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the caching is enabled
-	 * @returns {Boolean} If the caching is enabled.
+	 * @returns {boolean} If the caching is enabled.
 	 */
 	getEnabled() {
 		return enabled;
@@ -49,7 +49,7 @@ class ServerClientCacheStatusPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

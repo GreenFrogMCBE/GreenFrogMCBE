@@ -13,7 +13,7 @@
 let must_accept = false;
 let behavior_packs = [];
 let resource_packs = [];
-let game_version = "";
+let game_version;
 let experiments = [];
 let experiments_previously_used = false;
 
@@ -22,15 +22,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerResourcePackStackPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "resource_pack_stack";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return true;
@@ -38,7 +38,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Sets if the client must accept the packet
-	 * @param {Boolean} new_must_accept
+	 * @param {boolean} new_must_accept
 	 */
 	setMustAccept(new_must_accept) {
 		must_accept = new_must_accept;
@@ -62,7 +62,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Sets the game version
-	 * @param {String} new_game_version - The game version
+	 * @param {string} new_game_version - The game version
 	 */
 	setGameVersion(new_game_version) {
 		game_version = new_game_version;
@@ -78,7 +78,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Sets the if the experiments were previously used
-	 * @param {Boolean} new_experiments_previously_used
+	 * @param {boolean} new_experiments_previously_used
 	 */
 	setExperimentsPreviouslyUsed(new_experiments_previously_used) {
 		experiments_previously_used = new_experiments_previously_used;
@@ -86,7 +86,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Returns the if the client must accept the packet
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getMustAccept() {
 		return must_accept;
@@ -110,7 +110,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Returns the game version that the resource pack was made for
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getGameVersion() {
 		return game_version;
@@ -126,7 +126,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the experiments were previously used
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getExperimentsPreviouslyUsed() {
 		return experiments_previously_used;
@@ -134,7 +134,7 @@ class ServerResourcePackStackPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

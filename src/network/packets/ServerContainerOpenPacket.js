@@ -11,12 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 let window_id = 0;
-let cords = {
-	x: 0,
-	y: 0,
-	z: 0,
-};
-let window_type = "";
+let coordinates = {};
+let window_type;
 let runtime_entity_id = 0;
 
 const PacketConstructor = require("./PacketConstructor");
@@ -24,15 +20,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerContainerOpenPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "container_open";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -40,14 +36,14 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * Sets the coordinates of the container
-	 * If the container is creative menu then the cords are xyz: 0, 0, 0
+	 * If the container is creative menu then the coordinates are xyz: 0, 0, 0
 	 *
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Number} z
+	 * @param {number} x
+	 * @param {number} y
+	 * @param {number} z
 	 */
 	setCoordinates(x, y, z) {
-		cords = {
+		coordinates = {
 			x: x,
 			y: y,
 			z: z,
@@ -72,7 +68,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * It sets the runtime entity id
-	 * @param {String} new_runtime_entity_id
+	 * @param {string} new_runtime_entity_id
 	 */
 	setRuntimeEntityId(new_runtime_entity_id) {
 		runtime_entity_id = new_runtime_entity_id;
@@ -80,7 +76,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * It returns the window ID
-	 * @returns {Number} The window ID
+	 * @returns {number} The window ID
 	 */
 	getWindowID() {
 		return window_id;
@@ -88,10 +84,10 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * It returns the runtime entity ID
-	 * @returns {String} The runtime entity ID
+	 * @returns {string} The runtime entity ID
 	 */
 	getCoordinates() {
-		return cords;
+		return coordinates;
 	}
 
 	/**
@@ -104,7 +100,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * Returns the runtime entity id
-	 * @returns {String} The runtime entity id
+	 * @returns {string} The runtime entity id
 	 */
 	getRuntimeEntityId() {
 		return runtime_entity_id;
@@ -112,7 +108,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

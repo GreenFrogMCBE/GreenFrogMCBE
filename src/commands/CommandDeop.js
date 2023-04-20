@@ -1,93 +1,33 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
 const fs = require("fs").promises;
-const Logger = require("../server/Logger");
-const { lang, config } = require("../api/ServerInfo");
 
-class CommandDeop extends require("./Command") {
-	name() {
-		return lang.commands.deop;
-	}
+const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
-	aliases() {
-		return null;
-	}
+const { getKey } = require("../utils/Language");
 
-	async execute(args) {
-		if (!args) {
-			Logger.info(lang.commands.usageDeop);
-			return;
-		}
+module.exports = {
+    data: {
+        name: getKey("commands.deop.name"),
+        description: getKey("commands.deop.description"),
+        minArgs: 1,
+        requiresOp: true
+    },
 
-		try {
-			const data = await fs.readFile("ops.yml", "utf-8");
-			const players = data.trim().split("\n");
-			const index = players.indexOf(args);
+    async execute(_server, player, args) {
+        const playerName = args[0];
 
-			if (index === -1) {
-				Logger.info(lang.commands.notOp.replace("%player%", args));
-				return;
-			}
+        try {
+            const ops = await fs.readFile("ops.yml", "utf-8");
+            const updatedOps = ops.split("\n").filter(op => op !== playerName).join("\n");
 
-			players.splice(index, 1);
-			const updatedPlayers = players.join("\n") + "\n";
+            await fs.writeFile("ops.yml", updatedOps);
 
-			await fs.writeFile("ops.yml", updatedPlayers);
-			Logger.info(lang.commands.deOpped.replace("%player%", args));
-		} catch (err) {
-			Logger.info(lang.commands.deopFail);
-		}
-	}
+            try {
+                getPlayerInfo(playerName).op = false;
+            } catch { /** player is offline */ }
 
-	getPlayerDescription() {
-		return lang.commands.ingameDeopDescription;
-	}
-
-	async executePlayer(client, args) {
-		if (!config.playerCommandDeop) {
-			client.sendMessage("§c" + lang.errors.playerUnknownCommand);
-			return;
-		}
-
-		if (!client.op) {
-			client.sendMessage(lang.errors.noPermission);
-			return;
-		}
-
-		if (!args.split(" ")[1]) {
-			client.sendMessage("§c" + lang.commands.usageDeop);
-			return;
-		}
-
-		try {
-			const data = await fs.readFile("ops.yml", "utf-8");
-			const players = data.trim().split("\n");
-			const index = players.indexOf(args.split(" ")[1]);
-
-			if (index === -1) {
-				client.sendMessage("§c" + lang.commands.notOp.replace("%player%", args.split(" ")[1]));
-				return;
-			}
-
-			players.splice(index, 1);
-			const updatedPlayers = players.join("\n") + "\n";
-
-			await fs.writeFile("ops.yml", updatedPlayers);
-			client.sendMessage(lang.commands.deOpped.replace("%player%", args.split(" ")[1]));
-		} catch (err) {
-			client.sendMessage("§c" + lang.commands.deopFail);
-		}
-	}
-}
-
-module.exports = CommandDeop;
+            player.sendMessage(getKey("commands.deop.execution.success").replace("%s%", playerName));
+        } catch {
+            player.sendMessage(getKey("commands.deop.execution.fail").replace("%s%", player));
+        }
+    }
+};

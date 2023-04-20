@@ -12,26 +12,26 @@
  */
 const PlayerListTypes = require("./types/PlayerList");
 
-let username = "unknown";
-let uuid = "";
+let username;
+let uuid;
 let id = 0;
 let type = PlayerListTypes.ADD;
-let xboxid = "0";
+let xboxid;
 
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerPlayerListPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "player_list";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -39,7 +39,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Returns the player username
-	 * @returns {String} The player username
+	 * @returns {string} The player username
 	 */
 	getUsername() {
 		return username;
@@ -47,7 +47,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Sets the player username
-	 * @param {String} new_username The player username
+	 * @param {string} new_username The player username
 	 */
 	setUsername(new_username) {
 		username = new_username;
@@ -55,7 +55,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Returns the ID of the player
-	 * @returns {Number} The ID of the player
+	 * @returns {number} The ID of the player
 	 */
 	getId() {
 		return id;
@@ -65,7 +65,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Sets the ID of the player
 	 * @param new_id
 	 */
-	setId(new_id) {
+	setID(new_id) {
 		id = new_id;
 	}
 
@@ -89,7 +89,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Sets the UUID of the player
 	 * @param {UUID} new_uuid The UUID to set for the player
 	 */
-	setUuid(new_uuid) {
+	setUUID(new_uuid) {
 		uuid = new_uuid;
 	}
 
@@ -103,7 +103,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Sets the xbox id of user
-	 * @param {String} id
+	 * @param {string} id
 	 */
 	setXboxID(new_id) {
 		xboxid = new_id;
@@ -111,7 +111,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Returns the xbox id of user
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getXboxID() {
 		return xboxid;
@@ -119,17 +119,17 @@ class ServerPlayerListPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		let data = null;
 
 		if (this.getType() === PlayerListTypes.REMOVE) {
 			data = {
-				records: {
+				recoordinates: {
 					type: PlayerListTypes.REMOVE,
-					records_count: 1,
-					records: [
+					recoordinates_count: 1,
+					recoordinates: [
 						{
 							uuid: this.getUuid(),
 						},
@@ -138,10 +138,10 @@ class ServerPlayerListPacket extends PacketConstructor {
 			};
 		} else {
 			data = {
-				records: {
+				recoordinates: {
 					type: PlayerListTypes.ADD,
-					records_count: 1,
-					records: [
+					recoordinates_count: 1,
+					recoordinates: [
 						{
 							uuid: this.getUuid(),
 							entity_unique_id: "-" + this.getId(),

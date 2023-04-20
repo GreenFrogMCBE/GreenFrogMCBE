@@ -13,22 +13,32 @@
 const fs = require("fs");
 const path = require("path");
 
-const rootDir = __dirname + "/../";
+if (process.argv.length < 4) {
+	console.error('Usage: node refactor.js [what to refactor] [new name for stuff that gets refactored]')
+
+	process.exit(-1)
+}
+
+const rootDir = path.join(__dirname, "..");
 
 console.info("Started refactoring");
 console.time("Finished refactoring in");
 
-function replaceInFile(filePath, replacements) {
+async function replaceInFile(filePath, replacements) {
+	if (filePath.includes('node_modules')) {
+		return;
+	}
+
 	let fileContent = fs.readFileSync(filePath, "utf8");
 
 	for (const [searchValue, replaceValue] of replacements) {
 		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
 	}
 
-	fs.writeFileSync(filePath, fileContent);
+	fs.writeFile(filePath, fileContent, {}, () => { });
 }
 
-function traverseDirectory(dirPath, replacements) {
+async function traverseDirectory(dirPath, replacements) {
 	const entries = fs.readdirSync(dirPath, { withFileTypes: true });
 
 	for (const entry of entries) {
@@ -43,10 +53,7 @@ function traverseDirectory(dirPath, replacements) {
 }
 
 const replacements = [
-	// Put your replacements here
-	// example:
-	["{Number}", "{Number}"],
-	["{String}", "{String}"],
+	[process.argv[2], process.argv[3]]
 ];
 
 traverseDirectory(rootDir, replacements);

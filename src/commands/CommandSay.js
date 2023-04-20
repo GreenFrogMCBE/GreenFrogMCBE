@@ -1,72 +1,32 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
-const { lang, config } = require("../api/ServerInfo");
-const PlayerInfo = require("../api/PlayerInfo");
 const Logger = require("../server/Logger");
 
-class CommandSay extends require("./Command") {
-	name() {
-		return lang.commands.say;
-	}
+const PlayerInfo = require("../api/player/PlayerInfo");
 
-	aliases() {
-		return null;
-	}
+const { getKey } = require("../utils/Language");
 
-	execute(args) {
-		if (!args) {
-			Logger.info(lang.commands.usageSay);
-			return;
+/**
+ * Command to send a message in the chat to other players.
+ *
+ * @type {import('../type/Command').Command}
+ */
+module.exports = {
+	data: {
+		name: getKey("commands.say.name"),
+		description: getKey("commands.say.description"),
+		minArgs: 0,
+        requiresOp: true
+	},
+
+	execute(_server, player, args) {
+		const message = args.join(" ");		
+		const msg = getKey("chat.format.say")
+			.replace(`%s%`, player.username)
+			.replace(`%d%`, message)
+
+		for (const p of PlayerInfo.players) {
+			p.sendMessage(msg);
 		}
-
-		const msg = lang.commands.sayCommandFormat.replace(`%message%`, args).replace(`%sender%`, "Server");
-
-		PlayerInfo.players.forEach((client) => {
-			client.sendMessage(msg);
-		});
 
 		Logger.info(msg);
-	}
-
-	getPlayerDescription() {
-		return lang.commands.ingameSayDescription;
-	}
-
-	executePlayer(client, args) {
-		if (!config.playerCommandSay) {
-			client.sendMessage(lang.errors.playerUnknownCommand);
-			return;
-		}
-
-		if (!client.op) {
-			client.sendMessage(lang.errors.noPermission);
-			return;
-		}
-
-		const message = args.split(" ")[1];
-		if (!message) {
-			client.sendMessage(`§c${lang.commands.usageSay}`);
-			return;
-		}
-
-		const msg = lang.commands.sayCommandFormat.replace(`%message%`, message).replace(`%sender%`, client.username);
-
-		PlayerInfo.players.forEach((client) => {
-			client.sendMessage(msg);
-		});
-
-		Logger.info(msg);
-	}
-}
-
-module.exports = CommandSay;
+	},
+};

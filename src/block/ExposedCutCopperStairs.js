@@ -12,6 +12,9 @@
  */
 const Block = require("./Block");
 
+/**
+ * @type {import('../type/Block')}
+ */
 class ExposedCutCopperStairs extends Block {
 	getRuntimeId() {
 		return 5751;

@@ -11,119 +11,102 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-case-declarations */
-const PlayerInfo = require("../../api/PlayerInfo");
-const StartGame = require("./ServerStartGamePacket");
+const fs = require("fs");
+
+const Frog = require("../../Frog");
+
+const Biome = require("../../world/types/Biome");
+const PlayStatusType = require("./types/PlayStatus");
+const PlayerListTypes = require("./types/PlayerList");
+const Dimension = require("../../world/types/Dimension");
+const Difficulty = require("../../api/types/Difficulty");
+const Generator = require("../../world/types/Generator");
+const ResourcePackStatus = require("./types/ResourcePackStatus");
+const WorldGenerators = require("../../world/types/WorldGenerators");
+
+const PlayerInfo = require("../../api/player/PlayerInfo");
+
+const ChunkLoadException = require("../../utils/exceptions/ChunkLoadException");
+
+const PacketConstructor = require("./PacketConstructor");
+
+const NetworkChunkPublisherUpdate = require("./ServerNetworkChunkPublisherUpdatePacket");
+const AvailableEntityIdentifiers = require("./ServerAvailableEntityIdentifiersPacket")
+const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket");
+const SetCommandsEnabled = require("./ServerSetCommandsEnabledPacket");
+const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
+const ResourcePackStack = require("./ServerResourcePackStackPacket");
+const CreativeContent = require("./ServerCreativeContentPacket");
+const ItemComponent = require("./ServerItemComponentPacket");
+const LevelChunk = require("./ServerLevelChunkPacket");
 const PlayStatus = require("./ServerPlayStatusPacket");
 const PlayerList = require("./ServerPlayerListPacket");
-const PacketConstructor = require("./PacketConstructor");
-const CreativeContent = require("./ServerCreativeContentPacket");
-const PlayerSpawnEvent = require("../../events/PlayerSpawnEvent");
-const ResourcePackStack = require("./ServerResourcePackStackPacket");
-const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
-const SetCommandsEnabled = require("./ServerSetCommandsEnabledPacket");
-const PacketHandlingError = require("./exceptions/PacketHandlingError");
-const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket");
-const AvailableEntityIdentifiers = require("./ServerAvailableEntityIdentifiersPacket");
-const NetworkChunkPublisherUpdate = require("./ServerNetworkChunkPublisherUpdatePacket");
-const PlayerHasAllResourcePacksEvent = require("../../events/PlayerHasAllResourcePacksEvent");
-const PlayerResourcePacksRefusedEvent = require("../../events/PlayerResourcePacksRefusedEvent");
-const PlayerResourcePacksCompletedEvent = require("../../events/PlayerResourcePacksCompletedEvent");
-const PlayerHasNoResourcePacksInstalledEvent = require("../../events/PlayerHasNoResourcePacksInstalledEvent");
-const ChunkRadiusUpdate = require("./ServerChunkRadiusUpdatePacket");
-const CommandGamemode = require("../../commands/CommandGamemode");
-const ResourcePackStatus = require("./types/ResourcePackStatus");
-const CommandVersion = require("../../commands/CommandVersion");
+const StartGame = require("./ServerStartGamePacket");
+
 const CommandManager = require("../../player/CommandManager");
-const ItemComponent = require("./ServerItemComponentPacket");
-const CommandStop = require("../../commands/CommandStop");
-const CommandKick = require("../../commands/CommandKick");
-const CommandList = require("../../commands/CommandList");
-const CommandDeop = require("../../commands/CommandDeop");
-const CommandTime = require("../../commands/CommandTime");
-const WorldGenerator = require("./types/WorldGenerator");
-const { config, lang } = require("../../api/ServerInfo");
-const DefaultWorld = require("../../world/DefaultWorld");
-const CommandSay = require("../../commands/CommandSay");
-const LevelChunk = require("./ServerLevelChunkPacket");
-const CommandMe = require("../../commands/CommandMe");
-const CommandPl = require("../../commands/CommandPl");
-const CommandOp = require("../../commands/CommandOp");
-const PlayerListTypes = require("./types/PlayerList");
-const ChunkError = require("./exceptions/ChunkError");
-const PlayStatusType = require("./types/PlayStatus");
-const ServerInfo = require("../../api/ServerInfo");
-const Difficulty = require("./types/Difficulty");
-const Generator = require("./types/Generator");
-const Dimension = require("./types/Dimension");
+
+const World = require("../../world/World");
+
 const Logger = require("../../server/Logger");
-const Biome = require("./types/Biome");
-const fs = require("fs");
+
+const Commands = require("../../server/Commands");
+
+const { getKey } = require("../../utils/Language");
+
+const { serverConfigurationFiles } = require("../../Frog");
+const { config } = serverConfigurationFiles
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "resource_pack_client_response";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return true;
 	}
 
 	/**
-	 * Validates the packet
-	 * @param {ResourcePackStatus} response_status
-	 */
-	async validatePacket(response_status) {
-		const valid = [ResourcePackStatus.NONE, ResourcePackStatus.REFUSED, ResourcePackStatus.HAVEALLPACKS, ResourcePackStatus.COMPLETED];
-
-		if (!valid.includes(response_status)) {
-			throw new PacketHandlingError("Invalid resource pack status! " + response_status);
-		}
-	}
-
-	/**
-	 * Reads the packet from player
-	 * @param {any} player
+	 * Reads the packet from the player
+	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		const responseStatus = packet.data.params.response_status;
-		await this.validatePacket(responseStatus);
 
 		switch (responseStatus) {
 			case ResourcePackStatus.NONE:
-				const noRpsInstalledEvent = new PlayerHasNoResourcePacksInstalledEvent();
-				noRpsInstalledEvent.resourcePacksIds = [];
-				noRpsInstalledEvent.resourcePacksRequired = true;
-				noRpsInstalledEvent.server = server;
-				noRpsInstalledEvent.player = player;
-
-				Logger.info(lang.playerstatuses.noRpsInstalled.replace("%player%", player.username));
+				Frog.eventEmitter.emit('playerHasNoResourcePacksInstalled', {
+					resourcePacksIds: [],
+					resourcePacksRequired: true,
+					server,
+					player,
+					cancel: () => player.kick(getKey("kickMessages.serverDisconnect"))
+				});
+				Logger.info(getKey("status.resourcePacks.none").replace("%s%", player.username));
 				break;
 			case ResourcePackStatus.REFUSED:
-				const refusedInstalled = new PlayerResourcePacksRefusedEvent();
-				refusedInstalled.execute(server, player);
-
-				Logger.info(lang.playerstatuses.rpsrefused.replace("%player%", player.username));
-				player.kick(lang.kickmessages.resourcePacksRefused);
+				Frog.eventEmitter.emit('playerResourcePacksRefused', { server, player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
+				Logger.info(getKey("status.resourcePacks.refused").replace("%s%", player.username));
+				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
-			case ResourcePackStatus.HAVEALLPACKS: {
-				const hasAllPacksEvent = new PlayerHasAllResourcePacksEvent();
-				hasAllPacksEvent.resourcePacksIds = [];
-				hasAllPacksEvent.resourcePacksRequired = true;
-				hasAllPacksEvent.server = server;
-				hasAllPacksEvent.player = player;
-				hasAllPacksEvent.execute();
+			case ResourcePackStatus.HAVEALLPACKS:
+				Frog.eventEmitter.emit('playerHasAllResourcePacks', {
+					resourcePacksIds: [],
+					resourcePacksRequired: true,
+					server: server,
+					player: player
+				});
 
-				Logger.info(lang.playerstatuses.rpsInstalled.replace("%player%", player.username));
+				Logger.info(getKey("status.resourcePacks.installed").replace("%s%", player.username));
 
 				const resourcePackStack = new ResourcePackStack();
 				resourcePackStack.setMustAccept(false);
@@ -134,19 +117,19 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				resourcePackStack.setExperimentsPreviouslyUsed(false);
 				resourcePackStack.writePacket(player);
 				break;
-			}
 			case ResourcePackStatus.COMPLETED:
-				const completeEvent = new PlayerResourcePacksCompletedEvent();
-				completeEvent.server = server;
-				completeEvent.player = player;
-				completeEvent.execute();
+				Frog.eventEmitter.emit('playerResourcePacksCompleted', {
+					server: server,
+					player: player
+				});
 
-				player.world = new DefaultWorld();
-				player.world.setChunkRadius(require("../../../world/world_settings").chunkLoadRadius);
+				player.world = new World();
+				player.world.setChunkRadius(require("../../../world/world_settings.json").chunkLoadRadius);
 				player.world.setName(require("../../../world/world_settings.json").worldName);
-				if (config.generator === WorldGenerator.DEFAULT) {
-					player.world.setSpawnCoordinates(1070, 139, -914);
-				} else if (config.generator === WorldGenerator.VOID) {
+
+				if (config.world.generator === WorldGenerators.DEFAULT) {
+					player.world.setSpawnCoordinates(1070, 87, -914);
+				} else if (config.world.generator === WorldGenerators.VOID) {
 					player.world.setSpawnCoordinates(0, 100, 0);
 				} else {
 					player.world.setSpawnCoordinates(0, -58, 0);
@@ -154,112 +137,101 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
 
-				for (const op of ops) {
-					if (op.replace(/\r/g, "") === player.username) {
-						player.op = true;
-						player.permlevel = 4;
-						break;
+				if (ops.includes(player.username)) {
+					player.op = true;
+					player.permissionLevel = 4;
+				} else {
+					player.op = false
+				}
+
+
+				if (!player.op) player.permissionLevel = config.dev.defaultPermissionLevel;
+
+				Logger.info(getKey("status.resourcePacks.joined").replace("%s%", player.username));
+
+				const startGame = new StartGame();
+				startGame.setEntityId(0);
+				startGame.setRunTimeEntityId(0);
+				startGame.setGamemode(config.world.gamemode);
+				startGame.setPlayerPosition(player.world.getSpawnCoordinates().x, player.world.getSpawnCoordinates().y, player.world.getSpawnCoordinates().z);
+				startGame.setPlayerRotation(0, 0);
+				startGame.setSeed(-1);
+				startGame.setBiomeType(0);
+				startGame.setBiomeName(Biome.PLAINS);
+				startGame.setDimension(Dimension.OVERWORLD);
+				startGame.setGenerator(Generator.FLAT);
+				startGame.setWorldGamemode(config.world.worldGamemode);
+				startGame.setDifficulty(Difficulty.NORMAL);
+				startGame.setSpawnPosition(0, 0, 0);
+				startGame.setPlayerPermissionLevel(player.permissionLevel);
+				startGame.setWorldName(player.world.getName());
+				startGame.writePacket(player);
+
+				const biomeDefinitionList = new BiomeDefinitionList();
+				biomeDefinitionList.setValue(require("../../internalResources/biomes.json"));
+				biomeDefinitionList.writePacket(player);
+
+				const availableEntityIDs = new AvailableEntityIdentifiers();
+				availableEntityIDs.setValue(require("../../internalResources/entities.json"));
+				availableEntityIDs.writePacket(player);
+
+				const creativeContent = new CreativeContent();
+				creativeContent.setItems(require("../../internalResources/creativeContent.json").items);
+				creativeContent.writePacket(player);
+
+				const commandsEnabled = new SetCommandsEnabled();
+				commandsEnabled.setEnabled(true);
+				commandsEnabled.writePacket(player);
+
+				const clientCacheStatus = new ClientCacheStatus();
+				clientCacheStatus.setEnabled(true);
+				clientCacheStatus.writePacket(player);
+
+				const commandManager = new CommandManager();
+				commandManager.init(player);
+
+				for (const command of Commands.commandList) {
+					const requiresOp = command.data.requiresOp;
+					const name = command.data.name;
+					const description = command.data.description;
+					const aliases = command.data.aliases;
+
+					if (player.op) {
+						commandManager.addCommand(player, name, description);
+
+						if (aliases) {
+							for (const alias of aliases) {
+								commandManager.addCommand(player, alias, description);
+							}
+						}
+					} else {
+						if (!requiresOp) {
+							commandManager.addCommand(player, name, description);
+
+							if (aliases) {
+								for (const alias of aliases) {
+									commandManager.addCommand(player, alias, description);
+								}
+							}
+						}
 					}
 				}
 
-				if (!player.op) player.permlevel = config.defaultPermissionLevel;
-
-				Logger.info(lang.playerstatuses.joined.replace("%player%", player.username));
-
-				const startgame = new StartGame();
-				startgame.setEntityId(0);
-				startgame.setRunTimeEntityId(0);
-				startgame.setGamemode(config.gamemode);
-				startgame.setPlayerPosition(player.world.getSpawnCoordinates().x, player.world.getSpawnCoordinates().y, player.world.getSpawnCoordinates().z);
-				startgame.setPlayerRotation(1, 1);
-				startgame.setSeed(-1);
-				startgame.setBiomeType(0);
-				startgame.setBiomeName(Biome.PLAINS);
-				startgame.setDimension(Dimension.OVERWORLD);
-				startgame.setGenerator(Generator.FLAT);
-				startgame.setWorldGamemode(config.worldGamemode);
-				startgame.setDifficulty(Difficulty.NORMAL);
-				startgame.setSpawnPosition(0, 0, 0);
-				startgame.setPlayerPermissionLevel(player.permlevel);
-				startgame.setWorldName(player.world.getName());
-				startgame.writePacket(player);
-
-				const biomedeflist = new BiomeDefinitionList();
-				biomedeflist.setValue(require("./res/biomes.json"));
-				biomedeflist.writePacket(player);
-
-				const availableentityids = new AvailableEntityIdentifiers();
-				availableentityids.setValue(require("./res/entities.json"));
-				availableentityids.writePacket(player);
-
-				const creativecontent = new CreativeContent();
-				creativecontent.setItems(require("./res/creativeContent.json").items);
-				creativecontent.writePacket(player);
-
-				const commandsenabled = new SetCommandsEnabled();
-				commandsenabled.setEnabled(true);
-				commandsenabled.writePacket(player);
-
-				const clientcachestatus = new ClientCacheStatus();
-				clientcachestatus.setEnabled(true);
-				clientcachestatus.writePacket(player);
-
-				const commandmanager = new CommandManager();
-				commandmanager.init(player);
-				if (config.playerCommandVersion) {
-					commandmanager.addCommand(player, new CommandVersion().name().toLowerCase(), new CommandVersion().getPlayerDescription());
-					commandmanager.addCommand(player, new CommandVersion().aliases()[0].toLowerCase(), new CommandVersion().getPlayerDescription());
-				}
-				if (config.playerCommandPlugins) {
-					commandmanager.addCommand(player, new CommandPl().name().toLowerCase(), new CommandPl().getPlayerDescription());
-					commandmanager.addCommand(player, new CommandPl().aliases()[0].toLowerCase(), new CommandPl().getPlayerDescription());
-				}
-				if (config.playerCommandList) {
-					commandmanager.addCommand(player, new CommandList().name().toLowerCase(), new CommandList().getPlayerDescription());
-				}
-				if (config.playerCommandMe) {
-					commandmanager.addCommand(player, new CommandMe().name().toLowerCase(), new CommandMe().getPlayerDescription());
-				}
-				if (player.op) {
-					if (config.playerCommandStop) {
-						commandmanager.addCommand(player, new CommandStop().name().toLowerCase(), new CommandStop().getPlayerDescription());
-					}
-					if (config.playerCommandSay) {
-						commandmanager.addCommand(player, new CommandSay().name().toLowerCase(), new CommandSay().getPlayerDescription());
-					}
-					if (config.playerCommandOp) {
-						commandmanager.addCommand(player, new CommandOp().name().toLowerCase(), new CommandOp().getPlayerDescription());
-					}
-					if (config.playerCommandKick) {
-						commandmanager.addCommand(player, new CommandKick().name().toLowerCase(), new CommandKick().getPlayerDescription());
-					}
-					if (config.playerCommandTime) {
-						commandmanager.addCommand(player, new CommandTime().name().toLowerCase(), new CommandTime().getPlayerDescription());
-					}
-					if (config.playerCommandDeop) {
-						commandmanager.addCommand(player, new CommandDeop().name().toLowerCase(), new CommandDeop().getPlayerDescription());
-					}
-					if (config.playerCommandGamemode) {
-						commandmanager.addCommand(player, new CommandGamemode().name().toLowerCase(), new CommandGamemode().getPlayerDescription());
-					}
-				}
-
-				// This packet is used to set custom items
+				// This packet is used to create custom items
 				const itemcomponent = new ItemComponent();
 				try {
-					itemcomponent.setItems(require("../../../../world/custom_items.json").items);
-				} catch (e) {
+					itemcomponent.setItems(require("../../../world/custom_items.json").items);
+				} catch (error) {
+					Logger.warning(getKey("warning.customItems.loading.failed").replace("%s%", error.stack))
 					itemcomponent.setItems([]);
 				}
 				itemcomponent.writePacket(player);
 
 				if (player.chunksEnabled) {
-					const chunkradiusupdate = new ChunkRadiusUpdate();
-					chunkradiusupdate.setChunkRadius(player.world.getChunkRadius());
-					chunkradiusupdate.writePacket(player);
+					player.setChunkRadius(player.world.getChunkRadius())
 
-					const cords =
-						config.generator === WorldGenerator.DEFAULT
+					const coordinates =
+						config.world.generator === WorldGenerators.DEFAULT
 							? {
 								x: 1070,
 								y: 274,
@@ -271,32 +243,32 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 								z: 22,
 							};
 
-					const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-					networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
-					networkchunkpublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
-					networkchunkpublisher.setSavedChunks([]);
-					networkchunkpublisher.writePacket(player);
+					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
+					networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);
+					networkChunkPublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
+					networkChunkPublisher.setSavedChunks([]);
+					networkChunkPublisher.writePacket(player);
 
 					let chunks = null;
 
 					try {
-						chunks = require(`${__dirname}/../../../world/chunks${config.generator === WorldGenerator.DEFAULT ? "" : "_flat"}.json`);
-					} catch (e) {
-						throw new ChunkError(`${lang.errors.failedToLoadWorld} ${e}`);
+						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`);
+					} catch (error) {
+						throw new ChunkLoadException(getKey("exceptions.world.loading.failed").replace("%s%", error.stack));
 					}
 
 					for (const chunk of chunks) {
-						const levelchunk = new LevelChunk();
-						levelchunk.setX(chunk.x);
-						levelchunk.setZ(chunk.z);
-						levelchunk.setSubChunkCount(chunk.sub_chunk_count);
-						levelchunk.setCacheEnabled(chunk.cache_enabled);
+						const levelChunk = new LevelChunk();
+						levelChunk.setX(chunk.x);
+						levelChunk.setZ(chunk.z);
+						levelChunk.setSubChunkCount(chunk.sub_chunk_count);
+						levelChunk.setCacheEnabled(chunk.cache_enabled);
 						try {
-							levelchunk.setPayload(chunk.payload.data);
+							levelChunk.setPayload(chunk.payload.data);
 						} catch (e) {
-							throw new ChunkError(lang.errors.failedToLoadWorld_InvalidChunkData);
+							throw new ChunkLoadException(getKey("exceptions.world.loading.failed.invalidChunkData"));
 						}
-						levelchunk.writePacket(player);
+						levelChunk.writePacket(player);
 					}
 
 					player.network_chunks_loop = setInterval(() => {
@@ -306,27 +278,25 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							return;
 						}
 
-						const networkchunkpublisher = new NetworkChunkPublisherUpdate();
-						networkchunkpublisher.setCords(cords.x, cords.y, cords.z);
-						networkchunkpublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
-						networkchunkpublisher.setSavedChunks([]);
-						networkchunkpublisher.writePacket(player);
+						const networkChunkPublisher = new NetworkChunkPublisherUpdate();
+						networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);
+						networkChunkPublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
+						networkChunkPublisher.setSavedChunks([]);
+						networkChunkPublisher.writePacket(player);
 					}, 4500);
 				}
 
-				Logger.info(lang.playerstatuses.spawned.replace("%player%", player.username));
+				Logger.info(getKey("status.resourcePacks.spawned").replace("%s%", player.username));
 
 				setTimeout(() => {
-					if (player.offline) return;
+					const playStatus = new PlayStatus();
+					playStatus.setStatus(PlayStatusType.PLAYERSPAWN);
+					playStatus.writePacket(player);
 
-					const ps = new PlayStatus();
-					ps.setStatus(PlayStatusType.PLAYERSPAWN);
-					ps.writePacket(player);
-
-					const spawnEvent = new PlayerSpawnEvent();
-					spawnEvent.player = player;
-					spawnEvent.server = server;
-					spawnEvent.execute();
+					Frog.eventEmitter.emit('playerSpawn', {
+						player,
+						server
+					})
 
 					player.setEntityData("can_climb", true);
 					player.setEntityData("can_fly", false);
@@ -336,30 +306,35 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setEntityData("has_collision", true);
 					player.setEntityData("affected_by_gravity", true);
 
-					ServerInfo.__addPlayer();
+					Frog.__addPlayer();
+
 					for (const onlineplayers of PlayerInfo.players) {
 						if (onlineplayers.username == player.username) {
-							Logger.debug("Ignored bad PlayerList packet");
+							Logger.debug(getKey("debug.playerlist.invalid"));
 						} else {
 							let xuid = player.profile.xuid;
 							let uuid = player.profile.uuid;
 
-							const pl = new PlayerList();
-							pl.setType(PlayerListTypes.ADD);
-							pl.setUsername(player.username);
-							pl.setXboxID(xuid);
-							pl.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-							pl.setUuid(uuid);
-							pl.writePacket(onlineplayers);
+							const playerList = new PlayerList();
+							playerList.setType(PlayerListTypes.ADD);
+							playerList.setUsername(player.username);
+							playerList.setXboxID(xuid);
+							playerList.setID(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							playerList.setUUID(uuid);
+							playerList.writePacket(onlineplayers);
 						}
 					}
 				}, 2000);
 
 				setTimeout(() => {
-					if (player.offline) return;
-					for (let i = 0; i < PlayerInfo.players.length; i++) {
-						if (PlayerInfo.players[i].username == player.username) return; // Vanilla behaviour
-						PlayerInfo.players[i].sendMessage(lang.broadcasts.joinedTheGame.replace("%username%", player.username));
+					// NOTE: We can't use FrogJS.broadcastMessage here, because we need additional logic here (if PlayerInfo...)
+
+					for (const playerInfo of PlayerInfo.players) {
+						if (playerInfo.username === player.username) {
+							return; // Vanilla behaviour
+						}
+
+						playerInfo.sendMessage(getKey("chat.broadcasts.joined").replace("%s%", playerInfo.username));
 					}
 				}, 1000);
 		}

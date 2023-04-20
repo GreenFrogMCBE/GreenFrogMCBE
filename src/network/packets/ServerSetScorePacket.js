@@ -1,12 +1,14 @@
+const ScoreActions = require("../../scoreboard/types/ScoreActions");
+
 const PacketConstructor = require("./PacketConstructor");
 
-let action;
-let entries;
+let action = ScoreActions.UNKNOWN;
+let entries = [];
 
 class ServerSetScorePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_score";
@@ -14,7 +16,7 @@ class ServerSetScorePacket extends PacketConstructor {
 
 	/**
 	 * Returns if the packet is critical
-	 * @returns {Boolean} Returns if the packet is critical
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -54,7 +56,7 @@ class ServerSetScorePacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client The client to send the packet to
+	 * @param {Client} client The client to send the packet to
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

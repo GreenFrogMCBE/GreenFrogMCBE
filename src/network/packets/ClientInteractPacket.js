@@ -11,30 +11,31 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 /* eslint-disable no-case-declarations */
-const UnsupportedOperationException = require("../../events/exceptions/UnsupportedOperationException");
-
-const PlayerContainerOpenEvent = require("../../events/PlayerContainerOpenEvent");
+const ServerContainerOpenPacket = require("./ServerContainerOpenPacket");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const InteractType = require("./types/InteractType");
+const InventoryType = require("./types/InventoryType");
+const InteractType = require("../../world/types/InteractType");
 const WindowID = require("./types/WindowID");
 
 const Logger = require("../../server/Logger");
-const InventoryType = require("./types/InventoryType");
+const Frog = require("../../Frog");
+
+const { getKey } = require("../../utils/Language");
 
 class ClientInteractPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "interact";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -42,35 +43,54 @@ class ClientInteractPacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from client
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		const actionID = packet.data.params.action_id;
 
+		Frog.eventEmitter.emit('playerInteractEvent', {
+			player,
+			server,
+			actionID
+		})
+
 		switch (actionID) {
 			case InteractType.INVENTORYOPEN:
-				const event = new PlayerContainerOpenEvent();
-				event.server = server;
-				event.player = player;
-				event.windowID = WindowID.CREATIVE;
-				event.windowType = InventoryType.INVENTORY;
-				event.runtimeId = 2;
-				event.execute();
-				break;
-			case InteractType.MOUSEOVERENTITY:
-				// TODO: This thing is related to PVP, but it is not implemented yet in GreenFrog
+				let shouldOpen = true
+
+				const containerCoordinates = {
+					x: 0,
+					y: 0,
+					z: 0
+				}
+
+				Frog.eventEmitter.emit('playerContainerOpen', {
+					windowID: WindowID.CREATIVE,
+					windowType: InventoryType.INVENTORY,
+					isSentByServer: false,
+					runtimeID: 2,
+					player,
+					server,
+					containerCoordinates,
+					cancel: () => {
+						shouldOpen = false
+					}
+				})
+
+				if (!shouldOpen) return
+
+				const containerOpen = new ServerContainerOpenPacket();
+				containerOpen.setWindowID(WindowID.CREATIVE);
+				containerOpen.setWindowType(InventoryType.INVENTORY);
+				containerOpen.setRuntimeEntityId(2);
+				containerOpen.setCoordinates(containerCoordinates.x, containerCoordinates.y, containerCoordinates.z);
+				containerOpen.writePacket(player);
 				break;
 			default:
-				Logger.debug("Unsupported action ID: " + actionID);
+				Logger.debug(getKey("debug.player.unsupportedActionID").replace("%s%", actionID).replace("%d%", player.username));
 		}
-	}
-
-	/**
-	 * Writes the packet to the client
-	 */
-	writePacket() {
-		throw new UnsupportedOperationException("Cannot write client-side packet");
 	}
 }
 

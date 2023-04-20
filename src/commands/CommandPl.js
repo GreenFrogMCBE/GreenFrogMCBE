@@ -1,52 +1,27 @@
+const PluginManager = require('../plugins/PluginManager');
+
+const Colors = require("../api/colors/Colors");
+
+const { getKey } = require("../utils/Language");
+
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ * Command to show list of plugins that the server is running.
  *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * @type {import('../type/Command').Command}
  */
-const PluginManager = require("../plugins/PluginManager");
-const { lang, config } = require("../api/ServerInfo");
-const ConsoleColors = require("../api/ConsoleColors");
-const PlayerColors = require("../api/PlayerColors");
-const Logger = require("../server/Logger");
+module.exports = {
+    data: {
+        name: getKey("commands.plugins.name"),
+        description: getKey("commands.plugins.description"),
+        aliases: [getKey("commands.plugins.aliases.pl")],
+        minArgs: 0,
+        maxArgs: 0,
+    },
 
-class CommandPl extends require("./Command") {
-	name() {
-		return lang.commands.pl;
-	}
+    execute(_server, player) {
+        const pluginSet = new Set(PluginManager.plugins);
+        const pluginList = Colors.GREEN + [...pluginSet].join(Colors.WHITE + "§7, " + Colors.GREEN) || "";
 
-	aliases() {
-		return [lang.commands.plugins];
-	}
-
-	execute() {
-		const plugins = PluginManager.getPlugins()?.length ?? 0;
-		const pluginList = ConsoleColors.CONSOLE_GREEN + PluginManager.getPlugins()?.join(ConsoleColors.CONSOLE_RESET + ", " + ConsoleColors.CONSOLE_GREEN) || "";
-
-		Logger.info(`${lang.commands.plugins} (${plugins}): ${pluginList} ${ConsoleColors.CONSOLE_RESET}`);
-	}
-
-	getPlayerDescription() {
-		return lang.commands.ingamePlDescription;
-	}
-
-	executePlayer(player) {
-		if (!config.playerCommandPlugins) {
-			Logger.info(lang.errors.playerUnknownCommand);
-			return;
-		}
-
-		const plugins = PluginManager.getPlugins()?.length ?? 0;
-		const pluginList = PlayerColors.GREEN + PluginManager.getPlugins()?.join(PlayerColors.WHITE + "§7, " + PlayerColors.GREEN) || "";
-
-		player.sendMessage(`${lang.commands.plugins} (${plugins}): ${pluginList} ${PlayerColors.RESET}`);
-	}
-}
-
-module.exports = CommandPl;
+        player.sendMessage(getKey("commands.plugins.execution.success").replace("%s^1%", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`));
+    },
+};

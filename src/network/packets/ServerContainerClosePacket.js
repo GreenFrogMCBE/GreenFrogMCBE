@@ -18,15 +18,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerContainerClosePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "container_close";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -34,7 +34,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Sets the window ID
-	 * @param {Number} new_id
+	 * @param {number} new_id
 	 */
 	setWindowID(new_id) {
 		window_id = new_id;
@@ -42,7 +42,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Sets if the request is coming from server
-	 * @param {Boolean} new_server
+	 * @param {boolean} new_server
 	 */
 	setServer(new_server) {
 		server = new_server;
@@ -50,7 +50,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * It returns the window ID
-	 * @returns {Number} The window ID
+	 * @returns {number} The window ID
 	 */
 	getWindowID() {
 		return window_id;
@@ -58,7 +58,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Returns if request is coming from server
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getServer() {
 		return server;
@@ -66,7 +66,7 @@ class ServerContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

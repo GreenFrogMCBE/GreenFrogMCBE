@@ -11,11 +11,7 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 
-let pos = {
-	x: 0,
-	y: 0,
-	z: 0,
-};
+let position = {};
 let state = 0;
 let runtime_entity_id = 0;
 
@@ -24,15 +20,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerRespawnPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "respawn";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -43,12 +39,12 @@ class ServerRespawnPacket extends PacketConstructor {
 	 * @returns {JSON} The position.
 	 */
 	getPosition() {
-		return pos;
+		return position;
 	}
 
 	/**
 	 * Returns the packet state.
-	 * @returns {String} The state.
+	 * @returns {string} The state.
 	 */
 	getState() {
 		return state;
@@ -56,7 +52,7 @@ class ServerRespawnPacket extends PacketConstructor {
 
 	/**
 	 * Returns the runtime entity id.
-	 * @returns {Number} The runtime entity id.
+	 * @returns {number} The runtime entity id.
 	 */
 	getRuntimeEntityId() {
 		return runtime_entity_id;
@@ -64,19 +60,19 @@ class ServerRespawnPacket extends PacketConstructor {
 
 	/**
 	 * Sets the respawn position.
-	 * @param {Number} x - The X coordinate.
-	 * @param {Number} y - The Y coordinate.
-	 * @param {Number} z - The Z coordinate.
+	 * @param {number} x - The X coordinate.
+	 * @param {number} y - The Y coordinate.
+	 * @param {number} z - The Z coordinate.
 	 */
 	setPosition(x, y, z) {
-		pos.x = x;
-		pos.y = y;
-		pos.z = z;
+		position.x = x;
+		position.y = y;
+		position.z = z;
 	}
 
 	/**
 	 * Sets the packet state.
-	 * @param {Number} new_packet_state
+	 * @param {number} new_packet_state
 	 */
 	setState(new_packet_state) {
 		state = new_packet_state;
@@ -84,7 +80,7 @@ class ServerRespawnPacket extends PacketConstructor {
 
 	/**
 	 * Sets the runtime entity id
-	 * @param {Number} new_id
+	 * @param {number} new_id
 	 */
 	setRuntimeEntityId(new_id) {
 		runtime_entity_id = new_id;
@@ -92,7 +88,7 @@ class ServerRespawnPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

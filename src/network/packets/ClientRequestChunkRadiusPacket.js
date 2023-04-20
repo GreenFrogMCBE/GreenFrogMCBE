@@ -11,20 +11,21 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const PacketConstructor = require("./PacketConstructor");
-const PlayerRequestChunkRadiusEvent = require("../../events/PlayerRequestChunkRadiusEvent");
+
+const Frog = require("../../Frog");
 
 class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "request_chunk_radius";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -32,17 +33,25 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from player
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
+	 * @param {Server} server
 	 */
-	async readPacket(player, _packet, server) {
-		await this.validatePacket(player);
+	async readPacket(player, packet, server) {
+		let shouldChange = true
+		
+		Frog.eventEmitter.emit('playerRequestChunkRadius', {
+			radius: packet.data.params.radius,
+			player,
+			server,
+			cancel: () => {
+				shouldChange = false
+			}
+		})
 
-		const requestRadiusEvent = new PlayerRequestChunkRadiusEvent();
-		requestRadiusEvent.player = player;
-		requestRadiusEvent.server = server;
-		requestRadiusEvent.radius = 32;
-		requestRadiusEvent.execute();
+		if (!shouldChange) return
+	
+		player.setChunkRadius(32);
 	}
 }
 

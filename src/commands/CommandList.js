@@ -1,60 +1,30 @@
+const Frog = require("../Frog");
+
+const { players } = require("../api/player/PlayerInfo");
+
+const { getKey } = require("../utils/Language");
+
+const { serverConfigurationFiles } = Frog
+const { config } = serverConfigurationFiles
+
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ * Command to list players currently on the server.
  *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * @type {import('../type/Command').Command}
  */
-const { players: playerList } = require("../api/PlayerInfo");
-const { lang, config } = require("../api/ServerInfo");
-const Logger = require("../server/Logger");
+module.exports = {
+    data: {
+        name: getKey("commands.list.name"),
+        description: getKey("commands.list.description"),
+        minArgs: 0,
+        maxArgs: 0,
+    },
 
-class CommandList extends require("./Command") {
-	name() {
-		return lang.commands.listc;
-	}
+    execute(_server, player) {
+        const playerCount = players.length;
+        const playerSet = new Set(players.map((p) => p.username));
+        const playerList = [...playerSet].join(", ") || ""
 
-	aliases() {
-		return null;
-	}
-
-	execute(isconsole = true, client) {
-		const onlinePlayerList = playerList.filter((player) => !player.offline);
-		const playerNames = onlinePlayerList.map((player) => player.username);
-		const playerCount = onlinePlayerList.length;
-		const playerListMessage = lang.commands.playerList.replace("%info%", `${playerCount}/${config.maxPlayers}`);
-
-		if (!isconsole) {
-			client.sendMessage(playerListMessage);
-			if (playerCount > 0) {
-				client.sendMessage(playerNames.join(", "));
-			}
-			return;
-		}
-
-		Logger.info(playerListMessage);
-		if (playerCount > 0) {
-			Logger.info(playerNames.join(", "));
-		}
-	}
-
-	getPlayerDescription() {
-		return lang.commands.ingameListDescription;
-	}
-
-	executePlayer(client) {
-		if (!config.playerCommandList) {
-			client.sendMessage(lang.errors.playerUnknownCommand);
-			return;
-		}
-
-		this.execute(false, client);
-	}
-}
-
-module.exports = CommandList;
+        player.sendMessage(getKey("commands.list.execution.success.commandList").replace("%s%", `${playerCount}/${config.serverInfo.maxPlayers}`).replace("%d%", playerList));
+    },
+};

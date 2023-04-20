@@ -10,54 +10,64 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerGamemodeChangeRequest = require("../../events/PlayerGamemodeChangeRequestEvent");
+const Frog = require("../../Frog");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const PacketHandlingError = require("./exceptions/PacketHandlingError");
+const InvalidGamemodeException = require("../../utils/exceptions/InvalidGamemodeException");
+
+const { getKey } = require("../../utils/Language");
 
 class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	/**
-	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * Returns packet name
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_player_game_type";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
 	}
 
 	/**
-	 * Validates the packet
-	 * @param {any} player
-	 * @param {JSON} packet
+	 * Validates if packet
+	 * @param {Client} player
 	 */
-	async validatePacket(player, packet) {
-		if (!packet.data.params.gamemode) throw new PacketHandlingError("Bad gamemode packet - Bad gamemode");
-
-		if (!player.op) throw new PacketHandlingError("Bad gamemode packet - Tried to switch gamemode, while not opped");
+	async validatePacket(player) {
+		if (!player.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"));
 	}
 
 	/**
-	 * Reads the packet from player
-	 * @param {any} player
+	 * Reads if packet from player
+	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
 		await this.validatePacket(player, packet);
 
-		const gamemodeChangeEvent = new PlayerGamemodeChangeRequest();
-		gamemodeChangeEvent.server = server;
-		gamemodeChangeEvent.player = player;
-		gamemodeChangeEvent.gamemode = packet.data.params.gamemode;
-		gamemodeChangeEvent.execute();
+		let shouldChange = true;
+
+		const gamemode = packet.data.params.gamemode
+
+		Frog.eventEmitter.emit('playerChangeGamemodeRequest', {
+			server,
+			player,
+			gamemode,
+			cancel: () => {
+				shouldChange = false
+			}
+		})
+
+		if (!shouldChange) return
+
+		player.setGamemode(gamemode)
 	}
 }
 

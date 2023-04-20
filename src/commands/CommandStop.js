@@ -1,42 +1,22 @@
+const Frog = require("../Frog");
+
+const { getKey } = require("../utils/Language");
+
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ * Command to shutdown the server.
  *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * @type {import('../type/Command').Command}
  */
-const { lang } = require("../api/ServerInfo");
-
-class CommandShutdown extends require("./Command") {
-	name() {
-		return lang.commands.stop;
-	}
-
-	aliases() {
-		return null;
-	}
+module.exports = {
+	data: {
+		name: getKey("commands.stop.name"),
+		description: getKey("commands.stop.description"),
+		minArgs: 0,
+		maxArgs: 0,
+        requiresOp: true
+	},
 
 	execute() {
-		require("../Server").shutdown();
-	}
-
-	getPlayerDescription() {
-		return lang.commands.ingameStopDescription;
-	}
-
-	executePlayer(client) {
-		if (!client.op) {
-			client.sendMessage(lang.errors.noPermission);
-			return;
-		}
-		client.sendMessage(lang.server.stoppingServer);
-		this.execute();
-	}
-}
-
-module.exports = CommandShutdown;
+		Frog.shutdownServer();
+	},
+};

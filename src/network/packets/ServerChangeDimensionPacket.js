@@ -10,11 +10,11 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Dimensions = require("./types/DimensionLegacy");
+const Dimensions = require("../../world/types/DimensionLegacy");
 
 const PacketConstructor = require("./PacketConstructor");
 
-let dim = Dimensions.OVERWORLD;
+let dimension = Dimensions.OVERWORLD;
 let pos = {
 	x: 0,
 	y: 0,
@@ -25,15 +25,15 @@ let respawn = false;
 class ServerChangeDimensionPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "change_dimension";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -44,14 +44,14 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 	 * @param {Dimensions} new_dimension
 	 */
 	setDimension(new_dimension) {
-		dim = new_dimension;
+		dimension = new_dimension;
 	}
 
 	/**
 	 * Sets the spawn position
-	 * @param {Float} x
-	 * @param {Float} y
-	 * @param {Float} z
+	 * @param {float} x
+	 * @param {float} y
+	 * @param {float} z
 	 */
 	setPosition(x, y, z) {
 		pos.x = x;
@@ -70,14 +70,15 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 	/**
 	 * Returns the dimension
 	 * @returns {Dimensions} The dimension
+	 * @type {import("./types/Dimension")}
 	 */
 	getDimension() {
-		return dim;
+		return dimension;
 	}
 
 	/**
 	 * Returns if the player needs the be respawned
-	 * @returns {Boolean} If the player needs to be respawned
+	 * @returns {boolean} If the player needs to be respawned
 	 */
 	getRespawn() {
 		return respawn;
@@ -93,7 +94,7 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

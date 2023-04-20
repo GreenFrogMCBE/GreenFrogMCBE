@@ -12,13 +12,13 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let title = "";
-let message = "";
+let title;
+let message;
 
 class ServerToastRequestPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {String} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "toast_request";
@@ -26,7 +26,7 @@ class ServerToastRequestPacket extends PacketConstructor {
 
 	/**
 	 * Returns whether the packet is critical or not.
-	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
+	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return false;
@@ -50,7 +50,7 @@ class ServerToastRequestPacket extends PacketConstructor {
 
 	/**
 	 * Returns the title.
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getTitle() {
 		return title;
@@ -58,7 +58,7 @@ class ServerToastRequestPacket extends PacketConstructor {
 
 	/**
 	 * Returns the message.
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getMessage() {
 		return message;
@@ -66,7 +66,7 @@ class ServerToastRequestPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	send(client) {
 		client.queue(this.getPacketName(), {

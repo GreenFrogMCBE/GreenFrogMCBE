@@ -21,15 +21,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerResponsePackInfoPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "resource_packs_info";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical??
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return true;
@@ -37,7 +37,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Sets if the client must accept the packet
-	 * @param {Boolean} new_must_accept
+	 * @param {boolean} new_must_accept
 	 */
 	setMustAccept(new_must_accept) {
 		must_accept = new_must_accept;
@@ -45,7 +45,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Sets, if the resource pack has scripts
-	 * @param {Boolean} new_has_scripts
+	 * @param {boolean} new_has_scripts
 	 */
 	setHasScripts(new_has_scripts) {
 		has_scripts = new_has_scripts;
@@ -69,7 +69,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the resource pack is forced to accept.
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getMustAccept() {
 		return must_accept;
@@ -77,7 +77,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Returns if the resource pack has scripts.
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getHasScripts() {
 		return has_scripts;
@@ -85,7 +85,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Returns the list of behavior packs.
-	 * @returns {Array}.
+	 * @returns {Array}
 	 */
 	getBehaviorPacks() {
 		return behavior_packs;
@@ -93,7 +93,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Returns the list of texture packs.
-	 * @returns {Array}.
+	 * @returns {Array}
 	 */
 	getTexturePacks() {
 		return texture_packs;
@@ -101,7 +101,7 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

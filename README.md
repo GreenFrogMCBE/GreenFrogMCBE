@@ -3,7 +3,7 @@
 ```diff
 @@ GreenFrog is a server software for Minecraft: Bedrock edition @@
 
-It is written in NodeJS, currently supports 1.19.70/1.19.71/1.19.73
+It is written in NodeJS, currently supports 1.19.70 - 1.19.73
 It is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
 
@@ -12,14 +12,11 @@ Please note that this software is still in beta, so do not stare directly at the
 + Example block generator plugin: https://github.com/greenfrogmc/RBG
 + Support me: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
-+ Generate plugin structure: 'npm run pluginstructure'
++ Generate plugin structure: "npm run pluginstructure"
 
 You can install it by downloading this repo,
 then running "npm install"
 to start the server, use "npm run start"
 
-- We have the rights to take down your repo, if you copy our code, and don't credit us, so don't steal it
-
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/Credits.md
-+ Multilang docs: https://github.com/bufferfishq/GreenFrogMCBE/blob/main/docs/Multilang.md
 ```

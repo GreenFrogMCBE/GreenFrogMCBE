@@ -10,7 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const TitleType = require("./types/TitleType");
+const TitleType = require("./types/TitleType")
+
 const PacketConstructor = require("./PacketConstructor");
 
 let type = TitleType.TITLE;
@@ -24,7 +25,7 @@ let platformOnlineId = "";
 class ServerSetTitlePacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {String} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "set_title";
@@ -32,7 +33,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Returns whether the packet is critical or not.
-	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
+	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return false;
@@ -48,7 +49,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sets the text of the title.
-	 * @param {String} new_text - The text of the title.
+	 * @param {string} new_text - The text of the title.
 	 */
 	setText(new_text) {
 		text = new_text;
@@ -56,7 +57,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sets the fade-in time of the title.
-	 * @param {Number} new_fadein - The fade-in time of the title.
+	 * @param {number} new_fadein - The fade-in time of the title.
 	 */
 	setFadeinTime(new_fadein) {
 		fadeinTime = new_fadein;
@@ -64,7 +65,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sets the stay time of the title.
-	 * @param {Number} staytime1 - The stay time of the title.
+	 * @param {number} staytime1 - The stay time of the title.
 	 */
 	setStaytime(new_staytime) {
 		stayTime = new_staytime;
@@ -72,7 +73,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sets the fade-out time of the title.
-	 * @param {Number} fadeout - The fade-out time of the title.
+	 * @param {number} fadeout - The fade-out time of the title.
 	 */
 	setFadeoutTime(new_fadeout) {
 		fadeoutTime = new_fadeout;
@@ -80,7 +81,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sets the xuid of the title.
-	 * @param {String} xuid1 - The xuid of the title.
+	 * @param {string} xuid1 - The xuid of the title.
 	 */
 	setXuid(new_xuid) {
 		xuid = new_xuid;
@@ -88,7 +89,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Gets the text of the title.
-	 * @returns {String} The text of the title.
+	 * @returns {string} The text of the title.
 	 */
 	getText() {
 		return text;
@@ -96,7 +97,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Gets the fade-in time of the title.
-	 * @returns {Number} The fade-in time of the title.
+	 * @returns {number} The fade-in time of the title.
 	 */
 	getFadeinTime() {
 		return fadeinTime;
@@ -104,7 +105,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Gets the stay time of the title.
-	 * @returns {Number} The stay time of the title.
+	 * @returns {number} The stay time of the title.
 	 */
 	getStaytime() {
 		return stayTime;
@@ -112,7 +113,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Gets the fade-out time of the title.
-	 * @returns {Number} The fade-out time of the title.
+	 * @returns {number} The fade-out time of the title.
 	 */
 	getFadeout() {
 		return fadeoutTime;
@@ -120,7 +121,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Gets the xuid of the title.
-	 * @returns {String} The xuid of the title.
+	 * @returns {string} The xuid of the title.
 	 */
 	getXuid() {
 		return xuid;
@@ -128,7 +129,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Gets the platform online id of the title.
-	 * @returns {String} The platform online id of the title.
+	 * @returns {string} The platform online id of the title.
 	 */
 	getPlatformOnlineId() {
 		return platformOnlineId;
@@ -144,7 +145,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	send(client) {
 		if (this.getType() === TitleType.CLEAR) this.setText("");

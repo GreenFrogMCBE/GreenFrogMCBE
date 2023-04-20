@@ -10,20 +10,21 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const TextType = require("./types/TextType");
+const TextType = require("../../api/types/TextType");
+
 const PacketConstructor = require("./PacketConstructor");
 
-let message = "";
+let message;
 let type = TextType.ANNOUNCEMENT;
 let needs_translation = false;
-let source_name = "";
-let xuid = "";
-let platform_chat_id = "";
+let source_name;
+let xuid;
+let platform_chat_id;
 
 class ServerTextPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {String} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "text";
@@ -31,7 +32,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns whether the packet is critical or not.
-	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
+	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return false;
@@ -39,7 +40,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the message to be sent
-	 * @param {String} new_message
+	 * @param {string} new_message
 	 */
 	setMessage(new_message) {
 		message = new_message;
@@ -55,7 +56,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the if the message needs translation
-	 * @param {Boolean} new_needs_translation
+	 * @param {boolean} new_needs_translation
 	 */
 	setNeedsTranslation(new_needs_translation) {
 		needs_translation = new_needs_translation;
@@ -63,7 +64,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the source name
-	 * @param {String} new_source_name
+	 * @param {string} new_source_name
 	 */
 	setSourceName(new_source_name) {
 		source_name = new_source_name;
@@ -71,7 +72,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the XUID
-	 * @param {String} new_xuid
+	 * @param {string} new_xuid
 	 */
 	setXuid(new_xuid) {
 		xuid = new_xuid;
@@ -79,7 +80,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sets the platform chat id
-	 * @param {String} new_platform_chat_id
+	 * @param {string} new_platform_chat_id
 	 */
 	setPlatformChatId(new_platform_chat_id) {
 		platform_chat_id = new_platform_chat_id;
@@ -87,7 +88,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the message
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getMessage() {
 		return message;
@@ -103,7 +104,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the needs translation
-	 * @returns {Boolean}
+	 * @returns {boolean}
 	 */
 	getNeedsTranslation() {
 		return needs_translation;
@@ -111,7 +112,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the source name
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getSourceName() {
 		return source_name;
@@ -119,7 +120,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the XUID
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getXuid() {
 		return xuid;
@@ -127,7 +128,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Returns the platform chat id
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getPlatformChatId() {
 		return platform_chat_id;
@@ -135,7 +136,7 @@ class ServerTextPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

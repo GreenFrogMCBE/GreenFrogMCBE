@@ -10,17 +10,15 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/* eslint-disable use-isnan */
-/* eslint-disable no-dupe-class-members */
 const PacketConstructor = require("./PacketConstructor");
 
-let server_address = null;
-let port = null;
+let server_address;
+let port = 0;
 
 class ServerTransferPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {String} The name of the packet.
+	 * @returns {string}.
 	 */
 	getPacketName() {
 		return "transfer";
@@ -28,7 +26,7 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Returns whether the packet is critical or not.
-	 * @returns {Boolean} Returns true if the packet is critical, false otherwise.
+	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
 	 */
 	isCriticalPacket() {
 		return false;
@@ -36,7 +34,7 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Sets the server address
-	 * @param {String} address
+	 * @param {string} address
 	 */
 	setServerAddress(address) {
 		server_address = address;
@@ -44,7 +42,7 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Sets the server port
-	 * @param {Number} new_port
+	 * @param {number} new_port
 	 */
 	setPort(new_port) {
 		port = new_port;
@@ -52,7 +50,7 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Returns the server address.
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getServerAddress() {
 		return server_address;
@@ -60,7 +58,7 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Returns the server port.
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getPort() {
 		return port;
@@ -68,10 +66,11 @@ class ServerTransferPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		this.validate(this.getServerAddress(), this.getPort());
+
 		client.queue(this.getPacketName(), {
 			server_address: this.getServerAddress(),
 			port: parseInt(this.getPort()),

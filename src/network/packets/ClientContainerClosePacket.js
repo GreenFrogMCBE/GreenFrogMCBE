@@ -10,25 +10,25 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerContainerCloseEvent = require("../../events/PlayerContainerCloseEvent");
 const ServerContainerClosePacket = require("./ServerContainerClosePacket");
 
 const PacketConstructor = require("./PacketConstructor");
 
 const WindowID = require("./types/WindowID");
+const Frog = require("../../Frog");
 
 class ClientContainerClosePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "container_close";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -36,22 +36,31 @@ class ClientContainerClosePacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from client
-	 * @param {any} player
+	 * 
+	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {Server} server
 	 */
-	async readPacket(player, _packet, server) {
-		const containerclose = new ServerContainerClosePacket();
-		containerclose.setServer(false);
-		containerclose.setWindowID(WindowID.CREATIVE);
-		containerclose.writePacket(player);
+	async readPacket(player, packet, server) {
+		let shouldClose = true
 
-		const containerCloseEvent = new PlayerContainerCloseEvent();
-		containerCloseEvent.player = player;
-		containerCloseEvent.server = server;
-		containerCloseEvent.isRequestByServer = false;
-		containerCloseEvent.windowID = WindowID.CREATIVE;
-		containerCloseEvent.execute();
+		Frog.eventEmitter.emit('playerContainerClose', {
+			windowID: WindowID.CREATIVE,
+			isSentByServer: false,
+			player,
+			packet,
+			server,
+			cancel: () => {
+				shouldClose = false
+			}
+		})
+
+		if (!shouldClose) return
+
+		const containerClose = new ServerContainerClosePacket();
+		containerClose.setServer(false);
+		containerClose.setWindowID(WindowID.CREATIVE);
+		containerClose.writePacket(player);
 	}
 }
 

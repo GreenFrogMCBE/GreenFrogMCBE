@@ -10,22 +10,22 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let status = "";
+let status;
 
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerPlayStatusPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "play_status";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return true;
@@ -41,7 +41,7 @@ class ServerPlayStatusPacket extends PacketConstructor {
 
 	/**
 	 * Returns the status.
-	 * @returns {String} The status
+	 * @returns {string} The status
 	 */
 	getStatus() {
 		return status;
@@ -49,7 +49,7 @@ class ServerPlayStatusPacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

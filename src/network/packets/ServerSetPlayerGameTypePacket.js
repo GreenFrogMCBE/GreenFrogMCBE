@@ -10,8 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Gamemode = require("../../api/player/Gamemode");
 
-const Gamemode = require("../../api/GameMode");
 const PacketConstructor = require("./PacketConstructor");
 
 let gamemode = Gamemode.FALLBACK;
@@ -19,7 +19,7 @@ let gamemode = Gamemode.FALLBACK;
 class ServerSetPlayerGameTypePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name.
-	 * @returns {String} The name of the packet.
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_player_game_type";
@@ -27,7 +27,7 @@ class ServerSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Returns whether the packet is critical.
-	 * @returns {Boolean} Returns if the packet is critical.
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -35,7 +35,7 @@ class ServerSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Sets the gamemode.
-	 * @param {GameMode} gamemode1 The gamemode to be set.
+	 * @param {Gamemode} gamemode1 The gamemode to be set.
 	 */
 	setGamemode(gamemode1) {
 		gamemode = gamemode1;
@@ -43,7 +43,7 @@ class ServerSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Returns the current gamemode.
-	 * @returns {GameMode} The current gamemode.
+	 * @returns {Gamemode} The current gamemode.
 	 */
 	getGamemode() {
 		return gamemode;
@@ -51,7 +51,7 @@ class ServerSetPlayerGameTypePacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

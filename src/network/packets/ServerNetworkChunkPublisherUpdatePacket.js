@@ -10,11 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-let cords = {
-	x: 0,
-	y: 0,
-	z: 0,
-};
+let coordinates = {};
 let radius = 64;
 let saved_chunks = [];
 
@@ -23,15 +19,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "network_chunk_publisher_update";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -44,10 +40,10 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	 * @param y - The Y coordinate.
 	 * @param z - The Z coordinate.
 	 */
-	setCords(x, y, z) {
-		cords.x = x;
-		cords.y = y;
-		cords.z = z;
+	setCoordinates(x, y, z) {
+		coordinates.x = x;
+		coordinates.y = y;
+		coordinates.z = z;
 	}
 
 	/**
@@ -71,12 +67,12 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	 * @returns {JSON} The coordinates.
 	 */
 	getCords() {
-		return cords;
+		return coordinates;
 	}
 
 	/**
 	 * Returns the radius of chunks to load.
-	 * @returns {Number} The radius.
+	 * @returns {number} The radius.
 	 */
 	getRadius() {
 		return radius;
@@ -92,7 +88,7 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

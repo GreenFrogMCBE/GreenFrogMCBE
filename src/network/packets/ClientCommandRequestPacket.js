@@ -10,23 +10,29 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const PlayerCommandExecuteEvent = require("../../events/PlayerCommandExecuteEvent");
-const { config } = require("../../api/ServerInfo");
+const Frog = require("../../Frog");
+
+const Logger = require("../../server/Logger");
+
+const Commands = require("../../server/Commands");
 
 const PacketConstructor = require("./PacketConstructor");
+
+const { getKey } = require("../../utils/Language");
+const CommandVerifier = require("../../utils/CommandVerifier");
 
 class ClientCommandRequestPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "command_request";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -34,19 +40,80 @@ class ClientCommandRequestPacket extends PacketConstructor {
 
 	/**
 	 * Reads the packet from client
-	 * @param {any} player
+	 * @param {Client} player
 	 * @param {JSON} packet
-	 * @param {any} server
+	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		const command = packet.data.params.command;
+		const executedCommand = packet.data.params.command.replace('/', '');
 
-		if (!config.commandsDisabled) {
-			const commandExecutionEvent = new PlayerCommandExecuteEvent();
-			commandExecutionEvent.command = command;
-			commandExecutionEvent.player = player;
-			commandExecutionEvent.server = server;
-			commandExecutionEvent.execute();
+		const args = executedCommand.split(" ").slice(1);
+
+		let shouldExecuteCommand = true
+
+		Frog.eventEmitter.emit('playerExecutedCommand', {
+			player,
+			server,
+			args,
+			command: executedCommand,
+			cancel: () => {
+				shouldExecuteCommand = false
+			}
+		})
+
+		if (!shouldExecuteCommand) return
+
+		try {
+			if (!executedCommand.replace(" ", "")) return;
+
+			let commandFound = false;
+
+			for (const command of Commands.commandList) {
+				if (
+					command.data.name === executedCommand.split(" ")[0] ||
+					(command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))
+				) {
+					if (command.data.requiresOp && !player.op) {
+						CommandVerifier.throwError(player, executedCommand.split(" ")[0])
+						return
+					}
+
+					if (
+						command.data.minArgs !== undefined &&
+						command.data.minArgs > args.length
+					) {
+						player.sendMessage(
+							getKey("commands.errors.syntaxError.minArg")
+								.replace("%s%", command.data.minArgs)
+								.replace("%d%", args.length)
+						);
+						return;
+					}
+
+					if (
+						command.data.maxArgs !== undefined &&
+						command.data.maxArgs < args.length
+					) {
+						player.sendMessage(
+							getKey("commands.errors.syntaxError.maxArg")
+								.replace("%s%", command.data.maxArgs)
+								.replace("%d%", args.length)
+						);
+						return;
+					}
+
+					command.execute(Frog, player, args);
+
+					commandFound = true;
+					break; // Exit loop once command has been found and executed
+				}
+			}
+
+			if (!commandFound) {
+				CommandVerifier.throwError(player, executedCommand.split(" ")[0])
+			}
+		} catch (error) {
+			Logger.error(getKey("commands.internalError.player").replace("%s%", player.username).replace("%d%", error.stack));
 		}
 	}
 }

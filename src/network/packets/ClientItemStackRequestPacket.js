@@ -10,52 +10,51 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+const Frog = require("../../Frog");
+
 const PacketConstructor = require("./PacketConstructor");
 
 const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
-const GameModeLegacy = require("./types/GameModeLegacy");
+const GameModeLegacy = require("../../api/player/GamemodeLegacy");
 const InventoryType = require("./types/InventoryType");
 
-const PacketHandlingError = require("./exceptions/PacketHandlingError");
-
-const { lang } = require("../../api/ServerInfo");
 const Logger = require("../../server/Logger");
+
+const InvalidItemStackException = require("../../utils/exceptions/InvalidItemStackException");
+
+const { getKey } = require("../../utils/Language");
 
 class ClientItemStackRequestPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "item_stack_request";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
 	}
 
-	validatePacket(player) {
-		if (player.gamemode == !GameModeLegacy.CREATIVE) {
-			throw new PacketHandlingError("Impossible ItemStackRequest");
-		}
-	}
-
 	/**
 	 * Reads the packet from player
-	 * @param {any} player
+	 * 
+	 * @param {Client} player
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet) {
-		// TODO: Event
-
-		await this.validatePacket(player);
+		if (player.gamemode == !GameModeLegacy.CREATIVE) {
+			throw new InvalidItemStackException(getKey("exceptions.network.itemStackRequest.badGamemode"))
+		}
 
 		try {
 			let request = null;
+
 			try {
 				request = packet.data.params.requests[0].actions[1].result_items[0];
 			} catch {
@@ -69,14 +68,29 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 			const network_id = request.network_id;
 			const block_runtime_id = request.block_runtime_id;
 
+			let shouldGiveItem = true
+
+			Frog.eventEmitter.emit('playerItemStackRequest', {
+				count,
+				network_id,
+				block_runtime_id,
+				items: player.items,
+				cancel: () => {
+					shouldGiveItem = true
+				}
+			})
+
+			if (!shouldGiveItem) return
+
 			const jsondata = { count, network_id, block_runtime_id };
 			player.items.push(jsondata);
 
 			for (const [i, item] of player.items.entries()) {
-				const is = new ServerInventorySlotPacket();
-				is.setWindowID(InventoryType.INVENTORY);
-				is.setSlot(i);
-				is.setItemData({
+				const inventorySlotPacket = new ServerInventorySlotPacket();
+
+				inventorySlotPacket.setWindowID(InventoryType.INVENTORY);
+				inventorySlotPacket.setSlot(i);
+				inventorySlotPacket.setItemData({
 					network_id: item.network_id,
 					count: item.count,
 					metadata: 0,
@@ -89,10 +103,11 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 						can_destroy: [],
 					},
 				});
-				is.writePacket(player);
+
+				inventorySlotPacket.writePacket(player);
 			}
-		} catch (e) {
-			Logger.error(lang.errors.failedToHandleItemRequest.replace("%data%", `${player.username}: ${e.stack}`));
+		} catch (error) {
+			Logger.error(getKey("creativemenu.badPacket").replace("%s%", player.username).replace("%e%", error.stack));
 		}
 	}
 }

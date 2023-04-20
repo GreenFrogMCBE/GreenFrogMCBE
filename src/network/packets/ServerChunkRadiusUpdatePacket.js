@@ -17,15 +17,15 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "chunk_radius_update";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical?
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -33,7 +33,7 @@ class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 
 	/**
 	 * Sets the chunk radius
-	 * @param {Number} radius
+	 * @param {number} radius
 	 */
 	setChunkRadius(new_radius) {
 		chunk_radius = new_radius;
@@ -41,7 +41,7 @@ class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 
 	/**
 	 * Returns the chunk radius
-	 * @returns {Number} The chunk radius
+	 * @returns {number} The chunk radius
 	 */
 	getChunkRadius() {
 		return chunk_radius;
@@ -49,7 +49,7 @@ class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 
 	/**
 	 * Sends the packet to the client
-	 * @param {any} client
+	 * @param {Client} client
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {

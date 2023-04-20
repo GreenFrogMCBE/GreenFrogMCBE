@@ -14,21 +14,21 @@ const PacketConstructor = require("./PacketConstructor");
 
 let value = {};
 let properties = {};
-let tick = -1;
-let runtime_entity_id = "";
+let tick;
+let runtime_entity_id;
 
 class ServerSetEntityDataPacket extends PacketConstructor {
 	/**
 	 * Returns the packet name
-	 * @returns {String} The name of the packet
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "set_entity_data";
 	}
 
 	/**
-	 * Returns if is the packet critical?
-	 * @returns {Boolean} Returns if the packet is critical
+	 * Returns if the packet is critical??
+	 * @returns {boolean}
 	 */
 	isCriticalPacket() {
 		return false;
@@ -36,8 +36,8 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 
 	/**
 	 * Sets the field value for the player
-	 * @param {String} field
-	 * @param {Boolean} new_value
+	 * @param {string} field
+	 * @param {boolean} new_value
 	 */
 	setValue(field, new_value) {
 		value[field] = new_value;
@@ -69,7 +69,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 
 	/**
 	 * Sets the current tick
-	 * @param {Number} new_tick
+	 * @param {number} new_tick
 	 */
 	setTick(new_tick) {
 		tick = new_tick;
@@ -77,7 +77,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 
 	/**
 	 * Returns the current tick
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	getTick() {
 		return tick;
@@ -85,7 +85,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 
 	/**
 	 * Sets the runtime_entity_id
-	 * @param {String} new_runtime_entity_id
+	 * @param {string} new_runtime_entity_id
 	 */
 	setRuntimeEntityID(new_runtime_entity_id) {
 		runtime_entity_id = new_runtime_entity_id;
@@ -93,7 +93,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 
 	/**
 	 * Returns the runtime entity ID of the entity.
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	getRuntimeEntityID() {
 		return runtime_entity_id;
