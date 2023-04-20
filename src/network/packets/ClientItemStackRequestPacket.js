@@ -15,7 +15,7 @@ const Frog = require("../../Frog");
 const PacketConstructor = require("./PacketConstructor");
 
 const ServerInventorySlotPacket = require("./ServerInventorySlotPacket");
-const GameModeLegacy = require("../../api/player/GamemodeLegacy");
+const GamemodeLegacy = require("../../api/player/GamemodeLegacy");
 const InventoryType = require("./types/InventoryType");
 
 const Logger = require("../../server/Logger");
@@ -48,7 +48,7 @@ class ClientItemStackRequestPacket extends PacketConstructor {
 	 * @param {JSON} packet
 	 */
 	async readPacket(player, packet) {
-		if (player.gamemode == !GameModeLegacy.CREATIVE) {
+		if (player.gamemode == !GamemodeLegacy.CREATIVE) {
 			throw new InvalidItemStackException(getKey("exceptions.network.itemStackRequest.badGamemode"))
 		}
 
