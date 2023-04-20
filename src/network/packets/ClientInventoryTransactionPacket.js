@@ -15,14 +15,14 @@ const BlockBreakException = require("../../utils/exceptions/BlockBreakException"
 const PacketConstructor = require("./PacketConstructor");
 
 const Gamemode = require("../../api/player/Gamemode");
-const BlockActions = require("./types/BlockActions");
+const BlockActions = require("../../world/types/BlockActions");
 
 const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
 
 const ServerLevelChunkPacket = require("./ServerLevelChunkPacket");
 
-const WorldGenerators = require("./types/WorldGenerators");
+const WorldGenerators = require("../../world/types/WorldGenerators");
 
 const { getKey } = require("../../utils/Language");
 

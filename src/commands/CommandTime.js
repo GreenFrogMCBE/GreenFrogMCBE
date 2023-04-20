@@ -15,7 +15,7 @@ module.exports = {
 	},
 
 	execute(_server, player, args) {
-		const time = args[1];
+		const time = args[0];
 		const setTime = time === getKey("commands.time.times.day") ? 1000 : time === getKey("commands.time.times.night") ? 17000 : parseInt(time, 10);
 
 		if (!Number.isInteger(setTime)) {

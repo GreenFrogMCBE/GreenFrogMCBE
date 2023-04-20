@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const Difficulty = require("./types/Difficulty");
+const Difficulty = require("../../api/types/Difficulty");
 
 let difficulty = Difficulty.PEACEFUL;
 

@@ -16,11 +16,12 @@ const ServerContainerOpenPacket = require("./ServerContainerOpenPacket");
 const PacketConstructor = require("./PacketConstructor");
 
 const InventoryType = require("./types/InventoryType");
-const InteractType = require("./types/InteractType");
+const InteractType = require("../../world/types/InteractType");
 const WindowID = require("./types/WindowID");
 
 const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
+
 const { getKey } = require("../../utils/Language");
 
 class ClientInteractPacket extends PacketConstructor {

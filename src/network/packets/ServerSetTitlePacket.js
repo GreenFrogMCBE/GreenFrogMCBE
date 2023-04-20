@@ -10,7 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const TitleType = require("./types/TitleType");
+const TitleType = require("./types/TitleType")
+
 const PacketConstructor = require("./PacketConstructor");
 
 let type = TitleType.TITLE;

@@ -31,11 +31,11 @@
 
     "commands.help.name": "help",
     "commands.help.description": "Command list.",
-    "commands.help.execution.success.commandList": "Command list:",
+    "commands.help.execution.success": "Command list:",
 
     "commands.kick.name": "kick",
     "commands.kick.description": "Kicks a player from the server.",
-    "commands.kick.execution.failed.notOnline": "%s% is not online",
+    "commands.kick.execution.failed.notOnline": "§c%s% is not online",
 
     "commands.list.name": "list",
     "commands.list.description": "Lists players on the server.",
@@ -60,7 +60,7 @@
     "commands.time.name": "time",
     "commands.time.description": "Changes the world's time",
     "commands.time.execution.success": "Time set to %s%",
-    "commands.time.execution.failed": "Time must be a Number",
+    "commands.time.execution.failed": "§cTime must be a number",
     "commands.time.times.day": "day",
     "commands.time.times.night": "night",
 

@@ -10,7 +10,8 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const TextType = require("./types/TextType");
+const TextType = require("../../api/types/TextType");
+
 const PacketConstructor = require("./PacketConstructor");
 
 let message;

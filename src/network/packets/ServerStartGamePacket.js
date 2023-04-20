@@ -11,9 +11,11 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Gamemode = require("../../api/player/Gamemode");
-const Difficulty = require("./types/Difficulty");
-const Dimension = require("./types/Dimension");
-const Generator = require("./types/Generator");
+
+const Difficulty = require("../../api/types/Difficulty")
+
+const Dimension = require("../../world/types/Dimension");
+const Generator = require("../../world/types/Generator");
 
 const PacketConstructor = require("./PacketConstructor");
 

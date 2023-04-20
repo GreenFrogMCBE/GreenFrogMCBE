@@ -2,7 +2,7 @@
 
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 
-const WorldGenerators = require("../network/packets/types/WorldGenerators");
+const WorldGenerators = require("./types/WorldGenerators");
 const DamageCause = require("../api/health/DamageCause");
 const Gamemode = require("../api/player/Gamemode");
 
