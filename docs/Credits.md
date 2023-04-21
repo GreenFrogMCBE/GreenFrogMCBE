@@ -19,7 +19,7 @@
 > Fixing langs (https://github.com/andriycraft/GreenFrogMCBE/pull/19) <br>
 > Making logger better <br>
 > Also for disabling workflows for .MD files, also https://github.com/andriycraft/GreenFrogMCBE/pull/81 <br>
-> For rewriting command system <br>
+> For rewriting some parts of command system <br>
 > For making the README.md file look better
 
 4. @NhanAZ
@@ -104,3 +104,7 @@
 > For helping me to add the chunk support <br>
 > For rewriting logger <br>
 > For rewriting 20% of the network code
+
+18. @tutinoko2048
+
+> For making .d.ts files use const type for constant values
