@@ -11,32 +11,8 @@ chat:
   lang: "en_US"
   disable: false
   commandsDisabled: false
-  blockInvalidMessages: true # Kicks the player if the player tried to send an too long or empty message and also prevents from using colors in chat
-  commands:
-    consoleCommandKick: true
-    consoleCommandShutdown: true
-    consoleCommandVersion: true
-    consoleCommandTime: true
-    consoleCommandPlugins: true
-    consoleCommandStop: true # Will only stop showing in /help, if disabled
-    consoleCommandSay: true
-    consoleCommandOp: true
-    consoleCommandDeop: true
-    consoleCommandHelp: true
-    consoleCommandList: true
-    consoleCommandGamemode: true
-    consoleCommandMe: true
-    playerCommandVersion: true
-    playerCommandPlugins: true
-    playerCommandStop: true
-    playerCommandSay: true
-    playerCommandOp: true
-    playerCommandKick: true
-    playerCommandTime: true
-    playerCommandDeop: true
-    playerCommandList: true
-    playerCommandGamemode: true
-    playerCommandMe: true
+  blockInvalidMessages: true # Prevents players from using colors in chat or spam the chat with messages that are longer than 256 chars
+  blockInvalidCommands: true # Same as 'blockInvalidMessages' but for commands
 dev:
   unstable: false # Makes your server not crash on critical errors
   debug: false
@@ -51,6 +27,7 @@ dev:
   # 1 - unknown
   # 0 - visitor
   multiProtocol: false # Supports 1.19.70+. Some features may be broken
+  useLegacyVersionMismatchKickMessage: false # Instead of `Could not connect: Outdated client!` or `Could not connect: Outdated server!` it will say the value of `kickMessages.versionMismatch` in your lang file
 world:
   gamemode: "creative"
   worldGamemode: "creative"

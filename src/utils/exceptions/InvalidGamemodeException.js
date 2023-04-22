@@ -11,8 +11,8 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 class InvalidGamemodeException extends Error {
-	constructor(message = "Invalid gamemode provided.") {
-		super(message);
+	constructor(gamemode) {
+		super("Invalid gamemode provided: " + gamemode);
 		this.name = "InvalidGamemodeException";
 	}
 }

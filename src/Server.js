@@ -1,5 +1,3 @@
-/** This file is the main file that start the server and manages it */
-
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -24,6 +22,8 @@ const GarbageCollector = require("./utils/GarbageCollector");
 const PlayerInit = require("./server/PlayerInit");
 
 const World = require("./world/World");
+
+const PlayStatus = require("./network/packets/types/PlayStatus");
 
 const Logger = require("./server/Logger");
 
@@ -243,9 +243,19 @@ async function _onJoin(client) {
 		return;
 	}
 
-	if (!(client.version === VersionToProtocol.getProtocol(config.serverInfo.version)) && !config.multiProtocol) {
-		client.kick(Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version));
-		return;
+	const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
+
+	if (config.dev.useLegacyVersionMismatchKickMessage && !config.dev.multiProtocol) {
+		if (client.version !== serverProtocol) {
+			client.kick(Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version));
+			return;
+		}
+	} else {
+		if (client.version > serverProtocol) {
+			client.sendPlayStatus(PlayStatus.FAILEDSERVER);
+		} else if (client.version < serverProtocol) {
+			client.sendPlayStatus(PlayStatus.FAILEDCLIENT);
+		}
 	}
 
 	const responsePackInfo = new ResponsePackInfo();
