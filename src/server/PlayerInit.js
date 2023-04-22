@@ -27,6 +27,7 @@ const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRad
 const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket");
 const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket");
 const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
+const ServerPlayStatusPacket = require("../network/packets/ServerPlayStatusPacket");
 const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
 
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
@@ -225,6 +226,36 @@ module.exports = {
 			movePacket.setRotY(rot_y);
 			movePacket.setRotZ(rot_z);
 			movePacket.writePacket(player);
+		};
+
+		/**
+		 * Sends play status to the player
+		 * 
+		 * @param {PlayStatus} play_status 
+		 * @param {boolean} termiate_connection
+		 */
+		player.sendPlayStatus = function (play_status, termiate_connection = false) {
+			let sendPlayStatus = true;
+
+			Frog.eventEmitter.emit("playerTransferEvent", {
+				player,
+				play_status,
+				termiate_connection,
+				server: server,
+				cancel: () => {
+					sendPlayStatus = false;
+				},
+			});
+
+			if (!sendPlayStatus) return;
+			
+			const playStatus = new ServerPlayStatusPacket()
+			playStatus.setStatus(play_status)
+			playStatus.writePacket(player)
+
+			if (termiate_connection) {
+				player.kick(getKey("kickMessages.playStatus").replace("%s%", play_status))
+			}
 		};
 
 		/**
