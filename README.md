@@ -19,4 +19,5 @@ then running "npm install"
 to start the server, use "npm run start"
 
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/Credits.md
++ Our license in a nutshell: /docs/LICENSE-NUTSHELL.md
 ```
