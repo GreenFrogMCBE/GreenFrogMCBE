@@ -108,7 +108,7 @@ module.exports = {
 		 * Sets player's gamemode
 		 *
 		 * @param {Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
-		 * @type {import('../api/Gamemode')}
+		 * @type {import('../api/player/Gamemode')}
 		 */
 		// prettier-ignore
 		player.setGamemode = function (gamemode) {
