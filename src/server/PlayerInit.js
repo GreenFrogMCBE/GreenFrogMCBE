@@ -121,7 +121,7 @@ module.exports = {
 			];
 
 			if (!allowedGamemodes.includes(gamemode)) {
-				throw new InvalidGamemodeException()
+				throw new InvalidGamemodeException(gamemode)
 			}
 
 			let shouldChangeGamemode = true;
