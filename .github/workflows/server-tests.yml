@@ -10,7 +10,7 @@ on:
     branches: ["main"]
 
 jobs:
-  build-linux:
+  test-linux:
     runs-on: ubuntu-latest
 
     strategy:
@@ -25,9 +25,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm i --force
+      - run: npm install --force
       - run: npm run autotest
-  build-windows:
+  test-windows:
     runs-on: windows-latest
 
     strategy:
