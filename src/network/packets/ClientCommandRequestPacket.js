@@ -65,7 +65,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			},
 		});
 
-		if (!shouldExecuteCommand || executedCommand.replace(" ", "")) return;
+		if (!shouldExecuteCommand) return;
 
 		if (config.chat.blockInvalidCommands) {
 			executedCommand = executedCommand.replace("%d%", executedCommand.replace("§", ""));

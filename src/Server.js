@@ -245,15 +245,15 @@ async function _onJoin(client) {
 
 	const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
 
-	if (config.dev.useLegacyVersionMismatchKickMessage) {
-		if (client.version !== serverProtocol && !config.dev.multiProtocol) {
+	if (config.dev.useLegacyVersionMismatchKickMessage && !config.dev.multiProtocol) {
+		if (client.version !== serverProtocol) {
 			client.kick(Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version));
 			return;
 		}
 	} else {
 		if (client.version > serverProtocol) {
 			client.sendPlayStatus(PlayStatus.FAILEDSERVER);
-		} else {
+		} else if (client.version < serverProtocol) {
 			client.sendPlayStatus(PlayStatus.FAILEDCLIENT);
 		}
 	}
