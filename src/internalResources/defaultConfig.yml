@@ -13,31 +13,6 @@ chat:
   commandsDisabled: false
   blockInvalidMessages: true # Prevents players from using colors in chat or spam the chat with messages that are longer than 256 chars
   blockInvalidCommands: true # Same as 'blockInvalidMessages' but for commands
-  commands:
-    consoleCommandKick: true
-    consoleCommandShutdown: true
-    consoleCommandVersion: true
-    consoleCommandTime: true
-    consoleCommandPlugins: true
-    consoleCommandStop: true
-    consoleCommandSay: true
-    consoleCommandOp: true
-    consoleCommandDeop: true
-    consoleCommandHelp: true
-    consoleCommandList: true
-    consoleCommandGamemode: true
-    consoleCommandMe: true
-    playerCommandVersion: true
-    playerCommandPlugins: true
-    playerCommandStop: true
-    playerCommandSay: true
-    playerCommandOp: true
-    playerCommandKick: true
-    playerCommandTime: true
-    playerCommandDeop: true
-    playerCommandList: true
-    playerCommandGamemode: true
-    playerCommandMe: true
 dev:
   unstable: false # Makes your server not crash on critical errors
   debug: false
