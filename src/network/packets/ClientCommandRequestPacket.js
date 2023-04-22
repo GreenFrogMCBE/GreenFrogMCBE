@@ -18,7 +18,11 @@ const Commands = require("../../server/Commands");
 
 const PacketConstructor = require("./PacketConstructor");
 
+const { serverConfigurationFiles } = Frog;
+const { config } = serverConfigurationFiles;
+
 const { getKey } = require("../../utils/Language");
+
 const CommandVerifier = require("../../utils/CommandVerifier");
 
 class ClientCommandRequestPacket extends PacketConstructor {
@@ -45,7 +49,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		const executedCommand = packet.data.params.command.replace("/", "");
+		let executedCommand = packet.data.params.command.replace("/", "");
 
 		const args = executedCommand.split(" ").slice(1);
 
@@ -61,11 +65,22 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			},
 		});
 
-		if (!shouldExecuteCommand) return;
+		if (!shouldExecuteCommand || executedCommand.replace(" ", "")) return;
+
+		if (config.chat.blockInvalidCommands) {
+			executedCommand = executedCommand.replace("%d%", executedCommand.replace("§", ""));
+
+			if (executedCommand > 256) {
+				Frog.eventEmitter.emit("playerMalformatedChatCommand", {
+					server,
+					player,
+					command: executedCommand,
+				});
+				return;
+			}
+		}
 
 		try {
-			if (!executedCommand.replace(" ", "")) return;
-
 			let commandFound = false;
 
 			for (const command of Commands.commandList) {

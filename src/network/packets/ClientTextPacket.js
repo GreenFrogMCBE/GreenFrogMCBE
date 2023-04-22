@@ -47,7 +47,7 @@ class ClientTextPacket extends PacketConstructor {
 	 * @param {Server} server
 	 */
 	async readPacket(player, packet, server) {
-		const message = packet.data.params.message;
+		let message = packet.data.params.message;
 
 		let shouldChat = true;
 
@@ -60,23 +60,22 @@ class ClientTextPacket extends PacketConstructor {
 			},
 		});
 
-		if (!shouldChat || config.chat.disable) return;
-
-		let formattedMessage = getKey("chat.format").replace("%s%", player.username).replace("%d%", message.replace("§", ""));
-
-		if (!message.trim()) return;
+		if (!shouldChat || config.chat.disable || !message.trim()) return;
 
 		if (config.chat.blockInvalidMessages) {
-			formattedMessage = formattedMessage.replace("%d%", message.replace("§", ""));
+			message = message.replace("§", "")
+
+			if (message.length > 256) {
+				Frog.eventEmitter.emit("playerMalformatedChatMessage", {
+					server,
+					player,
+					message,
+				});
+				return
+			}
 		}
 
-		if (message.length > 256 && config.chat.blockInvalidMessages) {
-			Frog.eventEmitter.emit("playerMalformatedChatMessage", {
-				server,
-				player,
-				message,
-			});
-		}
+		const formattedMessage = getKey("chat.format").replace("%s%", player.username).replace("%d%", message.replace("§", ""));
 
 		Logger.info(formattedMessage);
 
