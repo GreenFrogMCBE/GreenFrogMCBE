@@ -289,7 +289,6 @@ module.exports = {
 		 * Sets player's local difficulty
 		 *
 		 * @param {Difficulty} difficulty
-		 * @type {import('../type/Difficulty')}
 		 */
 		player.setDifficulty = function (difficulty) {
 			let shouldChangeDifficulty = true;
