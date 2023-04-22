@@ -1,8 +1,5 @@
 ## Credits
 
-> If the name starts with "@" this means that the user has Github account credited <br>
-> If the name does not start with "@" and contains "#" this means that the user has Discord account credited
-
 1. @andriycraft
 
 > For creating this software
