@@ -237,7 +237,7 @@ module.exports = {
 		player.sendPlayStatus = function (play_status, termiate_connection = false) {
 			let sendPlayStatus = true;
 
-			Frog.eventEmitter.emit("playerTransferEvent", {
+			Frog.eventEmitter.emit("playerPlayStatus", {
 				player,
 				play_status,
 				termiate_connection,

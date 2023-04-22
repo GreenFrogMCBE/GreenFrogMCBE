@@ -60,6 +60,7 @@ declare function on(eventName: "playerMalformatedChatMessage", listener: (...arg
 declare function on(eventName: "playerMalformatedChatCommand", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerItemStackRequest", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerExecutedCommand", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerPlayStatus", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerTeleport", listener: (...args: any[]) => void): void;
 
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
