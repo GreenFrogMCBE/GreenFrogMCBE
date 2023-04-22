@@ -62,9 +62,13 @@ class ClientTextPacket extends PacketConstructor {
 
 		if (!shouldChat || config.chat.disable) return;
 
-		const formattedMessage = getKey("chat.format").replace("%s%", player.username).replace("%d%", message.replace("§", ""));
+		let formattedMessage = getKey("chat.format").replace("%s%", player.username).replace("%d%", message.replace("§", ""));
 
 		if (!message.trim()) return;
+
+		if (config.chat.blockInvalidMessages) {
+			formattedMessage = formattedMessage.replace("%d%", message.replace("§", ""));
+		}
 
 		if (message.length > 256 && config.chat.blockInvalidMessages) {
 			Frog.eventEmitter.emit("playerMalformatedChatMessage", {
