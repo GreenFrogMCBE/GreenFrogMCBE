@@ -7,5 +7,5 @@ Basically, you are allowed to do anything with this project, even resell it. But
 3. You may not change your license.
 
 
-<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png">
-Nerdy info: https://creativecommons.org/licenses/by-sa/4.0/
+<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png">
+Nerdy info: https://creativecommons.org/licenses/by/4.0/
