@@ -148,11 +148,11 @@ class Title {
 		if (!shouldSendTitle) return;
 
 		const titlePacket = new TitlePacket();
-		titlePacket.setFadeinTime(this.getFadeinTime());
-		titlePacket.setStaytime(this.getStayTime());
+		titlePacket.setFadeInTime(this.getFadeInTime());
+		titlePacket.setStayTime(this.getStayTime());
 		titlePacket.setText(this.getText());
 		titlePacket.setType(this.getType());
-		titlePacket.setFadeoutTime(this.getFadeoutTime());
+		titlePacket.setFadeOutTime(this.getFadeOutTime());
 		titlePacket.send(client);
 	}
 }
