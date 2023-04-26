@@ -33,16 +33,6 @@ const _eventEmitter = new eventLib();
 let __server;
 
 /**
- * Returns the server object
- *
- * @private
- * @returns {Server}
- */
-function getServer() {
-	return __server;
-}
-
-/**
  * Returns configuration files
  *
  * @returns {ConfigurationFile}
@@ -67,7 +57,9 @@ module.exports = {
 	 *
 	 * @returns {Server}
 	 */
-	server: getServer(),
+	getServer() {
+		return __server
+	},
 
 	/**
 	 * Sets the server object
@@ -145,7 +137,7 @@ module.exports = {
 			Logger.info(getKey("server.shuttingDown"));
 
 			await require("./server/ConsoleCommandSender").close();
-			await getServer().close(shutdownMessage);
+			await this.getServer().close(shutdownMessage);
 
 			setTimeout(() => {
 				PluginLoader.unloadPlugins();
@@ -166,3 +158,6 @@ module.exports = {
 		this.__playercount--;
 	},
 };
+/* `serverConfigurationFiles` is an object that contains the configuration
+files for the server, such as `config.yml` and `ops.yml`. It is used to
+access and modify the server's configuration settings. */
