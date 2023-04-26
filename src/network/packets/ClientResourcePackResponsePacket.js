@@ -289,7 +289,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				setTimeout(() => {
 					const playStatus = new PlayStatus();
-					playStatus.setStatus(PlayStatusType.PLAYERSPAWN);
+					playStatus.setStatus(PlayStatusType.PLAYER_SPAWN);
 					playStatus.writePacket(player);
 
 					Frog.eventEmitter.emit("playerSpawn", {
