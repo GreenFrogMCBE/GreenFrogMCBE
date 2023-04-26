@@ -158,6 +158,3 @@ module.exports = {
 		this.__playercount--;
 	},
 };
-/* `serverConfigurationFiles` is an object that contains the configuration
-files for the server, such as `config.yml` and `ops.yml`. It is used to
-access and modify the server's configuration settings. */
