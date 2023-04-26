@@ -11,7 +11,9 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Frog = require("../../Frog");
+
 const TitlePacket = require("../../network/packets/ServerSetTitlePacket");
+
 const TitleType = require("../../network/packets/types/TitleType");
 
 /**
