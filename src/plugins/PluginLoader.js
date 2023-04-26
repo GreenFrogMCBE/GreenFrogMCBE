@@ -128,14 +128,14 @@ module.exports = {
 						}
 
 						try {
+							this.initPluginShutdown();
+
 							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
 
 							Logger.info(getKey("plugin.unloading.success").replace("%s%", name));
 						} catch (error) {
 							Logger.error(getKey("plugin.unloading.failed").replace("%s%", name).replace("%d%", error.stack));
 						}
-
-						this.initPluginShutdown();
 					}
 				});
 			});
