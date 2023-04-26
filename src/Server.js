@@ -224,13 +224,29 @@ async function _listen() {
 async function _onJoin(client) {
 	await PlayerInit.initPlayer(client, server);
 
-	Object.assign(client, { items: [] }); // Inventory
-	Object.assign(client, { x: 0, y: 0, z: 0, on_ground: false }); // Player coordinates
-	Object.assign(client, { pitch: 0, yaw: 0 }); // Player rotation
-	Object.assign(client, { health: 20, hunger: 20, packetCount: 0, username: client.profile.name }); // API
-	Object.assign(client, { world: null, chunksEnabled: true, gamemode: Frog.serverConfigurationFiles.config.world.gamemode }); // World-related stuff
-	Object.assign(client, { op: null, dead: false, initialised: false, isConsole: false, fallDamageQueue: 0 }); // More API stuff
-	Object.assign(client, { ip: client.connection.address.split("/")[0], port: client.connection.address.split("/")[0] }); // Network
+	Object.assign(client, {
+		items: [],
+		x: 0,
+		y: 0,
+		z: 0,
+		on_ground: false,
+		pitch: 0,
+		yaw: 0,
+		health: 20,
+		hunger: 20,
+		packetCount: 0,
+		username: client.profile.name,
+		world: null,
+		chunksEnabled: true,
+		gamemode: Frog.serverConfigurationFiles.config.world.gamemode,
+		op: null,
+		dead: false,
+		initialised: false,
+		isConsole: false,
+		fallDamageQueue: 0,
+		ip: client.connection.address.split("/")[0],
+		port: client.connection.address.split("/")[0],
+	});
 
 	setInterval(() => {
 		client.packetCount = 0;
@@ -239,11 +255,10 @@ async function _onJoin(client) {
 	PlayerInfo.addPlayer(client);
 
 	if (PlayerInfo.players.length > config.maxPlayers) {
-		if (config.dev.useLegacyServerFullKickMessage) {
-			client.kick(Language.getKey("kickMessages.serverFull"));
-		} else {
-			client.sendPlayStatus(PlayStatus.FAILED_SERVER_FULL);
-		}
+		const kickMessage = config.dev.useLegacyServerFullKickMessage
+			? Language.getKey("kickMessages.serverFull")
+			: PlayStatus.FAILED_SERVER_FULL;
+		client.kick(kickMessage);
 		return;
 	}
 
@@ -251,7 +266,8 @@ async function _onJoin(client) {
 
 	if (config.dev.useLegacyVersionMismatchKickMessage && !config.dev.multiProtocol) {
 		if (client.version !== serverProtocol) {
-			client.kick(Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version));
+			const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version);
+			client.kick(kickMessage);
 			return;
 		}
 	} else {
@@ -267,7 +283,7 @@ async function _onJoin(client) {
 	responsePackInfo.setHasScripts(false);
 	responsePackInfo.setBehaviorPacks([]);
 	responsePackInfo.setTexturePacks([]);
-	responsePackInfo.writePacket(client);
+	responsePackInfo.writePacket(client)
 
 	Frog.eventEmitter.emit("playerJoin", {
 		player: client,
