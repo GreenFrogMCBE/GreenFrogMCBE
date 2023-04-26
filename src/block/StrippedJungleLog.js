@@ -15,14 +15,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class WrapedPlanks extends Block {
+class StrippedJungleLog extends Block {
 	getRuntimeId() {
-		return 3671;
+		return 4194;
 	}
 
 	getName() {
-		return "wraped_planks";
+		return "stripped_jungle_log";
 	}
 }
 
-module.exports = WrapedPlanks;
+module.exports = StrippedJungleLog;
