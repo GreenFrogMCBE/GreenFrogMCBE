@@ -20,7 +20,7 @@ const Gamemode = require("../api/player/Gamemode");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
-const Air = require("../block/BlueCandle");
+const Air = require("../block/Air");
 
 const Frog = require("../Frog");
 
