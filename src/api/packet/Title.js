@@ -14,7 +14,7 @@ const Frog = require("../../Frog");
 
 const TitlePacket = require("../../network/packets/ServerSetTitlePacket");
 
-const TitleType = require("../../network/packets/types/TitleType");
+const TitleType = require("../types/TitleType");
 
 /**
  * Represents a title that can be sent to a client.
@@ -29,11 +29,11 @@ class Title {
 		/** @type {string} The text to display in the title */
 		this.text;
 		/** @type {number} The time it takes for the title to fade in */
-		this.fadeInTime = 0;
+		this.fadeInTime = 20;
 		/** @type {number} The time the title will stay on the screen */
-		this.stayTime = 0;
+		this.stayTime = 20;
 		/** @type {number} The time it takes for the title to fade out */
-		this.fadeOutTime = 0;
+		this.fadeOutTime = 20;
 	}
 
 	/**
