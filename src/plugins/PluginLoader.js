@@ -33,8 +33,6 @@ module.exports = {
 
 	/**
 	 * Loads all plugins
-	 *
-	 *
 	 */
 	loadPlugins() {
 		fs.mkdirSync("./plugins/", { recursive: true });
@@ -85,8 +83,6 @@ module.exports = {
 
 	/**
 	 * Kills the server
-	 *
-	 *
 	 */
 	async killServer() {
 		config = require("../Frog").serverConfigurationFiles.config;
@@ -96,8 +92,6 @@ module.exports = {
 
 	/**
 	 * Prepares plugins for shutdown
-	 *
-	 *
 	 */
 	initPluginShutdown() {
 		pluginCount--;
@@ -107,9 +101,6 @@ module.exports = {
 
 	/**
 	 * Unloads plugins
-	 *
-	 *
-	 *
 	 */
 	async unloadPlugins() {
 		fs.readdir("./plugins", (_err, files) => {
