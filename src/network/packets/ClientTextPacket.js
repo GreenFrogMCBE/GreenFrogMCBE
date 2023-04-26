@@ -49,6 +49,8 @@ class ClientTextPacket extends PacketConstructor {
 	async readPacket(player, packet, server) {
 		let message = packet.data.params.message;
 
+		if (config.chat.disable || !message.trim()) return;
+
 		let shouldChat = true;
 
 		Frog.eventEmitter.emit("playerChat", {
@@ -60,7 +62,7 @@ class ClientTextPacket extends PacketConstructor {
 			},
 		});
 
-		if (!shouldChat || config.chat.disable || !message.trim()) return;
+		if (!shouldChat) return
 
 		if (config.chat.blockInvalidMessages) {
 			message = message.replace("§", "")
