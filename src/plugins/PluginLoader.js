@@ -103,42 +103,47 @@ module.exports = {
 	 * Unloads plugins
 	 */
 	async unloadPlugins() {
-		fs.readdir("./plugins", (_err, files) => {
-			if (files.length === 0) this.killServer();
+		try {
+			const files = await fs.promises.readdir("./plugins");
 
-			files.forEach((file) => {
-				fs.stat(`${__dirname}/../../plugins/${file}`, (error, stats) => {
-					if (error) {
-						Logger.error(getKey("plugin.unloading.failed").replace("%s%", file).replace("%d%", error.stack));
-						return;
+			if (files.length === 0) {
+				this.killServer();
+				return;
+			}
+
+			for (const file of files) {
+				const stats = await fs.promises.stat(`${__dirname}/../../plugins/${file}`);
+
+				if (stats.isDirectory()) {
+					pluginCount++;
+					let name, main;
+
+					try {
+						const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
+						name = packageJson.displayName;
+						main = packageJson.main;
+
+						Logger.info(getKey("plugin.unloading.unloading").replace("%s%", name));
+					} catch (error) {
+						continue;
 					}
 
-					if (stats.isDirectory()) {
-						pluginCount++;
-						let name, main;
+					this.initPluginShutdown();
 
-						try {
-							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
-							name = packageJson.displayName;
-							main = packageJson.main;
+					try {
+						const plugin = require(`${__dirname}/../../plugins/${file}/${main}`);
 
-							Logger.info(getKey("plugin.unloading.unloading").replace("%s%", name));
-						} catch (error) {
-							return;
-						}
-
-						try {
-							this.initPluginShutdown();
-
-							require(`${__dirname}/../../plugins/${file}/${main}`).onShutdown();
-
+						if (typeof plugin.onShutdown === 'function') {
+							await plugin.onShutdown();
 							Logger.info(getKey("plugin.unloading.success").replace("%s%", name));
-						} catch (error) {
-							Logger.error(getKey("plugin.unloading.failed").replace("%s%", name).replace("%d%", error.stack));
 						}
+					} catch (error) {
+						Logger.error(getKey("plugin.unloading.failed").replace("%s%", name).replace("%d%", error.stack));
 					}
-				});
-			});
-		});
-	},
+				}
+			}
+		} catch (error) {
+			Logger.error(getKey("plugin.unloading.error").replace("%d%", error.stack));
+		}
+	}
 };
