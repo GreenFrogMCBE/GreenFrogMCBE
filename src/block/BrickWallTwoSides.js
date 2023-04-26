@@ -15,7 +15,7 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class BrickWall extends Block {
+class BrickWallTwoSides extends Block {
 	getRuntimeId() {
 		return 3065;
 	}
@@ -25,4 +25,4 @@ class BrickWall extends Block {
 	}
 }
 
-module.exports = BrickWall;
+module.exports = BrickWallTwoSides;

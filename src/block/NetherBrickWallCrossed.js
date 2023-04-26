@@ -15,7 +15,7 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class NetherBrickWall extends Block {
+class NetherBrickWallCrossed extends Block {
 	getRuntimeId() {
 		return 3026;
 	}
@@ -25,4 +25,4 @@ class NetherBrickWall extends Block {
 	}
 }
 
-module.exports = NetherBrickWall;
+module.exports = NetherBrickWallCrossed;

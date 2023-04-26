@@ -15,7 +15,7 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class AndesiteWall extends Block {
+class AndesiteWallCrossed extends Block {
 	getRuntimeId() {
 		return 3357;
 	}
@@ -25,4 +25,4 @@ class AndesiteWall extends Block {
 	}
 }
 
-module.exports = AndesiteWall;
+module.exports = AndesiteWallCrossed;
