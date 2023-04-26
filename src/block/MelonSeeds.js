@@ -15,14 +15,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class RedSandstoneWall2 extends Block {
+class MelonSeeds extends Block {
 	getRuntimeId() {
-		return 3993;
+		return 7454;
 	}
 
 	getName() {
-		return "red_sandstone_wall2";
+		return "melon_seeds";
 	}
 }
 
-module.exports = RedSandstoneWall2;
+module.exports = MelonSeeds;

@@ -15,14 +15,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class RedNetherBrickWall2 extends Block {
+class BorderLeft extends Block {
 	getRuntimeId() {
-		return 4259;
+		return 7660;
 	}
 
 	getName() {
-		return "red_nether_brick_wall2";
+		return "border";
 	}
 }
 
-module.exports = RedNetherBrickWall2;
+module.exports = BorderLeft;

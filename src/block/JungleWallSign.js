@@ -15,14 +15,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class PrismarineWall2 extends Block {
+class JungleWallSign extends Block {
 	getRuntimeId() {
-		return 4064;
+		return 6234;
 	}
 
 	getName() {
-		return "prismarine_wall2";
+		return "jungle_wall_sign";
 	}
 }
 
-module.exports = PrismarineWall2;
+module.exports = JungleWallSign;

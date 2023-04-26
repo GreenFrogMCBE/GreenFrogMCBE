@@ -15,14 +15,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class HangingSign2 extends Block {
+class DeadBush extends Block {
 	getRuntimeId() {
-		return 4523;
+		return 6909;
 	}
 
 	getName() {
-		return "hanging_sign2";
+		return "bush";
 	}
 }
 
-module.exports = HangingSign2;
+module.exports = DeadBush;

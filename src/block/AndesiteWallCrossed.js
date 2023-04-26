@@ -15,14 +15,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class CobbleStoneWall2 extends Block {
+class AndesiteWallCrossed extends Block {
 	getRuntimeId() {
-		return 3731;
+		return 3357;
 	}
 
 	getName() {
-		return "cobble_stone_wall";
+		return "andesite_wall";
 	}
 }
 
-module.exports = CobbleStoneWall2;
+module.exports = AndesiteWallCrossed;
