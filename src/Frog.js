@@ -105,9 +105,9 @@ module.exports = {
 	 */
 	getServerData() {
 		return {
-			minorServerVersion: "3.1 (API rewrite)",
+			minorServerVersion: "3.3 (Added more blocks, and better movement API)",
 			majorServerVersion: "3.0",
-			apiServerVersion: "3.0",
+			apiVersion: "3.0",
 		};
 	},
 
