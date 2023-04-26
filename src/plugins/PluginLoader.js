@@ -87,7 +87,7 @@ module.exports = {
 	async killServer() {
 		config = require("../Frog").serverConfigurationFiles.config;
 
-		process.exit(config.exitCode);
+		process.exit(config.dev.exitCode);
 	},
 
 	/**
