@@ -39,9 +39,7 @@ const directories = {
 	 * @type {function}
 	 * @param {string} file
 	 */
-	getFile(file) {
-		return path.join(path.join(__dirname, "..", "..", "./plugins"), file)
-	}
+	getFile: (file) => path.join(path.join(__dirname, "..", "..", "./plugins"), file),
 }
 
 module.exports = {
@@ -52,6 +50,16 @@ module.exports = {
 	 */
 	pluginCount,
 
+	/**
+	 * Basic directory info
+	 * 
+	 * @type {{
+	 *   plugins: string,
+	 *   pluginData: string,
+	 *   fullPluginPath: string,
+	 *   getFile: (file: string) => string
+	 * }}
+	 */
 	directories,
 
 	/**
