@@ -17,11 +17,32 @@ const PluginManager = require("./PluginManager");
 
 const CCH = require("../server/ConsoleCommandSender");
 const { getKey } = require("../utils/Language");
+const path = require("path");
 
-/** @private */
+/** @private @type {number} */
 let pluginCount = 0;
-/** @private */
+/** @private @type {JSON} */
 let config;
+
+/** @private @type {JSON} */
+const directories = {
+	/** @type {string} */
+	plugins: "./plugins",
+
+	/** @type {string} */
+	pluginData: "./pluginData",
+
+	/** @type {string} */
+	fullPluginPath: path.join(__dirname, "..", "..", "./plugins"),
+
+	/** 
+	 * @type {function}
+	 * @param {string} file
+	 */
+	getFile(file) {
+		return path.join(path.join(__dirname, "..", "..", "./plugins"), file)
+	}
+}
 
 module.exports = {
 	/**
@@ -31,54 +52,50 @@ module.exports = {
 	 */
 	pluginCount,
 
+	directories,
+
 	/**
 	 * Loads all plugins
 	 */
-	loadPlugins() {
-		fs.mkdirSync("./plugins/", { recursive: true });
-		fs.mkdirSync("./pluginData/", { recursive: true });
+	async loadPlugins() {
+		fs.mkdirSync(directories.plugins, { recursive: true });
+		fs.mkdirSync(directories.pluginData, { recursive: true });
 
-		setTimeout(() => {
-			CCH.start();
-		}, 1500);
+		CCH.start();
 
-		fs.readdir("./plugins", (_err, files) => {
-			files.forEach((file) => {
-				fs.stat(`${__dirname}/../../plugins/${file}`, (error, stats) => {
-					if (error) {
-						Logger.error(getKey("plugin.loading.failed").replace("%s%", file).replace("%d%", error.stack));
-						return;
-					}
+		const files = await fs.readdirSync(directories.plugins);
 
-					if (stats.isDirectory()) {
-						let name, version, main;
+		for (const file of files) {
+			const stats = await fs.statSync(directories.getFile(file));
+			if (stats.isDirectory()) {
+				let name, version, main;
 
-						try {
-							const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
+				try {
+					const packageJson = require(directories.getFile(`${file}/package.json`));
 
-							name = packageJson.displayName;
-							version = packageJson.version;
-							main = packageJson.main;
+					name = packageJson.displayName;
+					version = packageJson.version;
+					main = packageJson.main;
 
-							PluginManager.addPlugin(name, version);
-							Logger.info(getKey("plugin.loading.loading").replace("%s%", name).replace("%d%", version));
-						} catch (error) {
-							Logger.warning(getKey("plugin.loading.warning.invalidJson").replace("%s%", file).replace("%d%", error.stack));
-							return;
-						}
+					PluginManager.addPlugin(name, version);
+					Logger.info(getKey("plugin.loading.loading").replace("%s%", name).replace("%d%", version));
+				} catch (error) {
+					Logger.warning(getKey("plugin.loading.warning.invalidJson").replace("%s%", file).replace("%d%", error.stack));
+					continue;
+				}
 
-						try {
-							require(`${__dirname}/../../plugins/${file}/${main}`).onLoad();
+				try {
+					const plugin = require(directories.getFile(`${file}/${main}`));
 
-							PluginManager.addPlugin(name, version);
-							Logger.info(getKey("plugin.loading.loaded").replace("%s%", name).replace("%d%", version));
-						} catch (error) {
-							Logger.error(getKey("plugin.loading.failed").replace("%s%", name).replace("%d%", error.stack));
-						}
-					}
-				});
-			});
-		});
+					await plugin.onLoad();
+
+					PluginManager.addPlugin(name, version);
+					Logger.info(getKey("plugin.loading.loaded").replace("%s%", name).replace("%d%", version));
+				} catch (error) {
+					Logger.error(getKey("plugin.loading.failed").replace("%s%", name).replace("%d%", error.stack));
+				}
+			}
+		}
 	},
 
 	/**
