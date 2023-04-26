@@ -239,7 +239,11 @@ async function _onJoin(client) {
 	PlayerInfo.addPlayer(client);
 
 	if (PlayerInfo.players.length > config.maxPlayers) {
-		client.kick(Language.getKey("kickMessages.serverFull"));
+		if (config.dev.useLegacyServerFullKickMessage) {
+			client.kick(Language.getKey("kickMessages.serverFull"));
+		} else {
+			client.sendPlayStatus(PlayStatus.FAILED_SERVER_FULL);
+		}
 		return;
 	}
 

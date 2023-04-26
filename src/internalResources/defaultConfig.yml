@@ -28,6 +28,7 @@ dev:
   # 0 - visitor
   multiProtocol: false # Supports 1.19.70+. Some features may be broken
   useLegacyVersionMismatchKickMessage: false # Instead of `Could not connect: Outdated client!` or `Could not connect: Outdated server!` it will say the value of `kickMessages.versionMismatch` in your lang file
+  useLegacyServerFullKickMessage: false # Instead of `Wow this server is popular! Check back later to see if space opens up.`  it will say the value of `kickMessages.serverFull` in your lang file
 world:
   gamemode: "creative"
   worldGamemode: "creative"
