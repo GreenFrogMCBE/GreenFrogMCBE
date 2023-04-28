@@ -129,11 +129,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				if (config.world.generator === WorldGenerators.DEFAULT) {
 					player.world.setSpawnCoordinates(1070, 87, -914);
-				} else if (config.world.generator === WorldGenerators.VOID) {
-					player.world.setSpawnCoordinates(0, 100, 0);
+				} else if (config.world.generator === WorldGenerators.FLAT) {
+					player.world.setSpawnCoordinates(-274, -58, -211);
 				} else {
-					player.world.setSpawnCoordinates(0, 69, 0);
+					player.world.setSpawnCoordinates(0, 100, 0);
 				}
+
+				player.location.x = player.world.getSpawnCoordinates().x
+				player.location.y = player.world.getSpawnCoordinates().y
+				player.location.z = player.world.getSpawnCoordinates().z
 
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
 
@@ -237,9 +241,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 								z: -915,
 							}
 							: {
-								x: -273,
-								y: 95,
-								z: 99
+								x: -279,
+								y: 111,
+								z: -216
 							};
 
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
