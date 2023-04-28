@@ -10,9 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-export = RedSandstoneWall2;
+export = NetherBrickWallCrossed;
 /**
  * @type {import('../type/Block')}
  */
-declare class RedSandstoneWall2 extends Block {}
+declare class NetherBrickWallCrossed extends Block {}
 import Block = require("./Block");

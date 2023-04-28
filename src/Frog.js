@@ -58,7 +58,7 @@ module.exports = {
 	 * @returns {Server}
 	 */
 	getServer() {
-		return __server
+		return __server;
 	},
 
 	/**

@@ -230,8 +230,8 @@ module.exports = {
 
 		/**
 		 * Sends play status to the player
-		 * 
-		 * @param {PlayStatus} play_status 
+		 *
+		 * @param {PlayStatus} play_status
 		 * @param {boolean} termiate_connection
 		 */
 		player.sendPlayStatus = function (play_status, termiate_connection = false) {
@@ -248,13 +248,13 @@ module.exports = {
 			});
 
 			if (!sendPlayStatus) return;
-			
-			const playStatus = new ServerPlayStatusPacket()
-			playStatus.setStatus(play_status)
-			playStatus.writePacket(player)
+
+			const playStatus = new ServerPlayStatusPacket();
+			playStatus.setStatus(play_status);
+			playStatus.writePacket(player);
 
 			if (termiate_connection) {
-				player.kick(getKey("kickMessages.playStatus").replace("%s%", play_status))
+				player.kick(getKey("kickMessages.playStatus").replace("%s%", play_status));
 			}
 		};
 

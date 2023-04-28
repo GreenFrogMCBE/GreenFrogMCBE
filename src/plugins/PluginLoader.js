@@ -35,12 +35,12 @@ const directories = {
 	/** @type {string} */
 	fullPluginPath: path.join(__dirname, "..", "..", "./plugins"),
 
-	/** 
+	/**
 	 * @type {function}
 	 * @param {string} file
 	 */
 	getFile: (file) => path.join(path.join(__dirname, "..", "..", "./plugins"), file),
-}
+};
 
 module.exports = {
 	/**
@@ -52,7 +52,7 @@ module.exports = {
 
 	/**
 	 * Basic directory info
-	 * 
+	 *
 	 * @type {{
 	 *   plugins: string,
 	 *   pluginData: string,
@@ -158,7 +158,7 @@ module.exports = {
 					try {
 						const plugin = require(`${__dirname}/../../plugins/${file}/${main}`);
 
-						if (typeof plugin.onShutdown === 'function') {
+						if (typeof plugin.onShutdown === "function") {
 							await plugin.onShutdown();
 							Logger.info(getKey("plugin.unloading.success").replace("%s%", name));
 						}
@@ -170,5 +170,5 @@ module.exports = {
 		} catch (error) {
 			Logger.error(getKey("plugin.unloading.error").replace("%d%", error.stack));
 		}
-	}
+	},
 };

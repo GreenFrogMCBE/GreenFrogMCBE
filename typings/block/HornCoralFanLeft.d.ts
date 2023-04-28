@@ -10,9 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-export = PrismarineWall2;
+export = HornCoralFanLeft;
 /**
  * @type {import('../type/Block')}
  */
-declare class PrismarineWall2 extends Block {}
+declare class HornCoralFanLeft extends Block {}
 import Block = require("./Block");

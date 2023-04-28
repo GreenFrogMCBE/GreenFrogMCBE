@@ -10,9 +10,10 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-export = HangingSign2;
 /**
- * @type {import('../type/Block')}
+ * Capitalizes the first letter of a string
+ *
+ * @param {string} str
+ * @returns {string}
  */
-declare class HangingSign2 extends Block {}
-import Block = require("./Block");
+export function capitalizeFirstLetter(str: string): string;

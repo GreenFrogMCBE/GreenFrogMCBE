@@ -43,7 +43,7 @@ class ClientMovePacket extends PacketConstructor {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw, on_ground } = packet.data.params;
 
-		let shouldSetPosition = true
+		let shouldSetPosition = true;
 
 		Frog.eventEmitter.emit("playerMove", {
 			player,
@@ -60,20 +60,20 @@ class ClientMovePacket extends PacketConstructor {
 
 				player.teleport(player.location.x, player.location.y, player.location.z);
 
-				shouldSetPosition = false
+				shouldSetPosition = false;
 			},
 		});
 
-		if (!shouldSetPosition) return
+		if (!shouldSetPosition) return;
 
 		Falldamage.calculateFalldamage(player, { x, y, z });
 		Falldamage.calculateHungerloss(player);
 
-		player.location.x = x
-		player.location.y = y
-		player.location.z = z
-		player.location.yaw = yaw
-		player.location.pitch = pitch
+		player.location.x = x;
+		player.location.y = y;
+		player.location.z = z;
+		player.location.yaw = yaw;
+		player.location.pitch = pitch;
 		player.location.onGround = on_ground;
 	}
 }

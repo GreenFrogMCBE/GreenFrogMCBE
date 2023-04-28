@@ -10,10 +10,23 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+/** @private @type {number} */
+export let pluginCount: number;
+/** @private @type {JSON} */
+export const directories: JSON;
 /**
- * Sends a unknown command (or no permission) error to the command executor.
- *
- * @param {Client} commandExecutor
- * @param {string} command
+ * Loads all plugins
  */
-export function throwError(commandExecutor: Client, command: string): void;
+export declare function loadPlugins(): Promise<void>;
+/**
+ * Kills the server
+ */
+export declare function killServer(): Promise<void>;
+/**
+ * Prepares plugins for shutdown
+ */
+export declare function initPluginShutdown(): void;
+/**
+ * Unloads plugins
+ */
+export declare function unloadPlugins(): Promise<void>;

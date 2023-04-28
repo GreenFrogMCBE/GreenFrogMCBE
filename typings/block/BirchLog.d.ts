@@ -10,9 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-export = RedNetherBrickWall2;
+export = BirchLog;
 /**
  * @type {import('../type/Block')}
  */
-declare class RedNetherBrickWall2 extends Block {}
+declare class BirchLog extends Block {}
 import Block = require("./Block");

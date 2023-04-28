@@ -62,10 +62,10 @@ class ClientTextPacket extends PacketConstructor {
 			},
 		});
 
-		if (!shouldChat) return
+		if (!shouldChat) return;
 
 		if (config.chat.blockInvalidMessages) {
-			message = message.replace("§", "")
+			message = message.replace("§", "");
 
 			if (message.length > 256) {
 				Frog.eventEmitter.emit("playerMalformatedChatMessage", {
@@ -73,7 +73,7 @@ class ClientTextPacket extends PacketConstructor {
 					player,
 					message,
 				});
-				return
+				return;
 			}
 		}
 

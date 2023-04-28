@@ -135,9 +135,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.world.setSpawnCoordinates(0, 100, 0);
 				}
 
-				player.location.x = player.world.getSpawnCoordinates().x
-				player.location.y = player.world.getSpawnCoordinates().y
-				player.location.z = player.world.getSpawnCoordinates().z
+				player.location.x = player.world.getSpawnCoordinates().x;
+				player.location.y = player.world.getSpawnCoordinates().y;
+				player.location.z = player.world.getSpawnCoordinates().z;
 
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
 
@@ -236,15 +236,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const coordinates =
 						config.world.generator === WorldGenerators.DEFAULT
 							? {
-								x: 1070,
-								y: 274,
-								z: -915,
-							}
+									x: 1070,
+									y: 274,
+									z: -915,
+							  }
 							: {
-								x: -279,
-								y: 111,
-								z: -216
-							};
+									x: -279,
+									y: 111,
+									z: -216,
+							  };
 
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
 					networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);

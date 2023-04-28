@@ -10,9 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-export = CobbleStoneWall2;
+export = UnnamedBlock;
 /**
  * @type {import('../type/Block')}
  */
-declare class CobbleStoneWall2 extends Block {}
+declare class UnnamedBlock extends Block {}
 import Block = require("./Block");

@@ -1,5 +1,4 @@
-import Server from "../../../types/Server";
-import { Client } from "frog-protocol";
+import { Client, Server } from "frog-protocol";
 
 export interface ArgOptions {
 	name: string;
@@ -18,6 +17,6 @@ export interface Options {
 
 export interface Command {
 	data: Options;
-	run(server: Server, player: Client, args: Array): void;
+	run(server: Server, player: Client, args: Array<String>): void;
 	throwError(player: Client): void;
 }
