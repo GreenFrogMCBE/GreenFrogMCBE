@@ -232,15 +232,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const coordinates =
 						config.world.generator === WorldGenerators.DEFAULT
 							? {
-									x: 1070,
-									y: 274,
-									z: -915,
-							  }
+								x: 1070,
+								y: 274,
+								z: -915,
+							}
 							: {
-									x: -17,
-									y: 117,
-									z: 22,
-							  };
+								x: -17,
+								y: 117,
+								z: 22,
+							};
 
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
 					networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);
@@ -251,7 +251,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					let chunks = null;
 
 					try {
-						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`);
+						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`).data;
 					} catch (error) {
 						throw new ChunkLoadException(getKey("exceptions.world.loading.failed").replace("%s%", error.stack));
 					}

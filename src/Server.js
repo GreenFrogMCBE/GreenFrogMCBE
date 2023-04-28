@@ -74,46 +74,58 @@ async function _handleCriticalError(error) {
  * @param {JSON} packetParams
  * @throws {RateLimitException} - In case if the client is ratelimited
  */
-async function _handlePacket(client, packetParams) {
-	const packetsDir = path.join(__dirname, "network", "packets");
+function _handlePacket(client, packetParams) {
+	try {
+		const packetsDir = path.join(__dirname, "network", "packets");
 
-	let exists = false;
+		let exists = false;
 
-	fs.readdirSync(packetsDir).forEach((filename) => {
-		if (filename.startsWith("Client") && filename.endsWith(".js")) {
-			const packetPath = path.join(packetsDir, filename);
+		fs.readdirSync(packetsDir).forEach((filename) => {
+			if (filename.startsWith("Client") && filename.endsWith(".js")) {
+				const packetPath = path.join(packetsDir, filename);
 
-			if (++client.packetCount > 2000) {
-				Frog.eventEmitter.emit("packetRatelimit", {
-					player: client,
-					server: this,
-				});
+				if (++client.packetCount > 2000) {
+					Frog.eventEmitter.emit("packetRatelimit", {
+						player: client,
+						server: this,
+					});
 
-				throw new RateLimitException(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
-			}
-
-			const packet = new (require(packetPath))();
-			if (packet.getPacketName() === packetParams.data.name) {
-				let shouldReadPacket = true;
-
-				Frog.eventEmitter.emit("packetRead", {
-					player: client,
-					data: packet.data,
-					server: this,
-				});
-
-				if (shouldReadPacket) {
-					packet.readPacket(client, packetParams, this);
+					throw new RateLimitException(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
 				}
 
-				exists = true;
-			}
-		}
-	});
+				const packet = new (require(packetPath))();
+				if (packet.getPacketName() === packetParams.data.name) {
+					let shouldReadPacket = true;
 
-	if (!exists && config.dev.logUnhandledPackets) {
-		Logger.warning(Language.getKey("network.packet.unhandledPacket"));
-		console.info("%o", packetParams);
+					Frog.eventEmitter.emit("packetRead", {
+						player: client,
+						data: packet.data,
+						server: this,
+					});
+
+					if (shouldReadPacket) {
+						packet.readPacket(client, packetParams, this);
+					}
+
+					exists = true;
+				}
+			}
+		});
+
+		if (!exists && config.dev.logUnhandledPackets) {
+			Logger.warning(Language.getKey("network.packet.unhandledPacket"));
+			console.info("%o", packetParams);
+		}
+	} catch (error) {
+		client.kick(Language.getKey("kickMessages.invalidPacket"));
+
+		Frog.eventEmitter.emit("packetReadError", {
+			player: client,
+			error,
+			server: this,
+		});
+
+		Logger.error(Language.getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
 	}
 }
 
@@ -189,19 +201,7 @@ async function _listen() {
 			});
 
 			client.on("packet", (packet) => {
-				try {
-					_handlePacket(client, packet);
-				} catch (error) {
-					client.kick(Language.getKey("kickMessages.invalidPacket"));
-
-					Frog.eventEmitter.emit("packetReadError", {
-						player: client,
-						error,
-						server: this,
-					});
-
-					Logger.error(Language.getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
-				}
+				_handlePacket(client, packet);
 			});
 		});
 
