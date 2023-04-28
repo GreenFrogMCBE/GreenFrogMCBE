@@ -257,9 +257,7 @@ async function _onJoin(client) {
 	PlayerInfo.addPlayer(client);
 
 	if (PlayerInfo.players.length > config.maxPlayers) {
-		const kickMessage = config.dev.useLegacyServerFullKickMessage
-			? Language.getKey("kickMessages.serverFull")
-			: PlayStatus.FAILED_SERVER_FULL;
+		const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.getKey("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL;
 		client.kick(kickMessage);
 		return;
 	}
@@ -285,7 +283,7 @@ async function _onJoin(client) {
 	responsePackInfo.setHasScripts(false);
 	responsePackInfo.setBehaviorPacks([]);
 	responsePackInfo.setTexturePacks([]);
-	responsePackInfo.writePacket(client)
+	responsePackInfo.writePacket(client);
 
 	Frog.eventEmitter.emit("playerJoin", {
 		player: client,

@@ -21,5 +21,5 @@ module.exports = {
 	 */
 	throwError(commandExecutor, command) {
 		commandExecutor.sendMessage(Language.getKey("commands.unknown").replace("%s%", command));
-	}
+	},
 };
