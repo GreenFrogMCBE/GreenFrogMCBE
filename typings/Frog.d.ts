@@ -18,7 +18,12 @@
  */
 declare const _eventEmitter: any;
 export declare const isDebug: any;
-export declare const server: Server;
+/**
+ * Returns the server object
+ *
+ * @returns {Server}
+ */
+export declare function getServer(): Server;
 export declare function setServer(server: any): void;
 export declare const serverConfigurationFiles: any;
 export { _eventEmitter as eventEmitter };

@@ -10,9 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-export = AndesiteWall2;
+export = InvisiblePainting;
 /**
  * @type {import('../type/Block')}
  */
-declare class AndesiteWall2 extends Block {}
+declare class InvisiblePainting extends Block {}
 import Block = require("./Block");

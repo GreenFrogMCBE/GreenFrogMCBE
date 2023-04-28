@@ -10,10 +10,9 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
+export = MelonSeeds;
 /**
- * Sends a unknown command (or no permission) error to the command executor.
- *
- * @param {Client} commandExecutor
- * @param {string} command
+ * @type {import('../type/Block')}
  */
-export function throwError(commandExecutor: Client, command: string): void;
+declare class MelonSeeds extends Block {}
+import Block = require("./Block");

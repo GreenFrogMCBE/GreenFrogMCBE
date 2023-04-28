@@ -6,3 +6,4 @@ TODO
 plugins/
 pluginData/
 crash-reports/
+!typings/plugins
