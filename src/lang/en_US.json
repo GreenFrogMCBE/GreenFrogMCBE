@@ -91,6 +91,7 @@
   "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
   "kickMessages.serverFull": "disconnectionScreen.serverFull",
   "kickMessages.versionMismatch": "Your client version does not match with the server version! Server is currently running on %s%",
+  "kickMessages.playStatus": "Kicked because a plugin sent play status: %s%",
   "kickMessages.invalidPacket": "Invalid packet",
   "kickMessages.serverClosed": "Server closed",
   "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",

@@ -27,6 +27,7 @@ const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRad
 const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket");
 const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket");
 const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
+const ServerPlayStatusPacket = require("../network/packets/ServerPlayStatusPacket");
 const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
 
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
@@ -107,7 +108,7 @@ module.exports = {
 		 * Sets player's gamemode
 		 *
 		 * @param {Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
-		 * @type {import('../api/Gamemode')}
+		 * @type {import('../api/player/Gamemode')}
 		 */
 		// prettier-ignore
 		player.setGamemode = function (gamemode) {
@@ -120,7 +121,7 @@ module.exports = {
 			];
 
 			if (!allowedGamemodes.includes(gamemode)) {
-				throw new InvalidGamemodeException()
+				throw new InvalidGamemodeException(gamemode)
 			}
 
 			let shouldChangeGamemode = true;
@@ -228,6 +229,36 @@ module.exports = {
 		};
 
 		/**
+		 * Sends play status to the player
+		 * 
+		 * @param {PlayStatus} play_status 
+		 * @param {boolean} termiate_connection
+		 */
+		player.sendPlayStatus = function (play_status, termiate_connection = false) {
+			let sendPlayStatus = true;
+
+			Frog.eventEmitter.emit("playerPlayStatus", {
+				player,
+				play_status,
+				termiate_connection,
+				server: server,
+				cancel: () => {
+					sendPlayStatus = false;
+				},
+			});
+
+			if (!sendPlayStatus) return;
+			
+			const playStatus = new ServerPlayStatusPacket()
+			playStatus.setStatus(play_status)
+			playStatus.writePacket(player)
+
+			if (termiate_connection) {
+				player.kick(getKey("kickMessages.playStatus").replace("%s%", play_status))
+			}
+		};
+
+		/**
 		 * Transfers the player to a different server
 		 *
 		 * @param {string} address - The address of the server to transfer to
@@ -258,7 +289,6 @@ module.exports = {
 		 * Sets player's local difficulty
 		 *
 		 * @param {Difficulty} difficulty
-		 * @type {import('../type/Difficulty')}
 		 */
 		player.setDifficulty = function (difficulty) {
 			let shouldChangeDifficulty = true;

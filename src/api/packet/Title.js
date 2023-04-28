@@ -11,8 +11,10 @@
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
 const Frog = require("../../Frog");
+
 const TitlePacket = require("../../network/packets/ServerSetTitlePacket");
-const TitleType = require("../../network/packets/types/TitleType");
+
+const TitleType = require("../types/TitleType");
 
 /**
  * Represents a title that can be sent to a client.
@@ -27,11 +29,11 @@ class Title {
 		/** @type {string} The text to display in the title */
 		this.text;
 		/** @type {number} The time it takes for the title to fade in */
-		this.fadeInTime = 0;
+		this.fadeInTime = 20;
 		/** @type {number} The time the title will stay on the screen */
-		this.stayTime = 0;
+		this.stayTime = 20;
 		/** @type {number} The time it takes for the title to fade out */
-		this.fadeOutTime = 0;
+		this.fadeOutTime = 20;
 	}
 
 	/**
@@ -133,8 +135,8 @@ class Title {
 		let shouldSendTitle = true;
 
 		Frog.eventEmitter.emit("serverTitle", {
-			fadeinTime: this.getFadeinTime(),
-			fadeoutTime: this.getFadeoutTime(),
+			fadeinTime: this.getFadeInTime(),
+			fadeoutTime: this.getFadeOutTime(),
 			stayTime: this.getStayTime(),
 			text: this.getText(),
 			type: this.getType(),
@@ -146,11 +148,11 @@ class Title {
 		if (!shouldSendTitle) return;
 
 		const titlePacket = new TitlePacket();
-		titlePacket.setFadeinTime(this.getFadeinTime());
-		titlePacket.setStaytime(this.getStayTime());
+		titlePacket.setFadeInTime(this.getFadeInTime());
+		titlePacket.setStayTime(this.getStayTime());
 		titlePacket.setText(this.getText());
 		titlePacket.setType(this.getType());
-		titlePacket.setFadeoutTime(this.getFadeoutTime());
+		titlePacket.setFadeOutTime(this.getFadeOutTime());
 		titlePacket.send(client);
 	}
 }

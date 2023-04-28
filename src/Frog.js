@@ -10,8 +10,6 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-/** Main API functions for GreenFrog */
-
 const eventLib = require("events");
 
 const PluginLoader = require("./plugins/PluginLoader");
@@ -33,16 +31,6 @@ const fs = require("fs");
 const _eventEmitter = new eventLib();
 
 let __server;
-
-/**
- * Returns the server object
- *
- * @private
- * @returns {Server}
- */
-function getServer() {
-	return __server;
-}
 
 /**
  * Returns configuration files
@@ -69,7 +57,9 @@ module.exports = {
 	 *
 	 * @returns {Server}
 	 */
-	server: getServer(),
+	getServer() {
+		return __server
+	},
 
 	/**
 	 * Sets the server object
@@ -107,9 +97,9 @@ module.exports = {
 	 */
 	getServerData() {
 		return {
-			minorServerVersion: "3.1 (API rewrite)",
+			minorServerVersion: "3.3 (Added more blocks, and better movement API)",
 			majorServerVersion: "3.0",
-			apiServerVersion: "3.0",
+			apiVersion: "3.0",
 		};
 	},
 
@@ -147,7 +137,7 @@ module.exports = {
 			Logger.info(getKey("server.shuttingDown"));
 
 			await require("./server/ConsoleCommandSender").close();
-			await getServer().close(shutdownMessage);
+			await this.getServer().close(shutdownMessage);
 
 			setTimeout(() => {
 				PluginLoader.unloadPlugins();

@@ -10,7 +10,7 @@
  * Copyright 2023 andriycraft
  * Github: https://github.com/andriycraft/GreenFrogMCBE
  */
-const TitleType = require("./types/TitleType");
+const TitleType = require("../../api/types/TitleType");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -59,7 +59,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 	 * Sets the fade-in time of the title.
 	 * @param {number} new_fadein - The fade-in time of the title.
 	 */
-	setFadeinTime(new_fadein) {
+	setFadeInTime(new_fadein) {
 		fadeinTime = new_fadein;
 	}
 
@@ -67,7 +67,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 	 * Sets the stay time of the title.
 	 * @param {number} staytime1 - The stay time of the title.
 	 */
-	setStaytime(new_staytime) {
+	setStayTime(new_staytime) {
 		stayTime = new_staytime;
 	}
 
@@ -75,7 +75,7 @@ class ServerSetTitlePacket extends PacketConstructor {
 	 * Sets the fade-out time of the title.
 	 * @param {number} fadeout - The fade-out time of the title.
 	 */
-	setFadeoutTime(new_fadeout) {
+	setFadeOutTime(new_fadeout) {
 		fadeoutTime = new_fadeout;
 	}
 

@@ -17,7 +17,7 @@ const Block = require("./Block");
  */
 class Air extends Block {
 	getRuntimeId() {
-		return 0;
+		return -1;
 	}
 
 	getName() {
