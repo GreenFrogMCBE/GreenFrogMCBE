@@ -132,7 +132,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				} else if (config.world.generator === WorldGenerators.VOID) {
 					player.world.setSpawnCoordinates(0, 100, 0);
 				} else {
-					player.world.setSpawnCoordinates(0, -58, 0);
+					player.world.setSpawnCoordinates(0, 69, 0);
 				}
 
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
@@ -237,9 +237,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 								z: -915,
 							}
 							: {
-								x: -17,
-								y: 117,
-								z: 22,
+								x: -273,
+								y: 95,
+								z: 99
 							};
 
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
@@ -311,8 +311,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						if (onlineplayers.username == player.username) {
 							Logger.debug(getKey("debug.playerlist.invalid"));
 						} else {
-							let xuid = player.profile.xuid;
-							let uuid = player.profile.uuid;
+							const xuid = player.profile.xuid;
+							const uuid = player.profile.uuid;
 
 							const playerList = new PlayerList();
 							playerList.setType(PlayerListTypes.ADD);
