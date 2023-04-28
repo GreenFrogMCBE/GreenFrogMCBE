@@ -129,11 +129,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				if (config.world.generator === WorldGenerators.DEFAULT) {
 					player.world.setSpawnCoordinates(1070, 87, -914);
-				} else if (config.world.generator === WorldGenerators.VOID) {
-					player.world.setSpawnCoordinates(0, 100, 0);
+				} else if (config.world.generator === WorldGenerators.FLAT) {
+					player.world.setSpawnCoordinates(-274, -58, -211);
 				} else {
-					player.world.setSpawnCoordinates(0, -58, 0);
+					player.world.setSpawnCoordinates(0, 100, 0);
 				}
+
+				player.location.x = player.world.getSpawnCoordinates().x
+				player.location.y = player.world.getSpawnCoordinates().y
+				player.location.z = player.world.getSpawnCoordinates().z
 
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
 
@@ -232,15 +236,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const coordinates =
 						config.world.generator === WorldGenerators.DEFAULT
 							? {
-									x: 1070,
-									y: 274,
-									z: -915,
-							  }
+								x: 1070,
+								y: 274,
+								z: -915,
+							}
 							: {
-									x: -17,
-									y: 117,
-									z: 22,
-							  };
+								x: -279,
+								y: 111,
+								z: -216
+							};
 
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
 					networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);
@@ -251,7 +255,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					let chunks = null;
 
 					try {
-						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`);
+						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`).data;
 					} catch (error) {
 						throw new ChunkLoadException(getKey("exceptions.world.loading.failed").replace("%s%", error.stack));
 					}
@@ -311,8 +315,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						if (onlineplayers.username == player.username) {
 							Logger.debug(getKey("debug.playerlist.invalid"));
 						} else {
-							let xuid = player.profile.xuid;
-							let uuid = player.profile.uuid;
+							const xuid = player.profile.xuid;
+							const uuid = player.profile.uuid;
 
 							const playerList = new PlayerList();
 							playerList.setType(PlayerListTypes.ADD);

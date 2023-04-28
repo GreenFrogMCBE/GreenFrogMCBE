@@ -3,7 +3,7 @@
 ```diff
 @@ GreenFrog is a server software for Minecraft: Bedrock edition @@
 
-It is written in NodeJS, currently supports 1.19.70 - 1.19.73
+It is written in NodeJS, currently supports 1.19.80
 It is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
 

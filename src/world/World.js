@@ -229,7 +229,7 @@ class World {
 			});
 
 			for (const client of this.getPlayersInWorld()) {
-				const posY = Math.floor(client.y);
+				const posY = Math.floor(client.location.y);
 
 				let min = -64;
 
