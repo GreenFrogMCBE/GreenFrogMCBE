@@ -3,7 +3,7 @@
   "description": "A server software for MCBE",
   "main": "index.js",
   "author": "andriycraft",
-  "license": "MIT",
+  "license": "CC-BY-4.0",
   "scripts": {
     "format": "npx prettier --write .",
     "start": "node index.js",
