@@ -19,5 +19,5 @@ then running "npm install"
 to start the server, use "npm run start"
 
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/CREDITS.md
-+ Our license in case if you are lazy to read the LICENSE file: /docs/LICENSE-INFO.md
++ Human-readable license: /docs/LICENSE-HUMANREADABLE.md
 ```
