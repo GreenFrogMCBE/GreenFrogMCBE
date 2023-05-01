@@ -75,12 +75,12 @@ module.exports = {
 
 			if (!shouldSendMessage) return;
 
-			const text = new ServerTextPacket();
-			text.setMessage(message);
-			text.setPlatformChatId("");
-			text.setSourceName("");
-			text.setXuid("");
-			text.writePacket(player);
+			const serverText = new ServerTextPacket();
+			serverText.setMessage(message);
+			serverText.setPlatformChatId("");
+			serverText.setSourceName("");
+			serverText.setXuid("");
+			serverText.writePacket(player);
 		};
 
 		/**
