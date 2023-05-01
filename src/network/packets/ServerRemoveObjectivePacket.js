@@ -1,6 +1,6 @@
-const PacketConstructor = require("./PacketConstructor");
-
 let objective_name;
+
+const PacketConstructor = require("./PacketConstructor");
 
 class ServerRemoveObjectivePacket extends PacketConstructor {
 	/**

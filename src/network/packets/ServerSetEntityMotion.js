@@ -1,4 +1,3 @@
-
 const PacketConstructor = require("./PacketConstructor");
 
 let runtime_entity_ID = 0;

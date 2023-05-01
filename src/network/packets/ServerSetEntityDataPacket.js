@@ -1,4 +1,3 @@
-
 const PacketConstructor = require("./PacketConstructor");
 
 let value = {};
