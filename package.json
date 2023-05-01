@@ -8,8 +8,8 @@
     "format": "npx prettier --write .",
     "start": "node index.js",
     "dev": "nodemon --signal SIGINT index.js --debug",
-    "genlicenseheaders": "node tools/generateLicenseHeaders.js",
-    "build": "npm run genlicenseheaders && npm run format",
+    "generatelicenseheaders": "node tools/generateLicenseHeaders.js",
+    "build": "npm run generatelicenseheaders && npm run format",
     "autotest": "cd tools && node tests-auto.js --test",
     "test": "cd tools && node tests-manual.js --test",
     "pluginstructure": "node tools/generateBasePlugin.js"
