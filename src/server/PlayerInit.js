@@ -232,15 +232,15 @@ module.exports = {
 		 * Sends play status to the player
 		 *
 		 * @param {PlayStatus} play_status
-		 * @param {boolean} termiate_connection
+		 * @param {boolean} terminate_connection
 		 */
-		player.sendPlayStatus = function (play_status, termiate_connection = false) {
+		player.sendPlayStatus = function (play_status, terminate_connection = false) {
 			let sendPlayStatus = true;
 
 			Frog.eventEmitter.emit("playerPlayStatus", {
 				player,
 				play_status,
-				termiate_connection,
+				terminate_connection,
 				server: server,
 				cancel: () => {
 					sendPlayStatus = false;
@@ -253,7 +253,7 @@ module.exports = {
 			playStatus.setStatus(play_status);
 			playStatus.writePacket(player);
 
-			if (termiate_connection) {
+			if (terminate_connection) {
 				player.kick(getKey("kickMessages.playStatus").replace("%s%", play_status));
 			}
 		};
