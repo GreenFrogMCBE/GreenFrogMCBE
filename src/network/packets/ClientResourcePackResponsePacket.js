@@ -45,10 +45,13 @@ const StartGame = require("./ServerStartGamePacket");
 const CommandManager = require("../../player/CommandManager");
 
 const World = require("../../world/World");
+
 const Logger = require("../../server/Logger");
+
 const Commands = require("../../server/Commands");
 
 const { getKey } = require("../../utils/Language");
+
 const { serverConfigurationFiles } = require("../../Frog");
 const { config } = serverConfigurationFiles;
 
