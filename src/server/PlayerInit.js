@@ -345,8 +345,9 @@ module.exports = {
 		 * Disconnect a player from the server
 		 *
 		 * @param {string} [message=lang.kickmessages.kickedByPlugin]
+		 * @param {boolean} [hideDisconnectionScreen=false]
 		 */
-		player.kick = function (message = lang.kickmessages.kickedByPlugin) {
+		player.kick = function (message = lang.kickmessages.kickedByPlugin, hideDisconnectionScreen = false) {
 			if (player.kicked) return;
 
 			player.kicked = true;
@@ -364,7 +365,7 @@ module.exports = {
 			}
 
 			Logger.info(getKey("player.kicked").replace("%s%", player.username).replace("%d%", message));
-			player.disconnect(message);
+			player.disconnect(message, hideDisconnectionScreen);
 		};
 
 		/**
