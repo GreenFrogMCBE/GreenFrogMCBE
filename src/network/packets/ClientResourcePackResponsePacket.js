@@ -132,6 +132,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                 } else if (config.world.generator === WorldGenerators.FLAT) {
                     player.world.setSpawnCoordinates(-274, -58, -211);
                 } else {
+					player.chunksEnabled = false
                     player.world.setSpawnCoordinates(0, 100, 0);
                 }
 
