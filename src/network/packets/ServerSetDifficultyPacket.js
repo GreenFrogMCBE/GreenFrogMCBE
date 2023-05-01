@@ -1,4 +1,3 @@
-
 const Difficulty = require("../../api/types/Difficulty");
 
 let difficulty = Difficulty.PEACEFUL;

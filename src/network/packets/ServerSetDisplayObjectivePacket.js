@@ -1,4 +1,3 @@
-
 const DisplaySlots = require("../../scoreboard/types/DisplaySlots");
 
 const PacketConstructor = require("./PacketConstructor");

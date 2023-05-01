@@ -1,4 +1,3 @@
-
 let enabled = true;
 
 const PacketConstructor = require("./PacketConstructor");
