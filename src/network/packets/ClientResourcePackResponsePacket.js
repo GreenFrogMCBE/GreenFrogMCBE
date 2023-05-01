@@ -217,6 +217,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
                 }
                 itemcomponent.writePacket(player);
 
+				// player.chunksEnabled is true by default, but can be disabled by plugins
                 if (player.chunksEnabled) {
                     player.setChunkRadius(player.world.getChunkRadius());
 
