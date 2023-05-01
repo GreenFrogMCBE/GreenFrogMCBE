@@ -3,6 +3,14 @@ const { getKey } = require("../utils/Language");
 
 const LoggingException = require("../utils/exceptions/LoggingException");
 
+/**
+ * Fires the 'serverLogMessage' event
+ * 
+ * @param {string} langString 
+ * @param {string} color 
+ * @param {string} message 
+ * @param {string} consoleType 
+ */
 function fireEvent(langString, color, message, consoleType) {
 	require("../Frog").eventEmitter.emit("serverLogMessage", {
 		type: langString,
