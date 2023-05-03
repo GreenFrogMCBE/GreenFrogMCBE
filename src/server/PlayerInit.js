@@ -257,7 +257,13 @@ module.exports = {
 			playStatus.writePacket(player);
 
 			if (terminate_connection) {
-				player.kick(getKey("kickMessages.playStatus").replace("%s%", play_status));
+				Logger.info(getKey("kickMessages.playStatus.console").replace("%s%", player.username))
+
+				setTimeout(() => { // Client should disconnect itself, this is added just to prevent hacked clients from bypassing kicks
+					if (player.offline) return
+
+					player.kick(getKey("kickMessages.playStatus").replace("%s%", play_status));
+				}, 5000)
 			}
 		};
 
@@ -623,6 +629,8 @@ module.exports = {
 				pl.setUUID(player.profile.uuid);
 				pl.writePacket(currentPlayer);
 			}
+
+			player.offline = true;
 
 			Frog.eventEmitter.emit("playerLeave", {
 				player,

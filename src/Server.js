@@ -236,6 +236,8 @@ async function _onJoin(client) {
 			pitch: 0,
 			yaw: 0,
 		},
+		offline: false,
+		kicked: false,
 		health: 20,
 		hunger: 20,
 		packetCount: 0,
