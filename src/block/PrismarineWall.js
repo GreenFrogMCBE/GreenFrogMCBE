@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../type/Block')}
  */
 class PrismarineWall extends Block {
-	getRuntimeId() {
+	getRuntimeID() {
 		return 3526;
 	}
 

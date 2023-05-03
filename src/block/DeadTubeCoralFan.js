@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../type/Block')}
  */
 class DeadTubeCoralFan extends Block {
-	getRuntimeId() {
+	getRuntimeID() {
 		return 5071;
 	}
 

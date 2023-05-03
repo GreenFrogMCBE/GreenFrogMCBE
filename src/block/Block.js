@@ -18,7 +18,7 @@ class Block {
 	 * Returns the runtime id of the block
 	 * @returns {number}
 	 */
-	getRuntimeId() {
+	getRuntimeID() {
 		return null;
 	}
 

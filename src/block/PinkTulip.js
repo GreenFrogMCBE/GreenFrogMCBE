@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../type/Block')}
  */
 class PinkTulip extends Block {
-	getRuntimeId() {
+	getRuntimeID() {
 		return 5512;
 	}
 

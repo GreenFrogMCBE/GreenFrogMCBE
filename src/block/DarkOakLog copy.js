@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../type/Block')}
  */
 class DarkOakLog extends Block {
-	getRuntimeId() {
+	getRuntimeID() {
 		return 4617;
 	}
 

@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../type/Block')}
  */
 class BirchFence extends Block {
-	getRuntimeId() {
+	getRuntimeID() {
 		return 5679;
 	}
 

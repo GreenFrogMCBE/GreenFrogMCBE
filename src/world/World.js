@@ -165,7 +165,7 @@ class World {
 	 * @param {number} z - The Z-coordinate of the block.
 	 */
 	breakBlock(x, y, z) {
-		this.placeBlock(x, y, z, new Air().getRuntimeId());
+		this.placeBlock(x, y, z, new Air().getRuntimeID());
 	}
 
 	/**

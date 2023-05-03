@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../type/Block')}
  */
 class RedCandle4 extends Block {
-	getRuntimeId() {
+	getRuntimeID() {
 		return 7430;
 	}
 

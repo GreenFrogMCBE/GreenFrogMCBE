@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../type/Block')}
  */
 class BirchLog extends Block {
-	getRuntimeId() {
+	getRuntimeID() {
 		return 4606;
 	}
 

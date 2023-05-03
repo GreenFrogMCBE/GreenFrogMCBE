@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../type/Block')}
  */
 class Pumpkin extends Block {
-	getRuntimeId() {
+	getRuntimeID() {
 		return 6891;
 	}
 
