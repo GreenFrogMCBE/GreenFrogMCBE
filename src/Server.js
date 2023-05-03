@@ -274,9 +274,9 @@ async function _onJoin(client) {
 		}
 	} else {
 		if (client.version > serverProtocol) {
-			client.sendPlayStatus(PlayStatus.FAILED_SERVER);
+			client.sendPlayStatus(PlayStatus.FAILED_SERVER, true);
 		} else if (client.version < serverProtocol) {
-			client.sendPlayStatus(PlayStatus.FAILED_CLIENT);
+			client.sendPlayStatus(PlayStatus.FAILED_CLIENT, true);
 		}
 	}
 
