@@ -20,11 +20,21 @@ const Block = require("./Block");
  */
 class CobbleStoneWall extends Block {
 	getRuntimeId() {
-		return 3373;
+		return 3167;
 	}
 
 	getName() {
 		return "cobblestone_wall";
+	}
+
+	/**
+	 * @type {{ direction_left: number, direction_right_and_left: number }}
+	 */
+	getVariants() {
+		return {
+			"direction_left": 3067,
+			"direction_right_and_left": 3319
+		}
 	}
 }
 

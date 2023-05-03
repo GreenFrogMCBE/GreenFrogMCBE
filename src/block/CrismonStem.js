@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class CrismonStem extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 6604;
 	}
 
 	getName() {
-		return "rail";
+		return "crismon_stem";
 	}
 }
 
-module.exports = Rail;
+module.exports = CrismonStem;

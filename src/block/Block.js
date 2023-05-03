@@ -29,6 +29,14 @@ class Block {
 	getName() {
 		return null;
 	}
+
+	/**
+	 * Returns the block variants
+	 * @returns {JSON}
+	 */
+	getVariants() {
+		return null;
+	}
 }
 
 module.exports = Block;

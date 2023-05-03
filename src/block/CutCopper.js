@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class CutCopper extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 5541;
 	}
 
 	getName() {
-		return "rail";
+		return "cut_copper";
 	}
 }
 
-module.exports = Rail;
+module.exports = CutCopper;

@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class EnderChest extends Block {
 	getRuntimeId() {
-		return 6221;
+		return 6682;
 	}
 
 	getName() {

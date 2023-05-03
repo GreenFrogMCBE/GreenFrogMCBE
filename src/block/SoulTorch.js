@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class SoulTorch extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 4232;
 	}
 
 	getName() {
-		return "rail";
+		return "soul_torch";
 	}
 }
 
-module.exports = Rail;
+module.exports = SoulTorch;

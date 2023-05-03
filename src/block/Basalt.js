@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class Basalt extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 6660;
 	}
 
 	getName() {
-		return "rail";
+		return "basalt";
 	}
 }
 
-module.exports = Rail;
+module.exports = Basalt;

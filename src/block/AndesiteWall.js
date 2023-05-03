@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class AndesiteWall extends Block {
 	getRuntimeId() {
-		return 3694;
+		return 3715;
 	}
 
 	getName() {
@@ -32,8 +32,8 @@ class AndesiteWall extends Block {
 	 */
 	getVariants() {
 		return {
-			"direction_crossed": 3357,
-			"direction_right": 3917
+			"direction_crossed": 3715,
+			"direction_right": 3917,
 		};
 	}
 }

@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class MossyCobbleStoneWall extends Block {
+class Podzol extends Block {
 	getRuntimeId() {
-		return 3200;
+		return 7392;
 	}
 
 	getName() {
-		return "mossy_cobblestone_wall";
+		return "podzol";
 	}
 }
 
-module.exports = MossyCobbleStoneWall;
+module.exports = Podzol;

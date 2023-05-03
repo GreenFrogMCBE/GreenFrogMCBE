@@ -20,11 +20,20 @@ const Block = require("./Block");
  */
 class MushroomBlock extends Block {
 	getRuntimeId() {
-		return 5060;
+		return 5490;
 	}
 
 	getName() {
 		return "mushroom_block";
+	}
+
+	/**
+	 * @type {{ inverted: number }}
+	 */
+	getVariants() {
+		return {
+			"inverted": 6278
+		}
 	}
 }
 

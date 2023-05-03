@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class DeadHornCoral extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 6396;
 	}
 
 	getName() {
-		return "rail";
+		return "dead_horn_coral";
 	}
 }
 
-module.exports = Rail;
+module.exports = DeadHornCoral;

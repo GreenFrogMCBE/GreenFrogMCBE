@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class Lava extends Block {
 	getRuntimeId() {
-		return 5171;
+		return 5710;
 	}
 
 	getName() {

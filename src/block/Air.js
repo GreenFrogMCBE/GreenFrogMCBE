@@ -26,6 +26,16 @@ class Air extends Block {
 	getName() {
 		return "air";
 	}
+
+	/**
+	 * @type {{ variant_1: number, variant_2: number }}
+	 */
+	getVariants() {
+		return {
+			"variant_1": 6767,
+			"variant_2": 7463
+		}
+	}
 }
 
 module.exports = Air;

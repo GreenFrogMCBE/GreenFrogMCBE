@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class Observer extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 5022;
 	}
 
 	getName() {
-		return "rail";
+		return "observer";
 	}
 }
 
-module.exports = Rail;
+module.exports = Observer;

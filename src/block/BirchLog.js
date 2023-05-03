@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class BirchLog extends Block {
 	getRuntimeId() {
-		return 4163;
+		return 4606;
 	}
 
 	getName() {

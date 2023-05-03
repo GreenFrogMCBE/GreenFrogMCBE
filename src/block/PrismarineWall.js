@@ -20,11 +20,20 @@ const Block = require("./Block");
  */
 class PrismarineWall extends Block {
 	getRuntimeId() {
-		return 3224;
+		return 3526;
 	}
 
 	getName() {
 		return "prismarine_wall";
+	}
+
+	/**
+	 * @type {{ direction_right: number }}
+	 */
+	getVariants() {
+		return {
+			"direction_right": 3834
+		}
 	}
 }
 

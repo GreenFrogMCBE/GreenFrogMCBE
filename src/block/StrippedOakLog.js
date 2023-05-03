@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class StrippedOakLog extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 4610;
 	}
 
 	getName() {
-		return "rail";
+		return "stripped_oak_log";
 	}
 }
 
-module.exports = Rail;
+module.exports = StrippedOakLog;

@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class StrippedJungleLog extends Block {
+class Unknown extends Block {
 	getRuntimeId() {
-		return 4194;
+		return 6744;
 	}
 
 	getName() {
-		return "stripped_jungle_log";
+		return "unknown";
 	}
 }
 
-module.exports = StrippedJungleLog;
+module.exports = Unknown;

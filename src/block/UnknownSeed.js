@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class BrickWallTwoSides extends Block {
+class UnknownSeed extends Block {
 	getRuntimeId() {
-		return 3065;
+		return 6967;
 	}
 
 	getName() {
-		return "brick_wall";
+		return "unknown_seed";
 	}
 }
 
-module.exports = BrickWallTwoSides;
+module.exports = UnknownSeed;

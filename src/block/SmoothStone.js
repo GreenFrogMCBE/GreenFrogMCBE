@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class SculkCatalyst extends Block {
+class SmoothStone extends Block {
 	getRuntimeId() {
-		return 5072;
+		return 6896;
 	}
 
 	getName() {
-		return "sculk_catalyst";
+		return "smooth_stone";
 	}
 }
 
-module.exports = SculkCatalyst;
+module.exports = SmoothStone;

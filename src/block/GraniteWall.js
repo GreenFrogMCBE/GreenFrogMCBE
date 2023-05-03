@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class GraniteWall extends Block {
 	getRuntimeId() {
-		return 3035;
+		return 4483;
 	}
 
 	getName() {

@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class BrickWall extends Block {
 	getRuntimeId() {
-		return 4694;
+		return 3703;
 	}
 
 	getName() {

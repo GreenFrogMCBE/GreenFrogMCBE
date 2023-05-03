@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class RedstoneRepeater extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 6876;
 	}
 
 	getName() {
-		return "rail";
+		return "redstone_repeater";
 	}
 }
 
-module.exports = Rail;
+module.exports = RedstoneRepeater;

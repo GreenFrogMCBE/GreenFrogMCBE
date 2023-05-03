@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class MushroomBlockInverted extends Block {
+class PinkTulip extends Block {
 	getRuntimeId() {
-		return 5064;
+		return 5512;
 	}
 
 	getName() {
-		return "mushroom_block";
+		return 'pink_tulip';
 	}
 }
 
-module.exports = MushroomBlockInverted;
+module.exports = PinkTulip;

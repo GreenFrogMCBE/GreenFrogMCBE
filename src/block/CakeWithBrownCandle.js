@@ -18,14 +18,23 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class CakeWithBrownCandle extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 5547;
 	}
 
 	getName() {
-		return "rail";
+		return "cake_with_brown_candle";
+	}
+
+	/**
+	 * @type {{ glow: number }}
+	 */
+	getVariants() {
+		return {
+			"glow": 5546
+		}
 	}
 }
 
-module.exports = Rail;
+module.exports = CakeWithBrownCandle;

@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class Rail extends Block {
+class OchreFroglight extends Block {
 	getRuntimeId() {
-		return 6195;
+		return 5012;
 	}
 
 	getName() {
-		return "rail";
+		return 'ochre_froglight';
 	}
 }
 
-module.exports = Rail;
+module.exports = OchreFroglight;

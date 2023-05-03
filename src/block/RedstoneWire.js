@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class RedstoneWire extends Block {
 	getRuntimeId() {
-		return 5259;
+		return 5690;
 	}
 
 	getName() {

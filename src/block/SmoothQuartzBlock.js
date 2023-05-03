@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class SmoothQuartzBlock extends Block {
 	getRuntimeId() {
-		return 5162;
+		return 6510;
 	}
 
 	getName() {

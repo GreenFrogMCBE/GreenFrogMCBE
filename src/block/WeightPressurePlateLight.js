@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class WeightPressurePlateLight extends Block {
 	getRuntimeId() {
-		return 5133;
+		return 5557;
 	}
 
 	getName() {

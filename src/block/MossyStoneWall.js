@@ -18,9 +18,9 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class FireCoralFan extends Block {
+class MossyStoneWall extends Block {
 	getRuntimeId() {
-		return 3270;
+		return 3922;
 	}
 
 	getName() {
@@ -28,4 +28,4 @@ class FireCoralFan extends Block {
 	}
 }
 
-module.exports = FireCoralFan;
+module.exports = MossyStoneWall;

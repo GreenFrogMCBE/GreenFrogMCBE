@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class RedSandstoneWall extends Block {
 	getRuntimeId() {
-		return 3981;
+		return 4129;
 	}
 
 	getName() {

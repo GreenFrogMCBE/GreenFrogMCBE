@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class UnnamedBlock extends Block {
 	getRuntimeId() {
-		return 7903;
+		return 6723;
 	}
 
 	getName() {

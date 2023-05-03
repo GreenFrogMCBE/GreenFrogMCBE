@@ -27,9 +27,13 @@ class HangingSign extends Block {
 		return "hanging_sign";
 	}
 
+	/**
+	 * @type {{ direction_right: number, dupe_direction_right: number }}
+	 */
 	getVariants() {
 		return {
-			"direction_right": 7370
+			"direction_right": 7370,
+			"dupe_direction_right": 6045,
 		}
 	}
 }

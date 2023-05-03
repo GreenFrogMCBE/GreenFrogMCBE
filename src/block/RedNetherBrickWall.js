@@ -20,7 +20,7 @@ const Block = require("./Block");
  */
 class RedNetherBrickWall extends Block {
 	getRuntimeId() {
-		return 3394;
+		return 3216;
 	}
 
 	getName() {
