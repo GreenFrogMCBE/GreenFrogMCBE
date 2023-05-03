@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class DarkOakLog extends Block {
+class BirchFence extends Block {
 	getRuntimeId() {
 		return 5679;
 	}
 
 	getName() {
-		return "dark_oak_log";
+		return "birch_fence";
 	}
 }
 
-module.exports = DarkOakLog;
+module.exports = BirchFence;

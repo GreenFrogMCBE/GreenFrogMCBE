@@ -26,6 +26,16 @@ class AndesiteWall extends Block {
 	getName() {
 		return "andesite_wall";
 	}
+
+	/**
+	 * @returns {{ [variantName: string]: number }}
+	 */
+	getVariants() {
+		return {
+			"direction_crossed": 3357,
+			"direction_right": 3917
+		};
+	}
 }
 
 module.exports = AndesiteWall;

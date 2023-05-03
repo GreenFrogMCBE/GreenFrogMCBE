@@ -20,11 +20,17 @@ const Block = require("./Block");
  */
 class HangingSign extends Block {
 	getRuntimeId() {
-		return 5215;
+		return 4882;
 	}
 
 	getName() {
 		return "hanging_sign";
+	}
+
+	getVariants() {
+		return {
+			"direction_right": 7370
+		}
 	}
 }
 

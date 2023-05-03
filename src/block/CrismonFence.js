@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../type/Block')}
  */
-class NetherBrickWallCrossed extends Block {
+class CrismonFence extends Block {
 	getRuntimeId() {
-		return 3026;
+		return 7410;
 	}
 
 	getName() {
-		return "nether_brick_wall";
+		return "crismon_fence";
 	}
 }
 
-module.exports = NetherBrickWallCrossed;
+module.exports = CrismonFence;
