@@ -257,6 +257,8 @@ module.exports = {
 			playStatus.writePacket(player);
 
 			if (terminate_connection) {
+				player.offline = true
+
 				Logger.info(getKey("kickMessages.playStatus.console").replace("%s%", player.username))
 
 				setTimeout(() => { // Client should disconnect itself, this is added just to prevent hacked clients from bypassing kicks

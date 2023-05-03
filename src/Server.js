@@ -277,8 +277,10 @@ async function _onJoin(client) {
 	} else {
 		if (client.version > serverProtocol) {
 			client.sendPlayStatus(PlayStatus.FAILED_SERVER, true);
+			return;
 		} else if (client.version < serverProtocol) {
 			client.sendPlayStatus(PlayStatus.FAILED_CLIENT, true);
+			return;
 		}
 	}
 
