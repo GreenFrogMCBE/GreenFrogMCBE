@@ -1,25 +1,31 @@
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
-
+* ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+* ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+* ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+* ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+* ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+* ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+*
+* The content of this file is licensed using the CC-BY-4.0 license
+* which requires you to agree to its terms if you wish to use or make any changes to it.
+*
+* @license CC-BY-4.0
+* @link Github - https://github.com/andriycraft/GreenFrogMCBE
+* @link Discord - https://discord.gg/UFqrnAbqjP
+*/
 const { convertConsoleColor } = require("../utils/ConsoleColorConvertor");
 const { getKey } = require("../utils/Language");
 
-/* const Frog = require("../Frog") <--- This code does not work
-It throws:
-(node:13208) Warning: Accessing non-existent property 'serverConfigurationFiles' of module exports inside circular dependency  */
-
 const LoggingException = require("../utils/exceptions/LoggingException");
 
+/**
+ * Fires the 'serverLogMessage' event
+ * 
+ * @param {string} langString 
+ * @param {string} color 
+ * @param {string} message 
+ * @param {string} consoleType 
+ */
 function fireEvent(langString, color, message, consoleType) {
 	require("../Frog").eventEmitter.emit("serverLogMessage", {
 		type: langString,

@@ -1,15 +1,18 @@
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
+* ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+* ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+* ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+* ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+* ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+* ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+*
+* The content of this file is licensed using the CC-BY-4.0 license
+* which requires you to agree to its terms if you wish to use or make any changes to it.
+*
+* @license CC-BY-4.0
+* @link Github - https://github.com/andriycraft/GreenFrogMCBE
+* @link Discord - https://discord.gg/UFqrnAbqjP
+*/
 /* eslint-disable no-case-declarations */
 const fs = require("fs");
 
@@ -132,6 +135,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				} else if (config.world.generator === WorldGenerators.FLAT) {
 					player.world.setSpawnCoordinates(-274, -58, -211);
 				} else {
+					player.chunksEnabled = false
 					player.world.setSpawnCoordinates(0, 100, 0);
 				}
 
@@ -194,27 +198,14 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				commandManager.init(player);
 
 				for (const command of Commands.commandList) {
-					const requiresOp = command.data.requiresOp;
-					const name = command.data.name;
-					const description = command.data.description;
-					const aliases = command.data.aliases;
+					const { requiresOp, name, description, aliases } = command.data;
 
-					if (player.op) {
+					if (player.op || !requiresOp) {
 						commandManager.addCommand(player, name, description);
 
 						if (aliases) {
 							for (const alias of aliases) {
 								commandManager.addCommand(player, alias, description);
-							}
-						}
-					} else {
-						if (!requiresOp) {
-							commandManager.addCommand(player, name, description);
-
-							if (aliases) {
-								for (const alias of aliases) {
-									commandManager.addCommand(player, alias, description);
-								}
 							}
 						}
 					}
@@ -230,21 +221,22 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				}
 				itemcomponent.writePacket(player);
 
+				// player.chunksEnabled is true by default, but can be disabled by plugins
 				if (player.chunksEnabled) {
 					player.setChunkRadius(player.world.getChunkRadius());
 
 					const coordinates =
 						config.world.generator === WorldGenerators.DEFAULT
 							? {
-									x: 1070,
-									y: 274,
-									z: -915,
-							  }
+								x: 1070,
+								y: 274,
+								z: -915,
+							}
 							: {
-									x: -279,
-									y: 111,
-									z: -216,
-							  };
+								x: -279,
+								y: 111,
+								z: -216,
+							};
 
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
 					networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);

@@ -91,11 +91,13 @@
   "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
   "kickMessages.serverFull": "disconnectionScreen.serverFull",
   "kickMessages.versionMismatch": "Your client version does not match with the server version! Server is currently running on %s%",
-  "kickMessages.playStatus": "Kicked because a plugin sent play status: %s%",
   "kickMessages.invalidPacket": "Invalid packet",
   "kickMessages.serverClosed": "Server closed",
   "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",
   "kickMessages.wereKicked": "You were kicked from the game%s%",
+
+  "kickMessages.playStatus": "Kicked because a plugin sent play status: %s%",
+  "kickMessages.playStatus.console": "Kicked %s% because plugin/server sent a play status with terminate_connection field set to true. Usually this means that the client version is older than the server version",
 
   "player.kicked": "Kicked %s% for %d%",
 

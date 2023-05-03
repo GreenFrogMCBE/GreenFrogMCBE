@@ -1,15 +1,18 @@
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
+* ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+* ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+* ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+* ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+* ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+* ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+*
+* The content of this file is licensed using the CC-BY-4.0 license
+* which requires you to agree to its terms if you wish to use or make any changes to it.
+*
+* @license CC-BY-4.0
+* @link Github - https://github.com/andriycraft/GreenFrogMCBE
+* @link Discord - https://discord.gg/UFqrnAbqjP
+*/
 const Logger = require("./Logger");
 
 const Gamemode = require("../api/player/Gamemode");
@@ -75,12 +78,12 @@ module.exports = {
 
 			if (!shouldSendMessage) return;
 
-			const text = new ServerTextPacket();
-			text.setMessage(message);
-			text.setPlatformChatId("");
-			text.setSourceName("");
-			text.setXuid("");
-			text.writePacket(player);
+			const serverText = new ServerTextPacket();
+			serverText.setMessage(message);
+			serverText.setPlatformChatId("");
+			serverText.setSourceName("");
+			serverText.setXuid("");
+			serverText.writePacket(player);
 		};
 
 		/**
@@ -232,15 +235,15 @@ module.exports = {
 		 * Sends play status to the player
 		 *
 		 * @param {PlayStatus} play_status
-		 * @param {boolean} termiate_connection
+		 * @param {boolean} terminate_connection
 		 */
-		player.sendPlayStatus = function (play_status, termiate_connection = false) {
+		player.sendPlayStatus = function (play_status, terminate_connection = false) {
 			let sendPlayStatus = true;
 
 			Frog.eventEmitter.emit("playerPlayStatus", {
 				player,
 				play_status,
-				termiate_connection,
+				terminate_connection,
 				server: server,
 				cancel: () => {
 					sendPlayStatus = false;
@@ -253,8 +256,16 @@ module.exports = {
 			playStatus.setStatus(play_status);
 			playStatus.writePacket(player);
 
-			if (termiate_connection) {
-				player.kick(getKey("kickMessages.playStatus").replace("%s%", play_status));
+			if (terminate_connection) {
+				player.offline = true
+
+				Logger.info(getKey("kickMessages.playStatus.console").replace("%s%", player.username))
+
+				setTimeout(() => { // Client should disconnect itself, this is added just to prevent hacked clients from bypassing kicks
+					if (player.offline) return
+
+					player.kick(getKey("kickMessages.playStatus").replace("%s%", play_status));
+				}, 5000)
 			}
 		};
 
@@ -345,8 +356,9 @@ module.exports = {
 		 * Disconnect a player from the server
 		 *
 		 * @param {string} [message=lang.kickmessages.kickedByPlugin]
+		 * @param {boolean} [hideDisconnectionScreen=false]
 		 */
-		player.kick = function (message = lang.kickmessages.kickedByPlugin) {
+		player.kick = function (message = lang.kickmessages.kickedByPlugin, hideDisconnectionScreen = false) {
 			if (player.kicked) return;
 
 			player.kicked = true;
@@ -364,7 +376,7 @@ module.exports = {
 			}
 
 			Logger.info(getKey("player.kicked").replace("%s%", player.username).replace("%d%", message));
-			player.disconnect(message);
+			player.disconnect(message, hideDisconnectionScreen);
 		};
 
 		/**
@@ -619,6 +631,8 @@ module.exports = {
 				pl.setUUID(player.profile.uuid);
 				pl.writePacket(currentPlayer);
 			}
+
+			player.offline = true;
 
 			Frog.eventEmitter.emit("playerLeave", {
 				player,
