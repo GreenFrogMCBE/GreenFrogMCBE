@@ -128,7 +128,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 			z: this.getZ(),
 			sub_chunk_count: this.getSubChunkCount(),
 			cache_enabled: this.getCacheEnabled(),
-			payload: { type: "Buffer", data: this.getPayload() },
+			payload: this.getPayload(),
 		});
 	}
 }

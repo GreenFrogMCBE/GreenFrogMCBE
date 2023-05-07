@@ -50,7 +50,7 @@ module.exports = {
 	async calculateHungerloss(player, position) {
 		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
 
-		if (position == !undefined && position.y == !player.y) return;
+		if (position === !undefined && position.y == !player.y) return;
 
 		if (Math.floor(Math.random() * 50) === 50) {
 			// TODO: Vanilla behaviour

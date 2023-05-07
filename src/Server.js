@@ -230,7 +230,7 @@ async function _onJoin(client) {
 		items: [],
 		location: {
 			x: 0,
-			y: 0,
+			y: 100,
 			z: 0,
 			onGround: false,
 			pitch: 0,

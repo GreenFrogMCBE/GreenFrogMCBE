@@ -18,7 +18,7 @@ const Gamemode = require("../../api/player/Gamemode");
 const Difficulty = require("../../api/types/Difficulty");
 
 const Dimension = require("../../world/types/Dimension");
-const Generator = require("../../world/types/Generator");
+const Generator = require("../../world/types/WorldGenerators");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -66,7 +66,7 @@ class ServerStartGamePacket extends PacketConstructor {
 	 * Sets the entity ID
 	 * @param {number} new_entity_id - The entity ID
 	 */
-	setEntityId(new_entity_id) {
+	setEntityID(new_entity_id) {
 		entity_id = new_entity_id;
 	}
 
@@ -74,7 +74,7 @@ class ServerStartGamePacket extends PacketConstructor {
 	 * Sets the runtime entity ID
 	 * @param {number} new_runtime_entity_id - The runtime entity ID
 	 */
-	setRunTimeEntityId(new_runtime_entity_id) {
+	setRuntimeEntityId(new_runtime_entity_id) {
 		runtimeentity_id = new_runtime_entity_id;
 	}
 
@@ -204,7 +204,7 @@ class ServerStartGamePacket extends PacketConstructor {
 	 * Returns the entity id
 	 * @returns {number} - The entity id
 	 */
-	getEntityId() {
+	getEntityID() {
 		return entity_id;
 	}
 
@@ -212,7 +212,7 @@ class ServerStartGamePacket extends PacketConstructor {
 	 * Returns the runtime entity id
 	 * @returns {number} - The runtime entity id
 	 */
-	getRunTimeEntityId() {
+	getRuntimeEntityId() {
 		return runtimeentity_id;
 	}
 
@@ -328,8 +328,8 @@ class ServerStartGamePacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			entity_id: this.getEntityId(),
-			runtime_entity_id: this.getRunTimeEntityId(),
+			entity_id: this.getEntityID(),
+			runtime_entity_id: this.getRuntimeEntityId(),
 			player_gamemode: this.getGamemode(),
 			player_position: this.getPlayerPosition(),
 			rotation: this.getPlayerRotation(),

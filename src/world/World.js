@@ -21,7 +21,7 @@ const Gamemode = require("../api/player/Gamemode");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
-const Air = require("../block/Air");
+const Air = require("../block/blockUpdate/Air");
 
 const Frog = require("../Frog");
 
@@ -50,6 +50,13 @@ class World {
 		 * @type {number}
 		 */
 		this.renderDistance;
+
+		/**
+		 * The world generator
+		 * 
+		 * @type {import('./types/WorldGenerators')}
+		 */
+		this.generator;
 	}
 
 	/**
@@ -62,7 +69,16 @@ class World {
 	}
 
 	/**
-	 * Gets the name of the world.
+	 * Sets the world generator
+	 * 
+	 * @param {import('./types/WorldGenerators')} generator 
+	 */
+	setGenerator(generator) {
+		this.generator = generator
+	}
+
+	/**
+	 * Returns the name of the world.
 	 *
 	 * @returns {string} - The name of the world.
 	 */
@@ -71,7 +87,16 @@ class World {
 	}
 
 	/**
-	 * Gets the players that are currently in the world.
+	 * Returns the world generator
+	 * 
+	 * @returns {import('./types/WorldGenerator')}
+	 */
+	getGenerator() {
+		return this.generator
+	}
+
+	/**
+	 * Returns the players that are currently in the world.
 	 *
 	 * @returns {Array<Player>} - The players in the world.
 	 */
@@ -91,11 +116,11 @@ class World {
 	}
 
 	/**
-	 * Gets the coordinates of the spawn point.
+	 * Returns the coordinates of the spawn point.
 	 *
 	 * @returns {{ x: number, y: number, z: number }} - The coordinates of the spawn point.
 	 */
-	getSpawnCoordinates() {
+	ReturnspawnCoordinates() {
 		return this.coords;
 	}
 
@@ -109,7 +134,7 @@ class World {
 	}
 
 	/**
-	 * Gets the chunk render radius.
+	 * Returns the chunk render radius.
 	 *
 	 * @returns {number} - The chunk render radius.
 	 */
@@ -263,6 +288,7 @@ class World {
 			name: this.worldName,
 			chunk_radius: this.renderDistance,
 			spawn_coordinates: this.coords,
+			generator: this.generator
 		};
 	}
 }
