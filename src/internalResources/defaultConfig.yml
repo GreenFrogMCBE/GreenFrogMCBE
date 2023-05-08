@@ -4,7 +4,7 @@ network:
 serverInfo:
   motd: "§aGreenFrog server"
   levelName: "GreenFrog"
-  version: "1.19.70"
+  version: "1.19.80"
   offlineMode: true
   maxPlayers: 20
 chat:
@@ -42,7 +42,7 @@ world:
   tickStarvationDamage: true # Should people take damage if their food level is 0?
   randomTickSpeed: 1000
 
-  chunksToGenerate: 15 # Setting too hight may lag your server
+  chunksToGenerate: 4 # Setting too hight may lag your server
   worldName: "GreenFrog server"
 performance:
   garbageCollectorDelay: 60000
