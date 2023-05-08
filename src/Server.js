@@ -268,19 +268,21 @@ async function _onJoin(client) {
 
 	const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
 
-	if (config.dev.useLegacyVersionMismatchKickMessage && !config.dev.multiProtocol) {
-		if (client.version !== serverProtocol) {
-			const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version);
-			client.kick(kickMessage);
-			return;
-		}
-	} else {
-		if (client.version > serverProtocol) {
-			client.sendPlayStatus(PlayStatus.FAILED_SERVER, true);
-			return;
-		} else if (client.version < serverProtocol) {
-			client.sendPlayStatus(PlayStatus.FAILED_CLIENT, true);
-			return;
+	if (!config.dev.multiProtocol) {
+		if (config.dev.useLegacyVersionMismatchKickMessage) {
+			if (client.version !== serverProtocol) {
+				const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version);
+				client.kick(kickMessage);
+				return;
+			}
+		} else {
+			if (client.version > serverProtocol) {
+				client.sendPlayStatus(PlayStatus.FAILED_SERVER, true);
+				return;
+			} else if (client.version < serverProtocol) {
+				client.sendPlayStatus(PlayStatus.FAILED_CLIENT, true);
+				return;
+			}
 		}
 	}
 

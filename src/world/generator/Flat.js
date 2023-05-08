@@ -9,7 +9,7 @@ class Flat extends Generator {
     }
 
     generate(player) {
-        const chunkData = Buffer.alloc(16 * 16 * 256).fill(new Grass().getID());
+        const chunkData = Buffer.alloc(16 * 256).fill(new Grass().getID());
 
         const chunkRadius = player.world.getChunkRadius();
 
