@@ -1,18 +1,18 @@
 /**
-* ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
-* ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
-* ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
-* ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
-* ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
-* ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
-*
-* The content of this file is licensed using the CC-BY-4.0 license
-* which requires you to agree to its terms if you wish to use or make any changes to it.
-*
-* @license CC-BY-4.0
-* @link Github - https://github.com/andriycraft/GreenFrogMCBE
-* @link Discord - https://discord.gg/UFqrnAbqjP
-*/
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
 /* eslint-disable no-case-declarations */
 const fs = require("fs");
 
@@ -131,10 +131,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				switch (config.world.generator) {
 					case "default":
 					case "flat":
-						player.world.setGenerator(WorldGenerators.FLAT)
-						break
+						player.world.setGenerator(WorldGenerators.FLAT);
+						break;
 					default:
-						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"))
+						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"));
 				}
 
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
@@ -218,16 +218,16 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				// player.chunksEnabled is true by default, but can be disabled by plugins
 				if (player.chunksEnabled) {
 					player.setChunkRadius(player.world.getChunkRadius());
-					
+
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
 					networkChunkPublisher.setCoordinates(0, 0, 0);
 					networkChunkPublisher.setRadius(64);
 					networkChunkPublisher.setSavedChunks([]);
 					networkChunkPublisher.writePacket(player);
 
-					const generatorFile = require("../../world/generator/" + player.world.getGenerator())
-					const generator = new generatorFile()
-					generator.generate(player)
+					const generatorFile = require("../../world/generator/" + player.world.getGenerator());
+					const generator = new generatorFile();
+					generator.generate(player);
 
 					player.network_chunks_loop = setInterval(() => {
 						if (player.offline) {

@@ -1,18 +1,18 @@
 /**
-* ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
-* ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
-* ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
-* ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
-* ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
-* ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
-*
-* The content of this file is licensed using the CC-BY-4.0 license
-* which requires you to agree to its terms if you wish to use or make any changes to it.
-*
-* @license CC-BY-4.0
-* @link Github - https://github.com/andriycraft/GreenFrogMCBE
-* @link Discord - https://discord.gg/UFqrnAbqjP
-*/
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 
 const WorldGenerators = require("./types/WorldGenerators");
@@ -53,7 +53,7 @@ class World {
 
 		/**
 		 * The world generator
-		 * 
+		 *
 		 * @type {import('./types/WorldGenerators')}
 		 */
 		this.generator;
@@ -70,11 +70,11 @@ class World {
 
 	/**
 	 * Sets the world generator
-	 * 
-	 * @param {import('./types/WorldGenerators')} generator 
+	 *
+	 * @param {import('./types/WorldGenerators')} generator
 	 */
 	setGenerator(generator) {
-		this.generator = generator
+		this.generator = generator;
 	}
 
 	/**
@@ -88,11 +88,11 @@ class World {
 
 	/**
 	 * Returns the world generator
-	 * 
+	 *
 	 * @returns {import('./types/WorldGenerator')}
 	 */
 	getGenerator() {
-		return this.generator
+		return this.generator;
 	}
 
 	/**
@@ -288,7 +288,7 @@ class World {
 			name: this.worldName,
 			chunk_radius: this.renderDistance,
 			spawn_coordinates: this.coords,
-			generator: this.generator
+			generator: this.generator,
 		};
 	}
 }
