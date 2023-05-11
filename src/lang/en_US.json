@@ -83,7 +83,7 @@
   "plugin.unloading.success": "Unloaded %s%",
   "plugin.unloading.unloading": "Unloading %s%...",
 
-  "frog.version": "This server is running GreenFrogMCBE. Version: %s%",
+  "frog.version": "This server is running GreenFrogMCBE (https://github.com/andriycraft/GreenFrogMCBE). Version: %s%",
 
   "errors.nodeJS.tooOld": "You are running nodeJS version that is too old to run GreenFrogMCBE",
   "errors.nodeJS.tooOld.update": "Please update it to 14.0.0+, from https://nodejs.org/",
