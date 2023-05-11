@@ -25,10 +25,8 @@ class Generator {
 
 	/**
 	 * Generates chunks
-	 *
-	 * @param {Client} player
 	 */
-	generate(player) {
+	generate() {
 		return null;
 	}
 }
