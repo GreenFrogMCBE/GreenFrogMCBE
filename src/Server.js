@@ -332,7 +332,7 @@ module.exports = {
 			process.exit(-1);
 		}
 
-		Logger.info(Language.getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion));
+		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.getServerData().minorServerVersion} (${Frog.getServerData().versionDescription})`));
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
 		process.on("unhandledRejection", (err) => _handleCriticalError(err));

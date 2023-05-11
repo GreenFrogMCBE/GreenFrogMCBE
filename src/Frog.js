@@ -100,7 +100,8 @@ module.exports = {
 	 */
 	getServerData() {
 		return {
-			minorServerVersion: "3.4.2 (Small API changes)",
+			minorServerVersion: "3.4.3",
+			versionDescription: "Added generator support",
 			majorServerVersion: "3.0",
 			apiVersion: "3.0",
 		};

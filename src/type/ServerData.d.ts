@@ -15,6 +15,7 @@
  */
 export interface ServerData {
 	minorServerVersion: string;
+	versionDescription: string;
 	majorServerVersion: string;
 	apiVersion: string;
 }
