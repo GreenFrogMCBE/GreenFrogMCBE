@@ -18,6 +18,7 @@
 > Also for disabling workflows for .MD files, also https://github.com/andriycraft/GreenFrogMCBE/pull/81 <br>
 > For rewriting some parts of command system <br>
 > For making the README.md file look better <br>
+> Recommended extensions (https://github.com/andriycraft/GreenFrogMCBE/pull/191)
 > For showing example of a generator in our discord <br>
 
 4. @NhanAZ
