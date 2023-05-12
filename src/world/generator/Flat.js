@@ -29,10 +29,17 @@ class Flat extends Generator {
 
 		for (let i = 0; i < chunkData.length; i++) {
 			if (i > 1 && i < 16) {
-				// magic value
 				chunkData[i] = 3; // dirt
 			} else if (i < 2) {
 				chunkData[i] = 7; // bedrock
+			} else if (i > 16 && i < 18) {
+				chunkData[i] = 7
+			} else if (i > 45 && i < 47) {
+				chunkData[i] = 3
+			} else if (i > 10 && i < 25) {
+				chunkData[i] = 0
+			} else if (i > 20 && i < 22) {
+				chunkData[i] = 3
 			} else {
 				chunkData[i] = 2; // grass
 			}

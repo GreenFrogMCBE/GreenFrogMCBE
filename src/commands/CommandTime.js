@@ -34,7 +34,8 @@ module.exports = {
 
 		const setTime = time === getKey("commands.time.times.day") ? 1000 : time === getKey("commands.time.times.night") ? 17000 : parseInt(time, 10);
 
-		if (!Number.isInteger(setTime)) {
+		// eslint-disable-next-line use-isnan
+		if (parseInt(setTime) === NaN) {
 			player.sendMessage(getKey("commands.time.execution.failed"));
 			return;
 		}
