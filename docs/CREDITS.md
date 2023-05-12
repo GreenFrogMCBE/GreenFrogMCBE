@@ -12,7 +12,7 @@
 > For updating langs (https://github.com/andriycraft/GreenFrogMCBE/pull/19) <br>
 > Also for disabling workflows for .MD files, also https://github.com/andriycraft/GreenFrogMCBE/pull/81 <br>
 > For rewriting some parts of command system <br>
-> For making logger better (https://github.com/andriycraft/GreenFrogMCBE/pull/33 and https://github.com/andriycraft/GreenFrogMCBE/pull/111) <br>
+> For making the README.md file look better <br>
 > For showing example of a generator in our discord <br>
 
 3. @NhanAZ
