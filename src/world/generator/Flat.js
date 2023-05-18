@@ -1,22 +1,5 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- * The content of this file is licensed using the CC-BY-4.0 license
- * which requires you to agree to its terms if you wish to use or make any changes to it.
- *
- * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
- * @link Discord - https://discord.gg/UFqrnAbqjP
- */
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
-
 const WorldGenerators = require("../types/WorldGenerators");
-
 const Generator = require("./Generator");
 
 class Flat extends Generator {
@@ -27,27 +10,17 @@ class Flat extends Generator {
 	generate(player) {
 		const chunkData = Buffer.alloc(16 * 16 * 256);
 
-		for (let i = 0; i < chunkData.length; i++) {
-			if (i > 1 && i < 16) {
-				chunkData[i] = 3; // dirt
-			} else if (i < 2) {
-				chunkData[i] = 7; // bedrock
-			} else if (i > 16 && i < 18) {
-				chunkData[i] = 7
-			} else if (i > 23 && i < 25) {
-				chunkData[i] = 3
-			} else if (i > 45 && i < 47) {
-				chunkData[i] = 3
-			} else if (i > 41 && i < 47) {
-				chunkData[i] = 3
-			} else if (i > 36 && i < 41) {
-				chunkData[i] = 0
-			} else if (i > 17 && i < 32) {
-				chunkData[i] = 3
-			} else if (i > 40 && i < 42) {
-				chunkData[i] = 3
-			} else {
-				chunkData[i] = 2; // grass
+		for (let y = 0; y < 256; y++) {
+			for (let x = 0; x < 16; x++) {
+				for (let z = 0; z < 16; z++) {
+					const index = y * 16 * 16 + z * 16 + x;
+
+					if (y < 20 && x < 5) {
+						chunkData[index] = 2
+					} else {
+						chunkData[index] = 3
+					}
+				}
 			}
 		}
 
