@@ -15,10 +15,42 @@ class Flat extends Generator {
 				for (let z = 0; z < 16; z++) {
 					const index = y * 16 * 16 + z * 16 + x;
 
-					if (y < 20 && x < 5) {
-						chunkData[index] = 2
+					if (y < 18 && x < 5) {
+// 						chunkData[index] = 7; // Bedrock blocks in the first 20 layers and first 5 columns
+					} else if (y > 14 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 13 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 12 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 11 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 10 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 9 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 8 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 7 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 6 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 5 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 4 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 3 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 2 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 1 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > 0 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
+					} else if (y > -1 && x > 14) {
+						chunkData[index] = 2; // Grass block on top of dirt in the 21st layer
 					} else {
-						chunkData[index] = 3
+						chunkData[index] = 3; // Dirt blocks for other layers
 					}
 				}
 			}
