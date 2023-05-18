@@ -34,13 +34,15 @@ class Flat extends Generator {
 				chunkData[i] = 7; // bedrock
 			} else if (i > 16 && i < 18) {
 				chunkData[i] = 7
+			} else if (i > 23 && i < 25) {
+				chunkData[i] = 3
 			} else if (i > 45 && i < 47) {
 				chunkData[i] = 3
 			} else if (i > 41 && i < 47) {
 				chunkData[i] = 3
+			} else if (i > 36 && i < 41) {
+				chunkData[i] = 0
 			} else if (i > 17 && i < 32) {
-				chunkData[i] = 3
-			} else if (i > 20 && i < 22) {
 				chunkData[i] = 3
 			} else if (i > 40 && i < 42) {
 				chunkData[i] = 3
