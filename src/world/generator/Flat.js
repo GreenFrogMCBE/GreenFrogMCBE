@@ -36,9 +36,13 @@ class Flat extends Generator {
 				chunkData[i] = 7
 			} else if (i > 45 && i < 47) {
 				chunkData[i] = 3
+			} else if (i > 41 && i < 47) {
+				chunkData[i] = 3
 			} else if (i > 17 && i < 32) {
 				chunkData[i] = 3
 			} else if (i > 20 && i < 22) {
+				chunkData[i] = 3
+			} else if (i > 40 && i < 42) {
 				chunkData[i] = 3
 			} else {
 				chunkData[i] = 2; // grass
