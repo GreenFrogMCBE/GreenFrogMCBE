@@ -125,7 +125,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				});
 
 				player.world = new World();
-				player.world.setChunkRadius(config.world.chunksToGenerate);
+				player.world.setChunkRadius(config.world.chunkGeneratorLimit);
 				player.world.setName(config.world.worldName);
 
 				switch (config.world.generator) {
