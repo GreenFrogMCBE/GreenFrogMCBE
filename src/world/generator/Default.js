@@ -6,7 +6,7 @@ const Generator = require("./Generator");
 
 let chunkData;
 
-class Flat extends Generator {
+class Default extends Generator {
 	getName() {
 		return WorldGenerators.FLAT;
 	}
@@ -36,7 +36,15 @@ class Flat extends Generator {
 					} else if (y > 6 && x > 14) {
 						chunkData[index] = 2;
 					} else if (y > 5 && x > 14) {
-						chunkData[index] = 2;
+						if (Math.floor(Math.random() * 100) < 10) {
+							chunkData[index] = 0;
+
+							if (Math.floor(Math.random() * 100) > 80) {
+								chunkData[index + 1] = 9
+							}
+						} else {
+							chunkData[index] = 2;
+						}
 					} else if (y > 4 && x > 14) {
 						chunkData[index] = 2;
 					} else if (y > 3 && x > 14) {
@@ -60,7 +68,7 @@ class Flat extends Generator {
 			}
 		}
 
-		return chunkData
+		return chunkData;
 	}
 
 	generate(player) {
@@ -80,4 +88,4 @@ class Flat extends Generator {
 	}
 }
 
-module.exports = Flat;
+module.exports = Default;

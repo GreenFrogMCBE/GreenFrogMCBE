@@ -24,6 +24,14 @@ class Generator {
 	}
 
 	/**
+	 * Returns the chunk data
+	 * @returns {Buffer}  
+	 */
+	getChunkData() {
+		return null;
+	}
+
+	/**
 	 * Generates chunks
 	 */
 	generate() {

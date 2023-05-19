@@ -15,6 +15,6 @@
  */
 module.exports = /** @type {const} */ ({
 	FLAT: "Flat",
-	DEFAULT: "Normal",
+	DEFAULT: "Default",
 	VOID: "Void",
 });

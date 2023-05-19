@@ -92,10 +92,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player,
 					cancel: () => player.kick(getKey("kickMessages.serverDisconnect")),
 				});
+
 				Logger.info(getKey("status.resourcePacks.none").replace("%s%", player.username));
 				break;
 			case ResourcePackStatus.REFUSED:
 				Frog.eventEmitter.emit("playerResourcePacksRefused", { server, player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
+
 				Logger.info(getKey("status.resourcePacks.refused").replace("%s%", player.username));
 				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
@@ -130,6 +132,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				switch (config.world.generator) {
 					case "default":
+						player.world.setGenerator(WorldGenerators.DEFAULT)
+						break;
 					case "flat":
 						player.world.setGenerator(WorldGenerators.FLAT);
 						break;
