@@ -15,11 +15,7 @@ class Flat extends Generator {
 				for (let z = 0; z < 16; z++) {
 					const index = y * 16 * 16 + z * 16 + x;
 
-					if (y < 18 && x < 5) {
-// 						chunkData[index] = 7; // Bedrock blocks in the first 20 layers and first 5 columns
-					} else if (y > 14 && x > 14) {
-						chunkData[index] = 2;
-					} else if (y > 13 && x > 14) {
+					if (y > 13 && x > 14) {
 						chunkData[index] = 2;
 					} else if (y > 12 && x > 14) {
 						chunkData[index] = 2;
@@ -49,6 +45,8 @@ class Flat extends Generator {
 						chunkData[index] = 2;
 					} else if (y > -1 && x > 14) {
 						chunkData[index] = 2;
+					} else if (y < 17 && x < 12) {
+						chunkData[index] = 0
 					} else {
 						chunkData[index] = 3; // Dirt blocks for other layers
 					}
