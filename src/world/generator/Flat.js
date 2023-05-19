@@ -45,8 +45,10 @@ class Flat extends Generator {
 						chunkData[index] = 2;
 					} else if (y > -1 && x > 14) {
 						chunkData[index] = 2;
-					} else if (y < 17 && x < 12) {
+					} else if (y < 18 && x < 11) {
 						chunkData[index] = 0
+					} else if (y < 17 && x < 12) {
+						chunkData[index] = 7
 					} else {
 						chunkData[index] = 3; // Dirt blocks for other layers
 					}
