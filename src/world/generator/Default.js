@@ -58,10 +58,11 @@ class Default extends Generator {
 					} else if (y > -1 && x > 14) {
 						this._generateHole(index)
 					} else if (y < 18 && x < 11) {
-						chunkData[index] = 0
-					} else {
+						chunkData[index] = 1
+					} else if (chunkData[index] == !2) {
 						if (chunkData[index] % 2 === 0) {
 							chunkData[index] = 0
+							chunkData[index + 1] = 2
 						}
 					}
 				}
