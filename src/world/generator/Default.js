@@ -11,8 +11,8 @@ class Default extends Generator {
 		return WorldGenerators.FLAT;
 	}
 
-	_generateHole(index, chance) {
-		if (Math.floor(Math.random() * 100) < chance) {
+	_generateHole(index) {
+		if (Math.floor(Math.random() * 300) < 1) {
 			chunkData[index] = 0;
 		} else {
 			chunkData[index] = 2;
@@ -28,41 +28,41 @@ class Default extends Generator {
 					const index = y * 16 * 16 + z * 16 + x;
 
 					if (y > 13 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 12 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 11 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 10 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 9 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 8 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 7 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 6 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 5 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 4 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 3 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 2 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 1 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > 0 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y > -1 && x > 14) {
-						this._generateHole(index, 1)
+						this._generateHole(index)
 					} else if (y < 18 && x < 11) {
 						chunkData[index] = 0
-					} else if (y < 17 && x < 12) {
-						chunkData[index] = 7
 					} else {
-						chunkData[index] = 2
+						if (chunkData[index] % 2 === 0) {
+							chunkData[index] = 0
+						}
 					}
 				}
 			}
