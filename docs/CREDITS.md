@@ -1,107 +1,74 @@
 ## Credits
 
-1. @andriycraft
-
-> For creating this software
-
-2. @AnyBananaGAME
+1. @AnyBananaGAME
 
 > For creating multilang (https://github.com/andriycraft/GreenFrogMCBE/pull/9) <br>
 > For improving tests and /list <br>
 > Making better tests (https://github.com/andriycraft/GreenFrogMCBE/pull/70)
 
-3. @hvlxh
+2. @hvlxh
 
 > For creating BasePlugin.js (https://github.com/andriycraft/GreenFrogMCBE/pull/20) <br>
-> Fixing langs (https://github.com/andriycraft/GreenFrogMCBE/pull/19) <br>
-> Making logger better <br>
+> For updating langs (https://github.com/andriycraft/GreenFrogMCBE/pull/19) <br>
 > Also for disabling workflows for .MD files, also https://github.com/andriycraft/GreenFrogMCBE/pull/81 <br>
 > For rewriting some parts of command system <br>
-> For making the README.md file look better
+> For making the README.md file look better <br>
+> For showing example of a generator in our discord <br>
 
-4. @NhanAZ
+3. @NhanAZ
 
-> For improving code (https://github.com/andriycraft/GreenFrogMCBE/pull/4) <br>
+> For making the logger use default parameter (https://github.com/andriycraft/GreenFrogMCBE/pull/4) <br>
 > For sorting lang strings (https://github.com/andriycraft/GreenFrogMCBE/pull/22, https://github.com/andriycraft/GreenFrogMCBE/pull/23, https://github.com/andriycraft/GreenFrogMCBE/pull/24) <br>
-> For reporting /help bug <br>
-> For adding yarn, many changes to tests <br>
-> For fixing paths <br>
+> For many changes to tests <br>
+> For fixing paths (https://github.com/andriycraft/GreenFrogMCBE/pull/77) <br>
 > For reporting a bug that server cannot be stopped when plugins are null <br>
-> For making /pl code better <br>
-> For making /list code better <br>
-> For making /deop code better <br>
-> For making /help code better <br>
-> For making /time code better <br>
-> For making /say code better <br>
-> For making /me code better <br>
-> For making /op code better <br>
-> For improving listen() in Server.js <br>
-> For improving generatelicenseheaders.js
+> For making /pl, /list, /deop, /help, /time, /say, /me, /op code better (https://github.com/andriycraft/GreenFrogMCBE/pulls?q=author%3ANhanAZ+Code+improvement) <br>
+> For reporting a bug that /help wasn't working <br>
+> For making `PluginManager.getPlugins()` better (https://github.com/andriycraft/GreenFrogMCBE/pull/82) <br>
+> For improving listen() in Server.js (https://github.com/andriycraft/GreenFrogMCBE/pull/105) <br>
+> For improving generateLicenseHeaders.js (https://github.com/andriycraft/GreenFrogMCBE/pull/106)
 
-5. @ATXLtheAxolotl
+4. @ATXLtheAxolotl
 
-> For adding nodemon script for faster development <br>
-> For tiny cleaning of the code <br>
-> Also for fixing weird usage of .prototype (https://github.com/andriycraft/GreenFrogMCBE/pull/44)
+> For nodemon script for faster development, tiny cleaning, & fix weird usage of .prototype (https://github.com/andriycraft/GreenFrogMCBE/pull/44)
 
-6. @bufferfishq
+5. @bufferfishq
 
-> For adding support for custom_form and new plugin system (https://github.com/andriycraft/GreenFrogMCBE/pull/47)
+> For adding support for custom_form and rewriting plugin system (https://github.com/andriycraft/GreenFrogMCBE/pull/47)
 > For fixing a lot of bugs, and paths
 
-7. @andriycraftbot
-
-> For fixing the code style (https://github.com/andriycraft/GreenFrogMCBE/pull/37, https://github.com/andriycraft/GreenFrogMCBE/pull/38, https://github.com/andriycraft/GreenFrogMCBE/pull/40, https://github.com/andriycraft/GreenFrogMCBE/pull/45, https://github.com/andriycraft/GreenFrogMCBE/pull/46, https://github.com/andriycraft/GreenFrogMCBE/pull/48, https://github.com/andriycraft/GreenFrogMCBE/pull/50, https://github.com/andriycraft/GreenFrogMCBE/pull/52, https://github.com/andriycraft/GreenFrogMCBE/pull/58, https://github.com/andriycraft/GreenFrogMCBE/pull/61, https://github.com/andriycraft/GreenFrogMCBE/pull/73, https://github.com/andriycraft/GreenFrogMCBE/pull/90)
-
-8. @Zwuiix-cmd
+6. @Zwuiix-cmd
 
 > Suggested custom_form support (https://github.com/andriycraft/GreenFrogMCBE/issues/35) <br>
 
-9. @CreeperG16 (Tom16#4672)
+7. @CreeperG16
 
 > For a better way to handle player disconnection <br>
+> For suggesting modal form support
 > For adding 1.19.60 support <br>
 > For adding 1.19.62 support <br>
-> For adding 1.19.70 support <br>
-> For helping me with chunk support <br>
-> For suggesting modal form support
+> For adding 1.19.70 support
 
-10. Bedrock-protocol (https://github.com/PrismarineJS/bedrock-protocol)
+8. Bedrock-protocol (https://github.com/PrismarineJS/bedrock-protocol)
 
-> Protocol library
+> Our frog-protocol is based on this protocol library
 
-11. Wiki.vg (https://wiki.vg/Bedrock_Protocol)
+10. js-yaml (https://github.com/nodeca/js-yaml)
 
-> For packet documentation
+> For parsing config and other files
 
-12. js-yaml (https://github.com/nodeca/js-yaml)
-
-> Used to parse config and other files
-
-13. EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy) (@Zwuiix-cmd)
+11. EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy)
 
 > Used as an example for custom_form support (i had permission from repo owner)
 
-14. 🌓Enzø ツ#6666
+12. 🌓Enzø ツ#6666, @CreeperG16, @faaxz
 
-> Helping me with chunk support <br>
+> Helping me with chunk support
 
-15. \<\/hakaN#0746
+13. @faaxz
 
-> For translating this software into Turkish <br>
+> For reporting form bugs
 
-16. @BasToTheMax
+14. @tutinoko2048
 
-> For translating this software into Dutch (still in progress) <br>
-> Was the first person who starred this repo
-
-17. @faaxz
-
-> For reporting form bugs <br>
-> For helping me to add the chunk support <br>
-> For rewriting logger <br>
-> For rewriting 20% of the network code
-
-18. @tutinoko2048
-
-> For making .d.ts files use const type for constant values
+> For making .d.ts files use const type for constant values (https://github.com/andriycraft/GreenFrogMCBE/pull/154)
