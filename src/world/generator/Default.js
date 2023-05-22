@@ -61,8 +61,9 @@ class Default extends Generator {
 						chunkData[index] = 0
 					} else if (chunkData[index] == !2) {
 						if (chunkData[index] % 2 === 0) {
-							chunkData[index] = 0
-							chunkData[index + 1] = 2
+							chunkData[index] = 1
+							chunkData[index + 1] = 3
+							chunkData[index - 1] = 1
 						}
 					}
 				}
