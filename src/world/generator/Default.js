@@ -22,6 +22,23 @@ function _generateHole() {
 	return blockType
 }
 
+
+/**
+ * @param {number} blockType 
+ * @private
+ */
+function _generateOre() {
+	let blockType;
+
+	if (Math.floor(Math.random() * 300) < 1) {
+		blockType = 16;
+	} else {
+		blockType = 0;
+	}
+
+	return blockType
+}
+
 class Default extends Generator {
 	/**
 	 * @returns {WorldGenerators.Flat} 
@@ -42,14 +59,14 @@ class Default extends Generator {
 					const index = y * 16 * 16 + z * 16 + x;
 
 					if (x > 14 && y > -1 && y < 16) {
-						chunkData[index] = this._generateHole();
+						chunkData[index] = _generateHole();
 					} else if (y < 18 && x < 11) {
 						chunkData[index] = 0
 					} else if (chunkData[index] == !2) {
 						if (chunkData[index] % 2 === 0) {
-							chunkData[index] = 1
+							chunkData[index] = _generateOre()
 							chunkData[index + 1] = 3
-							chunkData[index - 1] = 1
+							chunkData[index - 1] = _generateOre()
 						}
 					}
 				}
