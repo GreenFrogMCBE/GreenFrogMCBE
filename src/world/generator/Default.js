@@ -6,19 +6,33 @@ const Generator = require("./Generator");
 
 let chunkData;
 
+/**
+ * @param {number} blockType 
+ * @private
+ */
+function _generateHole() {
+	let blockType;
+
+	if (Math.floor(Math.random() * 300) < 1) {
+		blockType = 0;
+	} else {
+		blockType = 2;
+	}
+
+	return blockType
+}
+
 class Default extends Generator {
+	/**
+	 * @returns {WorldGenerators.Flat} 
+	 */
 	getName() {
 		return WorldGenerators.FLAT;
 	}
 
-	_generateHole(index) {
-		if (Math.floor(Math.random() * 300) < 1) {
-			chunkData[index] = 0;
-		} else {
-			chunkData[index] = 2;
-		}
-	}
-
+	/**
+	 * @returns {Buffer} 
+	 */
 	getChunkData() {
 		chunkData = Buffer.alloc(16 * 16 * 256);
 
@@ -27,36 +41,8 @@ class Default extends Generator {
 				for (let z = 0; z < 16; z++) {
 					const index = y * 16 * 16 + z * 16 + x;
 
-					if (y > 13 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 12 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 11 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 10 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 9 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 8 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 7 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 6 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 5 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 4 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 3 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 2 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 1 && x > 14) {
-						this._generateHole(index)
-					} else if (y > 0 && x > 14) {
-						this._generateHole(index)
-					} else if (y > -1 && x > 14) {
-						this._generateHole(index)
+					if (x > 14 && y > -1 && y < 16) {
+						chunkData[index] = this._generateHole();
 					} else if (y < 18 && x < 11) {
 						chunkData[index] = 0
 					} else if (chunkData[index] == !2) {

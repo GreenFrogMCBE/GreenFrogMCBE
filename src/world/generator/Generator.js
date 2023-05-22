@@ -17,7 +17,9 @@
 class Generator {
 	/**
 	 * Returns the generator name
-	 * @returns {string}
+	 * 
+	 * @returns {WorldGenerators}
+	 * @type {import('../types/WorldGenerators')}
 	 */
 	getName() {
 		return null;

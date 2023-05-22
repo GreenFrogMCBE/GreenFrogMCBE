@@ -7,10 +7,16 @@ const Generator = require("./Generator");
 let chunkData;
 
 class Flat extends Generator {
+	/**
+	 * @returns {WorldGenerators.Flat} 
+	 */
 	getName() {
 		return WorldGenerators.FLAT;
 	}
 
+	/**
+	 * @returns {Buffer} 
+	 */
 	getChunkData() {
 		chunkData = Buffer.alloc(16 * 16 * 256);
 		for (let y = 0; y < 256; y++) {
