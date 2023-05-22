@@ -30,10 +30,10 @@ function _generateHole() {
 function _generateOre() {
 	let blockType;
 
-	if (Math.floor(Math.random() * 300) < 1) {
+	if (Math.floor(Math.random() * 100) < 30) {
 		blockType = 16;
 	} else {
-		blockType = 0;
+		blockType = 1;
 	}
 
 	return blockType
