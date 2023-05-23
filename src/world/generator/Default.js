@@ -66,8 +66,12 @@ class Default extends Generator {
 						if (chunkData[index] % 2 === 0) {
 							chunkData[index] = _generateOre()
 							chunkData[index + 1] = 3
-							chunkData[index - 2] = _generateOre()
-							chunkData[index - 1] = _generateOre()
+
+							for (let i = 1; i <= 8; i++) {
+								chunkData[index - i] = _generateOre();
+							}
+
+							chunkData[index - 9] = 7
 						}
 					}
 				}
