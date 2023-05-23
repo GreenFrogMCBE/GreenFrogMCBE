@@ -60,12 +60,13 @@ class Default extends Generator {
 
 					if (x > 14 && y > -1 && y < 16) {
 						chunkData[index] = _generateHole();
-					} else if (y < 18 && x < 11) {
+					} else if (y < 17 && x < 11) {
 						chunkData[index] = 0
-					} else if (chunkData[index] == !2) {
+					} else {
 						if (chunkData[index] % 2 === 0) {
 							chunkData[index] = _generateOre()
 							chunkData[index + 1] = 3
+							chunkData[index - 2] = _generateOre()
 							chunkData[index - 1] = _generateOre()
 						}
 					}
