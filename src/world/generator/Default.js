@@ -66,8 +66,6 @@ class Default extends Generator {
 						}
 					} else {
 						if (chunkData[index] % 2 === 0) {
-							chunkData[index] = 0
-
 							if (Math.floor(Math.random() * 100) < 1) {
 								chunkData[index + 8] = 3
 								chunkData[index + 7] = 3
@@ -79,11 +77,19 @@ class Default extends Generator {
 								chunkData[index - 4] = 3
 							}
 
-							for (let i = 1; i <= 6; i++) {
+							for (let i = 1; i <= 5; i++) {
 								chunkData[index - i] = _generateOre();
 							}
 
+							if (Math.floor(Math.random() * 100) < 1) {
+								chunkData[index] = 0
+							} else {
+								chunkData[index] = 3
+							}
+
 							chunkData[index - 9] = 7
+						} else {
+							chunkData[index] = 0
 						}
 					}
 				}
