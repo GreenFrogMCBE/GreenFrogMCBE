@@ -42,7 +42,7 @@ world:
   tickStarvationDamage: true # Should people take damage if their food level is 0?
   randomTickSpeed: 1000
 
-  chunkGeneratorLimit: 16 # How many chunks will the server generate? Setting too hight may lag your server
+  chunkGeneratorLimit: 8 # How many chunks will the server generate? Setting too hight may lag your server
   worldName: "GreenFrog server"
 performance:
   garbageCollectorDelay: 60000

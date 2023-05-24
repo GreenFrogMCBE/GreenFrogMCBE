@@ -49,10 +49,10 @@ class Default extends Generator {
 						}
 					} else {
 						if (chunkData[index] % 2 === 0) {
-							if (Math.floor(Math.random() * 100) < 1) {
+							if (Math.floor(Math.random() * 100) < 10) {
 								chunkData[index + 1] = 3
-								if (Math.floor(Math.random() * 100) < 80) {
-									chunkData[index - 2] = 3
+								if (Math.floor(Math.random() * 100) < 10) {
+									chunkData[index - 20] = 7
 								}
 							}
 
