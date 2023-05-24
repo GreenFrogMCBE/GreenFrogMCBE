@@ -59,7 +59,7 @@ class Default extends Generator {
 					const index = y * 16 * 16 + z * 16 + x;
 
 					if (x > 14 && y > -1 && y < 16) {
-						chunkData[index] = _generateHole();
+						chunkData[index - 1] = 2;
 					} else if (y < 18 && x < 11) {
 						if (chunkData[index] === 7) {
 							chunkData[index] = 0
@@ -81,15 +81,10 @@ class Default extends Generator {
 								chunkData[index - i] = _generateOre();
 							}
 
-							if (Math.floor(Math.random() * 100) < 1) {
-								chunkData[index] = 0
-							} else {
-								chunkData[index] = 3
-							}
+							chunkData[index] = 0
+							chunkData[index - 1] = 3
 
 							chunkData[index - 9] = 7
-						} else {
-							chunkData[index] = 0
 						}
 					}
 				}
