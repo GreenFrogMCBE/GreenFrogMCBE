@@ -51,8 +51,8 @@ class Default extends Generator {
 						if (chunkData[index] % 2 === 0) {
 							if (Math.floor(Math.random() * 100) < 1) {
 								chunkData[index + 1] = 3
-								if (Math.floor(Math.random() * 100) < 5) {
-									chunkData[index + 2] = 3
+								if (Math.floor(Math.random() * 100) < 80) {
+									chunkData[index - 2] = 3
 								}
 							}
 
