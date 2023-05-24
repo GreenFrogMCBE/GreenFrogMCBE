@@ -10,23 +10,6 @@ let chunkData;
  * @param {number} blockType 
  * @private
  */
-function _generateHole() {
-	let blockType;
-
-	if (Math.floor(Math.random() * 300) < 1) {
-		blockType = 0;
-	} else {
-		blockType = 2;
-	}
-
-	return blockType
-}
-
-
-/**
- * @param {number} blockType 
- * @private
- */
 function _generateOre() {
 	let blockType;
 
