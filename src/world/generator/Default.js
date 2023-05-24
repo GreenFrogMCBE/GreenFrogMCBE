@@ -42,17 +42,26 @@ class Default extends Generator {
 					const index = y * 16 * 16 + z * 16 + x;
 
 					if (x > 14 && y > -1 && y < 16) {
-						chunkData[index - 1] = 2;
+						if (chunkData[index] == !3) {
+							chunkData[index - 1] = 2;
+						}
 					} else if (y < 18 && x < 11) {
 						if (chunkData[index] === 7) {
 							chunkData[index] = 0
 						}
 					} else {
 						if (chunkData[index] % 2 === 0) {
-							if (Math.floor(Math.random() * 100) < 10) {
-								chunkData[index + 1] = 3
-								if (Math.floor(Math.random() * 100) < 10) {
-									chunkData[index - 20] = 7
+							if (Math.floor(Math.random() * 100) < 5) {
+								if (Math.floor(Math.random() * 100) < 1) {
+									chunkData[index + 1] = 2
+
+									for (let i = 0; i < 97; i++) {
+										if (i < 60) {
+											chunkData[index - i] = 1
+										} else {
+											chunkData[index - i] = 2
+										}
+									}
 								}
 							}
 
