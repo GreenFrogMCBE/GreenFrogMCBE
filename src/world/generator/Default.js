@@ -50,14 +50,10 @@ class Default extends Generator {
 					} else {
 						if (chunkData[index] % 2 === 0) {
 							if (Math.floor(Math.random() * 100) < 1) {
-								chunkData[index + 8] = 3
-								chunkData[index + 7] = 3
-								chunkData[index + 6] = 3
-								chunkData[index + 5] = 3
-								chunkData[index + 4] = 3
-								chunkData[index + 3] = 3
-								chunkData[index - 3] = 3
-								chunkData[index - 4] = 3
+								chunkData[index + 1] = 3
+								if (Math.floor(Math.random() * 100) < 5) {
+									chunkData[index + 2] = 3
+								}
 							}
 
 							for (let i = 1; i <= 5; i++) {
