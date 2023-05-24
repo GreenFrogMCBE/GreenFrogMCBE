@@ -60,14 +60,26 @@ class Default extends Generator {
 
 					if (x > 14 && y > -1 && y < 16) {
 						chunkData[index] = _generateHole();
-					} else if (y < 17 && x < 11) {
-						chunkData[index] = 0
+					} else if (y < 18 && x < 11) {
+						if (chunkData[index] === 7) {
+							chunkData[index] = 0
+						}
 					} else {
 						if (chunkData[index] % 2 === 0) {
-							chunkData[index] = _generateOre()
-							chunkData[index + 1] = 3
+							chunkData[index] = 0
 
-							for (let i = 1; i <= 8; i++) {
+							if (Math.floor(Math.random() * 100) < 1) {
+								chunkData[index + 8] = 3
+								chunkData[index + 7] = 3
+								chunkData[index + 6] = 3
+								chunkData[index + 5] = 3
+								chunkData[index + 4] = 3
+								chunkData[index + 3] = 3
+								chunkData[index - 3] = 3
+								chunkData[index - 4] = 3
+							}
+
+							for (let i = 1; i <= 6; i++) {
 								chunkData[index - i] = _generateOre();
 							}
 
