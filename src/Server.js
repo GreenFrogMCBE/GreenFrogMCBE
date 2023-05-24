@@ -32,8 +32,6 @@ const Logger = require("./server/Logger");
 const PluginLoader = require("./plugins/PluginLoader");
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
 
-const { RateLimitException } = require("./utils/exceptions/RateLimitException");
-
 const Language = require("./utils/Language");
 
 const FrogProtocol = require("frog-protocol");
@@ -74,7 +72,7 @@ async function _handleCriticalError(error) {
  *
  * @param {Client} client
  * @param {JSON} packetParams
- * @throws {RateLimitException} - In case if the client is ratelimited
+ * @throws {Error} - In case if the client is ratelimited
  */
 function _handlePacket(client, packetParams) {
 	try {
@@ -92,7 +90,7 @@ function _handlePacket(client, packetParams) {
 						server: this,
 					});
 
-					throw new RateLimitException(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
+					throw new Error(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
 				}
 
 				const packet = new (require(packetPath))();
