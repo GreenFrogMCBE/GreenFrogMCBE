@@ -55,7 +55,7 @@ class Default extends Generator {
 								if (Math.floor(Math.random() * 100) < 1) {
 									chunkData[index + 1] = 0
 
-									for (let i = 0; i < 200; i++) {
+									for (let i = 0; i < 900; i++) {
 										if ((index - i) % 2 === 0) {
 											chunkData[index - i] = 2
 											chunkData[(index - 100) - i] = 2
