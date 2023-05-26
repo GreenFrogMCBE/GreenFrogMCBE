@@ -43,40 +43,71 @@ class Default extends Generator {
 
 					if (x > 14 && y > -1 && y < 16) {
 						if (chunkData[index] == !3) {
-							chunkData[index - 1] = 2;
+							if (Math.floor(Math.random() * 3000) < 1) {
+								chunkData[index - 1] = 0;
+							} else {
+								chunkData[index - 1] = 2;
+							}
 						}
 					} else if (y < 18 && x < 11) {
 						if (chunkData[index] === 7) {
 							chunkData[index] = 0
 						}
 					} else {
-						if (chunkData[index] % 2 === 0) {
-							if (Math.floor(Math.random() * 100) < 5) {
-								if (Math.floor(Math.random() * 100) < 1) {
-									chunkData[index + 1] = 0
+						if (Math.floor(Math.random() * 100) < 1) {
+							if (Math.floor(Math.random() * 100) < 1) {
+								chunkData[index + 1] = 0
 
-									for (let i = 0; i < 900; i++) {
-										if ((index - i) % 2 === 0) {
-											chunkData[index - i] = 2
-											chunkData[(index - 100) - i] = 2
-										}
-										else {
-											chunkData[index - i] = 1
-											chunkData[index - (i + 1)] = 1
-										}
+								for (let i = 0; i < 1200; i++) {
+									if ((index - i) % 2 === 0) {
+										chunkData[index - i] = 2
+										chunkData[(index - 100) - i] = 2
+
+										chunkData[(index + 351) - i] = 2
+										chunkData[(index + 451) - i] = 2
+										chunkData[(index + 551) - i] = 2
+										chunkData[(index + 651) - i] = 2
+										chunkData[(index + 751) - i] = 2
+										chunkData[(index + 851) - i] = 2
+										chunkData[(index + 951) - i] = 2
+										chunkData[(index + 1051) - i] = 2
+										chunkData[(index + 1151) - i] = 2
+										chunkData[(index + 1251) - i] = 2
+										chunkData[(index + 1351) - i] = 2
+										chunkData[(index + 1451) - i] = 2
+										chunkData[(index + 1551) - i] = 2
+										chunkData[(index + 1651) - i] = 2
+
+										chunkData[(index - 351) - i] = 2
+										chunkData[(index - 451) - i] = 2
+										chunkData[(index - 551) - i] = 2
+										chunkData[(index - 651) - i] = 2
+										chunkData[(index - 751) - i] = 2
+										chunkData[(index - 851) - i] = 2
+										chunkData[(index - 951) - i] = 2
+										chunkData[(index - 1051) - i] = 2
+										chunkData[(index - 1151) - i] = 2
+										chunkData[(index - 1251) - i] = 2
+										chunkData[(index - 1351) - i] = 2
+										chunkData[(index - 1451) - i] = 2
+										chunkData[(index - 1551) - i] = 2
+										chunkData[(index - 1651) - i] = 2
+									} else {
+										chunkData[index - i] = 1
+										chunkData[index - (i + 1)] = 1
 									}
 								}
 							}
-
-							for (let i = 1; i <= 5; i++) {
-								chunkData[index - i] = _generateOre();
-							}
-
-							chunkData[index] = 0
-							chunkData[index - 1] = 3
-
-							chunkData[index - 9] = 7
 						}
+
+						for (let i = 1; i <= 5; i++) {
+							chunkData[index - i] = _generateOre();
+						}
+
+						chunkData[index] = 0
+						chunkData[index - 1] = 3
+
+						chunkData[index - 9] = 7
 					}
 				}
 			}
