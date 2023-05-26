@@ -48,7 +48,7 @@ class Default extends Generator {
 						if (chunkData[index] == !3) {
 							if (Math.floor(Math.random() * 3000) < 1) {
 								chunkData[index - 1] = 0;
-								chunkData[index + 351] = 2;
+								chunkData[index + 351] = 7;
 							} else {
 								chunkData[index - 1] = 2;
 							}
@@ -58,8 +58,8 @@ class Default extends Generator {
 							chunkData[index] = 0
 						}
 					} else {
-						if (Math.floor(Math.random() * 100) < 2) {
-							if (Math.floor(Math.random() * 200) < 2) {
+						if (Math.floor(Math.random() * 100) < 3) {
+							if (Math.floor(Math.random() * 200) < 3) {
 								if (j > 4161319) {
 									for (let i = 0; i < 1200; i++) {
 										if ((index - i) % 2 === 0) {
@@ -97,7 +97,7 @@ class Default extends Generator {
 											chunkData[(index - 1551) - i] = 2
 											chunkData[(index - 1651) - i] = 2
 										} else {
-											chunkData[index - i] = 1
+											chunkData[index - i] = 0
 										}
 									}
 								}
