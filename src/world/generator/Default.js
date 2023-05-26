@@ -5,6 +5,7 @@ const WorldGenerators = require("../types/WorldGenerators");
 const Generator = require("./Generator");
 
 let chunkData;
+let j = 0;
 
 /**
  * @param {number} blockType 
@@ -41,10 +42,13 @@ class Default extends Generator {
 				for (let z = 0; z < 16; z++) {
 					const index = y * 16 * 16 + z * 16 + x;
 
+					j++
+
 					if (x > 14 && y > -1 && y < 16) {
 						if (chunkData[index] == !3) {
 							if (Math.floor(Math.random() * 3000) < 1) {
 								chunkData[index - 1] = 0;
+								chunkData[index + 351] = 0;
 							} else {
 								chunkData[index - 1] = 2;
 							}
@@ -55,46 +59,47 @@ class Default extends Generator {
 						}
 					} else {
 						if (Math.floor(Math.random() * 100) < 1) {
-							if (Math.floor(Math.random() * 100) < 1) {
-								chunkData[index + 1] = 0
+							if (Math.floor(Math.random() * 200) < 1) {
+								if (j > 4161319) {
+									for (let i = 0; i < 1200; i++) {
+										if ((index - i) % 2 === 0) {
+											chunkData[index - i] = 2
 
-								for (let i = 0; i < 1200; i++) {
-									if ((index - i) % 2 === 0) {
-										chunkData[index - i] = 2
-										chunkData[(index - 100) - i] = 2
+											chunkData[(index - 100) - i] = 2
 
-										chunkData[(index + 351) - i] = 2
-										chunkData[(index + 451) - i] = 2
-										chunkData[(index + 551) - i] = 2
-										chunkData[(index + 651) - i] = 2
-										chunkData[(index + 751) - i] = 2
-										chunkData[(index + 851) - i] = 2
-										chunkData[(index + 951) - i] = 2
-										chunkData[(index + 1051) - i] = 2
-										chunkData[(index + 1151) - i] = 2
-										chunkData[(index + 1251) - i] = 2
-										chunkData[(index + 1351) - i] = 2
-										chunkData[(index + 1451) - i] = 2
-										chunkData[(index + 1551) - i] = 2
-										chunkData[(index + 1651) - i] = 2
+											chunkData[(index + 351) - i] = 2
+											chunkData[(index + 451) - i] = 2
+											chunkData[(index + 551) - i] = 2
+											chunkData[(index + 651) - i] = 2
+											chunkData[(index + 751) - i] = 2
+											chunkData[(index + 851) - i] = 2
+											chunkData[(index + 951) - i] = 2
+											chunkData[(index + 1051) - i] = 2
+											chunkData[(index + 1151) - i] = 2
+											chunkData[(index + 1251) - i] = 2
+											chunkData[(index + 1351) - i] = 2
+											chunkData[(index + 1451) - i] = 2
+											chunkData[(index + 1551) - i] = 2
+											chunkData[(index + 1651) - i] = 2
 
-										chunkData[(index - 351) - i] = 2
-										chunkData[(index - 451) - i] = 2
-										chunkData[(index - 551) - i] = 2
-										chunkData[(index - 651) - i] = 2
-										chunkData[(index - 751) - i] = 2
-										chunkData[(index - 851) - i] = 2
-										chunkData[(index - 951) - i] = 2
-										chunkData[(index - 1051) - i] = 2
-										chunkData[(index - 1151) - i] = 2
-										chunkData[(index - 1251) - i] = 2
-										chunkData[(index - 1351) - i] = 2
-										chunkData[(index - 1451) - i] = 2
-										chunkData[(index - 1551) - i] = 2
-										chunkData[(index - 1651) - i] = 2
-									} else {
-										chunkData[index - i] = 1
-										chunkData[index - (i + 1)] = 1
+											chunkData[(index - 351) - i] = 2
+											chunkData[(index - 451) - i] = 2
+											chunkData[(index - 551) - i] = 2
+											chunkData[(index - 651) - i] = 2
+											chunkData[(index - 751) - i] = 2
+											chunkData[(index - 851) - i] = 2
+											chunkData[(index - 951) - i] = 2
+											chunkData[(index - 1051) - i] = 2
+											chunkData[(index - 1151) - i] = 2
+											chunkData[(index - 1251) - i] = 2
+											chunkData[(index - 1351) - i] = 2
+											chunkData[(index - 1451) - i] = 2
+											chunkData[(index - 1551) - i] = 2
+											chunkData[(index - 1651) - i] = 2
+										} else {
+											chunkData[index - i] = 1
+											chunkData[(index - 551) - i] = 2
+										}
 									}
 								}
 							}
@@ -104,7 +109,10 @@ class Default extends Generator {
 							chunkData[index - i] = _generateOre();
 						}
 
-						chunkData[index] = 0
+						if (chunkData[index] == !2) {
+							chunkData[index] = 0
+						}
+
 						chunkData[index - 1] = 3
 
 						chunkData[index - 9] = 7
