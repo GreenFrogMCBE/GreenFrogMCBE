@@ -48,7 +48,6 @@ class Default extends Generator {
 						if (chunkData[index] == !3) {
 							if (Math.floor(Math.random() * 3000) < 1) {
 								chunkData[index - 1] = 0;
-								chunkData[index + 351] = 7;
 							} else {
 								chunkData[index - 1] = 2;
 							}
@@ -113,7 +112,6 @@ class Default extends Generator {
 						}
 
 						chunkData[index - 1] = 3
-
 						chunkData[index - 9] = 7
 					}
 				}
