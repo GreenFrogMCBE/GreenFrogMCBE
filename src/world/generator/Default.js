@@ -56,10 +56,10 @@ class Default extends Generator {
 						}
 
 						// Lakes
-						if (Math.floor(Math.random() * 3000) < 1) {
-							for (let i = 0; i < 1200; i++) {
-								chunkData[(index - 351) - i] = 9
-							}
+						if (Math.floor(Math.random() * 3000) < 1 && j < 4161319) {
+							chunkData[(index - 1)] = 9
+							chunkData[(index - 2)] = 12
+							chunkData[(index - 267)] = 0
 						}
 					} else if (y < 18 && x < 11) {
 						// Fix bedrock level
