@@ -48,7 +48,7 @@ class Default extends Generator {
 						if (chunkData[index] == !3) {
 							// Holes
 
-							if (Math.floor(Math.random() * 500) < 1) {
+							if (Math.floor(Math.random() * 3000) < 1) {
 								chunkData[index - 1] = 0;
 							} else {
 								chunkData[index - 1] = 2;
@@ -56,8 +56,10 @@ class Default extends Generator {
 						}
 
 						// Lakes
-						if (Math.floor(Math.random() * 300) < 1) {
-							chunkData[index - 1] = 9;
+						if (Math.floor(Math.random() * 3000) < 1) {
+							for (let i = 0; i < 1200; i++) {
+								chunkData[(index - 351) - i] = 9
+							}
 						}
 					} else if (y < 18 && x < 11) {
 						// Fix bedrock level
@@ -68,7 +70,7 @@ class Default extends Generator {
 					} else {
 						// Hills
 
-						if (Math.floor(Math.random() * 300) < 1 && j > 4161319) {
+						if (Math.floor(Math.random() * 600) < 1 && j > 4161319) {
 							for (let i = 0; i < 1200; i++) {
 								if ((index - i) % 2 === 0) {
 									chunkData[index - i] = 2
