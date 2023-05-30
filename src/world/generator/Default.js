@@ -1,3 +1,18 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
 
 const WorldGenerators = require("../types/WorldGenerators");
@@ -35,10 +50,10 @@ class Default extends Generator {
 	 * @returns {Buffer} 
 	 */
 	getChunkData() {
-		chunkData = Buffer.alloc(16 * 16 * 256);
+		chunkData = Buffer.alloc(16 * 256 * 16);
 
-		for (let y = 0; y < 256; y++) {
-			for (let x = 0; x < 16; x++) {
+		for (let x = 0; x < 16; x++) {
+			for (let y = 0; y < 256; y++) {
 				for (let z = 0; z < 16; z++) {
 					const index = y * 16 * 16 + z * 16 + x;
 
@@ -88,24 +103,6 @@ class Default extends Generator {
 									chunkData[(index + 1151) - i] = 2
 									chunkData[(index + 1251) - i] = 2
 									chunkData[(index + 1351) - i] = 2
-									chunkData[(index + 1451) - i] = 2
-									chunkData[(index + 1551) - i] = 2
-									chunkData[(index + 1651) - i] = 2
-
-									chunkData[(index - 351) - i] = 2
-									chunkData[(index - 451) - i] = 2
-									chunkData[(index - 551) - i] = 2
-									chunkData[(index - 651) - i] = 2
-									chunkData[(index - 751) - i] = 2
-									chunkData[(index - 851) - i] = 2
-									chunkData[(index - 951) - i] = 2
-									chunkData[(index - 1051) - i] = 2
-									chunkData[(index - 1151) - i] = 2
-									chunkData[(index - 1251) - i] = 2
-									chunkData[(index - 1351) - i] = 2
-									chunkData[(index - 1451) - i] = 2
-									chunkData[(index - 1551) - i] = 2
-									chunkData[(index - 1651) - i] = 2
 								} else {
 									chunkData[index - i] = 0
 								}

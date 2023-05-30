@@ -236,9 +236,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const generator = new generatorFile();
 					generator.generate(player);
 
-					player.network_chunks_loop = setInterval(() => {
+					player.networkChunksLoop = setInterval(() => {
 						if (player.offline) {
-							delete player.network_chunks_loop;
+							delete player.networkChunksLoop;
 							return;
 						}
 
