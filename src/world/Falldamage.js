@@ -19,7 +19,7 @@ const Gamemode = require("../api/player/Gamemode");
 module.exports = {
 	/**
 	 * Calculates fall damage
-	 * NOTE: This can be spoofed by hacked client
+	 * NOTE: This can be spoofed by a hacked client
 	 *
 	 * @param {Client} player
 	 * @param {JSON} position

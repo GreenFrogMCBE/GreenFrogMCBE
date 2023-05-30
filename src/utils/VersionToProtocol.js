@@ -45,7 +45,7 @@ module.exports = {
 			case "1.19.20":
 				return 544;
 			default:
-				return 999;
+				return 0;
 		}
 	},
 };

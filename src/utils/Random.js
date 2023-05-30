@@ -20,7 +20,7 @@ class Random {
 	 * Generates random string
 	 *
 	 * @param {number} length
-	 * @returns {string} Randmo string
+	 * @returns {string} Random string
 	 */
 	generateRandomString(length) {
 		const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
