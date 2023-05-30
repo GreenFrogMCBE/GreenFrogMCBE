@@ -35,7 +35,7 @@ world:
   difficulty: 0
 
   generator: "default" # Can be default, flat, or void
-  renderDistance: 8
+  renderDistance: 4
   clientSideRenderDistance: 64
 
   tickEvent: true # Should ServerTickEvent be enabled?

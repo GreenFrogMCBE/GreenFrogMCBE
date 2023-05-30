@@ -14,6 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /* eslint-disable no-unused-vars */
+
 class Generator {
 	/**
 	 * Returns the generator name
