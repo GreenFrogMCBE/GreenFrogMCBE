@@ -39,7 +39,7 @@ const fs = require("fs");
 if (!fs.existsSync("../config.yml")) {
 	const config = fs.readFileSync("../src/internalResources/defaultConfig.yml");
 
-	fs.writeFileSync("../config.yml", config, () => {});
+	fs.writeFileSync("../config.yml", config, () => { });
 }
 
 console.info("Starting testing...");
@@ -56,104 +56,86 @@ const r = rl.createInterface({
 	input: process.stdin,
 	output: process.stdout,
 });
+
 console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);
-	let tests = ["3", "2", "1"];
 
-	if (args[0] == "1") {
-		StartServer.test();
-		console.info("\u001b[1m\u001b[38;5;214mStarting test 1 (Start server)...\u001b[0m");
-		r.close();
-		joinTest();
-	}
-	if (args[0] == "2") {
-		StartServer.test();
-		r.close();
-		console.info("\u001b[1m\u001b[38;5;214mStarting test 2 (Start server and send message)...\u001b[0m");
-		messageTest();
-	}
-	if (args[0] == "3") {
-		StartServer.test();
-
-		r.close();
-		console.info("\u001b[1m\u001b[38;5;214mStarting test 3 (Start server and try to execute a command)...\u001b[0m");
-		commandTest();
+	switch (args[0]) {
+		case "1":
+			runTest(1, "Start server", joinTest);
+			break;
+		case "2":
+			runTest(2, "Start server and send message", messageTest);
+			break;
+		case "3":
+			runTest(3, "Start server and try to execute a command", commandTest);
+			break;
+		default:
+			console.info(`Could not find test ${args[0]}`);
+			break;
 	}
 
-	if (!tests.includes(args[0])) {
-		console.info(`Could not find test ${args[0]}`);
-		r.close();
-	}
+	r.close();
 });
 
-let joinTest = () =>
+function runTest(testNumber, testName, testFunction) {
+	console.info(`\u001b[1m\u001b[38;5;214mStarting test ${testNumber} (${testName})...\u001b[0m`);
+
+	StartServer.test();
+
 	setTimeout(() => {
 		try {
 			TestConfigs.test();
+			testFunction();
 		} catch (e) {
-			console.info("Tests failed! Failed to test the configs! " + e.stack);
+			console.info(`Tests failed! ${e.stack}`);
 			process.exit(-1);
-		} finally {
-			setTimeout(() => {
-				try {
-					ClientJoin.test();
-				} catch (e) {
-					console.info("Tests failed! Failed to join with client! " + e.stack);
-					process.exit(-1);
-				} finally {
-					setTimeout(() => {
-						console.info("Tests passed!");
-						process.exit(0);
-					}, 10000);
-				}
-			}, 3000);
 		}
 	}, 6000);
-let messageTest = () =>
+}
+
+function handleTestSuccess() {
+	console.info("Tests passed!");
+	process.exit(0);
+}
+
+function joinTest() {
 	setTimeout(() => {
 		try {
-			TestConfigs.test();
+			ClientJoin.test();
 		} catch (e) {
-			console.info("Tests failed! Failed to test the configs! " + e.stack);
+			console.info("Tests failed! Failed to join with client! " + e.stack);
 			process.exit(-1);
 		} finally {
-			setTimeout(() => {
-				try {
-					ClientMessage.test();
-				} catch (e) {
-					console.info("Tests failed! Failed to join with client! " + e.stack);
-					process.exit(-1);
-				} finally {
-					setTimeout(() => {
-						console.info("Tests passed!");
-						process.exit(0);
-					}, 10000);
-				}
-			}, 3000);
+			setTimeout(handleTestSuccess, 10000);
 		}
-	}, 6000);
-let commandTest = () =>
+	}, 3000);
+}
+
+function messageTest() {
 	setTimeout(() => {
 		try {
-			TestConfigs.test();
+			ClientMessage.test();
 		} catch (e) {
-			console.info("Tests failed! Failed to parse the configs! " + e.stack);
+			console.info("Tests failed! Failed to join with client! " + e.stack);
 			process.exit(-1);
 		} finally {
-			setTimeout(() => {
-				try {
-					ClientCommand.test();
-				} catch (e) {
-					console.info("Tests failed! Failed to join with client! " + e.stack);
-					process.exit(-1);
-				} finally {
-					setTimeout(() => {
-						console.info("Tests passed!");
-						process.exit(0);
-					}, 10000);
-				}
-			}, 3000);
+			setTimeout(handleTestSuccess, 10000);
 		}
-	}, 6000);
+	}, 3000);
+}
+
+function commandTest() {
+	setTimeout(() => {
+		try {
+			ClientCommand.test();
+		} catch (e) {
+			console.info("Tests failed! Failed to join with client! " + e.stack);
+			process.exit(-1);
+		} finally {
+			setTimeout(handleTestSuccess, 10000);
+		}
+	}, 3000);
+}
