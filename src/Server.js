@@ -284,12 +284,12 @@ async function _onJoin(client) {
 		}
 	}
 
-	new ResponsePackInfo()
-		.setMustAccept(true)
-		.setHasScripts(false)
-		.setBehaviorPacks([])
-		.setTexturePacks([])
-		.writePacket(client)
+	const responsePackInfo = new ResponsePackInfo();
+	responsePackInfo.setMustAccept(true);
+	responsePackInfo.setHasScripts(false);
+	responsePackInfo.setBehaviorPacks([]);
+	responsePackInfo.setTexturePacks([]);
+	responsePackInfo.writePacket(client);
 
 	Frog.eventEmitter.emit("playerJoin", {
 		player: client,
@@ -350,7 +350,9 @@ module.exports = {
 		}, parseInt(config.performance.garbageCollectorDelay));
 
 		setInterval(() => {
-			new World().tick();
+			const world = new World();
+
+			world.tick();
 		}, parseInt(config.world.randomTickSpeed));
 	},
 };
