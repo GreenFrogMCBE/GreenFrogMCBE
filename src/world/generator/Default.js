@@ -56,11 +56,11 @@ class Default extends Generator {
 						}
 
 						// Lakes
-						//						if (Math.floor(Math.random() * 3000) < 2 && j < 4161319) {
-						//							chunkData[(index - 1)] = 9
-						//							chunkData[(index - 2)] = 12
-						//							chunkData[(index - 270)] = 0
-						//						}
+						/*if (Math.floor(Math.random() * 3000) < 2 && j < 4161319) {
+							chunkData[(index - 1)] = 9
+							chunkData[(index - 2)] = 12
+							chunkData[(index - 270)] = 0
+						*/
 					} else if (y < 18 && x < 11) {
 						// Fix bedrock level
 
