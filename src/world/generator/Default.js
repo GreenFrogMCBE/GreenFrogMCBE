@@ -70,7 +70,7 @@ class Default extends Generator {
 					} else {
 						// Hills
 
-						if (Math.floor(Math.random() * 600) < 1 && j > 4161319) {
+						if (Math.floor(Math.random() * 600) < 1 && j > 4161319 && y > 10) {
 							for (let i = 0; i < 1200; i++) {
 								if ((index - i) % 2 === 0) {
 									chunkData[index - i] = 2

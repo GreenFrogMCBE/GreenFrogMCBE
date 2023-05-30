@@ -257,7 +257,7 @@ class World {
 			for (const client of this.getPlayersInWorld()) {
 				const posY = Math.floor(client.location.y);
 
-				let min = -64;
+				let min = -62;
 
 				if (config.world.generator === WorldGenerators.VOID) {
 					min = undefined;
