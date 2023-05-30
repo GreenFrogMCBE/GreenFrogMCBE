@@ -130,12 +130,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				player.world.setChunkRadius(config.world.chunkGeneratorLimit);
 				player.world.setName(config.world.worldName);
 
-				switch (config.world.generator) {
+				switch (config.world.generator.toLowerCase()) {
 					case "default":
 						player.world.setGenerator(WorldGenerators.DEFAULT)
 						break;
 					case "flat":
 						player.world.setGenerator(WorldGenerators.FLAT);
+						break;
+					case "void":
+						player.world.setGenerator(WorldGenerators.VOID);
 						break;
 					default:
 						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"));
