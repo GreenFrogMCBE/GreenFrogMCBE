@@ -33,7 +33,10 @@ world:
   gamemode: "creative"
   worldGamemode: "creative"
   difficulty: 0
+
   generator: "default" # Can be default, flat, or void
+  renderDistance: 8
+  clientSideRenderDistance: 64
 
   tickEvent: true # Should ServerTickEvent be enabled?
   tickWorldTime: true # Should time update be server side?
@@ -42,7 +45,6 @@ world:
   tickStarvationDamage: true # Should people take damage if their food level is 0?
   randomTickSpeed: 1000
 
-  chunkGeneratorLimit: 4 # How many chunks will the server generate? Setting too hight may lag your server
   worldName: "GreenFrog server"
 performance:
   garbageCollectorDelay: 60000

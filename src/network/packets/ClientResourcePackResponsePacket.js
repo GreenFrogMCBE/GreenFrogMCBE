@@ -127,7 +127,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				});
 
 				player.world = new World();
-				player.world.setChunkRadius(config.world.chunkGeneratorLimit);
+				player.world.setChunkRadius(config.world.renderDistance);
 				player.world.setName(config.world.worldName);
 
 				switch (config.world.generator.toLowerCase()) {
@@ -228,7 +228,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
 					networkChunkPublisher.setCoordinates(0, 0, 0);
-					networkChunkPublisher.setRadius(64);
+					networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
 					networkChunkPublisher.setSavedChunks([]);
 					networkChunkPublisher.writePacket(player);
 
@@ -244,7 +244,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 						const networkChunkPublisher = new NetworkChunkPublisherUpdate();
 						networkChunkPublisher.setCoordinates(0, 0, 0);
-						networkChunkPublisher.setRadius(64);
+						networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
 						networkChunkPublisher.setSavedChunks([]);
 						networkChunkPublisher.writePacket(player);
 					}, 4500);
