@@ -126,6 +126,10 @@ class Default extends Generator {
 
 						// Bedrock generator
 						chunkData[index - 9] = 7
+
+						if (chunkData[index - 10]) {
+							chunkData[index - 10] = 0
+						}
 					}
 				}
 			}
