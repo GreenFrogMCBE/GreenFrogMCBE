@@ -13,19 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
-
+/* eslint-disable no-empty */
 // Credit: AnyBananaGAME
 
 const rl = require("readline");
@@ -44,13 +32,14 @@ if (!fs.existsSync("../config.yml")) {
 
 console.info("Starting testing...");
 
-const ServerInfo = require("../src/api/ServerInfo");
-const config = ServerInfo.config;
+try {
+	const { serverConfigurationFiles } = require("../src/Frog");
 
-if (!config.offlineMode) {
-	console.info("You can't use tests in online mode!");
-	process.exit();
-}
+	if (!serverConfigurationFiles.offlineMode) {
+		console.info("You can't use tests in online mode!");
+		process.exit();
+	}
+} catch { }
 
 const r = rl.createInterface({
 	input: process.stdin,
