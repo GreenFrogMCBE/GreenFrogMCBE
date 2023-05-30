@@ -93,16 +93,6 @@ class Default extends Generator {
 									chunkData[(index - 351) - i] = 2
 
 									chunkData[(index + 351) - i] = 2
-									chunkData[(index + 451) - i] = 2
-									chunkData[(index + 551) - i] = 2
-									chunkData[(index + 651) - i] = 2
-									chunkData[(index + 751) - i] = 2
-									chunkData[(index + 851) - i] = 2
-									chunkData[(index + 951) - i] = 2
-									chunkData[(index + 1051) - i] = 2
-									chunkData[(index + 1151) - i] = 2
-									chunkData[(index + 1251) - i] = 2
-									chunkData[(index + 1351) - i] = 2
 								} else {
 									chunkData[index - i] = 0
 								}
