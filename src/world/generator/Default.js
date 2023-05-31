@@ -13,8 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
-
 const WorldGenerators = require("../types/WorldGenerators");
 
 const Generator = require("./Generator");
@@ -76,25 +74,23 @@ class Default extends Generator {
 							chunkData[(index - 2)] = 12
 							chunkData[(index - 270)] = 0
 						}
-					} else if (y < 18 && x < 11) {
-						// Fix bedrock level
-
-						if (chunkData[index] === 7) {
-							chunkData[index] = 0
-						}
 					} else {
 						// Hills
 
-						if (Math.floor(Math.random() * 600) < 1 && j > 4161319 && y > 10) {
+						if (Math.floor(Math.random() * 600) < 1 && j > 4161319 && !chunkData[index]) {
 							for (let i = 0; i < 1200; i++) {
-								if ((index - i) % 2 === 0) {
-									chunkData[index - i] = 2
+								if ((index - i) % 2 === 0 && y > 15) {
+									if (!chunkData[index - i]) {
+										chunkData[index - i] = 2
+									}
 
-									chunkData[(index - 351) - i] = 2
+									if (!chunkData[(index - 351) - i]) {
+										chunkData[(index - 351) - i] = 2
+									}
 
-									chunkData[(index + 351) - i] = 2
-								} else {
-									chunkData[index - i] = 0
+									if (!chunkData[(index + 351) + i]) {
+										chunkData[(index + 351) + i] = 2
+									}
 								}
 							}
 						} else {
@@ -111,34 +107,24 @@ class Default extends Generator {
 
 						chunkData[index - 1] = 3
 
-						// Bedrock generator
-						chunkData[index - 9] = 7
-
-						if (chunkData[index - 10]) {
-							chunkData[index - 10] = 0
+						if (chunkData[index + 1] === 7) {
+							chunkData[index + 1] = 0
 						}
+						
+						if (chunkData[index + 2] === 7) {
+							chunkData[index + 2] = 0
+						}
+
+						// Bedrock generator
+						chunkData[index - 9] = 1
+						chunkData[index - 10] = 1
+						chunkData[index - 12] = 7
 					}
 				}
 			}
 		}
 
 		return chunkData;
-	}
-
-	generate(player) {
-		const chunkRadius = player.world.getChunkRadius();
-
-		for (let x = player.location.x - chunkRadius; x <= player.location.x + chunkRadius; x++) {
-			for (let z = player.location.z - chunkRadius; z <= player.location.z + chunkRadius; z++) {
-				const levelChunk = new ServerLevelChunkPacket();
-				levelChunk.setX(x);
-				levelChunk.setZ(z);
-				levelChunk.setSubChunkCount(1);
-				levelChunk.setCacheEnabled(false);
-				levelChunk.setPayload(this.getChunkData());
-				levelChunk.writePacket(player);
-			}
-		}
 	}
 }
 
