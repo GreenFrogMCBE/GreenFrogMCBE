@@ -48,7 +48,6 @@ class ClientMovePacket extends PacketConstructor {
 			z,
 			pitch,
 			yaw,
-			legacyPacket: false,
 			onGround: player.location.onGround,
 			cancel: () => {
 				if (player.location.x === 0 && player.location.y === 0 && player.location.z === 0) return;
