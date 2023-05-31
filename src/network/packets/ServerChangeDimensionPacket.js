@@ -35,14 +35,6 @@ class ServerChangeDimensionPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the dimension
 	 * @param {Dimensions} new_dimension
 	 */

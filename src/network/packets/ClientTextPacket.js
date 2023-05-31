@@ -36,14 +36,6 @@ class ClientTextPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if is if packet critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Reads if packet from player
 	 * @param {Client} player
 	 * @param {JSON} packet

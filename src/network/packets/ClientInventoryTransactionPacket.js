@@ -42,14 +42,6 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Reads the packet from client
 	 *
 	 * @param {Client} player

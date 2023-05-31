@@ -28,14 +28,6 @@ class ServerSetEntityMotion extends PacketConstructor {
 	}
 
 	/**
-	 * Returns whether the packet is critical or not
-	 * @returns {boolean} True if the packet is critical, false otherwise
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Returns the velocity of the entity
 	 * @returns {JSON}
 	 */

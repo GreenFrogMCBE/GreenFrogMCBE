@@ -27,14 +27,6 @@ class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the packet value
 	 * @param {JSON} new_value - The packet value data to set.
 	 */

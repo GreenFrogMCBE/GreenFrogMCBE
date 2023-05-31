@@ -29,14 +29,6 @@ class ServerSetPlayerGameTypePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns whether the packet is critical.
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the gamemode.
 	 * @param {Gamemode} gamemode1 The gamemode to be set.
 	 */

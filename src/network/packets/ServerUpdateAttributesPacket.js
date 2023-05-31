@@ -22,18 +22,10 @@ let tick = -1;
 class ServerUpdateAttributesPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
-	 * @returns {string}.
+	 * @returns {string}
 	 */
 	getPacketName() {
 		return "update_attributes";
-	}
-
-	/**
-	 * Returns whether the packet is critical or not.
-	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
-	 */
-	isCriticalPacket() {
-		return false;
 	}
 
 	/**

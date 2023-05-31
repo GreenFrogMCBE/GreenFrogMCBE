@@ -28,14 +28,6 @@ class ServerToastRequestPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns whether the packet is critical or not.
-	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the title of the toast.
 	 * @param new_title
 	 */

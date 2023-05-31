@@ -27,14 +27,6 @@ class ServerCreativeContentPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return true;
-	}
-
-	/**
 	 * Sets the items list
 	 * @param {Array<JSON>} new_items - item list
 	 */

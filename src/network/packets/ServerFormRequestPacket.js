@@ -35,14 +35,6 @@ class ServerFormRequestPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the ID for the form
 	 * @param {number} new_id
 	 */

@@ -34,14 +34,6 @@ class ServerTextPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns whether the packet is critical or not.
-	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the message to be sent
 	 * @param {string} new_message
 	 */

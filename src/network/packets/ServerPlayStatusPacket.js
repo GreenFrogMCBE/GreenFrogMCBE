@@ -27,14 +27,6 @@ class ServerPlayStatusPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return true;
-	}
-
-	/**
 	 * Sets the status.
 	 * @param new_status
 	 */

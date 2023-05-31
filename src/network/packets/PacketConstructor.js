@@ -22,20 +22,10 @@ class PacketConstructor {
 
 	/**
 	 * Returns the packet name
-	 *
 	 * @returns {string}
 	 */
 	getPacketName() {
 		return "unknown_packet";
-	}
-
-	/**
-	 * Returns if the packet is critical
-	 *
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
 	}
 
 	/**

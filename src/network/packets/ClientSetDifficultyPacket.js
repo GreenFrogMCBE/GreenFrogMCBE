@@ -29,14 +29,6 @@ class ClientSetDifficultyPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Reads the packet from player
 	 * @param {Client} player
 	 * @param {JSON} packet

@@ -33,14 +33,6 @@ class ServerPlayerListPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Returns the player username
 	 * @returns {string} The player username
 	 */

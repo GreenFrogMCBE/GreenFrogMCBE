@@ -34,14 +34,6 @@ class ServerMoveEntityDataPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns whether the packet is critical or not
-	 * @returns {boolean} Returns whether the packet is critical or not
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Returns the runtime entity ID
 	 * @returns {float} The runtime entity ID
 	 */

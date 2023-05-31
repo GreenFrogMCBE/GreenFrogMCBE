@@ -29,14 +29,6 @@ class ServerSetDifficultyPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the difficulty
 	 * @param {Difficulty} new_difficulty
 	 */

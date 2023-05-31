@@ -28,14 +28,6 @@ class ServerContainerClosePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the window ID
 	 * @param {number} new_id
 	 */

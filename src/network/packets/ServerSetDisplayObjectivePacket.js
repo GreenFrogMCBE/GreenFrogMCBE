@@ -33,14 +33,6 @@ class ServerScoreboardObjectivePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?.
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the display slot.
 	 * @param {DisplaySlots} slot The display slot to set.
 	 */

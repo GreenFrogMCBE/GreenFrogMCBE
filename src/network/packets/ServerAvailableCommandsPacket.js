@@ -27,14 +27,6 @@ class ServerAvailableCommandsPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the command data
 	 * @param {JSON} new_data - The new command data
 	 */

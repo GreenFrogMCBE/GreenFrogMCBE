@@ -27,14 +27,6 @@ class ServerClientCacheStatusPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets if the caching is enabled?
 	 * @param {boolean} new_enabled - Caching enabled?
 	 */

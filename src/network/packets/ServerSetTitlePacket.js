@@ -35,14 +35,6 @@ class ServerSetTitlePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns whether the packet is critical or not.
-	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the type of the title.
 	 * @param {Titles} new_type - The type of the title.
 	 */

@@ -27,14 +27,6 @@ class ServerBiomeDefinitionListPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return true;
-	}
-
-	/**
 	 * Sets the packet value
 	 * @param new_value - The packet value.
 	 */

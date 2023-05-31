@@ -30,14 +30,6 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the coordinates of the container
 	 * If the container is creative menu then the coordinates are xyz: 0, 0, 0
 	 *

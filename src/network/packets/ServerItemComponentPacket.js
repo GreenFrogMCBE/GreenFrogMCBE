@@ -27,14 +27,6 @@ class ServerItemComponentPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the custom items (some items may require texture pack)
 	 * @param {Array} new_items
 	 */

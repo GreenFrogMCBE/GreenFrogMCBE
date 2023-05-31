@@ -27,14 +27,6 @@ class ServerRemoveObjectivePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the objective name
 	 * @param {string} new_objectivename
 	 */

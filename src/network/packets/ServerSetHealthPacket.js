@@ -27,14 +27,6 @@ class ServerSetHealthPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the health
 	 * @param {number} new_health
 	 */

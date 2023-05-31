@@ -30,14 +30,6 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical??
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the field value for the player
 	 * @param {string} field
 	 * @param {boolean} new_value

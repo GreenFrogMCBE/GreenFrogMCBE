@@ -27,14 +27,6 @@ class ServerSetCommandsEnabledPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets if commands are enabled
 	 * @param {boolean} new_enabled
 	 */

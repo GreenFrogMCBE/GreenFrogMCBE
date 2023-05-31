@@ -55,14 +55,6 @@ class ServerStartGamePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns whether the packet is critical or not.
-	 * @returns {boolean} Returns true if the packet is critical, false otherwise.
-	 */
-	isCriticalPacket() {
-		return true;
-	}
-
-	/**
 	 * Sets the entity ID
 	 * @param {number} new_entity_id - The entity ID
 	 */

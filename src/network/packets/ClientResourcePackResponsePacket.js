@@ -67,14 +67,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return true;
-	}
-
-	/**
 	 * Reads the packet from the player
 	 * @param {Client} player
 	 * @param {JSON} packet

@@ -30,14 +30,6 @@ class ServerSetScorePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the action of the scoreboard update
 	 * @param {ScoreActions} new_action The action to set
 	 */

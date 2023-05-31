@@ -27,14 +27,6 @@ class ServerSetTimePacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Sets the time
 	 * @param {number} time
 	 */

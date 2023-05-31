@@ -30,14 +30,6 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical??
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return true;
-	}
-
-	/**
 	 * Sets if the client must accept the packet
 	 * @param {boolean} new_must_accept
 	 */

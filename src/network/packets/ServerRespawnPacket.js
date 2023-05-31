@@ -29,14 +29,6 @@ class ServerRespawnPacket extends PacketConstructor {
 	}
 
 	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
-	}
-
-	/**
 	 * Returns the position.
 	 * @returns {JSON} The position.
 	 */
