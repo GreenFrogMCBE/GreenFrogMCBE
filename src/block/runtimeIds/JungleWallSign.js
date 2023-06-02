@@ -16,7 +16,7 @@
 const Block = require("./Block");
 
 /**
- * @type {import('../type/Block')}
+ * @type {import('../../type/RuntimeBlock')}
  */
 class JungleWallSign extends Block {
 	getRuntimeID() {
