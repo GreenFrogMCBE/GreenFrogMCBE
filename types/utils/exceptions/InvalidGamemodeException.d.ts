@@ -1,3 +1,4 @@
+export = InvalidGamemodeException;
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -13,23 +14,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/** @private @type {number} */
-export let pluginCount: number;
-/** @private @type {JSON} */
-export const directories: JSON;
-/**
- * Loads all plugins
- */
-export declare function loadPlugins(): any;
-/**
- * Kills the server
- */
-export declare function killServer(): any;
-/**
- * Prepares plugins for shutdown
- */
-export declare function initPluginShutdown(): void;
-/**
- * Unloads plugins
- */
-export declare function unloadPlugins(): any;
+declare class InvalidGamemodeException extends Error {
+    constructor(gamemode: any);
+}

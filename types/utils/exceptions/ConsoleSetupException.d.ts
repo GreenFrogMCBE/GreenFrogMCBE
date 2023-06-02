@@ -1,3 +1,4 @@
+export = ConsoleSetupException;
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -13,13 +14,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-declare module "RuntimeBlock" {
-	interface RuntimeBlock {
-		getRuntimeId(): number;
-		getName(): string;
-		getVariants(): JSON;
-	}
-
-	const RuntimeBlock: RuntimeBlock;
-	export = RuntimeBlock;
+declare class ConsoleSetupException extends Error {
+    constructor(reason: any);
 }

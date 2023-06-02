@@ -1,3 +1,4 @@
+export = Block;
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -13,6 +14,20 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/** @private */
-export const plugins: {};
-export declare function addPlugin(name: string, version: string): void;
+declare class Block {
+    /**
+     * Returns the runtime id of the block
+     * @returns {number}
+     */
+    getRuntimeID(): number;
+    /**
+     * Returns the block name
+     * @returns {string}
+     */
+    getName(): string;
+    /**
+     * Returns the block variants
+     * @returns {JSON}
+     */
+    getVariants(): JSON;
+}

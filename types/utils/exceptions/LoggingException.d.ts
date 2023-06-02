@@ -1,3 +1,4 @@
+export = LoggingException;
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -13,11 +14,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export interface ServerData {
-	minorServerVersion: string;
-	versionDescription: string;
-	majorServerVersion: string;
-	apiVersion: string;
+declare class LoggingException extends Error {
+    constructor(message: any);
 }
-
-declare function getServerData(): ServerData;

@@ -1,3 +1,4 @@
+export = UnsupportedOperationException;
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -13,12 +14,8 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-declare module "RuntimeBlock" {
-	interface RuntimeBlock {
-		getId(): number;
-		getName(): string;
-	}
-
-	const RuntimeBlock: NormalBlock;
-	export = RuntimeBlock;
+declare class UnsupportedOperationException extends Error {
+    constructor(message: any);
+    message: any;
+    stack: string;
 }
