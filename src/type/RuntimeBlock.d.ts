@@ -13,13 +13,13 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-declare module "NormalBlock" {
-	interface NormalBlock {
+declare module "RuntimeBlock" {
+	interface RuntimeBlock {
 		getRuntimeId(): number;
 		getName(): string;
 		getVariants(): JSON;
 	}
 
-	const Block: NormalBlock;
+	const Block: RuntimeBlock;
 	export = Block;
 }
