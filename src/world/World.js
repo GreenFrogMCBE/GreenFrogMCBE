@@ -21,7 +21,7 @@ const Gamemode = require("../api/player/Gamemode");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
-const Air = require("../block/blockUpdate/Air");
+const Air = require("../block/runtimeIds/Air");
 
 const Frog = require("../Frog");
 
