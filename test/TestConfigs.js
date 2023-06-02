@@ -15,7 +15,7 @@
  */
 
 module.exports = {
-	test() {
+	async test() {
 		// prettier-ignore
 		const files = [
 			"/../src/lang/en_US.json",
@@ -23,7 +23,6 @@ module.exports = {
 			"/../src/internalResources/creativeContent.json", 
 			"/../src/internalResources/skinData.json", 
 			"/../src/internalResources/entities.json", 
-			"/../world/world_settings.json", 
 			"/../world/custom_items.json", 
 			"/../world/gamerules.json", 
 			"/../package.json",
@@ -32,7 +31,7 @@ module.exports = {
 
 		for (const file of files) {
 			console.info(`[config files] Parsing: ${file}`);
-			JSON.parse(JSON.stringify(require(__dirname + file)));
+			await JSON.parse(await JSON.stringify(require(__dirname + file)));
 		}
 	},
 };

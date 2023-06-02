@@ -16,6 +16,8 @@
 
 module.exports = {
 	test() {
+		process.env.TEST = true;
+
 		require("../index");
 
 		console.info("[server] started");
