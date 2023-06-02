@@ -15,11 +15,11 @@ export = Random;
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare class Random {
-    /**
-     * Generates random string
-     *
-     * @param {number} length
-     * @returns {string} Random string
-     */
-    generateRandomString(length: number): string;
+	/**
+	 * Generates random string
+	 *
+	 * @param {number} length
+	 * @returns {string} Random string
+	 */
+	generateRandomString(length: number): string;
 }

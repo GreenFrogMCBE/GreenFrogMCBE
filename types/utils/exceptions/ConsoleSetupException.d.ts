@@ -15,5 +15,5 @@ export = ConsoleSetupException;
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare class ConsoleSetupException extends Error {
-    constructor(reason: any);
+	constructor(reason: any);
 }

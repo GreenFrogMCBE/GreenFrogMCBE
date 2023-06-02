@@ -15,5 +15,5 @@ export = LoggingException;
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare class LoggingException extends Error {
-    constructor(message: any);
+	constructor(message: any);
 }
