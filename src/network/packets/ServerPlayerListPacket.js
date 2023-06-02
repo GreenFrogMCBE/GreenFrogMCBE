@@ -52,7 +52,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Returns the ID of the player
 	 * @returns {number} The ID of the player
 	 */
-	getId() {
+	getID() {
 		return id;
 	}
 
@@ -60,7 +60,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Sets the ID of the player
 	 * @param new_id
 	 */
-	setId(new_id) {
+	setID(new_id) {
 		id = new_id;
 	}
 
@@ -139,7 +139,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 					records: [
 						{
 							uuid: this.getUUID(),
-							entity_unique_id: "-" + this.getId(),
+							entity_unique_id: "-" + this.getID(),
 							username: this.getUsername(),
 							xbox_user_id: this.getXboxID(),
 							platform_chat_id: "",

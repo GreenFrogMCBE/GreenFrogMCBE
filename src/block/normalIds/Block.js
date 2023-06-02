@@ -15,10 +15,10 @@
  */
 class Block {
     /**
-     * Returns the runtime id of the block
+     * Returns the id of the block
      * @returns {number}
      */
-    getId() {
+    getID() {
         return null;
     }
 

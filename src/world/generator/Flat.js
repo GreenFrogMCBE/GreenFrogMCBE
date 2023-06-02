@@ -1,3 +1,8 @@
+const Air = require("../../block/normalIds/Air");
+const Dirt = require("../../block/normalIds/Dirt");
+const Grass = require("../../block/normalIds/Grass");
+const Bedrock = require("../../block/normalIds/Bedrock");
+
 const WorldGenerators = require("../types/WorldGenerators");
 
 const Generator = require("./Generator");
@@ -24,13 +29,13 @@ class Flat extends Generator {
 					const index = y * 16 * 16 + z * 16 + x;
 
 					if (x > 14 && y > -1 && y < 16) {
-						chunkData[index] = 2;
+						chunkData[index] = new Grass().getID();
 					} else if (y < 18 && x < 11) {
-						chunkData[index] = 0;
+						chunkData[index] = new Air().getID();
 					} else if (y < 17 && x < 12) {
-						chunkData[index] = 7;
+						chunkData[index] = new Bedrock().getID();
 					} else {
-						chunkData[index] = 3;
+						chunkData[index] = new Dirt().getID();
 					}
 				}
 			}

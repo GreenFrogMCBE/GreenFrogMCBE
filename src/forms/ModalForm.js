@@ -63,7 +63,7 @@ class ModalForm {
 	send(client) {
 		const FormReq = new ServerFormRequestPacket();
 		FormReq.setType(FormTypes.MODALFORM);
-		FormReq.setId(this.id);
+		FormReq.setID(this.id);
 		FormReq.setTitle(this.title);
 		FormReq.setContent(this.text);
 		FormReq.setButton1(this.button1);
