@@ -6,12 +6,13 @@
  * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
  * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
  *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/** This file contains API functions for the world. */
-
 const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
 
 const WorldGenerators = require("./types/WorldGenerators");
@@ -20,7 +21,7 @@ const Gamemode = require("../api/player/Gamemode");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
-const Air = require("../block/Air");
+const Air = require("../block/runtimeIds/Air");
 
 const Frog = require("../Frog");
 
@@ -49,6 +50,13 @@ class World {
 		 * @type {number}
 		 */
 		this.renderDistance;
+
+		/**
+		 * The world generator
+		 *
+		 * @type {import('./types/WorldGenerators')}
+		 */
+		this.generator;
 	}
 
 	/**
@@ -61,7 +69,16 @@ class World {
 	}
 
 	/**
-	 * Gets the name of the world.
+	 * Sets the world generator
+	 *
+	 * @param {import('./types/WorldGenerators')} generator
+	 */
+	setGenerator(generator) {
+		this.generator = generator;
+	}
+
+	/**
+	 * Returns the name of the world.
 	 *
 	 * @returns {string} - The name of the world.
 	 */
@@ -70,7 +87,16 @@ class World {
 	}
 
 	/**
-	 * Gets the players that are currently in the world.
+	 * Returns the world generator
+	 *
+	 * @returns {import('./types/WorldGenerator')}
+	 */
+	getGenerator() {
+		return this.generator;
+	}
+
+	/**
+	 * Returns the players that are currently in the world.
 	 *
 	 * @returns {Array<Player>} - The players in the world.
 	 */
@@ -90,11 +116,11 @@ class World {
 	}
 
 	/**
-	 * Gets the coordinates of the spawn point.
+	 * Returns the coordinates of the spawn point.
 	 *
 	 * @returns {{ x: number, y: number, z: number }} - The coordinates of the spawn point.
 	 */
-	getSpawnCoordinates() {
+	ReturnspawnCoordinates() {
 		return this.coords;
 	}
 
@@ -108,7 +134,7 @@ class World {
 	}
 
 	/**
-	 * Gets the chunk render radius.
+	 * Returns the chunk render radius.
 	 *
 	 * @returns {number} - The chunk render radius.
 	 */
@@ -164,7 +190,7 @@ class World {
 	 * @param {number} z - The Z-coordinate of the block.
 	 */
 	breakBlock(x, y, z) {
-		this.placeBlock(x, y, z, new Air().getRuntimeId());
+		this.placeBlock(x, y, z, new Air().getRuntimeID());
 	}
 
 	/**
@@ -231,7 +257,7 @@ class World {
 			for (const client of this.getPlayersInWorld()) {
 				const posY = Math.floor(client.location.y);
 
-				let min = -64;
+				let min = -62;
 
 				if (config.world.generator === WorldGenerators.VOID) {
 					min = undefined;
@@ -262,6 +288,7 @@ class World {
 			name: this.worldName,
 			chunk_radius: this.renderDistance,
 			spawn_coordinates: this.coords,
+			generator: this.generator,
 		};
 	}
 }

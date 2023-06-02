@@ -4,7 +4,7 @@ network:
 serverInfo:
   motd: "§aGreenFrog server"
   levelName: "GreenFrog"
-  version: "1.19.70"
+  version: "1.19.80"
   offlineMode: true
   maxPlayers: 20
 chat:
@@ -26,14 +26,17 @@ dev:
   # 2 - member
   # 1 - unknown
   # 0 - visitor
-  multiProtocol: false # Supports 1.19.70+. Some features may be broken
+  multiProtocol: false # Supports 1.19.<any sub versions or your version>. Some features may be broken
   useLegacyVersionMismatchKickMessage: false # Instead of `Could not connect: Outdated client!` or `Could not connect: Outdated server!` it will say the value of `kickMessages.versionMismatch` in your lang file
   useLegacyServerFullKickMessage: false # Instead of `Wow this server is popular! Check back later to see if space opens up.`  it will say the value of `kickMessages.serverFull` in your lang file
 world:
   gamemode: "creative"
   worldGamemode: "creative"
   difficulty: 0
+
   generator: "default" # Can be default, flat, or void
+  renderDistance: 4
+  clientSideRenderDistance: 64
 
   tickEvent: true # Should ServerTickEvent be enabled?
   tickWorldTime: true # Should time update be server side?
@@ -41,5 +44,7 @@ world:
   tickRegeneration: true # Should people in survival mode regenerate their health?
   tickStarvationDamage: true # Should people take damage if their food level is 0?
   randomTickSpeed: 1000
+
+  worldName: "GreenFrog server"
 performance:
   garbageCollectorDelay: 60000

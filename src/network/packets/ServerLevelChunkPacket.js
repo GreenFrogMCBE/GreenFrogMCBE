@@ -6,9 +6,12 @@
  * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
  * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
  *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 let x = 0;
 let z = 0;
@@ -25,14 +28,6 @@ class ServerLevelChunkPacket extends PacketConstructor {
 	 */
 	getPacketName() {
 		return "level_chunk";
-	}
-
-	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
 	}
 
 	/**
@@ -125,7 +120,7 @@ class ServerLevelChunkPacket extends PacketConstructor {
 			z: this.getZ(),
 			sub_chunk_count: this.getSubChunkCount(),
 			cache_enabled: this.getCacheEnabled(),
-			payload: { type: "Buffer", data: this.getPayload() },
+			payload: this.getPayload(),
 		});
 	}
 }

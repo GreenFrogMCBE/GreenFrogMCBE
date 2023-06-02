@@ -3,7 +3,7 @@
 ```diff
 @@ GreenFrog is a server software for Minecraft: Bedrock edition @@
 
-It is written in NodeJS, currently supports 1.19.80
+It is written in NodeJS, currently supports 1.19.80 - 1.19.81
 It is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
 
@@ -19,5 +19,7 @@ then running "npm install"
 to start the server, use "npm run start"
 
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/CREDITS.md
-+ Our license in case if you are lazy to read the LICENSE file: /docs/LICENSE-INFO.md
++ Human-readable license: /docs/READABLE-LICENSE.md
 ```
+
+![Alt](https://repobeats.axiom.co/api/embed/ff82e6d76083a1934305e3b40714b01604df4e92.svg "Repobeats analytics image")

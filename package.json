@@ -3,13 +3,13 @@
   "description": "A server software for MCBE",
   "main": "index.js",
   "author": "andriycraft",
-  "license": "MIT",
+  "license": "CC-BY-4.0",
   "scripts": {
     "format": "npx prettier --write .",
     "start": "node index.js",
     "dev": "nodemon --signal SIGINT index.js --debug",
-    "genlicenseheaders": "node tools/generateLicenseHeaders.js",
-    "build": "npm run genlicenseheaders && npm run format",
+    "generatelicenseheaders": "node tools/generateLicenseHeaders.js",
+    "build": "npm run generatelicenseheaders && npm run format",
     "autotest": "cd tools && node tests-auto.js --test",
     "test": "cd tools && node tests-manual.js --test",
     "pluginstructure": "node tools/generateBasePlugin.js"
@@ -21,7 +21,7 @@
     "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "eslint": "8.39.0",
+    "eslint": "8.41.0",
     "nodemon": "2.0.22",
     "prettier": "2.8.8"
   }

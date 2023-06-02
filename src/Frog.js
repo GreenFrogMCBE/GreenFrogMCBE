@@ -6,9 +6,12 @@
  * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
  * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
  *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const eventLib = require("events");
 
@@ -97,7 +100,8 @@ module.exports = {
 	 */
 	getServerData() {
 		return {
-			minorServerVersion: "3.3 (Added more blocks, and better movement API)",
+			minorServerVersion: "3.5",
+			versionDescription: "Added generator support",
 			majorServerVersion: "3.0",
 			apiVersion: "3.0",
 		};

@@ -6,11 +6,13 @@
  * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
  * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
  *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-
 /* eslint-disable no-unsafe-finally */
 
 const VersionToProtocol = require("./utils/VersionToProtocol");
@@ -29,8 +31,6 @@ const Logger = require("./server/Logger");
 
 const PluginLoader = require("./plugins/PluginLoader");
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
-
-const { RateLimitException } = require("./utils/exceptions/RateLimitException");
 
 const Language = require("./utils/Language");
 
@@ -72,7 +72,7 @@ async function _handleCriticalError(error) {
  *
  * @param {Client} client
  * @param {JSON} packetParams
- * @throws {RateLimitException} - In case if the client is ratelimited
+ * @throws {Error} - In case if the client is ratelimited
  */
 function _handlePacket(client, packetParams) {
 	try {
@@ -90,7 +90,7 @@ function _handlePacket(client, packetParams) {
 						server: this,
 					});
 
-					throw new RateLimitException(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
+					throw new Error(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
 				}
 
 				const packet = new (require(packetPath))();
@@ -228,12 +228,14 @@ async function _onJoin(client) {
 		items: [],
 		location: {
 			x: 0,
-			y: 0,
+			y: 100,
 			z: 0,
 			onGround: false,
 			pitch: 0,
 			yaw: 0,
 		},
+		offline: false,
+		kicked: false,
 		health: 20,
 		hunger: 20,
 		packetCount: 0,
@@ -264,17 +266,21 @@ async function _onJoin(client) {
 
 	const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
 
-	if (config.dev.useLegacyVersionMismatchKickMessage && !config.dev.multiProtocol) {
-		if (client.version !== serverProtocol) {
-			const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version);
-			client.kick(kickMessage);
-			return;
-		}
-	} else {
-		if (client.version > serverProtocol) {
-			client.sendPlayStatus(PlayStatus.FAILED_SERVER);
-		} else if (client.version < serverProtocol) {
-			client.sendPlayStatus(PlayStatus.FAILED_CLIENT);
+	if (!config.dev.multiProtocol) {
+		if (config.dev.useLegacyVersionMismatchKickMessage) {
+			if (client.version !== serverProtocol) {
+				const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version);
+				client.kick(kickMessage);
+				return;
+			}
+		} else {
+			if (client.version > serverProtocol) {
+				client.sendPlayStatus(PlayStatus.FAILED_SERVER, true);
+				return;
+			} else if (client.version < serverProtocol) {
+				client.sendPlayStatus(PlayStatus.FAILED_CLIENT, true);
+				return;
+			}
 		}
 	}
 
@@ -324,7 +330,11 @@ module.exports = {
 			process.exit(-1);
 		}
 
-		Logger.info(Language.getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion));
+		if (config.world.chunkGeneratorLimit > 16) {
+			Logger.warning(Language.getKey("world.chunks.chunksToGenerate.tooHigh"));
+		}
+
+		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.getServerData().minorServerVersion} (${Frog.getServerData().versionDescription})`));
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
 		process.on("unhandledRejection", (err) => _handleCriticalError(err));
