@@ -17,7 +17,7 @@ declare module "NormalBlock" {
 	interface NormalBlock {
 		getRuntimeId(): number;
 		getName(): string;
-		getVariants(): json;
+		getVariants(): JSON;
 	}
 
 	const Block: NormalBlock;
