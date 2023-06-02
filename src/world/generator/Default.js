@@ -113,7 +113,7 @@ class Default extends Generator {
 							chunkData[index] = new Air().getID()
 						}
 
-						chunkData[index - 1] = new Grass().getID()
+						chunkData[index - 1] = new Dirt().getID()
 
 						if (chunkData[index + 1] === new Bedrock().getID()) {
 							chunkData[index + 1] = new Air().getID()
