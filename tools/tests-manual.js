@@ -32,21 +32,12 @@ if (!fs.existsSync("../config.yml")) {
 
 console.info("Starting testing...");
 
-try {
-	const { serverConfigurationFiles } = require("../src/Frog");
-
-	if (!serverConfigurationFiles.offlineMode) {
-		console.info("You can't use tests in online mode!");
-		process.exit();
-	}
-} catch { }
-
 const r = rl.createInterface({
 	input: process.stdin,
 	output: process.stdout,
 });
 
-console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request");
+console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the configurations for JSON errors");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);
@@ -61,8 +52,11 @@ r.question("> ", (response) => {
 		case "3":
 			runTest(3, "Start server and try to execute a command", commandTest);
 			break;
+		case "4":
+			runTest(4, "Test the configurations for JSON errors", configTest);
+			break;
 		default:
-			console.info(`Could not find test ${args[0]}`);
+			console.error(`Could not find test ${args[0]}`);
 			break;
 	}
 
@@ -76,7 +70,6 @@ function runTest(testNumber, testName, testFunction) {
 
 	setTimeout(() => {
 		try {
-			TestConfigs.test();
 			testFunction();
 		} catch (e) {
 			console.info(`Tests failed! ${e.stack}`);
@@ -122,6 +115,19 @@ function commandTest() {
 			ClientCommand.test();
 		} catch (e) {
 			console.info("Tests failed! Failed to join with client! " + e.stack);
+			process.exit(-1);
+		} finally {
+			setTimeout(handleTestSuccess, 10000);
+		}
+	}, 3000);
+}
+
+function configTest() {
+	setTimeout(() => {
+		try {
+			TestConfigs.test();
+		} catch (e) {
+			console.info("Tests failed! Failed to parse configs! " + e.stack);
 			process.exit(-1);
 		} finally {
 			setTimeout(handleTestSuccess, 10000);

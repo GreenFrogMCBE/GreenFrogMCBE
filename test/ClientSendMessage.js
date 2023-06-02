@@ -19,7 +19,7 @@ module.exports = {
 	async test() {
 		console.info("[sendmessage bot] joining...");
 
-		const bot = protocol.createClient({
+		const bot = await protocol.createClient({
 			host: "127.0.0.1",
 			port: 19132,
 			username: "sendmessagebot",
