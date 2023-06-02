@@ -38,7 +38,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 	 * Sets the ID for the form
 	 * @param {number} new_id
 	 */
-	setID(new_id) {
+	setId(new_id) {
 		id = new_id;
 	}
 
@@ -110,7 +110,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 	 * Returns the ID of the form
 	 * @returns {number} - The ID of the form
 	 */
-	getID() {
+	getId() {
 		return id;
 	}
 
@@ -169,14 +169,14 @@ class ServerFormRequestPacket extends PacketConstructor {
 	writePacket(client) {
 		if (type === FormTypes.MODALFORM) {
 			client.queue(this.getPacketName(), {
-				form_id: this.getID(),
+				form_id: this.getId(),
 				data: `{"content":"${this.getText()}","button1":"${this.getButton1()}","button2":"${this.getButton2()}","type":"${this.getType()}","title":"${this.getTitle()}"}`,
 			});
 			return;
 		}
 
 		client.queue(this.getPacketName(), {
-			form_id: this.getID(),
+			form_id: this.getId(),
 			data: `{"content":${this.getContent()},"buttons":${this.getButtons()},"type":"${this.getType()}","title":"${this.getTitle()}"}`,
 		});
 	}

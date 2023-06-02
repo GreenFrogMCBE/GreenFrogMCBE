@@ -275,7 +275,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							playerList.setType(PlayerListTypes.ADD);
 							playerList.setUsername(player.username);
 							playerList.setXboxID(xuid);
-							playerList.setID(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							playerList.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
 							playerList.setUUID(uuid);
 							playerList.writePacket(onlineplayers);
 						}
