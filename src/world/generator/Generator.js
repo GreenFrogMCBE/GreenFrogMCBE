@@ -15,12 +15,12 @@
  */
 /* eslint-disable no-unused-vars */
 
-const ServerLevelChunkPacket = require('../../network/packets/ServerLevelChunkPacket');
+const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
 
 class Generator {
 	/**
 	 * Returns the generator name
-	 * 
+	 *
 	 * @returns {WorldGenerators}
 	 * @type {import('../types/WorldGenerators')}
 	 */
@@ -30,7 +30,7 @@ class Generator {
 
 	/**
 	 * Returns the chunk data
-	 * @returns {Buffer}  
+	 * @returns {Buffer}
 	 */
 	getChunkData() {
 		return null;
@@ -42,17 +42,17 @@ class Generator {
 	generate(player) {
 		const chunkRadius = player.world.getChunkRadius();
 
-        for (let x = player.location.x - chunkRadius; x <= player.location.x + chunkRadius; x++) {
-            for (let z = player.location.z - chunkRadius; z <= player.location.z + chunkRadius; z++) {
-                const levelChunk = new ServerLevelChunkPacket();
-                levelChunk.setX(x);
-                levelChunk.setZ(z);
-                levelChunk.setSubChunkCount(1);
-                levelChunk.setCacheEnabled(false);
-                levelChunk.setPayload(this.getChunkData());
-                levelChunk.writePacket(player);
-            }
-        }
+		for (let x = player.location.x - chunkRadius; x <= player.location.x + chunkRadius; x++) {
+			for (let z = player.location.z - chunkRadius; z <= player.location.z + chunkRadius; z++) {
+				const levelChunk = new ServerLevelChunkPacket();
+				levelChunk.setX(x);
+				levelChunk.setZ(z);
+				levelChunk.setSubChunkCount(1);
+				levelChunk.setCacheEnabled(false);
+				levelChunk.setPayload(this.getChunkData());
+				levelChunk.writePacket(player);
+			}
+		}
 	}
 }
 

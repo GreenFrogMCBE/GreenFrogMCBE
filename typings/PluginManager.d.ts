@@ -13,36 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-let playersOnline = [];
-
-module.exports = {
-	/**
-	 * Adds player
-	 * @param player
-	 */
-	addPlayer(player) {
-		playersOnline.push(player);
-	},
-
-	/**
-	 * @param {object} player
-	 * @returns The player if the player is online, null otherwise.
-	 */
-	get(player) {
-		try {
-			let name = player.toLowerCase();
-			for (let i = 0; i < playersOnline.length; i++) {
-				if (playersOnline[i].username.toLowerCase() === name) {
-					return playersOnline[i];
-				}
-			}
-		} catch (e) {
-			return null;
-		}
-	},
-
-	/**
-	 * @returns The players array.
-	 */
-	players: playersOnline,
-};
+/** @private */
+export const plugins: {};
+export declare function addPlugin(name: string, version: string): void;
