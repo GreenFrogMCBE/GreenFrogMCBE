@@ -76,4 +76,3 @@ function handleTestFailure(errorMessage, error) {
 	console.info("Tests failed! " + errorMessage + " " + error.stack);
 	process.exit(-1);
 }
-

@@ -30,7 +30,7 @@ let chunkData;
 let j = 0;
 
 /**
- * @param {number} blockType 
+ * @param {number} blockType
  * @private
  */
 function _generateOre() {
@@ -42,19 +42,19 @@ function _generateOre() {
 		blockType = new Stone().getID();
 	}
 
-	return blockType
+	return blockType;
 }
 
 class Default extends Generator {
 	/**
-	 * @returns {WorldGenerators.Flat} 
+	 * @returns {WorldGenerators.Flat}
 	 */
 	getName() {
 		return WorldGenerators.FLAT;
 	}
 
 	/**
-	 * @returns {Buffer} 
+	 * @returns {Buffer}
 	 */
 	getChunkData() {
 		chunkData = Buffer.alloc(16 * 256 * 16);
@@ -64,7 +64,7 @@ class Default extends Generator {
 				for (let z = 0; z < 16; z++) {
 					const index = y * 16 * 16 + z * 16 + x;
 
-					j++
+					j++;
 
 					if (x > 14 && y > -1 && y < 16) {
 						if (chunkData[index] == !new Dirt().getID()) {
@@ -79,8 +79,8 @@ class Default extends Generator {
 
 						// Lakes
 						if (Math.floor(Math.random() * 3000) < 2 && j < 4161319) {
-							chunkData[(index - 1)] = new Water().getID()
-							chunkData[(index - 2)] = new Sand().getID()
+							chunkData[index - 1] = new Water().getID();
+							chunkData[index - 2] = new Sand().getID();
 						}
 					} else {
 						// Hills
@@ -92,17 +92,17 @@ class Default extends Generator {
 										chunkData[index - i] = new Grass().getID();
 									}
 
-									if (!chunkData[(index - 351) - i]) {
-										chunkData[(index - 351) - i] = new Grass().getID();
+									if (!chunkData[index - 351 - i]) {
+										chunkData[index - 351 - i] = new Grass().getID();
 									}
 
-									if (!chunkData[(index + 351) + i]) {
-										chunkData[(index + 351) + i] = new Grass().getID();
+									if (!chunkData[index + 351 + i]) {
+										chunkData[index + 351 + i] = new Grass().getID();
 									}
 								}
 							}
 						} else {
-							chunkData[index] = new Stone().getID()
+							chunkData[index] = new Stone().getID();
 						}
 
 						for (let i = 1; i <= 5; i++) {
@@ -110,23 +110,23 @@ class Default extends Generator {
 						}
 
 						if (chunkData[index] == !new Grass().getID()) {
-							chunkData[index] = new Air().getID()
+							chunkData[index] = new Air().getID();
 						}
 
-						chunkData[index - 1] = new Dirt().getID()
+						chunkData[index - 1] = new Dirt().getID();
 
 						if (chunkData[index + 1] === new Bedrock().getID()) {
-							chunkData[index + 1] = new Air().getID()
+							chunkData[index + 1] = new Air().getID();
 						}
 
 						if (chunkData[index + 2] === new Bedrock().getID()) {
-							chunkData[index + 2] = new Air().getID()
+							chunkData[index + 2] = new Air().getID();
 						}
 
 						// Bedrock generator
-						chunkData[index - 9] = new Stone().getID()
-						chunkData[index - 10] = new Stone().getID()
-						chunkData[index - 12] = new Bedrock().getID()
+						chunkData[index - 9] = new Stone().getID();
+						chunkData[index - 10] = new Stone().getID();
+						chunkData[index - 12] = new Bedrock().getID();
 					}
 				}
 			}

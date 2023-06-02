@@ -124,7 +124,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				switch (config.world.generator.toLowerCase()) {
 					case "default":
-						player.world.setGenerator(WorldGenerators.DEFAULT)
+						player.world.setGenerator(WorldGenerators.DEFAULT);
 						break;
 					case "flat":
 						player.world.setGenerator(WorldGenerators.FLAT);

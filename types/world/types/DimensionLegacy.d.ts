@@ -13,12 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-declare module "RuntimeBlock" {
-	interface RuntimeBlock {
-		getId(): number;
-		getName(): string;
-	}
-
-	const RuntimeBlock: NormalBlock;
-	export = RuntimeBlock;
-}
+export const OVERWORLD: 0;
+export const NETHER: 1;
+export const END: 2;

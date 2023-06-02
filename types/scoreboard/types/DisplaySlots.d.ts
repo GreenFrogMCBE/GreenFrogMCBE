@@ -13,11 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export interface ServerData {
-	minorServerVersion: string;
-	versionDescription: string;
-	majorServerVersion: string;
-	apiVersion: string;
-}
-
-declare function getServerData(): ServerData;
+export const LIST: "list";
+export const SIDEBAR: "sidebar";
+export const BELOWNAME: "belowname";

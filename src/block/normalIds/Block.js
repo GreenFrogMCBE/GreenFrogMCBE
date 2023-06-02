@@ -14,21 +14,21 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class Block {
-    /**
-     * Returns the id of the block
-     * @returns {number}
-     */
-    getID() {
-        return null;
-    }
+	/**
+	 * Returns the id of the block
+	 * @returns {number}
+	 */
+	getID() {
+		return null;
+	}
 
-    /**
-     * Returns the block name
-     * @returns {string}
-     */
-    getName() {
-        return null;
-    }
+	/**
+	 * Returns the block name
+	 * @returns {string}
+	 */
+	getName() {
+		return null;
+	}
 }
 
 module.exports = Block;

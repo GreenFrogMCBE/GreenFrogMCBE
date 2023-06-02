@@ -62,7 +62,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 					server: server,
 					action: packet.data.params.transaction.transaction_data.actionType,
 					blockPosition: packet.data.params.transaction.transaction_data.block_position,
-					transactionType: packet.data.params.transaction.transaction_type
+					transactionType: packet.data.params.transaction.transaction_type,
 				});
 
 				player.world.breakBlock(packet.data.params.transaction.transaction_data.block_position.x, packet.data.params.transaction.transaction_data.block_position.y, packet.data.params.transaction.transaction_data.block_position.z);
