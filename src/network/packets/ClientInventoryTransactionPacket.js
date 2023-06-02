@@ -23,14 +23,7 @@ const BlockActions = require("../../world/types/BlockActions");
 const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
 
-const ServerLevelChunkPacket = require("./ServerLevelChunkPacket");
-
-const WorldGenerators = require("../../world/types/WorldGenerators");
-
 const { getKey } = require("../../utils/Language");
-
-const { serverConfigurationFiles } = Frog;
-const { config } = serverConfigurationFiles;
 
 class ClientInventoryTransactionPacket extends PacketConstructor {
 	/**
@@ -69,24 +62,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 					server: server,
 					action: packet.data.params.transaction.transaction_data.actionType,
 					blockPosition: packet.data.params.transaction.transaction_data.block_position,
-					transactionType: packet.data.params.transaction.transaction_type,
-					cancel: () => {
-						let chunks = require(`${__dirname}/../../world/chunks${config.generator === WorldGenerators.DEFAULT ? "" : "_flat"}json`);
-
-						for (const chunk of chunks) {
-							for (let x = 0; x < 80 /** magic value */; x++) {
-								if (chunk.x == x) {
-									const levelchunk = new ServerLevelChunkPacket();
-									levelchunk.setX(chunk.x);
-									levelchunk.setZ(chunk.z);
-									levelchunk.setSubChunkCount(chunk.sub_chunk_count);
-									levelchunk.setCacheEnabled(chunk.cache_enabled);
-									levelchunk.setPayload(chunk.payload.data);
-									levelchunk.writePacket(this.player);
-								}
-							}
-						}
-					},
+					transactionType: packet.data.params.transaction.transaction_type
 				});
 
 				player.world.breakBlock(packet.data.params.transaction.transaction_data.block_position.x, packet.data.params.transaction.transaction_data.block_position.y, packet.data.params.transaction.transaction_data.block_position.z);
