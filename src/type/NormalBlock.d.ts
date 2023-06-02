@@ -15,11 +15,10 @@
  */
 declare module "RuntimeBlock" {
 	interface RuntimeBlock {
-		getRuntimeId(): number;
+		getId(): number;
 		getName(): string;
-		getVariants(): JSON;
 	}
 
-	const RuntimeBlock: RuntimeBlock;
+	const RuntimeBlock: NormalBlock;
 	export = RuntimeBlock;
 }
