@@ -19,5 +19,7 @@ then running "npm install"
 to start the server, use "npm run start"
 
 + Credits: https://github.com/andriycraft/GreenFrogMCBE/blob/main/docs/CREDITS.md
-+ Human-readable license: /docs/LICENSE-HUMANREADABLE.md
++ Human-readable license: /docs/READABLE-LICENSE.md
 ```
+
+![Alt](https://repobeats.axiom.co/api/embed/ff82e6d76083a1934305e3b40714b01604df4e92.svg "Repobeats analytics image")

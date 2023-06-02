@@ -33,7 +33,10 @@ world:
   gamemode: "creative"
   worldGamemode: "creative"
   difficulty: 0
+
   generator: "default" # Can be default, flat, or void
+  renderDistance: 4
+  clientSideRenderDistance: 64
 
   tickEvent: true # Should ServerTickEvent be enabled?
   tickWorldTime: true # Should time update be server side?
@@ -41,5 +44,7 @@ world:
   tickRegeneration: true # Should people in survival mode regenerate their health?
   tickStarvationDamage: true # Should people take damage if their food level is 0?
   randomTickSpeed: 1000
+
+  worldName: "GreenFrog server"
 performance:
   garbageCollectorDelay: 60000

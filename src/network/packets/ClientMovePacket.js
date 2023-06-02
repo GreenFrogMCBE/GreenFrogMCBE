@@ -1,18 +1,18 @@
 /**
-* ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
-* ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
-* ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
-* ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
-* ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
-* ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
-*
-* The content of this file is licensed using the CC-BY-4.0 license
-* which requires you to agree to its terms if you wish to use or make any changes to it.
-*
-* @license CC-BY-4.0
-* @link Github - https://github.com/andriycraft/GreenFrogMCBE
-* @link Discord - https://discord.gg/UFqrnAbqjP
-*/
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
 const Frog = require("../../Frog");
 
 const Falldamage = require("../../world/Falldamage");
@@ -26,14 +26,6 @@ class ClientMovePacket extends PacketConstructor {
 	 */
 	getPacketName() {
 		return "move_player";
-	}
-
-	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return false;
 	}
 
 	/**
@@ -56,7 +48,6 @@ class ClientMovePacket extends PacketConstructor {
 			z,
 			pitch,
 			yaw,
-			legacyPacket: false,
 			onGround: player.location.onGround,
 			cancel: () => {
 				if (player.location.x === 0 && player.location.y === 0 && player.location.z === 0) return;

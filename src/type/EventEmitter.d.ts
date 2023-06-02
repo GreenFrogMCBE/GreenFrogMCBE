@@ -1,19 +1,19 @@
 /**
-* ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
-* ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
-* ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
-* ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
-* ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
-* ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
-*
-* The content of this file is licensed using the CC-BY-4.0 license
-* which requires you to agree to its terms if you wish to use or make any changes to it.
-*
-* @license CC-BY-4.0
-* @link Github - https://github.com/andriycraft/GreenFrogMCBE
-* @link Discord - https://discord.gg/UFqrnAbqjP
-*/
-import { EventEmitter } from 'events';
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
+import { EventEmitter } from "events";
 
 declare function on(eventName: "blockBreak", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetRead", listener: (...args: any[]) => void): void;
@@ -88,11 +88,4 @@ declare function shutdownServer(): void;
 declare const isDebug: boolean;
 declare const eventEmitter: EventEmitter;
 
-export {
-  on,
-  once,
-  emit,
-  isDebug,
-  eventEmitter,
-  shutdownServer,
-};
+export { on, once, emit, isDebug, eventEmitter, shutdownServer };

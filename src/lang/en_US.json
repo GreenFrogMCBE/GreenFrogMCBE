@@ -83,7 +83,9 @@
   "plugin.unloading.success": "Unloaded %s%",
   "plugin.unloading.unloading": "Unloading %s%...",
 
-  "frog.version": "This server is running GreenFrogMCBE. Version: %s%",
+  "frog.version": "This server is running GreenFrogMCBE (https://github.com/andriycraft/GreenFrogMCBE). Version: %s%",
+
+  "world.chunks.chunkGeneratorLimit.tooHigh": "Chunk generator limit in your config.yml is too high! It may cause lag",
 
   "errors.nodeJS.tooOld": "You are running nodeJS version that is too old to run GreenFrogMCBE",
   "errors.nodeJS.tooOld.update": "Please update it to 14.0.0+, from https://nodejs.org/",
@@ -91,7 +93,7 @@
   "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
   "kickMessages.serverFull": "disconnectionScreen.serverFull",
   "kickMessages.versionMismatch": "Your client version does not match with the server version! Server is currently running on %s%",
-  "kickMessages.invalidPacket": "Invalid packet",
+  "kickMessages.invalidPacket": "Invalid packet / Internal server error",
   "kickMessages.serverClosed": "Server closed",
   "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",
   "kickMessages.wereKicked": "You were kicked from the game%s%",
@@ -152,8 +154,7 @@
   "exceptions.plugin.noName": "No plugin name!",
   "exceptions.plugin.noVersion": "No plugin version!",
 
-  "exceptions.world.loading.failed": "Failed to load world! %s%",
-  "exceptions.world.loading.failed.invalidChunkData": "Failed to load world (Invalid chunk data)!",
+  "exceptions.generator.invalid": "World generator is invalid!",
 
   "exceptions.console.alreadyClosed": "Console is already closed!",
 

@@ -1,18 +1,18 @@
 /**
-* ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
-* ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
-* ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
-* ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
-* ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
-* ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
-*
-* The content of this file is licensed using the CC-BY-4.0 license
-* which requires you to agree to its terms if you wish to use or make any changes to it.
-*
-* @license CC-BY-4.0
-* @link Github - https://github.com/andriycraft/GreenFrogMCBE
-* @link Discord - https://discord.gg/UFqrnAbqjP
-*/
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
 /* eslint-disable no-case-declarations */
 const fs = require("fs");
 
@@ -23,13 +23,10 @@ const PlayStatusType = require("./types/PlayStatus");
 const PlayerListTypes = require("./types/PlayerList");
 const Dimension = require("../../world/types/Dimension");
 const Difficulty = require("../../api/types/Difficulty");
-const Generator = require("../../world/types/Generator");
+const NetworkGenerator = require("../../world/types/NetworkGenerator");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
-const WorldGenerators = require("../../world/types/WorldGenerators");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
-
-const ChunkLoadException = require("../../utils/exceptions/ChunkLoadException");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -41,7 +38,6 @@ const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
 const ResourcePackStack = require("./ServerResourcePackStackPacket");
 const CreativeContent = require("./ServerCreativeContentPacket");
 const ItemComponent = require("./ServerItemComponentPacket");
-const LevelChunk = require("./ServerLevelChunkPacket");
 const PlayStatus = require("./ServerPlayStatusPacket");
 const PlayerList = require("./ServerPlayerListPacket");
 const StartGame = require("./ServerStartGamePacket");
@@ -57,6 +53,8 @@ const Commands = require("../../server/Commands");
 const { getKey } = require("../../utils/Language");
 
 const { serverConfigurationFiles } = require("../../Frog");
+const WorldGenerators = require("../../world/types/WorldGenerators");
+const WorldGenerationFailedException = require("../../utils/exceptions/WorldGenerationFailedException");
 const { config } = serverConfigurationFiles;
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
@@ -66,14 +64,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 	 */
 	getPacketName() {
 		return "resource_pack_client_response";
-	}
-
-	/**
-	 * Returns if the packet is critical?
-	 * @returns {boolean}
-	 */
-	isCriticalPacket() {
-		return true;
 	}
 
 	/**
@@ -94,10 +84,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player,
 					cancel: () => player.kick(getKey("kickMessages.serverDisconnect")),
 				});
+
 				Logger.info(getKey("status.resourcePacks.none").replace("%s%", player.username));
 				break;
 			case ResourcePackStatus.REFUSED:
 				Frog.eventEmitter.emit("playerResourcePacksRefused", { server, player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
+
 				Logger.info(getKey("status.resourcePacks.refused").replace("%s%", player.username));
 				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
@@ -127,29 +119,30 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				});
 
 				player.world = new World();
-				player.world.setChunkRadius(require("../../../world/world_settings.json").chunkLoadRadius);
-				player.world.setName(require("../../../world/world_settings.json").worldName);
+				player.world.setChunkRadius(config.world.renderDistance);
+				player.world.setName(config.world.worldName);
 
-				if (config.world.generator === WorldGenerators.DEFAULT) {
-					player.world.setSpawnCoordinates(1070, 87, -914);
-				} else if (config.world.generator === WorldGenerators.FLAT) {
-					player.world.setSpawnCoordinates(-274, -58, -211);
-				} else {
-					player.chunksEnabled = false
-					player.world.setSpawnCoordinates(0, 100, 0);
+				switch (config.world.generator.toLowerCase()) {
+					case "default":
+						player.world.setGenerator(WorldGenerators.DEFAULT)
+						break;
+					case "flat":
+						player.world.setGenerator(WorldGenerators.FLAT);
+						break;
+					case "void":
+						player.world.setGenerator(WorldGenerators.VOID);
+						break;
+					default:
+						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"));
 				}
 
-				player.location.x = player.world.getSpawnCoordinates().x;
-				player.location.y = player.world.getSpawnCoordinates().y;
-				player.location.z = player.world.getSpawnCoordinates().z;
-
 				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
+
+				player.op = false;
 
 				if (ops.includes(player.username)) {
 					player.op = true;
 					player.permissionLevel = 4;
-				} else {
-					player.op = false;
 				}
 
 				if (!player.op) player.permissionLevel = config.dev.defaultPermissionLevel;
@@ -157,16 +150,16 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.joined").replace("%s%", player.username));
 
 				const startGame = new StartGame();
-				startGame.setEntityId(0);
-				startGame.setRunTimeEntityId(0);
+				startGame.setEntityID(0);
+				startGame.setRuntimeEntityId(0);
 				startGame.setGamemode(config.world.gamemode);
-				startGame.setPlayerPosition(player.world.getSpawnCoordinates().x, player.world.getSpawnCoordinates().y, player.world.getSpawnCoordinates().z);
+				startGame.setPlayerPosition(0, 100, 0);
 				startGame.setPlayerRotation(0, 0);
 				startGame.setSeed(-1);
 				startGame.setBiomeType(0);
 				startGame.setBiomeName(Biome.PLAINS);
 				startGame.setDimension(Dimension.OVERWORLD);
-				startGame.setGenerator(Generator.FLAT);
+				startGame.setGenerator(NetworkGenerator.FLAT);
 				startGame.setWorldGamemode(config.world.worldGamemode);
 				startGame.setDifficulty(Difficulty.NORMAL);
 				startGame.setSpawnPosition(0, 0, 0);
@@ -225,57 +218,25 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				if (player.chunksEnabled) {
 					player.setChunkRadius(player.world.getChunkRadius());
 
-					const coordinates =
-						config.world.generator === WorldGenerators.DEFAULT
-							? {
-								x: 1070,
-								y: 274,
-								z: -915,
-							}
-							: {
-								x: -279,
-								y: 111,
-								z: -216,
-							};
-
 					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
-					networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);
-					networkChunkPublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
+					networkChunkPublisher.setCoordinates(0, 0, 0);
+					networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
 					networkChunkPublisher.setSavedChunks([]);
 					networkChunkPublisher.writePacket(player);
 
-					let chunks = null;
+					const generatorFile = require("../../world/generator/" + player.world.getGenerator());
+					const generator = new generatorFile();
+					generator.generate(player);
 
-					try {
-						chunks = require(`${__dirname}/../../../world/chunks${config.world.generator === WorldGenerators.DEFAULT ? "" : "_flat"}.json`).data;
-					} catch (error) {
-						throw new ChunkLoadException(getKey("exceptions.world.loading.failed").replace("%s%", error.stack));
-					}
-
-					for (const chunk of chunks) {
-						const levelChunk = new LevelChunk();
-						levelChunk.setX(chunk.x);
-						levelChunk.setZ(chunk.z);
-						levelChunk.setSubChunkCount(chunk.sub_chunk_count);
-						levelChunk.setCacheEnabled(chunk.cache_enabled);
-						try {
-							levelChunk.setPayload(chunk.payload.data);
-						} catch (e) {
-							throw new ChunkLoadException(getKey("exceptions.world.loading.failed.invalidChunkData"));
-						}
-						levelChunk.writePacket(player);
-					}
-
-					player.network_chunks_loop = setInterval(() => {
+					player.networkChunksLoop = setInterval(() => {
 						if (player.offline) {
-							// Do not send network_chunk_publisher_update packet to offline players
-							delete player.network_chunks_loop;
+							delete player.networkChunksLoop;
 							return;
 						}
 
 						const networkChunkPublisher = new NetworkChunkPublisherUpdate();
-						networkChunkPublisher.setCoordinates(coordinates.x, coordinates.y, coordinates.z);
-						networkChunkPublisher.setRadius(require("../../../world/world_settings.json").networkChunkLoadRadius);
+						networkChunkPublisher.setCoordinates(0, 0, 0);
+						networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
 						networkChunkPublisher.setSavedChunks([]);
 						networkChunkPublisher.writePacket(player);
 					}, 4500);
