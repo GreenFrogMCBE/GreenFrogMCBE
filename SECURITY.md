@@ -9,4 +9,4 @@
 
 ## Reporting a vulnerability
 
-Use the Issues page for that. Versions below 3.0 are not supported
+Use the Issues page for that. Versions below 3.2 are not supported
