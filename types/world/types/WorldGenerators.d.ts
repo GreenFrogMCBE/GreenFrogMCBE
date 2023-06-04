@@ -13,6 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const FLAT: "Flat";
-export const DEFAULT: "Default";
-export const VOID: "Void";
+export let FLAT: "Flat";
+export let DEFAULT: "Default";
+export let VOID: "Void";

@@ -13,4 +13,4 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const DUMMY: "dummy";
+export let DUMMY: "dummy";

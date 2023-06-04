@@ -39,20 +39,25 @@ declare class CustomForm {
 	/**
 	 * @type {Array.<{ type: string, text: string, [placeholder]: string, [options]: JSON, [min]: number, [max]: number, [step]: number }>}
 	 */
-	actions: {
+	actions: Array<{
 		type: string;
 		text: string;
-	}[];
+		[placeholder]: string;
+		[options]: JSON;
+		[min]: number;
+		[max]: number;
+		[step]: number;
+	}>;
 	/**
 	 * @type {Array.<{ text: string, image?: { type: string, data: string } }>}
 	 */
-	buttons: {
+	buttons: Array<{
 		text: string;
 		image?: {
 			type: string;
 			data: string;
 		};
-	}[];
+	}>;
 	/**
 	 * @type {number}
 	 */

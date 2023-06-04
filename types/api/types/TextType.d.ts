@@ -13,14 +13,14 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const RAW: "raw";
-export const CHAT: "chat";
-export const TRANSLATION: "translation";
-export const POPUP: "popup";
-export const JUKEBOX_POPUP: "jukebox_popup";
-export const TIP: "tip";
-export const SYSTEM: "system";
-export const WHISPER: "whisper";
-export const ANNOUNCEMENT: "announcement";
-export const OBJECT: "object";
-export const OBJECTWISPHER: "object_whisper";
+export let RAW: "raw";
+export let CHAT: "chat";
+export let TRANSLATION: "translation";
+export let POPUP: "popup";
+export let JUKEBOX_POPUP: "jukebox_popup";
+export let TIP: "tip";
+export let SYSTEM: "system";
+export let WHISPER: "whisper";
+export let ANNOUNCEMENT: "announcement";
+export let OBJECT: "object";
+export let OBJECTWISPHER: "object_whisper";

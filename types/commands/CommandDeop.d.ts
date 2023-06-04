@@ -14,9 +14,9 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 export namespace data {
-	const name: string;
-	const description: string;
-	const minArgs: number;
-	const requiresOp: boolean;
+	let name: string;
+	let description: string;
+	let minArgs: number;
+	let requiresOp: boolean;
 }
 export function execute(_server: any, player: any, args: any): Promise<void>;

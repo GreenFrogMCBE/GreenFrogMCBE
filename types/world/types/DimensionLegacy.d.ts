@@ -13,6 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const OVERWORLD: 0;
-export const NETHER: 1;
-export const END: 2;
+export let OVERWORLD: 0;
+export let NETHER: 1;
+export let END: 2;

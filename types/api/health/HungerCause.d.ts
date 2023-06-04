@@ -13,6 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const NORMAL: "normal";
-export const PLUGIN: "plugin";
-export const UNKNOWN: "unknown";
+export let NORMAL: "normal";
+export let PLUGIN: "plugin";
+export let UNKNOWN: "unknown";

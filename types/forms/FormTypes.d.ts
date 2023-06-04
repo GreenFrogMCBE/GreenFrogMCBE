@@ -13,6 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const FORM: "form";
-export const CUSTOMFORM: "custom_form";
-export const MODALFORM: "modal";
+export let FORM: "form";
+export let CUSTOMFORM: "custom_form";
+export let MODALFORM: "modal";

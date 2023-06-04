@@ -13,6 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const HUNGER: "minecraft:player.hunger";
-export const HEALTH: "minecraft:health";
-export const EXPERIENCE: "player.experience";
+export let HUNGER: "minecraft:player.hunger";
+export let HEALTH: "minecraft:health";
+export let EXPERIENCE: "player.experience";
