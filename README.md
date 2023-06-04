@@ -7,7 +7,7 @@ It is written in NodeJS, currently supports 1.19.80 - 1.19.81
 It is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
 
-+ Discord: https://discord.gg/UFqrnAbqjP
++ Discord: https://discord.gg/X79f6jasW4
 + Example plugin: https://github.com/greenfrogmc/ExamplePlugin
 + Example block generator plugin: https://github.com/greenfrogmc/RBG
 + Support me: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
