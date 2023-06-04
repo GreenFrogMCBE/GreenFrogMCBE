@@ -1,10 +1,23 @@
+# NodeJS thing
+
 node_modules/
+
+# Configs
+
 ops.yml
 config.yml
+
+# bedrock protocol thing
+
 *_packetReadError.txt
-TODO
+
+# Plugin related
+
 plugins/
 pluginData/
+!types/plugins
+
+# Other
+
 crash-reports/
 world/
-!types/plugins
