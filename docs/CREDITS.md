@@ -4,13 +4,14 @@
 
 > For creating multilang (https://github.com/andriycraft/GreenFrogMCBE/pull/9) <br>
 > For improving tests and /list <br>
-> Making better tests (https://github.com/andriycraft/GreenFrogMCBE/pull/70)
+> For ,aking better tests (https://github.com/andriycraft/GreenFrogMCBE/pull/70) <br>
+> For making PlayerInfo.get not case sensitive (https://github.com/andriycraft/GreenFrogMCBE/pull/192)
 
 2. @hvlxh
 
 > For creating BasePlugin.js (https://github.com/andriycraft/GreenFrogMCBE/pull/20) <br>
 > For updating langs (https://github.com/andriycraft/GreenFrogMCBE/pull/19) <br>
-> Also for disabling workflows for .MD files, also https://github.com/andriycraft/GreenFrogMCBE/pull/81 <br>
+> For disabling workflows for .MD files, also https://github.com/andriycraft/GreenFrogMCBE/pull/81 <br>
 > For rewriting some parts of command system <br>
 > For making the README.md file look better <br>
 > For showing example of a generator in our discord <br>
@@ -63,7 +64,7 @@
 
 12. 🌓Enzø ツ#6666, @CreeperG16, @faaxz
 
-> Helping me with chunk support
+> For helping me with chunk support
 
 13. @faaxz
 
