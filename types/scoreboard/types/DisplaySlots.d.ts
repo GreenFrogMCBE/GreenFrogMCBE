@@ -13,6 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const LIST: "list";
-export const SIDEBAR: "sidebar";
-export const BELOWNAME: "belowname";
+export let LIST: "list";
+export let SIDEBAR: "sidebar";
+export let BELOWNAME: "belowname";

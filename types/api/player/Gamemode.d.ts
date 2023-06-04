@@ -13,10 +13,10 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const CREATIVE: "creative";
-export const SURVIVAL: "survival";
-export const SPECTATOR: "spectator";
-export const CREATIVESPECTATOR: any;
-export const SURVIVALSPECTATOR: any;
-export const ADVENTURE: "adventure";
-export const FALLBACK: "fallback";
+export let CREATIVE: "creative";
+export let SURVIVAL: "survival";
+export let SPECTATOR: "spectator";
+export let CREATIVESPECTATOR: any;
+export let SURVIVALSPECTATOR: any;
+export let ADVENTURE: "adventure";
+export let FALLBACK: "fallback";

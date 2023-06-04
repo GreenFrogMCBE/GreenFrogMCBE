@@ -13,9 +13,9 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const UNKNOWN: "unknown";
-export const FALL: "fall_damage";
-export const REGENERATION: "regeneration";
-export const VOID: "void";
-export const STARVATION: "starvation";
-export const PLUGIN: "plugin";
+export let UNKNOWN: "unknown";
+export let FALL: "fall_damage";
+export let REGENERATION: "regeneration";
+export let VOID: "void";
+export let STARVATION: "starvation";
+export let PLUGIN: "plugin";

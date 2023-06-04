@@ -13,7 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const PEACEFUL: "peaceful";
-export const EASY: "easy";
-export const NORMAL: "normal";
-export const HARD: "hard";
+export let PEACEFUL: "peaceful";
+export let EASY: "easy";
+export let NORMAL: "normal";
+export let HARD: "hard";

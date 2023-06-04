@@ -13,7 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const commandList: any[];
+export let commandList: any[];
 /**
  * Loads all commands
  */

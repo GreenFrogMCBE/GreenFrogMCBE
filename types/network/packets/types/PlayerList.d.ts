@@ -13,5 +13,5 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const ADD: "add";
-export const REMOVE: "remove";
+export let ADD: "add";
+export let REMOVE: "remove";

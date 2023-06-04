@@ -13,6 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const PLAYER: "player";
-export const ENTITY: "entity";
-export const TEXT: "fake_player";
+export let PLAYER: "player";
+export let ENTITY: "entity";
+export let TEXT: "fake_player";

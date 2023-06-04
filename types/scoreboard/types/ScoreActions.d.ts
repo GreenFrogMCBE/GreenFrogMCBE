@@ -13,7 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export const UPDATE: "change";
-export const REMOVE: "remove";
-export const UNKNOWN: "unknown";
-export const CHANGE: any;
+export let UPDATE: "change";
+export let REMOVE: "remove";
+export let UNKNOWN: "unknown";
+export let CHANGE: any;

@@ -14,10 +14,10 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 export namespace data {
-	const name: string;
-	const description: string;
-	const aliases: string[];
-	const minArgs: number;
-	const maxArgs: number;
+	let name: string;
+	let description: string;
+	let aliases: string[];
+	let minArgs: number;
+	let maxArgs: number;
 }
 export function execute(_server: any, player: any): void;
