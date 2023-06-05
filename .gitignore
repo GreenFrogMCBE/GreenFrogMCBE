@@ -7,7 +7,7 @@ node_modules/
 ops.yml
 config.yml
 
-# bedrock protocol thing
+# bedrock-protocol thing
 
 *_packetReadError.txt
 

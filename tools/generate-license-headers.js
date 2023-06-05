@@ -28,6 +28,7 @@ const addHeader = async (filePath) => {
 	try {
 		const data = await fs.readFile(filePath);
 		let contents = data.toString();
+
 		if (!contents.includes("CC-BY-4.0")) {
 			contents = LICENSE_HEADER + contents;
 			await fs.writeFile(filePath, contents);

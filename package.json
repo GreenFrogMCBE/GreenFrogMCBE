@@ -8,11 +8,11 @@
     "format": "npx prettier --write .",
     "start": "node index.js",
     "dev": "nodemon --signal SIGINT index.js --debug",
-    "generatelicenseheaders": "node tools/generateLicenseHeaders.js",
-    "build": "npm run generatelicenseheaders && npm run format",
+    "generate-license-headers": "node tools/generate-license-headers.js",
+    "build": "npm run generate-license-headers && npm run format",
     "autotest": "cd tools && node tests-auto.js --test",
     "test": "cd tools && node tests-manual.js --test",
-    "pluginstructure": "node tools/generateBasePlugin.js"
+    "plugin-structure": "node tools/generate-base-plugin.js"
   },
   "dependencies": {
     "center-align": "1.0.1",
