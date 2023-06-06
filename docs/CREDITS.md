@@ -4,8 +4,8 @@
 
 > For creating multilang (https://github.com/andriycraft/GreenFrogMCBE/pull/9) <br>
 > For improving tests and /list <br>
-> For making better tests (https://github.com/andriycraft/GreenFrogMCBE/pull/70) <br>
-> For making PlayerInfo.get not case sensitive (https://github.com/andriycraft/GreenFrogMCBE/pull/192)
+> For making better tests, and making `tests-manual.js` (https://github.com/andriycraft/GreenFrogMCBE/pull/70) <br>
+> For making `PlayerInfo.get()` not case sensitive (https://github.com/andriycraft/GreenFrogMCBE/pull/192)
 
 2. @hvlxh
 
