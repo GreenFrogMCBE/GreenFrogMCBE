@@ -90,7 +90,7 @@ class Default extends Generator {
 					} else {
 						// Hills
 
-						if (Math.floor(Math.random() * 600) < 1 && blockCount > 4161319 && !chunkData[index]) {
+						if (Math.floor(Math.random() * 600) < 5 && blockCount > 4161319 && !chunkData[index]) {
 							for (let i = 0; i < 1200; i++) {
 								if ((index - i) % 2 === 0 && y > 15) {
 									if (!chunkData[index - i]) {
