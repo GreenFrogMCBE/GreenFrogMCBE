@@ -17,6 +17,7 @@
 // Credit: AnyBananaGAME
 
 const rl = require("readline");
+
 const ClientJoin = require("../test/ClientJoin");
 const ClientMessage = require("../test/ClientSendMessage");
 const ClientCommand = require("../test/ClientRunCommand");
