@@ -10,7 +10,7 @@
     "dev": "nodemon --signal SIGINT index.js --debug",
     "generate-license-headers": "node tools/generate-license-headers.js",
     "build": "npm run generate-license-headers && npm run format",
-    "autotest": "cd tools && node tests-auto.js --test",
+    "auto-test": "cd tools && node tests-auto.js --test",
     "test": "cd tools && node tests-manual.js --test",
     "plugin-structure": "node tools/generate-base-plugin.js"
   },
