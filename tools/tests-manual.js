@@ -14,8 +14,6 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /* eslint-disable no-empty */
-// Credit: AnyBananaGAME
-
 const rl = require("readline");
 
 const ClientJoin = require("../test/ClientJoin");
