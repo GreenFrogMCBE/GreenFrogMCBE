@@ -4,7 +4,7 @@ network:
 serverInfo:
   motd: "§aGreenFrog server"
   levelName: "GreenFrog"
-  version: "1.19.80"
+  version: "1.20.0"
   offlineMode: true
   maxPlayers: 20
 chat:
