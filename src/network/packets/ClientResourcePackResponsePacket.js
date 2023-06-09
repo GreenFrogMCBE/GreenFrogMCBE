@@ -25,6 +25,7 @@ const Dimension = require("../../world/types/Dimension");
 const Difficulty = require("../../api/types/Difficulty");
 const NetworkGenerator = require("../../world/types/NetworkGenerator");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
+const WorldGenerators = require("../../world/types/WorldGenerators");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
 
@@ -43,19 +44,18 @@ const PlayerList = require("./ServerPlayerListPacket");
 const StartGame = require("./ServerStartGamePacket");
 
 const CommandManager = require("../../player/CommandManager");
-
 const World = require("../../world/World");
-
 const Logger = require("../../server/Logger");
-
 const Commands = require("../../server/Commands");
+
+const entityData = require("../../internalResources/entityData.json")
 
 const { getKey } = require("../../utils/Language");
 
 const { serverConfigurationFiles } = require("../../Frog");
-const WorldGenerators = require("../../world/types/WorldGenerators");
-const WorldGenerationFailedException = require("../../utils/exceptions/WorldGenerationFailedException");
 const { config } = serverConfigurationFiles;
+
+const WorldGenerationFailedException = require("../../utils/exceptions/WorldGenerationFailedException");
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
@@ -153,7 +153,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.setEntityID(0);
 				startGame.setRuntimeEntityId(0);
 				startGame.setGamemode(config.world.gamemode);
-				startGame.setPlayerPosition(0, 100, 0);
+				startGame.setPlayerPosition(0, -48, 0);
 				startGame.setPlayerRotation(0, 0);
 				startGame.setSeed(-1);
 				startGame.setBiomeType(0);
@@ -254,13 +254,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						server,
 					});
 
-					player.setEntityData("can_climb", true);
-					player.setEntityData("can_fly", false);
-					player.setEntityData("walker", true);
-					player.setEntityData("moving", true);
-					player.setEntityData("breathing", true);
-					player.setEntityData("has_collision", true);
-					player.setEntityData("affected_by_gravity", true);
+					for (const entry of Object.entries(entityData.data)) {
+						player.setEntityData(entry[0], entry[1])
+					}
 
 					Frog.__addPlayer();
 

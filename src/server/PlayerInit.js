@@ -347,8 +347,8 @@ module.exports = {
 				ints: [],
 				floats: [],
 			});
-			playerSetEntityDataPacket.setRuntimeEntityID(0); // Local player
-			playerSetEntityDataPacket.setTick(0);
+			playerSetEntityDataPacket.setRuntimeEntityID("0"); // Local player
+			playerSetEntityDataPacket.setTick("0");
 			playerSetEntityDataPacket.setValue(field, value);
 			playerSetEntityDataPacket.writePacket(player);
 		};
