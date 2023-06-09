@@ -254,8 +254,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						server,
 					});
 
-					for (const [dataName, dataValue] of Object.entries(entityData)) {
-						player.setEntityData(dataName, dataValue);
+					for (const entry of Object.entries(entityData.data)) {
+						player.setEntityData(entry[0], entry[1])
 					}
 
 					Frog.__addPlayer();
