@@ -16,7 +16,7 @@
 module.exports = /** @type {const} */ ({
 	CREATIVE: "creative",
 	SURVIVAL: "survival",
-	/** 1.19.30+ */
+	/** 1.19.50+ */
 	SPECTATOR: "spectator",
 
 	/** @deprecated */

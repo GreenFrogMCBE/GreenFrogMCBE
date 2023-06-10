@@ -31,26 +31,11 @@ module.exports = {
 
 		if (!falldamageY) return
 
-		if (falldamageY > 0.56 && player.fallDamageQueue && !player.___dmgCd) {
+		if (falldamageY > 0.56 && player.fallDamageQueue) {
 			player.setHealth(player.health - player.fallDamageQueue, DamageCause.FALL);
 			player.fallDamageQueue = 0;
 		}
 
 		player.fallDamageQueue = (falldamageY + 0.5) * 2;
-	},
-
-	/**
-	 * This function calculates how much hunger the player must lose
-	 *
-	 * @param {Client} player
-	 * @param {JSON} position
-	 */
-	async calculateHungerloss(player, position) {
-		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
-
-		if (Math.floor(Math.random() * 50) === 50) {
-			// TODO: Vanilla behaviour
-			player.setHunger(player.hunger - 1);
-		}
-	},
+	}
 };

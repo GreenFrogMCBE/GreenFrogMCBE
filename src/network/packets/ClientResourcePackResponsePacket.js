@@ -58,6 +58,7 @@ const { serverConfigurationFiles } = require("../../Frog");
 const { config } = serverConfigurationFiles;
 
 const WorldGenerationFailedException = require("../../utils/exceptions/WorldGenerationFailedException");
+const Gamemode = require("../../api/player/Gamemode");
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
@@ -235,6 +236,17 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const generator = new generatorFile();
 					generator.generate(player);
 
+					player.hungerLossLoop = setInterval(() => {
+						if (player.offline) {
+							delete player.hungerLossLoop;
+							return;
+						}
+
+						if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return
+
+						player.setHunger(player.hunger - 0.5)
+					}, 30000)
+
 					player.networkChunksLoop = setInterval(() => {
 						if (player.offline) {
 							delete player.networkChunksLoop;
@@ -266,7 +278,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setEntityData("affected_by_gravity", true)
 					player.setEntityData("breathing", true)
 					player.setEntityData("can_climb", true)
-	
+
 					Frog.__addPlayer();
 
 					for (const onlineplayers of PlayerInfo.players) {
