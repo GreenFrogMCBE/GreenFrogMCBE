@@ -347,8 +347,8 @@ module.exports = {
 				ints: [],
 				floats: [],
 			});
-			playerSetEntityDataPacket.setRuntimeEntityID("0"); // Local player
-			playerSetEntityDataPacket.setTick("0");
+			playerSetEntityDataPacket.setRuntimeEntityID("1"); // 1 - Means local player in 1.20
+			playerSetEntityDataPacket.setTick(0);
 			playerSetEntityDataPacket.setValue(field, value);
 			playerSetEntityDataPacket.writePacket(player);
 		};
@@ -448,7 +448,7 @@ module.exports = {
 			if (shouldSetAttribute) {
 				const updateAttributesPacket = new ServerUpdateAttributesPacket();
 				updateAttributesPacket.setPlayerId(1); // 1 - Means local player in 1.20
-				updateAttributesPacket.setTick("0");
+				updateAttributesPacket.setTick(0);
 				updateAttributesPacket.setAttributes([attribute]);
 				updateAttributesPacket.writePacket(player);
 			}

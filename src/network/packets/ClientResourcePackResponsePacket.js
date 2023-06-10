@@ -185,12 +185,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				clientCacheStatus.setEnabled(true);
 				clientCacheStatus.writePacket(player);
 
-				player.setEntityData("breathing", true)
-				player.setEntityData("has_collision", true)
-				player.setEntityData("affected_by_gravity", true)
-				player.setEntityData("breathing", true)
-				player.setEntityData("can_climb", true)
-
 				const commandManager = new CommandManager();
 				commandManager.init(player);
 
@@ -258,10 +252,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						server,
 					});
 
-					// for (const entry of Object.entries(entityData.data)) {
-					// 	player.setEntityData(entry[0], entry[1])
-					// }
-
+					player.setEntityData("breathing", true)
+					player.setEntityData("has_collision", true)
+					player.setEntityData("affected_by_gravity", true)
+					player.setEntityData("breathing", true)
+					player.setEntityData("can_climb", true)
+	
 					Frog.__addPlayer();
 
 					for (const onlineplayers of PlayerInfo.players) {
