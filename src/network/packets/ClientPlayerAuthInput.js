@@ -42,6 +42,8 @@ class ClientMovePacket extends PacketConstructor {
 
 		let shouldSetPosition = true;
 
+		player.location.onGround = false
+
 		Frog.eventEmitter.emit("playerMove", {
 			player,
 			server,

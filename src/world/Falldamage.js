@@ -27,18 +27,13 @@ module.exports = {
 	async calculateFalldamage(player, position) {
 		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
 
-		console.log('Line 53')
 		let falldamageY = player.location.y - position.y;
 
-		console.log(falldamageY)
+		if (!falldamageY) return
 
-		if (player.on_ground && player.fallDamageQueue && !player.___dmgCd) {
-			player.setHealth(player.health - player.fallDamageQueue * 2, DamageCause.FALL);
+		if (falldamageY > 0.56 && player.fallDamageQueue && !player.___dmgCd) {
+			player.setHealth(player.health - player.fallDamageQueue, DamageCause.FALL);
 			player.fallDamageQueue = 0;
-		}
-
-		if (falldamageY < 0.4) {
-			return;
 		}
 
 		player.fallDamageQueue = (falldamageY + 0.5) * 2;
@@ -52,8 +47,6 @@ module.exports = {
 	 */
 	async calculateHungerloss(player, position) {
 		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
-
-		if (position === !undefined && position.y == !player.y) return;
 
 		if (Math.floor(Math.random() * 50) === 50) {
 			// TODO: Vanilla behaviour
