@@ -48,7 +48,7 @@ const World = require("../../world/World");
 const Logger = require("../../server/Logger");
 const Commands = require("../../server/Commands");
 
-const entityData = require("../../internalResources/entityData.json")
+const entityData = require("../../internalResources/entityData.json");
 
 const { getKey } = require("../../utils/Language");
 
@@ -188,14 +188,43 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				clientCacheStatus.writePacket(player);
 
 				player.queue("trim_data", {
-					"patterns": [{ "item_name": "minecraft:ward_armor_trim_smithing_template", "pattern": "ward" }, { "item_name": "minecraft:sentry_armor_trim_smithing_template", "pattern": "sentry" }, { "item_name": "minecraft:snout_armor_trim_smithing_template", "pattern": "snout" }, { "item_name": "minecraft:dune_armor_trim_smithing_template", "pattern": "dune" }, { "item_name": "minecraft:spire_armor_trim_smithing_template", "pattern": "spire" }, { "item_name": "minecraft:tide_armor_trim_smithing_template", "pattern": "tide" }, { "item_name": "minecraft:wild_armor_trim_smithing_template", "pattern": "wild" }, { "item_name": "minecraft:rib_armor_trim_smithing_template", "pattern": "rib" }, { "item_name": "minecraft:coast_armor_trim_smithing_template", "pattern": "coast" }, { "item_name": "minecraft:shaper_armor_trim_smithing_template", "pattern": "shaper" }, { "item_name": "minecraft:eye_armor_trim_smithing_template", "pattern": "eye" }, { "item_name": "minecraft:vex_armor_trim_smithing_template", "pattern": "vex" }, { "item_name": "minecraft:silence_armor_trim_smithing_template", "pattern": "silence" }, { "item_name": "minecraft:wayfinder_armor_trim_smithing_template", "pattern": "wayfinder" }, { "item_name": "minecraft:raiser_armor_trim_smithing_template", "pattern": "raiser" }, { "item_name": "minecraft:host_armor_trim_smithing_template", "pattern": "host" }], "materials": [{ "material": "quartz", "color": "§h", "item_name": "minecraft:quartz" }, { "material": "iron", "color": "§i", "item_name": "minecraft:iron_ingot" }, { "material": "netherite", "color": "§j", "item_name": "minecraft:netherite_ingot" }, { "material": "redstone", "color": "§m", "item_name": "minecraft:redstone" }, { "material": "copper", "color": "§n", "item_name": "minecraft:copper_ingot" }, { "material": "gold", "color": "§p", "item_name": "minecraft:gold_ingot" }, { "material": "emerald", "color": "§q", "item_name": "minecraft:emerald" }, { "material": "diamond", "color": "§s", "item_name": "minecraft:diamond" }, { "material": "lapis", "color": "§t", "item_name": "minecraft:lapis_lazuli" }, { "material": "amethyst", "color": "§u", "item_name": "minecraft:amethyst_shard" }]
-				})
+					patterns: [
+						{ item_name: "minecraft:ward_armor_trim_smithing_template", pattern: "ward" },
+						{ item_name: "minecraft:sentry_armor_trim_smithing_template", pattern: "sentry" },
+						{ item_name: "minecraft:snout_armor_trim_smithing_template", pattern: "snout" },
+						{ item_name: "minecraft:dune_armor_trim_smithing_template", pattern: "dune" },
+						{ item_name: "minecraft:spire_armor_trim_smithing_template", pattern: "spire" },
+						{ item_name: "minecraft:tide_armor_trim_smithing_template", pattern: "tide" },
+						{ item_name: "minecraft:wild_armor_trim_smithing_template", pattern: "wild" },
+						{ item_name: "minecraft:rib_armor_trim_smithing_template", pattern: "rib" },
+						{ item_name: "minecraft:coast_armor_trim_smithing_template", pattern: "coast" },
+						{ item_name: "minecraft:shaper_armor_trim_smithing_template", pattern: "shaper" },
+						{ item_name: "minecraft:eye_armor_trim_smithing_template", pattern: "eye" },
+						{ item_name: "minecraft:vex_armor_trim_smithing_template", pattern: "vex" },
+						{ item_name: "minecraft:silence_armor_trim_smithing_template", pattern: "silence" },
+						{ item_name: "minecraft:wayfinder_armor_trim_smithing_template", pattern: "wayfinder" },
+						{ item_name: "minecraft:raiser_armor_trim_smithing_template", pattern: "raiser" },
+						{ item_name: "minecraft:host_armor_trim_smithing_template", pattern: "host" },
+					],
+					materials: [
+						{ material: "quartz", color: "§h", item_name: "minecraft:quartz" },
+						{ material: "iron", color: "§i", item_name: "minecraft:iron_ingot" },
+						{ material: "netherite", color: "§j", item_name: "minecraft:netherite_ingot" },
+						{ material: "redstone", color: "§m", item_name: "minecraft:redstone" },
+						{ material: "copper", color: "§n", item_name: "minecraft:copper_ingot" },
+						{ material: "gold", color: "§p", item_name: "minecraft:gold_ingot" },
+						{ material: "emerald", color: "§q", item_name: "minecraft:emerald" },
+						{ material: "diamond", color: "§s", item_name: "minecraft:diamond" },
+						{ material: "lapis", color: "§t", item_name: "minecraft:lapis_lazuli" },
+						{ material: "amethyst", color: "§u", item_name: "minecraft:amethyst_shard" },
+					],
+				});
 				player.queue("set_entity_data", {
 					runtime_entity_id: 1n,
 					metadata: [
 						{
-							key: 'flags',
-							type: 'long',
+							key: "flags",
+							type: "long",
 							value: {
 								onfire: false,
 								sneaking: false,
@@ -261,12 +290,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 								rider_can_pick: false,
 								transition_sitting: false,
 								eating: false,
-								laying_down: false
-							}
+								laying_down: false,
+							},
 						},
 						{
-							key: 'flags_extended',
-							type: 'long',
+							key: "flags_extended",
+							type: "long",
 							value: {
 								sneezing: false,
 								trusting: false,
@@ -316,36 +345,36 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 								scenting: false,
 								rising: false,
 								feeling_happy: false,
-								searching: false
-							}
+								searching: false,
+							},
 						},
-						{ key: 'air', type: 'short', value: 0 },
-						{ key: 'scale', type: 'float', value: 1 },
-						{ key: 'color', type: 'byte', value: 0 },
-						{ key: 'max_airdata_max_air', type: 'short', value: 300 },
+						{ key: "air", type: "short", value: 0 },
+						{ key: "scale", type: "float", value: 1 },
+						{ key: "color", type: "byte", value: 0 },
+						{ key: "max_airdata_max_air", type: "short", value: 300 },
 						{
-							key: 'boundingbox_height',
-							type: 'float',
-							value: 1.7999999523162842
+							key: "boundingbox_height",
+							type: "float",
+							value: 1.7999999523162842,
 						},
 						{
-							key: 'boundingbox_width',
-							type: 'float',
-							value: 0.6000000238418579
+							key: "boundingbox_width",
+							type: "float",
+							value: 0.6000000238418579,
 						},
-						{ key: 'health', type: 'int', value: 1 },
-						{ key: 'mark_variant', type: 'int', value: 255 },
+						{ key: "health", type: "int", value: 1 },
+						{ key: "mark_variant", type: "int", value: 255 },
 						{
-							key: 'heartbeat_sound_event',
-							type: 'vec3i',
-							value: { x: 7, y: 72, z: -116 }
+							key: "heartbeat_sound_event",
+							type: "vec3i",
+							value: { x: 7, y: 72, z: -116 },
 						},
-						{ key: 128, type: 'int', value: 0 },
-						{ key: 129, type: 'byte', value: 1 },
+						{ key: 128, type: "int", value: 0 },
+						{ key: 129, type: "byte", value: 1 },
 					],
 					properties: { ints: [], floats: [] },
-					tick: 0n
-				})
+					tick: 0n,
+				});
 
 				const commandManager = new CommandManager();
 				commandManager.init(player);
