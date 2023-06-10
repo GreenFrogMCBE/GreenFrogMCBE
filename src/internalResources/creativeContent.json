@@ -26151,20 +26151,6 @@
           "can_destroy": []
         }
       }
-    },
-    {
-      "entry_id": 1551,
-      "item": {
-        "network_id": 714,
-        "count": 1,
-        "metadata": 0,
-        "block_runtime_id": 0,
-        "extra": {
-          "has_nbt": 0,
-          "can_place_on": [],
-          "can_destroy": []
-        }
-      }
     }
   ]
 }

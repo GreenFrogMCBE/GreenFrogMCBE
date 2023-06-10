@@ -335,6 +335,8 @@ class ServerStartGamePacket extends PacketConstructor {
 			spawn_position: this.getSpawnPosition(),
 			achievements_disabled: true,
 			editor_world: false,
+			created_in_editor: false,
+			exported_from_editor: false,
 			day_cycle_stop_time: 1,
 			edu_offer: 0,
 			edu_features_enabled: false,
@@ -365,7 +367,7 @@ class ServerStartGamePacket extends PacketConstructor {
 			persona_disabled: false,
 			custom_skins_disabled: false,
 			emote_chat_muted: false,
-			game_version: "*",
+			game_version: "1.20",
 			limited_world_width: 0,
 			limited_world_length: 0,
 			is_new_nether: false,
@@ -383,7 +385,7 @@ class ServerStartGamePacket extends PacketConstructor {
 			movement_authority: "server",
 			rewind_history_size: 0,
 			server_authoritative_block_breaking: false,
-			current_tick: [-1, -1],
+			current_tick: -1n,
 			enchantment_seed: 0,
 			block_properties: [],
 			"itemstates": [
@@ -6873,17 +6875,22 @@ class ServerStartGamePacket extends PacketConstructor {
 					"component_based": false
 				}
 			],
-			multiplayer_correlation_id: "",
-			server_authoritative_inventory: true,
-			engine: "GreenFrogMCBE",
-			property_data: {
-				type: "compound",
-				name: "",
-				value: {},
+			"multiplayer_correlation_id": "",
+			"server_authoritative_inventory": true,
+			"engine": "",
+			"property_data": {
+				"type": "compound",
+				"name": "",
+				"value": {}
 			},
-			block_pallette_checksum: [0, 0],
-			world_template_id: "00000000-0000-0000-0000-000000000000",
-			client_side_generation: false,
+			"block_pallette_checksum": [
+				0,
+				0
+			],
+			"world_template_id": "00000000-0000-0000-0000-000000000000",
+			"client_side_generation": false,
+			"block_network_ids_are_hashes": false,
+			"server_controlled_sound": false
 		});
 	}
 }

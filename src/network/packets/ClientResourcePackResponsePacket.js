@@ -187,6 +187,166 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				clientCacheStatus.setEnabled(true);
 				clientCacheStatus.writePacket(player);
 
+				player.queue("trim_data", {
+					"patterns": [{ "item_name": "minecraft:ward_armor_trim_smithing_template", "pattern": "ward" }, { "item_name": "minecraft:sentry_armor_trim_smithing_template", "pattern": "sentry" }, { "item_name": "minecraft:snout_armor_trim_smithing_template", "pattern": "snout" }, { "item_name": "minecraft:dune_armor_trim_smithing_template", "pattern": "dune" }, { "item_name": "minecraft:spire_armor_trim_smithing_template", "pattern": "spire" }, { "item_name": "minecraft:tide_armor_trim_smithing_template", "pattern": "tide" }, { "item_name": "minecraft:wild_armor_trim_smithing_template", "pattern": "wild" }, { "item_name": "minecraft:rib_armor_trim_smithing_template", "pattern": "rib" }, { "item_name": "minecraft:coast_armor_trim_smithing_template", "pattern": "coast" }, { "item_name": "minecraft:shaper_armor_trim_smithing_template", "pattern": "shaper" }, { "item_name": "minecraft:eye_armor_trim_smithing_template", "pattern": "eye" }, { "item_name": "minecraft:vex_armor_trim_smithing_template", "pattern": "vex" }, { "item_name": "minecraft:silence_armor_trim_smithing_template", "pattern": "silence" }, { "item_name": "minecraft:wayfinder_armor_trim_smithing_template", "pattern": "wayfinder" }, { "item_name": "minecraft:raiser_armor_trim_smithing_template", "pattern": "raiser" }, { "item_name": "minecraft:host_armor_trim_smithing_template", "pattern": "host" }], "materials": [{ "material": "quartz", "color": "§h", "item_name": "minecraft:quartz" }, { "material": "iron", "color": "§i", "item_name": "minecraft:iron_ingot" }, { "material": "netherite", "color": "§j", "item_name": "minecraft:netherite_ingot" }, { "material": "redstone", "color": "§m", "item_name": "minecraft:redstone" }, { "material": "copper", "color": "§n", "item_name": "minecraft:copper_ingot" }, { "material": "gold", "color": "§p", "item_name": "minecraft:gold_ingot" }, { "material": "emerald", "color": "§q", "item_name": "minecraft:emerald" }, { "material": "diamond", "color": "§s", "item_name": "minecraft:diamond" }, { "material": "lapis", "color": "§t", "item_name": "minecraft:lapis_lazuli" }, { "material": "amethyst", "color": "§u", "item_name": "minecraft:amethyst_shard" }]
+				})
+				player.queue("set_entity_data", {
+					runtime_entity_id: 1n,
+					metadata: [
+						{
+							key: 'flags',
+							type: 'long',
+							value: {
+								onfire: false,
+								sneaking: false,
+								riding: false,
+								sprinting: false,
+								action: false,
+								invisible: false,
+								tempted: false,
+								inlove: false,
+								saddled: false,
+								powered: false,
+								ignited: false,
+								baby: false,
+								converting: false,
+								critical: false,
+								can_show_nametag: true,
+								always_show_nametag: false,
+								no_ai: false,
+								silent: false,
+								wallclimbing: false,
+								can_climb: true,
+								swimmer: false,
+								can_fly: false,
+								walker: false,
+								resting: false,
+								sitting: false,
+								angry: false,
+								interested: false,
+								charged: false,
+								tamed: false,
+								orphaned: false,
+								leashed: false,
+								sheared: false,
+								gliding: false,
+								elder: false,
+								moving: false,
+								breathing: false,
+								chested: false,
+								stackable: false,
+								showbase: false,
+								rearing: false,
+								vibrating: false,
+								idling: false,
+								evoker_spell: false,
+								charge_attack: false,
+								wasd_controlled: false,
+								can_power_jump: false,
+								can_dash: false,
+								linger: false,
+								has_collision: true,
+								affected_by_gravity: true,
+								fire_immune: false,
+								dancing: false,
+								enchanted: false,
+								show_trident_rope: false,
+								container_private: false,
+								transforming: false,
+								spin_attack: false,
+								swimming: false,
+								bribed: false,
+								pregnant: false,
+								laying_egg: false,
+								rider_can_pick: false,
+								transition_sitting: false,
+								eating: false,
+								laying_down: false
+							}
+						},
+						{
+							key: 'flags_extended',
+							type: 'long',
+							value: {
+								sneezing: false,
+								trusting: false,
+								rolling: false,
+								scared: false,
+								in_scaffolding: false,
+								over_scaffolding: false,
+								fall_through_scaffolding: false,
+								blocking: false,
+								transition_blocking: false,
+								blocked_using_shield: false,
+								blocked_using_damaged_shield: false,
+								sleeping: false,
+								wants_to_wake: false,
+								trade_interest: false,
+								door_breaker: false,
+								breaking_obstruction: false,
+								door_opener: false,
+								illager_captain: false,
+								stunned: false,
+								roaring: false,
+								delayed_attacking: false,
+								avoiding_mobs: false,
+								avoiding_block: false,
+								facing_target_to_range_attack: false,
+								hidden_when_invisible: false,
+								is_in_ui: false,
+								stalking: false,
+								emoting: false,
+								celebrating: false,
+								admiring: false,
+								celebrating_special: false,
+								unknown95: false,
+								ram_attack: false,
+								playing_dead: false,
+								in_ascendable_block: false,
+								over_descendable_block: false,
+								croaking: false,
+								eat_mob: false,
+								jump_goal_jump: false,
+								emerging: false,
+								sniffing: false,
+								digging: false,
+								sonic_boom: false,
+								has_dash_cooldown: false,
+								push_towards_closest_space: false,
+								scenting: false,
+								rising: false,
+								feeling_happy: false,
+								searching: false
+							}
+						},
+						{ key: 'air', type: 'short', value: 0 },
+						{ key: 'scale', type: 'float', value: 1 },
+						{ key: 'color', type: 'byte', value: 0 },
+						{ key: 'max_airdata_max_air', type: 'short', value: 300 },
+						{
+							key: 'boundingbox_height',
+							type: 'float',
+							value: 1.7999999523162842
+						},
+						{
+							key: 'boundingbox_width',
+							type: 'float',
+							value: 0.6000000238418579
+						},
+						{ key: 'health', type: 'int', value: 1 },
+						{ key: 'mark_variant', type: 'int', value: 255 },
+						{
+							key: 'heartbeat_sound_event',
+							type: 'vec3i',
+							value: { x: 7, y: 72, z: -116 }
+						},
+						{ key: 128, type: 'int', value: 0 },
+						{ key: 129, type: 'byte', value: 1 },
+					],
+					properties: { ints: [], floats: [] },
+					tick: 0n
+				})
+
 				const commandManager = new CommandManager();
 				commandManager.init(player);
 
@@ -254,9 +414,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						server,
 					});
 
-					for (const entry of Object.entries(entityData.data)) {
-						player.setEntityData(entry[0], entry[1])
-					}
+					// for (const entry of Object.entries(entityData.data)) {
+					// 	player.setEntityData(entry[0], entry[1])
+					// }
 
 					Frog.__addPlayer();
 

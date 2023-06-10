@@ -181,7 +181,7 @@ module.exports = {
 		};
 
 		/**
-		 * Teleports player
+		 * Teleports the player
 		 *
 		 * @param {float} x
 		 * @param {float} y

@@ -32,7 +32,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 	 * Sets the player ID
 	 * @param {number} new_playerid
 	 */
-	setPlayerID(new_playerid) {
+	setPlayerId(new_playerid) {
 		id = new_playerid;
 	}
 
