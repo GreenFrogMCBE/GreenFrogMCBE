@@ -24,7 +24,7 @@ module.exports = {
 			port: 19132,
 			username: "sendmessagebot",
 			offline: true,
-			version: "1.19.80",
+			version: "1.20.0",
 		});
 
 		console.info("[sendmessage bot] joined");
