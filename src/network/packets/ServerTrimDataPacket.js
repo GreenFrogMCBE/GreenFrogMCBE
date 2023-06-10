@@ -15,65 +15,48 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let id = -1;
-let attributes = null;
-let tick = -1;
+let patterns = [];
+let materials = [];
 
-class ServerUpdateAttributesPacket extends PacketConstructor {
+class ServerTrimDataPacket extends PacketConstructor {
 	/**
 	 * Returns the name of the packet.
 	 * @returns {string}
 	 */
 	getPacketName() {
-		return "update_attributes";
+		return "trim_data";
 	}
 
 	/**
-	 * Sets the player ID
-	 * @param {number} new_playerid
+	 * Sets the patterns
+	 * @param {Array<JSON>} new_patterns
 	 */
-	setPlayerId(new_playerid) {
-		id = new_playerid;
+	setPatterns(new_patterns) {
+		patterns = new_patterns;
 	}
 
 	/**
-	 * Returns the player ID
-	 * @returns {number}
+	 * Returns the patterns
+	 * @returns {JSON}
 	 */
-	getPlayerId() {
-		return id;
+	getPatterns() {
+		return patterns;
 	}
 
 	/**
-	 * Sets the attributes
-	 * @param {Array<JSON>} attribute
+	 * Sets the materials
+	 * @param {Array<JSON>} material
 	 */
-	setAttributes(attribute) {
-		attributes = attribute;
+	setMaterials(material) {
+		materials = material;
 	}
 
 	/**
-	 * Returns the attributes
+	 * Returns the materials
 	 * @returns {Array<JSON>}
 	 */
-	getAttributes() {
-		return attributes;
-	}
-
-	/**
-	 * Sets the current tick
-	 * @param {number} new_tick - The tick
-	 */
-	setTick(new_tick) {
-		tick = new_tick;
-	}
-
-	/**
-	 * Returns the current tick
-	 * @returns {number};
-	 */
-	getTick() {
-		return tick;
+	getMaterials() {
+		return materials;
 	}
 
 	/**
@@ -82,11 +65,10 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			runtime_entity_id: `${this.getPlayerId()}`,
-			attributes: this.getAttributes(),
-			tick: this.getTick(),
+			patterns: this.getPatterns(),
+            materials: this.getMaterials()
 		});
 	}
 }
 
-module.exports = ServerUpdateAttributesPacket;
+module.exports = ServerTrimDataPacket;

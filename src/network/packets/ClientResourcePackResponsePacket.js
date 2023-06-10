@@ -31,22 +31,26 @@ const PlayerInfo = require("../../api/player/PlayerInfo");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const NetworkChunkPublisherUpdate = require("./ServerNetworkChunkPublisherUpdatePacket");
-const AvailableEntityIdentifiers = require("./ServerAvailableEntityIdentifiersPacket");
-const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket");
-const SetCommandsEnabled = require("./ServerSetCommandsEnabledPacket");
-const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
-const ResourcePackStack = require("./ServerResourcePackStackPacket");
-const CreativeContent = require("./ServerCreativeContentPacket");
-const ItemComponent = require("./ServerItemComponentPacket");
-const PlayStatus = require("./ServerPlayStatusPacket");
-const PlayerList = require("./ServerPlayerListPacket");
-const StartGame = require("./ServerStartGamePacket");
+const ServerNetworkChunkPublisherUpdatePacket = require("./ServerNetworkChunkPublisherUpdatePacket");
+const ServerAvailableEntityIdentifiersPacket = require("./ServerAvailableEntityIdentifiersPacket");
+const ServerBiomeDefinitionListPacket = require("./ServerBiomeDefinitionListPacket");
+const ServerSetCommandsEnabledPacket = require("./ServerSetCommandsEnabledPacket");
+const ServerClientCacheStatusPacket = require("./ServerClientCacheStatusPacket");
+const ServerResourcePackStackPacket = require("./ServerResourcePackStackPacket");
+const ServerCreativeContentPacket = require("./ServerCreativeContentPacket");
+const ServerItemComponentPacket = require("./ServerItemComponentPacket");
+const ServerPlayStatusPacket = require("./ServerPlayStatusPacket");
+const ServerPlayerListPacket = require("./ServerPlayerListPacket");
+const ServerStartGamePacket = require("./ServerStartGamePacket");
+const ServerTrimDataPacket = require("./ServerTrimDataPacket");
 
 const CommandManager = require("../../player/CommandManager");
-const World = require("../../world/World");
-const Logger = require("../../server/Logger");
 const Commands = require("../../server/Commands");
+
+const Logger = require("../../server/Logger");
+const World = require("../../world/World");
+
+const dumpedTrimData = require("../../internalResources/trimData.json")
 
 const { getKey } = require("../../utils/Language");
 
@@ -101,7 +105,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				Logger.info(getKey("status.resourcePacks.installed").replace("%s%", player.username));
 
-				const resourcePackStack = new ResourcePackStack();
+				const resourcePackStack = new ServerResourcePackStackPacket();
 				resourcePackStack.setMustAccept(false);
 				resourcePackStack.setBehaviorPacks([]);
 				resourcePackStack.setResourcePacks([]);
@@ -147,7 +151,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				Logger.info(getKey("status.resourcePacks.joined").replace("%s%", player.username));
 
-				const startGame = new StartGame();
+				const startGame = new ServerStartGamePacket();
 				startGame.setEntityID(0);
 				startGame.setRuntimeEntityId(1); // NOTE: In 1.20 mojang swiched to bald stuff and the runtime entity id should always be 1
 				startGame.setGamemode(config.world.gamemode);
@@ -165,23 +169,28 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.setWorldName(player.world.getName());
 				startGame.writePacket(player);
 
-				const biomeDefinitionList = new BiomeDefinitionList();
+				const biomeDefinitionList = new ServerBiomeDefinitionListPacket();
 				biomeDefinitionList.setValue(require("../../internalResources/biomes.json"));
 				biomeDefinitionList.writePacket(player);
 
-				const availableEntityids = new AvailableEntityIdentifiers();
+				const availableEntityids = new ServerAvailableEntityIdentifiersPacket();
 				availableEntityids.setValue(require("../../internalResources/entities.json"));
 				availableEntityids.writePacket(player);
 
-				const creativeContent = new CreativeContent();
+				const creativeContent = new ServerCreativeContentPacket();
 				creativeContent.setItems(require("../../internalResources/creativeContent.json").items);
 				creativeContent.writePacket(player);
 
-				const commandsEnabled = new SetCommandsEnabled();
+				const commandsEnabled = new ServerSetCommandsEnabledPacket();
 				commandsEnabled.setEnabled(true);
 				commandsEnabled.writePacket(player);
 
-				const clientCacheStatus = new ClientCacheStatus();
+				const trimData = new ServerTrimDataPacket();
+				trimData.setPatterns(dumpedTrimData.patterns);
+				trimData.setMaterials(dumpedTrimData.materials)
+				trimData.writePacket(player);
+
+				const clientCacheStatus = new ServerClientCacheStatusPacket();
 				clientCacheStatus.setEnabled(true);
 				clientCacheStatus.writePacket(player);
 
@@ -203,7 +212,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				}
 
 				// This packet is used to create custom items
-				const itemcomponent = new ItemComponent();
+				const itemcomponent = new ServerItemComponentPacket();
 				try {
 					itemcomponent.setItems(require("../../../world/custom_items.json").items);
 				} catch (error) {
@@ -216,7 +225,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				if (player.chunksEnabled) {
 					player.setChunkRadius(player.world.getChunkRadius());
 
-					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
+					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
 					networkChunkPublisher.setCoordinates(0, 0, 0);
 					networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
 					networkChunkPublisher.setSavedChunks([]);
@@ -232,7 +241,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							return;
 						}
 
-						const networkChunkPublisher = new NetworkChunkPublisherUpdate();
+						const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
 						networkChunkPublisher.setCoordinates(0, 0, 0);
 						networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
 						networkChunkPublisher.setSavedChunks([]);
@@ -243,7 +252,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.spawned").replace("%s%", player.username));
 
 				setTimeout(() => {
-					const playStatus = new PlayStatus();
+					const playStatus = new ServerPlayStatusPacket();
 					playStatus.setStatus(PlayStatusType.PLAYER_SPAWN);
 					playStatus.writePacket(player);
 
@@ -267,7 +276,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							const xuid = player.profile.xuid;
 							const uuid = player.profile.uuid;
 
-							const playerList = new PlayerList();
+							const playerList = new ServerPlayerListPacket();
 							playerList.setType(PlayerListTypes.ADD);
 							playerList.setUsername(player.username);
 							playerList.setXboxid(xuid);

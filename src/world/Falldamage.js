@@ -27,7 +27,10 @@ module.exports = {
 	async calculateFalldamage(player, position) {
 		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
 
-		let falldamageY = player.y - position.y;
+		console.log('Line 53')
+		let falldamageY = player.location.y - position.y;
+
+		console.log(falldamageY)
 
 		if (player.on_ground && player.fallDamageQueue && !player.___dmgCd) {
 			player.setHealth(player.health - player.fallDamageQueue * 2, DamageCause.FALL);
