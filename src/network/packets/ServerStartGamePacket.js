@@ -196,7 +196,7 @@ class ServerStartGamePacket extends PacketConstructor {
 	 * Returns the entity id
 	 * @returns {number} - The entity id
 	 */
-	getEntityID() {
+	getEntityId() {
 		return entity_id;
 	}
 
@@ -320,30 +320,19 @@ class ServerStartGamePacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			entity_id: "-12884901887",
-			runtime_entity_id: "1",
-			player_gamemode: "fallback",
-			player_position: {
-				x: 0.5,
-				y: 32769.62109375,
-				z: 0.5,
-			},
-			rotation: {
-				x: 0,
-				z: 0,
-			},
-			seed: [582588190, 3669558543],
-			biome_type: 0,
-			biome_name: "plains",
-			dimension: "overworld",
-			generator: 1,
-			world_gamemode: "survival",
-			difficulty: 1,
-			spawn_position: {
-				x: 0,
-				y: 32767,
-				z: 0,
-			},
+			entity_id: this.getEntityId(),
+			runtime_entity_id: this.getRuntimeEntityId(),
+			player_gamemode: this.getGamemode(),
+			player_position: this.getPlayerPosition(),
+			rotation: this.getPlayerRotation(),
+			seed: this.getSeed(),
+			biome_type: this.getBiomeType(),
+			biome_name: this.getBiomeName(),
+			dimension: this.getDimension(),
+			generator: this.getGenerator(),
+			world_gamemode: this.getWorldGamemode(),
+			difficulty: this.getDifficulty(),
+			spawn_position: this.getSpawnPosition(),
 			achievements_disabled: true,
 			editor_world: false,
 			created_in_editor: false,
@@ -570,14 +559,14 @@ class ServerStartGamePacket extends PacketConstructor {
 			experimental_gameplay_override: false,
 			chat_restriction_level: "none",
 			disable_player_interactions: false,
-			level_id: "Bedrock level",
-			world_name: "Bedrock level",
+			level_id: this.getWorldName(),
+			world_name: this.getWorldName(),
 			premium_world_template_id: "00000000-0000-0000-0000-000000000000",
 			is_trial: false,
 			movement_authority: "server",
 			rewind_history_size: 20,
 			server_authoritative_block_breaking: false,
-			current_tick: [0, 18],
+			current_tick: [0, 0],
 			enchantment_seed: 1553099102,
 			block_properties: [],
 			itemstates: [

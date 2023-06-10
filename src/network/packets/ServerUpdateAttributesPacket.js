@@ -82,7 +82,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			runtime_entity_id: this.getPlayerId(),
+			runtime_entity_id: `${this.getPlayerId()}`,
 			attributes: this.getAttributes(),
 			tick: this.getTick(),
 		});

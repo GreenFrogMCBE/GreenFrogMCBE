@@ -447,8 +447,8 @@ module.exports = {
 
 			if (shouldSetAttribute) {
 				const updateAttributesPacket = new ServerUpdateAttributesPacket();
-				updateAttributesPacket.setPlayerId(0); // 0 - Means local player
-				updateAttributesPacket.setTick(0);
+				updateAttributesPacket.setPlayerId(1); // 1 - Means local player in 1.20
+				updateAttributesPacket.setTick("0");
 				updateAttributesPacket.setAttributes([attribute]);
 				updateAttributesPacket.writePacket(player);
 			}

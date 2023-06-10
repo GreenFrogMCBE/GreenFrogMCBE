@@ -48,8 +48,6 @@ const World = require("../../world/World");
 const Logger = require("../../server/Logger");
 const Commands = require("../../server/Commands");
 
-const entityData = require("../../internalResources/entityData.json");
-
 const { getKey } = require("../../utils/Language");
 
 const { serverConfigurationFiles } = require("../../Frog");
@@ -130,7 +128,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						player.world.setGenerator(WorldGenerators.FLAT);
 						break;
 					case "void":
-						player.world.setGenerator(WorldGenerators.VOID);
+						player.world.setGenerator(WorldGenerators.VOid);
 						break;
 					default:
 						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"));
@@ -151,11 +149,11 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				const startGame = new StartGame();
 				startGame.setEntityID(0);
-				startGame.setRuntimeEntityId(0);
+				startGame.setRuntimeEntityId(1); // NOTE: In 1.20 mojang swiched to bald stuff and the runtime entity id should always be 1
 				startGame.setGamemode(config.world.gamemode);
 				startGame.setPlayerPosition(0, -48, 0);
 				startGame.setPlayerRotation(0, 0);
-				startGame.setSeed(-1);
+				startGame.setSeed([0, 0]);
 				startGame.setBiomeType(0);
 				startGame.setBiomeName(Biome.PLAINS);
 				startGame.setDimension(Dimension.OVERWORLD);
@@ -171,9 +169,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				biomeDefinitionList.setValue(require("../../internalResources/biomes.json"));
 				biomeDefinitionList.writePacket(player);
 
-				const availableEntityIDs = new AvailableEntityIdentifiers();
-				availableEntityIDs.setValue(require("../../internalResources/entities.json"));
-				availableEntityIDs.writePacket(player);
+				const availableEntityids = new AvailableEntityIdentifiers();
+				availableEntityids.setValue(require("../../internalResources/entities.json"));
+				availableEntityids.writePacket(player);
 
 				const creativeContent = new CreativeContent();
 				creativeContent.setItems(require("../../internalResources/creativeContent.json").items);
@@ -187,119 +185,11 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				clientCacheStatus.setEnabled(true);
 				clientCacheStatus.writePacket(player);
 
-				player.queue("trim_data", {
-					patterns: [
-						{ item_name: "minecraft:ward_armor_trim_smithing_template", pattern: "ward" },
-						{ item_name: "minecraft:sentry_armor_trim_smithing_template", pattern: "sentry" },
-						{ item_name: "minecraft:snout_armor_trim_smithing_template", pattern: "snout" },
-						{ item_name: "minecraft:dune_armor_trim_smithing_template", pattern: "dune" },
-						{ item_name: "minecraft:spire_armor_trim_smithing_template", pattern: "spire" },
-						{ item_name: "minecraft:tide_armor_trim_smithing_template", pattern: "tide" },
-						{ item_name: "minecraft:wild_armor_trim_smithing_template", pattern: "wild" },
-						{ item_name: "minecraft:rib_armor_trim_smithing_template", pattern: "rib" },
-						{ item_name: "minecraft:coast_armor_trim_smithing_template", pattern: "coast" },
-						{ item_name: "minecraft:shaper_armor_trim_smithing_template", pattern: "shaper" },
-						{ item_name: "minecraft:eye_armor_trim_smithing_template", pattern: "eye" },
-						{ item_name: "minecraft:vex_armor_trim_smithing_template", pattern: "vex" },
-						{ item_name: "minecraft:silence_armor_trim_smithing_template", pattern: "silence" },
-						{ item_name: "minecraft:wayfinder_armor_trim_smithing_template", pattern: "wayfinder" },
-						{ item_name: "minecraft:raiser_armor_trim_smithing_template", pattern: "raiser" },
-						{ item_name: "minecraft:host_armor_trim_smithing_template", pattern: "host" },
-					],
-					materials: [
-						{ material: "quartz", color: "§h", item_name: "minecraft:quartz" },
-						{ material: "iron", color: "§i", item_name: "minecraft:iron_ingot" },
-						{ material: "netherite", color: "§j", item_name: "minecraft:netherite_ingot" },
-						{ material: "redstone", color: "§m", item_name: "minecraft:redstone" },
-						{ material: "copper", color: "§n", item_name: "minecraft:copper_ingot" },
-						{ material: "gold", color: "§p", item_name: "minecraft:gold_ingot" },
-						{ material: "emerald", color: "§q", item_name: "minecraft:emerald" },
-						{ material: "diamond", color: "§s", item_name: "minecraft:diamond" },
-						{ material: "lapis", color: "§t", item_name: "minecraft:lapis_lazuli" },
-						{ material: "amethyst", color: "§u", item_name: "minecraft:amethyst_shard" },
-					],
-				});
-				player.queue("set_entity_data", {
-					runtime_entity_id: "1",
-					metadata: [
-						{
-							key: "flags",
-							type: "long",
-							value: {
-								onfire: false,
-								sneaking: false,
-								riding: false,
-								sprinting: false,
-								action: false,
-								invisible: false,
-								tempted: false,
-								inlove: false,
-								saddled: false,
-								powered: false,
-								ignited: false,
-								baby: false,
-								converting: false,
-								critical: false,
-								can_show_nametag: false,
-								always_show_nametag: false,
-								no_ai: false,
-								silent: false,
-								wallclimbing: false,
-								can_climb: true,
-								swimmer: false,
-								can_fly: false,
-								walker: false,
-								resting: false,
-								sitting: false,
-								angry: false,
-								interested: false,
-								charged: false,
-								tamed: false,
-								orphaned: false,
-								leashed: false,
-								sheared: false,
-								gliding: false,
-								elder: false,
-								moving: false,
-								breathing: true,
-								chested: false,
-								stackable: false,
-								showbase: false,
-								rearing: false,
-								vibrating: false,
-								idling: false,
-								evoker_spell: false,
-								charge_attack: false,
-								wasd_controlled: false,
-								can_power_jump: false,
-								can_dash: false,
-								linger: false,
-								has_collision: true,
-								affected_by_gravity: true,
-								fire_immune: false,
-								dancing: false,
-								enchanted: false,
-								show_trident_rope: false,
-								container_private: false,
-								transforming: false,
-								spin_attack: false,
-								swimming: false,
-								bribed: false,
-								pregnant: false,
-								laying_egg: false,
-								rider_can_pick: false,
-								transition_sitting: false,
-								eating: false,
-								laying_down: false,
-							},
-						},
-					],
-					properties: {
-						ints: [],
-						floats: [],
-					},
-					tick: "0",
-				});
+				player.setEntityData("breathing", true)
+				player.setEntityData("has_collision", true)
+				player.setEntityData("affected_by_gravity", true)
+				player.setEntityData("breathing", true)
+				player.setEntityData("can_climb", true)
 
 				const commandManager = new CommandManager();
 				commandManager.init(player);
@@ -384,9 +274,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							const playerList = new PlayerList();
 							playerList.setType(PlayerListTypes.ADD);
 							playerList.setUsername(player.username);
-							playerList.setXboxID(xuid);
-							playerList.setID(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-							playerList.setUUID(uuid);
+							playerList.setXboxid(xuid);
+							playerList.setid(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							playerList.setUUid(uuid);
 							playerList.writePacket(onlineplayers);
 						}
 					}

@@ -36,7 +36,7 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 	 * @param {Client} player
 	 */
 	async validatePacket(player) {
-		//	if (!player.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"));
+		if (!player.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"));
 	}
 
 	/**
