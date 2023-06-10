@@ -90,13 +90,17 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 	 * Returns the runtime entity ID of the entity.
 	 * @returns {string}
 	 */
-	getRuntimeEntityID() {
+	getRuntimeEntityId() {
 		return runtime_entity_id;
 	}
-
+	
+	/**
+	 * Sends the packet to the client
+	 * @param {Client} client
+	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			runtime_entity_id: this.getRuntimeEntityID(),
+			runtime_entity_id: this.getRuntimeEntityId(),
 			metadata: [
 				{
 					key: "flags",

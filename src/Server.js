@@ -245,11 +245,13 @@ async function _onJoin(client) {
 		op: null,
 		dead: false,
 		chunksEnabled: true,
+		networkChunksLoop: null,
+		hungerLossLoop: null,
 		initialised: false,
 		isConsole: false,
 		fallDamageQueue: 0,
 		ip: client.connection.address.split("/")[0],
-		port: client.connection.address.split("/")[0],
+		port: client.connection.address.split("/")[1]
 	});
 
 	setInterval(() => {

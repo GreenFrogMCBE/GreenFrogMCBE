@@ -42,6 +42,8 @@ class ClientMovePacket extends PacketConstructor {
 
 		let shouldSetPosition = true;
 
+		player.location.onGround = false
+
 		Frog.eventEmitter.emit("playerMove", {
 			player,
 			server,
@@ -63,7 +65,6 @@ class ClientMovePacket extends PacketConstructor {
 		if (!shouldSetPosition) return;
 
 		Falldamage.calculateFalldamage(player, { x, y, z });
-		Falldamage.calculateHungerloss(player);
 
 		player.location.x = x;
 		player.location.y = y;

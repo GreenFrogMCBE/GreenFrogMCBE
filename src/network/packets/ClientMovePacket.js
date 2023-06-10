@@ -61,7 +61,6 @@ class ClientMovePacket extends PacketConstructor {
 		if (!shouldSetPosition) return;
 
 		Falldamage.calculateFalldamage(player, { x, y, z });
-		Falldamage.calculateHungerloss(player);
 
 		player.location.x = x;
 		player.location.y = y;

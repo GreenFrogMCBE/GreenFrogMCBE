@@ -13,19 +13,62 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const protocol = require("frog-protocol");
+const PacketConstructor = require("./PacketConstructor");
 
-module.exports = {
-	async test() {
-		console.info("[client] joining...");
+let patterns = [];
+let materials = [];
 
-		await protocol.createClient({
-			host: "127.0.0.1",
-			port: 19132,
-			username: "bot",
-			offline: true,
-			version: "1.20.0",
+class ServerTrimDataPacket extends PacketConstructor {
+	/**
+	 * Returns the name of the packet.
+	 * @returns {string}
+	 */
+	getPacketName() {
+		return "trim_data";
+	}
+
+	/**
+	 * Sets the patterns
+	 * @param {Array<JSON>} new_patterns
+	 */
+	setPatterns(new_patterns) {
+		patterns = new_patterns;
+	}
+
+	/**
+	 * Returns the patterns
+	 * @returns {JSON}
+	 */
+	getPatterns() {
+		return patterns;
+	}
+
+	/**
+	 * Sets the materials
+	 * @param {Array<JSON>} material
+	 */
+	setMaterials(material) {
+		materials = material;
+	}
+
+	/**
+	 * Returns the materials
+	 * @returns {Array<JSON>}
+	 */
+	getMaterials() {
+		return materials;
+	}
+
+	/**
+	 * Sends the packet to the client
+	 * @param {Client} client
+	 */
+	writePacket(client) {
+		client.queue(this.getPacketName(), {
+			patterns: this.getPatterns(),
+            materials: this.getMaterials()
 		});
-		console.info("[client] joined");
-	},
-};
+	}
+}
+
+module.exports = ServerTrimDataPacket;

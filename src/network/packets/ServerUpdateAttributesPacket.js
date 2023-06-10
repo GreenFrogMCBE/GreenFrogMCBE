@@ -32,7 +32,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 	 * Sets the player ID
 	 * @param {number} new_playerid
 	 */
-	setPlayerID(new_playerid) {
+	setPlayerId(new_playerid) {
 		id = new_playerid;
 	}
 
@@ -40,16 +40,16 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 	 * Returns the player ID
 	 * @returns {number}
 	 */
-	getPlayerID() {
+	getPlayerId() {
 		return id;
 	}
 
 	/**
 	 * Sets the attributes
-	 * @param {Array<JSON>} attr
+	 * @param {Array<JSON>} attribute
 	 */
-	setAttributes(attr) {
-		attributes = attr;
+	setAttributes(attribute) {
+		attributes = attribute;
 	}
 
 	/**
@@ -82,7 +82,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			runtime_entity_id: this.getPlayerID(),
+			runtime_entity_id: `${this.getPlayerId()}`,
 			attributes: this.getAttributes(),
 			tick: this.getTick(),
 		});

@@ -25,37 +25,40 @@ const Dimension = require("../../world/types/Dimension");
 const Difficulty = require("../../api/types/Difficulty");
 const NetworkGenerator = require("../../world/types/NetworkGenerator");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
+const WorldGenerators = require("../../world/types/WorldGenerators");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const NetworkChunkPublisherUpdate = require("./ServerNetworkChunkPublisherUpdatePacket");
-const AvailableEntityIdentifiers = require("./ServerAvailableEntityIdentifiersPacket");
-const BiomeDefinitionList = require("./ServerBiomeDefinitionListPacket");
-const SetCommandsEnabled = require("./ServerSetCommandsEnabledPacket");
-const ClientCacheStatus = require("./ServerClientCacheStatusPacket");
-const ResourcePackStack = require("./ServerResourcePackStackPacket");
-const CreativeContent = require("./ServerCreativeContentPacket");
-const ItemComponent = require("./ServerItemComponentPacket");
-const PlayStatus = require("./ServerPlayStatusPacket");
-const PlayerList = require("./ServerPlayerListPacket");
-const StartGame = require("./ServerStartGamePacket");
+const ServerNetworkChunkPublisherUpdatePacket = require("./ServerNetworkChunkPublisherUpdatePacket");
+const ServerAvailableEntityIdentifiersPacket = require("./ServerAvailableEntityIdentifiersPacket");
+const ServerBiomeDefinitionListPacket = require("./ServerBiomeDefinitionListPacket");
+const ServerSetCommandsEnabledPacket = require("./ServerSetCommandsEnabledPacket");
+const ServerClientCacheStatusPacket = require("./ServerClientCacheStatusPacket");
+const ServerResourcePackStackPacket = require("./ServerResourcePackStackPacket");
+const ServerCreativeContentPacket = require("./ServerCreativeContentPacket");
+const ServerItemComponentPacket = require("./ServerItemComponentPacket");
+const ServerPlayStatusPacket = require("./ServerPlayStatusPacket");
+const ServerPlayerListPacket = require("./ServerPlayerListPacket");
+const ServerStartGamePacket = require("./ServerStartGamePacket");
+const ServerTrimDataPacket = require("./ServerTrimDataPacket");
 
 const CommandManager = require("../../player/CommandManager");
-
-const World = require("../../world/World");
+const Commands = require("../../server/Commands");
 
 const Logger = require("../../server/Logger");
+const World = require("../../world/World");
 
-const Commands = require("../../server/Commands");
+const dumpedTrimData = require("../../internalResources/trimData.json")
 
 const { getKey } = require("../../utils/Language");
 
 const { serverConfigurationFiles } = require("../../Frog");
-const WorldGenerators = require("../../world/types/WorldGenerators");
-const WorldGenerationFailedException = require("../../utils/exceptions/WorldGenerationFailedException");
 const { config } = serverConfigurationFiles;
+
+const WorldGenerationFailedException = require("../../utils/exceptions/WorldGenerationFailedException");
+const Gamemode = require("../../api/player/Gamemode");
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
 	/**
@@ -103,7 +106,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				Logger.info(getKey("status.resourcePacks.installed").replace("%s%", player.username));
 
-				const resourcePackStack = new ResourcePackStack();
+				const resourcePackStack = new ServerResourcePackStackPacket();
 				resourcePackStack.setMustAccept(false);
 				resourcePackStack.setBehaviorPacks([]);
 				resourcePackStack.setResourcePacks([]);
@@ -130,7 +133,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						player.world.setGenerator(WorldGenerators.FLAT);
 						break;
 					case "void":
-						player.world.setGenerator(WorldGenerators.VOID);
+						player.world.setGenerator(WorldGenerators.VOid);
 						break;
 					default:
 						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"));
@@ -149,13 +152,13 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				Logger.info(getKey("status.resourcePacks.joined").replace("%s%", player.username));
 
-				const startGame = new StartGame();
+				const startGame = new ServerStartGamePacket();
 				startGame.setEntityID(0);
-				startGame.setRuntimeEntityId(0);
+				startGame.setRuntimeEntityId(1); // NOTE: In 1.20 mojang swiched to bald stuff and the runtime entity id should always be 1
 				startGame.setGamemode(config.world.gamemode);
-				startGame.setPlayerPosition(0, 100, 0);
+				startGame.setPlayerPosition(0, -48, 0);
 				startGame.setPlayerRotation(0, 0);
-				startGame.setSeed(-1);
+				startGame.setSeed([0, 0]);
 				startGame.setBiomeType(0);
 				startGame.setBiomeName(Biome.PLAINS);
 				startGame.setDimension(Dimension.OVERWORLD);
@@ -167,23 +170,28 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.setWorldName(player.world.getName());
 				startGame.writePacket(player);
 
-				const biomeDefinitionList = new BiomeDefinitionList();
+				const biomeDefinitionList = new ServerBiomeDefinitionListPacket();
 				biomeDefinitionList.setValue(require("../../internalResources/biomes.json"));
 				biomeDefinitionList.writePacket(player);
 
-				const availableEntityIDs = new AvailableEntityIdentifiers();
-				availableEntityIDs.setValue(require("../../internalResources/entities.json"));
-				availableEntityIDs.writePacket(player);
+				const availableEntityids = new ServerAvailableEntityIdentifiersPacket();
+				availableEntityids.setValue(require("../../internalResources/entities.json"));
+				availableEntityids.writePacket(player);
 
-				const creativeContent = new CreativeContent();
+				const creativeContent = new ServerCreativeContentPacket();
 				creativeContent.setItems(require("../../internalResources/creativeContent.json").items);
 				creativeContent.writePacket(player);
 
-				const commandsEnabled = new SetCommandsEnabled();
+				const commandsEnabled = new ServerSetCommandsEnabledPacket();
 				commandsEnabled.setEnabled(true);
 				commandsEnabled.writePacket(player);
 
-				const clientCacheStatus = new ClientCacheStatus();
+				const trimData = new ServerTrimDataPacket();
+				trimData.setPatterns(dumpedTrimData.patterns);
+				trimData.setMaterials(dumpedTrimData.materials)
+				trimData.writePacket(player);
+
+				const clientCacheStatus = new ServerClientCacheStatusPacket();
 				clientCacheStatus.setEnabled(true);
 				clientCacheStatus.writePacket(player);
 
@@ -205,7 +213,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				}
 
 				// This packet is used to create custom items
-				const itemcomponent = new ItemComponent();
+				const itemcomponent = new ServerItemComponentPacket();
 				try {
 					itemcomponent.setItems(require("../../../world/custom_items.json").items);
 				} catch (error) {
@@ -218,7 +226,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				if (player.chunksEnabled) {
 					player.setChunkRadius(player.world.getChunkRadius());
 
-					const networkChunkPublisher = new NetworkChunkPublisherUpdate();
+					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
 					networkChunkPublisher.setCoordinates(0, 0, 0);
 					networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
 					networkChunkPublisher.setSavedChunks([]);
@@ -228,13 +236,24 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					const generator = new generatorFile();
 					generator.generate(player);
 
+					player.hungerLossLoop = setInterval(() => {
+						if (player.offline) {
+							delete player.hungerLossLoop;
+							return;
+						}
+
+						if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return
+
+						player.setHunger(player.hunger - 0.5)
+					}, 30000)
+
 					player.networkChunksLoop = setInterval(() => {
 						if (player.offline) {
 							delete player.networkChunksLoop;
 							return;
 						}
 
-						const networkChunkPublisher = new NetworkChunkPublisherUpdate();
+						const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
 						networkChunkPublisher.setCoordinates(0, 0, 0);
 						networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
 						networkChunkPublisher.setSavedChunks([]);
@@ -245,7 +264,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.spawned").replace("%s%", player.username));
 
 				setTimeout(() => {
-					const playStatus = new PlayStatus();
+					const playStatus = new ServerPlayStatusPacket();
 					playStatus.setStatus(PlayStatusType.PLAYER_SPAWN);
 					playStatus.writePacket(player);
 
@@ -254,13 +273,11 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						server,
 					});
 
-					player.setEntityData("can_climb", true);
-					player.setEntityData("can_fly", false);
-					player.setEntityData("walker", true);
-					player.setEntityData("moving", true);
-					player.setEntityData("breathing", true);
-					player.setEntityData("has_collision", true);
-					player.setEntityData("affected_by_gravity", true);
+					player.setEntityData("breathing", true)
+					player.setEntityData("has_collision", true)
+					player.setEntityData("affected_by_gravity", true)
+					player.setEntityData("breathing", true)
+					player.setEntityData("can_climb", true)
 
 					Frog.__addPlayer();
 
@@ -271,12 +288,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							const xuid = player.profile.xuid;
 							const uuid = player.profile.uuid;
 
-							const playerList = new PlayerList();
+							const playerList = new ServerPlayerListPacket();
 							playerList.setType(PlayerListTypes.ADD);
 							playerList.setUsername(player.username);
-							playerList.setXboxID(xuid);
-							playerList.setID(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-							playerList.setUUID(uuid);
+							playerList.setXboxid(xuid);
+							playerList.setid(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							playerList.setUUid(uuid);
 							playerList.writePacket(onlineplayers);
 						}
 					}
