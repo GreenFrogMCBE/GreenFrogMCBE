@@ -40,7 +40,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 	 * Returns the player ID
 	 * @returns {number}
 	 */
-	getPlayerID() {
+	getPlayerId() {
 		return id;
 	}
 
@@ -82,7 +82,7 @@ class ServerUpdateAttributesPacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			runtime_entity_id: this.getPlayerID(),
+			runtime_entity_id: this.getPlayerId(),
 			attributes: this.getAttributes(),
 			tick: this.getTick(),
 		});
