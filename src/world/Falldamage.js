@@ -29,7 +29,7 @@ module.exports = {
 
 		let falldamageY = player.location.y - position.y;
 
-		if (!falldamageY) return
+		if (!falldamageY) return;
 
 		if (falldamageY > 0.56 && player.fallDamageQueue) {
 			player.setHealth(player.health - player.fallDamageQueue, DamageCause.FALL);
@@ -37,5 +37,5 @@ module.exports = {
 		}
 
 		player.fallDamageQueue = (falldamageY + 0.5) * 2;
-	}
+	},
 };

@@ -13,65 +13,25 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog");
+import { Client, Server } from "frog-protocol";
 
-const Falldamage = require("../../world/Falldamage");
-
-const PacketConstructor = require("./PacketConstructor");
-
-class ClientMovePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "player_auth_input";
-	}
-
-	/**
-	 * Reads the packet from player
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 * @param {Server} server
-	 */
-	async readPacket(player, packet, server) {
-		const { x, y, z } = packet.data.params.position;
-		const { pitch, yaw } = packet.data.params;
-
-		if (player.x == x && player.y == y && player.z == z && player.yaw == yaw && player.pitch == pitch) return;
-
-		let shouldSetPosition = true;
-
-		player.location.onGround = false;
-
-		Frog.eventEmitter.emit("playerMove", {
-			player,
-			server,
-			x,
-			y,
-			z,
-			pitch,
-			yaw,
-			onGround: player.location.onGround,
-			cancel: () => {
-				if (player.location.x === 0 && player.location.y === 0 && player.location.z === 0) return;
-
-				player.teleport(player.location.x, player.location.y, player.location.z);
-
-				shouldSetPosition = false;
-			},
-		});
-
-		if (!shouldSetPosition) return;
-
-		Falldamage.calculateFalldamage(player, { x, y, z });
-
-		player.location.x = x;
-		player.location.y = y;
-		player.location.z = z;
-		player.location.yaw = yaw;
-		player.location.pitch = pitch;
-	}
+export interface ArgOptions {
+	name: string;
+	type: "int" | "float" | "value" | "wildcard_int" | "wildcard_target" | "operator" | "command_operator" | "target" | "file_path" | "integer_range" | "equipment_slots" | "string" | "block_position" | "position" | "message" | "raw_text" | "json" | "block_states" | "command";
+	optional?: boolean;
 }
 
-module.exports = ClientMovePacket;
+export interface Options {
+	name: string;
+	description: string;
+	aliases?: string[];
+	maxArg?: number;
+	minArg?: number;
+	requiresOp: boolean;
+}
+
+export interface Command {
+	data: Options;
+	run(server: Server, player: Client, args: Array<String>): void;
+	throwError(player: Client): void;
+}

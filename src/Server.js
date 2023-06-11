@@ -234,6 +234,11 @@ async function _onJoin(client) {
 			pitch: 0,
 			yaw: 0,
 		},
+		inventory: {
+			lastKnownItemNetworkId: 0,
+			lastKnownItemRuntimeId: 0,
+			items: [],
+		},
 		offline: false,
 		kicked: false,
 		health: 20,
@@ -251,7 +256,7 @@ async function _onJoin(client) {
 		isConsole: false,
 		fallDamageQueue: 0,
 		ip: client.connection.address.split("/")[0],
-		port: client.connection.address.split("/")[1]
+		port: client.connection.address.split("/")[1],
 	});
 
 	setInterval(() => {

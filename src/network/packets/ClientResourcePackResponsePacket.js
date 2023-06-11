@@ -50,7 +50,7 @@ const Commands = require("../../server/Commands");
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
 
-const dumpedTrimData = require("../../internalResources/trimData.json")
+const dumpedTrimData = require("../../internalResources/trimData.json");
 
 const { getKey } = require("../../utils/Language");
 
@@ -188,7 +188,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				const trimData = new ServerTrimDataPacket();
 				trimData.setPatterns(dumpedTrimData.patterns);
-				trimData.setMaterials(dumpedTrimData.materials)
+				trimData.setMaterials(dumpedTrimData.materials);
 				trimData.writePacket(player);
 
 				const clientCacheStatus = new ServerClientCacheStatusPacket();
@@ -242,10 +242,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							return;
 						}
 
-						if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return
+						if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
 
-						player.setHunger(player.hunger - 0.5)
-					}, 30000)
+						player.setHunger(player.hunger - 0.5);
+					}, 30000);
 
 					player.networkChunksLoop = setInterval(() => {
 						if (player.offline) {
@@ -273,11 +273,11 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						server,
 					});
 
-					player.setEntityData("breathing", true)
-					player.setEntityData("has_collision", true)
-					player.setEntityData("affected_by_gravity", true)
-					player.setEntityData("breathing", true)
-					player.setEntityData("can_climb", true)
+					player.setEntityData("breathing", true);
+					player.setEntityData("has_collision", true);
+					player.setEntityData("affected_by_gravity", true);
+					player.setEntityData("breathing", true);
+					player.setEntityData("can_climb", true);
 
 					Frog.__addPlayer();
 
