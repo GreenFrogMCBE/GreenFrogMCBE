@@ -3,9 +3,6 @@
 ```diff
 @@ GreenFrog is a server software for Minecraft: Bedrock edition @@
 
-! This repo is a mirror of https://github.com/andriycraft/GreenFrogMCBE !
-! Pull requests won't be accepted here !
-
 It is written in NodeJS, currently supports 1.20
 It is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
