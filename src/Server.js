@@ -84,7 +84,7 @@ function _handlePacket(client, packetParams) {
 			if (filename.startsWith("Client") && filename.endsWith(".js")) {
 				const packetPath = path.join(packetsDir, filename);
 
-				if (++client.packetCount > 2000) {
+				if (++client.packetCount > 2500) {
 					Frog.eventEmitter.emit("packetRatelimit", {
 						player: client,
 						server: this,
