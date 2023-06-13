@@ -57,13 +57,12 @@ async function _handleCriticalError(error) {
 	if (error.toString().includes("Server failed to start")) {
 		Logger.error(Language.getKey("network.server.listening.failed").replace("%s%", `${host}:${port}`).replace("%d%", error));
 		Logger.error(Language.getKey("network.server.listening.failed.otherServerRunning"));
-		process.exit(config.dev.crashCode);
 	}
 
 	Logger.error(`Server error: ${error.stack}`);
 
 	if (!config.unstable) {
-		process.exit(config.crashCode);
+		process.exit(config.dev.crashCode);
 	}
 }
 
