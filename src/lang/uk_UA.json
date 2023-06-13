@@ -112,6 +112,50 @@
 
   "warning.customItems.loading.failed": "Не вдалося завантажити спеціальні предмети! Помилка: %s%",
 
+  "debug.debugEnabled": "Режим налагодження увімкнено. Це може спричинити затримки при відправці великих пакетів.",
+  "debug.unstable": "Режим ненадійності увімкнено. Це дозволить відновити сервер у разі виникнення критичних помилок, але може спричинити пошкодження даних плагіну.",
+  "debug.unstable.unsupported": "Крім того, режим ненадійності не підтримується розробниками GreenFrog, і ви несете відповідальність за пошкодження даних, якщо воно станеться.",
+
+  "debug.player.unsupportedActionID": "Непідтримуваний ідентифікатор дії від %s%: %d%.",
+  "debug.player.unsupportedActionID.block": "Непідтримуваний ідентифікатор блока дії від %s%: %d%.",
+
+  "debug.playerlist.invalid": "Пропущено недійсний пакет PlayerList.",
+
+  "chat.format": "<%s%> %d%.",
+  "chat.format.plugin": "%s%.",
+  "chat.format.me": "* %s% %d%.",
+  "chat.format.say": "[%s%] %d%.",
+
+  "chat.broadcasts.joined": "%s% приєднався до гри.",
+  "chat.broadcasts.left": "%s% покинув гру.",
+
+  "creativemenu.badPacket": "Не вдалося обробити запит ItemStackRequest від %s%. Помилка: %d%.",
+
+  "network.packet.unhandledPacket": "Невідомий пакет!",
+
+  "network.server.listening.success": "Прослуховування на %s% вдалося.",
+  "network.server.listening.failed": "Не вдалося прослуховувати %s%. Помилка: %d%.",
+  "network.server.listening.failed.otherServerRunning": "Можливо, на цьому порті вже працює інший сервер?",
+
+  "network.packet.failed.clientSide": "Не вдається записати пакет на клієнтській стороні.",
+  "network.packet.failed.serverSide": "Не вдається прочитати пакет на серверній стороні.",
+
+  "exceptions.network.rateLimited": "Забагато пакетів від %s% (%d%).",
+  "exceptions.network.packetHandlingError": "Не вдалося обробити пакет від %s%! Помилка: %d%.",
+  "exceptions.network.itemStackRequest.badGamemode": "Не можна отримати предмет з творчого меню, коли не знаходишся в режимі творчості.",
+  "exceptions.network.inventoryTransaction.invalid": "Недійсний пакет InventoryTransaction від %s%.",
+  "exceptions.network.invalidGamemodePacket": "Недійсний пакет режиму гри - спроба змінити режим гри без прав адміністратора.",
+
+  "exceptions.plugin.noName": "Відсутня назва плагіна!",
+  "exceptions.plugin.noVersion": "Відсутня версія плагіна!",
+
+  "exceptions.generator.invalid": "Недійсний генератор світу!",
+
+  "exceptions.console.alreadyClosed": "Консоль вже закрита!",
+
+  "exceptions.logger.invalidWarning": "Недійсний тип журналу: попередження. Правильний тип - 'warn', а не 'warning'.",
+  "exceptions.logger.invalidType": "Недійсний тип журналу: %s%. Допустимі типи: info, warn, error, debug."
+
   "logger.info": "ІНФО",
   "logger.warn": "ПОПЕРЕДЖЕННЯ",
   "logger.error": "ПОМИЛКА",
