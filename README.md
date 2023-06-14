@@ -10,7 +10,7 @@ Please note that this software is still in beta, so do not stare directly at the
 + Discord: https://discord.gg/X79f6jasW4
 + Example plugin: https://github.com/greenfrogmc/ExamplePlugin
 + Example block generator plugin: https://github.com/greenfrogmc/RBG
-+ Support me: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
++ Support this project: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
 + Generate plugin structure: "npm run plugin-structure"
 
@@ -20,7 +20,7 @@ to start the server, use "npm run start"
 
 + Credits: /docs/CREDITS.md
 + Human-readable license: /docs/READABLE-LICENSE.md
-+ How to connect via localhost: /docs/LOCALHOST-CONNECTIONS.md
++ How to connect via `localhost`: /docs/LOCALHOST-CONNECTIONS.md
 ```
 
 ![Alt](https://repobeats.axiom.co/api/embed/ff82e6d76083a1934305e3b40714b01604df4e92.svg "Repobeats analytics image")
