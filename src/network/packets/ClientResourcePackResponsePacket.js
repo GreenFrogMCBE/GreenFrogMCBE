@@ -300,8 +300,6 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				}, 2000);
 
 				setTimeout(() => {
-					// NOTE: We can't use FrogJS.broadcastMessage() here, because we need additional logic here (if PlayerInfo...)
-
 					for (const playerInfo of PlayerInfo.players) {
 						if (playerInfo.username === player.username) {
 							return; // Vanilla behaviour
