@@ -291,17 +291,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							const playerList = new ServerPlayerListPacket();
 							playerList.setType(PlayerListTypes.ADD);
 							playerList.setUsername(player.username);
-							playerList.setXboxid(xuid);
-							playerList.setid(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-							playerList.setUUid(uuid);
+							playerList.setXboxID(xuid);
+							playerList.setID(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							playerList.setUUID(uuid);
 							playerList.writePacket(onlineplayers);
 						}
 					}
 				}, 2000);
 
 				setTimeout(() => {
-					// NOTE: We can't use FrogJS.broadcastMessage here, because we need additional logic here (if PlayerInfo...)
-
 					for (const playerInfo of PlayerInfo.players) {
 						if (playerInfo.username === player.username) {
 							return; // Vanilla behaviour
