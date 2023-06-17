@@ -291,8 +291,8 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							const playerList = new ServerPlayerListPacket();
 							playerList.setType(PlayerListTypes.ADD);
 							playerList.setUsername(player.username);
-							playerList.setXboxid(xuid);
-							playerList.setid(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							playerList.setXboxID(xuid);
+							playerList.setID(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
 							playerList.setUUid(uuid);
 							playerList.writePacket(onlineplayers);
 						}
