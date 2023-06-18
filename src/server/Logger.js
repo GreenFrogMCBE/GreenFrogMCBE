@@ -58,6 +58,13 @@ module.exports = {
 	},
 
 	/**
+	 * Clears the message logs
+	 */
+	clearMessageLogs() {
+		messageLogs = []
+	},
+
+	/**
 	 * Logs a message
 	 *
 	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
