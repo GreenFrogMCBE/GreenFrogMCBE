@@ -1,3 +1,5 @@
+const Logger = require("../server/Logger");
+
 const dgram = require("dgram");
 const { SmartBuffer } = require("@harmonytf/smart-buffer");
 
@@ -6,15 +8,17 @@ class Query {
 
 	constructor() {
 		this.socket = dgram.createSocket("udp4");
+		this.info = {}
 	}
 
 	start(info) {
 		this.info = info;
-		this.socket.bind(this.info.port + 1);
+		this.socket.bind(this.info.port);
 
 		this.socket.on("listening", () => {
 			const address = this.socket.address();
-			console.info(`Minecraft Query server started on ${address.address}:${address.port}!`);
+
+			Logger.info(`Query server is running on ${address.address}:${address.port}!`);
 		});
 
 		this.socket.on("message", (msg, rinfo) => {
@@ -28,7 +32,6 @@ class Query {
 	}
 
 	/**
-	 *
 	 * @param {Buffer} msg
 	 * @param {dgram.RemoteInfo} rinfo
 	 */

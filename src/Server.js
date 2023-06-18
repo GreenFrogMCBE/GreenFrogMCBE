@@ -208,19 +208,6 @@ async function _listen() {
 			});
 		});
 
-		console.log(port);
-		query.start({
-			host,
-			port,
-			motd,
-			levelName,
-			players: PlayerInfo.players,
-			maxPlayers: String(maxPlayers),
-			gamemode: config.world.gameMode,
-			plugins: PluginManager.plugins,
-			wl: config.serverInfo.whitelist,
-			version: String(version),
-		});
 		Frog.setServer(server);
 
 		Logger.info(Language.getKey("network.server.listening.success").replace(`%s%`, `/${host}:${port}`));
