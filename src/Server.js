@@ -13,8 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-unsafe-finally */
-
 const VersionToProtocol = require("./utils/VersionToProtocol");
 
 const PlayerInfo = require("./api/player/PlayerInfo");
