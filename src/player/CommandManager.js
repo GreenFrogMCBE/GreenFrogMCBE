@@ -30,7 +30,6 @@ const { getKey } = require("../utils/Language");
  */
 let commands = [];
 
-/** Manages commands */
 class CommandManager {
 	/**
 	 * Retrieves the commands packet of a client.
@@ -77,6 +76,7 @@ class CommandManager {
 	 * @param {string} description - The description of the command.
 	 */
 	addCommand(client, name, description) {
+		// Ignore /help and /? because they are overriden by the client
 		if (name === getKey("commands.help.name") || name === "?") return;
 
 		client.commands.command_data.push({
