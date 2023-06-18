@@ -16,6 +16,7 @@
 const readline = require("readline");
 
 const ConsoleSetupException = require("../utils/exceptions/ConsoleSetupException");
+const CommandHandlingException = require("../utils/exceptions/CommandHandlingException");
 
 const Logger = require("./Logger");
 const Frog = require("../Frog");
@@ -80,16 +81,15 @@ module.exports = {
 
 	/**
 	 * Executes a command that the user typed in the console.
- 	 *
- 	 * @param {string} executedCommand - The command to execute.
- 	 * @throws {CommandHandlingException} Throws an error if the command is empty
+	   *
+	   * @param {string} executedCommand - The command to execute.
+	   * @throws {CommandHandlingException} Throws an error if the command is empty
 	 */
 	executeConsoleCommand(executedCommand) {
-		if (!executedCommand.trim()) {
-			throw new CommandHandlingException()
-		}
-		
 		executedCommand = executedCommand.replace("/", "")
+		if (!executedCommand.trim()) { // For API calls
+			throw new CommandHandlingException("The command is empty!")
+		}
 
 		let shouldExecCommand = true;
 
@@ -163,6 +163,14 @@ module.exports = {
 	},
 
 	/**
+	 * Checks if the command is empty
+	 * @param {string} command 
+	 */
+	isEmpty(command) {
+		return !command.replace("/", "").trim()
+	},
+
+	/**
 	 * Starts the console.
 	 */
 	async start() {
@@ -171,6 +179,8 @@ module.exports = {
 		await Commands.loadAllCommands();
 
 		readLineInterface.on("line", async (command) => {
+			if (this.isEmpty(command)) return
+
 			let shouldProcessCommand = true;
 
 			require("../Frog").eventEmitter.emit("serverCommandProcess", {
