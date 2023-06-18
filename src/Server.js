@@ -41,6 +41,10 @@ const assert = require("assert");
 const path = require("path");
 const fs = require("fs");
 
+const Query = require("./network/Query");
+const PluginManager = require("./plugins/PluginManager");
+const query = new Query();
+
 let server = null;
 let config = Frog.serverConfigurationFiles.config;
 let isDebug = Frog.isDebug;
@@ -204,6 +208,19 @@ async function _listen() {
 			});
 		});
 
+		console.log(port);
+		query.start({
+			host,
+			port,
+			motd,
+			levelName,
+			players: PlayerInfo.players,
+			maxPlayers: String(maxPlayers),
+			gamemode: config.world.gameMode,
+			plugins: PluginManager.plugins,
+			wl: config.serverInfo.whitelist,
+			version: String(version),
+		});
 		Frog.setServer(server);
 
 		Logger.info(Language.getKey("network.server.listening.success").replace(`%s%`, `/${host}:${port}`));
@@ -250,7 +267,7 @@ async function _onJoin(client) {
 		isConsole: false,
 		fallDamageQueue: 0,
 		ip: client.connection.address.split("/")[0],
-		port: client.connection.address.split("/")[1]
+		port: client.connection.address.split("/")[1],
 	});
 
 	setInterval(() => {
