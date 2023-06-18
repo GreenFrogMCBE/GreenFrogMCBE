@@ -81,20 +81,21 @@ module.exports = {
 
 	/**
 	 * Executes a command that the user typed in the console.
-	   *
-	   * @param {string} executedCommand - The command to execute.
-	   * @throws {CommandHandlingException} Throws an error if the command is empty
+	 *
+	 * @param {string} executedCommand - The command to execute.
+	 * @throws {CommandHandlingException} Throws an error if the command is empty
 	 */
 	executeConsoleCommand(executedCommand) {
-		executedCommand = executedCommand.replace("/", "")
+		executedCommand = executedCommand.replace("/", "");
 
-		if (!executedCommand.trim()) { // For API calls
-			throw new CommandHandlingException("The command is empty!")
+		if (!executedCommand.trim()) {
+			// For API calls
+			throw new CommandHandlingException("The command is empty!");
 		}
 
 		let shouldExecCommand = true;
 
-		const args = executedCommand.split(" ").slice(1)
+		const args = executedCommand.split(" ").slice(1);
 
 		require("../Frog").eventEmitter.emit("serverExecutedCommand", {
 			server: require("../Frog").server,
@@ -128,7 +129,7 @@ module.exports = {
 							sendMessage: (message) => {
 								Logger.info(message);
 							},
-							setGamemode: () => { },
+							setGamemode: () => {},
 							op: true,
 							username: "Server",
 							ip: "127.0.0.1",
@@ -165,10 +166,10 @@ module.exports = {
 
 	/**
 	 * Checks if the command is empty
-	 * @param {string} command 
+	 * @param {string} command
 	 */
 	isEmpty(command) {
-		return !command.replace("/", "").trim()
+		return !command.replace("/", "").trim();
 	},
 
 	/**
@@ -180,7 +181,7 @@ module.exports = {
 		await Commands.loadAllCommands();
 
 		readLineInterface.on("line", async (command) => {
-			if (this.isEmpty(command)) return
+			if (this.isEmpty(command)) return;
 
 			let shouldProcessCommand = true;
 
