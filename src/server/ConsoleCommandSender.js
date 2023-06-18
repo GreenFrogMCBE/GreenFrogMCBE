@@ -87,6 +87,7 @@ module.exports = {
 	 */
 	executeConsoleCommand(executedCommand) {
 		executedCommand = executedCommand.replace("/", "")
+
 		if (!executedCommand.trim()) { // For API calls
 			throw new CommandHandlingException("The command is empty!")
 		}
