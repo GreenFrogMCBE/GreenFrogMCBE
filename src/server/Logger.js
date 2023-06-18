@@ -42,15 +42,6 @@ function fireEvent(langString, color, message, consoleType) {
 
 module.exports = {
 	/**
-	 * Returns if debug is enabled or not
-	 *
-	 * @returns {boolean}
-	 */
-	isDebugEnabled() {
-		require("../Frog").isDebug;
-	},
-
-	/**
 	 * Returns all messages in console as an array
 	 * @returns {Array<String>}
 	 */
@@ -131,7 +122,7 @@ module.exports = {
 	 *
 	 */
 	debug(message) {
-		if (!(process.env.DEBUG === "minecraft-protocol" || this.isDebugEnabled())) return;
+		if (!(process.env.DEBUG === "minecraft-protocol" || require("../Frog").isDebug)) return;
 
 		this.log(getKey("logger.debug"), "35", message, "info");
 	},
