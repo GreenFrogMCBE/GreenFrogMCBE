@@ -85,9 +85,13 @@ module.exports = {
  	 * @throws {CommandHandlingException} Throws an error if the command cannot be executed.
 	 */
 	executeConsoleCommand(executedCommand) {
-		let shouldExecCommand = true;
-
+		if (!executedCommand.trim()) {
+			return;
+		}
+		
 		executedCommand = executedCommand.replace("/", "")
+
+		let shouldExecCommand = true;
 
 		const args = executedCommand.split(" ").slice(1)
 
