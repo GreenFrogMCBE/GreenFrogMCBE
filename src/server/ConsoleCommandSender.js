@@ -82,10 +82,11 @@ module.exports = {
 	 * Executes a command that the user typed in the console.
  	 *
  	 * @param {string} executedCommand - The command to execute.
+ 	 * @throws {CommandHandlingException} Throws an error if the command is empty
 	 */
 	executeConsoleCommand(executedCommand) {
 		if (!executedCommand.trim()) {
-			return;
+			throw new CommandHandlingException()
 		}
 		
 		executedCommand = executedCommand.replace("/", "")
