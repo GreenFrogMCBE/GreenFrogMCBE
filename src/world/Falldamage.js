@@ -24,7 +24,7 @@ module.exports = {
 	 * @param {Client} player
 	 * @param {JSON} position
 	 */
-	async calculateFalldamage(player, position) {
+	async calculateFallDamage(player, position) {
 		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
 
 		let falldamageY = player.location.y - position.y;
