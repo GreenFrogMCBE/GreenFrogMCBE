@@ -69,7 +69,7 @@ async function _handleCriticalError(error) {
  *
  * @param {Client} client
  * @param {JSON} packetParams
- * @throws {Error} - In case if the client is ratelimited
+ * @throws {PacketHandlingException} - In case if the client is ratelimited
  */
 function _handlePacket(client, packetParams) {
 	try {
@@ -87,7 +87,7 @@ function _handlePacket(client, packetParams) {
 						server: this,
 					});
 
-					throw new Error(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
+					throw new PacketHandlingException(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
 				}
 
 				const packet = new (require(packetPath))();
@@ -111,7 +111,7 @@ function _handlePacket(client, packetParams) {
 
 		if (!exists && config.dev.logUnhandledPackets) {
 			Logger.warning(Language.getKey("network.packet.unhandledPacket"));
-			console.info("%o", packetParams);
+			console.warn("%o", packetParams);
 		}
 	} catch (error) {
 		client.kick(Language.getKey("kickMessages.invalidPacket"));
