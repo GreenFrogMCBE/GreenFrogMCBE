@@ -18,6 +18,8 @@ const { getKey } = require("../utils/Language");
 
 const LoggingException = require("../utils/exceptions/LoggingException");
 
+let messageLogs = []
+
 /**
  * Fires the 'serverLogMessage' event
  *
@@ -49,6 +51,14 @@ module.exports = {
 	},
 
 	/**
+	 * Returns all messages in console as an array
+	 * @returns {Array<String>}
+	 */
+	getMessageLogs() {
+		return messageLogs
+	},
+
+	/**
 	 * Logs a message
 	 *
 	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
@@ -58,8 +68,6 @@ module.exports = {
 	 * @param {number} color
 	 * @param {string} message
 	 * @param {string} consoleType
-	 *
-	 *
 	 */
 	log(langString, color, message, consoleType) {
 		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
@@ -73,6 +81,8 @@ module.exports = {
 		}
 
 		fireEvent(langString, color, message, consoleType);
+		messageLogs.push({ langString, color, message, consoleType })
+
 		console[consoleType](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));
 	},
 
