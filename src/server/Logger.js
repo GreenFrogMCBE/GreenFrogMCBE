@@ -26,16 +26,16 @@ let messageLogs = []
  * @param {string} langString
  * @param {string} color
  * @param {string} message
- * @param {string} consoleType
+ * @param {string} type
  */
-function fireEvent(langString, color, message, consoleType) {
+function fireEvent(langString, color, message, type) {
 	require("../Frog").eventEmitter.emit("serverLogMessage", {
 		type: langString,
 		message,
 		server: require("../Frog"),
 		legacy: {
 			color,
-			consoleType,
+			type,
 		},
 	});
 }
@@ -66,23 +66,23 @@ module.exports = {
 	 * @param {string} langString
 	 * @param {number} color
 	 * @param {string} message
-	 * @param {string} consoleType
+	 * @param {string} type
 	 */
-	log(langString, color, message, consoleType) {
+	log(langString, color, message, type) {
 		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
 
-		if (consoleType === "warning") {
+		if (type === "warning") {
 			throw new LoggingException(getKey("exceptions.logger.invalidWarning"));
 		}
 
-		if (!console[consoleType]) {
-			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s%", consoleType));
+		if (!console[type]) {
+			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s%", type));
 		}
 
-		fireEvent(langString, color, message, consoleType);
-		messageLogs.push({ langString, color, message, consoleType })
+		fireEvent(langString, color, message, type);
+		messageLogs.push({ langString, color, message, type })
 
-		console[consoleType](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));
+		console[type](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));
 	},
 
 	/**
