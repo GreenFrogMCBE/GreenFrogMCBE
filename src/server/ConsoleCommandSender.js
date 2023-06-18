@@ -87,7 +87,9 @@ module.exports = {
 	executeConsoleCommand(executedCommand) {
 		let shouldExecCommand = true;
 
-		const args = executedCommand.split(" ").slice(1);
+		executedCommand = executedCommand.replace("/", "")
+
+		const args = executedCommand.split(" ").slice(1)
 
 		require("../Frog").eventEmitter.emit("serverExecutedCommand", {
 			server: require("../Frog").server,
