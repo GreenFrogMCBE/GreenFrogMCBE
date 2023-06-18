@@ -59,6 +59,14 @@ module.exports = {
 	},
 
 	/**
+	 * Changes the contents of the `messageLogs` array
+	 * @param {Array<String>} newMessageLogs
+	 */
+	setMessageLogs(newMessageLogs) {
+		messageLogs = newMessageLogs;
+	},
+
+	/**
 	 * Logs a message
 	 *
 	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
