@@ -153,7 +153,6 @@
 
   "exceptions.console.alreadyClosed": "Console is already closed!",
 
-  "exceptions.logger.invalidWarning": "Invalid log type: warning. Its 'warn', and not 'warning'",
   "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug",
 
   "logger.info": "INFO",

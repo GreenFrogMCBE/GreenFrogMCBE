@@ -153,7 +153,6 @@
 
   "exceptions.console.alreadyClosed": "Консоль вже закрита!",
 
-  "exceptions.logger.invalidWarning": "Недійсний тип журналу: попередження. Правильний тип - 'warn', а не 'warning'.",
   "exceptions.logger.invalidType": "Недійсний тип журналу: %s%. Допустимі типи: info, warn, error, debug."
 
   "logger.info": "ІНФО",

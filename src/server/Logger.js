@@ -78,10 +78,6 @@ module.exports = {
 	log(langString, color, message, type) {
 		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
 
-		if (type === "warning") {
-			throw new LoggingException(getKey("exceptions.logger.invalidWarning"));
-		}
-
 		if (!console[type]) {
 			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s%", type));
 		}
