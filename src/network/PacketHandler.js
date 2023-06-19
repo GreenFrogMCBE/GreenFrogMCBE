@@ -31,7 +31,7 @@ class PacketHandler {
     }
 
     /**
-     * Gets the directory path for packets.
+     * Returns the directory path for packets.
      *
      * @returns {string} - The packets directory path.
      */
