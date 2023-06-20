@@ -26,12 +26,18 @@ class Query {
 		});
 	}
 
-	_genToken() {
+	/**
+  	 * Generates a token
+	 * @returns {number}
+	 */
+	_generateToken() {
 		const min = Math.ceil(1000000);
 		return Math.floor(Math.random() * (Math.floor(9999999) - min + 1) + min);
 	}
 
 	/**
+ 	 * Handles query packets
+     * 
 	 * @param {Buffer} msg
 	 * @param {dgram.RemoteInfo} rinfo
 	 */
@@ -47,7 +53,7 @@ class Query {
 		if ((this.clientTokens.has(rinfo.address) && this.clientTokens.get(rinfo.address).expiresAt < Date.now()) || !this.clientTokens.has(rinfo.address)) {
 			Logger.info(`Query from ${rinfo.address}`);
 			this.clientTokens.set(rinfo.address, {
-				token: this._genToken(),
+				token: this._generateToken(),
 				expiresAt: Date.now() + 30 * 1000,
 			});
 		}
@@ -62,7 +68,8 @@ class Query {
 	}
 
 	/**
-	 *
+	 * Sends the handshake packet
+  	 *
 	 * @param {Buffer} rinfo
 	 * @param {dgram.RemoteInfo} msg
 	 */
@@ -86,8 +93,9 @@ class Query {
 	}
 
 	/**
+	 * Sends the basic info packet
 	 *
-	 * @param {dgram.RemoteInfo} rinfo
+  	 * @param {dgram.RemoteInfo} rinfo
 	 * @param {Buffer} message
 	 */
 	_sendBasicInfo(rinfo, message) {
@@ -120,9 +128,10 @@ class Query {
 		});
 	}
 
-	/**
-	 *
-	 * @param {dgram.RemoteInfo} rinfo
+	/** 
+  	 * Sends the full info packet
+	 * 
+  	 * @param {dgram.RemoteInfo} rinfo
 	 * @param {Buffer} message
 	 */
 	_sendFullInfo(rinfo, message) {
@@ -149,7 +158,12 @@ class Query {
 		];
 
 		const buffer = new SmartBuffer();
-		buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT("splitnum").writeUInt8(0x80).writeUInt8(0x00);
+		
+		buffer.
+			writeUInt8(0x00).
+			writeInt32BE(sessionID).
+			writeStringNT("splitnum").
+			writeUInt8(0x80).writeUInt8(0x00);
 
 		kvData.forEach(({ key, value }) => {
 			buffer.writeStringNT(String(key));
