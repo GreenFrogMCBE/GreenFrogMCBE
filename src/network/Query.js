@@ -51,7 +51,7 @@ class Query {
 		}
 
 		if ((this.clientTokens.has(rinfo.address) && this.clientTokens.get(rinfo.address).expiresAt < Date.now()) || !this.clientTokens.has(rinfo.address)) {
-			Logger.info(`Query from ${rinfo.address}`);
+			Logger.info(`Generating a query token for ${rinfo.address}`);
 			this.clientTokens.set(rinfo.address, {
 				token: this._generateToken(),
 				expiresAt: Date.now() + 30 * 1000,
@@ -59,10 +59,13 @@ class Query {
 		}
 
 		if (type === 0x09) {
+			Logger.info(`Responded with a query handshake packet to ${rinfo.address}`);
 			this._sendHandshake(rinfo, msg);
 		} else if (type === 0x00 && msg.length == 15) {
+			Logger.info(`Responded with a query full info packet to ${rinfo.address}`);
 			this._sendFullInfo(rinfo, msg);
 		} else if (type === 0x00 && msg.length == 11) {
+			Logger.info(`Responded with a query basic info packet to ${rinfo.address}`);
 			this._sendBasicInfo(rinfo, msg);
 		}
 	}
@@ -81,7 +84,10 @@ class Query {
 		}
 
 		const buffer = new SmartBuffer();
-		buffer.writeUInt8(0x09).writeInt32BE(sessionID).writeStringNT(clientToken.toString());
+		buffer.
+			writeUInt8(0x09).
+			writeInt32BE(sessionID).
+			writeStringNT(clientToken.toString());
 
 		const data = buffer.toBuffer();
 
@@ -170,7 +176,11 @@ class Query {
 			buffer.writeStringNT(String(value));
 		});
 
-		buffer.writeUInt8(0x00).writeUInt8(0x01).writeStringNT("player_").writeUInt8(0x00);
+		buffer.
+			writeUInt8(0x00).
+			writeUInt8(0x01).
+			writeStringNT("player_").
+			writeUInt8(0x00);
 
 		this.info.players.forEach((playerName) => {
 			buffer.writeStringNT(playerName);
