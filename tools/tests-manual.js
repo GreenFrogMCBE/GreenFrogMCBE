@@ -21,12 +21,13 @@ const ClientMessage = require("../test/ClientSendMessage");
 const ClientCommand = require("../test/ClientRunCommand");
 const StartServer = require("../test/StartServer");
 const TestConfigs = require("../test/TestConfigs");
+const Query = require("../test/Query")
 const fs = require("fs");
 
 if (!fs.existsSync("../config.yml")) {
 	const config = fs.readFileSync("../src/internalResources/defaultConfig.yml");
 
-	fs.writeFileSync("../config.yml", config, () => {});
+	fs.writeFileSync("../config.yml", config, () => { });
 }
 
 console.info("Starting testing...");
@@ -36,7 +37,7 @@ const r = rl.createInterface({
 	output: process.stdout,
 });
 
-console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the configurations for JSON errors");
+console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the configurations for JSON errors\n[5] = Test if the query server works");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);
@@ -54,6 +55,9 @@ r.question("> ", (response) => {
 		case "4":
 			runTest(4, "Test the configurations for JSON errors", configTest);
 			break;
+		case "5":
+			runTest(5, "Test if the query server works", queryTest);
+			break
 		default:
 			console.error(`Could not find test ${args[0]}`);
 			break;
@@ -127,6 +131,19 @@ function configTest() {
 			TestConfigs.test();
 		} catch (e) {
 			console.info("Tests failed! Failed to parse configs! " + e.stack);
+			process.exit(-1);
+		} finally {
+			setTimeout(handleTestSuccess, 10000);
+		}
+	}, 3000);
+}
+
+function configTest() {
+	setTimeout(() => {
+		try {
+			Query.test();
+		} catch (e) {
+			console.info("Tests failed! Failed to contact the query server! " + e.stack);
 			process.exit(-1);
 		} finally {
 			setTimeout(handleTestSuccess, 10000);
