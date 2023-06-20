@@ -40,12 +40,12 @@ class Query {
 		const type = msg.readUInt8(2);
 
 		if (magick !== 0xfefd) {
-			console.info("Client sent bad data.", "Query");
+			Logger.warning(`${rinfo.address} sent bad query data.`);
 			return;
 		}
 
 		if ((this.clientTokens.has(rinfo.address) && this.clientTokens.get(rinfo.address).expiresAt < Date.now()) || !this.clientTokens.has(rinfo.address)) {
-			console.log("token created");
+			Logger.info(`Query from ${rinfo.address}`);
 			this.clientTokens.set(rinfo.address, {
 				token: this._genToken(),
 				expiresAt: Date.now() + 30 * 1000,
@@ -53,12 +53,10 @@ class Query {
 		}
 
 		if (type === 0x09) {
-			console.log("handshake sent");
 			this._sendHandshake(rinfo, msg);
 		} else if (type === 0x00 && msg.length == 15) {
 			this._sendFullInfo(rinfo, msg);
 		} else if (type === 0x00 && msg.length == 11) {
-			console.log("basic sent");
 			this._sendBasicInfo(rinfo, msg);
 		}
 	}
@@ -82,7 +80,7 @@ class Query {
 
 		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
 			if (err) {
-				console.error(err, "Query");
+				Logger.error(`Query error: ${err.stack}`);
 			}
 		});
 	}
@@ -101,14 +99,23 @@ class Query {
 		}
 
 		const buffer = new SmartBuffer();
-		console.log(this.info.motd, this.info.host, this.port, this.info.maxPlayers, this.info.players, this.info.levelName, this.info.motd);
-		buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT(this.info.motd).writeStringNT("MINECRAFTBE").writeStringNT(this.info.levelName).writeStringNT(String(this.info.players.length)).writeStringNT(String(this.info.maxPlayers)).writeUInt16LE(this.info.port).writeStringNT(this.info.host);
+		
+		buffer
+			.writeUInt8(0x00)
+			.writeInt32BE(sessionID)
+			.writeStringNT(this.info.motd)
+			.writeStringNT("MINECRAFTBE")
+			.writeStringNT(this.info.levelName)
+			.writeStringNT(String(this.info.players.length))
+			.writeStringNT(String(this.info.maxPlayers))
+			.writeUInt16LE(this.info.port).
+			writeStringNT(this.info.host);
 
 		const data = buffer.toBuffer();
 
 		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
 			if (err) {
-				console.error(err, "Query");
+				Logger.error(`Query error: ${err.stack}`);
 			}
 		});
 	}
@@ -160,7 +167,7 @@ class Query {
 		const data = buffer.toBuffer();
 		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
 			if (err) {
-				console.error(err);
+				Logger.error(`Query error: ${err.stack}`);
 			}
 		});
 	}
