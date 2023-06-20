@@ -15,7 +15,7 @@
  */
 const Frog = require("../../Frog");
 
-const Falldamage = require("../../world/Falldamage");
+const FallDamage = require("../../world/FallDamage");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -42,7 +42,7 @@ class ClientMovePacket extends PacketConstructor {
 
 		let shouldSetPosition = true;
 
-		player.location.onGround = false
+		player.location.onGround = false;
 
 		Frog.eventEmitter.emit("playerMove", {
 			player,
@@ -64,7 +64,7 @@ class ClientMovePacket extends PacketConstructor {
 
 		if (!shouldSetPosition) return;
 
-		Falldamage.calculateFalldamage(player, { x, y, z });
+		FallDamage.calculateFallDamage(player, { x, y, z });
 
 		player.location.x = x;
 		player.location.y = y;

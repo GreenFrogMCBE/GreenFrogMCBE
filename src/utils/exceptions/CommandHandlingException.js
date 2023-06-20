@@ -13,29 +13,11 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const DamageCause = require("../api/health/DamageCause");
-const Gamemode = require("../api/player/Gamemode");
+class CommandHandlingException extends Error {
+	constructor(reason) {
+		super(reason);
+		this.name = "CommandHandlingException";
+	}
+}
 
-module.exports = {
-	/**
-	 * Calculates fall damage
-	 * NOTE: This can be spoofed by a hacked client
-	 *
-	 * @param {Client} player
-	 * @param {JSON} position
-	 */
-	async calculateFallDamage(player, position) {
-		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
-
-		let falldamageY = player.location.y - position.y;
-
-		if (!falldamageY) return;
-
-		if (falldamageY > 0.56 && player.fallDamageQueue) {
-			player.setHealth(player.health - player.fallDamageQueue, DamageCause.FALL);
-			player.fallDamageQueue = 0;
-		}
-
-		player.fallDamageQueue = (falldamageY + 0.5) * 2;
-	},
-};
+module.exports = CommandHandlingException;

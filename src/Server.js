@@ -13,8 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-unsafe-finally */
-
 const VersionToProtocol = require("./utils/VersionToProtocol");
 
 const PlayerInfo = require("./api/player/PlayerInfo");
@@ -36,9 +34,10 @@ const Language = require("./utils/Language");
 
 const FrogProtocol = require("frog-protocol");
 
+const PacketHandler = require('./network/PacketHandler')
+
 const assert = require("assert");
 
-const path = require("path");
 const fs = require("fs");
 
 const Query = require("./network/Query");
@@ -67,68 +66,6 @@ async function _handleCriticalError(error) {
 
 	if (!config.unstable) {
 		process.exit(config.dev.crashCode);
-	}
-}
-
-/**
- * Handles packets
- *
- * @param {Client} client
- * @param {JSON} packetParams
- * @throws {Error} - In case if the client is ratelimited
- */
-function _handlePacket(client, packetParams) {
-	try {
-		const packetsDir = path.join(__dirname, "network", "packets");
-
-		let exists = false;
-
-		fs.readdirSync(packetsDir).forEach((filename) => {
-			if (filename.startsWith("Client") && filename.endsWith(".js")) {
-				const packetPath = path.join(packetsDir, filename);
-
-				if (++client.packetCount > 2000) {
-					Frog.eventEmitter.emit("packetRatelimit", {
-						player: client,
-						server: this,
-					});
-
-					throw new Error(Language.getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount));
-				}
-
-				const packet = new (require(packetPath))();
-				if (packet.getPacketName() === packetParams.data.name) {
-					let shouldReadPacket = true;
-
-					Frog.eventEmitter.emit("packetRead", {
-						player: client,
-						data: packet.data,
-						server: this,
-					});
-
-					if (shouldReadPacket) {
-						packet.readPacket(client, packetParams, this);
-					}
-
-					exists = true;
-				}
-			}
-		});
-
-		if (!exists && config.dev.logUnhandledPackets) {
-			Logger.warning(Language.getKey("network.packet.unhandledPacket"));
-			console.info("%o", packetParams);
-		}
-	} catch (error) {
-		client.kick(Language.getKey("kickMessages.invalidPacket"));
-
-		Frog.eventEmitter.emit("packetReadError", {
-			player: client,
-			error,
-			server: this,
-		});
-
-		Logger.error(Language.getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
 	}
 }
 
@@ -204,7 +141,8 @@ async function _listen() {
 			});
 
 			client.on("packet", (packet) => {
-				_handlePacket(client, packet);
+				const packetHandler = new PacketHandler()
+				packetHandler.handlePacket(client, packet)
 			});
 		});
 
@@ -236,6 +174,11 @@ async function _onJoin(client) {
 			onGround: false,
 			pitch: 0,
 			yaw: 0,
+		},
+		inventory: {
+			lastKnownItemNetworkId: 0,
+			lastKnownItemRuntimeId: 0,
+			items: [],
 		},
 		offline: false,
 		kicked: false,

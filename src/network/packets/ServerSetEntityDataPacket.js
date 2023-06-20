@@ -93,7 +93,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 	getRuntimeEntityId() {
 		return runtime_entity_id;
 	}
-	
+
 	/**
 	 * Sends the packet to the client
 	 * @param {Client} client

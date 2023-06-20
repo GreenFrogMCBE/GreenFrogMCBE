@@ -13,29 +13,25 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const DamageCause = require("../api/health/DamageCause");
-const Gamemode = require("../api/player/Gamemode");
+import { Client, Server } from "frog-protocol";
 
-module.exports = {
-	/**
-	 * Calculates fall damage
-	 * NOTE: This can be spoofed by a hacked client
-	 *
-	 * @param {Client} player
-	 * @param {JSON} position
-	 */
-	async calculateFallDamage(player, position) {
-		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
+export interface ArgOptions {
+	name: string;
+	type: "int" | "float" | "value" | "wildcard_int" | "wildcard_target" | "operator" | "command_operator" | "target" | "file_path" | "integer_range" | "equipment_slots" | "string" | "block_position" | "position" | "message" | "raw_text" | "json" | "block_states" | "command";
+	optional?: boolean;
+}
 
-		let falldamageY = player.location.y - position.y;
+export interface Options {
+	name: string;
+	description: string;
+	aliases?: string[];
+	maxArg?: number;
+	minArg?: number;
+	requiresOp: boolean;
+}
 
-		if (!falldamageY) return;
-
-		if (falldamageY > 0.56 && player.fallDamageQueue) {
-			player.setHealth(player.health - player.fallDamageQueue, DamageCause.FALL);
-			player.fallDamageQueue = 0;
-		}
-
-		player.fallDamageQueue = (falldamageY + 0.5) * 2;
-	},
-};
+export interface Command {
+	data: Options;
+	run(server: Server, player: Client, args: Array<String>): void;
+	throwError(player: Client): void;
+}

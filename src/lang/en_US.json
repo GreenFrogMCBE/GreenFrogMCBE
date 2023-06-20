@@ -112,11 +112,6 @@
 
   "warning.customItems.loading.failed": "Failed to load custom items! Error: %s%",
 
-  "logger.info": "INFO",
-  "logger.warn": "WARNING",
-  "logger.error": "ERROR",
-  "logger.debug": "DEBUG",
-
   "debug.debugEnabled": "Debug mode is enabled. This may cause lag when sending large packets",
   "debug.unstable": "Unstable mode is enabled. This will recover server from critical errors, but it may cause plugin data corruption",
   "debug.unstable.unsupported": "Also, unstable mode is not supported by GreenFrog developers and you are the responsive for the data corruption if it occurs",
@@ -158,6 +153,10 @@
 
   "exceptions.console.alreadyClosed": "Console is already closed!",
 
-  "exceptions.logger.invalidWarning": "Invalid log type: warning. Its 'warn', and not 'warning'",
-  "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug"
+  "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug",
+
+  "logger.info": "INFO",
+  "logger.warn": "WARNING",
+  "logger.error": "ERROR",
+  "logger.debug": "DEBUG"
 }
