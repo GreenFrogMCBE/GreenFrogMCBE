@@ -41,8 +41,6 @@ const assert = require("assert");
 const fs = require("fs");
 
 const Query = require("./network/Query");
-const PluginManager = require("./plugins/PluginManager");
-const query = new Query();
 
 let server = null;
 let config = Frog.serverConfigurationFiles.config;
@@ -292,6 +290,8 @@ module.exports = {
 		PluginLoader.loadPlugins();
 
 		await _listen();
+
+		const query = new Query();
 
 		setInterval(() => {
 			GarbageCollector.gc();

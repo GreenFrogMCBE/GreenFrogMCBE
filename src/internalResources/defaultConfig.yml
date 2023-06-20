@@ -13,6 +13,11 @@ chat:
   commandsDisabled: false
   blockInvalidMessages: true # Prevents players from using colors in chat or spam the chat with messages that are longer than 256 chars
   blockInvalidCommands: true # Same as 'blockInvalidMessages' but for commands
+query: # Query is a UDP protocol for querying server properties. More info at https://wiki.vg/Query
+  enabled: true
+  logPackets: false
+  logConnections: false
+  port: 19133
 dev:
   unstable: false # Makes your server not crash on critical errors
   debug: false
