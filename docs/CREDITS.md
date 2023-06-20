@@ -15,6 +15,7 @@
 > For rewriting some parts of command system <br>
 > For making the README.md file look better <br>
 > For showing example of a generator in our discord <br>
+> For adding query support (https://github.com/andriycraft/GreenFrogMCBE/pull/214)
 
 3. @NhanAZ
 
