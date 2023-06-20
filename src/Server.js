@@ -13,34 +13,28 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const VersionToProtocol = require("./utils/VersionToProtocol");
-
-const PlayerInfo = require("./api/player/PlayerInfo");
 const Frog = require("./Frog");
 
+const PluginLoader = require("./plugins/PluginLoader");
+const PluginManager = require("./plugins/PluginManager");
+
+const PlayerInfo = require("./api/player/PlayerInfo");
 const GarbageCollector = require("./utils/GarbageCollector");
 const PlayerInit = require("./server/PlayerInit");
-
-const World = require("./world/World");
-
-const PlayStatus = require("./network/packets/types/PlayStatus");
-
+const Language = require("./utils/Language");
 const Logger = require("./server/Logger");
 
-const PluginLoader = require("./plugins/PluginLoader");
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
-
-const Language = require("./utils/Language");
-
-const FrogProtocol = require("frog-protocol");
-
 const PacketHandler = require('./network/PacketHandler')
-
-const assert = require("assert");
-
-const fs = require("fs");
+const PlayStatus = require("./network/packets/types/PlayStatus");
+const VersionToProtocol = require("./utils/VersionToProtocol");
 
 const Query = require("./network/Query");
+const World = require("./world/World");
+
+const FrogProtocol = require("frog-protocol");
+const assert = require("assert");
+const fs = require("fs");
 
 let server = null;
 let config = Frog.serverConfigurationFiles.config;
@@ -291,7 +285,22 @@ module.exports = {
 
 		await _listen();
 
-		const query = new Query();
+		if (config.query.enabled) {
+			const query = new Query();
+
+			query.start({
+				host: config.network.host,
+				port: config.query.port,
+				motd: config.serverInfo.motd,
+				levelName: config.network.levelName,
+				players: PlayerInfo.players,
+				maxPlayers: String(config.serverInfo.maxPlayers),
+				gamemode: config.world.gameMode,
+				plugins: PluginManager.plugins,
+				wl: false, // wl stands for whitelist. TODO: Implement whitelist
+				version: String(config.serverInfo.version),
+			});
+		}
 
 		setInterval(() => {
 			GarbageCollector.gc();
