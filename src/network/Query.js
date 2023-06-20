@@ -1,7 +1,7 @@
 const Logger = require("../server/Logger");
 
-const dgram = require("dgram");
 const { SmartBuffer } = require("@harmonytf/smart-buffer");
+const dgram = require("dgram");
 
 class Query {
 	clientTokens = new Map();
@@ -18,7 +18,7 @@ class Query {
 		this.socket.on("listening", () => {
 			const address = this.socket.address();
 
-			Logger.info(`Query server is running on ${address.address}:${address.port}!`);
+			Logger.info(`Query server listening on /${address.address}:${address.port}`);
 		});
 
 		this.socket.on("message", (msg, rinfo) => {
@@ -28,6 +28,7 @@ class Query {
 
 	/**
   	 * Generates a token
+	 * 
 	 * @returns {number}
 	 */
 	_generateToken() {

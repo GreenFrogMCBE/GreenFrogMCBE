@@ -148,11 +148,8 @@
 
   "exceptions.plugin.noName": "No plugin name!",
   "exceptions.plugin.noVersion": "No plugin version!",
-
   "exceptions.generator.invalid": "World generator is invalid!",
-
   "exceptions.console.alreadyClosed": "Console is already closed!",
-
   "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug",
 
   "logger.info": "INFO",

@@ -148,11 +148,8 @@
 
   "exceptions.plugin.noName": "Відсутня назва плагіна!",
   "exceptions.plugin.noVersion": "Відсутня версія плагіна!",
-
   "exceptions.generator.invalid": "Недійсний генератор світу!",
-
   "exceptions.console.alreadyClosed": "Консоль вже закрита!",
-
   "exceptions.logger.invalidType": "Недійсний тип журналу: %s%. Допустимі типи: info, warn, error, debug.",
 
   "logger.info": "ІНФО",
