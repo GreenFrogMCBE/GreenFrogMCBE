@@ -63,7 +63,7 @@
 
 > Used as an example for custom_form support (i had permission from repo owner)
 
-12. 🌓Enzø ツ#6666, @CreeperG16, @faaxz
+12. @Nya-Enzo, @CreeperG16, @faaxz
 
 > For helping me with chunk support
 
