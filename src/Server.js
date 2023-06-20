@@ -25,11 +25,11 @@ const Language = require("./utils/Language");
 const Logger = require("./server/Logger");
 
 const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
-const PacketHandler = require('./network/PacketHandler')
+const PacketHandler = require("./network/PacketHandler");
 const PlayStatus = require("./network/packets/types/PlayStatus");
 const VersionToProtocol = require("./utils/VersionToProtocol");
 
-const Query = require("./network/Query");
+const Query = require("./query/Query");
 const World = require("./world/World");
 
 const FrogProtocol = require("frog-protocol");
@@ -133,8 +133,8 @@ async function _listen() {
 			});
 
 			client.on("packet", (packet) => {
-				const packetHandler = new PacketHandler()
-				packetHandler.handlePacket(client, packet)
+				const packetHandler = new PacketHandler();
+				packetHandler.handlePacket(client, packet);
 			});
 		});
 
@@ -288,18 +288,22 @@ module.exports = {
 		if (config.query.enabled) {
 			const query = new Query();
 
-			query.start({
-				host: config.network.host,
-				port: config.query.port,
-				motd: config.serverInfo.motd,
-				levelName: config.network.levelName,
-				players: PlayerInfo.players,
-				maxPlayers: String(config.serverInfo.maxPlayers),
-				gamemode: config.world.gameMode,
-				plugins: PluginManager.plugins,
-				wl: false, // wl stands for whitelist. TODO: Implement whitelist
-				version: String(config.serverInfo.version),
-			});
+			try {
+				query.start({
+					host: config.network.host,
+					port: config.query.port,
+					motd: config.serverInfo.motd,
+					levelName: config.network.levelName,
+					players: PlayerInfo.players,
+					maxPlayers: String(config.serverInfo.maxPlayers),
+					gamemode: config.world.gameMode,
+					plugins: PluginManager.plugins,
+					wl: false, // wl stands for whitelist. TODO: Implement whitelist
+					version: String(config.serverInfo.version),
+				});
+			} catch (e) {
+				Logger.error(Language.getLanguage("query.server.listening.failed").replace("%s%", e.stack));
+			}
 		}
 
 		setInterval(() => {

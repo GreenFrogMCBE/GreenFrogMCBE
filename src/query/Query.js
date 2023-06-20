@@ -1,4 +1,21 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
 const Logger = require("../server/Logger");
+
+const { getLanguage, getKey } = require("../utils/Language");
 
 const { SmartBuffer } = require("@harmonytf/smart-buffer");
 const dgram = require("dgram");
@@ -8,7 +25,7 @@ class Query {
 
 	constructor() {
 		this.socket = dgram.createSocket("udp4");
-		this.info = {}
+		this.info = {};
 	}
 
 	start(info) {
@@ -18,7 +35,7 @@ class Query {
 		this.socket.on("listening", () => {
 			const address = this.socket.address();
 
-			Logger.info(`Query server listening on /${address.address}:${address.port}`);
+			Logger.info(getKey("query.server.listening").replace("%s%", `/${address.address}:${address.port}`));
 		});
 
 		this.socket.on("message", (msg, rinfo) => {
@@ -27,8 +44,8 @@ class Query {
 	}
 
 	/**
-  	 * Generates a token
-	 * 
+	 * Generates a token
+	 *
 	 * @returns {number}
 	 */
 	_generateToken() {
@@ -37,22 +54,22 @@ class Query {
 	}
 
 	/**
- 	 * Handles query packets
-     * 
+	 * Handles query packets
+	 *
 	 * @param {Buffer} msg
 	 * @param {dgram.RemoteInfo} rinfo
 	 */
 	_handle(msg, rinfo) {
-		const magick = msg.readUInt16BE(0);
+		const magic = msg.readUInt16BE(0);
 		const type = msg.readUInt8(2);
 
-		if (magick !== 0xfefd) {
-			Logger.warning(`${rinfo.address} sent bad query data.`);
+		if (magic !== 0xfefd) {
+			Logger.warning(getLanguage("query.server.network.invalidPacket").replace("%s%", `${rinfo.address}`));
 			return;
 		}
 
 		if ((this.clientTokens.has(rinfo.address) && this.clientTokens.get(rinfo.address).expiresAt < Date.now()) || !this.clientTokens.has(rinfo.address)) {
-			Logger.info(`Generating a query token for ${rinfo.address}`);
+			Logger.info(getLanguage("query.server.network.generatingToken").replace("%s%", `${rinfo.address}`));
 			this.clientTokens.set(rinfo.address, {
 				token: this._generateToken(),
 				expiresAt: Date.now() + 30 * 1000,
@@ -60,41 +77,39 @@ class Query {
 		}
 
 		if (type === 0x09) {
-			Logger.info(`Responded with a query handshake packet to ${rinfo.address}`);
+			Logger.info(getLanguage("query.server.network.packets.handshake").replace("%s%", `${rinfo.address}`));
 			this._sendHandshake(rinfo, msg);
 		} else if (type === 0x00 && msg.length == 15) {
-			Logger.info(`Responded with a query full info packet to ${rinfo.address}`);
+			Logger.info(getLanguage("query.server.network.packets.fullInfo").replace("%s%", `${rinfo.address}`));
 			this._sendFullInfo(rinfo, msg);
 		} else if (type === 0x00 && msg.length == 11) {
-			Logger.info(`Responded with a query basic info packet to ${rinfo.address}`);
+			Logger.info(getLanguage("query.server.network.packets.basicInfo").replace("%s%", `${rinfo.address}`));
 			this._sendBasicInfo(rinfo, msg);
 		}
 	}
 
 	/**
 	 * Sends the handshake packet
-  	 *
+	 *
 	 * @param {Buffer} rinfo
 	 * @param {dgram.RemoteInfo} msg
 	 */
 	_sendHandshake(rinfo, msg) {
 		const sessionID = msg.readInt32BE(3);
 		const clientToken = this.clientTokens.get(rinfo.address).token;
+
 		if (!this.clientTokens.has(rinfo.address) || this.clientTokens.get(rinfo.address).expiresAt < Date.now()) {
 			return;
 		}
 
 		const buffer = new SmartBuffer();
-		buffer.
-			writeUInt8(0x09).
-			writeInt32BE(sessionID).
-			writeStringNT(clientToken.toString());
+		buffer.writeUInt8(0x09).writeInt32BE(sessionID).writeStringNT(clientToken.toString());
 
 		const data = buffer.toBuffer();
 
 		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
 			if (err) {
-				Logger.error(`Query error: ${err.stack}`);
+				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
 			}
 		});
 	}
@@ -102,7 +117,7 @@ class Query {
 	/**
 	 * Sends the basic info packet
 	 *
-  	 * @param {dgram.RemoteInfo} rinfo
+	 * @param {dgram.RemoteInfo} rinfo
 	 * @param {Buffer} message
 	 */
 	_sendBasicInfo(rinfo, message) {
@@ -114,31 +129,22 @@ class Query {
 		}
 
 		const buffer = new SmartBuffer();
-		
-		buffer
-			.writeUInt8(0x00)
-			.writeInt32BE(sessionID)
-			.writeStringNT(this.info.motd)
-			.writeStringNT("MINECRAFTBE")
-			.writeStringNT(this.info.levelName)
-			.writeStringNT(String(this.info.players.length))
-			.writeStringNT(String(this.info.maxPlayers))
-			.writeUInt16LE(this.info.port).
-			writeStringNT(this.info.host);
+
+		buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT(this.info.motd).writeStringNT("MINECRAFTBE").writeStringNT(this.info.levelName).writeStringNT(String(this.info.players.length)).writeStringNT(String(this.info.maxPlayers)).writeUInt16LE(this.info.port).writeStringNT(this.info.host);
 
 		const data = buffer.toBuffer();
 
 		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
 			if (err) {
-				Logger.error(`Query error: ${err.stack}`);
+				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
 			}
 		});
 	}
 
-	/** 
-  	 * Sends the full info packet
-	 * 
-  	 * @param {dgram.RemoteInfo} rinfo
+	/**
+	 * Sends the full info packet
+	 *
+	 * @param {dgram.RemoteInfo} rinfo
 	 * @param {Buffer} message
 	 */
 	_sendFullInfo(rinfo, message) {
@@ -165,23 +171,15 @@ class Query {
 		];
 
 		const buffer = new SmartBuffer();
-		
-		buffer.
-			writeUInt8(0x00).
-			writeInt32BE(sessionID).
-			writeStringNT("splitnum").
-			writeUInt8(0x80).writeUInt8(0x00);
+
+		buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT("splitnum").writeUInt8(0x80).writeUInt8(0x00);
 
 		kvData.forEach(({ key, value }) => {
 			buffer.writeStringNT(String(key));
 			buffer.writeStringNT(String(value));
 		});
 
-		buffer.
-			writeUInt8(0x00).
-			writeUInt8(0x01).
-			writeStringNT("player_").
-			writeUInt8(0x00);
+		buffer.writeUInt8(0x00).writeUInt8(0x01).writeStringNT("player_").writeUInt8(0x00);
 
 		this.info.players.forEach((playerName) => {
 			buffer.writeStringNT(playerName);
@@ -192,7 +190,7 @@ class Query {
 		const data = buffer.toBuffer();
 		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
 			if (err) {
-				Logger.error(`Query error: ${err.stack}`);
+				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
 			}
 		});
 	}

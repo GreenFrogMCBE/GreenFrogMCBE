@@ -56,14 +56,14 @@ setTimeout(() => {
 
 				setTimeout(() => {
 					try {
-						Query.test()
+						Query.test();
 
 						console.info("All tests passed!");
-						process.exit(0);	
+						process.exit(0);
 					} catch (e) {
-						handleTestFailure("Failed to contact the server using query!", e);		
+						handleTestFailure("Failed to contact the server using query!", e);
 					}
-				}, 8000)
+				}, 8000);
 			}, 8000);
 		}, 8000);
 	}, 10000);

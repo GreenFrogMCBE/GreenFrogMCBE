@@ -18,7 +18,7 @@ const { getKey } = require("../utils/Language");
 
 const LoggingException = require("../utils/exceptions/LoggingException");
 
-let messageLogs = []
+let messageLogs = [];
 
 /**
  * Fires the 'serverLogMessage' event
@@ -46,7 +46,7 @@ module.exports = {
 	 * @returns {Array<String>}
 	 */
 	getMessageLogs() {
-		return messageLogs
+		return messageLogs;
 	},
 
 	/**
@@ -61,7 +61,7 @@ module.exports = {
 	 * Clears the message logs
 	 */
 	clearMessageLogs() {
-		messageLogs = []
+		messageLogs = [];
 	},
 
 	/**
@@ -83,7 +83,7 @@ module.exports = {
 		}
 
 		fireEvent(langString, color, message, type);
-		messageLogs.push({ langString, color, message, type })
+		messageLogs.push({ langString, color, message, type });
 
 		console[type](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));
 	},

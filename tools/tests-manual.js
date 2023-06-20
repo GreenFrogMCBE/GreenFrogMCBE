@@ -21,13 +21,13 @@ const ClientMessage = require("../test/ClientSendMessage");
 const ClientCommand = require("../test/ClientRunCommand");
 const StartServer = require("../test/StartServer");
 const TestConfigs = require("../test/TestConfigs");
-const Query = require("../test/Query")
+const Query = require("../test/Query");
 const fs = require("fs");
 
 if (!fs.existsSync("../config.yml")) {
 	const config = fs.readFileSync("../src/internalResources/defaultConfig.yml");
 
-	fs.writeFileSync("../config.yml", config, () => { });
+	fs.writeFileSync("../config.yml", config, () => {});
 }
 
 console.info("Starting testing...");
@@ -57,7 +57,7 @@ r.question("> ", (response) => {
 			break;
 		case "5":
 			runTest(5, "Test if the query server works", queryTest);
-			break
+			break;
 		default:
 			console.error(`Could not find test ${args[0]}`);
 			break;
