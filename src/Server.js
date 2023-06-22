@@ -20,14 +20,11 @@ const PluginManager = require("./plugins/PluginManager");
 
 const PlayerInfo = require("./api/player/PlayerInfo");
 const GarbageCollector = require("./utils/GarbageCollector");
-const PlayerInit = require("./server/PlayerInit");
 const Language = require("./utils/Language");
 const Logger = require("./server/Logger");
 
-const ResponsePackInfo = require("./network/packets/ServerResponsePackInfoPacket");
-const PacketHandler = require("./network/PacketHandler");
-const PlayStatus = require("./network/packets/types/PlayStatus");
-const VersionToProtocol = require("./utils/VersionToProtocol");
+const PlayerJoinHandler = require("./network/handlers/PlayerJoinHandler");
+const PacketHandler = require("./network/handlers/PacketHandler");
 
 const Query = require("./query/Query");
 const World = require("./world/World");
@@ -102,34 +99,8 @@ async function _listen() {
 			},
 		}).on("connect", (client) => {
 			client.on("join", () => {
-				Frog.eventEmitter.emit("playerPreConnectEvent", {
-					player: client,
-					server: this,
-					cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
-						client.kick(reason);
-					},
-				});
-
-				client.__queue = client.queue;
-				client.queue = (packetName, data) => {
-					let shouldQueue = true;
-
-					Frog.eventEmitter.emit("packetQueue", {
-						player: client,
-						server: this,
-						packetName,
-						packetData: data,
-						cancel: () => {
-							shouldQueue = false;
-						},
-					});
-
-					if (shouldQueue) {
-						client.__queue(packetName, data);
-					}
-				};
-
-				_onJoin(client);
+				const joinHandler = new PlayerJoinHandler
+				joinHandler.onPlayerJoin(client);
 			});
 
 			client.on("packet", (packet) => {
@@ -146,98 +117,6 @@ async function _listen() {
 
 		process.exit(config.dev.crashCode);
 	}
-}
-
-/**
- * Executes, when player joins the server
- *
- * @param {Client} client
- * @private
- */
-async function _onJoin(client) {
-	await PlayerInit.initPlayer(client, server);
-
-	Object.assign(client, {
-		items: [],
-		location: {
-			x: 0,
-			y: 100,
-			z: 0,
-			onGround: false,
-			pitch: 0,
-			yaw: 0,
-		},
-		inventory: {
-			lastKnownItemNetworkId: 0,
-			lastKnownItemRuntimeId: 0,
-			items: [],
-		},
-		offline: false,
-		kicked: false,
-		health: 20,
-		hunger: 20,
-		packetCount: 0,
-		username: client.profile.name,
-		gamemode: Frog.serverConfigurationFiles.config.world.gamemode,
-		world: null,
-		op: null,
-		dead: false,
-		chunksEnabled: true,
-		networkChunksLoop: null,
-		hungerLossLoop: null,
-		initialised: false,
-		isConsole: false,
-		fallDamageQueue: 0,
-		ip: client.connection.address.split("/")[0],
-		port: client.connection.address.split("/")[1],
-	});
-
-	setInterval(() => {
-		client.packetCount = 0;
-	}, 1000);
-
-	PlayerInfo.addPlayer(client);
-
-	if (PlayerInfo.players.length > config.maxPlayers) {
-		const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.getKey("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL;
-		client.kick(kickMessage);
-		return;
-	}
-
-	const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
-
-	if (!config.dev.multiProtocol) {
-		if (config.dev.useLegacyVersionMismatchKickMessage) {
-			if (client.version !== serverProtocol) {
-				const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version);
-				client.kick(kickMessage);
-				return;
-			}
-		} else {
-			if (client.version > serverProtocol) {
-				client.sendPlayStatus(PlayStatus.FAILED_SERVER, true);
-				return;
-			} else if (client.version < serverProtocol) {
-				client.sendPlayStatus(PlayStatus.FAILED_CLIENT, true);
-				return;
-			}
-		}
-	}
-
-	const responsePackInfo = new ResponsePackInfo();
-	responsePackInfo.setMustAccept(true);
-	responsePackInfo.setHasScripts(false);
-	responsePackInfo.setBehaviorPacks([]);
-	responsePackInfo.setTexturePacks([]);
-	responsePackInfo.writePacket(client);
-
-	Frog.eventEmitter.emit("playerJoin", {
-		player: client,
-		server: this,
-		cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
-			client.kick(reason);
-		},
-	});
 }
 
 module.exports = {

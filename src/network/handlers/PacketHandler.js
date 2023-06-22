@@ -16,13 +16,13 @@
 const fs = require("fs");
 const path = require("path");
 
-const Frog = require("../Frog");
+const Frog = require("../../Frog");
 
-const Logger = require("../server/Logger");
+const Logger = require("../../server/Logger");
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../../utils/Language");
 
-const PacketHandlingException = require("../utils/exceptions/PacketHandlingException");
+const PacketHandlingException = require("../../utils/exceptions/PacketHandlingException");
 
 class PacketHandler {
 	/**
