@@ -13,7 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-unused-vars */
 const { Client } = require("bedrock-protocol");
 
 const Frog = require("../../Frog");
