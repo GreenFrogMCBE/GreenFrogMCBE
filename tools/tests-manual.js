@@ -15,6 +15,7 @@
  */
 /* eslint-disable no-empty */
 const rl = require("readline");
+const fs = require("fs");
 
 const ClientJoin = require("../test/ClientJoin");
 const ClientMessage = require("../test/ClientSendMessage");
@@ -22,7 +23,6 @@ const ClientCommand = require("../test/ClientRunCommand");
 const StartServer = require("../test/StartServer");
 const TestConfigs = require("../test/TestConfigs");
 const Query = require("../test/Query");
-const fs = require("fs");
 
 if (!fs.existsSync("../config.yml")) {
 	const config = fs.readFileSync("../src/internalResources/defaultConfig.yml");
