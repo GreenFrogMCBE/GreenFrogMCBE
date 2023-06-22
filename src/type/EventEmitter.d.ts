@@ -16,6 +16,18 @@
 import { EventEmitter } from "events";
 
 declare function on(eventName: "blockBreak", listener: (...args: any[]) => void): void;
+declare function on(eventName: "queryListen", listener: (...args: any[]) => void): void;
+declare function on(eventName: "queryStart", listener: (...args: any[]) => void): void;
+declare function on(eventName: "queryError", listener: (...args: any[]) => void): void;
+declare function on(eventName: "queryTokenGeneration", listener: (...args: any[]) => void): void;
+declare function on(eventName: "queryInvalidPacket", listener: (...args: any[]) => void): void;
+declare function on(eventName: "queryHandshakePacket", listener: (...args: any[]) => void): void;
+declare function on(eventName: "queryFullInfoPacket", listener: (...args: any[]) => void): void;
+declare function on(eventName: "queryBasicInfoPacket", listener: (...args: any[]) => void): void;
+declare function on(eventName: "scoreboardCreation", listener: (...args: any[]) => void): void;
+declare function on(eventName: "scoreboardSetScore", listener: (...args: any[]) => void): void;
+declare function on(eventName: "scoreboardScoreDelete", listener: (...args: any[]) => void): void;
+declare function on(eventName: "scoreboardDelete", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetRead", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetReadError", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetRateLimitReached", listener: (...args: any[]) => void): void;
@@ -47,18 +59,6 @@ declare function on(eventName: "serverSetHealth", listener: (...args: any[]) => 
 declare function on(eventName: "serverCriticalError", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverStart", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverListen", listener: (...args: any[]) => void): void;
-declare function on(eventName: "queryListen", listener: (...args: any[]) => void): void;
-declare function on(eventName: "queryStart", listener: (...args: any[]) => void): void;
-declare function on(eventName: "queryError", listener: (...args: any[]) => void): void;
-declare function on(eventName: "queryTokenGeneration", listener: (...args: any[]) => void): void;
-declare function on(eventName: "queryInvalidPacket", listener: (...args: any[]) => void): void;
-declare function on(eventName: "queryHandshakePacket", listener: (...args: any[]) => void): void;
-declare function on(eventName: "queryFullInfoPacket", listener: (...args: any[]) => void): void;
-declare function on(eventName: "queryBasicInfoPacket", listener: (...args: any[]) => void): void;
-declare function on(eventName: "scoreboardCreation", listener: (...args: any[]) => void): void;
-declare function on(eventName: "scoreboardSetScore", listener: (...args: any[]) => void): void;
-declare function on(eventName: "scoreboardScoreDelete", listener: (...args: any[]) => void): void;
-declare function on(eventName: "scoreboardDelete", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerFallDamage", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerRegeneration", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerDeath", listener: (...args: any[]) => void): void;
