@@ -115,7 +115,7 @@ module.exports = {
 	 * Starts the server
 	 */
 	async start() {
-		Frog.eventEmitter.emit('serverStart', { error: e })
+		Frog.eventEmitter.emit('serverStart', { })
 
 		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
 		await assert(parseInt(config.world.randomTickSpeed), NaN);
