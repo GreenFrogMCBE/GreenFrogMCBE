@@ -200,7 +200,6 @@ module.exports = {
 
 		setInterval(() => {
 			const world = new World();
-
 			world.tick();
 		}, parseInt(config.world.randomTickSpeed));
 	},
