@@ -186,7 +186,6 @@ module.exports = {
 					version: String(config.serverInfo.version),
 				}
 
-				Frog.eventEmitter.emit('queryListen', { query, querySettings })
 				query.start(querySettings);
 			} catch (e) {
 				Frog.eventEmitter.emit('queryError', { error: e })
