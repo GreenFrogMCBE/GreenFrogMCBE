@@ -55,6 +55,8 @@ class Query {
 	 * @returns {number}
 	 */
 	_generateToken() {
+		Frog.eventEmitter('queryTokenGeneration', { })
+
 		const min = Math.ceil(1000000);
 		return Math.floor(Math.random() * (Math.floor(9999999) - min + 1) + min);
 	}
