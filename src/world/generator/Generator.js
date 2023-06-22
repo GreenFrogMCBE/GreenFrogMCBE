@@ -14,8 +14,10 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /* eslint-disable no-unused-vars */
+const { Client } = require("bedrock-protocol");
 
 const Frog = require("../../Frog");
+
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
 
 class Generator {
@@ -39,6 +41,7 @@ class Generator {
 
 	/**
 	 * Generates chunks
+	 * @param {Client} player
 	 */
 	generate(player) {
 		Frog.eventEmitter('generatorGeneratingWorld', { player, server: Frog.getServer() })
