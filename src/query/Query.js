@@ -44,8 +44,8 @@ class Query {
 			Logger.info(getKey("query.server.listening").replace("%s%", `/${address.address}:${address.port}`));
 		});
 
-		this.socket.on("message", (msg, rinfo) => {
-			this._handle(msg, rinfo);
+		this.socket.on("message", (msg, remoteInfo) => {
+			this._handle(msg, remoteInfo);
 		});
 	}
 
@@ -65,57 +65,57 @@ class Query {
 	 * Handles query packets
 	 *
 	 * @param {Buffer} msg
-	 * @param {dgram.RemoteInfo} rinfo
+	 * @param {dgram.RemoteInfo} remoteInfo
 	 */
-	_handle(msg, rinfo) {
+	_handle(msg, remoteInfo) {
 		const magic = msg.readUInt16BE(0);
 		const type = msg.readUInt8(2);
 
 		if (magic !== 0xfefd) {
-			Frog.eventEmitter.emit('queryInvalidPacket', { type, magic, msg, rinfo })
+			Frog.eventEmitter.emit('queryInvalidPacket', { type, magic, msg, remoteInfo })
 
-			Logger.warning(getLanguage("query.server.network.invalidPacket").replace("%s%", `${rinfo.address}`));
+			Logger.warning(getLanguage("query.server.network.invalidPacket").replace("%s%", `${remoteInfo.address}`));
 			return;
 		}
 
-		if ((this.clientTokens.has(rinfo.address) && this.clientTokens.get(rinfo.address).expiresAt < Date.now()) || !this.clientTokens.has(rinfo.address)) {
-			Logger.info(getLanguage("query.server.network.generatingToken").replace("%s%", `${rinfo.address}`));
+		if ((this.clientTokens.has(remoteInfo.address) && this.clientTokens.get(remoteInfo.address).expiresAt < Date.now()) || !this.clientTokens.has(remoteInfo.address)) {
+			Logger.info(getLanguage("query.server.network.generatingToken").replace("%s%", `${remoteInfo.address}`));
 
-			this.clientTokens.set(rinfo.address, {
+			this.clientTokens.set(remoteInfo.address, {
 				token: this._generateToken(),
 				expiresAt: Date.now() + 30 * 1000,
 			});
 		}
 
 		if (type === 0x09) {
-			Frog.eventEmitter.emit('queryHandshakePacket', { type, magic, msg, rinfo })
+			Frog.eventEmitter.emit('queryHandshakePacket', { type, magic, msg, remoteInfo })
 
-			Logger.info(getLanguage("query.server.network.packets.handshake").replace("%s%", `${rinfo.address}`));
-			this._sendHandshake(rinfo, msg);
+			Logger.info(getLanguage("query.server.network.packets.handshake").replace("%s%", `${remoteInfo.address}`));
+			this._sendHandshake(remoteInfo, msg);
 		} else if (type === 0x00 && msg.length == 15) {
-			Frog.eventEmitter.emit('queryFullInfoPacket', { type, magic, msg, rinfo })
+			Frog.eventEmitter.emit('queryFullInfoPacket', { type, magic, msg, remoteInfo })
 
-			Logger.info(getLanguage("query.server.network.packets.fullInfo").replace("%s%", `${rinfo.address}`));
-			this._sendFullInfo(rinfo, msg);
+			Logger.info(getLanguage("query.server.network.packets.fullInfo").replace("%s%", `${remoteInfo.address}`));
+			this._sendFullInfo(remoteInfo, msg);
 		} else if (type === 0x00 && msg.length == 11) {
-			Frog.eventEmitter.emit('queryBasicInfoPacket', { type, magic, msg, rinfo })
+			Frog.eventEmitter.emit('queryBasicInfoPacket', { type, magic, msg, remoteInfo })
 
-			Logger.info(getLanguage("query.server.network.packets.basicInfo").replace("%s%", `${rinfo.address}`));
-			this._sendBasicInfo(rinfo, msg);
+			Logger.info(getLanguage("query.server.network.packets.basicInfo").replace("%s%", `${remoteInfo.address}`));
+			this._sendBasicInfo(remoteInfo, msg);
 		}
 	}
 
 	/**
 	 * Sends the handshake packet
 	 *
-	 * @param {Buffer} rinfo
+	 * @param {Buffer} remoteInfo
 	 * @param {dgram.RemoteInfo} msg
 	 */
-	_sendHandshake(rinfo, msg) {
+	_sendHandshake(remoteInfo, msg) {
 		const sessionID = msg.readInt32BE(3);
-		const clientToken = this.clientTokens.get(rinfo.address).token;
+		const clientToken = this.clientTokens.get(remoteInfo.address).token;
 
-		if (!this.clientTokens.has(rinfo.address) || this.clientTokens.get(rinfo.address).expiresAt < Date.now()) {
+		if (!this.clientTokens.has(remoteInfo.address) || this.clientTokens.get(remoteInfo.address).expiresAt < Date.now()) {
 			return;
 		}
 
@@ -124,7 +124,7 @@ class Query {
 
 		const data = buffer.toBuffer();
 
-		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
+		this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 			if (err) {
 				Frog.eventEmitter.emit.emit('queryError', { error: err })
 				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
@@ -135,14 +135,14 @@ class Query {
 	/**
 	 * Sends the basic info packet
 	 *
-	 * @param {dgram.RemoteInfo} rinfo
+	 * @param {dgram.RemoteInfo} remoteInfo
 	 * @param {Buffer} message
 	 */
-	_sendBasicInfo(rinfo, message) {
+	_sendBasicInfo(remoteInfo, message) {
 		const sessionID = message.readInt32BE(3);
-		const clientToken = this.clientTokens.get(rinfo.address).token;
+		const clientToken = this.clientTokens.get(remoteInfo.address).token;
 
-		if (!this.clientTokens.has(rinfo.address) || this.clientTokens.get(rinfo.address).expiresAt < Date.now() || clientToken !== this.clientTokens.get(rinfo.address).token) {
+		if (!this.clientTokens.has(remoteInfo.address) || this.clientTokens.get(remoteInfo.address).expiresAt < Date.now() || clientToken !== this.clientTokens.get(remoteInfo.address).token) {
 			return;
 		}
 
@@ -152,7 +152,7 @@ class Query {
 
 		const data = buffer.toBuffer();
 
-		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
+		this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 			if (err) {
 				Frog.eventEmitter.emit.emit('queryError', { error: err })
 				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
@@ -163,14 +163,14 @@ class Query {
 	/**
 	 * Sends the full info packet
 	 *
-	 * @param {dgram.RemoteInfo} rinfo
+	 * @param {dgram.RemoteInfo} remoteInfo
 	 * @param {Buffer} message
 	 */
-	_sendFullInfo(rinfo, message) {
+	_sendFullInfo(remoteInfo, message) {
 		const sessionID = message.readInt32BE(3);
-		const clientToken = this.clientTokens.get(rinfo.address).token;
+		const clientToken = this.clientTokens.get(remoteInfo.address).token;
 
-		if (!this.clientTokens.has(rinfo.address) || this.clientTokens.get(rinfo.address).expiresAt < Date.now() || clientToken !== this.clientTokens.get(rinfo.address).token) {
+		if (!this.clientTokens.has(remoteInfo.address) || this.clientTokens.get(remoteInfo.address).expiresAt < Date.now() || clientToken !== this.clientTokens.get(remoteInfo.address).token) {
 			return;
 		}
 
@@ -207,7 +207,7 @@ class Query {
 		buffer.writeUInt8(0x00);
 
 		const data = buffer.toBuffer();
-		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
+		this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 			if (err) {
 				Frog.eventEmitter.emit.emit('queryError', { error: err })
 				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
