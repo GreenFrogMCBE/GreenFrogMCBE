@@ -93,7 +93,7 @@ class Query {
 			Logger.info(getLanguage("query.server.network.packets.handshake").replace("%s%", `${rinfo.address}`));
 			this._sendHandshake(rinfo, msg);
 		} else if (type === 0x00 && msg.length == 15) {
-			Frog.eventEmitter('queryInvalidPacket', { type, magic, msg, rinfo })
+			Frog.eventEmitter('queryFullInfoPacket', { type, magic, msg, rinfo })
 
 			Logger.info(getLanguage("query.server.network.packets.fullInfo").replace("%s%", `${rinfo.address}`));
 			this._sendFullInfo(rinfo, msg);

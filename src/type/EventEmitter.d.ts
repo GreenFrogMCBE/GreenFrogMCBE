@@ -53,7 +53,8 @@ declare function on(eventName: "queryError", listener: (...args: any[]) => void)
 declare function on(eventName: "queryTokenGeneration", listener: (...args: any[]) => void): void;
 declare function on(eventName: "queryInvalidPacket", listener: (...args: any[]) => void): void;
 declare function on(eventName: "queryHandshakePacket", listener: (...args: any[]) => void): void;
-// queryHandshakePacket
+declare function on(eventName: "queryFullInfoPacket", listener: (...args: any[]) => void): void;
+// queryFullInfoPacket
 declare function on(eventName: "scoreboardCreation", listener: (...args: any[]) => void): void;
 declare function on(eventName: "scoreboardSetScore", listener: (...args: any[]) => void): void;
 declare function on(eventName: "scoreboardScoreDelete", listener: (...args: any[]) => void): void;
