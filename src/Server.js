@@ -112,6 +112,7 @@ async function _listen() {
 		});
 
 		Frog.setServer(server);
+		Frog.eventEmitter.emit('serverListen', { server })
 
 		Logger.info(Language.getKey("network.server.listening.success").replace(`%s%`, `/${host}:${port}`));
 	} catch (e) {
@@ -170,7 +171,7 @@ module.exports = {
 			const query = new Query();
 
 			try {
-				query.start({
+				const querySettings = {
 					host: config.network.host,
 					port: config.query.port,
 					motd: config.serverInfo.motd,
@@ -181,7 +182,10 @@ module.exports = {
 					plugins: PluginManager.plugins,
 					wl: false, // wl stands for whitelist. TODO: Implement whitelist
 					version: String(config.serverInfo.version),
-				});
+				}
+
+				Frog.eventEmitter.emit('queryListen', { query, querySettings })
+				query.start(querySettings);
 			} catch (e) {
 				Logger.error(Language.getLanguage("query.server.listening.failed").replace("%s%", e.stack));
 			}
