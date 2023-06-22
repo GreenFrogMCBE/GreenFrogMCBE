@@ -15,6 +15,7 @@
  */
 /* eslint-disable no-unused-vars */
 
+const Frog = require("../../Frog");
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
 
 class Generator {
@@ -40,6 +41,8 @@ class Generator {
 	 * Generates chunks
 	 */
 	generate(player) {
+		Frog.eventEmitter('generatorGeneratingWorld', { player, server: Frog.getServer() })
+
 		const chunkRadius = player.world.getChunkRadius();
 
 		for (let x = player.location.x - chunkRadius; x <= player.location.x + chunkRadius; x++) {

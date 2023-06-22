@@ -24,6 +24,7 @@ declare function on(eventName: "queryInvalidPacket", listener: (...args: any[]) 
 declare function on(eventName: "queryHandshakePacket", listener: (...args: any[]) => void): void;
 declare function on(eventName: "queryFullInfoPacket", listener: (...args: any[]) => void): void;
 declare function on(eventName: "queryBasicInfoPacket", listener: (...args: any[]) => void): void;
+declare function on(eventName: "generatorGeneratingWorld", listener: (...args: any[]) => void): void;
 declare function on(eventName: "scoreboardCreation", listener: (...args: any[]) => void): void;
 declare function on(eventName: "scoreboardSetScore", listener: (...args: any[]) => void): void;
 declare function on(eventName: "scoreboardScoreDelete", listener: (...args: any[]) => void): void;
