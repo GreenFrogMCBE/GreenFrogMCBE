@@ -34,9 +34,9 @@ class Query {
 		Frog.eventEmitter.emit('queryStart', { queryInfo: info })
 
 		this.info = info;
-
 		this.socket.bind(this.info.port);
-		Frog.eventEmitter.emit('queryListen', { query, querySettings })
+
+		Frog.eventEmitter.emit('queryListen', { query: { info, socket }, querySettings })
 
 		this.socket.on("listening", () => {
 			const address = this.socket.address();
