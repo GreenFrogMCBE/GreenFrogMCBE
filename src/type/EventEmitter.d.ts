@@ -45,8 +45,11 @@ declare function on(eventName: "serverVelocityUpdate", listener: (...args: any[]
 declare function on(eventName: "serverSetXP", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetHealth", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverCriticalError", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverStart", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverListen", listener: (...args: any[]) => void): void;
 declare function on(eventName: "queryListen", listener: (...args: any[]) => void): void;
+declare function on(eventName: "queryError", listener: (...args: any[]) => void): void;
+// serverStart
 declare function on(eventName: "scoreboardCreation", listener: (...args: any[]) => void): void;
 declare function on(eventName: "scoreboardSetScore", listener: (...args: any[]) => void): void;
 declare function on(eventName: "scoreboardScoreDelete", listener: (...args: any[]) => void): void;

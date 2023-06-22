@@ -127,6 +127,8 @@ module.exports = {
 	 * Starts the server
 	 */
 	async start() {
+		Frog.eventEmitter.emit('serverStart', { error: e })
+
 		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
 		await assert(parseInt(config.world.randomTickSpeed), NaN);
 
@@ -187,6 +189,7 @@ module.exports = {
 				Frog.eventEmitter.emit('queryListen', { query, querySettings })
 				query.start(querySettings);
 			} catch (e) {
+				Frog.eventEmitter.emit('queryError', { error: e })
 				Logger.error(Language.getLanguage("query.server.listening.failed").replace("%s%", e.stack));
 			}
 		}
