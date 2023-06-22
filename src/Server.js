@@ -84,22 +84,10 @@ async function _listen() {
 	const { levelName, motd, maxPlayers, version } = config.serverInfo;
 	let { offlineMode } = config.serverInfo;
 
-	if (process.argv.includes("--test")) {
-		offlineMode = true;
-	}
+	if (process.argv.includes("--test")) offlineMode = true;
 
 	try {
-		server = FrogProtocol.createServer({
-			host,
-			port,
-			version,
-			offline: offlineMode,
-			maxPlayers,
-			motd: {
-				motd,
-				levelName,
-			},
-		}).on("connect", (client) => {
+		server = FrogProtocol.createServer({ host, port, version, offline: offlineMode, maxPlayers, motd: { motd, levelName, }, }).on("connect", (client) => {
 			client.on("join", () => {
 				const joinHandler = new PlayerJoinHandler
 				joinHandler.onPlayerJoin(client);
