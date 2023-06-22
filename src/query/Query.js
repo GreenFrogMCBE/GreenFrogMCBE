@@ -13,6 +13,8 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const Frog = require("../Frog")
+
 const Logger = require("../server/Logger");
 
 const { getLanguage, getKey } = require("../utils/Language");
@@ -29,6 +31,8 @@ class Query {
 	}
 
 	start(info) {
+		Frog.eventEmitter('queryStart')
+
 		this.info = info;
 		this.socket.bind(this.info.port);
 
