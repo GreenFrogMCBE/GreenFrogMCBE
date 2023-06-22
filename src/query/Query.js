@@ -126,6 +126,7 @@ class Query {
 
 		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
 			if (err) {
+				Frog.eventEmitter.emit('queryError', { error: err })
 				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
 			}
 		});
@@ -153,6 +154,7 @@ class Query {
 
 		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
 			if (err) {
+				Frog.eventEmitter.emit('queryError', { error: err })
 				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
 			}
 		});
@@ -207,6 +209,7 @@ class Query {
 		const data = buffer.toBuffer();
 		this.socket.send(data, 0, data.length, rinfo.port, rinfo.address, (err) => {
 			if (err) {
+				Frog.eventEmitter.emit('queryError', { error: err })
 				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
 			}
 		});
