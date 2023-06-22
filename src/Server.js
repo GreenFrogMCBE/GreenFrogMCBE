@@ -177,7 +177,7 @@ module.exports = {
 				query.start(querySettings);
 			} catch (e) {
 				Frog.eventEmitter.emit('queryError', { error: e })
-				Logger.error(Language.getLanguage("query.server.listening.failed").replace("%s%", e.stack));
+				Logger.error(Language.getKey("query.server.listening.failed").replace("%s%", e.stack));
 			}
 		}
 
