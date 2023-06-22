@@ -55,7 +55,7 @@ class Query {
 	 * @returns {number}
 	 */
 	_generateToken() {
-		Frog.eventEmitter('queryTokenGeneration', { })
+		Frog.eventEmitter('queryTokenGeneration', {})
 
 		const min = Math.ceil(1000000);
 		return Math.floor(Math.random() * (Math.floor(9999999) - min + 1) + min);
@@ -72,6 +72,8 @@ class Query {
 		const type = msg.readUInt8(2);
 
 		if (magic !== 0xfefd) {
+			Frog.eventEmitter('queryInvalidPacket', { type, magic, msg, rinfo })
+
 			Logger.warning(getLanguage("query.server.network.invalidPacket").replace("%s%", `${rinfo.address}`));
 			return;
 		}
