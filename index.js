@@ -13,10 +13,11 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-// Import required modules
 const fs = require("fs");
 const center = require("center-align");
+
 const Colors = require("./src/api/colors/Colors");
+
 const { convertConsoleColor } = require("./src/utils/ConsoleColorConvertor");
 
 // Print a centered header to the console
