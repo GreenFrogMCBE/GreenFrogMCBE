@@ -46,6 +46,8 @@ let isDebug = Frog.isDebug;
 async function _handleCriticalError(error) {
 	const { host, port } = config.network;
 
+	Frog.eventEmitter.emit('serverCriticalError', { error })
+
 	if (error.toString().includes("Server failed to start")) {
 		Logger.error(Language.getKey("network.server.listening.failed").replace("%s%", `${host}:${port}`).replace("%d%", error));
 		Logger.error(Language.getKey("network.server.listening.failed.otherServerRunning"));
