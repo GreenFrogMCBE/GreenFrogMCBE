@@ -31,7 +31,7 @@ class Query {
 	}
 
 	start(info) {
-		Frog.eventEmitter('queryStart', { queryInfo: info })
+		Frog.eventEmitter.emit('queryStart', { queryInfo: info })
 
 		this.info = info;
 
