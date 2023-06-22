@@ -80,6 +80,7 @@ class Query {
 
 		if ((this.clientTokens.has(rinfo.address) && this.clientTokens.get(rinfo.address).expiresAt < Date.now()) || !this.clientTokens.has(rinfo.address)) {
 			Logger.info(getLanguage("query.server.network.generatingToken").replace("%s%", `${rinfo.address}`));
+
 			this.clientTokens.set(rinfo.address, {
 				token: this._generateToken(),
 				expiresAt: Date.now() + 30 * 1000,
@@ -87,12 +88,18 @@ class Query {
 		}
 
 		if (type === 0x09) {
+			Frog.eventEmitter('queryHandshakePacket', { type, magic, msg, rinfo })
+
 			Logger.info(getLanguage("query.server.network.packets.handshake").replace("%s%", `${rinfo.address}`));
 			this._sendHandshake(rinfo, msg);
 		} else if (type === 0x00 && msg.length == 15) {
+			Frog.eventEmitter('queryInvalidPacket', { type, magic, msg, rinfo })
+
 			Logger.info(getLanguage("query.server.network.packets.fullInfo").replace("%s%", `${rinfo.address}`));
 			this._sendFullInfo(rinfo, msg);
 		} else if (type === 0x00 && msg.length == 11) {
+			Frog.eventEmitter('queryInvalidPacket', { type, magic, msg, rinfo })
+
 			Logger.info(getLanguage("query.server.network.packets.basicInfo").replace("%s%", `${rinfo.address}`));
 			this._sendBasicInfo(rinfo, msg);
 		}
