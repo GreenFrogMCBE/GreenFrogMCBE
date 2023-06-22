@@ -91,9 +91,7 @@ async function _listen() {
 			client.on("join", () => {
 				const joinHandler = new PlayerJoinHandler
 				joinHandler.onPlayerJoin(client);
-			});
-
-			client.on("packet", (packet) => {
+			}).on("packet", (packet) => {
 				const packetHandler = new PacketHandler();
 				packetHandler.handlePacket(client, packet);
 			});

@@ -51,7 +51,7 @@ class PacketHandler {
 	 * @returns {string} - The packets directory path.
 	 */
 	getPacketsDirectory() {
-		return path.join(__dirname, "packets");
+		return path.join(__dirname, "..", "packets");
 	}
 
 	/**
@@ -114,7 +114,7 @@ class PacketHandler {
 	 * @returns {string} - The packet file path.
 	 */
 	getPacketPath(directory, filename) {
-		return path.join(directory, filename);
+		return path.join(directory, "..", "packets", filename);
 	}
 
 	/**
@@ -243,15 +243,14 @@ class PacketHandler {
 	 * @param {Error} error - The error object.
 	 */
 	handlePacketError(client, error) {
-		client.kick(getKey("kickMessages.invalidPacket"));
+		Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
 
+		client.kick(getKey("kickMessages.invalidPacket"));
 		Frog.eventEmitter.emit("packetReadError", {
 			player: client,
 			error,
 			server: this,
 		});
-
-		Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
 	}
 }
 

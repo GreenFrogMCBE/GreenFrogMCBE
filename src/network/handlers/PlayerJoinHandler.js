@@ -20,16 +20,15 @@ class PlayerJoinHandler {
      * @param {Client} client - The client joining the server.
      */
     async onPlayerJoin(client) {
+        await this.initPlayer(client);
 
-        await initPlayer(client);
-
-        setupClientProperties(client);
-        setupClientIntervals(client);
-        addPlayer(client);
-        handleMaxPlayers(client);
-        handleVersionMismatch(client);
-        sendResponsePackInfo(client);
-        emitPlayerJoinEvent(client);
+        this.setupClientProperties(client);
+        this.setupClientIntervals(client);
+        this.addPlayer(client);
+        this.handleMaxPlayers(client);
+        this.handleVersionMismatch(client);
+        this.sendResponsePackInfo(client);
+        this.emitPlayerJoinEvent(client);
     }
 
     /**
