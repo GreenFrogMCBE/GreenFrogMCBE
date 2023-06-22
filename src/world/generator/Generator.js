@@ -13,7 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const { Client } = require("bedrock-protocol");
+const { Client } = require("frog-protocol");
 
 const Frog = require("../../Frog");
 

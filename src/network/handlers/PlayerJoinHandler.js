@@ -8,7 +8,7 @@ const ResponsePackInfo = require("../../network/packets/ServerResponsePackInfoPa
 const PlayStatus = require("../../network/packets/types/PlayStatus");
 const VersionToProtocol = require("../../utils/VersionToProtocol");
 
-const { Client } = require("bedrock-protocol");
+const { Client } = require("frog-protocol");
 
 let server = null;
 let config = Frog.serverConfigurationFiles.config;
