@@ -25,7 +25,8 @@ class PlayerJoinHandler {
         await this.initPlayer(client);
 
         if (!UsernameValidator.isUsernameValid(client.username) && config.dev.validateUsernames) {
-            client.kick("invalid username")
+            client.kick(Language.getKey("kickMessages.invalidUsername"))
+            return
         }
 
         this.setupClientIntervals(client);

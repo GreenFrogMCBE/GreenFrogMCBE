@@ -91,10 +91,11 @@
   "errors.nodeJS.tooOld.update": "Please update it to 14.0.0+, from https://nodejs.org/",
 
   "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
-  "kickMessages.serverFull": "disconnectionScreen.serverFull",
-  "kickMessages.versionMismatch": "Your client version does not match with the server version! Server is currently running on %s%",
-  "kickMessages.invalidPacket": "Invalid packet / Internal server error",
   "kickMessages.serverClosed": "Server closed",
+  "kickMessages.serverFull": "disconnectionScreen.serverFull",
+  "kickMessages.invalidPacket": "Invalid packet / Internal server error",
+  "kickMessages.invalidUsername": "Invalid or duplicate username",
+  "kickMessages.versionMismatch": "Your client version does not match with the server version! Server is currently running on %s%",
   "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",
   "kickMessages.wereKicked": "You were kicked from the game%s%",
 

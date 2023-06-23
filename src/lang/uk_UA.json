@@ -91,10 +91,10 @@
   "errors.nodeJS.tooOld.update": "Оновіть її до версії 14.0.0+ з https://nodejs.org/",
 
   "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
-  "kickMessages.serverFull": "disconnectionScreen.serverFull",
-  "kickMessages.versionMismatch": "Версія вашого клієнта не відповідає версії сервера! Сервер в даний момент працює на версії %s%",
-  "kickMessages.invalidPacket": "Недійсний пакет / Внутрішня помилка сервера",
   "kickMessages.serverClosed": "Сервер закритий",
+  "kickMessages.serverFull": "disconnectionScreen.serverFull",
+  "kickMessages.invalidPacket": "Недійсний пакет / Внутрішня помилка сервера",
+  "kickMessages.versionMismatch": "Версія вашого клієнта не відповідає версії сервера! Сервер в даний момент працює на версії %s%",
   "kickMessages.resourcePacksRefused": "Ви повинні прийняти ресурсні пакети, щоб приєднатися до цього сервера",
   "kickMessages.wereKicked": "Вас вигнали з гри%s%",
 
