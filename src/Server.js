@@ -84,7 +84,7 @@ async function _listen() {
 	const { levelName, motd, maxPlayers, version } = config.serverInfo;
 	let { offlineMode } = config.serverInfo;
 
-	if (Frog.isTest()) offlineMode = true;
+	if (Frog.isTest) offlineMode = true;
 
 	try {
 		server = FrogProtocol.createServer({ host, port, version, offline: offlineMode, maxPlayers, motd: { motd, levelName, }, }).on("connect", (client) => {
