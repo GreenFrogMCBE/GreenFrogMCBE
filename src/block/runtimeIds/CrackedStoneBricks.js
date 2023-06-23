@@ -19,8 +19,8 @@ const Block = require("./Block");
  * @type {import('../../type/RuntimeBlock')}
  */
 class CrackedStoneBricks extends Block {
-	getRuntimeID() {
-		return 5992;
+	getRuntimeId() {
+		return -2080260717;
 	}
 
 	getName() {

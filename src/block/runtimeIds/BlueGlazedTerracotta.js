@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../../type/RuntimeBlock')}
  */
-class RedstoneWire extends Block {
-	getRuntimeID() {
-		return 5690;
+class BlueGlazedTerracotta extends Block {
+	getRuntimeId() {
+		return -2106754178;
 	}
 
 	getName() {
-		return "redstone_wire";
+		return "blue_glazed_terracotta";
 	}
 }
 
-module.exports = RedstoneWire;
+module.exports = BlueGlazedTerracotta;

@@ -1,3 +1,3 @@
-# blockUpdate
+# Note
 
-IDs from this folder should be only used for the world.placeBlock() function
+To generate runtime ids, use this: https://github.com/greenfrogmc/BlockRuntimeIDDumper

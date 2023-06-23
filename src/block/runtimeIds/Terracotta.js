@@ -18,23 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../../type/RuntimeBlock')}
  */
-class CakeWithBrownCandle extends Block {
-	getRuntimeID() {
-		return 5547;
+class Terracotta extends Block {
+	getRuntimeId() {
+		return -336983999;
 	}
 
 	getName() {
-		return "cake_with_brown_candle";
-	}
-
-	/**
-	 * @type {{ glow: number }}
-	 */
-	getVariants() {
-		return {
-			glow: 5546,
-		};
+		return "terracotta";
 	}
 }
 
-module.exports = CakeWithBrownCandle;
+module.exports = Terracotta;

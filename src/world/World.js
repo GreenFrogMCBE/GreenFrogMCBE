@@ -190,7 +190,7 @@ class World {
 	 * @param {number} z - The Z-coordinate of the block.
 	 */
 	breakBlock(x, y, z) {
-		this.placeBlock(x, y, z, new Air().getRuntimeID());
+		this.placeBlock(x, y, z, new Air().getRuntimeId());
 	}
 
 	/**

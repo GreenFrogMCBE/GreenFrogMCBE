@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../../type/RuntimeBlock')}
  */
-class PolishedBlackStoneBrickStairs extends Block {
-	getRuntimeID() {
-		return 6607;
+class CrackedPolishedBlackStoneBricks extends Block {
+	getRuntimeId() {
+		return -1850412551;
 	}
 
 	getName() {
-		return "polished_blackstone_brick_stairs";
+		return "cracked_polished_blackstone_bricks";
 	}
 }
 
-module.exports = PolishedBlackStoneBrickStairs;
+module.exports = CrackedPolishedBlackStoneBricks;

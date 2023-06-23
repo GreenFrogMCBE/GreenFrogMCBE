@@ -18,24 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../../type/RuntimeBlock')}
  */
-class AndesiteWall extends Block {
-	getRuntimeID() {
-		return 3715;
+class Stone extends Block {
+	getRuntimeId() {
+		return -1706049077;
 	}
 
 	getName() {
-		return "andesite_wall";
-	}
-
-	/**
-	 * @returns {{ [variantName: string]: number }}
-	 */
-	getVariants() {
-		return {
-			direction_crossed: 3715,
-			direction_right: 3917,
-		};
+		return "stone";
 	}
 }
 
-module.exports = AndesiteWall;
+module.exports = Stone;

@@ -19,8 +19,8 @@ const Block = require("./Block");
  * @type {import('../../type/RuntimeBlock')}
  */
 class Basalt extends Block {
-	getRuntimeID() {
-		return 6660;
+	getRuntimeId() {
+		return 368734180;
 	}
 
 	getName() {

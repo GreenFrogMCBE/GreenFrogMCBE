@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../../type/RuntimeBlock')}
  */
-class HornCoralFanLeft extends Block {
-	getRuntimeID() {
-		return 5965;
+class CrackedDeepSlateTiles extends Block {
+	getRuntimeId() {
+		return 976881179;
 	}
 
 	getName() {
-		return "horn_coral_fan";
+		return "cracked_deepslate_tiles";
 	}
 }
 
-module.exports = HornCoralFanLeft;
+module.exports = CrackedDeepSlateTiles;

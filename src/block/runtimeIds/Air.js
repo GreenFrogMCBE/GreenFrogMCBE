@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../../type/RuntimeBlock')}
  */
 class Air extends Block {
-	getRuntimeID() {
+	getRuntimeId() {
 		return -1;
 	}
 

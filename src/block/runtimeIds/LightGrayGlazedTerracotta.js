@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../../type/RuntimeBlock')}
  */
-class NetherBrickWall extends Block {
-	getRuntimeID() {
-		return 4280;
+class LightGrayGlazedTerracotta extends Block {
+	getRuntimeId() {
+		return -1850412551;
 	}
 
 	getName() {
-		return "nether_brick_wall";
+		return "light_gray_glazed_terracotta";
 	}
 }
 
-module.exports = NetherBrickWall;
+module.exports = LightGrayGlazedTerracotta;

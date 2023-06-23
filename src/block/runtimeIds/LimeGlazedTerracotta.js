@@ -18,14 +18,14 @@ const Block = require("./Block");
 /**
  * @type {import('../../type/RuntimeBlock')}
  */
-class EnderChest extends Block {
-	getRuntimeID() {
-		return 6682;
+class LimeGlazedTerracotta extends Block {
+	getRuntimeId() {
+		return 379907727;
 	}
 
 	getName() {
-		return "ender_chest";
+		return "lime_glazed_terracotta";
 	}
 }
 
-module.exports = EnderChest;
+module.exports = LimeGlazedTerracotta;
