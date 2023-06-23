@@ -629,7 +629,6 @@ module.exports = {
 
 				const playerList = new PlayerList();
 				playerList.setType(PlayerListTypes.REMOVE);
-				console.log(player)
 				playerList.setUuid(player.profile.uuid);
 				playerList.writePacket(currentPlayer);
 			}
