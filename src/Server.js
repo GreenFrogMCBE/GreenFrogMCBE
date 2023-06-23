@@ -87,7 +87,17 @@ async function _listen() {
 	if (Frog.isTest) offlineMode = true;
 
 	try {
-		server = FrogProtocol.createServer({ host, port, version, offline: offlineMode, maxPlayers, motd: { motd, levelName, }, }).on("connect", (client) => {
+		server = FrogProtocol.createServer({
+			host,
+			port,
+			version,
+			offline: offlineMode,
+			maxPlayers,
+			motd: {
+				motd,
+				levelName,
+			},
+		}).on("connect", (client) => {
 			client.on("join", () => {
 				const joinHandler = new PlayerJoinHandler
 				joinHandler.onPlayerJoin(client);
@@ -113,7 +123,7 @@ module.exports = {
 	 * Starts the server
 	 */
 	async start() {
-		Frog.eventEmitter.emit('serverStart', { })
+		Frog.eventEmitter.emit('serverStart', {})
 
 		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
 		await assert(parseInt(config.world.randomTickSpeed), NaN);
