@@ -56,6 +56,13 @@ module.exports = {
 	isDebug: process.argv.includes("--debug") || getConfig().config.dev.debug,
 
 	/**
+	 * Returns if the server is running in the test workflow
+	 *
+	 * @returns {boolean}
+	 */
+	isTest: process.argv.includes("--test"),
+
+	/**
 	 * Returns the server object
 	 *
 	 * @returns {Server}

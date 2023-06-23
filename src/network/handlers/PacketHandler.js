@@ -251,6 +251,8 @@ class PacketHandler {
 			error,
 			server: this,
 		});
+
+		if ()
 	}
 }
 
