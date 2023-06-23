@@ -43,7 +43,7 @@ class Generator {
 	 * @param {Client} player
 	 */
 	generate(player) {
-		Frog.eventEmitter('generatorGeneratingWorld', { player, server: Frog.getServer() })
+		Frog.eventEmitter.emit('generatorGeneratingWorld', { player, server: Frog.getServer() })
 
 		const chunkRadius = player.world.getChunkRadius();
 
