@@ -9,6 +9,7 @@ const PlayStatus = require("../../network/packets/types/PlayStatus");
 const VersionToProtocol = require("../../utils/VersionToProtocol");
 
 const { Client } = require("frog-protocol");
+const UsernameValidator = require("../../player/UsernameValidator");
 
 let server = null;
 let config = Frog.serverConfigurationFiles.config;
@@ -20,9 +21,13 @@ class PlayerJoinHandler {
      * @param {Client} client - The client joining the server.
      */
     async onPlayerJoin(client) {
+        await this.setupClientProperties(client);
         await this.initPlayer(client);
 
-        this.setupClientProperties(client);
+        if (!UsernameValidator.isUsernameValid(client.username) && config.dev.validateUsernames) {
+            client.kick("invalid username")
+        }
+
         this.setupClientIntervals(client);
         this.addPlayer(client);
         this.handleMaxPlayers(client);

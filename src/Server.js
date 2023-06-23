@@ -99,7 +99,7 @@ async function _listen() {
 			},
 		}).on("connect", (client) => {
 			client.on("join", () => {
-				const joinHandler = new PlayerJoinHandler
+				const joinHandler = new PlayerJoinHandler()
 				joinHandler.onPlayerJoin(client);
 			}).on("packet", (packet) => {
 				const packetHandler = new PacketHandler();
