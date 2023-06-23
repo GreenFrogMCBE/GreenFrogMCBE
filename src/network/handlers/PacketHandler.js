@@ -243,16 +243,19 @@ class PacketHandler {
 	 * @param {Error} error - The error object.
 	 */
 	handlePacketError(client, error) {
-		Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
+		if (Frog.isTest()) {
+			throw error;
+		} else {
+			Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
+		}
 
 		client.kick(getKey("kickMessages.invalidPacket"));
+
 		Frog.eventEmitter.emit("packetReadError", {
 			player: client,
 			error,
 			server: this,
 		});
-
-		if ()
 	}
 }
 
