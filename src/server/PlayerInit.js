@@ -627,10 +627,11 @@ module.exports = {
 					continue;
 				}
 
-				const pl = new PlayerList();
-				pl.setType(PlayerListTypes.REMOVE);
-				pl.setUUID(player.profile.uuid);
-				pl.writePacket(currentPlayer);
+				const playerList = new PlayerList();
+				playerList.setType(PlayerListTypes.REMOVE);
+				console.log(player)
+				playerList.setUuid(player.profile.uuid);
+				playerList.writePacket(currentPlayer);
 			}
 
 			player.offline = true;

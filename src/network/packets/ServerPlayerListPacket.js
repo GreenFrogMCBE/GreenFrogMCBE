@@ -84,7 +84,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Sets the UUID of the player
 	 * @param {UUID} new_uuid The UUID to set for the player
 	 */
-	setUUID(new_uuid) {
+	setUuid(new_uuid) {
 		uuid = new_uuid;
 	}
 
