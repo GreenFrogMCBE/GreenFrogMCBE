@@ -50,7 +50,11 @@ const Commands = require("../../server/Commands");
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
 
+const creativeContent = require("../../internalResources/creativeContent.json")
 const dumpedTrimData = require("../../internalResources/trimData.json");
+const customItems = require("../../../world/custom_items.json")
+const entities = require("../../internalResources/entities.json")
+const biomes = require("../../internalResources/biomes.json")
 
 const { getKey } = require("../../utils/Language");
 
@@ -171,15 +175,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.writePacket(player);
 
 				const biomeDefinitionList = new ServerBiomeDefinitionListPacket();
-				biomeDefinitionList.setValue(require("../../internalResources/biomes.json"));
+				biomeDefinitionList.setValue(biomes);
 				biomeDefinitionList.writePacket(player);
 
 				const availableEntityids = new ServerAvailableEntityIdentifiersPacket();
-				availableEntityids.setValue(require("../../internalResources/entities.json"));
+				availableEntityids.setValue(entities);
 				availableEntityids.writePacket(player);
 
 				const creativeContent = new ServerCreativeContentPacket();
-				creativeContent.setItems(require("../../internalResources/creativeContent.json").items);
+				creativeContent.setItems(creativeContent.items);
 				creativeContent.writePacket(player);
 
 				const commandsEnabled = new ServerSetCommandsEnabledPacket();
@@ -215,7 +219,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				// This packet is used to create custom items
 				const itemcomponent = new ServerItemComponentPacket();
 				try {
-					itemcomponent.setItems(require("../../../world/custom_items.json").items);
+					itemcomponent.setItems(customItems.items);
 				} catch (error) {
 					Logger.warning(getKey("warning.customItems.loading.failed").replace("%s%", error.stack));
 					itemcomponent.setItems([]);
