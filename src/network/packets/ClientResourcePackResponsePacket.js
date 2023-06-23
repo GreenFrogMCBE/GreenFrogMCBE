@@ -50,11 +50,11 @@ const Commands = require("../../server/Commands");
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
 
-const creativeContent = require("../../internalResources/creativeContent.json")
+const availableEntitiesData = require("../../internalResources/entities.json")
+const creativeContentData = require("../../internalResources/creativeContent.json")
+const biomeDefinitionData = require("../../internalResources/biomes.json")
 const dumpedTrimData = require("../../internalResources/trimData.json");
 const customItems = require("../../../world/custom_items.json")
-const entities = require("../../internalResources/entities.json")
-const biomes = require("../../internalResources/biomes.json")
 
 const { getKey } = require("../../utils/Language");
 
@@ -175,15 +175,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.writePacket(player);
 
 				const biomeDefinitionList = new ServerBiomeDefinitionListPacket();
-				biomeDefinitionList.setValue(biomes);
+				biomeDefinitionList.setValue(biomeDefinitionData);
 				biomeDefinitionList.writePacket(player);
 
-				const availableEntityids = new ServerAvailableEntityIdentifiersPacket();
-				availableEntityids.setValue(entities);
-				availableEntityids.writePacket(player);
+				const availableEntityIds = new ServerAvailableEntityIdentifiersPacket();
+				availableEntityIds.setValue(availableEntitiesData);
+				availableEntityIds.writePacket(player);
 
 				const creativeContent = new ServerCreativeContentPacket();
-				creativeContent.setItems(creativeContent.items);
+				creativeContent.setItems(creativeContentData.items);
 				creativeContent.writePacket(player);
 
 				const commandsEnabled = new ServerSetCommandsEnabledPacket();
