@@ -126,8 +126,8 @@
   "chat.format.me": "* %s% %d%.",
   "chat.format.say": "[%s%] %d%.",
 
-  "chat.broadcasts.joined": "%s% приєднався до гри.",
-  "chat.broadcasts.left": "%s% покинув гру.",
+  "chat.broadcasts.joined": "§e%s% приєднався до гри",
+  "chat.broadcasts.left": "§e%s% покинув гру",
 
   "creativemenu.badPacket": "Не вдалося обробити запит ItemStackRequest від %s%. Помилка: %d%.",
 

@@ -309,7 +309,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							return; // Vanilla behaviour
 						}
 
-						playerInfo.sendMessage(getKey("chat.broadcasts.joined").replace("%s%", playerInfo.username));
+						playerInfo.sendMessage(getKey("chat.broadcasts.joined").replace("%s%", player.username));
 					}
 				}, 1000);
 		}
