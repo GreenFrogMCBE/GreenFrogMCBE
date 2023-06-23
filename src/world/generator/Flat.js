@@ -44,13 +44,13 @@ class Flat extends Generator {
 					const index = y * 16 * 16 + z * 16 + x;
 
 					if (x > 14 && y > -1 && y < 16) {
-						chunkData[index] = new Grass().getID();
+						chunkData[index] = new Grass().getId();
 					} else if (y < 18 && x < 11) {
-						chunkData[index] = new Air().getID();
+						chunkData[index] = new Air().getId();
 					} else if (y < 17 && x < 12) {
-						chunkData[index] = new Bedrock().getID();
+						chunkData[index] = new Bedrock().getId();
 					} else {
-						chunkData[index] = new Dirt().getID();
+						chunkData[index] = new Dirt().getId();
 					}
 				}
 			}
