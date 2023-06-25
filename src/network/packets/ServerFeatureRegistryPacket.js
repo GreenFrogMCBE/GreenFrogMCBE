@@ -15,7 +15,7 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let registry = [];
+let features = [];
 
 class ServerFeatureRegistryPacket extends PacketConstructor {
 	/**
