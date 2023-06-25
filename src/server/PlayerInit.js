@@ -617,7 +617,7 @@ module.exports = {
 		};
 
 		/**
-		 * Listens for player disconnects
+		 * Listens when a player leaves the server
 		 */
 		player.on("close", () => {
 			for (let i = 0; i < PlayerInfo.players.length; i++) {
