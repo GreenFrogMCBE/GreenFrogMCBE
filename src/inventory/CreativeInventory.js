@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../Frog");
-const InventoryType = require("../network/packets/types/InventoryType");
+const WindowType = require("../network/packets/types/WindowType");
 const ServerInventorySlotPacket = require("../network/packets/ServerInventorySlotPacket");
 const Logger = require("../server/Logger");
 const { getKey } = require("../utils/Language");
@@ -61,7 +61,7 @@ module.exports = {
 			if (firstAction.type_id === "place") {
 				const inventorySlotPacket = new ServerInventorySlotPacket();
 
-				inventorySlotPacket.setWindowId(InventoryType.INVENTORY);
+				inventorySlotPacket.setWindowId(WindowType.INVENTORY);
 				inventorySlotPacket.setSlot(firstAction.destination.slot);
 				inventorySlotPacket.setItemData({
 					network_id: player.inventory.lastKnownItemNetworkId,
