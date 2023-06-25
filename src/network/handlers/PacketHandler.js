@@ -182,7 +182,7 @@ class PacketHandler {
 	 */
 	processMatchingPacket(client, packet, packetData) {
 		let shouldReadPacket = true;
-		this.emitPacketReadEvent(client, packetData);
+		this.emitPacketReadEvent(client, packetInstance, packetData);
 
 		if (shouldReadPacket) {
 			this.readPacket(packet, client, packetData);
@@ -195,10 +195,11 @@ class PacketHandler {
 	 * @param {Client} client - The client object.
 	 * @param {*} packet - The packet object.
 	 */
-	emitPacketReadEvent(client, packet) {
+	emitPacketReadEvent(client, packetInstance, packetData) {
 		Frog.eventEmitter.emit("packetRead", {
 			client,
-			packet,
+			packetInstance,
+			packetData,
 			server: Frog.getServer(),
 		});
 	}
