@@ -21,7 +21,6 @@ const { getKey } = require("../utils/Language");
 const ServerInventorySlotPacket = require("../network/packets/ServerInventorySlotPacket");
 const WindowType = require("../network/packets/types/WindowType");
 
-
 module.exports = {
 	handle(player, packet) {
 		try {
