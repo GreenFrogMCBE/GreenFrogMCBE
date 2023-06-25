@@ -74,10 +74,10 @@ class PacketHandler {
 					throw this.createRateLimitException(client);
 				}
 
-				const packet = this.createPacketInstance(packetPath);
+				const packetInstance = this.createPacketInstance(packetPath);
 
-				if (this.isMatchingPacket(packet, packetData)) {
-					this.processMatchingPacket(client, packet, packetData);
+				if (this.isMatchingPacket(packetInstance, packetData)) {
+					this.processMatchingPacket(client, packetInstance, packetData);
 					exists = true;
 				}
 			}
@@ -177,10 +177,10 @@ class PacketHandler {
 	 * Processes a matching packet.
 	 *
 	 * @param {Client} client - The client object.
-	 * @param {*} packet - The matching packet object.
+	 * @param {*} packetInstance - The matching packet object.
 	 * @param {JSON} packetData - The packet parameters.
 	 */
-	processMatchingPacket(client, packet, packetData) {
+	processMatchingPacket(client, packetInstance, packetData) {
 		let shouldReadPacket = true;
 		this.emitPacketReadEvent(client, packetInstance, packetData);
 
