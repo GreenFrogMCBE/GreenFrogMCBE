@@ -74,12 +74,12 @@ class Query {
 		if (magic !== 0xfefd) {
 			Frog.eventEmitter.emit('queryInvalidPacket', { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo })
 
-			Logger.warning(getLanguage("query.server.network.invalidPacket").replace("%s%", `${remoteInfo.address}`));
+			Logger.warning(getKey("query.server.network.invalidPacket").replace("%s%", `${remoteInfo.address}`));
 			return;
 		}
 
 		if ((this.clientTokens.has(remoteInfo.address) && this.clientTokens.get(remoteInfo.address).expiresAt < Date.now()) || !this.clientTokens.has(remoteInfo.address)) {
-			Logger.info(getLanguage("query.server.network.generatingToken").replace("%s%", `${remoteInfo.address}`));
+			Logger.info(getKey("query.server.network.generatingToken").replace("%s%", `${remoteInfo.address}`));
 
 			this.clientTokens.set(remoteInfo.address, {
 				token: this._generateToken(),
@@ -90,17 +90,17 @@ class Query {
 		if (type === 0x09) {
 			Frog.eventEmitter.emit('queryHandshakePacket', { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo })
 
-			Logger.info(getLanguage("query.server.network.packets.handshake").replace("%s%", `${remoteInfo.address}`));
+			Logger.info(getKey("query.server.network.packets.handshake").replace("%s%", `${remoteInfo.address}`));
 			this._sendHandshake(remoteInfo, msg);
 		} else if (type === 0x00 && msg.length == 15) {
 			Frog.eventEmitter.emit('queryFullInfoPacket', { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo })
 
-			Logger.info(getLanguage("query.server.network.packets.fullInfo").replace("%s%", `${remoteInfo.address}`));
+			Logger.info(getKey("query.server.network.packets.fullInfo").replace("%s%", `${remoteInfo.address}`));
 			this._sendFullInfo(remoteInfo, msg);
 		} else if (type === 0x00 && msg.length == 11) {
 			Frog.eventEmitter.emit('queryBasicInfoPacket', { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo })
 
-			Logger.info(getLanguage("query.server.network.packets.basicInfo").replace("%s%", `${remoteInfo.address}`));
+			Logger.info(getKey("query.server.network.packets.basicInfo").replace("%s%", `${remoteInfo.address}`));
 			this._sendBasicInfo(remoteInfo, msg);
 		}
 	}
@@ -127,7 +127,7 @@ class Query {
 		this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 			if (err) {
 				Frog.eventEmitter.emit.emit('queryError', { query: { info: this.info, socket: this.socket }, error: err })
-				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
+				Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 			}
 		});
 	}
@@ -155,7 +155,7 @@ class Query {
 		this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 			if (err) {
 				Frog.eventEmitter.emit.emit('queryError', { query: { info: this.info, socket: this.socket }, error: err })
-				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
+				Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 			}
 		});
 	}
@@ -210,7 +210,7 @@ class Query {
 		this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 			if (err) {
 				Frog.eventEmitter.emit.emit('queryError', { query: { info: this.info, socket: this.socket }, error: err })
-				Logger.error(getLanguage("query.server.error").replace("%s%", err.stack));
+				Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 			}
 		});
 	}
