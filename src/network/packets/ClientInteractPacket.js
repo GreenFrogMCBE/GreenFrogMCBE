@@ -18,7 +18,7 @@ const ServerContainerOpenPacket = require("./ServerContainerOpenPacket");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const InventoryType = require("./types/InventoryType");
+const WindowType = require("./types/WindowType");
 const InteractType = require("../../world/types/InteractType");
 const WindowID = require("./types/WindowID");
 
@@ -63,7 +63,7 @@ class ClientInteractPacket extends PacketConstructor {
 
 				Frog.eventEmitter.emit("playerContainerOpen", {
 					windowID: WindowID.CREATIVE,
-					windowType: InventoryType.INVENTORY,
+					windowType: WindowType.INVENTORY,
 					isSentByServer: false,
 					runtimeID: 2,
 					player,
@@ -78,7 +78,7 @@ class ClientInteractPacket extends PacketConstructor {
 
 				const containerOpen = new ServerContainerOpenPacket();
 				containerOpen.setWindowId(WindowID.CREATIVE);
-				containerOpen.setWindowType(InventoryType.INVENTORY);
+				containerOpen.setWindowType(WindowType.INVENTORY);
 				containerOpen.setRuntimeEntityId(2);
 				containerOpen.setCoordinates(containerCoordinates.x, containerCoordinates.y, containerCoordinates.z);
 				containerOpen.writePacket(player);
