@@ -29,16 +29,16 @@ class PacketHandler {
 	 * Handles packets.
 	 *
 	 * @param {Client} client - The client object.
-	 * @param {JSON} packetParams - The packet parameters.
+	 * @param {JSON} packetData - The packet parameters.
 	 * @throws {PacketHandlingException} - If the client is rate-limited.
 	 */
-	handlePacket(client, packetParams) {
+	handlePacket(client, packetData) {
 		try {
 			const packetsDir = this.getPacketsDirectory();
-			const exists = this.checkForMatchingPackets(client, packetParams, packetsDir);
+			const exists = this.checkForMatchingPackets(client, packetData, packetsDir);
 
 			if (!exists && this.shouldLogUnhandledPackets()) {
-				this.handleUnhandledPacket(packetParams);
+				this.handleUnhandledPacket(packetData);
 			}
 		} catch (error) {
 			this.handlePacketError(client, error);
@@ -58,11 +58,11 @@ class PacketHandler {
 	 * Checks for matching packets in the directory.
 	 *
 	 * @param {Client} client - The client object.
-	 * @param {JSON} packetParams - The packet parameters.
+	 * @param {JSON} packetData - The packet parameters.
 	 * @param {string} packetsDir - The directory path for packets.
 	 * @returns {boolean} - Indicates if a matching packet was found.
 	 */
-	checkForMatchingPackets(client, packetParams, packetsDir) {
+	checkForMatchingPackets(client, packetData, packetsDir) {
 		let exists = false;
 
 		this.iteratePacketFiles(packetsDir, (filename) => {
@@ -76,8 +76,8 @@ class PacketHandler {
 
 				const packet = this.createPacketInstance(packetPath);
 
-				if (this.isMatchingPacket(packet, packetParams)) {
-					this.processMatchingPacket(client, packet, packetParams);
+				if (this.isMatchingPacket(packet, packetData)) {
+					this.processMatchingPacket(client, packet, packetData);
 					exists = true;
 				}
 			}
@@ -166,11 +166,11 @@ class PacketHandler {
 	 * Checks if the packet matches the packet parameters.
 	 *
 	 * @param {*} packet - The packet object.
-	 * @param {JSON} packetParams - The packet parameters.
+	 * @param {JSON} packetData - The packet parameters.
 	 * @returns {boolean} - Indicates if the packet matches the parameters.
 	 */
-	isMatchingPacket(packet, packetParams) {
-		return packet.getPacketName() === packetParams.data.name;
+	isMatchingPacket(packet, packetData) {
+		return packet.getPacketName() === packetData.data.name;
 	}
 
 	/**
@@ -178,14 +178,14 @@ class PacketHandler {
 	 *
 	 * @param {Client} client - The client object.
 	 * @param {*} packet - The matching packet object.
-	 * @param {JSON} packetParams - The packet parameters.
+	 * @param {JSON} packetData - The packet parameters.
 	 */
-	processMatchingPacket(client, packet, packetParams) {
+	processMatchingPacket(client, packet, packetData) {
 		let shouldReadPacket = true;
-		this.emitPacketReadEvent(client, packet);
+		this.emitPacketReadEvent(client, packetData);
 
 		if (shouldReadPacket) {
-			this.readPacket(packet, client, packetParams);
+			this.readPacket(packet, client, packetData);
 		}
 	}
 
@@ -208,10 +208,10 @@ class PacketHandler {
 	 *
 	 * @param {*} packet - The packet object.
 	 * @param {Client} client - The client object.
-	 * @param {JSON} packetParams - The packet parameters.
+	 * @param {JSON} packetData - The packet parameters.
 	 */
-	readPacket(packet, client, packetParams) {
-		packet.readPacket(client, packetParams, this);
+	readPacket(packet, client, packetData) {
+		packet.readPacket(client, packetData, this);
 	}
 
 	/**
@@ -229,11 +229,11 @@ class PacketHandler {
 	/**
 	 * Handles an unhandled packet.
 	 *
-	 * @param {JSON} packetParams - The packet parameters.
+	 * @param {JSON} packetData - The packet parameters.
 	 */
-	handleUnhandledPacket(packetParams) {
+	handleUnhandledPacket(packetData) {
 		Logger.warning(getKey("network.packet.unhandledPacket"));
-		console.warn("%o", packetParams);
+		console.warn("%o", packetData);
 	}
 
 	/**
