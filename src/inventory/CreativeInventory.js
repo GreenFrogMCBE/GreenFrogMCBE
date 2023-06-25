@@ -24,6 +24,8 @@ const WindowType = require("../network/packets/types/WindowType");
 module.exports = {
 	handle(player, packet) {
 		try {
+			if (player.inventory.container.isOpen) return
+
 			const requests = packet.data.params.requests;
 			const firstRequest = requests[0];
 			const firstAction = firstRequest.actions[0];
