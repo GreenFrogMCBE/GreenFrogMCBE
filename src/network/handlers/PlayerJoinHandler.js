@@ -24,17 +24,26 @@ class PlayerJoinHandler {
         await this.setupClientProperties(client);
         await this.initPlayer(client);
 
-        if (!UsernameValidator.isUsernameValid(client.username) && config.dev.validateUsernames) {
-            client.kick(Language.getKey("kickMessages.invalidUsername"))
-            return
-        }
-
+        this.validateUsername(client)
         this.setupClientIntervals(client);
         this.addPlayer(client);
         this.handleMaxPlayers(client);
         this.handleVersionMismatch(client);
         this.sendResponsePackInfo(client);
         this.emitPlayerJoinEvent(client);
+    }
+
+
+    /**
+     * Validates the username of the client
+     * 
+     * @param {Client} client 
+     */
+    validateUsername(client) {
+        if (!UsernameValidator.isUsernameValid(client.username) && config.dev.validateUsernames) {
+            client.kick(Language.getKey("kickMessages.invalidUsername"))
+            return
+        }
     }
 
     /**

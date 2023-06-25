@@ -616,6 +616,10 @@ module.exports = {
 			dimensionPacket.writePacket(player);
 		};
 
+		player.openContainer = function () {
+
+		}
+
 		/**
 		 * Listens when a player leaves the server
 		 */
