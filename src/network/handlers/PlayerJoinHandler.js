@@ -1,7 +1,7 @@
 const Frog = require("../../Frog");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
-const PlayerInit = require("../../server/PlayerInit");
+const PlayerInit = require("../../player/PlayerInit");
 const Language = require("../../utils/Language");
 
 const ResponsePackInfo = require("../../network/packets/ServerResponsePackInfoPacket");
@@ -110,6 +110,18 @@ class PlayerJoinHandler {
                 lastKnownItemNetworkId: 0,
                 lastKnownItemRuntimeId: 0,
                 items: [],
+                container: {
+                    window: {
+                        id: null,
+                        type: null,
+                    },
+                    blockPosition: {
+                        x: null,
+                        y: null,
+                        z: null,
+                    },
+                    isOpen: false
+                }
             },
             offline: false,
             kicked: false,
