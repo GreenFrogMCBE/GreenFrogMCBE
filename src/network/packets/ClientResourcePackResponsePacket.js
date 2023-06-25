@@ -38,6 +38,7 @@ const ServerSetCommandsEnabledPacket = require("./ServerSetCommandsEnabledPacket
 const ServerClientCacheStatusPacket = require("./ServerClientCacheStatusPacket");
 const ServerResourcePackStackPacket = require("./ServerResourcePackStackPacket");
 const ServerCreativeContentPacket = require("./ServerCreativeContentPacket");
+const ServerFeatureRegistryPacket = require("./ServerFeatureRegistryPacket")
 const ServerItemComponentPacket = require("./ServerItemComponentPacket");
 const ServerPlayStatusPacket = require("./ServerPlayStatusPacket");
 const ServerPlayerListPacket = require("./ServerPlayerListPacket");
@@ -53,6 +54,7 @@ const World = require("../../world/World");
 const availableEntitiesData = require("../../internalResources/entities.json")
 const creativeContentData = require("../../internalResources/creativeContent.json")
 const biomeDefinitionData = require("../../internalResources/biomes.json")
+const featureRegistryData = require("../../internalResources/featureRegistry.json");
 const dumpedTrimData = require("../../internalResources/trimData.json");
 const customItems = require("../../../world/custom_items.json")
 
@@ -194,6 +196,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				trimData.setPatterns(dumpedTrimData.patterns);
 				trimData.setMaterials(dumpedTrimData.materials);
 				trimData.writePacket(player);
+
+				const featureRegistry = new ServerFeatureRegistryPacket()
+				featureRegistry.setFeatures(featureRegistryData.features)
+				featureRegistry.writePacket(player)
 
 				const clientCacheStatus = new ServerClientCacheStatusPacket();
 				clientCacheStatus.setEnabled(true);

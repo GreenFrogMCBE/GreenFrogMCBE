@@ -17,7 +17,7 @@ const Frog = require("../Frog")
 
 const Logger = require("../server/Logger");
 
-const { getLanguage, getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language");
 
 const { SmartBuffer } = require("@harmonytf/smart-buffer");
 const dgram = require("dgram");
