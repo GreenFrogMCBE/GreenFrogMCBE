@@ -14,10 +14,13 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../Frog");
-const WindowType = require("../network/packets/types/WindowType");
-const ServerInventorySlotPacket = require("../network/packets/ServerInventorySlotPacket");
 const Logger = require("../server/Logger");
+
 const { getKey } = require("../utils/Language");
+
+const ServerInventorySlotPacket = require("../network/packets/ServerInventorySlotPacket");
+const WindowType = require("../network/packets/types/WindowType");
+
 
 module.exports = {
 	handle(player, packet) {
