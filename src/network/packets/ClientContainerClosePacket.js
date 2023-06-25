@@ -17,7 +17,7 @@ const ServerContainerClosePacket = require("./ServerContainerClosePacket");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const WindowID = require("./types/WindowID");
+const WindowId = require("./types/WindowId");
 const Frog = require("../../Frog");
 
 class ClientContainerClosePacket extends PacketConstructor {
@@ -40,7 +40,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 		let shouldClose = true;
 
 		Frog.eventEmitter.emit("playerContainerClose", {
-			windowID: WindowID.CREATIVE,
+			windowID: WindowId.CREATIVE,
 			isSentByServer: false,
 			player,
 			packet,
@@ -54,7 +54,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 
 		const containerClose = new ServerContainerClosePacket();
 		containerClose.setServer(false);
-		containerClose.setWindowId(WindowID.CREATIVE);
+		containerClose.setWindowId(WindowId.CREATIVE);
 		containerClose.writePacket(player);
 	}
 }

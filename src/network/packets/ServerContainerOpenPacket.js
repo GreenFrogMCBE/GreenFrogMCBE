@@ -55,7 +55,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * It sets the window ID
-	 * @param {WindowID} new_window_id
+	 * @param {WindowId} new_window_id
 	 */
 	setWindowId(new_window_id) {
 		window_id = new_window_id;
