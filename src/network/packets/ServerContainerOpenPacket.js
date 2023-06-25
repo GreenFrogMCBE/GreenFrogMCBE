@@ -31,7 +31,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 
 	/**
 	 * Sets the coordinates of the container
-	 * If the container is creative menu then the coordinates are xyz: 0, 0, 0
+	 * If the container is "inventory" then the coordinates are xyz: 0, 0, 0
 	 *
 	 * @param {number} x
 	 * @param {number} y
@@ -57,7 +57,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	 * It sets the window ID
 	 * @param {WindowID} new_window_id
 	 */
-	setWindowID(new_window_id) {
+	setWindowId(new_window_id) {
 		window_id = new_window_id;
 	}
 
@@ -73,7 +73,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	 * It returns the window ID
 	 * @returns {number} The window ID
 	 */
-	getWindowID() {
+	getWindowId() {
 		return window_id;
 	}
 
@@ -107,7 +107,7 @@ class ServerContainerOpenPacket extends PacketConstructor {
 	 */
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
-			window_id: this.getWindowID(),
+			window_id: this.getWindowId(),
 			window_type: this.getWindowType(),
 			coordinates: this.getCoordinates(),
 			runtime_entity_id: this.getRuntimeEntityId(),

@@ -61,7 +61,7 @@ module.exports = {
 			if (firstAction.type_id === "place") {
 				const inventorySlotPacket = new ServerInventorySlotPacket();
 
-				inventorySlotPacket.setWindowID(InventoryType.INVENTORY);
+				inventorySlotPacket.setWindowId(InventoryType.INVENTORY);
 				inventorySlotPacket.setSlot(firstAction.destination.slot);
 				inventorySlotPacket.setItemData({
 					network_id: player.inventory.lastKnownItemNetworkId,

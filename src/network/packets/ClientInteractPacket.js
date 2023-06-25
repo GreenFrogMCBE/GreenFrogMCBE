@@ -77,7 +77,7 @@ class ClientInteractPacket extends PacketConstructor {
 				if (!shouldOpen) return;
 
 				const containerOpen = new ServerContainerOpenPacket();
-				containerOpen.setWindowID(WindowID.CREATIVE);
+				containerOpen.setWindowId(WindowID.CREATIVE);
 				containerOpen.setWindowType(InventoryType.INVENTORY);
 				containerOpen.setRuntimeEntityId(2);
 				containerOpen.setCoordinates(containerCoordinates.x, containerCoordinates.y, containerCoordinates.z);

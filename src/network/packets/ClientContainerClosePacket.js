@@ -54,7 +54,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 
 		const containerClose = new ServerContainerClosePacket();
 		containerClose.setServer(false);
-		containerClose.setWindowID(WindowID.CREATIVE);
+		containerClose.setWindowId(WindowID.CREATIVE);
 		containerClose.writePacket(player);
 	}
 }
