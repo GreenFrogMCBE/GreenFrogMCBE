@@ -22,6 +22,7 @@ const Logger = require("../../server/Logger");
 
 const { getKey } = require("../../utils/Language");
 
+const PacketConstructor = require("../packets/PacketConstructor");
 const PacketHandlingException = require("../../utils/exceptions/PacketHandlingException");
 
 class PacketHandler {
@@ -177,7 +178,7 @@ class PacketHandler {
 	 * Processes a matching packet.
 	 *
 	 * @param {Client} client - The client object.
-	 * @param {*} packetInstance - The matching packet object.
+	 * @param {PacketConstructor} packetInstance - The matching packet object.
 	 * @param {JSON} packetData - The packet parameters.
 	 */
 	processMatchingPacket(client, packetInstance, packetData) {
@@ -185,7 +186,7 @@ class PacketHandler {
 		this.emitPacketReadEvent(client, packetInstance, packetData);
 
 		if (shouldReadPacket) {
-			this.readPacket(packet, client, packetData);
+			this.readPacket(packetInstance, client, packetData);
 		}
 	}
 
