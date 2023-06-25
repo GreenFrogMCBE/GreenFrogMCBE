@@ -134,8 +134,8 @@ class PacketHandler {
 	 */
 	handlePacketRatelimit(client) {
 		Frog.eventEmitter.emit("packetRatelimit", {
-			player: client,
-			server: this,
+			client,
+			server: Frog.getServer(),
 		});
 	}
 
@@ -197,9 +197,9 @@ class PacketHandler {
 	 */
 	emitPacketReadEvent(client, packet) {
 		Frog.eventEmitter.emit("packetRead", {
-			player: client,
-			data: packet.data,
-			server: this,
+			client,
+			packet,
+			server: Frog.getServer(),
 		});
 	}
 
@@ -252,9 +252,9 @@ class PacketHandler {
 		client.kick(getKey("kickMessages.invalidPacket"));
 
 		Frog.eventEmitter.emit("packetReadError", {
-			player: client,
+			client,
 			error,
-			server: this,
+			server: Frog.getServer(),
 		});
 	}
 }
