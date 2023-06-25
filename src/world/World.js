@@ -42,7 +42,7 @@ class World {
 		 *
 		 * @type {{ x: number, y: number, z: number }}
 		 */
-		this.coords = {};
+		this.coordinates = {};
 
 		/**
 		 * The chunk render radius.
@@ -112,7 +112,7 @@ class World {
 	 * @param {number} z - The z-coordinate of the spawn point.
 	 */
 	setSpawnCoordinates(x, y, z) {
-		this.coords = { x, y, z };
+		this.coordinates = { x, y, z };
 	}
 
 	/**
@@ -121,7 +121,7 @@ class World {
 	 * @returns {{ x: number, y: number, z: number }} - The coordinates of the spawn point.
 	 */
 	ReturnspawnCoordinates() {
-		return this.coords;
+		return this.coordinates;
 	}
 
 	/**
@@ -287,7 +287,7 @@ class World {
 		return {
 			name: this.worldName,
 			chunk_radius: this.renderDistance,
-			spawn_coordinates: this.coords,
+			spawn_coordinates: this.coordinates,
 			generator: this.generator,
 		};
 	}
