@@ -63,7 +63,7 @@ class ClientInteractPacket extends PacketConstructor {
 
 				Frog.eventEmitter.emit("playerContainerOpen", {
 					windowID: WindowId.CREATIVE,
-					windowType: WindowType.INVENTORY,
+					windowType: WindowType.CREATIVEINVENTORY,
 					isSentByServer: false,
 					runtimeID: 2,
 					player,
@@ -78,7 +78,7 @@ class ClientInteractPacket extends PacketConstructor {
 
 				const containerOpen = new ServerContainerOpenPacket();
 				containerOpen.setWindowId(WindowId.CREATIVE);
-				containerOpen.setWindowType(WindowType.INVENTORY);
+				containerOpen.setWindowType(WindowType.CREATIVEINVENTORY);
 				containerOpen.setRuntimeEntityId(2);
 				containerOpen.setCoordinates(containerCoordinates.x, containerCoordinates.y, containerCoordinates.z);
 				containerOpen.writePacket(player);
