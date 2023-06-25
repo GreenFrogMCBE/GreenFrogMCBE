@@ -48,6 +48,10 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 const Frog = require("../Frog");
 
 const { getKey } = require("../utils/Language");
+const Chest = require("../block/runtimeIds/Chest");
+const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket");
+const WindowId = require("../network/packets/types/WindowId");
+const WindowType = require("../network/packets/types/WindowType");
 
 /** @private */
 let lang = Frog.serverConfigurationFiles.lang;
@@ -617,7 +621,44 @@ module.exports = {
 		};
 
 		player.openContainer = function () {
+			let shouldPreCreateInventoryContainer = true
 
+			Frog.eventEmitter.emit('inventoryContainerPreCreate', {
+				player: player,
+				server: Frog.getServer(),
+				cancel: () => {
+					shouldPreCreateInventoryContainer = false
+				}
+			})
+
+			if (!shouldPreCreateInventoryContainer) return
+
+			player.inventory.container.blockPosition = { x: player.location.x, y: player.location.y + 3, z: player.location.z }
+			player.inventory.container.window = { id: WindowId.CHEST, type: WindowType.CONTAINER }
+
+			let shouldCreateInventoryContainer = true
+
+			Frog.eventEmitter.emit('inventoryContainerCreate', {
+				player: player,
+				inventory: player.inventory,
+				server: Frog.getServer(),
+				cancel: () => {
+					shouldCreateInventoryContainer = false
+				}
+			})
+
+			if (!shouldCreateInventoryContainer) return
+
+			player.world.placeBlock(player.inventory.container.blockPosition.x, player.inventory.container.blockPosition.y, player.inventory.container.blockPosition.z, new Chest().getRuntimeId())
+
+			const containerOpen = new ServerContainerOpenPacket();
+			containerOpen.setWindowId(player.inventory.container.window.id);
+			containerOpen.setWindowType(player.inventory.container.window.type);
+			containerOpen.setRuntimeEntityId(-1n);
+			containerOpen.setCoordinates(player.inventory.container.blockPosition.x, player.inventory.container.blockPosition.y, player.inventory.container.blockPosition.z);
+			containerOpen.writePacket(player);
+
+			player.inventory.container.isOpen = true
 		}
 
 		/**

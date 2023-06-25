@@ -17,6 +17,8 @@ const ServerContainerClosePacket = require("./ServerContainerClosePacket");
 
 const PacketConstructor = require("./PacketConstructor");
 
+const Air = require("../../block/runtimeIds/Air");
+
 const WindowId = require("./types/WindowId");
 const Frog = require("../../Frog");
 
@@ -51,6 +53,28 @@ class ClientContainerClosePacket extends PacketConstructor {
 		});
 
 		if (!shouldClose) return;
+
+		if (player.inventory.container.isOpen) {
+			let shouldRemoveTheChest = true
+
+			Frog.eventEmitter.emit('inventoryContainerChestRemoval', {
+				player: player,
+				server: Frog.getServer(),
+				cancel: () => {
+					shouldRemoveTheChest = false
+				}
+			})
+
+			if (!shouldRemoveTheChest) return
+
+			const { x, y, z } = player.inventory.container.blockPosition
+
+			player.world.placeBlock(x, y, z, new Air().getRuntimeId())
+
+			player.inventory.container.isOpen = false;
+			player.inventory.container.blockPosition = { x: null, y: null, z: null }
+			player.inventory.container.window = { id: null, type: null }
+		}
 
 		const containerClose = new ServerContainerClosePacket();
 		containerClose.setServer(false);
