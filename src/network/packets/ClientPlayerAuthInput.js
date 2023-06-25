@@ -19,7 +19,7 @@ const FallDamage = require("../../world/FallDamage");
 
 const PacketConstructor = require("./PacketConstructor");
 
-class ClientMovePacket extends PacketConstructor {
+class ClientPlayerAuthInput extends PacketConstructor {
 	/**
 	 * Returns the packet name
 	 * @returns {string}
@@ -74,4 +74,4 @@ class ClientMovePacket extends PacketConstructor {
 	}
 }
 
-module.exports = ClientMovePacket;
+module.exports = ClientPlayerAuthInput;
