@@ -35,6 +35,7 @@ const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion"
 const ServerPlayStatusPacket = require("../network/packets/ServerPlayStatusPacket");
 const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket");
 const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
+const ServerInventoryContentPacket = require("../network/packets/ServerInventoryContentPacket");
 
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
@@ -660,6 +661,49 @@ module.exports = {
 			containerOpen.writePacket(player);
 
 			player.inventory.container.isOpen = true
+		}
+
+		player.setContainerItem = function (networkId, blockRuntimeId, slot = 0, count = 1, extra = { "has_nbt": 0, "can_place_on": [], "can_destroy": [] }) {
+			let shouldGiveContainerItem = true
+
+			Frog.eventEmitter.emit('inventoryContainerGiveItem', {
+				player: player,
+				itemData: {
+					playerInventory: player.inventory,
+					networkId,
+					blockRuntimeId,
+					slot,
+					count,
+					extra
+				},
+				server: Frog.getServer(),
+				cancel: () => {
+					shouldGiveContainerItem = false
+				}
+			})
+
+			if (!shouldGiveContainerItem) return
+
+			let input = []
+
+			for (let i = 0; i < 27; i++) {
+				input.push({ network_id: 0, count: undefined, metadata: undefined, has_stack_id: undefined, stack_id: undefined, block_runtime_id: undefined, extra: undefined })
+			}
+
+			input[slot] = {
+				"network_id": networkId,
+				"count": count,
+				"metadata": 0,
+				"has_stack_id": 1,
+				"stack_id": 1,
+				"block_runtime_id": blockRuntimeId,
+				"extra": extra
+			}
+
+			const inventoryContent = new ServerInventoryContentPacket()
+			inventoryContent.setWindowId(WindowId.CHEST)
+			inventoryContent.setInput(input)
+			inventoryContent.writePacket(player)
 		}
 
 		/**

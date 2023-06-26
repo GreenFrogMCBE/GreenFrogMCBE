@@ -32,6 +32,7 @@ declare function on(eventName: "scoreboardDelete", listener: (...args: any[]) =>
 declare function on(eventName: "inventoryContainerPreCreate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "inventoryContainerCreate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "inventoryContainerChestRemoval", listener: (...args: any[]) => void): void;
+declare function on(eventName: "inventoryContainerGiveItem", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetRead", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetReadError", listener: (...args: any[]) => void): void;
 declare function on(eventName: "packetRateLimitReached", listener: (...args: any[]) => void): void;
