@@ -2,10 +2,12 @@
 
 node_modules/
 
-# Configs
+# Configs and some other stuff
 
 ops.yml
 config.yml
+crash-reports/
+world/
 
 # bedrock-protocol thing
 
@@ -17,7 +19,6 @@ plugins/
 pluginData/
 !types/plugins
 
-# Other
+# Fix that FallDamage.js is getting ignored
 
-crash-reports/
-world/
+!src/world/FallDamage.js

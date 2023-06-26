@@ -19,8 +19,8 @@ const Block = require("./Block");
  * @type {import('../../type/RuntimeBlock')}
  */
 class SmoothStone extends Block {
-	getRuntimeID() {
-		return 6896;
+	getRuntimeId() {
+		return 555751865;
 	}
 
 	getName() {

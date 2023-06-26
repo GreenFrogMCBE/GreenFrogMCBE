@@ -25,15 +25,15 @@ const WorldGenerators = require("../types/WorldGenerators");
 const Generator = require("./Generator");
 
 /** @private @type {number} */
-const dirt = new Dirt().getID();
+const dirt = new Dirt().getId();
 /** @private @type {number} */
-const grass = new Grass().getID();
+const grass = new Grass().getId();
 /** @private @type {number} */
-const air = new Air().getID();
+const air = new Air().getId();
 /** @private @type {number} */
-const bedrock = new Bedrock().getID();
+const bedrock = new Bedrock().getId();
 /** @private @type {number} */
-const stone = new Stone().getID();
+const stone = new Stone().getId();
 
 /** @private @type {Buffer} */
 let chunkData;
@@ -48,7 +48,7 @@ function _generateOre() {
 	let blockType;
 
 	if (Math.floor(Math.random() * 100) < 30) {
-		blockType = new CoalOre().getID();
+		blockType = new CoalOre().getId();
 	} else {
 		blockType = stone;
 	}

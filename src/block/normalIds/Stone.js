@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../../type/NormalBlock')}
  */
 class Stone extends Block {
-	getID() {
+	getId() {
 		return 1;
 	}
 

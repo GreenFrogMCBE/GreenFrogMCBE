@@ -18,7 +18,7 @@ class Block {
 	 * Returns the id of the block
 	 * @returns {number}
 	 */
-	getID() {
+	getId() {
 		return null;
 	}
 

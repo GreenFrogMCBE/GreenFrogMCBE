@@ -52,7 +52,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Returns the ID of the player
 	 * @returns {number} The ID of the player
 	 */
-	getID() {
+	getId() {
 		return id;
 	}
 
@@ -60,7 +60,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Sets the ID of the player
 	 * @param new_id
 	 */
-	setID(new_id) {
+	setId(new_id) {
 		id = new_id;
 	}
 
@@ -84,7 +84,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Sets the UUID of the player
 	 * @param {UUID} new_uuid The UUID to set for the player
 	 */
-	setUUID(new_uuid) {
+	setUuid(new_uuid) {
 		uuid = new_uuid;
 	}
 
@@ -100,7 +100,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Sets the xbox id of user
 	 * @param {string} id
 	 */
-	setXboxID(new_id) {
+	setXboxId(new_id) {
 		xboxid = new_id;
 	}
 
@@ -108,7 +108,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	 * Returns the xbox id of user
 	 * @returns {string}
 	 */
-	getXboxID() {
+	getXboxId() {
 		return xboxid;
 	}
 
@@ -139,9 +139,9 @@ class ServerPlayerListPacket extends PacketConstructor {
 					records: [
 						{
 							uuid: this.getUUID(),
-							entity_unique_id: "-" + this.getID(),
+							entity_unique_id: "-" + this.getId(),
 							username: this.getUsername(),
-							xbox_user_id: this.getXboxID(),
+							xbox_user_id: this.getXboxId(),
 							platform_chat_id: "",
 							build_platform: 7,
 							skin_data: require("../../internalResources/skinData.json"),

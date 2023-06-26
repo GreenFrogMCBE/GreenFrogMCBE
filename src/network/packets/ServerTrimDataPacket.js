@@ -66,7 +66,7 @@ class ServerTrimDataPacket extends PacketConstructor {
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			patterns: this.getPatterns(),
-            materials: this.getMaterials()
+			materials: this.getMaterials(),
 		});
 	}
 }

@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../../type/NormalBlock')}
  */
 class CoalOre extends Block {
-	getID() {
+	getId() {
 		return 16;
 	}
 

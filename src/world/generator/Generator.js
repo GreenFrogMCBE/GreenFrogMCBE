@@ -13,7 +13,9 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-unused-vars */
+const { Client } = require("frog-protocol");
+
+const Frog = require("../../Frog");
 
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
 
@@ -38,8 +40,11 @@ class Generator {
 
 	/**
 	 * Generates chunks
+	 * @param {Client} player
 	 */
 	generate(player) {
+		Frog.eventEmitter.emit('generatorGeneratingWorld', { player, server: Frog.getServer() })
+
 		const chunkRadius = player.world.getChunkRadius();
 
 		for (let x = player.location.x - chunkRadius; x <= player.location.x + chunkRadius; x++) {

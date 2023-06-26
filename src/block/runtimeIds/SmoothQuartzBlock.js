@@ -19,12 +19,12 @@ const Block = require("./Block");
  * @type {import('../../type/RuntimeBlock')}
  */
 class SmoothQuartzBlock extends Block {
-	getRuntimeID() {
-		return 6510;
+	getRuntimeId() {
+		return 1576086683;
 	}
 
 	getName() {
-		return "smooth_quartz_block";
+		return "cracked_stone_bricks";
 	}
 }
 

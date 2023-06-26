@@ -19,7 +19,7 @@ const Block = require("./Block");
  * @type {import('../../type/NormalBlock')}
  */
 class Bedrock extends Block {
-	getID() {
+	getId() {
 		return 7;
 	}
 

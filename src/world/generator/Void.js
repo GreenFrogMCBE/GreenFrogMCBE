@@ -31,7 +31,7 @@ class Flat extends Generator {
 	 * @returns {Buffer}
 	 */
 	getChunkData() {
-		return Buffer.alloc(16 * 256 * 16).fill(new Air().getID());
+		return Buffer.alloc(16 * 256 * 16).fill(new Air().getId());
 	}
 }
 

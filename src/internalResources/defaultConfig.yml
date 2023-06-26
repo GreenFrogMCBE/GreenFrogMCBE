@@ -13,6 +13,11 @@ chat:
   commandsDisabled: false
   blockInvalidMessages: true # Prevents players from using colors in chat or spam the chat with messages that are longer than 256 chars
   blockInvalidCommands: true # Same as 'blockInvalidMessages' but for commands
+query: # Query is a UDP protocol for querying server properties. More info at https://wiki.vg/Query
+  enabled: true
+  logPackets: false
+  logConnections: false
+  port: 19133
 dev:
   unstable: false # Makes your server not crash on critical errors
   debug: false
@@ -26,7 +31,8 @@ dev:
   # 2 - member
   # 1 - unknown
   # 0 - visitor
-  multiProtocol: false # Supports 1.19.<any sub versions or your version>. Some features may be broken
+  multiProtocol: false # Supports 1.20.<any sub versions or your version>. Some features may be broken
+  validateUsernames: true # Won't allow usernames that are too long/too short or duplicate usernames
   useLegacyVersionMismatchKickMessage: false # Instead of `Could not connect: Outdated client!` or `Could not connect: Outdated server!` it will say the value of `kickMessages.versionMismatch` in your lang file
   useLegacyServerFullKickMessage: false # Instead of `Wow this server is popular! Check back later to see if space opens up.`  it will say the value of `kickMessages.serverFull` in your lang file
 world:

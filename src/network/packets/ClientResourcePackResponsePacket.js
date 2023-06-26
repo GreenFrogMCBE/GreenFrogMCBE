@@ -38,6 +38,7 @@ const ServerSetCommandsEnabledPacket = require("./ServerSetCommandsEnabledPacket
 const ServerClientCacheStatusPacket = require("./ServerClientCacheStatusPacket");
 const ServerResourcePackStackPacket = require("./ServerResourcePackStackPacket");
 const ServerCreativeContentPacket = require("./ServerCreativeContentPacket");
+const ServerFeatureRegistryPacket = require("./ServerFeatureRegistryPacket")
 const ServerItemComponentPacket = require("./ServerItemComponentPacket");
 const ServerPlayStatusPacket = require("./ServerPlayStatusPacket");
 const ServerPlayerListPacket = require("./ServerPlayerListPacket");
@@ -50,7 +51,12 @@ const Commands = require("../../server/Commands");
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
 
-const dumpedTrimData = require("../../internalResources/trimData.json")
+const availableEntitiesData = require("../../internalResources/entities.json")
+const creativeContentData = require("../../internalResources/creativeContent.json")
+const biomeDefinitionData = require("../../internalResources/biomes.json")
+const featureRegistryData = require("../../internalResources/featureRegistry.json");
+const dumpedTrimData = require("../../internalResources/trimData.json");
+const customItems = require("../../../world/custom_items.json")
 
 const { getKey } = require("../../utils/Language");
 
@@ -171,15 +177,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.writePacket(player);
 
 				const biomeDefinitionList = new ServerBiomeDefinitionListPacket();
-				biomeDefinitionList.setValue(require("../../internalResources/biomes.json"));
+				biomeDefinitionList.setValue(biomeDefinitionData);
 				biomeDefinitionList.writePacket(player);
 
-				const availableEntityids = new ServerAvailableEntityIdentifiersPacket();
-				availableEntityids.setValue(require("../../internalResources/entities.json"));
-				availableEntityids.writePacket(player);
+				const availableEntityIds = new ServerAvailableEntityIdentifiersPacket();
+				availableEntityIds.setValue(availableEntitiesData);
+				availableEntityIds.writePacket(player);
 
 				const creativeContent = new ServerCreativeContentPacket();
-				creativeContent.setItems(require("../../internalResources/creativeContent.json").items);
+				creativeContent.setItems(creativeContentData.items);
 				creativeContent.writePacket(player);
 
 				const commandsEnabled = new ServerSetCommandsEnabledPacket();
@@ -188,8 +194,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				const trimData = new ServerTrimDataPacket();
 				trimData.setPatterns(dumpedTrimData.patterns);
-				trimData.setMaterials(dumpedTrimData.materials)
+				trimData.setMaterials(dumpedTrimData.materials);
 				trimData.writePacket(player);
+
+				const featureRegistry = new ServerFeatureRegistryPacket()
+				featureRegistry.setFeatures(featureRegistryData.features)
+				featureRegistry.writePacket(player)
 
 				const clientCacheStatus = new ServerClientCacheStatusPacket();
 				clientCacheStatus.setEnabled(true);
@@ -215,7 +225,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				// This packet is used to create custom items
 				const itemcomponent = new ServerItemComponentPacket();
 				try {
-					itemcomponent.setItems(require("../../../world/custom_items.json").items);
+					itemcomponent.setItems(customItems.items);
 				} catch (error) {
 					Logger.warning(getKey("warning.customItems.loading.failed").replace("%s%", error.stack));
 					itemcomponent.setItems([]);
@@ -242,10 +252,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							return;
 						}
 
-						if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return
+						if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
 
-						player.setHunger(player.hunger - 0.5)
-					}, 30000)
+						player.setHunger(player.hunger - 0.5);
+					}, 30000);
 
 					player.networkChunksLoop = setInterval(() => {
 						if (player.offline) {
@@ -273,11 +283,11 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						server,
 					});
 
-					player.setEntityData("breathing", true)
-					player.setEntityData("has_collision", true)
-					player.setEntityData("affected_by_gravity", true)
-					player.setEntityData("breathing", true)
-					player.setEntityData("can_climb", true)
+					player.setEntityData("breathing", true);
+					player.setEntityData("has_collision", true);
+					player.setEntityData("affected_by_gravity", true);
+					player.setEntityData("breathing", true);
+					player.setEntityData("can_climb", true);
 
 					Frog.__addPlayer();
 
@@ -291,9 +301,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							const playerList = new ServerPlayerListPacket();
 							playerList.setType(PlayerListTypes.ADD);
 							playerList.setUsername(player.username);
-							playerList.setXboxID(xuid);
-							playerList.setID(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-							playerList.setUUID(uuid);
+							playerList.setXboxId(xuid);
+							playerList.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
+							playerList.setUuid(uuid);
 							playerList.writePacket(onlineplayers);
 						}
 					}
@@ -305,7 +315,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							return; // Vanilla behaviour
 						}
 
-						playerInfo.sendMessage(getKey("chat.broadcasts.joined").replace("%s%", playerInfo.username));
+						playerInfo.sendMessage(getKey("chat.broadcasts.joined").replace("%s%", player.username));
 					}
 				}, 1000);
 		}

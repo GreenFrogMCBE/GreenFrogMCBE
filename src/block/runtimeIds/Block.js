@@ -18,7 +18,15 @@ class Block {
 	 * Returns the runtime id of the block
 	 * @returns {number}
 	 */
-	getRuntimeID() {
+	getRuntimeId() {
+		return null;
+	}
+
+	/**
+	 * Returns the network id of the block. Used for containers
+	 * @returns {number}
+	 */
+	getNetworkId() {
 		return null;
 	}
 
