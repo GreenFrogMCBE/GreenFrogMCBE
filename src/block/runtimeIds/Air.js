@@ -27,6 +27,10 @@ class Air extends Block {
 		return "air";
 	}
 
+	getNetworkId() {
+		return undefined
+	}
+
 	/**
 	 * @type {{ variant_1: number, variant_2: number }}
 	 */

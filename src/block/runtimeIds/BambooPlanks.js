@@ -13,38 +13,23 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-class Block {
-	/**
-	 * Returns the runtime id of the block
-	 * @returns {number}
-	 */
+const Block = require("./Block");
+
+/**
+ * @type {import('../../type/RuntimeBlock')}
+ */
+class BambooPlanks extends Block {
 	getRuntimeId() {
-		return null;
+		return -1843072030;
 	}
 
-	/**
-	 * Returns the network id of the block. Used for containers
-	 * @returns {number}
-	 */
 	getNetworkId() {
-		return null;
+		return -510;
 	}
 
-	/**
-	 * Returns the block name
-	 * @returns {string}
-	 */
-	getName() {
-		return null;
-	}
-
-	/**
-	 * Returns the block variants
-	 * @returns {JSON}
-	 */
-	getVariants() {
-		return null;
+    getName() {
+		return "bamboo_planks";
 	}
 }
 
-module.exports = Block;
+module.exports = BambooPlanks;
