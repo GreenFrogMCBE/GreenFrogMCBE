@@ -536,7 +536,7 @@ class ServerStartGamePacket extends PacketConstructor {
 			experiments_previously_used: false,
 			bonus_chest: false,
 			map_enabled: false,
-			permission_level: 4,
+			permission_level: this.getPlayerPermissionLevel(),
 			server_chunk_tick_range: 4,
 			has_locked_behavior_pack: false,
 			has_locked_resource_pack: false,
