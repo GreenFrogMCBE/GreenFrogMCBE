@@ -19,6 +19,8 @@ const Gamemode = require("../api/player/Gamemode");
 
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
+const Chest = require("../block/runtimeIds/Chest");
+
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
 const ServerChangedimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
 const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket");
@@ -31,10 +33,13 @@ const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket");
 const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket");
 const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
 const ServerPlayStatusPacket = require("../network/packets/ServerPlayStatusPacket");
+const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket");
 const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
 
 const PlayerList = require("../network/packets/ServerPlayerListPacket");
 const PlayerListTypes = require("../network/packets/types/PlayerList");
+const WindowId = require("../network/packets/types/WindowId");
+const WindowType = require("../network/packets/types/WindowType");
 
 const GarbageCollector = require("../utils/GarbageCollector");
 
@@ -48,10 +53,6 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 const Frog = require("../Frog");
 
 const { getKey } = require("../utils/Language");
-const Chest = require("../block/runtimeIds/Chest");
-const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket");
-const WindowId = require("../network/packets/types/WindowId");
-const WindowType = require("../network/packets/types/WindowType");
 
 /** @private */
 let lang = Frog.serverConfigurationFiles.lang;
