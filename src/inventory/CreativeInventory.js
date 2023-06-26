@@ -24,8 +24,6 @@ const WindowType = require("../network/packets/types/WindowType");
 module.exports = {
 	handle(player, packet) {
 		try {
-			if (player.inventory.container.isOpen) return
-
 			const requests = packet.data.params.requests;
 			const firstRequest = requests[0];
 			const firstAction = firstRequest.actions[0];
@@ -34,7 +32,7 @@ module.exports = {
 			if (firstAction && secondAction && secondAction.type_id === "results_deprecated") {
 				let shouldGiveItem = true;
 
-				Frog.eventEmitter.emit("playerPreItemStackRequest", {
+				Frog.eventEmitter.emit("inventoryPreItemRequest", {
 					count: firstAction.count,
 					network_id: secondAction.result_items[0].network_id,
 					block_runtime_id: secondAction.result_items[0].block_runtime_id,
@@ -54,7 +52,7 @@ module.exports = {
 					block_runtime_id: secondAction.result_items[0].block_runtime_id,
 				});
 
-				Frog.eventEmitter.emit("playerPostItemStackRequest", {
+				Frog.eventEmitter.emit("inventoryPostItemRequest", {
 					count: firstAction.count,
 					network_id: secondAction.result_items[0].network_id,
 					block_runtime_id: secondAction.result_items[0].block_runtime_id,

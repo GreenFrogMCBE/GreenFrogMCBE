@@ -13,36 +13,14 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Frog = require("../Frog");
 
-const GamemodeLegacy = require("../../api/player/GamemodeLegacy");
-
-const CreativeInventory = require("../../inventory/CreativeInventory");
-const ContainerInventory = require("../../inventory/ContainerInventory");
-
-class ClientItemStackRequestPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "item_stack_request";
-	}
-
-	/**
-	 * Reads the packet from player
-	 *
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 */
-	async readPacket(player, packet) {
-		if (player.inventory.container.isOpen) {
-			ContainerInventory.handle(player, packet)
-			return;
-		}
-
-		CreativeInventory.handle(player, packet);
-	}
-}
-
-module.exports = ClientItemStackRequestPacket;
+module.exports = {
+	handle(player, packet) {
+		Frog.eventEmitter.emit('inventoryContainerItemRequest', {
+			player,
+			packet,
+			server: Frog.server
+		})
+	},
+};
