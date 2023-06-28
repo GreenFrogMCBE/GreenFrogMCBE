@@ -20,4 +20,5 @@ module.exports = /** @type {const} */ ({
 
 	/** @deprecated */
 	CHANGE: this.UPDATE,
+	ADD: this.UPDATE
 });

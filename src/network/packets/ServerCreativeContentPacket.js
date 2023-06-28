@@ -13,42 +13,16 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-let items = [];
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerCreativeContentPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "creative_content";
-	}
+	name = "creative_content";
+	/** @type {Array} */
+	items = [];
 
-	/**
-	 * Sets the items list
-	 * @param {Array<JSON>} new_items - item list
-	 */
-	setItems(new_items) {
-		items = new_items;
-	}
-
-	/**
-	 * Returns the item list
-	 * @returns {Array<JSON>} Item list
-	 */
-	getItems() {
-		return items;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), {
-			items: this.getItems(),
+		client.queue(this.name, {
+			items: this.items,
 		});
 	}
 }

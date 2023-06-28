@@ -14,7 +14,7 @@ module.exports = {
      * @returns {boolean} Returns true if the username is a duplicate, false otherwise.
      */
     isDuplicate(username) {
-        return PlayerInfo.players.filter(player => player.username === username).length > 0;
+        return PlayerInfo.players.filter(player => player.username && !player.offline === username).length > 0;
     },
 
     /**

@@ -110,7 +110,7 @@ class CommandManager {
 		});
 
 		const availableCommandsPacket = new AvailableCommands();
-		availableCommandsPacket.setData(client.commands);
+		availableCommandsPacket.data = client.commands;
 		availableCommandsPacket.writePacket(client);
 	}
 }

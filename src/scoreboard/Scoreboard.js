@@ -15,10 +15,10 @@
  */
 const Random = require("../utils/Random");
 
-const CreteriaNames = require("./types/CreteriaNames");
-const DisplaySlots = require("./types/DisplaySlots");
-const EntryTypes = require("./types/EntryTypes");
-const ScoreActions = require("./types/ScoreActions");
+const CreteriaName = require("./types/CreteriaName");
+const DisplaySlot = require("./types/DisplaySlot");
+const EntryType = require("./types/EntryType");
+const ScoreAction = require("./types/ScoreAction");
 
 const ServerScoreboardObjectivePacket = require("../network/packets/ServerSetDisplayObjectivePacket");
 const ServerSetScorePacket = require("../network/packets/ServerSetScorePacket");
@@ -36,11 +36,11 @@ class Scoreboard {
 		/** @type {string} - The display name of the scoreboard. */
 		this.displayName = getKey("scoreboard.name.default");
 
-		/** @type {DisplaySlots} - The display slot of the scoreboard. */
-		this.displaySlot = DisplaySlots.SIDEBAR;
+		/** @type {DisplaySlot} - The display slot of the scoreboard. */
+		this.displaySlot = DisplaySlot.SIDEBAR;
 
-		/** @type {CreteriaNames} - The criteria name of the scoreboard. */
-		this.criteriaName = CreteriaNames.DUMMY;
+		/** @type {CreteriaName} - The criteria name of the scoreboard. */
+		this.criteriaName = CreteriaName.DUMMY;
 
 		/**
 		 * @type {string}
@@ -73,11 +73,11 @@ class Scoreboard {
 		if (!shouldCreateScoreboard) return;
 
 		const scoreboard = new ServerScoreboardObjectivePacket();
-		scoreboard.setCriteriaName(this.criteriaName);
-		scoreboard.setDisplayName(this.displayName);
-		scoreboard.setDisplaySlot(this.displaySlot);
-		scoreboard.setObjectiveName(this.objectiveName);
-		scoreboard.setSortOrder(this.sortOrder);
+		scoreboard.criteria_name = this.criteriaName;
+		scoreboard.display_name = this.displayName;
+		scoreboard.display_slot = this.displaySlot;
+		scoreboard.objective_name = this.objectiveName;
+		scoreboard.sort_order = this.sortOrder;
 		scoreboard.writePacket(this.player);
 	}
 
@@ -86,11 +86,11 @@ class Scoreboard {
 	 *
 	 * @param {number} score - The score to set.
 	 * @param {string} text - The text to display alongside the score.
-	 * @param {ScoreActions} [action=ScoreActions.UPDATE] - The action to perform when setting the score.
-	 * @param {EntryTypes} [entry_type=EntryTypes.TEXT] - The type of the score entry.
+	 * @param {ScoreAction} [action=ScoreAction.UPDATE] - The action to perform when setting the score.
+	 * @param {EntryType} [entry_type=EntryType.TEXT] - The type of the score entry.
 	 * @param {number} [entity_unique_id] - The unique ID of the entity associated with the score.
 	 */
-	setScore(score, text, entry_type = EntryTypes.TEXT, entity_unique_id = undefined) {
+	setScore(score, text, entry_type = EntryType.TEXT, entity_unique_id = undefined) {
 		let shouldSetScore = true;
 
 		Frog.eventEmitter.emit("scoreboardSetScore", {
@@ -104,8 +104,8 @@ class Scoreboard {
 		if (!shouldSetScore) return;
 
 		const setScorePacket = new ServerSetScorePacket();
-		setScorePacket.setAction(ScoreActions.UPDATE);
-		setScorePacket.setEntries([
+		setScorePacket.action = ScoreAction.UPDATE;
+		setScorePacket.entries = [
 			{
 				scoreboard_id: 1n,
 				objective_name: this.objectiveName,
@@ -114,7 +114,7 @@ class Scoreboard {
 				entity_unique_id: entity_unique_id,
 				custom_name: text,
 			},
-		]);
+		];
 		setScorePacket.writePacket(this.player);
 	}
 
@@ -137,17 +137,17 @@ class Scoreboard {
 		if (!shouldDeleteScore) return;
 
 		const setScorePacket = new ServerSetScorePacket();
-		setScorePacket.setAction(ScoreActions.REMOVE);
-		setScorePacket.setEntries([
+		setScorePacket.action = ScoreAction.REMOVE;
+		setScorePacket.entries = [
 			{
 				scoreboard_id: 1n,
 				objective_name: this.objectiveName,
 				score: score,
-				entry_type: EntryTypes.TEXT,
+				entry_type: EntryType.TEXT,
 				entity_unique_id: undefined,
 				custom_name: "",
 			},
-		]);
+		];
 		setScorePacket.writePacket(this.player);
 	}
 
@@ -168,7 +168,7 @@ class Scoreboard {
 		if (!shouldDelete) return;
 
 		const removeScoreboard = new ServerRemoveObjectivePacket();
-		removeScoreboard.setObjectiveName(this.objectiveName);
+		removeScoreboard.objective_name = this.objectiveName;
 		removeScoreboard.writePacket(this.player);
 	}
 }

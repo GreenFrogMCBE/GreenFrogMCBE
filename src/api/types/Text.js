@@ -14,7 +14,15 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-	LIST: "list",
-	SIDEBAR: "sidebar",
-	BELOWNAME: "belowname",
+	RAW: "raw",
+	CHAT: "chat",
+	TRANSLATION: "translation",
+	POPUP: "popup",
+	JUKEBOX_POPUP: "jukebox_popup",
+	TIP: "tip",
+	SYSTEM: "system",
+	WHISPER: "whisper",
+	ANNOUNCEMENT: "announcement",
+	OBJECT: "object",
+	OBJECT_WISPHER: "object_whisper",
 });

@@ -20,7 +20,7 @@ const Stone = require("../../block/normalIds/Stone");
 const Dirt = require("../../block/normalIds/Dirt");
 const Air = require("../../block/normalIds/Air");
 
-const WorldGenerators = require("../types/WorldGenerators");
+const WorldGenerator = require("../types/WorldGenerator");
 
 const Generator = require("./Generator");
 
@@ -58,10 +58,10 @@ function _generateOre() {
 
 class Default extends Generator {
 	/**
-	 * @returns {WorldGenerators.Flat}
+	 * @returns {WorldGenerator.Flat}
 	 */
 	getName() {
-		return WorldGenerators.FLAT;
+		return WorldGenerator.FLAT;
 	}
 
 	/**

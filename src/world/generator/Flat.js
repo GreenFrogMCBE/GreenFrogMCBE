@@ -18,7 +18,7 @@ const Dirt = require("../../block/normalIds/Dirt");
 const Grass = require("../../block/normalIds/Grass");
 const Bedrock = require("../../block/normalIds/Bedrock");
 
-const WorldGenerators = require("../types/WorldGenerators");
+const WorldGenerator = require("../types/WorldGenerator");
 
 const Generator = require("./Generator");
 
@@ -26,10 +26,10 @@ let chunkData;
 
 class Flat extends Generator {
 	/**
-	 * @returns {WorldGenerators.Flat}
+	 * @returns {WorldGenerator.Flat}
 	 */
 	getName() {
-		return WorldGenerators.FLAT;
+		return WorldGenerator.FLAT;
 	}
 
 	/**

@@ -46,9 +46,9 @@ async function createConfigFilesAndDebug() {
 
 		if (process.env.TEST) {
 			// TODO: Better way to do this
-			config = fs.readFileSync("../src/internalResources/defaultConfig.yml");
+			config = fs.readFileSync("../src/resources/defaultConfig.yml");
 		} else {
-			config = fs.readFileSync("./src/internalResources/defaultConfig.yml");
+			config = fs.readFileSync("./src/resources/defaultConfig.yml");
 		}
 
 		fs.writeFileSync("config.yml", config, () => {});

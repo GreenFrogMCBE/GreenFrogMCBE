@@ -13,62 +13,21 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ScoreActions = require("../../scoreboard/types/ScoreActions");
+const ScoreAction = require("../../scoreboard/types/ScoreAction");
 
 const PacketConstructor = require("./PacketConstructor");
 
-let action = ScoreActions.UNKNOWN;
-let entries = [];
-
 class ServerSetScorePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "set_score";
-	}
+	name = 'set_score';
+	/** @type {ScoreAction} */
+	action = ScoreAction.UNKNOWN;
+	/** @type {Array} */
+	entries = [];
 
-	/**
-	 * Sets the action of the scoreboard update
-	 * @param {ScoreActions} new_action The action to set
-	 */
-	setAction(new_action) {
-		action = new_action;
-	}
-
-	/**
-	 * Sets the entries of the scoreboard update
-	 * @param {Array} new_entries The entries to set
-	 */
-	setEntries(new_entries) {
-		entries = new_entries;
-	}
-
-	/**
-	 * Returns the scoreboard action
-	 * @returns {ScoreActions} The scoreboard action
-	 */
-	getAction() {
-		return action;
-	}
-
-	/**
-	 * Returns the scoreboard entries
-	 * @returns {Array} The scoreboard entries
-	 */
-	getEntries() {
-		return entries;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client The client to send the packet to
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), {
-			action: this.getAction(),
-			entries: this.getEntries(),
+		client.queue(this.name, {
+			action: this.action,
+			entries: this.entries,
 		});
 	}
 }

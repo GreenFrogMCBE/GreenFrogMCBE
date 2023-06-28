@@ -13,104 +13,25 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-let window_id = 0;
-let coordinates = {};
-let window_type;
-let runtime_entity_id = 0;
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerContainerOpenPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "container_open";
-	}
+	name = 'container_open'
+	/** @type {WindowId} */
+	window_id;
+	/** @type {JSON} */
+	coordinates;
+	/** @type {WindowType} */
+	window_type;
+	/** @type {number} */
+	runtime_entity_id;
 
-	/**
-	 * Sets the coordinates of the container
-	 * If the container is "inventory" then the coordinates are xyz: 0, 0, 0
-	 *
-	 * @param {number} x
-	 * @param {number} y
-	 * @param {number} z
-	 */
-	setCoordinates(x, y, z) {
-		coordinates = {
-			x: x,
-			y: y,
-			z: z,
-		};
-	}
-
-	/**
-	 * Sets the window type
-	 * @param {WindowTypes} new_window_type
-	 */
-	setWindowType(new_window_type) {
-		window_type = new_window_type;
-	}
-
-	/**
-	 * It sets the window ID
-	 * @param {WindowId} new_window_id
-	 */
-	setWindowId(new_window_id) {
-		window_id = new_window_id;
-	}
-
-	/**
-	 * It sets the runtime entity id
-	 * @param {string} new_runtime_entity_id
-	 */
-	setRuntimeEntityId(new_runtime_entity_id) {
-		runtime_entity_id = new_runtime_entity_id;
-	}
-
-	/**
-	 * It returns the window ID
-	 * @returns {number} The window ID
-	 */
-	getWindowId() {
-		return window_id;
-	}
-
-	/**
-	 * It returns the runtime entity ID
-	 * @returns {string} The runtime entity ID
-	 */
-	getCoordinates() {
-		return coordinates;
-	}
-
-	/**
-	 * Returns the window type
-	 * @returns {WindowType} The window type
-	 */
-	getWindowType() {
-		return window_type;
-	}
-
-	/**
-	 * Returns the runtime entity id
-	 * @returns {string} The runtime entity id
-	 */
-	getRuntimeEntityId() {
-		return runtime_entity_id;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), {
-			window_id: this.getWindowId(),
-			window_type: this.getWindowType(),
-			coordinates: this.getCoordinates(),
-			runtime_entity_id: this.getRuntimeEntityId(),
+		client.queue(this.name, {
+			window_id: this.window_id,
+			window_type: this.window_type,
+			coordinates: this.coordinates,
+			runtime_entity_id: this.runtime_entity_id,
 		});
 	}
 }

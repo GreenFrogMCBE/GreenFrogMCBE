@@ -20,29 +20,15 @@ const FallDamage = require("../../world/FallDamage");
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientPlayerAuthInputPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "player_auth_input";
-	}
+	name = 'player_auth_input';
 
-	/**
-	 * Reads the packet from player
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 * @param {Server} server
-	 */
 	async readPacket(player, packet, server) {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw } = packet.data.params;
 
-		if (player.x == x && player.y == y && player.z == z && player.yaw == yaw && player.pitch == pitch) return;
+		if (player.x === x && player.y === y && player.z === z && player.yaw === yaw && player.pitch === pitch) return;
 
 		let shouldSetPosition = true;
-
-		player.location.onGround = false;
 
 		Frog.eventEmitter.emit("playerMove", {
 			player,
@@ -71,6 +57,7 @@ class ClientPlayerAuthInputPacket extends PacketConstructor {
 		player.location.z = z;
 		player.location.yaw = yaw;
 		player.location.pitch = pitch;
+		player.location.onGround = false;
 	}
 }
 

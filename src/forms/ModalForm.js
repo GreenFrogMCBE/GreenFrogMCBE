@@ -13,16 +13,15 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-unused-vars */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
-const FormTypes = require("./FormTypes");
+const FormTypess = require("./types/FormTypes");
 
 class ModalForm {
 	constructor() {
 		/**
-		 * @type {FormTypes}
+		 * @type {FormTypess}
 		 *
-		 * @type {import("./FormTypes")}
+		 * @type {import("./types/FormTypes")}
 		 */
 		this.title = "";
 
@@ -52,7 +51,7 @@ class ModalForm {
 		 * @param {ModalForm} form
 		 * @param {Client} client
 		 */
-		this.onSend = (form, client) => {};
+		this.onSend = () => {};
 	}
 
 	/**
@@ -61,16 +60,16 @@ class ModalForm {
 	 * @param {Client} client
 	 */
 	send(client) {
-		const FormReq = new ServerFormRequestPacket();
-		FormReq.setType(FormTypes.MODALFORM);
-		FormReq.setId(this.id);
-		FormReq.setTitle(this.title);
-		FormReq.setContent(this.text);
-		FormReq.setButton1(this.button1);
-		FormReq.setButton2(this.button2);
-		FormReq.send(client);
-
 		this.onSend(this, client);
+
+		const FormRequestPacket = new ServerFormRequestPacket();
+		FormRequestPacket.type = FormTypess.MODAL_FORM;
+		FormRequestPacket.id = this.id;
+		FormRequestPacket.title = this.title;
+		FormRequestPacket.content = this.text;
+		FormRequestPacket.button1 = this.button1;
+		FormRequestPacket.button2 = this.button2;
+		FormRequestPacket.writePacket(client);
 	}
 }
 

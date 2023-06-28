@@ -29,20 +29,8 @@ const { getKey } = require("../../utils/Language");
 const CommandVerifier = require("../../utils/CommandVerifier");
 
 class ClientCommandRequestPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "command_request";
-	}
+	name = 'command_request'
 
-	/**
-	 * Reads the packet from client
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 * @param {Server} server
-	 */
 	async readPacket(player, packet, server) {
 		let executedCommand = packet.data.params.command.replace("/", "");
 

@@ -13,9 +13,9 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const UpdateBlock = require("../network/packets/ServerUpdateBlockPacket");
+const UpdateBlock = require("../network/packets/ServerupdateBlockPacket");
 
-const WorldGenerators = require("./types/WorldGenerators");
+const WorldGenerator = require("./types/WorldGenerator");
 const DamageCause = require("../api/health/DamageCause");
 const Gamemode = require("../api/player/Gamemode");
 
@@ -54,7 +54,7 @@ class World {
 		/**
 		 * The world generator
 		 *
-		 * @type {import('./types/WorldGenerators')}
+		 * @type {import('./types/WorldGenerator')}
 		 */
 		this.generator;
 	}
@@ -71,7 +71,7 @@ class World {
 	/**
 	 * Sets the world generator
 	 *
-	 * @param {import('./types/WorldGenerators')} generator
+	 * @param {import('./types/WorldGenerator')} generator
 	 */
 	setGenerator(generator) {
 		this.generator = generator;
@@ -170,15 +170,15 @@ class World {
 	 */
 	placeBlock(x, y, z, id) {
 		for (const player of this.getPlayersInWorld()) {
-			const updateblock = new UpdateBlock();
-			updateblock.setBlockRuntimeId(id);
-			updateblock.setX(x);
-			updateblock.setY(y);
-			updateblock.setZ(z);
-			updateblock.setNeighbors(true);
-			updateblock.setNetwork(true);
-			updateblock.setFlagsValue(3);
-			updateblock.writePacket(player);
+			const updateBlock = new UpdateBlock();
+			updateBlock.block_runtime_id = id;
+			updateBlock.x = x;
+			updateBlock.y = y;
+			updateBlock.z = z;
+			updateBlock.neighbors = true;
+			updateBlock.network = true;
+			updateBlock.flags_value = 3;
+			updateBlock.writePacket(player);
 		}
 	}
 
@@ -202,7 +202,7 @@ class World {
 		if (config.world.tickEvent) {
 			Frog.eventEmitter.emit("serverTick", {
 				world: this.getWorldData(),
-				server: require("../Server"),
+				server: Frog.getServer(),
 			});
 		}
 
@@ -211,7 +211,7 @@ class World {
 
 			Frog.eventEmitter.emit("serverTimeTick", {
 				world: this.getWorldData(),
-				server: require("../Server"),
+				server: Frog.getServer(),
 				time: this.getTime(),
 			});
 
@@ -225,7 +225,7 @@ class World {
 		if (config.world.tickRegeneration) {
 			Frog.eventEmitter.emit("serverRegenerationTick", {
 				world: this.getWorldData(),
-				server: require("../Server"),
+				server: Frog.getServer(),
 			});
 
 			for (const player of this.getPlayersInWorld()) {
@@ -238,7 +238,7 @@ class World {
 		if (config.world.tickStarvationDamage) {
 			Frog.eventEmitter.emit("serverStarvationDamageTick", {
 				world: this.getWorldData(),
-				server: require("../Server"),
+				server: Frog.getServer(),
 			});
 
 			for (const player of this.getPlayersInWorld()) {
@@ -251,7 +251,7 @@ class World {
 		if (config.world.tickVoid) {
 			Frog.eventEmitter.emit("serverVoidDamageTick", {
 				world: this.getWorldData(),
-				server: require("../Server"),
+				server: Frog.getServer(),
 			});
 
 			for (const client of this.getPlayersInWorld()) {
@@ -259,7 +259,7 @@ class World {
 
 				let min = -62;
 
-				if (config.world.generator === WorldGenerators.VOID) {
+				if (config.world.generator === WorldGenerator.VOID) {
 					min = undefined;
 				}
 

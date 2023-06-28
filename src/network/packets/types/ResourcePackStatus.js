@@ -16,6 +16,6 @@
 module.exports = /** @type {const} */ ({
 	NONE: "none",
 	REFUSED: "refused",
-	HAVEALLPACKS: "have_all_packs",
+	HAVE_ALL_PACKS: "have_all_packs",
 	COMPLETED: "completed",
 });

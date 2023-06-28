@@ -14,6 +14,6 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-	CREATIVEINVENTORY: "inventory",
+	CREATIVE_INVENTORY: "inventory",
 	CONTAINER: "container"
 });

@@ -20,20 +20,8 @@ const FallDamage = require("../../world/FallDamage");
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientMovePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "move_player";
-	}
+	name = 'move_player';
 
-	/**
-	 * Reads the packet from player
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 * @param {Server} server
-	 */
 	async readPacket(player, packet, server) {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw, on_ground } = packet.data.params;

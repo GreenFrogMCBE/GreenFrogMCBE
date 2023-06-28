@@ -15,60 +15,17 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let server_address;
-let port = 0;
-
 class ServerTransferPacket extends PacketConstructor {
-	/**
-	 * Returns the name of the packet.
-	 * @returns {string}.
-	 */
-	getPacketName() {
-		return "transfer";
-	}
-
-	/**
-	 * Sets the server address
-	 * @param {string} address
-	 */
-	setServerAddress(address) {
-		server_address = address;
-	}
-
-	/**
-	 * Sets the server port
-	 * @param {number} new_port
-	 */
-	setPort(new_port) {
-		port = new_port;
-	}
-
-	/**
-	 * Returns the server address.
-	 * @returns {string}
-	 */
-	getServerAddress() {
-		return server_address;
-	}
-
-	/**
-	 * Returns the server port.
-	 * @returns {number}
-	 */
-	getPort() {
-		return port;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
+	name = 'transfer'
+	/** @type {string} */
+	server_address;
+	/** @type {number} */
+	port;
+	
 	writePacket(client) {
-		this.validate(this.getServerAddress(), this.getPort());
-
 		client.queue(this.getPacketName(), {
-			server_address: this.getServerAddress(),
-			port: parseInt(this.getPort()),
+			server_address: this.server_address,
+			port: this.port,
 		});
 	}
 }

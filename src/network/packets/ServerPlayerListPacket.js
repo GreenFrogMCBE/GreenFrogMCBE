@@ -13,116 +13,30 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerListTypes = require("./types/PlayerList");
-
-let username;
-let uuid;
-let id = 0;
-let type = PlayerListTypes.ADD;
-let xboxid;
+const PlayerListType = require("./types/PlayerListType");
 
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerPlayerListPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "player_list";
-	}
+	name = 'player_list'
+	/** @type {string} */
+	username;
+	/** @type {string} */
+	uuid;
+	/** @type {number} */
+	id;
+	/** @type {PlayerList} */
+	type;
+	/** @type {number} */
+	xbox_id;
 
-	/**
-	 * Returns the player username
-	 * @returns {string} The player username
-	 */
-	getUsername() {
-		return username;
-	}
-
-	/**
-	 * Sets the player username
-	 * @param {string} new_username The player username
-	 */
-	setUsername(new_username) {
-		username = new_username;
-	}
-
-	/**
-	 * Returns the ID of the player
-	 * @returns {number} The ID of the player
-	 */
-	getId() {
-		return id;
-	}
-
-	/**
-	 * Sets the ID of the player
-	 * @param new_id
-	 */
-	setId(new_id) {
-		id = new_id;
-	}
-
-	/**
-	 * Returns the type of the packet
-	 * @returns {PlayerListTypes} The type
-	 */
-	getType() {
-		return type;
-	}
-
-	/**
-	 * Returns the UUID of the player
-	 * @returns {UUID} The UUID of the player
-	 */
-	getUUID() {
-		return uuid;
-	}
-
-	/**
-	 * Sets the UUID of the player
-	 * @param {UUID} new_uuid The UUID to set for the player
-	 */
-	setUuid(new_uuid) {
-		uuid = new_uuid;
-	}
-
-	/**
-	 * Sets the type
-	 * @param {PlayerListTypes} new_type The type. Valid types are ADD or REMOVE
-	 */
-	setType(new_type) {
-		type = new_type;
-	}
-
-	/**
-	 * Sets the xbox id of user
-	 * @param {string} id
-	 */
-	setXboxId(new_id) {
-		xboxid = new_id;
-	}
-
-	/**
-	 * Returns the xbox id of user
-	 * @returns {string}
-	 */
-	getXboxId() {
-		return xboxid;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
 		let data = null;
 
-		if (this.getType() === PlayerListTypes.REMOVE) {
+		if (this.getType() === PlayerListType.REMOVE) {
 			data = {
 				records: {
-					type: PlayerListTypes.REMOVE,
+					type: PlayerListType.REMOVE,
 					records_count: 1,
 					records: [
 						{
@@ -134,7 +48,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 		} else {
 			data = {
 				records: {
-					type: PlayerListTypes.ADD,
+					type: PlayerListType.ADD,
 					records_count: 1,
 					records: [
 						{
@@ -144,7 +58,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 							xbox_user_id: this.getXboxId(),
 							platform_chat_id: "",
 							build_platform: 7,
-							skin_data: require("../../internalResources/skinData.json"),
+							skin_data: require("../../resources/skinData.json"),
 							is_teacher: false,
 							is_host: false,
 						},

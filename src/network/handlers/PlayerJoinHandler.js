@@ -213,10 +213,10 @@ class PlayerJoinHandler {
      */
     sendResponsePackInfo(client) {
         const responsePackInfo = new ResponsePackInfo();
-        responsePackInfo.setMustAccept(true);
-        responsePackInfo.setHasScripts(false);
-        responsePackInfo.setBehaviorPacks([]);
-        responsePackInfo.setTexturePacks([]);
+        responsePackInfo.must_accept = false
+        responsePackInfo.has_scripts = false
+        responsePackInfo.behavior_packs = []
+        responsePackInfo.texture_packs = []
         responsePackInfo.writePacket(client);
     }
 

@@ -20,12 +20,14 @@ const Frog = require("../../Frog");
 
 const Biome = require("../../world/types/Biome");
 const PlayStatusType = require("./types/PlayStatus");
-const PlayerListTypes = require("./types/PlayerList");
+const Gamemode = require("../../api/player/Gamemode");
+const PlayerListType = require("./types/PlayerListType");
 const Dimension = require("../../world/types/Dimension");
 const Difficulty = require("../../api/types/Difficulty");
-const NetworkGenerator = require("../../world/types/NetworkGenerator");
+const MovementAuthority = require("./types/MovementAuthority");
+const GeneratorType = require("../../world/types/GeneratorType");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
-const WorldGenerators = require("../../world/types/WorldGenerators");
+const WorldGenerator = require("../../world/types/WorldGenerator");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
 
@@ -51,11 +53,14 @@ const Commands = require("../../server/Commands");
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
 
-const availableEntitiesData = require("../../internalResources/entities.json")
-const creativeContentData = require("../../internalResources/creativeContent.json")
-const biomeDefinitionData = require("../../internalResources/biomes.json")
-const featureRegistryData = require("../../internalResources/featureRegistry.json");
-const dumpedTrimData = require("../../internalResources/trimData.json");
+const defaultEntityData = require("../../resources/defaultEntityData.json").entityData
+const creativeContentData = require("../../resources/creativeContent.json").items
+const featureRegistryData = require("../../resources/featureRegistry.json");
+const itemStatesData = require("../../resources/itemStates.json").itemStates
+const gamerulesData = require("../../../world/gamerules.json").gamerules
+const availableEntitiesData = require("../../resources/entities.json")
+const biomeDefinitionData = require("../../resources/biomes.json")
+const dumpedTrimData = require("../../resources/trimData.json")
 const customItems = require("../../../world/custom_items.json")
 
 const { getKey } = require("../../utils/Language");
@@ -64,23 +69,10 @@ const { serverConfigurationFiles } = require("../../Frog");
 const { config } = serverConfigurationFiles;
 
 const WorldGenerationFailedException = require("../../utils/exceptions/WorldGenerationFailedException");
-const Gamemode = require("../../api/player/Gamemode");
 
 class ClientResourcePackResponsePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "resource_pack_client_response";
-	}
+	name = 'resource_pack_client_response'
 
-	/**
-	 * Reads the packet from the player
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 * @param {Server} server
-	 */
 	async readPacket(player, packet, server) {
 		const responseStatus = packet.data.params.response_status;
 
@@ -102,7 +94,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.refused").replace("%s%", player.username));
 				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
-			case ResourcePackStatus.HAVEALLPACKS:
+			case ResourcePackStatus.HAVE_ALL_PACKS:
 				Frog.eventEmitter.emit("playerHasAllResourcePacks", {
 					resourcePacksIds: [],
 					resourcePacksRequired: true,
@@ -113,12 +105,12 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.installed").replace("%s%", player.username));
 
 				const resourcePackStack = new ServerResourcePackStackPacket();
-				resourcePackStack.setMustAccept(false);
-				resourcePackStack.setBehaviorPacks([]);
-				resourcePackStack.setResourcePacks([]);
-				resourcePackStack.setGameVersion("");
-				resourcePackStack.setExperiments([]);
-				resourcePackStack.setExperimentsPreviouslyUsed(false);
+				resourcePackStack.must_accept = false;
+				resourcePackStack.behavior_packs = []
+				resourcePackStack.resource_packs = [];
+				resourcePackStack.game_version = "";
+				resourcePackStack.experiments = [];
+				resourcePackStack.experiments_previously_used = false;
 				resourcePackStack.writePacket(player);
 				break;
 			case ResourcePackStatus.COMPLETED:
@@ -128,18 +120,18 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				});
 
 				player.world = new World();
-				player.world.setChunkRadius(config.world.renderDistance);
-				player.world.setName(config.world.worldName);
+				player.world.renderDistance = config.world.renderDistance;
+				player.world.worldName = config.world.worldName;
 
 				switch (config.world.generator.toLowerCase()) {
 					case "default":
-						player.world.setGenerator(WorldGenerators.DEFAULT);
+						player.world.setGenerator(WorldGenerator.DEFAULT);
 						break;
 					case "flat":
-						player.world.setGenerator(WorldGenerators.FLAT);
+						player.world.setGenerator(WorldGenerator.FLAT);
 						break;
 					case "void":
-						player.world.setGenerator(WorldGenerators.VOid);
+						player.world.setGenerator(WorldGenerator.VOid);
 						break;
 					default:
 						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"));
@@ -159,50 +151,55 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.joined").replace("%s%", player.username));
 
 				const startGame = new ServerStartGamePacket();
-				startGame.setEntityID(0);
-				startGame.setRuntimeEntityId(1); // NOTE: In 1.20 mojang swiched to bald stuff and the runtime entity id should always be 1
-				startGame.setGamemode(config.world.gamemode);
-				startGame.setPlayerPosition(0, -48, 0);
-				startGame.setPlayerRotation(0, 0);
-				startGame.setSeed([0, 0]);
-				startGame.setBiomeType(0);
-				startGame.setBiomeName(Biome.PLAINS);
-				startGame.setDimension(Dimension.OVERWORLD);
-				startGame.setGenerator(NetworkGenerator.FLAT);
-				startGame.setWorldGamemode(config.world.worldGamemode);
-				startGame.setDifficulty(Difficulty.NORMAL);
-				startGame.setSpawnPosition(0, 0, 0);
-				startGame.setPlayerPermissionLevel(player.permissionLevel);
-				startGame.setWorldName(player.world.getName());
+				startGame.entity_id = 0;
+				startGame.runtime_entity_id = 1;
+				startGame.player_gamemode = config.world.gamemode;
+				startGame.player_position = { x: 0, y: -48, z: 0 }
+				startGame.rotation = { x: 0, z: 0 };
+				startGame.seed = [0, 0];
+				startGame.biome_type = 0;
+				startGame.biome_name = Biome.PLAINS;
+				startGame.dimension = Dimension.OVERWORLD;
+				startGame.generator = GeneratorType.FLAT;
+				startGame.world_gamemode = config.world.worldGamemode;
+				startGame.world = player.world.worldName
+				startGame.difficulty = Difficulty.NORMAL;
+				startGame.spawn_position = { x: 0, y: 0, z: 0 }
+				startGame.permission_level = player.permissionLevel;
+				startGame.world_name = player.world.getName();
+				startGame.game_version = "*"
+				startGame.movement_authority = MovementAuthority.SERVER
+				startGame.gamerules = gamerulesData
+				startGame.itemstates = itemStatesData
 				startGame.writePacket(player);
 
 				const biomeDefinitionList = new ServerBiomeDefinitionListPacket();
-				biomeDefinitionList.setValue(biomeDefinitionData);
+				biomeDefinitionList.value = biomeDefinitionData;
 				biomeDefinitionList.writePacket(player);
 
 				const availableEntityIds = new ServerAvailableEntityIdentifiersPacket();
-				availableEntityIds.setValue(availableEntitiesData);
+				availableEntityIds.value = availableEntitiesData;
 				availableEntityIds.writePacket(player);
 
 				const creativeContent = new ServerCreativeContentPacket();
-				creativeContent.setItems(creativeContentData.items);
+				creativeContent.items = creativeContentData;
 				creativeContent.writePacket(player);
 
 				const commandsEnabled = new ServerSetCommandsEnabledPacket();
-				commandsEnabled.setEnabled(true);
+				commandsEnabled.enable = true;
 				commandsEnabled.writePacket(player);
 
 				const trimData = new ServerTrimDataPacket();
-				trimData.setPatterns(dumpedTrimData.patterns);
-				trimData.setMaterials(dumpedTrimData.materials);
+				trimData.patterns = dumpedTrimData.patterns;
+				trimData.materials = dumpedTrimData.materials;
 				trimData.writePacket(player);
 
 				const featureRegistry = new ServerFeatureRegistryPacket()
-				featureRegistry.setFeatures(featureRegistryData.features)
+				featureRegistry.features = featureRegistryData
 				featureRegistry.writePacket(player)
 
 				const clientCacheStatus = new ServerClientCacheStatusPacket();
-				clientCacheStatus.setEnabled(true);
+				clientCacheStatus.enabled = true;
 				clientCacheStatus.writePacket(player);
 
 				const commandManager = new CommandManager();
@@ -225,10 +222,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				// This packet is used to create custom items
 				const itemcomponent = new ServerItemComponentPacket();
 				try {
-					itemcomponent.setItems(customItems.items);
+					itemcomponent.entries = customItems.items;
 				} catch (error) {
 					Logger.warning(getKey("warning.customItems.loading.failed").replace("%s%", error.stack));
-					itemcomponent.setItems([]);
+					itemcomponent.entries = [];
 				}
 				itemcomponent.writePacket(player);
 
@@ -237,9 +234,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					player.setChunkRadius(player.world.getChunkRadius());
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
-					networkChunkPublisher.setCoordinates(0, 0, 0);
-					networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
-					networkChunkPublisher.setSavedChunks([]);
+					networkChunkPublisher.coordinates = { x: 0, y: 0, z: 0 };
+					networkChunkPublisher.radius = config.world.clientSideRenderDistance;
+					networkChunkPublisher.saved_chunks = [];
 					networkChunkPublisher.writePacket(player);
 
 					const generatorFile = require("../../world/generator/" + player.world.getGenerator());
@@ -264,9 +261,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						}
 
 						const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
-						networkChunkPublisher.setCoordinates(0, 0, 0);
-						networkChunkPublisher.setRadius(config.world.clientSideRenderDistance);
-						networkChunkPublisher.setSavedChunks([]);
+						networkChunkPublisher.coordinates = { x: 0, y: 0, z: 0 };
+						networkChunkPublisher.radius = config.world.clientSideRenderDistance;
+						networkChunkPublisher.saved_chunks = [];
 						networkChunkPublisher.writePacket(player);
 					}, 4500);
 				}
@@ -275,7 +272,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				setTimeout(() => {
 					const playStatus = new ServerPlayStatusPacket();
-					playStatus.setStatus(PlayStatusType.PLAYER_SPAWN);
+					playStatus.status = PlayStatusType.PLAYER_SPAWN;
 					playStatus.writePacket(player);
 
 					Frog.eventEmitter.emit("playerSpawn", {
@@ -283,12 +280,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						server,
 					});
 
-					player.setEntityData("breathing", true);
-					player.setEntityData("has_collision", true);
-					player.setEntityData("affected_by_gravity", true);
-					player.setEntityData("breathing", true);
-					player.setEntityData("can_climb", true);
-
+					player.setEntityData(defaultEntityData);
 					Frog.__addPlayer();
 
 					for (const onlineplayers of PlayerInfo.players) {
@@ -299,11 +291,11 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							const uuid = player.profile.uuid;
 
 							const playerList = new ServerPlayerListPacket();
-							playerList.setType(PlayerListTypes.ADD);
-							playerList.setUsername(player.username);
-							playerList.setXboxId(xuid);
-							playerList.setId(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER));
-							playerList.setUuid(uuid);
+							playerList.type = PlayerListType.ADD;
+							playerList.username = player.username;
+							playerList.xbox_id = xuid;
+							playerList.id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+							playerList.uuid = (uuid);
 							playerList.writePacket(onlineplayers);
 						}
 					}

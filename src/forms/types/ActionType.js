@@ -14,9 +14,9 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-	OLD: 0,
-	INFINITE: 1,
-	FLAT: 2,
-	NETHER: 3,
-	END: 4,
+    INPUT: "input",
+    LABEL: "label",
+    DROPDOWN: "dropdown",
+    TOGGLE: "toggle",
+    SLIDER: "slider"
 });

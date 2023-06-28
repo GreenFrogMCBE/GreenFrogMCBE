@@ -13,42 +13,16 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-let status;
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerPlayStatusPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "play_status";
-	}
+	name = 'play_status'
+	/** @type {PlayStatusType} */
+	status;
 
-	/**
-	 * Sets the status.
-	 * @param new_status
-	 */
-	setStatus(new_status) {
-		status = new_status;
-	}
-
-	/**
-	 * Returns the status.
-	 * @returns {string} The status
-	 */
-	getStatus() {
-		return status;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), {
-			status: this.getStatus(),
+		client.queue(this.name, {
+			status: this.status,
 		});
 	}
 }

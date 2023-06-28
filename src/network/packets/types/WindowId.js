@@ -15,5 +15,5 @@
  */
 module.exports = /** @type {const} */ ({
 	CREATIVE: -1,
-	CHEST: 3, // https://discord.gg/UFqrnAbqjP (#protocol-changes) for more info
+	CHEST: 3,
 });

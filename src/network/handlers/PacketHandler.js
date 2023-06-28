@@ -171,7 +171,7 @@ class PacketHandler {
 	 * @returns {boolean} - Indicates if the packet matches the parameters.
 	 */
 	isMatchingPacket(packet, packetData) {
-		return packet.getPacketName() === packetData.data.name;
+		return packet.name === packetData.data.name;
 	}
 
 	/**
@@ -251,7 +251,11 @@ class PacketHandler {
 			Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
 		}
 
-		client.kick(getKey("kickMessages.invalidPacket"));
+		try {
+			client.kick(getKey("kickMessages.invalidPacket"));
+		} catch {
+			client.disconnect(getKey("kickMessages.invalidPacket"));
+		}
 
 		Frog.eventEmitter.emit("packetReadError", {
 			client,

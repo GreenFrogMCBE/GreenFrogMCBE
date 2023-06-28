@@ -23,27 +23,14 @@ const WindowId = require("./types/WindowId");
 const Frog = require("../../Frog");
 
 class ClientContainerClosePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "container_close";
-	}
+	name = 'container_close'
 
-	/**
-	 * Reads the packet from client
-	 *
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 * @param {Server} server
-	 */
 	async readPacket(player, packet, server) {
 		let shouldClose = true;
 
 		Frog.eventEmitter.emit("playerContainerClose", {
 			windowID: WindowId.CREATIVE,
-			isSentByServer: false,
+			sentByServer: false,
 			player,
 			packet,
 			server,
@@ -77,8 +64,8 @@ class ClientContainerClosePacket extends PacketConstructor {
 		}
 
 		const containerClose = new ServerContainerClosePacket();
-		containerClose.setServer(false);
-		containerClose.setWindowId(WindowId.CREATIVE);
+		containerClose.server = false;
+		containerClose.window_id = WindowId.CREATIVE;
 		containerClose.writePacket(player);
 	}
 }

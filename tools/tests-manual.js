@@ -25,7 +25,7 @@ const TestConfigs = require("../test/TestConfigs");
 const Query = require("../test/Query");
 
 if (!fs.existsSync("../config.yml")) {
-	const config = fs.readFileSync("../src/internalResources/defaultConfig.yml");
+	const config = fs.readFileSync("../src/resources/defaultConfig.yml");
 
 	fs.writeFileSync("../config.yml", config, () => {});
 }

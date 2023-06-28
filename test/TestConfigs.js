@@ -19,10 +19,10 @@ module.exports = {
 		// prettier-ignore
 		const files = [
 			"/../src/lang/en_US.json",
-			"/../src/internalResources/biomes.json", 
-			"/../src/internalResources/creativeContent.json", 
-			"/../src/internalResources/skinData.json", 
-			"/../src/internalResources/entities.json", 
+			"/../src/resources/biomes.json", 
+			"/../src/resources/creativeContent.json", 
+			"/../src/resources/skinData.json", 
+			"/../src/resources/entities.json", 
 			"/../world/custom_items.json", 
 			"/../world/gamerules.json", 
 			"/../package.json",

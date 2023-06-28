@@ -23,8 +23,8 @@ class Generator {
 	/**
 	 * Returns the generator name
 	 *
-	 * @returns {WorldGenerators}
-	 * @type {import('../types/WorldGenerators')}
+	 * @returns {WorldGenerator}
+	 * @type {import('../types/WorldGenerator')}
 	 */
 	getName() {
 		return null;
@@ -50,11 +50,11 @@ class Generator {
 		for (let x = player.location.x - chunkRadius; x <= player.location.x + chunkRadius; x++) {
 			for (let z = player.location.z - chunkRadius; z <= player.location.z + chunkRadius; z++) {
 				const levelChunk = new ServerLevelChunkPacket();
-				levelChunk.setX(x);
-				levelChunk.setZ(z);
-				levelChunk.setSubChunkCount(1);
-				levelChunk.setCacheEnabled(false);
-				levelChunk.setPayload(this.getChunkData());
+				levelChunk.x = x;
+				levelChunk.z = z;
+				levelChunk.sub_chunk_count = 1;
+				levelChunk.cache_enabled = false;
+				levelChunk.payload = this.getChunkData();
 				levelChunk.writePacket(player);
 			}
 		}

@@ -15,101 +15,30 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let value = {};
-let properties = {};
-let tick;
-let runtime_entity_id;
-
 class ServerSetEntityDataPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "set_entity_data";
-	}
+	/** @type {string} */
+	name = "set_entity_data";
+	/** @type {JSON} */
+	properties;
+	/** @type {string} */
+	tick;
+	/** @type {JSON} */
+	value = {};
+	/** @type {string} */
+	runtime_entity_id
 
-	/**
-	 * Sets the field value for the player
-	 * @param {string} field
-	 * @param {boolean} new_value
-	 */
-	setValue(field, new_value) {
-		value[field] = new_value;
-	}
-
-	/**
-	 * Returns the field value
-	 * @returns {JSON}
-	 */
-	getFieldValue() {
-		return value;
-	}
-
-	/**
-	 * Sets properties for the packet
-	 * @param {JSON} new_properties
-	 */
-	setProperties(new_properties) {
-		properties = new_properties;
-	}
-
-	/**
-	 * Returns the properties of the packet
-	 * @returns {JSON}
-	 */
-	getProperties() {
-		return properties;
-	}
-
-	/**
-	 * Sets the current tick
-	 * @param {number} new_tick
-	 */
-	setTick(new_tick) {
-		tick = new_tick;
-	}
-
-	/**
-	 * Returns the current tick
-	 * @returns {number}
-	 */
-	getTick() {
-		return tick;
-	}
-
-	/**
-	 * Sets the runtime_entity_id
-	 * @param {string} new_runtime_entity_id
-	 */
-	setRuntimeEntityID(new_runtime_entity_id) {
-		runtime_entity_id = new_runtime_entity_id;
-	}
-
-	/**
-	 * Returns the runtime entity ID of the entity.
-	 * @returns {string}
-	 */
-	getRuntimeEntityId() {
-		return runtime_entity_id;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), {
-			runtime_entity_id: this.getRuntimeEntityId(),
+		client.queue(this.name, {
+			runtime_entity_id: this.runtime_entity_id,
 			metadata: [
 				{
 					key: "flags",
 					type: "long",
-					value: this.getFieldValue(),
+					value: this.value
 				},
 			],
-			properties: this.getProperties(),
-			tick: this.getTick(),
+			properties: this.properties,
+			tick: this.tick,
 		});
 	}
 }

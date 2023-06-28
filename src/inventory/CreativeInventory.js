@@ -21,6 +21,8 @@ const { getKey } = require("../utils/Language");
 const ServerInventorySlotPacket = require("../network/packets/ServerInventorySlotPacket");
 const WindowType = require("../network/packets/types/WindowType");
 
+const TypeId = require("./types/TypeId");
+
 module.exports = {
 	handle(player, packet) {
 		try {
@@ -29,7 +31,7 @@ module.exports = {
 			const firstAction = firstRequest.actions[0];
 			const secondAction = firstRequest.actions[1];
 
-			if (firstAction && secondAction && secondAction.type_id === "results_deprecated") {
+			if (firstAction && secondAction && secondAction.type_id === TypeId.RESULTS) {
 				let shouldGiveItem = true;
 
 				Frog.eventEmitter.emit("inventoryPreItemRequest", {
@@ -60,12 +62,11 @@ module.exports = {
 				});
 			}
 
-			if (firstAction.type_id === "place") {
+			if (firstAction.type_id === TypeId.PLACE) {
 				const inventorySlotPacket = new ServerInventorySlotPacket();
-
-				inventorySlotPacket.setWindowId(WindowType.CREATIVEINVENTORY);
-				inventorySlotPacket.setSlot(firstAction.destination.slot);
-				inventorySlotPacket.setItemData({
+				inventorySlotPacket.window_id = WindowType.CREATIVE_INVENTORY;
+				inventorySlotPacket.slot = firstAction.destination.slot;
+				inventorySlotPacket.item = {
 					network_id: player.inventory.lastKnownItemNetworkId,
 					count: firstAction.count,
 					metadata: 0,
@@ -77,8 +78,7 @@ module.exports = {
 						can_place_on: [],
 						can_destroy: [],
 					},
-				});
-
+				};
 				inventorySlotPacket.writePacket(player);
 			}
 		} catch (error) {

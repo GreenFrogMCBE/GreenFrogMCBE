@@ -13,19 +13,19 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-unused-vars */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
+const ActionType = require("./types/ActionType");
 
-const FormTypes = require("./FormTypes");
+const FormTypess = require("./types/FormTypes");
 
 class CustomForm {
 	constructor() {
 		/**
-		 * @type {FormTypes}
+		 * @type {FormTypess}
 		 *
-		 * @type {import("./FormTypes")}
+		 * @type {import("./types/FormTypes")}
 		 */
-		this.type = FormTypes.CUSTOMFORM;
+		this.type = FormTypess.CUSTOM_FORM;
 
 		/**
 		 * @type {function}
@@ -33,7 +33,7 @@ class CustomForm {
 		 * @param {CustomForm} form
 		 * @param {Client} client
 		 */
-		this.onSend = (form, client) => {};
+		this.onSend = () => {};
 
 		/**
 		 * @type {string}
@@ -79,7 +79,7 @@ class CustomForm {
 	 * @param {string} [placeholder] - The text that will be displayed in the input box before the user types anything.
 	 */
 	addInput(text, placeholder = "") {
-		this.addAction({ type: "input", text: text, placeholder: placeholder });
+		this.addAction({ type: ActionType.INPUT, text: text, placeholder: placeholder });
 	}
 
 	/**
@@ -88,7 +88,7 @@ class CustomForm {
 	 * @param {string} text - The text to display.
 	 */
 	addLabel(text) {
-		this.addAction({ type: "label", text: text });
+		this.addAction({ type: ActionType.LABEL, text: text });
 	}
 
 	/**
@@ -98,7 +98,7 @@ class CustomForm {
 	 * @param {JSON} options - An object containing key-value pairs that define the options for the dropdown.
 	 */
 	addDropdown(text, options) {
-		this.addAction({ type: "dropdown", text: text, options: options });
+		this.addAction({ type: ActionType.dropdown, text: text, options: options });
 	}
 
 	/**
@@ -107,7 +107,7 @@ class CustomForm {
 	 * @param {string} text - The text to display for the toggle.
 	 */
 	addToggle(text) {
-		this.addAction({ type: "toggle", text: text });
+		this.addAction({ type: ActionType.TOGGLE, text: text });
 	}
 
 	/**
@@ -117,7 +117,7 @@ class CustomForm {
 	 * @param {number} min - The minimum value for the slider.
 	 */
 	addSlider(text, min, max, step = -1) {
-		this.addAction({ type: "slider", text: text, min: min, max: max, step: step });
+		this.addAction({ type: ActionType.SLIDER, text: text, min: min, max: max, step: step });
 	}
 
 	/**
@@ -126,13 +126,13 @@ class CustomForm {
 	 * @param {Client} client
 	 */
 	send(client) {
-		const packet = new ServerFormRequestPacket();
-		packet.setId(this.id);
-		packet.setTitle(this.title);
-		packet.setContent(JSON.stringify(this.actions));
-		packet.setButtons(JSON.stringify(this.buttons));
-		packet.setType(this.type);
-		packet.send(client);
+		const FormRequestPacket = new ServerFormRequestPacket();
+		FormRequestPacket.id = this.id;
+		FormRequestPacket.title = this.title;
+		FormRequestPacket.content = JSON.stringify(this.actions);
+		FormRequestPacket.buttons = JSON.stringify(this.buttons);
+		FormRequestPacket.type = this.type;
+		FormRequestPacket.send(client);
 
 		this.onSend(this, client);
 	}

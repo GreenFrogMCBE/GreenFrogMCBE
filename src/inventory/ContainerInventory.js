@@ -15,12 +15,25 @@
  */
 const Frog = require("../Frog");
 
+const TypeId = require("./types/TypeId");
+
 module.exports = {
 	handle(player, packet) {
+		let shouldHandleTheItemRequest = true
+
 		Frog.eventEmitter.emit('inventoryContainerItemRequest', {
 			player,
 			packet,
-			server: Frog.server
+			server: Frog.server,
+			cancel: () => {
+				shouldHandleTheItemRequest = false
+			}
 		})
+
+		if (!shouldHandleTheItemRequest) return
+
+		//if (packet.data.params.requests[0].actions[0].type_id === TypeId.PLACE) {
+	//		player.setContainerItem(undefined, undefined, packet.data.params.requests[0].actions[0].destination.slot, undefined, undefined, undefined, undefined, undefined)
+	//	}
 	},
 };

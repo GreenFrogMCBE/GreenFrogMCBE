@@ -19,6 +19,7 @@ plugins/
 pluginData/
 !types/plugins
 
-# Fix that FallDamage.js is getting ignored
+# Fix that FallDamage.js and GeneratorType.js are getting ignored
 
 !src/world/FallDamage.js
+!src/world/GeneratorType.js

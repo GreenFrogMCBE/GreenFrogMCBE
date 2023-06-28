@@ -15,16 +15,16 @@
  */
 const Air = require("../../block/normalIds/Air");
 
-const WorldGenerators = require("../types/WorldGenerators");
+const WorldGenerator = require("../types/WorldGenerator");
 
 const Generator = require("./Generator");
 
 class Flat extends Generator {
 	/**
-	 * @returns {WorldGenerators.Flat}
+	 * @returns {WorldGenerator.Flat}
 	 */
 	getName() {
-		return WorldGenerators.FLAT;
+		return WorldGenerator.FLAT;
 	}
 
 	/**

@@ -13,12 +13,14 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const { Client } = require("frog-protocol")
+
 const DamageCause = require("../api/health/DamageCause");
 const Gamemode = require("../api/player/Gamemode");
 
 module.exports = {
 	/**
-	 * Calculates fall damage
+	 * Calculates the fall damage
 	 * NOTE: This can be spoofed by a hacked client
 	 *
 	 * @param {Client} player
