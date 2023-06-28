@@ -16,7 +16,7 @@
 const fs = require("fs");
 const center = require("center-align");
 
-const Colors = require("./src/api/colors/Colors");
+const Colors = require("./src/api/color/Colors");
 
 const { convertConsoleColor } = require("./src/utils/ConsoleColorConvertor");
 
