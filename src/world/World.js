@@ -13,7 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const UpdateBlock = require("../network/packets/ServerupdateBlockPacket");
+const ServerUpdateBlockPacket = require("../network/packets/ServerUpdateBlockPacket");
 
 const WorldGenerator = require("./types/WorldGenerator");
 const DamageCause = require("../api/health/DamageCause");
@@ -170,15 +170,15 @@ class World {
 	 */
 	placeBlock(x, y, z, id) {
 		for (const player of this.getPlayersInWorld()) {
-			const updateBlock = new UpdateBlock();
-			updateBlock.block_runtime_id = id;
-			updateBlock.x = x;
-			updateBlock.y = y;
-			updateBlock.z = z;
-			updateBlock.neighbors = true;
-			updateBlock.network = true;
-			updateBlock.flags_value = 3;
-			updateBlock.writePacket(player);
+			const updateBlockPacket = new ServerUpdateBlockPacket();
+			updateBlockPacket.block_runtime_id = id;
+			updateBlockPacket.x = x;
+			updateBlockPacket.y = y;
+			updateBlockPacket.z = z;
+			updateBlockPacket.neighbors = true;
+			updateBlockPacket.network = true;
+			updateBlockPacket.flags_value = 3;
+			updateBlockPacket.writePacket(player);
 		}
 	}
 
