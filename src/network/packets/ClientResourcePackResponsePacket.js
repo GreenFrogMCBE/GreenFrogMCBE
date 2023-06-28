@@ -14,8 +14,6 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /* eslint-disable no-case-declarations */
-const fs = require("fs");
-
 const Frog = require("../../Frog");
 
 const Biome = require("../../world/types/Biome");
@@ -47,7 +45,8 @@ const ServerPlayerListPacket = require("./ServerPlayerListPacket");
 const ServerStartGamePacket = require("./ServerStartGamePacket");
 const ServerTrimDataPacket = require("./ServerTrimDataPacket");
 
-const CommandManager = require("../../player/CommandManager");
+const OfflinePermissionManager = require("../../api/permission/OfflinePermissionManager")
+const CommandManager = require("../../api/player/CommandManager");
 const Commands = require("../../server/Commands");
 
 const Logger = require("../../server/Logger");
@@ -137,11 +136,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"));
 				}
 
-				const ops = fs.readFileSync("ops.yml", "utf8").split("\n");
+				player.op = false
 
-				player.op = false;
-
-				if (ops.includes(player.username)) {
+				if (OfflinePermissionManager.isOpped(player.username)) {
 					player.op = true;
 					player.permissionLevel = 4;
 				}

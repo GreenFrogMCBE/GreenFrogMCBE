@@ -13,9 +13,9 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const AvailableCommands = require("../network/packets/ServerAvailableCommandsPacket");
+const AvailableCommands = require("../../network/packets/ServerAvailableCommandsPacket");
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../../utils/Language");
 
 /**
  * @typedef {object} CommandsPacket - The commands packet.

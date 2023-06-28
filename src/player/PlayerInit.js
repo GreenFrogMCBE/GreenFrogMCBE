@@ -589,7 +589,7 @@ module.exports = {
 		};
 
 		/**
-		 * Updates the dimension for the player
+		 * Changes the dimension for the player
 		 *
 		 * @param {float} x
 		 * @param {float} y
@@ -621,6 +621,37 @@ module.exports = {
 			dimensionPacket.respawn = respawn;
 			dimensionPacket.writePacket(player);
 		};
+
+		/**
+		 * Changes the OP status for the player
+		 * 
+		 * @param {boolean} op 
+		 */
+		player.setOp = async function (op) {
+			let shouldChange = true;
+
+			Frog.eventEmitter.emit('playerOpStatusChange', {
+				player,
+				status: op,
+				server: Frog.getServer(),
+				cancel: () => { shouldChange = true }
+			})
+
+			if (!shouldChange) return;
+
+			if (op) await fs.appendFile("ops.yml", player.username + "\n");
+			else {
+				const ops = await fs.readFile("ops.yml", "utf-8");
+				const updatedOps = ops
+					.split("\n")
+					.filter((op) => op !== player.username)
+					.join("\n");
+	
+				await fs.writeFile("ops.yml", updatedOps);	
+			}
+
+			player.op = op
+		}
 
 		/**
 		 * Opens a container (chest) for the player 
