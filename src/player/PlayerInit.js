@@ -19,7 +19,7 @@ const Gamemode = require("../api/player/Gamemode");
 
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
-const Chest = require("../block/runtimeIds/Chest");
+const vanillaBlocks = require("../api/block/vanillaBlocks.json")
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
 const ServerChangedimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
@@ -685,7 +685,7 @@ module.exports = {
 
 			if (!shouldCreateInventoryContainer) return
 
-			player.world.placeBlock(player.inventory.container.blockPosition.x, player.inventory.container.blockPosition.y, player.inventory.container.blockPosition.z, new Chest().getRuntimeId())
+			player.world.placeBlock(player.inventory.container.blockPosition.x, player.inventory.container.blockPosition.y, player.inventory.container.blockPosition.z, vanillaBlocks.chest.runtime_id)
 
 			const containerOpen = new ServerContainerOpenPacket();
 			containerOpen.window_id = player.inventory.container.window.id;

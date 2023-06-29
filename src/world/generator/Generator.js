@@ -21,8 +21,6 @@ const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPa
 
 class Generator {
 	/**
-	 * Returns the generator name
-	 *
 	 * @returns {WorldGenerator}
 	 * @type {import('../types/WorldGenerator')}
 	 */
@@ -31,7 +29,6 @@ class Generator {
 	}
 
 	/**
-	 * Returns the chunk data
 	 * @returns {Buffer}
 	 */
 	getChunkData() {
@@ -39,7 +36,6 @@ class Generator {
 	}
 
 	/**
-	 * Generates chunks
 	 * @param {Client} player
 	 */
 	generate(player) {

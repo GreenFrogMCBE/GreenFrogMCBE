@@ -13,7 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Air = require("../../block/normalIds/Air");
+const vanillaBlocks = require("../../api/block/vanillaBlocks.json")
 
 const WorldGenerator = require("../types/WorldGenerator");
 
@@ -31,7 +31,7 @@ class Flat extends Generator {
 	 * @returns {Buffer}
 	 */
 	getChunkData() {
-		return Buffer.alloc(16 * 256 * 16).fill(new Air().getId());
+		return Buffer.alloc(16 * 256 * 16).fill(vanillaBlocks.air.legacy_id);
 	}
 }
 

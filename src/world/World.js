@@ -21,7 +21,7 @@ const Gamemode = require("../api/player/Gamemode");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
-const Air = require("../block/runtimeIds/Air");
+const vanillaBlocks = require("../api/block/vanillaBlocks.json")
 
 const Frog = require("../Frog");
 
@@ -190,7 +190,7 @@ class World {
 	 * @param {number} z - The Z-coordinate of the block.
 	 */
 	breakBlock(x, y, z) {
-		this.placeBlock(x, y, z, new Air().getRuntimeId());
+		this.placeBlock(x, y, z, vanillaBlocks.air.runtime_id);
 	}
 
 	/**
@@ -207,7 +207,7 @@ class World {
 		}
 
 		if (config.world.tickWorldTime) {
-			this.setTime(this.getTime() + 10);
+			this.setTime(this.getTime + 10);
 
 			Frog.eventEmitter.emit("serverTimeTick", {
 				world: this.getWorldData(),

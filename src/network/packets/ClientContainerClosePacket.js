@@ -17,7 +17,7 @@ const ServerContainerClosePacket = require("./ServerContainerClosePacket");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const Air = require("../../block/runtimeIds/Air");
+const vanillaBlocks = require("../../api/block/vanillaBlocks.json")
 
 const WindowId = require("./types/WindowId");
 const Frog = require("../../Frog");
@@ -56,7 +56,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 
 			const { x, y, z } = player.inventory.container.blockPosition
 
-			player.world.placeBlock(x, y, z, new Air().getRuntimeId())
+			player.world.placeBlock(x, y, z, vanillaBlocks.air.legacy_id)
 
 			player.inventory.container.isOpen = false;
 			player.inventory.container.blockPosition = { x: null, y: null, z: null }

@@ -13,10 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Air = require("../../block/normalIds/Air");
-const Dirt = require("../../block/normalIds/Dirt");
-const Grass = require("../../block/normalIds/Grass");
-const Bedrock = require("../../block/normalIds/Bedrock");
+const vanillaBlocks = require("../../api/block/vanillaBlocks.json")
 
 const WorldGenerator = require("../types/WorldGenerator");
 
@@ -44,13 +41,13 @@ class Flat extends Generator {
 					const index = y * 16 * 16 + z * 16 + x;
 
 					if (x > 14 && y > -1 && y < 16) {
-						chunkData[index] = new Grass().getId();
+						chunkData[index] = vanillaBlocks.grass.legacy_id;
 					} else if (y < 18 && x < 11) {
-						chunkData[index] = new Air().getId();
+						chunkData[index] = vanillaBlocks.air.legacy_id;
 					} else if (y < 17 && x < 12) {
-						chunkData[index] = new Bedrock().getId();
+						chunkData[index] = vanillaBlocks.bedrock.legacy_id;
 					} else {
-						chunkData[index] = new Dirt().getId();
+						chunkData[index] = vanillaBlocks.dirt.legacy_id;
 					}
 				}
 			}
