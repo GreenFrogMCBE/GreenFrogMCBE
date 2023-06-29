@@ -43,7 +43,7 @@ module.exports = {
 		for (const player of players) {
 			const parsedTime = parseInt(time);
 
-			player.world.setTime(parsedTime);
+			player.world.time = parsedTime;
 			player.setTime(parsedTime);
 		}
 

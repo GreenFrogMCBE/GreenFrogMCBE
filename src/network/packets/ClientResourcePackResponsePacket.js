@@ -124,13 +124,13 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				switch (config.world.generator.toLowerCase()) {
 					case "default":
-						player.world.setGenerator(WorldGenerator.DEFAULT);
+						player.world.generator = WorldGenerator.DEFAULT;
 						break;
 					case "flat":
-						player.world.setGenerator(WorldGenerator.FLAT);
+						player.world.generator = WorldGenerator.FLAT;
 						break;
 					case "void":
-						player.world.setGenerator(WorldGenerator.VOID);
+						player.world.generator = WorldGenerator.VOID;
 						break;
 					default:
 						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"));
@@ -163,7 +163,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.difficulty = Difficulty.NORMAL;
 				startGame.spawn_position = { x: 0, y: 0, z: 0 }
 				startGame.permission_level = player.permissionLevel;
-				startGame.world_name = player.world.getName();
+				startGame.world_name = player.world.worldName;
 				startGame.game_version = "*"
 				startGame.movement_authority = MovementAuthority.SERVER
 				startGame.gamerules = gamerulesData
@@ -226,9 +226,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				}
 				itemcomponent.writePacket(player);
 
-				// player.chunksEnabled is true by default, but can be disabled by plugins
+				// player.chunksEnabled is true by default but can be disabled by plugins
 				if (player.chunksEnabled) {
-					player.setChunkRadius(player.world.getChunkRadius());
+					player.setChunkRadius(player.world.renderDistance);
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
 					networkChunkPublisher.coordinates = { x: 0, y: 0, z: 0 };
@@ -236,7 +236,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					networkChunkPublisher.saved_chunks = [];
 					networkChunkPublisher.writePacket(player);
 
-					const generatorFile = require("../../world/generator/" + player.world.getGenerator());
+					const generatorFile = require("../../world/generator/" + player.world.generator);
 					new generatorFile().generate(player);
 
 					player.hungerLossLoop = setInterval(() => {

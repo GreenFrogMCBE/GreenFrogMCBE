@@ -20,7 +20,10 @@ const Frog = require("../../Frog");
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
 
 class Generator {
-	/** @returns {WorldGenerator} @type {import('../types/WorldGenerator')} */
+	/** 
+	 * @returns {WorldGenerator} 
+	 * @type {import('../types/WorldGenerator')} 
+	 */
 	name;
 
 	/**
@@ -36,7 +39,7 @@ class Generator {
 	generate(player) {
 		Frog.eventEmitter.emit('generatorGeneratingWorld', { player, server: Frog.getServer() })
 
-		const chunkRadius = player.world.getChunkRadius();
+		const chunkRadius = player.world.renderDistance;
 
 		for (let x = player.location.x - chunkRadius; x <= player.location.x + chunkRadius; x++) {
 			for (let z = player.location.z - chunkRadius; z <= player.location.z + chunkRadius; z++) {
