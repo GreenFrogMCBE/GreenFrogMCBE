@@ -31,9 +31,9 @@ const PlayerInfo = require("../../api/player/PlayerInfo");
 
 const PacketConstructor = require("./PacketConstructor");
 
+const ServerCompressedBiomeDefinitionListPacket = require("./ServerCompressedBiomeDefinitionListPacket");
 const ServerNetworkChunkPublisherUpdatePacket = require("./ServerNetworkChunkPublisherUpdatePacket");
 const ServerAvailableEntityIdentifiersPacket = require("./ServerAvailableEntityIdentifiersPacket");
-const ServerBiomeDefinitionListPacket = require("./ServerBiomeDefinitionListPacket");
 const ServerSetCommandsEnabledPacket = require("./ServerSetCommandsEnabledPacket");
 const ServerClientCacheStatusPacket = require("./ServerClientCacheStatusPacket");
 const ServerResourcePackStackPacket = require("./ServerResourcePackStackPacket");
@@ -52,13 +52,13 @@ const Commands = require("../../server/Commands");
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
 
+const compressedBiomeDefinitionData = require("../../resources/biomeDefinitions.json").raw_payload
 const defaultEntityData = require("../../resources/defaultEntityData.json").entityData
 const creativeContentData = require("../../resources/creativeContent.json").items
 const featureRegistryData = require("../../resources/featureRegistry.json");
 const itemStatesData = require("../../resources/itemStates.json").itemStates
 const gamerulesData = require("../../../world/gamerules.json").gamerules
 const availableEntitiesData = require("../../resources/entities.json")
-const biomeDefinitionData = require("../../resources/biomes.json")
 const dumpedTrimData = require("../../resources/trimData.json")
 const customItems = require("../../../world/custom_items.json")
 
@@ -170,9 +170,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.itemstates = itemStatesData
 				startGame.writePacket(player);
 
-				const biomeDefinitionList = new ServerBiomeDefinitionListPacket();
-				biomeDefinitionList.value = biomeDefinitionData;
-				biomeDefinitionList.writePacket(player);
+				const compressedBiomeDefinitions = new ServerCompressedBiomeDefinitionListPacket()
+				compressedBiomeDefinitions.data =  require("../../resources/biomeDefinitions.json")
+				compressedBiomeDefinitions.writePacket(player)
 
 				const availableEntityIds = new ServerAvailableEntityIdentifiersPacket();
 				availableEntityIds.value = availableEntitiesData;

@@ -15,9 +15,8 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-/** @deprecated */
-class ServerBiomeDefinitionListPacket extends PacketConstructor {
-	name = "biome_definition_list"
+class ServerCompressedBiomeDefinitionListPacket extends PacketConstructor {
+	name = "compressed_biome_definitions"
 	data
 
 	writePacket(client) {
@@ -25,4 +24,4 @@ class ServerBiomeDefinitionListPacket extends PacketConstructor {
 	}
 }
 
-module.exports = ServerBiomeDefinitionListPacket;
+module.exports = ServerCompressedBiomeDefinitionListPacket;
