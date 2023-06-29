@@ -130,7 +130,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						player.world.setGenerator(WorldGenerator.FLAT);
 						break;
 					case "void":
-						player.world.setGenerator(WorldGenerator.VOid);
+						player.world.setGenerator(WorldGenerator.VOID);
 						break;
 					default:
 						throw new WorldGenerationFailedException(getKey("exceptions.generator.invalid"));
@@ -151,7 +151,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.entity_id = 0;
 				startGame.runtime_entity_id = 1;
 				startGame.player_gamemode = config.world.gamemode;
-				startGame.player_position = { x: 0, y: -48, z: 0 }
+				startGame.player_position = { x: 0, y: -47, z: 0 }
 				startGame.rotation = { x: 0, z: 0 };
 				startGame.seed = [0, 0];
 				startGame.biome_type = 0;
@@ -237,8 +237,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					networkChunkPublisher.writePacket(player);
 
 					const generatorFile = require("../../world/generator/" + player.world.getGenerator());
-					const generator = new generatorFile();
-					generator.generate(player);
+					new generatorFile().generate(player);
 
 					player.hungerLossLoop = setInterval(() => {
 						if (player.offline) {

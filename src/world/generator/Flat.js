@@ -19,21 +19,10 @@ const WorldGenerator = require("../types/WorldGenerator");
 
 const Generator = require("./Generator");
 
-let chunkData;
-
 class Flat extends Generator {
-	/**
-	 * @returns {WorldGenerator.Flat}
-	 */
-	getName() {
-		return WorldGenerator.FLAT;
-	}
-
-	/**
-	 * @returns {Buffer}
-	 */
+	name = WorldGenerator.FLAT
 	getChunkData() {
-		chunkData = Buffer.alloc(16 * 256 * 16);
+		let chunkData = Buffer.alloc(16 * 256 * 16);
 
 		for (let x = 0; x < 16; x++) {
 			for (let y = 0; y < 256; y++) {
@@ -53,7 +42,7 @@ class Flat extends Generator {
 			}
 		}
 
-		return chunkData;
+		return chunkData
 	}
 }
 

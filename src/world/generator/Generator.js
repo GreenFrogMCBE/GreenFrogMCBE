@@ -20,13 +20,8 @@ const Frog = require("../../Frog");
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
 
 class Generator {
-	/**
-	 * @returns {WorldGenerator}
-	 * @type {import('../types/WorldGenerator')}
-	 */
-	getName() {
-		return null;
-	}
+	/** @returns {WorldGenerator} @type {import('../types/WorldGenerator')} */
+	name;
 
 	/**
 	 * @returns {Buffer}

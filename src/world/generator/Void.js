@@ -19,20 +19,11 @@ const WorldGenerator = require("../types/WorldGenerator");
 
 const Generator = require("./Generator");
 
-class Flat extends Generator {
-	/**
-	 * @returns {WorldGenerator.Flat}
-	 */
-	getName() {
-		return WorldGenerator.FLAT;
-	}
-
-	/**
-	 * @returns {Buffer}
-	 */
+class Void extends Generator {
+	name = WorldGenerator.VOID
 	getChunkData() {
 		return Buffer.alloc(16 * 256 * 16).fill(vanillaBlocks.air.legacy_id);
 	}
 }
 
-module.exports = Flat;
+module.exports = Void;

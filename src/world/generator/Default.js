@@ -54,16 +54,7 @@ function _generateOre() {
 }
 
 class Default extends Generator {
-	/**
-	 * @returns {WorldGenerator.Flat}
-	 */
-	getName() {
-		return WorldGenerator.FLAT;
-	}
-
-	/**
-	 * @returns {Buffer}
-	 */
+	name = WorldGenerator.DEFAULT
 	getChunkData() {
 		chunkData = Buffer.alloc(16 * 256 * 16);
 

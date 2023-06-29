@@ -49,7 +49,7 @@ world:
   tickVoid: true # Should people that are in void take damage?
   tickRegeneration: true # Should people in survival mode regenerate their health?
   tickStarvationDamage: true # Should people take damage if their food level is 0?
-  randomTickSpeed: 1000
+  tickSpeed: 1000
 
   worldName: "GreenFrog server"
 performance:
