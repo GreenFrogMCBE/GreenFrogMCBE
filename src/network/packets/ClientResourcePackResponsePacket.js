@@ -53,7 +53,7 @@ const Commands = require("../../server/Commands");
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
 
-const compressedBiomeDefinitionData = require("../../resources/biomeDefinitions.json").raw_payload
+const compressedBiomeDefinitionData = require("../../resources/biomeDefinitions.json")
 const defaultEntityData = require("../../resources/defaultEntityData.json").entityData
 const creativeContentData = require("../../resources/creativeContent.json").items
 const featureRegistryData = require("../../resources/featureRegistry.json");
@@ -172,7 +172,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.writePacket(player);
 
 				const compressedBiomeDefinitions = new ServerCompressedBiomeDefinitionListPacket()
-				compressedBiomeDefinitions.data = require("../../resources/biomeDefinitions.json")
+				compressedBiomeDefinitions.data = compressedBiomeDefinitionData
 				compressedBiomeDefinitions.writePacket(player)
 
 				const availableEntityIds = new ServerAvailableEntityIdentifiersPacket();
