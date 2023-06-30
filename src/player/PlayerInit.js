@@ -516,7 +516,7 @@ module.exports = {
 			setHealthPacket.health = health;
 			setHealthPacket.writePacket(player);
 
-			if (this.cause == DamageCause.FALL) {
+			if (cause === DamageCause.FALL) {
 				Frog.eventEmitter.emit("playerFallDamageEvent", {
 					player,
 					health,
@@ -525,7 +525,7 @@ module.exports = {
 				});
 			}
 
-			if (this.cause == DamageCause.REGENERATION) {
+			if (cause === DamageCause.REGENERATION) {
 				Frog.eventEmitter.emit("playerRegenerationEvent", {
 					player,
 					health,
