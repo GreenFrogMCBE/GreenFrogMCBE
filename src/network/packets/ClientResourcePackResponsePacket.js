@@ -95,7 +95,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
 			case ResourcePackStatus.HAVE_ALL_PACKS:
-				Frog.eventEmitter.emit("playerHasAllResourcePacks", {
+				Frog.eventEmitter.emit("playerHasAllTheResourcePacks", {
 					resourcePacksIds: [],
 					resourcePacksRequired: true,
 					server: server,
