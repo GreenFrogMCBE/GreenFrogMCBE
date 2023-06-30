@@ -26,6 +26,7 @@ const MovementAuthority = require("./types/MovementAuthority");
 const GeneratorType = require("../../world/types/GeneratorType");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
 const WorldGenerator = require("../../world/types/WorldGenerator");
+const PlayerAttribute = require("../../api/attribute/PlayerAttribute");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
 
@@ -171,7 +172,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				startGame.writePacket(player);
 
 				const compressedBiomeDefinitions = new ServerCompressedBiomeDefinitionListPacket()
-				compressedBiomeDefinitions.data =  require("../../resources/biomeDefinitions.json")
+				compressedBiomeDefinitions.data = require("../../resources/biomeDefinitions.json")
 				compressedBiomeDefinitions.writePacket(player)
 
 				const availableEntityIds = new ServerAvailableEntityIdentifiersPacket();
@@ -277,6 +278,15 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					});
 
 					player.setEntityData(defaultEntityData);
+					player.setAttribute({
+						"min": 0,
+						"max": 3.4028234663852886e+38,
+						"current": 0.10000000149011612,
+						"default": 0.10000000149011612,
+						"name": PlayerAttribute.MOVEMENT_SPEED,
+						"modifiers": []
+					})
+
 					Frog.__addPlayer();
 
 					for (const onlineplayers of PlayerInfo.players) {

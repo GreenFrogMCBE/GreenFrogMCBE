@@ -16,5 +16,6 @@
 module.exports = /** @type {const} */ ({
 	HUNGER: "minecraft:player.hunger",
 	HEALTH: "minecraft:health",
+	MOVEMENT_SPEED: "minceraft:movement",
 	EXPERIENCE: "player.experience",
 });
