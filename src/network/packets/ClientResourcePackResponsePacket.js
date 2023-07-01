@@ -56,10 +56,10 @@ const World = require("../../world/World");
 const compressedBiomeDefinitionData = require("../../resources/biomeDefinitions.json")
 const defaultEntityData = require("../../resources/defaultEntityData.json").entityData
 const creativeContentData = require("../../resources/creativeContent.json").items
+const availableEntitiesData = require("../../resources/availableEntities.json")
 const featureRegistryData = require("../../resources/featureRegistry.json");
 const itemStatesData = require("../../resources/itemStates.json").itemStates
 const gamerulesData = require("../../../world/gamerules.json").gamerules
-const availableEntitiesData = require("../../resources/entities.json")
 const dumpedTrimData = require("../../resources/trimData.json")
 const customItems = require("../../../world/custom_items.json")
 
