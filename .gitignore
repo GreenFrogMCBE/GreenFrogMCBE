@@ -1,4 +1,4 @@
-# NodeJS thing
+# NodeJS modules
 
 node_modules/
 
@@ -6,8 +6,10 @@ node_modules/
 
 ops.yml
 config.yml
+crash-reports/
+world/
 
-# bedrock-protocol thing
+# bedrock-protocol erros
 
 *_packetReadError.txt
 
@@ -17,7 +19,6 @@ plugins/
 pluginData/
 !types/plugins
 
-# Other
+# Do not ignore anything in /src/
 
-crash-reports/
-world/
+!src/*

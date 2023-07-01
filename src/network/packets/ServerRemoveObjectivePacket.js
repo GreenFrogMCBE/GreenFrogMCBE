@@ -13,42 +13,16 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-let objective_name;
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerRemoveObjectivePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "remove_objective";
-	}
+	name = 'remove_objective'
+	/** @type {string} */
+	objective_name;
 
-	/**
-	 * Sets the objective name
-	 * @param {string} new_objectivename
-	 */
-	setObjectiveName(new_objectivename) {
-		objective_name = new_objectivename;
-	}
-
-	/**
-	 * Returns the objective name
-	 * @returns {string}
-	 */
-	getObjectiveName() {
-		return objective_name;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), {
-			objective_name: this.getObjectiveName(),
+		client.queue(this.name, {
+			objective_name: this.objective_name,
 		});
 	}
 }

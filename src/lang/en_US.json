@@ -91,10 +91,11 @@
   "errors.nodeJS.tooOld.update": "Please update it to 14.0.0+, from https://nodejs.org/",
 
   "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
-  "kickMessages.serverFull": "disconnectionScreen.serverFull",
-  "kickMessages.versionMismatch": "Your client version does not match with the server version! Server is currently running on %s%",
-  "kickMessages.invalidPacket": "Invalid packet / Internal server error",
   "kickMessages.serverClosed": "Server closed",
+  "kickMessages.serverFull": "disconnectionScreen.serverFull",
+  "kickMessages.invalidPacket": "Invalid packet / Internal server error",
+  "kickMessages.invalidUsername": "Invalid or duplicate username",
+  "kickMessages.versionMismatch": "Your client version does not match with the server version! Server is currently running on %s%",
   "kickMessages.resourcePacksRefused": "You must accept resource packs to join this server",
   "kickMessages.wereKicked": "You were kicked from the game%s%",
 
@@ -112,11 +113,6 @@
 
   "warning.customItems.loading.failed": "Failed to load custom items! Error: %s%",
 
-  "logger.info": "INFO",
-  "logger.warn": "WARNING",
-  "logger.error": "ERROR",
-  "logger.debug": "DEBUG",
-
   "debug.debugEnabled": "Debug mode is enabled. This may cause lag when sending large packets",
   "debug.unstable": "Unstable mode is enabled. This will recover server from critical errors, but it may cause plugin data corruption",
   "debug.unstable.unsupported": "Also, unstable mode is not supported by GreenFrog developers and you are the responsive for the data corruption if it occurs",
@@ -131,8 +127,8 @@
   "chat.format.me": "* %s% %d%",
   "chat.format.say": "[%s%] %d%",
 
-  "chat.broadcasts.joined": "%s% joined the game",
-  "chat.broadcasts.left": "%s% left the game",
+  "chat.broadcasts.joined": "§e%s% joined the game",
+  "chat.broadcasts.left": "§e%s% left the game",
 
   "creativemenu.badPacket": "Failed to handle ItemStackRequest from %s%. Error: %d%",
 
@@ -158,6 +154,22 @@
 
   "exceptions.console.alreadyClosed": "Console is already closed!",
 
-  "exceptions.logger.invalidWarning": "Invalid log type: warning. Its 'warn', and not 'warning'",
-  "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug"
+  "exceptions.logger.invalidType": "Invalid log type: %s%. Valid types are info, warn, error, debug",
+
+  "query.server.listening": "Query server listening on %s%",
+  "query.server.listening.failed": "Query server failed to listen on %s%",
+
+  "query.server.error": "Query error: %s%",
+
+  "query.server.network.generatingToken": "Generating a query token for %s%",
+  "query.server.network.invalidPacket": "Invalid query packet received from %s%",
+
+  "query.server.network.packets.handshake": "Responded with a query handshake packet to %s%",
+  "query.server.network.packets.fullInfo": "Responded with a query full info packet to %s%",
+  "query.server.network.packets.basicInfo": "Responded with a query basic info packet to %s%",
+
+  "logger.info": "INFO",
+  "logger.warn": "WARNING",
+  "logger.error": "ERROR",
+  "logger.debug": "DEBUG"
 }

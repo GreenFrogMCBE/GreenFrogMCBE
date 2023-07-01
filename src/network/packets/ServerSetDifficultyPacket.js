@@ -15,41 +15,15 @@
  */
 const Difficulty = require("../../api/types/Difficulty");
 
-let difficulty = Difficulty.PEACEFUL;
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetDifficultyPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "set_difficulty";
-	}
+	name = 'set_difficulty'
+	/** @type {Difficulty} */
+	difficulty = Difficulty.PEACEFUL
 
-	/**
-	 * Sets the difficulty
-	 * @param {Difficulty} new_difficulty
-	 */
-	setDifficulty(new_difficulty) {
-		difficulty = new_difficulty;
-	}
-
-	/**
-	 * Returns the difficulty
-	 * @returns {Difficulty}
-	 */
-	getDifficulty() {
-		return difficulty;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), { difficulty: this.getDifficulty() });
+		client.queue(this.name, { difficulty: this.difficulty });
 	}
 }
 

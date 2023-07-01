@@ -13,27 +13,24 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Bedrock = require("../../block/normalIds/Bedrock");
-const CoalOre = require("../../block/normalIds/CoalOre");
-const Grass = require("../../block/normalIds/Grass");
-const Stone = require("../../block/normalIds/Stone");
-const Dirt = require("../../block/normalIds/Dirt");
-const Air = require("../../block/normalIds/Air");
+const vanillaBlocks = require("../../api/block/vanillaBlocks.json")
 
-const WorldGenerators = require("../types/WorldGenerators");
+const WorldGenerator = require("../types/WorldGenerator");
 
 const Generator = require("./Generator");
 
 /** @private @type {number} */
-const dirt = new Dirt().getID();
+const dirt = vanillaBlocks.dirt.legacy_id
 /** @private @type {number} */
-const grass = new Grass().getID();
+const grass = vanillaBlocks.grass.legacy_id
 /** @private @type {number} */
-const air = new Air().getID();
+const air = vanillaBlocks.air.legacy_id
 /** @private @type {number} */
-const bedrock = new Bedrock().getID();
+const bedrock = vanillaBlocks.bedrock.legacy_id
 /** @private @type {number} */
-const stone = new Stone().getID();
+const stone = vanillaBlocks.stone.legacy_id
+/** @private @type {number} */
+const coalOre = vanillaBlocks.coal_ore.legacy_id
 
 /** @private @type {Buffer} */
 let chunkData;
@@ -48,7 +45,7 @@ function _generateOre() {
 	let blockType;
 
 	if (Math.floor(Math.random() * 100) < 30) {
-		blockType = new CoalOre().getID();
+		blockType = coalOre;
 	} else {
 		blockType = stone;
 	}
@@ -57,16 +54,7 @@ function _generateOre() {
 }
 
 class Default extends Generator {
-	/**
-	 * @returns {WorldGenerators.Flat}
-	 */
-	getName() {
-		return WorldGenerators.FLAT;
-	}
-
-	/**
-	 * @returns {Buffer}
-	 */
+	name = WorldGenerator.DEFAULT
 	getChunkData() {
 		chunkData = Buffer.alloc(16 * 256 * 16);
 

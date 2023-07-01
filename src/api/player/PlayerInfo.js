@@ -31,12 +31,13 @@ module.exports = {
 	get(player) {
 		try {
 			let name = player.toLowerCase();
+
 			for (let i = 0; i < playersOnline.length; i++) {
 				if (playersOnline[i].username.toLowerCase() === name) {
 					return playersOnline[i];
 				}
 			}
-		} catch (e) {
+		} catch {
 			return null;
 		}
 	},

@@ -13,30 +13,16 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Air = require("../../block/normalIds/Air");
-const Dirt = require("../../block/normalIds/Dirt");
-const Grass = require("../../block/normalIds/Grass");
-const Bedrock = require("../../block/normalIds/Bedrock");
+const vanillaBlocks = require("../../api/block/vanillaBlocks.json")
 
-const WorldGenerators = require("../types/WorldGenerators");
+const WorldGenerator = require("../types/WorldGenerator");
 
 const Generator = require("./Generator");
 
-let chunkData;
-
 class Flat extends Generator {
-	/**
-	 * @returns {WorldGenerators.Flat}
-	 */
-	getName() {
-		return WorldGenerators.FLAT;
-	}
-
-	/**
-	 * @returns {Buffer}
-	 */
+	name = WorldGenerator.FLAT
 	getChunkData() {
-		chunkData = Buffer.alloc(16 * 256 * 16);
+		let chunkData = Buffer.alloc(16 * 256 * 16);
 
 		for (let x = 0; x < 16; x++) {
 			for (let y = 0; y < 256; y++) {
@@ -44,19 +30,19 @@ class Flat extends Generator {
 					const index = y * 16 * 16 + z * 16 + x;
 
 					if (x > 14 && y > -1 && y < 16) {
-						chunkData[index] = new Grass().getID();
+						chunkData[index] = vanillaBlocks.grass.legacy_id;
 					} else if (y < 18 && x < 11) {
-						chunkData[index] = new Air().getID();
+						chunkData[index] = vanillaBlocks.air.legacy_id;
 					} else if (y < 17 && x < 12) {
-						chunkData[index] = new Bedrock().getID();
+						chunkData[index] = vanillaBlocks.bedrock.legacy_id;
 					} else {
-						chunkData[index] = new Dirt().getID();
+						chunkData[index] = vanillaBlocks.dirt.legacy_id;
 					}
 				}
 			}
 		}
 
-		return chunkData;
+		return chunkData
 	}
 }
 

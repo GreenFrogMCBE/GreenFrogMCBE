@@ -15,58 +15,17 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let patterns = [];
-let materials = [];
-
 class ServerTrimDataPacket extends PacketConstructor {
-	/**
-	 * Returns the name of the packet.
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "trim_data";
-	}
+	name = "trim_data";
+	/** @type {Array} */
+	patterns = []
+	/** @type {Array} */
+	materials = []
 
-	/**
-	 * Sets the patterns
-	 * @param {Array<JSON>} new_patterns
-	 */
-	setPatterns(new_patterns) {
-		patterns = new_patterns;
-	}
-
-	/**
-	 * Returns the patterns
-	 * @returns {JSON}
-	 */
-	getPatterns() {
-		return patterns;
-	}
-
-	/**
-	 * Sets the materials
-	 * @param {Array<JSON>} material
-	 */
-	setMaterials(material) {
-		materials = material;
-	}
-
-	/**
-	 * Returns the materials
-	 * @returns {Array<JSON>}
-	 */
-	getMaterials() {
-		return materials;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), {
-			patterns: this.getPatterns(),
-            materials: this.getMaterials()
+		client.queue(this.name, {
+			patterns: this.patterns,
+			materials: this.materials,
 		});
 	}
 }

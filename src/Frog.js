@@ -56,6 +56,13 @@ module.exports = {
 	isDebug: process.argv.includes("--debug") || getConfig().config.dev.debug,
 
 	/**
+	 * Returns if the server is running in the test workflow
+	 *
+	 * @returns {boolean}
+	 */
+	isTest: process.argv.includes("--test"),
+
+	/**
 	 * Returns the server object
 	 *
 	 * @returns {Server}
@@ -100,8 +107,8 @@ module.exports = {
 	 */
 	getServerData() {
 		return {
-			minorServerVersion: "3.6",
-			versionDescription: "Updated to 1.20",
+			minorServerVersion: "3.7",
+			versionDescription: "Added query and containers",
 			majorServerVersion: "3.0",
 			apiVersion: "3.0",
 		};

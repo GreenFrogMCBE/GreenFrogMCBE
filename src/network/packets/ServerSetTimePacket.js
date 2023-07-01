@@ -15,40 +15,14 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let time = 0;
-
 class ServerSetTimePacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "set_time";
-	}
+	name = 'set_time'
+	/** @type {number} */
+	time;
 
-	/**
-	 * Sets the time
-	 * @param {number} time
-	 */
-	setTime(new_time) {
-		time = new_time;
-	}
-
-	/**
-	 * Returns the time
-	 * @returns {number}
-	 */
-	getTime() {
-		return time;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), {
-			time: this.getTime(),
+		client.queue(this.name, {
+			time: this.time,
 		});
 	}
 }

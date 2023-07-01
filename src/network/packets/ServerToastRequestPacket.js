@@ -19,54 +19,16 @@ let title;
 let message;
 
 class ServerToastRequestPacket extends PacketConstructor {
-	/**
-	 * Returns the name of the packet.
-	 * @returns {string}.
-	 */
-	getPacketName() {
-		return "toast_request";
-	}
+	name = 'toast_request'
+	/** @type {string} */
+	title;
+	/** @type {string} */
+	message;
 
-	/**
-	 * Sets the title of the toast.
-	 * @param new_title
-	 */
-	setTitle(new_title) {
-		title = new_title;
-	}
-
-	/**
-	 * Sets the message of the toast.
-	 * @param new_messaged.
-	 */
-	setMessage(new_message) {
-		message = new_message;
-	}
-
-	/**
-	 * Returns the title.
-	 * @returns {string}
-	 */
-	getTitle() {
-		return title;
-	}
-
-	/**
-	 * Returns the message.
-	 * @returns {string}
-	 */
-	getMessage() {
-		return message;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
-	send(client) {
-		client.queue(this.getPacketName(), {
-			title: this.getTitle(),
-			message: this.getMessage(),
+	writePacket(client) {
+		client.queue(this.name, {
+			title: this.title,
+			message: this.message,
 		});
 	}
 }
