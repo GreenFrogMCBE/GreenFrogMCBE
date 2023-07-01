@@ -64,6 +64,7 @@ declare function on(eventName: "serverExecutedCommand", listener: (...args: any[
 declare function on(eventName: "serverVelocityUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetXP", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetHealth", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverSpeedUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverCriticalError", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverStart", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverListen", listener: (...args: any[]) => void): void;

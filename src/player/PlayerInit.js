@@ -622,6 +622,35 @@ module.exports = {
 			dimensionPacket.writePacket(player);
 		};
 
+
+		/**
+		 * Sets the speed for the player
+		 * 
+		 * @param {number} speed 
+		 */
+		player.setSpeed = async function (speed) {
+			let shouldUpdateSpeed = true;
+
+			Frog.eventEmitter.emit("serverSpeedUpdate", {
+				speed,
+				server: Frog.getServer(),
+				cancel: () => {
+					shouldUpdateSpeed = false;
+				},
+			});
+
+			if (!shouldUpdateSpeed) return;
+
+			player.setAttribute({
+				"min": 0,
+				"max": 3.4028234663852886e+38,
+				"current": speed,
+				"default": speed,
+				"name": PlayerAttribute.MOVEMENT_SPEED,
+				"modifiers": []
+			})
+		}
+
 		/**
 		 * Changes the OP status for the player
 		 * 

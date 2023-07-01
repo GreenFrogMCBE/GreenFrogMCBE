@@ -278,14 +278,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					});
 
 					player.setEntityData(defaultEntityData);
-					player.setAttribute({
-						"min": 0,
-						"max": 3.4028234663852886e+38,
-						"current": 0.10000000149011612,
-						"default": 0.10000000149011612,
-						"name": PlayerAttribute.MOVEMENT_SPEED,
-						"modifiers": []
-					})
+					player.setSpeed(0.10000000149011612)
 
 					Frog.__addPlayer();
 
