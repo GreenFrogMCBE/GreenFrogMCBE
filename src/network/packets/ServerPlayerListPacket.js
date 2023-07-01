@@ -40,7 +40,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 					records_count: 1,
 					records: [
 						{
-							uuid: this.getUUID(),
+							uuid: this.uuid,
 						},
 					],
 				},
@@ -52,10 +52,10 @@ class ServerPlayerListPacket extends PacketConstructor {
 					records_count: 1,
 					records: [
 						{
-							uuid: this.getUUID(),
-							entity_unique_id: "-" + this.getId(),
-							username: this.getUsername(),
-							xbox_user_id: this.getXboxId(),
+							uuid: this.uuid,
+							entity_unique_id: "-" + this.id,
+							username: this.username,
+							xbox_user_id: this.xbox_id,
 							platform_chat_id: "",
 							build_platform: 7,
 							skin_data: require("../../resources/skinData.json"),
