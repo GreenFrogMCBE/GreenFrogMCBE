@@ -1,15 +1,15 @@
-# NodeJS thing
+# NodeJS modules
 
 node_modules/
 
-# Configs and some other stuff
+# Configs
 
 ops.yml
 config.yml
 crash-reports/
 world/
 
-# bedrock-protocol thing
+# bedrock-protocol erros
 
 *_packetReadError.txt
 
@@ -19,7 +19,6 @@ plugins/
 pluginData/
 !types/plugins
 
-# Fix that FallDamage.js and GeneratorType.js are getting ignored
+# Do not ignore anything in /src/
 
-!src/world/FallDamage.js
-!src/world/GeneratorType.js
+!src/*
