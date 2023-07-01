@@ -25,7 +25,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	uuid;
 	/** @type {number} */
 	id;
-	/** @type {PlayerList} */
+	/** @type {PlayerListType} */
 	type;
 	/** @type {number} */
 	xbox_id;
@@ -33,7 +33,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	writePacket(client) {
 		let data = null;
 
-		if (this.getType() === PlayerListType.REMOVE) {
+		if (this.type === PlayerListType.REMOVE) {
 			data = {
 				records: {
 					type: PlayerListType.REMOVE,
@@ -68,7 +68,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 			};
 		}
 
-		client.queue(this.getPacketName(), data);
+		client.queue(this.name, data);
 	}
 }
 
