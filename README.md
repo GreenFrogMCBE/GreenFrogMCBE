@@ -13,11 +13,10 @@ Please note that this software is still in beta, so do not stare directly at the
 
 + Generate plugin structure: "npm run plugin-structure"
 
-You can install it by downloading this repo, then running "npm install" and then doing "npm run start" (or "node .")
-
 + Credits: /docs/CREDITS.md
 + Human-readable license: /docs/READABLE-LICENSE.md
 + How to connect via localhost: /docs/LOCALHOST-CONNECTIONS.md
++ How to install: /docs/INSTALLATION.md
 ```
 
 ![Alt](https://repobeats.axiom.co/api/embed/ff82e6d76083a1934305e3b40714b01604df4e92.svg "Repobeats analytics image")
