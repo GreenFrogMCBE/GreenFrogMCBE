@@ -1,0 +1,174 @@
+{
+  "server.loading": "Завантаження сервера...",
+  "server.license": "GreenFrog має ліцензію Creative Commons Attribution 4.0 International. Додаткова інформація: https://creativecommons.org",
+
+  "server.shuttingDown": "Вимкнення...",
+
+  "garbageCollector.started": "[Сбірник сміття] Початок збирання сміття...",
+  "garbageCollector.deleted": "[Сбірник сміття] Видалено %s%",
+  "garbageCollector.finished": "[Сбірник сміття] Завершено",
+
+  "commands.unknown": "§cНевідома команда: %s%. Перевірте, чи існує така команда та чи маєте ви права її використовувати.",
+  "commands.internalError": "Не вдалося виконати команду! Помилка: %s%",
+  "commands.internalError.player": "Не вдалося виконати команду від %s%. Помилка: %d%",
+  "commands.internalError.badSender": "§cЦей тип відправника не підтримує цю команду",
+
+  "commands.ingame.executed": "%s% виконав команду сервера: /%d%",
+
+  "commands.deop.name": "deop",
+  "commands.deop.description": "Скасування прав оператора у гравця.",
+  "commands.deop.execution.success": "Вдалося скасувати права оператора для гравця %s%",
+  "commands.deop.execution.fail": "Не вдалося скасувати права оператора для гравця %s%",
+
+  "commands.gamemode.name": "gamemode",
+  "commands.gamemode.description": "Встановлює режим гри гравця",
+  "commands.gamemode.execution.failed": "§cРежим гри '%s%' недійсний",
+  "commands.gamemode.execution.success.updated": "Ваш режим гри був оновлений до %s%.",
+  "commands.gamemode.execution.success.set": "Встановлено власний режим гри: %s%.",
+
+  "commands.me.name": "me",
+  "commands.me.description": "Відображає повідомлення про вас самого.",
+
+  "commands.help.name": "help",
+  "commands.help.description": "Список команд.",
+  "commands.help.execution.success": "Список команд:",
+
+  "commands.kick.name": "kick",
+  "commands.kick.description": "Видаляє гравця з сервера.",
+  "commands.kick.execution.failed.notOnline": "§c%s% не знаходиться в мережі",
+
+  "commands.list.name": "list",
+  "commands.list.description": "Перелік гравців на сервері.",
+  "commands.list.execution.success.commandList": "На сервері знаходиться %s% гравців: %d%",
+
+  "commands.op.name": "op",
+  "commands.op.description": "Надання прав оператора гравцю.",
+  "commands.op.execution.success": "Вдалося встановити рівень оператора для гравця %s%",
+  "commands.op.execution.failed": "§cНе вдалося надати права оператора гравцю %s%",
+
+  "commands.plugins.name": "plugins",
+  "commands.plugins.aliases.pl": "pl",
+  "commands.plugins.description": "Показує список плагінів, що працюють на сервері.",
+  "commands.plugins.execution.success": "Плагіни: %s^1%",
+
+  "commands.say.name": "say",
+  "commands.say.description": "Надсилає повідомлення в чат для інших гравців.",
+
+  "commands.stop.name": "stop",
+  "commands.stop.description": "Вимикає сервер.",
+
+  "commands.time.name": "time",
+  "commands.time.description": "Змінює час світу",
+  "commands.time.execution.success": "Встановлено час %s%",
+  "commands.time.execution.failed": "§cЧас повинен бути числом",
+  "commands.time.times.day": "день",
+  "commands.time.times.night": "ніч",
+
+  "commands.version.name": "version",
+  "commands.version.description": "Показує версію сервера.",
+  "commands.version.aliases.ver": "ver",
+  "commands.version.aliases.about": "about",
+
+  "commands.errors.syntaxError.minArg": "§cПомилка синтаксису: Мінімальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
+  "commands.errors.syntaxError.maxArg": "§cПомилка синтаксису: Максимальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
+
+  "scoreboard.name.default": "Табло",
+
+  "plugin.loading.failed": "Не вдалося завантажити %s%. Помилка: %d%",
+  "plugin.loading.loading": "Завантаження плагіна %s% v%d%",
+  "plugin.loading.loaded": "Завантажено плагін %s% v%d%",
+  "plugin.loading.warning.invalidJson": "Недійсні дані JSON для %s%. Помилка: %d%",
+
+  "plugin.unloading.failed": "Не вдалося вивантажити %s%. Помилка: %d%",
+  "plugin.unloading.success": "Вивантажено %s%",
+  "plugin.unloading.unloading": "Вивантаження %s%...",
+
+  "frog.version": "На цьому сервері використовується GreenFrogMCBE (https://github.com/andriycraft/GreenFrogMCBE). Версія: %s%",
+
+  "world.chunks.chunkGeneratorLimit.tooHigh": "Обмеження генератора чанків у вашому файлі config.yml занадто високе! Це може призвести до лагів",
+
+  "errors.nodeJS.tooOld": "Ви використовуєте застарілу версію nodeJS, що не підтримує роботу GreenFrogMCBE",
+  "errors.nodeJS.tooOld.update": "Оновіть її до версії 14.0.0+ з https://nodejs.org/",
+
+  "kickMessages.serverDisconnect": "disconnectionScreen.noReason",
+  "kickMessages.serverClosed": "Сервер закритий",
+  "kickMessages.serverFull": "disconnectionScreen.serverFull",
+  "kickMessages.invalidPacket": "Недійсний пакет / Внутрішня помилка сервера",
+  "kickMessages.versionMismatch": "Версія вашого клієнта не відповідає версії сервера! Сервер в даний момент працює на версії %s%",
+  "kickMessages.resourcePacksRefused": "Ви повинні прийняти ресурсні пакети, щоб приєднатися до цього сервера",
+  "kickMessages.wereKicked": "Вас вигнали з гри%s%",
+
+  "kickMessages.playStatus": "Вигнано через те, що плагін надіслав стан гри: %s%",
+  "kickMessages.playStatus.console": "Вигнано %s%, оскільки плагін / сервер надіслав стан гри з полем terminate_connection, встановленим в значення true. Зазвичай це означає, що версія клієнта старіша за версію сервера",
+
+  "player.kicked": "Вигнано %s% через %d%",
+
+  "status.resourcePacks.refused": "%s% відмовився від ресурсних пакетів сервера",
+  "status.resourcePacks.none": "%s% не має ресурсних пакетів",
+  "status.resourcePacks.installed": "%s% має всі встановлені ресурсні пакети",
+  "status.resourcePacks.joined": "%s% приєднався",
+  "status.resourcePacks.spawned": "%s% з'явився",
+  "status.resourcePacks.disconnected": "%s% відключився",
+
+  "warning.customItems.loading.failed": "Не вдалося завантажити спеціальні предмети! Помилка: %s%",
+
+  "debug.debugEnabled": "Режим налагодження увімкнено. Це може спричинити затримки при відправці великих пакетів.",
+  "debug.unstable": "Режим ненадійності увімкнено. Це дозволить відновити сервер у разі виникнення критичних помилок, але може спричинити пошкодження даних плагіну.",
+  "debug.unstable.unsupported": "Крім того, режим ненадійності не підтримується розробниками GreenFrog, і ви несете відповідальність за пошкодження даних, якщо воно станеться.",
+
+  "debug.player.unsupportedActionID": "Непідтримуваний ідентифікатор дії від %s%: %d%.",
+  "debug.player.unsupportedActionID.block": "Непідтримуваний ідентифікатор блока дії від %s%: %d%.",
+
+  "debug.playerlist.invalid": "Пропущено недійсний пакет PlayerList.",
+
+  "chat.format": "<%s%> %d%.",
+  "chat.format.plugin": "%s%.",
+  "chat.format.me": "* %s% %d%.",
+  "chat.format.say": "[%s%] %d%.",
+
+  "chat.broadcasts.joined": "§e%s% приєднався до гри",
+  "chat.broadcasts.left": "§e%s% покинув гру",
+
+  "creativemenu.badPacket": "Не вдалося обробити запит ItemStackRequest від %s%. Помилка: %d%.",
+
+  "network.packet.unhandledPacket": "Невідомий пакет!",
+
+  "network.server.listening.success": "Прослуховування на %s% вдалося.",
+  "network.server.listening.failed": "Не вдалося прослуховувати %s%. Помилка: %d%.",
+  "network.server.listening.failed.otherServerRunning": "Можливо, на цьому порті вже працює інший сервер?",
+
+  "network.packet.failed.clientSide": "Не вдається записати пакет на клієнтській стороні.",
+  "network.packet.failed.serverSide": "Не вдається прочитати пакет на серверній стороні.",
+
+  "exceptions.network.rateLimited": "Забагато пакетів від %s% (%d%).",
+  "exceptions.network.packetHandlingError": "Не вдалося обробити пакет від %s%! Помилка: %d%.",
+  "exceptions.network.itemStackRequest.badGamemode": "Не можна отримати предмет з творчого меню, коли не знаходишся в режимі творчості.",
+  "exceptions.network.inventoryTransaction.invalid": "Недійсний пакет InventoryTransaction від %s%.",
+  "exceptions.network.invalidGamemodePacket": "Недійсний пакет режиму гри - спроба змінити режим гри без прав адміністратора.",
+
+  "exceptions.plugin.noName": "Відсутня назва плагіна!",
+  "exceptions.plugin.noVersion": "Відсутня версія плагіна!",
+
+  "exceptions.generator.invalid": "Недійсний генератор світу!",
+
+  "exceptions.console.alreadyClosed": "Консоль вже закрита!",
+
+  "exceptions.logger.invalidType": "Недійсний тип журналу: %s%. Допустимі типи: info, warn, error, debug.",
+
+  "query.server.listening": "Query запущений та запустити на %s%",
+  "query.server.listening.failed": "Query не вдалося запустити на %s%",
+    
+  "query.server.error": "Помилка Query: %s%",
+    
+  "query.server.network.generatingToken": "Створення токена Query для %s%",
+  "query.server.network.invalidPacket": "Отримано недійсний пакет Query від %s%",
+    
+  "query.server.network.packets.handshake": "Відправлено пакет рукопозичії Query до %s%",
+  "query.server.network.packets.fullInfo": "Відправлено пакет повної інформації Query до %s%",
+  "query.server.network.packets.basicInfo": "Відправлено пакет базової інформації Query до %s%",
+
+  "logger.info": "ІНФО",
+  "logger.warn": "ПОПЕРЕДЖЕННЯ",
+  "logger.error": "ПОМИЛКА",
+  "logger.debug": "НАЛАДКА"
+}

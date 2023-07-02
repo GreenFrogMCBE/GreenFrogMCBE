@@ -18,62 +18,74 @@ const { getKey } = require("../utils/Language");
 
 const LoggingException = require("../utils/exceptions/LoggingException");
 
+let messageLogs = [];
+
 /**
  * Fires the 'serverLogMessage' event
  *
  * @param {string} langString
  * @param {string} color
  * @param {string} message
- * @param {string} consoleType
+ * @param {string} type
  */
-function fireEvent(langString, color, message, consoleType) {
+function fireEvent(langString, color, message, type) {
 	require("../Frog").eventEmitter.emit("serverLogMessage", {
 		type: langString,
 		message,
 		server: require("../Frog"),
 		legacy: {
 			color,
-			consoleType,
+			type,
 		},
 	});
 }
 
 module.exports = {
 	/**
-	 * Returns if debug is enabled or not
-	 *
-	 * @returns {boolean}
+	 * Returns all messages in console as an array
+	 * @returns {Array<String>}
 	 */
-	isDebugEnabled() {
-		require("../Frog").isDebug;
+	getMessageLogs() {
+		return messageLogs;
+	},
+
+	/**
+	 * Changes the contents of the `messageLogs` array
+	 * @param {Array<String>} newMessageLogs
+	 */
+	setMessageLogs(newMessageLogs) {
+		messageLogs = newMessageLogs;
+	},
+
+	/**
+	 * Clears the message logs
+	 */
+	clearMessageLogs() {
+		messageLogs = [];
 	},
 
 	/**
 	 * Logs a message
 	 *
 	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
-	 * @throws {LoggingException} - If the log type is 'warning' (common Node.JS mistake) (must be 'warn')
+	 * @throws {LoggingException} - If the log type is 'warning' (common NodeJS mistake) (must be 'warn')
 	 *
 	 * @param {string} langString
 	 * @param {number} color
 	 * @param {string} message
-	 * @param {string} consoleType
-	 *
-	 *
+	 * @param {string} type
 	 */
-	log(langString, color, message, consoleType) {
+	log(langString, color, message, type) {
 		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
 
-		if (consoleType === "warning") {
-			throw new LoggingException(getKey("exceptions.logger.invalidWarning"));
+		if (!console[type]) {
+			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s%", type));
 		}
 
-		if (!console[consoleType]) {
-			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s%", consoleType));
-		}
+		fireEvent(langString, color, message, type);
+		messageLogs.push({ langString, color, message, type });
 
-		fireEvent(langString, color, message, consoleType);
-		console[consoleType](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));
+		console[type](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));
 	},
 
 	/**
@@ -113,7 +125,7 @@ module.exports = {
 	 *
 	 */
 	debug(message) {
-		if (!(process.env.DEBUG === "minecraft-protocol" || this.isDebugEnabled())) return;
+		if (!(process.env.DEBUG === "minecraft-protocol" || require("../Frog").isDebug)) return;
 
 		this.log(getKey("logger.debug"), "35", message, "info");
 	},

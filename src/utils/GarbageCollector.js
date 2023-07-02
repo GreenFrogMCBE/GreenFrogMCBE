@@ -24,14 +24,14 @@ module.exports = {
 	/**
 	 * Removes data of offline players
 	 */
-	clearOfflinePlayers() {
+	async clearOfflinePlayers() {
 		Frog.eventEmitter.emit("serverOfflinePlayersGarbageCollection", {
-			server: require("../Server"),
+			server: Frog.getServer(),
 			players: PlayerInfo.players,
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			const player = PlayerInfo.players[i].q;
+			const player = PlayerInfo.players[i].q; // "q" gets created in the player object by bedrock-protocol when the player leaves the server
 
 			if (player) {
 				Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s%", player.username));
@@ -42,15 +42,15 @@ module.exports = {
 	},
 
 	/**
-	 * Clears RAM from useless data
+	 * Clears RAM from useless entries
 	 */
-	gc() {
+	async gc() {
 		Logger.debug(Language.getKey("garbageCollector.started"));
 
-		this.clearOfflinePlayers();
+		await this.clearOfflinePlayers();
 
 		Frog.eventEmitter.emit("serverGarbageCollection", {
-			server: require("../Server"),
+			server: Frog.getServer(),
 			players: PlayerInfo.players,
 		});
 

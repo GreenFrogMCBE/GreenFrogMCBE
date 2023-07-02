@@ -25,8 +25,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm install --force
-      - run: npm run autotest
+      - run: npm install
+      - run: npm run auto-test
   test-windows:
     runs-on: windows-latest
 
@@ -43,4 +43,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm install
-      - run: npm run autotest
+      - run: npm run auto-test

@@ -4,9 +4,9 @@
 
 | Version | Supported          |
 | ------- | ------------------ |
-| >= 3.0  | :white_check_mark: |
-| <= 2.8  | :x:                |
+| > 3.2   | :white_check_mark: |
+| < 3.2   | :x:                |
 
-## Reporting a vulnerability/bug
+## Reporting a vulnerability
 
-Use the Issues page for that. Versions below 2.5 are not supported
+Use the Issues page for that. Versions below 3.2 are not supported

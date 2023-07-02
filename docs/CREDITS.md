@@ -4,8 +4,8 @@
 
 > For creating multilang (https://github.com/andriycraft/GreenFrogMCBE/pull/9) <br>
 > For improving tests and /list <br>
-> For ,aking better tests (https://github.com/andriycraft/GreenFrogMCBE/pull/70) <br>
-> For making PlayerInfo.get not case sensitive (https://github.com/andriycraft/GreenFrogMCBE/pull/192)
+> For making better tests, and making `tests-manual.js` (https://github.com/andriycraft/GreenFrogMCBE/pull/70) <br>
+> For making `PlayerInfo.get()` not case sensitive (https://github.com/andriycraft/GreenFrogMCBE/pull/192)
 
 2. @hvlxh
 
@@ -15,6 +15,7 @@
 > For rewriting some parts of command system <br>
 > For making the README.md file look better <br>
 > For showing example of a generator in our discord <br>
+> For adding query support (https://github.com/andriycraft/GreenFrogMCBE/pull/214)
 
 3. @NhanAZ
 
@@ -35,8 +36,8 @@
 
 5. @bufferfishq
 
-> For adding support for custom_form and rewriting plugin system (https://github.com/andriycraft/GreenFrogMCBE/pull/47)
-> For fixing a lot of bugs, and paths
+> For adding support for custom_form and rewriting plugin system (https://github.com/andriycraft/GreenFrogMCBE/pull/47)  <br>
+> For fixing a lot of bugs and paths <br>
 
 6. @Zwuiix-cmd
 
@@ -62,7 +63,7 @@
 
 > Used as an example for custom_form support (i had permission from repo owner)
 
-12. 🌓Enzø ツ#6666, @CreeperG16, @faaxz
+12. @Nya-Enzo, @CreeperG16, @faaxz
 
 > For helping me with chunk support
 

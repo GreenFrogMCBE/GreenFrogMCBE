@@ -13,23 +13,12 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- *
- * Copyright 2023 andriycraft
- * Github: https://github.com/andriycraft/GreenFrogMCBE
- */
 const ClientRunCommand = require("../test/ClientRunCommand");
 const ClientSendMessage = require("../test/ClientSendMessage");
 const ClientJoin = require("../test/ClientJoin");
 const StartServer = require("../test/StartServer");
 const TestConfigs = require("../test/TestConfigs");
+const Query = require("../test/Query");
 
 try {
 	StartServer.test();
@@ -65,10 +54,18 @@ setTimeout(() => {
 					handleTestFailure("Failed to send a chat message!", e);
 				}
 
-				console.info("All tests passed!");
-				process.exit(0);
-			}, 10000);
-		}, 10000);
+				setTimeout(() => {
+					try {
+						Query.test();
+
+						console.info("All tests passed!");
+						process.exit(0);
+					} catch (e) {
+						handleTestFailure("Failed to contact the server using query!", e);
+					}
+				}, 8000);
+			}, 8000);
+		}, 8000);
 	}, 10000);
 }, 3500);
 

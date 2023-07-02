@@ -22,6 +22,9 @@ module.exports = {
 	 */
 	getProtocol(version) {
 		switch (version) {
+			case "1.20.0":
+			case "1.20":
+				return 589;
 			case "1.19.80":
 				return 582;
 			case "1.19.70":

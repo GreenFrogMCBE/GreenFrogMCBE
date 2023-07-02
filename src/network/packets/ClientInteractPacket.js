@@ -18,9 +18,9 @@ const ServerContainerOpenPacket = require("./ServerContainerOpenPacket");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const InventoryType = require("./types/InventoryType");
+const WindowType = require("./types/WindowType");
 const InteractType = require("../../world/types/InteractType");
-const WindowID = require("./types/WindowID");
+const WindowId = require("./types/WindowId");
 
 const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
@@ -28,28 +28,21 @@ const Frog = require("../../Frog");
 const { getKey } = require("../../utils/Language");
 
 class ClientInteractPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "interact";
-	}
+	name = 'interact'
 
-	/**
-	 * Reads the packet from client
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 * @param {Server} server
-	 */
 	async readPacket(player, packet, server) {
 		const actionID = packet.data.params.action_id;
+
+		let shouldInteract = true
 
 		Frog.eventEmitter.emit("playerInteractEvent", {
 			player,
 			server,
 			actionID,
+			cancel: () => { shouldInteract = false }
 		});
+
+		if (!shouldInteract) return
 
 		switch (actionID) {
 			case InteractType.INVENTORYOPEN:
@@ -62,8 +55,8 @@ class ClientInteractPacket extends PacketConstructor {
 				};
 
 				Frog.eventEmitter.emit("playerContainerOpen", {
-					windowID: WindowID.CREATIVE,
-					windowType: InventoryType.INVENTORY,
+					windowID: WindowId.CREATIVE,
+					windowType: WindowType.CREATIVE_INVENTORY,
 					isSentByServer: false,
 					runtimeID: 2,
 					player,
@@ -77,10 +70,10 @@ class ClientInteractPacket extends PacketConstructor {
 				if (!shouldOpen) return;
 
 				const containerOpen = new ServerContainerOpenPacket();
-				containerOpen.setWindowID(WindowID.CREATIVE);
-				containerOpen.setWindowType(InventoryType.INVENTORY);
-				containerOpen.setRuntimeEntityId(2);
-				containerOpen.setCoordinates(containerCoordinates.x, containerCoordinates.y, containerCoordinates.z);
+				containerOpen.window_id = WindowId.CREATIVE;
+				containerOpen.window_type = WindowType.CREATIVE_INVENTORY;
+				containerOpen.runtime_entity_id = 2;
+				containerOpen.coordinates = { x: containerCoordinates.x, y: containerCoordinates.y, z: containerCoordinates.z };
 				containerOpen.writePacket(player);
 				break;
 			default:

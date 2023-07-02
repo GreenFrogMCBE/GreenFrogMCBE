@@ -15,7 +15,7 @@
  */
 const Frog = require("../Frog");
 
-const Colors = require("../api/colors/Colors");
+const Colors = require("../api/color/Colors");
 const { getKey } = require("../utils/Language");
 
 /**

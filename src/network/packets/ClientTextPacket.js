@@ -16,70 +16,102 @@
 const Frog = require("../../Frog");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
-
 const Logger = require("../../server/Logger");
-
-const { getKey } = require("../../utils/Language");
-
-const { serverConfigurationFiles } = Frog;
-const { config } = serverConfigurationFiles;
 
 const PacketConstructor = require("./PacketConstructor");
 
+const { getKey } = require("../../utils/Language");
+const { serverConfigurationFiles } = Frog;
+const { config } = serverConfigurationFiles;
+
 class ClientTextPacket extends PacketConstructor {
-	/**
-	 * Returns packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "text";
-	}
+	name = "text";
 
-	/**
-	 * Reads if packet from player
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 * @param {Server} server
-	 */
 	async readPacket(player, packet, server) {
-		let message = packet.data.params.message;
+		const message = packet.data.params.message;
 
-		if (config.chat.disable || !message.trim()) return;
+		if (shouldDisableChat() || isEmptyMessage(message)) {
+			return;
+		}
 
-		let shouldChat = true;
+		if (!shouldChat(server, player, message)) {
+			return;
+		}
 
-		Frog.eventEmitter.emit("playerChat", {
-			server,
-			player,
-			message,
-			cancel: () => {
-				shouldChat = false;
-			},
-		});
+		if (shouldBlockInvalidMessages()) {
+			const cleanMessage = cleanInvalidCharacters(message);
 
-		if (!shouldChat) return;
-
-		if (config.chat.blockInvalidMessages) {
-			message = message.replace("§", "");
-
-			if (message.length > 256) {
-				Frog.eventEmitter.emit("playerMalformatedChatMessage", {
-					server,
-					player,
-					message,
-				});
+			if (isMessageTooLong(cleanMessage)) {
+				handleMalformattedChatMessage(server, player, cleanMessage);
 				return;
 			}
 		}
 
-		const formattedMessage = getKey("chat.format").replace("%s%", player.username).replace("%d%", message.replace("§", ""));
+		const formattedMessage = formatMessage(player.username, message);
 
-		Logger.info(formattedMessage);
-
-		for (const player of PlayerInfo.players) {
-			player.sendMessage(formattedMessage);
-		}
+		logMessage(formattedMessage);
+		sendMessageToPlayers(formattedMessage);
 	}
 }
+
+function shouldDisableChat() {
+	return config.chat.disable;
+}
+
+function isEmptyMessage(message) {
+	return !message.trim();
+}
+
+function shouldChat(server, player, message) {
+	let shouldChat = true;
+
+	Frog.eventEmitter.emit("playerChat", {
+		server,
+		player,
+		message,
+		cancel: () => {
+			shouldChat = false;
+		},
+	});
+
+	return shouldChat;
+}
+
+function shouldBlockInvalidMessages() {
+	return config.chat.blockInvalidMessages;
+}
+
+function cleanInvalidCharacters(message) {
+	return message.replace(/§/g, '');
+}
+
+function isMessageTooLong(message) {
+	return message.length > 256;
+}
+
+function handleMalformattedChatMessage(server, player, message) {
+	Frog.eventEmitter.emit("playerMalformattedChatMessage", {
+		server,
+		player,
+		message,
+	});
+}
+
+function formatMessage(username, message) {
+	return getKey("chat.format")
+		.replace("%s%", username)
+		.replace("%d%", message.replace(/§/g, ''));
+}
+
+function logMessage(message) {
+	Logger.info(message);
+}
+
+function sendMessageToPlayers(message) {
+	for (const recipient of PlayerInfo.players) {
+		recipient.sendMessage(message);
+	}
+}
+
 
 module.exports = ClientTextPacket;

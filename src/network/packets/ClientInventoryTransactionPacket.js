@@ -18,7 +18,7 @@ const BlockBreakException = require("../../utils/exceptions/BlockBreakException"
 const PacketConstructor = require("./PacketConstructor");
 
 const Gamemode = require("../../api/player/Gamemode");
-const BlockActions = require("../../world/types/BlockActions");
+const BlockActions = require("../../world/types/BlockAction");
 
 const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
@@ -26,20 +26,8 @@ const Frog = require("../../Frog");
 const { getKey } = require("../../utils/Language");
 
 class ClientInventoryTransactionPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "inventory_transaction";
-	}
+	name = 'inventory_transaction'
 
-	/**
-	 * Reads the packet from client
-	 *
-	 * @param {Client} player
-	 * @param {JSON} packet
-	 */
 	async readPacket(player, packet, server) {
 		let actionID = null;
 

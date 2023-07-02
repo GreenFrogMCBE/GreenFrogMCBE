@@ -1,10 +1,24 @@
+# NodeJS modules
+
 node_modules/
+
+# Configs
+
 ops.yml
 config.yml
-*_packetReadError.txt
-TODO
-plugins/
-pluginData/
 crash-reports/
 world/
+
+# bedrock-protocol erros
+
+*_packetReadError.txt
+
+# Plugin related
+
+plugins/
+pluginData/
 !types/plugins
+
+# Do not ignore anything in /src/
+
+!src/*

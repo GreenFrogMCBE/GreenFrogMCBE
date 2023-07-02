@@ -15,16 +15,16 @@
  */
 /* eslint-disable no-unused-vars */
 const FormRequest = require("../network/packets/ServerFormRequestPacket");
-const FormTypes = require("./FormTypes");
+const FormTypess = require("./FormTypess");
 
 class Form {
 	constructor() {
 		/**
-		 * @type {FormTypes}
+		 * @type {FormTypess}
 		 *
-		 * @type {import("./FormTypes")}
+		 * @type {import("./FormTypess")}
 		 */
-		this.type = FormTypes.FORM;
+		this.type = FormTypess.FORM;
 
 		/**
 		 * The title of the form.
@@ -61,7 +61,7 @@ class Form {
 
 	send(client) {
 		const FormReq = new FormRequest();
-		FormReq.setID(this.id);
+		FormReq.setId(this.id);
 		FormReq.setTitle(this.title);
 		FormReq.setContent(this.text);
 		FormReq.setButtons(JSON.stringify(this.buttons));

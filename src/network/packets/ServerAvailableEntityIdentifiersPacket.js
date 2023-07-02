@@ -13,41 +13,15 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-let value = null;
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName() {
-		return "available_entity_identifiers";
-	}
+	name = "available_entity_identifiers"
+	/** @type {JSON} */
+	value
 
-	/**
-	 * Sets the packet value
-	 * @param {JSON} new_value - The packet value data to set.
-	 */
-	setValue(new_value) {
-		value = new_value;
-	}
-
-	/**
-	 * Returns the packet value
-	 * @returns {string} The packet value.
-	 */
-	getValue() {
-		return value;
-	}
-
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client
-	 */
 	writePacket(client) {
-		client.queue(this.getPacketName(), this.getValue());
+		client.queue(this.name, this.value);
 	}
 }
 

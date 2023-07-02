@@ -8,22 +8,22 @@
     "format": "npx prettier --write .",
     "start": "node index.js",
     "dev": "nodemon --signal SIGINT index.js --debug",
-    "generatelicenseheaders": "node tools/generateLicenseHeaders.js",
-    "build": "npm run generatelicenseheaders && npm run format",
-    "autotest": "cd tools && node tests-auto.js --test",
+    "generate-license-headers": "node tools/generate-license-headers.js",
+    "build": "npm run generate-license-headers && npm run format",
+    "auto-test": "cd tools && node tests-auto.js --test",
     "test": "cd tools && node tests-manual.js --test",
-    "pluginstructure": "node tools/generateBasePlugin.js"
+    "plugin-structure": "node tools/generate-base-plugin.js"
   },
   "dependencies": {
+    "@harmonytf/smart-buffer": "4.2.4",
     "center-align": "1.0.1",
     "frog-protocol": "github:greenfrogmc/Protocol",
-    "js-yaml": "4.1.0",
-    "typescript": "^5.1.3"
+    "js-yaml": "4.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.2.5",
-    "eslint": "8.41.0",
+    "eslint": "8.44.0",
     "nodemon": "2.0.22",
-    "prettier": "2.8.8"
+    "prettier": "2.8.8",
+    "minecraft-server-util": "5.4.4"
   }
 }
