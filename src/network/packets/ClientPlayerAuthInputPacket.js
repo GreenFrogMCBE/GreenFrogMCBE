@@ -26,7 +26,7 @@ class ClientPlayerAuthInputPacket extends PacketConstructor {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw } = packet.data.params;
 
-		if (player.x === x && player.y === y && player.z === z && player.yaw === yaw && player.pitch === pitch) return;
+		if (player.location.x === x && player.location.y === y && player.location.z === z && player.location.yaw === yaw && player.location.pitch === pitch) return;
 
 		let shouldSetPosition = true;
 
