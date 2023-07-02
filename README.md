@@ -3,9 +3,9 @@
 ```diff
 @@ GreenFrog is a server software for Minecraft: Bedrock edition @@
 
-It is written in NodeJS and currently supports 1.20 - 1.20.1
-It is under active development
-Please note that this software is still in beta, so do not stare directly at the bugs!
+It's written in NodeJS and currently supports 1.20 - 1.20.1
+This software is under active development
+Please note that this software is still in beta, so do not stare directly at the bugs! 
 
 + Discord: https://discord.gg/X79f6jasW4
 + Example plugin: https://github.com/greenfrogmc/ExamplePlugin
@@ -14,9 +14,7 @@ Please note that this software is still in beta, so do not stare directly at the
 
 + Generate plugin structure: "npm run plugin-structure"
 
-You can install it by downloading this repo,
-then running "npm install"
-to start the server, use "npm run start"
+You can install it by downloading this repo, then running "npm install" and then doing "npm run start" (or "node .")
 
 + Credits: /docs/CREDITS.md
 + Human-readable license: /docs/READABLE-LICENSE.md
