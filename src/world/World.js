@@ -92,6 +92,8 @@ class World {
 	 * Ticks the world
 	 */
 	tick() {
+		if (!PlayerInfo.players.length) return;
+
 		const { config } = Frog.serverConfigurationFiles;
 
 		if (config.world.tickEvent) {

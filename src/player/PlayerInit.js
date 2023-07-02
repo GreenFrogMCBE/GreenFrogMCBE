@@ -265,8 +265,6 @@ module.exports = {
 			playStatus.writePacket(player);
 
 			if (terminate_connection) {
-				player.offline = true;
-
 				Logger.info(getKey("kickMessages.playStatus.console").replace("%s%", player.username));
 
 				setTimeout(() => {
@@ -786,9 +784,7 @@ module.exports = {
 		 * Listens when a player leaves the server
 		 */
 		player.on("close", () => {
-			for (let i = 0; i < PlayerInfo.players.length; i++) {
-				const currentPlayer = PlayerInfo.players[i];
-
+			for (const currentPlayer of PlayerInfo.players) {
 				if (currentPlayer.username === player.username) {
 					continue;
 				}
@@ -800,6 +796,7 @@ module.exports = {
 			}
 
 			player.offline = true;
+			GarbageCollector.clearOfflinePlayers()
 
 			Frog.eventEmitter.emit("playerLeave", {
 				player,
@@ -808,9 +805,7 @@ module.exports = {
 
 			Logger.info(getKey("status.resourcePacks.disconnected").replace("%s%", player.username));
 
-			if (player.initialised) {
-				Frog.broadcastMessage(getKey("chat.broadcasts.left").replace("%s%", player.username));
-			}
+			if (player.initialised) Frog.broadcastMessage(getKey("chat.broadcasts.left").replace("%s%", player.username));
 		});
 	},
 };
