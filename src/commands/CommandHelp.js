@@ -28,6 +28,7 @@ module.exports = {
 
 	execute(_server, player) {
 		player.sendMessage(getKey("commands.help.execution.success"));
+
 		for (const command of Commands.commandList) {
 			player.sendMessage(`${command.data.name} - ${command.data.description}`);
 		}
