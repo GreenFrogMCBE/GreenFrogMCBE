@@ -15,5 +15,5 @@ export = CommandHandlingException;
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare class CommandHandlingException extends Error {
-    constructor(reason: any);
+	constructor(reason: any);
 }

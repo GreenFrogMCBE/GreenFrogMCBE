@@ -15,5 +15,5 @@ export = PacketHandlingException;
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare class PacketHandlingException extends Error {
-    constructor(message: any);
+	constructor(message: any);
 }
