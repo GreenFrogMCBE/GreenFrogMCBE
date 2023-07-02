@@ -15,21 +15,17 @@
  */
 export = PacketConstructor;
 declare class PacketConstructor {
-	/**
-	 * Returns the packet name
-	 * @returns {string}
-	 */
-	getPacketName(): string;
-	/**
-	 * Validates the packet
-	 */
+	/** @type {string} */
+	name: string;
 	validatePacket(): void;
 	/**
-	 * Writes the packet
+	 * @param {Client} player
 	 */
 	writePacket(): void;
 	/**
-	 * Reads the packet
+	 * @param {Client} player
+	 * @param {JSON} packet
+	 * @param {Server} server
 	 */
 	readPacket(): void;
 }

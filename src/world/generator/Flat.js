@@ -13,14 +13,14 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const vanillaBlocks = require("../../api/block/vanillaBlocks.json")
+const vanillaBlocks = require("../../api/block/vanillaBlocks.json");
 
 const WorldGenerator = require("../types/WorldGenerator");
 
 const Generator = require("./Generator");
 
 class Flat extends Generator {
-	name = WorldGenerator.FLAT
+	name = WorldGenerator.FLAT;
 	getChunkData() {
 		let chunkData = Buffer.alloc(16 * 256 * 16);
 
@@ -42,7 +42,7 @@ class Flat extends Generator {
 			}
 		}
 
-		return chunkData
+		return chunkData;
 	}
 }
 

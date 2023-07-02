@@ -17,9 +17,9 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerFeatureRegistryPacket extends PacketConstructor {
 	/** @type {string} */
-	name = 'feature_registry'
+	name = "feature_registry";
 	/** @type {Array} */
-	features = []
+	features = [];
 
 	writePacket(client) {
 		client.queue(this.name, {

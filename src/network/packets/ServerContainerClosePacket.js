@@ -16,7 +16,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerContainerClosePacket extends PacketConstructor {
-	name = 'container_close';
+	name = "container_close";
 	/** @type {number} */
 	window_id;
 	/** @type {boolean} */

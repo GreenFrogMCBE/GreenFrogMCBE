@@ -16,17 +16,17 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerLevelChunkPacket extends PacketConstructor {
-	name = 'level_chunk'
+	name = "level_chunk";
 	/** @type {number} */
-	x
+	x;
 	/** @type {number} */
-	z
+	z;
 	/** @type {number} */
-	sub_chunk_count
+	sub_chunk_count;
 	/** @type {boolean} */
-	cache_enabled
+	cache_enabled;
 	/** @type {Buffer} */
-	payload
+	payload;
 
 	writePacket(client) {
 		client.queue(this.name, {

@@ -46,7 +46,7 @@ let isDebug = Frog.isDebug;
 async function _handleCriticalError(error) {
 	const { host, port } = config.network;
 
-	Frog.eventEmitter.emit('serverCriticalError', { error })
+	Frog.eventEmitter.emit("serverCriticalError", { error });
 
 	if (error.toString().includes("Server failed to start")) {
 		Logger.error(Language.getKey("network.server.listening.failed").replace("%s%", `${host}:${port}`).replace("%d%", error));
@@ -98,17 +98,19 @@ async function _listen() {
 				levelName,
 			},
 		}).on("connect", (client) => {
-			client.on("join", () => {
-				const joinHandler = new PlayerJoinHandler()
-				joinHandler.onPlayerJoin(client);
-			}).on("packet", (packet) => {
-				const packetHandler = new PacketHandler();
-				packetHandler.handlePacket(client, packet);
-			});
+			client
+				.on("join", () => {
+					const joinHandler = new PlayerJoinHandler();
+					joinHandler.onPlayerJoin(client);
+				})
+				.on("packet", (packet) => {
+					const packetHandler = new PacketHandler();
+					packetHandler.handlePacket(client, packet);
+				});
 		});
 
 		Frog.setServer(server);
-		Frog.eventEmitter.emit('serverListen', { server })
+		Frog.eventEmitter.emit("serverListen", { server });
 
 		Logger.info(Language.getKey("network.server.listening.success").replace(`%s%`, `/${host}:${port}`));
 	} catch (e) {
@@ -123,7 +125,7 @@ module.exports = {
 	 * Starts the server
 	 */
 	async start() {
-		Frog.eventEmitter.emit('serverStart', {})
+		Frog.eventEmitter.emit("serverStart", {});
 
 		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
 		await assert(parseInt(config.world.tickSpeed), NaN);
@@ -180,11 +182,11 @@ module.exports = {
 					plugins: PluginManager.plugins,
 					wl: false, // wl stands for whitelist. TODO: Implement whitelist
 					version: String(config.serverInfo.version),
-				}
+				};
 
 				query.start(querySettings);
 			} catch (e) {
-				Frog.eventEmitter.emit('queryError', { error: e })
+				Frog.eventEmitter.emit("queryError", { error: e });
 				Logger.error(Language.getKey("query.server.listening.failed").replace("%s%", e.stack));
 			}
 		}

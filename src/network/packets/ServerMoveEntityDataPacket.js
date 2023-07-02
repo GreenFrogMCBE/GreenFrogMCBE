@@ -16,15 +16,15 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerMoveEntityDataPacket extends PacketConstructor {
-	name = 'move_entity_delta';
+	name = "move_entity_delta";
 	/** @type {JSON} */
-	coordinates = {}
+	coordinates = {};
 	/** @type {number} */
 	runtime_entity_id;
 	/** @type {number} */
 	flags;
 	/** @type {JSON} */
-	coordinatesRotation = {}
+	coordinatesRotation = {};
 
 	writePacket(client) {
 		client.queue(this.name, {

@@ -21,11 +21,11 @@ const CreativeInventory = require("../../inventory/CreativeInventory");
 const ContainerInventory = require("../../inventory/ContainerInventory");
 
 class ClientItemStackRequestPacket extends PacketConstructor {
-	name = 'item_stack_request'
+	name = "item_stack_request";
 
 	async readPacket(player, packet) {
 		if (player.inventory.container.isOpen) {
-			ContainerInventory.handle(player, packet)
+			ContainerInventory.handle(player, packet);
 			return;
 		}
 

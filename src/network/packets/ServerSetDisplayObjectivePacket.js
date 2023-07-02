@@ -18,17 +18,17 @@ const DisplaySlot = require("../../scoreboard/types/DisplaySlot");
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerScoreboardObjectivePacket extends PacketConstructor {
-	name = 'set_display_objective'
+	name = "set_display_objective";
 	/** @type {DisplaySlot} */
 	display_slot;
 	/** @type {string} */
-	objective_name
+	objective_name;
 	/** @type {string} */
-	display_name
+	display_name;
 	/** @type {CreterialName} */
-	criteria_name
+	criteria_name;
 	/** @type {number} */
-	sort_order
+	sort_order;
 
 	writePacket(client) {
 		client.queue(this.name, {

@@ -22,7 +22,7 @@ const InvalidGamemodeException = require("../../utils/exceptions/InvalidGamemode
 const { getKey } = require("../../utils/Language");
 
 class ClientSetPlayerGameTypePacket extends PacketConstructor {
-	name = 'set_player_game_type';
+	name = "set_player_game_type";
 
 	validatePacket(player) {
 		if (!player.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"));

@@ -14,25 +14,31 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /**
- * Returns if debug is enabled or not
- *
- * @returns {boolean}
+ * Returns all messages in console as an array
+ * @returns {Array<String>}
  */
-export function isDebugEnabled(): boolean;
+export function getMessageLogs(): string[];
+/**
+ * Changes the contents of the `messageLogs` array
+ * @param {Array<String>} newMessageLogs
+ */
+export function setMessageLogs(newMessageLogs: string[]): void;
+/**
+ * Clears the message logs
+ */
+export function clearMessageLogs(): void;
 /**
  * Logs a message
  *
  * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
- * @throws {LoggingException} - If the log type is 'warning' (common Node.JS mistake) (must be 'warn')
+ * @throws {LoggingException} - If the log type is 'warning' (common NodeJS mistake) (must be 'warn')
  *
  * @param {string} langString
  * @param {number} color
  * @param {string} message
- * @param {string} consoleType
- *
- *
+ * @param {string} type
  */
-export function log(langString: string, color: number, message: string, consoleType: string): void;
+export function log(langString: string, color: number, message: string, type: string): void;
 /**
  * Logs a message to the console as info
  *

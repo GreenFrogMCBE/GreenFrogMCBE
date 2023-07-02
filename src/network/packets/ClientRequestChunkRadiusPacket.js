@@ -18,7 +18,7 @@ const PacketConstructor = require("./PacketConstructor");
 const Frog = require("../../Frog");
 
 class ClientRequestChunkRadiusPacket extends PacketConstructor {
-	name = 'request_chunk_radius'
+	name = "request_chunk_radius";
 
 	async readPacket(player, packet, server) {
 		let shouldChange = true;

@@ -16,29 +16,29 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerUpdateBlockPacket extends PacketConstructor {
-	name = 'update_block'
+	name = "update_block";
 	/** @type {number} */
 	x;
 	/** @type {number} */
 	y;
 	/** @type {number} */
-	z
+	z;
 	/** @type {number} */
-	block_runtime_id
+	block_runtime_id;
 	/** @type {boolean} */
-	neighbors
+	neighbors;
 	/** @type {boolean} */
-	network
+	network;
 	/** @type {boolean} */
-	no_graphic
+	no_graphic;
 	/** @type {boolean} */
-	unused
+	unused;
 	/** @type {boolean} */
-	priority
+	priority;
 	/** @type {number} */
-	layer
+	layer;
 	/** @type {number} */
-	flags_value
+	flags_value;
 
 	writePacket(client) {
 		client.queue(this.name, {

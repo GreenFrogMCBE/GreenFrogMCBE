@@ -16,7 +16,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerRespawnPacket extends PacketConstructor {
-	name = 'respawn'
+	name = "respawn";
 	/** @type {JSON} */
 	position;
 	/** @type {number} */

@@ -16,11 +16,11 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetEntityMotion extends PacketConstructor {
-	name = 'set_entity_motion'
+	name = "set_entity_motion";
 	/** @type {number} */
 	runtime_entity_id = 0;
 	/** @type {JSON} */
-	velocity = {}
+	velocity = {};
 
 	writePacket(client) {
 		client.queue(this.name, {

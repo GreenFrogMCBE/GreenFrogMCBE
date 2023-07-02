@@ -1,3 +1,4 @@
+export = CommandHandlingException;
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -13,7 +14,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export let UPDATE: "change";
-export let REMOVE: "remove";
-export let UNKNOWN: "unknown";
-export let CHANGE: any;
+declare class CommandHandlingException extends Error {
+	constructor(reason: any);
+}

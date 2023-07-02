@@ -25,7 +25,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 	/** @type {JSON} */
 	value = {};
 	/** @type {string} */
-	runtime_entity_id
+	runtime_entity_id;
 
 	writePacket(client) {
 		client.queue(this.name, {
@@ -34,7 +34,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 				{
 					key: "flags",
 					type: "long",
-					value: this.value
+					value: this.value,
 				},
 			],
 			properties: this.properties,

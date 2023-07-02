@@ -13,24 +13,24 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const vanillaBlocks = require("../../api/block/vanillaBlocks.json")
+const vanillaBlocks = require("../../api/block/vanillaBlocks.json");
 
 const WorldGenerator = require("../types/WorldGenerator");
 
 const Generator = require("./Generator");
 
 /** @private @type {number} */
-const dirt = vanillaBlocks.dirt.legacy_id
+const dirt = vanillaBlocks.dirt.legacy_id;
 /** @private @type {number} */
-const grass = vanillaBlocks.grass.legacy_id
+const grass = vanillaBlocks.grass.legacy_id;
 /** @private @type {number} */
-const air = vanillaBlocks.air.legacy_id
+const air = vanillaBlocks.air.legacy_id;
 /** @private @type {number} */
-const bedrock = vanillaBlocks.bedrock.legacy_id
+const bedrock = vanillaBlocks.bedrock.legacy_id;
 /** @private @type {number} */
-const stone = vanillaBlocks.stone.legacy_id
+const stone = vanillaBlocks.stone.legacy_id;
 /** @private @type {number} */
-const coalOre = vanillaBlocks.coal_ore.legacy_id
+const coalOre = vanillaBlocks.coal_ore.legacy_id;
 
 /** @private @type {Buffer} */
 let chunkData;
@@ -54,7 +54,7 @@ function _generateOre() {
 }
 
 class Default extends Generator {
-	name = WorldGenerator.DEFAULT
+	name = WorldGenerator.DEFAULT;
 	getChunkData() {
 		chunkData = Buffer.alloc(16 * 256 * 16);
 

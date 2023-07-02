@@ -13,11 +13,16 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export namespace data {
-	let name: string;
-	let description: string;
-	let minArgs: number;
-	let maxArgs: number;
-	let requiresOp: boolean;
+export = ServerContainerOpenPacket;
+declare class ServerContainerOpenPacket extends PacketConstructor {
+	/** @type {WindowId} */
+	window_id: WindowId;
+	/** @type {JSON} */
+	coordinates: JSON;
+	/** @type {WindowType} */
+	window_type: WindowType;
+	/** @type {number} */
+	runtime_entity_id: number;
+	writePacket(client: any): void;
 }
-export function execute(_server: any, player: any, args: any): Promise<void>;
+import PacketConstructor = require("./PacketConstructor");

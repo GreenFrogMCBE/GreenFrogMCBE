@@ -25,24 +25,24 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerStartGamePacket extends PacketConstructor {
 	name = "start_game";
 	entity_id;
-	runtime_entity_id
-	player_gamemode
-	player_position
-	rotation
-	seed
-	biome_type
-	biome_name
-	dimension
-	generator
-	world_gamemode
-	difficulty
-	spawn_position
-	gamerules
-	itemstates
-	world_name
-	game_version
-	movement_authority
-	permission_level
+	runtime_entity_id;
+	player_gamemode;
+	player_position;
+	rotation;
+	seed;
+	biome_type;
+	biome_name;
+	dimension;
+	generator;
+	world_gamemode;
+	difficulty;
+	spawn_position;
+	gamerules;
+	itemstates;
+	world_name;
+	game_version;
+	movement_authority;
+	permission_level;
 
 	writePacket(client) {
 		client.queue(this.name, {

@@ -20,7 +20,7 @@ const World = require("../../world/World");
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientSetDifficultyPacket extends PacketConstructor {
-	name = 'set_difficulty';
+	name = "set_difficulty";
 
 	async readPacket(player, packet, server) {
 		const difficulty = packet.data.params.difficulty;

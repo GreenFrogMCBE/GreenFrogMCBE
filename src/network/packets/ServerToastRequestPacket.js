@@ -19,7 +19,7 @@ let title;
 let message;
 
 class ServerToastRequestPacket extends PacketConstructor {
-	name = 'toast_request'
+	name = "toast_request";
 	/** @type {string} */
 	title;
 	/** @type {string} */

@@ -19,9 +19,9 @@
  * @private
  * @returns {EventEmitter}
  */
-declare const _eventEmitter: eventLib;
-import eventLib = require("events");
+declare const _eventEmitter: any;
 export declare let isDebug: any;
+export declare let isTest: any;
 /**
  * Returns the server object
  *

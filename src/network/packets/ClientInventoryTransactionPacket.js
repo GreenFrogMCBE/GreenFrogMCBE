@@ -26,7 +26,7 @@ const Frog = require("../../Frog");
 const { getKey } = require("../../utils/Language");
 
 class ClientInventoryTransactionPacket extends PacketConstructor {
-	name = 'inventory_transaction'
+	name = "inventory_transaction";
 
 	async readPacket(player, packet, server) {
 		let actionID = null;

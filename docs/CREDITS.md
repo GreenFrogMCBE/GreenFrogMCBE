@@ -36,7 +36,7 @@
 
 5. @bufferfishq
 
-> For adding support for custom_form and rewriting plugin system (https://github.com/andriycraft/GreenFrogMCBE/pull/47)  <br>
+> For adding support for custom_form and rewriting plugin system (https://github.com/andriycraft/GreenFrogMCBE/pull/47) <br>
 > For fixing a lot of bugs and paths <br>
 
 6. @Zwuiix-cmd

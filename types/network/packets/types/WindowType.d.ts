@@ -13,4 +13,5 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export let DUMMY: "dummy";
+export let CREATIVE_INVENTORY: "inventory";
+export let CONTAINER: "container";

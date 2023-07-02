@@ -16,9 +16,9 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
-	name = "available_entity_identifiers"
+	name = "available_entity_identifiers";
 	/** @type {JSON} */
-	value
+	value;
 
 	writePacket(client) {
 		client.queue(this.name, this.value);

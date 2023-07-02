@@ -18,7 +18,7 @@ const PlayerListType = require("./types/PlayerListType");
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerPlayerListPacket extends PacketConstructor {
-	name = 'player_list'
+	name = "player_list";
 	/** @type {string} */
 	username;
 	/** @type {string} */

@@ -16,8 +16,8 @@
 /**
  * Removes data of offline players
  */
-export function clearOfflinePlayers(): void;
+export function clearOfflinePlayers(): Promise<void>;
 /**
- * Clears RAM from useless data
+ * Clears RAM from useless entries
  */
-export function gc(): void;
+export function gc(): Promise<void>;

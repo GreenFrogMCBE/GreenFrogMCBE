@@ -16,9 +16,9 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetCommandsEnabledPacket extends PacketConstructor {
-	name = 'set_commands_enabled'
+	name = "set_commands_enabled";
 	/** @type {boolean} */
-	enabled = true
+	enabled = true;
 
 	writePacket(client) {
 		client.queue(this.name, {

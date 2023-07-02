@@ -18,32 +18,32 @@ const FormTypess = require("../../forms/types/FormTypes");
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerFormRequestPacket extends PacketConstructor {
-	name = 'modal_form_request'
+	name = "modal_form_request";
 	/** @type {number} */
-	form_id
+	form_id;
 	/** @type {JSON} */
-	content
+	content;
 	/** @type {Array} */
-	buttons
+	buttons;
 	/** @type {string} */
-	title
+	title;
 	/** @type {string} */
-	type
+	type;
 	/** @type {string} */
-	button1
+	button1;
 	/** @type {string} */
-	button2
+	button2;
 
 	writePacket(client) {
-		let data = `{"content":${this.contect},"buttons":${this.buttons},"type":"${this.type}","title":"${this.title}"}`
+		let data = `{"content":${this.contect},"buttons":${this.buttons},"type":"${this.type}","title":"${this.title}"}`;
 
 		if (type === FormTypess.MODAL_FORM) {
-			data = `{"content":"${this.text}","button1":"${this.button1}","button2":"${this.button2}","type":"${this.type}","title":"${this.title}"}`
+			data = `{"content":"${this.text}","button1":"${this.button1}","button2":"${this.button2}","type":"${this.type}","title":"${this.title}"}`;
 		}
 
 		client.queue(this.name, {
 			form_id: this.id,
-			data: data
+			data: data,
 		});
 	}
 }

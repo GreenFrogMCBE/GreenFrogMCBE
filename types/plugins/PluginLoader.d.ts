@@ -24,7 +24,7 @@ export declare function loadPlugins(): Promise<void>;
 /**
  * Kills the server
  */
-export declare function killServer(): Promise<never>;
+export declare function killServer(): Promise<void>;
 /**
  * Prepares plugins for shutdown
  */

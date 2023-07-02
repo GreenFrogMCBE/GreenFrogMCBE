@@ -29,7 +29,7 @@ const { getKey } = require("../../utils/Language");
 const CommandVerifier = require("../../utils/CommandVerifier");
 
 class ClientCommandRequestPacket extends PacketConstructor {
-	name = 'command_request'
+	name = "command_request";
 
 	async readPacket(player, packet, server) {
 		let executedCommand = packet.data.params.command.replace("/", "");

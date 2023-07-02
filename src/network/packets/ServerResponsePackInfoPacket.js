@@ -18,13 +18,13 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerResponsePackInfoPacket extends PacketConstructor {
 	name = "resource_packs_info";
 	/** @type {boolean} */
-	must_accept = false
+	must_accept = false;
 	/** @type {boolean} */
-	has_scripts = false
+	has_scripts = false;
 	/** @type {Array} */
-	behavior_packs = []
+	behavior_packs = [];
 	/** @type {Array} */
-	texture_packs = []
+	texture_packs = [];
 
 	writePacket(client) {
 		client.queue(this.name, {

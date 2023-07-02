@@ -13,37 +13,14 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export = ServerSetScorePacket;
-declare class ServerSetScorePacket extends PacketConstructor {
-	/**
-	 * Sets the action of the scoreboard update
-	 * @param {ScoreActions} new_action The action to set
-	 */
-	setAction(new_action: { readonly UPDATE: "change"; readonly REMOVE: "remove"; readonly UNKNOWN: "unknown"; readonly CHANGE: any }): void;
-	/**
-	 * Sets the entries of the scoreboard update
-	 * @param {Array} new_entries The entries to set
-	 */
-	setEntries(new_entries: any[]): void;
-	/**
-	 * Returns the scoreboard action
-	 * @returns {ScoreActions} The scoreboard action
-	 */
-	getAction(): {
-		readonly UPDATE: "change";
-		readonly REMOVE: "remove";
-		readonly UNKNOWN: "unknown";
-		readonly CHANGE: any;
-	};
-	/**
-	 * Returns the scoreboard entries
-	 * @returns {Array} The scoreboard entries
-	 */
-	getEntries(): any[];
-	/**
-	 * Sends the packet to the client
-	 * @param {Client} client The client to send the packet to
-	 */
-	writePacket(client: Client): void;
-}
-import PacketConstructor = require("./PacketConstructor");
+export let RAW: "raw";
+export let CHAT: "chat";
+export let TRANSLATION: "translation";
+export let POPUP: "popup";
+export let JUKEBOX_POPUP: "jukebox_popup";
+export let TIP: "tip";
+export let SYSTEM: "system";
+export let WHISPER: "whisper";
+export let ANNOUNCEMENT: "announcement";
+export let OBJECT: "object";
+export let OBJECT_WISPHER: "object_whisper";

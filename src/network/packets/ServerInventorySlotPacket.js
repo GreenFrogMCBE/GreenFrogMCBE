@@ -16,7 +16,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerInventorySlotPacket extends PacketConstructor {
-	name = 'inventory_slot'
+	name = "inventory_slot";
 	/** @param {number} */
 	window_id;
 	/** @param {number} */

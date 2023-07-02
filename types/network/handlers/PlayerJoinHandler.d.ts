@@ -13,66 +13,73 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export = ServerScoreboardObjectivePacket;
-declare class ServerScoreboardObjectivePacket extends PacketConstructor {
+export = PlayerJoinHandler;
+declare class PlayerJoinHandler {
 	/**
-	 * Sets the display slot.
-	 * @param {DisplaySlots} slot The display slot to set.
+	 * Executes when a player joins the server.
+	 *
+	 * @param {Client} client - The client joining the server.
 	 */
-	setDisplaySlot(slot: { readonly LIST: "list"; readonly SIDEBAR: "sidebar"; readonly BELOWNAME: "belowname" }): void;
+	onPlayerJoin(client: Client): Promise<void>;
 	/**
-	 * Sets the objective name.
-	 * @param {string} name The objective name to set.
-	 */
-	setObjectiveName(name: string): void;
-	/**
-	 * Sets the display name.
-	 * @param {string} name The display name to set.
-	 */
-	setDisplayName(name: string): void;
-	/**
-	 * Sets the criteria name.
-	 * @param {string} name The criteria name to set.
-	 */
-	setCriteriaName(name: string): void;
-	/**
-	 * Sets the sort order.
-	 * @param {number} order The sort order to set.
-	 */
-	setSortOrder(order: number): void;
-	/**
-	 * Returns the display slot.
-	 * @returns {DisplaySlots} The display slot.
-	 */
-	getDisplaySlot(): {
-		readonly LIST: "list";
-		readonly SIDEBAR: "sidebar";
-		readonly BELOWNAME: "belowname";
-	};
-	/**
-	 * Returns the objective name.
-	 * @returns {string} The objective name.
-	 */
-	getObjectiveName(): string;
-	/**
-	 * Returns the display name.
-	 * @returns {string} The display name.
-	 */
-	getDisplayName(): string;
-	/**
-	 * Returns the criteria name.
-	 * @returns {string} The criteria name.
-	 */
-	getCriteriaName(): string;
-	/**
-	 * Returns the sort order.
-	 * @returns {number} The sort order.
-	 */
-	getSortOrder(): number;
-	/**
-	 * Sends the packet to the client.
+	 * Validates the username of the client
+	 *
 	 * @param {Client} client
 	 */
-	writePacket(client: Client): void;
+	validateUsername(client: Client): void;
+	/**
+	 * Setups events for the client
+	 *
+	 * @param {Client} client
+	 */
+	setupEvents(client: Client): Promise<void>;
+	/**
+	 * Initializes the player.
+	 *
+	 * @param {Client} client - The client to initialize.
+	 * @returns {Promise<void>}
+	 */
+	initPlayer(client: Client): Promise<void>;
+	/**
+	 * Sets up the client properties.
+	 *
+	 * @param {Client} client - The client to set up properties for.
+	 */
+	setupClientProperties(client: Client): void;
+	/**
+	 * Sets up client intervals.
+	 *
+	 * @param {Client} client - The client to set up intervals for.
+	 */
+	setupClientIntervals(client: Client): void;
+	/**
+	 * Adds the player to the player list.
+	 *
+	 * @param {Client} client - The client to add to the player list.
+	 */
+	addPlayer(client: Client): void;
+	/**
+	 * Handles the case when the maximum number of players is reached.
+	 *
+	 * @param {Client} client - The client to check against the maximum player count.
+	 */
+	handleMaxPlayers(client: Client): void;
+	/**
+	 * Handles the version mismatch between the client and server.
+	 *
+	 * @param {Client} client - The client to check the version for.
+	 */
+	handleVersionMismatch(client: Client): void;
+	/**
+	 * Sends the response pack info to the client.
+	 *
+	 * @param {Client} client - The client to send the response pack info to.
+	 */
+	sendResponsePackInfo(client: Client): void;
+	/**
+	 * Emits the player join event.
+	 *
+	 * @param {Client} client - The client that joined the server.
+	 */
+	emitPlayerJoinEvent(client: Client): void;
 }
-import PacketConstructor = require("./PacketConstructor");

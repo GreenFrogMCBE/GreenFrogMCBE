@@ -16,7 +16,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerChunkRadiusUpdatePacket extends PacketConstructor {
-	name = 'chunk_radius_update'
+	name = "chunk_radius_update";
 	/** @type {number} */
 	chunk_radius = 0;
 

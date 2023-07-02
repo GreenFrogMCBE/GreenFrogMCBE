@@ -13,11 +13,5 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export namespace data {
-	let name: string;
-	let description: string;
-	let aliases: string[];
-	let minArgs: number;
-	let maxArgs: number;
-}
-export function execute(_server: any, player: any): void;
+export let CREATIVE: -1;
+export let CHEST: 3;

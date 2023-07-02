@@ -20,7 +20,7 @@ const FallDamage = require("../../world/FallDamage");
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientMovePacket extends PacketConstructor {
-	name = 'move_player';
+	name = "move_player";
 
 	async readPacket(player, packet, server) {
 		const { x, y, z } = packet.data.params.position;
