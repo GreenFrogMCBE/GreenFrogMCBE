@@ -15,8 +15,8 @@ Please note that this software is still in beta, so do not stare directly at the
 + Generate plugin structure: "npm run plugin-structure"
 
 + Credits: /docs/CREDITS.md
-+ Human-readable license: /docs/READABLE-LICENSE.md
-+ How to connect via localhost: /docs/LOCALHOST-CONNECTIONS.md
++ Human-readable license: /docs/READABLE LICENSE.md
++ How to connect via localhost: /docs/LOCAL CONNECTIONS.md
 + How to install: /docs/INSTALLATION.md
 ```
 
