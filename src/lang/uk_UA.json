@@ -157,12 +157,12 @@
 
   "query.server.listening": "Query запущений та запустити на %s%",
   "query.server.listening.failed": "Query не вдалося запустити на %s%",
-    
+
   "query.server.error": "Помилка Query: %s%",
-    
+
   "query.server.network.generatingToken": "Створення токена Query для %s%",
   "query.server.network.invalidPacket": "Отримано недійсний пакет Query від %s%",
-    
+
   "query.server.network.packets.handshake": "Відправлено пакет рукопозичії Query до %s%",
   "query.server.network.packets.fullInfo": "Відправлено пакет повної інформації Query до %s%",
   "query.server.network.packets.basicInfo": "Відправлено пакет базової інформації Query до %s%",

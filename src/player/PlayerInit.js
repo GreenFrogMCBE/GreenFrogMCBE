@@ -19,7 +19,7 @@ const Gamemode = require("../api/player/Gamemode");
 
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
-const vanillaBlocks = require("../api/block/vanillaBlocks.json")
+const vanillaBlocks = require("../api/block/vanillaBlocks.json");
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
 const ServerChangedimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
@@ -86,10 +86,10 @@ module.exports = {
 
 			const text = new ServerTextPacket();
 			text.message = message;
-			text.needs_translation = false
-			text.type = Text.ANNOUNCEMENT
+			text.needs_translation = false;
+			text.type = Text.ANNOUNCEMENT;
 			text.platform_chat_id = "";
-			text.source_name = ""
+			text.source_name = "";
 			text.xuid = "";
 			text.writePacket(player);
 		};
@@ -353,9 +353,9 @@ module.exports = {
 				ints: [],
 				floats: [],
 			};
-			playerSetEntityDataPacket.runtime_entity_id = "1"; // 1 - local player 
+			playerSetEntityDataPacket.runtime_entity_id = "1"; // 1 - local player
 			playerSetEntityDataPacket.tick = "0";
-			playerSetEntityDataPacket.value = data
+			playerSetEntityDataPacket.value = data;
 			playerSetEntityDataPacket.writePacket(player);
 		};
 
@@ -453,7 +453,7 @@ module.exports = {
 
 			if (shouldSetAttribute) {
 				const updateAttributesPacket = new ServerUpdateAttributesPacket();
-				updateAttributesPacket.runtime_entity_id = 1; // 1 - Local player 
+				updateAttributesPacket.runtime_entity_id = 1; // 1 - Local player
 				updateAttributesPacket.tick = 0;
 				updateAttributesPacket.attributes = [attribute];
 				updateAttributesPacket.writePacket(player);
@@ -622,11 +622,10 @@ module.exports = {
 			dimensionPacket.writePacket(player);
 		};
 
-
 		/**
 		 * Sets the speed for the player
-		 * 
-		 * @param {number} speed 
+		 *
+		 * @param {number} speed
 		 */
 		player.setSpeed = async function (speed) {
 			let shouldUpdateSpeed = true;
@@ -642,29 +641,31 @@ module.exports = {
 			if (!shouldUpdateSpeed) return;
 
 			player.setAttribute({
-				"min": 0,
-				"max": 3.4028234663852886e+38,
-				"current": speed,
-				"default": speed,
-				"name": PlayerAttribute.MOVEMENT_SPEED,
-				"modifiers": []
-			})
-		}
+				min: 0,
+				max: 3.4028234663852886e38,
+				current: speed,
+				default: speed,
+				name: PlayerAttribute.MOVEMENT_SPEED,
+				modifiers: [],
+			});
+		};
 
 		/**
 		 * Changes the OP status for the player
-		 * 
-		 * @param {boolean} op 
+		 *
+		 * @param {boolean} op
 		 */
 		player.setOp = async function (op) {
 			let shouldChange = true;
 
-			Frog.eventEmitter.emit('playerOpStatusChange', {
+			Frog.eventEmitter.emit("playerOpStatusChange", {
 				player,
 				status: op,
 				server: Frog.getServer(),
-				cancel: () => { shouldChange = true }
-			})
+				cancel: () => {
+					shouldChange = true;
+				},
+			});
 
 			if (!shouldChange) return;
 
@@ -675,46 +676,46 @@ module.exports = {
 					.split("\n")
 					.filter((op) => op !== player.username)
 					.join("\n");
-	
-				await fs.writeFile("ops.yml", updatedOps);	
+
+				await fs.writeFile("ops.yml", updatedOps);
 			}
 
-			player.op = op
-		}
+			player.op = op;
+		};
 
 		/**
-		 * Opens a container (chest) for the player 
+		 * Opens a container (chest) for the player
 		 */
 		player.openContainer = function () {
-			let shouldPreCreateInventoryContainer = true
+			let shouldPreCreateInventoryContainer = true;
 
-			Frog.eventEmitter.emit('inventoryContainerPreCreate', {
+			Frog.eventEmitter.emit("inventoryContainerPreCreate", {
 				player: player,
 				server: Frog.getServer(),
 				cancel: () => {
-					shouldPreCreateInventoryContainer = false
-				}
-			})
+					shouldPreCreateInventoryContainer = false;
+				},
+			});
 
-			if (!shouldPreCreateInventoryContainer) return
+			if (!shouldPreCreateInventoryContainer) return;
 
-			player.inventory.container.blockPosition = { x: Math.floor(player.location.x - 1), y: player.location.y + 2, z: Math.floor(player.location.z - 1) }
-			player.inventory.container.window = { id: WindowId.CHEST, type: WindowType.CONTAINER }
+			player.inventory.container.blockPosition = { x: Math.floor(player.location.x - 1), y: player.location.y + 2, z: Math.floor(player.location.z - 1) };
+			player.inventory.container.window = { id: WindowId.CHEST, type: WindowType.CONTAINER };
 
-			let shouldCreateInventoryContainer = true
+			let shouldCreateInventoryContainer = true;
 
-			Frog.eventEmitter.emit('inventoryContainerCreate', {
+			Frog.eventEmitter.emit("inventoryContainerCreate", {
 				player: player,
 				inventory: player.inventory,
 				server: Frog.getServer(),
 				cancel: () => {
-					shouldCreateInventoryContainer = false
-				}
-			})
+					shouldCreateInventoryContainer = false;
+				},
+			});
 
-			if (!shouldCreateInventoryContainer) return
+			if (!shouldCreateInventoryContainer) return;
 
-			player.world.placeBlock(player.inventory.container.blockPosition.x, player.inventory.container.blockPosition.y, player.inventory.container.blockPosition.z, vanillaBlocks.chest.runtime_id)
+			player.world.placeBlock(player.inventory.container.blockPosition.x, player.inventory.container.blockPosition.y, player.inventory.container.blockPosition.z, vanillaBlocks.chest.runtime_id);
 
 			const containerOpen = new ServerContainerOpenPacket();
 			containerOpen.window_id = player.inventory.container.window.id;
@@ -723,22 +724,22 @@ module.exports = {
 			containerOpen.coordinates = { x: player.inventory.container.blockPosition.x, y: player.inventory.container.blockPosition.y, z: player.inventory.container.blockPosition.z };
 			containerOpen.writePacket(player);
 
-			player.inventory.container.isOpen = true
-		}
+			player.inventory.container.isOpen = true;
+		};
 
 		/**
 		 * Updates an item in a container (if open)
-		 * 
-		 * @param {number} networkId 
-		 * @param {number} blockRuntimeId 
-		 * @param {number} slot 
-		 * @param {number} count 
+		 *
+		 * @param {number} networkId
+		 * @param {number} blockRuntimeId
+		 * @param {number} slot
+		 * @param {number} count
 		 * @param {JSON} extra
 		 */
-		player.setContainerItem = function (networkId, blockRuntimeId, slot = 0, metadata = false, hasStackId = true, stackId = 1, count = 1, extra = { "has_nbt": 0, "can_place_on": [], "can_destroy": [] }) {
-			let shouldGiveContainerItem = true
+		player.setContainerItem = function (networkId, blockRuntimeId, slot = 0, metadata = false, hasStackId = true, stackId = 1, count = 1, extra = { has_nbt: 0, can_place_on: [], can_destroy: [] }) {
+			let shouldGiveContainerItem = true;
 
-			Frog.eventEmitter.emit('inventoryContainerGiveItem', {
+			Frog.eventEmitter.emit("inventoryContainerGiveItem", {
 				player: player,
 				itemData: {
 					playerInventory: player.inventory,
@@ -753,33 +754,33 @@ module.exports = {
 				},
 				server: Frog.getServer(),
 				cancel: () => {
-					shouldGiveContainerItem = false
-				}
-			})
+					shouldGiveContainerItem = false;
+				},
+			});
 
-			if (!shouldGiveContainerItem) return
+			if (!shouldGiveContainerItem) return;
 
-			let input = []
+			let input = [];
 
 			for (let i = 0; i < 27; i++) {
-				input.push({ network_id: 0 })
+				input.push({ network_id: 0 });
 			}
 
 			input[slot] = {
-				"network_id": networkId,
-				"count": count,
-				"metadata": metadata,
-				"has_stack_id": hasStackId,
-				"stack_id": stackId,
-				"block_runtime_id": blockRuntimeId,
-				"extra": extra
-			}
+				network_id: networkId,
+				count: count,
+				metadata: metadata,
+				has_stack_id: hasStackId,
+				stack_id: stackId,
+				block_runtime_id: blockRuntimeId,
+				extra: extra,
+			};
 
-			const inventoryContent = new ServerInventoryContentPacket()
-			inventoryContent.window_id = WindowId.CHEST
-			inventoryContent.input = input
-			inventoryContent.writePacket(player)
-		}
+			const inventoryContent = new ServerInventoryContentPacket();
+			inventoryContent.window_id = WindowId.CHEST;
+			inventoryContent.input = input;
+			inventoryContent.writePacket(player);
+		};
 
 		/**
 		 * Listens when a player leaves the server

@@ -15,5 +15,5 @@ export = InvalidGamemodeException;
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare class InvalidGamemodeException extends Error {
-	constructor(gamemode: any);
+    constructor(gamemode: any);
 }

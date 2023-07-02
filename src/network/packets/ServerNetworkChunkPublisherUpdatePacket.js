@@ -16,7 +16,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
-	name = 'network_chunk_publisher_update'
+	name = "network_chunk_publisher_update";
 	/** @type {JSON} */
 	coordinates;
 	/** @type {number} */

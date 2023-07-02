@@ -14,9 +14,9 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-    INPUT: "input",
-    LABEL: "label",
-    DROPDOWN: "dropdown",
-    TOGGLE: "toggle",
-    SLIDER: "slider"
+	INPUT: "input",
+	LABEL: "label",
+	DROPDOWN: "dropdown",
+	TOGGLE: "toggle",
+	SLIDER: "slider",
 });

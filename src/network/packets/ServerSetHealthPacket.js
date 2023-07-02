@@ -17,13 +17,13 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetHealthPacket extends PacketConstructor {
-	name = 'set_health'
+	name = "set_health";
 	/** @type {number} */
 	health;
 
 	writePacket(client) {
 		client.queue(this.name, {
-			health: this.health
+			health: this.health,
 		});
 	}
 }

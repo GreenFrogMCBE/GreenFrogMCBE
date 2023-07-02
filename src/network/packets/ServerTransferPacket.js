@@ -16,12 +16,12 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerTransferPacket extends PacketConstructor {
-	name = 'transfer'
+	name = "transfer";
 	/** @type {string} */
 	server_address;
 	/** @type {number} */
 	port;
-	
+
 	writePacket(client) {
 		client.queue(this.getPacketName(), {
 			server_address: this.server_address,

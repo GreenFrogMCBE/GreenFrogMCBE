@@ -28,21 +28,23 @@ const Frog = require("../../Frog");
 const { getKey } = require("../../utils/Language");
 
 class ClientInteractPacket extends PacketConstructor {
-	name = 'interact'
+	name = "interact";
 
 	async readPacket(player, packet, server) {
 		const actionID = packet.data.params.action_id;
 
-		let shouldInteract = true
+		let shouldInteract = true;
 
 		Frog.eventEmitter.emit("playerInteractEvent", {
 			player,
 			server,
 			actionID,
-			cancel: () => { shouldInteract = false }
+			cancel: () => {
+				shouldInteract = false;
+			},
 		});
 
-		if (!shouldInteract) return
+		if (!shouldInteract) return;
 
 		switch (actionID) {
 			case InteractType.INVENTORYOPEN:

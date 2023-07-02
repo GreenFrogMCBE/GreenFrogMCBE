@@ -15,5 +15,5 @@ export = LanguageException;
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare class LanguageException extends Error {
-	constructor(message: any);
+    constructor(message: any);
 }

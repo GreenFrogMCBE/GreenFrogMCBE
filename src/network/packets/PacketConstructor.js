@@ -18,24 +18,24 @@ const { getKey } = require("../../utils/Language");
 const UnsupportedOperationException = require("../../utils/exceptions/UnsupportedOperationException");
 
 class PacketConstructor {
-	constructor() { }
+	constructor() {}
 
 	/** @type {string} */
 	name;
 
-	validatePacket() { }
+	validatePacket() {}
 
 	/**
-	 * @param {Client} player 
+	 * @param {Client} player
 	 */
 	writePacket() {
 		throw new UnsupportedOperationException(getKey("network.packet.failed.clientSide"));
 	}
 
 	/**
-	 * @param {Client} player 
-	 * @param {JSON} packet 
-	 * @param {Server} server 
+	 * @param {Client} player
+	 * @param {JSON} packet
+	 * @param {Server} server
 	 */
 	readPacket() {
 		throw new UnsupportedOperationException(getKey("network.packet.failed.serverSide"));

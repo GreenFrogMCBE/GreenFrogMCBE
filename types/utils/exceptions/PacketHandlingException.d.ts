@@ -1,3 +1,4 @@
+export = PacketHandlingException;
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -13,10 +14,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-export namespace data {
-	let name: string;
-	let description: string;
-	let minArgs: number;
-	let requiresOp: boolean;
+declare class PacketHandlingException extends Error {
+    constructor(message: any);
 }
-export function execute(_server: any, player: any, args: any): void;

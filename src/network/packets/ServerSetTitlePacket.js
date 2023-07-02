@@ -18,7 +18,7 @@ const Title = require("../../api/types/Title");
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetTitlePacket extends PacketConstructor {
-	name = 'set_title';
+	name = "set_title";
 	/** @param {Title} */
 	type;
 	/** @param {string} */

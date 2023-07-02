@@ -18,9 +18,9 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerTrimDataPacket extends PacketConstructor {
 	name = "trim_data";
 	/** @type {Array} */
-	patterns = []
+	patterns = [];
 	/** @type {Array} */
-	materials = []
+	materials = [];
 
 	writePacket(client) {
 		client.queue(this.name, {

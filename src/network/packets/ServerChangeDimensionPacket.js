@@ -18,9 +18,9 @@ const DimensionLegacy = require("../../world/types/DimensionLegacy");
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerChangeDimensionPacket extends PacketConstructor {
-	name = 'change_dimension';
+	name = "change_dimension";
 	/** @type {DimensionLegacy} */
-	dimension = DimensionLegacy.OVERWORLD
+	dimension = DimensionLegacy.OVERWORLD;
 	/** @type {JSON} */
 	position;
 	/** @type {boolean} */

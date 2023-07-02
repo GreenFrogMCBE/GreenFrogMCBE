@@ -18,17 +18,17 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerResourcePackStackPacket extends PacketConstructor {
 	name = "resource_pack_stack";
 	/** @type {Array} */
-	behavior_packs
+	behavior_packs;
 	/** @type {Array} */
-	resource_packs
+	resource_packs;
 	/** @type {string} */
-	game_version
+	game_version;
 	/** @type {boolean} */
-	must_accept
+	must_accept;
 	/** @type {Array} */
-	experiments
+	experiments;
 	/** @type {boolean} */
-	experiments_previously_used
+	experiments_previously_used;
 
 	writePacket(client) {
 		client.queue(this.name, {

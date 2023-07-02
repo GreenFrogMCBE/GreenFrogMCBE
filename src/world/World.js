@@ -21,7 +21,7 @@ const Gamemode = require("../api/player/Gamemode");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
-const vanillaBlocks = require("../api/block/vanillaBlocks.json")
+const vanillaBlocks = require("../api/block/vanillaBlocks.json");
 
 const Frog = require("../Frog");
 
@@ -181,7 +181,7 @@ class World {
 			chunk_radius: this.renderDistance,
 			spawn_coordinates: this.coordinates,
 			generator: this.generator,
-			time: time
+			time: time,
 		};
 	}
 }

@@ -41,18 +41,18 @@ const crashFileName = `./crash-reports/server-crash-${Math.floor(Math.random() *
 
 // Create config files and enable debug mode
 async function createConfigFilesAndDebug() {
-	if (!fs.existsSync('config.yml')) {
+	if (!fs.existsSync("config.yml")) {
 		let config = null;
-		const configPath = process.env.TEST ? '../src/resources/defaultConfig.yml' : './src/resources/defaultConfig.yml';
+		const configPath = process.env.TEST ? "../src/resources/defaultConfig.yml" : "./src/resources/defaultConfig.yml";
 
 		config = fs.readFileSync(configPath);
 
-		fs.writeFileSync('config.yml', config);
+		fs.writeFileSync("config.yml", config);
 	}
 
-	const Frog = require('./src/Frog');
+	const Frog = require("./src/Frog");
 	if (Frog.isDebug) {
-		process.env.DEBUG = 'minecraft-protocol';
+		process.env.DEBUG = "minecraft-protocol";
 	}
 }
 
@@ -81,8 +81,8 @@ If you are sure that this is a bug please report it here: https://github.com/and
 ${Colors.RESET}`
 			)
 		);
-		fs.mkdir("crash-reports", { recursive: true }, () => { });
-		fs.writeFileSync(crashFileName, `Error: ${error.stack}`, () => { });
+		fs.mkdir("crash-reports", { recursive: true }, () => {});
+		fs.writeFileSync(crashFileName, `Error: ${error.stack}`, () => {});
 
 		process.exit(-1);
 	}

@@ -20,7 +20,7 @@ const FallDamage = require("../../world/FallDamage");
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientPlayerAuthInputPacket extends PacketConstructor {
-	name = 'player_auth_input';
+	name = "player_auth_input";
 
 	async readPacket(player, packet, server) {
 		const { x, y, z } = packet.data.params.position;

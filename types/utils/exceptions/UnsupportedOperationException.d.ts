@@ -15,7 +15,7 @@ export = UnsupportedOperationException;
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare class UnsupportedOperationException extends Error {
-	constructor(message: any);
-	message: any;
-	stack: string;
+    constructor(message: any);
+    message: any;
+    stack: string;
 }

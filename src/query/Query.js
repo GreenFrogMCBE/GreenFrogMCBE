@@ -13,7 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../Frog")
+const Frog = require("../Frog");
 
 const Logger = require("../server/Logger");
 
@@ -31,12 +31,12 @@ class Query {
 	}
 
 	start(info) {
-		Frog.eventEmitter.emit('queryStart', { query: { info: this.info, socket: this.socket }, })
+		Frog.eventEmitter.emit("queryStart", { query: { info: this.info, socket: this.socket } });
 
 		this.info = info;
 		this.socket.bind(this.info.port);
 
-		Frog.eventEmitter.emit('queryListen', { query: { info: this.info, socket: this.socket } })
+		Frog.eventEmitter.emit("queryListen", { query: { info: this.info, socket: this.socket } });
 
 		this.socket.on("listening", () => {
 			const address = this.socket.address();
@@ -55,7 +55,7 @@ class Query {
 	 * @returns {number}
 	 */
 	_generateToken() {
-		Frog.eventEmitter.emit('queryTokenGeneration', {})
+		Frog.eventEmitter.emit("queryTokenGeneration", {});
 
 		const min = Math.ceil(1000000);
 		return Math.floor(Math.random() * (Math.floor(9999999) - min + 1) + min);
@@ -72,7 +72,7 @@ class Query {
 		const type = msg.readUInt8(2);
 
 		if (magic !== 0xfefd) {
-			Frog.eventEmitter.emit('queryInvalidPacket', { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo })
+			Frog.eventEmitter.emit("queryInvalidPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 			Logger.warning(getKey("query.server.network.invalidPacket").replace("%s%", `${remoteInfo.address}`));
 			return;
@@ -88,17 +88,17 @@ class Query {
 		}
 
 		if (type === 0x09) {
-			Frog.eventEmitter.emit('queryHandshakePacket', { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo })
+			Frog.eventEmitter.emit("queryHandshakePacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 			Logger.info(getKey("query.server.network.packets.handshake").replace("%s%", `${remoteInfo.address}`));
 			this._sendHandshake(remoteInfo, msg);
 		} else if (type === 0x00 && msg.length == 15) {
-			Frog.eventEmitter.emit('queryFullInfoPacket', { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo })
+			Frog.eventEmitter.emit("queryFullInfoPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 			Logger.info(getKey("query.server.network.packets.fullInfo").replace("%s%", `${remoteInfo.address}`));
 			this._sendFullInfo(remoteInfo, msg);
 		} else if (type === 0x00 && msg.length == 11) {
-			Frog.eventEmitter.emit('queryBasicInfoPacket', { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo })
+			Frog.eventEmitter.emit("queryBasicInfoPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 			Logger.info(getKey("query.server.network.packets.basicInfo").replace("%s%", `${remoteInfo.address}`));
 			this._sendBasicInfo(remoteInfo, msg);
@@ -126,7 +126,7 @@ class Query {
 
 		this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 			if (err) {
-				Frog.eventEmitter.emit.emit('queryError', { query: { info: this.info, socket: this.socket }, error: err })
+				Frog.eventEmitter.emit.emit("queryError", { query: { info: this.info, socket: this.socket }, error: err });
 				Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 			}
 		});
@@ -154,7 +154,7 @@ class Query {
 
 		this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 			if (err) {
-				Frog.eventEmitter.emit.emit('queryError', { query: { info: this.info, socket: this.socket }, error: err })
+				Frog.eventEmitter.emit.emit("queryError", { query: { info: this.info, socket: this.socket }, error: err });
 				Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 			}
 		});
@@ -209,7 +209,7 @@ class Query {
 		const data = buffer.toBuffer();
 		this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 			if (err) {
-				Frog.eventEmitter.emit.emit('queryError', { query: { info: this.info, socket: this.socket }, error: err })
+				Frog.eventEmitter.emit.emit("queryError", { query: { info: this.info, socket: this.socket }, error: err });
 				Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 			}
 		});

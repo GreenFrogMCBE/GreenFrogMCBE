@@ -16,7 +16,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerContainerOpenPacket extends PacketConstructor {
-	name = 'container_open'
+	name = "container_open";
 	/** @type {WindowId} */
 	window_id;
 	/** @type {JSON} */

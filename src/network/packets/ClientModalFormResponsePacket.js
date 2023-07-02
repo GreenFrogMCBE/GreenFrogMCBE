@@ -18,7 +18,7 @@ const Frog = require("../../Frog");
 const PacketConstructor = require("./PacketConstructor");
 
 class ClientModalFormResponsePacket extends PacketConstructor {
-	name = 'modal_form_response'
+	name = "modal_form_response";
 
 	async readPacket(player, packet, server) {
 		Frog.eventEmitter.emit("playerFormResponse", {

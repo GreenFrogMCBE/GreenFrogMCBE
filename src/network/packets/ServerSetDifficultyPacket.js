@@ -18,9 +18,9 @@ const Difficulty = require("../../api/types/Difficulty");
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetDifficultyPacket extends PacketConstructor {
-	name = 'set_difficulty'
+	name = "set_difficulty";
 	/** @type {Difficulty} */
-	difficulty = Difficulty.PEACEFUL
+	difficulty = Difficulty.PEACEFUL;
 
 	writePacket(client) {
 		client.queue(this.name, { difficulty: this.difficulty });

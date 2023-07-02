@@ -15,5 +15,5 @@ export = PluginSetupException;
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare class PluginSetupException extends Error {
-	constructor(plugin: any, message: any);
+    constructor(plugin: any, message: any);
 }

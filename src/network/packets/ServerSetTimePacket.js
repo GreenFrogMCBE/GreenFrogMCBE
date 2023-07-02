@@ -16,7 +16,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetTimePacket extends PacketConstructor {
-	name = 'set_time'
+	name = "set_time";
 	/** @type {number} */
 	time;
 

@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "eslint": "8.44.0",
+    "minecraft-server-util": "5.4.4",
     "nodemon": "2.0.22",
-    "prettier": "2.8.8",
-    "minecraft-server-util": "5.4.4"
+    "prettier": "2.8.8"
   }
 }

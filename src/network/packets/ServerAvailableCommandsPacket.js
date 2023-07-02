@@ -16,9 +16,9 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerAvailableCommandsPacket extends PacketConstructor {
-	name = "available_commands"
+	name = "available_commands";
 	/** @type {JSON} */
-	data
+	data;
 
 	writePacket(client) {
 		client.queue(this.name, this.data);

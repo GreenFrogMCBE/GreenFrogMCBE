@@ -16,7 +16,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerUpdateAttributesPacket extends PacketConstructor {
-	name = 'update_attributes';
+	name = "update_attributes";
 	/** @type {number} */
 	runtime_entity_id;
 	/** @type {JSON} */

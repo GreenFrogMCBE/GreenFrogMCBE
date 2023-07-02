@@ -16,7 +16,7 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerInventoryContentPacket extends PacketConstructor {
-	name = 'inventory_content';
+	name = "inventory_content";
 	/** @type {Array} */
 	input;
 	/** @type {number} */

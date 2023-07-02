@@ -18,7 +18,7 @@ const ScoreAction = require("../../scoreboard/types/ScoreAction");
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetScorePacket extends PacketConstructor {
-	name = 'set_score';
+	name = "set_score";
 	/** @type {ScoreAction} */
 	action = ScoreAction.UNKNOWN;
 	/** @type {Array} */

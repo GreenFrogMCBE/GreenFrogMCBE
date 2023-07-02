@@ -82,7 +82,7 @@ function shouldBlockInvalidMessages() {
 }
 
 function cleanInvalidCharacters(message) {
-	return message.replace(/§/g, '');
+	return message.replace(/§/g, "");
 }
 
 function isMessageTooLong(message) {
@@ -98,9 +98,7 @@ function handleMalformattedChatMessage(server, player, message) {
 }
 
 function formatMessage(username, message) {
-	return getKey("chat.format")
-		.replace("%s%", username)
-		.replace("%d%", message.replace(/§/g, ''));
+	return getKey("chat.format").replace("%s%", username).replace("%d%", message.replace(/§/g, ""));
 }
 
 function logMessage(message) {
@@ -112,6 +110,5 @@ function sendMessageToPlayers(message) {
 		recipient.sendMessage(message);
 	}
 }
-
 
 module.exports = ClientTextPacket;
