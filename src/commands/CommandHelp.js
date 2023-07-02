@@ -30,7 +30,7 @@ module.exports = {
 		player.sendMessage(getKey("commands.help.execution.success"));
 
 		for (const command of Commands.commandList) {
-			player.sendMessage(`${command.data.name} - ${command.data.description}`);
+			player.sendMessage(getKey("commands.help.execution.command").replace("%s%", command.data.name).replace("%d%", command.data.description));
 		}
 	},
 };

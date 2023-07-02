@@ -32,6 +32,7 @@
   "commands.help.name": "help",
   "commands.help.description": "Command list.",
   "commands.help.execution.success": "Command list:",
+  "commands.help.execution.command": "%s% - %d%",
 
   "commands.kick.name": "kick",
   "commands.kick.description": "Kicks a player from the server.",

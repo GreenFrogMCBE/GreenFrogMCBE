@@ -32,6 +32,7 @@
   "commands.help.name": "help",
   "commands.help.description": "Список команд.",
   "commands.help.execution.success": "Список команд:",
+  "commands.help.execution.command": "%s% - %d%",
 
   "commands.kick.name": "kick",
   "commands.kick.description": "Видаляє гравця з сервера.",
