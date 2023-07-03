@@ -42,7 +42,7 @@ class CommandManager {
 	}
 
 	/**
-	 * Initializes the commands.
+	 * Initialises the commands.
 	 *
 	 * @param {Client} client - The client.
 	 */

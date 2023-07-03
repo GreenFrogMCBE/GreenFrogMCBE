@@ -95,7 +95,7 @@ class PlayerJoinHandler {
 	}
 
 	/**
-	 * Initializes the player.
+	 * Initialises the player.
 	 *
 	 * @param {Client} client - The client to initialize.
 	 * @returns {Promise<void>}
