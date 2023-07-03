@@ -21,7 +21,7 @@ module.exports = {
 	data: {
 		name: "tp",
 		description: "Teleports a player",
-		aliases: ["?"],
+		aliases: ["teleport"],
 		minArgs: 1,
 		maxArgs: 4,
         requiresOp: true,
