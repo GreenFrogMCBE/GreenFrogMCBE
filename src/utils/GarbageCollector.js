@@ -35,6 +35,7 @@ module.exports = {
 
 			if (isOffline) {
 				Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s%", PlayerInfo.players[i].username));
+
 				PlayerInfo.players.splice(i, 1);
 				i--;
 			}
