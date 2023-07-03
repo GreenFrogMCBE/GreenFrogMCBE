@@ -13,8 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../Frog");
-
 const { readdir } = require("fs/promises");
 
 const path = require("path");
@@ -34,6 +32,6 @@ module.exports = {
 			this.commandList.push(cmd);
 		}
 
-		Frog.eventEmitter.emit('serverCommandsInitialised', { server: Frog.getServer() })
+		require("../Frog").eventEmitter.emit('serverCommandsInitialised', { server: require("../Frog").getServer() })
 	},
 };

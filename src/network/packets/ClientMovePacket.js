@@ -49,7 +49,7 @@ class ClientMovePacket extends PacketConstructor {
 		FallDamage.calculateFallDamage(player, { x, y, z });
 
 		player.location.x = x;
-		player.location.y = y;
+		player.location.y = y + 2;
 		player.location.z = z;
 		player.location.yaw = yaw;
 		player.location.pitch = pitch;
