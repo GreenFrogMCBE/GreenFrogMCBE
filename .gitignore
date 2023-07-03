@@ -22,3 +22,4 @@ pluginData/
 # Do not ignore anything in /src/
 
 !src/*
+!types/*
