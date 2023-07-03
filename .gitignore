@@ -7,7 +7,7 @@ node_modules/
 ops.yml
 config.yml
 crash-reports/
-#world/
+world/
 
 # bedrock-protocol erros
 
