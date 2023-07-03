@@ -75,6 +75,7 @@
 
 > For making .d.ts files use const type for constant values (https://github.com/andriycraft/GreenFrogMCBE/pull/154)
 
-15. @xnotkingdev_ (on Discord)
+15. @erixweb
 
 > For reporting a bug that the `playerMove` event fires when a player is standing still
+> For reporting that the `cancel()` function in the `playerMove` event is not working
