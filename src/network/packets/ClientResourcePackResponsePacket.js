@@ -300,6 +300,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}
 				}, 2000);
 
+				setInterval(() => {
+					player.location.previous = player.location;
+				}, 100)
+
 				setTimeout(() => {
 					for (const playerInfo of PlayerInfo.players) {
 						if (playerInfo.username === player.username) {

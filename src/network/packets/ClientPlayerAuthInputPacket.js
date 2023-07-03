@@ -40,9 +40,7 @@ class ClientPlayerAuthInputPacket extends PacketConstructor {
 			yaw,
 			onGround: player.location.onGround,
 			cancel: () => {
-				if (player.location.x === 0 && player.location.y === 0 && player.location.z === 0) return;
-
-				player.teleport(player.location.x, player.location.y, player.location.z);
+				player.teleport(player.location.previous.x, player.location.previous.y, player.location.previous.z);
 
 				shouldSetPosition = false;
 			},

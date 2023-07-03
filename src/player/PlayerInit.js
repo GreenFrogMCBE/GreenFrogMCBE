@@ -229,7 +229,7 @@ module.exports = {
 				teleport: false,
 				force_move: true,
 			};
-			movePacket.runtime_entity_id = 0;
+			movePacket.runtime_entity_id = 1;
 			movePacket.coordinates.x = x;
 			movePacket.coordinates.y = y;
 			movePacket.coordinates.z = z;
