@@ -61,6 +61,7 @@ declare function on(eventName: "serverUpdateChunkRadius", listener: (...args: an
 declare function on(eventName: "serverTimeUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetDifficulty", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverExecutedCommand", listener: (...args: any[]) => void): void;
+declare function on(eventName: "serverCommandsInitialised", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverVelocityUpdate", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetXP", listener: (...args: any[]) => void): void;
 declare function on(eventName: "serverSetHealth", listener: (...args: any[]) => void): void;
