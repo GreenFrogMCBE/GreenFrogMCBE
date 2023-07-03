@@ -43,6 +43,7 @@ module.exports = {
             const destinationY = getPlayerInfo(args[0]).location.y
             const destinationZ = getPlayerInfo(args[0]).location.z
             player.teleport(destinationX, destinationY, destinationZ)
+            player.sendMessage(`§7You were teleported to player ${args[0]}`)
         } else if (args.length > 0 && args.length < 3) {
             // Tp player to player
             const subject = getPlayerInfo(args[0])
@@ -50,6 +51,7 @@ module.exports = {
             const destinationY = getPlayerInfo(args[1]).location.y
             const destinationZ = getPlayerInfo(args[1]).location.z
             subject.teleport(destinationX, destinationY, destinationZ)
+            player.sendMessage(`§7You have teleported player ${subject} to ${args[1]}`)
         } else if (args.length >= 4) {
             // Tp player to coords
             const subject = getPlayerInfo(args[0])
@@ -57,6 +59,7 @@ module.exports = {
             const y = args[2]
             const z = args[3]
             subject.teleport(x, y, z)
+            player.sendMessage(`§7You have teleported player ${subject} to ${x} ${y} ${z}`)
         }
 	},
 };
