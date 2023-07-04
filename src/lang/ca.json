@@ -18,12 +18,12 @@
     "commands.ingame.executed": "%s% ha executat la comnada: /%d%",
   
     "commands.deop.name": "deop",
-    "commands.deop.description": "Treu el estatus d'operador d'un jugador",
+    "commands.deop.description": "Treu el estatus d'operador d'un jugador.",
     "commands.deop.execution.success": "S'ha remogut el nivell d'operador pel jugador %s%",
     "commands.deop.execution.fail": "No es va poder treure el nivell d'operador per %s%",
   
     "commands.gamemode.name": "gamemode",
-    "commands.gamemode.description": "Canvia el mode de joc d'un jugador",
+    "commands.gamemode.description": "Canvia el mode de joc d'un jugador.",
     "commands.gamemode.execution.failed": "§cMode de joc '%s%' es invàlid.",
     "commands.gamemode.execution.success.updated": "El teu mode de joc va ser actualitzat a %s%",
     "commands.gamemode.execution.success.set": "Has canviat el teu mode de joc a %s%",
@@ -32,16 +32,16 @@
     "commands.me.description": "Mostra un missatge sobre ti mateix.",
   
     "commands.help.name": "help",
-    "commands.help.description": "Llista de comandas",
+    "commands.help.description": "Llista de comandas.",
     "commands.help.execution.success": "Llista de comandas:",
     "commands.help.execution.command": "%s% - %d%",
   
     "commands.kick.name": "kick",
-    "commands.kick.description": "Expulsa a un jugador del servidor",
+    "commands.kick.description": "Expulsa a un jugador del servidor.",
     "commands.kick.execution.failed.notOnline": "§c%s% no està en línea",
   
     "commands.list.name": "list",
-    "commands.list.description": "Llista a tots els jugadores en el servidor",
+    "commands.list.description": "Llista a tots els jugadores en el servidor.",
     "commands.list.execution.success.commandList": "N'hi ha %s% jugadors en línea: %d%",
   
     "commands.op.name": "op",
@@ -68,7 +68,7 @@
     "commands.time.times.night": "night",
   
     "commands.version.name": "version",
-    "commands.version.description": "Mostra la versió del servidor",
+    "commands.version.description": "Mostra la versió del servidor.",
     "commands.version.aliases.ver": "ver",
     "commands.version.aliases.about": "about",
 

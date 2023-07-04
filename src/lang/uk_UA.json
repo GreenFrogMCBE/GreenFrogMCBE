@@ -23,13 +23,13 @@
   "commands.deop.execution.fail": "Не вдалося скасувати права оператора для гравця %s%",
 
   "commands.gamemode.name": "gamemode",
-  "commands.gamemode.description": "Встановлює режим гри гравця",
+  "commands.gamemode.description": "Встановлює режим гри гравця.",
   "commands.gamemode.execution.failed": "§cРежим гри '%s%' недійсний",
   "commands.gamemode.execution.success.updated": "Ваш режим гри був оновлений до %s%.",
   "commands.gamemode.execution.success.set": "Встановлено власний режим гри: %s%.",
 
   "commands.me.name": "me",
-  "commands.me.description": "Відображає повідомлення про вас самого.",
+  "commands.me.description": "Відображає повідомлення про вас.",
 
   "commands.help.name": "help",
   "commands.help.description": "Список команд.",
@@ -61,7 +61,7 @@
   "commands.stop.description": "Вимикає сервер.",
 
   "commands.time.name": "time",
-  "commands.time.description": "Змінює час світу",
+  "commands.time.description": "Змінює час світу.",
   "commands.time.execution.success": "Встановлено час %s%",
   "commands.time.execution.failed": "§cЧас повинен бути числом",
   "commands.time.times.day": "день",

@@ -23,7 +23,7 @@
     "commands.deop.execution.fail": "No se pudo quitar el nivel de operador para %s%",
   
     "commands.gamemode.name": "gamemode",
-    "commands.gamemode.description": "Cambia el modo de juego de un jugador",
+    "commands.gamemode.description": "Cambia el modo de juego de un jugador.",
     "commands.gamemode.execution.failed": "§cModo de juego '%s%' es inválido",
     "commands.gamemode.execution.success.updated": "Tu modo de juego fue actualizado a %s%",
     "commands.gamemode.execution.success.set": "Has cambiado tu modo de juego a %s%",
@@ -32,7 +32,7 @@
     "commands.me.description": "Muestra un mensaje sobre ti mismo.",
   
     "commands.help.name": "help",
-    "commands.help.description": "Lista de comandos",
+    "commands.help.description": "Lista de comandos.",
     "commands.help.execution.success": "Lista de comandos:",
     "commands.help.execution.command": "%s% - %d%",
   
@@ -41,7 +41,7 @@
     "commands.kick.execution.failed.notOnline": "§c%s% no está en línea.",
   
     "commands.list.name": "list",
-    "commands.list.description": "Lista a todos los jugadores en el servidor",
+    "commands.list.description": "Lista a todos los jugadores en el servidor.",
     "commands.list.execution.success.commandList": "Hay %s% jugadores online: %d%",
   
     "commands.op.name": "op",
@@ -68,7 +68,7 @@
     "commands.time.times.night": "night",
   
     "commands.version.name": "version",
-    "commands.version.description": "Muestra la versión del servidor",
+    "commands.version.description": "Muestra la versión del servidor.",
     "commands.version.aliases.ver": "ver",
     "commands.version.aliases.about": "about",
     

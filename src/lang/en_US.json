@@ -73,7 +73,7 @@
   "commands.version.aliases.about": "about",
 
   "commands.teleport.name": "teleport",
-  "commands.teleport.description": "Teleports players",
+  "commands.teleport.description": "Teleports players.",
   "commands.teleport.aliases.tp": "tp",
   "commands.teleport.execution.success": "You have been teleported to %s%",
   "commands.teleport.execution.success.teleported": "Teleported %s% to %d%",
