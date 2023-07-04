@@ -80,3 +80,6 @@
 > For reporting a bug that the `playerMove` event fires when a player is standing still
 > For reporting a bug that the `cancel()` function in the `playerMove` event is not working
 > For reporting a bug that you get insta-killed if you changed your gamemode to survival
+> For adding /tp
+> For adding /w, /tell, /msg and /whisper
+> For adding spanish & catalan language
