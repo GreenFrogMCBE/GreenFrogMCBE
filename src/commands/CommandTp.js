@@ -14,6 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
+const { getKey } = require("../utils/Language");
 
 /**
  * A command that shows the sender to other players
@@ -22,9 +23,9 @@ const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
  */
 module.exports = {
     data: {
-        name: "tp",
-        description: "Teleports players",
-        aliases: ["teleport"],
+        name: getKey("commands.teleport.name"),
+        description: getKey("commands.teleport.description"),
+        aliases: [getKey("commands.teleport.aliases.tp")],
         minArgs: 1,
         maxArgs: 4,
         requiresOp: true,
@@ -43,10 +44,10 @@ module.exports = {
             if (areCoordinatesPresent(x, y, z)) {
                 player.teleport(x, y, z);
 
-                player.sendMessage(`You have been teleported to ${x}, ${y}, ${z}`);
-                player.sendMessage(`Teleported ${player.username} to ${x}, ${y}, ${z}`)
+                player.sendMessage(getKey("commands.teleport.execution.success.teleportation.coordinates").replace("%s%", `${x}, ${y}, ${z}`));
+                player.sendMessage(getKey("commands.teleport.execution.success.teleportation.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`))
             } else {
-                player.sendMessage("§cSyntaxError: Invalid coordinates");
+                player.sendMessage(getKey("commands.teleport.execution.syntaxError.invalidCoordinates"));
             }
         } else if (args.length > 0 && args.length < 2) { // Teleport self to player
             const destinationPlayer = getPlayerInfo(args[0]);
@@ -56,7 +57,7 @@ module.exports = {
                 player.sendMessage(`You have been teleported to ${destinationPlayer.username}`);
                 player.sendMessage(`Teleported ${player.username} to ${destinationPlayer.username}`)
             } else {
-                player.sendMessage("§cNo targets matched selector");
+                player.sendMessage(getKey("commands.teleport.execution.error.noTargets"));
             }
         } else if (args.length > 0 && args.length < 3) { // Teleport player to player
             const target = getPlayerInfo(args[0]);
@@ -69,7 +70,7 @@ module.exports = {
                 target.sendMessage(`You have been teleported to ${target.username}`);
                 player.sendMessage(`Teleported ${target.username} to ${destinationPlayer.username}`)
             } else {
-                player.sendMessage("§cNo targets matched selector");
+                player.sendMessage(getKey("commands.teleport.execution.error.noTargets"));
             }
         } else if (args.length >= 4) { // Teleport player to coords
             const target = getPlayerInfo(args[0]);

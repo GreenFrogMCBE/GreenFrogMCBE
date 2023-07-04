@@ -70,6 +70,14 @@
   "commands.version.aliases.ver": "ver",
   "commands.version.aliases.about": "about",
 
+  "commands.teleport.name": "teleport",
+  "commands.teleport.description": "Teleports players",
+  "commands.teleport.aliases.tp": "tp",
+  "commands.teleport.execution.success.teleportation.coordinates": "You have been teleported to %s%",
+  "commands.teleport.execution.success.teleportation.teleported": "Teleported %s% to %d%",
+  "commands.teleport.execution.syntaxError.invalidCoordinates": "§cSyntaxError: Invalid coordinates",
+  "commands.teleport.execution.error.noTargets": "§cNo targets matched selector",
+ 
   "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
   "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
 
