@@ -88,7 +88,7 @@
       "name": "showcoordinates",
       "editable": true,
       "type": "bool",
-      "value": false
+      "value": true
     },
     {
       "name": "naturalregeneration",
