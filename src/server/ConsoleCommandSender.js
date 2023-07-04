@@ -160,7 +160,7 @@ module.exports = {
 				error,
 			});
 
-			Logger.error(Language.getKey("commands.internalError").replace("%s%", error.stack));
+			Logger.error(Language.getKey("commands.errors.internalError").replace("%s%", error.stack));
 		}
 	},
 

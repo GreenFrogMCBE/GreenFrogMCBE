@@ -9,9 +9,11 @@
   "garbageCollector.finished": "[Garbage collector] Finished",
 
   "commands.unknown": "§cUnknown command: %s%. Please check that the command exists and that you have permission to use it.",
-  "commands.internalError": "Failed to execute command! Error: %s%",
-  "commands.internalError.player": "Failed to execute command from %s%. Error: %d%",
-  "commands.internalError.badSender": "§cThis type of sender does not support this command",
+  "commands.errors.internalError": "Failed to execute command! Error: %s%",
+  "commands.errors.internalError.player": "Failed to execute command from %s%. Error: %d%",
+  "commands.errors.internalError.badSender": "§cThis type of sender does not support this command",
+  "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
+  "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
 
   "commands.ingame.executed": "%s% executed server command: /%d%",
 
@@ -73,13 +75,14 @@
   "commands.teleport.name": "teleport",
   "commands.teleport.description": "Teleports players",
   "commands.teleport.aliases.tp": "tp",
-  "commands.teleport.execution.success.teleportation.coordinates": "You have been teleported to %s%",
-  "commands.teleport.execution.success.teleportation.teleported": "Teleported %s% to %d%",
-  "commands.teleport.execution.syntaxError.invalidCoordinates": "§cSyntaxError: Invalid coordinates",
-  "commands.teleport.execution.error.noTargets": "§cNo targets matched selector",
+  "commands.teleport.execution.success": "You have been teleported to %s%",
+  "commands.teleport.execution.success.teleported": "Teleported %s% to %d%",
+  "commands.teleport.execution.failed.coordinates.invalid": "§cSyntaxError: Invalid coordinates",
  
-  "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
-  "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
+  "commands.tell.name": "tell",
+  "commands.tell.aliases.w": "w",
+  "commands.tell.aliases.whisper": "whisper",
+  "commands.tell.aliases.msg": "msg",
 
   "scoreboard.name.default": "Scoreboard",
 

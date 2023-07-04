@@ -13,7 +13,8 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const { get: getPlayerInfo } = require("../api/player/PlayerInfo")
+const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
+const { getKey } = require("../utils/Language");
 
 /**
  * A command that sends a private message to other players
@@ -22,9 +23,9 @@ const { get: getPlayerInfo } = require("../api/player/PlayerInfo")
  */
 module.exports = {
     data: {
-        name: "tell",
+        name: getKey("commands.tell.name"),
         description: "Send private messages",
-        aliases: ["w", "whisper", "msg"],
+        aliases: [getKey("commands.tell.aliases.w"), getKey("commands.tell.aliases.whisper"), getKey("commands.tell.aliases.msg")],
         minArgs: 2
     },
 

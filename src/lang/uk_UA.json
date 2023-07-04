@@ -9,9 +9,11 @@
   "garbageCollector.finished": "[Сбірник сміття] Завершено",
 
   "commands.unknown": "§cНевідома команда: %s%. Перевірте, чи існує така команда та чи маєте ви права її використовувати.",
-  "commands.internalError": "Не вдалося виконати команду! Помилка: %s%",
-  "commands.internalError.player": "Не вдалося виконати команду від %s%. Помилка: %d%",
-  "commands.internalError.badSender": "§cЦей тип відправника не підтримує цю команду",
+  "commands.errors.internalError": "Не вдалося виконати команду! Помилка: %s%",
+  "commands.errors.internalError.player": "Не вдалося виконати команду від %s%. Помилка: %d%",
+  "commands.errors.internalError.badSender": "§cЦей тип відправника не підтримує цю команду",
+  "commands.errors.syntaxError.minArg": "§cПомилка синтаксису: Мінімальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
+  "commands.errors.syntaxError.maxArg": "§cПомилка синтаксису: Максимальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
 
   "commands.ingame.executed": "%s% виконав команду сервера: /%d%",
 
@@ -69,9 +71,6 @@
   "commands.version.description": "Показує версію сервера.",
   "commands.version.aliases.ver": "ver",
   "commands.version.aliases.about": "about",
-
-  "commands.errors.syntaxError.minArg": "§cПомилка синтаксису: Мінімальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
-  "commands.errors.syntaxError.maxArg": "§cПомилка синтаксису: Максимальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
 
   "scoreboard.name.default": "Табло",
 

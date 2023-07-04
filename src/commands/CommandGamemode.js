@@ -31,7 +31,7 @@ module.exports = {
 
 	execute(_server, player, args) {
 		if (player.isConsole) {
-			player.sendMessage(getKey("commands.internalError.badSender"));
+			player.sendMessage(getKey("commands.errors.internalError.badSender"));
 			return;
 		}
 
