@@ -76,7 +76,7 @@ module.exports = {
             const z = args[3];
 
             if (subject && areCoordinatesPresent(x, y, z)) {
-                subject.teleport(player.location.previous.x, player.location.previous.y, player.location.previous.z);
+                subject.teleport(x, y, z);
                 player.sendMessage(`You have teleported player ${subject} to ${x} ${y} ${z}`);
             } else {
                 player.sendMessage("Invalid player or coordinates");
