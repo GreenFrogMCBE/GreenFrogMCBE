@@ -42,38 +42,46 @@ module.exports = {
             const z = args[2];
             if (areCoordinatesPresent(x, y, z)) {
                 player.teleport(x, y, z);
-                player.sendMessage(`You were teleported to ${x} ${y} ${z}`);
+
+                player.sendMessage(`You have been teleported to ${x}, ${y}, ${z}`);
+                player.sendMessage(`Teleported ${player.username} to ${x}, ${y}, ${z}`)
             } else {
-                player.sendMessage("Invalid coordinates");
+                player.sendMessage("§cSyntaxError: Invalid coordinates");
             }
         } else if (args.length > 0 && args.length < 2) { // Teleport self to player
-            const destinationPlayerInfo = getPlayerInfo(args[0]);
-            if (destinationPlayerInfo.location) {
+            const destinationPlayer = getPlayerInfo(args[0]);
+            if (destinationPlayer.location) {
                 player.teleport(x, y, z);
-                player.sendMessage(`You were teleported to player ${args[0]}`);
+
+                player.sendMessage(`You have been teleported to ${destinationPlayer.username}`);
+                player.sendMessage(`Teleported ${player.username} to ${destinationPlayer.username}`)
             } else {
-                player.sendMessage("Invalid player");
+                player.sendMessage("§cNo targets matched selector");
             }
         } else if (args.length > 0 && args.length < 3) { // Teleport player to player
-            const subject = getPlayerInfo(args[0]);
-            const destinationPlayerInfo = getPlayerInfo(args[1]);
+            const target = getPlayerInfo(args[0]);
+            const destinationPlayer = getPlayerInfo(args[1]);
 
-            if (subject && destinationPlayerInfo && destinationPlayerInfo.location) {
-                const { x, y, z } = destinationPlayerInfo.location;
-                subject.teleport(x, y, z);
-                player.sendMessage(`You have teleported player ${subject} to ${args[1]}`);
+            if (target && destinationPlayer && destinationPlayer.location) {
+                const { x, y, z } = destinationPlayer.location;
+                target.teleport(x, y, z);
+
+                target.sendMessage(`You have been teleported to ${target.username}`);
+                player.sendMessage(`Teleported ${target.username} to ${destinationPlayer.username}`)
             } else {
-                player.sendMessage("Invalid player or destination");
+                player.sendMessage("§cNo targets matched selector");
             }
         } else if (args.length >= 4) { // Teleport player to coords
-            const subject = getPlayerInfo(args[0]);
+            const target = getPlayerInfo(args[0]);
             const x = args[1];
             const y = args[2];
             const z = args[3];
 
-            if (subject && areCoordinatesPresent(x, y, z)) {
-                subject.teleport(x, y, z);
-                player.sendMessage(`You have teleported player ${subject} to ${x} ${y} ${z}`);
+            if (target && areCoordinatesPresent(x, y, z)) {
+                player.teleport(x, y, z);
+
+                target.sendMessage(`You have been teleported to ${x}, ${y}, ${z}`);
+                player.sendMessage(`Teleported ${player.username} to ${x}, ${y}, ${z}`)
             } else {
                 player.sendMessage("Invalid player or coordinates");
             }
