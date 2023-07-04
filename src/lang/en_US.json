@@ -85,7 +85,7 @@
   "commands.tell.aliases.w": "w",
   "commands.tell.aliases.whisper": "whisper",
   "commands.tell.aliases.msg": "msg",
-  "commands.tell.execution.success": "<%s%> §7§o$%d% whispers to you: %f%",
+  "commands.tell.execution.success": "<%s%> §7§o%d% whispers to you: %f%",
   "commands.tell.execution.success.whisper": "You whisper to %s%: %d%",
  
   "scoreboard.name.default": "Scoreboard",

@@ -14,7 +14,8 @@
     "commands.errors.internalError.badSender": "§cAquest tipus d'executor no suporta aquesta comanda.",
     "commands.errors.syntaxError.minArg": "§cError de sintaxis: Els arguments mínims per aquesta comanda son %s%, però has provegut %d%",
     "commands.errors.syntaxError.maxArg": "§cError de sintaxis: Els arguments màxims requerits per aquesta comanda son %s%, però has provegut %d%",
-  
+    "commands.errors.targetError.targetsNotFound": "§cCap objectiu coincideix amb el selector",
+
     "commands.ingame.executed": "%s% ha executat la comnada: /%d%",
   
     "commands.deop.name": "deop",
@@ -71,6 +72,21 @@
     "commands.version.description": "Mostra la versió del servidor.",
     "commands.version.aliases.ver": "ver",
     "commands.version.aliases.about": "about",
+
+    "commands.teleport.name": "teleport",
+    "commands.teleport.description": "Teleporta jugadors.",
+    "commands.teleport.aliases.tp": "tp",
+    "commands.teleport.execution.success": "Has estat teleportat a %s%.",
+    "commands.teleport.execution.success.teleported": "Teleportat %s% a %d%.",
+    "commands.teleport.execution.failed.coordinates.invalid": "§cError de sintaxi: Coordenades invàlides.",
+     
+    "commands.tell.name": "tell",
+    "commands.tell.description": "Envia un missatge privat a un o més jugadors.",
+    "commands.tell.aliases.w": "w",
+    "commands.tell.aliases.whisper": "whisper",
+    "commands.tell.aliases.msg": "msg",
+    "commands.tell.execution.success": "<%s%> §7§o%d% et xiuxiueja: %f%.",
+    "commands.tell.execution.success.whisper": "Xiuxiuejes a %s%: %d%.",    
 
     "scoreboard.name.default": "Scoreboard",
   

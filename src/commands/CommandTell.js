@@ -36,7 +36,7 @@ module.exports = {
 
         try {
             getPlayerInfo(target).sendMessage(getKey("commands.tell.execution.success").replace("%s%", player.username).replace("%d%", player.username).replace("%f%", message))
-            player.sendMessage(getKey("commands.tell.execution.success.whisper").replace("%s%", target).replace("%d%", messages))
+            player.sendMessage(getKey("commands.tell.execution.success.whisper").replace("%s%", target).replace("%d%", message))
         } catch (e) {
             player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
         }

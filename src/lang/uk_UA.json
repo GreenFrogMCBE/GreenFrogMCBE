@@ -14,6 +14,7 @@
   "commands.errors.internalError.badSender": "§cЦей тип відправника не підтримує цю команду",
   "commands.errors.syntaxError.minArg": "§cПомилка синтаксису: Мінімальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
   "commands.errors.syntaxError.maxArg": "§cПомилка синтаксису: Максимальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
+  "commands.errors.targetError.targetsNotFound": "§cНемає цілей, що відповідають селектору",
 
   "commands.ingame.executed": "%s% виконав команду сервера: /%d%",
 
@@ -71,6 +72,21 @@
   "commands.version.description": "Показує версію сервера.",
   "commands.version.aliases.ver": "ver",
   "commands.version.aliases.about": "about",
+
+  "commands.teleport.name": "teleport",
+  "commands.teleport.description": "Телепортує гравців.",
+  "commands.teleport.aliases.tp": "tp",
+  "commands.teleport.execution.success": "Ви були телепортовані до %s%.",
+  "commands.teleport.execution.success.teleported": "Телепортовано %s% до %d%.",
+  "commands.teleport.execution.failed.coordinates.invalid": "§cПомилка синтаксису: Неприпустимі координати.",
+ 
+  "commands.tell.name": "tell",
+  "commands.tell.description": "Надсилає приватне повідомлення одному або декільком гравцям.",
+  "commands.tell.aliases.w": "w",
+  "commands.tell.aliases.whisper": "whisper",
+  "commands.tell.aliases.msg": "msg",
+  "commands.tell.execution.success": "<%s%> §7§o%d% шепоче вам: %f%.",
+  "commands.tell.execution.success.whisper": "Ви шепочете до %s%: %d%.",
 
   "scoreboard.name.default": "Табло",
 
