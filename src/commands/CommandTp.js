@@ -23,7 +23,7 @@ const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 module.exports = {
     data: {
         name: "tp",
-        description: "Teleports a player",
+        description: "Teleports players",
         aliases: ["teleport"],
         minArgs: 1,
         maxArgs: 4,

@@ -14,6 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const PlayerInfo = require("../api/player/PlayerInfo");
+const Logger = require("../server/Logger");
 
 const { getKey } = require("../utils/Language");
 
@@ -36,5 +37,7 @@ module.exports = {
 		for (const p of PlayerInfo.players) {
 			p.sendMessage(msg);
 		}
+
+		Logger.info(msg);
 	},
 };

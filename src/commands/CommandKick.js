@@ -32,6 +32,7 @@ module.exports = {
 
 	execute(_server, player, args) {
 		const playerName = args[0];
+
 		let reason = ": " + args.slice(1).join(" ");
 
 		if (reason === ": ") {

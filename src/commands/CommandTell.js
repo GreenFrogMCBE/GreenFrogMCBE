@@ -13,6 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const { get: getPlayerInfo } = require("../api/player/PlayerInfo")
 
 /**
  * A command that sends a private message to other players
@@ -20,25 +21,23 @@
  * @type {import('../type/Command').Command}
  */
 module.exports = {
-	data: {
-		name: "tell",
-		description: "Send private messages",
-		aliases: ["w", "whisper", "msg"],
-		minArgs: 2,
-		maxArgs: 2,
-	},
+    data: {
+        name: "tell",
+        description: "Send private messages",
+        aliases: ["w", "whisper", "msg"],
+        minArgs: 2
+    },
 
-	execute(_server, player, args) {
-        const { get: getPlayerInfo } = require("../api/player/PlayerInfo")
+    execute(_server, player, args) {
+        const target = args[0]
 
-        const subject = args[0]
-        const message = args[1]
+        const message = args.slice(1).join(" ")
 
         try {
-            getPlayerInfo(subject).sendMessage(`§7§oFrom ${player.username}: ${message}`)
-            player.sendMessage(`§7§oTo ${subject}: ${message}`)
+            getPlayerInfo(target).sendMessage(`<${player.username}> §7§o${player.username} whispers to you: ${message}`)
+            player.sendMessage(`You whisper to ${target}: ${message}`)
         } catch (e) {
-            player.sendMessage(`§cPlayer with the name of ${subject} isn't online.`)
+            player.sendMessage(`§cNo targets matched selector`)
         }
-	},
+    },
 };
