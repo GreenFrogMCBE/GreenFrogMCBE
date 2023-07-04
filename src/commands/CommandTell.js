@@ -24,7 +24,7 @@ const { getKey } = require("../utils/Language");
 module.exports = {
     data: {
         name: getKey("commands.tell.name"),
-        description: "Send private messages",
+        description: getKey("commands.tell.description"),
         aliases: [getKey("commands.tell.aliases.w"), getKey("commands.tell.aliases.whisper"), getKey("commands.tell.aliases.msg")],
         minArgs: 2
     },
@@ -35,10 +35,10 @@ module.exports = {
         const message = args.slice(1).join(" ")
 
         try {
-            getPlayerInfo(target).sendMessage(`<${player.username}> §7§o${player.username} whispers to you: ${message}`)
-            player.sendMessage(`You whisper to ${target}: ${message}`)
+            getPlayerInfo(target).sendMessage(getKey("commands.tell.execution.success").replace("%s%", player.username).replace("%d%", player.username).replace("%f%", message))
+            player.sendMessage(getKey("commands.tell.execution.success.whisper").replace("%s%", target).replace("%d%", messages))
         } catch (e) {
-            player.sendMessage(`§cNo targets matched selector`)
+            player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
         }
     },
 };

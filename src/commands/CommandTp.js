@@ -32,7 +32,53 @@ module.exports = {
     },
 
     execute(_server, player, args) {
-        if (args.length >= 3) { // Teleport self to coords
+        if (args.length >= 4) { // Teleport player to coordinates
+            const target = getPlayerInfo(args[0]);
+            const x = args[1];
+            const y = args[2];
+            const z = args[3];
+
+            if (target && areCoordinatesPresent(x, y, z)) {
+                player.teleport(x, y, z);
+
+                player.sendMessage(getKey("commands.teleport.execution.success").replace("%s%", `${x}, ${y}, ${z}`));
+                player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`))
+            } else {
+                player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+            }
+        } else if (args.length > 0 && args.length < 2) { // Teleport self to player
+            if (player.isConsole) {
+                player.sendMessage(getKey("commands.errors.internalError.badSender"));
+                return;
+            }
+
+            const destinationPlayer = getPlayerInfo(args[0]);
+
+            if (destinationPlayer.location) {
+                const { x, y, z } = destinationPlayer.location
+
+                player.teleport(x, y, z);
+
+                player.sendMessage(getKey("commands.teleport.execution.success").replace("%s%", `${x}, ${y}, ${z}`));
+                player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`))
+            } else {
+                player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+            }
+        } else if (args.length > 0 && args.length < 3) { // Teleport player to player
+            const target = getPlayerInfo(args[0]);
+            const destinationPlayer = getPlayerInfo(args[1]);
+
+            if (target && destinationPlayer && destinationPlayer.location) {
+                const { x, y, z } = destinationPlayer.location;
+                target.teleport(x, y, z);
+
+
+                player.sendMessage(getKey("commands.teleport.execution.success").replace("%s%", `${x}, ${y}, ${z}`));
+                player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`))
+            } else {
+                player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+            }
+        } else if (args.length >= 3) { // Teleport self to coords
             if (player.isConsole) {
                 player.sendMessage(getKey("commands.errors.internalError.badSender"));
                 return;
@@ -45,54 +91,10 @@ module.exports = {
             if (areCoordinatesPresent(x, y, z)) {
                 player.teleport(x, y, z);
 
-                player.sendMessage(getKey("commands.teleport.execution.success.coordinates").replace("%s%", `${x}, ${y}, ${z}`));
-                player.sendMessage(getKey("commands.teleport.execution.success.coordinates.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`))
+                player.sendMessage(getKey("commands.teleport.execution.success").replace("%s%", `${x}, ${y}, ${z}`));
+                player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`))
             } else {
                 player.sendMessage(getKey("commands.teleport.execution.failed.coordinates.invalid"));
-            }
-        } else if (args.length > 0 && args.length < 2) { // Teleport self to player
-            if (player.isConsole) {
-                player.sendMessage(getKey("commands.errors.internalError.badSender"));
-                return;
-            }
-
-            const destinationPlayer = getPlayerInfo(args[0]);
-
-            if (destinationPlayer.location) {
-                player.teleport(x, y, z);
-
-                player.sendMessage(getKey("commands.teleport.execution.success").replace("%d%", `${x}, ${y}, ${z}`));
-                player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`))
-            } else {
-                player.sendMessage(getKey("commands.teleport.execution.failed.target.noTargets"));
-            }
-        } else if (args.length > 0 && args.length < 3) { // Teleport player to player
-            const target = getPlayerInfo(args[0]);
-            const destinationPlayer = getPlayerInfo(args[1]);
-
-            if (target && destinationPlayer && destinationPlayer.location) {
-                const { x, y, z } = destinationPlayer.location;
-                target.teleport(x, y, z);
-
-
-                player.sendMessage(getKey("commands.teleport.execution.success").replace("%d%", `${x}, ${y}, ${z}`));
-                player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`))
-            } else {
-                player.sendMessage(getKey("commands.teleport.execution.failed.target.noTargets"));
-            }
-        } else if (args.length >= 4) { // Teleport player to coords
-            const target = getPlayerInfo(args[0]);
-            const x = args[1];
-            const y = args[2];
-            const z = args[3];
-
-            if (target && areCoordinatesPresent(x, y, z)) {
-                player.teleport(x, y, z);
-
-                player.sendMessage(getKey("commands.teleport.execution.success").replace("%d%", `${x}, ${y}, ${z}`));
-                player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`))
-            } else {
-                player.sendMessage(getKey("commands.teleport.execution.failed.target.noTargets"));
             }
         }
     },
