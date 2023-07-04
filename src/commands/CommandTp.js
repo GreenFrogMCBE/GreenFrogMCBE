@@ -36,8 +36,7 @@ module.exports = {
             return;
         }
 
-        if (args.length >= 3) {
-            // Tp self to coords
+        if (args.length >= 3) { // Teleport self to coords
             const x = args[0];
             const y = args[1];
             const z = args[2];
@@ -47,8 +46,7 @@ module.exports = {
             } else {
                 player.sendMessage("Invalid coordinates");
             }
-        } else if (args.length > 0 && args.length < 2) {
-            // Tp self to player
+        } else if (args.length > 0 && args.length < 2) { // Teleport self to player
             const destinationPlayerInfo = getPlayerInfo(args[0]);
             if (destinationPlayerInfo.location) {
                 player.teleport(x, y, z);
@@ -56,8 +54,7 @@ module.exports = {
             } else {
                 player.sendMessage("Invalid player");
             }
-        } else if (args.length > 0 && args.length < 3) {
-            // Tp player to player
+        } else if (args.length > 0 && args.length < 3) { // Teleport player to player
             const subject = getPlayerInfo(args[0]);
             const destinationPlayerInfo = getPlayerInfo(args[1]);
 
@@ -68,8 +65,7 @@ module.exports = {
             } else {
                 player.sendMessage("Invalid player or destination");
             }
-        } else if (args.length >= 4) {
-            // Tp player to coords
+        } else if (args.length >= 4) { // Teleport player to coords
             const subject = getPlayerInfo(args[0]);
             const x = args[1];
             const y = args[2];
