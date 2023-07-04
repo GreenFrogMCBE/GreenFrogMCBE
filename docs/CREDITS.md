@@ -78,4 +78,5 @@
 15. @erixweb
 
 > For reporting a bug that the `playerMove` event fires when a player is standing still
-> For reporting that the `cancel()` function in the `playerMove` event is not working
+> For reporting a bug that the `cancel()` function in the `playerMove` event is not working
+> For reporting a bug that you get insta-killed if you changed your gamemode to survival

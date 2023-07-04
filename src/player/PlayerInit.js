@@ -149,7 +149,8 @@ module.exports = {
 
 			if (!shouldChangeGamemode) return;
 
-			player.gamemode = gamemode
+			player.gamemode = gamemode;
+			player.fallDamageQueue = 0; // To fix the bug that you get insta-killed if you changed your gamemode to survival
 
 			const playerGamemode = new ServerSetPlayerGameTypePacket();
 			playerGamemode.gamemode = gamemode;
