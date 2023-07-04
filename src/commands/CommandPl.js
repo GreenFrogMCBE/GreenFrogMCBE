@@ -20,8 +20,8 @@ const Colors = require("../api/color/Colors");
 const { getKey } = require("../utils/Language");
 
 /**
- * Command to show list of plugins that the server is running.
- *
+ * A command that all the plugin this server uses
+ * 
  * @type {import('../type/Command').Command}
  */
 module.exports = {

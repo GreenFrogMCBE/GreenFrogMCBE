@@ -18,7 +18,7 @@ const Frog = require("../Frog");
 const { getKey } = require("../utils/Language");
 
 /**
- * Command to shutdown the server.
+ * A command to shutdown the server.
  *
  * @type {import('../type/Command').Command}
  */

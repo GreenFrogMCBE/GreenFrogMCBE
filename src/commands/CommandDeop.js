@@ -19,6 +19,11 @@ const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
 
+/**
+ * A command that removes the op of the player
+ * 
+ * @type {import('../type/Command').Command}
+ */
 module.exports = {
 	data: {
 		name: getKey("commands.deop.name"),

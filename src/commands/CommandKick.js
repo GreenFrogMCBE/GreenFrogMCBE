@@ -17,6 +17,11 @@ const { getKey } = require("../utils/Language");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
+/**
+ * A command that kicks the specified player
+ * 
+ * @type {import('../type/Command').Command}
+ */
 module.exports = {
 	data: {
 		name: getKey("commands.kick.name"),

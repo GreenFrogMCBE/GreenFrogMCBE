@@ -14,9 +14,11 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 
-// Has to be translated
-
-
+/**
+ * A command that sends a private message to other players
+ * 
+ * @type {import('../type/Command').Command}
+ */
 module.exports = {
 	data: {
 		name: "tell",

@@ -13,53 +13,78 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
-// Has to be translated
-
-
+/**
+ * A command that shows the sender to other players
+ *
+ * @type {import('../type/Command').Command}
+ */
 module.exports = {
-	data: {
-		name: "tp",
-		description: "Teleports a player",
-		aliases: ["teleport"],
-		minArgs: 1,
-		maxArgs: 4,
+    data: {
+        name: "tp",
+        description: "Teleports a player",
+        aliases: ["teleport"],
+        minArgs: 1,
+        maxArgs: 4,
         requiresOp: true,
-	},
+    },
 
-	execute(_server, player, args) {
-        const { get: getPlayerInfo } = require("../api/player/PlayerInfo")
+    execute(_server, player, args) {
+        if (player.isConsole) {
+            player.sendMessage(getKey("commands.internalError.badSender"));
+            return;
+        }
 
         if (args.length >= 3) {
             // Tp self to coords
-            const x = args[0]
-            const y = args[1]
-            const z = args[2] 
-            player.teleport(x, y, z)
-            player.sendMessage(`§7You were teleported to ${x} ${y} ${z}`)
+            const x = args[0];
+            const y = args[1];
+            const z = args[2];
+            if (areCoordinatesPresent(x, y, z)) {
+                player.teleport(x, y, z);
+                player.sendMessage(`You were teleported to ${x} ${y} ${z}`);
+            } else {
+                player.sendMessage("Invalid coordinates");
+            }
         } else if (args.length > 0 && args.length < 2) {
             // Tp self to player
-            const destinationX = getPlayerInfo(args[0]).location.x
-            const destinationY = getPlayerInfo(args[0]).location.y
-            const destinationZ = getPlayerInfo(args[0]).location.z
-            player.teleport(destinationX, destinationY, destinationZ)
-            player.sendMessage(`§7You were teleported to player ${args[0]}`)
+            const destinationPlayerInfo = getPlayerInfo(args[0]);
+            if (destinationPlayerInfo.location) {
+                player.teleport(x, y, z);
+                player.sendMessage(`You were teleported to player ${args[0]}`);
+            } else {
+                player.sendMessage("Invalid player");
+            }
         } else if (args.length > 0 && args.length < 3) {
             // Tp player to player
-            const subject = getPlayerInfo(args[0])
-            const destinationX = getPlayerInfo(args[1]).location.x
-            const destinationY = getPlayerInfo(args[1]).location.y
-            const destinationZ = getPlayerInfo(args[1]).location.z
-            subject.teleport(destinationX, destinationY, destinationZ)
-            player.sendMessage(`§7You have teleported player ${subject} to ${args[1]}`)
+            const subject = getPlayerInfo(args[0]);
+            const destinationPlayerInfo = getPlayerInfo(args[1]);
+
+            if (subject && destinationPlayerInfo && destinationPlayerInfo.location) {
+                const { x, y, z } = destinationPlayerInfo.location;
+                subject.teleport(x, y, z);
+                player.sendMessage(`You have teleported player ${subject} to ${args[1]}`);
+            } else {
+                player.sendMessage("Invalid player or destination");
+            }
         } else if (args.length >= 4) {
             // Tp player to coords
-            const subject = getPlayerInfo(args[0])
-            const x = args[1]
-            const y = args[2]
-            const z = args[3]
-            subject.teleport(x, y, z)
-            player.sendMessage(`§7You have teleported player ${subject} to ${x} ${y} ${z}`)
+            const subject = getPlayerInfo(args[0]);
+            const x = args[1];
+            const y = args[2];
+            const z = args[3];
+
+            if (subject && areCoordinatesPresent(x, y, z)) {
+                subject.teleport(player.location.previous.x, player.location.previous.y, player.location.previous.z);
+                player.sendMessage(`You have teleported player ${subject} to ${x} ${y} ${z}`);
+            } else {
+                player.sendMessage("Invalid player or coordinates");
+            }
         }
-	},
+    },
 };
+
+function areCoordinatesPresent(x, y, z) {
+    return !isNaN(x) && !isNaN(y) && !isNaN(z);
+}

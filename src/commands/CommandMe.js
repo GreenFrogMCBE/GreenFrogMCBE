@@ -18,7 +18,7 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 const { getKey } = require("../utils/Language");
 
 /**
- * Command to perform an action in the chat as the player.
+ * A command to perform an action in the chat as the player.
  *
  * @type {import('../type/Command').Command}
  */

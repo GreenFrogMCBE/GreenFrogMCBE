@@ -15,8 +15,6 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-const GamemodeLegacy = require("../../api/player/GamemodeLegacy");
-
 const CreativeInventory = require("../../inventory/CreativeInventory");
 const ContainerInventory = require("../../inventory/ContainerInventory");
 
