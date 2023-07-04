@@ -38,7 +38,7 @@ async function replaceInFile(filePath, replacements) {
 		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
 	}
 
-	fs.writeFile(filePath, fileContent, {}, () => {});
+	fs.writeFile(filePath, fileContent, {}, () => { });
 }
 
 async function traverseDirectory(dirPath, replacements) {
@@ -49,7 +49,7 @@ async function traverseDirectory(dirPath, replacements) {
 
 		if (entry.isDirectory()) {
 			traverseDirectory(entryPath, replacements);
-		} else if (entry.isFile() && entry.name.endsWith(".js")) {
+		} else if (entry.isFile() && (entry.name.endsWith(".js") || entry.name.endsWith(".json"))) {
 			replaceInFile(entryPath, replacements);
 		}
 	}

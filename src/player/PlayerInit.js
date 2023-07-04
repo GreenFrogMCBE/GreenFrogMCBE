@@ -227,7 +227,7 @@ module.exports = {
 				has_rot_y: false,
 				has_rot_z: false,
 				on_ground: false,
-				teleport: false,
+				teleport: true,
 				force_move: true,
 			};
 			movePacket.runtime_entity_id = 1;

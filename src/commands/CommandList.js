@@ -23,7 +23,7 @@ const { serverConfigurationFiles } = Frog;
 const { config } = serverConfigurationFiles;
 
 /**
- * Command to list players currently on the server.
+ * A command to list players currently on the server
  *
  * @type {import('../type/Command').Command}
  */

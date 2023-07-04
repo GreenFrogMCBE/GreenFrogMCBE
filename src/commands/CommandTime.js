@@ -18,6 +18,8 @@ const { players } = require("../api/player/PlayerInfo");
 const { getKey } = require("../utils/Language");
 
 /**
+ * A command that changes the time
+ * 
  * @type {import('../type/Command').Command}
  */
 module.exports = {

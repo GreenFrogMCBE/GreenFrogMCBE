@@ -16,7 +16,7 @@
 const { getKey } = require("../utils/Language");
 
 /**
- * Command to change the player's game mode.
+ * A command to change the player's game mode.
  *
  * @type {import('../type/Command').Command}
  */
@@ -31,7 +31,7 @@ module.exports = {
 
 	execute(_server, player, args) {
 		if (player.isConsole) {
-			player.sendMessage(getKey("commands.internalError.badSender"));
+			player.sendMessage(getKey("commands.errors.internalError.badSender"));
 			return;
 		}
 
@@ -56,6 +56,7 @@ module.exports = {
 		};
 
 		const gamemode = gamemodeMap[args[0]];
+
 		if (!gamemode) {
 			player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s%", args[0]));
 			return;

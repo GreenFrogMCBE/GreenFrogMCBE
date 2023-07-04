@@ -17,6 +17,11 @@ const { getKey } = require("../utils/Language");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
+/**
+ * A command that kicks the specified player
+ * 
+ * @type {import('../type/Command').Command}
+ */
 module.exports = {
 	data: {
 		name: getKey("commands.kick.name"),
@@ -27,6 +32,7 @@ module.exports = {
 
 	execute(_server, player, args) {
 		const playerName = args[0];
+
 		let reason = ": " + args.slice(1).join(" ");
 
 		if (reason === ": ") {

@@ -19,6 +19,11 @@ const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
 
+/**
+ * A command that makes the specified player opped
+ * 
+ * @type {import('../type/Command').Command}
+ */
 module.exports = {
 	data: {
 		name: getKey("commands.op.name"),

@@ -21,7 +21,7 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 const { getKey } = require("../utils/Language");
 
 /**
- * Command to send a message in the chat to other players.
+ * A command to send a message in the chat to other players.
  *
  * @type {import('../type/Command').Command}
  */

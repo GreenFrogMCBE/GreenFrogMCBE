@@ -13,27 +13,32 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../Frog");
-
-const Colors = require("../api/color/Colors");
+const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 const { getKey } = require("../utils/Language");
 
 /**
- * A command that shows the server's version
+ * A command that sends a private message to other players
  * 
  * @type {import('../type/Command').Command}
  */
 module.exports = {
-	data: {
-		name: getKey("commands.version.name"),
-		description: getKey("commands.version.description"),
-		aliases: [getKey("commands.version.aliases.ver"), getKey("commands.version.aliases.about")],
-		minArgs: 0,
-		maxArgs: 0,
-	},
+    data: {
+        name: getKey("commands.tell.name"),
+        description: getKey("commands.tell.description"),
+        aliases: [getKey("commands.tell.aliases.w"), getKey("commands.tell.aliases.whisper"), getKey("commands.tell.aliases.msg")],
+        minArgs: 2
+    },
 
-	execute(_server, player) {
-		const versionMsg = getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion);
-		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
-	},
+    execute(_server, player, args) {
+        const target = args[0]
+
+        const message = args.slice(1).join(" ")
+
+        try {
+            getPlayerInfo(target).sendMessage(getKey("commands.tell.execution.success").replace("%s%", player.username).replace("%d%", player.username).replace("%f%", message))
+            player.sendMessage(getKey("commands.tell.execution.success.whisper").replace("%s%", target).replace("%d%", message))
+        } catch (e) {
+            player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
+        }
+    },
 };

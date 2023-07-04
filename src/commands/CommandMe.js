@@ -14,11 +14,12 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const PlayerInfo = require("../api/player/PlayerInfo");
+const Logger = require("../server/Logger");
 
 const { getKey } = require("../utils/Language");
 
 /**
- * Command to perform an action in the chat as the player.
+ * A command to perform an action in the chat as the player.
  *
  * @type {import('../type/Command').Command}
  */
@@ -36,5 +37,7 @@ module.exports = {
 		for (const p of PlayerInfo.players) {
 			p.sendMessage(msg);
 		}
+
+		Logger.info(msg);
 	},
 };
