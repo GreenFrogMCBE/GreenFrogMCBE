@@ -17,7 +17,7 @@ const fs = require("fs");
 const path = require("path");
 
 if (process.argv.length < 4) {
-	console.error("Usage: node refactor.js [what to refactor] [new name for stuff that gets refactored]");
+	console.error("Usage: node refactor.js [old code] [new code]");
 
 	process.exit(-1);
 }
