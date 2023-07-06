@@ -15,8 +15,9 @@ chat:
   blockInvalidCommands: true # Same as 'blockInvalidMessages' but for commands
 query: # Query is a UDP protocol for querying server properties. More info at https://wiki.vg/Query
   enabled: true
-  logPackets: true
-  logConnections: true
+  showPlugins: false # Will querying the server show all the plugins that the server has installed?
+  logPackets: false
+  logConnections: false
   port: 19133
 dev:
   unstable: false # Makes your server not crash on critical errors

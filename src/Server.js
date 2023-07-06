@@ -171,7 +171,7 @@ module.exports = {
 			const query = new Query();
 
 			try {
-				const querySettings = {
+				let querySettings = {
 					host: config.network.host,
 					port: config.query.port,
 					motd: config.serverInfo.motd,
@@ -179,10 +179,11 @@ module.exports = {
 					players: PlayerInfo.players,
 					maxPlayers: String(config.serverInfo.maxPlayers),
 					gamemode: config.world.gameMode,
-					plugins: PluginManager.plugins,
 					wl: false, // wl stands for whitelist. TODO: Implement whitelist
 					version: String(config.serverInfo.version),
 				};
+
+				if (!config.query.showPlugins) querySettings.plugins = ['']
 
 				query.start(querySettings);
 			} catch (e) {
