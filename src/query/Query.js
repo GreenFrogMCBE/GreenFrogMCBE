@@ -124,7 +124,7 @@ function _sendBasicInfo(remoteInfo, message, clientTokens, socket, info) {
 
 	const buffer = new SmartBuffer();
 
-	buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT(info.motd).writeStringNT("MINECRAFTBE").writeStringNT(this.info.levelName).writeStringNT(String(this.info.players.length)).writeStringNT(String(this.info.maxPlayers)).writeUInt16LE(this.info.port).writeStringNT(this.info.host);
+	buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT(info.motd).writeStringNT("MINECRAFTBE").writeStringNT(info.levelName).writeStringNT(String(info.players.length)).writeStringNT(String(info.maxPlayers)).writeUInt16LE(info.port).writeStringNT(info.host);
 
 	const data = buffer.toBuffer();
 
