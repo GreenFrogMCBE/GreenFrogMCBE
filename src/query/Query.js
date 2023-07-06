@@ -79,7 +79,7 @@ class Query {
 		}
 
 		if ((this.clientTokens.has(remoteInfo.address) && this.clientTokens.get(remoteInfo.address).expiresAt < Date.now()) || !this.clientTokens.has(remoteInfo.address)) {
-			Logger.debug(getKey("query.server.network.generatingToken").replace("%s%", `${remoteInfo.address}`));
+			Logger.info(getKey("query.server.network.generatingToken").replace("%s%", `${remoteInfo.address}`));
 
 			this.clientTokens.set(remoteInfo.address, {
 				token: this._generateToken(),
@@ -90,7 +90,7 @@ class Query {
 		if (type === 0x09) {
 			Frog.eventEmitter.emit("queryHandshakePacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
-			Logger.debug(getKey("query.server.network.packets.handshake").replace("%s%", `${remoteInfo.address}`));
+			Logger.info(getKey("query.server.network.packets.handshake").replace("%s%", `${remoteInfo.address}`));
 			this._sendHandshake(remoteInfo, msg);
 		} else if (type === 0x00 && msg.length == 15) {
 			Frog.eventEmitter.emit("queryFullInfoPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
