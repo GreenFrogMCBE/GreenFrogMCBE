@@ -175,7 +175,7 @@ module.exports = {
 					host: config.network.host,
 					port: config.query.port,
 					motd: config.serverInfo.motd,
-					levelName: config.network.levelName,
+					levelName: config.serverInfo.levelName,
 					players: PlayerInfo.players,
 					maxPlayers: String(config.serverInfo.maxPlayers),
 					gamemode: config.world.gameMode,
