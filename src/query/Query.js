@@ -40,7 +40,7 @@ function _generateToken() {
  * @param {dgram.Socket} socket
  * @param {JSON} info
  */
-function _handle(msg, remoteInfo, clientTokens, info, socket) {
+function _handle(msg, remoteInfo, clientTokens, socket, info) {
 	const magic = msg.readUInt16BE(0);
 	const type = msg.readUInt8(2);
 
