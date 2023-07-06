@@ -37,13 +37,15 @@ function _generateToken() {
  * @param {Buffer} msg
  * @param {dgram.RemoteInfo} remoteInfo
  * @param {JSON} clientTokens
+ * @param {dgram.Socket} socket
+ * @param {JSON} info
  */
 function _handle(msg, remoteInfo, clientTokens) {
 	const magic = msg.readUInt16BE(0);
 	const type = msg.readUInt8(2);
 
 	if (magic !== 0xfefd) {
-		Frog.eventEmitter.emit("queryInvalidPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
+		Frog.eventEmitter.emit("queryInvalidPacket", { query: { info: info, socket: socket }, type, magic, msg, remoteInfo });
 
 		if (config.query.logConnections) Logger.warning(getKey("query.server.network.invalidPacket").replace("%s%", `${remoteInfo.address}`));
 		return;
@@ -59,20 +61,20 @@ function _handle(msg, remoteInfo, clientTokens) {
 	}
 
 	if (type === 0x09) {
-		Frog.eventEmitter.emit("queryHandshakePacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
+		Frog.eventEmitter.emit("queryHandshakePacket", { query: { info: info, socket: socket }, type, magic, msg, remoteInfo });
 
 		Logger.info(getKey("query.server.network.packets.handshake").replace("%s%", `${remoteInfo.address}`));
-		_sendHandshake(remoteInfo, msg, clientTokens);
+		_sendHandshake(remoteInfo, msg, clientTokens, socket, info);
 	} else if (type === 0x00 && msg.length == 15) {
-		Frog.eventEmitter.emit("queryFullInfoPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
+		Frog.eventEmitter.emit("queryFullInfoPacket", { query: { info: info, socket: socket }, type, magic, msg, remoteInfo });
 
 		Logger.info(getKey("query.server.network.packets.fullInfo").replace("%s%", `${remoteInfo.address}`));
-		_sendFullInfo(remoteInfo, msg, clientTokens);
+		_sendFullInfo(remoteInfo, msg, clientTokens, socket, info);
 	} else if (type === 0x00 && msg.length == 11) {
-		Frog.eventEmitter.emit("queryBasicInfoPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
+		Frog.eventEmitter.emit("queryBasicInfoPacket", { query: { info: info, socket: socket }, type, magic, msg, remoteInfo });
 
 		Logger.info(getKey("query.server.network.packets.basicInfo").replace("%s%", `${remoteInfo.address}`));
-		_sendBasicInfo(remoteInfo, msg, clientTokens);
+		_sendBasicInfo(remoteInfo, msg, clientTokens, socket, info);
 	}
 }
 
@@ -80,8 +82,10 @@ function _handle(msg, remoteInfo, clientTokens) {
  * @param {Buffer} remoteInfo
  * @param {dgram.RemoteInfo} msg
  * @param {JSON} clientTokens
+ * @param {dgram.Socket} socket
+ * @param {JSON} info
  */
-function _sendHandshake(remoteInfo, msg) {
+function _sendHandshake(remoteInfo, msg, clientTokens, socket, info) {
 	const sessionID = msg.readInt32BE(3);
 	const clientToken = clientTokens.get(remoteInfo.address).token;
 
@@ -94,9 +98,9 @@ function _sendHandshake(remoteInfo, msg) {
 
 	const data = buffer.toBuffer();
 
-	this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
+	socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 		if (err) {
-			Frog.eventEmitter.emit.emit("queryError", { query: { info: this.info, socket: this.socket }, error: err });
+			Frog.eventEmitter.emit.emit("queryError", { query: { info: info, socket: socket }, error: err });
 
 			Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 		}
@@ -107,8 +111,10 @@ function _sendHandshake(remoteInfo, msg) {
  * @param {dgram.RemoteInfo} remoteInfo
  * @param {Buffer} message
  * @param {JSON} clientTokens
+ * @param {dgram.Socket} socket
+ * @param {JSON} info
  */
-function _sendBasicInfo(remoteInfo, message) {
+function _sendBasicInfo(remoteInfo, message, clientTokens, socket, info) {
 	const sessionID = message.readInt32BE(3);
 	const clientToken = clientTokens.get(remoteInfo.address).token;
 
@@ -118,13 +124,13 @@ function _sendBasicInfo(remoteInfo, message) {
 
 	const buffer = new SmartBuffer();
 
-	buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT(this.info.motd).writeStringNT("MINECRAFTBE").writeStringNT(this.info.levelName).writeStringNT(String(this.info.players.length)).writeStringNT(String(this.info.maxPlayers)).writeUInt16LE(this.info.port).writeStringNT(this.info.host);
+	buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT(info.motd).writeStringNT("MINECRAFTBE").writeStringNT(this.info.levelName).writeStringNT(String(this.info.players.length)).writeStringNT(String(this.info.maxPlayers)).writeUInt16LE(this.info.port).writeStringNT(this.info.host);
 
 	const data = buffer.toBuffer();
 
-	this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
+	socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 		if (err) {
-			Frog.eventEmitter.emit.emit("queryError", { query: { info: this.info, socket: this.socket }, error: err });
+			Frog.eventEmitter.emit.emit("queryError", { query: { info: info, socket: socket }, error: err });
 			Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 		}
 	});
@@ -134,8 +140,10 @@ function _sendBasicInfo(remoteInfo, message) {
  * @param {dgram.RemoteInfo} remoteInfo
  * @param {Buffer} message
  * @param {JSON} clientTokens
+ * @param {dgram.Socket} socket
+ * @param {JSON} info
  */
-function _sendFullInfo(remoteInfo, message) {
+function _sendFullInfo(remoteInfo, message, clientTokens, socket, info) {
 	const sessionID = message.readInt32BE(3);
 	const clientToken = clientTokens.get(remoteInfo.address).token;
 
@@ -144,18 +152,18 @@ function _sendFullInfo(remoteInfo, message) {
 	}
 
 	const kvData = [
-		{ key: "hostname", value: this.info.motd },
-		{ key: "gametype", value: this.info.gamemode },
+		{ key: "hostname", value: info.motd },
+		{ key: "gametype", value: info.gamemode },
 		{ key: "game_id", value: "MINECRAFTBE" },
-		{ key: "version", value: this.info.version },
+		{ key: "version", value: info.version },
 		{ key: "server_engine", value: "GreenFrogMCBE" },
-		{ key: "plugins", value: `GreenFrogMCBE: ${this.info.plugins.join("; ")}` },
-		{ key: "map", value: this.info.levelName },
-		{ key: "numplayers", value: this.info.players.length },
-		{ key: "maxplayers", value: this.info.maxPlayers },
-		{ key: "whitelist", value: this.info.wl },
-		{ key: "hostip", value: this.info.host },
-		{ key: "hostport", value: this.info.port },
+		{ key: "plugins", value: `GreenFrogMCBE: ${info.plugins.join("; ")}` },
+		{ key: "map", value: info.levelName },
+		{ key: "numplayers", value: info.players.length },
+		{ key: "maxplayers", value: info.maxPlayers },
+		{ key: "whitelist", value: info.wl },
+		{ key: "hostip", value: info.host },
+		{ key: "hostport", value: info.port },
 	];
 
 	const buffer = new SmartBuffer();
@@ -169,16 +177,16 @@ function _sendFullInfo(remoteInfo, message) {
 
 	buffer.writeUInt8(0x00).writeUInt8(0x01).writeStringNT("player_").writeUInt8(0x00);
 
-	this.info.players.forEach((playerName) => {
+	info.players.forEach((playerName) => {
 		buffer.writeStringNT(playerName);
 	});
 
 	buffer.writeUInt8(0x00);
 
 	const data = buffer.toBuffer();
-	this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
+	socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 		if (err) {
-			Frog.eventEmitter.emit.emit("queryError", { query: { info: this.info, socket: this.socket }, error: err });
+			Frog.eventEmitter.emit.emit("queryError", { query: { info: info, socket: socket }, error: err });
 			Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 		}
 	});
@@ -212,7 +220,7 @@ class Query {
 		});
 
 		this.socket.on("message", (msg, remoteInfo) => {
-			_handle(msg, remoteInfo, this.clientTokens);
+			_handle(msg, remoteInfo, this.clientTokens, this.socket, this.info);
 		});
 	}
 }
