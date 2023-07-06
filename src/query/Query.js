@@ -52,7 +52,7 @@ function _handle(msg, remoteInfo) {
 		Logger.info(getKey("query.server.network.generatingToken").replace("%s%", `${remoteInfo.address}`));
 
 		this.clientTokens.set(remoteInfo.address, {
-			token: this._generateToken(),
+			token: _generateToken(),
 			expiresAt: Date.now() + 30 * 1000,
 		});
 	}
@@ -61,17 +61,17 @@ function _handle(msg, remoteInfo) {
 		Frog.eventEmitter.emit("queryHandshakePacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 		Logger.info(getKey("query.server.network.packets.handshake").replace("%s%", `${remoteInfo.address}`));
-		this._sendHandshake(remoteInfo, msg);
+		_sendHandshake(remoteInfo, msg);
 	} else if (type === 0x00 && msg.length == 15) {
 		Frog.eventEmitter.emit("queryFullInfoPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 		Logger.info(getKey("query.server.network.packets.fullInfo").replace("%s%", `${remoteInfo.address}`));
-		this._sendFullInfo(remoteInfo, msg);
+		_sendFullInfo(remoteInfo, msg);
 	} else if (type === 0x00 && msg.length == 11) {
 		Frog.eventEmitter.emit("queryBasicInfoPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 		Logger.info(getKey("query.server.network.packets.basicInfo").replace("%s%", `${remoteInfo.address}`));
-		this._sendBasicInfo(remoteInfo, msg);
+		_sendBasicInfo(remoteInfo, msg);
 	}
 }
 
@@ -95,6 +95,7 @@ function _sendHandshake(remoteInfo, msg) {
 	this.socket.send(data, 0, data.length, remoteInfo.port, remoteInfo.address, (err) => {
 		if (err) {
 			Frog.eventEmitter.emit.emit("queryError", { query: { info: this.info, socket: this.socket }, error: err });
+
 			Logger.error(getKey("query.server.error").replace("%s%", err.stack));
 		}
 	});
