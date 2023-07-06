@@ -13,10 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-module.exports = /** @type {const} */ ({
-	VISITOR: 0,
-	UNKNOWN: 1,
-	MEMBER: 2,
-	UNKNOWN2: 3,
-	OPERATOR: 4,
-});
+export let FLAT: "Flat";
+export let DEFAULT: "Default";
+export let VOID: "Void";

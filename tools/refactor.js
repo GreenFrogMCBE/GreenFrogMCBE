@@ -38,7 +38,7 @@ async function replaceInFile(filePath, replacements) {
 		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
 	}
 
-	fs.writeFile(filePath, fileContent, {}, () => { });
+	fs.writeFile(filePath, fileContent, {}, () => {});
 }
 
 async function traverseDirectory(dirPath, replacements) {

@@ -797,7 +797,7 @@ module.exports = {
 			}
 
 			player.offline = true;
-			GarbageCollector.clearOfflinePlayers()
+			GarbageCollector.clearOfflinePlayers();
 
 			Frog.eventEmitter.emit("playerLeave", {
 				player,

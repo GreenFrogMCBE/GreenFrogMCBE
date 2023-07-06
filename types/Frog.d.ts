@@ -31,6 +31,7 @@ export declare function getServer(): Server;
 export declare function setServer(server: any): void;
 export declare let serverConfigurationFiles: any;
 export { _eventEmitter as eventEmitter };
+export declare namespace getServerData {}
 /**
  * Sends message to all players
  *

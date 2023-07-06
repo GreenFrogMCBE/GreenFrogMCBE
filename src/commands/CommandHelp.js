@@ -19,7 +19,7 @@ const { getKey } = require("../utils/Language");
 
 /**
  * A command that shows all commands this server has
- * 
+ *
  * @type {import('../type/Command').Command}
  */
 module.exports = {
