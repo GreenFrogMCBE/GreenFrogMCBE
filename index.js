@@ -31,9 +31,9 @@ console.info(
 ██    ██ ██   ██ ██      ██      ██  ██ ██ ██      ██   ██ ██    ██ ██    ██ 
 ██████   ██   ██ ███████ ███████ ██   ████ ██      ██   ██  ██████   ██████  
 ${Colors.RESET}`,
-			process.stdout.columns
-		)
-	)
+			process.stdout.columns,
+		),
+	),
 );
 
 // Generate a filename for the crash report
@@ -78,8 +78,8 @@ ${error}
 	
 Make sure that you have the required libraries. Run "npm i" to install them
 If you are sure that this is a bug please report it here: https://github.com/andriycraft/GreenFrogMCBE
-${Colors.RESET}`
-			)
+${Colors.RESET}`,
+			),
 		);
 		fs.mkdir("crash-reports", { recursive: true }, () => {});
 		fs.writeFileSync(crashFileName, `Error: ${error.stack}`, () => {});

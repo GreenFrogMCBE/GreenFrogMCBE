@@ -79,7 +79,7 @@
   "commands.teleport.execution.success": "You have been teleported to %s%",
   "commands.teleport.execution.success.teleported": "Teleported %s% to %d%",
   "commands.teleport.execution.failed.coordinates.invalid": "§cSyntaxError: Invalid coordinates",
- 
+
   "commands.tell.name": "tell",
   "commands.tell.description": "Sends a private message to one or more players.",
   "commands.tell.aliases.w": "w",
@@ -87,7 +87,7 @@
   "commands.tell.aliases.msg": "msg",
   "commands.tell.execution.success": "<%s%> §7§o%d% whispers to you: %f%",
   "commands.tell.execution.success.whisper": "You whisper to %s%: %d%",
- 
+
   "scoreboard.name.default": "Scoreboard",
 
   "plugin.loading.failed": "Failed to load %s%. Error: %d%",

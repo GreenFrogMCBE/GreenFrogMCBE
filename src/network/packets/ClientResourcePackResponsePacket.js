@@ -302,7 +302,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				setInterval(() => {
 					player.location.previous = player.location;
-				}, 100)
+				}, 100);
 
 				setTimeout(() => {
 					for (const playerInfo of PlayerInfo.players) {

@@ -21,7 +21,7 @@ const { getKey } = require("../utils/Language");
 
 /**
  * A command that all the plugin this server uses
- * 
+ *
  * @type {import('../type/Command').Command}
  */
 module.exports = {
