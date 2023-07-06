@@ -18,7 +18,7 @@ const Difficulty = require("../../api/types/Difficulty");
 const Dimension = require("../../world/types/Dimension");
 const MovementAuthority = require("./types/MovementAuthority");
 const GeneratorType = require("../../world/types/GeneratorType");
-const PermissionLevel = require("../../api/permission/PermissionLevel")
+const PermissionLevel = require("../../api/permission/PermissionLevel");
 
 const PacketConstructor = require("./PacketConstructor");
 

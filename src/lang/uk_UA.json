@@ -79,7 +79,7 @@
   "commands.teleport.execution.success": "Ви були телепортовані до %s%.",
   "commands.teleport.execution.success.teleported": "Телепортовано %s% до %d%.",
   "commands.teleport.execution.failed.coordinates.invalid": "§cПомилка синтаксису: Неприпустимі координати.",
- 
+
   "commands.tell.name": "tell",
   "commands.tell.description": "Надсилає приватне повідомлення одному або декільком гравцям.",
   "commands.tell.aliases.w": "w",

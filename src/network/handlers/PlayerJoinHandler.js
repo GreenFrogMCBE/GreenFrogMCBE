@@ -119,7 +119,7 @@ class PlayerJoinHandler {
 				onGround: false,
 				pitch: 0,
 				yaw: 0,
-				previous: {}
+				previous: {},
 			},
 			inventory: {
 				lastKnownItemNetworkId: 0,

@@ -32,6 +32,7 @@ export declare function close(): void;
 export declare function executeConsoleCommand(executedCommand: string): void;
 /**
  * Checks if the command is empty
+ *
  * @param {string} command
  */
 export declare function isEmpty(command: string): boolean;
