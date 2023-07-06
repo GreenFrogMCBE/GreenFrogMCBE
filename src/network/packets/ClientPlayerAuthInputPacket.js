@@ -26,7 +26,7 @@ class ClientPlayerAuthInputPacket extends PacketConstructor {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw } = packet.data.params;
 
-		if (player.x === x && player.y === y && player.z === z && player.yaw === yaw && player.pitch === pitch) return;
+		if (player.location.x === x && player.location.y === y && player.location.z === z && player.location.yaw === yaw && player.location.pitch === pitch) return;
 
 		let shouldSetPosition = true;
 
@@ -40,9 +40,7 @@ class ClientPlayerAuthInputPacket extends PacketConstructor {
 			yaw,
 			onGround: player.location.onGround,
 			cancel: () => {
-				if (player.location.x === 0 && player.location.y === 0 && player.location.z === 0) return;
-
-				player.teleport(player.location.x, player.location.y, player.location.z);
+				player.teleport(player.location.previous.x, player.location.previous.y, player.location.previous.z);
 
 				shouldSetPosition = false;
 			},

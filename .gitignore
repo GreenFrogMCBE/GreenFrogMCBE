@@ -19,6 +19,7 @@ plugins/
 pluginData/
 !types/plugins
 
-# Do not ignore anything in /src/
+# Do not ignore anything in /src/ or !types/*
 
 !src/*
+!types/*

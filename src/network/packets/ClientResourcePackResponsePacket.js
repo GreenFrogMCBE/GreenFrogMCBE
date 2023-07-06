@@ -26,7 +26,7 @@ const MovementAuthority = require("./types/MovementAuthority");
 const GeneratorType = require("../../world/types/GeneratorType");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
 const WorldGenerator = require("../../world/types/WorldGenerator");
-const PlayerAttribute = require("../../api/attribute/PlayerAttribute");
+const PermissionLevel = require("../../api/permission/PermissionLevel");
 
 const PlayerInfo = require("../../api/player/PlayerInfo");
 
@@ -141,7 +141,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 
 				if (OfflinePermissionManager.isOpped(player.username)) {
 					player.op = true;
-					player.permissionLevel = 4;
+					player.permissionLevel = PermissionLevel.OPERATOR;
 				}
 
 				if (!player.op) player.permissionLevel = config.dev.defaultPermissionLevel;
@@ -299,6 +299,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 						}
 					}
 				}, 2000);
+
+				setInterval(() => {
+					player.location.previous = player.location;
+				}, 100)
 
 				setTimeout(() => {
 					for (const playerInfo of PlayerInfo.players) {

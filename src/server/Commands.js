@@ -31,5 +31,7 @@ module.exports = {
 			const cmd = require(path.join(commandsPath, command));
 			this.commandList.push(cmd);
 		}
+
+		require("../Frog").eventEmitter.emit('serverCommandsInitialised', { server: require("../Frog").getServer() })
 	},
 };

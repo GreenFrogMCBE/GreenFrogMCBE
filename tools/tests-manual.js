@@ -138,7 +138,7 @@ function configTest() {
 	}, 3000);
 }
 
-function configTest() {
+function queryTest() {
 	setTimeout(() => {
 		try {
 			Query.test();

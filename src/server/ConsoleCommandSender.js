@@ -98,7 +98,7 @@ module.exports = {
 		const args = executedCommand.split(" ").slice(1);
 
 		require("../Frog").eventEmitter.emit("serverExecutedCommand", {
-			server: require("../Frog").server,
+			server: require("../Frog").getServer(),
 			args,
 			command: executedCommand,
 			cancel: () => {
@@ -155,17 +155,18 @@ module.exports = {
 			}
 		} catch (error) {
 			require("../Frog").eventEmitter.emit("serverCommandProcessError", {
-				server: require("../Frog").server,
+				server: require("../Frog").getServer(),
 				command: executedCommand,
 				error,
 			});
 
-			Logger.error(Language.getKey("commands.internalError").replace("%s%", error.stack));
+			Logger.error(Language.getKey("commands.errors.internalError").replace("%s%", error.stack));
 		}
 	},
 
 	/**
 	 * Checks if the command is empty
+	 * 
 	 * @param {string} command
 	 */
 	isEmpty(command) {
@@ -186,7 +187,7 @@ module.exports = {
 			let shouldProcessCommand = true;
 
 			require("../Frog").eventEmitter.emit("serverCommandProcess", {
-				server: require("../Frog").server,
+				server: require("../Frog").getServer(),
 				command,
 				cancel: () => {
 					shouldProcessCommand = false;

@@ -14,34 +14,53 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Gamemode = require("../../api/player/Gamemode");
-
 const Difficulty = require("../../api/types/Difficulty");
-
 const Dimension = require("../../world/types/Dimension");
-const Generator = require("../../world/types/WorldGenerator");
+const MovementAuthority = require("./types/MovementAuthority");
+const GeneratorType = require("../../world/types/GeneratorType");
+const PermissionLevel = require("../../api/permission/PermissionLevel")
 
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerStartGamePacket extends PacketConstructor {
 	name = "start_game";
+	/** @type {number} */
 	entity_id;
+	/** @type {number} */
 	runtime_entity_id;
+	/** @type {Gamemode} */
 	player_gamemode;
+	/** @type {JSON} */
 	player_position;
+	/** @type {JSON} */
 	rotation;
+	/** @type {Array<Number>} */
 	seed;
+	/** @type {number} */
 	biome_type;
+	/** @type {Biome} */
 	biome_name;
+	/** @type {Dimension} */
 	dimension;
+	/** @type {GeneratorType} */
 	generator;
+	/** @type {Gamemode} */
 	world_gamemode;
+	/** @type {Difficulty} */
 	difficulty;
+	/** @type {JSON} */
 	spawn_position;
+	/** @type {Array} */
 	gamerules;
+	/** @type {Array} */
 	itemstates;
+	/** @type {string} */
 	world_name;
+	/** @type {string} */
 	game_version;
+	/** @type {MovementAuthority} */
 	movement_authority;
+	/** @type {PermissionLevel} */
 	permission_level;
 
 	writePacket(client) {

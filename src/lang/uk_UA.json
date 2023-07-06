@@ -9,9 +9,12 @@
   "garbageCollector.finished": "[Сбірник сміття] Завершено",
 
   "commands.unknown": "§cНевідома команда: %s%. Перевірте, чи існує така команда та чи маєте ви права її використовувати.",
-  "commands.internalError": "Не вдалося виконати команду! Помилка: %s%",
-  "commands.internalError.player": "Не вдалося виконати команду від %s%. Помилка: %d%",
-  "commands.internalError.badSender": "§cЦей тип відправника не підтримує цю команду",
+  "commands.errors.internalError": "Не вдалося виконати команду! Помилка: %s%",
+  "commands.errors.internalError.player": "Не вдалося виконати команду від %s%. Помилка: %d%",
+  "commands.errors.internalError.badSender": "§cЦей тип відправника не підтримує цю команду",
+  "commands.errors.syntaxError.minArg": "§cПомилка синтаксису: Мінімальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
+  "commands.errors.syntaxError.maxArg": "§cПомилка синтаксису: Максимальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
+  "commands.errors.targetError.targetsNotFound": "§cНемає цілей, що відповідають селектору",
 
   "commands.ingame.executed": "%s% виконав команду сервера: /%d%",
 
@@ -21,17 +24,18 @@
   "commands.deop.execution.fail": "Не вдалося скасувати права оператора для гравця %s%",
 
   "commands.gamemode.name": "gamemode",
-  "commands.gamemode.description": "Встановлює режим гри гравця",
+  "commands.gamemode.description": "Встановлює режим гри гравця.",
   "commands.gamemode.execution.failed": "§cРежим гри '%s%' недійсний",
   "commands.gamemode.execution.success.updated": "Ваш режим гри був оновлений до %s%.",
   "commands.gamemode.execution.success.set": "Встановлено власний режим гри: %s%.",
 
   "commands.me.name": "me",
-  "commands.me.description": "Відображає повідомлення про вас самого.",
+  "commands.me.description": "Відображає повідомлення про вас.",
 
   "commands.help.name": "help",
   "commands.help.description": "Список команд.",
   "commands.help.execution.success": "Список команд:",
+  "commands.help.execution.command": "%s% - %d%",
 
   "commands.kick.name": "kick",
   "commands.kick.description": "Видаляє гравця з сервера.",
@@ -58,7 +62,7 @@
   "commands.stop.description": "Вимикає сервер.",
 
   "commands.time.name": "time",
-  "commands.time.description": "Змінює час світу",
+  "commands.time.description": "Змінює час світу.",
   "commands.time.execution.success": "Встановлено час %s%",
   "commands.time.execution.failed": "§cЧас повинен бути числом",
   "commands.time.times.day": "день",
@@ -69,8 +73,20 @@
   "commands.version.aliases.ver": "ver",
   "commands.version.aliases.about": "about",
 
-  "commands.errors.syntaxError.minArg": "§cПомилка синтаксису: Мінімальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
-  "commands.errors.syntaxError.maxArg": "§cПомилка синтаксису: Максимальна кількість аргументів для цієї команди - %s%, але ви вказали %d%",
+  "commands.teleport.name": "teleport",
+  "commands.teleport.description": "Телепортує гравців.",
+  "commands.teleport.aliases.tp": "tp",
+  "commands.teleport.execution.success": "Ви були телепортовані до %s%.",
+  "commands.teleport.execution.success.teleported": "Телепортовано %s% до %d%.",
+  "commands.teleport.execution.failed.coordinates.invalid": "§cПомилка синтаксису: Неприпустимі координати.",
+ 
+  "commands.tell.name": "tell",
+  "commands.tell.description": "Надсилає приватне повідомлення одному або декільком гравцям.",
+  "commands.tell.aliases.w": "w",
+  "commands.tell.aliases.whisper": "whisper",
+  "commands.tell.aliases.msg": "msg",
+  "commands.tell.execution.success": "<%s%> §7§o%d% шепоче вам: %f%.",
+  "commands.tell.execution.success.whisper": "Ви шепочете до %s%: %d%.",
 
   "scoreboard.name.default": "Табло",
 

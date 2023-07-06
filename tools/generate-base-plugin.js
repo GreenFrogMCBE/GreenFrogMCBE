@@ -31,9 +31,11 @@ setTimeout(() => {
 
 		const pluginDir = `${pluginPath}/${pluginName}`;
 
+		if (!fs.existsSync('plugins')) fs.mkdirSync("plugins");
+
 		try {
 			fs.mkdirSync(pluginDir);
-		} catch (e) {
+		} catch {
 			console.error("\x1b[31mPlugin already exists!");
 			rl.close();
 			return;

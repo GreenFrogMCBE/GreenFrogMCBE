@@ -9,9 +9,12 @@
   "garbageCollector.finished": "[Garbage collector] Finished",
 
   "commands.unknown": "§cUnknown command: %s%. Please check that the command exists and that you have permission to use it.",
-  "commands.internalError": "Failed to execute command! Error: %s%",
-  "commands.internalError.player": "Failed to execute command from %s%. Error: %d%",
-  "commands.internalError.badSender": "§cThis type of sender does not support this command",
+  "commands.errors.internalError": "Failed to execute command! Error: %s%",
+  "commands.errors.internalError.player": "Failed to execute command from %s%. Error: %d%",
+  "commands.errors.internalError.badSender": "§cThis type of sender does not support this command",
+  "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
+  "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
+  "commands.errors.targetError.targetsNotFound": "§cNo targets matched selector",
 
   "commands.ingame.executed": "%s% executed server command: /%d%",
 
@@ -32,6 +35,7 @@
   "commands.help.name": "help",
   "commands.help.description": "Command list.",
   "commands.help.execution.success": "Command list:",
+  "commands.help.execution.command": "%s% - %d%",
 
   "commands.kick.name": "kick",
   "commands.kick.description": "Kicks a player from the server.",
@@ -69,9 +73,21 @@
   "commands.version.aliases.ver": "ver",
   "commands.version.aliases.about": "about",
 
-  "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
-  "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
-
+  "commands.teleport.name": "teleport",
+  "commands.teleport.description": "Teleports players.",
+  "commands.teleport.aliases.tp": "tp",
+  "commands.teleport.execution.success": "You have been teleported to %s%",
+  "commands.teleport.execution.success.teleported": "Teleported %s% to %d%",
+  "commands.teleport.execution.failed.coordinates.invalid": "§cSyntaxError: Invalid coordinates",
+ 
+  "commands.tell.name": "tell",
+  "commands.tell.description": "Sends a private message to one or more players.",
+  "commands.tell.aliases.w": "w",
+  "commands.tell.aliases.whisper": "whisper",
+  "commands.tell.aliases.msg": "msg",
+  "commands.tell.execution.success": "<%s%> §7§o%d% whispers to you: %f%",
+  "commands.tell.execution.success.whisper": "You whisper to %s%: %d%",
+ 
   "scoreboard.name.default": "Scoreboard",
 
   "plugin.loading.failed": "Failed to load %s%. Error: %d%",

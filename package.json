@@ -15,15 +15,15 @@
     "plugin-structure": "node tools/generate-base-plugin.js"
   },
   "dependencies": {
-    "@harmonytf/smart-buffer": "4.2.4",
     "center-align": "1.0.1",
     "frog-protocol": "github:greenfrogmc/Protocol",
+    "@harmonytf/smart-buffer": "4.2.4",
     "js-yaml": "4.1.0"
   },
   "devDependencies": {
     "eslint": "8.44.0",
     "minecraft-server-util": "5.4.4",
     "nodemon": "2.0.22",
-    "prettier": "2.8.8"
+    "prettier": "3.0.0"
   }
 }

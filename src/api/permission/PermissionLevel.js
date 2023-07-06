@@ -13,27 +13,10 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../Frog");
-
-const Colors = require("../api/color/Colors");
-const { getKey } = require("../utils/Language");
-
-/**
- * A command that shows the server's version
- * 
- * @type {import('../type/Command').Command}
- */
-module.exports = {
-	data: {
-		name: getKey("commands.version.name"),
-		description: getKey("commands.version.description"),
-		aliases: [getKey("commands.version.aliases.ver"), getKey("commands.version.aliases.about")],
-		minArgs: 0,
-		maxArgs: 0,
-	},
-
-	execute(_server, player) {
-		const versionMsg = getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion);
-		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
-	},
-};
+module.exports = /** @type {const} */ ({
+	VISITOR: 0,
+	UNKNOWN: 1,
+    MEMBER: 2,
+    UNKNOWN2: 3,
+    OPERATOR: 4
+});

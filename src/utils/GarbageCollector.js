@@ -31,10 +31,11 @@ module.exports = {
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			const player = PlayerInfo.players[i].q; // "q" gets created in the player object by bedrock-protocol when the player leaves the server
+			const isOffline = PlayerInfo.players[i].q || PlayerInfo.players[i].offline; // "q" gets created in the player object by bedrock-protocol when the player leaves the server
 
-			if (player) {
-				Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s%", player.username));
+			if (isOffline) {
+				Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s%", PlayerInfo.players[i].username));
+
 				PlayerInfo.players.splice(i, 1);
 				i--;
 			}

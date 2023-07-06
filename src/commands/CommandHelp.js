@@ -17,6 +17,11 @@ const Commands = require("../server/Commands");
 
 const { getKey } = require("../utils/Language");
 
+/**
+ * A command that shows all commands this server has
+ * 
+ * @type {import('../type/Command').Command}
+ */
 module.exports = {
 	data: {
 		name: getKey("commands.help.name"),
@@ -28,8 +33,9 @@ module.exports = {
 
 	execute(_server, player) {
 		player.sendMessage(getKey("commands.help.execution.success"));
+
 		for (const command of Commands.commandList) {
-			player.sendMessage(`${command.data.name} - ${command.data.description}`);
+			player.sendMessage(getKey("commands.help.execution.command").replace("%s%", command.data.name).replace("%d%", command.data.description));
 		}
 	},
 };

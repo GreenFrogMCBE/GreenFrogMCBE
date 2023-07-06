@@ -95,7 +95,7 @@ class PlayerJoinHandler {
 	}
 
 	/**
-	 * Initializes the player.
+	 * Initialises the player.
 	 *
 	 * @param {Client} client - The client to initialize.
 	 * @returns {Promise<void>}
@@ -114,11 +114,12 @@ class PlayerJoinHandler {
 			items: [],
 			location: {
 				x: 0,
-				y: 100,
+				y: -47,
 				z: 0,
 				onGround: false,
 				pitch: 0,
 				yaw: 0,
+				previous: {}
 			},
 			inventory: {
 				lastKnownItemNetworkId: 0,

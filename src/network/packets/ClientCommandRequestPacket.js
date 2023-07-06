@@ -94,7 +94,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 				CommandVerifier.throwError(player, executedCommand.split(" ")[0]);
 			}
 		} catch (error) {
-			Logger.error(getKey("commands.internalError.player").replace("%s%", player.username).replace("%d%", error.stack));
+			Logger.error(getKey("commands.errors.internalError.player").replace("%s%", player.username).replace("%d%", error.stack));
 		}
 	}
 }

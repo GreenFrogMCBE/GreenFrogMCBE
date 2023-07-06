@@ -16,6 +16,7 @@
 > For making the README.md file look better <br>
 > For showing example of a generator in our discord <br>
 > For adding query support (https://github.com/andriycraft/GreenFrogMCBE/pull/214)
+> For fixing bugs in query (https://github.com/andriycraft/GreenFrogMCBE/pull/236)
 
 3. @NhanAZ
 
@@ -74,3 +75,12 @@
 14. @tutinoko2048
 
 > For making .d.ts files use const type for constant values (https://github.com/andriycraft/GreenFrogMCBE/pull/154)
+
+15. @erixweb
+
+> For reporting a bug that the `playerMove` event fires when a player is standing still
+> For reporting a bug that the `cancel()` function in the `playerMove` event is not working
+> For reporting a bug that you get insta-killed if you changed your gamemode to survival
+> For adding /tp
+> For adding /w, /tell, /msg and /whisper
+> For adding spanish & catalan language
