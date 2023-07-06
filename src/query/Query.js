@@ -94,7 +94,9 @@ function _sendHandshake(remoteInfo, msg, clientTokens, socket, info) {
 	}
 
 	const buffer = new SmartBuffer();
-	buffer.writeUInt8(0x09).writeInt32BE(sessionID).writeStringNT(clientToken.toString());
+	buffer.writeUInt8(0x09)
+	buffer.writeInt32BE(sessionID)
+	buffer.writeStringNT(clientToken.toString());
 
 	const data = buffer.toBuffer();
 
@@ -124,7 +126,15 @@ function _sendBasicInfo(remoteInfo, message, clientTokens, socket, info) {
 
 	const buffer = new SmartBuffer();
 
-	buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT(info.motd).writeStringNT("MINECRAFTBE").writeStringNT(info.levelName).writeStringNT(String(info.players.length)).writeStringNT(String(info.maxPlayers)).writeUInt16LE(info.port).writeStringNT(info.host);
+	buffer.writeUInt8(0x00)
+	buffer.writeInt32BE(sessionID)
+	buffer.writeStringNT(info.motd)
+	buffer.writeStringNT("MINECRAFTBE")
+	buffer.writeStringNT(info.levelName)
+	buffer.writeStringNT(String(info.players.length))
+	buffer.writeStringNT(String(info.maxPlayers))
+	buffer.writeUInt16LE(info.port)
+	buffer.writeStringNT(info.host);
 
 	const data = buffer.toBuffer();
 
@@ -168,7 +178,11 @@ function _sendFullInfo(remoteInfo, message, clientTokens, socket, info) {
 
 	const buffer = new SmartBuffer();
 
-	buffer.writeUInt8(0x00).writeInt32BE(sessionID).writeStringNT("splitnum").writeUInt8(0x80).writeUInt8(0x00);
+	buffer.writeUInt8(0x00)
+	buffer.writeInt32BE(sessionID)
+	buffer.writeStringNT("splitnum")
+	buffer.writeUInt8(0x80)
+	buffer.writeUInt8(0x00);
 
 	kvData.forEach(({ key, value }) => {
 		buffer.writeStringNT(String(key));
