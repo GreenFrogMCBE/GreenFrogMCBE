@@ -36,8 +36,9 @@ function _generateToken() {
 /**
  * @param {Buffer} msg
  * @param {dgram.RemoteInfo} remoteInfo
+ * @param {JSON} clientTokens
  */
-function _handle(msg, remoteInfo) {
+function _handle(msg, remoteInfo, clientTokens) {
 	const magic = msg.readUInt16BE(0);
 	const type = msg.readUInt8(2);
 
@@ -48,10 +49,10 @@ function _handle(msg, remoteInfo) {
 		return;
 	}
 
-	if ((this.clientTokens.has(remoteInfo.address) && this.clientTokens.get(remoteInfo.address).expiresAt < Date.now()) || !this.clientTokens.has(remoteInfo.address)) {
+	if ((clientTokens.has(remoteInfo.address) && clientTokens.get(remoteInfo.address).expiresAt < Date.now()) || !clientTokens.has(remoteInfo.address)) {
 		Logger.info(getKey("query.server.network.generatingToken").replace("%s%", `${remoteInfo.address}`));
 
-		this.clientTokens.set(remoteInfo.address, {
+		clientTokens.set(remoteInfo.address, {
 			token: _generateToken(),
 			expiresAt: Date.now() + 30 * 1000,
 		});
@@ -61,29 +62,30 @@ function _handle(msg, remoteInfo) {
 		Frog.eventEmitter.emit("queryHandshakePacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 		Logger.info(getKey("query.server.network.packets.handshake").replace("%s%", `${remoteInfo.address}`));
-		_sendHandshake(remoteInfo, msg);
+		_sendHandshake(remoteInfo, msg, clientTokens);
 	} else if (type === 0x00 && msg.length == 15) {
 		Frog.eventEmitter.emit("queryFullInfoPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 		Logger.info(getKey("query.server.network.packets.fullInfo").replace("%s%", `${remoteInfo.address}`));
-		_sendFullInfo(remoteInfo, msg);
+		_sendFullInfo(remoteInfo, msg, clientTokens);
 	} else if (type === 0x00 && msg.length == 11) {
 		Frog.eventEmitter.emit("queryBasicInfoPacket", { query: { info: this.info, socket: this.socket }, type, magic, msg, remoteInfo });
 
 		Logger.info(getKey("query.server.network.packets.basicInfo").replace("%s%", `${remoteInfo.address}`));
-		_sendBasicInfo(remoteInfo, msg);
+		_sendBasicInfo(remoteInfo, msg, clientTokens);
 	}
 }
 
 /**
  * @param {Buffer} remoteInfo
  * @param {dgram.RemoteInfo} msg
+ * @param {JSON} clientTokens
  */
 function _sendHandshake(remoteInfo, msg) {
 	const sessionID = msg.readInt32BE(3);
-	const clientToken = this.clientTokens.get(remoteInfo.address).token;
+	const clientToken = clientTokens.get(remoteInfo.address).token;
 
-	if (!this.clientTokens.has(remoteInfo.address) || this.clientTokens.get(remoteInfo.address).expiresAt < Date.now()) {
+	if (!clientTokens.has(remoteInfo.address) || clientTokens.get(remoteInfo.address).expiresAt < Date.now()) {
 		return;
 	}
 
@@ -104,12 +106,13 @@ function _sendHandshake(remoteInfo, msg) {
 /**
  * @param {dgram.RemoteInfo} remoteInfo
  * @param {Buffer} message
+ * @param {JSON} clientTokens
  */
 function _sendBasicInfo(remoteInfo, message) {
 	const sessionID = message.readInt32BE(3);
-	const clientToken = this.clientTokens.get(remoteInfo.address).token;
+	const clientToken = clientTokens.get(remoteInfo.address).token;
 
-	if (!this.clientTokens.has(remoteInfo.address) || this.clientTokens.get(remoteInfo.address).expiresAt < Date.now() || clientToken !== this.clientTokens.get(remoteInfo.address).token) {
+	if (!clientTokens.has(remoteInfo.address) || clientTokens.get(remoteInfo.address).expiresAt < Date.now() || clientToken !== clientTokens.get(remoteInfo.address).token) {
 		return;
 	}
 
@@ -130,12 +133,13 @@ function _sendBasicInfo(remoteInfo, message) {
 /**
  * @param {dgram.RemoteInfo} remoteInfo
  * @param {Buffer} message
+ * @param {JSON} clientTokens
  */
 function _sendFullInfo(remoteInfo, message) {
 	const sessionID = message.readInt32BE(3);
-	const clientToken = this.clientTokens.get(remoteInfo.address).token;
+	const clientToken = clientTokens.get(remoteInfo.address).token;
 
-	if (!this.clientTokens.has(remoteInfo.address) || this.clientTokens.get(remoteInfo.address).expiresAt < Date.now() || clientToken !== this.clientTokens.get(remoteInfo.address).token) {
+	if (!clientTokens.has(remoteInfo.address) || clientTokens.get(remoteInfo.address).expiresAt < Date.now() || clientToken !== clientTokens.get(remoteInfo.address).token) {
 		return;
 	}
 
@@ -181,14 +185,13 @@ function _sendFullInfo(remoteInfo, message) {
 }
 
 class Query {
-	/** @type {Map} */
-	clientTokens = new Map();
-
 	constructor() {
 		/** @type {dgram.Socket} */
 		this.socket = dgram.createSocket("udp4");
 		/** @type {JSON} */
 		this.info = {};
+		/** @type {Map} */
+		this.clientTokens = new Map();
 	}
 
 	/**
@@ -209,7 +212,7 @@ class Query {
 		});
 
 		this.socket.on("message", (msg, remoteInfo) => {
-			_handle(msg, remoteInfo);
+			_handle(msg, remoteInfo, this.clientTokens);
 		});
 	}
 }
