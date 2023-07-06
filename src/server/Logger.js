@@ -18,10 +18,8 @@ const { getKey } = require("../utils/Language");
 
 const LoggingException = require("../utils/exceptions/LoggingException");
 
-let messageLogs = [];
-
 /**
- * Fires the 'serverLogMessage' event
+ * Fires the `serverLogMessage` event
  *
  * @param {string} langString
  * @param {string} color
@@ -41,32 +39,10 @@ function fireEvent(langString, color, message, type) {
 }
 
 module.exports = {
-	/**
-	 * Returns all messages in console as an array
-	 * @returns {Array<String>}
-	 */
-	getMessageLogs() {
-		return messageLogs;
-	},
+	/** @type {Array} */
+	messageLogs: [],
 
 	/**
-	 * Changes the contents of the `messageLogs` array
-	 * @param {Array<String>} newMessageLogs
-	 */
-	setMessageLogs(newMessageLogs) {
-		messageLogs = newMessageLogs;
-	},
-
-	/**
-	 * Clears the message logs
-	 */
-	clearMessageLogs() {
-		messageLogs = [];
-	},
-
-	/**
-	 * Logs a message
-	 *
 	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
 	 * @throws {LoggingException} - If the log type is 'warning' (common NodeJS mistake) (must be 'warn')
 	 *
@@ -83,7 +59,7 @@ module.exports = {
 		}
 
 		fireEvent(langString, color, message, type);
-		messageLogs.push({ langString, color, message, type });
+		this.messageLogs.push({ langString, color, message, type });
 
 		console[type](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));
 	},
