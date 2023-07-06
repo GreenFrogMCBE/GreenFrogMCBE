@@ -40,7 +40,7 @@ function fireEvent(langString, color, message, type) {
 
 module.exports = {
 	/** @type {Array} */
-	messageLogs: [],
+	messages: [],
 
 	/**
 	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
@@ -59,7 +59,7 @@ module.exports = {
 		}
 
 		fireEvent(langString, color, message, type);
-		this.messageLogs.push({ langString, color, message, type });
+		this.messages.push({ langString, color, message, type });
 
 		console[type](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));
 	},
