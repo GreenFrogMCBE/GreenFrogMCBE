@@ -40,11 +40,11 @@
   "commands.kick.name": "kick",
   "commands.kick.description": "Kicks a player from the server.",
   "commands.kick.execution.failed.notOnline": "§c%s% is not online",
-  
-  "command.kill.name": "kill",
-  "command.kill.description": "Kills entities (players, mobs, etc.).",
-  "command.kill.execution.failed.notOnline": "§cNo targets matched %s%",
-  "command.kill.execution.failed.isCreative": "Players cannot be killed while they are in Creative mode",
+
+  "commands.kill.name": "kill",
+  "commands.kill.description": "Kills entities (players, mobs, etc.).",
+  "commands.kill.execution.failed.notOnline": "§cNo targets matched %s%",
+  "commands.kill.execution.failed.isCreative": "Players cannot be killed while they are in Creative mode",
 
   "commands.list.name": "list",
   "commands.list.description": "Lists players on the server.",
