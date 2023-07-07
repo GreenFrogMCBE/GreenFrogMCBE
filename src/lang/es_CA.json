@@ -41,6 +41,11 @@
   "commands.kick.description": "Expulsa a un jugador del servidor.",
   "commands.kick.execution.failed.notOnline": "§c%s% no està en línea",
 
+  "commands.kill.name": "kill",
+  "commands.kill.description": "Mata entitats (jugadors, mobs, etc.).",
+  "commands.kill.execution.failed.notOnline": "§cCap objectiu apunta a %s%",
+  "commands.kill.execution.failed.isCreative": "No es poden matar jugadors mentres estan en mode Creatiu.",
+
   "commands.list.name": "list",
   "commands.list.description": "Llista a tots els jugadores en el servidor.",
   "commands.list.execution.success.commandList": "N'hi ha %s% jugadors en línea: %d%",
