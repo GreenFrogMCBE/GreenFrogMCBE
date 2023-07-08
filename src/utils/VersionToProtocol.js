@@ -14,15 +14,6 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = {
-	/**
-	 * Returns the version as a protocol number
-	 *
-	 * @param {string} version
-	 * @returns {number} The version as a protocol number
-	 */
-
-	// Good practice
-
 	PROTOCOL_LIST: {
 		"1.20.0": 589,
 		"1.20": 589,
@@ -43,7 +34,12 @@ module.exports = {
 	
 	DEFAULT_PROTOCOL: 0,
 
-
+	/**
+	 * Returns the version as a protocol number
+	 *
+	 * @param {string} version
+	 * @returns {number} The version as a protocol number
+	 */
 	getProtocol(version) {
 		// Using switch is adding more lines of code than needed.
 
