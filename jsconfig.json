@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "module": "commonjs",
+    "moduleResolution": "nodenext",
+    "target": "esnext"
+  }
+}
