@@ -21,7 +21,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command that shows the server's version
  *
- * @type {import('../type/Command').Command}
+ * @type {import('../../types/interfaces/Command').Command}
  */
 module.exports = {
 	data: {
