@@ -156,8 +156,6 @@ module.exports = {
 						continue;
 					}
 
-					this.initPluginShutdown();
-
 					try {
 						const plugin = new (require(`${__dirname}/../../plugins/${file}/${main}`))();
 
@@ -168,6 +166,8 @@ module.exports = {
 					} catch (error) {
 						Logger.error(getKey("plugin.unloading.failed").replace("%s%", name).replace("%d%", error.stack));
 					}
+
+					this.initPluginShutdown();
 				}
 			}
 		} catch (error) {

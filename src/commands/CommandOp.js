@@ -22,7 +22,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command that makes the specified player opped
  *
- * @type {import('../type/Command').Command}
+ * @type {import('../../types/interfaces/Command').Command}
  */
 module.exports = {
 	data: {

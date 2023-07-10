@@ -23,7 +23,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command to send a message in the chat to other players.
  *
- * @type {import('../type/Command').Command}
+ * @type {import('../../types/interfaces/Command').Command}
  */
 module.exports = {
 	data: {

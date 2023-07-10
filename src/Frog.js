@@ -85,7 +85,6 @@ module.exports = {
 	 * Returns configuration files (e.g config.yml, and language files)
 	 *
 	 * @returns {ConfigurationFile}
-	 * @type {import('./type/ConfigurationFile')}
 	 */
 	serverConfigurationFiles: getConfig(),
 
@@ -95,7 +94,7 @@ module.exports = {
 	 * events
 	 *
 	 * @returns {EventEmitter}
-	 * @type {import('./type/EventEmitter')}
+	 * @type {import('../types/interfaces/EventEmitter')}
 	 */
 	eventEmitter: _eventEmitter,
 
