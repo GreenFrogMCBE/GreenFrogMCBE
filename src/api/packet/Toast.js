@@ -26,22 +26,6 @@ class Toast {
 	}
 
 	/**
-	 * Sets the title.
-	 * @param {string} title
-	 */
-	setTitle(title) {
-		this.title = title;
-	}
-
-	/**
-	 * Sets the message.
-	 * @param {string} message
-	 */
-	setMessage(message) {
-		this.message = message;
-	}
-
-	/**
 	 * Sends the toast
 	 * 
 	 * @param {import("frog-protocol").Client} player
