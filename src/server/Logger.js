@@ -1,5 +1,5 @@
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
  * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
@@ -13,6 +13,8 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const Frog = require("../Frog");
+
 const { convertConsoleColor } = require("../utils/ConsoleColorConvertor");
 const { getKey } = require("../utils/Language");
 
@@ -27,13 +29,11 @@ const LoggingException = require("../utils/exceptions/LoggingException");
  * @param {string} type
  */
 function fireEvent(langString, color, message, type) {
-	require("../Frog").eventEmitter.emit("serverLogMessage", {
-		type: langString,
+	Frog.eventEmitter.emit("serverLogMessage", {
+		type,
+		langString,
 		message,
-		legacy: {
-			color,
-			type,
-		},
+		color,
 	});
 }
 
@@ -42,7 +42,7 @@ module.exports = {
 	messages: [],
 
 	/**
-	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
+	 * @throws {LoggingException} - If the log type is invalid (valid types are info, warn, error, debug)
 	 *
 	 * @param {string} langString
 	 * @param {number} color
@@ -72,7 +72,7 @@ module.exports = {
 	},
 
 	/**
-	 * Logs a message to the console as warning
+	 * Logs a message to the console as a warning
 	 *
 	 * @param {string} message
 	 */
@@ -81,7 +81,7 @@ module.exports = {
 	},
 
 	/**
-	 * Logs a message to the console as error
+	 * Logs a message to the console as an error
 	 *
 	 * @param {string} message
 	 */
@@ -91,7 +91,7 @@ module.exports = {
 
 	/**
 	 * Logs a message to the console as debug
-	 * Requires for debug to be enabled in the server settings
+	 * Requires debug to be enabled in the server settings
 	 *
 	 * @param {string} message
 	 */

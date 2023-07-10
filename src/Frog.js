@@ -89,12 +89,12 @@ module.exports = {
 	serverConfigurationFiles: getConfig(),
 
 	/**
-	 * Returns if the event emitter for plugins
+	 * Returns the event emitter for plugins
 	 * to listen for, and for server to execute
 	 * events
 	 *
 	 * @returns {EventEmitter}
-	 * @type {import('../types/interfaces/EventEmitter')}
+	 * @type {import('../interfaces/EventEmitter')}
 	 */
 	eventEmitter: _eventEmitter,
 
@@ -128,7 +128,7 @@ module.exports = {
 
 	/**
 	 * Shutdowns the server correctly
-	 * Also its calls onShutdown() in every
+	 * Also it calls onShutdown() in every
 	 * single plugin that is loaded
 	 *
 	 * @param {string} shutdownMessage
