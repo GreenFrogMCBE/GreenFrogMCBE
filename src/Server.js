@@ -16,7 +16,6 @@
 const Frog = require("./Frog");
 
 const PluginLoader = require("./plugins/PluginLoader");
-const PluginManager = require("./plugins/PluginManager");
 
 const PlayerInfo = require("./api/player/PlayerInfo");
 const GarbageCollector = require("./utils/GarbageCollector");
@@ -128,7 +127,7 @@ module.exports = {
 		Frog.eventEmitter.emit("serverStart", {});
 
 		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
-		await assert(parseInt(config.world.tickSpeed), NaN);
+		// await assert(parseInt(config.world.tickSpeed), NaN);
 
 		if (!fs.existsSync("ops.yml")) {
 			fs.writeFile("ops.yml", "", (err) => {
@@ -183,7 +182,7 @@ module.exports = {
 					version: String(config.serverInfo.version),
 				};
 
-				if (!config.query.showPlugins) querySettings.plugins = ['']
+				if (!config.query.showPlugins) querySettings.plugins = [""];
 
 				query.start(querySettings);
 			} catch (e) {
