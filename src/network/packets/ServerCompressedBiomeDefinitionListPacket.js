@@ -17,6 +17,7 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerCompressedBiomeDefinitionListPacket extends PacketConstructor {
 	name = "compressed_biome_definitions";
+	/** @type {Array<any>} */
 	data;
 
 	writePacket(client) {
