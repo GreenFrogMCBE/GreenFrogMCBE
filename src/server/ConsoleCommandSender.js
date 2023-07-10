@@ -15,7 +15,6 @@
  */
 const readline = require("readline");
 
-const ConsoleSetupException = require("../utils/exceptions/ConsoleSetupException");
 const CommandHandlingException = require("../utils/exceptions/CommandHandlingException");
 
 const Logger = require("./Logger");
@@ -54,14 +53,8 @@ async function setupConsoleReader() {
 module.exports = {
 	/**
 	 * Closes the console.
-	 *
-	 * @throws {ConsoleSetupException} - If the console is already closed
 	 */
 	close() {
-		if (isClosed) {
-			throw new ConsoleSetupException(Language.getKey("exceptions.console.alreadyClosed"));
-		}
-
 		isClosed = true;
 	},
 

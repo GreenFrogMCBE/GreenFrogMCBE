@@ -183,7 +183,7 @@ module.exports = {
 					version: String(config.serverInfo.version),
 				};
 
-				if (!config.query.showPlugins) querySettings.plugins = ['']
+				if (!config.query.showPlugins) querySettings.plugins = [""];
 
 				query.start(querySettings);
 			} catch (e) {

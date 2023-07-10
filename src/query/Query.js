@@ -24,20 +24,20 @@ const dgram = require("dgram");
 
 /**
  * Will only work if `config.query.logPackets` is enabled
- * 
+ *
  * @param {string} string
  */
 function _logPacket(string) {
-	if (Frog.serverConfigurationFiles.config.query.logPackets || Frog.isTest || Frog.isDebug) Logger.info(string)
+	if (Frog.serverConfigurationFiles.config.query.logPackets || Frog.isTest || Frog.isDebug) Logger.info(string);
 }
 
 /**
  * Will only work if `config.query.logConnections` is enabled
- * 
+ *
  * @param {string} string
  */
 function _logConnection(string) {
-	if (Frog.serverConfigurationFiles.config.query.logConnections || Frog.isTest || Frog.isDebug) Logger.info(string)
+	if (Frog.serverConfigurationFiles.config.query.logConnections || Frog.isTest || Frog.isDebug) Logger.info(string);
 }
 
 /**
