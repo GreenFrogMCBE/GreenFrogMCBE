@@ -15,7 +15,7 @@
  */
 const Frog = require("../../Frog");
 
-const ServerToastRequestPacket = require("../network/packets/ServerToastRequestPacket");
+const ServerToastRequestPacket = require("../../network/packets/ServerToastRequestPacket");
 
 class Toast {
 	constructor() {
@@ -43,20 +43,20 @@ class Toast {
 
 	/**
 	 * Sends the toast
-	 * @param {Client} player
+	 * 
+	 * @param {import("frog-protocol").Client} player
 	 */
 	send(player) {
 		Frog.eventEmitter.emit("serverToast", {
-			server: require("../../Server"),
 			title: this.title,
 			message: this.message,
-			player: player,
+			player,
 		});
 
 		const toast = new ServerToastRequestPacket();
-		toast.setMessage(this.message);
-		toast.setTitle(this.title);
-		toast.execute(player);
+		toast.message = this.message;
+		toast.title = this.title;
+		toast.writePacket(player);
 	}
 }
 

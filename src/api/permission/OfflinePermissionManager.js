@@ -48,7 +48,6 @@ module.exports = {
 
 		Frog.eventEmitter.emit("playerOfflineOpStatusChange", {
 			username,
-			server: Frog.getServer(),
 			cancel: () => {
 				shouldOp = false;
 			},
