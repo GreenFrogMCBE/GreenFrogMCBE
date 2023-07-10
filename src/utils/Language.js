@@ -15,8 +15,7 @@
  */
 const { existsSync } = require("fs");
 const path = require("path");
-
-const LanguageException = require("./exceptions/LanguageException");
+const LanguageException = require("./exceptions/LanguageException.js")
 
 /**
  * @typedef {Object.<string, string>} LanguageContent
@@ -27,15 +26,16 @@ const LanguageException = require("./exceptions/LanguageException");
  *
  *
  * @param {string} lang - The language code.
- * @returns {LanguageContent} The content of the language file.
+ * @returns {LanguageContent | undefined }  The content of the language file.
  * @throws {LanguageException} If the language file is not found or is not valid JSON.
  */
+
 function getLanguage(lang) {
 	const langPath = path.resolve(__dirname, "../lang");
 	const langFile = path.join(langPath, `${lang}.json`);
 
 	if (!existsSync(langFile)) {
-		throw new LanguageException("Failed to find that language");
+		return
 	}
 
 	const langContent = require(langFile);
@@ -55,7 +55,9 @@ function getLanguage(lang) {
  */
 function getKey(key) {
 	const langConfig = require("../Frog").serverConfigurationFiles.config.chat.lang;
-	return getLanguage(langConfig)[key];
+
+
+	return getLanguage(langConfig) ? getLanguage(langConfig)[key] : getLanguage("en_US")[key]
 }
 
 module.exports = {
