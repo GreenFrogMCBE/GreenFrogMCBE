@@ -127,7 +127,7 @@ module.exports = {
 		Frog.eventEmitter.emit("serverStart", {});
 
 		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
-		// await assert(parseInt(config.world.tickSpeed), NaN);
+		await assert(parseInt(config.world.tickSpeed), NaN);
 
 		if (!fs.existsSync("ops.yml")) {
 			fs.writeFile("ops.yml", "", (err) => {
