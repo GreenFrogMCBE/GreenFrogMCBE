@@ -16,9 +16,9 @@
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerClientCacheStatusPacket extends PacketConstructor {
-	enabled;
-	/** @type {string} */
 	name = "client_cache_status";
+	/** @type {boolean} */
+	enabled;
 
 	writePacket(client) {
 		client.queue(this.name, { enabled: this.enabled });
