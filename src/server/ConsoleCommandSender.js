@@ -32,15 +32,8 @@ let readLineInterface;
 
 /**
  * Set ups the console command reader that is used to handle commands
- *
- * @throws {ConsoleSetupException} - If the console is closed
- *
  */
 async function setupConsoleReader() {
-	if (isClosed) {
-		throw new ConsoleSetupException("Console is closed!");
-	}
-
 	readLineInterface = await readline.createInterface({
 		input: process.stdin,
 		output: process.stdout,
