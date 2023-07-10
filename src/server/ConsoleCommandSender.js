@@ -15,7 +15,6 @@
  */
 const readline = require("readline");
 
-const ConsoleSetupException = require("../utils/exceptions/ConsoleSetupException");
 const CommandHandlingException = require("../utils/exceptions/CommandHandlingException");
 
 const Logger = require("./Logger");
@@ -54,14 +53,8 @@ async function setupConsoleReader() {
 module.exports = {
 	/**
 	 * Closes the console.
-	 *
-	 * @throws {ConsoleSetupException} - If the console is already closed
 	 */
 	close() {
-		if (isClosed) {
-			throw new ConsoleSetupException(Language.getKey("exceptions.console.alreadyClosed"));
-		}
-
 		isClosed = true;
 	},
 
@@ -135,7 +128,7 @@ module.exports = {
 							ip: "127.0.0.1",
 							isConsole: true,
 						},
-						args
+						args,
 					);
 
 					commandFound = true;
@@ -150,7 +143,7 @@ module.exports = {
 							Logger.info(msg);
 						},
 					},
-					executedCommand.split(" ")[0]
+					executedCommand.split(" ")[0],
 				);
 			}
 		} catch (error) {
@@ -166,7 +159,7 @@ module.exports = {
 
 	/**
 	 * Checks if the command is empty
-	 * 
+	 *
 	 * @param {string} command
 	 */
 	isEmpty(command) {

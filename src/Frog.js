@@ -85,7 +85,6 @@ module.exports = {
 	 * Returns configuration files (e.g config.yml, and language files)
 	 *
 	 * @returns {ConfigurationFile}
-	 * @type {import('./type/ConfigurationFile')}
 	 */
 	serverConfigurationFiles: getConfig(),
 
@@ -95,7 +94,7 @@ module.exports = {
 	 * events
 	 *
 	 * @returns {EventEmitter}
-	 * @type {import('./type/EventEmitter')}
+	 * @type {import('../types/interfaces/EventEmitter')}
 	 */
 	eventEmitter: _eventEmitter,
 
@@ -157,15 +156,15 @@ module.exports = {
 	},
 
 	/** Player count. Do not use this in your plugin, please */
-	__playercount: 0,
+	__playerCount: 0,
 
 	/** Adds player to player count. Do not use this in your plugin, please */
 	__addPlayer() {
-		this.__playercount++;
+		this.__playerCount++;
 	},
 
 	/** Removes player from player count. Do not use this in your plugin, please */
 	__deletePlayer() {
-		this.__playercount--;
+		this.__playerCount--;
 	},
 };

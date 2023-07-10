@@ -16,7 +16,7 @@
 module.exports = /** @type {const} */ ({
 	VISITOR: 0,
 	UNKNOWN: 1,
-    MEMBER: 2,
-    UNKNOWN2: 3,
-    OPERATOR: 4
+	MEMBER: 2,
+	UNKNOWN2: 3,
+	OPERATOR: 4,
 });

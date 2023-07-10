@@ -17,7 +17,7 @@ const fs = require("fs");
 const path = require("path");
 
 if (process.argv.length < 4) {
-	console.error("Usage: node refactor.js [what to refactor] [new name for stuff that gets refactored]");
+	console.error("Usage: node refactor.js [old code] [new code]");
 
 	process.exit(-1);
 }
@@ -38,7 +38,7 @@ async function replaceInFile(filePath, replacements) {
 		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
 	}
 
-	fs.writeFile(filePath, fileContent, {}, () => { });
+	fs.writeFile(filePath, fileContent, {}, () => {});
 }
 
 async function traverseDirectory(dirPath, replacements) {

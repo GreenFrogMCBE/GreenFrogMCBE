@@ -13,11 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-class ConsoleSetupException extends Error {
-	constructor(reason) {
-		super("Failed to setup console! " + reason);
-		this.name = "ConsoleSetupException";
-	}
-}
-
-module.exports = ConsoleSetupException;
+export let FLAT: "Flat";
+export let DEFAULT: "Default";
+export let VOID: "Void";

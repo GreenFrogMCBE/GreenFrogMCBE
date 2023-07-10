@@ -31,7 +31,7 @@ setTimeout(() => {
 
 		const pluginDir = `${pluginPath}/${pluginName}`;
 
-		if (!fs.existsSync('plugins')) fs.mkdirSync("plugins");
+		if (!fs.existsSync("plugins")) fs.mkdirSync("plugins");
 
 		try {
 			fs.mkdirSync(pluginDir);
