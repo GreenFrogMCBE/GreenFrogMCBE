@@ -128,7 +128,7 @@ module.exports = {
 
 	/**
 	 * Shutdowns the server correctly
-	 * Also it calls onShutdown() in every
+	 * Also it calls `onShutdown()` in every
 	 * single plugin that is loaded
 	 *
 	 * @param {string} shutdownMessage
@@ -155,16 +155,6 @@ module.exports = {
 		}
 	},
 
-	/** Player count. Do not use this in your plugin, please */
-	__playerCount: 0,
-
-	/** Adds player to player count. Do not use this in your plugin, please */
-	__addPlayer() {
-		this.__playerCount++;
-	},
-
-	/** Removes player from player count. Do not use this in your plugin, please */
-	__deletePlayer() {
-		this.__playerCount--;
-	},
+	/** @type {number} */
+	_playerCount: 0,
 };

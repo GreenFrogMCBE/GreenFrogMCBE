@@ -29,6 +29,8 @@ const LoggingException = require("../utils/exceptions/LoggingException");
  * @param {string} type
  */
 function fireEvent(langString, color, message, type) {
+	const Frog = require("../Frog");
+
 	Frog.eventEmitter.emit("serverLogMessage", {
 		type,
 		langString,
@@ -96,7 +98,9 @@ module.exports = {
 	 * @param {string} message
 	 */
 	debug(message) {
-		if (!require("../Frog").isDebug) return;
+		const Frog = require("../Frog");
+
+		if (!Frog.isDebug) return;
 
 		this.log(getKey("logger.debug"), 35, message, "info");
 	},
