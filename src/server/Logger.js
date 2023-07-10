@@ -13,8 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../Frog");
-
 const { convertConsoleColor } = require("../utils/ConsoleColorConvertor");
 const { getKey } = require("../utils/Language");
 

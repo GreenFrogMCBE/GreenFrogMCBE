@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Gamemode = require("../../api/player/Gamemode");
-const Difficulty = require("../../api/type/Difficulty");
+const Difficulty = require("../../api/types/Difficulty");
 const Dimension = require("../../world/types/Dimension");
 const MovementAuthority = require("./types/MovementAuthority");
 const GeneratorType = require("../../world/types/GeneratorType");
@@ -46,7 +46,7 @@ class ServerStartGamePacket extends PacketConstructor {
 	generator;
 	/** @type {Gamemode} */
 	world_gamemode;
-	/** @type {import("../../api/type/Difficulty")} */
+	/** @type {import("../../api/types/Difficulty")} */
 	difficulty;
 	/** @type {JSON} */
 	spawn_position;

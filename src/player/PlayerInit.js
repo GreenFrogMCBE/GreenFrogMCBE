@@ -161,9 +161,9 @@ module.exports = {
 		 * Sets player's velocity
 		 * NOTE: This is handled by the client, and not server-side
 		 *
-		 * @param {float} x
-		 * @param {float} y
-		 * @param {float} z
+		 * @param {number} x
+		 * @param {number} y
+		 * @param {number} z
 		 */
 		player.setVelocity = function (x, y, z) {
 			let shouldSetVelocity = true;
@@ -192,12 +192,12 @@ module.exports = {
 		/**
 		 * Teleports the player
 		 *
-		 * @param {float} x
-		 * @param {float} y
-		 * @param {float} z
-		 * @param {float} rot_x
-		 * @param {float} rot_y
-		 * @param {float} rot_z
+		 * @param {number} x
+		 * @param {number} y
+		 * @param {number} z
+		 * @param {number} rot_x
+		 * @param {number} rot_y
+		 * @param {number} rot_z
 		 */
 		player.teleport = function (x, y, z, rot_x = undefined, rot_y = undefined, rot_z = undefined) {
 			let shouldTeleport = true;
@@ -350,7 +350,7 @@ module.exports = {
 			const playerSetEntityDataPacket = new ServerSetEntityDataPacket();
 			playerSetEntityDataPacket.properties = {
 				ints: [],
-				floats: [],
+				numbers: [],
 			};
 			playerSetEntityDataPacket.runtime_entity_id = "1"; // 1 - local player
 			playerSetEntityDataPacket.tick = "0";
@@ -462,7 +462,7 @@ module.exports = {
 		/**
 		 * Sets the XP for the player
 		 *
-		 * @param {float} xp
+		 * @param {number} xp
 		 */
 		player.setXP = function (xp) {
 			let shouldSetXP = true;
@@ -491,7 +491,7 @@ module.exports = {
 		/**
 		 * Sets the health of the player
 		 *
-		 * @param {float} health
+		 * @param {number} health
 		 * @param {DamageCause} cause
 		 */
 		player.setHealth = function (health, cause = DamageCause.UNKNOWN) {
@@ -557,7 +557,7 @@ module.exports = {
 		/**
 		 * Sets the hunger of the player
 		 *
-		 * @param {float} hunger
+		 * @param {number} hunger
 		 * @param {HungerCause} cause
 		 */
 		player.setHunger = function (hunger, cause = HungerCause.UNKNOWN) {
@@ -590,9 +590,9 @@ module.exports = {
 		/**
 		 * Changes the dimension for the player
 		 *
-		 * @param {float} x
-		 * @param {float} y
-		 * @param {float} z
+		 * @param {number} x
+		 * @param {number} y
+		 * @param {number} z
 		 * @param {Dimension} dimension
 		 * @param {boolean} respawn
 		 *

@@ -20,7 +20,7 @@ class ServerSetEntityMotion extends PacketConstructor {
 	/** @type {number} */
 	runtime_entity_id = 0;
 	/** @type {JSON} */
-	velocity = {};
+	velocity;
 
 	writePacket(client) {
 		client.queue(this.name, {
