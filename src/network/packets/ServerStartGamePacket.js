@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Gamemode = require("../../api/player/Gamemode");
-const Difficulty = require("../../api/types/Difficulty");
+const Difficulty = require("../../api/type/Difficulty");
 const Dimension = require("../../world/types/Dimension");
 const MovementAuthority = require("./types/MovementAuthority");
 const GeneratorType = require("../../world/types/GeneratorType");
@@ -28,39 +28,39 @@ class ServerStartGamePacket extends PacketConstructor {
 	entity_id;
 	/** @type {number} */
 	runtime_entity_id;
-	/** @type {Gamemode} */
+	/** @type {import("../../api/player/Gamemode")} */
 	player_gamemode;
 	/** @type {JSON} */
 	player_position;
 	/** @type {JSON} */
 	rotation;
-	/** @type {Array<Number>} */
+	/** @type {Array<number>} */
 	seed;
 	/** @type {number} */
 	biome_type;
-	/** @type {Biome} */
+	/** @type {import("../../world/types/Biome")} */
 	biome_name;
 	/** @type {Dimension} */
 	dimension;
-	/** @type {GeneratorType} */
+	/** @type {import("../../world/types/GeneratorType")} */
 	generator;
 	/** @type {Gamemode} */
 	world_gamemode;
-	/** @type {Difficulty} */
+	/** @type {import("../../api/type/Difficulty")} */
 	difficulty;
 	/** @type {JSON} */
 	spawn_position;
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	gamerules;
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	itemstates;
 	/** @type {string} */
 	world_name;
 	/** @type {string} */
 	game_version;
-	/** @type {MovementAuthority} */
+	/** @type {import("./types/MovementAuthority")} */
 	movement_authority;
-	/** @type {PermissionLevel} */
+	/** @type {import("../../api/permission/PermissionLevel")} */
 	permission_level;
 
 	writePacket(client) {
