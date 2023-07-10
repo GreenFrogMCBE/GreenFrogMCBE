@@ -23,7 +23,7 @@ class ServerTransferPacket extends PacketConstructor {
 	port;
 
 	writePacket(client) {
-		client.queue(this.getPacketName(), {
+		client.queue(this.name, {
 			server_address: this.server_address,
 			port: this.port,
 		});
