@@ -17,9 +17,9 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerTrimDataPacket extends PacketConstructor {
 	name = "trim_data";
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	patterns = [];
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	materials = [];
 
 	writePacket(client) {
