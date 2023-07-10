@@ -15,9 +15,6 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
-let title;
-let message;
-
 class ServerToastRequestPacket extends PacketConstructor {
 	name = "toast_request";
 	/** @type {string} */
