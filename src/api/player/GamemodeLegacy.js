@@ -17,5 +17,8 @@ module.exports = /** @type {const} */ ({
 	SURVIVAL: 0,
 	CREATIVE: 1,
 	ADVENTURE: 2,
+	/** Fallbacks to the world gamemode */
+	FALLBACK: 5,
+	/** 1.19.50+ */
 	SPECTATOR: 6,
 });

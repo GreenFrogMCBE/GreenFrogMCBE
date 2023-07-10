@@ -25,7 +25,7 @@ module.exports = {
 	 * Returns plugins and their versions as array
 	 * Example: ["ExamplePlugin v1.0.0"]
 	 *
-	 * @returns {Array<String>}
+	 * @returns {Array<string>}
 	 */
 	plugins,
 

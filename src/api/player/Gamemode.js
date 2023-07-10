@@ -16,15 +16,14 @@
 module.exports = /** @type {const} */ ({
 	CREATIVE: "creative",
 	SURVIVAL: "survival",
+	ADVENTURE: "adventure",
 	/** 1.19.50+ */
 	SPECTATOR: "spectator",
 
 	/** @deprecated */
-	CREATIVESPECTATOR: this.SPECTATOR,
+	CREATIVE_SPECTATOR: this.SPECTATOR,
 	/** @deprecated */
-	SURVIVALSPECTATOR: this.SPECTATOR,
-
-	ADVENTURE: "adventure",
+	SURVIVAL_SPECTATOR: this.SPECTATOR,
 
 	/** Fallbacks to the world gamemode */
 	FALLBACK: "fallback",
