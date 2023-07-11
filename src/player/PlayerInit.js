@@ -37,8 +37,8 @@ const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpe
 const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
 const ServerInventoryContentPacket = require("../network/packets/ServerInventoryContentPacket");
 
-const PlayerList = require("../network/packets/ServerPlayerListPacket");
-const PlayerList = require("../network/packets/types/PlayerList");
+const ServerPlayerListPacket = require("../network/packets/ServerPlayerListPacket");
+const PlayerListStatus = require("../network/packets/types/PlayerListStatus");
 
 const GarbageCollector = require("../utils/GarbageCollector");
 
@@ -773,8 +773,8 @@ module.exports = {
 					continue;
 				}
 
-				const playerList = new PlayerList();
-				playerList.type = PlayerList.REMOVE;
+				const playerList = new ServerPlayerListPacket();
+				playerList.type = PlayerListStatus.REMOVE;
 				playerList.uuid = player.profile.uuid;
 				playerList.writePacket(currentPlayer);
 			}
