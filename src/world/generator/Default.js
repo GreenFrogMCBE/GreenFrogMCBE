@@ -36,6 +36,8 @@ const coalOre = vanillaBlocks.coal_ore.legacy_id;
 let chunkData;
 /** @private @type {number} */
 let blockCount = 0;
+/** @private @type {number} */
+let magicOffset = 351;
 
 /**
  * @param {number} blockType
@@ -78,6 +80,7 @@ class Default extends Generator {
 					} else {
 						// Hills
 
+						// bad code starts from here
 						if (Math.floor(Math.random() * 600) < 5 && blockCount > 4161319 && !chunkData[index]) {
 							for (let i = 0; i < 1200; i++) {
 								if ((index - i) % 2 === 0 && y > 15) {
@@ -85,12 +88,12 @@ class Default extends Generator {
 										chunkData[index - i] = grass;
 									}
 
-									if (!chunkData[index - 351 - i]) {
-										chunkData[index - 351 - i] = grass;
+									if (!chunkData[index - magicOffset - i]) {
+										chunkData[index - magicOffset - i] = grass;
 									}
 
-									if (!chunkData[index + 351 + i]) {
-										chunkData[index + 351 + i] = grass;
+									if (!chunkData[index + magicOffset + i]) {
+										chunkData[index + magicOffset + i] = grass;
 									}
 								}
 							}
@@ -108,11 +111,8 @@ class Default extends Generator {
 
 						chunkData[index - 1] = dirt;
 
-						if (chunkData[index + 1] === bedrock) {
+						if (chunkData[index + 1] === bedrock || chunkData[index + 2] === bedrock) {
 							chunkData[index + 1] = air;
-						}
-
-						if (chunkData[index + 2] === bedrock) {
 							chunkData[index + 2] = air;
 						}
 
