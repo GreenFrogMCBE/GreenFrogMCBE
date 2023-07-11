@@ -47,7 +47,7 @@
 7. @CreeperG16
 
 > For a better way to handle player disconnection <br>
-> For suggesting modal form support
+> For suggesting modal form support <br>
 > For adding 1.19.60 support to `bedrock-protocol` <br>
 > For adding 1.19.62 support to `bedrock-protocol` <br>
 > For adding 1.19.70 support to `bedrock-protocol`
