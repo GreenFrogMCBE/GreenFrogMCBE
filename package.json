@@ -2,7 +2,7 @@
   "name": "greenfrog",
   "description": "A server software for MCBE",
   "main": "index.js",
-  "author": "andriycraft",
+  "author": "aboxofrats",
   "license": "CC-BY-4.0",
   "scripts": {
     "format": "npx prettier --write .",

@@ -104,7 +104,7 @@
   "plugin.unloading.success": "Descarregat %s%",
   "plugin.unloading.unloading": "Descarregant %s%...",
 
-  "frog.version": "Aquest servidor utilitza GreenFrogMCBE (https://github.com/andriycraft/GreenFrogMCBE). Versió %s%.",
+  "frog.version": "Aquest servidor utilitza GreenFrogMCBE (https://github.com/aboxofrats/GreenFrogMCBE). Versió %s%.",
 
   "world.chunks.chunkGeneratorLimit.tooHigh": "El limit del generador de chunks en la teva config.yml es massa alt! Pot causar lag.",
 

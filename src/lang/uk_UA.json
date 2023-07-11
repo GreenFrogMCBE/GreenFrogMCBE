@@ -103,7 +103,7 @@
   "plugin.unloading.success": "Вивантажено %s%",
   "plugin.unloading.unloading": "Вивантаження %s%...",
 
-  "frog.version": "На цьому сервері використовується GreenFrogMCBE (https://github.com/andriycraft/GreenFrogMCBE). Версія: %s%",
+  "frog.version": "На цьому сервері використовується GreenFrogMCBE (https://github.com/aboxofrats/GreenFrogMCBE). Версія: %s%",
 
   "world.chunks.chunkGeneratorLimit.tooHigh": "Обмеження генератора чанків у вашому файлі config.yml занадто високе! Це може призвести до лагів",
 
