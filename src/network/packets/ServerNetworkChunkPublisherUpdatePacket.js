@@ -21,7 +21,7 @@ class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	coordinates;
 	/** @type {number} */
 	radius;
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	saved_chunks;
 
 	writePacket(client) {

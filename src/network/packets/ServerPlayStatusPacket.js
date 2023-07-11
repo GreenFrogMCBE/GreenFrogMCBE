@@ -17,7 +17,7 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerPlayStatusPacket extends PacketConstructor {
 	name = "play_status";
-	/** @type {PlayStatusType} */
+	/** @type {import("./types/PlayStatus")} */
 	status;
 
 	writePacket(client) {
