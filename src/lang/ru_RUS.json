@@ -1,0 +1,196 @@
+{
+  "server.loading": Загрузка сервера...",
+  "server.license": "GreenFrog использует  лицензию Creative Commons Attribution 4.0 International license. Узнать подробнее: https://creativecommons.org",
+
+  "server.shuttingDown": "Выключение сервера...",
+
+  "garbageCollector.started": "[Мусорщик] Начал сборку мусора...",
+  "garbageCollector.deleted": "[Мусорщик] Удалено %s%",
+  "garbageCollector.finished": "[Мусорщик] Сборка завершена!",
+
+  "commands.unknown": "§cНеизвестная команда: %s%.  Убедитесь, что команда существует и у вас есть право ее использовать.",
+  "commands.errors.internalError": Не удалось выполнить команду! Ошибка: %s%",
+  "commands.errors.internalError.player": "Не удалось выполнить  команду от%s%. Ошибка: %d%",
+  "commands.errors.internalError.badSender": "§cДанный тип отправителя не поддерживает эту команду",
+  "commands.errors.syntaxError.minArg": "§cSyntaxError: Минимальное число аргументов команды: %s%, вы предоставили: %d%",
+  "commands.errors.syntaxError.maxArg": "§cSyntaxError: Максимальное число аргументов  команды %s%, вы предоставили %d%",
+  "commands.errors.targetError.targetsNotFound": "§cВалидные цели не найдены",
+
+  "commands.ingame.executed": "%s% выполнена команда сервера: /%d%",
+
+  "commands.deop.name": "deop",
+  "commands.deop.description": "Понизить игрока в должности оператора.",
+  "commands.deop.execution.success": "Игрока %s% успешно понизили в должности оператора.",
+  "commands.deop.execution.fail": "Игрока %s% не удалось понизить в должности оператора.",
+
+  "commands.gamemode.name": "gamemode",
+  "commands.gamemode.description": "Установить игровой режим игроку.",
+  "commands.gamemode.execution.failed": "§cИгровой режим '%s%' неверен.",
+  "commands.gamemode.execution.success.updated": "Ваш игровой режим изменён на %s%.",
+  "commands.gamemode.execution.success.set": "Установить свой игровой режим на %s%.",
+
+  "commands.me.name": "me",
+  "commands.me.description": "Вывести информацию о себе.",
+
+  "commands.help.name": "help",
+  "commands.help.description": "Список команд.",
+  "commands.help.execution.success": "Доступные команды:",
+  "commands.help.execution.command": "%s% - %d%",
+
+  "commands.kick.name": "kick",
+  "commands.kick.description": "Выгнать игрока с сервера.",
+  "commands.kick.execution.failed.notOnline": "§c%s% оффлайн",
+
+  "commands.kill.name": "kill",
+  "commands.kill.description": "Убить сущности(игроков, мобов, тд).",
+  "commands.kill.execution.failed.notOnline": "§cВалидных целей не найдено: %s%",
+  "commands.kill.execution.failed.isCreative": "Нельзя убить игрока пока он в креативе.",
+
+  "commands.list.name": "list",
+  "commands.list.description": "Список игроков на сервере",
+  "commands.list.execution.success.commandList": "%s% игроков в сети: %d%",
+
+  "commands.op.name": "op",
+  "commands.op.description": "Повысить игрока до оператора.",
+  "commands.op.execution.success": "Игрока %s% успешно повысили до оператора.",
+  "commands.op.execution.failed": "§cИгрока %s% не удалось повысить до оператора.",
+
+  "commands.plugins.name": "plugins",
+  "commands.plugins.aliases.pl": "pl",
+  "commands.plugins.description": "Показать список запущенных плагинов.",
+  "commands.plugins.execution.success": "Плагины: %s^1%",
+
+  "commands.say.name": "say",
+  "commands.say.description": "Отправить сообщение в чат другим игрокам.",
+
+  "commands.stop.name": "stop",
+  "commands.stop.description": "Выключить сервер.",
+
+  "commands.time.name": "time",
+  "commands.time.description": "Изменить внутриигровое время.",
+  "commands.time.execution.success": "Время изменено на: %s%",
+  "commands.time.execution.failed": "§cВремя должно быть числом",
+  "commands.time.times.day": "день",
+  "commands.time.times.night": "ночь",
+
+  "commands.version.name": "version",
+  "commands.version.description": "Показать версию сервера.",
+  "commands.version.aliases.ver": "ver",
+  "commands.version.aliases.about": "about",
+
+  "commands.teleport.name": "teleport",
+  "commands.teleport.description": "Телепортировать игроков. ",
+  "commands.teleport.aliases.tp": "tp",
+  "commands.teleport.execution.success": "Вас телепортировали к: %s%",
+  "commands.teleport.execution.success.teleported": "%s% телепортировался к %d%",
+  "commands.teleport.execution.failed.coordinates.invalid": "§cОшибка Синтаксиса: неверные координаты.",
+
+  "commands.tell.name": "tell",
+  "commands.tell.description": "Отправить личное сообщение одному и более игрокам.",
+  "commands.tell.aliases.w": "w",
+  "commands.tell.aliases.whisper": "whisper",
+  "commands.tell.aliases.msg": "msg",
+  "commands.tell.execution.success": "<%s%> §7§o%d% прошептал вам: %f%",
+  "commands.tell.execution.success.whisper": "Вы прошептали %s%: %d%",
+
+  "scoreboard.name.default": "Scoreboard",
+
+  "plugin.loading.failed": "Не удалось загрузить %s%. Ошибка: %d%",
+  "plugin.loading.loading": "Загружается плагин %s% v%d%",
+  "plugin.loading.loaded": "Загружен плагин %s% v%d%",
+  "plugin.loading.warning.invalidJson": "Неверная JSON информация предоставлена для %s%. Ошибка: %d%",
+
+  "plugin.unloading.failed": "Не удалось выгрузить %s%. Ошибка: %d%",
+  "plugin.unloading.success": "Выгружен %s%",
+  "plugin.unloading.unloading": "Выгружается %s%...",
+
+  "frog.version": "Сервер запущен на базе GreenFrogMCBE (https://github.com/andriycraft/GreenFrogMCBE). Версия: %s%",
+
+  "world.chunks.chunkGeneratorLimit.tooHigh": "Лимит генератора чанков в config.yml слишком высок!  Возможно появление багов.",
+
+  "errors.nodeJS.tooOld": "Вы используете слишком струю версию NodeJS для запуска GreenFrogMCBE",
+  "errors.nodeJS.tooOld.update": "Обновите ее до версии 14.0.0+, из https://nodejs.org/",
+
+  "kickMessages.serverDisconnect": "Разорванно соединение",
+  "kickMessages.serverClosed": "Сервер закрыт",
+  "kickMessages.serverFull": "Сервер переполнен, заходите попозже!",
+  "kickMessages.invalidPacket": "Неверный пакет / ошибка сервера",
+  "kickMessages.invalidUsername": "Неверное или повторяющиеся имя",
+  "kickMessages.versionMismatch": "Версия клиента не соответствует версии сервера! Сервер запущен на версии: %s%",
+  "kickMessages.resourcePacksRefused": "Необходимо принять ресурс паки что бы зайти на сервер",
+  "kickMessages.wereKicked": "Вас выгнали с сервера: %s%",
+
+  "kickMessages.playStatus": "%s% выгнан с сервера, ибо плагин отправил статус игры: %s%",
+  "kickMessages.playStatus.console": "%s% выгнан с сервера, ибо плагин/сервер отправил статус игры, где поле terminate_connection установлено на true. Обычно это означает, что версия клиента выше версии сервера",
+
+  "player.kicked": "%s% выгнан по причине: %d%",
+
+  "status.resourcePacks.refused": "%s% не принял серверный ресурс пак",
+  "status.resourcePacks.none": "%s% не имеет ресурс паков",
+  "status.resourcePacks.installed": "%s% установил все ресурс паки",
+  "status.resourcePacks.joined": "%s% зашел",
+  "status.resourcePacks.spawned": "%s% заспавнился",
+  "status.resourcePacks.disconnected": "%s% вышел",
+
+  "warning.customItems.loading.failed": "Не удалось загрузить кастомные предметы! Ошибка: %s%",
+
+  "debug.debugEnabled": "Режим отладки включён. Это может вызывать лаги при отправке больших пакетов",
+  "debug.unstable": "Нестабильный режим включён. Это спасёт сервер от критических ошибок, но может повредить данные плагинов",
+  "debug.unstable.unsupported": "Так же, нестабильный режим не поддерживается GreenFogs, вы берете на себя ответственность за свои данные в случае их повреждения"
+
+  "debug.player.unsupportedActionID": "Неподдерживаемый action ID от %s%: %d%",
+  "debug.player.unsupportedActionID.block": "Неподдерживаемый  block action ID от %s%: %d%",
+
+  "debug.playerlist.invalid": "Неверный пакет PlayerList проигнорирован",
+
+  "chat.format": "<%s%> %d%",
+  "chat.format.plugin": "%s%",
+  "chat.format.me": "* %s% %d%",
+  "chat.format.say": "[%s%] %d%",
+
+  "chat.broadcasts.joined": "§e%s% зашел в игру",
+  "chat.broadcasts.left": "§e%s% покинул игру",
+
+  "creativemenu.badPacket": "Не удалось обработать ItemStackRequest от %s%. Ошибка: %d%",
+
+  "network.packet.unhandledPacket": "Необработанный пакет!",
+
+  "network.server.listening.success": "Слушаю на %s%",
+  "network.server.listening.failed": "Не удалось прослушать %s%. Ошибка: %d%",
+  "network.server.listening.failed.otherServerRunning": "Может еще один сервер запущен на этом порту?",
+
+  "network.packet.failed.clientSide": "Не могу записать клиентский пакет",
+  "network.packet.failed.serverSide": "Не могу прочитать серверный пакет",
+
+  "exceptions.network.rateLimited": "Слишком много пакетов от %s% (%d%)",
+  "exceptions.network.packetHandlingError": "Не удалось обработать пакет от %s%! Ошибка: %d%",
+  "exceptions.network.itemStackRequest.badGamemode": "Нельзя получить вещь из креатива не находясь в нем",
+  "exceptions.network.inventoryTransaction.invalid": "Неверный  пакет InventoryTransaction от %s%",
+  "exceptions.network.invalidGamemodePacket": "Неверный gamemode пакет - попытка изменить игровой режим не являясь оператором",
+
+  "exceptions.plugin.noName": "Нет имени плагина!",
+  "exceptions.plugin.noVersion": "Нет версии плагина!",
+
+  "exceptions.generator.invalid": "Неверный генератор мира!",
+
+  "exceptions.console.alreadyClosed": "Консоль уже закрыта!",
+
+  "exceptions.logger.invalidType": "Неверный тип логов: %s%. Допустимые типы: info, warn, error, debug",
+
+  "query.server.listening": "Query сервер слушает на %s%",
+  "query.server.listening.failed": "Query сервер не может прослушать на %s%",
+
+  "query.server.error": "Query ошибка: %s%",
+
+  "query.server.network.generatingToken": "Генерация query-токена для %s%",
+  "query.server.network.invalidPacket": "Неверный  query-пакет получен от %s%",
+
+  "query.server.network.packets.handshake": "Ответил пакетом query handshake %s%",
+  "query.server.network.packets.fullInfo": "Ответил пакетом query full info %s%",
+  "query.server.network.packets.basicInfo": "Ответил пакетом query basic info %s%",
+
+  "logger.info": "ИНФО",
+  "logger.warn": "ПРЕД",
+  "logger.error": "ОШИБКА",
+  "logger.debug": "ОТЛАДКА"
+}
