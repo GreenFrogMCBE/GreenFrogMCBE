@@ -21,12 +21,12 @@
 3. @NhanAZ
 
 > For making the logger use default parameter (https://github.com/kotinash/GreenFrogMCBE/pull/4) <br>
-> For sorting lang strings (https://github.com/kotinash/GreenFrogMCBE/pull/22, https://github.com/kotinash/GreenFrogMCBE/pull/23, https://github.com/kotinash/GreenFrogMCBE/pull/24) <br>
 > For many changes to tests <br>
+> For sorting lang strings (https://github.com/kotinash/GreenFrogMCBE/pull/22, https://github.com/kotinash/GreenFrogMCBE/pull/23, https://github.com/kotinash/GreenFrogMCBE/pull/24) <br>
 > For fixing paths (https://github.com/kotinash/GreenFrogMCBE/pull/77) <br>
 > For reporting a bug that server cannot be stopped when plugins are null <br>
-> For making `/pl`, `/list`, `/deop`, `/help`, `/time`, `/say`, `/me`, `/op` code better (https://github.com/kotinash/GreenFrogMCBE/pulls?q=author%3ANhanAZ+Code+improvement) <br>
 > For reporting a bug that /help wasn't working <br>
+> For making the code better in commands like `/pl`, `/list`, `/deop`, `/help`, `/time`, `/say`, `/me`, `/op` <br>
 > For making `PluginManager.getPlugins()` better (https://github.com/kotinash/GreenFrogMCBE/pull/82) <br>
 > For improving `listen()` in Server.js (https://github.com/kotinash/GreenFrogMCBE/pull/105) <br>
 > For improving `generateLicenseHeaders.js` (https://github.com/kotinash/GreenFrogMCBE/pull/106)
@@ -48,9 +48,9 @@
 
 > For a better way to handle player disconnection <br>
 > For suggesting modal form support
-> For adding 1.19.60 support <br>
-> For adding 1.19.62 support <br>
-> For adding 1.19.70 support
+> For adding 1.19.60 support to `bedrock-protocol` <br>
+> For adding 1.19.62 support to `bedrock-protocol` <br>
+> For adding 1.19.70 support to `bedrock-protocol`
 
 8. The `Bedrock-protocol` library (https://github.com/PrismarineJS/bedrock-protocol)
 
