@@ -16,7 +16,6 @@
 const Frog = require("./Frog");
 
 const PluginLoader = require("./plugins/PluginLoader");
-const PluginManager = require("./plugins/PluginManager");
 
 const PlayerInfo = require("./api/player/PlayerInfo");
 const GarbageCollector = require("./utils/GarbageCollector");
