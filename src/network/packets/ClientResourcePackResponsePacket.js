@@ -184,7 +184,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				creativeContent.writePacket(player);
 
 				const commandsEnabled = new ServerSetCommandsEnabledPacket();
-				commandsEnabled.enable = true;
+				commandsEnabled.enabled = true;
 				commandsEnabled.writePacket(player);
 
 				const trimData = new ServerTrimDataPacket();
@@ -278,9 +278,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					});
 
 					player.setEntityData(defaultEntityData);
-					player.setSpeed(0.10000000149011612);
+					player.setSpeed(0.1);
 
-					Frog.__addPlayer();
+					Frog._playerCount++;
 
 					for (const onlineplayers of PlayerInfo.players) {
 						if (onlineplayers.username == player.username) {

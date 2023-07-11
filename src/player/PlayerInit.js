@@ -780,6 +780,8 @@ module.exports = {
 			}
 
 			player.offline = true;
+			Frog._playerCount--;
+
 			GarbageCollector.clearOfflinePlayers();
 
 			Frog.eventEmitter.emit("playerLeave", {
