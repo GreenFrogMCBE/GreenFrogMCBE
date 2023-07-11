@@ -1,6 +1,7 @@
+/** @type {import("../declarations/PluginBase")} */
 class PluginBase {
-	onLoad() { };
-	onShutdown() { };
+	onLoad() { }
+	onShutdown() { }
 }
 
 module.exports = { PluginBase };

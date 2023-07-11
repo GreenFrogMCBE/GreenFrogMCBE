@@ -13,7 +13,7 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerList = require("./types/PlayerListStatus");
+const PlayerList = require("./types/PlayerListAction");
 
 const PacketConstructor = require("./PacketConstructor");
 

@@ -30,8 +30,6 @@ module.exports = {
 	plugins,
 
 	/**
-	 * Adds plugin to the plugin list
-	 *
 	 * @throws {PluginSetupException} - If there is no plugin name
 	 * @throws {PluginSetupException} - If there is no plugin version
 	 *

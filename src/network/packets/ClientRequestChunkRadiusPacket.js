@@ -33,7 +33,7 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 
 		if (!shouldChange) return;
 
-		player.setChunkRadius(packet.data.params.radius);
+		player.setChunkRadius(32);
 	}
 }
 

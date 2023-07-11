@@ -88,6 +88,10 @@
   "commands.tell.execution.success": "<%s%> §7§o%d% шепоче вам: %f%.",
   "commands.tell.execution.success.whisper": "Ви шепочете до %s%: %d%.",
 
+  "commands.kill.name": "kill",
+  "commands.kill.description": "Вбиває об'єкти (гравці, тощо).",
+  "commands.kill.execution.failed.notOnline": "§cНемає цілей, що відповідають %s%",
+
   "scoreboard.name.default": "Табло",
 
   "plugin.loading.failed": "Не вдалося завантажити %s%. Помилка: %d%",

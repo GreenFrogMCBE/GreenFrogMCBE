@@ -40,7 +40,7 @@ const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityD
 const ServerInventoryContentPacket = require("../network/packets/ServerInventoryContentPacket");
 
 const ServerPlayerListPacket = require("../network/packets/ServerPlayerListPacket");
-const PlayerListStatus = require("../network/packets/types/PlayerListStatus");
+const PlayerListAction = require("../network/packets/types/PlayerListAction");
 
 const GarbageCollector = require("../utils/GarbageCollector");
 
@@ -348,7 +348,7 @@ module.exports = {
 			const playerSetEntityDataPacket = new ServerSetEntityDataPacket();
 			playerSetEntityDataPacket.properties = {
 				ints: [],
-				numbers: [],
+				floats: [],
 			};
 			playerSetEntityDataPacket.runtime_entity_id = "1"; // 1 - local player
 			playerSetEntityDataPacket.tick = "0";
@@ -776,7 +776,7 @@ module.exports = {
 				}
 
 				const playerList = new ServerPlayerListPacket();
-				playerList.type = PlayerListStatus.REMOVE;
+				playerList.type = PlayerListAction.REMOVE;
 				playerList.uuid = player.profile.uuid;
 				playerList.writePacket(currentPlayer);
 			}

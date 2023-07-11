@@ -17,9 +17,9 @@
 const Frog = require("../../Frog");
 
 const Biome = require("../../world/types/Biome");
-const PlayStatusType = require("./types/PlayStatus");
+const PlayStatus = require("./types/PlayStatus");
 const Gamemode = require("../../api/player/Gamemode");
-const PlayerList = require("./types/PlayerListStatus");
+const PlayerList = require("./types/PlayerListAction");
 const Dimension = require("../../world/types/Dimension");
 const Difficulty = require("../../api/types/Difficulty");
 const MovementAuthority = require("./types/MovementAuthority");
@@ -41,7 +41,6 @@ const ServerResourcePackStackPacket = require("./ServerResourcePackStackPacket")
 const ServerCreativeContentPacket = require("./ServerCreativeContentPacket");
 const ServerFeatureRegistryPacket = require("./ServerFeatureRegistryPacket");
 const ServerItemComponentPacket = require("./ServerItemComponentPacket");
-const ServerPlayStatusPacket = require("./ServerPlayStatusPacket");
 const ServerPlayerListPacket = require("./ServerPlayerListPacket");
 const ServerStartGamePacket = require("./ServerStartGamePacket");
 const ServerTrimDataPacket = require("./ServerTrimDataPacket");
@@ -268,9 +267,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.spawned").replace("%s%", player.username));
 
 				setTimeout(() => {
-					const playStatus = new ServerPlayStatusPacket();
-					playStatus.status = PlayStatusType.PLAYER_SPAWN;
-					playStatus.writePacket(player);
+					player.sendPlayStatus(PlayStatus.PLAYER_SPAWN)
 
 					Frog.eventEmitter.emit("playerSpawn", {
 						player,

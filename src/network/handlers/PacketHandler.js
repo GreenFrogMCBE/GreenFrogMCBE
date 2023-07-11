@@ -26,8 +26,6 @@ const PacketHandlingException = require("../../utils/exceptions/PacketHandlingEx
 
 class PacketHandler {
 	/**
-	 * Handles packets.
-	 *
 	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @param {JSON} packetData - The packet parameters.
 	 * @throws {PacketHandlingException} - If the client is rate-limited.
