@@ -17,7 +17,6 @@ let playersOnline = [];
 
 module.exports = {
 	/**
-	 * Adds player
 	 * @param player
 	 */
 	addPlayer(player) {
@@ -43,7 +42,7 @@ module.exports = {
 	},
 
 	/**
-	 * @returns The players array.
+	 * @returns {Array<any>} The players array.
 	 */
 	players: playersOnline,
 };

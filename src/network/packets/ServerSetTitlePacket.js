@@ -19,19 +19,19 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetTitlePacket extends PacketConstructor {
 	name = "set_title";
-	/** @param {Title} */
+	/** @type {import("../../api/types/Title")} */
 	type;
-	/** @param {string} */
+	/** @type {string} */
 	text;
-	/** @param {number} */
+	/** @type {number} */
 	fade_in_time;
-	/** @param {number} */
+	/** @type {number} */
 	stay_time;
-	/** @param {number} */
+	/** @type {number} */
 	fade_out_time;
-	/** @param {string} */
+	/** @type {string} */
 	xuid;
-	/** @param {string} */
+	/** @type {string} */
 	platform_online_id;
 
 	writePacket(client) {

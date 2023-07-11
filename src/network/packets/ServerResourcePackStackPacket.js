@@ -17,9 +17,9 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerResourcePackStackPacket extends PacketConstructor {
 	name = "resource_pack_stack";
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	behavior_packs;
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	resource_packs;
 	/** @type {string} */
 	game_version;

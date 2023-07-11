@@ -26,16 +26,16 @@ class PacketConstructor {
 	validatePacket() {}
 
 	/**
-	 * @param {Client} player
+	 * @param {import("frog-protocol").Client} player
 	 */
 	writePacket() {
 		throw new UnsupportedOperationException(getKey("network.packet.failed.clientSide"));
 	}
 
 	/**
-	 * @param {Client} player
+	 * @param {import("frog-protocol").Client} player
 	 * @param {JSON} packet
-	 * @param {Server} server
+	 * @param {import("frog-protocol").Server} server
 	 */
 	readPacket() {
 		throw new UnsupportedOperationException(getKey("network.packet.failed.serverSide"));

@@ -17,8 +17,8 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerCreativeContentPacket extends PacketConstructor {
 	name = "creative_content";
-	/** @type {Array} */
-	items = [];
+	/** @type {Array<any>} */
+	items;
 
 	writePacket(client) {
 		client.queue(this.name, {

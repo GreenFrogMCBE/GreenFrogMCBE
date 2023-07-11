@@ -18,7 +18,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerItemComponentPacket extends PacketConstructor {
 	name = "item_component";
 	/** @type {JSON} */
-	entries = {};
+	entries;
 
 	writePacket(client) {
 		client.queue(this.name, {

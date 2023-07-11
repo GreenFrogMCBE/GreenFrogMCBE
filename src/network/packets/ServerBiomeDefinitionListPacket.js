@@ -18,6 +18,7 @@ const PacketConstructor = require("./PacketConstructor");
 /** @deprecated */
 class ServerBiomeDefinitionListPacket extends PacketConstructor {
 	name = "biome_definition_list";
+	/** @type {JSON} */
 	data;
 
 	writePacket(client) {

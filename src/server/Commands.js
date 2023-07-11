@@ -25,6 +25,8 @@ module.exports = {
 	 * Loads all commands
 	 */
 	async loadAllCommands() {
+		const Frog = require("../Frog");
+		
 		const commandsPath = path.join(__dirname, "..", "..", "src", "commands");
 
 		for (const command of await readdir(commandsPath)) {
@@ -32,6 +34,6 @@ module.exports = {
 			this.commandList.push(cmd);
 		}
 
-		require("../Frog").eventEmitter.emit("serverCommandsInitialised", { server: require("../Frog").getServer() });
+		Frog.eventEmitter.emit("serverCommandsInitialised");
 	},
 };

@@ -23,7 +23,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 	/** @type {string} */
 	tick;
 	/** @type {JSON} */
-	value = {};
+	value;
 	/** @type {string} */
 	runtime_entity_id;
 

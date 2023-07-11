@@ -21,9 +21,9 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 	must_accept = false;
 	/** @type {boolean} */
 	has_scripts = false;
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	behavior_packs = [];
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	texture_packs = [];
 
 	writePacket(client) {

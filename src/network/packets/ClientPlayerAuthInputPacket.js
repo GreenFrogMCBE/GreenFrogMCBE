@@ -22,7 +22,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ClientPlayerAuthInputPacket extends PacketConstructor {
 	name = "player_auth_input";
 
-	async readPacket(player, packet, server) {
+	async readPacket(player, packet) {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw } = packet.data.params;
 
@@ -32,7 +32,6 @@ class ClientPlayerAuthInputPacket extends PacketConstructor {
 
 		Frog.eventEmitter.emit("playerMove", {
 			player,
-			server,
 			x,
 			y,
 			z,

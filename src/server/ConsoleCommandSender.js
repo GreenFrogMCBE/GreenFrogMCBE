@@ -15,10 +15,7 @@
  */
 const readline = require("readline");
 
-const CommandHandlingException = require("../utils/exceptions/CommandHandlingException");
-
 const Logger = require("./Logger");
-const Frog = require("../Frog");
 const Commands = require("./Commands");
 
 const Language = require("../utils/Language");
@@ -69,22 +66,16 @@ module.exports = {
 	 * Executes a command that the user typed in the console.
 	 *
 	 * @param {string} executedCommand - The command to execute.
-	 * @throws {CommandHandlingException} Throws an error if the command is empty
 	 */
 	executeConsoleCommand(executedCommand) {
 		executedCommand = executedCommand.replace("/", "");
-
-		if (!executedCommand.trim()) {
-			// For API calls
-			throw new CommandHandlingException("The command is empty!");
-		}
 
 		let shouldExecCommand = true;
 
 		const args = executedCommand.split(" ").slice(1);
 
-		require("../Frog").eventEmitter.emit("serverExecutedCommand", {
-			server: require("../Frog").getServer(),
+		const Frog = require("../Frog")
+		Frog.eventEmitter.emit("serverExecutedCommand", {
 			args,
 			command: executedCommand,
 			cancel: () => {
@@ -115,7 +106,7 @@ module.exports = {
 							sendMessage: (message) => {
 								Logger.info(message);
 							},
-							setGamemode: () => {},
+							setGamemode: () => { },
 							op: true,
 							username: "Server",
 							ip: "127.0.0.1",
@@ -141,7 +132,6 @@ module.exports = {
 			}
 		} catch (error) {
 			require("../Frog").eventEmitter.emit("serverCommandProcessError", {
-				server: require("../Frog").getServer(),
 				command: executedCommand,
 				error,
 			});
@@ -163,8 +153,9 @@ module.exports = {
 	 * Starts the console.
 	 */
 	async start() {
-		await setupConsoleReader();
+		const Frog = require("../Frog")
 
+		await setupConsoleReader();
 		await Commands.loadAllCommands();
 
 		readLineInterface.on("line", async (command) => {
@@ -172,8 +163,7 @@ module.exports = {
 
 			let shouldProcessCommand = true;
 
-			require("../Frog").eventEmitter.emit("serverCommandProcess", {
-				server: require("../Frog").getServer(),
+			Frog.eventEmitter.emit("serverCommandProcess", {
 				command,
 				cancel: () => {
 					shouldProcessCommand = false;

@@ -15,7 +15,7 @@
  */
 const Frog = require("../../Frog");
 
-const World = require("../../world/World");
+const PlayerInfo = require("../../api/player/PlayerInfo");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -31,7 +31,7 @@ class ClientSetDifficultyPacket extends PacketConstructor {
 			difficulty,
 		});
 
-		for (const player of new World().getPlayersInWorld()) {
+		for (const player of PlayerInfo.players) {
 			player.setDifficulty(difficulty);
 		}
 	}

@@ -17,7 +17,7 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetPlayerGameTypePacket extends PacketConstructor {
 	name = "set_player_game_type";
-	/** @type {Gamemode} */
+	/** @type {import("../../api/player/Gamemode")} */
 	gamemode;
 
 	writePacket(client) {

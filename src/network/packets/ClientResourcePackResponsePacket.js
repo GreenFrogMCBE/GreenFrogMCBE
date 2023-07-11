@@ -19,7 +19,7 @@ const Frog = require("../../Frog");
 const Biome = require("../../world/types/Biome");
 const PlayStatusType = require("./types/PlayStatus");
 const Gamemode = require("../../api/player/Gamemode");
-const PlayerListType = require("./types/PlayerListType");
+const PlayerList = require("./types/PlayerList");
 const Dimension = require("../../world/types/Dimension");
 const Difficulty = require("../../api/types/Difficulty");
 const MovementAuthority = require("./types/MovementAuthority");
@@ -290,7 +290,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							const uuid = player.profile.uuid;
 
 							const playerList = new ServerPlayerListPacket();
-							playerList.type = PlayerListType.ADD;
+							playerList.type = PlayerList.ADD;
 							playerList.username = player.username;
 							playerList.xbox_id = xuid;
 							playerList.id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);

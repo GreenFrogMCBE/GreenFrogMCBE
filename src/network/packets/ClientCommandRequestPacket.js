@@ -31,7 +31,7 @@ const CommandVerifier = require("../../utils/CommandVerifier");
 class ClientCommandRequestPacket extends PacketConstructor {
 	name = "command_request";
 
-	async readPacket(player, packet, server) {
+	async readPacket(player, packet) {
 		let executedCommand = packet.data.params.command.replace("/", "");
 
 		const args = executedCommand.split(" ").slice(1);
@@ -40,7 +40,6 @@ class ClientCommandRequestPacket extends PacketConstructor {
 
 		Frog.eventEmitter.emit("playerExecutedCommand", {
 			player,
-			server,
 			args,
 			command: executedCommand,
 			cancel: () => {
@@ -55,7 +54,6 @@ class ClientCommandRequestPacket extends PacketConstructor {
 
 			if (executedCommand > 256) {
 				Frog.eventEmitter.emit("playerMalformatedChatCommand", {
-					server,
 					player,
 					command: executedCommand,
 				});

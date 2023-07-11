@@ -21,7 +21,7 @@ class ServerRespawnPacket extends PacketConstructor {
 	position;
 	/** @type {number} */
 	state;
-	/** @type {numb} */
+	/** @type {number} */
 	runtime_entity_id;
 
 	writePacket(client) {

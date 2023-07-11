@@ -39,7 +39,7 @@ class World {
 		 *
 		 * @type {{ x: number, y: number, z: number }}
 		 */
-		this.spawnCoordinates = {};
+		this.spawnCoordinates;
 
 		/**
 		 * @type {number}

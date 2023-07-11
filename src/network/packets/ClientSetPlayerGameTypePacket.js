@@ -28,15 +28,14 @@ class ClientSetPlayerGameTypePacket extends PacketConstructor {
 		if (!player.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"));
 	}
 
-	async readPacket(player, packet, server) {
-		await this.validatePacket(player, packet);
+	async readPacket(player, packet) {
+		await this.validatePacket(player);
 
 		const gamemode = packet.data.params.gamemode;
 
 		let shouldChange = true;
 
 		Frog.eventEmitter.emit("playerChangeGamemodeRequest", {
-			server,
 			player,
 			gamemode,
 			cancel: () => {

@@ -17,11 +17,11 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerInventorySlotPacket extends PacketConstructor {
 	name = "inventory_slot";
-	/** @param {number} */
+	/** @type {number} */
 	window_id;
-	/** @param {number} */
+	/** @type {number} */
 	slot;
-	/** @param {JSON} */
+	/** @type {JSON} */
 	item;
 
 	writePacket(client) {

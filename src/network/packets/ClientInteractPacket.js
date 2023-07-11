@@ -47,7 +47,7 @@ class ClientInteractPacket extends PacketConstructor {
 		if (!shouldInteract) return;
 
 		switch (actionID) {
-			case InteractType.INVENTORYOPEN:
+			case InteractType.INVENTORY_OPEN:
 				let shouldOpen = true;
 
 				const containerCoordinates = {

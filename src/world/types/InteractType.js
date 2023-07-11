@@ -14,6 +14,6 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-	INVENTORYOPEN: "open_inventory",
-	MOUSEOVERENTITY: "mouse_over_entity",
+	INVENTORY_OPEN: "open_inventory",
+	MOUSE_OVER_ENTITY: "mouse_over_entity",
 });

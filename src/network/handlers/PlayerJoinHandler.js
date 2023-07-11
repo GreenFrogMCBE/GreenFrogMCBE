@@ -23,7 +23,6 @@ const ResponsePackInfo = require("../../network/packets/ServerResponsePackInfoPa
 const PlayStatus = require("../../network/packets/types/PlayStatus");
 const VersionToProtocol = require("../../utils/VersionToProtocol");
 
-const { Client } = require("frog-protocol");
 const UsernameValidator = require("../../player/UsernameValidator");
 
 let server = null;
@@ -33,7 +32,7 @@ class PlayerJoinHandler {
 	/**
 	 * Executes when a player joins the server.
 	 *
-	 * @param {Client} client - The client joining the server.
+	 * @param {import('frog-protocol').Client} client - The client joining the server.
 	 */
 	async onPlayerJoin(client) {
 		await this.setupClientProperties(client);
@@ -51,7 +50,7 @@ class PlayerJoinHandler {
 	/**
 	 * Validates the username of the client
 	 *
-	 * @param {Client} client
+	 * @param {import('frog-protocol').Client} client
 	 */
 	validateUsername(client) {
 		if (!UsernameValidator.isUsernameValid(client.username) && config.dev.validateUsernames) {
@@ -63,7 +62,7 @@ class PlayerJoinHandler {
 	/**
 	 * Setups events for the client
 	 *
-	 * @param {Client} client
+	 * @param {import('frog-protocol').Client} client
 	 */
 	async setupEvents(client) {
 		Frog.eventEmitter.emit("playerPreConnectEvent", {
@@ -97,7 +96,7 @@ class PlayerJoinHandler {
 	/**
 	 * Initialises the player.
 	 *
-	 * @param {Client} client - The client to initialize.
+	 * @param {import('frog-protocol').Client} client - The client to initialize.
 	 * @returns {Promise<void>}
 	 */
 	async initPlayer(client) {
@@ -107,7 +106,7 @@ class PlayerJoinHandler {
 	/**
 	 * Sets up the client properties.
 	 *
-	 * @param {Client} client - The client to set up properties for.
+	 * @param {import('frog-protocol').Client} client - The client to set up properties for.
 	 */
 	setupClientProperties(client) {
 		Object.assign(client, {
@@ -162,7 +161,7 @@ class PlayerJoinHandler {
 	/**
 	 * Sets up client intervals.
 	 *
-	 * @param {Client} client - The client to set up intervals for.
+	 * @param {import('frog-protocol').Client} client - The client to set up intervals for.
 	 */
 	setupClientIntervals(client) {
 		setInterval(() => {
@@ -173,7 +172,7 @@ class PlayerJoinHandler {
 	/**
 	 * Adds the player to the player list.
 	 *
-	 * @param {Client} client - The client to add to the player list.
+	 * @param {import('frog-protocol').Client} client - The client to add to the player list.
 	 */
 	addPlayer(client) {
 		PlayerInfo.addPlayer(client);
@@ -182,7 +181,7 @@ class PlayerJoinHandler {
 	/**
 	 * Handles the case when the maximum number of players is reached.
 	 *
-	 * @param {Client} client - The client to check against the maximum player count.
+	 * @param {import('frog-protocol').Client} client - The client to check against the maximum player count.
 	 */
 	handleMaxPlayers(client) {
 		if (PlayerInfo.players.length > config.maxPlayers) {
@@ -195,7 +194,7 @@ class PlayerJoinHandler {
 	/**
 	 * Handles the version mismatch between the client and server.
 	 *
-	 * @param {Client} client - The client to check the version for.
+	 * @param {import('frog-protocol').Client} client - The client to check the version for.
 	 */
 	handleVersionMismatch(client) {
 		const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
@@ -222,7 +221,7 @@ class PlayerJoinHandler {
 	/**
 	 * Sends the response pack info to the client.
 	 *
-	 * @param {Client} client - The client to send the response pack info to.
+	 * @param {import('frog-protocol').Client} client - The client to send the response pack info to.
 	 */
 	sendResponsePackInfo(client) {
 		const responsePackInfo = new ResponsePackInfo();
@@ -236,7 +235,7 @@ class PlayerJoinHandler {
 	/**
 	 * Emits the player join event.
 	 *
-	 * @param {Client} client - The client that joined the server.
+	 * @param {import('frog-protocol').Client} client - The client that joined the server.
 	 */
 	emitPlayerJoinEvent(client) {
 		Frog.eventEmitter.emit("playerJoin", {

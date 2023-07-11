@@ -15,8 +15,6 @@
  */
 const Frog = require("../Frog");
 
-const TypeId = require("./types/TypeId");
-
 module.exports = {
 	handle(player, packet) {
 		let shouldHandleTheItemRequest = true;
@@ -24,7 +22,6 @@ module.exports = {
 		Frog.eventEmitter.emit("inventoryContainerItemRequest", {
 			player,
 			packet,
-			server: Frog.server,
 			cancel: () => {
 				shouldHandleTheItemRequest = false;
 			},

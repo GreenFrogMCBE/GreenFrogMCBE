@@ -15,16 +15,16 @@
  */
 /* eslint-disable no-unused-vars */
 const FormRequest = require("../network/packets/ServerFormRequestPacket");
-const FormTypess = require("./FormTypess");
+const FormType = require("./FormType");
 
 class Form {
 	constructor() {
 		/**
-		 * @type {FormTypess}
+		 * @type {FormType}
 		 *
-		 * @type {import("./FormTypess")}
+		 * @type {import("./FormType")}
 		 */
-		this.type = FormTypess.FORM;
+		this.type = FormType.FORM;
 
 		/**
 		 * The title of the form.

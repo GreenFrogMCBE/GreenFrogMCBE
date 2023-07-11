@@ -17,11 +17,11 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerContainerOpenPacket extends PacketConstructor {
 	name = "container_open";
-	/** @type {WindowId} */
+	/** @type {import("./types/WindowId")} */
 	window_id;
 	/** @type {JSON} */
 	coordinates;
-	/** @type {WindowType} */
+	/** @type {import("./types/WindowType")} */
 	window_type;
 	/** @type {number} */
 	runtime_entity_id;

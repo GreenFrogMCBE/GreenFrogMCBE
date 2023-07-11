@@ -24,10 +24,11 @@ const { getKey } = require("../../utils/Language");
  * @property {Array} enum_values - The enum values.
  * @property {Array} suffixes - The suffixes.
  * @property {Array} enums - The enums.
- * @property {Array<CommandData>} command_data - The command data.
+ * @property {Array<any>} command_data - The command data.
  * @property {Array} dynamic_enums - The dynamic enums.
  * @property {Array} enum_constraints - The enum constraints.
  */
+/** @type {CommandManager} */
 let commands = [];
 
 class CommandManager {

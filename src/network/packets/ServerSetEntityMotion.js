@@ -18,7 +18,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ServerSetEntityMotion extends PacketConstructor {
 	name = "set_entity_motion";
 	/** @type {number} */
-	runtime_entity_id = 0;
+	runtime_entity_id;
 	/** @type {JSON} */
 	velocity;
 

@@ -13,7 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetHealthPacket extends PacketConstructor {

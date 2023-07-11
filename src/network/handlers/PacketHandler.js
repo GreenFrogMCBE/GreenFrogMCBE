@@ -22,14 +22,13 @@ const Logger = require("../../server/Logger");
 
 const { getKey } = require("../../utils/Language");
 
-const PacketConstructor = require("../packets/PacketConstructor");
 const PacketHandlingException = require("../../utils/exceptions/PacketHandlingException");
 
 class PacketHandler {
 	/**
 	 * Handles packets.
 	 *
-	 * @param {Client} client - The client object.
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @param {JSON} packetData - The packet parameters.
 	 * @throws {PacketHandlingException} - If the client is rate-limited.
 	 */
@@ -58,7 +57,7 @@ class PacketHandler {
 	/**
 	 * Checks for matching packets in the directory.
 	 *
-	 * @param {Client} client - The client object.
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @param {JSON} packetData - The packet parameters.
 	 * @param {string} packetsDir - The directory path for packets.
 	 * @returns {boolean} - Indicates if a matching packet was found.
@@ -121,7 +120,7 @@ class PacketHandler {
 	/**
 	 * Checks if the packet count exceeds the limit.
 	 *
-	 * @param {Client} client - The client object.
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @returns {boolean} - Indicates if the packet count exceeds the limit.
 	 */
 	exceedsPacketCountLimit(client) {
@@ -131,7 +130,7 @@ class PacketHandler {
 	/**
 	 * Handles the packet ratelimit event.
 	 *
-	 * @param {Client} client - The client object.
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 */
 	handlePacketRatelimit(client) {
 		Frog.eventEmitter.emit("packetRatelimit", {
@@ -143,7 +142,7 @@ class PacketHandler {
 	/**
 	 * Creates a packet handling exception for rate limiting.
 	 *
-	 * @param {Client} client - The client object.
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @returns {PacketHandlingException} - The rate limit exception.
 	 */
 	createRateLimitException(client) {
@@ -177,7 +176,7 @@ class PacketHandler {
 	/**
 	 * Processes a matching packet.
 	 *
-	 * @param {Client} client - The client object.
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @param {PacketConstructor} packetInstance - The matching packet object.
 	 * @param {JSON} packetData - The packet parameters.
 	 */
@@ -193,7 +192,7 @@ class PacketHandler {
 	/**
 	 * Emits the packet read event.
 	 *
-	 * @param {Client} client - The client object.
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @param {*} packet - The packet object.
 	 */
 	emitPacketReadEvent(client, packetInstance, packetData) {
@@ -209,7 +208,7 @@ class PacketHandler {
 	 * Reads the packet.
 	 *
 	 * @param {*} packet - The packet object.
-	 * @param {Client} client - The client object.
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @param {JSON} packetData - The packet parameters.
 	 */
 	readPacket(packet, client, packetData) {
@@ -241,7 +240,7 @@ class PacketHandler {
 	/**
 	 * Handles an error that occurred during packet handling.
 	 *
-	 * @param {Client} client - The client object.
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @param {Error} error - The error object.
 	 */
 	handlePacketError(client, error) {

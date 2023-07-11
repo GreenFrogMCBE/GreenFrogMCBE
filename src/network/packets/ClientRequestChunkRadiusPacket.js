@@ -20,13 +20,12 @@ const Frog = require("../../Frog");
 class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	name = "request_chunk_radius";
 
-	async readPacket(player, packet, server) {
+	async readPacket(player, packet) {
 		let shouldChange = true;
 
 		Frog.eventEmitter.emit("playerRequestChunkRadius", {
 			radius: packet.data.params.radius,
 			player,
-			server,
 			cancel: () => {
 				shouldChange = false;
 			},
@@ -34,7 +33,7 @@ class ClientRequestChunkRadiusPacket extends PacketConstructor {
 
 		if (!shouldChange) return;
 
-		player.setChunkRadius(32);
+		player.setChunkRadius(packet.data.params.radius);
 	}
 }
 

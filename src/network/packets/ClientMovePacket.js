@@ -22,7 +22,7 @@ const PacketConstructor = require("./PacketConstructor");
 class ClientMovePacket extends PacketConstructor {
 	name = "move_player";
 
-	async readPacket(player, packet, server) {
+	async readPacket(player, packet) {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw, on_ground } = packet.data.params;
 
@@ -30,7 +30,6 @@ class ClientMovePacket extends PacketConstructor {
 
 		Frog.eventEmitter.emit("playerMove", {
 			player,
-			server,
 			x,
 			y,
 			z,
