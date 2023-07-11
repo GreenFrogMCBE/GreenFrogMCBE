@@ -9,7 +9,7 @@
 
 2. @hvlxh
 
-> For creating BasePlugin.js (https://github.com/andriycraft/GreenFrogMCBE/pull/20) <br>
+> For adding BasePlugin.js (https://github.com/andriycraft/GreenFrogMCBE/pull/20 and https://github.com/andriycraft/GreenFrogMCBE/pull/243) <br>
 > For updating langs (https://github.com/andriycraft/GreenFrogMCBE/pull/19) <br>
 > For disabling workflows for .MD files, also https://github.com/andriycraft/GreenFrogMCBE/pull/81 <br>
 > For rewriting some parts of command system <br>
