@@ -17,14 +17,6 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 const { getKey } = require("../utils/Language");
 
-/**
- * A command that sends a private message to other players
- * 
- * @type {import('../type/Command').Command}
- */
-
-// To Do: Translate to Ukrainian
-
 const canBeKilled = (player) => {
     if (player.gamemode === "creative" || player.gamemode === "spectator") {
         return false
@@ -33,7 +25,11 @@ const canBeKilled = (player) => {
     return true
 }
 
-
+/**
+ * A command that sends a private message to other players
+ * 
+ * @type {import('../type/Command').Command}
+ */
 module.exports = {
     data: {
         name: getKey("commands.kill.name"),
