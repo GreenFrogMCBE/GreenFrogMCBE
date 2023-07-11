@@ -82,7 +82,7 @@
 
 16. EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy)
 
-> Used as an example for `custom_form` support (i had permission from repo owner)
+> Used as an example for `custom_form` support
 
 17. @Nya-Enzo, @CreeperG16, @faaxz
 
