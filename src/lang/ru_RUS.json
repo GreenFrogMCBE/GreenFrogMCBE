@@ -1,15 +1,15 @@
 {
-  "server.loading": Загрузка сервера...",
-  "server.license": "GreenFrog использует  лицензию Creative Commons Attribution 4.0 International license. Узнать подробнее: https://creativecommons.org",
+  "server.loading": "Загрузка сервера...",
+  "server.license": "GreenFrog использует лицензию Creative Commons Attribution 4.0 International license. Узнать подробнее: https://creativecommons.org",
 
   "server.shuttingDown": "Выключение сервера...",
 
   "garbageCollector.started": "[Мусорщик] Начал сборку мусора...",
-  "garbageCollector.deleted": "[Мусорщик] Удалено %s%",
+  "garbageCollector.deleted": "[Мусорщик] Удалено игрока %s%",
   "garbageCollector.finished": "[Мусорщик] Сборка завершена!",
 
   "commands.unknown": "§cНеизвестная команда: %s%.  Убедитесь, что команда существует и у вас есть право ее использовать.",
-  "commands.errors.internalError": Не удалось выполнить команду! Ошибка: %s%",
+  "commands.errors.internalError": "Не удалось выполнить команду! Ошибка: %s%",
   "commands.errors.internalError.player": "Не удалось выполнить  команду от%s%. Ошибка: %d%",
   "commands.errors.internalError.badSender": "§cДанный тип отправителя не поддерживает эту команду",
   "commands.errors.syntaxError.minArg": "§cSyntaxError: Минимальное число аргументов команды: %s%, вы предоставили: %d%",
