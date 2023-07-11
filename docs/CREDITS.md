@@ -83,6 +83,10 @@
 > For reporting a bug that you get insta-killed if you changed your gamemode to survival
 > For adding /tp
 > For adding /w, /tell, /msg and /whisper
-> For adding spanish & catalan language
+> For adding Spanish & Catalan languages
 > For adding /kill
 > For cleaning up the code of `VersionToProtocol.js`
+
+16. @mikhaillav
+
+> For adding the Russian language
