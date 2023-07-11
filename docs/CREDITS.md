@@ -3,17 +3,17 @@
 1. @AnyBananaGAME
 
 > For creating multilang (https://github.com/andriycraft/GreenFrogMCBE/pull/9) <br>
-> For improving tests and /list <br>
+> For improving tests and `/list` <br>
 > For making better tests, and making `tests-manual.js` (https://github.com/andriycraft/GreenFrogMCBE/pull/70) <br>
 > For making `PlayerInfo.get()` not case sensitive (https://github.com/andriycraft/GreenFrogMCBE/pull/192)
 
 2. @hvlxh
 
-> For adding BasePlugin.js (https://github.com/andriycraft/GreenFrogMCBE/pull/20 and https://github.com/andriycraft/GreenFrogMCBE/pull/243) <br>
+> For adding `BasePlugin.js` (https://github.com/andriycraft/GreenFrogMCBE/pull/20 and https://github.com/andriycraft/GreenFrogMCBE/pull/243) <br>
 > For updating langs (https://github.com/andriycraft/GreenFrogMCBE/pull/19) <br>
 > For disabling workflows for .MD files, also https://github.com/andriycraft/GreenFrogMCBE/pull/81 <br>
 > For rewriting some parts of command system <br>
-> For making the README.md file look better <br>
+> For making the `README.md` file look better <br>
 > For showing example of a generator in our discord <br>
 > For adding query support (https://github.com/andriycraft/GreenFrogMCBE/pull/214)
 > For fixing bugs in query (https://github.com/andriycraft/GreenFrogMCBE/pull/236)
@@ -25,11 +25,11 @@
 > For many changes to tests <br>
 > For fixing paths (https://github.com/andriycraft/GreenFrogMCBE/pull/77) <br>
 > For reporting a bug that server cannot be stopped when plugins are null <br>
-> For making /pl, /list, /deop, /help, /time, /say, /me, /op code better (https://github.com/andriycraft/GreenFrogMCBE/pulls?q=author%3ANhanAZ+Code+improvement) <br>
+> For making `/pl`, `/list`, `/deop`, `/help`, `/time`, `/say`, `/me`, `/op` code better (https://github.com/andriycraft/GreenFrogMCBE/pulls?q=author%3ANhanAZ+Code+improvement) <br>
 > For reporting a bug that /help wasn't working <br>
 > For making `PluginManager.getPlugins()` better (https://github.com/andriycraft/GreenFrogMCBE/pull/82) <br>
-> For improving listen() in Server.js (https://github.com/andriycraft/GreenFrogMCBE/pull/105) <br>
-> For improving generateLicenseHeaders.js (https://github.com/andriycraft/GreenFrogMCBE/pull/106)
+> For improving `listen()` in Server.js (https://github.com/andriycraft/GreenFrogMCBE/pull/105) <br>
+> For improving `generateLicenseHeaders.js` (https://github.com/andriycraft/GreenFrogMCBE/pull/106)
 
 4. @ATXLtheAxolotl
 
@@ -42,7 +42,7 @@
 
 6. @Zwuiix-cmd
 
-> Suggested custom_form support (https://github.com/andriycraft/GreenFrogMCBE/issues/35) <br>
+> Suggested `custom_form` support (https://github.com/andriycraft/GreenFrogMCBE/issues/35) <br>
 
 7. @CreeperG16
 
@@ -94,17 +94,17 @@
 
 19. @tutinoko2048
 
-> For making .d.ts files use const type for constant values (https://github.com/andriycraft/GreenFrogMCBE/pull/154)
+> For making `.d.ts` files use const type for constant values (https://github.com/andriycraft/GreenFrogMCBE/pull/154)
 
 20. @erixweb
 
 > For reporting a bug that the `playerMove` event fires when a player is standing still <br>
 > For reporting a bug that the `cancel()` function in the `playerMove` event is not working <br>
 > For reporting a bug that you get insta-killed if you changed your gamemode to survival <br>
-> For adding /tp <br>
-> For adding /w, /tell, /msg and /whisper <br>
+> For adding `/tp` <br>
+> For adding `/w`, `/tell`, `/msg` and `/whisper` <br>
 > For adding Spanish & Catalan languages <br>
-> For adding /kill <br>
+> For adding `/kill` <br>
 > For cleaning up the code of `VersionToProtocol.js`
 
 21. @mikhaillav
