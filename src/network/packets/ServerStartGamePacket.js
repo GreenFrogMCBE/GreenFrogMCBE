@@ -13,13 +13,6 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Gamemode = require("../../api/player/Gamemode");
-const Difficulty = require("../../api/types/Difficulty");
-const Dimension = require("../../world/types/Dimension");
-const MovementAuthority = require("./types/MovementAuthority");
-const GeneratorType = require("../../world/types/GeneratorType");
-const PermissionLevel = require("../../api/permission/PermissionLevel");
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerStartGamePacket extends PacketConstructor {

@@ -13,6 +13,8 @@
  * @link Github - https://github.com/andriycraft/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const fs = require('fs')
+
 const Logger = require("../server/Logger");
 
 const Gamemode = require("../api/player/Gamemode");
