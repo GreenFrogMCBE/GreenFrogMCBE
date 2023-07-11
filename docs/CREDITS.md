@@ -52,31 +52,51 @@
 > For adding 1.19.62 support <br>
 > For adding 1.19.70 support
 
-8. Bedrock-protocol (https://github.com/PrismarineJS/bedrock-protocol)
+8. The `Bedrock-protocol` library (https://github.com/PrismarineJS/bedrock-protocol)
 
-> Our frog-protocol is based on this protocol library
+> Our `frog-protocol` is based on this protocol library
 
-10. js-yaml (https://github.com/nodeca/js-yaml)
+10. The `js-yaml` library (https://github.com/nodeca/js-yaml)
 
-> For parsing config and other files
+> It is used for parsing config and other files
 
-11. EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy)
+11. The `center-align` library (https://www.npmjs.com/package/center-align)
 
-> Used as an example for custom_form support (i had permission from repo owner)
+> It is used for centering the `GreenFrog` text on server startup
 
-12. @Nya-Enzo, @CreeperG16, @faaxz
+12. The `@harmonytf/smart-buffer` library (https://github.com/harmonytf/smart-buffer)
+
+> It is used for query support
+
+13. The `eslint` (https://github.com/eslint/eslint) & `prettier` (https://github.com/prettier/prettier) library
+
+> They are used for our code style
+
+14. The `minecraft-server-util` library (https://github.com/PassTheMayo/minecraft-server-util)
+
+> It is used for query tests
+
+15. The `nodemon` library (https://github.com/remy/nodemon)
+
+> It is used for faster development
+
+16. EasyProxy (https://github.com/Zwuiix-cmd/EasyProxy)
+
+> Used as an example for `custom_form` support (i had permission from repo owner)
+
+17. @Nya-Enzo, @CreeperG16, @faaxz
 
 > For helping me with chunk support
 
-13. @faaxz
+18. @faaxz
 
 > For reporting form bugs
 
-14. @tutinoko2048
+19. @tutinoko2048
 
 > For making .d.ts files use const type for constant values (https://github.com/andriycraft/GreenFrogMCBE/pull/154)
 
-15. @erixweb
+20. @erixweb
 
 > For reporting a bug that the `playerMove` event fires when a player is standing still <br>
 > For reporting a bug that the `cancel()` function in the `playerMove` event is not working <br>
@@ -87,6 +107,6 @@
 > For adding /kill <br>
 > For cleaning up the code of `VersionToProtocol.js`
 
-16. @mikhaillav
+21. @mikhaillav
 
 > For adding the Russian language
