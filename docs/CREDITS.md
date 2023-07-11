@@ -2,47 +2,47 @@
 
 1. @AnyBananaGAME
 
-> For creating multilang (https://github.com/aboxofrats/GreenFrogMCBE/pull/9) <br>
+> For creating multilang (https://github.com/kotinash/GreenFrogMCBE/pull/9) <br>
 > For improving tests and `/list` <br>
-> For making better tests, and making `tests-manual.js` (https://github.com/aboxofrats/GreenFrogMCBE/pull/70) <br>
-> For making `PlayerInfo.get()` not case sensitive (https://github.com/aboxofrats/GreenFrogMCBE/pull/192)
+> For making better tests, and making `tests-manual.js` (https://github.com/kotinash/GreenFrogMCBE/pull/70) <br>
+> For making `PlayerInfo.get()` not case sensitive (https://github.com/kotinash/GreenFrogMCBE/pull/192)
 
 2. @hvlxh
 
-> For adding `BasePlugin.js` (https://github.com/aboxofrats/GreenFrogMCBE/pull/20 and https://github.com/aboxofrats/GreenFrogMCBE/pull/243) <br>
-> For updating langs (https://github.com/aboxofrats/GreenFrogMCBE/pull/19) <br>
-> For disabling workflows for .MD files, also https://github.com/aboxofrats/GreenFrogMCBE/pull/81 <br>
+> For adding `BasePlugin.js` (https://github.com/kotinash/GreenFrogMCBE/pull/20 and https://github.com/kotinash/GreenFrogMCBE/pull/243) <br>
+> For updating langs (https://github.com/kotinash/GreenFrogMCBE/pull/19) <br>
+> For disabling workflows for .MD files, also https://github.com/kotinash/GreenFrogMCBE/pull/81 <br>
 > For rewriting some parts of command system <br>
 > For making the `README.md` file look better <br>
 > For showing example of a generator in our discord <br>
-> For adding query support (https://github.com/aboxofrats/GreenFrogMCBE/pull/214)
-> For fixing bugs in query (https://github.com/aboxofrats/GreenFrogMCBE/pull/236)
+> For adding query support (https://github.com/kotinash/GreenFrogMCBE/pull/214)
+> For fixing bugs in query (https://github.com/kotinash/GreenFrogMCBE/pull/236)
 
 3. @NhanAZ
 
-> For making the logger use default parameter (https://github.com/aboxofrats/GreenFrogMCBE/pull/4) <br>
-> For sorting lang strings (https://github.com/aboxofrats/GreenFrogMCBE/pull/22, https://github.com/aboxofrats/GreenFrogMCBE/pull/23, https://github.com/aboxofrats/GreenFrogMCBE/pull/24) <br>
+> For making the logger use default parameter (https://github.com/kotinash/GreenFrogMCBE/pull/4) <br>
+> For sorting lang strings (https://github.com/kotinash/GreenFrogMCBE/pull/22, https://github.com/kotinash/GreenFrogMCBE/pull/23, https://github.com/kotinash/GreenFrogMCBE/pull/24) <br>
 > For many changes to tests <br>
-> For fixing paths (https://github.com/aboxofrats/GreenFrogMCBE/pull/77) <br>
+> For fixing paths (https://github.com/kotinash/GreenFrogMCBE/pull/77) <br>
 > For reporting a bug that server cannot be stopped when plugins are null <br>
-> For making `/pl`, `/list`, `/deop`, `/help`, `/time`, `/say`, `/me`, `/op` code better (https://github.com/aboxofrats/GreenFrogMCBE/pulls?q=author%3ANhanAZ+Code+improvement) <br>
+> For making `/pl`, `/list`, `/deop`, `/help`, `/time`, `/say`, `/me`, `/op` code better (https://github.com/kotinash/GreenFrogMCBE/pulls?q=author%3ANhanAZ+Code+improvement) <br>
 > For reporting a bug that /help wasn't working <br>
-> For making `PluginManager.getPlugins()` better (https://github.com/aboxofrats/GreenFrogMCBE/pull/82) <br>
-> For improving `listen()` in Server.js (https://github.com/aboxofrats/GreenFrogMCBE/pull/105) <br>
-> For improving `generateLicenseHeaders.js` (https://github.com/aboxofrats/GreenFrogMCBE/pull/106)
+> For making `PluginManager.getPlugins()` better (https://github.com/kotinash/GreenFrogMCBE/pull/82) <br>
+> For improving `listen()` in Server.js (https://github.com/kotinash/GreenFrogMCBE/pull/105) <br>
+> For improving `generateLicenseHeaders.js` (https://github.com/kotinash/GreenFrogMCBE/pull/106)
 
 4. @ATXLtheAxolotl
 
-> For nodemon script for faster development, tiny cleaning, & fix weird usage of .prototype (https://github.com/aboxofrats/GreenFrogMCBE/pull/44)
+> For nodemon script for faster development, tiny cleaning, & fix weird usage of .prototype (https://github.com/kotinash/GreenFrogMCBE/pull/44)
 
 5. @bufferfishq
 
-> For adding support for custom_form and rewriting plugin system (https://github.com/aboxofrats/GreenFrogMCBE/pull/47) <br>
+> For adding support for custom_form and rewriting plugin system (https://github.com/kotinash/GreenFrogMCBE/pull/47) <br>
 > For fixing a lot of bugs and paths <br>
 
 6. @Zwuiix-cmd
 
-> Suggested `custom_form` support (https://github.com/aboxofrats/GreenFrogMCBE/issues/35) <br>
+> Suggested `custom_form` support (https://github.com/kotinash/GreenFrogMCBE/issues/35) <br>
 
 7. @CreeperG16
 
@@ -94,7 +94,7 @@
 
 19. @tutinoko2048
 
-> For making `.d.ts` files use const type for constant values (https://github.com/aboxofrats/GreenFrogMCBE/pull/154)
+> For making `.d.ts` files use const type for constant values (https://github.com/kotinash/GreenFrogMCBE/pull/154)
 
 20. @erixweb
 
