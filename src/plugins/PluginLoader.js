@@ -96,7 +96,7 @@ module.exports = {
 				}
 
 				try {
-					const plugin = new (require(directories.getFile(`${file}/${main}`)))();
+					const plugin = require(directories.getFile(`${file}/${main}`));
 
 					await plugin.onLoad();
 
@@ -157,7 +157,7 @@ module.exports = {
 					}
 
 					try {
-						const plugin = new (require(`${__dirname}/../../plugins/${file}/${main}`))();
+						const plugin = require(`${__dirname}/../../plugins/${file}/${main}`);
 
 						if (typeof plugin.onShutdown === "function") {
 							await plugin.onShutdown();
