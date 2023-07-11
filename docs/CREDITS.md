@@ -84,3 +84,4 @@
 > For adding /tp
 > For adding /w, /tell, /msg and /whisper
 > For adding spanish & catalan language
+> For adding /kill
