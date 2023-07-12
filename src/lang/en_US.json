@@ -15,6 +15,7 @@
   "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
   "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
   "commands.errors.targetError.targetsNotFound": "§cNo targets matched selector",
+  "commands.errors.targetError.notOnline": "§cNo targets matched %s%",
 
   "commands.ingame.executed": "%s% executed server command: /%d%",
 
@@ -43,8 +44,6 @@
 
   "commands.kill.name": "kill",
   "commands.kill.description": "Kills entities (players, mobs, etc.).",
-  "commands.kill.execution.failed.notOnline": "§cNo targets matched %s%",
-  "commands.kill.execution.failed.isCreative": "Players cannot be killed while they are in Creative mode",
 
   "commands.list.name": "list",
   "commands.list.description": "Lists players on the server.",

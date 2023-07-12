@@ -44,7 +44,6 @@
   "commands.kill.name": "kill",
   "commands.kill.description": "Mata entidades (jugadores, mobs, etc.).",
   "commands.kill.execution.failed.notOnline": "§cNingún objectivo apunta a %s%",
-  "commands.kill.execution.failed.isCreative": "No se pueden matar jugadores mientras están en modo Creativo.",
 
   "commands.list.name": "list",
   "commands.list.description": "Lista a todos los jugadores en el servidor.",

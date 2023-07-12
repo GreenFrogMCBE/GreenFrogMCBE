@@ -21,7 +21,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command to perform an action in the chat as the player.
  *
- * @type {import('../../types/interfaces/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {

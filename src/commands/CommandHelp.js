@@ -20,7 +20,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command that shows all commands this server has
  *
- * @type {import('../../types/interfaces/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {

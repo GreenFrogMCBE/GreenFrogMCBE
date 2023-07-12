@@ -20,7 +20,7 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 /**
  * A command that kicks the specified player
  *
- * @type {import('../../types/interfaces/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {

@@ -42,9 +42,8 @@
   "commands.kick.execution.failed.notOnline": "§c%s% оффлайн",
 
   "commands.kill.name": "kill",
-  "commands.kill.description": "Убить сущности(игроков, мобов, тд).",
+  "commands.kill.description": "Убить сущностей (игроков, мобов, тд).",
   "commands.kill.execution.failed.notOnline": "§cВалидных целей не найдено: %s%",
-  "commands.kill.execution.failed.isCreative": "Нельзя убить игрока пока он в креативе.",
 
   "commands.list.name": "list",
   "commands.list.description": "Список игроков на сервере",
@@ -136,7 +135,7 @@
 
   "debug.debugEnabled": "Режим отладки включён. Это может вызывать лаги при отправке больших пакетов",
   "debug.unstable": "Нестабильный режим включён. Это спасёт сервер от критических ошибок, но может повредить данные плагинов",
-  "debug.unstable.unsupported": "Так же, нестабильный режим не поддерживается GreenFogs, вы берете на себя ответственность за свои данные в случае их повреждения"
+  "debug.unstable.unsupported": "Так же, нестабильный режим не поддерживается GreenFogs, вы берете на себя ответственность за свои данные в случае их повреждения",
 
   "debug.player.unsupportedActionID": "Неподдерживаемый action ID от %s%: %d%",
   "debug.player.unsupportedActionID.block": "Неподдерживаемый  block action ID от %s%: %d%",

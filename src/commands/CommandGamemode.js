@@ -18,7 +18,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command to change the player's game mode.
  *
- * @type {import('../../types/interfaces/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {

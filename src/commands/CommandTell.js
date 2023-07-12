@@ -19,7 +19,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command that sends a private message to other players
  *
- * @type {import('../../types/interfaces/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {

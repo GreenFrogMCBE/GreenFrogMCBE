@@ -20,7 +20,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command that changes the time
  *
- * @type {import('../../types/interfaces/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {
