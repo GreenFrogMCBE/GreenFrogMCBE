@@ -13,12 +13,15 @@
  * @link Github - https://github.com/kotinash/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const Gamemode = require("../api/player/Gamemode");
+
 const PlayerInfo = require("../api/player/PlayerInfo");
+
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 const { getKey } = require("../utils/Language");
 
 const canBeKilled = (player) => {
-    if (player.gamemode === "creative" || player.gamemode === "spectator") {
+    if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
         return false
     }
 
@@ -28,7 +31,7 @@ const canBeKilled = (player) => {
 /**
  * A command that sends a private message to other players
  * 
- * @type {import('../type/Command').Command}
+ * @type {import('../declarations/Command').Command}
  */
 module.exports = {
     data: {
@@ -39,16 +42,17 @@ module.exports = {
     },
     execute(_server, player, args) {
         if (args.length === 0) {
-            if (!canBeKilled(player)) { 
-                player.sendMessage(getKey("commands.kill.execution.failed.isCreative")) 
+            if (!canBeKilled(player)) {
+                player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
                 return
             }
+
             player.setHealth(0, "VOID")
         } else {
             if (args[0] === "@a" || args[0] === "all") {
                 PlayerInfo.players.forEach(p => {
-                    if (!canBeKilled(p)) { 
-                        player.sendMessage(getKey("commands.kill.execution.failed.isCreative")) 
+                    if (!canBeKilled(p)) {
+                        player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
                         return
                     }
                     p.setHealth(0, "VOID")
@@ -57,8 +61,8 @@ module.exports = {
             } else if (args[0] === "@r") {
                 const randomPlayer = Math.floor(Math.random() * PlayerInfo.players.length)
                 const subject = PlayerInfo.players[randomPlayer]
-                if (!canBeKilled(subject)) { 
-                    player.sendMessage(getKey("commands.kill.execution.failed.isCreative")) 
+                if (!canBeKilled(subject)) {
+                    player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
                     return
                 }
                 subject.setHealth(0, "VOID")
@@ -67,10 +71,12 @@ module.exports = {
 
             try {
                 const subject = getPlayerInfo(args[0])
-                if (!canBeKilled(subject)) { 
-                    player.sendMessage(getKey("commands.kill.execution.failed.isCreative")) 
+
+                if (!canBeKilled(subject)) {
+                    player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
                     return
                 }
+
                 subject.setHealth(0, "VOID")
             } catch (err) {
                 player.sendMessage(
