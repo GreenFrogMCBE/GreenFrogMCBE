@@ -33,7 +33,7 @@ module.exports = {
 	},
 
 	execute(_server, player) {
-		const versionMsg = getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion);
+		const versionMsg = getKey("frog.version").replace("%s%", Frog.releaseData.minorServerVersion);
 		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
 	},
 };

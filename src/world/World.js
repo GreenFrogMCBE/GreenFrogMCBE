@@ -37,7 +37,7 @@ class World {
 		/**
 		 * The coordinates of the spawn point.
 		 *
-		 * @type {{ x: number, y: number, z: number }}
+		 * @type {import('../declarations/Typedefs').Coordinate}
 		 */
 		this.spawnCoordinates;
 
@@ -94,7 +94,7 @@ class World {
 	tick() {
 		if (!PlayerInfo.players.length) return;
 
-		const { config } = Frog.serverConfigurationFiles;
+		const config = Frog.config;
 
 		if (config.world.tickEvent) {
 			Frog.eventEmitter.emit("serverTick", {
@@ -175,7 +175,7 @@ class World {
 	/**
 	 * Returns world data.
 	 *
-	 * @returns {{ name: string, chunk_radius: number, spawn_coordinates: { x: number, y: number, z: number } }} An object containing the world's name, chunk radius, and spawn coordinates.
+	 * @returns {import("../declarations/Typedefs").WorldData}
 	 */
 	getWorldData() {
 		return {

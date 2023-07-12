@@ -219,10 +219,7 @@ class PacketHandler {
 	 * @returns {boolean} - Indicates if unhandled packets should be logged.
 	 */
 	shouldLogUnhandledPackets() {
-		const configFiles = Frog.serverConfigurationFiles;
-		const config = configFiles.config;
-
-		return config.dev.logUnhandledPackets;
+		return Frog.config.dev.logUnhandledPackets;
 	}
 
 	/**

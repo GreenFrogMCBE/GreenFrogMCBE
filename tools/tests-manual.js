@@ -24,10 +24,10 @@ const StartServer = require("../test/StartServer");
 const TestConfigs = require("../test/TestConfigs");
 const Query = require("../test/Query");
 
-if (!fs.existsSync("../config.yml")) {
-	const config = fs.readFileSync("../src/resources/defaultConfig.yml");
+if (!fs.existsSync("...yml")) {
+	const.= fs.readFileSync("../src/resources/defaultConfig.yml");
 
-	fs.writeFileSync("../config.yml", config, () => {});
+	fs.writeFileSync("...yml",. () => {});
 }
 
 console.info("Starting testing...");
@@ -37,7 +37,7 @@ const r = rl.createInterface({
 	output: process.stdout,
 });
 
-console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the configurations for JSON errors\n[5] = Test if the query server works");
+console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the.rations for JSON errors\n[5] = Test if the query server works");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);
@@ -53,7 +53,7 @@ r.question("> ", (response) => {
 			runTest(3, "Start server and try to execute a command", commandTest);
 			break;
 		case "4":
-			runTest(4, "Test the configurations for JSON errors", configTest);
+			runTest(4, "Test the.rations for JSON errors",.est);
 			break;
 		case "5":
 			runTest(5, "Test if the query server works", queryTest);
@@ -125,12 +125,12 @@ function commandTest() {
 	}, 3000);
 }
 
-function configTest() {
+function.est() {
 	setTimeout(() => {
 		try {
 			TestConfigs.test();
 		} catch (e) {
-			console.info("Tests failed! Failed to parse configs! " + e.stack);
+			console.info("Tests failed! Failed to parse.! " + e.stack);
 			process.exit(-1);
 		} finally {
 			setTimeout(handleTestSuccess, 10000);

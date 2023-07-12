@@ -16,11 +16,11 @@
 const readline = require("readline");
 
 const Logger = require("./Logger");
-const Commands = require("./Commands");
 
 const Language = require("../utils/Language");
 
 const CommandVerifier = require("../utils/CommandVerifier");
+const CommandManager = require("./CommandManager");
 
 /** @private */
 let isClosed = false;
@@ -70,25 +70,25 @@ module.exports = {
 	executeConsoleCommand(executedCommand) {
 		executedCommand = executedCommand.replace("/", "");
 
-		let shouldExecCommand = true;
+		let shouldExecuteCommand = true;
 
 		const args = executedCommand.split(" ").slice(1);
-
 		const Frog = require("../Frog")
+
 		Frog.eventEmitter.emit("serverExecutedCommand", {
 			args,
 			command: executedCommand,
 			cancel: () => {
-				shouldExecCommand = false;
+				shouldExecuteCommand = false;
 			},
 		});
 
-		if (isClosed || !shouldExecCommand || !executedCommand.replace(" ", "")) return;
+		if (isClosed || !shouldExecuteCommand || !executedCommand.replace(" ", "")) return;
 
 		try {
 			let commandFound = false;
 
-			for (const command of Commands.commandList) {
+			for (const command of CommandManager.commands) {
 				if (command.data.name === executedCommand.split(" ")[0] || (command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))) {
 					if (command.data.minArgs !== undefined && command.data.minArgs > args.length) {
 						Logger.info(Language.getKey("commands.errors.syntaxError.minArg").replace("%s%", command.data.minArgs).replace("%d%", args.length));
@@ -156,7 +156,7 @@ module.exports = {
 		const Frog = require("../Frog")
 
 		await setupConsoleReader();
-		await Commands.loadAllCommands();
+		await CommandManager.loadAllCommands();
 
 		readLineInterface.on("line", async (command) => {
 			if (this.isEmpty(command)) return;

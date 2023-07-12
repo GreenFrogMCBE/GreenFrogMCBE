@@ -14,18 +14,16 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const fs = require("fs");
+const path = require("path");
 
 const Logger = require("../server/Logger");
 const PluginManager = require("./PluginManager");
-
 const CCH = require("../server/ConsoleCommandSender");
+
 const { getKey } = require("../utils/Language");
-const path = require("path");
 
 /** @private @type {number} */
 let pluginCount = 0;
-/** @private @type {JSON} */
-let config;
 
 /** @private @type {JSON} */
 const directories = {
@@ -113,9 +111,7 @@ module.exports = {
 	 * Kills the server
 	 */
 	async killServer() {
-		config = require("../Frog").serverConfigurationFiles.config;
-
-		process.exit(config.dev.exitCode);
+		process.exit(require("../Frog").config.dev.exitCode)
 	},
 
 	/**

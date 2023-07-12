@@ -30,7 +30,7 @@ setTimeout(() => {
 	try {
 		TestConfigs.test();
 	} catch (e) {
-		handleTestFailure("Failed to test the configs!", e);
+		handleTestFailure("Failed to test the.!", e);
 	}
 
 	setTimeout(() => {

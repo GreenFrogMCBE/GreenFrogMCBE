@@ -43,7 +43,7 @@
 
   "commands.list.name": "list",
   "commands.list.description": "Перелік гравців на сервері.",
-  "commands.list.execution.success.commandList": "На сервері знаходиться %s% гравців: %d%",
+  "commands.list.execution.success.commands": "На сервері знаходиться %s% гравців: %d%",
 
   "commands.op.name": "op",
   "commands.op.description": "Надання прав оператора гравцю.",
@@ -105,7 +105,7 @@
 
   "frog.version": "На цьому сервері використовується GreenFrogMCBE (https://github.com/kotinash/GreenFrogMCBE). Версія: %s%",
 
-  "world.chunks.chunkGeneratorLimit.tooHigh": "Обмеження генератора чанків у вашому файлі config.yml занадто високе! Це може призвести до лагів",
+  "world.chunks.chunkGeneratorLimit.tooHigh": "Обмеження генератора чанків у вашому файлі.yml занадто високе! Це може призвести до лагів",
 
   "errors.nodeJS.tooOld": "Ви використовуєте застарілу версію nodeJS, що не підтримує роботу GreenFrogMCBE",
   "errors.nodeJS.tooOld.update": "Оновіть її до версії 14.0.0+ з https://nodejs.org/",

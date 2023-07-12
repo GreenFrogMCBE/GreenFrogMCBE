@@ -35,7 +35,7 @@ module.exports = {
 		];
 
 		for (const file of files) {
-			console.info(`[config files] Parsing: ${file}`);
+			console.info(`.files] Parsing: ${file}`);
 			await JSON.parse(await JSON.stringify(require(__dirname + file)));
 		}
 	},

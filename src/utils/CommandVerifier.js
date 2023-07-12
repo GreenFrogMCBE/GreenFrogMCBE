@@ -19,7 +19,7 @@ module.exports = {
 	/**
 	 * Sends a unknown command (or no permission) error to the command executor.
 	 *
-	 * @param {Client} commandExecutor
+	 * @param {import("frog-protocol").Client} commandExecutor
 	 * @param {string} command
 	 */
 	throwError(commandExecutor, command) {

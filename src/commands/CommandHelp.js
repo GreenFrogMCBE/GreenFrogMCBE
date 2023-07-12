@@ -13,7 +13,7 @@
  * @link Github - https://github.com/kotinash/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Commands = require("../server/Commands");
+const CommandManager = require("../server/CommandManager");
 
 const { getKey } = require("../utils/Language");
 
@@ -34,7 +34,7 @@ module.exports = {
 	execute(_server, player) {
 		player.sendMessage(getKey("commands.help.execution.success"));
 
-		for (const command of Commands.commandList) {
+		for (const command of CommandManager.commands) {
 			player.sendMessage(getKey("commands.help.execution.command").replace("%s%", command.data.name).replace("%d%", command.data.description));
 		}
 	},

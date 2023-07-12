@@ -33,8 +33,9 @@ const assert = require("assert");
 const fs = require("fs");
 
 let server = null;
-let config = Frog.serverConfigurationFiles.config;
-let isDebug = Frog.isDebug;
+
+const config = Frog.config;
+const isDebug = Frog.isDebug;
 
 /**
  * This function executes when something is off with the server
@@ -54,7 +55,7 @@ async function _handleCriticalError(error) {
 
 	Logger.error(`Server error: ${error.stack}`);
 
-	if (!config.unstable) {
+	if (config.unstable) {
 		process.exit(config.dev.crashCode);
 	}
 }
@@ -65,7 +66,7 @@ async function _handleCriticalError(error) {
  * @private
  */
 async function _initDebug() {
-	if (config.unstable) {
+	if (config.dev.unstable) {
 		Logger.warning(Language.getKey("debug.unstable"));
 		Logger.warning(Language.getKey("debug.unstable.unsupported"));
 	}
@@ -139,7 +140,7 @@ module.exports = {
 
 		console.clear();
 
-		Language.getLanguage(Frog.serverConfigurationFiles.config.chat.lang);
+		Language.getLanguage(Frog.config.chat.lang);
 
 		Logger.info(Language.getKey("server.loading"));
 		Logger.info(Language.getKey("server.license"));
@@ -155,7 +156,7 @@ module.exports = {
 			Logger.warning(Language.getKey("world.chunks.chunksToGenerate.tooHigh"));
 		}
 
-		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.getServerData().minorServerVersion} (${Frog.getServerData().versionDescription})`));
+		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`));
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
 		process.on("unhandledRejection", (err) => _handleCriticalError(err));
@@ -182,7 +183,7 @@ module.exports = {
 					version: String(config.serverInfo.version),
 				};
 
-				if (!config.query.showPlugins) querySettings.plugins = [""];
+				if (config.query.showPlugins) querySettings.plugins = [""];
 
 				query.start(querySettings);
 			} catch (e) {

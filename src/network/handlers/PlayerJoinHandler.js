@@ -26,7 +26,7 @@ const VersionToProtocol = require("../../utils/VersionToProtocol");
 const UsernameValidator = require("../../player/UsernameValidator");
 
 let server = null;
-let config = Frog.serverConfigurationFiles.config;
+let config = Frog.config;
 
 class PlayerJoinHandler {
 	/**
@@ -143,7 +143,7 @@ class PlayerJoinHandler {
 			hunger: 20,
 			packetCount: 0,
 			username: client.profile.name,
-			gamemode: Frog.serverConfigurationFiles.config.world.gamemode,
+			gamemode: Frog.config.world.gamemode,
 			world: null,
 			op: null,
 			dead: false,
@@ -184,7 +184,7 @@ class PlayerJoinHandler {
 	 * @param {import('frog-protocol').Client} client - The client to check against the maximum player count.
 	 */
 	handleMaxPlayers(client) {
-		if (PlayerInfo.players.length > config.maxPlayers) {
+		if (PlayerInfo.players.length > config.serverInfo.maxPlayers) {
 			const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.getKey("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL;
 			client.kick(kickMessage);
 			return;
@@ -199,7 +199,7 @@ class PlayerJoinHandler {
 	handleVersionMismatch(client) {
 		const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
 
-		if (!config.dev.multiProtocol) {
+		if (config.dev.multiProtocol) {
 			if (config.dev.useLegacyVersionMismatchKickMessage) {
 				if (client.version !== serverProtocol) {
 					const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version);

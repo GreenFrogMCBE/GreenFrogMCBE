@@ -46,8 +46,9 @@ const ServerStartGamePacket = require("./ServerStartGamePacket");
 const ServerTrimDataPacket = require("./ServerTrimDataPacket");
 
 const OfflinePermissionManager = require("../../api/permission/OfflinePermissionManager");
-const CommandManager = require("../../api/player/CommandManager");
-const Commands = require("../../server/Commands");
+
+const ClientCommandManager = require("../../player/CommandManager");
+const ServerCommandManager = require("../../server/CommandManager")
 
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
@@ -64,8 +65,7 @@ const customItems = require("../../../world/custom_items.json");
 
 const { getKey } = require("../../utils/Language");
 
-const { serverConfigurationFiles } = require("../../Frog");
-const { config } = serverConfigurationFiles;
+const config = Frog.config;
 
 const WorldGenerationFailedException = require("../../utils/exceptions/WorldGenerationFailedException");
 
@@ -199,10 +199,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				clientCacheStatus.enabled = true;
 				clientCacheStatus.writePacket(player);
 
-				const commandManager = new CommandManager();
+				const commandManager = new ClientCommandManager();
 				commandManager.init(player);
 
-				for (const command of Commands.commandList) {
+				for (const command of ServerCommandManager.commands) {
 					const { requiresOp, name, description, aliases } = command.data;
 
 					if (player.op || !requiresOp) {

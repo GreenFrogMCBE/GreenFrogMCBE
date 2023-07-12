@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-	BLOCKBREAK: "break_block",
-	CLICKBLOCK: "click_block",
-	CLICKAIR: "click_air",
+	BLOCK_BREAK: "break_block",
+	CLICK_BLOCK: "click_block",
+	CLICK_AIR: "click_air",
 });

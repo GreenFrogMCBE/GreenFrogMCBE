@@ -15,18 +15,14 @@
  */
 const { existsSync } = require("fs");
 const path = require("path");
-const LanguageException = require("./exceptions/LanguageException.js")
 
-/**
- * @typedef {Object.<string, string>} LanguageContent
- */
+const LanguageException = require("./exceptions/LanguageException.js")
 
 /**
  * Returns the content of a language file.
  *
- *
  * @param {string} lang - The language code.
- * @returns {LanguageContent | undefined }  The content of the language file.
+ * @returns {import("../declarations/Typedefs.js").LanguageContent}  The content of the language file.
  * @throws {LanguageException} If the language file is not found or is not valid JSON.
  */
 
@@ -54,8 +50,7 @@ function getLanguage(lang) {
  * @returns {string} The value associated with the key.
  */
 function getKey(key) {
-	const langConfig = require("../Frog").serverConfigurationFiles.config.chat.lang;
-
+	const langConfig = require("../Frog").config.chat.lang;
 
 	return getLanguage(langConfig) ? getLanguage(langConfig)[key] : getLanguage("en_US")[key]
 }

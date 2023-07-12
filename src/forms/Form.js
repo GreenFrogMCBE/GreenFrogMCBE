@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -13,8 +14,8 @@
  * @link Github - https://github.com/kotinash/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-unused-vars */
-const FormRequest = require("../network/packets/ServerFormRequestPacket");
+const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
+
 const FormType = require("./FormType");
 
 class Form {
@@ -34,7 +35,7 @@ class Form {
 
 		/**
 		 * The buttons in the form.
-		 * @type {Array}
+		 * @type {Array<JSON>}
 		 */
 		this.buttons = [];
 
@@ -42,7 +43,7 @@ class Form {
 		 * @type {function}
 		 *
 		 * @param {Form} form
-		 * @param {Client} client
+		 * @param {import('frog-protocol').Client} client
 		 */
 		this.onSend = (form, client) => {};
 
@@ -59,14 +60,17 @@ class Form {
 		this.text = [];
 	}
 
+	/**
+	 * @param {import('frog-protocol').Client}
+	 */
 	send(client) {
-		const FormReq = new FormRequest();
-		FormReq.setId(this.id);
-		FormReq.setTitle(this.title);
-		FormReq.setContent(this.text);
-		FormReq.setButtons(JSON.stringify(this.buttons));
-		FormReq.setType(this.type);
-		FormReq.send(client);
+		const FormReq = new ServerFormRequestPacket();
+		FormReq.id = this.id;
+		FormReq.title = this.title;
+		FormReq.text = this.text;
+		FormReq.buttons = JSON.stringify(this.buttons);
+		FormReq.type = this.type;
+		FormReq.writePacket(client);
 
 		this.onSend(this, client);
 	}

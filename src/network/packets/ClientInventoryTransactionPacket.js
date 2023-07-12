@@ -38,7 +38,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 		}
 
 		switch (actionID) {
-			case BlockActions.BLOCKBREAK:
+			case BlockActions.BLOCK_BREAK:
 				if (player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
 					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s%", player.username));
 				}

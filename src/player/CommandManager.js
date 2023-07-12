@@ -13,22 +13,11 @@
  * @link Github - https://github.com/kotinash/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const AvailableCommands = require("../../network/packets/ServerAvailableCommandsPacket");
+const ServerAvailableCommandsPacket = require("../network/packets/ServerAvailableCommandsPacket");
 
-const { getKey } = require("../../utils/Language");
+const { getKey } = require("../utils/Language");
 
-/**
- * @typedef {object} CommandsPacket - The commands packet.
- * @property {number} values_len - The length of the values.
- * @property {string} _enum_type - The type of the enum.
- * @property {Array} enum_values - The enum values.
- * @property {Array} suffixes - The suffixes.
- * @property {Array} enums - The enums.
- * @property {Array<any>} command_data - The command data.
- * @property {Array} dynamic_enums - The dynamic enums.
- * @property {Array} enum_constraints - The enum constraints.
- */
-/** @type {CommandManager} */
+/** @type {import("../declarations/Typedefs").CommandsPacket} */
 let commands = [];
 
 class CommandManager {
@@ -36,7 +25,7 @@ class CommandManager {
 	 * Retrieves the commands packet of a client.
 	 *
 	 * @param {Client} client - The client object.
-	 * @returns {CommandsPacket} The client's commands packet.
+	 * @returns {Array}
 	 */
 	getPacket(client) {
 		return client.commands;
@@ -45,7 +34,7 @@ class CommandManager {
 	/**
 	 * Initialises the commands.
 	 *
-	 * @param {Client} client - The client.
+	 * @param {import("frog-protocol").Client} client
 	 */
 	init(client) {
 		client.commands = {
@@ -110,10 +99,10 @@ class CommandManager {
 			description,
 		});
 
-		const availableCommandsPacket = new AvailableCommands();
+		const availableCommandsPacket = new ServerAvailableCommandsPacket();
 		availableCommandsPacket.data = client.commands;
 		availableCommandsPacket.writePacket(client);
 	}
 }
 
-module.exports = CommandManager;
+module.exports = CommandManager

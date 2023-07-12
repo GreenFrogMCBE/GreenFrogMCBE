@@ -13,14 +13,9 @@
  * @link Github - https://github.com/kotinash/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../Frog");
-
 const { players } = require("../api/player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
-
-const { serverConfigurationFiles } = Frog;
-const { config } = serverConfigurationFiles;
 
 /**
  * A command to list players currently on the server
@@ -40,6 +35,6 @@ module.exports = {
 		const playerSet = new Set(players.map((p) => p.username));
 		const playerList = [...playerSet].join(", ") || "";
 
-		player.sendMessage(getKey("commands.list.execution.success.commandList").replace("%s%", `${playerCount}/${config.serverInfo.maxPlayers}`).replace("%d%", playerList));
+		player.sendMessage(getKey("commands.list.execution.success.commands").replace("%s%", `${playerCount}/$.serverInfo.maxPlayers}`).replace("%d%", playerList));
 	},
 };

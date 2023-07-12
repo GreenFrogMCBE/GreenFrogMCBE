@@ -58,7 +58,7 @@ const Frog = require("../Frog");
 const { getKey } = require("../utils/Language");
 
 /** @private */
-let lang = Frog.serverConfigurationFiles.lang;
+let lang = Frog.lang;
 
 module.exports = {
 	/**

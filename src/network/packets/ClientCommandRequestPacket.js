@@ -16,17 +16,14 @@
 const Frog = require("../../Frog");
 
 const Logger = require("../../server/Logger");
-
-const Commands = require("../../server/Commands");
+const CommandManager = require("../../server/CommandManager");
+const CommandVerifier = require("../../utils/CommandVerifier");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const { serverConfigurationFiles } = Frog;
-const { config } = serverConfigurationFiles;
-
 const { getKey } = require("../../utils/Language");
 
-const CommandVerifier = require("../../utils/CommandVerifier");
+const config = Frog.config;
 
 class ClientCommandRequestPacket extends PacketConstructor {
 	name = "command_request";
@@ -64,7 +61,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 		try {
 			let commandFound = false;
 
-			for (const command of Commands.commandList) {
+			for (const command of CommandManager.commands) {
 				if (command.data.name === executedCommand.split(" ")[0] || (command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))) {
 					if (command.data.requiresOp && !player.op) {
 						CommandVerifier.throwError(player, executedCommand.split(" ")[0]);
