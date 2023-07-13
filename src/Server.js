@@ -153,7 +153,7 @@ module.exports = {
 		}
 
 		if (config.world.renderDistance > 16) {
-			Logger.warning(Language.getKey("world.chunks.chunksToGenerate.tooHigh"));
+			Logger.warning(Language.getKey("world.chunks.renderDistance.tooHigh"));
 		}
 
 		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`));

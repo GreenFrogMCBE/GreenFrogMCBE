@@ -105,7 +105,7 @@
 
   "frog.version": "Aquest servidor utilitza GreenFrogMCBE (https://github.com/kotinash/GreenFrogMCBE). Versió %s%.",
 
-  "world.chunks.chunkGeneratorLimit.tooHigh": "El limit del generador de chunks en la teva.yml es massa alt! Pot causar lag.",
+  "world.chunks.renderDistance.tooHigh": "El limit del generador de chunks en la config.yml es massa alt! Pot causar lag.",
 
   "errors.nodeJS.tooOld": "Estás utilitzant una versió de NodeJS que es massa antiga per executar GreenFrogMCBE.",
   "errors.nodeJS.tooOld.update": "Per favor actualitza-ho a la versió 14.0.0+, desde https://nodejs.org/",

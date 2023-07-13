@@ -105,7 +105,7 @@
 
   "frog.version": "This server is running GreenFrogMCBE (https://github.com/kotinash/GreenFrogMCBE). Version: %s%",
 
-  "world.chunks.chunkGeneratorLimit.tooHigh": "Chunk generator limit in your.yml is too high! It may cause lag",
+  "world.chunks.renderDistance.tooHigh": "Chunk generator limit in your.yml is too high! It may cause lag",
 
   "errors.nodeJS.tooOld": "You are running nodeJS version that is too old to run GreenFrogMCBE",
   "errors.nodeJS.tooOld.update": "Please update it to 14.0.0+, from https://nodejs.org/",
