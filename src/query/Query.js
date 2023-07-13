@@ -28,7 +28,7 @@ const dgram = require("dgram");
  * @param {string} string
  */
 function _logPacket(string) {
-	if (Frog.serverConfigurationFiles.query.logPackets || Frog.isTest || Frog.isDebug) Logger.info(string);
+	if (Frog.config.query.logPackets || Frog.isTest || Frog.isDebug) Logger.info(string);
 }
 
 /**
@@ -37,7 +37,7 @@ function _logPacket(string) {
  * @param {string} string
  */
 function _logConnection(string) {
-	if (Frog.serverConfigurationFiles.query.logConnections || Frog.isTest || Frog.isDebug) Logger.info(string);
+	if (Frog.config.query.logConnections || Frog.isTest || Frog.isDebug) Logger.info(string);
 }
 
 /**

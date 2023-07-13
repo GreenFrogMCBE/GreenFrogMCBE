@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "eslint": "8.44.0",
-    "minecraft-server-util": "5.4.4",
+    "minecraft-server-util": "github:greenfrogmc/minecraft-server-util-compiled",
     "nodemon": "3.0.1",
     "prettier": "3.0.0"
   }

@@ -181,14 +181,15 @@ module.exports = {
 					gamemode: config.world.gameMode,
 					wl: false, // wl stands for whitelist. TODO: Implement whitelist
 					version: String(config.serverInfo.version),
+					plugins: PlayerInfo.players,
 				};
 
 				if (config.query.showPlugins) querySettings.plugins = [""];
 
 				query.start(querySettings);
-			} catch (e) {
-				Frog.eventEmitter.emit("queryError", { error: e });
-				Logger.error(Language.getKey("query.server.listening.failed").replace("%s%", e.stack));
+			} catch (error) {
+				Frog.eventEmitter.emit("queryError", { error });
+				Logger.error(Language.getKey("query.server.listening.failed").replace("%s%", error.stack));
 			}
 		}
 
