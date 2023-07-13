@@ -152,7 +152,7 @@ module.exports = {
 			process.exit(-1);
 		}
 
-		if (config.world.chunkGeneratorLimit > 16) {
+		if (config.world.renderDistance > 16) {
 			Logger.warning(Language.getKey("world.chunks.chunksToGenerate.tooHigh"));
 		}
 
