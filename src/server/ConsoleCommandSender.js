@@ -22,9 +22,9 @@ const Language = require("../utils/Language");
 const CommandVerifier = require("../utils/CommandVerifier");
 const CommandManager = require("./CommandManager");
 
-/** @private */
+/** @private @type {boolean} */
 let isClosed = false;
-/** @private */
+/** @private @type {readline.Interface} */
 let readLineInterface;
 
 /**
