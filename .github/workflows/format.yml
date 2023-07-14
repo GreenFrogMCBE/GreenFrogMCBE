@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   format:
-    if: "!contains(github.actor, 'andriycraftbot')"
+    if: "!contains(github.actor, 'realfrogbot')"
     runs-on: ubuntu-latest
 
     steps:
@@ -25,8 +25,8 @@ jobs:
         run: |
           npm run format
           git pull
-          git config --global user.name "andriycraftbot"
-          git config --global user.email "124494132+andriycraftbot@users.noreply.github.com"
+          git config --global user.name "realfrogbot"
+          git config --global user.email "124494132+realfrogbot@users.noreply.github.com"
           git add .
           set +e
           git status | grep modified
