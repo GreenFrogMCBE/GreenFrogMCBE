@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/kotinash/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const fs = require("fs");
@@ -77,7 +77,7 @@ async function start() {
 ${error.stack}
 	
 Make sure that you have the required libraries. Run "npm i" to install them
-If you are sure that this is a bug please report it here: https://github.com/kotinash/GreenFrogMCBE
+If you are sure that this is a bug please report it here: https://github.com/GreenFrogMCBE/GreenFrogMCBE
 ${Colors.RESET}`,
 			),
 		);

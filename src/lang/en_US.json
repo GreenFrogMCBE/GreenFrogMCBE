@@ -103,7 +103,7 @@
   "plugin.unloading.success": "Unloaded %s%",
   "plugin.unloading.unloading": "Unloading %s%...",
 
-  "frog.version": "This server is running GreenFrogMCBE (https://github.com/kotinash/GreenFrogMCBE). Version: %s%",
+  "frog.version": "This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s%",
 
   "world.chunks.renderDistance.tooHigh": "Chunk generator limit in your config.yml is too high! It may cause lag",
 

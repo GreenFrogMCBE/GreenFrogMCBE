@@ -2,7 +2,7 @@
   "name": "greenfrog",
   "description": "A server software for MCBE",
   "main": "index.js",
-  "author": "kotinash",
+  "author": "GreenFrogMCBE",
   "license": "CC-BY-4.0",
   "scripts": {
     "format": "npx prettier --write .",
@@ -17,12 +17,12 @@
   "dependencies": {
     "@harmonytf/smart-buffer": "4.2.4",
     "center-align": "1.0.1",
-    "frog-protocol": "github:greenfrogmc/Protocol",
+    "frog-protocol": "github:greenfrogmcbe/Protocol",
     "js-yaml": "4.1.0"
   },
   "devDependencies": {
     "eslint": "8.44.0",
-    "minecraft-server-util": "github:greenfrogmc/minecraft-server-util-compiled",
+    "minecraft-server-util": "github:greenfrogmcbe/minecraft-server-util-compiled",
     "nodemon": "3.0.1",
     "prettier": "3.0.0"
   }
