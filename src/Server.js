@@ -198,8 +198,7 @@ module.exports = {
 		}, parseInt(config.performance.garbageCollectorDelay));
 
 		setInterval(() => {
-			const world = new World();
-			world.tick();
+			new World().tick();
 		}, parseInt(config.world.tickSpeed));
 	},
 };
