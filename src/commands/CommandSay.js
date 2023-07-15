@@ -13,7 +13,6 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-
 const Logger = require("../server/Logger");
 
 const PlayerInfo = require("../api/player/PlayerInfo");

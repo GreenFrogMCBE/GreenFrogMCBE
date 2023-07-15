@@ -13,8 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerInfo = require("../api/player/PlayerInfo");
-const Logger = require("../server/Logger");
+const Frog = require("../Frog");
 
 const { getKey } = require("../utils/Language");
 
@@ -27,17 +26,12 @@ module.exports = {
 	data: {
 		name: getKey("commands.me.name"),
 		description: getKey("commands.me.description"),
-		maxArgs: undefined,
 		minArgs: 1,
 	},
 
 	execute(_server, player, args) {
-		const msg = getKey("chat.format.me").replace("%s%", player.username).replace("%d%", args.join(" "));
+		const message = getKey("chat.format.me").replace("%s%", player.username).replace("%d%", args.join(" "));
 
-		for (const p of PlayerInfo.players) {
-			p.sendMessage(msg);
-		}
-
-		Logger.info(msg);
+		Frog.broadcastMessage(message)
 	},
 };

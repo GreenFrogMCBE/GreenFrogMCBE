@@ -13,9 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const fs = require("fs").promises;
-
-const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
+const OfflinePermissionManager = require("../api/permission/OfflinePermissionManager");
 
 const { getKey } = require("../utils/Language");
 
@@ -36,19 +34,7 @@ module.exports = {
 		const playerName = args[0];
 
 		try {
-			const ops = await fs.readFile("ops.yml", "utf-8");
-			const updatedOps = ops
-				.split("\n")
-				.filter((op) => op !== playerName)
-				.join("\n");
-
-			await fs.writeFile("ops.yml", updatedOps);
-
-			try {
-				getPlayerInfo(playerName).op = false;
-			} catch {
-				/** player is offline */
-			}
+			OfflinePermissionManager.changeOpStatus(playerName, false)
 
 			player.sendMessage(getKey("commands.deop.execution.success").replace("%s%", playerName));
 		} catch {
