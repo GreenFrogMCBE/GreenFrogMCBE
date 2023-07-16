@@ -37,7 +37,7 @@ module.exports = {
 	},
 
 	execute(_server, player) {
-		const versionMsg = getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%s%", version).replace("%s%", VersionToProtocol.getProtocol(version));
+		const versionMsg = getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%d%", version).replace("%f%", VersionToProtocol.getProtocol(version));
 		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
 	},
 };
