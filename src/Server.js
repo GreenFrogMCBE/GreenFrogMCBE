@@ -128,7 +128,7 @@ module.exports = {
 	async start() {
         const { version } = config.serverInfo;
 
-		Frog.eventEmitter.emit("serverStart", {});
+		Frog.eventEmitter.emit("serverStart");
 
 		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
 		await assert(parseInt(config.world.tickSpeed), NaN);
