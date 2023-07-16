@@ -253,7 +253,6 @@ module.exports = {
 				player,
 				play_status,
 				terminate_connection,
-				server: server,
 				cancel: () => {
 					sendPlayStatus = false;
 				},
@@ -290,7 +289,6 @@ module.exports = {
 				player,
 				port,
 				address,
-				server: server,
 				cancel: () => {
 					shouldTransfer = false;
 				},
@@ -512,7 +510,6 @@ module.exports = {
 					player,
 					health,
 					cause,
-					server: Frog.getServer(),
 				});
 			}
 
@@ -521,7 +518,6 @@ module.exports = {
 					player,
 					health,
 					cause,
-					server: Frog.getServer(),
 				});
 			}
 
@@ -537,10 +533,7 @@ module.exports = {
 			player.health = health;
 
 			if (player.health <= 0) {
-				Frog.eventEmitter.emit("playerDeathEvent", {
-					player,
-					server: Frog.getServer(),
-				});
+				Frog.eventEmitter.emit("playerDeathEvent", { player });
 
 				player.dead = true;
 			}
