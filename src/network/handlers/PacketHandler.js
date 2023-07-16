@@ -131,10 +131,7 @@ class PacketHandler {
 	 * @param {import('frog-protocol').Client} client - The client object.
 	 */
 	handlePacketRatelimit(client) {
-		Frog.eventEmitter.emit("packetRatelimit", {
-			client,
-			server: Frog.getServer(),
-		});
+		Frog.eventEmitter.emit("packetRatelimit", { player: client });
 	}
 
 	/**
@@ -195,10 +192,9 @@ class PacketHandler {
 	 */
 	emitPacketReadEvent(client, packetInstance, packetData) {
 		Frog.eventEmitter.emit("packetRead", {
-			client,
+			player: client,
 			packetInstance,
-			packetData,
-			server: Frog.getServer(),
+			packetData
 		});
 	}
 
@@ -252,9 +248,8 @@ class PacketHandler {
 		}
 
 		Frog.eventEmitter.emit("packetReadError", {
-			client,
+			player: client,
 			error,
-			server: Frog.getServer(),
 		});
 	}
 }
