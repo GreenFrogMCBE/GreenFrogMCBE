@@ -21,6 +21,7 @@ const PlayerInfo = require("./api/player/PlayerInfo");
 const GarbageCollector = require("./utils/GarbageCollector");
 const Language = require("./utils/Language");
 const Logger = require("./server/Logger");
+const VersionToProtocol = require("./utils/VersionToProtocol");
 
 const PlayerJoinHandler = require("./network/handlers/PlayerJoinHandler");
 const PacketHandler = require("./network/handlers/PacketHandler");
@@ -125,6 +126,8 @@ module.exports = {
 	 * Starts the server
 	 */
 	async start() {
+        const { version } = config.serverInfo;
+
 		Frog.eventEmitter.emit("serverStart", {});
 
 		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
@@ -156,7 +159,7 @@ module.exports = {
 			Logger.warning(Language.getKey("world.chunks.renderDistance.tooHigh"));
 		}
 
-		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`));
+		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%s%", version).replace("%s%", VersionToProtocol.getProtocol(version)));
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
 		process.on("unhandledRejection", (err) => _handleCriticalError(err));

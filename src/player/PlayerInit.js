@@ -68,6 +68,24 @@ module.exports = {
 	 * @param {import('frog-protocol').Server} server
 	 */
 	async initPlayer(player, server) {
+        /**
+         * Kill a player
+         */
+        player.kill = function(cause = HungerCause.UNKNOWN) {
+            let shouldKillPlayer = true;
+
+            Frog.eventEmitter.emit("playerKill", {
+                player,
+                cancel: () => {
+					shouldKillPlayer = false;
+				},
+            });
+            
+            if (!shouldKillPlayer) return;
+
+            player.setHealth(0, cause);
+        }
+
 		/**
 		 * Sends a message to the player
 		 * @param {string} message - The message to send
