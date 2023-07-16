@@ -103,7 +103,7 @@
   "plugin.unloading.success": "Выгружен %s%",
   "plugin.unloading.unloading": "Выгружается %s%...",
 
-  "frog.version": "Сервер запущен на базе GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версия: %s%. Версия майнкрафта: %s%. Версия протокола: %s%",
+  "frog.version": "Сервер запущен на базе GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версия: %s%. Версия Майнкрафта: %d%. Версия протокола: %f%",
 
   "world.chunks.renderDistance.tooHigh": "Лимит генератора чанков в config.yml слишком высок! Возможно появление багов.",
 
