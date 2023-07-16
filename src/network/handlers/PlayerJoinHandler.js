@@ -67,7 +67,6 @@ class PlayerJoinHandler {
 	async setupEvents(client) {
 		Frog.eventEmitter.emit("playerPreConnectEvent", {
 			player: client,
-			server: this,
 			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
 				client.kick(reason);
 			},
@@ -79,7 +78,6 @@ class PlayerJoinHandler {
 
 			Frog.eventEmitter.emit("packetQueue", {
 				player: client,
-				server: this,
 				packetName,
 				packetData: data,
 				cancel: () => {
@@ -240,7 +238,6 @@ class PlayerJoinHandler {
 	emitPlayerJoinEvent(client) {
 		Frog.eventEmitter.emit("playerJoin", {
 			player: client,
-			server: this,
 			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
 				client.kick(reason);
 			},
