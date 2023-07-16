@@ -159,7 +159,7 @@ module.exports = {
 			Logger.warning(Language.getKey("world.chunks.renderDistance.tooHigh"));
 		}
 
-		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%s%", version).replace("%s%", VersionToProtocol.getProtocol(version)));
+		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%d%", version).replace("%f%", VersionToProtocol.getProtocol(version)));
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
 		process.on("unhandledRejection", (err) => _handleCriticalError(err));
