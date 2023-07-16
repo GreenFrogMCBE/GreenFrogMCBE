@@ -100,6 +100,7 @@ declare function on(eventName: "playerItemStackRequest", listener: (...args: any
 declare function on(eventName: "playerExecutedCommand", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerPlayStatus", listener: (...args: any[]) => void): void;
 declare function on(eventName: "playerTeleport", listener: (...args: any[]) => void): void;
+declare function on(eventName: "playerKill", listener: (...args: any[]) => void): void;
 
 declare function on(eventName: string, listener: (...args: any[]) => void): void;
 

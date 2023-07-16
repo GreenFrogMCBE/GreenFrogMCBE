@@ -110,3 +110,4 @@
 21. @mikhaillav
 
 > For adding the Russian language
+> For adding `player.kill()` and the `playerKill` event, for updating `/version` to show the mcbe and protocol version
