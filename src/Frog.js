@@ -146,7 +146,6 @@ module.exports = {
 		let shouldShutdown = true;
 
 		this.eventEmitter.emit("serverShutdownEvent", {
-			server: this,
 			cancel: () => {
 				shouldShutdown = false;
 			},
