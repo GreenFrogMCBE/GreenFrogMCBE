@@ -96,20 +96,12 @@ class World {
 
 		const config = Frog.config;
 
-		if (config.world.tickEvent) {
-			Frog.eventEmitter.emit("serverTick", {
-				world: this.getWorldData(),
-				server: Frog.getServer(),
-			});
-		}
+		if (config.world.tickEvent) Frog.eventEmitter.emit("serverTick", { world: this.getWorldData() });
 
 		if (config.world.tickWorldTime) {
 			time = time + 10;
 
-			Frog.eventEmitter.emit("serverTimeTick", {
-				server: Frog.getServer(),
-				world: this.getWorldData(),
-			});
+			Frog.eventEmitter.emit("serverTimeTick", { world: this.getWorldData() });
 
 			for (const player of PlayerInfo.players) {
 				if (!player.offline) player.setTime(time);
@@ -117,10 +109,7 @@ class World {
 		}
 
 		if (config.world.tickRegeneration) {
-			Frog.eventEmitter.emit("serverRegenerationTick", {
-				server: Frog.getServer(),
-				world: this.getWorldData(),
-			});
+			Frog.eventEmitter.emit("serverRegenerationTick", { world: this.getWorldData() });
 
 			for (const player of PlayerInfo.players) {
 				if (!(player.health > 20 || player.hunger < 20 || player.offline || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR)) {
@@ -130,10 +119,7 @@ class World {
 		}
 
 		if (config.world.tickStarvationDamage) {
-			Frog.eventEmitter.emit("serverStarvationDamageTick", {
-				server: Frog.getServer(),
-				world: this.getWorldData(),
-			});
+			Frog.eventEmitter.emit("serverStarvationDamageTick", { world: this.getWorldData() });
 
 			for (const player of PlayerInfo.players) {
 				if (player.hunger <= 0) {
@@ -143,10 +129,7 @@ class World {
 		}
 
 		if (config.world.tickVoid) {
-			Frog.eventEmitter.emit("serverVoidDamageTick", {
-				server: Frog.getServer(),
-				world: this.getWorldData(),
-			});
+			Frog.eventEmitter.emit("serverVoidDamageTick", { world: this.getWorldData() });
 
 			for (const client of PlayerInfo.players) {
 				const posY = Math.floor(client.location.y);
