@@ -24,32 +24,31 @@ const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeExc
 const vanillaBlocks = require("../api/block/vanillaBlocks.json");
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
-const ServerChangedimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
-const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket");
-const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
-const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
-const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
-const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
 const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket");
+const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
 const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket");
 const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
 const ServerPlayStatusPacket = require("../network/packets/ServerPlayStatusPacket");
+const ServerPlayerListPacket = require("../network/packets/ServerPlayerListPacket");
+const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
+const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket");
 const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
+const ServerChangedimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
+const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket");
 const ServerInventoryContentPacket = require("../network/packets/ServerInventoryContentPacket");
-
-const ServerPlayerListPacket = require("../network/packets/ServerPlayerListPacket");
-const PlayerListAction = require("../network/packets/types/PlayerListAction");
+const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
+const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
 
 const GarbageCollector = require("../utils/GarbageCollector");
 
+const TextType = require("../api/types/Text");
 const DamageCause = require("../api/health/DamageCause");
 const HungerCause = require("../api/health/HungerCause");
 const WindowId = require("../network/packets/types/WindowId");
 const WindowType = require("../network/packets/types/WindowType");
 const PlayerAttribute = require("../api/attribute/PlayerAttribute");
-const TextType = require("../api/types/Text");
+const PlayerListAction = require("../network/packets/types/PlayerListAction");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
