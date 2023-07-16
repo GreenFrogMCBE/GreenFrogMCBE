@@ -17,6 +17,10 @@ const Frog = require("../Frog");
 
 const Colors = require("../api/color/Colors");
 const { getKey } = require("../utils/Language");
+const VersionToProtocol = require("../utils/VersionToProtocol");
+
+const config = Frog.config;
+const version = config.serverInfo.version
 
 /**
  * A command that shows the server's version
@@ -33,7 +37,7 @@ module.exports = {
 	},
 
 	execute(_server, player) {
-		const versionMsg = getKey("frog.version").replace("%s%", Frog.releaseData.minorServerVersion);
+		const versionMsg = getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%s%", version).replace("%s%", VersionToProtocol.getProtocol(version));
 		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
 	},
 };
