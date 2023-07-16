@@ -19,9 +19,9 @@ const PluginLoader = require("./plugins/PluginLoader");
 
 const PlayerInfo = require("./api/player/PlayerInfo");
 const GarbageCollector = require("./utils/GarbageCollector");
+const VersionToProtocol = require("./utils/VersionToProtocol");
 const Language = require("./utils/Language");
 const Logger = require("./server/Logger");
-const VersionToProtocol = require("./utils/VersionToProtocol");
 
 const PlayerJoinHandler = require("./network/handlers/PlayerJoinHandler");
 const PacketHandler = require("./network/handlers/PacketHandler");
