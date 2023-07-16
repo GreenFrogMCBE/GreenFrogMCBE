@@ -71,7 +71,7 @@ module.exports = {
         /**
          * Kill a player
          */
-        player.kill = function(cause = HungerCause.UNKNOWN) {
+        player.kill = function(cause = DamageCause.UNKNOWN) {
             let shouldKillPlayer = true;
 
             Frog.eventEmitter.emit("playerKill", {
