@@ -69,7 +69,9 @@ module.exports = {
 	 */
 	async initPlayer(player, server) {
         /**
-         * Kill a player
+         * Kills the player
+		 *
+   		 * @param {DamageCause} cause
          */
         player.kill = function(cause = DamageCause.UNKNOWN) {
             let shouldKillPlayer = true;
@@ -88,6 +90,7 @@ module.exports = {
 
 		/**
 		 * Sends a message to the player
+   		 *
 		 * @param {string} message - The message to send
 		 */
 		player.sendMessage = function (message) {
@@ -373,7 +376,7 @@ module.exports = {
 		};
 
 		/**
-		 * Disconnect a player from the server
+		 * Disconnects the player from the server
 		 *
 		 * @param {string} [message=lang.kickmessages.kickedByPlugin]
 		 * @param {boolean} [hideDisconnectionScreen=false]
