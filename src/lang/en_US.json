@@ -44,6 +44,7 @@
 
   "commands.kill.name": "kill",
   "commands.kill.description": "Kills entities (players, mobs, etc.).",
+  "commands.kill.execution.failed.killServer": "§cUnable to kill server, use stop instead",
 
   "commands.list.name": "list",
   "commands.list.description": "Lists players on the server.",
