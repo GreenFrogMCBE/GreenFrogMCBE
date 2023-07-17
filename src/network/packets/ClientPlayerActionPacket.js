@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-case-declarations */
+
 const BlockBreakException = require("../../utils/exceptions//BlockBreakException");
 const PacketConstructor = require("./PacketConstructor");
 
