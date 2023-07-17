@@ -46,8 +46,7 @@ class ClientInventoryTransactionPacket extends PacketConstructor {
 				Frog.eventEmitter.emit("blockBreakEvent", {
 					actions: packet.data.params.actions,
 					legacy: packet.data.params.transaction.legacy,
-					player: player,
-					server: server,
+					player,
 					action: packet.data.params.transaction.transaction_data.actionType,
 					blockPosition: packet.data.params.transaction.transaction_data.block_position,
 					transactionType: packet.data.params.transaction.transaction_type,
