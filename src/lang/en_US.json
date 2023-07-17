@@ -104,7 +104,7 @@
   "plugin.unloading.success": "Unloaded %s%",
   "plugin.unloading.unloading": "Unloading %s%...",
 
-  "frog.version": "This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s% | game version: %d% | protocol: %f%",
+  "frog.version": "This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s%",
 
   "world.chunks.renderDistance.tooHigh": "Chunk generator limit in your config.yml is too high! It may cause lag",
 
@@ -135,13 +135,14 @@
   "warning.customItems.loading.failed": "Failed to load custom items! Error: %s%",
 
   "debug.debugEnabled": "Debug mode is enabled. This may cause lag when sending large packets",
+
   "debug.unstable": "Unstable mode is enabled. This will recover server from critical errors, but it may cause plugin data corruption",
   "debug.unstable.unsupported": "Also, unstable mode is not supported by GreenFrog developers and you are the responsive for the data corruption if it occurs",
 
-  "debug.player.unsupportedActionID": "Unsupported action ID from %s%: %d%",
-  "debug.player.unsupportedActionID.block": "Unsupported block action ID from %s%: %d%",
-
   "debug.playerlist.invalid": "Ignored invalid PlayerList packet",
+
+  "debug.player.unsupportedAction.id": "Unsupported action ID from %s%: %d%",
+  "debug.player.unsupportedAction.block": "Unsupported block action ID from %s%: %d%",
 
   "chat.format": "<%s%> %d%",
   "chat.format.plugin": "%s%",

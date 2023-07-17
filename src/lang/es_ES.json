@@ -103,7 +103,7 @@
   "plugin.unloading.success": "Descargado %s%",
   "plugin.unloading.unloading": "Descargando %s%...",
 
-  "frog.version": "Este servidor utiliza GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versión %s% | versión del juego: %d% | protocolo: %f%",
+  "frog.version": "Este servidor utiliza GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versión %s%",
 
   "world.chunks.renderDistance.tooHigh": "El limite del generador de chunks en tu.yml es demasiado alto! Puede llegar a causar lag.",
 
@@ -134,13 +134,14 @@
   "warning.customItems.loading.failed": "No se pudieron cargar los items personalizados! Error: %s%",
 
   "debug.debugEnabled": "El modo debug está activado. Esto puede causar lag cuando envíes grandes paquetes.",
+
   "debug.unstable": "Modo inestable está activado. Este cubrera el servidor de errores críticos, pero puede causar corrupción en datos de plugins.",
   "debug.unstable.unsupported": "Además, el modo inestable no está soportado por los desarolladores de GreenFrog y eres responsable de corrupción de datos si ocurre.",
 
-  "debug.player.unsupportedActionID": "ID de acción no soportada de %s%: %d%.",
-  "debug.player.unsupportedActionID.block": "ID de acción de bloque no soportada de %s%: %d%",
-
   "debug.playerlist.invalid": "Se ingoró un paquete PlayerList inválido.",
+
+  "debug.player.unsupportedAction.id": "ID de acción no soportada de %s%: %d%.",
+  "debug.player.unsupportedAction.block": "ID de acción de bloque no soportada de %s%: %d%",
 
   "chat.format": "<%s%> %d%",
   "chat.format.plugin": "%s%",
