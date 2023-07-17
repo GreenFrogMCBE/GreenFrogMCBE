@@ -13,51 +13,44 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-case-declarations */
-const BlockBreakException = require("../../utils/exceptions/BlockBreakException");
+
+const BlockBreakException = require("../../utils/exceptions//BlockBreakException");
 const PacketConstructor = require("./PacketConstructor");
 
 const Gamemode = require("../../api/player/Gamemode");
-const BlockActions = require("../../world/types/BlockAction");
+const BlockAction = require("../../world/types/BlockAction");
 
 const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
 
 const { getKey } = require("../../utils/Language");
 
-class ClientInventoryTransactionPacket extends PacketConstructor {
-	name = "inventory_transaction";
+class ClientPlayerActionPacket extends PacketConstructor {
+	name = "player_action";
 
-	async readPacket(player, packet, server) {
-		let actionID = null;
+	async readPacket(player, packet) {
+		const { action, position, result_position, face } = packet.data.params;
 
-		try {
-			actionID = packet.data.params.transaction.transaction_data.action_type;
-		} catch {
-			actionID = null;
-		}
-
-		switch (actionID) {
-			case BlockActions.BLOCK_BREAK:
-				if (player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
+		switch (action) {
+			case BlockAction.CREATIVE_PLAYER_DESTROY_BLOCK:
+				if (player.gamemode == Gamemode.SURVIVAL || player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
 					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s%", player.username));
 				}
 
 				Frog.eventEmitter.emit("blockBreakEvent", {
-					actions: packet.data.params.actions,
-					legacy: packet.data.params.transaction.legacy,
 					player,
-					action: packet.data.params.transaction.transaction_data.actionType,
-					blockPosition: packet.data.params.transaction.transaction_data.block_position,
-					transactionType: packet.data.params.transaction.transaction_type,
+					action,
+					position,
+					result_position,
+					face
 				});
 
-				player.world.breakBlock(packet.data.params.transaction.transaction_data.block_position.x, packet.data.params.transaction.transaction_data.block_position.y, packet.data.params.transaction.transaction_data.block_position.z);
+				player.world.breakBlock(position.x, position.y, position.z);
 				break;
 			default:
-				Logger.debug(getKey("debug.player.unsupportedActionID.block").replace("%s%", player.username).replace("%d%", actionID));
+				Logger.debug(getKey("debug.player.unsupportedAction.block").replace("%s%", player.username).replace("%d%", action));
 		}
 	}
 }
 
-module.exports = ClientInventoryTransactionPacket;
+module.exports = ClientPlayerActionPacket;
