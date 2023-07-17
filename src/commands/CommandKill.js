@@ -25,7 +25,7 @@ const Logger = require("../server/Logger");
  * @param {import("frog-protocol").Client} player 
  */
 const canBeKilled = (player) => {
-    if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
+    if (player.isConsole || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
         return false;
     }
 
@@ -45,15 +45,12 @@ module.exports = {
         requiresOp: true,
     },
     execute(_server, player, args) {
-        if (args.length === 0) {
+        if (!args.length) {
             if (!canBeKilled(player)) {
                 player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
                 return;
             }
-            if(player.isConsole){
-                Logger.error(getKey("commands.errors.targetError.targetsNotFound"))
-                return;
-            }
+            
             player.setHealth(0, DamageCause.KILL_COMMAND);
         } else {
             if (args[0] === "@a") {
