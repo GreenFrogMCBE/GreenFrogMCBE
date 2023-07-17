@@ -140,6 +140,9 @@
 
   "debug.playerlist.invalid": "Неверный пакет PlayerList проигнорирован",
 
+  "debug.player.unsupportedAction.id": "Неподдерживаемый action ID от %s%: %d%",
+  "debug.player.unsupportedAction.block": "Неподдерживаемый  block action ID от %s%: %d%",
+
   "chat.format": "<%s%> %d%",
   "chat.format.plugin": "%s%",
   "chat.format.me": "* %s% %d%",

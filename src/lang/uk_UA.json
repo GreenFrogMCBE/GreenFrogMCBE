@@ -139,6 +139,9 @@
 
   "debug.playerlist.invalid": "Пропущено недійсний пакет PlayerList.",
 
+  "debug.player.unsupportedAction.id": "Непідтримуваний ідентифікатор дії від %s%: %d%.",
+  "debug.player.unsupportedAction.block": "Непідтримуваний ідентифікатор блока дії від %s%: %d%.",
+
   "chat.format": "<%s%> %d%.",
   "chat.format.plugin": "%s%.",
   "chat.format.me": "* %s% %d%.",

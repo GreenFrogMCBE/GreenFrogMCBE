@@ -140,6 +140,9 @@
 
   "debug.playerlist.invalid": "Ignored invalid PlayerList packet",
 
+  "debug.player.unsupportedAction.id": "Unsupported action ID from %s%: %d%",
+  "debug.player.unsupportedAction.block": "Unsupported block action ID from %s%: %d%",
+
   "chat.format": "<%s%> %d%",
   "chat.format.plugin": "%s%",
   "chat.format.me": "* %s% %d%",

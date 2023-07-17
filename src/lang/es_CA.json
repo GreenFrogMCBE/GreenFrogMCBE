@@ -140,6 +140,9 @@
 
   "debug.playerlist.invalid": "S'ha ignorat un paquet PlayerList invàlid.",
 
+  "debug.player.unsupportedAction.id": "ID de l'acció no suportada de %s%: %d%",
+  "debug.player.unsupportedAction.block": "ID de l'acció del bloc no suportada de %s%: %d%",
+
   "chat.format": "<%s%> %d%",
   "chat.format.plugin": "%s%",
   "chat.format.me": "* %s% %d%",

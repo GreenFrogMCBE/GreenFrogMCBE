@@ -48,7 +48,7 @@ class ClientPlayerActionPacket extends PacketConstructor {
 				player.world.breakBlock(position.x, position.y, position.z);
 				break;
 			default:
-				Logger.debug(getKey("debug.player.unsupportedaction.block").replace("%s%", player.username).replace("%d%", action));
+				Logger.debug(getKey("debug.player.unsupportedAction.block").replace("%s%", player.username).replace("%d%", action));
 		}
 	}
 }

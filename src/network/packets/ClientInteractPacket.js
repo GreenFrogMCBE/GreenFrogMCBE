@@ -79,7 +79,7 @@ class ClientInteractPacket extends PacketConstructor {
 				containerOpen.writePacket(player);
 				break;
 			default:
-				Logger.debug(getKey("debug.player.unsupportedActionID").replace("%s%", actionID).replace("%d%", player.username));
+				Logger.debug(getKey("debug.player.unsupportedAction.id").replace("%s%", actionID).replace("%d%", player.username));
 		}
 	}
 }
