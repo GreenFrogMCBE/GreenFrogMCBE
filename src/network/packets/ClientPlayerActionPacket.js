@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /* eslint-disable no-case-declarations */
-const BlockBreakException = require("../../util/exceptions/BlockBreakException");
+const BlockBreakException = require("../../utils/exceptions//BlockBreakException");
 const PacketConstructor = require("./PacketConstructor");
 
 const Gamemode = require("../../api/player/Gamemode");
@@ -23,7 +23,7 @@ const BlockAction = require("../../world/types/BlockAction");
 const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
 
-const { getKey } = require("../../util/Language");
+const { getKey } = require("../../utils/Language");
 
 class ClientPlayerActionPacket extends PacketConstructor {
 	name = "player_action";
@@ -33,7 +33,7 @@ class ClientPlayerActionPacket extends PacketConstructor {
 
 		switch (action) {
 			case BlockAction.CREATIVE_PLAYER_DESTROY_BLOCK:
-				if (player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
+				if (player.gamemode == Gamemode.SURVIVAL || player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
 					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s%", player.username));
 				}
 
