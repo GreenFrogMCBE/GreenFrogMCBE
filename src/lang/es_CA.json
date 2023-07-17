@@ -134,11 +134,9 @@
   "warning.customItems.loading.failed": "No es van poder carregar els items personalitzats! Error: %s%",
 
   "debug.debugEnabled": "El modo debug está activado. Esto puede causar lag cuando envíes grandes paquetes. El modo debug està activat. Això pot causar lag quan enviïs paquets molt grans",
+
   "debug.unstable": "El mode inestable està activat. Això cobrera el servidor d'errors crítics però, pot causar corrupció de dades en plugins.",
   "debug.unstable.unsupported": "A més, el mode inestable no està suportada pels desarolladors de GreenFrog i ets responsable de corrupció de dades si ocurreix.",
-
-  "debug.player.unsupportedActionID": "ID de l'acció no suportada de %s%: %d%",
-  "debug.player.unsupportedActionID.block": "ID de l'acció del bloc no suportada de %s%: %d%",
 
   "debug.playerlist.invalid": "S'ha ignorat un paquet PlayerList invàlid.",
 

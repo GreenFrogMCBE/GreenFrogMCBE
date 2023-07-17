@@ -103,7 +103,7 @@
   "plugin.unloading.success": "Вивантажено %s%",
   "plugin.unloading.unloading": "Вивантаження %s%...",
 
-  "frog.version": "На цьому сервері використовується GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версія: %s% | версія гри: %d% | протокол: %f%",
+  "frog.version": "На цьому сервері використовується GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версія: %s%",
 
   "world.chunks.renderDistance.tooHigh.chunk.renderDistance.tooHigh": "Обмеження генератора чанків у вашому файлі config.yml занадто високе! Це може призвести до лагів",
 
@@ -133,11 +133,9 @@
   "warning.customItems.loading.failed": "Не вдалося завантажити спеціальні предмети! Помилка: %s%",
 
   "debug.debugEnabled": "Режим налагодження увімкнено. Це може спричинити затримки при відправці великих пакетів.",
+
   "debug.unstable": "Режим ненадійності увімкнено. Це дозволить відновити сервер у разі виникнення критичних помилок, але може спричинити пошкодження даних плагіну.",
   "debug.unstable.unsupported": "Крім того, режим ненадійності не підтримується розробниками GreenFrog, і ви несете відповідальність за пошкодження даних, якщо воно станеться.",
-
-  "debug.player.unsupportedActionID": "Непідтримуваний ідентифікатор дії від %s%: %d%.",
-  "debug.player.unsupportedActionID.block": "Непідтримуваний ідентифікатор блока дії від %s%: %d%.",
 
   "debug.playerlist.invalid": "Пропущено недійсний пакет PlayerList.",
 
