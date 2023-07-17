@@ -44,7 +44,6 @@
   "commands.kill.name": "kill",
   "commands.kill.description": "Убить сущностей (игроков, мобов, тд).",
   "commands.kill.execution.failed.notOnline": "§cВалидных целей не найдено: %s%",
-  "commands.kill.execution.failed.killServer": "§cНельзя убить сервер, используйте stop для остановки",
 
   "commands.list.name": "list",
   "commands.list.description": "Список игроков на сервере",
