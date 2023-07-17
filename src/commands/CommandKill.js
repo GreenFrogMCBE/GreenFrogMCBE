@@ -19,6 +19,7 @@ const DamageCause = require("../api/health/DamageCause");
 
 const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 const { getKey } = require("../utils/Language");
+const Logger = require("../server/Logger");
 
 /**
  * @param {import("frog-protocol").Client} player 
@@ -49,7 +50,10 @@ module.exports = {
                 player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
                 return;
             }
-
+            if(player.isConsole){
+                Logger.error(getKey("commands.errors.targetError.targetsNotFound"))
+                return;
+            }
             player.setHealth(0, DamageCause.KILL_COMMAND);
         } else {
             if (args[0] === "@a") {
