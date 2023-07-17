@@ -51,7 +51,7 @@ module.exports = {
                 return;
             }
             if(player.isConsole){
-                Logger.warning(getKey("commands.kill.execution.failed.killServer"))
+                Logger.error(getKey("commands.kill.execution.failed.killServer"))
                 return;
             }
             player.setHealth(0, DamageCause.KILL_COMMAND);
