@@ -44,13 +44,14 @@
 
 > Suggested `custom_form` support (https://github.com/GreenFrogMCBE/GreenFrogMCBE/issues/35) <br>
 
-7. @CreeperG16
+7. @CreeperG16 (W)
 
 > For a better way to handle player disconnection <br>
 > For suggesting modal form support <br>
 > For adding 1.19.60 support to `bedrock-protocol` <br>
 > For adding 1.19.62 support to `bedrock-protocol` <br>
-> For adding 1.19.70 support to `bedrock-protocol`
+> For adding 1.19.70 support to `bedrock-protocol` <br>
+> For adding 1.20.10 support to `bedrock-protocol`
 
 8. The `Bedrock-protocol` library (https://github.com/PrismarineJS/bedrock-protocol)
 
