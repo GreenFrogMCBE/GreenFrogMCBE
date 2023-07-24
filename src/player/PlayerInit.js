@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const fs = require('fs')
+const fs = require("fs");
 
 const Logger = require("../server/Logger");
 
@@ -67,29 +67,29 @@ module.exports = {
 	 * @param {import('frog-protocol').Server} server
 	 */
 	async initPlayer(player, server) {
-        /**
-         * Kills the player
+		/**
+		 * Kills the player
 		 *
-   		 * @param {DamageCause} cause
-         */
-        player.kill = function(cause = DamageCause.UNKNOWN) {
-            let shouldKillPlayer = true;
+		 * @param {DamageCause} cause
+		 */
+		player.kill = function (cause = DamageCause.UNKNOWN) {
+			let shouldKillPlayer = true;
 
-            Frog.eventEmitter.emit("playerKill", {
-                player,
-                cancel: () => {
+			Frog.eventEmitter.emit("playerKill", {
+				player,
+				cancel: () => {
 					shouldKillPlayer = false;
 				},
-            });
-            
-            if (!shouldKillPlayer) return;
+			});
 
-            player.setHealth(0, cause);
-        }
+			if (!shouldKillPlayer) return;
+
+			player.setHealth(0, cause);
+		};
 
 		/**
 		 * Sends a message to the player
-   		 *
+		 *
 		 * @param {string} message - The message to send
 		 */
 		player.sendMessage = function (message) {

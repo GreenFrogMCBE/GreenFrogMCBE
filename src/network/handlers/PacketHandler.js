@@ -194,7 +194,7 @@ class PacketHandler {
 		Frog.eventEmitter.emit("packetRead", {
 			player: client,
 			packetInstance,
-			packetData
+			packetData,
 		});
 	}
 

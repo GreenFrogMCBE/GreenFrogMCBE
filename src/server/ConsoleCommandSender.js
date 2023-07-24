@@ -73,7 +73,7 @@ module.exports = {
 		let shouldExecuteCommand = true;
 
 		const args = executedCommand.split(" ").slice(1);
-		const Frog = require("../Frog")
+		const Frog = require("../Frog");
 
 		Frog.eventEmitter.emit("serverExecutedCommand", {
 			args,
@@ -106,7 +106,7 @@ module.exports = {
 							sendMessage: (message) => {
 								Logger.info(message);
 							},
-							setGamemode: () => { },
+							setGamemode: () => {},
 							op: true,
 							username: "Server",
 							ip: "127.0.0.1",
@@ -153,7 +153,7 @@ module.exports = {
 	 * Starts the console.
 	 */
 	async start() {
-		const Frog = require("../Frog")
+		const Frog = require("../Frog");
 
 		await setupConsoleReader();
 		await CommandManager.loadAllCommands();

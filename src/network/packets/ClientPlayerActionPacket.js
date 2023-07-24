@@ -42,7 +42,7 @@ class ClientPlayerActionPacket extends PacketConstructor {
 					action,
 					position,
 					result_position,
-					face
+					face,
 				});
 
 				player.world.breakBlock(position.x, position.y, position.z);

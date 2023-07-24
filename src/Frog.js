@@ -32,7 +32,7 @@ const fs = require("fs");
 const _eventEmitter = new events();
 
 /**
- * @private 
+ * @private
  * @type {any}
  */
 let _server;
@@ -48,7 +48,7 @@ function getConfig() {
  * @private
  */
 function getLang() {
-	return require("./lang/" + yaml.load(fs.readFileSync("config.yml", "utf8")).chat.lang)
+	return require("./lang/" + yaml.load(fs.readFileSync("config.yml", "utf8")).chat.lang);
 }
 
 module.exports = {

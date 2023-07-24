@@ -20,5 +20,5 @@ module.exports = /** @type {const} */ ({
 	VOID: "void",
 	STARVATION: "starvation",
 	PLUGIN: "plugin",
-	KILL_COMMAND: "kill_command"
+	KILL_COMMAND: "kill_command",
 });

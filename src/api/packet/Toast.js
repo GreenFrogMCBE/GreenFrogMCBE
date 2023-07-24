@@ -27,7 +27,7 @@ class Toast {
 
 	/**
 	 * Sends the toast
-	 * 
+	 *
 	 * @param {import("frog-protocol").Client} player
 	 */
 	send(player) {

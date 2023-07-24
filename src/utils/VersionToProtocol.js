@@ -21,7 +21,7 @@ module.exports = {
 		"1.19.70": 575,
 		"1.19.63": 568,
 		"1.19.60": 567,
-		"1.19.51": 559, 
+		"1.19.51": 559,
 		"1.19.50": 559,
 		"1.19.41": 557,
 		"1.19.40": 557,
@@ -31,7 +31,7 @@ module.exports = {
 		"1.19.21": 545,
 		"1.19.20": 544,
 	},
-	
+
 	DEFAULT_PROTOCOL: 0,
 
 	/**
@@ -43,6 +43,6 @@ module.exports = {
 	getProtocol(version) {
 		// Using switch is adding more lines of code than needed.
 
-		return this.PROTOCOL_LIST[version] || this.DEFAULT_PROTOCOL
+		return this.PROTOCOL_LIST[version] || this.DEFAULT_PROTOCOL;
 	},
 };

@@ -22,71 +22,71 @@ const { getKey } = require("../utils/Language");
 const Logger = require("../server/Logger");
 
 /**
- * @param {import("frog-protocol").Client} player 
+ * @param {import("frog-protocol").Client} player
  */
 const canBeKilled = (player) => {
-    if (player.isConsole || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
-        return false;
-    }
+	if (player.isConsole || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
+		return false;
+	}
 
-    return true;
+	return true;
 };
 
 /**
  * A command that sends a private message to other players
- * 
+ *
  * @type {import('../declarations/Command').Command}
  */
 module.exports = {
-    data: {
-        name: getKey("commands.kill.name"),
-        description: getKey("commands.kill.description"),
-        minArgs: 0,
-        requiresOp: true,
-    },
-    execute(_server, player, args) {
-        if (!args.length) {
-            if (!canBeKilled(player)) {
-                player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
-                return;
-            }
-            
-            player.setHealth(0, DamageCause.KILL_COMMAND);
-        } else {
-            if (args[0] === "@a") {
-                PlayerInfo.players.forEach(p => {
-                    if (canBeKilled(p)) {
-                        p.setHealth(0, DamageCause.KILL_COMMAND);
-                        return;
-                    }
-                });
+	data: {
+		name: getKey("commands.kill.name"),
+		description: getKey("commands.kill.description"),
+		minArgs: 0,
+		requiresOp: true,
+	},
+	execute(_server, player, args) {
+		if (!args.length) {
+			if (!canBeKilled(player)) {
+				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+				return;
+			}
 
-                return;
-            } else if (args[0] === "@r") {
-                const randomPlayer = Math.floor(Math.random() * PlayerInfo.players.length);
-                const subject = PlayerInfo.players[randomPlayer];
+			player.setHealth(0, DamageCause.KILL_COMMAND);
+		} else {
+			if (args[0] === "@a") {
+				PlayerInfo.players.forEach((p) => {
+					if (canBeKilled(p)) {
+						p.setHealth(0, DamageCause.KILL_COMMAND);
+						return;
+					}
+				});
 
-                if (!canBeKilled(subject)) {
-                    player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
-                    return;
-                }
+				return;
+			} else if (args[0] === "@r") {
+				const randomPlayer = Math.floor(Math.random() * PlayerInfo.players.length);
+				const subject = PlayerInfo.players[randomPlayer];
 
-                subject.setHealth(0, DamageCause.KILL_COMMAND);
-                return;
-            }
+				if (!canBeKilled(subject)) {
+					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+					return;
+				}
 
-            try {
-                const subject = getPlayerInfo(args[0]);
+				subject.setHealth(0, DamageCause.KILL_COMMAND);
+				return;
+			}
 
-                if (!canBeKilled(subject)) {
-                    player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
-                    return;
-                }
+			try {
+				const subject = getPlayerInfo(args[0]);
 
-                subject.setHealth(0, DamageCause.KILL_COMMAND);
-            } catch {
-                player.sendMessage(getKey("commands.kill.execution.failed.notOnline").replace("%s%", args[0]));
-            }
-        }
-    },
+				if (!canBeKilled(subject)) {
+					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+					return;
+				}
+
+				subject.setHealth(0, DamageCause.KILL_COMMAND);
+			} catch {
+				player.sendMessage(getKey("commands.kill.execution.failed.notOnline").replace("%s%", args[0]));
+			}
+		}
+	},
 };
