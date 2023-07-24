@@ -208,8 +208,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}
 				}
 
-				// This packet is used to create custom items
-				const itemcomponent = new ServerItemComponentPacket();
+				const itemcomponent = new ServerItemComponentPacket(); // This packet is used to create custom items
 				try {
 					itemcomponent.entries = customItems.items;
 				} catch (error) {
