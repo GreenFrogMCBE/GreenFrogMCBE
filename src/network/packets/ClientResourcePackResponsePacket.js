@@ -191,22 +191,22 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				clientCacheStatus.enabled = true;
 				clientCacheStatus.writePacket(player);
 
-				// const commandManager = new ClientCommandManager();
-				// commandManager.init(player);
+				const commandManager = new ClientCommandManager();
+				commandManager.init(player);
 
-				// for (const command of ServerCommandManager.commands) {
-				// 	const { requiresOp, name, description, aliases } = command.data;
+				for (const command of ServerCommandManager.commands) {
+					const { requiresOp, name, description, aliases } = command.data;
 
-				// 	if (player.op || !requiresOp) {
-				// 		commandManager.addCommand(player, name, description);
+					if (player.op || !requiresOp) {
+						commandManager.addCommand(player, name, description);
 
-				// 		if (aliases) {
-				// 			for (const alias of aliases) {
-				// 				commandManager.addCommand(player, alias, description);
-				// 			}
-				// 		}
-				// 	}
-				// }
+						if (aliases) {
+							for (const alias of aliases) {
+								commandManager.addCommand(player, alias, description);
+							}
+						}
+					}
+				}
 
 				const itemcomponent = new ServerItemComponentPacket(); // This packet is used to create custom items
 				try {
