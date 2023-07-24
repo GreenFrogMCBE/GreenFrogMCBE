@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /* eslint-disable no-case-declarations */
@@ -47,7 +47,7 @@ class ClientInteractPacket extends PacketConstructor {
 		if (!shouldInteract) return;
 
 		switch (actionID) {
-			case InteractType.INVENTORYOPEN:
+			case InteractType.INVENTORY_OPEN:
 				let shouldOpen = true;
 
 				const containerCoordinates = {
@@ -79,7 +79,7 @@ class ClientInteractPacket extends PacketConstructor {
 				containerOpen.writePacket(player);
 				break;
 			default:
-				Logger.debug(getKey("debug.player.unsupportedActionID").replace("%s%", actionID).replace("%d%", player.username));
+				Logger.debug(getKey("debug.player.unsupportedAction.id").replace("%s%", actionID).replace("%d%", player.username));
 		}
 	}
 }

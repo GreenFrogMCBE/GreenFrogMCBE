@@ -10,17 +10,17 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = {
 	/**
 	 * Capitalizes the first letter of a string
 	 *
-	 * @param {string} str
+	 * @param {string} string
 	 * @returns {string}
 	 */
-	capitalizeFirstLetter(str) {
-		return str.charAt(0).toUpperCase() + str.slice(1);
+	capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
 	},
 };

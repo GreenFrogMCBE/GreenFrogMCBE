@@ -10,28 +10,25 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../../Frog");
 
 const Logger = require("../../server/Logger");
-
-const Commands = require("../../server/Commands");
+const CommandManager = require("../../server/CommandManager");
+const CommandVerifier = require("../../utils/CommandVerifier");
 
 const PacketConstructor = require("./PacketConstructor");
 
-const { serverConfigurationFiles } = Frog;
-const { config } = serverConfigurationFiles;
-
 const { getKey } = require("../../utils/Language");
 
-const CommandVerifier = require("../../utils/CommandVerifier");
+const config = Frog.config;
 
 class ClientCommandRequestPacket extends PacketConstructor {
 	name = "command_request";
 
-	async readPacket(player, packet, server) {
+	async readPacket(player, packet) {
 		let executedCommand = packet.data.params.command.replace("/", "");
 
 		const args = executedCommand.split(" ").slice(1);
@@ -40,7 +37,6 @@ class ClientCommandRequestPacket extends PacketConstructor {
 
 		Frog.eventEmitter.emit("playerExecutedCommand", {
 			player,
-			server,
 			args,
 			command: executedCommand,
 			cancel: () => {
@@ -55,7 +51,6 @@ class ClientCommandRequestPacket extends PacketConstructor {
 
 			if (executedCommand > 256) {
 				Frog.eventEmitter.emit("playerMalformatedChatCommand", {
-					server,
 					player,
 					command: executedCommand,
 				});
@@ -66,7 +61,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 		try {
 			let commandFound = false;
 
-			for (const command of Commands.commandList) {
+			for (const command of CommandManager.commands) {
 				if (command.data.name === executedCommand.split(" ")[0] || (command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))) {
 					if (command.data.requiresOp && !player.op) {
 						CommandVerifier.throwError(player, executedCommand.split(" ")[0]);

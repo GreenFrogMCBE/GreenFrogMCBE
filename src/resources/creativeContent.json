@@ -4878,7 +4878,7 @@
         "network_id": 236,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -931470414,
+        "block_runtime_id": 1075364060,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -4889,10 +4889,10 @@
     {
       "entry_id": 350,
       "item": {
-        "network_id": 236,
+        "network_id": -635,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -1426946601,
+        "block_runtime_id": 919423496,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -4903,10 +4903,10 @@
     {
       "entry_id": 351,
       "item": {
-        "network_id": 236,
+        "network_id": -634,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 1667030431,
+        "block_runtime_id": -267259613,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -4917,10 +4917,10 @@
     {
       "entry_id": 352,
       "item": {
-        "network_id": 236,
+        "network_id": -642,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -1978456288,
+        "block_runtime_id": 227928282,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -4931,10 +4931,10 @@
     {
       "entry_id": 353,
       "item": {
-        "network_id": 236,
+        "network_id": -639,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -113206765,
+        "block_runtime_id": 229769057,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -4945,10 +4945,10 @@
     {
       "entry_id": 354,
       "item": {
-        "network_id": 236,
+        "network_id": -641,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 553912590,
+        "block_runtime_id": -1614335316,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -4959,10 +4959,10 @@
     {
       "entry_id": 355,
       "item": {
-        "network_id": 236,
+        "network_id": -628,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 1077003860,
+        "block_runtime_id": 1060622528,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -4973,10 +4973,10 @@
     {
       "entry_id": 356,
       "item": {
-        "network_id": 236,
+        "network_id": -631,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 62211626,
+        "block_runtime_id": -591746106,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -4987,10 +4987,10 @@
     {
       "entry_id": 357,
       "item": {
-        "network_id": 236,
+        "network_id": -632,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 2102956705,
+        "block_runtime_id": -1464409123,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -5001,10 +5001,10 @@
     {
       "entry_id": 358,
       "item": {
-        "network_id": 236,
+        "network_id": -640,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 317506400,
+        "block_runtime_id": 1381373594,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -5015,10 +5015,10 @@
     {
       "entry_id": 359,
       "item": {
-        "network_id": 236,
+        "network_id": -636,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 1810809495,
+        "block_runtime_id": -57242853,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -5029,10 +5029,10 @@
     {
       "entry_id": 360,
       "item": {
-        "network_id": 236,
+        "network_id": -630,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -1301208941,
+        "block_runtime_id": -765002677,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -5043,10 +5043,10 @@
     {
       "entry_id": 361,
       "item": {
-        "network_id": 236,
+        "network_id": -638,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 2128262820,
+        "block_runtime_id": -850019252,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -5057,10 +5057,10 @@
     {
       "entry_id": 362,
       "item": {
-        "network_id": 236,
+        "network_id": -637,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 1473095088,
+        "block_runtime_id": -1744598484,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -5071,10 +5071,10 @@
     {
       "entry_id": 363,
       "item": {
-        "network_id": 236,
+        "network_id": -629,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -470995558,
+        "block_runtime_id": -1651250724,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -5085,10 +5085,10 @@
     {
       "entry_id": 364,
       "item": {
-        "network_id": 236,
+        "network_id": -633,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 2081503380,
+        "block_runtime_id": 728288428,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -7479,7 +7479,7 @@
     {
       "entry_id": 535,
       "item": {
-        "network_id": 713,
+        "network_id": 715,
         "count": 1,
         "metadata": 0,
         "block_runtime_id": 0,
@@ -12345,7 +12345,10 @@
           "has_nbt": 0,
           "can_place_on": [],
           "can_destroy": [],
-          "blocking_tick": [0, 0]
+          "blocking_tick": [
+            0,
+            0
+          ]
         }
       }
     },
@@ -15799,7 +15802,7 @@
         "network_id": 218,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 1037045916,
+        "block_runtime_id": -367808114,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15810,10 +15813,10 @@
     {
       "entry_id": 1130,
       "item": {
-        "network_id": 218,
+        "network_id": -620,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -904488351,
+        "block_runtime_id": -191146878,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15824,10 +15827,10 @@
     {
       "entry_id": 1131,
       "item": {
-        "network_id": 218,
+        "network_id": -619,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -1612432543,
+        "block_runtime_id": 382425271,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15838,10 +15841,10 @@
     {
       "entry_id": 1132,
       "item": {
-        "network_id": 218,
+        "network_id": -627,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -8689174,
+        "block_runtime_id": 887979100,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15852,10 +15855,10 @@
     {
       "entry_id": 1133,
       "item": {
-        "network_id": 218,
+        "network_id": -624,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 1025460749,
+        "block_runtime_id": 1634303081,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15866,10 +15869,10 @@
     {
       "entry_id": 1134,
       "item": {
-        "network_id": 218,
+        "network_id": -626,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 2031571580,
+        "block_runtime_id": 670752730,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15880,10 +15883,10 @@
     {
       "entry_id": 1135,
       "item": {
-        "network_id": 218,
+        "network_id": -613,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 600932882,
+        "block_runtime_id": -1730998678,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15894,10 +15897,10 @@
     {
       "entry_id": 1136,
       "item": {
-        "network_id": 218,
+        "network_id": -616,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -1818593424,
+        "block_runtime_id": 642416912,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15908,10 +15911,10 @@
     {
       "entry_id": 1137,
       "item": {
-        "network_id": 218,
+        "network_id": -617,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -1020759221,
+        "block_runtime_id": -1431668663,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15922,10 +15925,10 @@
     {
       "entry_id": 1138,
       "item": {
-        "network_id": 218,
+        "network_id": -625,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 816249506,
+        "block_runtime_id": -2052548404,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15936,10 +15939,10 @@
     {
       "entry_id": 1139,
       "item": {
-        "network_id": 218,
+        "network_id": -621,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 104540585,
+        "block_runtime_id": -2074576185,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15950,10 +15953,10 @@
     {
       "entry_id": 1140,
       "item": {
-        "network_id": 218,
+        "network_id": -615,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 1115851829,
+        "block_runtime_id": 885329687,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15964,10 +15967,10 @@
     {
       "entry_id": 1141,
       "item": {
-        "network_id": 218,
+        "network_id": -623,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 51790554,
+        "block_runtime_id": 1525866702,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15978,10 +15981,10 @@
     {
       "entry_id": 1142,
       "item": {
-        "network_id": 218,
+        "network_id": -622,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": -1910614846,
+        "block_runtime_id": 1625601618,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -15992,10 +15995,10 @@
     {
       "entry_id": 1143,
       "item": {
-        "network_id": 218,
+        "network_id": -614,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 1871116148,
+        "block_runtime_id": 1407699698,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -16006,10 +16009,10 @@
     {
       "entry_id": 1144,
       "item": {
-        "network_id": 218,
+        "network_id": -618,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 722163070,
+        "block_runtime_id": -479916018,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -17728,7 +17731,7 @@
     {
       "entry_id": 1267,
       "item": {
-        "network_id": 712,
+        "network_id": 714,
         "count": 1,
         "metadata": 0,
         "block_runtime_id": 0,
@@ -23123,7 +23126,7 @@
         "network_id": 251,
         "count": 1,
         "metadata": 0,
-        "block_runtime_id": 1075404840,
+        "block_runtime_id": -428259264,
         "extra": {
           "has_nbt": 0,
           "can_place_on": [],
@@ -24231,7 +24234,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [0]
+                              "value": [
+                                0
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24293,7 +24298,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [8]
+                              "value": [
+                                8
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24355,7 +24362,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [7]
+                              "value": [
+                                7
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24417,7 +24426,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [15]
+                              "value": [
+                                15
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24479,7 +24490,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [12]
+                              "value": [
+                                12
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24541,7 +24554,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [14]
+                              "value": [
+                                14
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24603,7 +24618,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [1]
+                              "value": [
+                                1
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24665,7 +24682,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [4]
+                              "value": [
+                                4
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24727,7 +24746,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [5]
+                              "value": [
+                                5
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24789,7 +24810,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [13]
+                              "value": [
+                                13
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24851,7 +24874,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [9]
+                              "value": [
+                                9
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24913,7 +24938,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [3]
+                              "value": [
+                                3
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -24975,7 +25002,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [11]
+                              "value": [
+                                11
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -25037,7 +25066,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [10]
+                              "value": [
+                                10
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -25099,7 +25130,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [2]
+                              "value": [
+                                2
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -25161,7 +25194,9 @@
                           {
                             "FireworkColor": {
                               "type": "byteArray",
-                              "value": [6]
+                              "value": [
+                                6
+                              ]
                             },
                             "FireworkFade": {
                               "type": "byteArray",
@@ -25217,7 +25252,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [0]
+                      "value": [
+                        0
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25269,7 +25306,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [8]
+                      "value": [
+                        8
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25321,7 +25360,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [7]
+                      "value": [
+                        7
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25373,7 +25414,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [15]
+                      "value": [
+                        15
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25425,7 +25468,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [12]
+                      "value": [
+                        12
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25477,7 +25522,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [14]
+                      "value": [
+                        14
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25529,7 +25576,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [1]
+                      "value": [
+                        1
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25581,7 +25630,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [4]
+                      "value": [
+                        4
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25633,7 +25684,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [5]
+                      "value": [
+                        5
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25685,7 +25738,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [13]
+                      "value": [
+                        13
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25737,7 +25792,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [9]
+                      "value": [
+                        9
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25789,7 +25846,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [3]
+                      "value": [
+                        3
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25841,7 +25900,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [11]
+                      "value": [
+                        11
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25893,7 +25954,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [10]
+                      "value": [
+                        10
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25945,7 +26008,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [2]
+                      "value": [
+                        2
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -25997,7 +26062,9 @@
                   "value": {
                     "FireworkColor": {
                       "type": "byteArray",
-                      "value": [6]
+                      "value": [
+                        6
+                      ]
                     },
                     "FireworkFade": {
                       "type": "byteArray",
@@ -26103,6 +26170,20 @@
       "entry_id": 1552,
       "item": {
         "network_id": 508,
+        "count": 1,
+        "metadata": 0,
+        "block_runtime_id": 0,
+        "extra": {
+          "has_nbt": 0,
+          "can_place_on": [],
+          "can_destroy": []
+        }
+      }
+    },
+    {
+      "entry_id": 1553,
+      "item": {
+        "network_id": 597,
         "count": 1,
         "metadata": 0,
         "block_runtime_id": 0,

@@ -10,10 +10,9 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-
 const Logger = require("../server/Logger");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
@@ -23,7 +22,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command to send a message in the chat to other players.
  *
- * @type {import('../type/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {

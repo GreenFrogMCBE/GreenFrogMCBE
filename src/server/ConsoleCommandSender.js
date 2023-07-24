@@ -10,38 +10,27 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const readline = require("readline");
 
-const ConsoleSetupException = require("../utils/exceptions/ConsoleSetupException");
-const CommandHandlingException = require("../utils/exceptions/CommandHandlingException");
-
 const Logger = require("./Logger");
-const Frog = require("../Frog");
-const Commands = require("./Commands");
 
 const Language = require("../utils/Language");
 
 const CommandVerifier = require("../utils/CommandVerifier");
+const CommandManager = require("./CommandManager");
 
-/** @private */
+/** @private @type {boolean} */
 let isClosed = false;
-/** @private */
+/** @private @type {readline.Interface} */
 let readLineInterface;
 
 /**
  * Set ups the console command reader that is used to handle commands
- *
- * @throws {ConsoleSetupException} - If the console is closed
- *
  */
 async function setupConsoleReader() {
-	if (isClosed) {
-		throw new ConsoleSetupException("Console is closed!");
-	}
-
 	readLineInterface = await readline.createInterface({
 		input: process.stdin,
 		output: process.stdout,
@@ -54,14 +43,8 @@ async function setupConsoleReader() {
 module.exports = {
 	/**
 	 * Closes the console.
-	 *
-	 * @throws {ConsoleSetupException} - If the console is already closed
 	 */
 	close() {
-		if (isClosed) {
-			throw new ConsoleSetupException(Language.getKey("exceptions.console.alreadyClosed"));
-		}
-
 		isClosed = true;
 	},
 
@@ -83,35 +66,29 @@ module.exports = {
 	 * Executes a command that the user typed in the console.
 	 *
 	 * @param {string} executedCommand - The command to execute.
-	 * @throws {CommandHandlingException} Throws an error if the command is empty
 	 */
 	executeConsoleCommand(executedCommand) {
 		executedCommand = executedCommand.replace("/", "");
 
-		if (!executedCommand.trim()) {
-			// For API calls
-			throw new CommandHandlingException("The command is empty!");
-		}
-
-		let shouldExecCommand = true;
+		let shouldExecuteCommand = true;
 
 		const args = executedCommand.split(" ").slice(1);
+		const Frog = require("../Frog")
 
-		require("../Frog").eventEmitter.emit("serverExecutedCommand", {
-			server: require("../Frog").getServer(),
+		Frog.eventEmitter.emit("serverExecutedCommand", {
 			args,
 			command: executedCommand,
 			cancel: () => {
-				shouldExecCommand = false;
+				shouldExecuteCommand = false;
 			},
 		});
 
-		if (isClosed || !shouldExecCommand || !executedCommand.replace(" ", "")) return;
+		if (isClosed || !shouldExecuteCommand || !executedCommand.replace(" ", "")) return;
 
 		try {
 			let commandFound = false;
 
-			for (const command of Commands.commandList) {
+			for (const command of CommandManager.commands) {
 				if (command.data.name === executedCommand.split(" ")[0] || (command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))) {
 					if (command.data.minArgs !== undefined && command.data.minArgs > args.length) {
 						Logger.info(Language.getKey("commands.errors.syntaxError.minArg").replace("%s%", command.data.minArgs).replace("%d%", args.length));
@@ -129,7 +106,7 @@ module.exports = {
 							sendMessage: (message) => {
 								Logger.info(message);
 							},
-							setGamemode: () => {},
+							setGamemode: () => { },
 							op: true,
 							username: "Server",
 							ip: "127.0.0.1",
@@ -155,7 +132,6 @@ module.exports = {
 			}
 		} catch (error) {
 			require("../Frog").eventEmitter.emit("serverCommandProcessError", {
-				server: require("../Frog").getServer(),
 				command: executedCommand,
 				error,
 			});
@@ -177,17 +153,17 @@ module.exports = {
 	 * Starts the console.
 	 */
 	async start() {
-		await setupConsoleReader();
+		const Frog = require("../Frog")
 
-		await Commands.loadAllCommands();
+		await setupConsoleReader();
+		await CommandManager.loadAllCommands();
 
 		readLineInterface.on("line", async (command) => {
 			if (this.isEmpty(command)) return;
 
 			let shouldProcessCommand = true;
 
-			require("../Frog").eventEmitter.emit("serverCommandProcess", {
-				server: require("../Frog").getServer(),
+			Frog.eventEmitter.emit("serverCommandProcess", {
 				command,
 				cancel: () => {
 					shouldProcessCommand = false;

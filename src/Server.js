@@ -10,13 +10,12 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("./Frog");
 
 const PluginLoader = require("./plugins/PluginLoader");
-const PluginManager = require("./plugins/PluginManager");
 
 const PlayerInfo = require("./api/player/PlayerInfo");
 const GarbageCollector = require("./utils/GarbageCollector");
@@ -30,12 +29,12 @@ const Query = require("./query/Query");
 const World = require("./world/World");
 
 const FrogProtocol = require("frog-protocol");
-const assert = require("assert");
 const fs = require("fs");
 
 let server = null;
-let config = Frog.serverConfigurationFiles.config;
-let isDebug = Frog.isDebug;
+
+const config = Frog.config;
+const isDebug = Frog.isDebug;
 
 /**
  * This function executes when something is off with the server
@@ -55,7 +54,7 @@ async function _handleCriticalError(error) {
 
 	Logger.error(`Server error: ${error.stack}`);
 
-	if (!config.unstable) {
+	if (config.unstable) {
 		process.exit(config.dev.crashCode);
 	}
 }
@@ -66,7 +65,7 @@ async function _handleCriticalError(error) {
  * @private
  */
 async function _initDebug() {
-	if (config.unstable) {
+	if (config.dev.unstable) {
 		Logger.warning(Language.getKey("debug.unstable"));
 		Logger.warning(Language.getKey("debug.unstable.unsupported"));
 	}
@@ -125,10 +124,7 @@ module.exports = {
 	 * Starts the server
 	 */
 	async start() {
-		Frog.eventEmitter.emit("serverStart", {});
-
-		await assert(parseInt(config.performance.garbageCollectorDelay), NaN);
-		await assert(parseInt(config.world.tickSpeed), NaN);
+		Frog.eventEmitter.emit("serverStart");
 
 		if (!fs.existsSync("ops.yml")) {
 			fs.writeFile("ops.yml", "", (err) => {
@@ -140,7 +136,7 @@ module.exports = {
 
 		console.clear();
 
-		Language.getLanguage(Frog.serverConfigurationFiles.config.chat.lang);
+		Language.getLanguage(Frog.config.chat.lang);
 
 		Logger.info(Language.getKey("server.loading"));
 		Logger.info(Language.getKey("server.license"));
@@ -152,11 +148,11 @@ module.exports = {
 			process.exit(-1);
 		}
 
-		if (config.world.chunkGeneratorLimit > 16) {
-			Logger.warning(Language.getKey("world.chunks.chunksToGenerate.tooHigh"));
+		if (config.world.renderDistance > 16) {
+			Logger.warning(Language.getKey("world.chunks.renderDistance.tooHigh"));
 		}
 
-		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.getServerData().minorServerVersion} (${Frog.getServerData().versionDescription})`));
+		Logger.info(Language.getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`));
 
 		process.on("uncaughtException", (err) => _handleCriticalError(err));
 		process.on("unhandledRejection", (err) => _handleCriticalError(err));
@@ -171,7 +167,7 @@ module.exports = {
 			const query = new Query();
 
 			try {
-				const querySettings = {
+				let querySettings = {
 					host: config.network.host,
 					port: config.query.port,
 					motd: config.serverInfo.motd,
@@ -179,15 +175,17 @@ module.exports = {
 					players: PlayerInfo.players,
 					maxPlayers: String(config.serverInfo.maxPlayers),
 					gamemode: config.world.gameMode,
-					plugins: PluginManager.plugins,
 					wl: false, // wl stands for whitelist. TODO: Implement whitelist
 					version: String(config.serverInfo.version),
+					plugins: PlayerInfo.players,
 				};
 
+				if (config.query.showPlugins) querySettings.plugins = [""];
+
 				query.start(querySettings);
-			} catch (e) {
-				Frog.eventEmitter.emit("queryError", { error: e });
-				Logger.error(Language.getKey("query.server.listening.failed").replace("%s%", e.stack));
+			} catch (error) {
+				Frog.eventEmitter.emit("queryError", { error });
+				Logger.error(Language.getKey("query.server.listening.failed").replace("%s%", error.stack));
 			}
 		}
 
@@ -196,8 +194,7 @@ module.exports = {
 		}, parseInt(config.performance.garbageCollectorDelay));
 
 		setInterval(() => {
-			const world = new World();
-			world.tick();
+			new World().tick();
 		}, parseInt(config.world.tickSpeed));
 	},
 };

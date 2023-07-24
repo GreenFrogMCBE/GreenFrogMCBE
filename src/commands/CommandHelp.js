@@ -10,17 +10,17 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Commands = require("../server/Commands");
+const CommandManager = require("../server/CommandManager");
 
 const { getKey } = require("../utils/Language");
 
 /**
  * A command that shows all commands this server has
  *
- * @type {import('../type/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {
@@ -34,7 +34,7 @@ module.exports = {
 	execute(_server, player) {
 		player.sendMessage(getKey("commands.help.execution.success"));
 
-		for (const command of Commands.commandList) {
+		for (const command of CommandManager.commands) {
 			player.sendMessage(getKey("commands.help.execution.command").replace("%s%", command.data.name).replace("%d%", command.data.description));
 		}
 	},

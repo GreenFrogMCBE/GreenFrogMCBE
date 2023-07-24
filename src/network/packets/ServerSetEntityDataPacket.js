@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const PacketConstructor = require("./PacketConstructor");
@@ -23,7 +23,7 @@ class ServerSetEntityDataPacket extends PacketConstructor {
 	/** @type {string} */
 	tick;
 	/** @type {JSON} */
-	value = {};
+	value;
 	/** @type {string} */
 	runtime_entity_id;
 

@@ -10,11 +10,9 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const { Client } = require("frog-protocol");
-
 const DamageCause = require("../api/health/DamageCause");
 const Gamemode = require("../api/player/Gamemode");
 
@@ -23,7 +21,7 @@ module.exports = {
 	 * Calculates the fall damage
 	 * NOTE: This can be spoofed by a hacked client
 	 *
-	 * @param {Client} player
+	 * @param {imort("frog-protocol").Client} player
 	 * @param {JSON} position
 	 */
 	async calculateFallDamage(player, position) {

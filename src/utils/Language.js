@@ -10,32 +10,28 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const { existsSync } = require("fs");
 const path = require("path");
 
-const LanguageException = require("./exceptions/LanguageException");
-
-/**
- * @typedef {Object.<string, string>} LanguageContent
- */
+const LanguageException = require("./exceptions/LanguageException.js")
 
 /**
  * Returns the content of a language file.
  *
- *
  * @param {string} lang - The language code.
- * @returns {LanguageContent} The content of the language file.
+ * @returns {import("../declarations/Typedefs.js").LanguageContent}  The content of the language file.
  * @throws {LanguageException} If the language file is not found or is not valid JSON.
  */
+
 function getLanguage(lang) {
 	const langPath = path.resolve(__dirname, "../lang");
 	const langFile = path.join(langPath, `${lang}.json`);
 
 	if (!existsSync(langFile)) {
-		throw new LanguageException("Failed to find that language");
+		return
 	}
 
 	const langContent = require(langFile);
@@ -54,8 +50,9 @@ function getLanguage(lang) {
  * @returns {string} The value associated with the key.
  */
 function getKey(key) {
-	const langConfig = require("../Frog").serverConfigurationFiles.config.chat.lang;
-	return getLanguage(langConfig)[key];
+	const langConfig = require("../Frog").config.chat.lang;
+
+	return getLanguage(langConfig) ? getLanguage(langConfig)[key] : getLanguage("en_US")[key]
 }
 
 module.exports = {

@@ -10,16 +10,16 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /* eslint-disable no-case-declarations */
 const Frog = require("../../Frog");
 
 const Biome = require("../../world/types/Biome");
-const PlayStatusType = require("./types/PlayStatus");
+const PlayStatus = require("./types/PlayStatus");
 const Gamemode = require("../../api/player/Gamemode");
-const PlayerListType = require("./types/PlayerListType");
+const PlayerList = require("./types/PlayerListAction");
 const Dimension = require("../../world/types/Dimension");
 const Difficulty = require("../../api/types/Difficulty");
 const MovementAuthority = require("./types/MovementAuthority");
@@ -41,14 +41,14 @@ const ServerResourcePackStackPacket = require("./ServerResourcePackStackPacket")
 const ServerCreativeContentPacket = require("./ServerCreativeContentPacket");
 const ServerFeatureRegistryPacket = require("./ServerFeatureRegistryPacket");
 const ServerItemComponentPacket = require("./ServerItemComponentPacket");
-const ServerPlayStatusPacket = require("./ServerPlayStatusPacket");
 const ServerPlayerListPacket = require("./ServerPlayerListPacket");
 const ServerStartGamePacket = require("./ServerStartGamePacket");
 const ServerTrimDataPacket = require("./ServerTrimDataPacket");
 
 const OfflinePermissionManager = require("../../api/permission/OfflinePermissionManager");
-const CommandManager = require("../../api/player/CommandManager");
-const Commands = require("../../server/Commands");
+
+const ClientCommandManager = require("../../player/CommandManager");
+const ServerCommandManager = require("../../server/CommandManager")
 
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
@@ -65,8 +65,7 @@ const customItems = require("../../../world/custom_items.json");
 
 const { getKey } = require("../../utils/Language");
 
-const { serverConfigurationFiles } = require("../../Frog");
-const { config } = serverConfigurationFiles;
+const config = Frog.config;
 
 const WorldGenerationFailedException = require("../../utils/exceptions/WorldGenerationFailedException");
 
@@ -89,18 +88,13 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.none").replace("%s%", player.username));
 				break;
 			case ResourcePackStatus.REFUSED:
-				Frog.eventEmitter.emit("playerResourcePacksRefused", { server, player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
+				Frog.eventEmitter.emit("playerResourcePacksRefused", { player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
 
 				Logger.info(getKey("status.resourcePacks.refused").replace("%s%", player.username));
 				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
 			case ResourcePackStatus.HAVE_ALL_PACKS:
-				Frog.eventEmitter.emit("playerHasAllTheResourcePacks", {
-					resourcePacksIds: [],
-					resourcePacksRequired: true,
-					server: server,
-					player: player,
-				});
+				Frog.eventEmitter.emit("playerHasAllTheResourcePacks", { player });
 
 				Logger.info(getKey("status.resourcePacks.installed").replace("%s%", player.username));
 
@@ -114,10 +108,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				resourcePackStack.writePacket(player);
 				break;
 			case ResourcePackStatus.COMPLETED:
-				Frog.eventEmitter.emit("playerResourcePacksCompleted", {
-					server: server,
-					player: player,
-				});
+				Frog.eventEmitter.emit("playerResourcePacksCompleted", { player });
 
 				player.world = new World();
 				player.world.renderDistance = config.world.renderDistance;
@@ -184,7 +175,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				creativeContent.writePacket(player);
 
 				const commandsEnabled = new ServerSetCommandsEnabledPacket();
-				commandsEnabled.enable = true;
+				commandsEnabled.enabled = true;
 				commandsEnabled.writePacket(player);
 
 				const trimData = new ServerTrimDataPacket();
@@ -200,10 +191,10 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				clientCacheStatus.enabled = true;
 				clientCacheStatus.writePacket(player);
 
-				const commandManager = new CommandManager();
+				const commandManager = new ClientCommandManager();
 				commandManager.init(player);
 
-				for (const command of Commands.commandList) {
+				for (const command of ServerCommandManager.commands) {
 					const { requiresOp, name, description, aliases } = command.data;
 
 					if (player.op || !requiresOp) {
@@ -217,8 +208,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					}
 				}
 
-				// This packet is used to create custom items
-				const itemcomponent = new ServerItemComponentPacket();
+				const itemcomponent = new ServerItemComponentPacket(); // This packet is used to create custom items
 				try {
 					itemcomponent.entries = customItems.items;
 				} catch (error) {
@@ -268,9 +258,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.spawned").replace("%s%", player.username));
 
 				setTimeout(() => {
-					const playStatus = new ServerPlayStatusPacket();
-					playStatus.status = PlayStatusType.PLAYER_SPAWN;
-					playStatus.writePacket(player);
+					player.sendPlayStatus(PlayStatus.PLAYER_SPAWN)
 
 					Frog.eventEmitter.emit("playerSpawn", {
 						player,
@@ -278,9 +266,9 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 					});
 
 					player.setEntityData(defaultEntityData);
-					player.setSpeed(0.10000000149011612);
+					player.setSpeed(0.1);
 
-					Frog.__addPlayer();
+					Frog._playerCount++;
 
 					for (const onlineplayers of PlayerInfo.players) {
 						if (onlineplayers.username == player.username) {
@@ -290,7 +278,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 							const uuid = player.profile.uuid;
 
 							const playerList = new ServerPlayerListPacket();
-							playerList.type = PlayerListType.ADD;
+							playerList.type = PlayerList.ADD;
 							playerList.username = player.username;
 							playerList.xbox_id = xuid;
 							playerList.id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);

@@ -10,9 +10,11 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const fs = require('fs')
+
 const Logger = require("../server/Logger");
 
 const Gamemode = require("../api/player/Gamemode");
@@ -22,32 +24,31 @@ const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeExc
 const vanillaBlocks = require("../api/block/vanillaBlocks.json");
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
-const ServerChangedimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
-const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket");
-const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
-const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
-const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
-const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
 const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket");
+const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
 const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket");
 const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
 const ServerPlayStatusPacket = require("../network/packets/ServerPlayStatusPacket");
+const ServerPlayerListPacket = require("../network/packets/ServerPlayerListPacket");
+const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
+const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
 const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket");
 const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
+const ServerChangedimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
+const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket");
 const ServerInventoryContentPacket = require("../network/packets/ServerInventoryContentPacket");
-
-const PlayerList = require("../network/packets/ServerPlayerListPacket");
-const PlayerListType = require("../network/packets/types/PlayerListType");
+const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
+const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
 
 const GarbageCollector = require("../utils/GarbageCollector");
 
+const TextType = require("../api/types/Text");
 const DamageCause = require("../api/health/DamageCause");
 const HungerCause = require("../api/health/HungerCause");
 const WindowId = require("../network/packets/types/WindowId");
 const WindowType = require("../network/packets/types/WindowType");
 const PlayerAttribute = require("../api/attribute/PlayerAttribute");
-const Text = require("../api/types/Text");
+const PlayerListAction = require("../network/packets/types/PlayerListAction");
 
 const PlayerInfo = require("../api/player/PlayerInfo");
 
@@ -56,18 +57,39 @@ const Frog = require("../Frog");
 const { getKey } = require("../utils/Language");
 
 /** @private */
-let lang = Frog.serverConfigurationFiles.lang;
+let lang = Frog.lang;
 
 module.exports = {
 	/**
 	 * Adds API functions to the client object
 	 *
-	 * @param {Client} player
-	 * @param {Server} server
+	 * @param {import('frog-protocol').Client} player
+	 * @param {import('frog-protocol').Server} server
 	 */
 	async initPlayer(player, server) {
+        /**
+         * Kills the player
+		 *
+   		 * @param {DamageCause} cause
+         */
+        player.kill = function(cause = DamageCause.UNKNOWN) {
+            let shouldKillPlayer = true;
+
+            Frog.eventEmitter.emit("playerKill", {
+                player,
+                cancel: () => {
+					shouldKillPlayer = false;
+				},
+            });
+            
+            if (!shouldKillPlayer) return;
+
+            player.setHealth(0, cause);
+        }
+
 		/**
 		 * Sends a message to the player
+   		 *
 		 * @param {string} message - The message to send
 		 */
 		player.sendMessage = function (message) {
@@ -84,14 +106,14 @@ module.exports = {
 
 			if (!shouldSendMessage) return;
 
-			const text = new ServerTextPacket();
-			text.message = message;
-			text.needs_translation = false;
-			text.type = Text.ANNOUNCEMENT;
-			text.platform_chat_id = "";
-			text.source_name = "";
-			text.xuid = "";
-			text.writePacket(player);
+			const textPacket = new ServerTextPacket();
+			textPacket.message = message;
+			textPacket.needs_translation = false;
+			textPacket.type = TextType.ANNOUNCEMENT;
+			textPacket.platform_chat_id = "";
+			textPacket.source_name = "";
+			textPacket.xuid = "";
+			textPacket.writePacket(player);
 		};
 
 		/**
@@ -161,16 +183,15 @@ module.exports = {
 		 * Sets player's velocity
 		 * NOTE: This is handled by the client, and not server-side
 		 *
-		 * @param {float} x
-		 * @param {float} y
-		 * @param {float} z
+		 * @param {number} x
+		 * @param {number} y
+		 * @param {number} z
 		 */
 		player.setVelocity = function (x, y, z) {
 			let shouldSetVelocity = true;
 
 			Frog.eventEmitter.emit("serverVelocityUpdate", {
 				player,
-				server: Frog.getServer(),
 				coordinates: {
 					x,
 					y,
@@ -192,12 +213,12 @@ module.exports = {
 		/**
 		 * Teleports the player
 		 *
-		 * @param {float} x
-		 * @param {float} y
-		 * @param {float} z
-		 * @param {float} rot_x
-		 * @param {float} rot_y
-		 * @param {float} rot_z
+		 * @param {number} x
+		 * @param {number} y
+		 * @param {number} z
+		 * @param {number | undefined} rot_x
+		 * @param {number | undefined} rot_y
+		 * @param {number | undefined} rot_z
 		 */
 		player.teleport = function (x, y, z, rot_x = undefined, rot_y = undefined, rot_z = undefined) {
 			let shouldTeleport = true;
@@ -210,7 +231,6 @@ module.exports = {
 				has_rot_y: rot_y !== undefined,
 				has_rot_z: rot_z !== undefined,
 				player,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldTeleport = false;
 				},
@@ -243,7 +263,7 @@ module.exports = {
 		/**
 		 * Sends play status to the player
 		 *
-		 * @param {PlayStatus} play_status
+		 * @param {import("../network/packets/types/PlayStatus")} play_status
 		 * @param {boolean} terminate_connection
 		 */
 		player.sendPlayStatus = function (play_status, terminate_connection = false) {
@@ -253,7 +273,6 @@ module.exports = {
 				player,
 				play_status,
 				terminate_connection,
-				server: server,
 				cancel: () => {
 					sendPlayStatus = false;
 				},
@@ -290,7 +309,6 @@ module.exports = {
 				player,
 				port,
 				address,
-				server: server,
 				cancel: () => {
 					shouldTransfer = false;
 				},
@@ -307,7 +325,7 @@ module.exports = {
 		/**
 		 * Sets player's local difficulty
 		 *
-		 * @param {Difficulty} difficulty
+		 * @param {import("../api/types/Difficulty")} difficulty
 		 */
 		player.setDifficulty = function (difficulty) {
 			let shouldChangeDifficulty = true;
@@ -315,7 +333,6 @@ module.exports = {
 			Frog.eventEmitter.emit("serverSetDifficulty", {
 				player,
 				difficulty,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldChangeDifficulty = false;
 				},
@@ -339,7 +356,6 @@ module.exports = {
 			Frog.eventEmitter.emit("serverSetEntityData", {
 				player,
 				data,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldSetEntityData = false;
 				},
@@ -359,7 +375,7 @@ module.exports = {
 		};
 
 		/**
-		 * Disconnect a player from the server
+		 * Disconnects the player from the server
 		 *
 		 * @param {string} [message=lang.kickmessages.kickedByPlugin]
 		 * @param {boolean} [hideDisconnectionScreen=false]
@@ -372,7 +388,6 @@ module.exports = {
 			Frog.eventEmitter.emit("playerKickEvent", {
 				player,
 				message,
-				server: Frog.getServer(),
 			});
 
 			if (message === "disconnectionScreen.serverFull") {
@@ -396,7 +411,6 @@ module.exports = {
 			Frog.eventEmitter.emit("serverUpdateChunkRadius", {
 				player,
 				radius: chunkRadius,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldUpdateRadius = false;
 				},
@@ -420,7 +434,6 @@ module.exports = {
 			Frog.eventEmitter.emit("serverTimeUpdate", {
 				player,
 				time,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldUpdateTime = false;
 				},
@@ -444,7 +457,6 @@ module.exports = {
 			Frog.eventEmitter.emit("playerSetAttribute", {
 				player,
 				attribute,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldSetAttribute = false;
 				},
@@ -462,7 +474,7 @@ module.exports = {
 		/**
 		 * Sets the XP for the player
 		 *
-		 * @param {float} xp
+		 * @param {number} xp
 		 */
 		player.setXP = function (xp) {
 			let shouldSetXP = true;
@@ -470,7 +482,6 @@ module.exports = {
 			Frog.eventEmitter.emit("serverSetXP", {
 				player,
 				xp,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldSetXP = false;
 				},
@@ -491,7 +502,7 @@ module.exports = {
 		/**
 		 * Sets the health of the player
 		 *
-		 * @param {float} health
+		 * @param {number} health
 		 * @param {DamageCause} cause
 		 */
 		player.setHealth = function (health, cause = DamageCause.UNKNOWN) {
@@ -503,7 +514,6 @@ module.exports = {
 				player,
 				health,
 				cause,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldSetHealth = false;
 				},
@@ -520,7 +530,6 @@ module.exports = {
 					player,
 					health,
 					cause,
-					server: Frog.getServer(),
 				});
 			}
 
@@ -529,7 +538,6 @@ module.exports = {
 					player,
 					health,
 					cause,
-					server: Frog.getServer(),
 				});
 			}
 
@@ -545,10 +553,7 @@ module.exports = {
 			player.health = health;
 
 			if (player.health <= 0) {
-				Frog.eventEmitter.emit("playerDeathEvent", {
-					player,
-					server: Frog.getServer(),
-				});
+				Frog.eventEmitter.emit("playerDeathEvent", { player });
 
 				player.dead = true;
 			}
@@ -557,7 +562,7 @@ module.exports = {
 		/**
 		 * Sets the hunger of the player
 		 *
-		 * @param {float} hunger
+		 * @param {number} hunger
 		 * @param {HungerCause} cause
 		 */
 		player.setHunger = function (hunger, cause = HungerCause.UNKNOWN) {
@@ -565,7 +570,6 @@ module.exports = {
 
 			Frog.eventEmitter.emit("playerHungerUpdate", {
 				player,
-				server: Frog.getServer(),
 				hunger,
 				cause,
 				cancel: () => {
@@ -590,9 +594,9 @@ module.exports = {
 		/**
 		 * Changes the dimension for the player
 		 *
-		 * @param {float} x
-		 * @param {float} y
-		 * @param {float} z
+		 * @param {number} x
+		 * @param {number} y
+		 * @param {number} z
 		 * @param {Dimension} dimension
 		 * @param {boolean} respawn
 		 *
@@ -606,7 +610,6 @@ module.exports = {
 				dimension,
 				coordinates: { x, y, z },
 				respawnAfterSwitch: respawn,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldChangeDimension = false;
 				},
@@ -631,7 +634,6 @@ module.exports = {
 
 			Frog.eventEmitter.emit("serverSpeedUpdate", {
 				speed,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldUpdateSpeed = false;
 				},
@@ -641,7 +643,7 @@ module.exports = {
 
 			player.setAttribute({
 				min: 0,
-				max: 3.4028234663852886e38,
+				max: 3.4,
 				current: speed,
 				default: speed,
 				name: PlayerAttribute.MOVEMENT_SPEED,
@@ -660,7 +662,6 @@ module.exports = {
 			Frog.eventEmitter.emit("playerOpStatusChange", {
 				player,
 				status: op,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldChange = true;
 				},
@@ -690,7 +691,6 @@ module.exports = {
 
 			Frog.eventEmitter.emit("inventoryContainerPreCreate", {
 				player: player,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldPreCreateInventoryContainer = false;
 				},
@@ -706,7 +706,6 @@ module.exports = {
 			Frog.eventEmitter.emit("inventoryContainerCreate", {
 				player: player,
 				inventory: player.inventory,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldCreateInventoryContainer = false;
 				},
@@ -751,7 +750,6 @@ module.exports = {
 					count,
 					extra,
 				},
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldGiveContainerItem = false;
 				},
@@ -790,18 +788,19 @@ module.exports = {
 					continue;
 				}
 
-				const playerList = new PlayerList();
-				playerList.type = PlayerListType.REMOVE;
+				const playerList = new ServerPlayerListPacket();
+				playerList.type = PlayerListAction.REMOVE;
 				playerList.uuid = player.profile.uuid;
 				playerList.writePacket(currentPlayer);
 			}
 
 			player.offline = true;
+			Frog._playerCount--;
+
 			GarbageCollector.clearOfflinePlayers();
 
 			Frog.eventEmitter.emit("playerLeave", {
 				player,
-				server: Frog.getServer(),
 			});
 
 			Logger.info(getKey("status.resourcePacks.disconnected").replace("%s%", player.username));

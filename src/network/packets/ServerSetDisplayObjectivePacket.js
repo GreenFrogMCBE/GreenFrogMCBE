@@ -10,22 +10,20 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const DisplaySlot = require("../../scoreboard/types/DisplaySlot");
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerScoreboardObjectivePacket extends PacketConstructor {
 	name = "set_display_objective";
-	/** @type {DisplaySlot} */
+	/** @type {import("../../scoreboard/types/DisplaySlot")} */
 	display_slot;
 	/** @type {string} */
 	objective_name;
 	/** @type {string} */
 	display_name;
-	/** @type {CreterialName} */
+	/** @type {import("../../scoreboard/types/CreteriaNames")} */
 	criteria_name;
 	/** @type {number} */
 	sort_order;

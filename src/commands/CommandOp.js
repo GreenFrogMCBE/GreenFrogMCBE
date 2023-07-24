@@ -10,19 +10,17 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const fs = require("fs").promises;
-
-const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
+const OfflinePermissionManager = require("../api/permission/OfflinePermissionManager");
 
 const { getKey } = require("../utils/Language");
 
 /**
  * A command that makes the specified player opped
  *
- * @type {import('../type/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {
@@ -37,13 +35,7 @@ module.exports = {
 		const playerName = args[0];
 
 		try {
-			await fs.appendFile("ops.yml", playerName + "\n");
-
-			try {
-				getPlayerInfo(playerName).op = true;
-			} catch {
-				/** player is offline */
-			}
+			OfflinePermissionManager.changeOpStatus(playerName, true)
 
 			player.sendMessage(getKey("commands.op.execution.success").replace("%s%", playerName));
 		} catch {

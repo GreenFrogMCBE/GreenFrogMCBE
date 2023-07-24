@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /* eslint-disable no-empty */
@@ -24,10 +24,10 @@ const StartServer = require("../test/StartServer");
 const TestConfigs = require("../test/TestConfigs");
 const Query = require("../test/Query");
 
-if (!fs.existsSync("../config.yml")) {
+if (!fs.existsSync("config.yml")) {
 	const config = fs.readFileSync("../src/resources/defaultConfig.yml");
 
-	fs.writeFileSync("../config.yml", config, () => {});
+	fs.writeFileSync("config.yml", config);
 }
 
 console.info("Starting testing...");
@@ -37,7 +37,7 @@ const r = rl.createInterface({
 	output: process.stdout,
 });
 
-console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the configurations for JSON errors\n[5] = Test if the query server works");
+console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the configuration files for JSON errors\n[5] = Test the query server");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);
@@ -53,7 +53,7 @@ r.question("> ", (response) => {
 			runTest(3, "Start server and try to execute a command", commandTest);
 			break;
 		case "4":
-			runTest(4, "Test the configurations for JSON errors", configTest);
+			runTest(4, "Test the.rations for JSON errors", configTest);
 			break;
 		case "5":
 			runTest(5, "Test if the query server works", queryTest);
@@ -130,7 +130,7 @@ function configTest() {
 		try {
 			TestConfigs.test();
 		} catch (e) {
-			console.info("Tests failed! Failed to parse configs! " + e.stack);
+			console.info("Tests failed! Failed to parse.! " + e.stack);
 			process.exit(-1);
 		} finally {
 			setTimeout(handleTestSuccess, 10000);

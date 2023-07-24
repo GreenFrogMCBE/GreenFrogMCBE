@@ -10,28 +10,28 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 const ActionType = require("./types/ActionType");
 
-const FormTypess = require("./types/FormTypes");
+const FormType = require("./types/FormType");
 
 class CustomForm {
 	constructor() {
 		/**
-		 * @type {FormTypess}
+		 * @type {FormType}
 		 *
-		 * @type {import("./types/FormTypes")}
+		 * @type {import("./types/FormType")}
 		 */
-		this.type = FormTypess.CUSTOM_FORM;
+		this.type = FormType.CUSTOM_FORM;
 
 		/**
 		 * @type {function}
 		 *
 		 * @param {CustomForm} form
-		 * @param {Client} client
+		 * @param {import('frog-protocol').Client} client
 		 */
 		this.onSend = () => {};
 
@@ -123,7 +123,7 @@ class CustomForm {
 	/**
 	 * Sends the custom form to a player.
 	 *
-	 * @param {Client} client
+	 * @param {import('frog-protocol').Client} client
 	 */
 	send(client) {
 		const FormRequestPacket = new ServerFormRequestPacket();

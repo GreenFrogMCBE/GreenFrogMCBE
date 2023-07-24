@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Title = require("../../api/types/Title");
@@ -19,19 +19,19 @@ const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetTitlePacket extends PacketConstructor {
 	name = "set_title";
-	/** @param {Title} */
+	/** @type {import("../../api/types/Title")} */
 	type;
-	/** @param {string} */
+	/** @type {string} */
 	text;
-	/** @param {number} */
+	/** @type {number} */
 	fade_in_time;
-	/** @param {number} */
+	/** @type {number} */
 	stay_time;
-	/** @param {number} */
+	/** @type {number} */
 	fade_out_time;
-	/** @param {string} */
+	/** @type {string} */
 	xuid;
-	/** @param {string} */
+	/** @type {string} */
 	platform_online_id;
 
 	writePacket(client) {

@@ -41,9 +41,13 @@
   "commands.kick.description": "Echa a un jugador del servidor.",
   "commands.kick.execution.failed.notOnline": "§c%s% no está en línea.",
 
+  "commands.kill.name": "kill",
+  "commands.kill.description": "Mata entidades (jugadores, mobs, etc.).",
+  "commands.kill.execution.failed.notOnline": "§cNingún objectivo apunta a %s%",
+
   "commands.list.name": "list",
   "commands.list.description": "Lista a todos los jugadores en el servidor.",
-  "commands.list.execution.success.commandList": "Hay %s% jugadores online: %d%",
+  "commands.list.execution.success.commands": "Hay %s% jugadores online: %d%",
 
   "commands.op.name": "op",
   "commands.op.description": "Concede el estatus de operador a un jugador.",
@@ -99,9 +103,9 @@
   "plugin.unloading.success": "Descargado %s%",
   "plugin.unloading.unloading": "Descargando %s%...",
 
-  "frog.version": "Este servidor utiliza GreenFrogMCBE (https://github.com/andriycraft/GreenFrogMCBE). Versión %s%.",
+  "frog.version": "Este servidor utiliza GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versión %s%",
 
-  "world.chunks.chunkGeneratorLimit.tooHigh": "El limite del generador de chunks en tu config.yml es demasiado alto! Puede llegar a causar lag.",
+  "world.chunks.renderDistance.tooHigh": "El limite del generador de chunks en tu.yml es demasiado alto! Puede llegar a causar lag.",
 
   "errors.nodeJS.tooOld": "Estás usando una versión de NodeJS que es demasiado antigua para ejecutar GreenFrogMCBE.",
   "errors.nodeJS.tooOld.update": "Por favor actualizalo a la versión 14.0.0+, desde https://nodejs.org/",
@@ -130,13 +134,14 @@
   "warning.customItems.loading.failed": "No se pudieron cargar los items personalizados! Error: %s%",
 
   "debug.debugEnabled": "El modo debug está activado. Esto puede causar lag cuando envíes grandes paquetes.",
+
   "debug.unstable": "Modo inestable está activado. Este cubrera el servidor de errores críticos, pero puede causar corrupción en datos de plugins.",
   "debug.unstable.unsupported": "Además, el modo inestable no está soportado por los desarolladores de GreenFrog y eres responsable de corrupción de datos si ocurre.",
 
-  "debug.player.unsupportedActionID": "ID de acción no soportada de %s%: %d%.",
-  "debug.player.unsupportedActionID.block": "ID de acción de bloque no soportada de %s%: %d%",
-
   "debug.playerlist.invalid": "Se ingoró un paquete PlayerList inválido.",
+
+  "debug.player.unsupportedAction.id": "ID de acción no soportada de %s%: %d%.",
+  "debug.player.unsupportedAction.block": "ID de acción de bloque no soportada de %s%: %d%",
 
   "chat.format": "<%s%> %d%",
   "chat.format.plugin": "%s%",
