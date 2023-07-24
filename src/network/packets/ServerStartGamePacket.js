@@ -15,6 +15,8 @@
  */
 const PacketConstructor = require("./PacketConstructor");
 
+const ChatRestrictionLevel = require("./types/ChatRestrictionLevel");
+
 class ServerStartGamePacket extends PacketConstructor {
 	name = "start_game";
 	/** @type {number} */
@@ -114,7 +116,7 @@ class ServerStartGamePacket extends PacketConstructor {
 				link_uri: "",
 			},
 			experimental_gameplay_override: false,
-			chat_restriction_level: "none",
+			chat_restriction_level: ChatRestrictionLevel.NONE,
 			disable_player_interactions: false,
 			level_id: this.world_name,
 			world_name: this.world_name,
@@ -124,7 +126,7 @@ class ServerStartGamePacket extends PacketConstructor {
 			rewind_history_size: 20,
 			server_authoritative_block_breaking: false,
 			current_tick: [0, 0],
-			enchantment_seed: 1553099102,
+			enchantment_seed: 0,
 			block_properties: [],
 			itemstates: this.itemstates,
 			multiplayer_correlation_id: "00000000-0000-0000-0000-000000000000",
