@@ -32,6 +32,6 @@ module.exports = {
 	execute(_server, player, args) {
 		const message = getKey("chat.format.me").replace("%s%", player.username).replace("%d%", args.join(" "));
 
-		Frog.broadcastMessage(message)
+		Frog.broadcastMessage(message);
 	},
 };

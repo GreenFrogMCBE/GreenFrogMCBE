@@ -48,7 +48,7 @@ const ServerTrimDataPacket = require("./ServerTrimDataPacket");
 const OfflinePermissionManager = require("../../api/permission/OfflinePermissionManager");
 
 const ClientCommandManager = require("../../player/CommandManager");
-const ServerCommandManager = require("../../server/CommandManager")
+const ServerCommandManager = require("../../server/CommandManager");
 
 const Logger = require("../../server/Logger");
 const World = require("../../world/World");
@@ -258,7 +258,7 @@ class ClientResourcePackResponsePacket extends PacketConstructor {
 				Logger.info(getKey("status.resourcePacks.spawned").replace("%s%", player.username));
 
 				setTimeout(() => {
-					player.sendPlayStatus(PlayStatus.PLAYER_SPAWN)
+					player.sendPlayStatus(PlayStatus.PLAYER_SPAWN);
 
 					Frog.eventEmitter.emit("playerSpawn", {
 						player,

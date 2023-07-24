@@ -32,10 +32,10 @@ module.exports = {
 			let name = player.toLowerCase();
 
 			const findSelector = (selector) => {
-				return selector.username.toLowerCase() === name
-			}
+				return selector.username.toLowerCase() === name;
+			};
 
-			return playersOnline.find(findSelector)
+			return playersOnline.find(findSelector);
 		} catch {
 			return null;
 		}

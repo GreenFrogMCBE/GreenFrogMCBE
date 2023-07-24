@@ -111,7 +111,7 @@ module.exports = {
 	 * Kills the server
 	 */
 	async killServer() {
-		process.exit(require("../Frog").config.dev.exitCode)
+		process.exit(require("../Frog").config.dev.exitCode);
 	},
 
 	/**

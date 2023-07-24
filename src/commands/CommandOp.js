@@ -35,7 +35,7 @@ module.exports = {
 		const playerName = args[0];
 
 		try {
-			OfflinePermissionManager.changeOpStatus(playerName, true)
+			OfflinePermissionManager.changeOpStatus(playerName, true);
 
 			player.sendMessage(getKey("commands.op.execution.success").replace("%s%", playerName));
 		} catch {

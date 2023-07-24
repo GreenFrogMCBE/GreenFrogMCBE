@@ -20,7 +20,7 @@ const { getKey } = require("../utils/Language");
 const VersionToProtocol = require("../utils/VersionToProtocol");
 
 const config = Frog.config;
-const version = config.serverInfo.version
+const version = config.serverInfo.version;
 
 /**
  * A command that shows the server's version
