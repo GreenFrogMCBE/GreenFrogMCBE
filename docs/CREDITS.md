@@ -28,7 +28,7 @@
 > For reporting a bug that /help wasn't working <br>
 > For making the code better in commands like `/pl`, `/list`, `/deop`, `/help`, `/time`, `/say`, `/me`, `/op` <br>
 > For making `PluginManager.getPlugins()` better (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/82) <br>
-> For improving `listen()` in Server.js (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/105) <br>
+> For improving `listen()` in `Server.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/105) <br>
 > For improving `generateLicenseHeaders.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/106)
 
 4. @ATXLtheAxolotl
