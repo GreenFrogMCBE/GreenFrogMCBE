@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../../Frog");
@@ -21,20 +21,18 @@ const Logger = require("../../server/Logger");
 const PacketConstructor = require("./PacketConstructor");
 
 const { getKey } = require("../../utils/Language");
-const { serverConfigurationFiles } = Frog;
-const { config } = serverConfigurationFiles;
 
 class ClientTextPacket extends PacketConstructor {
 	name = "text";
 
-	async readPacket(player, packet, server) {
+	async readPacket(player, packet) {
 		const message = packet.data.params.message;
 
 		if (shouldDisableChat() || isEmptyMessage(message)) {
 			return;
 		}
 
-		if (!shouldChat(server, player, message)) {
+		if (!shouldChat(player, message)) {
 			return;
 		}
 
@@ -42,7 +40,7 @@ class ClientTextPacket extends PacketConstructor {
 			const cleanMessage = cleanInvalidCharacters(message);
 
 			if (isMessageTooLong(cleanMessage)) {
-				handleMalformattedChatMessage(server, player, cleanMessage);
+				handleMalformattedChatMessage(player, cleanMessage);
 				return;
 			}
 		}
@@ -55,18 +53,17 @@ class ClientTextPacket extends PacketConstructor {
 }
 
 function shouldDisableChat() {
-	return config.chat.disable;
+	return require("../../Frog").config.chat.disable;
 }
 
 function isEmptyMessage(message) {
 	return !message.trim();
 }
 
-function shouldChat(server, player, message) {
+function shouldChat(player, message) {
 	let shouldChat = true;
 
 	Frog.eventEmitter.emit("playerChat", {
-		server,
 		player,
 		message,
 		cancel: () => {
@@ -78,7 +75,7 @@ function shouldChat(server, player, message) {
 }
 
 function shouldBlockInvalidMessages() {
-	return config.chat.blockInvalidMessages;
+	return require("../../Frog").config.chat.blockInvalidMessages;
 }
 
 function cleanInvalidCharacters(message) {
@@ -89,9 +86,8 @@ function isMessageTooLong(message) {
 	return message.length > 256;
 }
 
-function handleMalformattedChatMessage(server, player, message) {
+function handleMalformattedChatMessage(player, message) {
 	Frog.eventEmitter.emit("playerMalformattedChatMessage", {
-		server,
 		player,
 		message,
 	});

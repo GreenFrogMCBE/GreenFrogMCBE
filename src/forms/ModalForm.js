@@ -10,18 +10,18 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
-const FormTypess = require("./types/FormTypes");
+const FormType = require("./types/FormType");
 
 class ModalForm {
 	constructor() {
 		/**
-		 * @type {FormTypess}
+		 * @type {FormType}
 		 *
-		 * @type {import("./types/FormTypes")}
+		 * @type {import("./types/FormType")}
 		 */
 		this.title = "";
 
@@ -49,7 +49,7 @@ class ModalForm {
 		 * @type {function}
 		 *
 		 * @param {ModalForm} form
-		 * @param {Client} client
+		 * @param {import('frog-protocol').Client} client
 		 */
 		this.onSend = () => {};
 	}
@@ -57,13 +57,13 @@ class ModalForm {
 	/**
 	 * Sends the modal form to the specified client.
 	 *
-	 * @param {Client} client
+	 * @param {import('frog-protocol').Client} client
 	 */
 	send(client) {
 		this.onSend(this, client);
 
 		const FormRequestPacket = new ServerFormRequestPacket();
-		FormRequestPacket.type = FormTypess.MODAL_FORM;
+		FormRequestPacket.type = FormType.MODAL_FORM;
 		FormRequestPacket.id = this.id;
 		FormRequestPacket.title = this.title;
 		FormRequestPacket.content = this.text;

@@ -2,16 +2,16 @@
 
 ## API changes
 
-- Type changes that you did here (ignore if you didn't do any changes related to this category)
+- Describe any relevant changes you made to the API here
 
-## Types/JSDoc changes
+## JSDoc/Declarations changes
 
-- Type changes that you did here (ignore if you didn't do any changes related to this category)
+- Describe any relevant changes you made to the JSDoc or declarations here
 
 ## Behavior changes
 
-- Type changes that you did here (ignore if you didn't do any changes related to this category)
+- Describe any relevant changes you made to the server behaviour (e.g., added forms support) here
 
 ## Other changes
 
-- Type changes that you did here (ignore if you didn't do any changes related to this category)
+- Describe any other changes

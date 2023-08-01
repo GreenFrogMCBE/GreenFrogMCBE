@@ -10,19 +10,17 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ScoreAction = require("../../scoreboard/types/ScoreAction");
-
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerSetScorePacket extends PacketConstructor {
 	name = "set_score";
-	/** @type {ScoreAction} */
-	action = ScoreAction.UNKNOWN;
+	/** @type {import("../../scoreboard/types/ScoreAction")} */
+	action;
 	/** @type {Array} */
-	entries = [];
+	entries;
 
 	writePacket(client) {
 		client.queue(this.name, {

@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const PacketConstructor = require("./PacketConstructor");
@@ -21,9 +21,9 @@ class ServerResponsePackInfoPacket extends PacketConstructor {
 	must_accept = false;
 	/** @type {boolean} */
 	has_scripts = false;
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	behavior_packs = [];
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	texture_packs = [];
 
 	writePacket(client) {

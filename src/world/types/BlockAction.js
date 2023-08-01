@@ -10,11 +10,11 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-	BLOCKBREAK: "break_block",
-	CLICKBLOCK: "click_block",
-	CLICKAIR: "click_air",
+	BLOCK_BREAK: "break_block",
+	CLICK_BLOCK: "click_block",
+	CLICK_AIR: "click_air",
 });

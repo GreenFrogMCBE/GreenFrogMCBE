@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ClientRunCommand = require("../test/ClientRunCommand");
@@ -30,7 +30,7 @@ setTimeout(() => {
 	try {
 		TestConfigs.test();
 	} catch (e) {
-		handleTestFailure("Failed to test the configs!", e);
+		handleTestFailure("Failed to test the.!", e);
 	}
 
 	setTimeout(() => {

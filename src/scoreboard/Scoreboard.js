@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Random = require("../utils/Random");
@@ -52,7 +52,7 @@ class Scoreboard {
 		/** @type {number} - The sort order of the scoreboard. */
 		this.sortOrder = 1;
 
-		/** @type {Client} - The player to whom the scoreboard will be displayed. */
+		/** @type {import("frog-protocol").Client} - The player to whom the scoreboard will be displayed. */
 		this.player;
 	}
 
@@ -63,7 +63,6 @@ class Scoreboard {
 		let shouldCreateScoreboard = true;
 
 		Frog.eventEmitter.emit("scoreboardCreation", {
-			server: require("../Server"),
 			scoreboard: this,
 			cancel: () => {
 				shouldCreateScoreboard = false;
@@ -94,7 +93,6 @@ class Scoreboard {
 		let shouldSetScore = true;
 
 		Frog.eventEmitter.emit("scoreboardSetScore", {
-			server: require("../Server"),
 			scoreboard: this,
 			cancel: () => {
 				shouldSetScore = false;
@@ -127,7 +125,6 @@ class Scoreboard {
 		let shouldDeleteScore = true;
 
 		Frog.eventEmitter.emit("scoreboardScoreDelete", {
-			server: require("../Server"),
 			scoreboard: this,
 			cancel: () => {
 				shouldDeleteScore = false;
@@ -158,7 +155,6 @@ class Scoreboard {
 		let shouldDelete = true;
 
 		Frog.eventEmitter.emit("scoreboardDelete", {
-			server: require("../Server"),
 			scoreboard: this,
 			cancel: () => {
 				shouldDelete = false;

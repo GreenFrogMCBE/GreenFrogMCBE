@@ -10,10 +10,10 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerListType = require("./types/PlayerListType");
+const PlayerList = require("./types/PlayerListAction");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -25,7 +25,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 	uuid;
 	/** @type {number} */
 	id;
-	/** @type {PlayerListType} */
+	/** @type {PlayerList} */
 	type;
 	/** @type {number} */
 	xbox_id;
@@ -33,10 +33,10 @@ class ServerPlayerListPacket extends PacketConstructor {
 	writePacket(client) {
 		let data = null;
 
-		if (this.type === PlayerListType.REMOVE) {
+		if (this.type === PlayerList.REMOVE) {
 			data = {
 				records: {
-					type: PlayerListType.REMOVE,
+					type: PlayerList.REMOVE,
 					records_count: 1,
 					records: [
 						{
@@ -48,7 +48,7 @@ class ServerPlayerListPacket extends PacketConstructor {
 		} else {
 			data = {
 				records: {
-					type: PlayerListType.ADD,
+					type: PlayerList.ADD,
 					records_count: 1,
 					records: [
 						{

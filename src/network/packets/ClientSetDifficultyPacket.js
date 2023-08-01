@@ -10,12 +10,12 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../../Frog");
 
-const World = require("../../world/World");
+const PlayerInfo = require("../../api/player/PlayerInfo");
 
 const PacketConstructor = require("./PacketConstructor");
 
@@ -31,7 +31,7 @@ class ClientSetDifficultyPacket extends PacketConstructor {
 			difficulty,
 		});
 
-		for (const player of new World().getPlayersInWorld()) {
+		for (const player of PlayerInfo.players) {
 			player.setDifficulty(difficulty);
 		}
 	}

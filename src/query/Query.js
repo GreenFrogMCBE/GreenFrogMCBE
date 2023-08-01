@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../Frog");
@@ -23,21 +23,21 @@ const { SmartBuffer } = require("@harmonytf/smart-buffer");
 const dgram = require("dgram");
 
 /**
- * Will only work if `config.query.logPackets` is enabled
+ * Will only work if .query.logPackets` is enabled
  *
  * @param {string} string
  */
 function _logPacket(string) {
-	if (Frog.serverConfigurationFiles.config.query.logPackets || Frog.isTest || Frog.isDebug) Logger.info(string);
+	if (Frog.config.query.logPackets || Frog.isTest || Frog.isDebug) Logger.info(string);
 }
 
 /**
- * Will only work if `config.query.logConnections` is enabled
+ * Will only work if .query.logConnections` is enabled
  *
  * @param {string} string
  */
 function _logConnection(string) {
-	if (Frog.serverConfigurationFiles.config.query.logConnections || Frog.isTest || Frog.isDebug) Logger.info(string);
+	if (Frog.config.query.logConnections || Frog.isTest || Frog.isDebug) Logger.info(string);
 }
 
 /**
@@ -64,7 +64,7 @@ function _handle(msg, remoteInfo, clientTokens, socket, info) {
 	if (magic !== 0xfefd) {
 		Frog.eventEmitter.emit("queryInvalidPacket", { query: { info: info, socket: socket }, type, magic, msg, remoteInfo });
 
-		if (config.query.logConnections) Logger.warning(getKey("query.server.network.invalidPacket").replace("%s%", `${remoteInfo.address}`));
+		if (Frog.config.query.logConnections) Logger.warning(getKey("query.server.network.invalidPacket").replace("%s%", `${remoteInfo.address}`));
 		return;
 	}
 

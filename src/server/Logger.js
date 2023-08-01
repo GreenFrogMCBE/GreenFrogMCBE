@@ -1,5 +1,5 @@
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
  * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const { convertConsoleColor } = require("../utils/ConsoleColorConvertor");
@@ -22,29 +22,27 @@ const LoggingException = require("../utils/exceptions/LoggingException");
  * Fires the `serverLogMessage` event
  *
  * @param {string} langString
- * @param {string} color
+ * @param {number} color
  * @param {string} message
  * @param {string} type
  */
 function fireEvent(langString, color, message, type) {
-	require("../Frog").eventEmitter.emit("serverLogMessage", {
-		type: langString,
+	const Frog = require("../Frog");
+
+	Frog.eventEmitter.emit("serverLogMessage", {
+		type,
+		langString,
 		message,
-		server: require("../Frog"),
-		legacy: {
-			color,
-			type,
-		},
+		color,
 	});
 }
 
 module.exports = {
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	messages: [],
 
 	/**
-	 * @throws {LoggingException} - If the log type is invalid (valid are info, warn, error, debug)
-	 * @throws {LoggingException} - If the log type is 'warning' (common NodeJS mistake) (must be 'warn')
+	 * @throws {LoggingException} - If the log type is invalid (valid types are info, warn, error, debug)
 	 *
 	 * @param {string} langString
 	 * @param {number} color
@@ -70,39 +68,38 @@ module.exports = {
 	 * @param {string} message
 	 */
 	info(message) {
-		this.log(getKey("logger.info"), "32", message, "info");
+		this.log(getKey("logger.info"), 32, message, "info");
 	},
 
 	/**
-	 * Logs a message to the console as warning
+	 * Logs a message to the console as a warning
 	 *
 	 * @param {string} message
-	 *
 	 */
 	warning(message) {
-		this.log(getKey("logger.warn"), "33", message, "warn");
+		this.log(getKey("logger.warn"), 33, message, "warn");
 	},
 
 	/**
-	 * Logs a message to the console as error
+	 * Logs a message to the console as an error
 	 *
 	 * @param {string} message
-	 *
 	 */
 	error(message) {
-		this.log(getKey("logger.error"), "31", message, "error");
+		this.log(getKey("logger.error"), 31, message, "error");
 	},
 
 	/**
 	 * Logs a message to the console as debug
-	 * Requires for debug to be enabled in the server settings
+	 * Requires debug to be enabled in the server settings
 	 *
 	 * @param {string} message
-	 *
 	 */
 	debug(message) {
-		if (!(process.env.DEBUG === "minecraft-protocol" || require("../Frog").isDebug)) return;
+		const Frog = require("../Frog");
 
-		this.log(getKey("logger.debug"), "35", message, "info");
+		if (!Frog.isDebug) return;
+
+		this.log(getKey("logger.debug"), 35, message, "info");
 	},
 };

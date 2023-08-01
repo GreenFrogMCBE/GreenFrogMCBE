@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../Frog");
@@ -26,12 +26,11 @@ module.exports = {
 	 */
 	async clearOfflinePlayers() {
 		Frog.eventEmitter.emit("serverOfflinePlayersGarbageCollection", {
-			server: Frog.getServer(),
 			players: PlayerInfo.players,
 		});
 
 		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			const isOffline = PlayerInfo.players[i].q || PlayerInfo.players[i].offline; // "q" gets created in the player object by bedrock-protocol when the player leaves the server
+			const isOffline = PlayerInfo.players[i].offline;
 
 			if (isOffline) {
 				Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s%", PlayerInfo.players[i].username));
@@ -51,7 +50,6 @@ module.exports = {
 		await this.clearOfflinePlayers();
 
 		Frog.eventEmitter.emit("serverGarbageCollection", {
-			server: Frog.getServer(),
 			players: PlayerInfo.players,
 		});
 

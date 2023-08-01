@@ -10,17 +10,12 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Gamemode = require("../../api/player/Gamemode");
-const Difficulty = require("../../api/types/Difficulty");
-const Dimension = require("../../world/types/Dimension");
-const MovementAuthority = require("./types/MovementAuthority");
-const GeneratorType = require("../../world/types/GeneratorType");
-const PermissionLevel = require("../../api/permission/PermissionLevel");
-
 const PacketConstructor = require("./PacketConstructor");
+
+const ChatRestrictionLevel = require("./types/ChatRestrictionLevel");
 
 class ServerStartGamePacket extends PacketConstructor {
 	name = "start_game";
@@ -28,39 +23,39 @@ class ServerStartGamePacket extends PacketConstructor {
 	entity_id;
 	/** @type {number} */
 	runtime_entity_id;
-	/** @type {Gamemode} */
+	/** @type {import("../../api/player/Gamemode")} */
 	player_gamemode;
 	/** @type {JSON} */
 	player_position;
 	/** @type {JSON} */
 	rotation;
-	/** @type {Array<Number>} */
+	/** @type {Array<number>} */
 	seed;
 	/** @type {number} */
 	biome_type;
-	/** @type {Biome} */
+	/** @type {import("../../world/types/Biome")} */
 	biome_name;
 	/** @type {Dimension} */
 	dimension;
-	/** @type {GeneratorType} */
+	/** @type {import("../../world/types/GeneratorType")} */
 	generator;
 	/** @type {Gamemode} */
 	world_gamemode;
-	/** @type {Difficulty} */
+	/** @type {import("../../api/types/Difficulty")} */
 	difficulty;
 	/** @type {JSON} */
 	spawn_position;
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	gamerules;
-	/** @type {Array} */
+	/** @type {Array<any>} */
 	itemstates;
 	/** @type {string} */
 	world_name;
 	/** @type {string} */
 	game_version;
-	/** @type {MovementAuthority} */
+	/** @type {import("./types/MovementAuthority")} */
 	movement_authority;
-	/** @type {PermissionLevel} */
+	/** @type {import("../../api/permission/PermissionLevel")} */
 	permission_level;
 
 	writePacket(client) {
@@ -121,7 +116,7 @@ class ServerStartGamePacket extends PacketConstructor {
 				link_uri: "",
 			},
 			experimental_gameplay_override: false,
-			chat_restriction_level: "none",
+			chat_restriction_level: ChatRestrictionLevel.NONE,
 			disable_player_interactions: false,
 			level_id: this.world_name,
 			world_name: this.world_name,
@@ -131,7 +126,7 @@ class ServerStartGamePacket extends PacketConstructor {
 			rewind_history_size: 20,
 			server_authoritative_block_breaking: false,
 			current_tick: [0, 0],
-			enchantment_seed: 1553099102,
+			enchantment_seed: 0,
 			block_properties: [],
 			itemstates: this.itemstates,
 			multiplayer_correlation_id: "00000000-0000-0000-0000-000000000000",

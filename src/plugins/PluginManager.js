@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const { getKey } = require("../utils/Language");
@@ -25,13 +25,11 @@ module.exports = {
 	 * Returns plugins and their versions as array
 	 * Example: ["ExamplePlugin v1.0.0"]
 	 *
-	 * @returns {Array<String>}
+	 * @returns {Array<string>}
 	 */
 	plugins,
 
 	/**
-	 * Adds plugin to the plugin list
-	 *
 	 * @throws {PluginSetupException} - If there is no plugin name
 	 * @throws {PluginSetupException} - If there is no plugin version
 	 *

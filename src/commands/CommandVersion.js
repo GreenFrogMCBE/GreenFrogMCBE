@@ -10,18 +10,22 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../Frog");
 
 const Colors = require("../api/color/Colors");
 const { getKey } = require("../utils/Language");
+const VersionToProtocol = require("../utils/VersionToProtocol");
+
+const config = Frog.config;
+const version = config.serverInfo.version;
 
 /**
  * A command that shows the server's version
  *
- * @type {import('../../types/interfaces/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {
@@ -33,7 +37,7 @@ module.exports = {
 	},
 
 	execute(_server, player) {
-		const versionMsg = getKey("frog.version").replace("%s%", Frog.getServerData().minorServerVersion);
+		const versionMsg = getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%d%", version).replace("%f%", VersionToProtocol.getProtocol(version));
 		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
 	},
 };

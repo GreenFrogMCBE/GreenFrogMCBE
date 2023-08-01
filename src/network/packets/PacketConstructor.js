@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const { getKey } = require("../../utils/Language");
@@ -26,16 +26,16 @@ class PacketConstructor {
 	validatePacket() {}
 
 	/**
-	 * @param {Client} player
+	 * @param {import("frog-protocol").Client} player
 	 */
 	writePacket() {
 		throw new UnsupportedOperationException(getKey("network.packet.failed.clientSide"));
 	}
 
 	/**
-	 * @param {Client} player
+	 * @param {import("frog-protocol").Client} player
 	 * @param {JSON} packet
-	 * @param {Server} server
+	 * @param {import("frog-protocol").Server} server
 	 */
 	readPacket() {
 		throw new UnsupportedOperationException(getKey("network.packet.failed.serverSide"));

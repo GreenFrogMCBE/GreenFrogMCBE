@@ -10,10 +10,10 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const eventLib = require("events");
+const events = require("events");
 
 const PluginLoader = require("./plugins/PluginLoader");
 const PlayerInfo = require("./api/player/PlayerInfo");
@@ -26,25 +26,29 @@ const yaml = require("js-yaml");
 const fs = require("fs");
 
 /**
- * Event emitter
- *
  * @private
- * @returns {EventEmitter}
+ * @returns {import('../interfaces/EventEmitter')}
  */
-const _eventEmitter = new eventLib();
-
-let __server;
+const _eventEmitter = new events();
 
 /**
- * Returns configuration files
- *
- * @returns {ConfigurationFile}
- * @type {import('./type/ConfigurationFile')}
+ * @private
+ * @type {any}
+ */
+let _server;
+
+/**
+ * @private
  */
 function getConfig() {
-	return {
-		config: yaml.load(fs.readFileSync("config.yml", "utf8")),
-	};
+	return yaml.load(fs.readFileSync("config.yml", "utf8"));
+}
+
+/**
+ * @private
+ */
+function getLang() {
+	return require("./lang/" + yaml.load(fs.readFileSync("config.yml", "utf8")).chat.lang);
 }
 
 module.exports = {
@@ -53,7 +57,7 @@ module.exports = {
 	 *
 	 * @returns {boolean}
 	 */
-	isDebug: process.argv.includes("--debug") || getConfig().config.dev.debug,
+	isDebug: process.argv.includes("--debug") || getConfig().dev.debug,
 
 	/**
 	 * Returns if the server is running in the test workflow
@@ -68,7 +72,7 @@ module.exports = {
 	 * @returns {Server}
 	 */
 	getServer() {
-		return __server;
+		return _server;
 	},
 
 	/**
@@ -78,39 +82,44 @@ module.exports = {
 	 * @param {Server}
 	 */
 	setServer: (server) => {
-		__server = server;
+		_server = server;
 	},
 
 	/**
-	 * Returns configuration files (e.g config.yml, and language files)
+	 * Returns the configuration file
 	 *
-	 * @returns {ConfigurationFile}
+	 * @returns {any}
 	 */
-	serverConfigurationFiles: getConfig(),
+	config: getConfig(),
 
 	/**
-	 * Returns if the event emitter for plugins
+	 * Returns the language file
+	 *
+	 * @returns {any}
+	 */
+	lang: getLang(),
+
+	/**
+	 * Returns the event emitter for plugins
 	 * to listen for, and for server to execute
 	 * events
 	 *
-	 * @returns {EventEmitter}
-	 * @type {import('../types/interfaces/EventEmitter')}
+	 * @returns {import('../interfaces/EventEmitter')}
+	 * @type {import('../interfaces/EventEmitter')}
 	 */
 	eventEmitter: _eventEmitter,
 
 	/**
 	 * Returns server data
 	 *
-	 * @returns {ServerData}
-	 * @type {import('./type/ServerData')}
+	 * @type {import("./declarations/Typedefs").ServerInfo}
+	 * @returns {import("./declarations/Typedefs").ServerInfo}
 	 */
-	getServerData() {
-		return {
-			minorServerVersion: "3.7",
-			versionDescription: "Added query and containers",
-			majorServerVersion: "3.0",
-			apiVersion: "3.0",
-		};
+	releaseData: {
+		minorServerVersion: "3.7",
+		versionDescription: "Added query and containers",
+		majorServerVersion: "3.0",
+		apiVersion: "3.0",
 	},
 
 	/**
@@ -128,7 +137,7 @@ module.exports = {
 
 	/**
 	 * Shutdowns the server correctly
-	 * Also its calls onShutdown() in every
+	 * Also it calls `onShutdown()` in every
 	 * single plugin that is loaded
 	 *
 	 * @param {string} shutdownMessage
@@ -137,7 +146,6 @@ module.exports = {
 		let shouldShutdown = true;
 
 		this.eventEmitter.emit("serverShutdownEvent", {
-			server: this,
 			cancel: () => {
 				shouldShutdown = false;
 			},
@@ -155,16 +163,6 @@ module.exports = {
 		}
 	},
 
-	/** Player count. Do not use this in your plugin, please */
-	__playerCount: 0,
-
-	/** Adds player to player count. Do not use this in your plugin, please */
-	__addPlayer() {
-		this.__playerCount++;
-	},
-
-	/** Removes player from player count. Do not use this in your plugin, please */
-	__deletePlayer() {
-		this.__playerCount--;
-	},
+	/** @type {number} */
+	_playerCount: 0,
 };

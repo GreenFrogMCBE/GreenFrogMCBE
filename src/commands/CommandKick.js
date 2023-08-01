@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const { getKey } = require("../utils/Language");
@@ -20,7 +20,7 @@ const PlayerInfo = require("../api/player/PlayerInfo");
 /**
  * A command that kicks the specified player
  *
- * @type {import('../../types/interfaces/Command').Command}
+ * @type {import('../../declarations/Command').Command}
  */
 module.exports = {
 	data: {
@@ -33,11 +33,7 @@ module.exports = {
 	execute(_server, player, args) {
 		const playerName = args[0];
 
-		let reason = ": " + args.slice(1).join(" ");
-
-		if (reason === ": ") {
-			reason = "";
-		}
+		let reason = args.slice(1).join(" ");
 
 		const target = PlayerInfo.get(playerName);
 

@@ -15,6 +15,7 @@
   "commands.errors.syntaxError.minArg": "§cSyntaxError: Minimum arguments required for this command is %s%, but you provided %d%",
   "commands.errors.syntaxError.maxArg": "§cSyntaxError: Maximum arguments required for this command is %s%, but you provided %d%",
   "commands.errors.targetError.targetsNotFound": "§cNo targets matched selector",
+  "commands.errors.targetError.notOnline": "§cNo targets matched %s%",
 
   "commands.ingame.executed": "%s% executed server command: /%d%",
 
@@ -41,9 +42,12 @@
   "commands.kick.description": "Kicks a player from the server.",
   "commands.kick.execution.failed.notOnline": "§c%s% is not online",
 
+  "commands.kill.name": "kill",
+  "commands.kill.description": "Kills entities (players, mobs, etc.).",
+
   "commands.list.name": "list",
   "commands.list.description": "Lists players on the server.",
-  "commands.list.execution.success.commandList": "There are %s% players online: %d%",
+  "commands.list.execution.success.commands": "There are %s% players online: %d%",
 
   "commands.op.name": "op",
   "commands.op.description": "Grants operator status to a player.",
@@ -99,9 +103,9 @@
   "plugin.unloading.success": "Unloaded %s%",
   "plugin.unloading.unloading": "Unloading %s%...",
 
-  "frog.version": "This server is running GreenFrogMCBE (https://github.com/andriycraft/GreenFrogMCBE). Version: %s%",
+  "frog.version": "This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s%",
 
-  "world.chunks.chunkGeneratorLimit.tooHigh": "Chunk generator limit in your config.yml is too high! It may cause lag",
+  "world.chunks.renderDistance.tooHigh": "Chunk generator limit in your config.yml is too high! It may cause lag",
 
   "errors.nodeJS.tooOld": "You are running nodeJS version that is too old to run GreenFrogMCBE",
   "errors.nodeJS.tooOld.update": "Please update it to 14.0.0+, from https://nodejs.org/",
@@ -130,13 +134,14 @@
   "warning.customItems.loading.failed": "Failed to load custom items! Error: %s%",
 
   "debug.debugEnabled": "Debug mode is enabled. This may cause lag when sending large packets",
+
   "debug.unstable": "Unstable mode is enabled. This will recover server from critical errors, but it may cause plugin data corruption",
   "debug.unstable.unsupported": "Also, unstable mode is not supported by GreenFrog developers and you are the responsive for the data corruption if it occurs",
 
-  "debug.player.unsupportedActionID": "Unsupported action ID from %s%: %d%",
-  "debug.player.unsupportedActionID.block": "Unsupported block action ID from %s%: %d%",
-
   "debug.playerlist.invalid": "Ignored invalid PlayerList packet",
+
+  "debug.player.unsupportedAction.id": "Unsupported action ID from %s%: %d%",
+  "debug.player.unsupportedAction.block": "Unsupported block action ID from %s%: %d%",
 
   "chat.format": "<%s%> %d%",
   "chat.format.plugin": "%s%",

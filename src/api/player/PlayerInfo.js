@@ -10,14 +10,13 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 let playersOnline = [];
 
 module.exports = {
 	/**
-	 * Adds player
 	 * @param player
 	 */
 	addPlayer(player) {
@@ -25,25 +24,25 @@ module.exports = {
 	},
 
 	/**
-	 * @param {object} player
-	 * @returns The player if the player is online, null otherwise.
+	 * @param { Object } player
+	 * @returns { Object | null } The player if the player is online, null otherwise.
 	 */
 	get(player) {
 		try {
 			let name = player.toLowerCase();
 
-			for (let i = 0; i < playersOnline.length; i++) {
-				if (playersOnline[i].username.toLowerCase() === name) {
-					return playersOnline[i];
-				}
-			}
+			const findSelector = (selector) => {
+				return selector.username.toLowerCase() === name;
+			};
+
+			return playersOnline.find(findSelector);
 		} catch {
 			return null;
 		}
 	},
 
 	/**
-	 * @returns The players array.
+	 * @returns {Array<any>} The players array.
 	 */
 	players: playersOnline,
 };

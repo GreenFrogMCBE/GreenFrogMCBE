@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerContainerClosePacket = require("./ServerContainerClosePacket");
@@ -33,7 +33,6 @@ class ClientContainerClosePacket extends PacketConstructor {
 			sentByServer: false,
 			player,
 			packet,
-			server,
 			cancel: () => {
 				shouldClose = false;
 			},
@@ -46,7 +45,6 @@ class ClientContainerClosePacket extends PacketConstructor {
 
 			Frog.eventEmitter.emit("inventoryContainerChestRemoval", {
 				player: player,
-				server: Frog.getServer(),
 				cancel: () => {
 					shouldRemoveTheChest = false;
 				},

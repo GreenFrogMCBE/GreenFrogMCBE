@@ -10,7 +10,7 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../../Frog");
@@ -23,17 +23,16 @@ const ResponsePackInfo = require("../../network/packets/ServerResponsePackInfoPa
 const PlayStatus = require("../../network/packets/types/PlayStatus");
 const VersionToProtocol = require("../../utils/VersionToProtocol");
 
-const { Client } = require("frog-protocol");
 const UsernameValidator = require("../../player/UsernameValidator");
 
 let server = null;
-let config = Frog.serverConfigurationFiles.config;
+let config = Frog.config;
 
 class PlayerJoinHandler {
 	/**
 	 * Executes when a player joins the server.
 	 *
-	 * @param {Client} client - The client joining the server.
+	 * @param {import('frog-protocol').Client} client - The client joining the server.
 	 */
 	async onPlayerJoin(client) {
 		await this.setupClientProperties(client);
@@ -51,7 +50,7 @@ class PlayerJoinHandler {
 	/**
 	 * Validates the username of the client
 	 *
-	 * @param {Client} client
+	 * @param {import('frog-protocol').Client} client
 	 */
 	validateUsername(client) {
 		if (!UsernameValidator.isUsernameValid(client.username) && config.dev.validateUsernames) {
@@ -63,12 +62,11 @@ class PlayerJoinHandler {
 	/**
 	 * Setups events for the client
 	 *
-	 * @param {Client} client
+	 * @param {import('frog-protocol').Client} client
 	 */
 	async setupEvents(client) {
 		Frog.eventEmitter.emit("playerPreConnectEvent", {
 			player: client,
-			server: this,
 			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
 				client.kick(reason);
 			},
@@ -80,7 +78,6 @@ class PlayerJoinHandler {
 
 			Frog.eventEmitter.emit("packetQueue", {
 				player: client,
-				server: this,
 				packetName,
 				packetData: data,
 				cancel: () => {
@@ -97,7 +94,7 @@ class PlayerJoinHandler {
 	/**
 	 * Initialises the player.
 	 *
-	 * @param {Client} client - The client to initialize.
+	 * @param {import('frog-protocol').Client} client - The client to initialize.
 	 * @returns {Promise<void>}
 	 */
 	async initPlayer(client) {
@@ -107,7 +104,7 @@ class PlayerJoinHandler {
 	/**
 	 * Sets up the client properties.
 	 *
-	 * @param {Client} client - The client to set up properties for.
+	 * @param {import('frog-protocol').Client} client - The client to set up properties for.
 	 */
 	setupClientProperties(client) {
 		Object.assign(client, {
@@ -144,7 +141,7 @@ class PlayerJoinHandler {
 			hunger: 20,
 			packetCount: 0,
 			username: client.profile.name,
-			gamemode: Frog.serverConfigurationFiles.config.world.gamemode,
+			gamemode: Frog.config.world.gamemode,
 			world: null,
 			op: null,
 			dead: false,
@@ -162,7 +159,7 @@ class PlayerJoinHandler {
 	/**
 	 * Sets up client intervals.
 	 *
-	 * @param {Client} client - The client to set up intervals for.
+	 * @param {import('frog-protocol').Client} client - The client to set up intervals for.
 	 */
 	setupClientIntervals(client) {
 		setInterval(() => {
@@ -173,7 +170,7 @@ class PlayerJoinHandler {
 	/**
 	 * Adds the player to the player list.
 	 *
-	 * @param {Client} client - The client to add to the player list.
+	 * @param {import('frog-protocol').Client} client - The client to add to the player list.
 	 */
 	addPlayer(client) {
 		PlayerInfo.addPlayer(client);
@@ -182,10 +179,10 @@ class PlayerJoinHandler {
 	/**
 	 * Handles the case when the maximum number of players is reached.
 	 *
-	 * @param {Client} client - The client to check against the maximum player count.
+	 * @param {import('frog-protocol').Client} client - The client to check against the maximum player count.
 	 */
 	handleMaxPlayers(client) {
-		if (PlayerInfo.players.length > config.maxPlayers) {
+		if (PlayerInfo.players.length > config.serverInfo.maxPlayers) {
 			const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.getKey("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL;
 			client.kick(kickMessage);
 			return;
@@ -195,12 +192,12 @@ class PlayerJoinHandler {
 	/**
 	 * Handles the version mismatch between the client and server.
 	 *
-	 * @param {Client} client - The client to check the version for.
+	 * @param {import('frog-protocol').Client} client - The client to check the version for.
 	 */
 	handleVersionMismatch(client) {
 		const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
 
-		if (!config.dev.multiProtocol) {
+		if (config.dev.multiProtocol) {
 			if (config.dev.useLegacyVersionMismatchKickMessage) {
 				if (client.version !== serverProtocol) {
 					const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version);
@@ -222,7 +219,7 @@ class PlayerJoinHandler {
 	/**
 	 * Sends the response pack info to the client.
 	 *
-	 * @param {Client} client - The client to send the response pack info to.
+	 * @param {import('frog-protocol').Client} client - The client to send the response pack info to.
 	 */
 	sendResponsePackInfo(client) {
 		const responsePackInfo = new ResponsePackInfo();
@@ -236,12 +233,11 @@ class PlayerJoinHandler {
 	/**
 	 * Emits the player join event.
 	 *
-	 * @param {Client} client - The client that joined the server.
+	 * @param {import('frog-protocol').Client} client - The client that joined the server.
 	 */
 	emitPlayerJoinEvent(client) {
 		Frog.eventEmitter.emit("playerJoin", {
 			player: client,
-			server: this,
 			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
 				client.kick(reason);
 			},

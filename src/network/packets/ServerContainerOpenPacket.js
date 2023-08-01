@@ -10,18 +10,18 @@
  * which requires you to agree to its terms if you wish to use or make any changes to it.
  *
  * @license CC-BY-4.0
- * @link Github - https://github.com/andriycraft/GreenFrogMCBE
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerContainerOpenPacket extends PacketConstructor {
 	name = "container_open";
-	/** @type {WindowId} */
+	/** @type {import("./types/WindowId")} */
 	window_id;
 	/** @type {JSON} */
 	coordinates;
-	/** @type {WindowType} */
+	/** @type {import("./types/WindowType")} */
 	window_type;
 	/** @type {number} */
 	runtime_entity_id;
