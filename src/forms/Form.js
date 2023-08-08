@@ -21,11 +21,6 @@ const FormVariant = require("./types/Form");
 class Form {
 	constructor() {
 		/**
-		 * @type {import("Frog").Form}
-		 */
-		this.type = FormVariant.FORM;
-
-		/**
 		 * The title of the form.
 		 * @type {string}
 		 */
@@ -55,7 +50,7 @@ class Form {
 		 * The text in the form.
 		 * @type {string}
 		 */
-		this.text;
+		this.content;
 	}
 
 	/**
@@ -65,9 +60,9 @@ class Form {
 		const formRequest = new ServerFormRequestPacket();
 		formRequest.id = this.id;
 		formRequest.title = this.title;
-		formRequest.text = this.text;
+		formRequest.content = this.content;
 		formRequest.buttons = JSON.stringify(this.buttons);
-		formRequest.type = this.type;
+		formRequest.type = FormVariant.FORM;
 		formRequest.writePacket(player);
 
 		this.onSend(this, player);

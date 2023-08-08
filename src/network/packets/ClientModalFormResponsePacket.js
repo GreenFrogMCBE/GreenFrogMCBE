@@ -20,10 +20,14 @@ const Packet = require("./Packet");
 class ClientModalFormResponsePacket extends Packet {
 	name = "modal_form_response";
 
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
+	 */
 	async readPacket(player, packet) {
 		Frog.eventEmitter.emit("playerFormResponse", {
 			player,
-			formData: packet,
+			packet,
 		});
 	}
 }
