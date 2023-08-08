@@ -35,11 +35,10 @@ class CommandKick extends Command {
 	 */
 	execute(player, server, args) {
 		const playerName = args[0];
-
-		let reason = args.slice(1).join(" ");
+		const reason = args.slice(1).join(" ");
 
 		const target = PlayerInfo.getPlayer(playerName);
-		console.log(target, reason, playerName);
+
 		if (!target) {
 			player.sendMessage(getKey("commands.kick.execution.failed.notOnline").replace("%s", playerName));
 			return;
