@@ -97,7 +97,10 @@ class CommandKill extends Command {
 
 					subject.setHealth(0, DamageCause.KILL_COMMAND);
 				} catch {
-					player.sendMessage(getKey("commands.kill.execution.failed.notOnline").replace("%s", args[0]));
+					player.sendMessage(
+						getKey("commands.kill.execution.failed.notOnline")
+							.replace("%s", args[0])
+					);
 				}
 				break;
 			}

@@ -40,9 +40,15 @@ class CommandOp extends Command {
 		try {
 			PermissionManager.setOpStatus(playerName, true);
 
-			player.sendMessage(getKey("commands.op.execution.success").replace("%s", playerName));
+			player.sendMessage(
+				getKey("commands.op.execution.success")
+					.replace("%s", playerName)
+			);
 		} catch {
-			player.sendMessage(getKey("commands.op.execution.failed").replace("%s", playerName));
+			player.sendMessage(
+				getKey("commands.op.execution.failed")
+					.replace("%s", playerName)
+			);
 		}
 	}
 }

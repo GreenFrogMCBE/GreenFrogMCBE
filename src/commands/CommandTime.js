@@ -51,7 +51,10 @@ class CommandTime extends Command {
 			player.setTime(parsedTime);
 		}
 
-		player.sendMessage(getKey("commands.time.execution.success").replace("%s", time));
+		player.sendMessage(
+			getKey("commands.time.execution.success")
+				.replace("%s", time)
+		);
 	}
 }
 

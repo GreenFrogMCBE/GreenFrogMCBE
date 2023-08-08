@@ -34,7 +34,9 @@ class CommandSay extends Command {
 	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
-		const message = getKey("chat.format.say").replace(`%s`, player.username).replace(`%d`, args.join(" "));
+		const message = getKey("chat.format.say")
+			.replace(`%s`, player.username)
+			.replace(`%d`, args.join(" "));
 
 		Frog.broadcastMessage(message);
 	}

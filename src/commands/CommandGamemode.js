@@ -63,20 +63,25 @@ class CommandGamemode extends Command {
 		const gamemode = gamemodeMap[args[0]];
 
 		if (!gamemode) {
-			player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s", args[0]));
+			player.sendMessage(
+				getKey("commands.gamemode.execution.invalidGamemode")
+					.replace("%s", args[0])
+			);
 			return;
 		}
 
-		try {
-			player.setGamemode(gamemode);
+		player.setGamemode(gamemode);
 
-			const gmStr = gamemode.charAt(0).toUpperCase() + gamemode.slice(1);
+		const gmStr = gamemode.charAt(0).toUpperCase() + gamemode.slice(1);
 
-			player.sendMessage(getKey("commands.gamemode.execution.success.updated").replace("%s", gmStr));
-			player.sendMessage(getKey("commands.gamemode.execution.success.set").replace("%s", gmStr));
-		} catch {
-			player.sendMessage(getKey("commands.gamemode.execution.invalidGamemode"));
-		}
+		player.sendMessage(
+			getKey("commands.gamemode.execution.success.updated")
+				.replace("%s", gmStr)
+		);
+		player.sendMessage(
+			getKey("commands.gamemode.execution.success.set")
+				.replace("%s", gmStr)
+		);
 	}
 }
 
