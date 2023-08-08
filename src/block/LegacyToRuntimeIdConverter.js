@@ -15,6 +15,8 @@
  */
 const InvalidBlockException = require("../utils/exceptions/InvalidBlockException");
 
+const items = require("../resources/creativeContent.json").items;
+
 module.exports = {
 	/**
 	 * Converts a legacy/network ID to a runtime ID
@@ -23,10 +25,6 @@ module.exports = {
 	 * @returns {number}
 	 */
 	convert(legacyId) {
-		const creativeContent = require("../resources/creativeContent.json");
-
-		const { items } = creativeContent;
-
 		for (const item of items) {
 			if (legacyId === item.item.network_id) {
 				return item.item.block_runtime_id;
