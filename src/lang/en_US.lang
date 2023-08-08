@@ -42,11 +42,11 @@ commands.kick.description=Kicks a player from the server.
 commands.kick.execution.failed.notOnline=§c%s is not online
 
 commands.kill.name=kill
-commands.kill.description=Kills entities (playersOnline.mobs etc.).
+commands.kill.description=Kills entities (players, mobs etc.).
 
 commands.list.name=list
-commands.list.description=Lists playersOnline.on the server.
-commands.list.execution.success.commands=There are %s playersOnline.online %d
+commands.list.description=Lists players on the server.
+commands.list.execution.success.commands=There are %s players online %d
 
 commands.op.name=op
 commands.op.description=Grants operator status to a player.
