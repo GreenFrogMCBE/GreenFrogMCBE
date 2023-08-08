@@ -1,7 +1,7 @@
 ## Credits
 
 1. @AnyBananaGAME
-> For making `PlayerInfo.getPlayer()` not case sensitive (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/192)
+   > For making `PlayerInfo.getPlayer()` not case sensitive (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/192)
 
 > [!WARNING]
 > Contributions below are outdated <br>
@@ -13,7 +13,7 @@
 > For adding `tests-manual.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/70) <br>
 
 2. @hvlxh
-> For showing example of a world generator in our Discord <br>
+   > For showing example of a world generator in our Discord <br>
 
 > [!WARNING]
 > Contributions below are outdated <br>
@@ -30,7 +30,7 @@
 
 3. @NhanAZ
 
-> For fixing paths (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/77)  <br>
+> For fixing paths (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/77) <br>
 > For reporting a bug that server cannot be stopped when plugins are null <br>
 > For reporting a bug that /help wasn't working <br>
 > For making the code better in commands like `/pl`, `/list`, `/deop`, `/help`, `/time`, `/say`, `/me`, `/op` <br>

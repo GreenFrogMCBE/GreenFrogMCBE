@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerSetPlayerGameTypePacket extends Packet {
 	name = "set_player_game_types";
-	
+
 	/** @type {import("Frog").Gamemode} */
 	gamemode;
 

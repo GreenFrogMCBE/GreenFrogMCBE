@@ -19,7 +19,7 @@ let playersOnline = [];
 module.exports = {
 	/**
 	 * Adds player to the playersOnline array
-	 * 
+	 *
 	 * @param {import("Frog").Player} player
 	 */
 	addPlayer(player) {
@@ -28,12 +28,12 @@ module.exports = {
 
 	/**
 	 * Returns the player
-	 * 
+	 *
 	 * @param {string} username
 	 * @returns {import("Frog").Player | undefined} The player if the player is online, null if not.
 	 */
 	getPlayer(username) {
-		return playersOnline.find(player => player.username.toLowerCase() == username.toLowerCase());
+		return playersOnline.find((player) => player.username.toLowerCase() == username.toLowerCase());
 	},
 
 	/**

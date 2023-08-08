@@ -19,7 +19,7 @@ const Packet = require("./Packet");
 
 class ServerPlayerListPacket extends Packet {
 	name = "player_list";
-	
+
 	/** @type {string | undefined} */
 	username;
 	/** @type {string | undefined} */

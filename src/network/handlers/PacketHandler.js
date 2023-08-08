@@ -87,7 +87,7 @@ class PacketHandler {
 	/**
 	 * Iterates over the files in a directory.
 	 *
-	 * @param {string} directory 
+	 * @param {string} directory
 	 * @param {any} callback
 	 */
 	iteratePacketFiles(directory, callback) {
@@ -98,7 +98,7 @@ class PacketHandler {
 	 * Checks if a file represents a player packet.
 	 *
 	 * @param {string} filename
-	 * @returns {boolean} 
+	 * @returns {boolean}
 	 */
 	isClientPacket(filename) {
 		return filename.startsWith("Client") && filename.endsWith(".js");
@@ -107,7 +107,7 @@ class PacketHandler {
 	/**
 	 * Gets the full path of a packet file.
 	 *
-	 * @param {string} directory 
+	 * @param {string} directory
 	 * @param {string} filename
 	 * @returns {string}
 	 */
@@ -119,7 +119,7 @@ class PacketHandler {
 	 * Checks if the packet count exceeds the limit.
 	 *
 	 * @param {import("Frog").Player} player
-	 * @returns {boolean} 
+	 * @returns {boolean}
 	 */
 	exceedsPacketCountLimit(player) {
 		return ++player.network.packetCount > 2500;
@@ -149,7 +149,7 @@ class PacketHandler {
 	/**
 	 * Creates an instance of a packet.
 	 *
-	 * @param {string} packetPath 
+	 * @param {string} packetPath
 	 * @returns {import("../packets/Packet")}
 	 */
 	createPacketInstance(packetPath) {
@@ -162,7 +162,7 @@ class PacketHandler {
 	 *
 	 * @param {import("../packets/Packet")} packetClass
 	 * @param {import("Frog").Packet} packet
-	 * @returns {boolean} 
+	 * @returns {boolean}
 	 */
 	isMatchingPacket(packetClass, packet) {
 		return packetClass.name === packet.data.name;
@@ -182,9 +182,11 @@ class PacketHandler {
 			player,
 			packet: {
 				packet: packetParams,
-				instance: packetInstance
+				instance: packetInstance,
 			},
-			cancel: () => { shouldReadPacket = false }
+			cancel: () => {
+				shouldReadPacket = false;
+			},
 		});
 
 		if (shouldReadPacket) {
@@ -230,11 +232,7 @@ class PacketHandler {
 	 * @param {Error} error
 	 */
 	handlePacketError(player, error) {
-		Logger.error(
-			getKey("exceptions.network.packetHandlingError")
-				.replace("%s", player.username)
-				.replace("%d", error.stack)
-		);
+		Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s", player.username).replace("%d", error.stack));
 
 		try {
 			player.kick(getKey("kickMessages.invalidPacket"));

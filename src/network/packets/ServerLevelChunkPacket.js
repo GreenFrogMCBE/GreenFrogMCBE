@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerLevelChunkPacket extends Packet {
 	name = "level_chunk";
-	
+
 	/** @type {number | undefined} */
 	x;
 	/** @type {number | undefined} */

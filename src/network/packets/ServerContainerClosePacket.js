@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerContainerClosePacket extends Packet {
 	name = "container_close";
-	
+
 	/** @type {number | undefined} */
 	window_id;
 	/** @type {boolean | undefined} */

@@ -31,10 +31,7 @@ module.exports = {
 			const isOffline = PlayerInfo.playersOnline[i].offline;
 
 			if (isOffline) {
-				Logger.debug(
-					Language.getKey("garbageCollector.deleted")
-						.replace("%s", PlayerInfo.playersOnline[i].username)
-				);
+				Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s", PlayerInfo.playersOnline[i].username));
 
 				PlayerInfo.playersOnline.splice(i, 1);
 				i--;

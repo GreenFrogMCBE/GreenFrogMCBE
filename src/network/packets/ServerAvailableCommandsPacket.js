@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerAvailableCommandsPacket extends Packet {
 	name = "available_commands";
-	
+
 	/** @type {import("Frog").CommandPacket | undefined} */
 	data;
 

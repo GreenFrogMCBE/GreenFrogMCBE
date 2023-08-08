@@ -21,9 +21,9 @@ class ClientRequestChunkRadiusPacket extends Packet {
 	name = "request_chunk_radius";
 
 	/**
- * @param {import("Frog").Player} player
- * @param {import("Frog").Packet} packet
- */
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
+	 */
 	async readPacket(player, packet) {
 		let shouldChange = true;
 

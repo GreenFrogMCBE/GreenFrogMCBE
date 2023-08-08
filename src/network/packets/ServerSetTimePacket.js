@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerSetTimePacket extends Packet {
 	name = "set_time";
-	
+
 	/** @type {number | undefined} */
 	time;
 

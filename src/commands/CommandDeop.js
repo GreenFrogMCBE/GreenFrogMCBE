@@ -23,15 +23,15 @@ const { getKey } = require("../utils/Language");
  * A command that removes the op of the player
  */
 class CommandDeop extends Command {
-	name = getKey("commands.deop.name")
-	description = getKey("commands.deop.description")
-	minArgs = 1
-	requiresOp = true
+	name = getKey("commands.deop.name");
+	description = getKey("commands.deop.description");
+	minArgs = 1;
+	requiresOp = true;
 
 	/**
-	 * @param {import("Frog").Player} player 
-	 * @param {import("frog-protocol").Server} server 
-	 * @param {string[]} args 
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
 		const playerName = args[0];

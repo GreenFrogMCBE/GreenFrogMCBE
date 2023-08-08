@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerSetEntityMotion extends Packet {
 	name = "set_entity_motion";
-	
+
 	/** @type {number | undefined} */
 	runtime_entity_id;
 	/** @type {import("Frog").Coordinate | undefined} */

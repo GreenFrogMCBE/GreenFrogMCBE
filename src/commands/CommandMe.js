@@ -23,19 +23,17 @@ const { getKey } = require("../utils/Language");
  * A command to perform an action in the chat as the player
  */
 class CommandMe extends Command {
-	name = getKey("commands.me.name")
-	description = getKey("commands.me.description")
-	minArgs = 1
+	name = getKey("commands.me.name");
+	description = getKey("commands.me.description");
+	minArgs = 1;
 
 	/**
-	 * @param {import("Frog").Player} player 
-	 * @param {import("frog-protocol").Server} server 
-	 * @param {string[]} args 
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
-		const message = getKey("chat.format.me")
-			.replace("%s", player.username)
-			.replace("%d", args.join(" "));
+		const message = getKey("chat.format.me").replace("%s", player.username).replace("%d", args.join(" "));
 
 		Frog.broadcastMessage(message);
 	}

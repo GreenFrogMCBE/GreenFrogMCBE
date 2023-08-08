@@ -19,8 +19,8 @@ const Inventory = require("./Inventory");
 
 class ContainerInventory extends Inventory {
 	/**
-	 * @param {import("Frog").Player} player 
-	 * @param {import("Frog").Packet} packet 
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
 	 */
 	handle(player, packet) {
 		Frog.eventEmitter.emit("inventoryContainerItemRequest", {

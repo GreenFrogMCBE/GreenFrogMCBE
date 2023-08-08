@@ -39,8 +39,8 @@ module.exports = {
 		/** @type {import("Frog").Plugin} */
 		let pluginObject = {
 			name,
-			version
-		}
+			version,
+		};
 
 		if (!name) {
 			throw new PluginSetupException(pluginObject, getKey("exceptions.plugin.noName"));

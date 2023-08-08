@@ -23,15 +23,15 @@ const { getKey } = require("../utils/Language");
  * A command that sends a private message to other players
  */
 class CommandTell extends Command {
-	name = getKey("commands.tell.name")
-	description = getKey("commands.tell.description")
-	aliases = [getKey("commands.tell.aliases.w"), getKey("commands.tell.aliases.whisper"), getKey("commands.tell.aliases.msg")]
-	minArgs = 2
+	name = getKey("commands.tell.name");
+	description = getKey("commands.tell.description");
+	aliases = [getKey("commands.tell.aliases.w"), getKey("commands.tell.aliases.whisper"), getKey("commands.tell.aliases.msg")];
+	minArgs = 2;
 
 	/**
-	 * @param {import("Frog").Player} player 
-	 * @param {import("frog-protocol").Server} server 
-	 * @param {string[]} args 
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
 		const target = getPlayer(args[0]);
@@ -43,19 +43,10 @@ class CommandTell extends Command {
 
 		const message = args.slice(1).join(" ");
 
-		target.sendMessage(
-			getKey("commands.tell.execution.success")
-				.replace("%s", player.username)
-				.replace("%d", player.username)
-				.replace("%f", message)
-		);
+		target.sendMessage(getKey("commands.tell.execution.success").replace("%s", player.username).replace("%d", player.username).replace("%f", message));
 
-		player.sendMessage(
-			getKey("commands.tell.execution.success.whisper")
-				.replace("%s", target.username)
-				.replace("%d", message)
-		);
+		player.sendMessage(getKey("commands.tell.execution.success.whisper").replace("%s", target.username).replace("%d", message));
 	}
 }
 
-module.exports = CommandTell
+module.exports = CommandTell;

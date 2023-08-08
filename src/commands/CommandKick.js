@@ -23,15 +23,15 @@ const PlayerInfo = require("../player/PlayerInfo");
  * A command to disconnect a player from the server
  */
 class CommandKick extends Command {
-	name = getKey("commands.kick.name")
-	description = getKey("commands.kick.description")
-	minArgs = 1
-	requiresOp = true
+	name = getKey("commands.kick.name");
+	description = getKey("commands.kick.description");
+	minArgs = 1;
+	requiresOp = true;
 
 	/**
-	 * @param {import("Frog").Player} player 
-	 * @param {import("frog-protocol").Server} server 
-	 * @param {string[]} args 
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
 		const playerName = args[0];
@@ -39,19 +39,13 @@ class CommandKick extends Command {
 		let reason = args.slice(1).join(" ");
 
 		const target = PlayerInfo.getPlayer(playerName);
-		console.log(target, reason, playerName)
+		console.log(target, reason, playerName);
 		if (!target) {
-			player.sendMessage(
-				getKey("commands.kick.execution.failed.notOnline")
-					.replace("%s", playerName)
-			);
+			player.sendMessage(getKey("commands.kick.execution.failed.notOnline").replace("%s", playerName));
 			return;
 		}
 
-		target.kick(
-			getKey("kickMessages.wereKicked")
-				.replace("%s", reason)
-		);
+		target.kick(getKey("kickMessages.wereKicked").replace("%s", reason));
 	}
 }
 

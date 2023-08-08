@@ -34,7 +34,7 @@ function getLanguage(lang) {
 		throw new LanguageException("Language file does not exist");
 	}
 
-	const langContent = fs.readFileSync(langFile, 'utf8');
+	const langContent = fs.readFileSync(langFile, "utf8");
 
 	return langContent;
 }

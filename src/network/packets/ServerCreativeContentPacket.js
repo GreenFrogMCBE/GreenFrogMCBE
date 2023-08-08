@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerCreativeContentPacket extends Packet {
 	name = "creative_content";
-	
+
 	/** @type {any[] | undefined} */
 	items;
 

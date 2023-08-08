@@ -143,7 +143,7 @@ class World {
 			for (const player of PlayerInfo.playersOnline) {
 				networkChunkPublisher.writePacket(player);
 			}
-		}, 4500)
+		}, 4500);
 	}
 
 	/**
@@ -177,12 +177,7 @@ class World {
 		Frog.eventEmitter.emit("serverRegenerationTick", { world: this.getWorldData() });
 
 		for (const player of PlayerInfo.playersOnline) {
-			if (!(player.health > 20
-				|| player.hunger < 20
-				|| player.offline
-				|| player.gamemode === Gamemode.CREATIVE
-				|| player.gamemode === Gamemode.SPECTATOR)
-			) {
+			if (!(player.health > 20 || player.hunger < 20 || player.offline || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR)) {
 				player.setHealth(player.health + 1, DamageCause.REGENERATION);
 			}
 		}
@@ -221,7 +216,7 @@ class World {
 				min = undefined;
 			}
 
-			if (typeof min === 'number' && posY <= min) {
+			if (typeof min === "number" && posY <= min) {
 				const invulnerable = client.gamemode === Gamemode.CREATIVE || client.gamemode === Gamemode.SPECTATOR;
 
 				if (!invulnerable) {
@@ -250,7 +245,7 @@ class World {
 			player._damage.fall.queue = 0;
 			setTimeout(() => {
 				player._damage.fall.invulnerable = false;
-			}, 50)
+			}, 50);
 		}
 
 		player._damage.fall.queue = (falldamageY + 0.5) * 2;

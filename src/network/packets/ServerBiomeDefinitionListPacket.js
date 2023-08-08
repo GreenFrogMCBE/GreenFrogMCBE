@@ -18,7 +18,7 @@ const Packet = require("./Packet");
 /** @deprecated */
 class ServerBiomeDefinitionListPacket extends Packet {
 	name = "biome_definition_list";
-	
+
 	/** @type {JSON | undefined} */
 	data;
 

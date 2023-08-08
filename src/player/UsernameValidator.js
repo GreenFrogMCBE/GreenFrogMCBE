@@ -18,7 +18,7 @@ const PlayerInfo = require("./PlayerInfo");
 module.exports = {
 	/**
 	 * Checks if the usernames matches the regex. The regex is `/^[a-zA-Z0-9]+$/`
-	 * 
+	 *
 	 * @param {string} username - The username to check for duplicates.
 	 * @returns {boolean} Returns true if the username is a duplicate, false otherwise.
 	 */
@@ -40,7 +40,7 @@ module.exports = {
 
 	/**
 	 * Returns `true` if the username is longer than 16 characters or shorter than 3 characters
-	 * 
+	 *
 	 * @param {string} username - The username to check the length for.
 	 * @returns {boolean} Returns true if the username length is valid, false otherwise.
 	 */

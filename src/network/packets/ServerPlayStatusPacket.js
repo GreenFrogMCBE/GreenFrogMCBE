@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerPlayStatusPacket extends Packet {
 	name = "play_status";
-	
+
 	/** @type {import("Frog").PlayStatus | undefined} */
 	status;
 

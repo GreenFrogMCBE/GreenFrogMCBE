@@ -24,7 +24,7 @@ module.exports = {
 
 	/**
 	 * Logs a message
-	 * 
+	 *
 	 * @throws {LoggingException} - If the log types is invalid (valid types are info, warn, error, debug)
 	 *
 	 * @param {string} langString
@@ -35,10 +35,7 @@ module.exports = {
 	log(langString, color, message, type) {
 		const Frog = require("../Frog");
 
-		const date = new Date()
-			.toLocaleString()
-			.replace(",", "")
-			.toUpperCase();
+		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
 
 		if (!console[type]) {
 			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s", type));
@@ -53,16 +50,16 @@ module.exports = {
 			color,
 			cancel: () => {
 				shouldLogMessage = false;
-			}
+			},
 		});
 
 		if (!shouldLogMessage) return;
 
-		this.messages.push({ 
-			langString, 
-			color, 
-			message, 
-			type 
+		this.messages.push({
+			langString,
+			color,
+			message,
+			type,
 		});
 
 		console[type](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));

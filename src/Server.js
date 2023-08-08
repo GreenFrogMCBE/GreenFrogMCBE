@@ -1,3 +1,18 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
 const Frog = require("./Frog");
 
 const FrogProtocol = require("frog-protocol");
@@ -22,7 +37,7 @@ let server = null;
 
 /**
  * Sets up an uncaught exception handler to catch critical errors
- * 
+ *
  * @private
  */
 function setupUncaughtExceptionHandler() {
@@ -31,7 +46,7 @@ function setupUncaughtExceptionHandler() {
 
 /**
  * Initializes the server settings and plugins
- * 
+ *
  * @private
  */
 function initializeServer() {
@@ -47,7 +62,7 @@ function initializeServer() {
 
 /**
  * Creates necessary directories if they don't exist
- * 
+ *
  * @private
  */
 function createDirectories() {
@@ -57,7 +72,7 @@ function createDirectories() {
 
 /**
  * Logs a warning if the debug or unstable mode is enabled
- * 
+ *
  * @private
  */
 function initDebug() {
@@ -71,7 +86,7 @@ function initDebug() {
 
 /**
  * Checks the Node.js version and displays an error if it's too old
- * 
+ *
  * @private
  */
 function checkNodeJSVersion() {
@@ -84,7 +99,7 @@ function checkNodeJSVersion() {
 
 /**
  * Checks the render distance setting and warns if it's too high
- * 
+ *
  * @private
  */
 function checkRenderDistance() {
@@ -95,17 +110,17 @@ function checkRenderDistance() {
 
 /**
  * Logs some startup messages
- * 
+ *
  * @private
  */
 function logStartupMessages() {
 	Logger.info(Language.getKey("server.loading"));
-	Logger.info(Language.getKey("server.license"))
+	Logger.info(Language.getKey("server.license"));
 }
 
 /**
  * This function executes when something is off with the server
- * 
+ *
  * @private
  * @param {Error} error - The critical error that occurred
  */
@@ -115,11 +130,7 @@ function handleCriticalError(error) {
 	Frog.eventEmitter.emit("serverCriticalError", { error });
 
 	if (error.toString().includes("Server failed to start")) {
-		Logger.error(
-			Language.getKey("network.server.listening.failed")
-				.replace("%s", `${host}:${port}`)
-				.replace("%d", error.toString())
-		);
+		Logger.error(Language.getKey("network.server.listening.failed").replace("%s", `${host}:${port}`).replace("%d", error.toString()));
 		Logger.error(Language.getKey("network.server.listening.failed.otherServerRunning"));
 	}
 
@@ -132,7 +143,7 @@ function handleCriticalError(error) {
 
 /**
  * Loads plugins for the server
- * 
+ *
  * @private
  */
 async function loadPlugins() {
@@ -141,7 +152,7 @@ async function loadPlugins() {
 
 /**
  * Listens to the server
- * 
+ *
  * @private
  */
 async function listen() {
@@ -172,7 +183,7 @@ async function listen() {
 
 		Logger.info(Language.getKey("network.server.listening.success").replace(`%s`, `/${host}:${port}`));
 	} catch (error) {
-		Logger.error(Language.getKey("network.server.listening.failed").replace(`%s`, `/${host}:${port}`).replace("%d", error.stack))
+		Logger.error(Language.getKey("network.server.listening.failed").replace(`%s`, `/${host}:${port}`).replace("%d", error.stack));
 
 		process.exit(Frog.config.dev.exitCodes.crash);
 	}
@@ -180,7 +191,7 @@ async function listen() {
 
 /**
  * Starts the garbage collector
- * 
+ *
  * @private
  */
 function startGarbageCollector() {
@@ -191,7 +202,7 @@ function startGarbageCollector() {
 
 /**
  * Starts the world ticker
- * 
+ *
  * @private
  */
 function startWorldTicker() {
@@ -207,7 +218,7 @@ function startWorldTicker() {
 
 /**
  * Gets the query settings for the server
- * 
+ *
  * @private
  * @returns {import("Frog").QuerySettings}
  */
@@ -248,5 +259,5 @@ module.exports = {
 
 		startGarbageCollector();
 		startWorldTicker();
-	}
-}
+	},
+};

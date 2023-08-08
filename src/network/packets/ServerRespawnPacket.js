@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerRespawnPacket extends Packet {
 	name = "respawn";
-	
+
 	/** @type {import("Frog").Coordinate | undefined} */
 	position;
 	/** @type {number | undefined} */

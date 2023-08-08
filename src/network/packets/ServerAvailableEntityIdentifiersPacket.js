@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerAvailableEntityIdentifiersPacket extends Packet {
 	name = "available_entity_identifiers";
-	
+
 	/** @type {import("Frog").NBT | undefined} */
 	nbt;
 

@@ -67,7 +67,7 @@ module.exports = {
 	async initPlayer(player) {
 		/**
 		 * Kills the player
-		 * 
+		 *
 		 * @param {import("Frog").DamageCause} cause
 		 */
 		player.kill = function (cause = DamageCause.UNKNOWN) {
@@ -87,7 +87,7 @@ module.exports = {
 
 		/**
 		 * Sends a chat message as the player
-		 * 
+		 *
 		 * @param {string} message
 		 */
 		player.chat = function (message) {
@@ -184,7 +184,7 @@ module.exports = {
 
 		/**
 		 * Sends a chat message to the player
-		 * 
+		 *
 		 * @param {string} message
 		 */
 		player.sendMessage = function (message) {
@@ -226,17 +226,17 @@ module.exports = {
 			];
 
 			if (!allowedGamemodes.includes(gamemode)) {
-				throw new InvalidGamemodeException(gamemode)
+				throw new InvalidGamemodeException(gamemode);
 			}
 
 			let shouldChangeGamemode = true;
 
-			Frog.eventEmitter.emit('serverGamemodeChange', {
+			Frog.eventEmitter.emit("serverGamemodeChange", {
 				player,
 				gamemode,
 				oldGamemode: player.gamemode,
 				cancel: () => {
-					shouldChangeGamemode = false
+					shouldChangeGamemode = false;
 				},
 			});
 
@@ -309,7 +309,8 @@ module.exports = {
 				Logger.info(getKey("kickMessages.playStatus.console").replace("%s", player.username));
 
 				setTimeout(() => {
-					if (!player.network.offline) { // If the player does not disconnect itself for some reason
+					if (!player.network.offline) {
+						// If the player does not disconnect itself for some reason
 						player.kick(getKey("kickMessages.playStatus").replace("%s", playStatusPacket.toString()));
 					}
 				}, 5000);
@@ -645,7 +646,7 @@ module.exports = {
 		 * @param {boolean} status
 		 */
 		player.setOp = function (status) {
-			return PermissionManager.setOpStatus(player.username, status)
+			return PermissionManager.setOpStatus(player.username, status);
 		};
 
 		/**

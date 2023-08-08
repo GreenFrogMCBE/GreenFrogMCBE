@@ -74,5 +74,5 @@ module.exports = {
 		if (target) {
 			target.permissions.op = status;
 		}
-	}
+	},
 };

@@ -18,7 +18,6 @@ const Packet = require("./Packet");
 class ServerSetDifficultyPacket extends Packet {
 	name = "set_difficulty";
 
-	
 	/** @type {import("Frog").Difficulty | undefined} */
 	difficulty;
 

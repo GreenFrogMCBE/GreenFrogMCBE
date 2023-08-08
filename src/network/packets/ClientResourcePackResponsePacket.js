@@ -70,7 +70,7 @@ class ClientResourcePackResponsePacket extends Packet {
 	name = "resource_pack_client_response";
 
 	/**
-	   * @param {import("Frog").Player} player
+	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 * @param {import("frog-protocol").Server} server
 	 */
@@ -205,7 +205,8 @@ class ClientResourcePackResponsePacket extends Packet {
 				}
 				itemcomponent.writePacket(player);
 
-				if (player.renderChunks) { // player.renderChunks is true by default but can be disabled by plugins
+				if (player.renderChunks) {
+					// player.renderChunks is true by default but can be disabled by plugins
 					player.setChunkRadius(player.world.renderDistance);
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
@@ -225,7 +226,7 @@ class ClientResourcePackResponsePacket extends Packet {
 
 					Frog.eventEmitter.emit("playerSpawn", { player });
 
-					player.setEntityData(/** @type {import("Frog").EntityData} */(entityData));
+					player.setEntityData(/** @type {import("Frog").EntityData} */ (entityData));
 					player.setSpeed(0.1);
 
 					for (const onlinePlayer of PlayerInfo.playersOnline) {

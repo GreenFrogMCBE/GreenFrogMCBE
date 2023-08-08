@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerRemoveObjectivePacket extends Packet {
 	name = "remove_objective";
-	
+
 	/** @type {string | undefined} */
 	objective_name;
 

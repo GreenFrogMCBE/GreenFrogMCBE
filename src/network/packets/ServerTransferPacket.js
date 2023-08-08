@@ -18,8 +18,6 @@ const Packet = require("./Packet");
 class ServerTransferPacket extends Packet {
 	name = "transfer";
 
-
-	
 	/** @type {string | undefined} */
 	server_address;
 	/** @type {number | undefined} */

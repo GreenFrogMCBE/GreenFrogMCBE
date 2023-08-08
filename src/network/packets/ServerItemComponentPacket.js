@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerItemComponentPacket extends Packet {
 	name = "item_component";
-	
+
 	/** @type {any | undefined} */
 	entries;
 

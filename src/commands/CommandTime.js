@@ -23,16 +23,16 @@ const { getKey } = require("../utils/Language");
  * A command that changes the time
  */
 class CommandTime extends Command {
-	name = getKey("commands.time.name")
-	description = getKey("commands.time.description")
-	minArgs = 1
-	maxArgs = 1
-	requiresOp = true
+	name = getKey("commands.time.name");
+	description = getKey("commands.time.description");
+	minArgs = 1;
+	maxArgs = 1;
+	requiresOp = true;
 
 	/**
-	 * @param {import("Frog").Player} player 
-	 * @param {import("frog-protocol").Server} server 
-	 * @param {string[]} args 
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
 		const time = args[0];
@@ -51,10 +51,7 @@ class CommandTime extends Command {
 			player.setTime(parsedTime);
 		}
 
-		player.sendMessage(
-			getKey("commands.time.execution.success")
-				.replace("%s", time)
-		);
+		player.sendMessage(getKey("commands.time.execution.success").replace("%s", time));
 	}
 }
 
