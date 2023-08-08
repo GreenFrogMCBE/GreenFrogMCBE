@@ -16,16 +16,14 @@
 /* eslint-disable no-unused-vars */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 
-const FormType = require("./FormType");
+const FormVariant = require("./types/Form");
 
 class Form {
 	constructor() {
 		/**
-		 * @type {FormType}
-		 *
-		 * @type {import("./FormType")}
+		 * @type {import("Frog").Form}
 		 */
-		this.types = FormType.FORM;
+		this.type = FormVariant.FORM;
 
 		/**
 		 * The title of the form.
@@ -35,7 +33,7 @@ class Form {
 
 		/**
 		 * The buttons in the form.
-		 * @type {Array<JSON>}
+		 * @type {import("Frog").FormButton[]}
 		 */
 		this.buttons = [];
 
@@ -43,9 +41,9 @@ class Form {
 		 * @type {function}
 		 *
 		 * @param {Form} form
-		 * @param {import('frog-protocol').Client} client
+		 * @param {import("Frog").Player} client
 		 */
-		this.onSend = (form, client) => {};
+		this.onSend = (form, client) => { };
 
 		/**
 		 * The ID of the form.
@@ -55,24 +53,24 @@ class Form {
 
 		/**
 		 * The text in the form.
-		 * @type {Array}
+		 * @type {string}
 		 */
-		this.text = [];
+		this.text;
 	}
 
 	/**
-	 * @param {import('frog-protocol').Client}
+	 * @param {import("Frog").Player} player
 	 */
-	send(client) {
-		const FormReq = new ServerFormRequestPacket();
-		FormReq.id = this.id;
-		FormReq.title = this.title;
-		FormReq.text = this.text;
-		FormReq.buttons = JSON.stringify(this.buttons);
-		FormReq.types = this.types;
-		FormReq.writePacket(client);
+	send(player) {
+		const formRequest = new ServerFormRequestPacket();
+		formRequest.id = this.id;
+		formRequest.title = this.title;
+		formRequest.text = this.text;
+		formRequest.buttons = JSON.stringify(this.buttons);
+		formRequest.type = this.type;
+		formRequest.writePacket(player);
 
-		this.onSend(this, client);
+		this.onSend(this, player);
 	}
 }
 

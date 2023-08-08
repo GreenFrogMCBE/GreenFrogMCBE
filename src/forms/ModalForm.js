@@ -53,7 +53,7 @@ class ModalForm {
 	/**
 	 * Sends the modal form to the specified client.
 	 *
-	 * @param {import('frog-protocol').Client} client
+	 * @param {import("Frog").Player} client
 	 */
 	send(client) {
 		this.onSend(this, client);

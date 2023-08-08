@@ -28,7 +28,7 @@ class CustomForm {
 		/**
 		 * @type {function}
 		 */
-		this.onSend = () => {};
+		this.onSend = () => { };
 
 		/**
 		 * @type {string}
@@ -113,16 +113,16 @@ class CustomForm {
 	/**
 	 * Sends the custom form to a player.
 	 *
-	 * @param {import('frog-protocol').Client} client
+	 * @param {import("Frog").Player} client
 	 */
 	send(client) {
-		const FormRequestPacket = new ServerFormRequestPacket();
-		FormRequestPacket.id = this.id;
-		FormRequestPacket.title = this.title;
-		FormRequestPacket.content = JSON.stringify(this.actions);
-		FormRequestPacket.buttons = JSON.stringify(this.buttons);
-		FormRequestPacket.type = this.type;
-		FormRequestPacket.writePacket(client);
+		const formRequestPacket = new ServerFormRequestPacket();
+		formRequestPacket.id = this.id;
+		formRequestPacket.title = this.title;
+		formRequestPacket.content = JSON.stringify(this.actions);
+		formRequestPacket.buttons = JSON.stringify(this.buttons);
+		formRequestPacket.type = this.type;
+		formRequestPacket.writePacket(client);
 
 		this.onSend(this, client);
 	}
