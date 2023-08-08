@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerSetCommandsEnabledPacket extends Packet {
 	name = "set_commands_enabled";
-	
+
 	/** @type {boolean | undefined} */
 	enabled;
 

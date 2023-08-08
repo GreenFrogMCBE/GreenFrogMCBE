@@ -19,7 +19,7 @@ const Packet = require("./Packet");
 
 class ServerFormRequestPacket extends Packet {
 	name = "modal_form_request";
-	
+
 	/** @type {number | undefined} */
 	id;
 	/** @type {string | undefined} */
@@ -35,7 +35,7 @@ class ServerFormRequestPacket extends Packet {
 	/** @type {string | undefined} */
 	button1;
 	/** @type {string | undefined} */
-	button2; 
+	button2;
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -46,7 +46,7 @@ class ServerFormRequestPacket extends Packet {
 		if (this.type === FormType.MODAL_FORM) {
 			data = `{"content":"${this.text}","button1":"${this.button1}","button2":"${this.button2}","type":"${this.type}","title":"${this.title}"}`;
 		} else {
-			data = `{"content":${this.content},"buttons":${this.buttons},"type":"${this.type}","title":"${this.title}"}`     
+			data = `{"content":${this.content},"buttons":${this.buttons},"type":"${this.type}","title":"${this.title}"}`;
 		}
 
 		player.queue(this.name, {

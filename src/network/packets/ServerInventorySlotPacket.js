@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerInventorySlotPacket extends Packet {
 	name = "inventory_slot";
-	
+
 	/** @type {import("Frog").WindowId | undefined} */
 	window_id;
 	/** @type {number | undefined} */

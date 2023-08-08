@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerResourcePackStackPacket extends Packet {
 	name = "resource_pack_stack";
-	
+
 	/** @type {any[] | undefined} */
 	behavior_packs;
 	/** @type {any[] | undefined} */

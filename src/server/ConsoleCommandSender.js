@@ -1,3 +1,18 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
 const readline = require("readline");
 
 const Logger = require("../utils/Logger");
@@ -73,39 +88,36 @@ module.exports = {
 			let commandFound = false;
 
 			for (const command of CommandManager.commands) {
-				if (
-					command.name === executedCommand.split(" ")[0] ||
-					(command.aliases && command.aliases.includes(executedCommand.split(" ")[0]))
-				) {
+				if (command.name === executedCommand.split(" ")[0] || (command.aliases && command.aliases.includes(executedCommand.split(" ")[0]))) {
 					if (command.minArgs !== undefined && command.minArgs > args.length) {
-						Logger.info(
-							Language.getKey("commands.errors.syntaxError.minArg").replace("%s", command.minArgs).replace("%d", args.length.toString())
-						);
+						Logger.info(Language.getKey("commands.errors.syntaxError.minArg").replace("%s", command.minArgs).replace("%d", args.length.toString()));
 						return;
 					}
 
 					if (command.maxArgs !== undefined && command.maxArgs < args.length) {
-						Logger.info(
-							Language.getKey("commands.errors.syntaxError.maxArg").replace("%s", command.maxArgs).replace("%d", args.length.toString())
-						);
+						Logger.info(Language.getKey("commands.errors.syntaxError.maxArg").replace("%s", command.maxArgs).replace("%d", args.length.toString()));
 						return;
 					}
 
-					command.execute({
-						username: "Server",
-						network: {
-							address: Frog.config.network.host,
-							port: Frog.config.network.port,
+					command.execute(
+						{
+							username: "Server",
+							network: {
+								address: Frog.config.network.host,
+								port: Frog.config.network.port,
+							},
+							permissions: {
+								op: true,
+								isConsole: true,
+							},
+							/** @param {string} message */
+							sendMessage: (message) => {
+								Logger.info(message);
+							},
 						},
-						permissions: {
-							op: true,
-							isConsole: true,
-						},
-						/** @param {string} message */
-						sendMessage: (message) => {
-							Logger.info(message);
-						},
-					}, Frog, args);
+						Frog,
+						args,
+					);
 
 					commandFound = true;
 					break;
@@ -119,7 +131,7 @@ module.exports = {
 							Logger.info(msg);
 						},
 					},
-					executedCommand.split(" ")[0]
+					executedCommand.split(" ")[0],
 				);
 			}
 		} catch (error) {
@@ -170,5 +182,5 @@ module.exports = {
 				if (!isClosed && readLineInterface) readLineInterface.prompt(true);
 			}
 		});
-	}
+	},
 };

@@ -21,7 +21,7 @@ const { getKey } = require("../utils/Language");
 
 /**
  * Returns if the coordinates are valid
- * 
+ *
  * @param {number} x
  * @param {number} y
  * @param {number} z
@@ -35,17 +35,17 @@ function areCoordinatesValid(x, y, z) {
  * A command that shows the sender to other players
  */
 class CommandTp extends Command {
-	name = getKey("commands.teleport.name")
-	description = getKey("commands.teleport.description")
-	aliases = [getKey("commands.teleport.aliases.tp")]
-	minArgs = 1
-	maxArgs = 4
-	requiresOp = true
+	name = getKey("commands.teleport.name");
+	description = getKey("commands.teleport.description");
+	aliases = [getKey("commands.teleport.aliases.tp")];
+	minArgs = 1;
+	maxArgs = 4;
+	requiresOp = true;
 
 	/**
-	 * @param {import("Frog").Player} player 
-	 * @param {import("frog-protocol").Server} server 
-	 * @param {string[]} args 
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
 		const target = getPlayer(args[0]);
@@ -53,24 +53,19 @@ class CommandTp extends Command {
 		const y = Number(args[2]);
 		const z = Number(args[3]);
 
-		if (args.length >= 4) {	// Teleport player to coordinates
+		if (args.length >= 4) {
+			// Teleport player to coordinates
 			if (target && areCoordinatesValid(x, y, z)) {
 				player.teleport(x, y, z);
 
-				player.sendMessage(
-					getKey("commands.teleport.execution.success")
-						.replace("%s", `${x}, ${y}, ${z}`)
-				);
+				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
 
-				player.sendMessage(
-					getKey("commands.teleport.execution.success.teleported")
-						.replace("%s", player.username)
-						.replace("%d", `${x}, ${y}, ${z}`)
-				);
+				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
-		} else if (args.length > 0 && args.length < 2) { // Teleport self to player
+		} else if (args.length > 0 && args.length < 2) {
+			// Teleport self to player
 			if (player.isConsole) {
 				player.sendMessage(getKey("commands.errors.internalError.badSender"));
 				return;
@@ -83,20 +78,14 @@ class CommandTp extends Command {
 
 				player.teleport(x, y, z);
 
-				player.sendMessage(
-					getKey("commands.teleport.execution.success")
-						.replace("%s", `${x}, ${y}, ${z}`)
-				);
+				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
 
-				player.sendMessage(
-					getKey("commands.teleport.execution.success.teleported")
-						.replace("%s", player.username)
-						.replace("%d", `${x}, ${y}, ${z}`)
-				);
+				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
-		} else if (args.length > 0 && args.length < 3) { // Teleport player to player
+		} else if (args.length > 0 && args.length < 3) {
+			// Teleport player to player
 			const target = getPlayer(args[0]);
 			const destinationPlayer = getPlayer(args[1]);
 
@@ -104,20 +93,14 @@ class CommandTp extends Command {
 				const { x, y, z } = destinationPlayer.location;
 				target.teleport(x, y, z);
 
-				player.sendMessage(
-					getKey("commands.teleport.execution.success")
-						.replace("%s", `${x}, ${y}, ${z}`)
-				);
+				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
 
-				player.sendMessage(
-					getKey("commands.teleport.execution.success.teleported")
-						.replace("%s", player.username)
-						.replace("%d", `${x}, ${y}, ${z}`)
-				);
+				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
-		} else if (args.length >= 3) { // Teleport self to coords
+		} else if (args.length >= 3) {
+			// Teleport self to coords
 			if (player.isConsole) {
 				player.sendMessage(getKey("commands.errors.internalError.badSender"));
 				return;
@@ -130,16 +113,9 @@ class CommandTp extends Command {
 			if (areCoordinatesValid(x, y, z)) {
 				player.teleport(x, y, z);
 
-				player.sendMessage(
-					getKey("commands.teleport.execution.success")
-						.replace("%s", `${x}, ${y}, ${z}`)
-				);
+				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
 
-				player.sendMessage(
-					getKey("commands.teleport.execution.success.teleported")
-						.replace("%s", player.username)
-						.replace("%d", `${x}, ${y}, ${z}`)
-				);
+				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
 			} else {
 				player.sendMessage(getKey("commands.teleport.execution.failed.coordinates.invalid"));
 			}

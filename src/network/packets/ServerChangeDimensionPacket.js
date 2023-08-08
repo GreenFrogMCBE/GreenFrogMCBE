@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerChangeDimensionPacket extends Packet {
 	name = "change_dimension";
-	
+
 	/** @type {import("Frog").DimensionLegacy | undefined} */
 	dimension;
 	/** @type {import("Frog").Coordinate | undefined} */

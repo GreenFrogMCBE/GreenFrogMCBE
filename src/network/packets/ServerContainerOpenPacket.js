@@ -17,11 +17,11 @@ const Packet = require("./Packet");
 
 class ServerContainerOpenPacket extends Packet {
 	name = "container_open";
-	
+
 	/** @type {import("Frog").WindowId | undefined} */
 	window_id;
 	/** @type {import("Frog").Coordinate | undefined} */
-	coordinates; 
+	coordinates;
 	/** @type {import("Frog").WindowType | undefined} */
 	window_type;
 	/** @type {number | undefined} */

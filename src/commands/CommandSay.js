@@ -23,20 +23,18 @@ const Frog = require("../Frog");
  * A command to send a message in the chat to other players
  */
 class CommandSay extends Command {
-	name = getKey("commands.say.name")
-	description = getKey("commands.say.description")
-	minArgs = 0
-	requiresOp = true
+	name = getKey("commands.say.name");
+	description = getKey("commands.say.description");
+	minArgs = 0;
+	requiresOp = true;
 
 	/**
-	 * @param {import("Frog").Player} player 
-	 * @param {import("frog-protocol").Server} server 
-	 * @param {string[]} args 
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
-		const message = getKey("chat.format.say")
-			.replace(`%s`, player.username)
-			.replace(`%d`, args.join(" "));
+		const message = getKey("chat.format.say").replace(`%s`, player.username).replace(`%d`, args.join(" "));
 
 		Frog.broadcastMessage(message);
 	}

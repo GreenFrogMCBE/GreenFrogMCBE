@@ -8,5 +8,5 @@
     "useUnknownInCatchVariables": false,
     "suppressImplicitAnyIndexErrors": true,
     "ignoreDeprecations": "5.0"
-  },
+  }
 }

@@ -28,21 +28,17 @@ const { version } = Frog.config.serverInfo;
  * A command that shows the server's version
  */
 class CommandVersion extends Command {
-	name = getKey("commands.version.name")
-	description = getKey("commands.version.description")
-	aliases = [getKey("commands.version.aliases.ver"), getKey("commands.version.aliases.about")]
-	minArgs = 0
-	maxArgs = 0
+	name = getKey("commands.version.name");
+	description = getKey("commands.version.description");
+	aliases = [getKey("commands.version.aliases.ver"), getKey("commands.version.aliases.about")];
+	minArgs = 0;
+	maxArgs = 0;
 
 	/**
-	 * @param {import("Frog").Player} player 
+	 * @param {import("Frog").Player} player
 	 */
 	async execute(player) {
-		const message =
-			getKey("frog.version")
-				.replace("%s", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`)
-				.replace("%d", version)
-				.replace("%f", VersionToProtocol.getProtocol(version).toString());
+		const message = getKey("frog.version").replace("%s", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%d", version).replace("%f", VersionToProtocol.getProtocol(version).toString());
 
 		player.sendMessage(`${Colors.GRAY}${message}`);
 	}

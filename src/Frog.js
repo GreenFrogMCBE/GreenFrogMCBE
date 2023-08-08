@@ -22,7 +22,7 @@ const { getKey } = require("./utils/Language");
 
 const Logger = require("./utils/Logger");
 
-const langParser = require("@kotinash/lang-parser")
+const langParser = require("@kotinash/lang-parser");
 const EventEmitter = require("events");
 const yaml = require("js-yaml");
 const path = require("path");
@@ -32,7 +32,7 @@ const fs = require("fs");
 let _server;
 
 /** @returns {EventEmitter} */
-const _eventEmitter = new EventEmitter()
+const _eventEmitter = new EventEmitter();
 
 /** @returns {any} */
 function getConfig() {
@@ -45,8 +45,8 @@ function getLang() {
 	const config = getConfig();
 
 	const langFilePath = path.join(__dirname, `lang/${config.chat.lang}.lang`);
-	const langFileContent = fs.readFileSync(langFilePath, 'utf8');
-	const lang = langParser.parseRaw(langFileContent)
+	const langFileContent = fs.readFileSync(langFilePath, "utf8");
+	const lang = langParser.parseRaw(langFileContent);
 
 	return lang;
 }
@@ -91,7 +91,7 @@ module.exports = {
 
 	/**
 	 * Returns the release data
-	 * 
+	 *
 	 * @returns {import("Frog").ReleaseData}
 	 */
 	releaseData: {
@@ -141,5 +141,5 @@ module.exports = {
 		PluginLoader.unloadPlugins();
 
 		process.exit(this.config.dev.exitCodes.exit);
-	}
+	},
 };

@@ -19,7 +19,7 @@ const Packet = require("./Packet");
 
 class ServerSetTitlePacket extends Packet {
 	name = "set_title";
-	
+
 	/** @type {string | undefined} */
 	type;
 	/** @type {string | undefined} */

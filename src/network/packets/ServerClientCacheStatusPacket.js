@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerClientCacheStatusPacket extends Packet {
 	name = "client_cache_status";
-	
+
 	/** @type {boolean | undefined} */
 	enabled;
 

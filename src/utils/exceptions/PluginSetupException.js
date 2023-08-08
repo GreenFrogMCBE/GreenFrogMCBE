@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class PluginSetupException extends Error {
-	/** 
+	/**
 	 * @param {import("Frog").Plugin} plugin
 	 * @param {string} message
 	 */

@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerSetScorePacket extends Packet {
 	name = "set_score";
-	
+
 	/** @type {import("Frog").ScoreAction | undefined} */
 	action;
 	/** @type {any[] | undefined} */

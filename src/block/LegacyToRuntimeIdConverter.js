@@ -18,8 +18,8 @@ const InvalidBlockException = require("../utils/exceptions/InvalidBlockException
 module.exports = {
 	/**
 	 * Converts a legacy ID (or an etwork ID) to a runtime ID
-	 * 
-	 * @param {number} legacyId 
+	 *
+	 * @param {number} legacyId
 	 * @returns {number}
 	 */
 	convert(legacyId) {

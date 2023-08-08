@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerCompressedBiomeDefinitionListPacket extends Packet {
 	name = "compressed_biome_definitions";
-	
+
 	/** @type {string | undefined} */
 	raw_payload;
 

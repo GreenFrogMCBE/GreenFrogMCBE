@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerScoreboardObjectivePacket extends Packet {
 	name = "set_display_objective";
-	
+
 	/** @type {import("Frog").DisplaySlot | undefined} */
 	display_slot;
 	/** @type {string | undefined} */

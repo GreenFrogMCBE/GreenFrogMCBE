@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerInventoryContentPacket extends Packet {
 	name = "inventory_content";
-	
+
 	/** @type {any[] | undefined} */
 	input;
 	/** @type {number | undefined} */

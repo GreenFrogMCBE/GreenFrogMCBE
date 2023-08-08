@@ -16,7 +16,7 @@
 /* eslint-disable no-unused-vars */
 
 class Packet {
-	constructor() { }
+	constructor() {}
 
 	/** @type {string | unknown} */
 	name;
@@ -28,12 +28,12 @@ class Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	validatePacket(player, packet) { }
+	validatePacket(player, packet) {}
 
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) { }
+	writePacket(player) {}
 
 	/**
 	 * @param {import("Frog").Player} player

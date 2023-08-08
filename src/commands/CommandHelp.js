@@ -23,24 +23,20 @@ const { getKey } = require("../utils/Language");
  * A command that shows a list of all other commands
  */
 class CommandHelp extends Command {
-	name = getKey("commands.help.name")
-	description = getKey("commands.help.description")
-	aliases = ["?"]
-	minArgs = 0
-	maxArgs = 0
+	name = getKey("commands.help.name");
+	description = getKey("commands.help.description");
+	aliases = ["?"];
+	minArgs = 0;
+	maxArgs = 0;
 
 	/**
-	 * @param {import("Frog").Player} player 
+	 * @param {import("Frog").Player} player
 	 */
 	execute(player) {
 		player.sendMessage(getKey("commands.help.execution.success"));
 
 		for (const command of CommandManager.commands) {
-			player.sendMessage(
-				getKey("commands.help.execution.command")
-					.replace("%s", command.name)
-					.replace("%d", command.description)
-			);
+			player.sendMessage(getKey("commands.help.execution.command").replace("%s", command.name).replace("%d", command.description));
 		}
 	}
 }

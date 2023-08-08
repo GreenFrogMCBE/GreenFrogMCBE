@@ -27,7 +27,7 @@ const Selector = require("./types/Selector");
 
 /**
  * Returns if the player can be killed
- * 
+ *
  * @param {import("Frog").Player} player
  * @returns {boolean}
  */
@@ -49,9 +49,9 @@ class CommandKill extends Command {
 	requiresOp = true;
 
 	/**
-	 * @param {import("Frog").Player} player 
-	 * @param {import("frog-protocol").Server} server 
-	 * @param {string[]} args 
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
 		switch (args[0]) {

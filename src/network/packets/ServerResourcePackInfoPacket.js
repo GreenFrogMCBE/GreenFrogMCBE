@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerResponsePackInfoPacket extends Packet {
 	name = "resource_packs_info";
-	
+
 	/** @type {boolean | undefined} */
 	must_accept;
 	/** @type {boolean | undefined} */
@@ -38,7 +38,7 @@ class ServerResponsePackInfoPacket extends Packet {
 			has_scripts: this.has_scripts,
 			behaviour_packs: this.behavior_packs,
 			texture_packs: this.texture_packs,
-			rtx_enabled: this.rtx_enabled
+			rtx_enabled: this.rtx_enabled,
 		});
 	}
 }

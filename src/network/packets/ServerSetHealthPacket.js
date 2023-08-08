@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerSetHealthPacket extends Packet {
 	name = "set_health";
-	
+
 	/** @type {number | undefined} */
 	health;
 

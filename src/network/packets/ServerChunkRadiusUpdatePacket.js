@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerChunkRadiusUpdatePacket extends Packet {
 	name = "chunk_radius_update";
-	
+
 	/** @type {number | undefined} */
 	chunk_radius;
 

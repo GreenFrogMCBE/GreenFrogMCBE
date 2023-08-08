@@ -82,10 +82,11 @@ class PlayerJoinHandler {
 			Frog.eventEmitter.emit("packetQueue", {
 				player,
 				packet: {
-					data: { // Follow bedrock-protocol's packet structure
+					data: {
+						// Follow bedrock-protocol's packet structure
 						name,
-						params
-					}
+						params,
+					},
 				},
 				cancel: () => {
 					shouldQueue = false;
@@ -156,8 +157,8 @@ class PlayerJoinHandler {
 				pitch: 0,
 			},
 			network: {
-				address: player.connection.address.split('/')[0],
-				port: player.connection.address.split('/')[1],
+				address: player.connection.address.split("/")[0],
+				port: player.connection.address.split("/")[1],
 				packetCount: 0,
 				offline: false,
 				initialised: false,
@@ -173,9 +174,9 @@ class PlayerJoinHandler {
 				},
 				void: {
 					invulnerable: null,
-				}
-			}
-		})
+				},
+			},
+		});
 	}
 
 	/**

@@ -28,7 +28,7 @@ class CustomForm {
 		/**
 		 * @type {function}
 		 */
-		this.onSend = () => { };
+		this.onSend = () => {};
 
 		/**
 		 * @type {string}
@@ -73,7 +73,7 @@ class CustomForm {
 	/**
 	 * Adds a label to the form.
 	 *
-	 * @param {string} text 
+	 * @param {string} text
 	 */
 	addLabel(text) {
 		this.addAction({ type: Action.LABEL, text });
@@ -83,7 +83,7 @@ class CustomForm {
 	 * Adds a dropdown menu to the form.
 	 *
 	 * @param {string} text
-	 * @param {string} options 
+	 * @param {string} options
 	 */
 	addDropdown(text, options) {
 		this.addAction({ type: Action.DROPDOWN, text, options });
@@ -102,12 +102,12 @@ class CustomForm {
 	 * Adds a slider to the form.
 	 *
 	 * @param {string} text
-	 * @param {number} min 
-	 * @param {number} max 
-	 * @param {number} [step] 
+	 * @param {number} min
+	 * @param {number} max
+	 * @param {number} [step]
 	 */
 	addSlider(text, min, max, step = -1) {
-		this.addAction({ type: Action.SLIDER, text, min: min.toString(), max: max.toString(), step: step.toString()});
+		this.addAction({ type: Action.SLIDER, text, min: min.toString(), max: max.toString(), step: step.toString() });
 	}
 
 	/**

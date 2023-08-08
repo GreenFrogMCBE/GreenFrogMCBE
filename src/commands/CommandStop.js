@@ -23,11 +23,11 @@ const Frog = require("../Frog");
  * A command to shutdown the server.
  */
 class CommandStop extends Command {
-	name = getKey("commands.stop.name")
-	description = getKey("commands.stop.description")
-	minArgs = 0
-	maxArgs = 0
-	requiresOp = true
+	name = getKey("commands.stop.name");
+	description = getKey("commands.stop.description");
+	minArgs = 0;
+	maxArgs = 0;
+	requiresOp = true;
 
 	execute() {
 		Frog.shutdownServer();

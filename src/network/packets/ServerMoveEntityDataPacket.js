@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerMoveEntityDataPacket extends Packet {
 	name = "move_entity_delta";
-	
+
 	/** @type {import("Frog").Coordinate } */
 	coordinates = { x: 0, y: 0, z: 0 }; // This is required here
 	/** @type {number | undefined} */

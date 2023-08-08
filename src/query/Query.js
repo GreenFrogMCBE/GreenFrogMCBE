@@ -25,12 +25,11 @@ class Query {
 
 	/**
 	 * Starts the query server.
-	 * 
+	 *
 	 * @param {import("Frog").QuerySettings} settings
 	 */
 	start(settings) {
-		new ListeningHandler()
-			.handleListening(this.socket, settings)
+		new ListeningHandler().handleListening(this.socket, settings);
 
 		this.settings = settings;
 	}

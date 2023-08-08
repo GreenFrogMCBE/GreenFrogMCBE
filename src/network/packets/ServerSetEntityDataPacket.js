@@ -17,7 +17,7 @@ const Packet = require("./Packet");
 
 class ServerSetEntityDataPacket extends Packet {
 	name = "set_entity_data";
-	
+
 	/** @type {import("Frog").EntityDataProperties | undefined} */
 	properties;
 	/** @type {string | undefined} */

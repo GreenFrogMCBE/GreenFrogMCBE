@@ -54,7 +54,7 @@ module.exports = {
 	/**
 	 * Retrieves the commands array.
 	 *
-	 * @returns {import("Frog").CommandInfo[]} 
+	 * @returns {import("Frog").CommandInfo[]}
 	 */
 	getCommands() {
 		return commands;
@@ -107,5 +107,5 @@ module.exports = {
 		const availableCommandsPacket = new ServerAvailableCommandsPacket();
 		availableCommandsPacket.data = client.commands;
 		availableCommandsPacket.writePacket(client);
-	}
-}
+	},
+};

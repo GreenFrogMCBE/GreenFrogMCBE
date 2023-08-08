@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const fs = require('fs');
+const fs = require("fs");
 const path = require("path");
 
 module.exports = {
@@ -50,5 +50,5 @@ module.exports = {
 
 			Frog.eventEmitter.emit("serverCommandsInitialised");
 		});
-	}
+	},
 };

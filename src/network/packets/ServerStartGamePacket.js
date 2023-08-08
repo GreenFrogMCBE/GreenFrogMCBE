@@ -19,7 +19,7 @@ const ChatRestrictionLevel = require("./types/ChatRestrictionLevel");
 
 class ServerStartGamePacket extends Packet {
 	name = "start_game";
-	
+
 	/** @type {number | undefined} */
 	entity_id;
 	/** @type {number | undefined} */
