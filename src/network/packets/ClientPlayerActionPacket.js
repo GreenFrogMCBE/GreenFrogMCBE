@@ -37,7 +37,7 @@ class ClientPlayerActionPacket extends Packet {
 		const { action, position, result_position, face } = packet.data.params;
 
 		switch (action) {
-			case BlockAction.BLOCK_BREAK:
+			case BlockAction.CREATIVE_PLAYER_BREAK_BLOCK:
 				if (player.gamemode == Gamemode.SURVIVAL || player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
 					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s", player.username));
 				}
