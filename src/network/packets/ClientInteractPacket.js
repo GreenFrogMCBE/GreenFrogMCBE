@@ -39,7 +39,7 @@ class ClientInteractPacket extends Packet {
 
 		let shouldInteract = true;
 
-		Frog.eventEmitter.emit("playerInteractEvent", {
+		Frog.eventEmitter.emit("playerInteract", {
 			player,
 			actionID,
 			cancel: () => {
@@ -61,10 +61,10 @@ class ClientInteractPacket extends Packet {
 				};
 
 				Frog.eventEmitter.emit("playerContainerOpen", {
-					windowID: WindowId.CREATIVE,
+					windowId: WindowId.CREATIVE,
 					windowType: WindowType.CREATIVE_INVENTORY,
-					isSentByServer: false,
-					runtimeID: 2,
+					entByServer: false,
+					runtimeId: 2,
 					player,
 					containerCoordinates,
 					cancel: () => {
