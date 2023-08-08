@@ -21,6 +21,9 @@ const { getKey } = require("../utils/Language");
 
 const Command = require("./Command");
 
+/**
+ * A command that lists all online players
+ */
 class CommandList extends Command {
 	name = getKey("commands.list.name");
 	description = getKey("commands.list.description");
