@@ -21,7 +21,6 @@
     "js-yaml": "4.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.4.5",
     "eslint": "8.45.0",
     "minecraft-server-util": "github:greenfrogmcbe/minecraft-server-util-compiled",
     "nodemon": "3.0.1",
