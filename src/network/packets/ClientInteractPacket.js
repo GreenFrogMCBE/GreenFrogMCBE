@@ -63,7 +63,7 @@ class ClientInteractPacket extends Packet {
 				Frog.eventEmitter.emit("playerContainerOpen", {
 					windowId: WindowId.CREATIVE,
 					windowType: WindowType.CREATIVE_INVENTORY,
-					entByServer: false,
+					sentByServer: false,
 					runtimeId: 2,
 					player,
 					containerCoordinates,
