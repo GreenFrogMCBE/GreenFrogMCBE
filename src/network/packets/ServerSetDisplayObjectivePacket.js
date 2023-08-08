@@ -13,23 +13,27 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerScoreboardObjectivePacket extends PacketConstructor {
+class ServerScoreboardObjectivePacket extends Packet {
 	name = "set_display_objective";
-	/** @type {import("../../scoreboard/types/DisplaySlot")} */
+	
+	/** @type {import("Frog").DisplaySlot | undefined} */
 	display_slot;
-	/** @type {string} */
+	/** @type {string | undefined} */
 	objective_name;
-	/** @type {string} */
+	/** @type {string | undefined} */
 	display_name;
-	/** @type {import("../../scoreboard/types/CreteriaNames")} */
+	/** @type {import("Frog").CreteriaName | undefined} */
 	criteria_name;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	sort_order;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			display_slot: this.display_slot,
 			objective_name: this.objective_name,
 			display_name: this.display_name,

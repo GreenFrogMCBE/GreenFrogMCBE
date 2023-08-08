@@ -49,7 +49,7 @@ async function traverseDirectory(dirPath, replacements) {
 
 		if (entry.isDirectory()) {
 			traverseDirectory(entryPath, replacements);
-		} else if (entry.isFile() && (entry.name.endsWith(".js") || entry.name.endsWith(".json"))) {
+		} else if (entry.isFile()) {
 			replaceInFile(entryPath, replacements);
 		}
 	}

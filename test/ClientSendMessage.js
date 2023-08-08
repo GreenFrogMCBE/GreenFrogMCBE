@@ -24,13 +24,13 @@ module.exports = {
 			port: 19132,
 			username: "sendmessagebot",
 			offline: true,
-			version: "1.20.0",
+			version: "1.20.10",
 		});
 
 		console.info("[sendmessage bot] joined");
 		bot.on("spawn", () => {
 			bot.queue("text", {
-				type: "chat",
+				types: "chat",
 				needs_translation: false,
 				source_name: bot.username,
 				xuid: "",

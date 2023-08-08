@@ -14,6 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class BlockBreakException extends Error {
+	/** @param {string} message */
 	constructor(message) {
 		super("BlockBreakException: " + message);
 		this.name = "BlockBreakException";

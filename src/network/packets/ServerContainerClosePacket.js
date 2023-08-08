@@ -13,17 +13,21 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerContainerClosePacket extends PacketConstructor {
+class ServerContainerClosePacket extends Packet {
 	name = "container_close";
-	/** @type {number} */
+	
+	/** @type {number | undefined} */
 	window_id;
-	/** @type {boolean} */
+	/** @type {boolean | undefined} */
 	server;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			window_id: this.window_id,
 			server: this.server,
 		});

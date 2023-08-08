@@ -16,28 +16,31 @@
 /* eslint-disable no-case-declarations */
 const ServerContainerOpenPacket = require("./ServerContainerOpenPacket");
 
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-const WindowType = require("./types/WindowType");
-const InteractType = require("../../world/types/InteractType");
-const WindowId = require("./types/WindowId");
+const WindowType = require("../../inventory/types/WindowType");
+const WindowId = require("../../inventory/types/WindowId");
+const Interact = require("../../world/types/Interact");
 
-const Logger = require("../../server/Logger");
+const Logger = require("../../utils/Logger");
 const Frog = require("../../Frog");
 
 const { getKey } = require("../../utils/Language");
 
-class ClientInteractPacket extends PacketConstructor {
+class ClientInteractPacket extends Packet {
 	name = "interact";
 
-	async readPacket(player, packet, server) {
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
+	 */
+	async readPacket(player, packet) {
 		const actionID = packet.data.params.action_id;
 
 		let shouldInteract = true;
 
 		Frog.eventEmitter.emit("playerInteractEvent", {
 			player,
-			server,
 			actionID,
 			cancel: () => {
 				shouldInteract = false;
@@ -47,9 +50,10 @@ class ClientInteractPacket extends PacketConstructor {
 		if (!shouldInteract) return;
 
 		switch (actionID) {
-			case InteractType.INVENTORY_OPEN:
-				let shouldOpen = true;
+			case Interact.INVENTORY_OPEN:
+				let shouldOpenInventory = true;
 
+				/** @type {import("Frog").Coordinate} */
 				const containerCoordinates = {
 					x: 0,
 					y: 0,
@@ -62,24 +66,23 @@ class ClientInteractPacket extends PacketConstructor {
 					isSentByServer: false,
 					runtimeID: 2,
 					player,
-					server,
 					containerCoordinates,
 					cancel: () => {
-						shouldOpen = false;
+						shouldOpenInventory = false;
 					},
 				});
 
-				if (!shouldOpen) return;
+				if (!shouldOpenInventory) return;
 
 				const containerOpen = new ServerContainerOpenPacket();
 				containerOpen.window_id = WindowId.CREATIVE;
 				containerOpen.window_type = WindowType.CREATIVE_INVENTORY;
-				containerOpen.runtime_entity_id = 2;
+				containerOpen.runtime_entity_id = 1;
 				containerOpen.coordinates = { x: containerCoordinates.x, y: containerCoordinates.y, z: containerCoordinates.z };
 				containerOpen.writePacket(player);
 				break;
 			default:
-				Logger.debug(getKey("debug.player.unsupportedAction.id").replace("%s%", actionID).replace("%d%", player.username));
+				Logger.debug(getKey("debug.player.unsupportedAction.id").replace("%s", actionID).replace("%d", player.username));
 		}
 	}
 }

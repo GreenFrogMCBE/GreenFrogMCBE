@@ -15,13 +15,15 @@
  */
 const Frog = require("../../Frog");
 
-const FallDamage = require("../../world/FallDamage");
+const Packet = require("./Packet");
 
-const PacketConstructor = require("./PacketConstructor");
-
-class ClientPlayerAuthInputPacket extends PacketConstructor {
+class ClientPlayerAuthInputPacket extends Packet {
 	name = "player_auth_input";
 
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
+	 */
 	async readPacket(player, packet) {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw } = packet.data.params;
@@ -47,10 +49,10 @@ class ClientPlayerAuthInputPacket extends PacketConstructor {
 
 		if (!shouldSetPosition) return;
 
-		FallDamage.calculateFallDamage(player, { x, y, z });
+		player.world.handleFallDamage(player, { x, y, z });
 
 		player.location.x = x;
-		player.location.y = y;
+		player.location.y = y - 2;
 		player.location.z = z;
 		player.location.yaw = yaw;
 		player.location.pitch = pitch;

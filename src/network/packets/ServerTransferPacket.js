@@ -13,17 +13,23 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerTransferPacket extends PacketConstructor {
+class ServerTransferPacket extends Packet {
 	name = "transfer";
-	/** @type {string} */
+
+
+	
+	/** @type {string | undefined} */
 	server_address;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	port;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			server_address: this.server_address,
 			port: this.port,
 		});

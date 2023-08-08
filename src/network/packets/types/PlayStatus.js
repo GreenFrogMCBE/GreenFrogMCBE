@@ -22,9 +22,9 @@ module.exports = /** @type {const} */ ({
 	FAILED_CLIENT: "failed_client",
 	/** Displays "Could not connect: Outdated server!" */
 	FAILED_SERVER: "failed_server",
-	/** EDU only, but supported in GreenFrog, displays "Unable to connect to world. Your school does not have access to this server." */
+	/** EDU only, displays "Unable to connect to world. Your school does not have access to this server." */
 	FAILED_SCHOOL_ACCESS_DENIED: "failed_invalid_tenant",
-	/** EDU only, but supported in GreenFrog, displays "The server is not running Minecraft: Education Edition. Failed to connect." */
+	/** EDU only,  displays "The server is not running Minecraft: Education Edition. Failed to connect." */
 	FAILED_EDUCATION_EDITION_REQUIRED: "failed_edu_vanilla",
 	/** Displays "The server is running an incompatible edition of Minecraft. Failed to connect."*/
 	FAILED_VANILLA_BEDROCK_REQUIRED: "failed_edu_vanilla",

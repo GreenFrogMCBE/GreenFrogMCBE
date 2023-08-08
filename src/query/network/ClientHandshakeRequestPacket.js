@@ -1,0 +1,29 @@
+const Packet = require("./Packet");
+
+const ClientTokens = require("../utils/ClientTokens");
+
+const QueryPacket = require("./types/QueryPacket");
+
+const ServerHandshakeResponsePacket = require("./ServerHandshakeResponsePacket");
+
+class ClientHandshakeRequestPacket extends Packet {
+    packetId = QueryPacket.HANDSHAKE;
+
+    /**
+     * @param {import("dgram").RemoteInfo} client
+     * @param {Buffer} packet
+     * @param {import("dgram").Socket} socket
+     */
+    readPacket(client, packet, socket) {
+        const sessionID = packet.readInt32BE(3);
+
+        ClientTokens.clientTokens.set(`${client.address},${client.port}`, sessionID);
+
+        const handshakeResponsePacket = new ServerHandshakeResponsePacket();
+        handshakeResponsePacket.sessionId = sessionID;
+        handshakeResponsePacket.payload = sessionID.toString();
+        handshakeResponsePacket.writePacket(client, socket)
+    }
+}
+
+module.exports = ClientHandshakeRequestPacket;

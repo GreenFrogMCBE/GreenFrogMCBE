@@ -14,26 +14,21 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
-const ActionType = require("./types/ActionType");
 
-const FormType = require("./types/FormType");
+const Action = require("./types/Action");
+const Form = require("./types/Form");
 
 class CustomForm {
 	constructor() {
 		/**
-		 * @type {FormType}
-		 *
-		 * @type {import("./types/FormType")}
+		 * @type {import("Frog").Action}
 		 */
-		this.type = FormType.CUSTOM_FORM;
+		this.type = Form.CUSTOM_FORM;
 
 		/**
 		 * @type {function}
-		 *
-		 * @param {CustomForm} form
-		 * @param {import('frog-protocol').Client} client
 		 */
-		this.onSend = () => {};
+		this.onSend = () => { };
 
 		/**
 		 * @type {string}
@@ -41,12 +36,12 @@ class CustomForm {
 		this.title = "";
 
 		/**
-		 * @type {Array.<{ type: string, text: string, [placeholder]: string, [options]: JSON, [min]: number, [max]: number, [step]: number }>}
+		 * @type {import("Frog").FormAction[]}
 		 */
 		this.actions = [];
 
 		/**
-		 * @type {Array.<{ text: string, image?: { type: string, data: string } }>}
+		 * @type {import("Frog").FormButton[]}
 		 */
 		this.buttons = [];
 
@@ -57,67 +52,62 @@ class CustomForm {
 	}
 
 	/**
-	 * Add an action to the form.
+	 * Adds an action to the form.
 	 *
-	 * @param {object} action - The action to add to the list of actions.
-	 * @param {string} action.type - The type of action, e.g. "input", "label", "dropdown", "toggle", or "slider".
-	 * @param {string} action.text - The text to display for the action.
-	 * @param {string} [action.placeholder] - The text to display as a placeholder in an input field.
-	 * @param {JSON} [action.options] - An object containing key-value pairs that define the options for a dropdown menu.
-	 * @param {number} [action.min] - The minimum value for a slider.
-	 * @param {number} [action.max] - The maximum value for a slider.
-	 * @param {number} [action.step] - The step value for a slider.
+	 * @param {import("Frog").FormAction} action
 	 */
 	addAction(action) {
 		this.actions.push(action);
 	}
 
 	/**
-	 * Add an input to the form.
+	 * Adds an input to the form.
 	 *
-	 * @param {string} text - The text that will be displayed in the input field.
-	 * @param {string} [placeholder] - The text that will be displayed in the input box before the user types anything.
+	 * @param {string} text
+	 * @param {string} [placeholder]
 	 */
 	addInput(text, placeholder = "") {
-		this.addAction({ type: ActionType.INPUT, text: text, placeholder: placeholder });
+		this.addAction({ type: Action.INPUT, text, placeholder });
 	}
 
 	/**
-	 * Add a label to the form.
+	 * Adds a label to the form.
 	 *
-	 * @param {string} text - The text to display.
+	 * @param {string} text 
 	 */
 	addLabel(text) {
-		this.addAction({ type: ActionType.LABEL, text: text });
+		this.addAction({ type: Action.LABEL, text });
 	}
 
 	/**
-	 * Add a dropdown menu to the form.
+	 * Adds a dropdown menu to the form.
 	 *
-	 * @param {string} text - The text to display for the dropdown.
-	 * @param {JSON} options - An object containing key-value pairs that define the options for the dropdown.
+	 * @param {string} text
+	 * @param {string} options 
 	 */
 	addDropdown(text, options) {
-		this.addAction({ type: ActionType.dropdown, text: text, options: options });
+		this.addAction({ type: Action.DROPDOWN, text, options });
 	}
 
 	/**
-	 * Add a toggle button to the form.
+	 * Adds a toggle button to the form.
 	 *
-	 * @param {string} text - The text to display for the toggle.
+	 * @param {string} text
 	 */
 	addToggle(text) {
-		this.addAction({ type: ActionType.TOGGLE, text: text });
+		this.addAction({ type: Action.TOGGLE, text });
 	}
 
 	/**
-	 * Add a slider to the form.
+	 * Adds a slider to the form.
 	 *
-	 * @param {string} text - The text to display for the slider.
-	 * @param {number} min - The minimum value for the slider.
+	 * @param {string} text
+	 * @param {number} min 
+	 * @param {number} max 
+	 * @param {number} [step] 
 	 */
 	addSlider(text, min, max, step = -1) {
-		this.addAction({ type: ActionType.SLIDER, text: text, min: min, max: max, step: step });
+		this.addAction({ type: Action.SLIDER, text, min: min.toString(), max: max.toString(), step: step.toString()});
 	}
 
 	/**
@@ -132,7 +122,7 @@ class CustomForm {
 		FormRequestPacket.content = JSON.stringify(this.actions);
 		FormRequestPacket.buttons = JSON.stringify(this.buttons);
 		FormRequestPacket.type = this.type;
-		FormRequestPacket.send(client);
+		FormRequestPacket.writePacket(client);
 
 		this.onSend(this, client);
 	}

@@ -17,6 +17,25 @@ Please note that this software is still in beta, so do not stare directly at the
 + Human-readable license: /docs/READABLE LICENSE.md
 + How to connect via localhost: /docs/LOCAL CONNECTIONS.md
 + How to install: /docs/INSTALLATION.md
+
+@@ Features: @@
+
++ Chat
++ A lot of commands
++ API
++ Events
++ Chunks/Generators
++ Toasts
++ Forms
++ Player transfer support
++ XP API
++ Container API
++ Tests
++ Configs
++ Multilang
++ Creative inventory
++ Basic permission system
++ Hunger and damage support
 ```
 
 ![Alt](https://repobeats.axiom.co/api/embed/ff82e6d76083a1934305e3b40714b01604df4e92.svg "Repobeats analytics image")

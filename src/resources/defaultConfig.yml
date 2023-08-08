@@ -1,6 +1,9 @@
 network:
   host: "0.0.0.0"
   port: 19132
+  packetRateLimting: # Limits how many packets can be sent per second
+    enabled: true # Recommended to enable. It can prevent bad actors from crashing your server
+    maxPackets: 2500
 serverInfo:
   motd: "§aGreenFrog server"
   levelName: "GreenFrog"
@@ -8,50 +11,57 @@ serverInfo:
   offlineMode: false
   maxPlayers: 20
 chat:
-  lang: "en_US"
-  disable: false
-  commandsDisabled: false
-  blockInvalidMessages: true # Prevents players from using colors in chat or spam the chat with messages that are longer than 256 chars
-  blockInvalidCommands: true # Same as 'blockInvalidMessages' but for commands
+  lang: "en_US" # Can be "en_US", "ca_ES", "es_ES", "ru_RU" or "uk_UA"
+  systemMessages:
+    join: false # Should messages like "X joined the game" be disabled?
+    leave: false # Should messages like "X left the game" be disabled?
+  features:
+    chat: false # Should chat be disabled?
+    commands: false # Should commands be disabled? This will won't affect console commands
+  blockInvalidPackets:
+    messages: true # Prevents playersOnline.from using colors in chat or spam the chat with messages that are longer than 256 chars
+    commands: true # Same as "messages" but for commands
 query: # Query is a UDP protocol for querying server properties. More info at https://wiki.vg/Query
   enabled: true
-  showPlugins: false # Will querying the server show all the plugins that the server has installed?
-  logPackets: false
-  logConnections: false
   port: 19133
+  showPlugins: false # Will querying the server show all the plugins that the server has installed?
+  log:
+    packets: true
+    connections: false
 dev:
   unstable: false # Makes your server not crash on critical errors
   debug: false
-  crashCode: -1
-  exitCode: 0
   logUnhandledPackets: false
-  defaultPermissionLevel: 2
   # Permission levels are:
   # 4 - operator
-  # 3 - unknown
   # 2 - member
-  # 1 - unknown
   # 0 - visitor
-  multiProtocol: false # Supports 1.20.<any sub versions or your version>. Some features may be broken
-  validateUsernames: true # Won't allow usernames that are too long/too short or duplicate usernames
-  useLegacyVersionMismatchKickMessage: false # Instead of `Could not connect: Outdated client!` or `Could not connect: Outdated server!` it will say the value of `kickMessages.versionMismatch` in your lang file
-  useLegacyServerFullKickMessage: false # Instead of `Wow this server is popular! Check back later to see if space opens up.`  it will say the value of `kickMessages.serverFull` in your lang file
+  defaultPermissionLevel: 2
+  multiProtocol: false # Supports versions that have no or nearly any protocol changes. Some features may be broken
+  validateUsernames: true # Don't allow allow usernames that are too long/too short or duplicate usernames?
+  legacy:
+    useLegacyVersionMismatchKickMessage: false # Instead of `Could not connect: Outdated client!` or `Could not connect: Outdated server!` it will say the value of `kickMessages.versionMismatch` in your lang file
+    useLegacyServerFullKickMessage: false # Instead of `Wow this server is popular! Check back later to see if space opens up.`  it will say the value of `kickMessages.serverFull` in your lang file
+  exitCodes:
+    exit: 0
+    crash: -1
 world:
-  gamemode: "creative"
-  worldGamemode: "creative"
-  difficulty: 0
-
-  generator: "default" # Can be default, flat, or void
-  renderDistance: 4
-  clientSideRenderDistance: 64
-
-  tickEvent: true # Should ServerTickEvent be enabled?
-  tickWorldTime: true # Should time update be server side?
-  tickVoid: true # Should people that are in void take damage?
-  tickRegeneration: true # Should people in survival mode regenerate their health?
-  tickStarvationDamage: true # Should people take damage if their food level is 0?
-  tickSpeed: 1000
-
-  worldName: "GreenFrog server"
+  name: "GreenFrog server"
+  difficulty: 0 # Can be 0 (for peaceful), 1 (for easy), 2 (for normal), 3 (for hard)
+  gamemode:
+    player: "creative"
+    world: "creative"
+  generators:
+    type: "default" # The world type. Can be "default" (for a normal world), "flat" (for a superflat world), or "void" (for an empty world)
+  renderDistance:
+    serverSide: 4
+    clientSide: 64
+  ticking:
+    event: true # Should ServerTickEvent be enabled?
+    worldTime: true # Should time update be server side?
+    void: true # Should people that are in void take damage?
+    regeneration: true # Should people in survival mode regenerate their health?
+    starvationDamage: true # Should people take damage if their food level is 0?
+    speed: 1000 # The tick speed
 performance:
   garbageCollectorDelay: 60000

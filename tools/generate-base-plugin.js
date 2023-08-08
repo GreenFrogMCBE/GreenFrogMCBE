@@ -1,72 +1,130 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- * The content of this file is licensed using the CC-BY-4.0 license
- * which requires you to agree to its terms if you wish to use or make any changes to it.
- *
- * @license CC-BY-4.0
- * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
- * @link Discord - https://discord.gg/UFqrnAbqjP
- */
 const fs = require("fs");
+const path = require("path");
 const readline = require("readline");
 
-const pluginPath = `${__dirname}/../plugins`;
+const { convertConsoleColor } = require("../src/utils/ConsoleColorConvertor");
+const Colors = require("../src/utils/types/Colors");
 
-setTimeout(() => {
+let pluginName;
+
+const pluginsFolderPath = path.join(__dirname, "..", "plugins");
+
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+
+function handleError(message) {
 	console.clear();
+	console.error(convertConsoleColor(`${Colors.RED}${message}${Colors.RESET}`));
+	process.exit(1);
+}
 
-	const rl = readline.createInterface({
-		input: process.stdin,
-		output: process.stdout,
-	});
+function createDirectoryIfNotExists(directoryPath) {
+	if (!fs.existsSync(directoryPath)) {
+		fs.mkdirSync(directoryPath);
+	}
+}
 
-	rl.question("\x1b[34mPlease enter the name of your plugin...\n", (pluginName) => {
-		console.clear();
+function writePackageJson(directoryPath, pluginName) {
+	const packageJson = {
+		name: pluginName.toLowerCase(),
+		main: `${pluginName.toLowerCase()}.js`,
+		version: "1.0.0",
+		displayName: pluginName,
+	};
 
-		const pluginDir = `${pluginPath}/${pluginName}`;
+	fs.writeFileSync(`${directoryPath}/package.json`, JSON.stringify(packageJson, null, 4));
+}
 
-		if (!fs.existsSync("plugins")) fs.mkdirSync("plugins");
+function writePluginFile(directoryPath, pluginName, useTypeScript) {
+	let pluginJs = `module.exports = {
+	onLoad() {
+		// ...
+	},
 
+	onShutdown() {
+		// ...
+	},
+};`
+
+	if (useTypeScript) {
 		try {
-			fs.mkdirSync(pluginDir);
+			require("typescript");
 		} catch {
-			console.error("\x1b[31mPlugin already exists!");
-			rl.close();
-			return;
+			handleError(`TypeScript is not installed. Please install it to create TypeScript plugins (Hint: To install it, run "npm i typescript")`);
 		}
 
-		const packageJson = {
-			name: pluginName.toLowerCase(),
-			main: `${pluginName.toLowerCase()}.js`,
-			version: "1.0.0",
-			displayName: pluginName,
-		};
+		pluginJs = `export function onLoad(): void {
+	// ...
+}
 
-		const pluginJs = `module.exports = {
-  onLoad() {
-    // ...
-  },
+export function onShutdown(): void {
+	// ...
+}`;
+		const tsConfig = {
+			"compilerOptions": {
+				"strict": true,
+				"esModuleInterop": true,
+				"resolveJsonModule": true,
+				"allowJs": true
+			},
+			"include": ["../../**/*", "../../index.d.ts"]
+		}
 
-  onShutdown() {
-    // ...
-  },
-};`;
+		fs.writeFileSync(`${directoryPath}/tsconfig.json`, JSON.stringify(tsConfig, null, 4));
+	}
 
-		fs.writeFileSync(`${pluginDir}/package.json`, JSON.stringify(packageJson, null, 2));
-		fs.writeFileSync(`${pluginDir}/${pluginName.toLowerCase()}.js`, pluginJs);
+	fs.writeFileSync(`${directoryPath}/${pluginName.toLowerCase()}.${useTypeScript ? 'ts' : 'js'}`, pluginJs);
+}
 
-		setTimeout(() => {
-			console.info("\x1b[32mPlugin created!");
+async function handleUserInputForTypeScript(ts) {
+	const useTypeScript = ts.toLowerCase() === 'y';
 
-			console.info("\x1b[0m");
-			rl.close();
-			process.exit(0);
-		}, 100);
-	});
-}, 500);
+	if (!['y', 'n'].includes(ts.toLowerCase())) {
+		handleError(`Please enter "Y" for yes or "N" for no`);
+	}
+
+	const pluginDirPath = path.join(pluginsFolderPath, pluginName);
+
+	createDirectoryIfNotExists(pluginsFolderPath);
+
+	try {
+		createDirectoryIfNotExists(pluginDirPath);
+	} catch (error) {
+		if (error.message.includes("file already exists")) {
+			handleError(`Plugin directory already exists`);
+		} else {
+			handleError(`There was an error when creating a plugin! ${error}`);
+		}
+	}
+
+	writePackageJson(pluginDirPath, pluginName, useTypeScript);
+	writePluginFile(pluginDirPath, pluginName, useTypeScript);
+
+	console.clear();
+	console.info(convertConsoleColor(`${Colors.GREEN}Plugin created!${useTypeScript ? ` (Hint: To compile it, run "npx tsc ${pluginName.toLowerCase()}.ts")` : ''}${Colors.RESET}`));
+	process.exit(0);
+}
+
+async function handleUserInputForPluginName(pluginNameInput) {
+	if (!pluginNameInput) {
+		handleError(`Please enter a plugin name`);
+	}
+
+	pluginName = pluginNameInput;
+
+	rl.question(
+		convertConsoleColor(`${Colors.GREEN}Do you want to use TypeScript [Y/N]? (Hint: "Y" stands for yes and "N" stands for no) ${Colors.RESET}`),
+		(input) => { handleUserInputForTypeScript(input) }
+	);
+}
+
+async function start() {
+	rl.question(
+		convertConsoleColor(`${Colors.GREEN}Please enter the name of your plugin... ${Colors.RESET}`),
+		(input) => { handleUserInputForPluginName(input) }
+	);
+}
+
+start();

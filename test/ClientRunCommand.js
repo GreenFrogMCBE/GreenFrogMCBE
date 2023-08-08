@@ -24,7 +24,7 @@ module.exports = {
 			port: 19132,
 			username: "commandbot",
 			offline: true,
-			version: "1.20.0",
+			version: "1.20.10",
 		});
 
 		console.info("[commandbot] joined");
@@ -36,7 +36,7 @@ module.exports = {
 				origin: {
 					uuid: bot.profile.uuid,
 					request_id: bot.profile.uuid,
-					type: "player",
+					types: "player",
 				},
 			});
 		});

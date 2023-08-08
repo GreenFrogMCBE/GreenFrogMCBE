@@ -15,14 +15,18 @@
   },
   "dependencies": {
     "@harmonytf/smart-buffer": "4.2.4",
+    "@kotinash/lang-parser": "^1.0.3",
     "center-align": "1.0.1",
     "frog-protocol": "github:greenfrogmcbe/Protocol",
-    "js-yaml": "4.1.0"
+    "i18next": "23.3.0",
+    "js-yaml": "4.1.0",
+    "npm-dts": "^1.3.12"
   },
   "devDependencies": {
-    "eslint": "8.46.0",
+    "@types/node": "^20.4.5",
+    "eslint": "8.45.0",
     "minecraft-server-util": "github:greenfrogmcbe/minecraft-server-util-compiled",
     "nodemon": "3.0.1",
-    "prettier": "3.0.1"
+    "prettier": "3.0.0"
   }
 }
