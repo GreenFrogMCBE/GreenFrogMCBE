@@ -38,10 +38,7 @@ class CommandPl extends Command {
 		const pluginSet = new Set(PluginManager.plugins);
 		const pluginList = [...pluginSet].map((plugin) => `§r§a${plugin.name} v${plugin.version}§r`).join(", ") || "";
 
-		player.sendMessage(
-			getKey("commands.plugins.execution.success")
-				.replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`)
-		);
+		player.sendMessage(getKey("commands.plugins.execution.success").replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`));
 	}
 }
 

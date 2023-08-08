@@ -38,7 +38,7 @@ class Form {
 		 * @param {Form} form
 		 * @param {import("Frog").Player} client
 		 */
-		this.onSend = (form, client) => { };
+		this.onSend = (form, client) => {};
 
 		/**
 		 * The ID of the form.

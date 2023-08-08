@@ -39,15 +39,9 @@ class CommandDeop extends Command {
 		try {
 			PermissionManager.setOpStatus(playerName, false);
 
-			player.sendMessage(
-				getKey("commands.deop.execution.success")
-					.replace("%s", playerName)
-			);
+			player.sendMessage(getKey("commands.deop.execution.success").replace("%s", playerName));
 		} catch {
-			player.sendMessage(
-				getKey("commands.deop.execution.fail")
-					.replace("%s", playerName)
-			);
+			player.sendMessage(getKey("commands.deop.execution.fail").replace("%s", playerName));
 		}
 	}
 }

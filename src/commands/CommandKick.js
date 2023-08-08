@@ -40,17 +40,11 @@ class CommandKick extends Command {
 		const target = PlayerInfo.getPlayer(playerName);
 
 		if (!target) {
-			player.sendMessage(
-				getKey("commands.kick.execution.failed.notOnline")
-					.replace("%s", playerName)
-			);
+			player.sendMessage(getKey("commands.kick.execution.failed.notOnline").replace("%s", playerName));
 			return;
 		}
 
-		target.kick(
-			getKey("kickMessages.wereKicked")
-				.replace("%s", reason)
-		);
+		target.kick(getKey("kickMessages.wereKicked").replace("%s", reason));
 	}
 }
 

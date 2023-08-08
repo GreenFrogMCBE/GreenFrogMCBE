@@ -36,11 +36,7 @@ class CommandHelp extends Command {
 		player.sendMessage(getKey("commands.help.execution.success"));
 
 		for (const command of CommandManager.commands) {
-			player.sendMessage(
-				getKey("commands.help.execution.command")
-					.replace("%s", command.name)
-					.replace("%d", command.description)
-			);
+			player.sendMessage(getKey("commands.help.execution.command").replace("%s", command.name).replace("%d", command.description));
 		}
 	}
 }

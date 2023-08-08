@@ -43,18 +43,9 @@ class CommandTell extends Command {
 
 		const message = args.slice(1).join(" ");
 
-		target.sendMessage(
-			getKey("commands.tell.execution.success")
-				.replace("%s", player.username)
-				.replace("%d", player.username)
-				.replace("%f", message)
-		);
+		target.sendMessage(getKey("commands.tell.execution.success").replace("%s", player.username).replace("%d", player.username).replace("%f", message));
 
-		player.sendMessage(
-			getKey("commands.tell.execution.success.whisper")
-				.replace("%s", target.username)
-				.replace("%d", message)
-		);
+		player.sendMessage(getKey("commands.tell.execution.success.whisper").replace("%s", target.username).replace("%d", message));
 	}
 }
 

@@ -48,9 +48,7 @@ class ClientTextPacket extends Packet {
 
 		if (!shouldChat) return;
 
-		const formattedMessage = getKey("chat.format")
-			.replace("%s", player.username)
-			.replace("%d", message.replace(/§/g, ""));
+		const formattedMessage = getKey("chat.format").replace("%s", player.username).replace("%d", message.replace(/§/g, ""));
 
 		Logger.info(formattedMessage);
 

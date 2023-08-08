@@ -28,7 +28,7 @@ class CustomForm {
 		/**
 		 * @type {function}
 		 */
-		this.onSend = () => { };
+		this.onSend = () => {};
 
 		/**
 		 * @type {string}

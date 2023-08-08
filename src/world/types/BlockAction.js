@@ -14,5 +14,5 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-	CREATIVE_PLAYER_BREAK_BLOCK: "creative_player_destroy_block"
+	CREATIVE_PLAYER_BREAK_BLOCK: "creative_player_destroy_block",
 });
