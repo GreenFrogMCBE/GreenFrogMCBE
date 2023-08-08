@@ -61,6 +61,7 @@ class CommandTp extends Command {
 					getKey("commands.teleport.execution.success")
 						.replace("%s", `${x}, ${y}, ${z}`)
 				);
+
 				player.sendMessage(
 					getKey("commands.teleport.execution.success.teleported")
 						.replace("%s", player.username)
@@ -86,6 +87,7 @@ class CommandTp extends Command {
 					getKey("commands.teleport.execution.success")
 						.replace("%s", `${x}, ${y}, ${z}`)
 				);
+
 				player.sendMessage(
 					getKey("commands.teleport.execution.success.teleported")
 						.replace("%s", player.username)
@@ -106,6 +108,7 @@ class CommandTp extends Command {
 					getKey("commands.teleport.execution.success")
 						.replace("%s", `${x}, ${y}, ${z}`)
 				);
+
 				player.sendMessage(
 					getKey("commands.teleport.execution.success.teleported")
 						.replace("%s", player.username)
@@ -131,6 +134,7 @@ class CommandTp extends Command {
 					getKey("commands.teleport.execution.success")
 						.replace("%s", `${x}, ${y}, ${z}`)
 				);
+
 				player.sendMessage(
 					getKey("commands.teleport.execution.success.teleported")
 						.replace("%s", player.username)

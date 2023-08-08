@@ -43,7 +43,7 @@ class ClientTextPacket extends Packet {
 
 		Logger.info(formattedMessage);
 
-		for (const recipient of PlayerInfo.playersOnline. {
+		for (const recipient of PlayerInfo.playersOnline) {
 			recipient.sendMessage(formattedMessage);
 		}
 	}

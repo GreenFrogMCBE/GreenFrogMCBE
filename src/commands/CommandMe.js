@@ -33,10 +33,9 @@ class CommandMe extends Command {
 	 * @param {string[]} args 
 	 */
 	execute(player, server, args) {
-		const message =
-			getKey("chat.format.me")
-				.replace("%s", player.username)
-				.replace("%d", args.join(" "));
+		const message = getKey("chat.format.me")
+			.replace("%s", player.username)
+			.replace("%d", args.join(" "));
 
 		Frog.broadcastMessage(message);
 	}

@@ -228,7 +228,7 @@ class ClientResourcePackResponsePacket extends Packet {
 					player.setEntityData(/** @type {import("Frog").EntityData} */(entityData));
 					player.setSpeed(0.1);
 
-					for (const onlinePlayer of PlayerInfo.playersOnline. {
+					for (const onlinePlayer of PlayerInfo.playersOnline) {
 						if (onlinePlayer.username === player.username) {
 							return; // Vanilla behaviour
 						}

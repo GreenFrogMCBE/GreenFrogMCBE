@@ -15,7 +15,7 @@
  */
 const Frog = require("../Frog");
 
-const { playersOnline.} = require("../player/PlayerInfo");
+const { playersOnline } = require("../player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
 

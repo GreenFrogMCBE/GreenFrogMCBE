@@ -15,7 +15,7 @@
  */
 const Command = require("./Command");
 
-const { playersOnline.} = require("../player/PlayerInfo");
+const { playersOnline } = require("../player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
 
@@ -46,7 +46,7 @@ class CommandTime extends Command {
 
 		const parsedTime = parseInt(time);
 
-		for (const player of playersOnline. {
+		for (const player of playersOnline) {
 			player.world.time = parsedTime;
 			player.setTime(parsedTime);
 		}

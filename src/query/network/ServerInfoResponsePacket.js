@@ -24,7 +24,7 @@ class ServerInfoResponsePacket extends Packet {
     /** @type {import("Frog").Gamemode | undefined} */
     gamemode;
     /** @type {number | undefined} */
-    playersOnline;
+    numPlayers;
     /** @type {number | undefined} */
     maxPlayers;
     /** @type {number | undefined} */
@@ -56,8 +56,8 @@ class ServerInfoResponsePacket extends Packet {
                 { key: "version", value: this.version },
                 { key: "plugins", value: this.plugins },
                 { key: "map", value: this.levelName },
-                { key: "numplayersOnline., value: this.playersOnline.nline },
-                { key: "maxplayersOnline., value: this.maxPlayers },
+                { key: "numplayers", value: this.numPlayers },
+                { key: "maxplayers", value: this.maxPlayers },
                 { key: "whitelist", value: this.whitelist },
                 { key: "hostip", value: this.serverAddress },
                 { key: "hostport", value: this.serverPort },
@@ -74,8 +74,8 @@ class ServerInfoResponsePacket extends Packet {
                 .writeStringNT("player_")
                 .writeUInt8(0x00);
 
-            if (this.playersOnline. {
-                this.playersOnline.forEach((playerName) => {
+            if (this.players) {
+                this.players.forEach((playerName) => {
                     buffer.writeStringNT(playerName);
                 });
             }
@@ -95,7 +95,7 @@ class ServerInfoResponsePacket extends Packet {
                     .writeStringNT(/** @type {string} */(this.serverName))
                     .writeStringNT(/** @type {string} */(this.game))
                     .writeStringNT(/** @type {string} */(this.levelName))
-                    .writeStringNT(/** @type {string} */(this.playersOnline.nline?.toString()))
+                    .writeStringNT(/** @type {string} */(this.players?.toString()))
                     .writeStringNT(/** @type {string} */(this.maxPlayers?.toString()))
                     .writeUInt16LE(/** @type {number} */(this.serverPort))
                     .writeStringNT(/** @type {string} */(this.serverAddress))

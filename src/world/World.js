@@ -97,7 +97,7 @@ class World {
 	}
 
 	/**
-	 * Breaks a block at the specified coordinates for all playersOnline.in the world.
+	 * Breaks a block at the specified coordinates for all players in the world.
 	 *
 	 * @param {number} x - The X-coordinate of the block.
 	 * @param {number} y - The Y-coordinate of the block.
@@ -132,7 +132,7 @@ class World {
 	}
 
 	/**
-	 * Sends the network chunk publisher packet to all online playersOnline.
+	 * Sends the network chunk publisher packet to all online players
 	 */
 	startNetworkChunkPublisherPacketSendingLoop() {
 		setInterval(() => {
@@ -169,7 +169,7 @@ class World {
 	}
 
 	/**
-	 * Performs regeneration on playersOnline.and emits the server regeneration tick event.
+	 * Performs regeneration on the player and emits the server regeneration tick event.
 	 */
 	tickRegeneration() {
 		if (!config.world.tickRegeneration) return;
@@ -189,7 +189,7 @@ class World {
 	}
 
 	/**
-	 * Performs starvation damage on playersOnline.and emits the server starvation damage tick event.
+	 * Performs starvation damage on the player and emits the server starvation damage tick event.
 	 */
 	tickStarvationDamage() {
 		if (!config.world.tickStarvationDamage) return;
@@ -204,7 +204,7 @@ class World {
 	}
 
 	/**
-	 * Performs void damage on playersOnline.and emits the server void damage tick event.
+	 * Performs void damage on players and emits the server void damage tick event.
 	 */
 	tickVoidDamage() {
 		if (!config.world.ticking.void) return;

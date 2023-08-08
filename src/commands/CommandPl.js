@@ -36,10 +36,9 @@ class CommandPl extends Command {
 	 */
 	execute(player) {
 		const pluginSet = new Set(PluginManager.plugins);
-		const pluginList =
-			[...pluginSet]
-				.map(plugin => `§r§a${plugin.name} v${plugin.version}§r`)
-				.join(", ") || "";
+		const pluginList = [...pluginSet]
+			.map(plugin => `§r§a${plugin.name} v${plugin.version}§r`)
+			.join(", ") || "";
 
 		player.sendMessage(
 			getKey("commands.plugins.execution.success")

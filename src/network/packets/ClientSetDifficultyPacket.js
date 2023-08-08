@@ -34,7 +34,7 @@ class ClientSetDifficultyPacket extends Packet {
 			difficulty,
 		});
 
-		for (const player of PlayerInfo.playersOnline. {
+		for (const player of PlayerInfo.playersOnline) {
 			player.setDifficulty(difficulty);
 		}
 	}

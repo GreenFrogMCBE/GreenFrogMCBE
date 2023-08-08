@@ -76,7 +76,7 @@ class CommandKill extends Command {
 			}
 			case Selector.RANDOM_PLAYER: {
 				const randomPlayer = Math.floor(Math.random() * PlayerInfo.playersOnline.length);
-				const subject = PlayerInfo.playersOnline.randomPlayer];
+				const subject = PlayerInfo.playersOnline[randomPlayer];
 
 				if (!canBeKilled(subject)) {
 					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
