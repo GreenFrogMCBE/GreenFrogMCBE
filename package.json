@@ -18,7 +18,6 @@
     "@kotinash/lang-parser": "^1.0.3",
     "center-align": "1.0.1",
     "frog-protocol": "github:greenfrogmcbe/Protocol",
-    "i18next": "23.3.0",
     "js-yaml": "4.1.0",
     "npm-dts": "^1.3.12"
   },
