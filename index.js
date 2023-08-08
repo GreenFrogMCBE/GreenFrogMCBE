@@ -16,18 +16,17 @@
 const fs = require("fs");
 const center = require("center-align");
 
-const Colors = require("./src/api/color/Colors");
+const Colors = require("./src/utils/types/Colors");
 
 const { convertConsoleColor } = require("./src/utils/ConsoleColorConvertor");
 
-// Print a centered header to the console
 console.info(
 	convertConsoleColor(
 		center(
 			`${Colors.GREEN} 
 ██████   ██████  ███████ ███████ ███    ██ ███████ ██████   ██████   ██████  
 ██       ██   ██ ██      ██      ████   ██ ██      ██   ██ ██    ██ ██       
-██   ███ ██████  █████   █████   ██ ██  ██ █████   ██████  ██    ██ ██   ███ 
+██   ███ ██████  █████   █████   ██ ██  ██ █████   ██████  ██    ██ ██    ██ 
 ██    ██ ██   ██ ██      ██      ██  ██ ██ ██      ██   ██ ██    ██ ██    ██ 
 ██████   ██   ██ ███████ ███████ ██   ████ ██      ██   ██  ██████   ██████  
 ${Colors.RESET}`,
@@ -36,10 +35,8 @@ ${Colors.RESET}`,
 	),
 );
 
-// Generate a filename for the crash report
 const crashFileName = `./crash-reports/server-crash-${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}.txt`;
 
-// Create config files and enable debug mode
 async function createConfigFilesAndDebug() {
 	if (!fs.existsSync("config.yml")) {
 		let config = null;
@@ -56,7 +53,6 @@ async function createConfigFilesAndDebug() {
 	}
 }
 
-// Start the server
 async function start() {
 	try {
 		await createConfigFilesAndDebug();
@@ -64,12 +60,10 @@ async function start() {
 		const Server = require("./src/Server.js");
 		Server.start();
 
-		// Handle SIGINT signal to shutdown the server
 		process.once("SIGINT", async () => {
 			require("./src/Frog").shutdownServer();
 		});
 	} catch (error) {
-		// Print error message to console and write crash report to file
 		console.clear();
 		console.error(
 			convertConsoleColor(
@@ -81,12 +75,11 @@ If you are sure that this is a bug please report it here: https://github.com/Gre
 ${Colors.RESET}`,
 			),
 		);
-		fs.mkdir("crash-reports", { recursive: true }, () => {});
-		fs.writeFileSync(crashFileName, `Error: ${error.stack}`, () => {});
+		fs.mkdirSync("crash-reports", { recursive: true });
+		fs.writeFileSync(crashFileName, `Error: ${error.stack}`);
 
 		process.exit(-1);
 	}
 }
 
-// Call the start function to start the server
 start();

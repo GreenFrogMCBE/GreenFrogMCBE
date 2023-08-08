@@ -16,28 +16,21 @@
 const fs = require("fs");
 const path = require("path");
 
-const Logger = require("../server/Logger");
+const Logger = require("../utils/Logger");
 const PluginManager = require("./PluginManager");
-const CCH = require("../server/ConsoleCommandSender");
+const ConsoleCommandSender = require("../server/ConsoleCommandSender");
 
 const { getKey } = require("../utils/Language");
 
-/** @private @type {number} */
 let pluginCount = 0;
 
-/** @private @type {JSON} */
 const directories = {
-	/** @type {string} */
 	plugins: "./plugins",
-
-	/** @type {string} */
 	pluginData: "./pluginData",
-
-	/** @type {string} */
 	fullPluginPath: path.join(__dirname, "..", "..", "./plugins"),
 
 	/**
-	 * @type {function}
+	 * @example `getFile("Example")` will return `pathToProject/plugins/Example`
 	 * @param {string} file
 	 */
 	getFile: (file) => path.join(path.join(__dirname, "..", "..", "./plugins"), file),
@@ -45,21 +38,14 @@ const directories = {
 
 module.exports = {
 	/**
-	 * Returns plugin count
-	 *
 	 * @returns {number}
 	 */
 	pluginCount,
 
 	/**
-	 * Basic directory info
+	 * Plugin-related directory info
 	 *
-	 * @type {{
-	 *   plugins: string,
-	 *   pluginData: string,
-	 *   fullPluginPath: string,
-	 *   getFile: (file: string) => string
-	 * }}
+	 * @type {import("Frog").Directories}
 	 */
 	directories,
 
@@ -70,12 +56,13 @@ module.exports = {
 		fs.mkdirSync(directories.plugins, { recursive: true });
 		fs.mkdirSync(directories.pluginData, { recursive: true });
 
-		CCH.start();
+		ConsoleCommandSender.startConsole();
 
-		const files = await fs.readdirSync(directories.plugins);
+		const files = fs.readdirSync(directories.plugins);
 
 		for (const file of files) {
-			const stats = await fs.statSync(directories.getFile(file));
+			const stats = fs.statSync(directories.getFile(file));
+
 			if (stats.isDirectory()) {
 				let name, version, main;
 
@@ -86,10 +73,9 @@ module.exports = {
 					version = packageJson.version;
 					main = packageJson.main;
 
-					PluginManager.addPlugin(name, version);
-					Logger.info(getKey("plugin.loading.loading").replace("%s%", name).replace("%d%", version));
+					Logger.info(getKey("plugin.loading.loading").replace("%s", name).replace("%d", version));
 				} catch (error) {
-					Logger.warning(getKey("plugin.loading.warning.invalidJson").replace("%s%", file).replace("%d%", error.stack));
+					Logger.warning(getKey("plugin.loading.warning.invalidJson").replace("%s", file).replace("%d", error.stack));
 					continue;
 				}
 
@@ -99,9 +85,9 @@ module.exports = {
 					await plugin.onLoad();
 
 					PluginManager.addPlugin(name, version);
-					Logger.info(getKey("plugin.loading.loaded").replace("%s%", name).replace("%d%", version));
+					Logger.info(getKey("plugin.loading.loaded").replace("%s", name).replace("%d", version));
 				} catch (error) {
-					Logger.error(getKey("plugin.loading.failed").replace("%s%", name).replace("%d%", error.stack));
+					Logger.error(getKey("plugin.loading.failed").replace("%s", name).replace("%d", error.stack));
 				}
 			}
 		}
@@ -111,26 +97,26 @@ module.exports = {
 	 * Kills the server
 	 */
 	async killServer() {
-		process.exit(require("../Frog").config.dev.exitCode);
+		process.exit(require("../Frog").config.dev.exitCodes.crash);
 	},
 
 	/**
-	 * Prepares plugins for shutdown
+	 * Decrements the plugin count
 	 */
-	initPluginShutdown() {
+	decrementPluginCount() {
 		pluginCount--;
 
 		if (pluginCount <= 0) this.killServer();
 	},
 
 	/**
-	 * Unloads plugins
+	 * Unloads the plugins
 	 */
 	async unloadPlugins() {
 		try {
 			const files = await fs.promises.readdir("./plugins");
 
-			if (files.length === 0) {
+			if (!files) {
 				this.killServer();
 				return;
 			}
@@ -147,7 +133,7 @@ module.exports = {
 						name = packageJson.displayName;
 						main = packageJson.main;
 
-						Logger.info(getKey("plugin.unloading.unloading").replace("%s%", name));
+						Logger.info(getKey("plugin.unloading.unloading").replace("%s", name));
 					} catch (error) {
 						continue;
 					}
@@ -157,17 +143,18 @@ module.exports = {
 
 						if (typeof plugin.onShutdown === "function") {
 							await plugin.onShutdown();
-							Logger.info(getKey("plugin.unloading.success").replace("%s%", name));
+
+							Logger.info(getKey("plugin.unloading.success").replace("%s", name));
 						}
 					} catch (error) {
-						Logger.error(getKey("plugin.unloading.failed").replace("%s%", name).replace("%d%", error.stack));
+						Logger.error(getKey("plugin.unloading.failed").replace("%s", name).replace("%d", error.stack));
 					}
 
-					this.initPluginShutdown();
+					this.decrementPluginCount();
 				}
 			}
 		} catch (error) {
-			Logger.error(getKey("plugin.unloading.error").replace("%d%", error.stack));
+			Logger.error(getKey("plugin.unloading.error").replace("%d", error.stack));
 		}
 	},
 };

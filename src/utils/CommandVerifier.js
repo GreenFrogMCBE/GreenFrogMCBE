@@ -19,10 +19,10 @@ module.exports = {
 	/**
 	 * Sends a unknown command (or no permission) error to the command executor.
 	 *
-	 * @param {import("frog-protocol").Client} commandExecutor
+	 * @param {import("Frog").Messagable} commandExecutor
 	 * @param {string} command
 	 */
 	throwError(commandExecutor, command) {
-		commandExecutor.sendMessage(Language.getKey("commands.unknown").replace("%s%", command));
+		commandExecutor.sendMessage(Language.getKey("commands.unknown").replace("%s", command));
 	},
 };

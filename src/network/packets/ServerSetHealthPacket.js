@@ -13,15 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerSetHealthPacket extends PacketConstructor {
+class ServerSetHealthPacket extends Packet {
 	name = "set_health";
-	/** @type {number} */
+	
+	/** @type {number | undefined} */
 	health;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			health: this.health,
 		});
 	}

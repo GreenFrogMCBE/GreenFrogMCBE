@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-module.exports = /** @type {const} */ ({
+module.exports = /** @type {const} */({
 	NONE: "none",
 	REFUSED: "refused",
 	HAVE_ALL_PACKS: "have_all_packs",

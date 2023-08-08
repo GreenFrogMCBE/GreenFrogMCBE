@@ -15,8 +15,8 @@
  */
 module.exports = {
 	PROTOCOL_LIST: {
+		"1.20.10": 594,
 		"1.20.0": 589,
-		"1.20": 589,
 		"1.19.80": 582,
 		"1.19.70": 575,
 		"1.19.63": 568,
@@ -41,8 +41,6 @@ module.exports = {
 	 * @returns {number} The version as a protocol number
 	 */
 	getProtocol(version) {
-		// Using switch is adding more lines of code than needed.
-
 		return this.PROTOCOL_LIST[version] || this.DEFAULT_PROTOCOL;
 	},
 };

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -14,6 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+/* eslint-disable no-unused-vars */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 
 const FormType = require("./FormType");
@@ -25,7 +25,7 @@ class Form {
 		 *
 		 * @type {import("./FormType")}
 		 */
-		this.type = FormType.FORM;
+		this.types = FormType.FORM;
 
 		/**
 		 * The title of the form.
@@ -69,7 +69,7 @@ class Form {
 		FormReq.title = this.title;
 		FormReq.text = this.text;
 		FormReq.buttons = JSON.stringify(this.buttons);
-		FormReq.type = this.type;
+		FormReq.types = this.types;
 		FormReq.writePacket(client);
 
 		this.onSend(this, client);

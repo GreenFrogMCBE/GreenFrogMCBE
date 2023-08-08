@@ -15,28 +15,32 @@
  */
 const Frog = require("../Frog");
 
-const { players } = require("../api/player/PlayerInfo");
+const { playersOnline } = require("../player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
 
-/**
- * A command to list players currently on the server
- *
- * @type {import('../../declarations/Command').Command}
- */
-module.exports = {
-	data: {
-		name: getKey("commands.list.name"),
-		description: getKey("commands.list.description"),
-		minArgs: 0,
-		maxArgs: 0,
-	},
+const Command = require("./Command");
 
-	execute(_server, player) {
-		const playerCount = players.length;
-		const playerSet = new Set(players.map((p) => p.username));
+class CommandList extends Command {
+	name = getKey("commands.list.name")
+	description = getKey("commands.list.description")
+	minArgs = 0
+	maxArgs = 0
+
+	/**
+	 * @param {import("Frog").Player} player 
+	 */
+	execute(player) {
+		const playerCount = playersOnline.length;
+		const playerSet = new Set(playersOnline.map((p) => p.username));
 		const playerList = [...playerSet].join(", ") || "";
 
-		player.sendMessage(getKey("commands.list.execution.success.commands").replace("%s%", `${playerCount}/${Frog.config.serverInfo.maxPlayers}`).replace("%d%", playerList));
-	},
-};
+		player.sendMessage(
+			getKey("commands.list.execution.success.commands")
+				.replace("%s", `${playerCount}/${Frog.config.serverInfo.maxPlayers}`)
+				.replace("%d", playerList)
+		);
+	}
+}
+
+module.exports = CommandList;

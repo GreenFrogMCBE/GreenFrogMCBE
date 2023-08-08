@@ -13,12 +13,11 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-module.exports = /** @type {const} */ ({
+module.exports = {
 	UPDATE: "change",
 	REMOVE: "remove",
 	UNKNOWN: "unknown",
 
-	/** @deprecated */
-	CHANGE: this.UPDATE,
-	ADD: this.UPDATE,
-});
+	ADD: "change",
+	CHANGE: "change",
+};

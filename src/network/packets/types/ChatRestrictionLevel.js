@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-	NONE: "NONE",
-	DROPPED: "DROPPED",
-	DISABLED: "DISABLED",
+	NONE: "none",
+	DROPPED: "dropped",
+	DISABLED: "disabled",
 });

@@ -13,32 +13,37 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const OfflinePermissionManager = require("../api/permission/OfflinePermissionManager");
+const Command = require("./Command");
+
+const PermissionManager = require("../permission/PermissionManager");
 
 const { getKey } = require("../utils/Language");
 
 /**
  * A command that removes the op of the player
- *
- * @type {import('../../declarations/Command').Command}
  */
-module.exports = {
-	data: {
-		name: getKey("commands.deop.name"),
-		description: getKey("commands.deop.description"),
-		minArgs: 1,
-		requiresOp: true,
-	},
+class CommandDeop extends Command {
+	name = getKey("commands.deop.name")
+	description = getKey("commands.deop.description")
+	minArgs = 1
+	requiresOp = true
 
-	async execute(_server, player, args) {
+	/**
+	 * @param {import("Frog").Player} player 
+	 * @param {import("frog-protocol").Server} server 
+	 * @param {string[]} args 
+	 */
+	async execute(player, server, args) {
 		const playerName = args[0];
 
 		try {
-			OfflinePermissionManager.changeOpStatus(playerName, false);
+			PermissionManager.setOpStatus(playerName, false);
 
-			player.sendMessage(getKey("commands.deop.execution.success").replace("%s%", playerName));
+			player.sendMessage(getKey("commands.deop.execution.success").replace("%s", playerName));
 		} catch {
-			player.sendMessage(getKey("commands.deop.execution.fail").replace("%s%", player));
+			player.sendMessage(getKey("commands.deop.execution.fail").replace("%s", playerName));
 		}
-	},
-};
+	}
+}
+
+module.exports = CommandDeop;

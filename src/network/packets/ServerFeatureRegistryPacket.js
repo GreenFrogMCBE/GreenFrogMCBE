@@ -13,16 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerFeatureRegistryPacket extends PacketConstructor {
-	/** @type {string} */
+class ServerFeatureRegistryPacket extends Packet {
 	name = "feature_registry";
-	/** @type {Array<any>} */
+
+	/** @type {import("Frog").Feature[] | undefined} */
 	features;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			features: this.features,
 		});
 	}

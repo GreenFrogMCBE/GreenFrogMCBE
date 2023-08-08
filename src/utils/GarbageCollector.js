@@ -14,9 +14,9 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../Frog");
-const Logger = require("../server/Logger");
+const Logger = require("../utils/Logger");
 
-const PlayerInfo = require("../api/player/PlayerInfo");
+const PlayerInfo = require("../player/PlayerInfo");
 
 const Language = require("./Language");
 
@@ -25,17 +25,18 @@ module.exports = {
 	 * Removes data of offline players
 	 */
 	async clearOfflinePlayers() {
-		Frog.eventEmitter.emit("serverOfflinePlayersGarbageCollection", {
-			players: PlayerInfo.players,
-		});
+		Frog.eventEmitter.emit("serverOfflinePlayersGarbageCollection");
 
-		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			const isOffline = PlayerInfo.players[i].offline;
+		for (let i = 0; i < PlayerInfo.playersOnline.length; i++) {
+			const isOffline = PlayerInfo.playersOnline[i].offline;
 
 			if (isOffline) {
-				Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s%", PlayerInfo.players[i].username));
+				Logger.debug(
+					Language.getKey("garbageCollector.deleted")
+						.replace("%s", PlayerInfo.playersOnline[i].username)
+				);
 
-				PlayerInfo.players.splice(i, 1);
+				PlayerInfo.playersOnline.splice(i, 1);
 				i--;
 			}
 		}
@@ -49,12 +50,10 @@ module.exports = {
 
 		await this.clearOfflinePlayers();
 
-		Frog.eventEmitter.emit("serverGarbageCollection", {
-			players: PlayerInfo.players,
-		});
+		Frog.eventEmitter.emit("serverGarbageCollection");
 
-		for (let i = 0; i < PlayerInfo.players.length; i++) {
-			const player = PlayerInfo.players[i];
+		for (let i = 0; i < PlayerInfo.playersOnline.length; i++) {
+			const player = PlayerInfo.playersOnline[i];
 
 			delete player.q;
 			delete player.q2;
