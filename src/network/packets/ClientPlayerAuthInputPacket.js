@@ -27,15 +27,16 @@ class ClientPlayerAuthInputPacket extends Packet {
 	async readPacket(player, packet) {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw } = packet.data.params;
+		const fixedY = y - 2;
 
-		if (player.location.x === x && player.location.y === y && player.location.z === z && player.location.yaw === yaw && player.location.pitch === pitch) return;
+		if (player.location.x === x && player.location.y === fixedY && player.location.z === z && player.location.yaw === yaw && player.location.pitch === pitch) return;
 
 		let shouldSetPosition = true;
 
 		Frog.eventEmitter.emit("playerMove", {
 			player,
 			x,
-			y,
+			y: fixedY,
 			z,
 			pitch,
 			yaw,
@@ -52,7 +53,7 @@ class ClientPlayerAuthInputPacket extends Packet {
 		player.world.handleFallDamage(player, { x, y, z });
 
 		player.location.x = x;
-		player.location.y = y - 2;
+		player.location.y = fixedY;
 		player.location.z = z;
 		player.location.yaw = yaw;
 		player.location.pitch = pitch;

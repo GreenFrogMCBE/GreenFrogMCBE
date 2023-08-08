@@ -37,12 +37,12 @@ class ClientPlayerActionPacket extends Packet {
 		const { action, position, result_position, face } = packet.data.params;
 
 		switch (action) {
-			case BlockAction.BLOCK_BREAK: // TODO: FIX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DONT FORGET TO FIX BEFORE COMMITING IT TO THE REPO U STUPID MONKEY
+			case BlockAction.BLOCK_BREAK:
 				if (player.gamemode == Gamemode.SURVIVAL || player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
 					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s", player.username));
 				}
 
-				Frog.eventEmitter.emit("blockBreakEvent", {
+				Frog.eventEmitter.emit("blockBreak", {
 					player,
 					action,
 					position,
