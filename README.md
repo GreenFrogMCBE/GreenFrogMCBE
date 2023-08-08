@@ -21,7 +21,7 @@ Please note that this software is still in beta, so do not stare directly at the
 @@ Features: @@
 
 + Chat
-+ A lot of commands
++ Commands
 + API
 + Events
 + Chunks/Generators
@@ -33,7 +33,7 @@ Please note that this software is still in beta, so do not stare directly at the
 + Tests
 + Configs
 + Multilang
-+ Creative inventory
++ Inventories
 + Basic permission system
 + Hunger and damage support
 ```
