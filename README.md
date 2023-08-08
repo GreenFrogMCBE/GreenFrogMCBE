@@ -18,24 +18,23 @@ Please note that this software is still in beta, so do not stare directly at the
 + How to connect via localhost: /docs/LOCAL CONNECTIONS.md
 + How to install: /docs/INSTALLATION.md
 
-@@ Features: @@
+@@ Features supported @@:
 
 + Chat
 + Commands
++ Plugins
 + API
 + Events
-+ Chunks/Generators
++ World
 + Toasts
 + Forms
-+ Player transfer support
-+ XP API
-+ Container API
 + Tests
 + Configs
 + Multilang
-+ Inventories
++ Inventories (containers too!)
 + Basic permission system
-+ Hunger and damage support
++ Hunger and damage
++ And many others...
 ```
 
 ![Alt](https://repobeats.axiom.co/api/embed/ff82e6d76083a1934305e3b40714b01604df4e92.svg "Repobeats analytics image")
