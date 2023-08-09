@@ -535,7 +535,7 @@ declare module "Frog" {
 	};
 
 	// Only used in the start_game packet
-	export type WorldSeed = Array<number, number>;
+	export type WorldSeed = [number, number];
 
 	export type World = {
 		name: string;
@@ -665,11 +665,11 @@ declare module "Frog" {
 	export interface FormAction {
 		type: string;
 		text: string;
-		[placeholder: string]: string;
-		[options: string]: any;
-		[min: number]: number;
-		[max: number]: number;
-		[step: number]: number;
+		placeholder: string;
+		options: any;
+		min: number;
+		max: number;
+		step: number;
 	}
 
 	export type FormButton = {
@@ -704,18 +704,18 @@ declare module "Frog" {
 
 	export type DamageCause = ValueOf<import("./src/player/types/DamageCause")>;
 	export type HungerCause = ValueOf<import("./src/player/types/HungerCause")>;
-	export type DimensionId = ValueOf<import("./src/player/types/DimensionId")>;
 	export type Gamemode = ValueOf<import("./src/player/types/Gamemode")>;
 	export type Title = ValueOf<import("./src/player/types/Title")>;
 	export type Text = ValueOf<import("./src/player/types/Text")>;
 
 	export type Difficulty = ValueOf<import("./src/server/types/Difficulty")>;
 
-	export type MovementAuthority = ValueOf<import("./src/network/types/MovementAuthority")>;
-	export type PlayListAction = ValueOf<import("./src/network/types/PlayerListAction")>;
+	export type MovementAuthority = ValueOf<import("./src/network/packets/types/MovementAuthority")>;
+	export type PlayListAction = ValueOf<import("./src/network/packets/types/PlayerListAction")>;
 	export type PlayStatus = ValueOf<import("./src/network/packets/types/PlayStatus")>;
+	export type DimensionId = ValueOf<import("./src/world/types/DimensionId")>;
 
-	export type PermissionLevel = ValueOf<import("./src/permissions/PermissionLevel")>;
+	export type PermissionLevel = ValueOf<import("./src/permission/PermissionLevel")>;
 
 	export type Event =
 		| "blockBreak"
@@ -824,7 +824,7 @@ declare module "Frog" {
 		health: number;
 		hunger: number;
 		dead: boolean;
-		world: WorldData;
+		world: World;
 		renderChunks: boolean;
 		initialised: boolean; // Internal usage only
 		offline: boolean;
