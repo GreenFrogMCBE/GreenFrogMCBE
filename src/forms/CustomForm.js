@@ -21,11 +21,6 @@ const Form = require("./types/Form");
 class CustomForm {
 	constructor() {
 		/**
-		 * @type {import("Frog").Action}
-		 */
-		this.type = Form.CUSTOM_FORM;
-
-		/**
 		 * @type {function}
 		 */
 		this.onSend = () => {};
@@ -75,7 +70,7 @@ class CustomForm {
 	 *
 	 * @param {string} text
 	 */
-	addLabel(text) {
+	addText(text) {
 		this.addAction({ type: Action.LABEL, text });
 	}
 
@@ -121,7 +116,7 @@ class CustomForm {
 		formRequestPacket.title = this.title;
 		formRequestPacket.content = JSON.stringify(this.actions);
 		formRequestPacket.buttons = JSON.stringify(this.buttons);
-		formRequestPacket.type = this.type;
+		formRequestPacket.type = Form.CUSTOM_FORM;
 		formRequestPacket.writePacket(client);
 
 		this.onSend(this, client);

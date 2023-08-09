@@ -42,7 +42,7 @@ class ServerFormRequestPacket extends Packet {
 		let data;
 
 		if (this.type === FormType.MODAL_FORM) {
-			data = `{"content":"${this.content}","button1":"${this.button1}","button2":"${this.button2}","type":"${this.type}","title":"${this.title}"}`;
+			data = '{"content":"' + this.content + '","button1":" +this.button1}","button2":"${this.button2}","type":"' + this.type + '","title":"' + this.title + '"}';
 		} else {
 			data = '{"content":"' + this.content + '","buttons":' + this.buttons + ',"type":"' + this.type + '","title":"' + this.title + '"}';
 		}
