@@ -682,40 +682,40 @@ declare module "Frog" {
 
 	export type ValueOf<T> = T[keyof T];
 
-	export type WorldGenerator = readonly ValueOf<import("./src/world/types/WorldGenerator")>;
-	export type DimensionLegacy = readonly ValueOf<import("./src/world/types/DimensionId")>;
-	export type BlockAction = readonly ValueOf<import("./src/world/types/BlockAction")>;
-	export type Dimension = readonly ValueOf<import("./src/world/types/Dimension")>;
-	export type Generator = readonly ValueOf<import("./src/world/types/Generator")>;
-	export type Interact = readonly ValueOf<import("./src/world/types/Interact")>;
-	export type Biome = readonly ValueOf<import("./src/world/types/Biome")>;
+	export type WorldGenerator = ValueOf<import("./src/world/types/WorldGenerator")>;
+	export type DimensionLegacy = ValueOf<import("./src/world/types/DimensionId")>;
+	export type BlockAction = ValueOf<import("./src/world/types/BlockAction")>;
+	export type Dimension = ValueOf<import("./src/world/types/Dimension")>;
+	export type Generator = ValueOf<import("./src/world/types/Generator")>;
+	export type Interact = ValueOf<import("./src/world/types/Interact")>;
+	export type Biome = ValueOf<import("./src/world/types/Biome")>;
 
-	export type Transaction = readonly ValueOf<import("./src/inventory/types/Transaction")>;
-	export type WindowType = readonly ValueOf<import("./src/inventory/types/WindowType")>;
-	export type WindowId = readonly ValueOf<import("./src/inventory/types/WindowId")>;
+	export type Transaction = ValueOf<import("./src/inventory/types/Transaction")>;
+	export type WindowType = ValueOf<import("./src/inventory/types/WindowType")>;
+	export type WindowId = ValueOf<import("./src/inventory/types/WindowId")>;
 
-	export type Action = readonly ValueOf<import("./src/forms/types/Action")>;
-	export type Form = readonly ValueOf<import("./src/forms/types/Form")>;
+	export type Action = ValueOf<import("./src/forms/types/Action")>;
+	export type Form = ValueOf<import("./src/forms/types/Form")>;
 
-	export type CreteriaName = readonly ValueOf<import("./src/scoreboard/types/CreteriaName")>;
-	export type DisplaySlot = readonly ValueOf<import("./src/scoreboard/types/DisplaySlot")>;
-	export type ScoreAction = readonly ValueOf<import("./src/scoreboard/types/ScoreAction")>;
-	export type EntryType = readonly ValueOf<import("./src/scoreboard/types/EntryType")>;
+	export type CreteriaName = ValueOf<import("./src/scoreboard/types/CreteriaName")>;
+	export type DisplaySlot = ValueOf<import("./src/scoreboard/types/DisplaySlot")>;
+	export type ScoreAction = ValueOf<import("./src/scoreboard/types/ScoreAction")>;
+	export type EntryType = ValueOf<import("./src/scoreboard/types/EntryType")>;
 
-	export type DamageCause = readonly ValueOf<import("./src/player/types/DamageCause")>;
-	export type HungerCause = readonly ValueOf<import("./src/player/types/HungerCause")>;
-	export type DimensionId = readonly ValueOf<import("./src/player/types/DimensionId")>;
-	export type Gamemode = readonly ValueOf<import("./src/player/types/Gamemode")>;
-	export type Title = readonly ValueOf<import("./src/player/types/Title")>;
-	export type Text = readonly ValueOf<import("./src/player/types/Text")>;
+	export type DamageCause = ValueOf<import("./src/player/types/DamageCause")>;
+	export type HungerCause = ValueOf<import("./src/player/types/HungerCause")>;
+	export type DimensionId = ValueOf<import("./src/player/types/DimensionId")>;
+	export type Gamemode = ValueOf<import("./src/player/types/Gamemode")>;
+	export type Title = ValueOf<import("./src/player/types/Title")>;
+	export type Text = ValueOf<import("./src/player/types/Text")>;
 
-	export type Difficulty = readonly ValueOf<import("./src/server/types/Difficulty")>;
+	export type Difficulty = ValueOf<import("./src/server/types/Difficulty")>;
 
-	export type MovementAuthority = readonly ValueOf<import("./src/network/types/MovementAuthority")>;
-	export type PlayListAction = readonly ValueOf<import("./src/network/types/PlayerListAction")>;
-	export type PlayStatus = readonly ValueOf<import("./src/network/packets/types/PlayStatus")>;
+	export type MovementAuthority = ValueOf<import("./src/network/types/MovementAuthority")>;
+	export type PlayListAction = ValueOf<import("./src/network/types/PlayerListAction")>;
+	export type PlayStatus = ValueOf<import("./src/network/packets/types/PlayStatus")>;
 
-	export type PermissionLevel = readonly ValueOf<import("./src/permissions/PermissionLevel")>;
+	export type PermissionLevel = ValueOf<import("./src/permissions/PermissionLevel")>;
 
 	export type Event =
 		| "blockBreak"
