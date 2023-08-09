@@ -83,6 +83,7 @@ export function onShutdown(): void {
 				esModuleInterop: true,
 				resolveJsonModule: true,
 				allowJs: true,
+				baseUrl: "../../"
 			},
 			include: ["../../**/*", "../../index.d.ts"],
 		};
