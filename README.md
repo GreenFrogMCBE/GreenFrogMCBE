@@ -8,9 +8,9 @@ This software is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
 
 + Discord: https://discord.gg/UFqrnAbqjP
-+ Example plugin: https://github.com/GreenFrogMCBE/ExamplePlugin
-+ Support this project: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
++ Guilded: https://www.guilded.gg/i/kbZ41Z5k
 
++ Example plugin: https://github.com/GreenFrogMCBE/ExamplePlugin
 + Generate plugin structure: "npm run plugin-structure"
 
 + Credits: /docs/CREDITS.md
