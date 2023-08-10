@@ -11,7 +11,6 @@ Please note that this software is still in beta, so do not stare directly at the
 + Guilded: https://www.guilded.gg/i/kbZ41Z5k
 
 + Example plugin: https://github.com/GreenFrogMCBE/ExamplePlugin
-+ Support this project: https://www.paypal.com/donate/?hosted_button_id=EMT6MHNNL3KBQ
 
 + Generate plugin structure: "npm run plugin-structure"
 
