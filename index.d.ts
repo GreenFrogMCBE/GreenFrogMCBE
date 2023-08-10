@@ -631,14 +631,65 @@ declare module "Frog" {
 		name: string;
 		options: string;
 	};
+	
+	export type Color =
+		| "§0"
+		| "§1"
+		| "§2"
+		| "§3"
+		| "§4"
+		| "§5"
+		| "§6"
+		| "§7"
+		| "§8"
+		| "§9"
+		| "§a"
+		| "§b"
+		| "§c"
+		| "§d"
+		| "§e"
+		| "§f"
+		| "§g"
+		| "§k"
+		| "§l"
+		| "§o"
+		| "§r";
 
-	export type Color = "§0" | "§1" | "§2" | "§3" | "§4" | "§5" | "§6" | "§7" | "§8" | "§9" | "§a" | "§b" | "§c" | "§d" | "§e" | "§f" | "§g" | "§k" | "§l" | "§o" | "§r";
+	export type TrimMaterialColor =
+		| "§h"
+		| "§i"
+		| "§j"
+		| "§m"
+		| "§n"
+		| "§p"
+		| "§q"
+		| "§s"
+		| "§t"
+		| "§u";
 
-	export type TrimMaterialColor = "§h" | "§i" | "§j" | "§m" | "§n" | "§p" | "§q" | "§s" | "§t" | "§u";
+	export type TrimMaterialName =
+		| "quartz"
+		| "iron"
+		| "netherite"
+		| "redstone"
+		| "copper"
+		| "gold"
+		| "emerald"
+		| "diamond"
+		| "lapis"
+		| "amethyst";
 
-	export type TrimMaterialName = "quartz" | "iron" | "netherite" | "redstone" | "copper" | "gold" | "emerald" | "diamond" | "lapis" | "amethyst";
-
-	export type TrimMaterialItem = "minecraft:quartz" | "minecraft:iron_ingot" | "minecraft:netherite_ingot" | "minecraft:redstone" | "minecraft:copper_ingot" | "minecraft:gold_ingot" | "minecraft:emerald" | "minecraft:diamond" | "minecraft:lapis_lazuli" | "minecraft:amethyst_shard";
+	export type TrimMaterialItem =
+		| "minecraft:quartz"
+		| "minecraft:iron_ingot"
+		| "minecraft:netherite_ingot"
+		| "minecraft:redstone"
+		| "minecraft:copper_ingot"
+		| "minecraft:gold_ingot"
+		| "minecraft:emerald"
+		| "minecraft:diamond"
+		| "minecraft:lapis_lazuli"
+		| "minecraft:amethyst_shard";
 
 	export type TrimMaterial = {
 		material: TrimMaterialName | string;
@@ -646,9 +697,41 @@ declare module "Frog" {
 		item_name: TrimMaterialItem | string;
 	};
 
-	export type TrimPatternItemName = "minecraft:ward_armor_trim_smithing_template" | "minecraft:sentry_armor_trim_smithing_template" | "minecraft:snout_armor_trim_smithing_template" | "minecraft:dune_armor_trim_smithing_template" | "minecraft:spire_armor_trim_smithing_template" | "minecraft:tide_armor_trim_smithing_template" | "minecraft:wild_armor_trim_smithing_template" | "minecraft:rib_armor_trim_smithing_template" | "minecraft:coast_armor_trim_smithing_template" | "minecraft:shaper_armor_trim_smithing_template" | "minecraft:eye_armor_trim_smithing_template" | "minecraft:vex_armor_trim_smithing_template" | "minecraft:silence_armor_trim_smithing_template" | "minecraft:wayfinder_armor_trim_smithing_template" | "minecraft:raiser_armor_trim_smithing_template" | "minecraft:host_armor_trim_smithing_template";
+	export type TrimPatternItemName =
+		| "minecraft:ward_armor_trim_smithing_template"
+		| "minecraft:sentry_armor_trim_smithing_template"
+		| "minecraft:snout_armor_trim_smithing_template"
+		| "minecraft:dune_armor_trim_smithing_template"
+		| "minecraft:spire_armor_trim_smithing_template"
+		| "minecraft:tide_armor_trim_smithing_template"
+		| "minecraft:wild_armor_trim_smithing_template"
+		| "minecraft:rib_armor_trim_smithing_template"
+		| "minecraft:coast_armor_trim_smithing_template"
+		| "minecraft:shaper_armor_trim_smithing_template"
+		| "minecraft:eye_armor_trim_smithing_template"
+		| "minecraft:vex_armor_trim_smithing_template"
+		| "minecraft:silence_armor_trim_smithing_template"
+		| "minecraft:wayfinder_armor_trim_smithing_template"
+		| "minecraft:raiser_armor_trim_smithing_template"
+		| "minecraft:host_armor_trim_smithing_template";
 
-	export type TrimPatternName = "ward" | "sentry" | "snout" | "dune" | "spire" | "tide" | "wild" | "rib" | "coast" | "shaper" | "eye" | "vex" | "silence" | "wayfinder" | "raiser" | "host";
+	export type TrimPatternName =
+		| "ward"
+		| "sentry"
+		| "snout"
+		| "dune"
+		| "spire"
+		| "tide"
+		| "wild"
+		| "rib"
+		| "coast"
+		| "shaper"
+		| "eye"
+		| "vex"
+		| "silence"
+		| "wayfinder"
+		| "raiser"
+		| "host";
 
 	export type TrimPattern = {
 		item_name: TrimPatternItemName | string;
