@@ -15,11 +15,19 @@
  */
 const Frog = require("../Frog");
 
-module.exports = {
+const Inventory = require("./Inventory");
+
+class ContainerInventory extends Inventory {
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
+	 */
 	handle(player, packet) {
 		Frog.eventEmitter.emit("inventoryContainerItemRequest", {
 			player,
 			packet,
 		});
-	},
-};
+	}
+}
+
+module.exports = ContainerInventory;

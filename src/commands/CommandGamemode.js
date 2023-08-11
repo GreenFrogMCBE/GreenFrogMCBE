@@ -13,64 +13,67 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const Command = require("./Command");
+
 const { getKey } = require("../utils/Language");
+
+const Gamemode = require("../player/types/Gamemode");
 
 /**
  * A command to change the player's game mode.
- *
- * @type {import('../../declarations/Command').Command}
  */
-module.exports = {
-	data: {
-		name: getKey("commands.gamemode.name"),
-		description: getKey("commands.gamemode.description"),
-		maxArg: 1,
-		minArgs: 1,
-		requiresOp: true,
-	},
+class CommandGamemode extends Command {
+	name = getKey("commands.gamemode.name");
+	description = getKey("commands.gamemode.description");
+	maxArg = 1;
+	minArg = 1;
+	requiresOp = true;
 
-	execute(_server, player, args) {
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
+	 */
+	execute(player, server, args) {
 		if (player.isConsole) {
 			player.sendMessage(getKey("commands.errors.internalError.badSender"));
 			return;
 		}
 
 		const gamemodeMap = {
-			0: "survival",
-			1: "creative",
-			2: "adventure",
-			3: "spectator",
-			4: "fallback",
+			0: Gamemode.SURVIVAL,
+			1: Gamemode.CREATIVE,
+			2: Gamemode.ADVENTURE,
+			3: Gamemode.SPECTATOR,
+			5: Gamemode.FALLBACK,
 
-			s: "survival",
-			c: "creative",
-			a: "adventure",
-			sp: "spectator",
-			d: "fallback",
+			s: Gamemode.SURVIVAL,
+			c: Gamemode.CREATIVE,
+			a: Gamemode.ADVENTURE,
+			sp: Gamemode.SPECTATOR,
+			d: Gamemode.FALLBACK,
 
-			survival: "survival",
-			creative: "creative",
-			adventure: "adventure",
-			spectator: "spectator",
-			default: "fallback",
+			survival: Gamemode.SURVIVAL,
+			creative: Gamemode.CREATIVE,
+			adventure: Gamemode.ADVENTURE,
+			spectator: Gamemode.SPECTATOR,
+			default: Gamemode.FALLBACK,
 		};
 
 		const gamemode = gamemodeMap[args[0]];
 
 		if (!gamemode) {
-			player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s%", args[0]));
+			player.sendMessage(getKey("commands.gamemode.execution.invalidGamemode").replace("%s", args[0]));
 			return;
 		}
 
-		try {
-			player.setGamemode(gamemode);
+		player.setGamemode(gamemode);
 
-			const gmStr = gamemode.charAt(0).toUpperCase() + gamemode.slice(1);
+		const gmStr = gamemode.charAt(0).toUpperCase() + gamemode.slice(1);
 
-			player.sendMessage(getKey("commands.gamemode.execution.success.updated").replace("%s%", gmStr));
-			player.sendMessage(getKey("commands.gamemode.execution.success.set").replace("%s%", gmStr));
-		} catch {
-			player.sendMessage(getKey("commands.gamemode.execution.invalidGamemode"));
-		}
-	},
-};
+		player.sendMessage(getKey("commands.gamemode.execution.success.updated").replace("%s", gmStr));
+		player.sendMessage(getKey("commands.gamemode.execution.success.set").replace("%s", gmStr));
+	}
+}
+
+module.exports = CommandGamemode;

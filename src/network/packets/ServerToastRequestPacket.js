@@ -13,17 +13,21 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerToastRequestPacket extends PacketConstructor {
+class ServerToastRequestPacket extends Packet {
 	name = "toast_request";
-	/** @type {string} */
+
+	/** @type {string | undefined} */
 	title;
-	/** @type {string} */
+	/** @type {string | undefined} */
 	message;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			title: this.title,
 			message: this.message,
 		});

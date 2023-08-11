@@ -13,25 +13,30 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const Command = require("./Command");
+
 const Frog = require("../Frog");
 
 const { getKey } = require("../utils/Language");
 
 /**
- * A command to perform an action in the chat as the player.
- *
- * @type {import('../../declarations/Command').Command}
+ * A command to perform an action in the chat as the player
  */
-module.exports = {
-	data: {
-		name: getKey("commands.me.name"),
-		description: getKey("commands.me.description"),
-		minArgs: 1,
-	},
+class CommandMe extends Command {
+	name = getKey("commands.me.name");
+	description = getKey("commands.me.description");
+	minArgs = 1;
 
-	execute(_server, player, args) {
-		const message = getKey("chat.format.me").replace("%s%", player.username).replace("%d%", args.join(" "));
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("frog-protocol").Server} server
+	 * @param {string[]} args
+	 */
+	execute(player, server, args) {
+		const message = getKey("chat.format.me").replace("%s", player.username).replace("%d", args.join(" "));
 
 		Frog.broadcastMessage(message);
-	},
-};
+	}
+}
+
+module.exports = CommandMe;

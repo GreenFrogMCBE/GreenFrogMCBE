@@ -15,17 +15,22 @@
  */
 const ServerContainerClosePacket = require("./ServerContainerClosePacket");
 
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-const vanillaBlocks = require("../../api/block/vanillaBlocks.json");
+const vanillaBlocks = require("../../block/vanillaBlocks.json");
 
-const WindowId = require("./types/WindowId");
+const WindowId = require("../../inventory/types/WindowId");
+
 const Frog = require("../../Frog");
 
-class ClientContainerClosePacket extends PacketConstructor {
+class ClientContainerClosePacket extends Packet {
 	name = "container_close";
 
-	async readPacket(player, packet, server) {
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
+	 */
+	async readPacket(player, packet) {
 		let shouldClose = true;
 
 		Frog.eventEmitter.emit("playerContainerClose", {
@@ -44,7 +49,7 @@ class ClientContainerClosePacket extends PacketConstructor {
 			let shouldRemoveTheChest = true;
 
 			Frog.eventEmitter.emit("inventoryContainerChestRemoval", {
-				player: player,
+				player,
 				cancel: () => {
 					shouldRemoveTheChest = false;
 				},
@@ -57,8 +62,8 @@ class ClientContainerClosePacket extends PacketConstructor {
 			player.world.placeBlock(x, y, z, vanillaBlocks.air.legacy_id);
 
 			player.inventory.container.isOpen = false;
-			player.inventory.container.blockPosition = { x: null, y: null, z: null };
-			player.inventory.container.window = { id: null, type: null };
+			player.inventory.container.blockPosition = { x: undefined, y: undefined, z: undefined };
+			player.inventory.container.window = { id: undefined, type: undefined };
 		}
 
 		const containerClose = new ServerContainerClosePacket();

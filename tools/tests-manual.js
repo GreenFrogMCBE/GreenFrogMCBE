@@ -37,7 +37,7 @@ const r = rl.createInterface({
 	output: process.stdout,
 });
 
-console.info("Welcome to GreenFrogMCBE Tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the configuration files for JSON errors\n[5] = Test the query server");
+console.info("Welcome to GreenFrogMCBE tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the configuration files for JSON errors\n[5] = Test the query server");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);

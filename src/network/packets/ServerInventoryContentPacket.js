@@ -13,17 +13,21 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerInventoryContentPacket extends PacketConstructor {
+class ServerInventoryContentPacket extends Packet {
 	name = "inventory_content";
-	/** @type {Array<any>} */
+
+	/** @type {any[] | undefined} */
 	input;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	window_id;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			window_id: this.window_id,
 			input: this.input,
 		});

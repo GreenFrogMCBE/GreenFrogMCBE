@@ -13,17 +13,21 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerSetEntityMotion extends PacketConstructor {
+class ServerSetEntityMotion extends Packet {
 	name = "set_entity_motion";
-	/** @type {number} */
+
+	/** @type {number | undefined} */
 	runtime_entity_id;
-	/** @type {JSON} */
+	/** @type {import("Frog").Coordinate | undefined} */
 	velocity;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			runtime_entity_id: this.runtime_entity_id,
 			velocity: this.velocity,
 		});
