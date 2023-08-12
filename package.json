@@ -5,7 +5,7 @@
   "author": "GreenFrogMCBE",
   "license": "CC-BY-4.0",
   "scripts": {
-    "format": "npm run generate-license-headers && npx prettier --write .",
+    "format": "npm run generate-license-headers && npx eslint . --fix",
     "start": "node index.js",
     "dev": "nodemon --signal SIGINT index.js --debug",
     "generate-license-headers": "node tools/generate-license-headers.js",
