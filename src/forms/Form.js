@@ -15,8 +15,8 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
-const { FormType } = require("./types/FormType");
 
+const FormType = require("./types/FormType");
 
 class Form {
 	constructor() {
@@ -66,7 +66,7 @@ class Form {
 		FormReq.id = this.id;
 		FormReq.title = this.title;
 		FormReq.text = this.text;
-		FormReq.buttons.push(JSON.stringify(this.buttons));
+		FormReq.buttons = JSON.stringify(this.buttons);
 		FormReq.type = this.type;
 		FormReq.writePacket(client);
 
