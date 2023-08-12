@@ -13,8 +13,8 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const FormType = require("../../forms/types/FormType");
 
-const { FormType } = require("../../forms/types/FormType");
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerFormRequestPacket extends PacketConstructor {
