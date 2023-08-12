@@ -16,15 +16,13 @@
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 
-const FormType = require("./FormType");
+const FormType = require("./types/FormType");
 
 class Form {
 	constructor() {
 		/**
-		 * @type {FormType}
-		 *
-		 * @type {import("./FormType")}
-		 */
+		 * @type {FormType | string}
+		*/
 		this.type = FormType.FORM;
 
 		/**
@@ -35,7 +33,7 @@ class Form {
 
 		/**
 		 * The buttons in the form.
-		 * @type {Array<JSON>}
+		 * @type {Array}
 		 */
 		this.buttons = [];
 
@@ -55,13 +53,13 @@ class Form {
 
 		/**
 		 * The text in the form.
-		 * @type {Array}
+		 * @type {string | Array}
 		 */
 		this.text = [];
 	}
 
 	/**
-	 * @param {import('frog-protocol').Client}
+	 * @param {import('frog-protocol').Client} client
 	 */
 	send(client) {
 		const FormReq = new ServerFormRequestPacket();
