@@ -45,24 +45,24 @@ r.question("> ", (response) => {
 	const args = response.split(/ +/);
 
 	switch (args[0]) {
-		case "1":
-			runTest(1, "Start server", joinTest);
-			break;
-		case "2":
-			runTest(2, "Start server and send message", messageTest);
-			break;
-		case "3":
-			runTest(3, "Start server and try to execute a command", commandTest);
-			break;
-		case "4":
-			runTest(4, "Test the.rations for JSON errors", configTest);
-			break;
-		case "5":
-			runTest(5, "Test if the query server works", queryTest);
-			break;
-		default:
-			console.error(`Could not find test ${args[0]}`);
-			break;
+	case "1":
+		runTest(1, "Start server", joinTest);
+		break;
+	case "2":
+		runTest(2, "Start server and send message", messageTest);
+		break;
+	case "3":
+		runTest(3, "Start server and try to execute a command", commandTest);
+		break;
+	case "4":
+		runTest(4, "Test the.rations for JSON errors", configTest);
+		break;
+	case "5":
+		runTest(5, "Test if the query server works", queryTest);
+		break;
+	default:
+		console.error(`Could not find test ${args[0]}`);
+		break;
 	}
 
 	r.close();

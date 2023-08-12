@@ -7,6 +7,6 @@
         "resolveJsonModule": true,
         "useUnknownInCatchVariables": false,
         "suppressImplicitAnyIndexErrors": true,
-        "ignoreDeprecations": "5.0"
+        "ignoreDeprecations": "5.0" // ignore this!!!! please!
     }
 }

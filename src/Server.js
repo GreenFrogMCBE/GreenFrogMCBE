@@ -180,9 +180,9 @@ async function listen() {
 		Frog.server = server;
 		Frog.eventEmitter.emit("serverListen");
 
-		Logger.info(Language.getKey("network.server.listening.success").replace(`%s`, `/${host}:${port}`));
+		Logger.info(Language.getKey("network.server.listening.success").replace("%s", `/${host}:${port}`));
 	} catch (error) {
-		Logger.error(Language.getKey("network.server.listening.failed").replace(`%s`, `/${host}:${port}`).replace("%d", error.stack));
+		Logger.error(Language.getKey("network.server.listening.failed").replace("%s", `/${host}:${port}`).replace("%d", error.stack));
 
 		process.exit(Frog.config.dev.exitCodes.crash);
 	}

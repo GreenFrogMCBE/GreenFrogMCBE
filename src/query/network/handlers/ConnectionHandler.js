@@ -48,15 +48,15 @@ class ConnectionHandler {
 
 		// Check if the packet matches one of the packets in `NetworkConstants`
 		switch (packetType) {
-			case QueryPacket.HANDSHAKE:
-				new ClientHandshakeRequestPacket().readPacket(client, packet, socket);
-				break;
-			case QueryPacket.INFO:
-				new ClientInfoRequestPacket().readPacket(client, packet, socket, settings);
-				break;
-			default:
-				new ClientInvalidPacket().readPacket(client, packet);
-				break;
+		case QueryPacket.HANDSHAKE:
+			new ClientHandshakeRequestPacket().readPacket(client, packet, socket);
+			break;
+		case QueryPacket.INFO:
+			new ClientInfoRequestPacket().readPacket(client, packet, socket, settings);
+			break;
+		default:
+			new ClientInvalidPacket().readPacket(client, packet);
+			break;
 		}
 	}
 }

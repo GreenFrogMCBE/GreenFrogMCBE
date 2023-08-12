@@ -35,7 +35,7 @@ module.exports = {
 				source_name: bot.username,
 				xuid: "",
 				platform_chat_id: "",
-				message: `Hello!`,
+				message: "Hello!",
 			});
 		});
 	},

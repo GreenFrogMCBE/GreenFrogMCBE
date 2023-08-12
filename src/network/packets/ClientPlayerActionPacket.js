@@ -37,23 +37,23 @@ class ClientPlayerActionPacket extends Packet {
 		const { action, position, result_position, face } = packet.data.params;
 
 		switch (action) {
-			case BlockAction.CREATIVE_PLAYER_BREAK_BLOCK:
-				if (player.gamemode == Gamemode.SURVIVAL || player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
-					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s", player.username));
-				}
+		case BlockAction.CREATIVE_PLAYER_BREAK_BLOCK:
+			if (player.gamemode == Gamemode.SURVIVAL || player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
+				throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s", player.username));
+			}
 
-				Frog.eventEmitter.emit("blockBreak", {
-					player,
-					action,
-					position,
-					result_position,
-					face,
-				});
+			Frog.eventEmitter.emit("blockBreak", {
+				player,
+				action,
+				position,
+				result_position,
+				face,
+			});
 
-				player.world.breakBlock(position.x, position.y, position.z);
-				break;
-			default:
-				Logger.debug(getKey("debug.player.unsupportedAction.block").replace("%s", player.username).replace("%d", action));
+			player.world.breakBlock(position.x, position.y, position.z);
+			break;
+		default:
+			Logger.debug(getKey("debug.player.unsupportedAction.block").replace("%s", player.username).replace("%d", action));
 		}
 	}
 }
