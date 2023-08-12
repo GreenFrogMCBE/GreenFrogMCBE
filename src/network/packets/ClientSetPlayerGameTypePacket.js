@@ -42,7 +42,7 @@ class ClientSetPlayerGameTypePacket extends Packet {
 
 		let shouldChange = true;
 
-		Frog.eventEmitter.emit("playerChangeGamemodeRequest", {
+		Frog.eventEmitter.emit("playerGamemodeChangeRequest", {
 			player,
 			gamemode,
 			cancel: () => {

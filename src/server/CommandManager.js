@@ -48,7 +48,7 @@ module.exports = {
 				}
 			}
 
-			Frog.eventEmitter.emit("serverCommandsInitialised");
+			Frog.eventEmitter.emit("serverCommandsInitialize");
 		});
 	},
 };

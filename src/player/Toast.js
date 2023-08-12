@@ -31,11 +31,18 @@ class Toast {
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
+		let shouldSendToast = true;
+
 		Frog.eventEmitter.emit("serverToast", {
+			player,
 			title: this.title,
 			message: this.message,
-			player,
+			cancel() {
+				shouldSendToast = false;
+			}
 		});
+
+		if (!shouldSendToast) return;
 
 		const toast = new ServerToastRequestPacket();
 		toast.message = this.message;

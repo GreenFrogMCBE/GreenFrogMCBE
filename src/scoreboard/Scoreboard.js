@@ -61,7 +61,7 @@ class Scoreboard {
 	sendScoreboard() {
 		let shouldCreateScoreboard = true;
 
-		Frog.eventEmitter.emit("scoreboardCreation", {
+		Frog.eventEmitter.emit("scoreboardCreate", {
 			scoreboard: this,
 			cancel: () => {
 				shouldCreateScoreboard = false;

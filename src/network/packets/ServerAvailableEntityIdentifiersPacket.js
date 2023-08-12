@@ -25,7 +25,9 @@ class ServerAvailableEntityIdentifiersPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 */
 	writePacket(player) {
-		player.queue(this.name, { nbt: this.nbt });
+		player.queue(this.name, {
+			nbt: this.nbt
+		});
 	}
 }
 

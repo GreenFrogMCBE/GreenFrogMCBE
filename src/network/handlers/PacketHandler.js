@@ -131,7 +131,7 @@ class PacketHandler {
 	 * @param {import("Frog").Player} player
 	 */
 	handlePacketRatelimit(player) {
-		Frog.eventEmitter.emit("packetRateLimitReached", { player });
+		Frog.eventEmitter.emit("packetRateLimit", { player });
 	}
 
 	/**

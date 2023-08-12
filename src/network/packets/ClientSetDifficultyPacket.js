@@ -29,10 +29,17 @@ class ClientSetDifficultyPacket extends Packet {
 	async readPacket(player, packet) {
 		const difficulty = packet.data.params.difficulty;
 
+		let shouldUpdateDifficulty = false;
+
 		Frog.eventEmitter.emit("playerSetDifficulty", {
 			player,
 			difficulty,
+			cancel() {
+				shouldUpdateDifficulty = true;
+			}
 		});
+
+		if (!shouldUpdateDifficulty) return;
 
 		for (const player of PlayerInfo.playersOnline) {
 			player.setDifficulty(difficulty);

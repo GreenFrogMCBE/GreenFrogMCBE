@@ -42,8 +42,8 @@ class Title {
 		let shouldSendTitle = true;
 
 		Frog.eventEmitter.emit("serverTitle", {
-			fadeinTime: this.fadeInTime,
-			fadeoutTime: this.fadeOutTime,
+			fadeInTime: this.fadeInTime,
+			fadeOutTime: this.fadeOutTime,
 			stayTime: this.stayTime,
 			text: this.text,
 			type: this.type,

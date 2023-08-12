@@ -22,7 +22,7 @@ class ServerInventorySlotPacket extends Packet {
 	window_id;
 	/** @type {number | undefined} */
 	slot;
-	/** @type {any} */
+	/** @type {import("Frog").Item[] | undefined} */
 	item;
 
 	/**

@@ -112,21 +112,21 @@ module.exports = {
 		 * @param {number} x
 		 * @param {number} y
 		 * @param {number} z
-		 * @param {number | undefined} rot_x
-		 * @param {number | undefined} rot_y
-		 * @param {number | undefined} rot_z
+		 * @param {number | undefined} rotation_x
+		 * @param {number | undefined} rotation_y
+		 * @param {number | undefined} rotation_z
 		 */
-		player.teleport = function (x, y, z, rot_x = undefined, rot_y = undefined, rot_z = undefined) {
+		player.teleport = function (x, y, z, rotation_x = undefined, rotation_y = undefined, rotation_z = undefined) {
 			let shouldTeleport = true;
 
 			Frog.eventEmitter.emit("playerTeleport", {
+				player,
 				x,
 				y,
 				z,
-				has_rot_x: rot_x !== undefined,
-				has_rot_y: rot_y !== undefined,
-				has_rot_z: rot_z !== undefined,
-				player,
+				rotation_x,
+				rotation_y,
+				rotation_z,
 				cancel: () => {
 					shouldTeleport = false;
 				},
@@ -150,9 +150,9 @@ module.exports = {
 			movePacket.coordinates.x = x;
 			movePacket.coordinates.y = y;
 			movePacket.coordinates.z = z;
-			movePacket.coordinatesRotation.x = Number(rot_x);
-			movePacket.coordinatesRotation.y = Number(rot_y);
-			movePacket.coordinatesRotation.z = Number(rot_z);
+			movePacket.coordinatesRotation.x = Number(rotation_x);
+			movePacket.coordinatesRotation.y = Number(rotation_y);
+			movePacket.coordinatesRotation.z = Number(rotation_z);
 			movePacket.writePacket(player);
 		};
 
@@ -190,7 +190,7 @@ module.exports = {
 		player.sendMessage = function (message) {
 			let shouldSendMessage = true;
 
-			Frog.eventEmitter.emit("serverToClientMessage", {
+			Frog.eventEmitter.emit("serverMessage", {
 				player,
 				message,
 				cancel: () => {
@@ -234,7 +234,6 @@ module.exports = {
 			Frog.eventEmitter.emit("serverGamemodeChange", {
 				player,
 				gamemode,
-				oldGamemode: player.gamemode,
 				cancel: () => {
 					shouldChangeGamemode = false;
 				},
@@ -243,7 +242,6 @@ module.exports = {
 			if (!shouldChangeGamemode) return;
 
 			player.gamemode = gamemode;
-			player.world.fallDamageQueue = 0; // To fix the bug that you get insta-killed if you changed your gamemode to survival
 
 			const playerGamemode = new ServerSetPlayerGameTypePacket();
 			playerGamemode.gamemode = gamemode;
@@ -536,7 +534,7 @@ module.exports = {
 			}
 
 			if (cause === DamageCause.REGENERATION) {
-				Frog.eventEmitter.emit("playerRegeneration", {
+				Frog.eventEmitter.emit("playerRegenerate", {
 					player,
 					health,
 					cause,

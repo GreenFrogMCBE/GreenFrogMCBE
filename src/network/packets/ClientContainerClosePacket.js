@@ -34,9 +34,9 @@ class ClientContainerClosePacket extends Packet {
 		let shouldClose = true;
 
 		Frog.eventEmitter.emit("playerContainerClose", {
-			windowID: WindowId.CREATIVE,
-			sentByServer: false,
 			player,
+			windowId: WindowId.CREATIVE,
+			sentByServer: false,
 			packet,
 			cancel: () => {
 				shouldClose = false;
@@ -48,7 +48,7 @@ class ClientContainerClosePacket extends Packet {
 		if (player.inventory.container.isOpen) {
 			let shouldRemoveTheChest = true;
 
-			Frog.eventEmitter.emit("inventoryContainerChestRemoval", {
+			Frog.eventEmitter.emit("inventoryContainerChestRemove", {
 				player,
 				cancel: () => {
 					shouldRemoveTheChest = false;

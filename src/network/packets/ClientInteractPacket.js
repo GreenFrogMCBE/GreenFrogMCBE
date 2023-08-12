@@ -61,11 +61,11 @@ class ClientInteractPacket extends Packet {
 				};
 
 				Frog.eventEmitter.emit("playerContainerOpen", {
+					player,
 					windowId: WindowId.CREATIVE,
 					windowType: WindowType.CREATIVE_INVENTORY,
 					sentByServer: false,
-					runtimeId: 2,
-					player,
+					runtimeId: 1,
 					containerCoordinates,
 					cancel: () => {
 						shouldOpenInventory = false;

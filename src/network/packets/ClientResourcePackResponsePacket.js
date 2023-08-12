@@ -72,19 +72,16 @@ class ClientResourcePackResponsePacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
-	 * @param {import("frog-protocol").Server} server
 	 */
-	async readPacket(player, packet, server) {
+	async readPacket(player, packet) {
 		const responseStatus = packet.data.params.response_status;
 
 		switch (responseStatus) {
 			case ResourcePackStatus.NONE:
 				Frog.eventEmitter.emit("playerHasNoResourcePacksInstalled", {
-					resourcePacksIds: [],
-					resourcePacksRequired: true,
-					server,
 					player,
-					cancel: () => player.kick(getKey("kickMessages.serverDisconnect")),
+					resourcePacksIds: [],
+					resourcePacksRequired: true
 				});
 
 				Logger.info(getKey("status.resourcePacks.none").replace("%s", player.username));
@@ -96,7 +93,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
 			case ResourcePackStatus.HAVE_ALL_PACKS:
-				Frog.eventEmitter.emit("playerHasAllTheResourcePacks", { player });
+				Frog.eventEmitter.emit("playerHasAllTheResourcePacks", { player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
 
 				Logger.info(getKey("status.resourcePacks.installed").replace("%s", player.username));
 
@@ -110,7 +107,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				resourcePackStack.writePacket(player);
 				break;
 			case ResourcePackStatus.COMPLETED:
-				Frog.eventEmitter.emit("playerResourcePacksCompleted", { player });
+				Frog.eventEmitter.emit("playerResourcePacksCompleted", { player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect"))  });
 
 				player.world = new World();
 				player.world.renderDistance = config.world.renderDistance.serverSide;
@@ -196,17 +193,16 @@ class ClientResourcePackResponsePacket extends Packet {
 					}
 				}
 
-				const itemcomponent = new ServerItemComponentPacket(); // This packet is used to create custom items
+				const itemComponent = new ServerItemComponentPacket(); // This packet is used to create custom items
 				try {
-					itemcomponent.entries = customItems;
+					itemComponent.entries = customItems;
 				} catch (error) {
 					Logger.warning(getKey("warning.customItems.loading.failed").replace("%s", error.stack));
-					itemcomponent.entries = [];
+					itemComponent.entries = [];
 				}
-				itemcomponent.writePacket(player);
+				itemComponent.writePacket(player);
 
-				if (player.renderChunks) {
-					// player.renderChunks is true by default but can be disabled by plugins
+				if (player.renderChunks) { // player.renderChunks is true by default but can be disabled by plugins
 					player.setChunkRadius(player.world.renderDistance);
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();

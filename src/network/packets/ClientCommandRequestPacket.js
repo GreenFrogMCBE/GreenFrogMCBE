@@ -41,7 +41,7 @@ class ClientCommandRequestPacket extends Packet {
 
 		let shouldExecuteCommand = true;
 
-		Frog.eventEmitter.emit("playerExecutedCommand", {
+		Frog.eventEmitter.emit("playerCommand", {
 			player,
 			args,
 			command: executedCommand,

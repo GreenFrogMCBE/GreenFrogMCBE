@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare module "Frog" {
-	import { Client, Server } from "frog-protocol";
+	import { Client, Player as OnlinePlayer, Server } from "frog-protocol";
 
 	export type ReleaseData = {
 		minorServerVersion: string;
@@ -534,8 +534,7 @@ declare module "Frog" {
 		data: PacketData;
 	};
 
-	// Only used in the start_game packet
-	export type WorldSeed = [number, number];
+	export type WorldSeed = [number, number]; // Only used in the start_game packet
 
 	export type World = {
 		name: string;
@@ -543,6 +542,9 @@ declare module "Frog" {
 		spawnCoordinates: Coordinate;
 		generator: string;
 		time: number;
+		handleFallDamage(player: Player, coordinates: Coordinate): void;
+		breakBlock(x: number, y: number, z: number): void;
+		placeBlock(x: number, y: number, z: number, runtime_id: number): void;
 	};
 
 	export type NBTType = "compoud";
@@ -631,7 +633,7 @@ declare module "Frog" {
 		name: string;
 		options: string;
 	};
-	
+
 	export type Color =
 		| "§0"
 		| "§1"
@@ -800,27 +802,206 @@ declare module "Frog" {
 
 	export type PermissionLevel = ValueOf<import("./src/permission/PermissionLevel")>;
 
+	export type PlayerSetDifficultyEvent = {
+		player: Player;
+		difficulty: Difficulty;
+		cancel(): void;
+	}
+
+	export type PlayerGamemodeChangeRequestEvent = {
+		player: Player;
+		gamemode: Gamemode;
+		cancel(): void;
+	}
+
+	export type PlayerChatEvent = {
+		player: Player;
+		message: string;
+		cancel(): void;
+	}
+
+	export type PlayerCommandEvent = {
+		player: Player;
+		args: string[];
+		command: string;
+		cancel(): void
+	}
+
+	export type PlayerMalformatedChatCommand = {
+		player: Player;
+		command: string;
+	}
+
+	export type PlayerRequestChunkRadiusEvent = {
+		radius: number;
+		player: Player;
+		cancel(): void;
+	}
+
+	export type PlayerMoveEvent = {
+		player: Player;
+		x: number;
+		y: number;
+		z: number;
+		pitch: number;
+		yaw: number;
+		onGround: boolean;
+		cancel(): void;
+	}
+
+	export type PlayerModalFormResponseEvent = {
+		player: Player;
+		packet: Packet;
+	}
+
+	export type PlayerContainerOpenEvent = {
+		player: Player;
+		windowId: WindowId;
+		windowType: WindowType;
+		sentByServer: boolean;
+		runtimeId: number;
+		containerCoordinates: Coordinate;
+		cancel(): void;
+	}
+
+	export type PlayerContainerCloseEvent = {
+		player: Player;
+		windowId: WindowId,
+		sentByServer: boolean,
+		packet: Packet,
+		cancel(): void;
+	}
+
+	export type PlayerSetDifficultyRequest = {
+		player: Player;
+		difficulty: Difficulty;
+		cancel(): void;
+	}
+
+	export type PlayerHasNoResourcePacksInstalledEvent = {
+		player: Player;
+		resourcePacksIds: any[];
+		resourcePacksRequired: boolean;
+	}
+
+	export type PlayerResourcePacksRefusedEvent = {
+		player: Player;
+		cancel(): void;
+	}
+
+	export type PlayerHasAllTheResourcePacksEvent = {
+		player: Player;
+		cancel(): void
+	}
+
+	export type PlayerResourcePacksCompletedEvent = {
+		player: Player;
+		cancel(): void;
+	}
+
+	export type PlayerSpawnEvent = {
+		player: Player;
+	}
+
+	export type PlayerOpStatusChangeEvent = {
+		username: string;
+		cancel(): void;
+	}
+
+	export type PlayerKillEvent = {
+		player: Player;
+		cancel(): void;
+	}
+
+	export type PlayerTeleportEvent = {
+		player: Player;
+		x: number;
+		y: number;
+		z: number;
+		rotation_x: number | undefined;
+		rotation_y: number | undefined;
+		rotation_z: number | undefined;
+		cancel(): void;
+	}
+
+	export type PlayerTransferEvent = {
+		player: Player;
+		port: number;
+		address: string;
+		cancel(): void;
+	}
+
+	export type ServerGamemodeChangeEvent = {
+		player: Player;
+		gamemode: Gamemode;
+		cancel(): void;
+	}
+
+	export type ServerMessageEvent = {
+		player: Player;
+		message: string;
+		cancel(): void;
+	}
+
+	export type ServerChatAsPlayerEvent = {
+		player: Player;
+		message: string;
+		cancel(): void;
+	}
+
+	export type ServerCommandProcessErrorEvent = {
+		command: string;
+		error: Error;
+	}
+
+	export type ServerCommandExecuteEvent = {
+		args: string[];
+		command: string;
+		cancel(): void;
+	}
+
+	export type ServerToastEvent = {
+		player: Player;
+		message: string;
+		title: string;
+		cancel(): void;
+	}
+
+	export type ServerTitleEvent = {
+		fadeInTime: number,
+		fadeOutTime: number,
+		stayTime: number,
+		text: number,
+		type: number,
+		cancel(): void
+	}
+
+	export type InventoryContainerChestRemovalEvent = {
+		player: Player;
+		cancel(): void;
+	}
+
 	export type Event =
 		| "blockBreak"
 		| "queryListen"
 		| "queryPacket"
 		| "queryInvalidPacket"
 		| "queryError"
-		| "generatorGeneratingWorld"
-		| "scoreboardCreation"
+		| "worldGenerate"
+		| "scoreboardCreate"
 		| "scoreboardSetScore"
 		| "scoreboardScoreDelete"
 		| "scoreboardDelete"
 		| "inventoryContainerPreCreate"
 		| "inventoryContainerCreate"
-		| "inventoryContainerChestRemoval"
+		| "inventoryContainerChestRemove"
 		| "inventoryContainerGiveItem"
 		| "inventoryContainerItemRequest"
 		| "inventoryPreItemRequest"
 		| "inventoryPostItemRequest"
 		| "packetRead"
 		| "packetReadError"
-		| "packetRateLimitReached"
+		| "packetRateLimit"
 		| "packetQueue"
 		| "serverShutdown"
 		| "serverTick"
@@ -831,10 +1012,11 @@ declare module "Frog" {
 		| "serverSetDimension"
 		| "serverGarbageCollection"
 		| "serverOfflinePlayersGarbageCollection"
-		| "serverToClientMessage"
+		| "serverMessage"
 		| "serverChatAsPlayer"
 		| "serverGamemodeChange"
 		| "serverToast"
+		| "serverTitle"
 		| "serverCommandProcess"
 		| "serverCommandProcessError"
 		| "serverLogMessage"
@@ -842,8 +1024,8 @@ declare module "Frog" {
 		| "serverUpdateChunkRadius"
 		| "serverTimeUpdate"
 		| "serverSetDifficulty"
-		| "serverExecutedCommand"
-		| "serverCommandsInitialised"
+		| "serverCommandExecute"
+		| "serverCommandsInitialize"
 		| "serverVelocityUpdate"
 		| "serverSetXP"
 		| "serverSetHealth"
@@ -852,7 +1034,7 @@ declare module "Frog" {
 		| "serverStart"
 		| "serverListen"
 		| "playerFallDamage"
-		| "playerRegeneration"
+		| "playerRegenerate"
 		| "playerDeath"
 		| "playerHungerUpdate"
 		| "playerHealthUpdate"
@@ -875,17 +1057,17 @@ declare module "Frog" {
 		| "playerHasNoResourcePacksInstalled"
 		| "playerMalformatedChatCommand"
 		| "playerResourcePacksCompleted"
-		| "playerChangeGamemodeRequest"
+		| "playerGamemodeChangeRequest"
 		| "playerSpawn"
 		| "playerChat"
 		| "playerMove"
 		| "playerDeath"
-		| "playerRegeneration"
+		| "playerRegenerate"
 		| "playerFallDamage"
 		| "playerMalformedChatMessage"
 		| "playerMalformedChatCommand"
 		| "playerItemStackRequest"
-		| "playerExecutedCommand"
+		| "playerCommand"
 		| "playerPlayStatus"
 		| "playerTeleport"
 		| "playerKill";
@@ -901,7 +1083,7 @@ declare module "Frog" {
 		sendMessage(message: string): void;
 	}
 
-	export interface Player extends Client, Messagable {
+	export interface Player extends Client, OnlinePlayer, Messagable {
 		username: string;
 		gamemode: string;
 		health: number;
@@ -909,7 +1091,7 @@ declare module "Frog" {
 		dead: boolean;
 		world: World;
 		renderChunks: boolean;
-		initialised: boolean; // Internal usage only
+		initialised: boolean;
 		offline: boolean;
 		isConsole: boolean;
 		inventory: {

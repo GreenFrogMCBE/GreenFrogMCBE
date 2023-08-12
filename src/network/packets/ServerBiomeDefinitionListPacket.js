@@ -26,7 +26,7 @@ class ServerBiomeDefinitionListPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 */
 	writePacket(player) {
-		player.queue(this.name, /** @type {Object} */ (this.data));
+		player.queue(this.name, this.data);
 	}
 }
 
