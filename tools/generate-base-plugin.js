@@ -46,7 +46,7 @@ function createDirectoryIfNotExists(directoryPath) {
 function writePackageJson(directoryPath, pluginName, useTypeScript = false) {
 	const packageJson = {
 		name: pluginName.toLowerCase(),
-		main: `${pluginName.toLowerCase()}.${useTypeScript ? "ts" : "js"}`,
+		main: `${pluginName.toLowerCase()}.js`,
 		version: "1.0.0",
 		displayName: pluginName,
 	};
