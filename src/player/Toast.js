@@ -39,7 +39,7 @@ class Toast {
 			message: this.message,
 			cancel() {
 				shouldSendToast = false;
-			}
+			},
 		});
 
 		if (!shouldSendToast) return;

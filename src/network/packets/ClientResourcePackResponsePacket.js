@@ -81,7 +81,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				Frog.eventEmitter.emit("playerHasNoResourcePacksInstalled", {
 					player,
 					resourcePacksIds: [],
-					resourcePacksRequired: true
+					resourcePacksRequired: true,
 				});
 
 				Logger.info(getKey("status.resourcePacks.none").replace("%s", player.username));
@@ -107,7 +107,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				resourcePackStack.writePacket(player);
 				break;
 			case ResourcePackStatus.COMPLETED:
-				Frog.eventEmitter.emit("playerResourcePacksCompleted", { player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect"))  });
+				Frog.eventEmitter.emit("playerResourcePacksCompleted", { player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
 
 				player.world = new World();
 				player.world.renderDistance = config.world.renderDistance.serverSide;
@@ -202,7 +202,8 @@ class ClientResourcePackResponsePacket extends Packet {
 				}
 				itemComponent.writePacket(player);
 
-				if (player.renderChunks) { // player.renderChunks is true by default but can be disabled by plugins
+				if (player.renderChunks) {
+					// player.renderChunks is true by default but can be disabled by plugins
 					player.setChunkRadius(player.world.renderDistance);
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();

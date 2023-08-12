@@ -634,52 +634,11 @@ declare module "Frog" {
 		options: string;
 	};
 
-	export type Color =
-		| "§0"
-		| "§1"
-		| "§2"
-		| "§3"
-		| "§4"
-		| "§5"
-		| "§6"
-		| "§7"
-		| "§8"
-		| "§9"
-		| "§a"
-		| "§b"
-		| "§c"
-		| "§d"
-		| "§e"
-		| "§f"
-		| "§g"
-		| "§k"
-		| "§l"
-		| "§o"
-		| "§r";
+	export type Color = "§0" | "§1" | "§2" | "§3" | "§4" | "§5" | "§6" | "§7" | "§8" | "§9" | "§a" | "§b" | "§c" | "§d" | "§e" | "§f" | "§g" | "§k" | "§l" | "§o" | "§r";
 
-	export type TrimMaterialColor =
-		| "§h"
-		| "§i"
-		| "§j"
-		| "§m"
-		| "§n"
-		| "§p"
-		| "§q"
-		| "§s"
-		| "§t"
-		| "§u";
+	export type TrimMaterialColor = "§h" | "§i" | "§j" | "§m" | "§n" | "§p" | "§q" | "§s" | "§t" | "§u";
 
-	export type TrimMaterialName =
-		| "quartz"
-		| "iron"
-		| "netherite"
-		| "redstone"
-		| "copper"
-		| "gold"
-		| "emerald"
-		| "diamond"
-		| "lapis"
-		| "amethyst";
+	export type TrimMaterialName = "quartz" | "iron" | "netherite" | "redstone" | "copper" | "gold" | "emerald" | "diamond" | "lapis" | "amethyst";
 
 	export type TrimMaterialItem =
 		| "minecraft:quartz"
@@ -717,23 +676,7 @@ declare module "Frog" {
 		| "minecraft:raiser_armor_trim_smithing_template"
 		| "minecraft:host_armor_trim_smithing_template";
 
-	export type TrimPatternName =
-		| "ward"
-		| "sentry"
-		| "snout"
-		| "dune"
-		| "spire"
-		| "tide"
-		| "wild"
-		| "rib"
-		| "coast"
-		| "shaper"
-		| "eye"
-		| "vex"
-		| "silence"
-		| "wayfinder"
-		| "raiser"
-		| "host";
+	export type TrimPatternName = "ward" | "sentry" | "snout" | "dune" | "spire" | "tide" | "wild" | "rib" | "coast" | "shaper" | "eye" | "vex" | "silence" | "wayfinder" | "raiser" | "host";
 
 	export type TrimPattern = {
 		item_name: TrimPatternItemName | string;
@@ -806,37 +749,37 @@ declare module "Frog" {
 		player: Player;
 		difficulty: Difficulty;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerGamemodeChangeRequestEvent = {
 		player: Player;
 		gamemode: Gamemode;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerChatEvent = {
 		player: Player;
 		message: string;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerCommandEvent = {
 		player: Player;
 		args: string[];
 		command: string;
-		cancel(): void
-	}
+		cancel(): void;
+	};
 
 	export type PlayerMalformatedChatCommand = {
 		player: Player;
 		command: string;
-	}
+	};
 
 	export type PlayerRequestChunkRadiusEvent = {
 		radius: number;
 		player: Player;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerMoveEvent = {
 		player: Player;
@@ -847,12 +790,12 @@ declare module "Frog" {
 		yaw: number;
 		onGround: boolean;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerModalFormResponseEvent = {
 		player: Player;
 		packet: Packet;
-	}
+	};
 
 	export type PlayerContainerOpenEvent = {
 		player: Player;
@@ -862,56 +805,56 @@ declare module "Frog" {
 		runtimeId: number;
 		containerCoordinates: Coordinate;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerContainerCloseEvent = {
 		player: Player;
-		windowId: WindowId,
-		sentByServer: boolean,
-		packet: Packet,
+		windowId: WindowId;
+		sentByServer: boolean;
+		packet: Packet;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerSetDifficultyRequest = {
 		player: Player;
 		difficulty: Difficulty;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerHasNoResourcePacksInstalledEvent = {
 		player: Player;
 		resourcePacksIds: any[];
 		resourcePacksRequired: boolean;
-	}
+	};
 
 	export type PlayerResourcePacksRefusedEvent = {
 		player: Player;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerHasAllTheResourcePacksEvent = {
 		player: Player;
-		cancel(): void
-	}
+		cancel(): void;
+	};
 
 	export type PlayerResourcePacksCompletedEvent = {
 		player: Player;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerSpawnEvent = {
 		player: Player;
-	}
+	};
 
 	export type PlayerOpStatusChangeEvent = {
 		username: string;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerKillEvent = {
 		player: Player;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerTeleportEvent = {
 		player: Player;
@@ -922,64 +865,64 @@ declare module "Frog" {
 		rotation_y: number | undefined;
 		rotation_z: number | undefined;
 		cancel(): void;
-	}
+	};
 
 	export type PlayerTransferEvent = {
 		player: Player;
 		port: number;
 		address: string;
 		cancel(): void;
-	}
+	};
 
 	export type ServerGamemodeChangeEvent = {
 		player: Player;
 		gamemode: Gamemode;
 		cancel(): void;
-	}
+	};
 
 	export type ServerMessageEvent = {
 		player: Player;
 		message: string;
 		cancel(): void;
-	}
+	};
 
 	export type ServerChatAsPlayerEvent = {
 		player: Player;
 		message: string;
 		cancel(): void;
-	}
+	};
 
 	export type ServerCommandProcessErrorEvent = {
 		command: string;
 		error: Error;
-	}
+	};
 
 	export type ServerCommandExecuteEvent = {
 		args: string[];
 		command: string;
 		cancel(): void;
-	}
+	};
 
 	export type ServerToastEvent = {
 		player: Player;
 		message: string;
 		title: string;
 		cancel(): void;
-	}
+	};
 
 	export type ServerTitleEvent = {
-		fadeInTime: number,
-		fadeOutTime: number,
-		stayTime: number,
-		text: number,
-		type: number,
-		cancel(): void
-	}
+		fadeInTime: number;
+		fadeOutTime: number;
+		stayTime: number;
+		text: number;
+		type: number;
+		cancel(): void;
+	};
 
 	export type InventoryContainerChestRemovalEvent = {
 		player: Player;
 		cancel(): void;
-	}
+	};
 
 	export type Event =
 		| "blockBreak"

@@ -6,8 +6,8 @@ labels: Bug
 assignees: ""
 ---
 
-- [ ] I checked if the bug still happens in the latest version of Greenfrog
-- [ ] I am sure that this isn't caused by other plugins
+-   [ ] I checked if the bug still happens in the latest version of Greenfrog
+-   [ ] I am sure that this isn't caused by other plugins
 
 ## What is broken
 

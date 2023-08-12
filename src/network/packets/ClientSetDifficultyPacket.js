@@ -36,7 +36,7 @@ class ClientSetDifficultyPacket extends Packet {
 			difficulty,
 			cancel() {
 				shouldUpdateDifficulty = true;
-			}
+			},
 		});
 
 		if (!shouldUpdateDifficulty) return;

@@ -53,5 +53,5 @@ module.exports = {
 		const langKey = langParser.getKey(key, langParsed);
 
 		return langKey.toString();
-	}
-}
+	},
+};

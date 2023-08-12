@@ -1,29 +1,29 @@
 {
-  "name": "greenfrog",
-  "description": "A server software for MCBE",
-  "main": "index.js",
-  "author": "GreenFrogMCBE",
-  "license": "CC-BY-4.0",
-  "scripts": {
-    "format": "npm run generate-license-headers && npx prettier --write .",
-    "start": "node index.js",
-    "dev": "nodemon --signal SIGINT index.js --debug",
-    "generate-license-headers": "node tools/generate-license-headers.js",
-    "auto-test": "cd tools && node tests-auto.js --test",
-    "test": "cd tools && node tests-manual.js --test",
-    "plugin-structure": "node tools/generate-base-plugin.js"
-  },
-  "dependencies": {
-    "@harmonytf/smart-buffer": "4.2.4",
-    "@kotinash/lang-parser": "^1.0.3",
-    "center-align": "1.0.1",
-    "frog-protocol": "github:greenfrogmcbe/Protocol",
-    "js-yaml": "4.1.0"
-  },
-  "devDependencies": {
-    "eslint": "8.45.0",
-    "minecraft-server-util": "github:greenfrogmcbe/minecraft-server-util-compiled",
-    "nodemon": "3.0.1",
-    "prettier": "3.0.0"
-  }
+    "name": "greenfrog",
+    "description": "A server software for MCBE",
+    "main": "index.js",
+    "author": "GreenFrogMCBE",
+    "license": "CC-BY-4.0",
+    "scripts": {
+        "format": "npm run generate-license-headers && npx prettier --write .",
+        "start": "node index.js",
+        "dev": "nodemon --signal SIGINT index.js --debug",
+        "generate-license-headers": "node tools/generate-license-headers.js",
+        "auto-test": "cd tools && node tests-auto.js --test",
+        "test": "cd tools && node tests-manual.js --test",
+        "plugin-structure": "node tools/generate-base-plugin.js"
+    },
+    "dependencies": {
+        "@harmonytf/smart-buffer": "4.2.4",
+        "@kotinash/lang-parser": "^1.0.3",
+        "center-align": "1.0.1",
+        "frog-protocol": "github:greenfrogmcbe/Protocol",
+        "js-yaml": "4.1.0"
+    },
+    "devDependencies": {
+        "eslint": "8.45.0",
+        "minecraft-server-util": "github:greenfrogmcbe/minecraft-server-util-compiled",
+        "nodemon": "3.0.1",
+        "prettier": "3.0.0"
+    }
 }

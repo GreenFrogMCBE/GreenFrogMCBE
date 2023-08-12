@@ -25,8 +25,8 @@ class ServerClientCacheStatusPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 */
 	writePacket(player) {
-		player.queue(this.name, { 
-			enabled: this.enabled 
+		player.queue(this.name, {
+			enabled: this.enabled,
 		});
 	}
 }

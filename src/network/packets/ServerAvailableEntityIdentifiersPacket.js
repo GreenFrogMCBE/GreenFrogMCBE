@@ -26,7 +26,7 @@ class ServerAvailableEntityIdentifiersPacket extends Packet {
 	 */
 	writePacket(player) {
 		player.queue(this.name, {
-			nbt: this.nbt
+			nbt: this.nbt,
 		});
 	}
 }
