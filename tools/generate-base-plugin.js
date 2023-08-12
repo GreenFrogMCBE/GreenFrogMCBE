@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -41,10 +42,10 @@ function createDirectoryIfNotExists(directoryPath) {
 	}
 }
 
-function writePackageJson(directoryPath, pluginName) {
+function writePackageJson(directoryPath, pluginName, useTypeScript = false) {
 	const packageJson = {
 		name: pluginName.toLowerCase(),
-		main: `${pluginName.toLowerCase()}.js`,
+		main: `${pluginName.toLowerCase()}.${useTypeScript ? 'ts' : 'js'}`,
 		version: "1.0.0",
 		displayName: pluginName,
 	};
@@ -67,7 +68,7 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 		try {
 			require("typescript");
 		} catch {
-			handleError("TypeScript is not installed. Please install it to create TypeScript plugins (Hint: To install it, run \"npm i typescript\")");
+			handleError(`TypeScript is not installed. Please install it to create TypeScript plugins (Hint: To install it, run "npm i typescript")`);
 		}
 
 		pluginJs = `export function onLoad(): void {
@@ -98,7 +99,7 @@ async function handleUserInputForTypeScript(ts) {
 	const useTypeScript = ts.toLowerCase() === "y";
 
 	if (!["y", "n"].includes(ts.toLowerCase())) {
-		handleError("Please enter \"Y\" for yes or \"N\" for no");
+		handleError(`Please enter "Y" for yes or "N" for no`);
 	}
 
 	const pluginDirPath = path.join(pluginsFolderPath, pluginName);
@@ -109,7 +110,7 @@ async function handleUserInputForTypeScript(ts) {
 		createDirectoryIfNotExists(pluginDirPath);
 	} catch (error) {
 		if (error.message.includes("file already exists")) {
-			handleError("Plugin directory already exists");
+			handleError(`Plugin directory already exists`);
 		} else {
 			handleError(`There was an error when creating a plugin! ${error}`);
 		}
@@ -125,7 +126,7 @@ async function handleUserInputForTypeScript(ts) {
 
 async function handleUserInputForPluginName(pluginNameInput) {
 	if (!pluginNameInput) {
-		handleError("Please enter a plugin name");
+		handleError(`Please enter a plugin name`);
 	}
 
 	pluginName = pluginNameInput;
