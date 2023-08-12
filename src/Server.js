@@ -173,7 +173,6 @@ async function listen() {
 			},
 		}).on("connect", (client) => {
 			client.on("join", () => {
-				// @ts-ignore (only for people using @ts-check)
 				new PlayerJoinHandler().onPlayerJoin(client);
 			});
 		});
