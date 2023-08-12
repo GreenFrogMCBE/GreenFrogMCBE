@@ -8,6 +8,12 @@
     "parserOptions": {
         "ecmaVersion": "latest"
     },
+    "globals": {
+        "process": true,
+        "__dirname": true,
+        "__filename": true,
+        "Buffer": true
+    },
     "rules": {
         "indent": [
             "error",
