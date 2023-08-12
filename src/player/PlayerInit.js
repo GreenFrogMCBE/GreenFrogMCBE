@@ -216,7 +216,6 @@ module.exports = {
 		 * @param {import("Frog").Gamemode} gamemode - The gamemode. This can be survival, creative, adventure, spectator or fallback
 		 */
 		player.setGamemode = function (gamemode) {
-			// prettier-ignore
 			const allowedGamemodes = [
 				Gamemode.SURVIVAL,
 				Gamemode.CREATIVE,
