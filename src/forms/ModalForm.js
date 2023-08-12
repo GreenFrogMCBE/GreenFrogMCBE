@@ -58,14 +58,14 @@ class ModalForm {
 	send(client) {
 		this.onSend(this, client);
 
-		const FormRequestPacket = new ServerFormRequestPacket();
-		FormRequestPacket.type = Form.MODAL_FORM;
-		FormRequestPacket.id = this.id;
-		FormRequestPacket.title = this.title;
-		FormRequestPacket.content = this.text;
-		FormRequestPacket.button1 = this.button1;
-		FormRequestPacket.button2 = this.button2;
-		FormRequestPacket.writePacket(client);
+		const formRequestPacket = new ServerFormRequestPacket();
+		formRequestPacket.type = Form.MODAL_FORM;
+		formRequestPacket.id = this.id;
+		formRequestPacket.title = this.title;
+		formRequestPacket.content = this.text;
+		formRequestPacket.button1 = this.button1;
+		formRequestPacket.button2 = this.button2;
+		formRequestPacket.writePacket(client);
 	}
 }
 

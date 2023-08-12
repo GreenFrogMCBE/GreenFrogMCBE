@@ -57,13 +57,13 @@ class Form {
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
-		const formRequest = new ServerFormRequestPacket();
-		formRequest.id = this.id;
-		formRequest.title = this.title;
-		formRequest.content = this.content;
-		formRequest.buttons = JSON.stringify(this.buttons);
-		formRequest.type = FormVariant.FORM;
-		formRequest.writePacket(player);
+		const formRequestPacket = new ServerFormRequestPacket();
+		formRequestPacket.id = this.id;
+		formRequestPacket.title = this.title;
+		formRequestPacket.content = this.content;
+		formRequestPacket.buttons = JSON.stringify(this.buttons);
+		formRequestPacket.type = FormVariant.FORM;
+		formRequestPacket.writePacket(player);
 
 		this.onSend(this, player);
 	}
