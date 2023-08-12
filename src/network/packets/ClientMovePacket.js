@@ -15,28 +15,23 @@
  */
 const Frog = require("../../Frog");
 
-const Packet = require("./Packet");
+const FallDamage = require("../../world/FallDamage");
 
-class ClientMovePacket extends Packet {
+const PacketConstructor = require("./PacketConstructor");
+
+class ClientMovePacket extends PacketConstructor {
 	name = "move_player";
 
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 */
 	async readPacket(player, packet) {
 		const { x, y, z } = packet.data.params.position;
 		const { pitch, yaw, on_ground } = packet.data.params;
-		const fixedY = y - 2;
-
-		if (player.location.x === x && player.location.y === fixedY && player.location.z === z && player.location.yaw === yaw && player.location.pitch === pitch) return;
 
 		let shouldSetPosition = true;
 
 		Frog.eventEmitter.emit("playerMove", {
 			player,
 			x,
-			y: fixedY,
+			y,
 			z,
 			pitch,
 			yaw,
@@ -50,10 +45,10 @@ class ClientMovePacket extends Packet {
 
 		if (!shouldSetPosition) return;
 
-		player.world.handleFallDamage(player, { x, y, z });
+		FallDamage.calculateFallDamage(player, { x, y, z });
 
 		player.location.x = x;
-		player.location.y = fixedY;
+		player.location.y = y;
 		player.location.z = z;
 		player.location.yaw = yaw;
 		player.location.pitch = pitch;

@@ -13,29 +13,25 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerTextPacket extends Packet {
+class ServerTextPacket extends PacketConstructor {
 	name = "text";
-
-	/** @type {string | undefined} */
+	/** @type {number} */
 	message;
-	/** @type {import("Frog").Text | undefined} */
+	/** @type {import("../../api/types/Text")} */
 	type;
-	/** @type {boolean | undefined} */
+	/** @type {boolean} */
 	needs_translation;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	source_name;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	xuid;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	platform_chat_id;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
+	writePacket(client) {
+		client.queue(this.name, {
 			type: this.type,
 			needs_translation: this.needs_translation,
 			source_name: this.source_name,

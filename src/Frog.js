@@ -13,42 +13,42 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PluginLoader = require("./plugins/PluginLoader");
-const PlayerInfo = require("./player/PlayerInfo");
+const events = require("events");
 
-const ConsoleCommandSender = require("./server/ConsoleCommandSender");
+const PluginLoader = require("./plugins/PluginLoader");
+const PlayerInfo = require("./api/player/PlayerInfo");
 
 const { getKey } = require("./utils/Language");
 
-const Logger = require("./utils/Logger");
+const Logger = require("./server/Logger");
 
-const langParser = require("@kotinash/lang-parser");
-const EventEmitter = require("events");
 const yaml = require("js-yaml");
-const path = require("path");
 const fs = require("fs");
 
-/** @returns {import("frog-protocol").Server} */
+/**
+ * @private
+ * @returns {import('../interfaces/EventEmitter')}
+ */
+const _eventEmitter = new events();
+
+/**
+ * @private
+ * @type {any}
+ */
 let _server;
 
-/** @returns {EventEmitter} */
-const _eventEmitter = new EventEmitter();
-
-/** @returns {any} */
+/**
+ * @private
+ */
 function getConfig() {
-	const configData = yaml.load(fs.readFileSync("config.yml", "utf8"));
-	return configData;
+	return yaml.load(fs.readFileSync("config.yml", "utf8"));
 }
 
-/** @returns {any} */
+/**
+ * @private
+ */
 function getLang() {
-	const config = getConfig();
-
-	const langFilePath = path.join(__dirname, `lang/${config.chat.lang}.lang`);
-	const langFileContent = fs.readFileSync(langFilePath, "utf8");
-	const lang = langParser.parseRaw(langFileContent);
-
-	return lang;
+	return require("./lang/" + yaml.load(fs.readFileSync("config.yml", "utf8")).chat.lang);
 }
 
 module.exports = {
@@ -60,23 +60,42 @@ module.exports = {
 	isDebug: process.argv.includes("--debug") || getConfig().dev.debug,
 
 	/**
+	 * Returns if the server is running in the test workflow
+	 *
+	 * @returns {boolean}
+	 */
+	isTest: process.argv.includes("--test"),
+
+	/**
 	 * Returns the server object
 	 *
-	 * @returns {import("frog-protocol").Server}
+	 * @returns {Server}
 	 */
-	server: _server,
+	getServer() {
+		return _server;
+	},
+
+	/**
+	 * Sets the server object
+	 * Not recommended to use in plugins.
+	 *
+	 * @param {Server}
+	 */
+	setServer: (server) => {
+		_server = server;
+	},
 
 	/**
 	 * Returns the configuration file
 	 *
-	 * @returns {import("Frog").Config}
+	 * @returns {any}
 	 */
 	config: getConfig(),
 
 	/**
 	 * Returns the language file
 	 *
-	 * @returns {import("Frog").Language}
+	 * @returns {any}
 	 */
 	lang: getLang(),
 
@@ -85,33 +104,35 @@ module.exports = {
 	 * to listen for, and for server to execute
 	 * events
 	 *
-	 * @type {import("Frog").EventEmitter}
+	 * @returns {import('../interfaces/EventEmitter')}
+	 * @type {import('../interfaces/EventEmitter')}
 	 */
 	eventEmitter: _eventEmitter,
 
 	/**
-	 * Returns the release data
+	 * Returns server data
 	 *
-	 * @returns {import("Frog").ReleaseData}
+	 * @type {import("./declarations/Typedefs").ServerInfo}
+	 * @returns {import("./declarations/Typedefs").ServerInfo}
 	 */
 	releaseData: {
-		minorServerVersion: "3.7.1",
+		minorServerVersion: "3.7",
+		versionDescription: "Added query and containers",
 		majorServerVersion: "3.0",
-		versionDescription: "Updated to 1.20.10",
 		apiVersion: "3.0",
 	},
 
 	/**
-	 * Sends a message to all online players
+	 * Sends message to all players
 	 *
 	 * @param {string} message
 	 */
 	broadcastMessage(message) {
-		for (const player of PlayerInfo.playersOnline) {
+		for (const player of PlayerInfo.players) {
 			player.sendMessage(message);
 		}
 
-		Logger.info(getKey("chat.format.plugin").replace("%s", message));
+		Logger.info(getKey("chat.format.plugin").replace("%s%", message));
 	},
 
 	/**
@@ -124,22 +145,24 @@ module.exports = {
 	async shutdownServer(shutdownMessage = getKey("kickMessages.serverClosed")) {
 		let shouldShutdown = true;
 
-		this.eventEmitter.emit("serverShutdown", {
+		this.eventEmitter.emit("serverShutdownEvent", {
 			cancel: () => {
 				shouldShutdown = false;
 			},
 		});
 
-		if (!shouldShutdown) return;
+		if (shouldShutdown) {
+			Logger.info(getKey("server.shuttingDown"));
 
-		Logger.info(getKey("server.shuttingDown"));
+			await require("./server/ConsoleCommandSender").close();
+			await this.getServer().close(shutdownMessage);
 
-		// @ts-ignore (only for people using @ts-check)
-		this.server.close(shutdownMessage);
-
-		ConsoleCommandSender.closeConsole();
-		PluginLoader.unloadPlugins();
-
-		process.exit(this.config.dev.exitCodes.exit);
+			setTimeout(() => {
+				PluginLoader.unloadPlugins();
+			}, 1000);
+		}
 	},
+
+	/** @type {number} */
+	_playerCount: 0,
 };

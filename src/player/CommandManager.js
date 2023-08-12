@@ -17,24 +17,24 @@ const ServerAvailableCommandsPacket = require("../network/packets/ServerAvailabl
 
 const { getKey } = require("../utils/Language");
 
-/** @type {import("Frog").CommandInfo[]} */
+/** @type {import("../declarations/Typedefs").CommandsPacket} */
 let commands = [];
 
-module.exports = {
+class CommandManager {
 	/**
 	 * Retrieves the commands packet of a client.
 	 *
-	 * @param {import("Frog").Player} client - The client object.
-	 * @returns {import("Frog").CommandPacket}
+	 * @param {Client} client - The client object.
+	 * @returns {Array}
 	 */
 	getPacket(client) {
 		return client.commands;
-	},
+	}
 
 	/**
 	 * Initialises the commands.
 	 *
-	 * @param {import("Frog").Player} client
+	 * @param {import("frog-protocol").Client} client
 	 */
 	init(client) {
 		client.commands = {
@@ -49,26 +49,27 @@ module.exports = {
 			dynamic_enums: [],
 			enum_constraints: [],
 		};
-	},
+	}
 
 	/**
 	 * Retrieves the commands array.
 	 *
-	 * @returns {import("Frog").CommandInfo[]}
+	 * @returns {Array} The commands array.
 	 */
 	getCommands() {
 		return commands;
-	},
+	}
 
 	/**
 	 * Adds a new command to the client's commands packet and updates the commands array.
 	 *
-	 * @param {import("Frog").Player} client
+	 * @param {Client} client - The client.
 	 * @param {string} name - The name of the new command.
 	 * @param {string} description - The description of the command.
 	 */
 	addCommand(client, name, description) {
-		if (name === getKey("commands.help.name") || name === "?") return; // Ignore /help and /? because they are overridden by the client
+		// Ignore /help and /? because they are overriden by the client
+		if (name === getKey("commands.help.name") || name === "?") return;
 
 		client.commands.command_data.push({
 			name,
@@ -107,5 +108,7 @@ module.exports = {
 		const availableCommandsPacket = new ServerAvailableCommandsPacket();
 		availableCommandsPacket.data = client.commands;
 		availableCommandsPacket.writePacket(client);
-	},
-};
+	}
+}
+
+module.exports = CommandManager;

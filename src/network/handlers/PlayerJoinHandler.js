@@ -15,224 +15,201 @@
  */
 const Frog = require("../../Frog");
 
-const PlayerInfo = require("../../player/PlayerInfo");
+const PlayerInfo = require("../../api/player/PlayerInfo");
 const PlayerInit = require("../../player/PlayerInit");
-
 const Language = require("../../utils/Language");
 
-const ResourcePackInfo = require("../packets/ServerResourcePackInfoPacket");
+const ResponsePackInfo = require("../../network/packets/ServerResponsePackInfoPacket");
 const PlayStatus = require("../../network/packets/types/PlayStatus");
-
 const VersionToProtocol = require("../../utils/VersionToProtocol");
+
 const UsernameValidator = require("../../player/UsernameValidator");
 
-const PacketHandler = require("./PacketHandler");
-
+let server = null;
 let config = Frog.config;
 
 class PlayerJoinHandler {
 	/**
 	 * Executes when a player joins the server.
 	 *
-	 * @param {import("Frog").Player} player - The player joining the server.
+	 * @param {import('frog-protocol').Client} client - The client joining the server.
 	 */
-	async onPlayerJoin(player) {
-		await this.initPlayer(player);
+	async onPlayerJoin(client) {
+		await this.setupClientProperties(client);
+		await this.initPlayer(client);
 
-		this.setupPlayerProperties(player);
-		this.setupPlayerIntervals(player);
-		this.validateUsername(player);
-		this.addPlayer(player);
-		this.handleMaxPlayers(player);
-		this.handleVersionMismatch(player);
-		this.sendResponsePackInfo(player);
-		this.emitPlayerJoinEvent(player);
-		this.setupEvents(player);
+		this.validateUsername(client);
+		this.setupClientIntervals(client);
+		this.addPlayer(client);
+		this.handleMaxPlayers(client);
+		this.handleVersionMismatch(client);
+		this.sendResponsePackInfo(client);
+		this.emitPlayerJoinEvent(client);
 	}
 
 	/**
-	 * Validates the username of the player
+	 * Validates the username of the client
 	 *
-	 * @param {import("Frog").Player} player
+	 * @param {import('frog-protocol').Client} client
 	 */
-	validateUsername(player) {
-		if (!UsernameValidator.isUsernameValid(player.username) && config.dev.validateUsernames) {
-			player.kick(Language.getKey("kickMessages.invalidUsername"));
+	validateUsername(client) {
+		if (!UsernameValidator.isUsernameValid(client.username) && config.dev.validateUsernames) {
+			client.kick(Language.getKey("kickMessages.invalidUsername"));
 			return;
 		}
 	}
 
 	/**
-	 * Setups events for the player
+	 * Setups events for the client
 	 *
-	 * @param {import("Frog").Player} player
+	 * @param {import('frog-protocol').Client} client
 	 */
-	async setupEvents(player) {
-		Frog.eventEmitter.emit("playerPreConnect", {
-			player,
+	async setupEvents(client) {
+		Frog.eventEmitter.emit("playerPreConnectEvent", {
+			player: client,
 			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
-				player.kick(reason);
+				client.kick(reason);
 			},
 		});
 
-		player._queue = player.queue;
-		player.queue = (name, params) => {
+		client.__queue = client.queue;
+		client.queue = (packetName, data) => {
 			let shouldQueue = true;
 
 			Frog.eventEmitter.emit("packetQueue", {
-				player,
-				packet: {
-					data: {
-						// Follow bedrock-protocol's packet structure
-						name,
-						params,
-					},
-				},
+				player: client,
+				packetName,
+				packetData: data,
 				cancel: () => {
 					shouldQueue = false;
 				},
 			});
 
 			if (shouldQueue) {
-				player._queue(name, params);
+				client.__queue(packetName, data);
 			}
 		};
-
-		player.on("packet", (packet) => {
-			new PacketHandler().handlePacket(player, packet);
-		});
 	}
 
 	/**
 	 * Initialises the player.
 	 *
-	 * @param {import("Frog").Player} player - The player to initialize.
+	 * @param {import('frog-protocol').Client} client - The client to initialize.
 	 * @returns {Promise<void>}
 	 */
-	async initPlayer(player) {
-		await PlayerInit.initPlayer(player);
+	async initPlayer(client) {
+		await PlayerInit.initPlayer(client, server);
 	}
 
 	/**
-	 * Sets up the player properties.
+	 * Sets up the client properties.
 	 *
-	 * @param {import("Frog").Player} player - The player to set up properties for.
+	 * @param {import('frog-protocol').Client} client - The client to set up properties for.
 	 */
-	setupPlayerProperties(player) {
-		Object.assign(player, {
-			username: player.profile.name,
-			gamemode: null,
-			dead: null,
-			health: 20,
-			hunger: 20,
-			world: null,
-			renderChunks: true,
-			isConsole: false,
+	setupClientProperties(client) {
+		Object.assign(client, {
+			items: [],
+			location: {
+				x: 0,
+				y: -47,
+				z: 0,
+				onGround: false,
+				pitch: 0,
+				yaw: 0,
+				previous: {},
+			},
 			inventory: {
+				lastKnownItemNetworkId: 0,
+				lastKnownItemRuntimeId: 0,
+				items: [],
 				container: {
+					window: {
+						id: null,
+						type: null,
+					},
 					blockPosition: {
 						x: null,
 						y: null,
 						z: null,
 					},
 					isOpen: false,
-					window: {
-						id: null,
-						type: null,
-					},
-				},
-				items: [],
-				lastUsedItem: {
-					networkId: null,
-					runtimeId: null,
 				},
 			},
-			location: {
-				onGround: false,
-				previous: {},
-				x: 0,
-				y: -47,
-				z: 0,
-				yaw: 0,
-				pitch: 0,
-			},
-			network: {
-				address: player.connection.address.split("/")[0],
-				port: player.connection.address.split("/")[1],
-				packetCount: 0,
-				offline: false,
-				initialised: false,
-				protocolVersion: null,
-			},
-			permissions: {
-				op: null,
-				permissionLevel: null,
-			},
-			_damage: {
-				fall: {
-					queue: null,
-				},
-				void: {
-					invulnerable: null,
-				},
-			},
+			offline: false,
+			kicked: false,
+			health: 20,
+			hunger: 20,
+			packetCount: 0,
+			username: client.profile.name,
+			gamemode: Frog.config.world.gamemode,
+			world: null,
+			op: null,
+			dead: false,
+			chunksEnabled: true,
+			networkChunksLoop: null,
+			hungerLossLoop: null,
+			initialised: false,
+			isConsole: false,
+			fallDamageQueue: 0,
+			ip: client.connection.address.split("/")[0],
+			port: client.connection.address.split("/")[1],
 		});
 	}
 
 	/**
-	 * Sets up player intervals.
+	 * Sets up client intervals.
 	 *
-	 * @param {import("Frog").Player} player - The player to set up intervals for.
+	 * @param {import('frog-protocol').Client} client - The client to set up intervals for.
 	 */
-	setupPlayerIntervals(player) {
+	setupClientIntervals(client) {
 		setInterval(() => {
-			player.network.packetCount = 0;
+			client.packetCount = 0;
 		}, 1000);
 	}
 
 	/**
 	 * Adds the player to the player list.
 	 *
-	 * @param {import("Frog").Player} player - The player to add to the player list.
+	 * @param {import('frog-protocol').Client} client - The client to add to the player list.
 	 */
-	addPlayer(player) {
-		PlayerInfo.addPlayer(player);
+	addPlayer(client) {
+		PlayerInfo.addPlayer(client);
 	}
 
 	/**
-	 * Handles the case when the maximum number of playersOnline.is reached.
+	 * Handles the case when the maximum number of players is reached.
 	 *
-	 * @param {import("Frog").Player} player - The player to check against the maximum player count.
+	 * @param {import('frog-protocol').Client} client - The client to check against the maximum player count.
 	 */
-	handleMaxPlayers(player) {
-		if (PlayerInfo.playersOnline.length > config.serverInfo.maxPlayers) {
+	handleMaxPlayers(client) {
+		if (PlayerInfo.players.length > config.serverInfo.maxPlayers) {
 			const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.getKey("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL;
-			player.kick(kickMessage);
+			client.kick(kickMessage);
 			return;
 		}
 	}
 
 	/**
-	 * Handles the version mismatch between the player and server.
+	 * Handles the version mismatch between the client and server.
 	 *
-	 * @param {import("Frog").Player} player - The player to check the version for.
+	 * @param {import('frog-protocol').Client} client - The client to check the version for.
 	 */
-	handleVersionMismatch(player) {
+	handleVersionMismatch(client) {
 		const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
 
 		if (config.dev.multiProtocol) {
 			if (config.dev.useLegacyVersionMismatchKickMessage) {
-				if (player.network.protocolVersion !== serverProtocol) {
-					const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s", config.serverInfo.version);
-					player.kick(kickMessage);
+				if (client.version !== serverProtocol) {
+					const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s%", config.serverInfo.version);
+					client.kick(kickMessage);
 					return;
 				}
 			} else {
-				if (player.network.protocolVersion > serverProtocol) {
-					player.sendPlayStatus(PlayStatus.FAILED_SERVER, true);
+				if (client.version > serverProtocol) {
+					client.sendPlayStatus(PlayStatus.FAILED_SERVER, true);
 					return;
-				} else if (player.network.protocolVersion < serverProtocol) {
-					player.sendPlayStatus(PlayStatus.FAILED_CLIENT, true);
+				} else if (client.version < serverProtocol) {
+					client.sendPlayStatus(PlayStatus.FAILED_CLIENT, true);
 					return;
 				}
 			}
@@ -240,30 +217,29 @@ class PlayerJoinHandler {
 	}
 
 	/**
-	 * Sends the response pack info to the player.
+	 * Sends the response pack info to the client.
 	 *
-	 * @param {import("Frog").Player} player - The player to send the response pack info to.
+	 * @param {import('frog-protocol').Client} client - The client to send the response pack info to.
 	 */
-	sendResponsePackInfo(player) {
-		const responsePackInfo = new ResourcePackInfo();
+	sendResponsePackInfo(client) {
+		const responsePackInfo = new ResponsePackInfo();
 		responsePackInfo.must_accept = false;
 		responsePackInfo.has_scripts = false;
 		responsePackInfo.behavior_packs = [];
 		responsePackInfo.texture_packs = [];
-		responsePackInfo.rtx_enabled = false;
-		responsePackInfo.writePacket(player);
+		responsePackInfo.writePacket(client);
 	}
 
 	/**
 	 * Emits the player join event.
 	 *
-	 * @param {import("Frog").Player} player - The player that joined the server.
+	 * @param {import('frog-protocol').Client} client - The client that joined the server.
 	 */
-	emitPlayerJoinEvent(player) {
+	emitPlayerJoinEvent(client) {
 		Frog.eventEmitter.emit("playerJoin", {
-			player,
+			player: client,
 			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
-				player.kick(reason);
+				client.kick(reason);
 			},
 		});
 	}

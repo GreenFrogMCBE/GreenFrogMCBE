@@ -13,17 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
 const Frog = require("../../Frog");
 
-class ClientRequestChunkRadiusPacket extends Packet {
+class ClientRequestChunkRadiusPacket extends PacketConstructor {
 	name = "request_chunk_radius";
 
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 */
 	async readPacket(player, packet) {
 		let shouldChange = true;
 

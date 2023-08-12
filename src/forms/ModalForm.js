@@ -14,13 +14,14 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
-
-const Form = require("./types/Form");
+const FormType = require("./types/FormType");
 
 class ModalForm {
 	constructor() {
 		/**
-		 * @type {import("Frog").Form}
+		 * @type {FormType}
+		 *
+		 * @type {import("./types/FormType")}
 		 */
 		this.title = "";
 
@@ -46,6 +47,9 @@ class ModalForm {
 
 		/**
 		 * @type {function}
+		 *
+		 * @param {ModalForm} form
+		 * @param {import('frog-protocol').Client} client
 		 */
 		this.onSend = () => {};
 	}
@@ -53,13 +57,13 @@ class ModalForm {
 	/**
 	 * Sends the modal form to the specified client.
 	 *
-	 * @param {import("Frog").Player} client
+	 * @param {import('frog-protocol').Client} client
 	 */
 	send(client) {
 		this.onSend(this, client);
 
 		const FormRequestPacket = new ServerFormRequestPacket();
-		FormRequestPacket.type = Form.MODAL_FORM;
+		FormRequestPacket.type = FormType.MODAL_FORM;
 		FormRequestPacket.id = this.id;
 		FormRequestPacket.title = this.title;
 		FormRequestPacket.content = this.text;

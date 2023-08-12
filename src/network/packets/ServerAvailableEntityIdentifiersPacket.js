@@ -13,21 +13,15 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerAvailableEntityIdentifiersPacket extends Packet {
+class ServerAvailableEntityIdentifiersPacket extends PacketConstructor {
 	name = "available_entity_identifiers";
+	/** @type {JSON} */
+	value;
 
-	/** @type {import("Frog").NBT | undefined} */
-	nbt;
-
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
-			nbt: this.nbt,
-		});
+	writePacket(client) {
+		client.queue(this.name, this.value);
 	}
 }
 

@@ -13,57 +13,53 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
 const ChatRestrictionLevel = require("./types/ChatRestrictionLevel");
 
-class ServerStartGamePacket extends Packet {
+class ServerStartGamePacket extends PacketConstructor {
 	name = "start_game";
-
-	/** @type {number | undefined} */
+	/** @type {number} */
 	entity_id;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	runtime_entity_id;
-	/** @type {string | undefined} */
+	/** @type {import("../../api/player/Gamemode")} */
 	player_gamemode;
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {JSON} */
 	player_position;
-	/** @type {import("Frog").Rotation | undefined} */
+	/** @type {JSON} */
 	rotation;
-	/** @type {import("Frog").WorldSeed | undefined} */
+	/** @type {Array<number>} */
 	seed;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	biome_type;
-	/** @type {string | undefined} */
+	/** @type {import("../../world/types/Biome")} */
 	biome_name;
-	/** @type {import("Frog").Dimension | undefined} */
+	/** @type {Dimension} */
 	dimension;
-	/** @type {import("Frog").Generator | undefined} */
+	/** @type {import("../../world/types/GeneratorType")} */
 	generator;
-	/** @type {import("Frog").Gamemode | undefined} */
+	/** @type {Gamemode} */
 	world_gamemode;
-	/** @type {import("Frog").Difficulty | undefined} */
+	/** @type {import("../../api/types/Difficulty")} */
 	difficulty;
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {JSON} */
 	spawn_position;
-	/** @type {any[] | undefined} */
+	/** @type {Array<any>} */
 	gamerules;
-	/** @type {any[] | undefined} */
+	/** @type {Array<any>} */
 	itemstates;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	world_name;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	game_version;
-	/** @type {import("Frog").MovementAuthority | undefined} */
+	/** @type {import("./types/MovementAuthority")} */
 	movement_authority;
-	/** @type {import("Frog").PermissionLevel | undefined} */
+	/** @type {import("../../api/permission/PermissionLevel")} */
 	permission_level;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
+	writePacket(client) {
+		client.queue(this.name, {
 			entity_id: this.entity_id,
 			runtime_entity_id: this.runtime_entity_id,
 			player_gamemode: this.player_gamemode,

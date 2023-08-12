@@ -13,24 +13,20 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerUpdateAttributesPacket extends Packet {
+class ServerUpdateAttributesPacket extends PacketConstructor {
 	name = "update_attributes";
-
-	/** @type {number | undefined} */
+	/** @type {number} */
 	runtime_entity_id;
-	/** @type {import("Frog").Attribute | undefined} */
+	/** @type {JSON} */
 	attributes;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	tick;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
-			runtime_entity_id: String(this.runtime_entity_id),
+	writePacket(client) {
+		client.queue(this.name, {
+			runtime_entity_id: `${this.runtime_entity_id}`,
 			attributes: this.attributes,
 			tick: this.tick,
 		});

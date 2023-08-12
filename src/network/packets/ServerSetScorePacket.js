@@ -13,21 +13,17 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerSetScorePacket extends Packet {
+class ServerSetScorePacket extends PacketConstructor {
 	name = "set_score";
-
-	/** @type {import("Frog").ScoreAction | undefined} */
+	/** @type {import("../../scoreboard/types/ScoreAction")} */
 	action;
-	/** @type {any[] | undefined} */
+	/** @type {Array} */
 	entries;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
+	writePacket(client) {
+		client.queue(this.name, {
 			action: this.action,
 			entries: this.entries,
 		});

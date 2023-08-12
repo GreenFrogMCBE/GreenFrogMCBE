@@ -17,14 +17,15 @@ const { getKey } = require("../utils/Language");
 
 const PluginSetupException = require("../utils/exceptions/PluginSetupException");
 
-/** @type {import("Frog").Plugin[]} */
+/** @private */
 const plugins = [];
 
 module.exports = {
 	/**
-	 * Returns plugins and their versions as an array
+	 * Returns plugins and their versions as array
+	 * Example: ["ExamplePlugin v1.0.0"]
 	 *
-	 * @type {import("Frog").Plugin[]}
+	 * @returns {Array<string>}
 	 */
 	plugins,
 
@@ -36,20 +37,16 @@ module.exports = {
 	 * @param {string} version
 	 */
 	addPlugin: (name, version) => {
-		/** @type {import("Frog").Plugin} */
-		let pluginObject = {
-			name,
-			version,
-		};
+		let pluginString = `${name} v${version}`;
 
 		if (!name) {
-			throw new PluginSetupException(pluginObject, getKey("exceptions.plugin.noName"));
+			throw new PluginSetupException(pluginString, getKey("exceptions.plugin.noName"));
 		}
 
 		if (!version) {
-			throw new PluginSetupException(pluginObject, getKey("exceptions.plugin.noVersion"));
+			throw new PluginSetupException(pluginString, getKey("exceptions.plugin.noVersion"));
 		}
 
-		plugins.push(pluginObject);
+		plugins.push(pluginString);
 	},
 };

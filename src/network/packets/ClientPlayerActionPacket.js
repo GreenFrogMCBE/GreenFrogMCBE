@@ -13,36 +13,31 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
 
 const BlockBreakException = require("../../utils/exceptions//BlockBreakException");
+const PacketConstructor = require("./PacketConstructor");
 
-const Gamemode = require("../../player/types/Gamemode");
+const Gamemode = require("../../api/player/Gamemode");
 const BlockAction = require("../../world/types/BlockAction");
 
-const Logger = require("../../utils/Logger");
-
+const Logger = require("../../server/Logger");
 const Frog = require("../../Frog");
 
 const { getKey } = require("../../utils/Language");
 
-class ClientPlayerActionPacket extends Packet {
+class ClientPlayerActionPacket extends PacketConstructor {
 	name = "player_action";
 
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 */
 	async readPacket(player, packet) {
 		const { action, position, result_position, face } = packet.data.params;
 
 		switch (action) {
-			case BlockAction.CREATIVE_PLAYER_BREAK_BLOCK:
+			case BlockAction.CREATIVE_PLAYER_DESTROY_BLOCK:
 				if (player.gamemode == Gamemode.SURVIVAL || player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
-					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s", player.username));
+					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s%", player.username));
 				}
 
-				Frog.eventEmitter.emit("blockBreak", {
+				Frog.eventEmitter.emit("blockBreakEvent", {
 					player,
 					action,
 					position,
@@ -53,7 +48,7 @@ class ClientPlayerActionPacket extends Packet {
 				player.world.breakBlock(position.x, position.y, position.z);
 				break;
 			default:
-				Logger.debug(getKey("debug.player.unsupportedAction.block").replace("%s", player.username).replace("%d", action));
+				Logger.debug(getKey("debug.player.unsupportedAction.block").replace("%s%", player.username).replace("%d%", action));
 		}
 	}
 }

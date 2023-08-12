@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -13,13 +14,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-unused-vars */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 
-const FormVariant = require("./types/Form");
+const FormType = require("./FormType");
 
 class Form {
 	constructor() {
+		/**
+		 * @type {FormType}
+		 *
+		 * @type {import("./FormType")}
+		 */
+		this.type = FormType.FORM;
+
 		/**
 		 * The title of the form.
 		 * @type {string}
@@ -28,7 +35,7 @@ class Form {
 
 		/**
 		 * The buttons in the form.
-		 * @type {import("Frog").FormButton[]}
+		 * @type {Array<JSON>}
 		 */
 		this.buttons = [];
 
@@ -36,7 +43,7 @@ class Form {
 		 * @type {function}
 		 *
 		 * @param {Form} form
-		 * @param {import("Frog").Player} client
+		 * @param {import('frog-protocol').Client} client
 		 */
 		this.onSend = (form, client) => {};
 
@@ -48,24 +55,24 @@ class Form {
 
 		/**
 		 * The text in the form.
-		 * @type {string}
+		 * @type {Array}
 		 */
-		this.content;
+		this.text = [];
 	}
 
 	/**
-	 * @param {import("Frog").Player} player
+	 * @param {import('frog-protocol').Client}
 	 */
-	send(player) {
-		const formRequest = new ServerFormRequestPacket();
-		formRequest.id = this.id;
-		formRequest.title = this.title;
-		formRequest.content = this.content;
-		formRequest.buttons = JSON.stringify(this.buttons);
-		formRequest.type = FormVariant.FORM;
-		formRequest.writePacket(player);
+	send(client) {
+		const FormReq = new ServerFormRequestPacket();
+		FormReq.id = this.id;
+		FormReq.title = this.title;
+		FormReq.text = this.text;
+		FormReq.buttons = JSON.stringify(this.buttons);
+		FormReq.type = this.type;
+		FormReq.writePacket(client);
 
-		this.onSend(this, player);
+		this.onSend(this, client);
 	}
 }
 

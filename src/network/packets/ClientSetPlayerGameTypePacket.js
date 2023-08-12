@@ -15,34 +15,27 @@
  */
 const Frog = require("../../Frog");
 
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
 const InvalidGamemodeException = require("../../utils/exceptions/InvalidGamemodeException");
 
 const { getKey } = require("../../utils/Language");
 
-class ClientSetPlayerGameTypePacket extends Packet {
-	name = "set_player_game_types";
+class ClientSetPlayerGameTypePacket extends PacketConstructor {
+	name = "set_player_game_type";
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
 	validatePacket(player) {
-		if (!player.permissions.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"));
+		if (!player.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"));
 	}
 
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 */
 	async readPacket(player, packet) {
-		this.validatePacket(player);
+		await this.validatePacket(player);
 
 		const gamemode = packet.data.params.gamemode;
 
 		let shouldChange = true;
 
-		Frog.eventEmitter.emit("playerGamemodeChangeRequest", {
+		Frog.eventEmitter.emit("playerChangeGamemodeRequest", {
 			player,
 			gamemode,
 			cancel: () => {

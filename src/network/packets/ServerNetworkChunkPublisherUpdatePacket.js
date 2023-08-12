@@ -13,23 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerNetworkChunkPublisherUpdatePacket extends Packet {
+class ServerNetworkChunkPublisherUpdatePacket extends PacketConstructor {
 	name = "network_chunk_publisher_update";
-
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {JSON} */
 	coordinates;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	radius;
-	/** @type {any[] | undefined} */
+	/** @type {Array<any>} */
 	saved_chunks;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
+	writePacket(client) {
+		client.queue(this.name, {
 			coordinates: this.coordinates,
 			radius: this.radius,
 			saved_chunks: this.saved_chunks,

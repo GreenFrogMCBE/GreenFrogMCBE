@@ -13,34 +13,30 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerListAction = require("./types/PlayerListAction");
+const PlayerList = require("./types/PlayerListAction");
 
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerPlayerListPacket extends Packet {
+class ServerPlayerListPacket extends PacketConstructor {
 	name = "player_list";
-
-	/** @type {string | undefined} */
+	/** @type {string} */
 	username;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	uuid;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	id;
-	/** @type {import("Frog").PlayListAction | undefined} */
+	/** @type {PlayerList} */
 	type;
-	/** @type {string | undefined} */
+	/** @type {number} */
 	xbox_id;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
+	writePacket(client) {
 		let data = null;
 
-		if (this.type === PlayerListAction.REMOVE) {
+		if (this.type === PlayerList.REMOVE) {
 			data = {
 				records: {
-					types: PlayerListAction.REMOVE,
+					type: PlayerList.REMOVE,
 					records_count: 1,
 					records: [
 						{
@@ -52,7 +48,7 @@ class ServerPlayerListPacket extends Packet {
 		} else {
 			data = {
 				records: {
-					types: PlayerListAction.ADD,
+					type: PlayerList.ADD,
 					records_count: 1,
 					records: [
 						{
@@ -72,7 +68,7 @@ class ServerPlayerListPacket extends Packet {
 			};
 		}
 
-		player.queue(this.name, data);
+		client.queue(this.name, data);
 	}
 }
 

@@ -3,7 +3,7 @@
 ```diff
 @@ GreenFrog is a server software for Minecraft: Bedrock edition @@
 
-It's written in Node.js and currently supports 1.20.10
+It's written in Node.js and currently supports 1.20 - 1.20.1
 This software is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
 
@@ -17,24 +17,6 @@ Please note that this software is still in beta, so do not stare directly at the
 + Human-readable license: /docs/READABLE LICENSE.md
 + How to connect via localhost: /docs/LOCAL CONNECTIONS.md
 + How to install: /docs/INSTALLATION.md
-
-@@ Features supported @@:
-
-+ Chat
-+ Commands
-+ Plugins
-+ API
-+ Events
-+ World
-+ Toasts
-+ Forms
-+ Tests
-+ Configs
-+ Multilang
-+ Inventories (containers too!)
-+ Basic permission system
-+ Hunger and damage
-+ And many others...
 ```
 
 ![Alt](https://repobeats.axiom.co/api/embed/ff82e6d76083a1934305e3b40714b01604df4e92.svg "Repobeats analytics image")

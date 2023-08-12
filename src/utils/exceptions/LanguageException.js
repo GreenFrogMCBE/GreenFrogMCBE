@@ -14,7 +14,6 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class LanguageException extends Error {
-	/** @param {string} message */
 	constructor(message) {
 		super("LanguageException: " + message);
 		this.name = "LanguageException";

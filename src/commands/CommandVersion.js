@@ -13,35 +13,31 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
-
 const Frog = require("../Frog");
 
-const Colors = require("../utils/types/Colors");
+const Colors = require("../api/color/Colors");
+const { getKey } = require("../utils/Language");
 const VersionToProtocol = require("../utils/VersionToProtocol");
 
-const { getKey } = require("../utils/Language");
-
-const { version } = Frog.config.serverInfo;
+const config = Frog.config;
+const version = config.serverInfo.version;
 
 /**
  * A command that shows the server's version
+ *
+ * @type {import('../../declarations/Command').Command}
  */
-class CommandVersion extends Command {
-	name = getKey("commands.version.name");
-	description = getKey("commands.version.description");
-	aliases = [getKey("commands.version.aliases.ver"), getKey("commands.version.aliases.about")];
-	minArgs = 0;
-	maxArgs = 0;
+module.exports = {
+	data: {
+		name: getKey("commands.version.name"),
+		description: getKey("commands.version.description"),
+		aliases: [getKey("commands.version.aliases.ver"), getKey("commands.version.aliases.about")],
+		minArgs: 0,
+		maxArgs: 0,
+	},
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	async execute(player) {
-		const message = getKey("frog.version").replace("%s", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%d", version).replace("%f", VersionToProtocol.getProtocol(version).toString());
-
-		player.sendMessage(`${Colors.GRAY}${message}`);
-	}
-}
-
-module.exports = CommandVersion;
+	execute(_server, player) {
+		const versionMsg = getKey("frog.version").replace("%s%", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%d%", version).replace("%f%", VersionToProtocol.getProtocol(version));
+		player.sendMessage(`${Colors.GRAY}${versionMsg}`);
+	},
+};

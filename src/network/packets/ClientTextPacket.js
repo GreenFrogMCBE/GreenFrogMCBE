@@ -15,46 +15,95 @@
  */
 const Frog = require("../../Frog");
 
-const PlayerInfo = require("../../player/PlayerInfo");
+const PlayerInfo = require("../../api/player/PlayerInfo");
+const Logger = require("../../server/Logger");
 
-const Logger = require("../../utils/Logger");
+const PacketConstructor = require("./PacketConstructor");
+
 const { getKey } = require("../../utils/Language");
 
-const Packet = require("./Packet");
-
-class ClientTextPacket extends Packet {
+class ClientTextPacket extends PacketConstructor {
 	name = "text";
 
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 */
 	async readPacket(player, packet) {
 		const message = packet.data.params.message;
 
-		if (Frog.config.chat.features.chat || !message.trim() || message.startsWith("/")) {
+		if (shouldDisableChat() || isEmptyMessage(message)) {
 			return;
 		}
 
-		let shouldChat = true;
-
-		Frog.eventEmitter.emit("playerChat", {
-			player,
-			message,
-			cancel: () => {
-				shouldChat = false;
-			},
-		});
-
-		if (!shouldChat) return;
-
-		const formattedMessage = getKey("chat.format").replace("%s", player.username).replace("%d", message.replace(/§/g, ""));
-
-		Logger.info(formattedMessage);
-
-		for (const recipient of PlayerInfo.playersOnline) {
-			recipient.sendMessage(formattedMessage);
+		if (!shouldChat(player, message)) {
+			return;
 		}
+
+		if (shouldBlockInvalidMessages()) {
+			const cleanMessage = cleanInvalidCharacters(message);
+
+			if (isMessageTooLong(cleanMessage)) {
+				handleMalformattedChatMessage(player, cleanMessage);
+				return;
+			}
+		}
+
+		const formattedMessage = formatMessage(player.username, message);
+
+		logMessage(formattedMessage);
+		sendMessageToPlayers(formattedMessage);
+	}
+}
+
+function shouldDisableChat() {
+	return require("../../Frog").config.chat.disable;
+}
+
+function isEmptyMessage(message) {
+	return !message.trim();
+}
+
+function shouldChat(player, message) {
+	let shouldChat = true;
+
+	Frog.eventEmitter.emit("playerChat", {
+		player,
+		message,
+		cancel: () => {
+			shouldChat = false;
+		},
+	});
+
+	return shouldChat;
+}
+
+function shouldBlockInvalidMessages() {
+	return require("../../Frog").config.chat.blockInvalidMessages;
+}
+
+function cleanInvalidCharacters(message) {
+	return message.replace(/§/g, "");
+}
+
+function isMessageTooLong(message) {
+	return message.length > 256;
+}
+
+function handleMalformattedChatMessage(player, message) {
+	Frog.eventEmitter.emit("playerMalformattedChatMessage", {
+		player,
+		message,
+	});
+}
+
+function formatMessage(username, message) {
+	return getKey("chat.format").replace("%s%", username).replace("%d%", message.replace(/§/g, ""));
+}
+
+function logMessage(message) {
+	Logger.info(message);
+}
+
+function sendMessageToPlayers(message) {
+	for (const recipient of PlayerInfo.players) {
+		recipient.sendMessage(message);
 	}
 }
 

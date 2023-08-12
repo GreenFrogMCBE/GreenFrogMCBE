@@ -15,19 +15,15 @@
  */
 const Frog = require("../../Frog");
 
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ClientModalFormResponsePacket extends Packet {
+class ClientModalFormResponsePacket extends PacketConstructor {
 	name = "modal_form_response";
 
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 */
 	async readPacket(player, packet) {
 		Frog.eventEmitter.emit("playerFormResponse", {
 			player,
-			packet,
+			formData: packet,
 		});
 	}
 }

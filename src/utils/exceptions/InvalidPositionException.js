@@ -14,9 +14,8 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class InvalidPositionException extends Error {
-	/** @param {string} message */
 	constructor(message) {
-		super("Invalid position: " + message);
+		super("Invalid position/packet: " + message);
 		this.name = "InvalidPositionException";
 	}
 }

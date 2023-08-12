@@ -18,7 +18,7 @@ const path = require("path");
 
 const Frog = require("../../Frog");
 
-const Logger = require("../../utils/Logger");
+const Logger = require("../../server/Logger");
 
 const { getKey } = require("../../utils/Language");
 
@@ -26,27 +26,27 @@ const PacketHandlingException = require("../../utils/exceptions/PacketHandlingEx
 
 class PacketHandler {
 	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 * @throws {PacketHandlingException} - If the player is rate-limited.
+	 * @param {import('frog-protocol').Client} client - The client object.
+	 * @param {JSON} packetData - The packet parameters.
+	 * @throws {PacketHandlingException} - If the client is rate-limited.
 	 */
-	handlePacket(player, packet) {
+	handlePacket(client, packetData) {
 		try {
 			const packetsDir = this.getPacketsDirectory();
-			const exists = this.checkForMatchingPackets(player, packet, packetsDir);
+			const exists = this.checkForMatchingPackets(client, packetData, packetsDir);
 
 			if (!exists && this.shouldLogUnhandledPackets()) {
-				this.handleUnhandledPacket(packet);
+				this.handleUnhandledPacket(packetData);
 			}
 		} catch (error) {
-			this.handlePacketError(player, error);
+			this.handlePacketError(client, error);
 		}
 	}
 
 	/**
 	 * Returns the directory path for packets.
 	 *
-	 * @returns {string}
+	 * @returns {string} - The packets directory path.
 	 */
 	getPacketsDirectory() {
 		return path.join(__dirname, "..", "packets");
@@ -55,27 +55,27 @@ class PacketHandler {
 	/**
 	 * Checks for matching packets in the directory.
 	 *
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 * @param {string} packetsDir
-	 * @returns {boolean}
+	 * @param {import('frog-protocol').Client} client - The client object.
+	 * @param {JSON} packetData - The packet parameters.
+	 * @param {string} packetsDir - The directory path for packets.
+	 * @returns {boolean} - Indicates if a matching packet was found.
 	 */
-	checkForMatchingPackets(player, packet, packetsDir) {
+	checkForMatchingPackets(client, packetData, packetsDir) {
 		let exists = false;
 
-		this.iteratePacketFiles(packetsDir, (/** @type {string} */ filename) => {
+		this.iteratePacketFiles(packetsDir, (filename) => {
 			if (this.isClientPacket(filename)) {
 				const packetPath = this.getPacketPath(packetsDir, filename);
 
-				if (this.exceedsPacketCountLimit(player) && Frog.config) {
-					this.handlePacketRatelimit(player);
-					throw this.createRateLimitException(player);
+				if (this.exceedsPacketCountLimit(client)) {
+					this.handlePacketRatelimit(client);
+					throw this.createRateLimitException(client);
 				}
 
 				const packetInstance = this.createPacketInstance(packetPath);
 
-				if (this.isMatchingPacket(packetInstance, packet)) {
-					this.processMatchingPacket(player, packetInstance, packet);
+				if (this.isMatchingPacket(packetInstance, packetData)) {
+					this.processMatchingPacket(client, packetInstance, packetData);
 					exists = true;
 				}
 			}
@@ -87,18 +87,18 @@ class PacketHandler {
 	/**
 	 * Iterates over the files in a directory.
 	 *
-	 * @param {string} directory
-	 * @param {any} callback
+	 * @param {string} directory - The directory path.
+	 * @param {function} callback - The callback function to execute for each file.
 	 */
 	iteratePacketFiles(directory, callback) {
 		fs.readdirSync(directory).forEach(callback);
 	}
 
 	/**
-	 * Checks if a file represents a player packet.
+	 * Checks if a file represents a client packet.
 	 *
-	 * @param {string} filename
-	 * @returns {boolean}
+	 * @param {string} filename - The file name.
+	 * @returns {boolean} - Indicates if the file is a client packet.
 	 */
 	isClientPacket(filename) {
 		return filename.startsWith("Client") && filename.endsWith(".js");
@@ -107,9 +107,9 @@ class PacketHandler {
 	/**
 	 * Gets the full path of a packet file.
 	 *
-	 * @param {string} directory
-	 * @param {string} filename
-	 * @returns {string}
+	 * @param {string} directory - The directory path.
+	 * @param {string} filename - The file name.
+	 * @returns {string} - The packet file path.
 	 */
 	getPacketPath(directory, filename) {
 		return path.join(directory, "..", "packets", filename);
@@ -118,30 +118,30 @@ class PacketHandler {
 	/**
 	 * Checks if the packet count exceeds the limit.
 	 *
-	 * @param {import("Frog").Player} player
-	 * @returns {boolean}
+	 * @param {import('frog-protocol').Client} client - The client object.
+	 * @returns {boolean} - Indicates if the packet count exceeds the limit.
 	 */
-	exceedsPacketCountLimit(player) {
-		return ++player.network.packetCount > 2500;
+	exceedsPacketCountLimit(client) {
+		return ++client.packetCount > 2500;
 	}
 
 	/**
 	 * Handles the packet ratelimit event.
 	 *
-	 * @param {import("Frog").Player} player
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 */
-	handlePacketRatelimit(player) {
-		Frog.eventEmitter.emit("packetRateLimit", { player });
+	handlePacketRatelimit(client) {
+		Frog.eventEmitter.emit("packetRatelimit", { player: client });
 	}
 
 	/**
 	 * Creates a packet handling exception for rate limiting.
 	 *
-	 * @param {import("Frog").Player} player
+	 * @param {import('frog-protocol').Client} client - The client object.
 	 * @returns {PacketHandlingException} - The rate limit exception.
 	 */
-	createRateLimitException(player) {
-		const exceptionMessage = getKey("exceptions.network.rateLimited").replace("%s", player.username).replace("%d", player.network.packetCount.toString());
+	createRateLimitException(client) {
+		const exceptionMessage = getKey("exceptions.network.rateLimited").replace("%s%", client.username).replace("%d%", client.packetCount);
 
 		return new PacketHandlingException(exceptionMessage);
 	}
@@ -149,8 +149,8 @@ class PacketHandler {
 	/**
 	 * Creates an instance of a packet.
 	 *
-	 * @param {string} packetPath
-	 * @returns {import("../packets/Packet")}
+	 * @param {string} packetPath - The path of the packet file.
+	 * @returns {*} - The instance of the packet.
 	 */
 	createPacketInstance(packetPath) {
 		const PacketClass = require(packetPath);
@@ -160,56 +160,59 @@ class PacketHandler {
 	/**
 	 * Checks if the packet matches the packet parameters.
 	 *
-	 * @param {import("../packets/Packet")} packetClass
-	 * @param {import("Frog").Packet} packet
-	 * @returns {boolean}
+	 * @param {*} packet - The packet object.
+	 * @param {JSON} packetData - The packet parameters.
+	 * @returns {boolean} - Indicates if the packet matches the parameters.
 	 */
-	isMatchingPacket(packetClass, packet) {
-		return packetClass.name === packet.data.name;
+	isMatchingPacket(packet, packetData) {
+		return packet.name === packetData.data.name;
 	}
 
 	/**
 	 * Processes a matching packet.
 	 *
-	 * @param {import("Frog").Player} player
-	 * @param {import("../packets/Packet")} packetInstance
-	 * @param {import("Frog").PacketParams} packetParams
+	 * @param {import('frog-protocol').Client} client - The client object.
+	 * @param {PacketConstructor} packetInstance - The matching packet object.
+	 * @param {JSON} packetData - The packet parameters.
 	 */
-	processMatchingPacket(player, packetInstance, packetParams) {
+	processMatchingPacket(client, packetInstance, packetData) {
 		let shouldReadPacket = true;
-
-		Frog.eventEmitter.emit("packetRead", {
-			player,
-			packet: {
-				packet: packetParams,
-				instance: packetInstance,
-			},
-			cancel: () => {
-				shouldReadPacket = false;
-			},
-		});
+		this.emitPacketReadEvent(client, packetInstance, packetData);
 
 		if (shouldReadPacket) {
-			this.readPacket(packetInstance, player, Frog.server, packetParams);
+			this.readPacket(packetInstance, client, packetData);
 		}
+	}
+
+	/**
+	 * Emits the packet read event.
+	 *
+	 * @param {import('frog-protocol').Client} client - The client object.
+	 * @param {*} packet - The packet object.
+	 */
+	emitPacketReadEvent(client, packetInstance, packetData) {
+		Frog.eventEmitter.emit("packetRead", {
+			player: client,
+			packetInstance,
+			packetData,
+		});
 	}
 
 	/**
 	 * Reads the packet.
 	 *
-	 * @param {import("../packets/Packet")} packet
-	 * @param {import("Frog").Player} player
-	 * @param {import("frog-protocol").Server} server
-	 * @param {import("Frog").PacketParams} packetParams
+	 * @param {*} packet - The packet object.
+	 * @param {import('frog-protocol').Client} client - The client object.
+	 * @param {JSON} packetData - The packet parameters.
 	 */
-	readPacket(packet, player, server, packetParams) {
-		packet.readPacket(player, packetParams, server);
+	readPacket(packet, client, packetData) {
+		packet.readPacket(client, packetData, this);
 	}
 
 	/**
 	 * Checks if unhandled packets should be logged.
 	 *
-	 * @returns {boolean}
+	 * @returns {boolean} - Indicates if unhandled packets should be logged.
 	 */
 	shouldLogUnhandledPackets() {
 		return Frog.config.dev.logUnhandledPackets;
@@ -218,30 +221,34 @@ class PacketHandler {
 	/**
 	 * Handles an unhandled packet.
 	 *
-	 * @param {import("Frog").Packet} packet
+	 * @param {JSON} packetData - The packet parameters.
 	 */
-	handleUnhandledPacket(packet) {
+	handleUnhandledPacket(packetData) {
 		Logger.warning(getKey("network.packet.unhandledPacket"));
-		console.warn("%o", packet);
+		console.warn("%o", packetData);
 	}
 
 	/**
 	 * Handles an error that occurred during packet handling.
 	 *
-	 * @param {import("Frog").Player} player
-	 * @param {Error} error
+	 * @param {import('frog-protocol').Client} client - The client object.
+	 * @param {Error} error - The error object.
 	 */
-	handlePacketError(player, error) {
-		Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s", player.username).replace("%d", error.stack));
+	handlePacketError(client, error) {
+		if (Frog.isTest) {
+			throw error;
+		} else {
+			Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s%", client.username).replace("%d%", error.stack));
+		}
 
 		try {
-			player.kick(getKey("kickMessages.invalidPacket"));
+			client.kick(getKey("kickMessages.invalidPacket"));
 		} catch {
-			player.disconnect(getKey("kickMessages.invalidPacket"));
+			client.disconnect(getKey("kickMessages.invalidPacket"));
 		}
 
 		Frog.eventEmitter.emit("packetReadError", {
-			player,
+			player: client,
 			error,
 		});
 	}

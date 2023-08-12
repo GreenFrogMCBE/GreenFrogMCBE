@@ -13,19 +13,17 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Difficulty = require("../../api/types/Difficulty");
 
-class ServerSetDifficultyPacket extends Packet {
+const PacketConstructor = require("./PacketConstructor");
+
+class ServerSetDifficultyPacket extends PacketConstructor {
 	name = "set_difficulty";
+	/** @type {Difficulty} */
+	difficulty = Difficulty.PEACEFUL;
 
-	/** @type {import("Frog").Difficulty | undefined} */
-	difficulty;
-
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, { difficulty: this.difficulty });
+	writePacket(client) {
+		client.queue(this.name, { difficulty: this.difficulty });
 	}
 }
 

@@ -13,33 +13,27 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerInfo = require("./PlayerInfo");
+const PlayerInfo = require("../api/player/PlayerInfo");
 
 module.exports = {
-	/**
-	 * Checks if the usernames matches the regex. The regex is `/^[a-zA-Z0-9]+$/`
-	 *
-	 * @param {string} username - The username to check for duplicates.
-	 * @returns {boolean} Returns true if the username is a duplicate, false otherwise.
-	 */
-	doesUsernameMatchRegex(username) {
+	doesUsernameMatchesRegex(username) {
 		const regex = /^[a-zA-Z0-9]+$/; // Regular expression to match only English letters and numbers
 
 		return regex.test(username);
 	},
 
 	/**
-	 * Checks if a player with the same username is online on the server.
+	 * Checks if the username is a duplicate.
 	 *
 	 * @param {string} username - The username to check for duplicates.
 	 * @returns {boolean} Returns true if the username is a duplicate, false otherwise.
 	 */
 	isDuplicate(username) {
-		return PlayerInfo.playersOnline.filter((player) => player.username && player.username == username).length > 0;
+		return PlayerInfo.players.filter((player) => player.username && !player.offline === username).length > 0;
 	},
 
 	/**
-	 * Returns `true` if the username is longer than 16 characters or shorter than 3 characters
+	 * Checks if the username length is valid.
 	 *
 	 * @param {string} username - The username to check the length for.
 	 * @returns {boolean} Returns true if the username length is valid, false otherwise.
@@ -49,12 +43,12 @@ module.exports = {
 	},
 
 	/**
-	 * isDuplicate(username: string), doesUsernameMatchRegex(username: string), isUsernameLengthValid(username: string) combined
+	 * isDuplicate(username: string), doesUsernameMatchesRegex(username: string), isUsernameLengthValid(username: string) combined
 	 *
 	 * @param {string} username - The username to check for validity.
 	 * @returns {boolean} Returns true if the username is valid, false otherwise.
 	 */
 	isUsernameValid(username) {
-		return !this.isDuplicate(username) && this.isUsernameLengthValid(username) && this.doesUsernameMatchRegex(username);
+		return !this.isDuplicate(username) && this.isUsernameLengthValid(username) && this.doesUsernameMatchesRegex(username);
 	},
 };

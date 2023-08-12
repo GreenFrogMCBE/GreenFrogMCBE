@@ -13,70 +13,58 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Gamemode = require("../api/player/Gamemode");
+const PlayerInfo = require("../api/player/PlayerInfo");
+const DamageCause = require("../api/health/DamageCause");
 
-const Gamemode = require("../player/types/Gamemode");
-const DamageCause = require("../player/types/DamageCause");
-
-const PlayerInfo = require("../player/PlayerInfo");
-
-const { getPlayer } = require("../player/PlayerInfo");
-
+const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 const { getKey } = require("../utils/Language");
-const Selector = require("./types/Selector");
+const Logger = require("../server/Logger");
 
 /**
- * Returns if the player can be killed
- *
- * @param {import("Frog").Player} player
- * @returns {boolean}
+ * @param {import("frog-protocol").Client} player
  */
-function canBeKilled(player) {
+const canBeKilled = (player) => {
 	if (player.isConsole || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
 		return false;
 	}
 
 	return true;
-}
+};
 
 /**
- * Kills the specified player
+ * A command that sends a private message to other players
+ *
+ * @type {import('../declarations/Command').Command}
  */
-class CommandKill extends Command {
-	name = getKey("commands.kill.name");
-	description = getKey("commands.kill.description");
-	minArgs = 0;
-	requiresOp = true;
-
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("frog-protocol").Server} server
-	 * @param {string[]} args
-	 */
-	execute(player, server, args) {
-		switch (args[0]) {
-			case Selector.SELF:
-			case undefined: {
-				if (!canBeKilled(player)) {
-					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
-					return;
-				}
-
-				player.setHealth(0, DamageCause.KILL_COMMAND);
-				break;
+module.exports = {
+	data: {
+		name: getKey("commands.kill.name"),
+		description: getKey("commands.kill.description"),
+		minArgs: 0,
+		requiresOp: true,
+	},
+	execute(_server, player, args) {
+		if (!args.length) {
+			if (!canBeKilled(player)) {
+				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+				return;
 			}
-			case Selector.ALL_ENTITIES:
-			case Selector.ALL_PLAYERS: {
-				PlayerInfo.playersOnline.forEach((player) => {
-					if (canBeKilled(player)) {
-						player.setHealth(0, DamageCause.KILL_COMMAND);
+
+			player.setHealth(0, DamageCause.KILL_COMMAND);
+		} else {
+			if (args[0] === "@a") {
+				PlayerInfo.players.forEach((p) => {
+					if (canBeKilled(p)) {
+						p.setHealth(0, DamageCause.KILL_COMMAND);
+						return;
 					}
 				});
-				break;
-			}
-			case Selector.RANDOM_PLAYER: {
-				const randomPlayer = Math.floor(Math.random() * PlayerInfo.playersOnline.length);
-				const subject = PlayerInfo.playersOnline[randomPlayer];
+
+				return;
+			} else if (args[0] === "@r") {
+				const randomPlayer = Math.floor(Math.random() * PlayerInfo.players.length);
+				const subject = PlayerInfo.players[randomPlayer];
 
 				if (!canBeKilled(subject)) {
 					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
@@ -84,25 +72,21 @@ class CommandKill extends Command {
 				}
 
 				subject.setHealth(0, DamageCause.KILL_COMMAND);
-				break;
+				return;
 			}
-			default: {
-				try {
-					const subject = getPlayer(args[0]);
 
-					if (!subject || !canBeKilled(subject)) {
-						player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
-						return;
-					}
+			try {
+				const subject = getPlayerInfo(args[0]);
 
-					subject.setHealth(0, DamageCause.KILL_COMMAND);
-				} catch {
-					player.sendMessage(getKey("commands.kill.execution.failed.notOnline").replace("%s", args[0]));
+				if (!canBeKilled(subject)) {
+					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+					return;
 				}
-				break;
+
+				subject.setHealth(0, DamageCause.KILL_COMMAND);
+			} catch {
+				player.sendMessage(getKey("commands.kill.execution.failed.notOnline").replace("%s%", args[0]));
 			}
 		}
-	}
-}
-
-module.exports = CommandKill;
+	},
+};

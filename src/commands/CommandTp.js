@@ -13,54 +13,37 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
-
-const { getPlayer } = require("../player/PlayerInfo");
-
+const { get: getPlayerInfo } = require("../api/player/PlayerInfo");
 const { getKey } = require("../utils/Language");
 
 /**
- * Returns if the coordinates are valid
- *
- * @param {number} x
- * @param {number} y
- * @param {number} z
- * @private
- */
-function areCoordinatesValid(x, y, z) {
-	return !isNaN(x) && !isNaN(y) && !isNaN(z);
-}
-
-/**
  * A command that shows the sender to other players
+ *
+ * @type {import('../../declarations/Command').Command}
  */
-class CommandTp extends Command {
-	name = getKey("commands.teleport.name");
-	description = getKey("commands.teleport.description");
-	aliases = [getKey("commands.teleport.aliases.tp")];
-	minArgs = 1;
-	maxArgs = 4;
-	requiresOp = true;
+module.exports = {
+	data: {
+		name: getKey("commands.teleport.name"),
+		description: getKey("commands.teleport.description"),
+		aliases: [getKey("commands.teleport.aliases.tp")],
+		minArgs: 1,
+		maxArgs: 4,
+		requiresOp: true,
+	},
 
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("frog-protocol").Server} server
-	 * @param {string[]} args
-	 */
-	async execute(player, server, args) {
-		const target = getPlayer(args[0]);
-		const x = Number(args[1]);
-		const y = Number(args[2]);
-		const z = Number(args[3]);
-
+	execute(_server, player, args) {
 		if (args.length >= 4) {
 			// Teleport player to coordinates
-			if (target && areCoordinatesValid(x, y, z)) {
+			const target = getPlayerInfo(args[0]);
+			const x = args[1];
+			const y = args[2];
+			const z = args[3];
+
+			if (target && areCoordinatesPresent(x, y, z)) {
 				player.teleport(x, y, z);
 
-				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
-
-				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
+				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s%", `${x}, ${y}, ${z}`));
+				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`));
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
@@ -71,31 +54,29 @@ class CommandTp extends Command {
 				return;
 			}
 
-			const destinationPlayer = getPlayer(args[0]);
+			const destinationPlayer = getPlayerInfo(args[0]);
 
-			if (destinationPlayer && destinationPlayer.location) {
+			if (destinationPlayer.location) {
 				const { x, y, z } = destinationPlayer.location;
 
 				player.teleport(x, y, z);
 
-				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
-
-				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
+				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s%", `${x}, ${y}, ${z}`));
+				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`));
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
 		} else if (args.length > 0 && args.length < 3) {
 			// Teleport player to player
-			const target = getPlayer(args[0]);
-			const destinationPlayer = getPlayer(args[1]);
+			const target = getPlayerInfo(args[0]);
+			const destinationPlayer = getPlayerInfo(args[1]);
 
 			if (target && destinationPlayer && destinationPlayer.location) {
 				const { x, y, z } = destinationPlayer.location;
 				target.teleport(x, y, z);
 
-				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
-
-				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
+				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s%", `${x}, ${y}, ${z}`));
+				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`));
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
@@ -106,21 +87,22 @@ class CommandTp extends Command {
 				return;
 			}
 
-			const x = Number(args[0]);
-			const y = Number(args[1]);
-			const z = Number(args[2]);
+			const x = args[0];
+			const y = args[1];
+			const z = args[2];
 
-			if (areCoordinatesValid(x, y, z)) {
+			if (areCoordinatesPresent(x, y, z)) {
 				player.teleport(x, y, z);
 
-				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
-
-				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
+				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s%", `${x}, ${y}, ${z}`));
+				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s%", player.username).replace("%d%", `${x}, ${y}, ${z}`));
 			} else {
 				player.sendMessage(getKey("commands.teleport.execution.failed.coordinates.invalid"));
 			}
 		}
-	}
-}
+	},
+};
 
-module.exports = CommandTp;
+function areCoordinatesPresent(x, y, z) {
+	return !isNaN(x) && !isNaN(y) && !isNaN(z);
+}

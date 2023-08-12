@@ -13,19 +13,15 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerChunkRadiusUpdatePacket extends Packet {
+class ServerChunkRadiusUpdatePacket extends PacketConstructor {
 	name = "chunk_radius_update";
-
-	/** @type {number | undefined} */
+	/** @type {number} */
 	chunk_radius;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
+	writePacket(client) {
+		client.queue(this.name, {
 			chunk_radius: this.chunk_radius,
 		});
 	}

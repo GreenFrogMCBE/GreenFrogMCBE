@@ -13,45 +13,39 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const FormType = require("../../forms/types/Form");
+const FormType = require("../../forms/types/FormType");
 
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerFormRequestPacket extends Packet {
+class ServerFormRequestPacket extends PacketConstructor {
 	name = "modal_form_request";
-
-	/** @type {number | undefined} */
-	id;
-	/** @type {string | undefined} */
+	/** @type {number} */
+	form_id;
+	/** @type {JSON} */
 	content;
-	/** @type {string | undefined} */
+	/** @type {Array<any>} */
 	buttons;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	title;
-	/** @type {import("Frog").Form | string} */
+	/** @type {string} */
 	type;
-	/** @type {string[] | undefined} */
+	/** @type {string} */
 	text;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	button1;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	button2;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		let data;
+	writePacket(client) {
+		let data = `{"content":${this.content},"buttons":${this.buttons},"type":"${this.type}","title":"${this.title}"}`;
 
 		if (this.type === FormType.MODAL_FORM) {
-			data = '{"content":"' + this.content + '","button1":" +this.button1}","button2":"${this.button2}","type":"' + this.type + '","title":"' + this.title + '"}';
-		} else {
-			data = '{"content":"' + this.content + '","buttons":' + this.buttons + ',"type":"' + this.type + '","title":"' + this.title + '"}';
+			data = `{"content":"${this.text}","button1":"${this.button1}","button2":"${this.button2}","type":"${this.type}","title":"${this.title}"}`;
 		}
 
-		player.queue(this.name, {
-			form_id: this.id,
-			data,
+		client.queue(this.name, {
+			form_id: this.form_id,
+			data: data,
 		});
 	}
 }

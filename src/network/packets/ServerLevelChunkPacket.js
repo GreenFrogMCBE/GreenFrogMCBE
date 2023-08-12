@@ -13,27 +13,23 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerLevelChunkPacket extends Packet {
+class ServerLevelChunkPacket extends PacketConstructor {
 	name = "level_chunk";
-
-	/** @type {number | undefined} */
+	/** @type {number} */
 	x;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	z;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	sub_chunk_count;
-	/** @type {boolean | undefined} */
+	/** @type {boolean} */
 	cache_enabled;
-	/** @type {Buffer | null | undefined} */
+	/** @type {Buffer} */
 	payload;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
+	writePacket(client) {
+		client.queue(this.name, {
 			x: this.x,
 			z: this.z,
 			sub_chunk_count: this.sub_chunk_count,

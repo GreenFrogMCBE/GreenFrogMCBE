@@ -15,28 +15,23 @@
  */
 const ServerContainerClosePacket = require("./ServerContainerClosePacket");
 
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-const vanillaBlocks = require("../../block/vanillaBlocks.json");
+const vanillaBlocks = require("../../api/block/vanillaBlocks.json");
 
-const WindowId = require("../../inventory/types/WindowId");
-
+const WindowId = require("./types/WindowId");
 const Frog = require("../../Frog");
 
-class ClientContainerClosePacket extends Packet {
+class ClientContainerClosePacket extends PacketConstructor {
 	name = "container_close";
 
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 */
-	async readPacket(player, packet) {
+	async readPacket(player, packet, server) {
 		let shouldClose = true;
 
 		Frog.eventEmitter.emit("playerContainerClose", {
-			player,
-			windowId: WindowId.CREATIVE,
+			windowID: WindowId.CREATIVE,
 			sentByServer: false,
+			player,
 			packet,
 			cancel: () => {
 				shouldClose = false;
@@ -48,8 +43,8 @@ class ClientContainerClosePacket extends Packet {
 		if (player.inventory.container.isOpen) {
 			let shouldRemoveTheChest = true;
 
-			Frog.eventEmitter.emit("inventoryContainerChestRemove", {
-				player,
+			Frog.eventEmitter.emit("inventoryContainerChestRemoval", {
+				player: player,
 				cancel: () => {
 					shouldRemoveTheChest = false;
 				},
@@ -62,8 +57,8 @@ class ClientContainerClosePacket extends Packet {
 			player.world.placeBlock(x, y, z, vanillaBlocks.air.legacy_id);
 
 			player.inventory.container.isOpen = false;
-			player.inventory.container.blockPosition = { x: undefined, y: undefined, z: undefined };
-			player.inventory.container.window = { id: undefined, type: undefined };
+			player.inventory.container.blockPosition = { x: null, y: null, z: null };
+			player.inventory.container.window = { id: null, type: null };
 		}
 
 		const containerClose = new ServerContainerClosePacket();

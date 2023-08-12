@@ -14,9 +14,8 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class InvalidBlockException extends Error {
-	/** @param {string} message */
-	constructor(message) {
-		super(message);
+	constructor(reason) {
+		super(reason);
 		this.name = "InvalidBlockException";
 	}
 }

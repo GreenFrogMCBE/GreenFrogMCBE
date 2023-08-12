@@ -13,22 +13,21 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
 const CreativeInventory = require("../../inventory/CreativeInventory");
 const ContainerInventory = require("../../inventory/ContainerInventory");
 
-class ClientItemStackRequestPacket extends Packet {
+class ClientItemStackRequestPacket extends PacketConstructor {
 	name = "item_stack_request";
 
-	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 */
 	async readPacket(player, packet) {
-		const inventoryToOpen = player.inventory.container.isOpen ? new ContainerInventory() : new CreativeInventory();
+		if (player.inventory.container.isOpen) {
+			ContainerInventory.handle(player, packet);
+			return;
+		}
 
-		inventoryToOpen.handle(player, packet);
+		CreativeInventory.handle(player, packet);
 	}
 }
 

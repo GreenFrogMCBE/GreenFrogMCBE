@@ -13,29 +13,25 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerResourcePackStackPacket extends Packet {
+class ServerResourcePackStackPacket extends PacketConstructor {
 	name = "resource_pack_stack";
-
-	/** @type {any[] | undefined} */
+	/** @type {Array<any>} */
 	behavior_packs;
-	/** @type {any[] | undefined} */
+	/** @type {Array<any>} */
 	resource_packs;
-	/** @type {string | undefined} */
+	/** @type {string} */
 	game_version;
-	/** @type {boolean | undefined} */
+	/** @type {boolean} */
 	must_accept;
-	/** @type {any[] | undefined} */
+	/** @type {Array} */
 	experiments;
-	/** @type {boolean | undefined} */
+	/** @type {boolean} */
 	experiments_previously_used;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
+	writePacket(client) {
+		client.queue(this.name, {
 			must_accept: this.must_accept,
 			behavior_packs: this.behavior_packs,
 			resource_packs: this.resource_packs,

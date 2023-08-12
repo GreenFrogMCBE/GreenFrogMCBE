@@ -13,21 +13,17 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerTrimDataPacket extends Packet {
+class ServerTrimDataPacket extends PacketConstructor {
 	name = "trim_data";
+	/** @type {Array<any>} */
+	patterns = [];
+	/** @type {Array<any>} */
+	materials = [];
 
-	/** @type {any[] | undefined} */
-	patterns;
-	/** @type {import("Frog").TrimMaterial[] | undefined} */
-	materials;
-
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
+	writePacket(client) {
+		client.queue(this.name, {
 			patterns: this.patterns,
 			materials: this.materials,
 		});

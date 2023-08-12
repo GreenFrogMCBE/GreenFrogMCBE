@@ -13,39 +13,35 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const PacketConstructor = require("./PacketConstructor");
 
-class ServerUpdateBlockPacket extends Packet {
+class ServerUpdateBlockPacket extends PacketConstructor {
 	name = "update_block";
-
-	/** @type {number | undefined} */
+	/** @type {number} */
 	x;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	y;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	z;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	block_runtime_id;
-	/** @type {boolean | undefined} */
+	/** @type {boolean} */
 	neighbors;
-	/** @type {boolean | undefined} */
+	/** @type {boolean} */
 	network;
-	/** @type {boolean | undefined} */
+	/** @type {boolean} */
 	no_graphic;
-	/** @type {boolean | undefined} */
+	/** @type {boolean} */
 	unused;
-	/** @type {boolean | undefined} */
+	/** @type {boolean} */
 	priority;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	layer;
-	/** @type {number | undefined} */
+	/** @type {number} */
 	flags_value;
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
-	writePacket(player) {
-		player.queue(this.name, {
+	writePacket(client) {
+		client.queue(this.name, {
 			position: {
 				x: this.x,
 				y: this.y,

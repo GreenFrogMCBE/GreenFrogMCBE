@@ -24,7 +24,7 @@ module.exports = {
 			port: 19132,
 			username: "bot",
 			offline: true,
-			version: "1.20.10",
+			version: "1.20.0",
 		});
 		console.info("[client] joined");
 	},

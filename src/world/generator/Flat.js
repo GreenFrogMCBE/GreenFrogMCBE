@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const vanillaBlocks = require("../../block/vanillaBlocks.json");
+const vanillaBlocks = require("../../api/block/vanillaBlocks.json");
 
 const WorldGenerator = require("../types/WorldGenerator");
 
@@ -21,7 +21,6 @@ const Generator = require("./Generator");
 
 class Flat extends Generator {
 	name = WorldGenerator.FLAT;
-
 	getChunkData() {
 		let chunkData = Buffer.alloc(16 * 256 * 16);
 

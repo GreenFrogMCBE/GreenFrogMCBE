@@ -1,0 +1,117 @@
+{
+  "air": {
+    "runtime_id": -1,
+    "legacy_id": 0,
+    "network_id": 0
+  },
+  "bedrock": {
+    "legacy_id": 7
+  },
+  "coal_ore": {
+    "legacy_id": 16
+  },
+  "dirt": {
+    "legacy_id": 3
+  },
+  "grass": {
+    "legacy_id": 2
+  },
+  "stone": {
+    "runtime_id": -1706049077,
+    "legacy_id": 1,
+    "network_id": 1
+  },
+  "chest": {
+    "runtime_id": -880687232,
+    "legacy_id": 54
+  },
+  "basalt": {
+    "runtime_id": 368734180
+  },
+  "sand": {
+    "legacy_id": 12
+  },
+  "water": {
+    "legacy_id": 9
+  },
+  "bamboo_planks": {
+    "runtime_id": -1843072030,
+    "network_id": -510
+  },
+  "glass": {
+    "runtime_id": 927668178,
+    "legacy_id": 20,
+    "numberic_id": 20
+  },
+  "blue_glazed_terracotta": {
+    "runtime_id": -2106754178,
+    "network_id": 231
+  },
+  "cracked_deepslate_tiles": {
+    "runtime_id": 976881179,
+    "network_id": -409
+  },
+  "sponge": {
+    "runtime_id": -307481251,
+    "legacy_id": 19,
+    "network_id": 19
+  },
+  "terracotta": {
+    "runtime_id": -336983999,
+    "legacy_id": 251,
+    "network_id": 172
+  },
+  "smooth_stone": {
+    "runtime_id": 555751865,
+    "network_id": -183
+  },
+  "smooth_sand_block": {
+    "runtime_id": 1912846579,
+    "legacy_id": 24,
+    "network_id": 24
+  },
+  "smooth_quartz_block": {
+    "runtime_id": 1576086683,
+    "legacy_id": 24,
+    "network_id": 24
+  },
+  "smooth_redsand_block": {
+    "runtime_id": -2089484049,
+    "legacy_id": 179,
+    "network_id": 179
+  },
+  "cracked_stone_bricks": {
+    "runtime_id": -2080260717,
+    "legacy_id": 98,
+    "network_id": 98
+  },
+  "cracked_polished_blackstone_bricks": {
+    "runtime_id": -1850412551,
+    "network_id": 228
+  },
+  "gray_glazed_terracotta": {
+    "runtime_id": -2050534635,
+    "legacy_id": 242,
+    "network_id": 227
+  },
+  "light_gray_glazed_terracotta": {
+    "runtime_id": -1850412551,
+    "legacy_id": 228,
+    "network_id": 228
+  },
+  "lime_glazed_terracotta": {
+    "runtime_id": 379907727,
+    "legacy_id": 225,
+    "network_id": 225
+  },
+  "purple_glazed_terracotta": {
+    "runtime_id": 1313381298,
+    "legacy_id": 219,
+    "network_id": 219
+  },
+  "yellow_glazed_terracotta": {
+    "runtime_id": -362985564,
+    "legacy_id": 224,
+    "network_id": 224
+  }
+}

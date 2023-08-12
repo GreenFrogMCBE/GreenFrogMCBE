@@ -13,28 +13,31 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const { Client } = require("frog-protocol");
+
 const Frog = require("../../Frog");
 
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket");
 
 class Generator {
 	/**
-	 * @type {import("Frog").WorldGenerator | undefined}
+	 * @returns {WorldGenerator}
+	 * @type {import('../types/WorldGenerator')}
 	 */
 	name;
 
 	/**
-	 * @returns {Buffer | null}
+	 * @returns {Buffer}
 	 */
 	getChunkData() {
 		return null;
 	}
 
 	/**
-	 * @param {import("Frog").Player} player
+	 * @param {Client} player
 	 */
 	generate(player) {
-		Frog.eventEmitter.emit("worldGenerate", { player });
+		Frog.eventEmitter.emit("generatorGeneratingWorld", { player, server: Frog.getServer() });
 
 		const chunkRadius = player.world.renderDistance;
 
