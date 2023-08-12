@@ -20,6 +20,9 @@ const readline = require("readline");
 const { convertConsoleColor } = require("../src/utils/ConsoleColorConvertor");
 const Colors = require("../src/utils/types/Colors");
 
+/**
+ * @type { string }
+ */
 let pluginName;
 
 const pluginsFolderPath = path.join(__dirname, "..", "plugins");
@@ -29,6 +32,10 @@ const rl = readline.createInterface({
 	output: process.stdout,
 });
 
+/**
+ *
+ * @param { string } message
+ */
 function handleError(message) {
 	console.clear();
 	console.error(
@@ -36,17 +43,25 @@ function handleError(message) {
 	);
 	process.exit(1);
 }
-
+/**
+ *
+ * @param { string } directoryPath
+ */
 function createDirectoryIfNotExists(directoryPath) {
 	if (!fs.existsSync(directoryPath)) {
 		fs.mkdirSync(directoryPath);
 	}
 }
-
+/**
+ *
+ * @param { string } directoryPath
+ * @param { string } pluginName
+ * @param { boolean } useTypeScript
+ */
 function writePackageJson(directoryPath, pluginName, useTypeScript = false) {
 	const packageJson = {
 		name: pluginName.toLowerCase(),
-		main: `${pluginName.toLowerCase()}.${useTypeScript ? "ts" : "js"}`,
+		main: `${pluginName.toLowerCase()}.js`,
 		version: "1.0.0",
 		displayName: pluginName,
 	};
@@ -56,7 +71,12 @@ function writePackageJson(directoryPath, pluginName, useTypeScript = false) {
 		JSON.stringify(packageJson, null, 4)
 	);
 }
-
+/**
+ *
+ * @param { string } directoryPath
+ * @param { string } pluginName
+ * @param { boolean } useTypeScript
+ */
 function writePluginFile(directoryPath, pluginName, useTypeScript) {
 	let pluginJs = `module.exports = {
 	onLoad() {
@@ -73,7 +93,7 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 			require("typescript");
 		} catch {
 			handleError(
-				"TypeScript is not installed. Please install it to create TypeScript plugins (Hint: To install it, run \"npm i typescript\")"
+				'TypeScript is not installed. Please install it to create TypeScript plugins (Hint: To install it, run "npm i typescript")'
 			);
 		}
 
@@ -109,11 +129,15 @@ export function onShutdown(): void {
 	);
 }
 
+/**
+ * 
+ * @param { string } ts 
+ */
 async function handleUserInputForTypeScript(ts) {
 	const useTypeScript = ts.toLowerCase() === "y";
 
 	if (!["y", "n"].includes(ts.toLowerCase())) {
-		handleError("Please enter \"Y\" for yes or \"N\" for no");
+		handleError('Please enter "Y" for yes or "N" for no');
 	}
 
 	const pluginDirPath = path.join(pluginsFolderPath, pluginName);
@@ -145,7 +169,10 @@ async function handleUserInputForTypeScript(ts) {
 	);
 	process.exit(0);
 }
-
+/**
+ * 
+ * @param { string } pluginNameInput 
+ */
 async function handleUserInputForPluginName(pluginNameInput) {
 	if (!pluginNameInput) {
 		handleError("Please enter a plugin name");

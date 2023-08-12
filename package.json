@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@harmonytf/smart-buffer": "4.2.4",
+    "@kotinash/lang-parser": "^1.0.3",
     "center-align": "1.0.1",
     "frog-protocol": "github:greenfrogmcbe/Protocol",
     "js-yaml": "4.1.0"

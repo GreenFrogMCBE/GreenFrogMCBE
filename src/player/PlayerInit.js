@@ -385,7 +385,7 @@ module.exports = {
 			}
 
 			Logger.info(getKey("player.kicked").replace("%s", player.username).replace("%d", message));
-			player.disconnect(message, hideDisconnectionScreen);
+			player.disconnect(message, hideDisconnectionScreen); // TODO: Fix this function which expects 0 arguments but has 2.
 		};
 
 		/**
@@ -753,6 +753,8 @@ module.exports = {
 
 				const playerList = new ServerPlayerListPacket();
 				playerList.type = PlayerListAction.REMOVE;
+				// Fix JSDoc Error: Profile is possibly undefined
+				if (!player.profile) return
 				playerList.uuid = player.profile.uuid;
 				playerList.writePacket(currentPlayer);
 			}

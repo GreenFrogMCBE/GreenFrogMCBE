@@ -35,6 +35,11 @@ const LICENSE_HEADER = `/**
 
 const srcPath = path.join(__dirname, "..");
 
+/**
+ * 
+ * @param { string } filePath 
+ * @returns 
+ */
 const addHeader = async (filePath) => {
 	if (filePath.includes("node_modules")) {
 		return;
@@ -54,6 +59,10 @@ const addHeader = async (filePath) => {
 	}
 };
 
+/**
+ * 
+ * @param {string} dir 
+ */
 const walk = async (dir) => {
 	try {
 		const files = await fs.readdir(dir);

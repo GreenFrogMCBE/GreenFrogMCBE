@@ -67,7 +67,12 @@ r.question("> ", (response) => {
 
 	r.close();
 });
-
+/**
+ * 
+ * @param { number } testNumber 
+ * @param { string } testName 
+ * @param { Function } testFunction 
+ */
 function runTest(testNumber, testName, testFunction) {
 	console.info(`\u001b[1m\u001b[38;5;214mStarting test ${testNumber} (${testName})...\u001b[0m`);
 
