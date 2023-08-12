@@ -14,16 +14,22 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../Frog");
-const Logger = require("../server/Logger");
+const Logger = require("../utils/Logger");
 
 const { getKey } = require("../utils/Language");
 
 const ServerInventorySlotPacket = require("../network/packets/ServerInventorySlotPacket");
-const WindowType = require("../network/packets/types/WindowType");
 
-const TypeId = require("./types/TypeId");
+const WindowType = require("../inventory/types/WindowType");
+const TypeId = require("./types/Transaction");
 
-module.exports = {
+const Inventory = require("./Inventory");
+
+class CreativeInventory extends Inventory {
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
+	 */
 	handle(player, packet) {
 		try {
 			const requests = packet.data.params.requests;
@@ -45,8 +51,8 @@ module.exports = {
 
 				if (!shouldGiveItem) return;
 
-				player.inventory.lastKnownItemRuntimeId = secondAction.result_items[0].block_runtime_id;
-				player.inventory.lastKnownItemNetworkId = secondAction.result_items[0].network_id;
+				player.inventory.lastUsedItem.runtimeId = secondAction.result_items[0].block_runtime_id;
+				player.inventory.lastUsedItem.networkId = secondAction.result_items[0].network_id;
 
 				player.inventory.items.push({
 					count: firstAction.count,
@@ -58,7 +64,7 @@ module.exports = {
 					count: firstAction.count,
 					network_id: secondAction.result_items[0].network_id,
 					block_runtime_id: secondAction.result_items[0].block_runtime_id,
-					inventoryItems: player.items,
+					inventoryItems: player.inventory.items,
 				});
 			}
 
@@ -67,12 +73,12 @@ module.exports = {
 				inventorySlotPacket.window_id = WindowType.CREATIVE_INVENTORY;
 				inventorySlotPacket.slot = firstAction.destination.slot;
 				inventorySlotPacket.item = {
-					network_id: player.inventory.lastKnownItemNetworkId,
+					network_id: player.inventory.lastUsedItem.networkId,
 					count: firstAction.count,
 					metadata: 0,
 					has_stack_id: 1,
 					stack_id: 1,
-					block_runtime_id: player.inventory.lastKnownItemRuntimeId,
+					block_runtime_id: player.inventory.lastUsedItem.runtimeId,
 					extra: {
 						has_nbt: 0,
 						can_place_on: [],
@@ -82,7 +88,9 @@ module.exports = {
 				inventorySlotPacket.writePacket(player);
 			}
 		} catch (error) {
-			Logger.error(getKey("creativemenu.badPacket").replace("%s%", player.username).replace("%d%", error.stack));
+			Logger.error(getKey("creativemenu.badPacket").replace("%s", player.username).replace("%d", error.stack));
 		}
-	},
-};
+	}
+}
+
+module.exports = CreativeInventory;

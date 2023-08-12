@@ -13,21 +13,23 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const DimensionLegacy = require("../../world/types/DimensionLegacy");
+const Packet = require("./Packet");
 
-const PacketConstructor = require("./PacketConstructor");
-
-class ServerChangeDimensionPacket extends PacketConstructor {
+class ServerChangeDimensionPacket extends Packet {
 	name = "change_dimension";
-	/** @type {DimensionLegacy} */
-	dimension = DimensionLegacy.OVERWORLD;
-	/** @type {JSON} */
+
+	/** @type {import("Frog").DimensionLegacy | undefined} */
+	dimension;
+	/** @type {import("Frog").Coordinate | undefined} */
 	position;
-	/** @type {boolean} */
+	/** @type {boolean | undefined} */
 	respawn;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			dimension: this.dimension,
 			position: this.position,
 			respawn: this.respawn,

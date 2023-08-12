@@ -13,19 +13,23 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerRespawnPacket extends PacketConstructor {
+class ServerRespawnPacket extends Packet {
 	name = "respawn";
-	/** @type {JSON} */
+
+	/** @type {import("Frog").Coordinate | undefined} */
 	position;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	state;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	runtime_entity_id;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			position: this.position,
 			state: this.state,
 			runtime_entity_id: this.runtime_entity_id,

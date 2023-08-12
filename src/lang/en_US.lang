@@ -1,0 +1,182 @@
+server.loading=Loading server...
+server.license=GreenFrog is licensed under Creative Commons Attribution 4.0 International license. More info: https://creativecommons.org
+
+server.shuttingDown=Shutting down...
+
+garbageCollector.started=[Garbage collector] Started garbage collection...
+garbageCollector.deleted=[Garbage collector] Deleted %s
+garbageCollector.finished=[Garbage collector] Finished
+
+commands.unknown=§cUnknown command %s. Please check that the command exists and that you have permission to use it.
+commands.errors.internalError=Failed to execute command! Error: %s
+commands.errors.internalError.player=Failed to execute command from %s. Error: %d
+commands.errors.internalError.badSender=§cThis types of sender does not support this command
+commands.errors.syntaxError.minArg=§cSyntaxError=Minimum arguments required for this command is %s but you provided %d
+commands.errors.syntaxError.maxArg=§cSyntaxError=Maximum arguments required for this command is %s but you provided %d
+commands.errors.targetError.targetsNotFound=§cNo targets matched selector
+commands.errors.targetError.notOnline=§cNo targets matched %s
+
+commands.ingame.executed=%s executed server command /%d
+
+commands.deop.name=deop
+commands.deop.description=Revokes operator status from a player.
+commands.deop.execution.success=Succeeded in revoking operator level for player %s
+commands.deop.execution.fail=Failed in revoking operator level for player %s
+
+commands.gamemode.name=gamemode
+commands.gamemode.description=Sets a player's game mode
+commands.gamemode.execution.failed=§cGame mode '%s' is invalid
+commands.gamemode.execution.success.updated=Your game mode has been updated to %s.
+commands.gamemode.execution.success.set=Set own gamemode to %s.
+
+commands.me.name=me
+commands.me.description=Displays message about yourself.
+
+commands.help.name=help
+commands.help.description=Command list.
+commands.help.execution.success=Command list:
+commands.help.execution.command=%s - %d
+
+commands.kick.name=kick
+commands.kick.description=Kicks a player from the server.
+commands.kick.execution.failed.notOnline=§c%s is not online
+
+commands.kill.name=kill
+commands.kill.description=Kills entities (players, mobs etc.).
+
+commands.list.name=list
+commands.list.description=Lists players on the server.
+commands.list.execution.success.commands=There are %s players online %d
+
+commands.op.name=op
+commands.op.description=Grants operator status to a player.
+commands.op.execution.success=Succeeded in setting operator level for player %s
+commands.op.execution.failed=§cFailed to OP %s
+
+commands.plugins.name=plugins
+commands.plugins.aliases.pl=pl
+commands.plugins.description=Shows list of plugins that the server is running.
+commands.plugins.execution.success=Plugins %s
+
+commands.say.name=say
+commands.say.description=Sends a message in the chat to other playersOnline.
+
+commands.stop.name=stop
+commands.stop.description=Shut downs the server.
+
+commands.time.name=time
+commands.time.description=Changes the world's time
+commands.time.execution.success=Time set to %s
+commands.time.execution.failed=§cTime must be a number
+commands.time.times.day=day
+commands.time.times.night=night
+
+commands.version.name=version
+commands.version.description=Shows the server version.
+commands.version.aliases.ver=ver
+commands.version.aliases.about=about
+
+commands.teleport.name=teleport
+commands.teleport.description=Teleports playersOnline.
+commands.teleport.aliases.tp=tp
+commands.teleport.execution.success=You have been teleported to %s
+commands.teleport.execution.success.teleported=Teleported %s to %d
+commands.teleport.execution.failed.coordinates.invalid=§cSyntaxError: Invalid coordinates
+
+commands.tell.name=tell
+commands.tell.description=Sends a private message to one or more playersOnline.
+commands.tell.aliases.w=w
+commands.tell.aliases.whisper=whisper
+commands.tell.aliases.msg=msg
+commands.tell.execution.success=<%s> §7§o%d whispers to you: %f
+commands.tell.execution.success.whisper=You whisper to %s: %d
+
+scoreboard.name.default=Scoreboard
+
+plugin.loading.failed=Failed to load %s. Error: %d
+plugin.loading.loading=Loading plugin %s v%d
+plugin.loading.loaded=Loaded plugin %s v%d
+plugin.loading.warning.invalidJson=Invalid JSON data provided for %s. Error: %d
+
+plugin.unloading.failed=Failed to unload %s. Error=%d
+plugin.unloading.success=Unloaded %s
+plugin.unloading.unloading=Unloading %s...
+
+frog.version=This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s
+
+world.chunks.renderDistance.tooHigh=Chunk generator limit in your config.yml is too high! It may cause lag
+
+errors.nodeJS.tooOld=You are running nodeJS version that is too old to run GreenFrogMCBE
+errors.nodeJS.tooOld.update=Please update it to 14.0.0+ from https://nodejs.org/
+
+kickMessages.serverDisconnect=disconnectionScreen.noReason
+kickMessages.serverClosed=Server closed
+kickMessages.serverFull=disconnectionScreen.serverFull
+kickMessages.invalidPacket=Invalid packet / Internal server error
+kickMessages.invalidUsername=Invalid or duplicate username
+kickMessages.versionMismatch=Your client version does not match with the server version! Server is currently running on %s
+kickMessages.resourcePacksRefused=You must accept resource packs to join this server
+kickMessages.wereKicked=You were kicked from the game%s
+
+kickMessages.playStatus=Kicked because a plugin sent play status: %s
+kickMessages.playStatus.console=Kicked %s because plugin/server sent a play status with terminateConnection field set to true. Usually this means that the client version is older than the server version
+
+player.kicked=Kicked %s for %d
+
+status.resourcePacks.refused=%s refused server resource packs
+status.resourcePacks.none=%s has no resource packs
+status.resourcePacks.installed=%s has all the resource packs installed
+status.resourcePacks.joined=%s joined
+status.resourcePacks.spawned=%s spawned
+status.resourcePacks.disconnected=%s disconnected
+
+warning.customItems.loading.failed=Failed to load custom items! Error=%s
+
+debug.debugEnabled=Debug mode is enabled. This may cause lag when sending large packets
+
+debug.unstable=Unstable mode is enabled. This will recover server from critical errors but it may cause plugin data corruption
+debug.unstable.unsupported=Also unstable mode is not supported by GreenFrog developers and you are the responsive for the data corruption if it occurs
+
+debug.player.unsupportedAction.id=Unsupported action ID from %s=%d
+debug.player.unsupportedAction.block=Unsupported block action ID from %s=%d
+
+chat.format=<%s> %d
+chat.format.plugin=%s
+chat.format.me=* %s %d
+chat.format.say=[%s] %d
+
+chat.broadcasts.joined=§e%s joined the game
+chat.broadcasts.left=§e%s left the game
+
+creativemenu.badPacket=Failed to handle ItemStackRequest from %s. Error: %d
+
+network.packet.unhandledPacket=Unhandled packet!
+
+network.server.listening.success=Listening on %s
+network.server.listening.failed=Failed to listen on %s. Error: %d
+network.server.listening.failed.otherServerRunning=Maybe another server is running on the same port?
+
+exceptions.network.rateLimited=Too many packets from %s (%d)
+exceptions.network.packetHandlingError=Failed to handle packet from %s! Error: %d
+exceptions.network.itemStackRequest.badGamemode=Cannot get an item from creative menu while not in creative
+exceptions.network.inventoryTransaction.invalid=Bad InventoryTransaction packet from %s
+exceptions.network.invalidGamemodePacket=Bad gamemode packet - Tried to switch gamemode while not opped
+
+exceptions.plugin.noName=No plugin name!
+exceptions.plugin.noVersion=No plugin version!
+
+exceptions.console.alreadyClosed=Console is already closed!
+
+exceptions.logger.invalidType=Invalid log types=%s. Valid types are info warn error debug
+
+query.server.listening.success=Query server listening on %s
+query.server.listening.failed=Query server failed to listen on %s
+
+query.server.error=Query error: %s
+
+query.server.network.packets.invalidPacket=Invalid query packet from %s
+
+logger.info=INFO
+logger.warn=WARNING
+logger.error=ERROR
+logger.debug=DEBUG

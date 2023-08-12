@@ -14,6 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class TransferException extends Error {
+	/** @param {string} message */
 	constructor(message) {
 		super(message);
 		this.name = "TransferException";

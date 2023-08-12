@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = /** @type {const} */ ({
-	FLAT: "Flat",
-	DEFAULT: "Default",
-	VOID: "Void",
+	FLAT: "flat",
+	DEFAULT: "default",
+	VOID: "void",
 });
