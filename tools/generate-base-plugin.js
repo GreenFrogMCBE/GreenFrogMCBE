@@ -31,7 +31,9 @@ const rl = readline.createInterface({
 
 function handleError(message) {
 	console.clear();
-	console.error(convertConsoleColor(`${Colors.RED}${message}${Colors.RESET}`));
+	console.error(
+		convertConsoleColor(`${Colors.RED}${message}${Colors.RESET}`)
+	);
 	process.exit(1);
 }
 
@@ -41,7 +43,7 @@ function createDirectoryIfNotExists(directoryPath) {
 	}
 }
 
-function writePackageJson(directoryPath, pluginName) {
+function writePackageJson(directoryPath, pluginName, useTypeScript = false) {
 	const packageJson = {
 		name: pluginName.toLowerCase(),
 		main: `${pluginName.toLowerCase()}.js`,
@@ -49,7 +51,10 @@ function writePackageJson(directoryPath, pluginName) {
 		displayName: pluginName,
 	};
 
-	fs.writeFileSync(`${directoryPath}/package.json`, JSON.stringify(packageJson, null, 4));
+	fs.writeFileSync(
+		`${directoryPath}/package.json`,
+		JSON.stringify(packageJson, null, 4)
+	);
 }
 
 function writePluginFile(directoryPath, pluginName, useTypeScript) {
@@ -67,7 +72,9 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 		try {
 			require("typescript");
 		} catch {
-			handleError("TypeScript is not installed. Please install it to create TypeScript plugins (Hint: To install it, run \"npm i typescript\")");
+			handleError(
+				"TypeScript is not installed. Please install it to create TypeScript plugins (Hint: To install it, run \"npm i typescript\")"
+			);
 		}
 
 		pluginJs = `export function onLoad(): void {
@@ -88,10 +95,18 @@ export function onShutdown(): void {
 			include: ["../../**/*", "../../index.d.ts"],
 		};
 
-		fs.writeFileSync(`${directoryPath}/tsconfig.json`, JSON.stringify(tsConfig, null, 4));
+		fs.writeFileSync(
+			`${directoryPath}/tsconfig.json`,
+			JSON.stringify(tsConfig, null, 4)
+		);
 	}
 
-	fs.writeFileSync(`${directoryPath}/${pluginName.toLowerCase()}.${useTypeScript ? "ts" : "js"}`, pluginJs);
+	fs.writeFileSync(
+		`${directoryPath}/${pluginName.toLowerCase()}.${
+			useTypeScript ? "ts" : "js"
+		}`,
+		pluginJs
+	);
 }
 
 async function handleUserInputForTypeScript(ts) {
@@ -119,7 +134,15 @@ async function handleUserInputForTypeScript(ts) {
 	writePluginFile(pluginDirPath, pluginName, useTypeScript);
 
 	console.clear();
-	console.info(convertConsoleColor(`${Colors.GREEN}Plugin created!${useTypeScript ? ` (Hint: To compile it, run "npx tsc ${pluginName.toLowerCase()}.ts")` : ""}${Colors.RESET}`));
+	console.info(
+		convertConsoleColor(
+			`${Colors.GREEN}Plugin created!${
+				useTypeScript
+					? ` (Hint: To compile it, run "npx tsc ${pluginName.toLowerCase()}.ts")`
+					: ""
+			}${Colors.RESET}`
+		)
+	);
 	process.exit(0);
 }
 
@@ -130,15 +153,25 @@ async function handleUserInputForPluginName(pluginNameInput) {
 
 	pluginName = pluginNameInput;
 
-	rl.question(convertConsoleColor(`${Colors.GREEN}Do you want to use TypeScript [Y/N]? (Hint: "Y" stands for yes and "N" stands for no) ${Colors.RESET}`), (input) => {
-		handleUserInputForTypeScript(input);
-	});
+	rl.question(
+		convertConsoleColor(
+			`${Colors.GREEN}Do you want to use TypeScript [Y/N]? (Hint: "Y" stands for yes and "N" stands for no) ${Colors.RESET}`
+		),
+		(input) => {
+			handleUserInputForTypeScript(input);
+		}
+	);
 }
 
 async function start() {
-	rl.question(convertConsoleColor(`${Colors.GREEN}Please enter the name of your plugin... ${Colors.RESET}`), (input) => {
-		handleUserInputForPluginName(input);
-	});
+	rl.question(
+		convertConsoleColor(
+			`${Colors.GREEN}Please enter the name of your plugin... ${Colors.RESET}`
+		),
+		(input) => {
+			handleUserInputForPluginName(input);
+		}
+	);
 }
 
 start();
