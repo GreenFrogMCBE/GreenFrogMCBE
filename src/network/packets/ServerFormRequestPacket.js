@@ -13,23 +13,23 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const FormType = require("../../forms/types/FormType");
 
+const { FormType } = require("../../forms/types/FormType");
 const PacketConstructor = require("./PacketConstructor");
 
 class ServerFormRequestPacket extends PacketConstructor {
 	name = "modal_form_request";
 	/** @type {number} */
-	form_id;
+	id;
 	/** @type {JSON} */
 	content;
 	/** @type {Array<any>} */
 	buttons;
 	/** @type {string} */
 	title;
-	/** @type {string} */
+	/** @type {FormType | string} */
 	type;
-	/** @type {string} */
+	/** @type {string | Array} */
 	text;
 	/** @type {string} */
 	button1;
@@ -44,7 +44,7 @@ class ServerFormRequestPacket extends PacketConstructor {
 		}
 
 		client.queue(this.name, {
-			form_id: this.form_id,
+			form_id: this.id,
 			data: data,
 		});
 	}

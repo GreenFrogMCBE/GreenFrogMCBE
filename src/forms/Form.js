@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+// @ts-check
 /**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
@@ -15,16 +16,14 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
+const { FormType } = require("./types/FormType");
 
-const FormType = require("./FormType");
 
 class Form {
 	constructor() {
 		/**
-		 * @type {FormType}
-		 *
-		 * @type {import("./FormType")}
-		 */
+		 * @type {FormType | string}
+		*/
 		this.type = FormType.FORM;
 
 		/**
@@ -35,7 +34,7 @@ class Form {
 
 		/**
 		 * The buttons in the form.
-		 * @type {Array<JSON>}
+		 * @type {Array}
 		 */
 		this.buttons = [];
 
@@ -55,20 +54,20 @@ class Form {
 
 		/**
 		 * The text in the form.
-		 * @type {Array}
+		 * @type {string | Array}
 		 */
 		this.text = [];
 	}
 
 	/**
-	 * @param {import('frog-protocol').Client}
+	 * @param {import('frog-protocol').Client} client
 	 */
 	send(client) {
 		const FormReq = new ServerFormRequestPacket();
 		FormReq.id = this.id;
 		FormReq.title = this.title;
 		FormReq.text = this.text;
-		FormReq.buttons = JSON.stringify(this.buttons);
+		FormReq.buttons.push(JSON.stringify(this.buttons));
 		FormReq.type = this.type;
 		FormReq.writePacket(client);
 
