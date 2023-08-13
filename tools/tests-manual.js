@@ -1,19 +1,3 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- * The content of this file is licensed using the CC-BY-4.0 license
- * which requires you to agree to its terms if you wish to use or make any changes to it.
- *
- * @license CC-BY-4.0
- * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
- * @link Discord - https://discord.gg/UFqrnAbqjP
- */
-/* eslint-disable no-empty */
 const rl = require("readline");
 const fs = require("fs");
 
@@ -25,9 +9,8 @@ const TestConfigs = require("../test/TestConfigs");
 const Query = require("../test/Query");
 
 if (!fs.existsSync("config.yml")) {
-	const config = fs.readFileSync("../src/resources/defaultConfig.yml");
-
-	fs.writeFileSync("config.yml", config);
+	const defaultConfig = fs.readFileSync("../src/resources/defaultConfig.yml");
+	fs.writeFileSync("config.yml", defaultConfig);
 }
 
 console.info("Starting testing...");
@@ -37,52 +20,56 @@ const r = rl.createInterface({
 	output: process.stdout,
 });
 
-console.info(
-	"Welcome to GreenFrogMCBE tests!\n\n[1] = Start server\n[2] = Start the server and send a message\n[3] = Start the server and try to send a command request\n[4] = Test the configuration files for JSON errors\n[5] = Test the query server",
-);
+console.info("Welcome to GreenFrogMCBE tests!\n");
+console.info("[1] = Start server");
+console.info("[2] = Start the server and send a message");
+console.info("[3] = Start the server and try to send a command request");
+console.info("[4] = Test the configuration files for JSON errors");
+console.info("[5] = Test the query server");
 
 r.question("> ", (response) => {
 	const args = response.split(/ +/);
 
 	switch (args[0]) {
-	case "1":
-		runTest(1, "Start server", joinTest);
-		break;
-	case "2":
-		runTest(2, "Start server and send message", messageTest);
-		break;
-	case "3":
-		runTest(3, "Start server and try to execute a command", commandTest);
-		break;
-	case "4":
-		runTest(4, "Test the.rations for JSON errors", configTest);
-		break;
-	case "5":
-		runTest(5, "Test if the query server works", queryTest);
-		break;
-	default:
-		console.error(`Could not find test ${args[0]}`);
-		break;
+		case "1":
+			runTest(1, "Start server", joinTest);
+			break;
+		case "2":
+			runTest(2, "Start server and send message", messageTest);
+			break;
+		case "3":
+			runTest(3, "Start server and try to execute a command", commandTest);
+			break;
+		case "4":
+			runTest(4, "Test the configurations for JSON errors", configTest);
+			break;
+		case "5":
+			runTest(5, "Test if the query server works", queryTest);
+			break;
+		default:
+			console.error(`Could not find test ${args[0]}`);
+			break;
 	}
 
 	r.close();
 });
+
 /**
+ * Runs a test
  * 
- * @param { number } testNumber 
- * @param { string } testName 
- * @param { Function } testFunction 
+ * @param {number} testNumber 
+ * @param {string} testName 
+ * @param {function} testFunction 
  */
 function runTest(testNumber, testName, testFunction) {
-	console.info(`\u001b[1m\u001b[38;5;214mStarting test ${testNumber} (${testName})...\u001b[0m`);
-
+	console.info(`Starting test ${testNumber} (${testName})...`);
 	StartServer.test();
 
 	setTimeout(() => {
 		try {
 			testFunction();
 		} catch (e) {
-			console.info(`Tests failed! ${e.stack}`);
+			console.error(`Tests failed! ${e.stack}`);
 			process.exit(-1);
 		}
 	}, 6000);
@@ -94,63 +81,37 @@ function handleTestSuccess() {
 }
 
 function joinTest() {
-	setTimeout(() => {
-		try {
-			ClientJoin.test();
-		} catch (e) {
-			console.info("Tests failed! Failed to join with client! " + e.stack);
-			process.exit(-1);
-		} finally {
-			setTimeout(handleTestSuccess, 10000);
-		}
-	}, 3000);
+	runTest(ClientJoin, "join");
 }
 
 function messageTest() {
-	setTimeout(() => {
-		try {
-			ClientMessage.test();
-		} catch (e) {
-			console.info("Tests failed! Failed to join with client! " + e.stack);
-			process.exit(-1);
-		} finally {
-			setTimeout(handleTestSuccess, 10000);
-		}
-	}, 3000);
+	runTest(ClientMessage, "send message");
 }
 
 function commandTest() {
-	setTimeout(() => {
-		try {
-			ClientCommand.test();
-		} catch (e) {
-			console.info("Tests failed! Failed to join with client! " + e.stack);
-			process.exit(-1);
-		} finally {
-			setTimeout(handleTestSuccess, 10000);
-		}
-	}, 3000);
+	runTest(ClientCommand, "execute command");
 }
 
 function configTest() {
-	setTimeout(() => {
-		try {
-			TestConfigs.test();
-		} catch (e) {
-			console.info("Tests failed! Failed to parse.! " + e.stack);
-			process.exit(-1);
-		} finally {
-			setTimeout(handleTestSuccess, 10000);
-		}
-	}, 3000);
+	runTest(TestConfigs, "configurations");
 }
 
 function queryTest() {
+	runTest(Query, "query server");
+}
+
+/**
+ * Run a test
+ * 
+ * @param {import("Frog").Test} clientTest 
+ * @param {string} testName 
+ */
+function runTest(clientTest, testName) {
 	setTimeout(() => {
 		try {
-			Query.test();
+			clientTest.test();
 		} catch (e) {
-			console.info("Tests failed! Failed to contact the query server! " + e.stack);
+			console.error(`Tests failed! Failed to run test "${testName}"! ${e.stack}`);
 			process.exit(-1);
 		} finally {
 			setTimeout(handleTestSuccess, 10000);

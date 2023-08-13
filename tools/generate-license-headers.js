@@ -36,9 +36,9 @@ const LICENSE_HEADER = `/**
 const srcPath = path.join(__dirname, "..");
 
 /**
+ * Adds a header to the file
  * 
- * @param { string } filePath 
- * @returns 
+ * @param {string} filePath 
  */
 const addHeader = async (filePath) => {
 	if (filePath.includes("node_modules")) {
@@ -60,15 +60,18 @@ const addHeader = async (filePath) => {
 };
 
 /**
+ * Walks through the directory
  * 
  * @param {string} dir 
  */
 const walk = async (dir) => {
 	try {
 		const files = await fs.readdir(dir);
+
 		for (const file of files) {
 			const filePath = path.join(dir, file);
 			const stats = await fs.stat(filePath);
+
 			if (stats.isDirectory()) {
 				await walk(filePath);
 			} else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts") {
