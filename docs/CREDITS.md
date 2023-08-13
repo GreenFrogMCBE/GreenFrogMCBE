@@ -92,6 +92,7 @@
 > For adding `/tp`, `/w`, `/tell`, `/msg` and `/whisper` <br> 
 > For adding `/kill` <br> 
 > For adding Spanish & Catalan languages <br> 
+> For fixing some types <br>
 > For cleaning up the code of `VersionToProtocol.js` <br> 
 > For creating https://greenfrog.deno.dev/
 
