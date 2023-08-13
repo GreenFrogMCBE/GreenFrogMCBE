@@ -1,7 +1,7 @@
 ## Credits
 
 1. @AnyBananaGAME
-    > For making `PlayerInfo.getPlayer()` not case sensitive (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/192)
+> For making `PlayerInfo.getPlayer()` not case sensitive (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/192)
 
 > [!WARNING] Contributions below are outdated <br> For improving code in `/list` <br>
 
