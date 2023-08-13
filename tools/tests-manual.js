@@ -9,8 +9,7 @@ const TestConfigs = require("../test/TestConfigs");
 const Query = require("../test/Query");
 
 if (!fs.existsSync("config.yml")) {
-	const defaultConfig = fs.readFileSync("../src/resources/defaultConfig.yml");
-	fs.writeFileSync("config.yml", defaultConfig);
+	fs.writeFileSync("config.yml", fs.readFileSync("../src/resources/defaultConfig.yml"));
 }
 
 console.info("Starting testing...");
@@ -110,8 +109,8 @@ function runTest(clientTest, testName) {
 	setTimeout(() => {
 		try {
 			clientTest.test();
-		} catch (e) {
-			console.error(`Tests failed! Failed to run test "${testName}"! ${e.stack}`);
+		} catch (error) {
+			console.error(`Tests failed! Failed to run test "${testName}"! ${error.stack}`);
 			process.exit(-1);
 		} finally {
 			setTimeout(handleTestSuccess, 10000);
