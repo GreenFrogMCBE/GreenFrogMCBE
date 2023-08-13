@@ -43,7 +43,7 @@
 > [!WARNING]
 > Contributions below are outdated <br> 
 > For sorting lang strings (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/22, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/23, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/24) <br>
-> For making `PluginManager.getPlugins()` better (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/82
+> For making `PluginManager.getPlugins()` better (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/82)
 
 > [!NOTE]
 > Contributions below are partially outdated <br>
