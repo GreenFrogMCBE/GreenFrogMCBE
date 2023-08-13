@@ -6,9 +6,7 @@ const { convertConsoleColor } = require("../src/utils/ConsoleColorConvertor");
 
 const Colors = require("../src/utils/types/Colors");
 
-/**
- * @type {string}
- */
+/** @type {string} */
 let pluginName;
 
 const pluginsFolderPath = path.join(__dirname, "..", "plugins");
