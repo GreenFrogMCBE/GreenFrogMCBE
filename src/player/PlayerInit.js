@@ -385,7 +385,7 @@ module.exports = {
 			}
 
 			Logger.info(getKey("player.kicked").replace("%s", player.username).replace("%d", message));
-			player.disconnect(message, hideDisconnectionScreen); // TODO: Fix this function which expects 0 arguments but has 2.
+			player.disconnect(message, hideDisconnectionScreen);
 		};
 
 		/**
