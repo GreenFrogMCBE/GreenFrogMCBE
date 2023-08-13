@@ -753,6 +753,8 @@ module.exports = {
 
 				const playerList = new ServerPlayerListPacket();
 				playerList.type = PlayerListAction.REMOVE;
+				// Fix JSDoc Error: Profile is possibly undefined
+				if (!player.profile) return;
 				playerList.uuid = player.profile.uuid;
 				playerList.writePacket(currentPlayer);
 			}

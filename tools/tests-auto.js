@@ -69,6 +69,12 @@ setTimeout(() => {
 	}, 10000);
 }, 3500);
 
+/**
+ * Handles test failures
+ * 
+ * @param {string} errorMessage 
+ * @param {Error} error 
+ */
 function handleTestFailure(errorMessage, error) {
 	console.info("Tests failed! " + errorMessage + " " + error.stack);
 	process.exit(-1);

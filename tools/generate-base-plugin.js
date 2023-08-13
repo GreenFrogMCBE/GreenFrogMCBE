@@ -1,25 +1,12 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- * The content of this file is licensed using the CC-BY-4.0 license
- * which requires you to agree to its terms if you wish to use or make any changes to it.
- *
- * @license CC-BY-4.0
- * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
- * @link Discord - https://discord.gg/UFqrnAbqjP
- */
 const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 
 const { convertConsoleColor } = require("../src/utils/ConsoleColorConvertor");
+
 const Colors = require("../src/utils/types/Colors");
 
+/** @type {string} */
 let pluginName;
 
 const pluginsFolderPath = path.join(__dirname, "..", "plugins");
@@ -29,20 +16,35 @@ const rl = readline.createInterface({
 	output: process.stdout,
 });
 
+/**
+ * Handles errors and displays them in red color.
+ *
+ * @param {string} message - The error message.
+ */
 function handleError(message) {
 	console.clear();
-	console.error(
-		convertConsoleColor(`${Colors.RED}${message}${Colors.RESET}`)
-	);
+	console.error(convertConsoleColor(`${Colors.RED}${message}${Colors.RESET}`));
 	process.exit(1);
 }
 
+/**
+ * Creates a directory if it doesn't exist.
+ *
+ * @param {string} directoryPath - The path of the directory to create.
+ */
 function createDirectoryIfNotExists(directoryPath) {
 	if (!fs.existsSync(directoryPath)) {
 		fs.mkdirSync(directoryPath);
 	}
 }
 
+/**
+ * Writes the package.json file for the plugin.
+ *
+ * @param {string} directoryPath - The directory path.
+ * @param {string} pluginName - The name of the plugin.
+ * @param {boolean} useTypeScript - Whether to use TypeScript.
+ */
 function writePackageJson(directoryPath, pluginName, useTypeScript = false) {
 	const packageJson = {
 		name: pluginName.toLowerCase(),
@@ -51,21 +53,25 @@ function writePackageJson(directoryPath, pluginName, useTypeScript = false) {
 		displayName: pluginName,
 	};
 
-	fs.writeFileSync(
-		`${directoryPath}/package.json`,
-		JSON.stringify(packageJson, null, 4)
-	);
+	fs.writeFileSync(`${directoryPath}/package.json`, JSON.stringify(packageJson, null, 4));
 }
 
+/**
+ * Writes the plugin main file.
+ *
+ * @param {string} directoryPath - The directory path.
+ * @param {string} pluginName - The name of the plugin.
+ * @param {boolean} useTypeScript - Whether to use TypeScript.
+ */
 function writePluginFile(directoryPath, pluginName, useTypeScript) {
 	let pluginJs = `module.exports = {
-	onLoad() {
-		// ...
-	},
-
-	onShutdown() {
-		// ...
-	},
+    onLoad() {
+        // ...
+    },
+    
+    onShutdown() {
+        // ...
+    },
 };`;
 
 	if (useTypeScript) {
@@ -78,11 +84,11 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 		}
 
 		pluginJs = `export function onLoad(): void {
-	// ...
+// ...
 }
 
 export function onShutdown(): void {
-	// ...
+// ...
 }`;
 		const tsConfig = {
 			compilerOptions: {
@@ -101,14 +107,14 @@ export function onShutdown(): void {
 		);
 	}
 
-	fs.writeFileSync(
-		`${directoryPath}/${pluginName.toLowerCase()}.${
-			useTypeScript ? "ts" : "js"
-		}`,
-		pluginJs
-	);
+	fs.writeFileSync(`${directoryPath}/${pluginName.toLowerCase()}.${useTypeScript ? "ts" : "js"}`, pluginJs);
 }
 
+/**
+ * Handles user input for whether to use TypeScript.
+ *
+ * @param {string} ts - User input for TypeScript (Y/N).
+ */
 async function handleUserInputForTypeScript(ts) {
 	const useTypeScript = ts.toLowerCase() === "y";
 
@@ -134,18 +140,15 @@ async function handleUserInputForTypeScript(ts) {
 	writePluginFile(pluginDirPath, pluginName, useTypeScript);
 
 	console.clear();
-	console.info(
-		convertConsoleColor(
-			`${Colors.GREEN}Plugin created!${
-				useTypeScript
-					? ` (Hint: To compile it, run "npx tsc ${pluginName.toLowerCase()}.ts")`
-					: ""
-			}${Colors.RESET}`
-		)
-	);
+	console.info(convertConsoleColor(`${Colors.GREEN}Plugin created!${useTypeScript ? ` (Hint: To compile it, run "npx tsc ${pluginName.toLowerCase()}.ts")` : ""}${Colors.RESET}`));
 	process.exit(0);
 }
 
+/**
+ * Handles user input for the plugin name.
+ *
+ * @param {string} pluginNameInput - User input for the plugin name.
+ */
 async function handleUserInputForPluginName(pluginNameInput) {
 	if (!pluginNameInput) {
 		handleError("Please enter a plugin name");
@@ -163,6 +166,9 @@ async function handleUserInputForPluginName(pluginNameInput) {
 	);
 }
 
+/**
+ * Starts the plugin creation process.
+ */
 async function start() {
 	rl.question(
 		convertConsoleColor(

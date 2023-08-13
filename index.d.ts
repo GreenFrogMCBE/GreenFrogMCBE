@@ -750,11 +750,11 @@ declare module "Frog" {
 	export interface FormAction {
 		type: string;
 		text: string;
-		placeholder: string;
-		options: any;
-		min: number;
-		max: number;
-		step: number;
+		placeholder?: string;
+		options?: any;
+		min?: number;
+		max?: number;
+		step?: number;
 	}
 
 	export type FormButton = {
@@ -1071,6 +1071,11 @@ declare module "Frog" {
 		| "playerPlayStatus"
 		| "playerTeleport"
 		| "playerKill";
+
+
+	export type Test = {
+		test(): void;
+	}
 
 	export interface EventEmitter {
 		on(eventName: Event, listener?: any): void;
