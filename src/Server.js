@@ -171,7 +171,7 @@ async function listen() {
 				motd,
 				levelName,
 			},
-		}).on("connect", /** @param { any } client */ (client) => {
+		}).on("connect", /** @param {any} client */ (client) => {
 			client.on("join", () => {
 				new PlayerJoinHandler().onPlayerJoin(client);
 			});
