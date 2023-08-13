@@ -48,7 +48,7 @@ module.exports = {
 	 */
 	getKey(key) {
 		const langConfig = require("../Frog").config.chat.lang;
-		const langContent = module.exports.getLanguage(langConfig); // Use `this` to call the method
+		const langContent = module.exports.getLanguage(langConfig);
 		const langParsed = langParser.parseRaw(langContent.toString());
 		const langKey = langParser.getKey(key, langParsed);
 
