@@ -3,9 +3,9 @@
 1. @AnyBananaGAME
 > For making `PlayerInfo.getPlayer()` not case sensitive (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/192)
 
-> [!WARNING] Contributions below are outdated <br> For improving code in `/list` <br>
+[!WARNING] Contributions below are outdated <br> For improving code in `/list` <br>
 
-> [!NOTE] Contributions below are partially outdated <br> For creating multilang (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/9) <br> For adding `tests-manual.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/70) <br>
+[!NOTE] Contributions below are partially outdated <br> For creating multilang (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/9) <br> For adding `tests-manual.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/70) <br>
 
 2. @hvlxh
     > For showing example of a world generator in our Discord <br>
