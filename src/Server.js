@@ -158,7 +158,7 @@ async function loadPlugins() {
 async function listen() {
 	const { host, port } = Frog.config.network;
 	const { levelName, motd, maxPlayers, version } = Frog.config.serverInfo;
-	let { offlineMode } = Frog.config.serverInfo;
+	const { offlineMode } = Frog.config.serverInfo;
 
 	try {
 		server = FrogProtocol.createServer({

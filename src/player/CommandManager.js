@@ -18,7 +18,7 @@ const ServerAvailableCommandsPacket = require("../network/packets/ServerAvailabl
 const { getKey } = require("../utils/Language");
 
 /** @type {import("Frog").CommandInfo[]} */
-let commands = [];
+const commands = [];
 
 module.exports = {
 	/**

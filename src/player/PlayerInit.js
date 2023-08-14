@@ -56,7 +56,7 @@ const PlayerInfo = require("./PlayerInfo");
 
 const Frog = require("../Frog");
 
-let lang = Frog.lang;
+const lang = Frog.lang;
 
 module.exports = {
 	/**
@@ -720,7 +720,7 @@ module.exports = {
 			if (!shouldGiveContainerItem) return;
 
 			/** @type {import("Frog").Item[]} */
-			let input = [];
+			const input = [];
 
 			for (let i = 0; i < 27; i++) {
 				input.push({ network_id: 0 });

@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /** @type {import("Frog").Player[]} */
-let playersOnline = [];
+const playersOnline = [];
 
 module.exports = {
 	/**

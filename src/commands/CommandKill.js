@@ -55,52 +55,52 @@ class CommandKill extends Command {
 	 */
 	execute(player, server, args) {
 		switch (args[0]) {
-		case Selector.SELF:
-		case undefined: {
-			if (!canBeKilled(player)) {
-				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
-				return;
-			}
-
-			player.setHealth(0, DamageCause.KILL_COMMAND);
-			break;
-		}
-		case Selector.ALL_ENTITIES:
-		case Selector.ALL_PLAYERS: {
-			PlayerInfo.playersOnline.forEach((player) => {
-				if (canBeKilled(player)) {
-					player.setHealth(0, DamageCause.KILL_COMMAND);
+			case Selector.SELF:
+			case undefined: {
+				if (!canBeKilled(player)) {
+					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+					return;
 				}
-			});
-			break;
-		}
-		case Selector.RANDOM_PLAYER: {
-			const randomPlayer = Math.floor(Math.random() * PlayerInfo.playersOnline.length);
-			const subject = PlayerInfo.playersOnline[randomPlayer];
 
-			if (!canBeKilled(subject)) {
-				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
-				return;
+				player.setHealth(0, DamageCause.KILL_COMMAND);
+				break;
 			}
+			case Selector.ALL_ENTITIES:
+			case Selector.ALL_PLAYERS: {
+				PlayerInfo.playersOnline.forEach((player) => {
+					if (canBeKilled(player)) {
+						player.setHealth(0, DamageCause.KILL_COMMAND);
+					}
+				});
+				break;
+			}
+			case Selector.RANDOM_PLAYER: {
+				const randomPlayer = Math.floor(Math.random() * PlayerInfo.playersOnline.length);
+				const subject = PlayerInfo.playersOnline[randomPlayer];
 
-			subject.setHealth(0, DamageCause.KILL_COMMAND);
-			break;
-		}
-		default: {
-			try {
-				const subject = getPlayer(args[0]);
-
-				if (!subject || !canBeKilled(subject)) {
+				if (!canBeKilled(subject)) {
 					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 					return;
 				}
 
 				subject.setHealth(0, DamageCause.KILL_COMMAND);
-			} catch {
-				player.sendMessage(getKey("commands.kill.execution.failed.notOnline").replace("%s", args[0]));
+				break;
 			}
-			break;
-		}
+			default: {
+				try {
+					const subject = getPlayer(args[0]);
+
+					if (!subject || !canBeKilled(subject)) {
+						player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+						return;
+					}
+
+					subject.setHealth(0, DamageCause.KILL_COMMAND);
+				} catch {
+					player.sendMessage(getKey("commands.kill.execution.failed.notOnline").replace("%s", args[0]));
+				}
+				break;
+			}
 		}
 	}
 }

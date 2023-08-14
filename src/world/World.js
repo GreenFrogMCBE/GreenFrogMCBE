@@ -236,7 +236,7 @@ class World {
 	async handleFallDamage(player, position) {
 		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
 
-		let falldamageY = player.location.y - position.y;
+		const falldamageY = player.location.y - position.y;
 
 		if (falldamageY > 0.56 && player._damage.fall.queue && !player._damage.fall.invulnerable) {
 			player.setHealth(Math.floor(player.health - player._damage.fall.queue), DamageCause.FALL);

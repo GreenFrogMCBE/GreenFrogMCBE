@@ -28,7 +28,7 @@ const UsernameValidator = require("../../player/UsernameValidator");
 
 const PacketHandler = require("./PacketHandler");
 
-let config = Frog.config;
+const config = Frog.config;
 
 class PlayerJoinHandler {
 	/**

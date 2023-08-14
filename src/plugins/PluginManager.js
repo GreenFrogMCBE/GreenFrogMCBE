@@ -37,7 +37,7 @@ module.exports = {
 	 */
 	addPlugin: (name, version) => {
 		/** @type {import("Frog").Plugin} */
-		let pluginObject = {
+		const pluginObject = {
 			name,
 			version,
 		};

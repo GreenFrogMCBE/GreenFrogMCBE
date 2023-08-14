@@ -41,35 +41,35 @@ class ClientInfoRequestPacket extends Packet {
 		const sessionId = ClientTokens.clientTokens.get(`${client.address},${client.port}`);
 
 		switch (packet.length) {
-		case InfoRequest.BASIC:
-			const basicInfoResponsePacket = new ServerInfoResponsePacket();
-			basicInfoResponsePacket.game = "MINECRAFTBE";
-			basicInfoResponsePacket.levelName = querySettings.levelName;
-			basicInfoResponsePacket.playersOnline.nline = PlayerInfo.playersOnline.length;
-			basicInfoResponsePacket.maxPlayers = querySettings.maxPlayers;
-			basicInfoResponsePacket.serverName = querySettings.motd;
-			basicInfoResponsePacket.serverAddress = querySettings.host;
-			basicInfoResponsePacket.serverPort = querySettings.port;
-			basicInfoResponsePacket.sessionId = sessionId;
-			basicInfoResponsePacket.writePacket(client, socket);
-			break;
-		case InfoRequest.FULL:
-			const fullInfoResponsePacket = new ServerInfoResponsePacket();
-			fullInfoResponsePacket.isFullPacket = true;
-			fullInfoResponsePacket.game = "MINECRAFTBE";
-			fullInfoResponsePacket.levelName = querySettings.levelName;
-			fullInfoResponsePacket.serverName = querySettings.motd;
-			fullInfoResponsePacket.playersOnline.nline = PlayerInfo.playersOnline.length;
-			fullInfoResponsePacket.maxPlayers = querySettings.maxPlayers;
-			fullInfoResponsePacket.version = querySettings.version;
-			fullInfoResponsePacket.serverAddress = querySettings.host;
-			fullInfoResponsePacket.serverPort = querySettings.port;
-			fullInfoResponsePacket.gamemode = Frog.config.world.gamemode.world;
-			fullInfoResponsePacket.plugins = Frog.config.query.showPlugins ? "GreenFrogMCBE: " + PluginManager.plugins.toString() : "GreenFrogMCBE: ";
-			fullInfoResponsePacket.sessionId = sessionId;
-			fullInfoResponsePacket.whitelist = false; // TODO: Implement whitelist
-			fullInfoResponsePacket.writePacket(client, socket);
-			break;
+			case InfoRequest.BASIC:
+				const basicInfoResponsePacket = new ServerInfoResponsePacket();
+				basicInfoResponsePacket.game = "MINECRAFTBE";
+				basicInfoResponsePacket.levelName = querySettings.levelName;
+				basicInfoResponsePacket.playersOnline.nline = PlayerInfo.playersOnline.length;
+				basicInfoResponsePacket.maxPlayers = querySettings.maxPlayers;
+				basicInfoResponsePacket.serverName = querySettings.motd;
+				basicInfoResponsePacket.serverAddress = querySettings.host;
+				basicInfoResponsePacket.serverPort = querySettings.port;
+				basicInfoResponsePacket.sessionId = sessionId;
+				basicInfoResponsePacket.writePacket(client, socket);
+				break;
+			case InfoRequest.FULL:
+				const fullInfoResponsePacket = new ServerInfoResponsePacket();
+				fullInfoResponsePacket.isFullPacket = true;
+				fullInfoResponsePacket.game = "MINECRAFTBE";
+				fullInfoResponsePacket.levelName = querySettings.levelName;
+				fullInfoResponsePacket.serverName = querySettings.motd;
+				fullInfoResponsePacket.playersOnline.nline = PlayerInfo.playersOnline.length;
+				fullInfoResponsePacket.maxPlayers = querySettings.maxPlayers;
+				fullInfoResponsePacket.version = querySettings.version;
+				fullInfoResponsePacket.serverAddress = querySettings.host;
+				fullInfoResponsePacket.serverPort = querySettings.port;
+				fullInfoResponsePacket.gamemode = Frog.config.world.gamemode.world;
+				fullInfoResponsePacket.plugins = Frog.config.query.showPlugins ? "GreenFrogMCBE: " + PluginManager.plugins.toString() : "GreenFrogMCBE: ";
+				fullInfoResponsePacket.sessionId = sessionId;
+				fullInfoResponsePacket.whitelist = false; // TODO: Implement whitelist
+				fullInfoResponsePacket.writePacket(client, socket);
+				break;
 		}
 	}
 }

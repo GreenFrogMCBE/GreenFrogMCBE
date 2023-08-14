@@ -50,39 +50,39 @@ class ClientInteractPacket extends Packet {
 		if (!shouldInteract) return;
 
 		switch (actionID) {
-		case Interact.INVENTORY_OPEN:
-			let shouldOpenInventory = true;
+			case Interact.INVENTORY_OPEN:
+				let shouldOpenInventory = true;
 
-			/** @type {import("Frog").Coordinate} */
-			const containerCoordinates = {
-				x: 0,
-				y: 0,
-				z: 0,
-			};
+				/** @type {import("Frog").Coordinate} */
+				const containerCoordinates = {
+					x: 0,
+					y: 0,
+					z: 0,
+				};
 
-			Frog.eventEmitter.emit("playerContainerOpen", {
-				player,
-				windowId: WindowId.CREATIVE,
-				windowType: WindowType.CREATIVE_INVENTORY,
-				sentByServer: false,
-				runtimeId: 1,
-				containerCoordinates,
-				cancel: () => {
-					shouldOpenInventory = false;
-				},
-			});
+				Frog.eventEmitter.emit("playerContainerOpen", {
+					player,
+					windowId: WindowId.CREATIVE,
+					windowType: WindowType.CREATIVE_INVENTORY,
+					sentByServer: false,
+					runtimeId: 1,
+					containerCoordinates,
+					cancel: () => {
+						shouldOpenInventory = false;
+					},
+				});
 
-			if (!shouldOpenInventory) return;
+				if (!shouldOpenInventory) return;
 
-			const containerOpen = new ServerContainerOpenPacket();
-			containerOpen.window_id = WindowId.CREATIVE;
-			containerOpen.window_type = WindowType.CREATIVE_INVENTORY;
-			containerOpen.runtime_entity_id = 1;
-			containerOpen.coordinates = { x: containerCoordinates.x, y: containerCoordinates.y, z: containerCoordinates.z };
-			containerOpen.writePacket(player);
-			break;
-		default:
-			Logger.debug(getKey("debug.player.unsupportedAction.id").replace("%s", actionID).replace("%d", player.username));
+				const containerOpen = new ServerContainerOpenPacket();
+				containerOpen.window_id = WindowId.CREATIVE;
+				containerOpen.window_type = WindowType.CREATIVE_INVENTORY;
+				containerOpen.runtime_entity_id = 1;
+				containerOpen.coordinates = { x: containerCoordinates.x, y: containerCoordinates.y, z: containerCoordinates.z };
+				containerOpen.writePacket(player);
+				break;
+			default:
+				Logger.debug(getKey("debug.player.unsupportedAction.id").replace("%s", actionID).replace("%d", player.username));
 		}
 	}
 }
