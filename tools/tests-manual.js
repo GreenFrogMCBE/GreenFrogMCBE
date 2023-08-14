@@ -17,9 +17,8 @@ const rl = require("readline");
 const fs = require("fs");
 
 const ClientJoin = require("../test/ClientJoin");
-const ClientMessage = require("../test/ClientSendMessage");
-const ClientCommand = require("../test/ClientRunCommand");
-const StartServer = require("../test/StartServer");
+const ClientSendMessage = require("../test/ClientSendMessage");
+const ClientRunCommand = require("../test/ClientRunCommand");
 const TestConfigs = require("../test/TestConfigs");
 const Query = require("../test/Query");
 
@@ -46,19 +45,19 @@ r.question("> ", (response) => {
 
 	switch (args[0]) {
 		case "1":
-			runTest(1, "Start server", joinTest);
+			runTest("Start server", ClientJoin);
 			break;
 		case "2":
-			runTest(2, "Start server and send message", messageTest);
+			runTest("Start server and send message", ClientSendMessage);
 			break;
 		case "3":
-			runTest(3, "Start server and try to execute a command", commandTest);
+			runTest("Start server and try to execute a command", ClientRunCommand);
 			break;
 		case "4":
-			runTest(4, "Test the configurations for JSON errors", configTest);
+			runTest("Test the configurations for JSON errors", TestConfigs);
 			break;
 		case "5":
-			runTest(5, "Test if the query server works", queryTest);
+			runTest("Test if the query server works", Query);
 			break;
 		default:
 			console.error(`Could not find test ${args[0]}`);
@@ -71,59 +70,13 @@ r.question("> ", (response) => {
 /**
  * Runs a test
  * 
- * @param {number} testNumber 
  * @param {string} testName 
- * @param {function} testFunction 
+ * @param {import("Frog").Test} test
  */
-function runTest(testNumber, testName, testFunction) {
-	console.info(`Starting test ${testNumber} (${testName})...`);
-	StartServer.test();
-
+function runTest(testName, test) {
 	setTimeout(() => {
 		try {
-			testFunction();
-		} catch (e) {
-			console.error(`Tests failed! ${e.stack}`);
-			process.exit(-1);
-		}
-	}, 6000);
-}
-
-function handleTestSuccess() {
-	console.info("Tests passed!");
-	process.exit(0);
-}
-
-function joinTest() {
-	runTest(ClientJoin, "join");
-}
-
-function messageTest() {
-	runTest(ClientMessage, "send message");
-}
-
-function commandTest() {
-	runTest(ClientCommand, "execute command");
-}
-
-function configTest() {
-	runTest(TestConfigs, "configurations");
-}
-
-function queryTest() {
-	runTest(Query, "query server");
-}
-
-/**
- * Run a test
- * 
- * @param {import("Frog").Test} clientTest 
- * @param {string} testName 
- */
-function runTest(clientTest, testName) {
-	setTimeout(() => {
-		try {
-			clientTest.test();
+			test.test();
 		} catch (error) {
 			console.error(`Tests failed! Failed to run test "${testName}"! ${error.stack}`);
 			process.exit(-1);
@@ -131,4 +84,9 @@ function runTest(clientTest, testName) {
 			setTimeout(handleTestSuccess, 10000);
 		}
 	}, 3000);
+}
+
+function handleTestSuccess() {
+	console.info("Tests passed!");
+	process.exit(0);
 }

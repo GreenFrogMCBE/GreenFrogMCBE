@@ -58,9 +58,8 @@ function createDirectoryIfNotExists(directoryPath) {
  *
  * @param {string} directoryPath - The directory path.
  * @param {string} pluginName - The name of the plugin.
- * @param {boolean} useTypeScript - Whether to use TypeScript.
  */
-function writePackageJson(directoryPath, pluginName, useTypeScript = false) {
+function writePackageJson(directoryPath, pluginName) {
 	const packageJson = {
 		name: pluginName.toLowerCase(),
 		main: `${pluginName.toLowerCase()}.js`,
@@ -151,7 +150,7 @@ async function handleUserInputForTypeScript(ts) {
 		}
 	}
 
-	writePackageJson(pluginDirPath, pluginName, useTypeScript);
+	writePackageJson(pluginDirPath, pluginName);
 	writePluginFile(pluginDirPath, pluginName, useTypeScript);
 
 	console.clear();
