@@ -4,14 +4,20 @@
         "commonjs": true,
         "es2021": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended"
+    ],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
     "rules": {
         "indent": [
             "error",
-            "tab"
+            "tab",
+            {
+                "SwitchCase": 1,
+                "MemberExpression": 1
+            }
         ],
         "linebreak-style": [
             "error",
@@ -24,6 +30,27 @@
         "semi": [
             "error",
             "always"
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 2,
+                "maxBOF": 1,
+                "maxEOF": 1
+            }
+        ],
+        "eol-last": [
+            "error",
+            "always"
+        ],
+        "no-unused-vars": [
+            "error"
+        ],
+        "prefer-const": [
+            "error"
+        ],
+        "arrow-spacing": [
+            "error"
         ]
     }
 }
