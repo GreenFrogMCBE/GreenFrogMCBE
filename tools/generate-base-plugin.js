@@ -98,11 +98,11 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 		}
 
 		pluginJs = `export function onLoad(): void {
-// ...
+    // ...
 }
 
 export function onShutdown(): void {
-// ...
+    // ...
 }`;
 		const tsConfig = {
 			compilerOptions: {
