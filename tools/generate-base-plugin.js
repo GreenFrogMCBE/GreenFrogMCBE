@@ -79,13 +79,13 @@ function writePackageJson(directoryPath, pluginName) {
  */
 function writePluginFile(directoryPath, pluginName, useTypeScript) {
 	let pluginJs = `module.exports = {
-    onLoad() {
-        // ...
-    },
-    
-    onShutdown() {
-        // ...
-    },
+	onLoad() {
+		// ...
+	},
+
+	onShutdown() {
+		// ...
+	},
 };`;
 
 	if (useTypeScript) {
