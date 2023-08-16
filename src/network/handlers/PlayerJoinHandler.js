@@ -119,7 +119,6 @@ class PlayerJoinHandler {
 	 * @param {import("Frog").Player} player - The player to set up properties for.
 	 */
 	setupPlayerProperties(player) {
-		if (!player.profile) return;
 		Object.assign(player, {
 			username: player.profile.name,
 			gamemode: null,
