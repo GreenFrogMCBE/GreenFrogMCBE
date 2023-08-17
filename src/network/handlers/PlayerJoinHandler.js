@@ -99,8 +99,7 @@ class PlayerJoinHandler {
 		};
 
 		player.on("packet", (packet) => {
-			const packetHandler = new PacketHandler()
-			packetHandler.handlePacket(player, /** @type {import("Frog").Packet} */ packet);
+			new PacketHandler().handlePacket(player, packet);
 		});
 	}
 
