@@ -16,7 +16,7 @@
 
 module.exports = {
 	test() {
-		process.env.TEST = true;
+		process.env.TEST = (true).toString();
 
 		require("../index");
 

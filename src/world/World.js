@@ -263,6 +263,7 @@ class World {
 			spawnCoordinates: this.spawnCoordinates,
 			generator: this.generator,
 			time,
+			
 		};
 	}
 }

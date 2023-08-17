@@ -28,15 +28,16 @@ module.exports = {
 		});
 
 		console.info("[commandbot] joined");
+
 		bot.on("spawn", () => {
 			bot.queue("command_request", {
 				command: "/pl",
 				internal: false,
 				version: 52,
 				origin: {
-					uuid: bot.profile.uuid,
-					request_id: bot.profile.uuid,
-					types: "player",
+					uuid: "",
+					request_id: "",
+					type: "player",
 				},
 			});
 		});

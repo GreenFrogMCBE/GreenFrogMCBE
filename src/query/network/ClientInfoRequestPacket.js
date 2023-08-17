@@ -45,7 +45,7 @@ class ClientInfoRequestPacket extends Packet {
 				const basicInfoResponsePacket = new ServerInfoResponsePacket();
 				basicInfoResponsePacket.game = "MINECRAFTBE";
 				basicInfoResponsePacket.levelName = querySettings.levelName;
-				basicInfoResponsePacket.playersOnline.nline = PlayerInfo.playersOnline.length;
+				basicInfoResponsePacket.numPlayers = PlayerInfo.playersOnline.length;
 				basicInfoResponsePacket.maxPlayers = querySettings.maxPlayers;
 				basicInfoResponsePacket.serverName = querySettings.motd;
 				basicInfoResponsePacket.serverAddress = querySettings.host;
@@ -59,7 +59,7 @@ class ClientInfoRequestPacket extends Packet {
 				fullInfoResponsePacket.game = "MINECRAFTBE";
 				fullInfoResponsePacket.levelName = querySettings.levelName;
 				fullInfoResponsePacket.serverName = querySettings.motd;
-				fullInfoResponsePacket.playersOnline.nline = PlayerInfo.playersOnline.length;
+				fullInfoResponsePacket.numPlayers = PlayerInfo.playersOnline.length;
 				fullInfoResponsePacket.maxPlayers = querySettings.maxPlayers;
 				fullInfoResponsePacket.version = querySettings.version;
 				fullInfoResponsePacket.serverAddress = querySettings.host;
