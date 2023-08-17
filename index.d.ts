@@ -543,8 +543,10 @@ declare module "Frog" {
 		generator: string;
 		time: number;
 		handleFallDamage(player: Player, coordinates: Coordinate): void;
-		breakBlock(x: number, y: number, z: number): void;
-		placeBlock(x: number, y: number, z: number, runtime_id: number): void;
+
+		// Actually passing undefined as a parameter will result in it being converted to 0
+		breakBlock(x: number | undefined, y: number | undefined, z: number | undefined): void;
+		placeBlock(x: number | undefined, y: number | undefined, z: number | undefined, runtime_id: number | undefined): void;
 	};
 
 	export type NBTType = "compoud";
