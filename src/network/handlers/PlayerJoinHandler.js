@@ -99,7 +99,8 @@ class PlayerJoinHandler {
 		};
 
 		player.on("packet", (packet) => {
-			new PacketHandler().handlePacket(player, packet);
+			const packetHandler = new PacketHandler()
+			packetHandler.handlePacket(player, /** @type {import("Frog").Packet} */ packet);
 		});
 	}
 
@@ -149,7 +150,6 @@ class PlayerJoinHandler {
 			},
 			location: {
 				onGround: false,
-				previous: {},
 				x: 0,
 				y: -47,
 				z: 0,

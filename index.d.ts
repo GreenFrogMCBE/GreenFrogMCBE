@@ -621,7 +621,6 @@ declare module "Frog" {
 
 	export type Location = {
 		onGround: boolean;
-		previous: any;
 		x: number;
 		y: number;
 		z: number;
@@ -635,8 +634,8 @@ declare module "Frog" {
 	};
 
 	export type Color =
-		"§0"
-	"§1" |
+		"§0" |
+		"§1" |
 		"§2" |
 		"§3" |
 		"§4" |
@@ -1088,7 +1087,7 @@ declare module "Frog" {
 		sendMessage(message: string): void;
 	}
 
-	export interface Player extends Client, OnlinePlayer, Messagable {
+	export type Player = Client & OnlinePlayer & Messagable & {
 		username: string;
 		gamemode: string;
 		health: number;

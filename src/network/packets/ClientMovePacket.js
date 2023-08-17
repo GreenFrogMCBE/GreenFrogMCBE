@@ -42,7 +42,7 @@ class ClientMovePacket extends Packet {
 			yaw,
 			onGround: player.location.onGround,
 			cancel: () => {
-				player.teleport(player.location.previous.x, player.location.previous.y, player.location.previous.z);
+				player.teleport(player.location.x, y, player.location.z);
 
 				shouldSetPosition = false;
 			},

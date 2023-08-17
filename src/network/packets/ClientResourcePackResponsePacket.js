@@ -246,10 +246,6 @@ class ClientResourcePackResponsePacket extends Packet {
 						playerList.writePacket(onlinePlayer);
 					}
 				}, 2000);
-
-				setInterval(() => {
-					player.location.previous = player.location;
-				}, 100);
 		}
 	}
 }
