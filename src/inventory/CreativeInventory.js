@@ -76,11 +76,11 @@ class CreativeInventory extends Inventory {
 					network_id: player.inventory.lastUsedItem.networkId,
 					count: firstAction.count,
 					metadata: 0,
-					has_stack_id: 1,
+					has_stack_id: true,
 					stack_id: 1,
 					block_runtime_id: player.inventory.lastUsedItem.runtimeId,
 					extra: {
-						has_nbt: 0,
+						has_nbt: false,
 						can_place_on: [],
 						can_destroy: [],
 					},

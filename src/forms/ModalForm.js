@@ -20,7 +20,7 @@ const Form = require("./types/Form");
 class ModalForm {
 	constructor() {
 		/**
-		 * @type {import("Frog").Form}
+		 * @type {string}
 		 */
 		this.title = "";
 

@@ -21,6 +21,7 @@ module.exports = {
 	 * @returns {string} The converted string with NodeJS console color codes
 	 */
 	convertConsoleColor(string) {
+		/** @type {import("Frog").ConsoleColors} */
 		const colors = {
 			"§0": "\x1b[30m", // black
 			"§1": "\x1b[34m", // dark blue
@@ -42,7 +43,9 @@ module.exports = {
 		};
 
 		for (const color in colors) {
-			string = string.replace(new RegExp(color, "g"), colors[color]);
+			if (colors.hasOwnProperty(color)) {
+				string = string.replace(new RegExp(color, "g"), colors[color]);
+			}
 		}
 
 		return string + "\x1b[0m";

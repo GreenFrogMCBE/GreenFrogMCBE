@@ -742,10 +742,10 @@ declare module "Frog" {
 	};
 
 	export type LogMessage = {
-		langString: string;
-		color: number;
+		consoleLoggingLevel: string;
+		levelName: string;
 		message: string;
-		type: string;
+		color: number;
 	};
 
 	export interface FormAction {
@@ -766,42 +766,76 @@ declare module "Frog" {
 		};
 	};
 
+	export type ConsoleColors = {
+		[key: string]: string;
+	};
+
+	export type ProtocolList = {
+		[key: string]: number;
+	};
+
+	export type LogLevel =
+		"debug" |
+		"info" |
+		"warn" |
+		"error"
+
 	export type ValueOf<T> = T[keyof T];
 
-	export type WorldGenerator = ValueOf<import("./src/world/types/WorldGenerator")>;
-	export type DimensionLegacy = ValueOf<import("./src/world/types/DimensionId")>;
-	export type BlockAction = ValueOf<import("./src/world/types/BlockAction")>;
-	export type Dimension = ValueOf<import("./src/world/types/Dimension")>;
-	export type Generator = ValueOf<import("./src/world/types/Generator")>;
-	export type Interact = ValueOf<import("./src/world/types/Interact")>;
-	export type Biome = ValueOf<import("./src/world/types/Biome")>;
+	export type WorldGenerator = ValueOf<typeof import("./src/world/types/WorldGenerator")>;
+	export type DimensionLegacy = ValueOf<typeof import("./src/world/types/DimensionId")>;
+	export type BlockAction = ValueOf<typeof import("./src/world/types/BlockAction")>;
+	export type Dimension = ValueOf<typeof import("./src/world/types/Dimension")>;
+	export type Generator = ValueOf<typeof import("./src/world/types/Generator")>;
+	export type Interact = ValueOf<typeof import("./src/world/types/Interact")>;
+	export type Biome = ValueOf<typeof import("./src/world/types/Biome")>;
 
-	export type Transaction = ValueOf<import("./src/inventory/types/Transaction")>;
-	export type WindowType = ValueOf<import("./src/inventory/types/WindowType")>;
-	export type WindowId = ValueOf<import("./src/inventory/types/WindowId")>;
+	export type Transaction = ValueOf<typeof import("./src/inventory/types/Transaction")>;
+	export type WindowType = ValueOf<typeof import("./src/inventory/types/WindowType")>;
+	export type WindowId = ValueOf<typeof import("./src/inventory/types/WindowId")>;
 
-	export type Action = ValueOf<import("./src/forms/types/Action")>;
-	export type Form = ValueOf<import("./src/forms/types/Form")>;
+	export type Action = ValueOf<typeof import("./src/forms/types/Action")>;
+	export type Form = ValueOf<typeof import("./src/forms/types/Form")>;
 
-	export type CreteriaName = ValueOf<import("./src/scoreboard/types/CreteriaName")>;
-	export type DisplaySlot = ValueOf<import("./src/scoreboard/types/DisplaySlot")>;
-	export type ScoreAction = ValueOf<import("./src/scoreboard/types/ScoreAction")>;
-	export type EntryType = ValueOf<import("./src/scoreboard/types/EntryType")>;
+	export type CreteriaName = ValueOf<typeof import("./src/scoreboard/types/CreteriaName")>;
+	export type DisplaySlot = ValueOf<typeof import("./src/scoreboard/types/DisplaySlot")>;
+	export type ScoreAction = ValueOf<typeof import("./src/scoreboard/types/ScoreAction")>;
+	export type EntryType = ValueOf<typeof import("./src/scoreboard/types/EntryType")>;
 
-	export type DamageCause = ValueOf<import("./src/player/types/DamageCause")>;
-	export type HungerCause = ValueOf<import("./src/player/types/HungerCause")>;
-	export type Gamemode = ValueOf<import("./src/player/types/Gamemode")>;
-	export type Title = ValueOf<import("./src/player/types/Title")>;
-	export type Text = ValueOf<import("./src/player/types/Text")>;
+	export type DamageCause = ValueOf<typeof import("./src/player/types/DamageCause")>;
+	export type HungerCause = ValueOf<typeof import("./src/player/types/HungerCause")>;
+	export type Gamemode = ValueOf<typeof import("./src/player/types/Gamemode")>;
+	export type Title = ValueOf<typeof import("./src/player/types/Title")>;
+	export type Text = ValueOf<typeof import("./src/player/types/Text")>;
 
-	export type Difficulty = ValueOf<import("./src/server/types/Difficulty")>;
+	export type Difficulty = ValueOf<typeof import("./src/server/types/Difficulty")>;
 
-	export type MovementAuthority = ValueOf<import("./src/network/packets/types/MovementAuthority")>;
-	export type PlayListAction = ValueOf<import("./src/network/packets/types/PlayerListAction")>;
-	export type PlayStatus = ValueOf<import("./src/network/packets/types/PlayStatus")>;
-	export type DimensionId = ValueOf<import("./src/world/types/DimensionId")>;
+	export type MovementAuthority = ValueOf<typeof import("./src/network/packets/types/MovementAuthority")>;
+	export type PlayListAction = ValueOf<typeof import("./src/network/packets/types/PlayerListAction")>;
+	export type PlayStatus = ValueOf<typeof import("./src/network/packets/types/PlayStatus")>;
+	export type DimensionId = ValueOf<typeof import("./src/world/types/DimensionId")>;
 
-	export type PermissionLevel = ValueOf<import("./src/permission/PermissionLevel")>;
+	export type PermissionLevel = ValueOf<typeof import("./src/permission/PermissionLevel")>;
+
+	export type GamemodeMap = keyof {
+		0: Gamemode;
+		1: Gamemode;
+		2: Gamemode;
+		3: Gamemode;
+		5: Gamemode;
+
+		s: Gamemode;
+		c: Gamemode;
+		a: Gamemode;
+		sp: Gamemode;
+		d: Gamemode;
+
+		survival: Gamemode;
+		creative: Gamemode;
+		adventure: Gamemode;
+		spectator: Gamemode;
+		default: Gamemode;
+	};
 
 	export type PlayerSetDifficultyEvent = {
 		player: Player;
@@ -1143,7 +1177,7 @@ declare module "Frog" {
 		setAttribute(setAttribute: Attribute): void;
 		setHealth(health: number, cause?: DamageCause): void;
 		setHunger(health: number, cause?: HungerCause): void;
-		setDimension(x: number, y: number, z: number, dimension: string, respawn?: boolean): void;
+		setDimension(x: number, y: number, z: number, dimension: DimensionId, respawn?: boolean | undefined): void;
 		setSpeed(speed: number): void;
 		setOp(status: boolean): void;
 		sendPlayStatus(playStatus: PlayStatus, terminateConnection?: boolean): void;

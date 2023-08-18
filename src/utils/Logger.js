@@ -1,51 +1,39 @@
-/**
- * ██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- * The content of this file is licensed using the CC-BY-4.0 license
- * which requires you to agree to its terms if you wish to use or make any changes to it.
- *
- * @license CC-BY-4.0
- * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
- * @link Discord - https://discord.gg/UFqrnAbqjP
- */
 const { convertConsoleColor } = require("./ConsoleColorConvertor");
 const { getKey } = require("./Language");
 
 const LoggingException = require("./exceptions/LoggingException");
 
 module.exports = {
-	/** @type {import("Frog").LogMessage[]} */
+	/**
+	 * This array contains all logged messages
+	 * @type {import("Frog").LogMessage[]}
+	 */
 	messages: [],
 
 	/**
-	 * Logs a message
+	 * Logs a message.
 	 *
-	 * @throws {LoggingException} - If the log types is invalid (valid types are info, warn, error, debug)
+	 * @throws {LoggingException} If the `consoleLoggingLevel` is invalid
 	 *
-	 * @param {string} langString
-	 * @param {number} color
-	 * @param {string} message
-	 * @param {string} type
+	 * @param {string} levelName The name of the logging level 
+	 * @param {number} color The color ID for formatting
+	 * @param {string} message The message
+	 * @param {import("Frog").LogLevel} consoleLoggingLevel The logging level for the console output (e.g info, warn, error, debug)
 	 */
-	log(langString, color, message, type) {
+	log(levelName, color, message, consoleLoggingLevel) {
 		const Frog = require("../Frog");
 
 		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
 
-		if (!console[type]) {
-			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s", type));
+		if (!console[consoleLoggingLevel]) {
+			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s", consoleLoggingLevel));
 		}
 
 		let shouldLogMessage = true;
 
 		Frog.eventEmitter.emit("serverLogMessage", {
-			type,
-			langString,
+			consoleLoggingLevel,
+			levelName,
 			message,
 			color,
 			cancel: () => {
@@ -56,47 +44,47 @@ module.exports = {
 		if (!shouldLogMessage) return;
 
 		this.messages.push({
-			langString,
-			color,
+			consoleLoggingLevel,
+			levelName,
 			message,
-			type,
+			color,
 		});
 
-		console[type](convertConsoleColor(`${date} \x1b[${color}m${langString}\x1b[0m | ${message}`));
+		console[consoleLoggingLevel](convertConsoleColor(`${date} \x1b[${color}m${levelName}\x1b[0m | ${message}`));
 	},
 
 	/**
-	 * Logs a message to the console as info
+	 * Logs a message to the console as info.
 	 *
-	 * @param {string} message
+	 * @param {string} message Log message.
 	 */
 	info(message) {
 		this.log(getKey("logger.info"), 32, message, "info");
 	},
 
 	/**
-	 * Logs a message to the console as a warning
+	 * Logs a message to the console as a warning.
 	 *
-	 * @param {string} message
+	 * @param {string} message Log message.
 	 */
 	warning(message) {
 		this.log(getKey("logger.warn"), 33, message, "warn");
 	},
 
 	/**
-	 * Logs a message to the console as an error
+	 * Logs a message to the console as an error.
 	 *
-	 * @param {string} message
+	 * @param {string} message Log message.
 	 */
 	error(message) {
 		this.log(getKey("logger.error"), 31, message, "error");
 	},
 
 	/**
-	 * Logs a message to the console as debug
-	 * Requires debug to be enabled in the server settings
+	 * Logs a message to the console as debug.
+	 * Requires debug to be enabled in the server settings.
 	 *
-	 * @param {string} message
+	 * @param {string} message Log message.
 	 */
 	debug(message) {
 		const Frog = require("../Frog");

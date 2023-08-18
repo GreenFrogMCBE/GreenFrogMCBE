@@ -140,7 +140,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				startGame.world_gamemode = config.world.gamemode.world;
 				startGame.difficulty = Difficulty.NORMAL;
 				startGame.spawn_position = { x: 0, y: 0, z: 0 };
-				startGame.permission_level = player.permissions.permissionLevel;
+				startGame.permission_level = /** @type {import("Frog").PermissionLevel} */ (player.permissions.permissionLevel);
 				startGame.world_name = player.world.name;
 				startGame.game_version = "*";
 				startGame.movement_authority = MovementAuthority.SERVER;

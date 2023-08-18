@@ -317,7 +317,7 @@ module.exports = {
 		/**
 		 * Sets player's local difficulty
 		 *
-		 * @param {import("Frog").Difficulty | string} difficulty
+		 * @param {import("Frog").Difficulty} difficulty
 		 */
 		player.setDifficulty = function (difficulty) {
 			let shouldChangeDifficulty = true;
@@ -679,8 +679,8 @@ module.exports = {
 			player.world.placeBlock(player.inventory.container.blockPosition.x, player.inventory.container.blockPosition.y, player.inventory.container.blockPosition.z, vanillaBlocks.chest.runtime_id);
 
 			const containerOpen = new ServerContainerOpenPacket();
-			containerOpen.window_id = player.inventory.container.window.id;
-			containerOpen.window_type = player.inventory.container.window.type;
+			containerOpen.window_id = /** @type {import("Frog").WindowId} */ (player.inventory.container.window.id);
+			containerOpen.window_type = /** @type {import("Frog").WindowType} */ (player.inventory.container.window.type);
 			containerOpen.runtime_entity_id = -1;
 			containerOpen.coordinates = { x: player.inventory.container.blockPosition.x || 0, y: player.inventory.container.blockPosition.y || 0, z: player.inventory.container.blockPosition.z || 0 };
 			containerOpen.writePacket(player);

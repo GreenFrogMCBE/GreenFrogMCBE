@@ -23,7 +23,7 @@ const { getKey } = require("./utils/Language");
 const Logger = require("./utils/Logger");
 
 const langParser = require("@kotinash/lang-parser");
-const EventEmitter = require("events");
+const eventEmitter = require("events");
 const yaml = require("js-yaml");
 const path = require("path");
 const fs = require("fs");
@@ -32,15 +32,15 @@ const fs = require("fs");
 let _server;
 
 /** @returns {EventEmitter} */
-const _eventEmitter = new EventEmitter();
+const _eventEmitter = new eventEmitter();
 
-/** @returns {any} */
+/** @returns {import("Frog").Config} */
 function getConfig() {
 	const configData = yaml.load(fs.readFileSync("config.yml", "utf8"));
 	return configData;
 }
 
-/** @returns {any} */
+/** @returns {import("Frog").Language} */
 function getLang() {
 	const config = getConfig();
 
@@ -92,12 +92,12 @@ module.exports = {
 	/**
 	 * Returns the release data
 	 *
-	 * @returns {import("Frog").ReleaseData}
+	 * @type {import("Frog").ReleaseData}
 	 */
 	releaseData: {
 		minorServerVersion: "3.7.1",
 		majorServerVersion: "3.0",
-		versionDescription: "Code improvement",
+		versionDescription: "Code improvements",
 		apiVersion: "3.0",
 	},
 
@@ -134,7 +134,6 @@ module.exports = {
 
 		Logger.info(getKey("server.shuttingDown"));
 
-		// @ts-ignore (only for people using @ts-check)
 		this.server.close(shutdownMessage);
 
 		ConsoleCommandSender.closeConsole();

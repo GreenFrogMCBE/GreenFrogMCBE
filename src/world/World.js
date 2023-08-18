@@ -227,18 +227,20 @@ class World {
 	}
 
 	/**
-	 * Calculates and handles the fall damage
-	 * NOTE: This can be spoofed by a hacked client
+	 * Calculates and handles fall damage.
+	 * NOTE: This can be spoofed by a hacked client.
 	 *
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Coordinate} position
+	 * @param {import("Frog").Player} player - The player object.
+	 * @param {import("Frog").Coordinate} position - The position where the fall occurred.
 	 */
 	async handleFallDamage(player, position) {
-		if (player.gamemode == Gamemode.CREATIVE || player.gamemode == Gamemode.SPECTATOR) return;
+		if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
+			return;
+		}
 
-		const falldamageY = player.location.y - position.y;
+		const fallDistanceY = player.location.y - position.y;
 
-		if (falldamageY > 0.56 && player._damage.fall.queue && !player._damage.fall.invulnerable) {
+		if (fallDistanceY > 0.56 && player._damage.fall.queue && !player._damage.fall.invulnerable) {
 			player.setHealth(Math.floor(player.health - player._damage.fall.queue), DamageCause.FALL);
 
 			player._damage.fall.invulnerable = true;
@@ -248,7 +250,7 @@ class World {
 			}, 50);
 		}
 
-		player._damage.fall.queue = (falldamageY + 0.5) * 2;
+		player._damage.fall.queue = (fallDistanceY + 0.5) * 2;
 	}
 
 	/**
@@ -263,7 +265,6 @@ class World {
 			spawnCoordinates: this.spawnCoordinates,
 			generator: this.generator,
 			time,
-			
 		};
 	}
 }

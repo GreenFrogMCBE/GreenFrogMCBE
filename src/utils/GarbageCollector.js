@@ -49,12 +49,9 @@ module.exports = {
 
 		Frog.eventEmitter.emit("serverGarbageCollection");
 
-		for (let i = 0; i < PlayerInfo.playersOnline.length; i++) {
-			const player = PlayerInfo.playersOnline[i];
-
+		for (const player of PlayerInfo.playersOnline) {
 			delete player.q;
 			delete player.q2;
-			delete player.profile;
 			delete player.skinData;
 			delete player.userData;
 		}

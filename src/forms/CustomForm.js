@@ -102,7 +102,7 @@ class CustomForm {
 	 * @param {number} [step]
 	 */
 	addSlider(text, min, max, step = -1) {
-		this.addAction({ type: Action.SLIDER, text, min: min.toString(), max: max.toString(), step: step.toString() });
+		this.addAction({ type: Action.SLIDER, text, min, max, step });
 	}
 
 	/**

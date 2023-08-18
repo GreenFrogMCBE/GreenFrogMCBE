@@ -232,7 +232,7 @@ class PacketHandler {
 	 * @param {Error} error
 	 */
 	handlePacketError(player, error) {
-		Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s", player.username).replace("%d", error.stack));
+		Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s", player.username).replace("%d", error.stack || ""));
 
 		try {
 			player.kick(getKey("kickMessages.invalidPacket"));
