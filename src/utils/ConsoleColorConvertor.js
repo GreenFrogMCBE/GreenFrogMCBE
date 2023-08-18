@@ -43,9 +43,7 @@ module.exports = {
 		};
 
 		for (const color in colors) {
-			if (colors.hasOwnProperty(color)) {
-				string = string.replace(new RegExp(color, "g"), colors[color]);
-			}
+			string = string.replace(new RegExp(color, "g"), colors[color]);
 		}
 
 		return string + "\x1b[0m";
