@@ -18,11 +18,8 @@
 class Packet {
 	constructor() {}
 
-	/** @type {string | unknown} */
-	name;
-
-	/** @type {number | unknown} */
-	packetId;
+	/** @type {string} */
+	name = "";
 
 	/**
 	 * @param {import("Frog").Player} player
