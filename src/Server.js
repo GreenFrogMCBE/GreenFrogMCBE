@@ -103,7 +103,7 @@ function checkNodeJSVersion() {
  * @private
  */
 function checkRenderDistance() {
-	if (Frog.config.world.renderDistance > 16) {
+	if (Frog.config.world.renderDistance.serverSide > 16) {
 		Logger.warning(Language.getKey("world.chunks.renderDistance.tooHigh"));
 	}
 }
@@ -122,7 +122,7 @@ function logStartupMessages() {
  * This function executes when something is off with the server
  *
  * @private
- * @param {Error} error - The critical error that occurred
+ * @param {Error} error
  */
 function handleCriticalError(error) {
 	const { host, port } = Frog.config.network;
@@ -137,7 +137,7 @@ function handleCriticalError(error) {
 	Logger.error(`Server error: ${error.stack}`);
 
 	if (Frog.config.dev.unstable) {
-		process.exit(Frog.config.dev.crashCode);
+		process.exit(Frog.config.dev.exitCodes.crash);
 	}
 }
 
@@ -212,7 +212,7 @@ function startWorldTicker() {
 
 	setInterval(() => {
 		world.tick();
-	}, Frog.config.world.tickSpeed);
+	}, Frog.config.world.ticking.speed);
 }
 
 /**
@@ -228,8 +228,8 @@ function getQuerySettings() {
 		motd: Frog.config.serverInfo.motd,
 		levelName: Frog.config.serverInfo.levelName,
 		players: PlayerInfo.playersOnline,
-		maxPlayers: Frog.config.serverInfo.maxPlayers.toString(),
-		gamemode: Frog.config.world.gamemode,
+		maxPlayers: Frog.config.serverInfo.maxPlayers,
+		gamemode: Frog.config.world.gamemode.world,
 		wl: false, // wl stands for whitelist. TODO: Implement whitelist
 		version: Frog.config.serverInfo.version.toString(),
 		plugins: Frog.config.query.showPlugins ? [""] : PluginManager.plugins,
@@ -239,6 +239,8 @@ function getQuerySettings() {
 module.exports = {
 	/**
 	 * Starts the server
+	 * 
+	 * @async
 	 */
 	async start() {
 		initializeServer();

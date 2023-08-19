@@ -48,7 +48,7 @@ declare module "Frog" {
 		levelName: string;
 		players: Player[];
 		maxPlayers: number;
-		gamemode: Gamemode;
+		gamemode: Gamemode | string;
 		wl: boolean;
 		version: string;
 		plugins: Plugin[] | string[];
@@ -110,6 +110,10 @@ declare module "Frog" {
 			gamemode: {
 				player: string;
 				world: string;
+			};
+			renderDistance: {
+				clientSide: number;
+				serverSide: number;
 			};
 			generators: {
 				type: string;
