@@ -117,6 +117,8 @@ describe("client", async () => {
                     type: "player",
                 },
             });
+
+            Frog.shutdownServer();
         })
     })
 })
