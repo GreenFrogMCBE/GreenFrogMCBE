@@ -64,7 +64,7 @@ class ClientCommandRequestPacket extends Packet {
 			}
 		}
 
-		Logger.info(getKey("commands.ingame.executed").replace("%s", player.username).replace("%d", executedCommand))
+		Logger.info(getKey("commands.ingame.executed").replace("%s", player.username).replace("%d", executedCommand));
 
 		try {
 			let commandFound = false;
