@@ -9,8 +9,7 @@
     "start": "node index.js",
     "dev": "nodemon --signal SIGINT index.js --debug",
     "generate-license-headers": "node tools/generate-license-headers.js",
-    "auto-test": "cd tools && node tests-auto.js --test",
-    "test": "cd tools && node tests-manual.js --test",
+    "test": "cd test && npx mocha main.test.js",
     "plugin-structure": "node tools/generate-base-plugin.js"
   },
   "dependencies": {
@@ -18,7 +17,8 @@
     "@kotinash/lang-parser": "^1.0.3",
     "center-align": "1.0.1",
     "frog-protocol": "github:greenfrogmcbe/Protocol",
-    "js-yaml": "4.1.0"
+    "js-yaml": "4.1.0",
+    "mocha": "^10.2.0"
   },
   "devDependencies": {
     "eslint": "8.47.0",
