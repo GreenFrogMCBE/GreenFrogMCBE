@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare module "Frog" {
-	import { Client, Player as OnlinePlayer, Server } from "frog-protocol";
+	import { Client, Player as OnlinePlayer } from "frog-protocol";
 
 	export type ReleaseData = {
 		minorServerVersion: string;
