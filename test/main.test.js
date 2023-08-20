@@ -118,7 +118,9 @@ describe("client", async () => {
                 },
             });
 
-            Frog.shutdownServer();
+            setTimeout(() => {
+                Frog.shutdownServer();
+            }, 1000)
         })
     })
 })
