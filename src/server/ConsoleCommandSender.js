@@ -64,42 +64,42 @@ module.exports = {
 	/**
 	 * Executes a command that the user types in the console.
 	 *
-	 * @param {string} executedCommand - The command to execute.
+	 * @param {string} command
 	 */
-	executeConsoleCommand(executedCommand) {
-		executedCommand = executedCommand.replace("/", "");
+	executeCommand(command) {
+		command = command.replace("/", "");
 
 		let shouldExecuteCommand = true;
 
-		const args = executedCommand?.split(" ")?.slice(1);
+		const args = command?.split(" ")?.slice(1);
 		const Frog = require("../Frog");
 
 		Frog.eventEmitter.emit("serverCommandExecute", {
 			args,
-			command: executedCommand,
+			command,
 			cancel() {
 				shouldExecuteCommand = false;
 			},
 		});
 
-		if (isClosed || !shouldExecuteCommand || !executedCommand.replace(" ", "")) return;
+		if (isClosed || !shouldExecuteCommand || !command.replace(" ", "")) return;
 
 		try {
 			let commandFound = false;
 
-			for (const command of CommandManager.commands) {
-				if (command.name === executedCommand.split(" ")[0] || (command.aliases && command.aliases.includes(executedCommand.split(" ")[0]))) {
-					if (command.minArgs !== undefined && command.minArgs > args.length) {
-						Logger.info(Language.getKey("commands.errors.syntaxError.minArg").replace("%s", command.minArgs).replace("%d", args.length.toString()));
+			for (const loadedCommand of CommandManager.commands) {
+				if (loadedCommand.name === command.split(" ")[0] || (loadedCommand.aliases && loadedCommand.aliases.includes(command.split(" ")[0]))) {
+					if (loadedCommand.minArgs !== undefined && loadedCommand.minArgs > args.length) {
+						Logger.info(Language.getKey("commands.errors.syntaxError.minArg").replace("%s", loadedCommand.minArgs).replace("%d", args.length.toString()));
 						return;
 					}
 
-					if (command.maxArgs !== undefined && command.maxArgs < args.length) {
-						Logger.info(Language.getKey("commands.errors.syntaxError.maxArg").replace("%s", command.maxArgs).replace("%d", args.length.toString()));
+					if (loadedCommand.maxArgs !== undefined && loadedCommand.maxArgs < args.length) {
+						Logger.info(Language.getKey("commands.errors.syntaxError.maxArg").replace("%s", loadedCommand.maxArgs).replace("%d", args.length.toString()));
 						return;
 					}
 
-					command.execute(
+					loadedCommand.execute(
 						{
 							username: "Server",
 							network: {
@@ -131,12 +131,12 @@ module.exports = {
 							Logger.info(msg);
 						},
 					},
-					executedCommand.split(" ")[0],
+					command.split(" ")[0],
 				);
 			}
 		} catch (error) {
 			Frog.eventEmitter.emit("serverCommandProcessError", {
-				command: executedCommand,
+				command,
 				error,
 			});
 
@@ -177,7 +177,7 @@ module.exports = {
 			});
 
 			if (shouldProcessCommand) {
-				this.executeConsoleCommand(command);
+				this.executeCommand(command);
 
 				if (!isClosed && readLineInterface) readLineInterface.prompt(true);
 			}

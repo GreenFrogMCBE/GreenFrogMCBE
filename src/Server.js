@@ -165,13 +165,13 @@ async function listen() {
 			host,
 			port,
 			version,
-			offline: offlineMode,
+			offline: process.env.TEST || offlineMode,
 			maxPlayers,
 			motd: {
 				motd,
 				levelName,
 			},
-		}).on("connect", /** @param {any} client */ (client) => {
+		}).on("connect", client => {
 			client.on("join", () => {
 				new PlayerJoinHandler().onPlayerJoin(client);
 			});

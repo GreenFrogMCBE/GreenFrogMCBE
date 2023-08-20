@@ -1111,11 +1111,6 @@ declare module "Frog" {
 		| "playerTeleport"
 		| "playerKill";
 
-
-	export type Test = {
-		test(): void;
-	}
-
 	export interface EventEmitter {
 		on(eventName: Event, listener?: any): void;
 

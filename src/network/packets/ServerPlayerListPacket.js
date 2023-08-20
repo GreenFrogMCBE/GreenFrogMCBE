@@ -40,7 +40,7 @@ class ServerPlayerListPacket extends Packet {
 		if (this.type === PlayerListAction.REMOVE) {
 			data = {
 				records: {
-					types: PlayerListAction.REMOVE,
+					type: PlayerListAction.REMOVE,
 					records_count: 1,
 					records: [
 						{
@@ -52,12 +52,12 @@ class ServerPlayerListPacket extends Packet {
 		} else {
 			data = {
 				records: {
-					types: PlayerListAction.ADD,
+					type: PlayerListAction.ADD,
 					records_count: 1,
 					records: [
 						{
 							uuid: this.uuid,
-							entity_unique_id: "-" + this.id,
+							entity_unique_id: this.id,
 							username: this.username,
 							xbox_user_id: this.xbox_id,
 							platform_chat_id: "",

@@ -64,6 +64,8 @@ class ClientCommandRequestPacket extends Packet {
 			}
 		}
 
+		Logger.info(getKey("commands.ingame.executed").replace("%s", player.username).replace("%d", executedCommand))
+
 		try {
 			let commandFound = false;
 
@@ -87,7 +89,7 @@ class ClientCommandRequestPacket extends Packet {
 					command.execute(player, Frog, args);
 
 					commandFound = true;
-					break; // Exit loop once command has been found and executed
+					break;
 				}
 			}
 

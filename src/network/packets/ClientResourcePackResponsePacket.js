@@ -54,7 +54,7 @@ const World = require("../../world/World");
 const biomeDefinitions = require("../../resources/biomeDefinitions.json").raw_payload;
 const availableEntities = require("../../resources/availableEntities.json").nbt;
 const creativeContentItems = require("../../resources/creativeContent.json").items;
-const entityData = require("../../resources/defaultEntityData.json").entityData;
+const entityData = require("../../resources/entityData.json").entityData;
 const features = require("../../resources/featureRegistry.json").features;
 const trimMaterials = require("../../resources/trimData.json").materials;
 const itemStates = require("../../resources/itemStates.json").itemStates;
@@ -202,8 +202,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				}
 				itemComponent.writePacket(player);
 
-				if (player.renderChunks) {
-				// player.renderChunks is true by default but can be disabled by plugins
+				if (player.renderChunks) {	// player.renderChunks is true by default but can be disabled by plugins
 					player.setChunkRadius(player.world.renderDistance);
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
@@ -223,7 +222,7 @@ class ClientResourcePackResponsePacket extends Packet {
 
 					Frog.eventEmitter.emit("playerSpawn", { player });
 
-					player.setEntityData(/** @type {import("Frog").EntityData} */ (entityData));
+					player.setEntityData(/** @type {import("Frog").EntityData} */(entityData));
 					player.setSpeed(0.1);
 
 					for (const onlinePlayer of PlayerInfo.playersOnline) {

@@ -63,7 +63,7 @@ class CommandGamemode extends Command {
 		const gamemode = gamemodeMap[args[0]];
 
 		if (!gamemode) {
-			player.sendMessage(getKey("commands.gamemode.execution.invalidGamemode").replace("%s", args[0]));
+			player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s", args[0]));
 			return;
 		}
 

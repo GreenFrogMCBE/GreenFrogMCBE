@@ -32,7 +32,7 @@ const Selector = require("./types/Selector");
  * @returns {boolean}
  */
 function canBeKilled(player) {
-	if (player.isConsole || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
+	if (player.permissions.isConsole || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
 		return false;
 	}
 

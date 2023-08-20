@@ -57,7 +57,7 @@ module.exports = {
 	 *
 	 * @returns {boolean}
 	 */
-	isDebug: process.argv.includes("--debug") || getConfig().dev.debug,
+	isDebug: process.env.DEBUG || process.argv.includes("--debug") || getConfig().dev.debug,
 
 	/**
 	 * Returns the server object
