@@ -171,7 +171,7 @@ async function listen() {
 				motd,
 				levelName,
 			},
-		}).on("connect", client => {
+		}).on("connect", (/** @type {import("frog-protocol").Player} */ client) => {
 			client.on("join", () => {
 				new PlayerJoinHandler().onPlayerJoin(client);
 			});
