@@ -1015,10 +1015,24 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
-	export type InventoryContainerChestRemovalEvent = {
+	export type InventoryContainerChestRemoveEvent = {
 		player: Player;
 		cancel(): void;
 	};
+
+	export type InventoryPreItemRequestEvent = {
+		count: number;
+		network_id: number;
+		block_runtime_id: number;
+		cancel(): void
+	}
+
+	export type InventoryPostsItemRequestEvent = {
+		count: number;
+		network_id: number;
+		block_runtime_id: number;
+		inventoryItems: Item[]
+	}
 
 	export type Event =
 		| "blockBreak"
@@ -1034,8 +1048,6 @@ declare module "Frog" {
 		| "inventoryContainerPreCreate"
 		| "inventoryContainerCreate"
 		| "inventoryContainerChestRemove"
-		| "inventoryContainerGiveItem"
-		| "inventoryContainerItemRequest"
 		| "inventoryPreItemRequest"
 		| "inventoryPostItemRequest"
 		| "packetRead"
