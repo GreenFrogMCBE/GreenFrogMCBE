@@ -15,6 +15,7 @@
  */
 declare module "Frog" {
 	import { Client, Player as OnlinePlayer } from "frog-protocol";
+	import { Socket, RemoteInfo } from "dgram";
 
 	export type ReleaseData = {
 		minorServerVersion: string;
@@ -49,7 +50,6 @@ declare module "Frog" {
 		players: Player[];
 		maxPlayers: number;
 		gamemode: Gamemode | string;
-		wl: boolean;
 		version: string;
 		plugins: Plugin[] | string[];
 	};
@@ -821,6 +821,8 @@ declare module "Frog" {
 
 	export type PermissionLevel = ValueOf<typeof import("./src/permission/PermissionLevel")>;
 
+	export type Scoreboard = import("./src/scoreboard/Scoreboard");
+
 	export type GamemodeMap = keyof {
 		0: Gamemode;
 		1: Gamemode;
@@ -1032,6 +1034,67 @@ declare module "Frog" {
 		network_id: number;
 		block_runtime_id: number;
 		inventoryItems: Item[]
+	}
+
+	export type BlockBreakEvent = {
+		player: Player;
+		action: BlockAction;
+		position: any;
+		result_position: any;
+		face: number;
+	}
+
+	export type QueryListenEvent = {
+		socket: Socket
+		settings: QuerySettings
+		packet: Buffer;
+		client: RemoteInfo;
+		cancel(): void;
+	}
+
+	export type QueryPacketEvent = {
+		socket: Socket; 
+		settings: QuerySettings;
+		packet: Buffer;
+		client: RemoteInfo;
+		cancel(): void;
+	}
+
+	export type QueryInvalidPacketEvent = {
+		client: RemoteInfo;
+		packet: Buffer
+	}
+
+	export type QueryErrorEvent = {
+		socket: Socket;
+		querySettings: QuerySettings;
+		error: Error;
+		cancel(): void;
+	}
+
+	export type WorldGenerateEvent = {
+		player: Player;
+		cancel(): void;
+	}
+
+	export type ScoreboardCreateEvent = {
+		scoreboard: Scoreboard;
+		cancel(): void
+	}
+
+	export type ScoreboardSetScoreEvent = {
+		scoreboard: Scoreboard;
+		cancel(): void
+	}
+
+	export type ScoreboardScoreDeleteEvent = {
+		scoreboard: Scoreboard;
+		cancel(): void
+	}
+
+	export type ScoreboardDeleteEvent = {
+		scoreboard: Scoreboard;
+		cancel(): void
 	}
 
 	export type Event =

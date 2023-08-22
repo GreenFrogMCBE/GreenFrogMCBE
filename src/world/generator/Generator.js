@@ -34,7 +34,16 @@ class Generator {
 	 * @param {import("Frog").Player} player
 	 */
 	generate(player) {
-		Frog.eventEmitter.emit("worldGenerate", { player });
+		let shouldGenerateWorld = true;
+
+		Frog.eventEmitter.emit("worldGenerate", {
+			player,
+			cancel() {
+				shouldGenerateWorld = false;
+			}
+		});
+
+		if (!shouldGenerateWorld) return;
 
 		const chunkRadius = player.world.renderDistance;
 

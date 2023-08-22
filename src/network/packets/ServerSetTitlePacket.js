@@ -39,11 +39,9 @@ class ServerSetTitlePacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 */
 	writePacket(player) {
-		if (this.type === Title.CLEAR) this.text = "";
-
 		player.queue(this.name, {
 			type: this.type,
-			text: this.text,
+			text: this.type === Title.CLEAR ? "" : this.text,
 			fade_in_time: this.fade_in_time,
 			stay_time: this.stay_time,
 			fade_out_time: this.fade_out_time,

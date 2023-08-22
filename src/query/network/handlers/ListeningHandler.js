@@ -30,7 +30,6 @@ class ListeningHandler {
 		// Get the query address
 		const address = `/${Frog.config.network.host}:${Frog.config.query.port}`;
 
-		// Try to bind the socket
 		try {
 			let shouldListen = true;
 
@@ -46,12 +45,10 @@ class ListeningHandler {
 
 			socket.bind(settings.port, settings.host);
 
-			// Start handling connections
 			socket.on("message", (message, client) => new ConnectionHandler().handleConnection(socket, settings, message, client));
 
 			Logger.info(getKey("query.server.listening.success").replace("%s", address));
 		} catch (error) {
-			// Emit the queryError event
 			let shouldCancelError = false;
 
 			Frog.eventEmitter.emit("queryError", {
@@ -65,7 +62,6 @@ class ListeningHandler {
 
 			if (!shouldCancelError) return;
 
-			// Check if the error code is ERRADDRINUSE (usually caused by another server listening on the same port)
 			if (error.code === "ERRADDRINUSE") {
 				Logger.error(getKey("query.server.listening.failed").replace("%s", address));
 				return;

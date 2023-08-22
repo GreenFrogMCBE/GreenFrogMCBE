@@ -31,7 +31,6 @@ class ConnectionHandler {
 	handleConnection(socket, settings, packet, client) {
 		const packetType = packet.readUInt8(2);
 
-		// Emit the event
 		let shouldCancelPacket = true;
 
 		Frog.eventEmitter.emit("queryPacket", {
@@ -46,7 +45,6 @@ class ConnectionHandler {
 
 		if (!shouldCancelPacket) return;
 
-		// Check if the packet matches one of the packets in `NetworkConstants`
 		switch (packetType) {
 			case QueryPacket.HANDSHAKE:
 				new ClientHandshakeRequestPacket().readPacket(client, packet, socket);

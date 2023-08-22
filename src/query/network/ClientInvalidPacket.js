@@ -32,13 +32,11 @@ class ClientInvalidPacket extends Packet {
 	 * @param {Buffer} packet
 	 */
 	readPacket(client, packet) {
-		// Emit the event
 		Frog.eventEmitter.emit("queryInvalidPacket", {
 			client,
 			packet,
 		});
 
-		// Log the packet
 		QueryLogger.logPacket(getKey("query.server.network.packets.invalidPacket").replace("%s", client.address.toString()), true);
 	}
 }

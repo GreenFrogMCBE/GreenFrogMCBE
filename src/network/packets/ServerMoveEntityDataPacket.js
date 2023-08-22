@@ -19,13 +19,13 @@ class ServerMoveEntityDataPacket extends Packet {
 	name = "move_entity_delta";
 
 	/** @type {import("Frog").Coordinate } */
-	coordinates = { x: 0, y: 0, z: 0 }; // This is required here
+	coordinates = { x: 0, y: 0, z: 0 };
 	/** @type {number | undefined} */
 	runtime_entity_id;
 	/** @type {import("Frog").EntityMovementFlags | undefined} */
 	flags;
 	/** @type {import("Frog").Coordinate} */
-	coordinatesRotation = { x: 0, y: 0, z: 0 }; // This is required here
+	coordinatesRotation = { x: 0, y: 0, z: 0 };
 
 	/**
 	 * @param {import("Frog").Player} player

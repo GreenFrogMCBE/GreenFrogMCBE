@@ -230,7 +230,6 @@ function getQuerySettings() {
 		players: PlayerInfo.playersOnline,
 		maxPlayers: Frog.config.serverInfo.maxPlayers,
 		gamemode: Frog.config.world.gamemode.world,
-		wl: false, // wl stands for whitelist. TODO: Implement whitelist
 		version: Frog.config.serverInfo.version.toString(),
 		plugins: Frog.config.query.showPlugins ? [""] : PluginManager.plugins,
 	};

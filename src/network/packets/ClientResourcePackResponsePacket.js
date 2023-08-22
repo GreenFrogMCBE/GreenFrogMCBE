@@ -202,7 +202,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				}
 				itemComponent.writePacket(player);
 
-				if (player.renderChunks) {	// player.renderChunks is true by default but can be disabled by plugins
+				if (player.renderChunks) { // player.renderChunks is true by default but can be disabled by plugins
 					player.setChunkRadius(player.world.renderDistance);
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
