@@ -15,8 +15,6 @@
  */
 const Logger = require("../utils/Logger");
 
-const Gamemode = require("./types/Gamemode");
-
 const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
 
 const GarbageCollector = require("../utils/GarbageCollector");
@@ -45,6 +43,7 @@ const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRad
 const PermissionManager = require("../permission/PermissionManager");
 
 const TextType = require("./types/Text");
+const Gamemode = require("./types/Gamemode");
 const DamageCause = require("./types/DamageCause");
 const HungerCause = require("./types/HungerCause");
 const WindowId = require("../inventory/types/WindowId");
