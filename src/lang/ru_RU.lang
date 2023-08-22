@@ -141,7 +141,6 @@ debug.player.unsupportedAction.id=Неподдерживаемый иденти�
 debug.player.unsupportedAction.block=Неподдерживаемый идентификатор действия блока от %s=%d
 
 chat.format=<%s> %d
-chat.format.plugin=<%s> %d
 chat.format.me=* %s %d
 chat.format.say=[%s] %d
 

@@ -100,8 +100,7 @@ module.exports = {
 
 			if (!shouldSendMessage) return;
 
-			Frog.broadcastMessage(getKey('chat.format.plugin').replace("%s", player.username).replace("%d", message));
-			process.exit(0)
+			Frog.broadcastMessage(getKey('chat.format').replace("%s", player.username).replace("%d", message));
 		};
 
 		/**

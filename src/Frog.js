@@ -111,7 +111,7 @@ module.exports = {
 			player.sendMessage(message);
 		}
 
-		Logger.info(getKey("chat.format.plugin").replace("%s", message));
+		Logger.info(message);
 	},
 
 	/**
