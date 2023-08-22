@@ -55,8 +55,6 @@ const PlayerInfo = require("./PlayerInfo");
 
 const Frog = require("../Frog");
 
-const lang = Frog.lang;
-
 module.exports = {
 	/**
 	 * Adds API functions to the player object
@@ -102,7 +100,8 @@ module.exports = {
 
 			if (!shouldSendMessage) return;
 
-			Frog.broadcastMessage(lang.chat.format.plugin.replace("%username%", player.username).replace("%message%", message));
+			Frog.broadcastMessage(getKey('chat.format.plugin').replace("%s", player.username).replace("%d", message));
+			process.exit(0)
 		};
 
 		/**

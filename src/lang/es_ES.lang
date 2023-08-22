@@ -141,7 +141,7 @@ debug.player.unsupportedAction.id=ID d'acció no admès de %s=%d
 debug.player.unsupportedAction.block=ID d'acció de bloc no admès de %s=%d
 
 chat.format=<%s> %d
-chat.format.plugin=%s
+chat.format.plugin=<%s> %d
 chat.format.me=* %s %d
 chat.format.say=[%s] %d
 

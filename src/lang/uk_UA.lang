@@ -141,7 +141,7 @@ debug.player.unsupportedAction.id=Непідтримуваний ідентиф�
 debug.player.unsupportedAction.block=Непідтримуваний ідентифікатор дії блока від %s=%d
 
 chat.format=<%s> %d
-chat.format.plugin=%s
+chat.format.plugin=<%s> %d
 chat.format.me=* %s %d
 chat.format.say=[%s] %d
 
