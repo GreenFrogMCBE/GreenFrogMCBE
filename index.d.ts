@@ -1244,7 +1244,7 @@ declare module "Frog" {
 		setTime(time: number): void;
 		setGamemode(gamemode: string): void;
 		setVelocity(x: number, y: number, z: number): void;
-		setDifficulty(difficulty: string): void;
+		setDifficulty(difficulty: Difficulty): void;
 		setEntityData(data: EntityData): void;
 		setChunkRadius(chunkRadius: number): void;
 		setAttribute(setAttribute: Attribute): void;
