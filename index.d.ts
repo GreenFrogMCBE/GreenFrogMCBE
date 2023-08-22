@@ -1141,7 +1141,6 @@ declare module "Frog" {
 		| "serverCommandExecute"
 		| "serverCommandsInitialize"
 		| "serverVelocityUpdate"
-		| "serverSetXP"
 		| "serverSetHealth"
 		| "serverSpeedUpdate"
 		| "serverCriticalError"

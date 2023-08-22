@@ -457,34 +457,6 @@ module.exports = {
 		};
 
 		/**
-		 * Sets the XP for the player
-		 *
-		 * @param {number} xp
-		 */
-		player.setXP = function (xp) {
-			let shouldSetXP = true;
-
-			Frog.eventEmitter.emit("serverSetXP", {
-				player,
-				xp,
-				cancel: () => {
-					shouldSetXP = false;
-				},
-			});
-
-			if (!shouldSetXP) return;
-
-			player.setAttribute({
-				min: 0,
-				max: 1000000,
-				current: xp,
-				default: 0,
-				name: PlayerAttribute.EXPERIENCE,
-				modifiers: [],
-			});
-		};
-
-		/**
 		 * Sets the health of the player
 		 *
 		 * @param {number} health
