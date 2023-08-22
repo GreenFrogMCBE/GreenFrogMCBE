@@ -1240,7 +1240,6 @@ declare module "Frog" {
 		chat(message: string): void;
 		teleport(x: number, y: number, z: number, rot_x?: number, rot_y?: number, rot_z?: number): void;
 		transfer(address: string, port: number): void;
-		setXP(xp: number): void;
 		setTime(time: number): void;
 		setGamemode(gamemode: string): void;
 		setVelocity(x: number, y: number, z: number): void;
