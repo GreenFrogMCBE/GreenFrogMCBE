@@ -359,7 +359,7 @@ module.exports = {
 				ints: [],
 				floats: [],
 			};
-			playerSetEntityDataPacket.runtime_entity_id = "1"; // 1 - local player
+			playerSetEntityDataPacket.runtime_entity_id = "1"; // Local player
 			playerSetEntityDataPacket.tick = "0";
 			playerSetEntityDataPacket.value = data;
 			playerSetEntityDataPacket.writePacket(player);
