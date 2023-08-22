@@ -270,7 +270,7 @@ module.exports = {
 			if (!shouldSetVelocity) return;
 
 			const setEntityMotionPacket = new ServerSetEntityMotion();
-			setEntityMotionPacket.runtime_entity_id = 0;
+			setEntityMotionPacket.runtime_entity_id = 1;
 			setEntityMotionPacket.velocity = { x, y, z };
 			setEntityMotionPacket.writePacket(player);
 		};
