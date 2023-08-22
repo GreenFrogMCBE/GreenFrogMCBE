@@ -30,7 +30,7 @@ class ServerUpdateAttributesPacket extends Packet {
 	 */
 	writePacket(player) {
 		player.queue(this.name, {
-			runtime_entity_id: String(this.runtime_entity_id),
+			runtime_entity_id: this.runtime_entity_id.toString(),
 			attributes: this.attributes,
 			tick: this.tick,
 		});
