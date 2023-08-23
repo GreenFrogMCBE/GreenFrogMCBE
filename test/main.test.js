@@ -100,9 +100,8 @@ describe("client", () => {
 			offline: true
 		});
 
-		client.on("disconnect", (packet) => {
-			console.log(packet)
-			throw new Error("Connection closed: " + reason);
+		client.on("disconnect", () => {
+			throw new Error("Connection closed");
 		});
 	});
 
@@ -114,8 +113,8 @@ describe("client", () => {
 			offline: true
 		});
 
-		client.on("close", (packet) => {
-			throw new Error("Connection closed: " + packet.data.params.reason);
+		client.on("close", () => {
+			throw new Error("Connection closed");
 		});
 
 		client.on("spawn", () => {
