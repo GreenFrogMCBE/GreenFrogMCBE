@@ -149,7 +149,7 @@ class Scoreboard {
 	/**
 	 * Deletes the scoreboard
 	 */
-	deleteScoreboard() {
+	delete() {
 		let shouldDelete = true;
 
 		Frog.eventEmitter.emit("scoreboardDelete", {
