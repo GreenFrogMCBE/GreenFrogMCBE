@@ -50,6 +50,7 @@ class ModalForm {
 		 * @param {ModalForm} form
 		 * @param {import("Frog").Player} client
 		 */
+		// eslint-disable-next-line no-unused-vars
 		this.onSend = (form, client) => {};
 	}
 

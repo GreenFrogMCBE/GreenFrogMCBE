@@ -13,7 +13,6 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-/* eslint-disable no-unused-vars */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
 
 const FormVariant = require("./types/Form");
@@ -38,7 +37,8 @@ class Form {
 		 * @param {Form} form
 		 * @param {import("Frog").Player} client
 		 */
-		this.onSend = (form, client) => {};
+		// eslint-disable-next-line no-unused-vars
+		this.onSend = (form, client) => { };
 
 		/**
 		 * The ID of the form.

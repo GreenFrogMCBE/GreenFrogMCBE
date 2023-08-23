@@ -46,7 +46,8 @@ class CustomForm {
 		 * @param {CustomForm} form
 		 * @param {import("Frog").Player} client
 		 */
-		this.onSend = (form, client) => {};
+		// eslint-disable-next-line no-unused-vars
+		this.onSend = (form, client) => { };
 	}
 
 	/**
