@@ -736,7 +736,7 @@ module.exports = {
 
 			Logger.info(getKey("status.resourcePacks.disconnected").replace("%s", player.username));
 
-			if (player.initialised && Frog.config.chat.systemMessages.left) {
+			if (player.network.initialised && Frog.config.chat.systemMessages.left) {
 				Frog.broadcastMessage(getKey("chat.broadcasts.left").replace("%s", player.username));
 			}
 		});

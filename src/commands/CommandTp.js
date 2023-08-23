@@ -66,7 +66,7 @@ class CommandTp extends Command {
 			}
 		} else if (args.length > 0 && args.length < 2) {
 			// Teleport self to player
-			if (player.isConsole) {
+			if (player.permissions.isConsole) {
 				player.sendMessage(getKey("commands.errors.internalError.badSender"));
 				return;
 			}
@@ -101,7 +101,7 @@ class CommandTp extends Command {
 			}
 		} else if (args.length >= 3) {
 			// Teleport self to coords
-			if (player.isConsole) {
+			if (player.permissions.isConsole) {
 				player.sendMessage(getKey("commands.errors.internalError.badSender"));
 				return;
 			}

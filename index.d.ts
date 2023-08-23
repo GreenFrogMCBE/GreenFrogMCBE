@@ -1204,9 +1204,6 @@ declare module "Frog" {
 		dead: boolean;
 		world: World;
 		renderChunks: boolean;
-		initialised: boolean;
-		offline: boolean;
-		isConsole: boolean;
 		inventory: {
 			container: Container;
 			items: any[];
@@ -1219,11 +1216,13 @@ declare module "Frog" {
 			packetCount: number;
 			offline: boolean;
 			initialised: boolean;
+			version: string;
 			protocolVersion: number;
 		};
 		permissions: {
 			op: boolean;
 			permissionLevel: number;
+			isConsole: boolean;
 		};
 		_damage: {
 			fall: {
@@ -1236,7 +1235,7 @@ declare module "Frog" {
 		};
 		commands: CommandPacket;
 		kick(reason: string): void;
-		kill(cause: any): void;
+		kill(cause?: DamageCause): void;
 		chat(message: string): void;
 		teleport(x: number, y: number, z: number, rot_x?: number, rot_y?: number, rot_z?: number): void;
 		transfer(address: string, port: number): void;

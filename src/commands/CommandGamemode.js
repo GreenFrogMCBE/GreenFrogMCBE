@@ -35,7 +35,7 @@ class CommandGamemode extends Command {
 	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
-		if (player.isConsole) {
+		if (player.permissions.isConsole) {
 			player.sendMessage(getKey("commands.errors.internalError.badSender"));
 			return;
 		}

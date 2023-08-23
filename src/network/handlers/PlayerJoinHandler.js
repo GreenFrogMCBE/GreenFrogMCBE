@@ -127,7 +127,6 @@ class PlayerJoinHandler {
 			hunger: 20,
 			world: null,
 			renderChunks: true,
-			isConsole: false,
 			inventory: {
 				container: {
 					blockPosition: {
@@ -161,7 +160,9 @@ class PlayerJoinHandler {
 				packetCount: 0,
 				offline: false,
 				initialised: false,
+				version: null,
 				protocolVersion: null,
+				isConsole: false,
 			},
 			permissions: {
 				op: null,

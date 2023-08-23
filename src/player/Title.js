@@ -60,6 +60,8 @@ class Title {
 		titlePacket.text = this.text;
 		titlePacket.type = this.type;
 		titlePacket.fade_out_time = this.fadeOutTime;
+		titlePacket.xuid = "";
+		titlePacket.platform_online_id = "";
 		titlePacket.writePacket(client);
 	}
 }
