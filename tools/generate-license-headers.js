@@ -40,7 +40,7 @@ const srcPath = path.join(__dirname, "..");
  * 
  * @param {string} filePath 
  */
-const addHeader = async (filePath) => {
+async function addHeader(filePath) {
 	if (filePath.includes("node_modules")) {
 		return;
 	}
@@ -52,19 +52,20 @@ const addHeader = async (filePath) => {
 		if (!contents.includes("CC-BY-4.0")) {
 			contents = LICENSE_HEADER + contents;
 			await fs.writeFile(filePath, contents);
+
 			console.info(`Added license header to file ${filePath}`);
 		}
-	} catch (err) {
-		console.error(`Error adding license header to file ${filePath}:`, err);
+	} catch (error) {
+		console.error(`Error adding license header to file ${filePath}: ${error.stack}`);
 	}
-};
+}
 
 /**
  * Walks through the directory
  * 
  * @param {string} dir 
  */
-const walk = async (dir) => {
+async function walk(dir) {
 	try {
 		const files = await fs.readdir(dir);
 
@@ -74,13 +75,13 @@ const walk = async (dir) => {
 
 			if (stats.isDirectory()) {
 				await walk(filePath);
-			} else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts" || path.extname(filePath) === ".json" || path.extname(filePath) === ".yml") {
+			} else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts") {
 				await addHeader(filePath);
 			}
 		}
 	} catch (err) {
 		console.error(`Error reading directory ${dir}:`, err);
 	}
-};
+}
 
 walk(srcPath);

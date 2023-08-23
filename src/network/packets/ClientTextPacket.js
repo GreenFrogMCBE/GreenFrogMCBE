@@ -18,6 +18,7 @@ const Frog = require("../../Frog");
 const PlayerInfo = require("../../player/PlayerInfo");
 
 const Logger = require("../../utils/Logger");
+
 const { getKey } = require("../../utils/Language");
 
 const Packet = require("./Packet");

@@ -90,7 +90,7 @@ module.exports = {
 		player.chat = function (message) {
 			let shouldSendMessage = true;
 
-			Frog.eventEmitter.emit("serverChatAsPlayer", {
+			Frog.eventEmitter.emit("serverChat", {
 				player,
 				message,
 				cancel: () => {
@@ -100,7 +100,7 @@ module.exports = {
 
 			if (!shouldSendMessage) return;
 
-			Frog.broadcastMessage(getKey('chat.format').replace("%s", player.username).replace("%d", message));
+			Frog.broadcastMessage(getKey("chat.format").replace("%s", player.username).replace("%d", message));
 		};
 
 		/**
@@ -246,8 +246,8 @@ module.exports = {
 
 		/**
 		 * Sets player's velocity
-		 * NOTE: This is handled by the player, and not server-side
-		 *
+		 * NOTE: This is handled by the client-side
+		 * 
 		 * @param {number} x
 		 * @param {number} y
 		 * @param {number} z
@@ -300,12 +300,14 @@ module.exports = {
 			playStatusPacket.writePacket(player);
 
 			if (terminateConnection) {
-				Logger.info(getKey("kickMessages.playStatus.console").replace("%s", player.username));
+				const kickMessageConsole = getKey("kickMessages.playStatus.console").replace("%s", player.username);
+				const kickMessagePlayer = getKey("kickMessages.playStatus").replace("%s", playStatus);
+			
+				Logger.info(kickMessageConsole);
 
 				setTimeout(() => {
 					if (!player.network.offline) {
-						// If the player does not disconnect itself for some reason
-						player.kick(getKey("kickMessages.playStatus").replace("%s", playStatusPacket.toString()));
+						player.kick(kickMessagePlayer);
 					}
 				}, 5000);
 			}
@@ -366,10 +368,10 @@ module.exports = {
 		/**
 		 * Disconnects the player from the server
 		 *
-		 * @param {string} [message=lang["kickMessages.serverDisconnect"]]
+		 * @param {string} [message=kickMessages.serverDisconnect]
 		 * @param {boolean} [hideDisconnectionScreen=false]
 		 */
-		player.kick = function (message = lang["kickMessages.serverDisconnect"], hideDisconnectionScreen = false) {
+		player.kick = function (message = getKey("kickMessages.serverDisconnect"), hideDisconnectionScreen = false) {
 			Frog.eventEmitter.emit("playerKick", {
 				player,
 				message,
@@ -564,7 +566,7 @@ module.exports = {
 				player,
 				dimension,
 				coordinates: { x, y, z },
-				respawnAfterSwitch: respawn,
+				respawn,
 				cancel: () => {
 					shouldChangeDimension = false;
 				},

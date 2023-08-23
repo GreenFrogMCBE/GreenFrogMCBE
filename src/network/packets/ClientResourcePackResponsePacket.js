@@ -78,23 +78,13 @@ class ClientResourcePackResponsePacket extends Packet {
 
 		switch (responseStatus) {
 			case ResourcePackStatus.NONE:
-				Frog.eventEmitter.emit("playerHasNoResourcePacksInstalled", {
-					player,
-					resourcePacksIds: [],
-					resourcePacksRequired: true,
-				});
-
 				Logger.info(getKey("status.resourcePacks.none").replace("%s", player.username));
 				break;
 			case ResourcePackStatus.REFUSED:
-				Frog.eventEmitter.emit("playerResourcePacksRefused", { player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
-
 				Logger.info(getKey("status.resourcePacks.refused").replace("%s", player.username));
 				player.kick(getKey("kickMessages.resourcePacksRefused"));
 				break;
 			case ResourcePackStatus.HAVE_ALL_PACKS:
-				Frog.eventEmitter.emit("playerHasAllTheResourcePacks", { player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
-
 				Logger.info(getKey("status.resourcePacks.installed").replace("%s", player.username));
 
 				const resourcePackStack = new ServerResourcePackStackPacket();
@@ -107,8 +97,6 @@ class ClientResourcePackResponsePacket extends Packet {
 				resourcePackStack.writePacket(player);
 				break;
 			case ResourcePackStatus.COMPLETED:
-				Frog.eventEmitter.emit("playerResourcePacksCompleted", { player, cancel: () => player.kick(getKey("kickMessages.serverDisconnect")) });
-
 				player.world = new World();
 				player.world.renderDistance = config.world.renderDistance.serverSide;
 				player.world.name = config.world.name;

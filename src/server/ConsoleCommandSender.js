@@ -74,7 +74,7 @@ module.exports = {
 		const args = command?.split(" ")?.slice(1);
 		const Frog = require("../Frog");
 
-		Frog.eventEmitter.emit("serverCommandExecute", {
+		Frog.eventEmitter.emit("serverCommand", {
 			args,
 			command,
 			cancel() {

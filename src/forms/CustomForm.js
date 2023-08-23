@@ -21,11 +21,6 @@ const Form = require("./types/Form");
 class CustomForm {
 	constructor() {
 		/**
-		 * @type {function}
-		 */
-		this.onSend = () => {};
-
-		/**
 		 * @type {string}
 		 */
 		this.title = "";
@@ -44,6 +39,14 @@ class CustomForm {
 		 * @type {number}
 		 */
 		this.id = 0;
+
+		/**
+		 * @type {function}
+		 *
+		 * @param {CustomForm} form
+		 * @param {import("Frog").Player} client
+		 */
+		this.onSend = (form, client) => {};
 	}
 
 	/**

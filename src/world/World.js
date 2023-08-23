@@ -234,23 +234,24 @@ class World {
 	 * @param {import("Frog").Coordinate} position - The position where the fall occurred.
 	 */
 	async handleFallDamage(player, position) {
-		if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
-			return;
+		if (player.gamemode !== Gamemode.CREATIVE && player.gamemode !== Gamemode.SPECTATOR) {
+			const fallDistanceY = player.location.y - position.y;
+
+			if (fallDistanceY > 0.56 && player._damage.fall.queue && !player._damage.fall.invulnerable) {
+				const damageAmount = Math.floor(player.health - player._damage.fall.queue);
+		
+				player.setHealth(damageAmount, DamageCause.FALL);
+
+				player._damage.fall.invulnerable = true;
+				player._damage.fall.queue = 0;
+
+				setTimeout(() => {
+					player._damage.fall.invulnerable = false;
+				}, 50);
+			}
+
+			player._damage.fall.queue = (fallDistanceY + 0.5) * 2;
 		}
-
-		const fallDistanceY = player.location.y - position.y;
-
-		if (fallDistanceY > 0.56 && player._damage.fall.queue && !player._damage.fall.invulnerable) {
-			player.setHealth(Math.floor(player.health - player._damage.fall.queue), DamageCause.FALL);
-
-			player._damage.fall.invulnerable = true;
-			player._damage.fall.queue = 0;
-			setTimeout(() => {
-				player._damage.fall.invulnerable = false;
-			}, 50);
-		}
-
-		player._damage.fall.queue = (fallDistanceY + 0.5) * 2;
 	}
 
 	/**

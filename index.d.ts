@@ -746,7 +746,7 @@ declare module "Frog" {
 	};
 
 	export type LogMessage = {
-		consoleLoggingLevel: string;
+		consoleLoggingLevel: LogLevel;
 		levelName: string;
 		message: string;
 		color: number;
@@ -819,29 +819,9 @@ declare module "Frog" {
 	export type PlayStatus = ValueOf<typeof import("./src/network/packets/types/PlayStatus")>;
 	export type DimensionId = ValueOf<typeof import("./src/world/types/DimensionId")>;
 
-	export type PermissionLevel = ValueOf<typeof import("./src/permission/PermissionLevel")>;
+	export type PermissionLevel = ValueOf<typeof import("./src/permission/types/PermissionLevel")>;
 
 	export type Scoreboard = import("./src/scoreboard/Scoreboard");
-
-	export type GamemodeMap = keyof {
-		0: Gamemode;
-		1: Gamemode;
-		2: Gamemode;
-		3: Gamemode;
-		5: Gamemode;
-
-		s: Gamemode;
-		c: Gamemode;
-		a: Gamemode;
-		sp: Gamemode;
-		d: Gamemode;
-
-		survival: Gamemode;
-		creative: Gamemode;
-		adventure: Gamemode;
-		spectator: Gamemode;
-		default: Gamemode;
-	};
 
 	export type PlayerSetDifficultyEvent = {
 		player: Player;
@@ -890,7 +870,7 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
-	export type PlayerModalFormResponseEvent = {
+	export type PlayerFormResponseEvent = {
 		player: Player;
 		packet: Packet;
 	};
@@ -919,34 +899,8 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
-	export type PlayerHasNoResourcePacksInstalledEvent = {
-		player: Player;
-		resourcePacksIds: any[];
-		resourcePacksRequired: boolean;
-	};
-
-	export type PlayerResourcePacksRefusedEvent = {
-		player: Player;
-		cancel(): void;
-	};
-
-	export type PlayerHasAllTheResourcePacksEvent = {
-		player: Player;
-		cancel(): void;
-	};
-
-	export type PlayerResourcePacksCompletedEvent = {
-		player: Player;
-		cancel(): void;
-	};
-
 	export type PlayerSpawnEvent = {
 		player: Player;
-	};
-
-	export type PlayerOpStatusChangeEvent = {
-		username: string;
-		cancel(): void;
 	};
 
 	export type PlayerKillEvent = {
@@ -984,7 +938,7 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
-	export type ServerChatAsPlayerEvent = {
+	export type ServerChatEvent = {
 		player: Player;
 		message: string;
 		cancel(): void;
@@ -1017,6 +971,10 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
+	export type ServerShutdownEvent = {
+		cancel(): void;
+	}
+
 	export type InventoryContainerChestRemoveEvent = {
 		player: Player;
 		cancel(): void;
@@ -1044,6 +1002,11 @@ declare module "Frog" {
 		face: number;
 	}
 
+	export type PlayerPreConnectEvent = {
+		player: Player;
+		cancel(): void;
+	}
+
 	export type QueryListenEvent = {
 		socket: Socket
 		settings: QuerySettings
@@ -1053,7 +1016,7 @@ declare module "Frog" {
 	}
 
 	export type QueryPacketEvent = {
-		socket: Socket; 
+		socket: Socket;
 		settings: QuerySettings;
 		packet: Buffer;
 		client: RemoteInfo;
@@ -1097,6 +1060,170 @@ declare module "Frog" {
 		cancel(): void
 	}
 
+	export type PacketReadEvent = {
+		player: Player;
+		packet: {
+			packet: PacketParams;
+			instance: Packet;
+		};
+		cancel(): void;
+	}
+
+	export type PacketReadErrorEvent = {
+		player: Player;
+		error: Error;
+	}
+
+	export type PacketQueueEvent = {
+		player: Player;
+		packet: {
+			data: PacketData
+		},
+		cancel(): void;
+	}
+
+	export type ServerListenEvent = {}
+	export type ServerOfflinePlayersGarbageCollectionEvent = {}
+	export type ServerGarbageCollectionEvent = {}
+	export type ServerCommandsInitializeEvent = {}
+
+	export type PacketRateLimitEvent = {
+		player: Player;
+	}
+
+	export type ServerTickEvent = {
+		world: World;
+	}
+
+	export type ServerTimeTickEvent = {
+		world: World;
+	}
+
+	export type ServerRegenerationTickEvent = {
+		world: World;
+	}
+
+	export type ServerStarvationDamageTickEvent = {
+		world: World;
+	}
+
+	export type ServerVoidDamageTickEvent = {
+		world: World;
+	}
+
+	export type ServerLogMessageEvent = {
+		consoleLoggingLevel: LogLevel;
+		levelName: string;
+		message: string;
+		color: number;
+		cancel(): void;
+	}
+
+	export type ServerCommandProcessEvent = {
+		command: string;
+		cancel(): void;
+	}
+
+	export type ServerVelocityUpdateEvent = {
+		player: Player;
+		coordinates: Coordinate;
+		cancel(): void;
+	}
+
+	export type PlayerPlayStatusEvent = {
+		player: Player;
+		playStatus: PlayStatus
+		terminateConnection: boolean;
+		cancel(): void;
+	}
+
+	export type ServerSetDifficultyEvent = {
+		player: Player;
+		difficulty: Difficulty;
+		cancel(): void;
+	}
+
+	export type ServerSetEntityDataEvent = {
+		player: Player;
+		data: EntityData | any;
+		cancel(): void;
+	}
+
+	export type ServerUpdateChunkRadiusEvent = {
+		player: Player;
+		radius: number;
+		cancel(): void;
+	}
+
+	export type ServerTimeUpdateEvent = {
+		player: Player;
+		time: number;
+		cancel(): void;
+	}
+
+	export type PlayerSetAttributeEvent = {
+		player: Player;
+		attribute: Attribute;
+		cancel(): void;
+	}
+
+	export type ServerSetHealthEvent = {
+		player: Player;
+		health: number;
+		cause: DamageCause;
+		cancel(): void;
+	}
+
+	export type PlayerFallDamageEvent = {
+		player: Player;
+		health: number;
+		cause: DamageCause;
+	}
+
+	export type PlayerRegenerateEvent = {
+		player: Player;
+		health: number;
+		cause: DamageCause;
+	}
+
+	export type PlayerDeathEvent = {
+		player: Player;
+	}
+
+	export type PlayerHungerUpdateEvent = {
+		player: Player;
+		hunger: number;
+		cause: HungerCause;
+		cancel(): void;
+	}
+
+	export type ServerSetDimensionEvent = {
+		player: Player;
+		dimension: Dimension;
+		coordinates: Coordinate;
+		respawn: boolean;
+		cancel(): void;
+	}
+
+	export type ServerSpeedUpdateEvent = {
+		speed: number;
+		cancel(): void;
+	}
+
+	export type PlayerLeaveEvent = {
+		player: Player;
+	}
+
+	export type PlayerOpStatusChangeEvent = {
+		username: string;
+		status: boolean;
+		cancel(): void;
+	}
+
+	export type ServerCriticalErrorEvent = {
+		error: Error;
+	}
+
 	export type Event =
 		| "blockBreak"
 		| "queryListen"
@@ -1127,7 +1254,7 @@ declare module "Frog" {
 		| "serverGarbageCollection"
 		| "serverOfflinePlayersGarbageCollection"
 		| "serverMessage"
-		| "serverChatAsPlayer"
+		| "serverChat"
 		| "serverGamemodeChange"
 		| "serverToast"
 		| "serverTitle"
@@ -1138,7 +1265,7 @@ declare module "Frog" {
 		| "serverUpdateChunkRadius"
 		| "serverTimeUpdate"
 		| "serverSetDifficulty"
-		| "serverCommandExecute"
+		| "serverCommand"
 		| "serverCommandsInitialize"
 		| "serverVelocityUpdate"
 		| "serverSetHealth"
@@ -1160,26 +1287,16 @@ declare module "Frog" {
 		| "playerPreConnect"
 		| "playerContainerOpen"
 		| "playerOpStatusChange"
-		| "playerOfflineOpStatusChange"
 		| "playerRequestChunkRadius"
 		| "playerContainerClose"
 		| "playerInteract"
 		| "playerFormResponse"
-		| "playerHasAllTheResourcePacks"
-		| "playerResourcePacksRefused"
-		| "playerHasNoResourcePacksInstalled"
-		| "playerMalformatedChatCommand"
-		| "playerResourcePacksCompleted"
 		| "playerGamemodeChangeRequest"
 		| "playerSpawn"
 		| "playerChat"
 		| "playerMove"
-		| "playerDeath"
 		| "playerRegenerate"
 		| "playerFallDamage"
-		| "playerMalformedChatMessage"
-		| "playerMalformedChatCommand"
-		| "playerItemStackRequest"
 		| "playerCommand"
 		| "playerPlayStatus"
 		| "playerTeleport"

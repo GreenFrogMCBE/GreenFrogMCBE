@@ -21,10 +21,10 @@ const fs = require("fs");
 
 module.exports = {
 	/**
-	 * Returns if the user is opped.
+	 * Checks if a user is opped.
 	 *
-	 * @param {string} username - The username of the user to check.
-	 * @returns {Promise<boolean>}
+	 * @param {string} username - The username to check.
+	 * @returns {Promise<boolean>} - Whether the user is opped.
 	 */
 	async isOpped(username) {
 		const oppedPlayers = fs.readFileSync("ops.yml", "utf8").split("\n");
@@ -39,10 +39,10 @@ module.exports = {
 	},
 
 	/**
-	 * Changes the op status of a player
+	 * Changes the op status of a player.
 	 *
-	 * @param {string} username - The username of the user to change the op status for.
-	 * @param {boolean} status - The new op status to set (true for op, false for deop).
+	 * @param {string} username - The username of the player.
+	 * @param {boolean} status - The new op status (true for op, false for deop).
 	 * @returns {Promise<void>}
 	 */
 	async setOpStatus(username, status) {
@@ -50,6 +50,7 @@ module.exports = {
 
 		Frog.eventEmitter.emit("playerOpStatusChange", {
 			username,
+			status,
 			cancel: () => {
 				shouldOp = false;
 			},

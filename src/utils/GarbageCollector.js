@@ -27,16 +27,24 @@ module.exports = {
 	async clearOfflinePlayers() {
 		Frog.eventEmitter.emit("serverOfflinePlayersGarbageCollection");
 
-		for (let i = 0; i < PlayerInfo.playersOnline.length; i++) {
-			const isOffline = PlayerInfo.playersOnline[i].offline;
+		const onlinePlayers = PlayerInfo.playersOnline;
+		const playersToRemove = [];
 
-			if (isOffline) {
-				Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s", PlayerInfo.playersOnline[i].username));
-
-				PlayerInfo.playersOnline.splice(i, 1);
-				i--;
+		for (let i = 0; i < onlinePlayers.length; i++) {
+			if (onlinePlayers[i].offline) {
+				playersToRemove.push(onlinePlayers[i]);
 			}
 		}
+
+		playersToRemove.forEach(player => {
+			Logger.debug(Language.getKey("garbageCollector.deleted").replace("%s", player.username));
+
+			const index = onlinePlayers.indexOf(player);
+
+			if (index !== -1) {
+				onlinePlayers.splice(index, 1);
+			}
+		});
 	},
 
 	/**

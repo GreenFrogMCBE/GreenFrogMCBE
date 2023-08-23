@@ -50,14 +50,14 @@ class ServerFormRequestPacket extends Packet {
 				button2: this.button2,
 				title: this.title,
 				type: this.type,
-			}
+			};
 		} else {
 			data = {
 				content: this.content,
 				buttons: this.buttons,
 				title: this.title,
 				type: this.type,
-			}
+			};
 		}
 
 		player.queue(this.name, {
