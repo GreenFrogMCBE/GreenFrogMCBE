@@ -24,7 +24,7 @@ const Difficulty = require("../../server/types/Difficulty");
 const MovementAuthority = require("./types/MovementAuthority");
 const GeneratorType = require("../../world/types/Generator");
 const ResourcePackStatus = require("./types/ResourcePackStatus");
-const PermissionLevel = require("../../permission/PermissionLevel");
+const PermissionLevel = require("../../permission/types/PermissionLevel");
 
 const PlayerInfo = require("../../player/PlayerInfo");
 

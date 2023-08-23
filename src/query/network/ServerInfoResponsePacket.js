@@ -102,7 +102,7 @@ class ServerInfoResponsePacket extends Packet {
 					.writeStringNT(/** @type {string} */ (this.serverName))
 					.writeStringNT(/** @type {string} */ (this.game))
 					.writeStringNT(/** @type {string} */ (this.levelName))
-					.writeStringNT(/** @type {string} */ (this.players?.toString()))
+					.writeStringNT(/** @type {string} */ (this.players?.toString() || ""))
 					.writeStringNT(/** @type {string} */ (this.maxPlayers?.toString()))
 					.writeUInt16LE(/** @type {number} */ (this.serverPort))
 					.writeStringNT(/** @type {string} */ (this.serverAddress))

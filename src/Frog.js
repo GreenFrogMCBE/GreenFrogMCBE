@@ -36,7 +36,9 @@ const _eventEmitter = new eventEmitter();
 
 /** @returns {import("Frog").Config} */
 function getConfig() {
-	const configData = yaml.load(fs.readFileSync("config.yml", "utf8"));
+	const path = process.env.TEST ? "../config.yml" : "config.yml";
+	const configData = yaml.load(fs.readFileSync(path, "utf8"));
+
 	return configData;
 }
 

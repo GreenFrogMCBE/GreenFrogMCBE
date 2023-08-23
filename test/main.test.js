@@ -14,15 +14,16 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const fs = require("fs");
+const path = require("path");
 const yaml = require("js-yaml");
 const protocol = require("frog-protocol");
+const util = require("minecraft-server-util");
 
 const Frog = require("../src/Frog");
 const ConsoleCommandSender = require("../src/server/ConsoleCommandSender");
 
 describe("config files", () => {
 	const configFiles = [
-		// .json files
 		"../.eslintrc.json",
 		"../renovate.json",
 		"../src/resources/availableEntities.json",
@@ -33,8 +34,6 @@ describe("config files", () => {
 		"../src/resources/itemStates.json",
 		"../src/resources/skinData.json",
 		"../src/resources/trimData.json",
-
-		// .yml files
 		"../src/resources/defaultConfig.yml"
 	];
 
@@ -63,14 +62,15 @@ describe("server", () => {
 });
 
 describe("commands", () => {
-	const commandsDir = __dirname + "/../src/commands/";
+	const commandsDir = path.join(__dirname, "..", "src", "commands", "\\");
+
+	Frog.eventEmitter.on("serverCommandProcessError", (event) => {
+		throw event.error;
+	});
+
 	for (const commandFile of fs.readdirSync(commandsDir)) {
 		if (fs.statSync(commandsDir + commandFile).isFile()) {
 			const command = new (require(commandsDir + commandFile));
-
-			Frog.eventEmitter.on("serverCommandProcessError", (event) => {
-				throw event.error;
-			});
 
 			if (command.name == "stop" || !command.name) continue;
 
@@ -81,27 +81,44 @@ describe("commands", () => {
 	}
 });
 
-describe("client", async () => {
-	it("can join", async () => {
-		protocol.createClient({
+describe("query", () => {
+	it("can respond with basic info", async () => {
+		console.log(`Basic info: ${JSON.stringify(await util.queryBasic("0.0.0.0", 19133))}`);
+	});
+
+	it("can respond with full info", async () => {
+		console.log(`Full info: ${JSON.stringify(await util.queryFull("0.0.0.0", 19133))}`);
+	});
+});
+
+describe("client", () => {
+	it("can join", () => {
+		const client = protocol.createClient({
 			host: "127.0.0.1",
 			port: 19132,
 			username: "joinBot",
 			offline: true
-		}).on("close", (reason) => {
+		});
+
+		client.on("disconnect", (packet) => {
+			console.log(packet)
 			throw new Error("Connection closed: " + reason);
 		});
 	});
 
-	it("can send a message", async () => {
+	it("can send a message", () => {
 		const client = protocol.createClient({
 			host: "127.0.0.1",
 			port: 19132,
 			username: "messageBot",
 			offline: true
-		}).on("close", (packet) => {
+		});
+
+		client.on("close", (packet) => {
 			throw new Error("Connection closed: " + packet.data.params.reason);
-		}).on("spawn", () => {
+		});
+
+		client.on("spawn", () => {
 			client.queue("text", {
 				type: "chat",
 				needs_translation: false,
@@ -113,15 +130,19 @@ describe("client", async () => {
 		});
 	});
 
-	it("can send a command", async () => {
+	it("can send a command", () => {
 		const client = protocol.createClient({
 			host: "127.0.0.1",
 			port: 19132,
 			username: "commandBot",
 			offline: true
-		}).on("close", (packet) => {
+		});
+
+		client.on("close", (packet) => {
 			throw new Error("Connection closed: " + packet.data.params.reason);
-		}).on("spawn", () => {
+		});
+
+		client.on("spawn", () => {
 			client.queue("command_request", {
 				command: "pl",
 				internal: false,
@@ -139,4 +160,3 @@ describe("client", async () => {
 		});
 	});
 });
-
