@@ -1,7 +1,7 @@
 network:
     host: "0.0.0.0"
     port: 19132
-    packetRateLimting: # Limits how many packets can be sent per second
+    packetRateLimiting: # Limits how many packets can be sent per second
         enabled: true # Recommended to enable. It can prevent bad actors from crashing your server
         maxPackets: 2500
 serverInfo:

@@ -662,20 +662,23 @@ module.exports = {
 		 *
 		 * @param {number} itemId
 		 * @param {number} blockRuntimeId - You can convert the item ID to a block runtime ID using https://github.com/GreenFrogMCBE/GreenFrogMCBE/blob/main/src/api/block/LegacyToRuntimeIdConverter.js
-		 * @param {number} slot
-		 * @param {number} count
+		 * @param {number} [slot=0]
+		 * @param {boolean} [hasMetadata=false]
+		 * @param {boolean} [hasStackId=true]
+		 * @param {number} [stackId=1]
+		 * @param {number} [count=1]
 		 * @param {import("Frog").ItemExtraData} extra - Extra data
 		 */
-		player.setContainerItem = function (itemId, blockRuntimeId, slot = 0, metadata = false, hasStackId = true, stackId = 1, count = 1, extra = { has_nbt: false, can_place_on: [], can_destroy: [] }) {
+		player.setContainerItem = function (itemId, blockRuntimeId, slot = 0, hasMetadata = false, hasStackId = true, stackId = 1, count = 1, extra = { has_nbt: false, can_place_on: [], can_destroy: [] }) {
 			let shouldGiveContainerItem = true;
 
 			Frog.eventEmitter.emit("inventoryContainerGiveItem", {
-				player: player,
+				player,
 				itemData: {
 					itemId,
 					blockRuntimeId,
 					slot,
-					metadata,
+					hasMetadata,
 					hasStackId,
 					stackId,
 					count,
@@ -698,7 +701,7 @@ module.exports = {
 			input[slot] = {
 				network_id: itemId,
 				count,
-				metadata,
+				metadata: hasMetadata,
 				has_stack_id: hasStackId,
 				stack_id: stackId,
 				block_runtime_id: blockRuntimeId,
@@ -722,8 +725,6 @@ module.exports = {
 
 				const playerList = new ServerPlayerListPacket();
 				playerList.type = PlayerListAction.REMOVE;
-				// Fix JSDoc Error: Profile is possibly undefined
-				if (!player.profile) return;
 				playerList.uuid = player.profile.uuid;
 				playerList.writePacket(currentPlayer);
 			}

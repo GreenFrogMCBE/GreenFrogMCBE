@@ -58,7 +58,7 @@ declare module "Frog" {
 		network: {
 			host: string;
 			port: number;
-			packetRateLimting: {
+			packetRateLimiting: {
 				enabled: boolean;
 				maxPackets: number;
 			};
@@ -1254,7 +1254,7 @@ declare module "Frog" {
 		setOp(status: boolean): void;
 		sendPlayStatus(playStatus: PlayStatus, terminateConnection?: boolean): void;
 		openContainer(): void;
-		setContainerItem(itemId: number, blockRuntimeId: number, slot: number, metadata: boolean, hasStackId: boolean, stackId: number, count: number, extra: ItemExtraData): void;
+		setContainerItem(itemId: number, blockRuntimeId: number, slot?: number, hasMetadata?: boolean, hasStackId?: boolean, stackId?: number, count?: number, extra?: ItemExtraData): void;
 		_queue(packetName: string, packetData: any): void;
 	}
 }

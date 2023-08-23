@@ -74,7 +74,7 @@ const walk = async (dir) => {
 
 			if (stats.isDirectory()) {
 				await walk(filePath);
-			} else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts") {
+			} else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts" || path.extname(filePath) === ".json" || path.extname(filePath) === ".yml") {
 				await addHeader(filePath);
 			}
 		}

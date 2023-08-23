@@ -58,7 +58,7 @@ class Scoreboard {
 	/**
 	 * Sends the scoreboard to the player.
 	 */
-	sendScoreboard() {
+	send() {
 		let shouldCreateScoreboard = true;
 
 		Frog.eventEmitter.emit("scoreboardCreate", {
