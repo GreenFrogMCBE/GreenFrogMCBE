@@ -54,6 +54,8 @@ class Form {
 	}
 
 	/**
+	 * Sends the form to the player.
+	 * 
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
@@ -61,7 +63,7 @@ class Form {
 		formRequestPacket.id = this.id;
 		formRequestPacket.title = this.title;
 		formRequestPacket.content = this.content;
-		formRequestPacket.buttons = JSON.stringify(this.buttons);
+		formRequestPacket.buttons = this.buttons;
 		formRequestPacket.type = FormVariant.FORM;
 		formRequestPacket.writePacket(player);
 

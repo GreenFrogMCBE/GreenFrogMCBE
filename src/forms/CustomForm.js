@@ -78,7 +78,7 @@ class CustomForm {
 	 * Adds a dropdown menu to the form.
 	 *
 	 * @param {string} text
-	 * @param {string} options
+	 * @param {string[]} options
 	 */
 	addDropdown(text, options) {
 		this.addAction({ type: Action.DROPDOWN, text, options });
@@ -106,20 +106,20 @@ class CustomForm {
 	}
 
 	/**
-	 * Sends the custom form to a player.
+	 * Sends the form to the player.
 	 *
-	 * @param {import("Frog").Player} client
+	 * @param {import("Frog").Player} player
 	 */
-	send(client) {
+	send(player) {
 		const formRequestPacket = new ServerFormRequestPacket();
 		formRequestPacket.id = this.id;
 		formRequestPacket.title = this.title;
-		formRequestPacket.content = JSON.stringify(this.actions);
-		formRequestPacket.buttons = JSON.stringify(this.buttons);
+		formRequestPacket.content = this.actions;
+		formRequestPacket.buttons = this.buttons;
 		formRequestPacket.type = Form.CUSTOM_FORM;
-		formRequestPacket.writePacket(client);
+		formRequestPacket.writePacket(player);
 
-		this.onSend(this, client);
+		this.onSend(this, player);
 	}
 }
 

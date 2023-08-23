@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const FormType = require("../../forms/types/Form");
+const Form = require("../../forms/types/Form");
 
 const Packet = require("./Packet");
 
@@ -43,15 +43,26 @@ class ServerFormRequestPacket extends Packet {
 	writePacket(player) {
 		let data;
 
-		if (this.type === FormType.MODAL_FORM) {
-			data = "{\"content\":\"" + this.content + "\",\"button1\":\" +this.button1}\",\"button2\":\"${this.button2}\",\"type\":\"" + this.type + "\",\"title\":\"" + this.title + "\"}";
+		if (this.type === Form.MODAL_FORM) {
+			data = {
+				content: this.content,
+				button1: this.button1,
+				button2: this.button2,
+				title: this.title,
+				type: this.type,
+			}
 		} else {
-			data = "{\"content\":\"" + this.content + "\",\"buttons\":" + this.buttons + ",\"type\":\"" + this.type + "\",\"title\":\"" + this.title + "\"}";
+			data = {
+				content: this.content,
+				buttons: this.buttons,
+				title: this.title,
+				type: this.type,
+			}
 		}
 
 		player.queue(this.name, {
 			form_id: this.id,
-			data,
+			data: JSON.stringify(data),
 		});
 	}
 }

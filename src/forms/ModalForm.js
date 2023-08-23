@@ -51,12 +51,12 @@ class ModalForm {
 	}
 
 	/**
-	 * Sends the modal form to the specified client.
+	 * Sends the form to the player.
 	 *
-	 * @param {import("Frog").Player} client
+	 * @param {import("Frog").Player} player
 	 */
-	send(client) {
-		this.onSend(this, client);
+	send(player) {
+		this.onSend(this, player);
 
 		const formRequestPacket = new ServerFormRequestPacket();
 		formRequestPacket.type = Form.MODAL_FORM;
@@ -65,7 +65,7 @@ class ModalForm {
 		formRequestPacket.content = this.text;
 		formRequestPacket.button1 = this.button1;
 		formRequestPacket.button2 = this.button2;
-		formRequestPacket.writePacket(client);
+		formRequestPacket.writePacket(player);
 	}
 }
 
