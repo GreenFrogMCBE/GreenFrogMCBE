@@ -823,15 +823,62 @@ declare module "Frog" {
 
 	export type Scoreboard = import("./src/scoreboard/Scoreboard");
 
-	export type PlayerSetDifficultyEvent = {
+	export type BlockBreakEvent = {
 		player: Player;
-		difficulty: Difficulty;
+		action: BlockAction;
+		position: any;
+		result_position: any;
+		face: number;
+	};
+
+	export type InventoryContainerChestRemoveEvent = {
+		player: Player;
 		cancel(): void;
 	};
 
-	export type PlayerGamemodeChangeRequestEvent = {
+	export type InventoryPostsItemRequestEvent = {
+		count: number;
+		network_id: number;
+		block_runtime_id: number;
+		inventoryItems: Item[];
+	};
+
+	export type InventoryPreItemRequestEvent = {
+		count: number;
+		network_id: number;
+		block_runtime_id: number;
+		cancel(): void;
+	};
+
+	export type PacketQueueEvent = {
 		player: Player;
-		gamemode: Gamemode;
+		packet: {
+			data: PacketData;
+		};
+		cancel(): void;
+	};
+
+	export type PacketReadErrorEvent = {
+		player: Player;
+		error: Error;
+	};
+
+	export type PacketReadEvent = {
+		player: Player;
+		packet: {
+			packet: PacketParams;
+			instance: Packet;
+		};
+		cancel(): void;
+	};
+
+	export type PacketRateLimitEvent = {
+		player: Player;
+	};
+
+	export type PlayerAttributeEvent = {
+		player: Player;
+		attribute: Attribute;
 		cancel(): void;
 	};
 
@@ -848,15 +895,64 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
+	export type PlayerContainerCloseEvent = {
+		player: Player;
+		windowId: WindowId;
+		sentByServer: boolean;
+		packet: Packet;
+		cancel(): void;
+	};
+
+	export type PlayerContainerOpenEvent = {
+		player: Player;
+		windowId: WindowId;
+		windowType: WindowType;
+		sentByServer: boolean;
+		runtimeId: number;
+		containerCoordinates: Coordinate;
+		cancel(): void;
+	};
+
+	export type PlayerDeathEvent = {
+		player: Player;
+	};
+
+	export type PlayerFallDamageEvent = {
+		player: Player;
+		health: number;
+		cause: DamageCause;
+	};
+
+	export type PlayerFormResponseEvent = {
+		player: Player;
+		packet: Packet;
+	};
+
+	export type PlayerGamemodeChangeRequestEvent = {
+		player: Player;
+		gamemode: Gamemode;
+		cancel(): void;
+	};
+
+	export type PlayerHungerUpdateEvent = {
+		player: Player;
+		hunger: number;
+		cause: HungerCause;
+		cancel(): void;
+	};
+
+	export type PlayerKillEvent = {
+		player: Player;
+		cancel(): void;
+	};
+
+	export type PlayerLeaveEvent = {
+		player: Player;
+	};
+
 	export type PlayerMalformatedChatCommand = {
 		player: Player;
 		command: string;
-	};
-
-	export type PlayerRequestChunkRadiusEvent = {
-		radius: number;
-		player: Player;
-		cancel(): void;
 	};
 
 	export type PlayerMoveEvent = {
@@ -870,26 +966,45 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
-	export type PlayerFormResponseEvent = {
-		player: Player;
-		packet: Packet;
-	};
-
-	export type PlayerContainerOpenEvent = {
-		player: Player;
-		windowId: WindowId;
-		windowType: WindowType;
-		sentByServer: boolean;
-		runtimeId: number;
-		containerCoordinates: Coordinate;
+	export type PlayerOpStatusChangeEvent = {
+		username: string;
+		status: boolean;
 		cancel(): void;
 	};
 
-	export type PlayerContainerCloseEvent = {
+	export type PlayerPlayStatusEvent = {
 		player: Player;
-		windowId: WindowId;
-		sentByServer: boolean;
-		packet: Packet;
+		playStatus: PlayStatus;
+		terminateConnection: boolean;
+		cancel(): void;
+	};
+
+	export type PlayerPreConnectEvent = {
+		player: Player;
+		cancel(): void;
+	};
+
+	export type PlayerRegenerateEvent = {
+		player: Player;
+		health: number;
+		cause: DamageCause;
+	};
+
+	export type PlayerRequestChunkRadiusEvent = {
+		radius: number;
+		player: Player;
+		cancel(): void;
+	};
+
+	export type PlayerSetAttributeEvent = {
+		player: Player;
+		attribute: Attribute;
+		cancel(): void;
+	};
+
+	export type PlayerSetDifficultyEvent = {
+		player: Player;
+		difficulty: Difficulty;
 		cancel(): void;
 	};
 
@@ -901,11 +1016,6 @@ declare module "Frog" {
 
 	export type PlayerSpawnEvent = {
 		player: Player;
-	};
-
-	export type PlayerKillEvent = {
-		player: Player;
-		cancel(): void;
 	};
 
 	export type PlayerTeleportEvent = {
@@ -926,15 +1036,31 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
-	export type ServerGamemodeChangeEvent = {
-		player: Player;
-		gamemode: Gamemode;
+	export type QueryErrorEvent = {
+		socket: Socket;
+		querySettings: QuerySettings;
+		error: Error;
 		cancel(): void;
 	};
 
-	export type ServerMessageEvent = {
-		player: Player;
-		message: string;
+	export type QueryInvalidPacketEvent = {
+		client: RemoteInfo;
+		packet: Buffer;
+	};
+
+	export type QueryListenEvent = {
+		socket: Socket;
+		settings: QuerySettings;
+		packet: Buffer;
+		client: RemoteInfo;
+		cancel(): void;
+	};
+
+	export type QueryPacketEvent = {
+		socket: Socket;
+		settings: QuerySettings;
+		packet: Buffer;
+		client: RemoteInfo;
 		cancel(): void;
 	};
 
@@ -944,14 +1070,98 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
-	export type ServerCommandProcessErrorEvent = {
-		command: string;
-		error: Error;
-	};
-
 	export type ServerCommandExecuteEvent = {
 		args: string[];
 		command: string;
+		cancel(): void;
+	};
+
+	export type ServerCommandProcessEvent = {
+		command: string;
+		cancel(): void;
+	};
+
+	export type ServerCommandsInitializeEvent = {};
+
+	export type ServerCriticalErrorEvent = {
+		error: Error;
+	};
+
+	export type ServerGamemodeChangeEvent = {
+		player: Player;
+		gamemode: Gamemode;
+		cancel(): void;
+	};
+
+	export type ServerGarbageCollectionEvent = {};
+
+	export type ServerListenEvent = {};
+
+	export type ServerLogMessageEvent = {
+		consoleLoggingLevel: LogLevel;
+		levelName: string;
+		message: string;
+		color: number;
+		cancel(): void;
+	};
+
+	export type ServerMessageEvent = {
+		player: Player;
+		message: string;
+		cancel(): void;
+	};
+
+	export type ServerOfflinePlayersGarbageCollectionEvent = {};
+
+	export type ServerRegenerationTickEvent = {
+		world: World;
+	};
+
+	export type ServerSetDimensionEvent = {
+		player: Player;
+		dimension: Dimension;
+		coordinates: Coordinate;
+		respawn: boolean;
+		cancel(): void;
+	};
+
+	export type ServerSetEntityDataEvent = {
+		player: Player;
+		data: EntityData | any;
+		cancel(): void;
+	};
+
+	export type ServerSetHealthEvent = {
+		player: Player;
+		health: number;
+		cause: DamageCause;
+		cancel(): void;
+	};
+
+	export type ServerShutdownEvent = {
+		cancel(): void;
+	};
+
+	export type ServerSpeedUpdateEvent = {
+		speed: number;
+		cancel(): void;
+	};
+
+	export type ServerStarvationDamageTickEvent = {
+		world: World;
+	};
+
+	export type ServerTickEvent = {
+		world: World;
+	};
+
+	export type ServerTimeTickEvent = {
+		world: World;
+	};
+
+	export type ServerTimeUpdateEvent = {
+		player: Player;
+		time: number;
 		cancel(): void;
 	};
 
@@ -962,267 +1172,32 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
-	export type ServerTitleEvent = {
-		fadeInTime: number;
-		fadeOutTime: number;
-		stayTime: number;
-		text: number;
-		type: number;
+	export type ServerUpdateChunkRadiusEvent = {
+		player: Player;
+		radius: number;
 		cancel(): void;
 	};
-
-	export type ServerShutdownEvent = {
-		cancel(): void;
-	}
-
-	export type InventoryContainerChestRemoveEvent = {
-		player: Player;
-		cancel(): void;
-	};
-
-	export type InventoryPreItemRequestEvent = {
-		count: number;
-		network_id: number;
-		block_runtime_id: number;
-		cancel(): void
-	}
-
-	export type InventoryPostsItemRequestEvent = {
-		count: number;
-		network_id: number;
-		block_runtime_id: number;
-		inventoryItems: Item[]
-	}
-
-	export type BlockBreakEvent = {
-		player: Player;
-		action: BlockAction;
-		position: any;
-		result_position: any;
-		face: number;
-	}
-
-	export type PlayerPreConnectEvent = {
-		player: Player;
-		cancel(): void;
-	}
-
-	export type QueryListenEvent = {
-		socket: Socket
-		settings: QuerySettings
-		packet: Buffer;
-		client: RemoteInfo;
-		cancel(): void;
-	}
-
-	export type QueryPacketEvent = {
-		socket: Socket;
-		settings: QuerySettings;
-		packet: Buffer;
-		client: RemoteInfo;
-		cancel(): void;
-	}
-
-	export type QueryInvalidPacketEvent = {
-		client: RemoteInfo;
-		packet: Buffer
-	}
-
-	export type QueryErrorEvent = {
-		socket: Socket;
-		querySettings: QuerySettings;
-		error: Error;
-		cancel(): void;
-	}
-
-	export type WorldGenerateEvent = {
-		player: Player;
-		cancel(): void;
-	}
-
-	export type ScoreboardCreateEvent = {
-		scoreboard: Scoreboard;
-		cancel(): void
-	}
-
-	export type ScoreboardSetScoreEvent = {
-		scoreboard: Scoreboard;
-		cancel(): void
-	}
-
-	export type ScoreboardScoreDeleteEvent = {
-		scoreboard: Scoreboard;
-		cancel(): void
-	}
-
-	export type ScoreboardDeleteEvent = {
-		scoreboard: Scoreboard;
-		cancel(): void
-	}
-
-	export type PacketReadEvent = {
-		player: Player;
-		packet: {
-			packet: PacketParams;
-			instance: Packet;
-		};
-		cancel(): void;
-	}
-
-	export type PacketReadErrorEvent = {
-		player: Player;
-		error: Error;
-	}
-
-	export type PacketQueueEvent = {
-		player: Player;
-		packet: {
-			data: PacketData
-		},
-		cancel(): void;
-	}
-
-	export type ServerListenEvent = {}
-	export type ServerOfflinePlayersGarbageCollectionEvent = {}
-	export type ServerGarbageCollectionEvent = {}
-	export type ServerCommandsInitializeEvent = {}
-
-	export type PacketRateLimitEvent = {
-		player: Player;
-	}
-
-	export type ServerTickEvent = {
-		world: World;
-	}
-
-	export type ServerTimeTickEvent = {
-		world: World;
-	}
-
-	export type ServerRegenerationTickEvent = {
-		world: World;
-	}
-
-	export type ServerStarvationDamageTickEvent = {
-		world: World;
-	}
-
-	export type ServerVoidDamageTickEvent = {
-		world: World;
-	}
-
-	export type ServerLogMessageEvent = {
-		consoleLoggingLevel: LogLevel;
-		levelName: string;
-		message: string;
-		color: number;
-		cancel(): void;
-	}
-
-	export type ServerCommandProcessEvent = {
-		command: string;
-		cancel(): void;
-	}
 
 	export type ServerVelocityUpdateEvent = {
 		player: Player;
 		coordinates: Coordinate;
 		cancel(): void;
-	}
+	};
 
-	export type PlayerPlayStatusEvent = {
-		player: Player;
-		playStatus: PlayStatus
-		terminateConnection: boolean;
-		cancel(): void;
-	}
+	export type ServerVoidDamageTickEvent = {
+		world: World;
+	};
 
 	export type ServerSetDifficultyEvent = {
 		player: Player;
 		difficulty: Difficulty;
 		cancel(): void;
-	}
+	};
 
-	export type ServerSetEntityDataEvent = {
+	export type WorldGenerateEvent = {
 		player: Player;
-		data: EntityData | any;
 		cancel(): void;
-	}
-
-	export type ServerUpdateChunkRadiusEvent = {
-		player: Player;
-		radius: number;
-		cancel(): void;
-	}
-
-	export type ServerTimeUpdateEvent = {
-		player: Player;
-		time: number;
-		cancel(): void;
-	}
-
-	export type PlayerSetAttributeEvent = {
-		player: Player;
-		attribute: Attribute;
-		cancel(): void;
-	}
-
-	export type ServerSetHealthEvent = {
-		player: Player;
-		health: number;
-		cause: DamageCause;
-		cancel(): void;
-	}
-
-	export type PlayerFallDamageEvent = {
-		player: Player;
-		health: number;
-		cause: DamageCause;
-	}
-
-	export type PlayerRegenerateEvent = {
-		player: Player;
-		health: number;
-		cause: DamageCause;
-	}
-
-	export type PlayerDeathEvent = {
-		player: Player;
-	}
-
-	export type PlayerHungerUpdateEvent = {
-		player: Player;
-		hunger: number;
-		cause: HungerCause;
-		cancel(): void;
-	}
-
-	export type ServerSetDimensionEvent = {
-		player: Player;
-		dimension: Dimension;
-		coordinates: Coordinate;
-		respawn: boolean;
-		cancel(): void;
-	}
-
-	export type ServerSpeedUpdateEvent = {
-		speed: number;
-		cancel(): void;
-	}
-
-	export type PlayerLeaveEvent = {
-		player: Player;
-	}
-
-	export type PlayerOpStatusChangeEvent = {
-		username: string;
-		status: boolean;
-		cancel(): void;
-	}
-
-	export type ServerCriticalErrorEvent = {
-		error: Error;
-	}
+	};
 
 	export type Event =
 		| "blockBreak"
