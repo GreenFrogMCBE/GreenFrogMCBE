@@ -84,10 +84,10 @@ class Scoreboard {
 	 *
 	 * @param {number} score - The score to set.
 	 * @param {string} text - The text to display alongside the score.
-	 * @param {import("Frog").EntryType} [entry_types=EntryType.TEXT] - The types of the score entry.
+	 * @param {import("Frog").EntryType} [entry_type=EntryType.TEXT] - The types of the score entry.
 	 * @param {number} [entity_unique_id] - The unique ID of the entity associated with the score.
 	 */
-	setScore(score, text, entry_types = EntryType.TEXT, entity_unique_id = undefined) {
+	setScore(score, text, entry_type = EntryType.TEXT, entity_unique_id = undefined) {
 		let shouldSetScore = true;
 
 		Frog.eventEmitter.emit("scoreboardSetScore", {
@@ -106,7 +106,7 @@ class Scoreboard {
 				scoreboard_id: 1,
 				objective_name: this.objectiveName,
 				score: score,
-				entry_types: entry_types,
+				entry_type: entry_type,
 				entity_unique_id: entity_unique_id,
 				custom_name: text,
 			},
