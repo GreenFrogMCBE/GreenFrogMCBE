@@ -59,7 +59,7 @@ commands.plugins.description=Shows list of plugins that the server is running.
 commands.plugins.execution.success=Plugins %s
 
 commands.say.name=say
-commands.say.description=Sends a message in the chat to other playersOnline.
+commands.say.description=Sends a message in the chat to other online players.
 
 commands.stop.name=stop
 commands.stop.description=Shut downs the server.
@@ -77,14 +77,14 @@ commands.version.aliases.ver=ver
 commands.version.aliases.about=about
 
 commands.teleport.name=teleport
-commands.teleport.description=Teleports playersOnline.
+commands.teleport.description=Teleports online players.
 commands.teleport.aliases.tp=tp
 commands.teleport.execution.success=You have been teleported to %s
 commands.teleport.execution.success.teleported=Teleported %s to %d
 commands.teleport.execution.failed.coordinates.invalid=§cSyntaxError: Invalid coordinates
 
 commands.tell.name=tell
-commands.tell.description=Sends a private message to one or more playersOnline.
+commands.tell.description=Sends a private message to one or more online players.
 commands.tell.aliases.w=w
 commands.tell.aliases.whisper=whisper
 commands.tell.aliases.msg=msg
