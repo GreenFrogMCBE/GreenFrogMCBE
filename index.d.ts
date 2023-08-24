@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 declare module "Frog" {
-	import { Client, Player as OnlinePlayer } from "frog-protocol";
+	import { Client, Player as OnlinePlayer, Server } from "frog-protocol";
 	import { Socket, RemoteInfo } from "dgram";
 
 	export type ReleaseData = {
@@ -604,10 +604,20 @@ declare module "Frog" {
 		requiresOp?: boolean;
 	};
 
-	export type Command = {
+	export type ClientSideCommand = {
 		chaining: boolean;
 		__4265: CommandOverload[];
 	};
+
+	export type Command = {
+		name: string;
+		description: string;
+		minArgs?: number | undefined;
+		maxArgs?: number | undefined;
+		requiresOp?: boolean;
+		aliases: string[];
+		execute(player: Player, server: Server, args: string[]): void;
+	}
 
 	export type Plugin = {
 		name: string;
