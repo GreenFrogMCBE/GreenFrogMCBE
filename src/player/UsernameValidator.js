@@ -17,13 +17,13 @@ const PlayerInfo = require("./PlayerInfo");
 
 module.exports = {
 	/**
-	 * Checks if the usernames matches the regex. The regex is `/^[a-zA-Z0-9]+$/`
+	 * Checks if the usernames matches the regex. The regex is `/^[a-zA-Z0-9 ]+$/`
 	 *
 	 * @param {string} username - The username to check for duplicates.
 	 * @returns {boolean} Returns true if the username is a duplicate, false otherwise.
 	 */
 	doesUsernameMatchRegex(username) {
-		const regex = /^[a-zA-Z0-9]+$/; // Regular expression to match only English letters and numbers
+		const regex = /^[a-zA-Z0-9 ]+$/; // Regular expression to match only English letters, spaces and numbers
 
 		return regex.test(username);
 	},
