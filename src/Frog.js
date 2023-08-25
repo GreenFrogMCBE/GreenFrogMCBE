@@ -137,7 +137,6 @@ module.exports = {
 		Logger.info(getKey("server.shuttingDown"));
 
 		this.server.close(shutdownMessage);
-
 		ConsoleCommandSender.closeConsole();
 		PluginLoader.unloadPlugins();
 
