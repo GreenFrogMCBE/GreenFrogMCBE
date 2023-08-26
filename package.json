@@ -20,7 +20,7 @@
     "js-yaml": "4.1.0"
   },
   "devDependencies": {
-    "eslint": "8.46.0",
+    "eslint": "8.48.0",
     "minecraft-server-util": "github:greenfrogmcbe/minecraft-server-util-compiled",
     "nodemon": "3.0.1",
     "prettier": "3.0.2"
