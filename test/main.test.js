@@ -70,12 +70,12 @@ describe("commands", () => {
 	});
 
 	for (const commandFile of fs.readdirSync(commandsDir)) {
-		if (fs.statSync(commandsDir + commandFile).isFile()) {
-			const command = new (require(commandsDir + commandFile));
+		if (fs.statSync(path.join(commandsDir, commandFile)).isFile()) {
+			const command = new (require(path.join(commandsDir, commandFile)))();
 
 			if (command.name == "stop" || !command.name) continue;
 
-			it("can execute /" + command.name, () => {
+			it(`can execute /${command.name}`, () => {
 				ConsoleCommandSender.executeCommand(command.name);
 			});
 		}
@@ -157,7 +157,7 @@ describe("client", () => {
 
 				setTimeout(() => {
 					Frog.shutdownServer();
-				}, 1000);	
+				}, 1000);
 			}
 		});
 	});
