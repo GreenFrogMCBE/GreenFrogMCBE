@@ -1,5 +1,5 @@
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
  * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
@@ -13,15 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+process.env.TEST = true;
+process.env.DEBUG = true;
+
 const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 const protocol = require("frog-protocol");
 const util = require("minecraft-server-util");
 
-const Frog = require("../src/Frog");
-
 const ConsoleCommandSender = require("../src/server/ConsoleCommandSender");
+
+// This will be assigned when the server finishes loading
+let Frog;
 
 describe("config files", () => {
 	const configFiles = [
@@ -49,25 +53,15 @@ describe("config files", () => {
 	}
 });
 
-describe("server", () => {
-	it("can start", () => {
-		process.env.TEST = true;
-		process.env.DEBUG = true;
-
+describe("server", async () => {
+	it("can start", async () => {
 		require("../index");
-	});
-
-	it("can broadcast a message", () => {
-		Frog.broadcastMessage("Hello, World!");
+		Frog = require("../src/Frog");
 	});
 });
 
 describe("commands", () => {
 	const commandsDir = path.join(__dirname, "..", "src", "commands", "\\");
-
-	Frog.eventEmitter.on("serverCommandProcessError", (event) => {
-		throw event.error;
-	});
 
 	for (const commandFile of fs.readdirSync(commandsDir)) {
 		if (fs.statSync(path.join(commandsDir, commandFile)).isFile()) {

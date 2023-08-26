@@ -39,15 +39,14 @@ const crashFileName = `./crash-reports/server-crash-${Math.floor(Math.random() *
 
 async function createConfigFilesAndDebug() {
 	if (!fs.existsSync("config.yml")) {
-		let config = null;
-
-		const configPath = process.env.TEST ? "./src/resources/defaultConfig.yml" : "../src/resources/defaultConfig.yml";
-		config = fs.readFileSync(configPath);
+		const configPath = process.env.TEST ? "../src/resources/defaultConfig.yml" : "./src/resources/defaultConfig.yml";
+		const config = fs.readFileSync(configPath);
 
 		fs.writeFileSync("config.yml", config);
 	}
 
 	const Frog = require("./src/Frog");
+
 	if (Frog.isDebug) {
 		process.env.DEBUG = "minecraft-protocol";
 	}
