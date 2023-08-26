@@ -1,4 +1,4 @@
-# License info
+# License
 
 Basically, you are allowed to do anything with this project, even resell it. But:
 
@@ -6,4 +6,4 @@ Basically, you are allowed to do anything with this project, even resell it. But
 2. Do not apply any additional restrictions
 
 <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png">
-Info: https://creativecommons.org/licenses/by/4.0/
+More info: https://creativecommons.org/licenses/by/4.0/

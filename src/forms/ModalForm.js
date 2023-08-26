@@ -14,14 +14,13 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
-const FormType = require("./types/FormType");
+
+const Form = require("./types/Form");
 
 class ModalForm {
 	constructor() {
 		/**
-		 * @type {FormType}
-		 *
-		 * @type {import("./types/FormType")}
+		 * @type {string}
 		 */
 		this.title = "";
 
@@ -49,27 +48,28 @@ class ModalForm {
 		 * @type {function}
 		 *
 		 * @param {ModalForm} form
-		 * @param {import('frog-protocol').Client} client
+		 * @param {import("Frog").Player} client
 		 */
-		this.onSend = () => {};
+		// eslint-disable-next-line no-unused-vars
+		this.onSend = (form, client) => {};
 	}
 
 	/**
-	 * Sends the modal form to the specified client.
+	 * Sends the form to the player.
 	 *
-	 * @param {import('frog-protocol').Client} client
+	 * @param {import("Frog").Player} player
 	 */
-	send(client) {
-		this.onSend(this, client);
+	send(player) {
+		this.onSend(this, player);
 
-		const FormRequestPacket = new ServerFormRequestPacket();
-		FormRequestPacket.type = FormType.MODAL_FORM;
-		FormRequestPacket.id = this.id;
-		FormRequestPacket.title = this.title;
-		FormRequestPacket.content = this.text;
-		FormRequestPacket.button1 = this.button1;
-		FormRequestPacket.button2 = this.button2;
-		FormRequestPacket.writePacket(client);
+		const formRequestPacket = new ServerFormRequestPacket();
+		formRequestPacket.type = Form.MODAL_FORM;
+		formRequestPacket.id = this.id;
+		formRequestPacket.title = this.title;
+		formRequestPacket.content = this.text;
+		formRequestPacket.button1 = this.button1;
+		formRequestPacket.button2 = this.button2;
+		formRequestPacket.writePacket(player);
 	}
 }
 

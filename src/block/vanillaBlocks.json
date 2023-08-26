@@ -1,0 +1,29 @@
+{
+    "air": {
+        "legacy_id": 0
+    },
+    "bedrock": {
+        "legacy_id": 7
+    },
+    "coal_ore": {
+        "legacy_id": 16
+    },
+    "dirt": {
+        "legacy_id": 3
+    },
+    "grass": {
+        "legacy_id": 2
+    },
+    "stone": {
+        "legacy_id": 1
+    },
+    "chest": {
+        "legacy_id": 54
+    },
+    "sand": {
+        "legacy_id": 12
+    },
+    "water": {
+        "legacy_id": 9
+    }
+}

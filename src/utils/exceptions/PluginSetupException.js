@@ -14,8 +14,12 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class PluginSetupException extends Error {
+	/**
+	 * @param {import("Frog").Plugin} plugin
+	 * @param {string} message
+	 */
 	constructor(plugin, message) {
-		super("Failed to load " + plugin + ", error: " + message);
+		super(`Failed to load ${plugin.name} v${plugin.version}, error: ${message}`);
 		this.name = "PluginSetupException";
 	}
 }

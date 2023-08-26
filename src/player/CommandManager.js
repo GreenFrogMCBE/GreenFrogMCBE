@@ -17,24 +17,24 @@ const ServerAvailableCommandsPacket = require("../network/packets/ServerAvailabl
 
 const { getKey } = require("../utils/Language");
 
-/** @type {import("../declarations/Typedefs").CommandsPacket} */
-let commands = [];
+/** @type {import("Frog").CommandInfo[]} */
+const commands = [];
 
-class CommandManager {
+module.exports = {
 	/**
 	 * Retrieves the commands packet of a client.
 	 *
-	 * @param {Client} client - The client object.
-	 * @returns {Array}
+	 * @param {import("Frog").Player} client - The client object.
+	 * @returns {import("Frog").CommandPacket}
 	 */
 	getPacket(client) {
 		return client.commands;
-	}
+	},
 
 	/**
 	 * Initialises the commands.
 	 *
-	 * @param {import("frog-protocol").Client} client
+	 * @param {import("Frog").Player} client
 	 */
 	init(client) {
 		client.commands = {
@@ -49,27 +49,26 @@ class CommandManager {
 			dynamic_enums: [],
 			enum_constraints: [],
 		};
-	}
+	},
 
 	/**
 	 * Retrieves the commands array.
 	 *
-	 * @returns {Array} The commands array.
+	 * @returns {import("Frog").CommandInfo[]}
 	 */
 	getCommands() {
 		return commands;
-	}
+	},
 
 	/**
 	 * Adds a new command to the client's commands packet and updates the commands array.
 	 *
-	 * @param {Client} client - The client.
+	 * @param {import("Frog").Player} client
 	 * @param {string} name - The name of the new command.
 	 * @param {string} description - The description of the command.
 	 */
 	addCommand(client, name, description) {
-		// Ignore /help and /? because they are overriden by the client
-		if (name === getKey("commands.help.name") || name === "?") return;
+		if (name === getKey("commands.help.name") || name === "?") return; // Ignore /help and /? because they are overridden by the client
 
 		client.commands.command_data.push({
 			name,
@@ -108,7 +107,5 @@ class CommandManager {
 		const availableCommandsPacket = new ServerAvailableCommandsPacket();
 		availableCommandsPacket.data = client.commands;
 		availableCommandsPacket.writePacket(client);
-	}
-}
-
-module.exports = CommandManager;
+	},
+};

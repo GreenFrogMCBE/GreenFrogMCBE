@@ -15,37 +15,36 @@
  */
 const readline = require("readline");
 
-const Logger = require("./Logger");
-
-const Language = require("../utils/Language");
-
-const CommandVerifier = require("../utils/CommandVerifier");
+const Logger = require("../utils/Logger");
 const CommandManager = require("./CommandManager");
 
-/** @private @type {boolean} */
+const Language = require("../utils/Language");
+const CommandVerifier = require("../utils/CommandVerifier");
+
+/** @type {boolean} */
 let isClosed = false;
-/** @private @type {readline.Interface} */
+/** @type {import("readline").ReadLine | undefined} */
 let readLineInterface;
-
-/**
- * Set ups the console command reader that is used to handle commands
- */
-async function setupConsoleReader() {
-	readLineInterface = await readline.createInterface({
-		input: process.stdin,
-		output: process.stdout,
-	});
-
-	readLineInterface.setPrompt("");
-	readLineInterface.prompt(true);
-}
 
 module.exports = {
 	/**
 	 * Closes the console.
 	 */
-	close() {
+	closeConsole() {
 		isClosed = true;
+	},
+
+	/**
+	 * Set ups the console command reader that is used to handle commands
+	 */
+	async setupConsoleReader() {
+		readLineInterface = readline.createInterface({
+			input: process.stdin,
+			output: process.stdout,
+		});
+
+		readLineInterface.setPrompt("");
+		readLineInterface.prompt(true);
 	},
 
 	/**
@@ -58,65 +57,70 @@ module.exports = {
 	/**
 	 * Returns the command handler interface.
 	 *
-	 * @type {readline.Interface}
+	 * @type {import("readline").ReadLine | undefined}
 	 */
 	readLineInterface,
 
 	/**
-	 * Executes a command that the user typed in the console.
+	 * Executes a command that the user types in the console.
 	 *
-	 * @param {string} executedCommand - The command to execute.
+	 * @param {string} command
 	 */
-	executeConsoleCommand(executedCommand) {
-		executedCommand = executedCommand.replace("/", "");
+	executeCommand(command) {
+		command = command.replace("/", "");
 
 		let shouldExecuteCommand = true;
 
-		const args = executedCommand.split(" ").slice(1);
+		const args = command?.split(" ")?.slice(1);
 		const Frog = require("../Frog");
 
-		Frog.eventEmitter.emit("serverExecutedCommand", {
+		Frog.eventEmitter.emit("serverCommand", {
 			args,
-			command: executedCommand,
-			cancel: () => {
+			command,
+			cancel() {
 				shouldExecuteCommand = false;
 			},
 		});
 
-		if (isClosed || !shouldExecuteCommand || !executedCommand.replace(" ", "")) return;
+		if (isClosed || !shouldExecuteCommand || !command.replace(" ", "")) return;
 
 		try {
 			let commandFound = false;
 
-			for (const command of CommandManager.commands) {
-				if (command.data.name === executedCommand.split(" ")[0] || (command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))) {
-					if (command.data.minArgs !== undefined && command.data.minArgs > args.length) {
-						Logger.info(Language.getKey("commands.errors.syntaxError.minArg").replace("%s%", command.data.minArgs).replace("%d%", args.length));
+			for (const loadedCommand of CommandManager.commands) {
+				if (loadedCommand.name === command.split(" ")[0] || (loadedCommand.aliases && loadedCommand.aliases.includes(command.split(" ")[0]))) {
+					if (loadedCommand.minArgs !== undefined && loadedCommand.minArgs > args.length) {
+						Logger.info(Language.getKey("commands.errors.syntaxError.minArg").replace("%s", loadedCommand.minArgs).replace("%d", args.length.toString()));
 						return;
 					}
 
-					if (command.data.maxArgs !== undefined && command.data.maxArgs < args.length) {
-						Logger.info(Language.getKey("commands.errors.syntaxError.maxArg").replace("%s%", command.data.maxArgs).replace("%d%", args.length));
+					if (loadedCommand.maxArgs !== undefined && loadedCommand.maxArgs < args.length) {
+						Logger.info(Language.getKey("commands.errors.syntaxError.maxArg").replace("%s", loadedCommand.maxArgs).replace("%d", args.length.toString()));
 						return;
 					}
 
-					command.execute(
-						Frog,
+					loadedCommand.execute(
 						{
+							username: "Server",
+							network: {
+								address: Frog.config.network.host,
+								port: Frog.config.network.port,
+							},
+							permissions: {
+								op: true,
+								isConsole: true,
+							},
+							/** @param {string} message */
 							sendMessage: (message) => {
 								Logger.info(message);
 							},
-							setGamemode: () => {},
-							op: true,
-							username: "Server",
-							ip: "127.0.0.1",
-							isConsole: true,
 						},
+						Frog,
 						args,
 					);
 
 					commandFound = true;
-					break; // Exit loop once command has been found and executed
+					break;
 				}
 			}
 
@@ -127,16 +131,16 @@ module.exports = {
 							Logger.info(msg);
 						},
 					},
-					executedCommand.split(" ")[0],
+					command.split(" ")[0],
 				);
 			}
 		} catch (error) {
-			require("../Frog").eventEmitter.emit("serverCommandProcessError", {
-				command: executedCommand,
+			Frog.eventEmitter.emit("serverCommandProcessError", {
+				command,
 				error,
 			});
 
-			Logger.error(Language.getKey("commands.errors.internalError").replace("%s%", error.stack));
+			Logger.error(Language.getKey("commands.errors.internalError").replace("%s", error.stack));
 		}
 	},
 
@@ -145,21 +149,23 @@ module.exports = {
 	 *
 	 * @param {string} command
 	 */
-	isEmpty(command) {
+	isEmptyCommand(command) {
 		return !command.replace("/", "").trim();
 	},
 
 	/**
 	 * Starts the console.
 	 */
-	async start() {
+	async startConsole() {
 		const Frog = require("../Frog");
 
-		await setupConsoleReader();
+		await this.setupConsoleReader();
 		await CommandManager.loadAllCommands();
 
-		readLineInterface.on("line", async (command) => {
-			if (this.isEmpty(command)) return;
+		if (!readLineInterface) return;
+
+		readLineInterface.on("line", async (command /** @type {string} */) => {
+			if (this.isEmptyCommand(command)) return;
 
 			let shouldProcessCommand = true;
 
@@ -171,9 +177,9 @@ module.exports = {
 			});
 
 			if (shouldProcessCommand) {
-				this.executeConsoleCommand(command);
+				this.executeCommand(command);
 
-				if (!isClosed) readLineInterface.prompt(true);
+				if (!isClosed && readLineInterface) readLineInterface.prompt(true);
 			}
 		});
 	},

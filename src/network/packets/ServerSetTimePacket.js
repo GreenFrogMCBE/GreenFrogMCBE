@@ -13,15 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerSetTimePacket extends PacketConstructor {
+class ServerSetTimePacket extends Packet {
 	name = "set_time";
-	/** @type {number} */
+
+	/** @type {number | undefined} */
 	time;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			time: this.time,
 		});
 	}

@@ -15,27 +15,33 @@
  */
 const Frog = require("../../Frog");
 
-const Logger = require("../../server/Logger");
+const Logger = require("../../utils/Logger");
 const CommandManager = require("../../server/CommandManager");
 const CommandVerifier = require("../../utils/CommandVerifier");
 
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
 const { getKey } = require("../../utils/Language");
 
 const config = Frog.config;
 
-class ClientCommandRequestPacket extends PacketConstructor {
+class ClientCommandRequestPacket extends Packet {
 	name = "command_request";
 
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
+	 */
 	async readPacket(player, packet) {
+		if (Frog.config.chat.features.commands) return;
+
 		let executedCommand = packet.data.params.command.replace("/", "");
 
 		const args = executedCommand.split(" ").slice(1);
 
 		let shouldExecuteCommand = true;
 
-		Frog.eventEmitter.emit("playerExecutedCommand", {
+		Frog.eventEmitter.emit("playerCommand", {
 			player,
 			args,
 			command: executedCommand,
@@ -46,8 +52,8 @@ class ClientCommandRequestPacket extends PacketConstructor {
 
 		if (!shouldExecuteCommand) return;
 
-		if (config.chat.blockInvalidCommands) {
-			executedCommand = executedCommand.replace("%d%", executedCommand.replace("§", ""));
+		if (config.chat.blockInvalidPackets.commands) {
+			executedCommand = executedCommand.replace("%d", executedCommand.replace("§", ""));
 
 			if (executedCommand > 256) {
 				Frog.eventEmitter.emit("playerMalformatedChatCommand", {
@@ -58,30 +64,32 @@ class ClientCommandRequestPacket extends PacketConstructor {
 			}
 		}
 
+		Logger.info(getKey("commands.ingame.executed").replace("%s", player.username).replace("%d", executedCommand));
+
 		try {
 			let commandFound = false;
 
 			for (const command of CommandManager.commands) {
-				if (command.data.name === executedCommand.split(" ")[0] || (command.data.aliases && command.data.aliases.includes(executedCommand.split(" ")[0]))) {
-					if (command.data.requiresOp && !player.op) {
+				if (command.name === executedCommand.split(" ")[0] || (command.aliases && command.aliases.includes(executedCommand.split(" ")[0]))) {
+					if (command.requiresOp && !player.permissions.op) {
 						CommandVerifier.throwError(player, executedCommand.split(" ")[0]);
 						return;
 					}
 
-					if (command.data.minArgs !== undefined && command.data.minArgs > args.length) {
-						player.sendMessage(getKey("commands.errors.syntaxError.minArg").replace("%s%", command.data.minArgs).replace("%d%", args.length));
+					if (command.minArgs !== undefined && command.minArgs > args.length) {
+						player.sendMessage(getKey("commands.errors.syntaxError.minArg").replace("%s", command.minArgs).replace("%d", args.length));
 						return;
 					}
 
-					if (command.data.maxArgs !== undefined && command.data.maxArgs < args.length) {
-						player.sendMessage(getKey("commands.errors.syntaxError.maxArg").replace("%s%", command.data.maxArgs).replace("%d%", args.length));
+					if (command.maxArgs !== undefined && command.maxArgs < args.length) {
+						player.sendMessage(getKey("commands.errors.syntaxError.maxArg").replace("%s", command.maxArgs).replace("%d", args.length));
 						return;
 					}
 
-					command.execute(Frog, player, args);
+					command.execute(player, Frog, args);
 
 					commandFound = true;
-					break; // Exit loop once command has been found and executed
+					break;
 				}
 			}
 
@@ -89,7 +97,7 @@ class ClientCommandRequestPacket extends PacketConstructor {
 				CommandVerifier.throwError(player, executedCommand.split(" ")[0]);
 			}
 		} catch (error) {
-			Logger.error(getKey("commands.errors.internalError.player").replace("%s%", player.username).replace("%d%", error.stack));
+			Logger.error(getKey("commands.errors.internalError.player").replace("%s", player.username).replace("%d", error.stack));
 		}
 	}
 }

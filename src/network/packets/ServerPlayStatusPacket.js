@@ -13,15 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerPlayStatusPacket extends PacketConstructor {
+class ServerPlayStatusPacket extends Packet {
 	name = "play_status";
-	/** @type {import("./types/PlayStatus")} */
+
+	/** @type {import("Frog").PlayStatus | undefined} */
 	status;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			status: this.status,
 		});
 	}

@@ -15,23 +15,33 @@
  */
 const Frog = require("../../Frog");
 
-const PlayerInfo = require("../../api/player/PlayerInfo");
+const PlayerInfo = require("../../player/PlayerInfo");
 
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ClientSetDifficultyPacket extends PacketConstructor {
+class ClientSetDifficultyPacket extends Packet {
 	name = "set_difficulty";
 
-	async readPacket(player, packet, server) {
+	/**
+	 * @param {import("Frog").Player} player
+	 * @param {import("Frog").Packet} packet
+	 */
+	async readPacket(player, packet) {
 		const difficulty = packet.data.params.difficulty;
+
+		let shouldUpdateDifficulty = false;
 
 		Frog.eventEmitter.emit("playerSetDifficulty", {
 			player,
-			server,
 			difficulty,
+			cancel() {
+				shouldUpdateDifficulty = true;
+			},
 		});
 
-		for (const player of PlayerInfo.players) {
+		if (!shouldUpdateDifficulty) return;
+
+		for (const player of PlayerInfo.playersOnline) {
 			player.setDifficulty(difficulty);
 		}
 	}

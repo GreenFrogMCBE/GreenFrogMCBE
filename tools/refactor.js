@@ -27,6 +27,12 @@ const rootDir = path.join(__dirname, "..");
 console.info("Started refactoring");
 console.time("Finished refactoring in");
 
+/**
+ * Replace specified strings in a file
+ *
+ * @param {string} filePath
+ * @param {string[][]} replacements
+ */
 async function replaceInFile(filePath, replacements) {
 	if (filePath.includes("node_modules")) {
 		return;
@@ -38,9 +44,15 @@ async function replaceInFile(filePath, replacements) {
 		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
 	}
 
-	fs.writeFile(filePath, fileContent, {}, () => {});
+	fs.writeFile(filePath, fileContent, {}, () => { });
 }
 
+/**
+ * Walks through the directory
+ * 
+ * @param {string} dirPath 
+ * @param {string[][]} replacements 
+ */
 async function traverseDirectory(dirPath, replacements) {
 	const entries = fs.readdirSync(dirPath, { withFileTypes: true });
 
@@ -49,7 +61,7 @@ async function traverseDirectory(dirPath, replacements) {
 
 		if (entry.isDirectory()) {
 			traverseDirectory(entryPath, replacements);
-		} else if (entry.isFile() && (entry.name.endsWith(".js") || entry.name.endsWith(".json"))) {
+		} else if (entry.isFile() && (entry.name.includes(".js") || entry.name.includes(".ts") || entry.name.includes(".json") || entry.name.includes(".yml"))) {
 			replaceInFile(entryPath, replacements);
 		}
 	}

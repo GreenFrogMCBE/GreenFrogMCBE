@@ -13,21 +13,25 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerMoveEntityDataPacket extends PacketConstructor {
+class ServerMoveEntityDataPacket extends Packet {
 	name = "move_entity_delta";
-	/** @type {JSON} */
-	coordinates;
-	/** @type {number} */
-	runtime_entity_id;
-	/** @type {number} */
-	flags;
-	/** @type {JSON} */
-	coordinatesRotation;
 
-	writePacket(client) {
-		client.queue(this.name, {
+	/** @type {import("Frog").Coordinate } */
+	coordinates = { x: 0, y: 0, z: 0 };
+	/** @type {number | undefined} */
+	runtime_entity_id;
+	/** @type {import("Frog").EntityMovementFlags | undefined} */
+	flags;
+	/** @type {import("Frog").Coordinate} */
+	coordinatesRotation = { x: 0, y: 0, z: 0 };
+
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			runtime_entity_id: this.runtime_entity_id,
 			flags: this.flags,
 			x: this.coordinates.x,

@@ -13,16 +13,20 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
 /** @deprecated */
-class ServerBiomeDefinitionListPacket extends PacketConstructor {
+class ServerBiomeDefinitionListPacket extends Packet {
 	name = "biome_definition_list";
-	/** @type {JSON} */
+
+	/** @type {JSON | undefined} */
 	data;
 
-	writePacket(client) {
-		client.queue(this.name, this.data);
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, this.data);
 	}
 }
 

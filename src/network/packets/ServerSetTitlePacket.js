@@ -13,33 +13,35 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Title = require("../../api/types/Title");
+const Title = require("../../player/types/Title");
 
-const PacketConstructor = require("./PacketConstructor");
+const Packet = require("./Packet");
 
-class ServerSetTitlePacket extends PacketConstructor {
+class ServerSetTitlePacket extends Packet {
 	name = "set_title";
-	/** @type {import("../../api/types/Title")} */
+
+	/** @type {string | undefined} */
 	type;
-	/** @type {string} */
+	/** @type {string | undefined} */
 	text;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	fade_in_time;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	stay_time;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	fade_out_time;
-	/** @type {string} */
+	/** @type {string | undefined} */
 	xuid;
-	/** @type {string} */
+	/** @type {string | undefined} */
 	platform_online_id;
 
-	writePacket(client) {
-		if (this.getType() === Title.CLEAR) this.text = "";
-
-		client.queue(this.getPacketName(), {
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
 			type: this.type,
-			text: this.text,
+			text: this.type === Title.CLEAR ? "" : this.text,
 			fade_in_time: this.fade_in_time,
 			stay_time: this.stay_time,
 			fade_out_time: this.fade_out_time,

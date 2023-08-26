@@ -35,7 +35,12 @@ const LICENSE_HEADER = `/**
 
 const srcPath = path.join(__dirname, "..");
 
-const addHeader = async (filePath) => {
+/**
+ * Adds a header to the file
+ * 
+ * @param {string} filePath 
+ */
+async function addHeader(filePath) {
 	if (filePath.includes("node_modules")) {
 		return;
 	}
@@ -47,19 +52,27 @@ const addHeader = async (filePath) => {
 		if (!contents.includes("CC-BY-4.0")) {
 			contents = LICENSE_HEADER + contents;
 			await fs.writeFile(filePath, contents);
+
 			console.info(`Added license header to file ${filePath}`);
 		}
-	} catch (err) {
-		console.error(`Error adding license header to file ${filePath}:`, err);
+	} catch (error) {
+		console.error(`Error adding license header to file ${filePath}: ${error.stack}`);
 	}
-};
+}
 
-const walk = async (dir) => {
+/**
+ * Walks through the directory
+ * 
+ * @param {string} dir 
+ */
+async function walk(dir) {
 	try {
 		const files = await fs.readdir(dir);
+
 		for (const file of files) {
 			const filePath = path.join(dir, file);
 			const stats = await fs.stat(filePath);
+
 			if (stats.isDirectory()) {
 				await walk(filePath);
 			} else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts") {
@@ -69,6 +82,6 @@ const walk = async (dir) => {
 	} catch (err) {
 		console.error(`Error reading directory ${dir}:`, err);
 	}
-};
+}
 
 walk(srcPath);

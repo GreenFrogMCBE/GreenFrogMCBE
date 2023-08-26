@@ -21,6 +21,7 @@ module.exports = {
 	 * @returns {string} The converted string with NodeJS console color codes
 	 */
 	convertConsoleColor(string) {
+		/** @type {import("Frog").ConsoleColors} */
 		const colors = {
 			"§0": "\x1b[30m", // black
 			"§1": "\x1b[34m", // dark blue
