@@ -15,8 +15,8 @@
  */
 const Frog = require("./Frog");
 
-const FrogProtocol = require("frog-protocol");
 const fs = require("fs");
+const FrogProtocol = require("frog-protocol");
 
 const PluginLoader = require("./plugins/PluginLoader");
 const PluginManager = require("./plugins/PluginManager");

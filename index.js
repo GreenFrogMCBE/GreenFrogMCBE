@@ -40,8 +40,8 @@ const crashFileName = `./crash-reports/server-crash-${Math.floor(Math.random() *
 async function createConfigFilesAndDebug() {
 	if (!fs.existsSync("config.yml")) {
 		let config = null;
-		const configPath = process.env.TEST ? "../src/resources/defaultConfig.yml" : "./src/resources/defaultConfig.yml";
 
+		const configPath = process.env.TEST ? "./src/resources/defaultConfig.yml" : "../src/resources/defaultConfig.yml";
 		config = fs.readFileSync(configPath);
 
 		fs.writeFileSync("config.yml", config);

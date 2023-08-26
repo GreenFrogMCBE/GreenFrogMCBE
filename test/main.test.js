@@ -20,6 +20,7 @@ const protocol = require("frog-protocol");
 const util = require("minecraft-server-util");
 
 const Frog = require("../src/Frog");
+
 const ConsoleCommandSender = require("../src/server/ConsoleCommandSender");
 
 describe("config files", () => {
@@ -137,25 +138,27 @@ describe("client", () => {
 			offline: true
 		});
 
-		client.on("close", (packet) => {
-			throw new Error("Connection closed: " + packet.data.params.reason);
+		client.on("close", () => {
+			throw new Error("Connection closed");
 		});
 
-		client.on("spawn", () => {
-			client.queue("command_request", {
-				command: "pl",
-				internal: false,
-				version: 70,
-				origin: {
-					uuid: client.profile.uuid,
-					request_id: client.profile.uuid,
-					type: "player",
-				},
-			});
+		client.on("packet", (packet) => {
+			if (packet.data.name === "start_game") {
+				client.queue("command_request", {
+					command: "pl",
+					internal: false,
+					version: 70,
+					origin: {
+						uuid: client.profile.uuid,
+						request_id: client.profile.uuid,
+						type: "player",
+					},
+				});
 
-			setTimeout(() => {
-				Frog.shutdownServer();
-			}, 1000);
+				setTimeout(() => {
+					Frog.shutdownServer();
+				}, 1000);	
+			}
 		});
 	});
 });
