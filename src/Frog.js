@@ -139,6 +139,6 @@ module.exports = {
 		ConsoleCommandSender.closeConsole();
 		PluginLoader.unloadPlugins();
 
-		process.exit(this.config.dev.exitCodes.exit);
+		process.exit(this.config.dev.exitCodes.successful);
 	},
 };
