@@ -132,10 +132,10 @@
 
 > Used for query part of our tests
 
-19. The `nodemon` library (https://github.com/remy/nodemon)
-
-> Used for faster development
-
-20. The `@harmonytf/smart-buffer` library (https://github.com/harmonytf/smart-buffer)
+19. The `@harmonytf/smart-buffer` library (https://github.com/harmonytf/smart-buffer)
 
 > Used for query support
+
+20. The `nodemon` library (https://github.com/remy/nodemon)
+
+> Helps us develop this software faster
