@@ -77,7 +77,26 @@ module.exports = {
 			permission_level: 0,
 			alias: -1,
 			chained_subcommand_offsets: [],
-			overloads: [],
+			overloads: [
+				{
+					chaining: false,
+					parameters: [
+						{
+							parameter_name: "args",
+							value_type: "string",
+							enum_type: "valid",
+							optional: false,
+							options: {
+								unused: 0,
+								collapse_enum: 0,
+								has_semantic_constraint: 0,
+								as_chained_command: 0,
+								unknown2: 0
+							}
+						}
+					]
+				}
+			],
 		});
 
 		commands.push({
