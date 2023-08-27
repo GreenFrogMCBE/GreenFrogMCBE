@@ -19,4 +19,4 @@ Please note that this software is still in beta, so do not stare directly at the
 + How to install: /docs/INSTALLATION.md
 ```
 
-![Alt](https://repobeats.axiom.co/api/embed/ff82e6d76083a1934305e3b40714b01604df4e92.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/ebe39780588d69d3add0017875c20da754321cd0.svg "Repobeats analytics image")
