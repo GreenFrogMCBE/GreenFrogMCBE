@@ -100,7 +100,7 @@ declare module "Frog" {
 				useLegacyServerFullKickMessage: boolean;
 			};
 			exitCodes: {
-				exit: number;
+				successful: number;
 				crash: number;
 			};
 		};

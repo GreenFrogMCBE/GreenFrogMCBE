@@ -36,8 +36,7 @@ const _eventEmitter = new eventEmitter();
 
 /** @returns {import("Frog").Config} */
 function getConfig() {
-	const path = process.env.TEST ? "../config.yml" : "config.yml";
-	const configData = yaml.load(fs.readFileSync(path, "utf8"));
+	const configData = yaml.load(fs.readFileSync("config.yml", "utf8"));
 
 	return configData;
 }
@@ -140,6 +139,6 @@ module.exports = {
 		ConsoleCommandSender.closeConsole();
 		PluginLoader.unloadPlugins();
 
-		process.exit(this.config.dev.exitCodes.exit);
+		process.exit(this.config.dev.exitCodes.successful);
 	},
 };

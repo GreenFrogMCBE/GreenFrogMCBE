@@ -181,7 +181,8 @@ class ClientResourcePackResponsePacket extends Packet {
 					}
 				}
 
-				const itemComponent = new ServerItemComponentPacket(); // This packet is used to create custom items
+				// This packet is used to create custom items
+				const itemComponent = new ServerItemComponentPacket();
 				try {
 					itemComponent.entries = customItems;
 				} catch (error) {
@@ -190,7 +191,8 @@ class ClientResourcePackResponsePacket extends Packet {
 				}
 				itemComponent.writePacket(player);
 
-				if (player.renderChunks) { // player.renderChunks is true by default but can be disabled by plugins
+				// player.renderChunks is true by default but can be disabled by plugins
+				if (player.renderChunks) { 
 					player.setChunkRadius(player.world.renderDistance);
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();

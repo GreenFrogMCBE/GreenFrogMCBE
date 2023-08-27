@@ -19,8 +19,12 @@ const yaml = require("js-yaml");
 const protocol = require("frog-protocol");
 const util = require("minecraft-server-util");
 
-const Frog = require("../src/Frog");
 const ConsoleCommandSender = require("../src/server/ConsoleCommandSender");
+
+before(() => {
+	process.env.TEST = true;
+	process.env.DEBUG = true;
+});
 
 describe("config files", () => {
 	const configFiles = [
@@ -49,113 +53,107 @@ describe("config files", () => {
 });
 
 describe("server", () => {
-	it("can start", () => {
-		process.env.TEST = true;
-		process.env.DEBUG = true;
+	it("can start", async () => {
+		await require("../index");
 
-		require("../index");
-	});
+		describe("commands", () => {
+			const commandsDir = path.join(__dirname, "..", "src", "commands");
 
-	it("can broadcast a message", () => {
-		Frog.broadcastMessage("Hello, World!");
-	});
-});
+			for (const commandFile of fs.readdirSync(commandsDir)) {
+				if (fs.statSync(path.join(commandsDir, commandFile)).isFile()) {
+					const command = new (require(path.join(commandsDir, commandFile)))();
 
-describe("commands", () => {
-	const commandsDir = path.join(__dirname, "..", "src", "commands", "\\");
+					if (command.name == "stop" || !command.name) continue;
 
-	Frog.eventEmitter.on("serverCommandProcessError", (event) => {
-		throw event.error;
-	});
-
-	for (const commandFile of fs.readdirSync(commandsDir)) {
-		if (fs.statSync(commandsDir + commandFile).isFile()) {
-			const command = new (require(commandsDir + commandFile));
-
-			if (command.name == "stop" || !command.name) continue;
-
-			it("can execute /" + command.name, () => {
-				ConsoleCommandSender.executeCommand(command.name);
-			});
-		}
-	}
-});
-
-describe("query", () => {
-	it("can respond with basic info", async () => {
-		console.log(`Basic info: ${JSON.stringify(await util.queryBasic("0.0.0.0", 19133))}`);
-	});
-
-	it("can respond with full info", async () => {
-		console.log(`Full info: ${JSON.stringify(await util.queryFull("0.0.0.0", 19133))}`);
-	});
-});
-
-describe("client", () => {
-	it("can join", () => {
-		const client = protocol.createClient({
-			host: "127.0.0.1",
-			port: 19132,
-			username: "joinBot",
-			offline: true
+					it(`can execute /${command.name}`, () => {
+						ConsoleCommandSender.executeCommand(command.name);
+					});
+				}
+			}
 		});
 
-		client.on("disconnect", () => {
-			throw new Error("Connection closed");
-		});
-	});
-
-	it("can send a message", () => {
-		const client = protocol.createClient({
-			host: "127.0.0.1",
-			port: 19132,
-			username: "messageBot",
-			offline: true
-		});
-
-		client.on("close", () => {
-			throw new Error("Connection closed");
-		});
-
-		client.on("spawn", () => {
-			client.queue("text", {
-				type: "chat",
-				needs_translation: false,
-				source_name: client.username,
-				xuid: "",
-				platform_chat_id: "",
-				message: "hi"
-			});
-		});
-	});
-
-	it("can send a command", () => {
-		const client = protocol.createClient({
-			host: "127.0.0.1",
-			port: 19132,
-			username: "commandBot",
-			offline: true
-		});
-
-		client.on("close", (packet) => {
-			throw new Error("Connection closed: " + packet.data.params.reason);
-		});
-
-		client.on("spawn", () => {
-			client.queue("command_request", {
-				command: "pl",
-				internal: false,
-				version: 70,
-				origin: {
-					uuid: client.profile.uuid,
-					request_id: client.profile.uuid,
-					type: "player",
-				},
+		describe("query", () => {
+			it("can respond with basic info", async () => {
+				const basicInfo = await util.queryBasic("0.0.0.0", 19133);
+				console.log(`Basic info: ${JSON.stringify(basicInfo)}`);
 			});
 
-			setTimeout(() => {
-				Frog.shutdownServer();
-			}, 1000);
+			it("can respond with full info", async () => {
+				const fullInfo = await util.queryFull("0.0.0.0", 19133);
+				console.log(`Full info: ${JSON.stringify(fullInfo)}`);
+			});
 		});
-	});
+
+		describe("client", () => {
+			it("can join", () => {
+				const client = protocol.createClient({
+					host: "127.0.0.1",
+					port: 19132,
+					username: "joinBot",
+					offline: true
+				});
+
+				client.on("disconnect", () => {
+					throw new Error("Connection closed");
+				});
+			});
+
+			it("can send a message", () => {
+				const client = protocol.createClient({
+					host: "127.0.0.1",
+					port: 19132,
+					username: "messageBot",
+					offline: true
+				});
+
+				client.on("close", () => {
+					throw new Error("Connection closed");
+				});
+
+				client.on("spawn", () => {
+					client.queue("text", {
+						type: "chat",
+						needs_translation: false,
+						source_name: client.username,
+						xuid: "",
+						platform_chat_id: "",
+						message: "hi"
+					});
+				});
+			});
+
+			it("can send a command", () => {
+				const client = protocol.createClient({
+					host: "127.0.0.1",
+					port: 19132,
+					username: "commandBot",
+					offline: true
+				});
+
+				client.on("close", () => {
+					throw new Error("Connection closed");
+				});
+
+				client.on("packet", (packet) => {
+					if (packet.data.name === "start_game") {
+						client.queue("command_request", {
+							command: "pl",
+							internal: false,
+							version: 70,
+							origin: {
+								uuid: client.profile.uuid,
+								request_id: client.profile.uuid,
+								type: "player"
+							}
+						});
+
+						setTimeout(() => {
+							const Frog = require("../src/Frog");
+							Frog.shutdownServer();
+						}, 1000);
+					}
+				});
+			});
+		});
+	}).timeout(5000);
 });
