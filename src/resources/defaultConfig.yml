@@ -8,7 +8,7 @@ serverInfo:
     motd: "§aGreenFrog server"
     levelName: "GreenFrog"
     version: "1.20.10"
-    offlineMode: true
+    offlineMode: false
     maxPlayers: 20
 chat:
     lang: "en_US" # Can be "en_US", "ca_ES", "es_ES", "ru_RU" or "uk_UA"
