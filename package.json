@@ -16,13 +16,13 @@
     "@harmonytf/smart-buffer": "4.2.4",
     "@kotinash/lang-parser": "1.0.3",
     "center-align": "1.0.1",
-    "frog-protocol": "github:greenfrogmcbe/Protocol",
+    "frog-protocol": "github:GreenFrogMCBE/protocol",
     "js-yaml": "4.1.0"
   },
   "devDependencies": {
     "mocha": "10.2.0",
     "eslint": "8.48.0",
-    "minecraft-server-util": "github:greenfrogmcbe/minecraft-server-util-compiled",
+    "minecraft-server-util": "github:GreenFrogMCBE/minecraft-server-util-compiled",
     "nodemon": "3.0.1"
   }
 }
