@@ -53,11 +53,17 @@ declare module "Frog" {
 		version: string;
 		plugins: Plugin[] | string[];
 	};
+	
+	export type RaknetBackend =
+		"raknet-native" |
+		"jsp-raknet" |
+		"raknet-node"
 
 	export type Config = {
 		network: {
 			host: string;
 			port: number;
+			raknetBackend: RaknetBackend;
 			packetRateLimiting: {
 				enabled: boolean;
 				maxPackets: number;
