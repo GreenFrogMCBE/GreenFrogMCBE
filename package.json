@@ -1,10 +1,10 @@
 {
-  "name": "greenfrog",
+  "name": "@greenfrog/greenfrogmcbe",
   "description": "A server software for MCBE",
   "main": "index.js",
   "author": "GreenFrogMCBE",
   "license": "CC-BY-4.0",
-  "version": "3.7.1",
+  "version": "3.7.1-npmfix",
   "scripts": {
     "format": "npm run generate-license-headers && npx eslint . --fix",
     "start": "node index.js",
