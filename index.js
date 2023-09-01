@@ -1,7 +1,7 @@
 /**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ███████╗██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
  * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
  * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
  * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
@@ -14,32 +14,20 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const fs = require("fs");
-const center = require("center-align");
+const path = require("path");
 
 const Colors = require("./src/utils/types/Colors");
-
 const { convertConsoleColor } = require("./src/utils/ConsoleColorConvertor");
-
-console.info(
-	convertConsoleColor(
-		center(
-			`${Colors.GREEN} 
-██████   ██████  ███████ ███████ ███    ██ ███████ ██████   ██████   ██████  
-██       ██   ██ ██      ██      ████   ██ ██      ██   ██ ██    ██ ██       
-██   ███ ██████  █████   █████   ██ ██  ██ █████   ██████  ██    ██ ██    ██ 
-██    ██ ██   ██ ██      ██      ██  ██ ██ ██      ██   ██ ██    ██ ██    ██ 
-██████   ██   ██ ███████ ███████ ██   ████ ██      ██   ██  ██████   ██████  
-${Colors.RESET}`,
-			process.stdout.columns,
-		),
-	),
-);
 
 const crashFileName = `./crash-reports/server-crash-${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}.txt`;
 
+/**
+ * Creates configuration files and sets up debugging if necessary.
+ * @async
+ */
 async function createConfigFilesAndDebug() {
 	if (!fs.existsSync("config.yml")) {
-		const configPath = process.env.TEST ? "../src/resources/defaultConfig.yml" : "./src/resources/defaultConfig.yml";
+		const configPath = path.join(__dirname, process.env.TEST ? ".." : ".", "src", "resources", "defaultConfig.yml");
 		const config = fs.readFileSync(configPath);
 
 		fs.writeFileSync("config.yml", config);
@@ -52,6 +40,10 @@ async function createConfigFilesAndDebug() {
 	}
 }
 
+/**
+ * Starts the server.
+ * @async
+ */
 async function start() {
 	try {
 		await createConfigFilesAndDebug();
@@ -68,7 +60,7 @@ async function start() {
 			convertConsoleColor(
 				`${Colors.RED}Failed to start server
 ${error.stack}
-	
+
 Make sure that you have the required libraries. Run "npm i" to install them
 If you are sure that this is a bug please report it here: https://github.com/GreenFrogMCBE/GreenFrogMCBE
 ${Colors.RESET}`,
