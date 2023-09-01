@@ -4,6 +4,7 @@
   "main": "index.js",
   "author": "GreenFrogMCBE",
   "license": "CC-BY-4.0",
+  "version": "3.7.1",
   "scripts": {
     "format": "npm run generate-license-headers && npx eslint . --fix",
     "start": "node index.js",
