@@ -66,6 +66,7 @@ If you are sure that this is a bug please report it here: https://github.com/Gre
 ${Colors.RESET}`,
 			),
 		);
+
 		fs.mkdirSync("crash-reports", { recursive: true });
 		fs.writeFileSync(crashFileName, `Error: ${error.stack}`);
 
