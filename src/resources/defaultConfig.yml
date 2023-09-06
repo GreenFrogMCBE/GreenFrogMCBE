@@ -1,6 +1,7 @@
 network:
     host: "0.0.0.0"
     port: 19132
+    raknet: "raknet-native" # Can be raknet-native (default), jsp-raknet or raknet-node
     packetRateLimiting: # Limits how many packets can be sent per second
         enabled: true # Recommended to enable. It can prevent bad actors from crashing your server
         maxPackets: 2500
@@ -32,11 +33,7 @@ dev:
     unstable: false # Makes your server not crash on critical errors
     debug: false
     logUnhandledPackets: false
-    # Permission levels are:
-    # 4 - operator
-    # 2 - member
-    # 0 - visitor
-    defaultPermissionLevel: 2
+    defaultPermissionLevel: 2 # Can be 4 (for operator), 2 (for member) or 0 (for visitor)
     multiProtocol: false # Supports versions that have no or nearly any protocol changes. Some features may be broken
     validateUsernames: true # Don't allow allow usernames that are too long/too short or duplicate usernames?
     legacy:

@@ -7,9 +7,8 @@ node_modules/
 ops.yml
 config.yml
 crash-reports/
-world/
 
-# bedrock-protocol erros
+# bedrock-protocol errors
 
 *_packetReadError.txt
 

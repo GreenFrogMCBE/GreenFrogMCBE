@@ -120,18 +120,22 @@
 
 > Used for centering the `GreenFrog` text on server startup
 
-16. The `eslint` (https://github.com/eslint/eslint) & `prettier` (https://github.com/prettier/prettier) library
+16. The `eslint` (https://github.com/eslint/eslint) library
 
 > Used for our codestyle & formatting
 
-17. The `minecraft-server-util` library (https://github.com/PassTheMayo/minecraft-server-util)
+17. The `mocha` library (https://github.com/mochajs/mocha)
 
-> Used for query tests
+> Used for our tests
 
-18. The `nodemon` library (https://github.com/remy/nodemon)
+18. The `minecraft-server-util` library (https://github.com/PassTheMayo/minecraft-server-util)
 
-> Used for the `npm run dev` command
+> Used for query part of our tests
 
 19. The `@harmonytf/smart-buffer` library (https://github.com/harmonytf/smart-buffer)
 
 > Used for query support
+
+20. The `nodemon` library (https://github.com/remy/nodemon)
+
+> Helps us develop this software faster

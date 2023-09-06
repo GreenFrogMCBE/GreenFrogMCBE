@@ -157,7 +157,7 @@ async function loadPlugins() {
  */
 async function listen() {
 	const { host, port } = Frog.config.network;
-	const { levelName, motd, maxPlayers, version } = Frog.config.serverInfo;
+	const { levelName, motd, maxPlayers, version, raknetBackend } = Frog.config.serverInfo;
 	const { offlineMode } = Frog.config.serverInfo;
 
 	try {
@@ -166,6 +166,7 @@ async function listen() {
 			port,
 			version,
 			offline: process.env.TEST || offlineMode,
+			raknetBackend,
 			maxPlayers,
 			motd: {
 				motd,
