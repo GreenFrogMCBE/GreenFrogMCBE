@@ -13,6 +13,8 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
+const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
 class Random {
 	constructor() {}
 
@@ -23,12 +25,12 @@ class Random {
 	 * @returns {string} Random string
 	 */
 	generateRandomString(length) {
-		const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
 		let result = "";
+		const randomValues = new Uint32Array(length);
+		crypto.getRandomValues(randomValues);
 
 		for (let i = 0; i < length; i++) {
-			result += chars.charAt(Math.floor(Math.random() * chars.length));
+			result += CHARS.charAt(randomValues[i] % CHARS.length);
 		}
 
 		return result;
@@ -36,3 +38,4 @@ class Random {
 }
 
 module.exports = Random;
+
