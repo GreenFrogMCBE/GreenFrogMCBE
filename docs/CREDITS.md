@@ -3,15 +3,16 @@
 1. @AnyBananaGAME
 
 > For making `PlayerInfo.getPlayer()` not case sensitive (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/192)
+> For improving code in `/list`
 
 > [!WARNING]
 > Contributions below are outdated <br>
-> For improving code in `/list`
+> For creating `tools/tests-manual.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/70)
 
 > [!NOTE]
 > Contributions below are partially outdated <br>
 > For creating multilang (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/9) <br> 
-> For creating `tests-manual.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/70)
+
 
 2. @hvlxh
 
@@ -38,9 +39,10 @@
 > For making the code better in some commands <br> 
 > For making the logger use default parameter (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/4) <br> 
 > For adding Vietnamese language (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/295) <br>
-> For optimizing `generateRandomString()` in `Random.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/294) <br>
-> For optimizing the `listen()` function in `Server.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/105) <br> 
-> For improving `generate-license-headers.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/106) <br>
+> For optimizing `generateRandomString()` in `src/utils/Random.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/294) <br>
+> For optimizing the `listen()` function in `src/Server.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/105) <br>
+> For optimizing `tools/refactor.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/296) <br> 
+> For improving `tools/generate-license-headers.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/106) <br>
 
 > [!WARNING]
 > Contributions below are outdated <br> 
@@ -91,7 +93,7 @@
 > For adding `/kill` <br> 
 > For adding Spanish & Catalan languages <br> 
 > For fixing some types <br>
-> For cleaning up the code of `VersionToProtocol.js` <br> 
+> For cleaning up the code of `src/utils/VersionToProtocol.js` <br> 
 > For creating https://greenfrog.deno.dev/
 
 12. @mikhaillav
