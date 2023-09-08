@@ -37,7 +37,8 @@
 > For reporting a bug that /help wasn't working <br> 
 > For making the code better in some commands <br> 
 > For making the logger use default parameter (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/4) <br> 
-> For optimizing `generateRandomString()` in `Random.js` <br>
+> For adding Vietnamese language (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/295) <br>
+> For optimizing `generateRandomString()` in `Random.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/294) <br>
 > For optimizing the `listen()` function in `Server.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/105) <br> 
 > For improving `generate-license-headers.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/106) <br>
 
