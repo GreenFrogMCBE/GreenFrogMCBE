@@ -12,7 +12,7 @@ serverInfo:
     offlineMode: false
     maxPlayers: 20
 chat:
-    lang: "en_US" # Can be "en_US", "ca_ES", "es_ES", "ru_RU" or "uk_UA"
+    lang: "en_US" # Can be "en_US", "ca_ES", "es_ES", "ru_RU", "uk_UA" and "vi_VN"
     systemMessages:
         join: false # Should messages like "X joined the game" be disabled?
         leave: false # Should messages like "X left the game" be disabled?
