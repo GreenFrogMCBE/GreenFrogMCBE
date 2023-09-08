@@ -2,8 +2,8 @@
 
 1. @AnyBananaGAME
 
-> For making `PlayerInfo.getPlayer()` not case sensitive (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/192)
-> For improving code in `/list`
+> For making `PlayerInfo.getPlayer()` not case sensitive (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/192) <br>
+> For improving code style in `/list` <br>
 
 > [!WARNING]
 > Contributions below are outdated <br>
@@ -11,8 +11,7 @@
 
 > [!NOTE]
 > Contributions below are partially outdated <br>
-> For creating multilang (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/9) <br> 
-
+> For adding multilang support (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/9) <br> 
 
 2. @hvlxh
 
