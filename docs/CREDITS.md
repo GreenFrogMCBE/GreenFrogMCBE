@@ -47,10 +47,6 @@
 > For sorting lang strings (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/22, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/23, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/24) <br>
 > For making `PluginManager.getPlugins()` better (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/82)
 
-> [!NOTE]
-> Contributions below are partially outdated <br>
-> For many changes to tests
-
 4. @ATXLtheAxolotl
 
 > For adding a nodemon script for faster development, tiny cleaning and fixing weird usage of .prototype (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/44) 
