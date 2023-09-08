@@ -41,7 +41,6 @@
 > For optimizing the `listen()` function in `Server.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/105) <br> 
 > For improving `generate-license-headers.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/106) <br>
 
-
 > [!WARNING]
 > Contributions below are outdated <br> 
 > For sorting lang strings (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/22, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/23, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/24) <br>
