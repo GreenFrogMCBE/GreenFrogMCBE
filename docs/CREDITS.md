@@ -37,9 +37,10 @@
 > For reporting a bug that /help wasn't working <br> 
 > For making the code better in some commands <br> 
 > For making the logger use default parameter (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/4) <br> 
-> For improving the `listen()` function in `Server.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/105) <br> 
+> For optimizing `generateRandomString()` in `Random.js` <br>
+> For optimizing the `listen()` function in `Server.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/105) <br> 
 > For improving `generate-license-headers.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/106) <br>
-> For optimizing `generateRandomString()` in `Random.js`
+
 
 > [!WARNING]
 > Contributions below are outdated <br> 
