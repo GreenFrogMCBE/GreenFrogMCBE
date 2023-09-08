@@ -1,4 +1,4 @@
-<img src="https://cdn.discordapp.com/icons/1027320700022825030/18452bb7b7a051ca651b2c9b2c817846.webp?size=128">
+<img src="https://avatars.githubusercontent.com/u/123328545?s=200&v=4">
 
 ```diff
 @@ GreenFrog is a server software for Minecraft: Bedrock edition @@
