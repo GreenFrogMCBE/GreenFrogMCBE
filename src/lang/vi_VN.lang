@@ -74,7 +74,7 @@ commands.time.times.night=đêm
 commands.version.name=version
 commands.version.description=Hiển thị phiên bản máy chủ.
 commands.version.aliases.ver=ver
-commands.version.aliases.about=về
+commands.version.aliases.about=about
 
 commands.teleport.name=teleport
 commands.teleport.description=Dịch chuyển người chơi trực tuyến.
