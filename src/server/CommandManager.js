@@ -27,7 +27,7 @@ module.exports = {
 	/**
 	 * Loads all commands
 	 */
-	async loadAllCommands() {
+	async loadCommands() {
 		const Frog = require("../Frog");
 		const commandsPath = path.join(__dirname, "..", "commands");
 

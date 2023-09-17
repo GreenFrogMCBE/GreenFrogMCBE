@@ -159,7 +159,7 @@ module.exports = {
 		const Frog = require("../Frog");
 
 		await this.setupConsoleReader();
-		await CommandManager.loadAllCommands();
+		await CommandManager.loadCommands();
 
 		if (!readLineInterface) return;
 
