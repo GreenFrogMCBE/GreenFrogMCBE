@@ -69,10 +69,10 @@ module.exports = {
 	executeCommand(command) {
 		command = command.replace("/", "");
 
-		let shouldExecuteCommand = true;
-
 		const args = command?.split(" ")?.slice(1);
 		const Frog = require("../Frog");
+
+		let shouldExecuteCommand = true;
 
 		Frog.eventEmitter.emit("serverCommand", {
 			args,
@@ -110,7 +110,6 @@ module.exports = {
 								op: true,
 								isConsole: true,
 							},
-							/** @param {string} message */
 							sendMessage: (message) => {
 								Logger.info(message);
 							},
@@ -164,7 +163,7 @@ module.exports = {
 
 		if (!readLineInterface) return;
 
-		readLineInterface.on("line", async (command /** @type {string} */) => {
+		readLineInterface.on("line", async (command) => {
 			if (this.isEmptyCommand(command)) return;
 
 			let shouldProcessCommand = true;
