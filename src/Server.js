@@ -36,7 +36,7 @@ const Query = require("./query/Query");
 let server = null;
 
 /**
- * Initializes the server setting
+ * Initializes the server
  *
  * @private
  */
