@@ -23,29 +23,23 @@ const { getKey } = require("./utils/Language");
 const Logger = require("./utils/Logger");
 
 const langParser = require("@kotinash/lang-parser");
-const eventEmitter = require("events");
+const events = require("events");
 const yaml = require("js-yaml");
 const path = require("path");
 const fs = require("fs");
 
-/** @returns {import("frog-protocol").Server} */
-let _server;
+let server;
 
-/** @returns {EventEmitter} */
-const _eventEmitter = new eventEmitter();
+const eventEmitter = new events();
 
-/** @returns {import("Frog").Config} */
 function getConfig() {
 	const configData = yaml.load(fs.readFileSync("config.yml", "utf8"));
 
 	return configData;
 }
 
-/** @returns {import("Frog").Language} */
 function getLang() {
-	const config = getConfig();
-
-	const langFilePath = path.join(__dirname, `lang/${config.chat.lang}.lang`);
+	const langFilePath = path.join(__dirname, `lang/${getConfig().chat.lang}.lang`);
 	const langFileContent = fs.readFileSync(langFilePath, "utf8");
 	const lang = langParser.parseRaw(langFileContent);
 
@@ -65,7 +59,7 @@ module.exports = {
 	 *
 	 * @returns {import("frog-protocol").Server}
 	 */
-	server: _server,
+	server,
 
 	/**
 	 * Returns the configuration file
@@ -88,7 +82,7 @@ module.exports = {
 	 *
 	 * @type {import("Frog").EventEmitter}
 	 */
-	eventEmitter: _eventEmitter,
+	eventEmitter,
 
 	/**
 	 * Returns the release data
@@ -96,7 +90,7 @@ module.exports = {
 	 * @type {import("Frog").ReleaseData}
 	 */
 	releaseData: {
-		minorServerVersion: "3.7.1",
+		minorServerVersion: "3.8",
 		majorServerVersion: "3.0",
 		versionDescription: "Code improvements",
 		apiVersion: "3.0",
@@ -116,11 +110,10 @@ module.exports = {
 	},
 
 	/**
-	 * Shutdowns the server correctly
-	 * Also it calls `onShutdown()` in every
-	 * single plugin that is loaded
+	 * Shutdowns the server
 	 *
 	 * @param {string} shutdownMessage
+	 * @async
 	 */
 	async shutdownServer(shutdownMessage = getKey("kickMessages.serverClosed")) {
 		let shouldShutdown = true;
@@ -135,10 +128,16 @@ module.exports = {
 
 		Logger.info(getKey("server.shuttingDown"));
 
+		// Shutdown the bedrock-protocol server and disconnect all clients
 		this.server.close(shutdownMessage);
-		ConsoleCommandSender.closeConsole();
-		PluginLoader.unloadPlugins();
 
+		// Prevent the usage of the console when the server is shutting down
+		ConsoleCommandSender.closeConsole();
+
+		// Unload (disable) all plugins
+		await PluginLoader.unloadPlugins();
+
+		// And finally, exit the process
 		process.exit(this.config.dev.exitCodes.successful);
 	},
 };
