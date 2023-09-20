@@ -22,6 +22,9 @@ const Logger = require("../utils/Logger");
 
 const { getKey } = require("../utils/Language");
 
+/**
+ * @type {number}
+ */
 let pluginCount = 0;
 
 const directories = {

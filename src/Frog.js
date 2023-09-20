@@ -27,6 +27,7 @@ const yaml = require("js-yaml");
 const events = require("events");
 const path = require("path");
 const fs = require("fs");
+const {Server} = require("frog-protocol");
 
 /**
  * @returns {import("Frog").Config}
@@ -143,6 +144,13 @@ module.exports = {
 
 		// And finally, exit the process
 		process.exit(this.config.dev.exitCodes.successful);
+	},
+
+	/**
+	 *
+	 */
+	crash() {
+		process.exit(this.config.dev.exitCodes.crash);
 	},
 
 	/**

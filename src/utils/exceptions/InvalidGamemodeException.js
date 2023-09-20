@@ -14,9 +14,13 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class InvalidGamemodeException extends Error {
-	/** @param {string} gamemode */
+	/**
+	 * @constructor
+	 * @param {string} gamemode
+	 */
 	constructor(gamemode) {
-		super("Invalid gamemode provided: " + gamemode);
+		super(gamemode);
+
 		this.name = "InvalidGamemodeException";
 	}
 }

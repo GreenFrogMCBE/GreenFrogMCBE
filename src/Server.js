@@ -36,6 +36,7 @@ const PlayerJoinHandler = require("./network/handlers/PlayerJoinHandler");
 const World = require("./world/World");
 
 const Query = require("./query/Query");
+const ServerStartupException = require("./utils/exceptions/ServerStartupException");
 
 let server = null;
 
@@ -180,12 +181,14 @@ async function listen() {
 		offlineMode,
 	} = Frog.config.serverInfo;
 
+	const offline =  process.env.TEST || offlineMode;
+
 	try {
 		server = frogProtocol.createServer({
 			host,
 			port,
 			version,
-			offline: process.env.TEST || offlineMode,
+			offline,
 			raknetBackend,
 			maxPlayers,
 			motd: {
@@ -216,7 +219,7 @@ async function listen() {
 				.replace("%d", error.stack)
 		);
 
-		process.exit(Frog.config.dev.exitCodes.crash);
+		throw new ServerStartupException("Server failed to start");
 	}
 }
 
