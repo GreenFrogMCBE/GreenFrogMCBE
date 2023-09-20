@@ -27,9 +27,10 @@ const yaml = require("js-yaml");
 const events = require("events");
 const path = require("path");
 const fs = require("fs");
-const {Server} = require("frog-protocol");
 
 /**
+ * Returns the configuration file
+ *
  * @returns {import("Frog").Config}
  */
 function getConfig() {
@@ -39,7 +40,9 @@ function getConfig() {
 }
 
 /**
- * @returns {{[p: string]: string}}
+ * Returns the language file
+ *
+ * @returns {import("Frog").Language}
  */
 function getLang() {
 	const langFilePath = path.join(__dirname, `lang/${getConfig().chat.lang}.lang`);

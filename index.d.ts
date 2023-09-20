@@ -35,13 +35,6 @@ declare module "Frog" {
 		z: number;
 	};
 
-	export type Directories = {
-		plugins: string;
-		pluginData: string;
-		fullPluginPath: string;
-		getFile: (file: string) => string;
-	};
-
 	export type QuerySettings = {
 		host: string;
 		port: number;
@@ -53,7 +46,7 @@ declare module "Frog" {
 		version: string;
 		plugins: Plugin[] | string[];
 	};
-	
+
 	export type RaknetBackend =
 		"raknet-native" |
 		"jsp-raknet" |
@@ -142,7 +135,7 @@ declare module "Frog" {
 		};
 	};
 
-	export interface Language extends String {
+	export type Language = {
 		server: {
 			loading: string;
 			license: string;
@@ -531,13 +524,9 @@ declare module "Frog" {
 		force_move: boolean;
 	};
 
-	export type Attribute = any; // Temp
-
-	export type PacketParams = any;
-
 	export type PacketData = {
 		name: string;
-		params: PacketParams;
+		params: *;
 	};
 
 	export type Packet = {
@@ -554,7 +543,7 @@ declare module "Frog" {
 		time: number;
 		handleFallDamage(player: Player, coordinates: Coordinate): void;
 
-		// Actually passing undefined as a parameter will result in it being converted to 0
+		// Passing undefined as a parameter will result in it being converted to 0
 		breakBlock(x: number | undefined, y: number | undefined, z: number | undefined): void;
 		placeBlock(x: number | undefined, y: number | undefined, z: number | undefined, runtime_id: number | undefined): void;
 	};
@@ -768,7 +757,7 @@ declare module "Frog" {
 		color: number;
 	};
 
-	export interface FormAction {
+	export type FormAction = {
 		type: string;
 		text: string;
 		placeholder?: string;
@@ -1286,8 +1275,6 @@ declare module "Frog" {
 		| "playerSpawn"
 		| "playerChat"
 		| "playerMove"
-		| "playerRegenerate"
-		| "playerFallDamage"
 		| "playerCommand"
 		| "playerPlayStatus"
 		| "playerTeleport"
@@ -1300,11 +1287,7 @@ declare module "Frog" {
 		emit(eventName: Event, listener?: any): void;
 	}
 
-	export interface Messagable {
-		sendMessage(message: string): void;
-	}
-
-	export type Player = Client & OnlinePlayer & Messagable & {
+	export interface Player extends Client, OnlinePlayer {
 		username: string;
 		gamemode: string;
 		health: number;
