@@ -22,7 +22,7 @@ const Gamemode = require("../player/types/Gamemode");
 
 const PlayerInfo = require("../player/PlayerInfo");
 
-const vanillaBlocks = require("../block/vanillaBlocks.json");
+const LegacyToRuntimeIdConverter = require("../block/LegacyToRuntimeIdConverter");
 
 const Frog = require("../Frog");
 
@@ -38,20 +38,20 @@ class World {
 		/**
 		 * @type {string}
 		 */
-		this.name;
+		this.name = "World";
 
 		/**
 		 * @type {import("Frog").Coordinate}
 		 */
-		this.spawnCoordinates;
+		this.spawnCoordinates = { x: 0, y: 0, z: 0 };
 
 		/**
 		 * @type {number}
 		 */
-		this.renderDistance;
+		this.renderDistance = 12;
 
 		/**
-		 * @type {keyof import('./types/WorldGenerator')}
+		 * @type {import("Frog").WorldGenerator}
 		 */
 		this.generator;
 
@@ -104,7 +104,7 @@ class World {
 	 * @param {number} z - The Z-coordinate of the block.
 	 */
 	breakBlock(x, y, z) {
-		this.placeBlock(x, y, z, vanillaBlocks.air.runtime_id);
+		this.placeBlock(x, y, z, LegacyToRuntimeIdConverter.convert(0));
 	}
 
 	/**
@@ -140,6 +140,7 @@ class World {
 			networkChunkPublisher.coordinates = { x: 0, y: 0, z: 0 };
 			networkChunkPublisher.radius = config.world.renderDistance.clientSide;
 			networkChunkPublisher.saved_chunks = [];
+
 			for (const player of PlayerInfo.playersOnline) {
 				networkChunkPublisher.writePacket(player);
 			}
@@ -154,7 +155,7 @@ class World {
 	}
 
 	/**
-	 * Advances the world time and emits the server time tick event.
+	 * Updates the world time
 	 */
 	tickWorldTime() {
 		if (!config.world.tickWorldTime) return;
@@ -239,7 +240,7 @@ class World {
 
 			if (fallDistanceY > 0.56 && player._damage.fall.queue && !player._damage.fall.invulnerable) {
 				const damageAmount = Math.floor(player.health - player._damage.fall.queue);
-		
+
 				player.setHealth(damageAmount, DamageCause.FALL);
 
 				player._damage.fall.invulnerable = true;

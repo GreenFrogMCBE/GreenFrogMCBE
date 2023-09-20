@@ -15,62 +15,120 @@
  */
 const readline = require("readline");
 
+const CommandVerifier = require("../utils/CommandVerifier");
+const Language = require("../utils/Language");
 const Logger = require("../utils/Logger");
+
+const CommandProcessException = require("../utils/exceptions/CommandHandlingException");
+
 const CommandManager = require("./CommandManager");
 
-const Language = require("../utils/Language");
-const CommandVerifier = require("../utils/CommandVerifier");
-
-/** @type {boolean} */
-let isClosed = false;
-/** @type {import("readline").ReadLine | undefined} */
-let readLineInterface;
+const closed = false;
 
 module.exports = {
-	/**
-	 * Closes the console.
-	 */
-	closeConsole() {
-		isClosed = true;
-	},
-
-	/**
-	 * Set ups the console command reader that is used to handle commands
-	 */
-	async setupConsoleReader() {
-		readLineInterface = readline.createInterface({
-			input: process.stdin,
-			output: process.stdout,
-		});
-
-		readLineInterface.setPrompt("");
-		readLineInterface.prompt(true);
-	},
-
 	/**
 	 * Returns true if the console is closed, false otherwise.
 	 *
 	 * @returns {boolean}
 	 */
-	isClosed,
+	closed,
 
 	/**
-	 * Returns the command handler interface.
+	 * Checks if the string is empty
 	 *
-	 * @type {import("readline").ReadLine | undefined}
+	 * @param {string} string - The string to check
+	 * @returns {boolean} If the string is empty
 	 */
-	readLineInterface,
+	isEmpty(string) {
+		return !string.trim();
+	},
 
 	/**
-	 * Executes a command that the user types in the console.
+	 * Returns the string without the slash
+	 *
+	 * @param {string} string - The string that you want to remove slash from
+	 * @returns {string} - The string without the / character
+	 */
+	removeSlash(string) {
+		return string.replace("/", "");
+	},
+
+	/**
+	 * Handles possible errors that can occur while executing a command
+	 *
+	 * @param {Error} error
+	 * @param {string} command
+	 */
+	handleCommandError(error, command) {
+		const Frog = require("../Frog");
+
+		Frog.eventEmitter.emit("serverCommandProcessError", {
+			command,
+			error,
+		});
+
+		Logger.error(Language.getKey("commands.errors.internalError").replace("%s", error.stack));
+	},
+
+	/**
+	 * Finds a command in `CommandManager.commands` and executes it
+	 *
+	 * @param {string} inputCommand
+	 * @param {string[]} args
+	 * @returns {boolean}
+	 */
+	findCommand(inputCommand, args) {
+		const Frog = require("../Frog");
+
+		for (const command of CommandManager.commands) {
+			if (
+				command.name === inputCommand.split(" ")[0] ||
+				(
+					command.aliases &&
+					command.aliases.includes(inputCommand.split(" ")[0])
+				)
+			) {
+				if (command.minArgs !== undefined && command.minArgs > args.length) {
+					Logger.info(
+						Language.getKey("commands.errors.syntaxError.minArg")
+							.replace("%s", command.minArgs)
+							.replace("%d", args.length.toString())
+					);
+
+					return false;
+				}
+
+				if (command.maxArgs !== undefined && command.maxArgs < args.length) {
+					Logger.info(
+						Language.getKey("commands.errors.syntaxError.maxArg")
+							.replace("%s", command.maxArgs)
+							.replace("%d", args.length.toString())
+					);
+
+					return false;
+				}
+
+				command.execute(Frog.asPlayer, Frog, args);
+
+				return true;
+			}
+		}
+
+		return false;
+	},
+
+	/**
+	 * Executes a command
 	 *
 	 * @param {string} command
 	 */
 	executeCommand(command) {
-		command = command.replace("/", "");
-
-		const args = command?.split(" ")?.slice(1);
 		const Frog = require("../Frog");
+		const args = command?.split(" ")?.slice(1);
+
+		if (this.closed) {
+			throw new CommandProcessException("Cannot execute a command when the console is closed");
+		}
 
 		let shouldExecuteCommand = true;
 
@@ -82,46 +140,10 @@ module.exports = {
 			},
 		});
 
-		if (isClosed || !shouldExecuteCommand || !command.replace(" ", "")) return;
+		if (!shouldExecuteCommand) return;
 
 		try {
-			let commandFound = false;
-
-			for (const loadedCommand of CommandManager.commands) {
-				if (loadedCommand.name === command.split(" ")[0] || (loadedCommand.aliases && loadedCommand.aliases.includes(command.split(" ")[0]))) {
-					if (loadedCommand.minArgs !== undefined && loadedCommand.minArgs > args.length) {
-						Logger.info(Language.getKey("commands.errors.syntaxError.minArg").replace("%s", loadedCommand.minArgs).replace("%d", args.length.toString()));
-						return;
-					}
-
-					if (loadedCommand.maxArgs !== undefined && loadedCommand.maxArgs < args.length) {
-						Logger.info(Language.getKey("commands.errors.syntaxError.maxArg").replace("%s", loadedCommand.maxArgs).replace("%d", args.length.toString()));
-						return;
-					}
-
-					loadedCommand.execute(
-						{
-							username: "Server",
-							network: {
-								address: Frog.config.network.host,
-								port: Frog.config.network.port,
-							},
-							permissions: {
-								op: true,
-								isConsole: true,
-							},
-							sendMessage: (message) => {
-								Logger.info(message);
-							},
-						},
-						Frog,
-						args,
-					);
-
-					commandFound = true;
-					break;
-				}
-			}
+			const commandFound = this.findCommand(command, args);
 
 			if (!commandFound) {
 				CommandVerifier.throwError(
@@ -134,52 +156,27 @@ module.exports = {
 				);
 			}
 		} catch (error) {
-			Frog.eventEmitter.emit("serverCommandProcessError", {
-				command,
-				error,
-			});
-
-			Logger.error(Language.getKey("commands.errors.internalError").replace("%s", error.stack));
+			this.handleCommandError(error, command);
 		}
 	},
 
 	/**
-	 * Checks if the command is empty
-	 *
-	 * @param {string} command
-	 */
-	isEmptyCommand(command) {
-		return !command.replace("/", "").trim();
-	},
-
-	/**
 	 * Starts the console.
+	 *
+	 * @async
 	 */
-	async startConsole() {
-		const Frog = require("../Frog");
-
-		await this.setupConsoleReader();
-		await CommandManager.loadCommands();
-
-		if (!readLineInterface) return;
-
-		readLineInterface.on("line", async (command) => {
-			if (this.isEmptyCommand(command)) return;
-
-			let shouldProcessCommand = true;
-
-			Frog.eventEmitter.emit("serverCommandProcess", {
-				command,
-				cancel: () => {
-					shouldProcessCommand = false;
-				},
-			});
-
-			if (shouldProcessCommand) {
-				this.executeCommand(command);
-
-				if (!isClosed && readLineInterface) readLineInterface.prompt(true);
-			}
+	async start() {
+		const commandHandler = readline.createInterface({
+			input: process.stdin,
+			output: process.stdout
 		});
-	},
+
+		commandHandler.on("line", (line) => {
+			const command = this.removeSlash(line);
+
+			if (this.isEmpty(command)) return;
+
+			this.executeCommand(command);
+		});
+	}
 };

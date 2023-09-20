@@ -13,12 +13,12 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-class CommandHandlingException extends Error {
+class CommandProcessException extends Error {
 	/** @param {string} message */
 	constructor(message) {
 		super(message);
-		this.name = "CommandHandlingException";
+		this.name = "CommandProcessException";
 	}
 }
 
-module.exports = CommandHandlingException;
+module.exports = CommandProcessException;

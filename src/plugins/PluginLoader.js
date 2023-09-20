@@ -16,9 +16,9 @@
 const fs = require("fs");
 const path = require("path");
 
-const Logger = require("../utils/Logger");
 const PluginManager = require("./PluginManager");
-const ConsoleCommandSender = require("../server/ConsoleCommandSender");
+
+const Logger = require("../utils/Logger");
 
 const { getKey } = require("../utils/Language");
 
@@ -53,11 +53,6 @@ module.exports = {
 	 * Loads all plugins
 	 */
 	async loadPlugins() {
-		fs.mkdirSync(directories.plugins, { recursive: true });
-		fs.mkdirSync(directories.pluginData, { recursive: true });
-
-		ConsoleCommandSender.startConsole();
-
 		const files = fs.readdirSync(directories.plugins);
 
 		for (const file of files) {

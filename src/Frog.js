@@ -23,21 +23,23 @@ const { getKey } = require("./utils/Language");
 const Logger = require("./utils/Logger");
 
 const langParser = require("@kotinash/lang-parser");
-const events = require("events");
 const yaml = require("js-yaml");
+const events = require("events");
 const path = require("path");
 const fs = require("fs");
 
-let server;
-
-const eventEmitter = new events();
-
+/**
+ * @returns {import("Frog").Config}
+ */
 function getConfig() {
 	const configData = yaml.load(fs.readFileSync("config.yml", "utf8"));
 
 	return configData;
 }
 
+/**
+ * @returns {{[p: string]: string}}
+ */
 function getLang() {
 	const langFilePath = path.join(__dirname, `lang/${getConfig().chat.lang}.lang`);
 	const langFileContent = fs.readFileSync(langFilePath, "utf8");
@@ -45,6 +47,8 @@ function getLang() {
 
 	return lang;
 }
+
+let server;
 
 module.exports = {
 	/**
@@ -82,7 +86,7 @@ module.exports = {
 	 *
 	 * @type {import("Frog").EventEmitter}
 	 */
-	eventEmitter,
+	eventEmitter: new events(),
 
 	/**
 	 * Returns the release data
@@ -132,7 +136,7 @@ module.exports = {
 		this.server.close(shutdownMessage);
 
 		// Prevent the usage of the console when the server is shutting down
-		ConsoleCommandSender.closeConsole();
+		ConsoleCommandSender.closed = true;
 
 		// Unload (disable) all plugins
 		await PluginLoader.unloadPlugins();
@@ -140,4 +144,24 @@ module.exports = {
 		// And finally, exit the process
 		process.exit(this.config.dev.exitCodes.successful);
 	},
+
+	/**
+	 * Returns the server as a player object
+	 *
+	 * @returns {import("Frog").Player}
+	 */
+	asPlayer: {
+		username: "Server",
+		network: {
+			address: this.config.network.host,
+			port: this.config.network.port,
+		},
+		permissions: {
+			op: true,
+			isConsole: true,
+		},
+		sendMessage: (message) => {
+			Logger.info(message);
+		},
+	}
 };

@@ -37,7 +37,7 @@ class CommandDeop extends Command {
 		const playerName = args[0];
 
 		try {
-			PermissionManager.setOpStatus(playerName, false);
+			await PermissionManager.setOpStatus(playerName, false);
 
 			player.sendMessage(getKey("commands.deop.execution.success").replace("%s", playerName));
 		} catch {
