@@ -26,9 +26,18 @@ const LegacyToRuntimeIdConverter = require("../block/LegacyToRuntimeIdConverter"
 
 const Frog = require("../Frog");
 
-const config = Frog.config;
-
 let time = 0;
+
+/**
+ * Emits a world event
+ *
+ * @param {import("Frog").Event} eventName - The name of the event to emit.
+ */
+function emitServerEvent(eventName) {
+	Frog.eventEmitter.emit(eventName, {
+		world: this.getWorldData()
+	});
+}
 
 class World {
 	/**
@@ -111,13 +120,25 @@ class World {
 	 * Ticks the world.
 	 */
 	tick() {
-		if (!PlayerInfo.playersOnline.length) return;
+		if (!PlayerInfo.playersOnline.length) {
+			return;
+		}
 
-		this.tickEvent();
-		this.tickWorldTime();
-		this.tickVoidDamage();
-		this.tickRegeneration();
-		this.tickStarvationDamage();
+		const tickingConfig = Frog.config.world.ticking;
+
+		const tickingFunctions = [
+			{ enabled: tickingConfig.event, function: this.tickEvent },
+			{ enabled: tickingConfig.worldTime, function: this.tickWorldTime },
+			{ enabled: tickingConfig.void, function: this.tickVoidDamage },
+			{ enabled: tickingConfig.regeneration, function: this.tickRegeneration },
+			{ enabled: tickingConfig.starvationDamage, function: this.tickStarvationDamage },
+		];
+
+		tickingFunctions.forEach((tickingFunction) => {
+			if (tickingFunction.enabled) {
+				tickingFunction.function();
+			}
+		});
 	}
 
 	/**
@@ -138,7 +159,7 @@ class World {
 		setInterval(() => {
 			const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
 			networkChunkPublisher.coordinates = { x: 0, y: 0, z: 0 };
-			networkChunkPublisher.radius = config.world.renderDistance.clientSide;
+			networkChunkPublisher.radius = Frog.config.world.renderDistance.clientSide;
 			networkChunkPublisher.saved_chunks = [];
 
 			for (const player of PlayerInfo.playersOnline) {
@@ -151,16 +172,14 @@ class World {
 	 * Emits the server tick event.
 	 */
 	tickEvent() {
-		Frog.eventEmitter.emit("serverTick", { world: this.getWorldData() });
+		emitServerEvent("serverTick");
 	}
 
 	/**
 	 * Updates the world time
 	 */
 	tickWorldTime() {
-		if (!config.world.tickWorldTime) return;
-
-		Frog.eventEmitter.emit("serverTimeTick", { world: this.getWorldData() });
+		emitServerEvent("serverTimeTick");
 
 		time += 10;
 
@@ -173,13 +192,17 @@ class World {
 	 * Performs regeneration on the player and emits the server regeneration tick event.
 	 */
 	tickRegeneration() {
-		if (!config.world.tickRegeneration) return;
-
-		Frog.eventEmitter.emit("serverRegenerationTick", { world: this.getWorldData() });
+		emitServerEvent("serverRegenerationTick")
 
 		for (const player of PlayerInfo.playersOnline) {
-			if (!(player.health > 20 || player.hunger < 20 || player.offline || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR)) {
-				player.setHealth(player.health + 1, DamageCause.REGENERATION);
+			if (!(
+				player.health > 20 ||
+				player.hunger < 20 ||
+				player.offline ||
+				player.gamemode === Gamemode.CREATIVE ||
+				player.gamemode === Gamemode.SPECTATOR
+			)) {
+				player.setHealth(player.health++, DamageCause.REGENERATION);
 			}
 		}
 	}
@@ -188,13 +211,13 @@ class World {
 	 * Performs starvation damage on the player and emits the server starvation damage tick event.
 	 */
 	tickStarvationDamage() {
-		if (!config.world.tickStarvationDamage) return;
+		if (!Frog.config.world.ticking.starvationDamage) return;
 
-		Frog.eventEmitter.emit("serverStarvationDamageTick", { world: this.getWorldData() });
+		emitServerEvent("serverStarvationDamageTick");
 
 		for (const player of PlayerInfo.playersOnline) {
 			if (player.hunger <= 0) {
-				player.setHealth(player.health - 1, DamageCause.STARVATION);
+				player.setHealth(player.health--, DamageCause.STARVATION);
 			}
 		}
 	}
@@ -203,22 +226,21 @@ class World {
 	 * Performs void damage on players and emits the server void damage tick event.
 	 */
 	tickVoidDamage() {
-		if (!config.world.ticking.void) return;
-
-		Frog.eventEmitter.emit("serverVoidDamageTick", { world: this.getWorldData() });
+		emitServerEvent("serverVoidDamageTick")
 
 		for (const client of PlayerInfo.playersOnline) {
 			const posY = Math.floor(client.location.y);
 
-			/** @type {number | undefined} */
 			let min = -65;
 
-			if (config.world.generators.type === WorldGenerator.VOID) {
+			if (Frog.config.world.generators.type === WorldGenerator.VOID) {
 				min = undefined;
 			}
 
 			if (typeof min === "number" && posY <= min) {
-				const invulnerable = client.gamemode === Gamemode.CREATIVE || client.gamemode === Gamemode.SPECTATOR;
+				const invulnerable =
+					client.gamemode === Gamemode.CREATIVE ||
+					client.gamemode === Gamemode.SPECTATOR;
 
 				if (!invulnerable) {
 					client.setHealth(client.health - 3, DamageCause.VOID);
@@ -233,6 +255,7 @@ class World {
 	 *
 	 * @param {import("Frog").Player} player - The player object.
 	 * @param {import("Frog").Coordinate} position - The position where the fall occurred.
+	 * @async
 	 */
 	async handleFallDamage(player, position) {
 		if (player.gamemode !== Gamemode.CREATIVE && player.gamemode !== Gamemode.SPECTATOR) {

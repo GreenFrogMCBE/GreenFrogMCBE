@@ -56,20 +56,6 @@ let server;
 
 module.exports = {
 	/**
-	 * Returns if the server is in debug mode
-	 *
-	 * @returns {boolean}
-	 */
-	isDebug: process.env.DEBUG || process.argv.includes("--debug") || getConfig().dev.debug,
-
-	/**
-	 * Returns the server object
-	 *
-	 * @returns {import("frog-protocol").Server}
-	 */
-	server,
-
-	/**
 	 * Returns the configuration file
 	 *
 	 * @returns {import("Frog").Config}
@@ -82,6 +68,20 @@ module.exports = {
 	 * @returns {import("Frog").Language}
 	 */
 	lang: getLang(),
+
+	/**
+	 * Returns if the server is in debug mode
+	 *
+	 * @returns {boolean}
+	 */
+	isDebug: process.env.DEBUG || process.argv.includes("--debug") || getConfig().dev.debug,
+
+	/**
+	 * Returns the server object
+	 *
+	 * @returns {import("frog-protocol").Server}
+	 */
+	server,
 
 	/**
 	 * Returns the event emitter for plugins
@@ -102,6 +102,26 @@ module.exports = {
 		majorServerVersion: "3.0",
 		versionDescription: "Code improvements",
 		apiVersion: "3.0",
+	},
+
+	/**
+	 * Returns the server as a player object
+	 *
+	 * @returns {import("Frog").Player}
+	 */
+	asPlayer: {
+		username: "Server",
+		network: {
+			address: getConfig().network.host,
+			port: getConfig().network.port,
+		},
+		permissions: {
+			op: true,
+			isConsole: true,
+		},
+		sendMessage: (message) => {
+			Logger.info(message);
+		},
 	},
 
 	/**
@@ -150,29 +170,11 @@ module.exports = {
 	},
 
 	/**
-	 *
+	 * Crashes the server
 	 */
 	crash() {
 		process.exit(this.config.dev.exitCodes.crash);
 	},
 
-	/**
-	 * Returns the server as a player object
-	 *
-	 * @returns {import("Frog").Player}
-	 */
-	asPlayer: {
-		username: "Server",
-		network: {
-			address: this.config.network.host,
-			port: this.config.network.port,
-		},
-		permissions: {
-			op: true,
-			isConsole: true,
-		},
-		sendMessage: (message) => {
-			Logger.info(message);
-		},
-	}
+
 };
