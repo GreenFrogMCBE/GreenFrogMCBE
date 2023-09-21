@@ -524,6 +524,13 @@ declare module "Frog" {
 		force_move: boolean;
 	};
 
+	export type ResourcePackLink = { // Only used in the resource_packs_info packet
+		id: string,
+		url: string,
+	}
+
+	export type WorldSeed = [number, number]; // Only used in the start_game packet
+
 	export type PacketData = {
 		name: string;
 		params: *;
@@ -532,8 +539,6 @@ declare module "Frog" {
 	export type Packet = {
 		data: PacketData;
 	};
-
-	export type WorldSeed = [number, number]; // Only used in the start_game packet
 
 	export type World = {
 		name: string;
@@ -810,6 +815,7 @@ declare module "Frog" {
 	export type DisplaySlot = ValueOf<typeof import("./src/scoreboard/types/DisplaySlot")>;
 	export type ScoreAction = ValueOf<typeof import("./src/scoreboard/types/ScoreAction")>;
 	export type EntryType = ValueOf<typeof import("./src/scoreboard/types/EntryType")>;
+	export type Scoreboard = ValueOf<import("./src/scoreboard/Scoreboard")>;
 
 	export type DamageCause = ValueOf<typeof import("./src/player/types/DamageCause")>;
 	export type HungerCause = ValueOf<typeof import("./src/player/types/HungerCause")>;
@@ -821,12 +827,12 @@ declare module "Frog" {
 
 	export type MovementAuthority = ValueOf<typeof import("./src/network/packets/types/MovementAuthority")>;
 	export type PlayListAction = ValueOf<typeof import("./src/network/packets/types/PlayerListAction")>;
+	export type EditorLevelType = ValueOf<typeof import("./src/network/packets/types/EditorLevelType")>;
 	export type PlayStatus = ValueOf<typeof import("./src/network/packets/types/PlayStatus")>;
+
 	export type DimensionId = ValueOf<typeof import("./src/world/types/DimensionId")>;
 
 	export type PermissionLevel = ValueOf<typeof import("./src/permission/types/PermissionLevel")>;
-
-	export type Scoreboard = import("./src/scoreboard/Scoreboard");
 
 	export type BlockBreakEvent = {
 		player: Player;

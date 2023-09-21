@@ -83,7 +83,6 @@ class PlayerJoinHandler {
 				player,
 				packet: {
 					data: {
-						// Follow bedrock-protocol's packet structure
 						name,
 						params,
 					},
@@ -250,7 +249,7 @@ class PlayerJoinHandler {
 		responsePackInfo.has_scripts = false;
 		responsePackInfo.behavior_packs = [];
 		responsePackInfo.texture_packs = [];
-		responsePackInfo.rtx_enabled = false;
+		responsePackInfo.resource_pack_links = [];
 		responsePackInfo.writePacket(player);
 	}
 

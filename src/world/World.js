@@ -28,16 +28,6 @@ const Frog = require("../Frog");
 
 let time = 0;
 
-/**
- * Emits a world event
- *
- * @param {import("Frog").Event} eventName - The name of the event to emit.
- */
-function emitServerEvent(eventName) {
-	Frog.eventEmitter.emit(eventName, {
-		world: this.getWorldData()
-	});
-}
 
 class World {
 	/**
@@ -60,7 +50,7 @@ class World {
 		this.renderDistance = 12;
 
 		/**
-		 * @type {import("Frog").WorldGenerator}
+		 * @type {import("Frog").WorldGenerator | undefined}
 		 */
 		this.generator;
 
@@ -146,7 +136,10 @@ class World {
 	 */
 	startHungerLossLoop() {
 		for (const player of PlayerInfo.playersOnline) {
-			if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) return;
+			if (
+				player.gamemode === Gamemode.CREATIVE ||
+				player.gamemode === Gamemode.SPECTATOR
+			) return;
 
 			player.setHunger(player.hunger - 0.5);
 		}
@@ -171,28 +164,28 @@ class World {
 	/**
 	 * Emits the server tick event.
 	 */
-	tickEvent() {
-		emitServerEvent("serverTick");
-	}
+	tickEvent = () => {
+		this.emitServerEvent("serverTick");
+	};
 
 	/**
 	 * Updates the world time
 	 */
-	tickWorldTime() {
-		emitServerEvent("serverTimeTick");
+	tickWorldTime = () => {
+		this.emitServerEvent("serverTimeTick");
 
 		time += 10;
 
 		for (const player of PlayerInfo.playersOnline) {
 			player.setTime(time);
 		}
-	}
+	};
 
 	/**
 	 * Performs regeneration on the player and emits the server regeneration tick event.
 	 */
-	tickRegeneration() {
-		emitServerEvent("serverRegenerationTick");
+	tickRegeneration = () => {
+		this.emitServerEvent("serverRegenerationTick");
 
 		for (const player of PlayerInfo.playersOnline) {
 			if (!(
@@ -205,28 +198,26 @@ class World {
 				player.setHealth(player.health++, DamageCause.REGENERATION);
 			}
 		}
-	}
+	};
 
 	/**
 	 * Performs starvation damage on the player and emits the server starvation damage tick event.
 	 */
-	tickStarvationDamage() {
-		if (!Frog.config.world.ticking.starvationDamage) return;
-
-		emitServerEvent("serverStarvationDamageTick");
+	tickStarvationDamage = () => {
+		this.emitServerEvent("serverStarvationDamageTick");
 
 		for (const player of PlayerInfo.playersOnline) {
 			if (player.hunger <= 0) {
 				player.setHealth(player.health--, DamageCause.STARVATION);
 			}
 		}
-	}
+	};
 
 	/**
 	 * Performs void damage on players and emits the server void damage tick event.
 	 */
-	tickVoidDamage() {
-		emitServerEvent("serverVoidDamageTick");
+	tickVoidDamage = () => {
+		this.emitServerEvent("serverVoidDamageTick");
 
 		for (const client of PlayerInfo.playersOnline) {
 			const posY = Math.floor(client.location.y);
@@ -247,7 +238,7 @@ class World {
 				}
 			}
 		}
-	}
+	};
 
 	/**
 	 * Calculates and handles fall damage.
@@ -258,10 +249,17 @@ class World {
 	 * @async
 	 */
 	async handleFallDamage(player, position) {
-		if (player.gamemode !== Gamemode.CREATIVE && player.gamemode !== Gamemode.SPECTATOR) {
+		if (
+			player.gamemode !== Gamemode.CREATIVE &&
+			player.gamemode !== Gamemode.SPECTATOR
+		) {
 			const fallDistanceY = player.location.y - position.y;
 
-			if (fallDistanceY > 0.56 && player._damage.fall.queue && !player._damage.fall.invulnerable) {
+			if (
+				fallDistanceY > 0.56 &&
+				player._damage.fall.queue &&
+				!player._damage.fall.invulnerable
+			) {
 				const damageAmount = Math.floor(player.health - player._damage.fall.queue);
 
 				player.setHealth(damageAmount, DamageCause.FALL);
@@ -291,6 +289,17 @@ class World {
 			generator: this.generator,
 			time,
 		};
+	}
+
+	/**
+	 * Emits a world event
+	 *
+	 * @param {string} eventName - The name of the event to emit.
+	 */
+	emitServerEvent(eventName) {
+		Frog.eventEmitter.emit(eventName, {
+			world: this.getWorldData()
+		});
 	}
 }
 

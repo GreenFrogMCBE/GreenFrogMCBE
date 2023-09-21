@@ -16,15 +16,15 @@
 /* eslint-disable no-case-declarations */
 const Frog = require("../../Frog");
 
-const Biome = require("../../world/types/Biome");
-const PlayStatus = require("./types/PlayStatus");
-const PlayerList = require("./types/PlayerListAction");
-const Dimension = require("../../world/types/Dimension");
-const Difficulty = require("../../server/types/Difficulty");
+const PermissionLevel = require("../../permission/types/PermissionLevel");
+const ResourcePackStatus = require("./types/ResourcePackStatus");
 const MovementAuthority = require("./types/MovementAuthority");
 const GeneratorType = require("../../world/types/Generator");
-const ResourcePackStatus = require("./types/ResourcePackStatus");
-const PermissionLevel = require("../../permission/types/PermissionLevel");
+const Difficulty = require("../../server/types/Difficulty");
+const EditorLevelType = require("./types/EditorLevelType");
+const Dimension = require("../../world/types/Dimension");
+const PlayerList = require("./types/PlayerListAction");
+const PlayStatus = require("./types/PlayStatus");
 
 const PlayerInfo = require("../../player/PlayerInfo");
 
@@ -49,13 +49,16 @@ const ClientCommandManager = require("../../player/CommandManager");
 const ServerCommandManager = require("../../server/CommandManager");
 
 const Logger = require("../../utils/Logger");
+
 const World = require("../../world/World");
 
+const Biome = require("../../world/types/Biome");
+
 const biomeDefinitions = require("../../resources/biomeDefinitions.json").raw_payload;
-const availableEntities = require("../../resources/availableEntities.json").nbt;
 const creativeContentItems = require("../../resources/creativeContent.json").items;
-const entityData = require("../../resources/entityData.json").entityData;
+const availableEntities = require("../../resources/availableEntities.json").nbt;
 const features = require("../../resources/featureRegistry.json").features;
+const entityData = require("../../resources/entityData.json").entityData;
 const trimMaterials = require("../../resources/trimData.json").materials;
 const itemStates = require("../../resources/itemStates.json").itemStates;
 const trimPatterns = require("../../resources/trimData.json").patterns;
@@ -128,7 +131,8 @@ class ClientResourcePackResponsePacket extends Packet {
 				startGame.world_gamemode = config.world.gamemode.world;
 				startGame.difficulty = Difficulty.NORMAL;
 				startGame.spawn_position = { x: 0, y: 0, z: 0 };
-				startGame.permission_level = /** @type {import("Frog").PermissionLevel} */ (player.permissions.permissionLevel);
+				startGame.editor_world_type = EditorLevelType.NOT_EDITOR;
+				startGame.permission_level = player.permissions.permissionLevel;
 				startGame.world_name = player.world.name;
 				startGame.game_version = "*";
 				startGame.movement_authority = MovementAuthority.SERVER;
@@ -192,7 +196,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				itemComponent.writePacket(player);
 
 				// player.renderChunks is true by default but can be disabled by plugins
-				if (player.renderChunks) { 
+				if (player.renderChunks) {
 					player.setChunkRadius(player.world.renderDistance);
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
