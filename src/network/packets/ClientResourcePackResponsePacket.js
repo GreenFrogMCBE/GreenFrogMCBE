@@ -131,7 +131,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				startGame.world_gamemode = config.world.gamemode.world;
 				startGame.difficulty = Difficulty.NORMAL;
 				startGame.spawn_position = { x: 0, y: 0, z: 0 };
-				startGame.editor_world_type = EditorWorldType.NOT_EDITOR;
+				startGame.editor_world_type = EditorLevelType.NOT_EDITOR;
 				startGame.permission_level = player.permissions.permissionLevel;
 				startGame.world_name = player.world.name;
 				startGame.game_version = "*";
