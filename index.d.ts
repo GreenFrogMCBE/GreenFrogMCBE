@@ -524,6 +524,13 @@ declare module "Frog" {
 		force_move: boolean;
 	};
 
+	export type ResourcePackLink = { // Only used in the resource_packs_info packet
+		id: string,
+		url: string,
+	}
+
+	export type WorldSeed = [number, number]; // Only used in the start_game packet
+
 	export type PacketData = {
 		name: string;
 		params: *;
@@ -532,8 +539,6 @@ declare module "Frog" {
 	export type Packet = {
 		data: PacketData;
 	};
-
-	export type WorldSeed = [number, number]; // Only used in the start_game packet
 
 	export type World = {
 		name: string;
