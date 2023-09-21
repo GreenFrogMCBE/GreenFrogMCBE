@@ -15,15 +15,44 @@
  */
 const readline = require("readline");
 
+const CommandProcessException = require("../utils/exceptions/CommandHandlingException");
+
 const CommandVerifier = require("../utils/CommandVerifier");
 const Language = require("../utils/Language");
 const Logger = require("../utils/Logger");
 
-const CommandProcessException = require("../utils/exceptions/CommandHandlingException");
-
 const CommandManager = require("./CommandManager");
 
+/**
+ * Returns true if the console is closed, false otherwise.
+ *
+ * @type {boolean}
+ */
 const closed = false;
+
+/**
+ * Emits the `serverCommand` event
+ *
+ * @param {string[]} args
+ * @param {string} command
+ * @returns {boolean}
+ * @private
+ */
+function emitServerCommandEvent(args, command) {
+	const Frog = require("../Frog");
+
+	let shouldExecuteCommand = true;
+
+	Frog.eventEmitter.emit("serverCommand", {
+		args,
+		command,
+		cancel: () => {
+			shouldExecuteCommand = false;
+		}
+	});
+
+	return shouldExecuteCommand;
+}
 
 module.exports = {
 	/**
@@ -95,7 +124,7 @@ module.exports = {
 							.replace("%d", args.length.toString())
 					);
 
-					return false;
+					return true;
 				}
 
 				if (command.maxArgs !== undefined && command.maxArgs < args.length) {
@@ -105,11 +134,10 @@ module.exports = {
 							.replace("%d", args.length.toString())
 					);
 
-					return false;
+					return true;
 				}
 
 				command.execute(Frog.asPlayer, Frog, args);
-
 				return true;
 			}
 		}
@@ -118,46 +146,44 @@ module.exports = {
 	},
 
 	/**
-	 * Executes a command
+	 * Executes a command.
 	 *
 	 * @param {string} command
 	 */
 	executeCommand(command) {
-		const Frog = require("../Frog");
 		const args = command?.split(" ")?.slice(1);
 
 		if (this.closed) {
 			throw new CommandProcessException("Cannot execute a command when the console is closed");
 		}
 
-		let shouldExecuteCommand = true;
-
-		Frog.eventEmitter.emit("serverCommand", {
-			args,
-			command,
-			cancel() {
-				shouldExecuteCommand = false;
-			},
-		});
-
-		if (!shouldExecuteCommand) return;
+		if (!emitServerCommandEvent(args, command)) return;
 
 		try {
 			const commandFound = this.findCommand(command, args);
 
 			if (!commandFound) {
-				CommandVerifier.throwError(
-					{
-						sendMessage: (msg) => {
-							Logger.info(msg);
-						},
-					},
-					command.split(" ")[0],
-				);
+				this.handleErrorForInvalidCommand(command);
 			}
 		} catch (error) {
 			this.handleCommandError(error, command);
 		}
+	},
+
+	/**
+	 * Handles the case when an invalid command is entered.
+	 *
+	 * @param {string} command
+	 */
+	handleErrorForInvalidCommand(command) {
+		CommandVerifier.throwError(
+			{
+				sendMessage: (message) => {
+					Logger.info(message);
+				},
+			},
+			command.split(" ")[0]
+		);
 	},
 
 	/**
@@ -170,6 +196,9 @@ module.exports = {
 			input: process.stdin,
 			output: process.stdout
 		});
+
+		commandHandler
+			.setPrompt("");
 
 		commandHandler.on("line", (line) => {
 			const command = this.removeSlash(line);

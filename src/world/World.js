@@ -192,7 +192,7 @@ class World {
 	 * Performs regeneration on the player and emits the server regeneration tick event.
 	 */
 	tickRegeneration() {
-		emitServerEvent("serverRegenerationTick")
+		emitServerEvent("serverRegenerationTick");
 
 		for (const player of PlayerInfo.playersOnline) {
 			if (!(
@@ -226,7 +226,7 @@ class World {
 	 * Performs void damage on players and emits the server void damage tick event.
 	 */
 	tickVoidDamage() {
-		emitServerEvent("serverVoidDamageTick")
+		emitServerEvent("serverVoidDamageTick");
 
 		for (const client of PlayerInfo.playersOnline) {
 			const posY = Math.floor(client.location.y);

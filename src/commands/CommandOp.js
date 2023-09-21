@@ -33,12 +33,13 @@ class CommandOp extends Command {
 	 * @param {import("Frog").Player} player
 	 * @param {import("frog-protocol").Server} server
 	 * @param {string[]} args
+	 * @async
 	 */
 	async execute(player, server, args) {
 		const playerName = args[0];
 
 		try {
-			PermissionManager.setOpStatus(playerName, true);
+			await PermissionManager.op(playerName);
 
 			player.sendMessage(getKey("commands.op.execution.success").replace("%s", playerName));
 		} catch {

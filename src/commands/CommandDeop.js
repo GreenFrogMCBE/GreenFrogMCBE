@@ -32,12 +32,13 @@ class CommandDeop extends Command {
 	 * @param {import("Frog").Player} player
 	 * @param {import("frog-protocol").Server} server
 	 * @param {string[]} args
+	 * @async
 	 */
 	async execute(player, server, args) {
 		const playerName = args[0];
 
 		try {
-			await PermissionManager.setOpStatus(playerName, false);
+			await PermissionManager.deop(playerName);
 
 			player.sendMessage(getKey("commands.deop.execution.success").replace("%s", playerName));
 		} catch {
