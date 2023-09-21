@@ -103,7 +103,7 @@ class World {
 	 * @param {number} z - The Z-coordinate of the block.
 	 */
 	breakBlock(x, y, z) {
-		this.placeBlock(x, y, z, LegacyToRuntimeIdConverter.convert(0));
+		this.placeBlock(x, y, z, 0);
 	}
 
 	/**
@@ -136,10 +136,9 @@ class World {
 	 */
 	startHungerLossLoop() {
 		for (const player of PlayerInfo.playersOnline) {
-			if (
-				player.gamemode === Gamemode.CREATIVE ||
-				player.gamemode === Gamemode.SPECTATOR
-			) return;
+			if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
+				return;
+			}
 
 			player.setHunger(player.hunger - 0.5);
 		}
@@ -229,9 +228,7 @@ class World {
 			}
 
 			if (typeof min === "number" && posY <= min) {
-				const invulnerable =
-					client.gamemode === Gamemode.CREATIVE ||
-					client.gamemode === Gamemode.SPECTATOR;
+				const invulnerable = client.gamemode === Gamemode.CREATIVE || client.gamemode === Gamemode.SPECTATOR;
 
 				if (!invulnerable) {
 					client.setHealth(client.health - 3, DamageCause.VOID);
