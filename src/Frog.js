@@ -48,7 +48,7 @@ function getLang() {
 	const langFilePath = path.join(__dirname, `lang/${getConfig().chat.lang}.lang`);
 	const langFileContent = fs.readFileSync(langFilePath, "utf8");
 	const lang = langParser.parseRaw(langFileContent);
-
+	
 	return lang;
 }
 
