@@ -95,7 +95,7 @@ scoreboard.name.default=Scoreboard
 plugin.loading.failed=No s'ha pogut carregar %s. Error: %d
 plugin.loading.loading=Cargant el plugin %s v%d
 plugin.loading.loaded=Ha cargat el plugin %s v%d
-plugin.loading.warning.invalidJson=Datos JSON inválidos proveídos para %s. Error %d
+plugin.loading.warning.invalidJson=Dades JSON invàlids proveídos para %s. Error %d
 
 plugin.unloading.failed=No s'ha pogut descarregar %s. Error: %d
 plugin.unloading.success=Descarregat %s
@@ -105,8 +105,8 @@ frog.version=Aquest servidor utilitza GreenFrogMCBE (https://github.com/GreenFro
 
 world.chunks.renderDistance.tooHigh=El limit del generador de chunks en la config.yml es massa alt! Pot causar lag.
 
-errors.nodeJS.tooOld=Estás utilitzant una versió de NodeJS que es massa antiga per executar GreenFrogMCBE.
-errors.nodeJS.tooOld.update=Per favor actualitza-ho a la versió 14.0.0+, desde https://nodejs.org/
+errors.nodeJS.tooOld=Estàs utilitzant una versió de NodeJS que es massa antiga per executar GreenFrogMCBE.
+errors.nodeJS.tooOld.update=Si us plau actualitza-ho a la versió 14.0.0+, des de https://nodejs.org/
 
 kickMessages.serverDisconnect=disconnectionScreen.noReason
 kickMessages.serverClosed=Servidor tancat
@@ -122,8 +122,8 @@ kickMessages.playStatus.console=Expulsat %s perquè un plugin o el servidor van 
 
 player.kicked=Expulsat %s per %d
 
-status.resourcePacks.refused=%s ha dengat els paquets de recursos del servidor.
-status.resourcePacks.none=%s no té paquets de recursos.
+status.resourcePacks.refused=%s ha denegat els paquets de recursos del servidor.
+status.resourcePacks.none=%s no té els paquets de recursos.
 status.resourcePacks.installed=%s té tots els paquets de recursos instalats
 status.resourcePacks.joined=%s s'ha unit
 status.resourcePacks.spawned=%s ha aparegut
@@ -131,7 +131,7 @@ status.resourcePacks.disconnected=%s s'ha desconectat
 
 warning.customItems.loading.failed=No es van poder carregar els items personalitzats! Error: %s
 
-debug.debugEnabled=El modo debug está activado. Esto puede causar lag cuando envíes grandes paquetes. El modo debug està activat. Això pot causar lag quan enviïs paquets molt grans
+debug.debugEnabled=El mode debug està activat. Això pot causar lag quan enviïs paquets molt grans
 
 debug.unstable=El mode inestable està activat. Això cobrera el servidor d'errors crítics però, pot causar corrupció de dades en plugins.
 debug.unstable.unsupported=A més, el mode inestable no està suportada pels desarolladors de GreenFrog i ets responsable de corrupció de dades si ocurreix.
