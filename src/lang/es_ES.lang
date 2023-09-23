@@ -17,8 +17,8 @@ commands.errors.targetError.targetsNotFound=§cNo se encontraron objetivos que c
 commands.ingame.executed=%s ejecutó el comando: /%d
 
 commands.deop.name=deop
-commands.deop.description=Remueve el estatus de operador de un jugador.
-commands.deop.execution.success=Se removió el nivel de operador para el jugador %s
+commands.deop.description=Elimina el estatus de operador de un jugador.
+commands.deop.execution.success=Se eliminó el nivel de operador para el jugador %s
 commands.deop.execution.fail=No se pudo quitar el nivel de operador para %s
 
 commands.gamemode.name=gamemode
@@ -45,7 +45,7 @@ commands.kill.execution.failed.notOnline=§cNingún objectivo apunta a %s
 
 commands.list.name=list
 commands.list.description=Lista a todos los jugadores en el servidor.
-commands.list.execution.success.commands=Hay %s jugadores online: %d
+commands.list.execution.success.commands=Hay %s jugadores en línea: %d
 
 commands.op.name=op
 commands.op.description=Concede el estatus de operador a un jugador.
@@ -101,12 +101,12 @@ plugin.unloading.failed=No se pudo descargar %s. Error: %d
 plugin.unloading.success=Descargado %s
 plugin.unloading.unloading=Descargando %s...
 
-frog.version=Este servidor utiliza GreenFrogMCBE (https=//github.com/GreenFrogMCBE/GreenFrogMCBE). Versión %s
+frog.version=Este servidor utiliza GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versión %s
 
-world.chunks.renderDistance.tooHigh=El limite del generador de chunks en tu.yml es demasiado alto! Puede llegar a causar lag.
+world.chunks.renderDistance.tooHigh=El limite del generador de chunks en tu config.yml es demasiado alto! Puede llegar a causar lag.
 
 errors.nodeJS.tooOld=Estás usando una versión de NodeJS que es demasiado antigua para ejecutar GreenFrogMCBE.
-errors.nodeJS.tooOld.update=Por favor actualizalo a la versión 14.0.0+ desde https=//nodejs.org/
+errors.nodeJS.tooOld.update=Por favor actualizalo a la versión 14.0.0+ desde https://nodejs.org/
 
 kickMessages.serverDisconnect=disconnectionScreen.noReason
 kickMessages.serverClosed=Servidor cerrado
