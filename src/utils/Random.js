@@ -16,6 +16,9 @@
 const crypto = require("crypto");
 
 class Random {
+	/**
+	 * @constructor
+	 */
 	constructor() {}
 
 	/**

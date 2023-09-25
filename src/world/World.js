@@ -22,12 +22,9 @@ const Gamemode = require("../player/types/Gamemode");
 
 const PlayerInfo = require("../player/PlayerInfo");
 
-const LegacyToRuntimeIdConverter = require("../block/LegacyToRuntimeIdConverter");
-
 const Frog = require("../Frog");
 
 let time = 0;
-
 
 class World {
 	/**
@@ -47,7 +44,7 @@ class World {
 		/**
 		 * @type {number}
 		 */
-		this.renderDistance = 12;
+		this.renderDistance = 4;
 
 		/**
 		 * @type {import("Frog").WorldGenerator | undefined}
@@ -171,9 +168,9 @@ class World {
 	 * Updates the world time
 	 */
 	tickWorldTime = () => {
-		this.emitServerEvent("serverTimeTick");
-
 		time += 10;
+
+		this.emitServerEvent("serverTimeTick");
 
 		for (const player of PlayerInfo.playersOnline) {
 			player.setTime(time);
@@ -228,7 +225,9 @@ class World {
 			}
 
 			if (typeof min === "number" && posY <= min) {
-				const invulnerable = client.gamemode === Gamemode.CREATIVE || client.gamemode === Gamemode.SPECTATOR;
+				const invulnerable = 
+					client.gamemode === Gamemode.CREATIVE || 
+					client.gamemode === Gamemode.SPECTATOR;
 
 				if (!invulnerable) {
 					client.setHealth(client.health - 3, DamageCause.VOID);
@@ -274,6 +273,17 @@ class World {
 	}
 
 	/**
+	 * Emits a world event
+	 *
+	 * @param {string} eventName - The name of the event to emit.
+	 */
+	emitServerEvent(eventName) {
+		Frog.eventEmitter.emit(eventName, {
+			world: this.getWorldData()
+		});
+	}
+
+	/**
 	 * Returns the world data.
 	 *
 	 * @returns {import("Frog").World}
@@ -286,17 +296,6 @@ class World {
 			generator: this.generator,
 			time,
 		};
-	}
-
-	/**
-	 * Emits a world event
-	 *
-	 * @param {string} eventName - The name of the event to emit.
-	 */
-	emitServerEvent(eventName) {
-		Frog.eventEmitter.emit(eventName, {
-			world: this.getWorldData()
-		});
 	}
 }
 

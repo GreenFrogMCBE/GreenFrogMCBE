@@ -124,6 +124,13 @@ module.exports = {
 		},
 	},
 
+	directories: {
+		opFile: "./op.yml",
+		worldFolder: "./world",
+		pluginsFolder: "./plugins",
+		pluginDataFolders: "./pluginsData"
+	},
+
 	/**
 	 * Sends a message to all online players
 	 *
@@ -175,6 +182,4 @@ module.exports = {
 	crash() {
 		process.exit(this.config.dev.exitCodes.crash);
 	},
-
-
 };

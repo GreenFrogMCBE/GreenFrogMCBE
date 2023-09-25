@@ -108,10 +108,6 @@ module.exports = {
 	 * @returns {Promise<void>}
 	 */
 	async setOp(username, status) {
-		if (status) {
-			await this.op(username);
-		} else {
-			await this.deop(username);
-		}
+		status ? await this.op(username) : await this.deop(username);
 	},
 };

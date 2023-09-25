@@ -38,10 +38,16 @@ module.exports = {
 	log(levelName, color, message, consoleLoggingLevel) {
 		const Frog = require("../Frog");
 
-		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
+		const date = new Date()
+			.toLocaleString()
+			.replace(",", "")
+			.toUpperCase();
 
 		if (!console[consoleLoggingLevel]) {
-			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s", consoleLoggingLevel));
+			throw new LoggingException(
+				getKey("exceptions.logger.invalidType")
+					.replace("%s", consoleLoggingLevel)
+			);
 		}
 
 		let shouldLogMessage = true;
@@ -65,7 +71,9 @@ module.exports = {
 			color,
 		});
 
-		console[consoleLoggingLevel](convertConsoleColor(`${date} \x1b[${color}m${levelName}\x1b[0m | ${message}`));
+		console[consoleLoggingLevel](
+			convertConsoleColor(`${date} \x1b[${color}m${levelName}\x1b[0m | ${message}`)
+		);
 	},
 
 	/**

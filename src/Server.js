@@ -27,6 +27,8 @@ const PlayerInfo = require("./player/PlayerInfo");
 
 const ConsoleCommandSender = require("../src/server/ConsoleCommandSender");
 
+const ServerStartupException = require("./utils/exceptions/ServerStartupException");
+
 const GarbageCollector = require("./utils/GarbageCollector");
 const Language = require("./utils/Language");
 const Logger = require("./utils/Logger");
@@ -36,7 +38,6 @@ const PlayerJoinHandler = require("./network/handlers/PlayerJoinHandler");
 const World = require("./world/World");
 
 const Query = require("./query/Query");
-const ServerStartupException = require("./utils/exceptions/ServerStartupException");
 
 let server = null;
 
@@ -73,12 +74,14 @@ function setupUncaughtExceptionHandler() {
  * @private
  */
 function createDirectories() {
-	fs.mkdirSync("world", { recursive: true });
+	fs.mkdirSync(Frog.directories.worldFolder, { recursive: true });
 
-	fs.mkdirSync(PluginLoader.directories.plugins, { recursive: true });
-	fs.mkdirSync(PluginLoader.directories.pluginData, { recursive: true });
+	fs.mkdirSync(Frog.directories.pluginsFolder, { recursive: true });
+	fs.mkdirSync(Frog.directories.pluginDataFolders, { recursive: true });
 
-	if (!fs.existsSync("ops.yml")) fs.writeFileSync("ops.yml", "");
+	if (!fs.existsSync(Frog.directories.opFile)) {
+		fs.writeFileSync(Frog.directories.opFile, "");
+	}
 }
 
 /**
@@ -181,7 +184,7 @@ async function listen() {
 		offlineMode,
 	} = Frog.config.serverInfo;
 
-	const offline =  process.env.TEST || offlineMode;
+	const offline = process.env.TEST || offlineMode;
 
 	try {
 		server = frogProtocol.createServer({
