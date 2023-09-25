@@ -20,7 +20,7 @@ const LoggingException = require("./exceptions/LoggingException");
 
 module.exports = {
 	/**
-	 * This array contains all logged messages
+	 * This array contains all the logged messages
 	 * @type {import("Frog").LogMessage[]}
 	 */
 	messages: [],
@@ -79,7 +79,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as info.
 	 *
-	 * @param {string} message Log message.
+	 * @param {string} message- The log message.
 	 */
 	info(message) {
 		this.log(getKey("logger.info"), 32, message, "info");
@@ -88,7 +88,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as a warning.
 	 *
-	 * @param {string} message Log message.
+	 * @param {string} message- The log message.
 	 */
 	warning(message) {
 		this.log(getKey("logger.warn"), 33, message, "warn");
@@ -97,7 +97,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as an error.
 	 *
-	 * @param {string} message Log message.
+	 * @param {string} message- The log message.
 	 */
 	error(message) {
 		this.log(getKey("logger.error"), 31, message, "error");
@@ -107,7 +107,7 @@ module.exports = {
 	 * Logs a message to the console as debug.
 	 * Requires debug to be enabled in the server settings.
 	 *
-	 * @param {string} message Log message.
+	 * @param {string} message- The log message.
 	 */
 	debug(message) {
 		const Frog = require("../Frog");
