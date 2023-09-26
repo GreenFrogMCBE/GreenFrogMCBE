@@ -1,6 +1,9 @@
 server.loading=Cargando servidor...
 server.license=GreenFrog esta lincenciado bajo la licencia Creative Commons Attribution 4.0 International. Más información=https=//creativecommons.org
+
 server.shuttingDown=Apagando...
+
+server.version=This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s
 
 garbageCollector.started=[Recolector] Empezando recolección...
 garbageCollector.deleted=[Recolector] Eliminado %s

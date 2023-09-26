@@ -3,6 +3,8 @@ server.license=GreenFrog được cấp phép theo giấy phép Quốc tế Crea
 
 server.shuttingDown=Đang tắt máy chủ...
 
+server.version=This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s
+
 garbageCollector.started=[Bộ thu gom rác] Bắt đầu thu gom rác...
 garbageCollector.deleted=[Bộ thu gom rác] Đã xóa %s
 garbageCollector.finished=[Bộ thu gom rác] Đã hoàn thành

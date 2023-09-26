@@ -3,6 +3,8 @@ server.license=GreenFrog ліцензується за ліцензією Creati
 
 server.shuttingDown=Вимкнення...
 
+server.version=This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s
+
 garbageCollector.started=[Сбірщик сміття] Початок збору сміття...
 garbageCollector.deleted=[Сбірщик сміття] Видалено %s
 garbageCollector.finished=[Сбірщик сміття] Закінчено
