@@ -125,10 +125,10 @@ module.exports = {
 	},
 
 	directories: {
-		opFile: "./op.yml",
+		opFile: "./ops.yml",
 		worldFolder: "./world",
 		pluginsFolder: "./plugins",
-		pluginDataFolders: "./pluginsData"
+		pluginDataFolders: "./pluginData"
 	},
 
 	/**
