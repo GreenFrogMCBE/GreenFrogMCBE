@@ -3,7 +3,7 @@ server.license=GreenFrog està licensiat sota la licencia Creative Commons Attri
 
 server.shuttingDown=Apagant...
 
-server.version=This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s
+server.version=Aquest servidor està executant GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versió: %s
 
 garbageCollector.started=[Recol·lector] Començant recolecció...
 garbageCollector.deleted=[Recol·lector] Eliminant %s
