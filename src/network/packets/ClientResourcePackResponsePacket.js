@@ -205,7 +205,8 @@ class ClientResourcePackResponsePacket extends Packet {
 					networkChunkPublisher.saved_chunks = [];
 					networkChunkPublisher.writePacket(player);
 
-					const generatorFile = require("../../world/generator/" + player.world.generator);
+					const generatorFileName = player.world.generator[0].toUpperCase() + player.world.generator.substring(1);
+					const generatorFile = require("../../world/generator/" + generatorFileName);
 					new generatorFile().generate(player);
 				}
 
