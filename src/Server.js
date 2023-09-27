@@ -49,25 +49,36 @@ let server = null;
  * @private
  */
 async function initializeServer() {
-	createDirectories();
 	console.clear();
+
+	createDirectories();
 	logStartupMessages();
+
 	checkNodeJSVersion();
 	checkRenderDistance();
-	setupUncaughtExceptionHandler();
+
+	setupHandlers();
+
 	await PluginLoader.loadPlugins();
 	await CommandManager.loadCommands();
 	await ConsoleCommandSender.start();
+
 	initDebug();
 }
 
 /**
- * Sets up an uncaught exception handler to catch critical errors
+ * Sets up the `uncaughtException` and the `SIGINT` handlers
  *
  * @private
  */
-function setupUncaughtExceptionHandler() {
-	process.on("uncaughtException", (err) => handleCriticalError(err));
+function setupHandlers() {
+	process.on("uncaughtException", (error) => {
+		handleCriticalError(error);
+	});
+
+	process.on("SIGINT", async () => {
+		Frog.shutdownServer();
+	});
 }
 
 /**
