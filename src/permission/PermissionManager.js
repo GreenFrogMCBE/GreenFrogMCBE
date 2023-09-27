@@ -50,7 +50,7 @@ module.exports = {
 	 * @async
 	 */
 	async isOpped(username) {
-		const oppedPlayers = fs.readFileSync("ops.yml", "utf8")
+		const oppedPlayers = fs.readFileSync(Frog.directories.opFile, "utf8")
 			.split("\n");
 
 		return oppedPlayers.includes(username);
@@ -66,7 +66,7 @@ module.exports = {
 	async op(username) {
 		if (!emitPlayerOpStatusChange(username, true)) return;
 
-		fs.appendFileSync("ops.yml", username + "\n");
+		fs.appendFileSync(Frog.directories.opFile, username + "\n");
 
 		const target = PlayerInfo.getPlayer(username);
 
@@ -85,13 +85,13 @@ module.exports = {
 	async deop(username) {
 		if (!emitPlayerOpStatusChange(username, false)) return;
 
-		const ops = fs.readFileSync("ops.yml", "utf-8");
+		const ops = fs.readFileSync(Frog.directories.opFile, "utf-8");
 		const updatedOps = ops
 			.split("\n")
 			.filter((op) => op !== username)
 			.join("\n");
 
-		fs.writeFileSync("ops.yml", updatedOps);
+		fs.writeFileSync(Frog.directories.opFile, updatedOps);
 
 		const target = PlayerInfo.getPlayer(username);
 
