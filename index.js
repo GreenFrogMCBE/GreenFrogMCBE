@@ -17,6 +17,7 @@ const fs = require("fs");
 const path = require("path");
 
 const Colors = require("./src/utils/types/Colors");
+
 const { convertConsoleColor } = require("./src/utils/ConsoleColorConvertor");
 
 const crashFileName = `./crash-reports/server-crash-${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}.txt`;
