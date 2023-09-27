@@ -135,7 +135,7 @@ function checkRenderDistance() {
 function logStartupMessages() {
 	Logger.info(Language.getKey("server.loading"));
 	Logger.info(Language.getKey("server.license"));
-	
+
 	// Executes `/version` as the console
 	new CommandVersion()
 		.execute(Frog.asPlayer);
@@ -178,8 +178,8 @@ function handleCriticalError(error) {
 async function listen() {
 	const {
 		host,
-		port
-    raknetBackend 
+		port,
+		raknet: raknetBackend
 	} = Frog.config.network;
 
 	const {
@@ -187,7 +187,6 @@ async function listen() {
 		motd,
 		maxPlayers,
 		version,
-		raknetBackend,
 		offlineMode,
 	} = Frog.config.serverInfo;
 
@@ -215,11 +214,11 @@ async function listen() {
 		Frog.server = server;
 		Frog.eventEmitter.emit("serverListen");
 
-			Language.getKey("network.server.listening.success")
-				.replace(
-					"%s",
-					`/${host}:${port}`
-				)
+		Language.getKey("network.server.listening.success"
+			.replace(
+				"%s",
+				`/${host}:${port}`
+			)
 		);
 	} catch (error) {
 		Logger.error(
@@ -312,7 +311,7 @@ module.exports = {
 
 		if (Frog.config.query.enabled) {
 			startQueryServer();
-    }
+		}
 
 		startGarbageCollector();
 		startWorldTicking();
