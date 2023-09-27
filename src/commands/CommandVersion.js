@@ -18,7 +18,6 @@ const Command = require("./Command");
 const Frog = require("../Frog");
 
 const Colors = require("../utils/types/Colors");
-const VersionToProtocol = require("../utils/VersionToProtocol");
 
 const { getKey } = require("../utils/Language");
 
