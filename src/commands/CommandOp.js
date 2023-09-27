@@ -28,6 +28,14 @@ class CommandOp extends Command {
 	minArgs = 1;
 	maxArgs = 1;
 	requiresOp = true;
+	/** @type {{ name: string; type: 'int' | 'float' | 'value' | 'wildcard_int' | 'operator' | 'command_operator' | 'target' | 'wildcard_target' | 'file_path' | 'integer_range' | 'equipment_slot' | 'string' | 'block_position' | 'position' | 'message' | 'raw_text' | 'json' | 'block_states' | 'command'; optional: boolean; }[]} */
+	args = [
+		{
+			name: "player",
+			type: "target",
+			optional: true
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

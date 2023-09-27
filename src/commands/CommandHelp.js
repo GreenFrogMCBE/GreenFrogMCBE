@@ -28,6 +28,7 @@ class CommandHelp extends Command {
 	aliases = ["?"];
 	minArgs = 0;
 	maxArgs = 0;
+	args = [];
 
 	/**
 	 * @param {import("Frog").Player} player

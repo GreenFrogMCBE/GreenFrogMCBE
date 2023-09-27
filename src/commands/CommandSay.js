@@ -25,8 +25,16 @@ const Frog = require("../Frog");
 class CommandSay extends Command {
 	name = getKey("commands.say.name");
 	description = getKey("commands.say.description");
-	minArgs = 0;
+	minArgs = 1;
 	requiresOp = true;
+	/** @type {{ name: string; type: 'int' | 'float' | 'value' | 'wildcard_int' | 'operator' | 'command_operator' | 'target' | 'wildcard_target' | 'file_path' | 'integer_range' | 'equipment_slot' | 'string' | 'block_position' | 'position' | 'message' | 'raw_text' | 'json' | 'block_states' | 'command'; optional: boolean; }[]} */
+	args = [
+		{
+			name: "message",
+			type: "string",
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

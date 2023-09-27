@@ -168,14 +168,14 @@ class ClientResourcePackResponsePacket extends Packet {
 				ClientCommandManager.init(player);
 
 				for (const command of ServerCommandManager.commands) {
-					const { requiresOp, name, description, aliases } = command;
+					const { requiresOp, name, description, aliases, args } = command;
 
 					if (!Frog.config.chat.features.commands && (!requiresOp || player.permissions.op)) {
-						ClientCommandManager.addCommand(player, name, description);
+						ClientCommandManager.addCommand(player, name, description, args);
 
 						if (aliases) {
 							for (const alias of aliases) {
-								ClientCommandManager.addCommand(player, alias, description);
+								ClientCommandManager.addCommand(player, alias, description, args);
 							}
 						}
 					}

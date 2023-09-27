@@ -28,6 +28,8 @@ class Command {
 	requiresOp;
 	/** @type {string[] | undefined} */
 	aliases;
+	/** @type {{ name: string; type: 'int' | 'float' | 'value' | 'wildcard_int' | 'operator' | 'command_operator' | 'target' | 'wildcard_target' | 'file_path' | 'integer_range' | 'equipment_slot' | 'string' | 'block_position' | 'position' | 'message' | 'raw_text' | 'json' | 'block_states' | 'command'; optional: boolean; }[]} */
+	args;
 
 	/**
 	 * @param {import("Frog").Player} player
