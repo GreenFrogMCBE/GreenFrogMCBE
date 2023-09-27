@@ -18,6 +18,8 @@ const path = require("path");
 
 const Frog = require("./src/Frog");
 
+const Server = require("./src/Server");
+
 const Colors = require("./src/utils/types/Colors");
 
 const { convertConsoleColor } = require("./src/utils/ConsoleColorConvertor");
@@ -52,11 +54,10 @@ async function start() {
 	try {
 		await createConfigFilesAndDebug();
 
-		const Server = require("./src/Server.js");
 		Server.start();
 
 		process.once("SIGINT", async () => {
-			require("./src/Frog").shutdownServer();
+			Frog.shutdownServer();
 		});
 	} catch (error) {
 		console.clear();
