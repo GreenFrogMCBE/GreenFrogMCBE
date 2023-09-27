@@ -14,11 +14,14 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 class UnsupportedOperationException extends Error {
-	/** @param {string} message */
+	/**
+	 * @constructor
+	 * @param {string} message
+	 */
 	constructor(message) {
 		super(message);
+
 		this.name = "UnsupportedOperationException";
-		this.message = message || "This operation is not supported";
 	}
 }
 

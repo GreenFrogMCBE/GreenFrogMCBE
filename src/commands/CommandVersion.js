@@ -38,7 +38,7 @@ class CommandVersion extends Command {
 	 * @param {import("Frog").Player} player
 	 */
 	async execute(player) {
-		const message = getKey("frog.version").replace("%s", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%d", version).replace("%f", VersionToProtocol.getProtocol(version).toString());
+		const message = getKey("server.version").replace("%s", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`).replace("%d", version).replace("%f", VersionToProtocol.getProtocol(version).toString());
 
 		player.sendMessage(`${Colors.GRAY}${message}`);
 	}

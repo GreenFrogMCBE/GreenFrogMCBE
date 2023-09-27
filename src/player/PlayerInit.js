@@ -247,7 +247,7 @@ module.exports = {
 		/**
 		 * Sets player's velocity
 		 * NOTE: This is handled by the client-side
-		 * 
+		 *
 		 * @param {number} x
 		 * @param {number} y
 		 * @param {number} z
@@ -302,7 +302,7 @@ module.exports = {
 			if (terminateConnection) {
 				const kickMessageConsole = getKey("kickMessages.playStatus.console").replace("%s", player.username);
 				const kickMessagePlayer = getKey("kickMessages.playStatus").replace("%s", playStatus);
-			
+
 				Logger.info(kickMessageConsole);
 
 				setTimeout(() => {
@@ -612,9 +612,11 @@ module.exports = {
 		 * Changes the OP status for the player
 		 *
 		 * @param {boolean} status
+		 * @returns {Promise<void>}
+		 * @async
 		 */
-		player.setOp = function (status) {
-			return PermissionManager.setOpStatus(player.username, status);
+		player.setOp = async function (status) {
+			return await PermissionManager.setOp(player.username, status);
 		};
 
 		/**

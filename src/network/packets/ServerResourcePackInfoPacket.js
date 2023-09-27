@@ -26,8 +26,8 @@ class ServerResponsePackInfoPacket extends Packet {
 	behavior_packs;
 	/** @type {any[] | undefined} */
 	texture_packs;
-	/** @type {boolean | undefined} */
-	rtx_enabled;
+	/** @type {import("Frog").ResourcePackLink[] | [] | undefined} */
+	resource_pack_links;
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -38,7 +38,7 @@ class ServerResponsePackInfoPacket extends Packet {
 			has_scripts: this.has_scripts,
 			behaviour_packs: this.behavior_packs,
 			texture_packs: this.texture_packs,
-			rtx_enabled: this.rtx_enabled,
+			resource_pack_links: this.resource_pack_links,
 		});
 	}
 }

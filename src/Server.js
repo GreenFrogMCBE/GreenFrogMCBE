@@ -13,27 +13,51 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("./Frog");
-
 const fs = require("fs");
-const FrogProtocol = require("frog-protocol");
+const frogProtocol = require("frog-protocol");
+
+const Frog = require("./Frog");
 
 const PluginLoader = require("./plugins/PluginLoader");
 const PluginManager = require("./plugins/PluginManager");
 
+const CommandManager = require("./server/CommandManager");
+
 const PlayerInfo = require("./player/PlayerInfo");
+
+const ConsoleCommandSender = require("../src/server/ConsoleCommandSender");
+
+const ServerStartupException = require("./utils/exceptions/ServerStartupException");
 
 const GarbageCollector = require("./utils/GarbageCollector");
 const Language = require("./utils/Language");
-
 const Logger = require("./utils/Logger");
 
 const PlayerJoinHandler = require("./network/handlers/PlayerJoinHandler");
 
 const World = require("./world/World");
+
 const Query = require("./query/Query");
 
 let server = null;
+
+/**
+ * Initializes the server
+ *
+ * @private
+ */
+async function initializeServer() {
+	createDirectories();
+	console.clear();
+	logStartupMessages();
+	checkNodeJSVersion();
+	checkRenderDistance();
+	setupUncaughtExceptionHandler();
+	await PluginLoader.loadPlugins();
+	await CommandManager.loadCommands();
+	await ConsoleCommandSender.start();
+	initDebug();
+}
 
 /**
  * Sets up an uncaught exception handler to catch critical errors
@@ -45,29 +69,19 @@ function setupUncaughtExceptionHandler() {
 }
 
 /**
- * Initializes the server settings and plugins
- *
- * @private
- */
-function initializeServer() {
-	createDirectories();
-	console.clear();
-	logStartupMessages();
-	checkNodeJSVersion();
-	checkRenderDistance();
-	setupUncaughtExceptionHandler();
-	loadPlugins();
-	initDebug();
-}
-
-/**
  * Creates necessary directories if they don't exist
  *
  * @private
  */
 function createDirectories() {
-	if (!fs.existsSync("ops.yml")) fs.writeFileSync("ops.yml", "");
-	if (!fs.existsSync("world")) fs.mkdirSync("world");
+	fs.mkdirSync(Frog.directories.worldFolder, { recursive: true });
+
+	fs.mkdirSync(Frog.directories.pluginsFolder, { recursive: true });
+	fs.mkdirSync(Frog.directories.pluginDataFolders, { recursive: true });
+
+	if (!fs.existsSync(Frog.directories.opFile)) {
+		fs.writeFileSync(Frog.directories.opFile, "");
+	}
 }
 
 /**
@@ -81,7 +95,9 @@ function initDebug() {
 		Logger.warning(Language.getKey("debug.unstable.unsupported"));
 	}
 
-	if (Frog.isDebug) Logger.debug(Language.getKey("debug.debugEnabled"));
+	if (Frog.isDebug) {
+		Logger.debug(Language.getKey("debug.debugEnabled"));
+	}
 }
 
 /**
@@ -93,12 +109,13 @@ function checkNodeJSVersion() {
 	if (parseInt(process.versions.node.split(".")[0]) < 14) {
 		Logger.error(Language.getKey("errors.nodeJS.tooOld"));
 		Logger.error(Language.getKey("errors.nodeJS.tooOld.update"));
+
 		process.exit(-1);
 	}
 }
 
 /**
- * Checks the render distance setting and warns if it's too high
+ * Checks the render distance setting and displays a warning if it's too high
  *
  * @private
  */
@@ -109,7 +126,7 @@ function checkRenderDistance() {
 }
 
 /**
- * Logs some startup messages
+ * Logs startup messages
  *
  * @private
  */
@@ -129,74 +146,74 @@ function handleCriticalError(error) {
 
 	Frog.eventEmitter.emit("serverCriticalError", { error });
 
-	if (error.toString().includes("Server failed to start")) {
+	if (error.message.includes("Server failed to start")) {
 		Logger.error(
 			Language.getKey("network.server.listening.failed")
 				.replace("%s", `${host}:${port}`)
-				.replace("%d", error.toString())
+				.replace("%d", error.message)
 		);
-		Logger.error(
-			Language.getKey(
-				"network.server.listening.failed.otherServerRunning"
-			)
-		);
+
+		Logger.error(Language.getKey("network.server.listening.failed.otherServerRunning"));
 	}
 
 	Logger.error(`Server error: ${error.stack}`);
 
-	if (Frog.config.dev.unstable) {
+	if (!Frog.config.dev.unstable) {
 		process.exit(Frog.config.dev.exitCodes.crash);
 	}
 }
 
 /**
- * Loads plugins for the server
+ * Makes the server listen on the host and port specified in the config
  *
  * @private
- */
-async function loadPlugins() {
-	await PluginLoader.loadPlugins();
-}
-
-/**
- * Listens to the server
- *
- * @private
+ * @async
  */
 async function listen() {
-	const { host, port, raknet: raknetBackend } = Frog.config.network;
-	const { levelName, motd, maxPlayers, version } = Frog.config.serverInfo;
-	const { offlineMode } = Frog.config.serverInfo;
+	const {
+		host,
+		port
+    raknetBackend 
+	} = Frog.config.network;
+
+	const {
+		levelName,
+		motd,
+		maxPlayers,
+		version,
+		raknetBackend,
+		offlineMode,
+	} = Frog.config.serverInfo;
+
+	const offline = process.env.TEST || offlineMode;
 
 	try {
-		server = FrogProtocol.createServer({
+		server = frogProtocol.createServer({
 			host,
 			port,
 			version,
-			offline: process.env.TEST || offlineMode,
+			offline,
 			raknetBackend,
 			maxPlayers,
 			motd: {
 				motd,
 				levelName,
 			},
-		}).on(
-			"connect",
-			(/** @type {import("frog-protocol").Player} */ client) => {
-				client.on("join", () => {
-					new PlayerJoinHandler().onPlayerJoin(client);
-				});
-			}
-		);
+		}).on("connect", (client) => {
+			client.on("join", () => {
+				new PlayerJoinHandler()
+					.onPlayerJoin(client);
+			});
+		});
 
 		Frog.server = server;
 		Frog.eventEmitter.emit("serverListen");
 
-		Logger.info(
-			Language.getKey("network.server.listening.success").replace(
-				"%s",
-				`/${host}:${port}`
-			)
+			Language.getKey("network.server.listening.success")
+				.replace(
+					"%s",
+					`/${host}:${port}`
+				)
 		);
 	} catch (error) {
 		Logger.error(
@@ -205,7 +222,7 @@ async function listen() {
 				.replace("%d", error.stack)
 		);
 
-		process.exit(Frog.config.dev.exitCodes.crash);
+		throw new ServerStartupException("Server failed to start");
 	}
 }
 
@@ -225,7 +242,7 @@ function startGarbageCollector() {
  *
  * @private
  */
-function startWorldTicker() {
+function startWorldTicking() {
 	const world = new World();
 
 	world.startHungerLossLoop();
@@ -256,6 +273,27 @@ function getQuerySettings() {
 	};
 }
 
+/**
+ * Starts the query server.
+ */
+function startQueryServer() {
+	const query = new Query();
+
+	try {
+		query.start(getQuerySettings());
+	} catch (error) {
+		Frog.eventEmitter.emit("queryError", { error });
+
+		Logger.error(
+			Language.getKey("query.listening.failed")
+				.replace(
+					"%s",
+					error.stack
+				)
+		);
+	}
+}
+
 module.exports = {
 	/**
 	 * Starts the server
@@ -263,27 +301,14 @@ module.exports = {
 	 * @async
 	 */
 	async start() {
-		initializeServer();
+		await initializeServer();
 		await listen();
 
 		if (Frog.config.query.enabled) {
-			const query = new Query();
-
-			try {
-				query.start(getQuerySettings());
-			} catch (error) {
-				Frog.eventEmitter.emit("queryError", { error });
-
-				Logger.error(
-					Language.getKey("query.listening.failed").replace(
-						"%s",
-						error.stack
-					)
-				);
-			}
-		}
+			startQueryServer();
+    }
 
 		startGarbageCollector();
-		startWorldTicker();
+		startWorldTicking();
 	},
 };

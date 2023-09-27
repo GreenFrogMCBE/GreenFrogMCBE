@@ -13,12 +13,16 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-class InvalidPositionException extends Error {
-	/** @param {string} message */
+class ServerStartupException extends Error {
+	/**
+	 * @constructor
+	 * @param {string} message
+	 */
 	constructor(message) {
-		super("Invalid position: " + message);
-		this.name = "InvalidPositionException";
+		super(message);
+
+		this.name = "ServerStartupException";
 	}
 }
 
-module.exports = InvalidPositionException;
+module.exports = ServerStartupException;

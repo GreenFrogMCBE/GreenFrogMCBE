@@ -58,6 +58,8 @@ class ServerStartGamePacket extends Packet {
 	movement_authority;
 	/** @type {import("Frog").PermissionLevel | undefined} */
 	permission_level;
+	/** @type {import("Frog").EditorLevelType | undefined} */
+	editor_world_type;
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -78,7 +80,7 @@ class ServerStartGamePacket extends Packet {
 			difficulty: this.difficulty,
 			spawn_position: this.spawn_position,
 			achievements_disabled: true,
-			editor_world: false,
+			editor_world_type: this.editor_world_type,
 			created_in_editor: false,
 			exported_from_editor: false,
 			day_cycle_stop_time: 18,

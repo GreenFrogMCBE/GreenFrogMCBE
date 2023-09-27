@@ -3,6 +3,8 @@ server.license=GreenFrog is licensed under Creative Commons Attribution 4.0 Inte
 
 server.shuttingDown=Shutting down...
 
+server.version=This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s
+
 garbageCollector.started=[Garbage collector] Started garbage collection...
 garbageCollector.deleted=[Garbage collector] Deleted %s
 garbageCollector.finished=[Garbage collector] Finished
@@ -101,8 +103,6 @@ plugin.loading.warning.invalidJson=Invalid JSON data provided for %s. Error: %d
 plugin.unloading.failed=Failed to unload %s. Error=%d
 plugin.unloading.success=Unloaded %s
 plugin.unloading.unloading=Unloading %s...
-
-frog.version=This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s
 
 world.chunks.renderDistance.tooHigh=Chunk generator limit in your config.yml is too high! It may cause lag
 
