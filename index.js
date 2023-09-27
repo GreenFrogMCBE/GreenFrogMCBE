@@ -16,11 +16,16 @@
 const fs = require("fs");
 const path = require("path");
 
+const Frog = require("./src/Frog");
+
 const Colors = require("./src/utils/types/Colors");
 
 const { convertConsoleColor } = require("./src/utils/ConsoleColorConvertor");
 
-const crashFileName = `./crash-reports/server-crash-${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}.txt`;
+/**
+ * @type {string}
+ */
+const crashFile = `./crash-reports/server-crash-${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)}.txt`;
 
 /**
  * Creates configuration files and sets up debugging if necessary.
@@ -33,8 +38,6 @@ async function createConfigFilesAndDebug() {
 
 		fs.writeFileSync("config.yml", config);
 	}
-
-	const Frog = require("./src/Frog");
 
 	if (Frog.isDebug) {
 		process.env.DEBUG = "minecraft-protocol";
@@ -57,6 +60,7 @@ async function start() {
 		});
 	} catch (error) {
 		console.clear();
+
 		console.error(
 			convertConsoleColor(
 				`${Colors.RED}Failed to start server
@@ -69,7 +73,7 @@ ${Colors.RESET}`,
 		);
 
 		fs.mkdirSync("crash-reports", { recursive: true });
-		fs.writeFileSync(crashFileName, `Error: ${error.stack}`);
+		fs.writeFileSync(crashFile, `Error: ${error.stack}`);
 
 		process.exit(-1);
 	}
