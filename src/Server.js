@@ -179,6 +179,7 @@ async function listen() {
 	const {
 		host,
 		port
+    raknetBackend 
 	} = Frog.config.network;
 
 	const {
@@ -214,7 +215,6 @@ async function listen() {
 		Frog.server = server;
 		Frog.eventEmitter.emit("serverListen");
 
-		Logger.info(
 			Language.getKey("network.server.listening.success")
 				.replace(
 					"%s",
@@ -312,7 +312,7 @@ module.exports = {
 
 		if (Frog.config.query.enabled) {
 			startQueryServer();
-		}
+    }
 
 		startGarbageCollector();
 		startWorldTicking();
