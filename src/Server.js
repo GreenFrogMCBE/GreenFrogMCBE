@@ -130,8 +130,16 @@ function handleCriticalError(error) {
 	Frog.eventEmitter.emit("serverCriticalError", { error });
 
 	if (error.toString().includes("Server failed to start")) {
-		Logger.error(Language.getKey("network.server.listening.failed").replace("%s", `${host}:${port}`).replace("%d", error.toString()));
-		Logger.error(Language.getKey("network.server.listening.failed.otherServerRunning"));
+		Logger.error(
+			Language.getKey("network.server.listening.failed")
+				.replace("%s", `${host}:${port}`)
+				.replace("%d", error.toString())
+		);
+		Logger.error(
+			Language.getKey(
+				"network.server.listening.failed.otherServerRunning"
+			)
+		);
 	}
 
 	Logger.error(`Server error: ${error.stack}`);
@@ -156,8 +164,8 @@ async function loadPlugins() {
  * @private
  */
 async function listen() {
-	const { host, port } = Frog.config.network;
-	const { levelName, motd, maxPlayers, version, raknetBackend } = Frog.config.serverInfo;
+	const { host, port, raknet: raknetBackend } = Frog.config.network;
+	const { levelName, motd, maxPlayers, version } = Frog.config.serverInfo;
 	const { offlineMode } = Frog.config.serverInfo;
 
 	try {
@@ -172,18 +180,30 @@ async function listen() {
 				motd,
 				levelName,
 			},
-		}).on("connect", (/** @type {import("frog-protocol").Player} */ client) => {
-			client.on("join", () => {
-				new PlayerJoinHandler().onPlayerJoin(client);
-			});
-		});
+		}).on(
+			"connect",
+			(/** @type {import("frog-protocol").Player} */ client) => {
+				client.on("join", () => {
+					new PlayerJoinHandler().onPlayerJoin(client);
+				});
+			}
+		);
 
 		Frog.server = server;
 		Frog.eventEmitter.emit("serverListen");
 
-		Logger.info(Language.getKey("network.server.listening.success").replace("%s", `/${host}:${port}`));
+		Logger.info(
+			Language.getKey("network.server.listening.success").replace(
+				"%s",
+				`/${host}:${port}`
+			)
+		);
 	} catch (error) {
-		Logger.error(Language.getKey("network.server.listening.failed").replace("%s", `/${host}:${port}`).replace("%d", error.stack));
+		Logger.error(
+			Language.getKey("network.server.listening.failed")
+				.replace("%s", `/${host}:${port}`)
+				.replace("%d", error.stack)
+		);
 
 		process.exit(Frog.config.dev.exitCodes.crash);
 	}
@@ -239,7 +259,7 @@ function getQuerySettings() {
 module.exports = {
 	/**
 	 * Starts the server
-	 * 
+	 *
 	 * @async
 	 */
 	async start() {
@@ -254,7 +274,12 @@ module.exports = {
 			} catch (error) {
 				Frog.eventEmitter.emit("queryError", { error });
 
-				Logger.error(Language.getKey("query.listening.failed").replace("%s", error.stack));
+				Logger.error(
+					Language.getKey("query.listening.failed").replace(
+						"%s",
+						error.stack
+					)
+				);
 			}
 		}
 
