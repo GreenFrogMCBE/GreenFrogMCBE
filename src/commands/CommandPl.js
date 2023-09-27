@@ -27,7 +27,7 @@ const { getKey } = require("../utils/Language");
 class CommandPl extends Command {
 	name = getKey("commands.plugins.name");
 	description = getKey("commands.plugins.description");
-	aliases = [getKey("commands.plugins.aliases.pl")];
+	aliases = getKey("commands.plugins.aliases.pl");
 	minArgs = 0;
 	maxArgs = 0;
 

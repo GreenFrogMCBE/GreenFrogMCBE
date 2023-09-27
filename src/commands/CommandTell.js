@@ -25,7 +25,11 @@ const { getKey } = require("../utils/Language");
 class CommandTell extends Command {
 	name = getKey("commands.tell.name");
 	description = getKey("commands.tell.description");
-	aliases = [getKey("commands.tell.aliases.w"), getKey("commands.tell.aliases.whisper"), getKey("commands.tell.aliases.msg")];
+	aliases = [
+		getKey("commands.tell.aliases.w"), 
+		getKey("commands.tell.aliases.whisper"), 
+		getKey("commands.tell.aliases.msg")
+	];
 	minArgs = 2;
 
 	/**

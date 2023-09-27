@@ -29,7 +29,10 @@ const { version } = Frog.config.serverInfo;
 class CommandVersion extends Command {
 	name = getKey("commands.version.name");
 	description = getKey("commands.version.description");
-	aliases = [getKey("commands.version.aliases.ver"), getKey("commands.version.aliases.about")];
+	aliases = [
+		getKey("commands.version.aliases.ver"), 
+		getKey("commands.version.aliases.about")
+	];
 	minArgs = 0;
 	maxArgs = 0;
 

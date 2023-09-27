@@ -25,7 +25,9 @@ const { getKey } = require("../utils/Language");
 class CommandHelp extends Command {
 	name = getKey("commands.help.name");
 	description = getKey("commands.help.description");
-	aliases = ["?"];
+	aliases = [
+		"?"
+	];
 	minArgs = 0;
 	maxArgs = 0;
 
