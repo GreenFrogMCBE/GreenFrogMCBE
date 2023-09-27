@@ -23,6 +23,8 @@ const PluginManager = require("./plugins/PluginManager");
 
 const CommandManager = require("./server/CommandManager");
 
+const CommandVersion = require("./commands/CommandVersion");
+
 const PlayerInfo = require("./player/PlayerInfo");
 
 const ConsoleCommandSender = require("../src/server/ConsoleCommandSender");
@@ -133,6 +135,10 @@ function checkRenderDistance() {
 function logStartupMessages() {
 	Logger.info(Language.getKey("server.loading"));
 	Logger.info(Language.getKey("server.license"));
+	
+	// Executes `/version` as the console
+	new CommandVersion()
+		.execute(Frog.asPlayer);
 }
 
 /**
