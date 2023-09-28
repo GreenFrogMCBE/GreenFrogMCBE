@@ -15,6 +15,8 @@
  */
 const PlayerListAction = require("./types/PlayerListAction");
 
+const skinData = require("../../resources/json/skinData.json");
+
 const Packet = require("./Packet");
 
 class ServerPlayerListPacket extends Packet {
@@ -62,7 +64,7 @@ class ServerPlayerListPacket extends Packet {
 							xbox_user_id: this.xbox_id,
 							platform_chat_id: "",
 							build_platform: 7,
-							skin_data: require("../../resources/skinData.json"),
+							skin_data: skinData,
 							is_teacher: false,
 							is_host: false,
 						},
