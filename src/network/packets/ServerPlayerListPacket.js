@@ -37,40 +37,30 @@ class ServerPlayerListPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 */
 	writePacket(player) {
-		let data = null;
+		let data = {
+			records: {
+				type: PlayerListAction.ADD,
+				records_count: 1,
+				records: [{
+					uuid: this.uuid,
+					entity_unique_id: this.id,
+					username: this.username,
+					xbox_user_id: this.xbox_id,
+					platform_chat_id: "",
+					build_platform: 7,
+					skin_data: skinData,
+					is_teacher: false,
+					is_host: false,
+				}],
+				verified: [true]
+			}
+		};
 
 		if (this.type === PlayerListAction.REMOVE) {
 			data = {
-				records: {
-					type: PlayerListAction.REMOVE,
-					records_count: 1,
-					records: [
-						{
-							uuid: this.uuid,
-						},
-					],
-				},
-			};
-		} else {
-			data = {
-				records: {
-					type: PlayerListAction.ADD,
-					records_count: 1,
-					records: [
-						{
-							uuid: this.uuid,
-							entity_unique_id: this.id,
-							username: this.username,
-							xbox_user_id: this.xbox_id,
-							platform_chat_id: "",
-							build_platform: 7,
-							skin_data: skinData,
-							is_teacher: false,
-							is_host: false,
-						},
-					],
-					verified: [true],
-				},
+				type: PlayerListAction.REMOVE,
+				records_count: 1,
+				records: [{ uuid: this.uuid }],
 			};
 		}
 
