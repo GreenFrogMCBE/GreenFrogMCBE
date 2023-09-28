@@ -24,13 +24,13 @@ declare module "Frog" {
 		apiVersion: string;
 	};
 
-	export type Coordinate = {
+	export type Vec3 = {
 		x: number;
 		y: number;
 		z: number;
 	};
 
-	export type Rotation = {
+	export type Vec2 = {
 		x: number;
 		z: number;
 	};
@@ -147,7 +147,7 @@ declare module "Frog" {
 			};
 			ticking: {
 				event: boolean;
-				worldTime: boolean;
+				time: boolean;
 				void: boolean;
 				regeneration: boolean;
 				starvationDamage: boolean;
@@ -567,10 +567,10 @@ declare module "Frog" {
 	export type World = {
 		name: string;
 		renderDistance: number;
-		spawnCoordinates: Coordinate;
+		spawnCoordinates: Vec3;
 		generator: string;
 		time: number;
-		handleFallDamage(player: Player, coordinates: Coordinate): void;
+		handleFallDamage(player: Player, coordinates: Vec3): void;
 
 		// Passing undefined as a parameter will result in it being converted to 0
 		breakBlock(x: number | undefined, y: number | undefined, z: number | undefined): void;
@@ -654,7 +654,7 @@ declare module "Frog" {
 	};
 
 	export type Container = {
-		blockPosition: Partial<Coordinate>;
+		blockPosition: Partial<Vec3>;
 		isOpen: boolean;
 		window: Partial<ContainerWindow>;
 	};
@@ -944,7 +944,7 @@ declare module "Frog" {
 		windowType: WindowType;
 		sentByServer: boolean;
 		runtimeId: number;
-		containerCoordinates: Coordinate;
+		containerCoordinates: Vec3;
 		cancel(): void;
 	};
 
@@ -1155,7 +1155,7 @@ declare module "Frog" {
 	export type ServerSetDimensionEvent = {
 		player: Player;
 		dimension: Dimension;
-		coordinates: Coordinate;
+		coordinates: Vec3;
 		respawn: boolean;
 		cancel(): void;
 	};
@@ -1215,7 +1215,7 @@ declare module "Frog" {
 
 	export type ServerVelocityUpdateEvent = {
 		player: Player;
-		coordinates: Coordinate;
+		coordinates: Vec3;
 		cancel(): void;
 	};
 

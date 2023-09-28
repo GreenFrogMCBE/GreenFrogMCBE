@@ -37,7 +37,7 @@ class World {
 		this.name = "World";
 
 		/**
-		 * @type {import("Frog").Coordinate}
+		 * @type {import("Frog").Vec3}
 		 */
 		this.spawnCoordinates = { x: 0, y: 0, z: 0 };
 
@@ -115,7 +115,7 @@ class World {
 
 		const tickingFunctions = [
 			{ enabled: tickingConfig.event, function: this.tickEvent },
-			{ enabled: tickingConfig.worldTime, function: this.tickWorldTime },
+			{ enabled: tickingConfig.time, function: this.tickTime },
 			{ enabled: tickingConfig.void, function: this.tickVoidDamage },
 			{ enabled: tickingConfig.regeneration, function: this.tickRegeneration },
 			{ enabled: tickingConfig.starvationDamage, function: this.tickStarvationDamage },
@@ -167,7 +167,7 @@ class World {
 	/**
 	 * Updates the world time
 	 */
-	tickWorldTime = () => {
+	tickTime = () => {
 		time += 10;
 
 		this.emitServerEvent("serverTimeTick");
@@ -241,7 +241,7 @@ class World {
 	 * NOTE: This can be spoofed by a hacked client.
 	 *
 	 * @param {import("Frog").Player} player - The player object.
-	 * @param {import("Frog").Coordinate} position - The position where the fall occurred.
+	 * @param {import("Frog").Vec3} position - The position where the fall occurred.
 	 * @async
 	 */
 	async handleFallDamage(player, position) {

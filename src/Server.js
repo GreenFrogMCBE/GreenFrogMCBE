@@ -49,25 +49,36 @@ let server = null;
  * @private
  */
 async function initializeServer() {
-	createDirectories();
 	console.clear();
+
+	createDirectories();
 	logStartupMessages();
+
 	checkNodeJSVersion();
 	checkRenderDistance();
-	setupUncaughtExceptionHandler();
+
+	setupHandlers();
+
 	await PluginLoader.loadPlugins();
 	await CommandManager.loadCommands();
 	await ConsoleCommandSender.start();
+
 	initDebug();
 }
 
 /**
- * Sets up an uncaught exception handler to catch critical errors
+ * Sets up the `uncaughtException` and the `SIGINT` handlers
  *
  * @private
  */
-function setupUncaughtExceptionHandler() {
-	process.on("uncaughtException", (err) => handleCriticalError(err));
+function setupHandlers() {
+	process.on("uncaughtException", (error) => {
+		handleCriticalError(error);
+	});
+
+	process.on("SIGINT", async () => {
+		Frog.shutdownServer();
+	});
 }
 
 /**
@@ -190,7 +201,9 @@ async function listen() {
 		offlineMode,
 	} = Frog.config.serverInfo;
 
-	const offline = process.env.TEST || offlineMode;
+	const offline =
+		process.env.TEST ||
+		offlineMode;
 
 	try {
 		server = frogProtocol.createServer({
@@ -214,11 +227,12 @@ async function listen() {
 		Frog.server = server;
 		Frog.eventEmitter.emit("serverListen");
 
-		Language.getKey("network.server.listening.success"
-			.replace(
-				"%s",
-				`/${host}:${port}`
-			)
+		Logger.info(
+			Language.getKey("network.server.listening.success")
+				.replace(
+					"%s",
+					`/${host}:${port}`
+				)
 		);
 	} catch (error) {
 		Logger.error(
