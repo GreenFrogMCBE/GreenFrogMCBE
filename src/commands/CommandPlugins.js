@@ -24,7 +24,7 @@ const { getKey } = require("../utils/Language");
 /**
  * A command that all the plugin this server uses
  */
-class CommandPl extends Command {
+class CommandPlugins extends Command {
 	name = getKey("commands.plugins.name");
 	description = getKey("commands.plugins.description");
 	aliases = getKey("commands.plugins.aliases.pl");
@@ -42,4 +42,4 @@ class CommandPl extends Command {
 	}
 }
 
-module.exports = CommandPl;
+module.exports = CommandPlugins;

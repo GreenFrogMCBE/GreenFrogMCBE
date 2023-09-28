@@ -34,7 +34,7 @@ function areCoordinatesValid(x, y, z) {
 /**
  * A command that shows the sender to other players
  */
-class CommandTp extends Command {
+class CommandTeleport extends Command {
 	name = getKey("commands.teleport.name");
 	description = getKey("commands.teleport.description");
 	aliases = [getKey("commands.teleport.aliases.tp")];
@@ -145,4 +145,4 @@ class CommandTp extends Command {
 	}
 }
 
-module.exports = CommandTp;
+module.exports = CommandTeleport;
