@@ -47,6 +47,13 @@ class CommandKill extends Command {
 	description = getKey("commands.kill.description");
 	minArgs = 0;
 	requiresOp = true;
+	args = [
+		{
+			name: "which",
+			type: "string",
+			optional: true
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

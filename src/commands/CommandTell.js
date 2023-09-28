@@ -31,6 +31,18 @@ class CommandTell extends Command {
 		getKey("commands.tell.aliases.msg")
 	];
 	minArgs = 2;
+	args = [
+		{
+			name: "player",
+			type: "target",
+			optional: false,
+		},
+		{
+			name: "message",
+			type: "string",
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

@@ -66,8 +66,9 @@ module.exports = {
 	 * @param {import("Frog").Player} client
 	 * @param {string} name - The name of the new command.
 	 * @param {string} description - The description of the command.
+	 * @param {{ name: string; type: 'int' | 'float' | 'value' | 'wildcard_int' | 'operator' | 'command_operator' | 'target' | 'wildcard_target' | 'file_path' | 'integer_range' | 'equipment_slot' | 'string' | 'block_position' | 'position' | 'message' | 'raw_text' | 'json' | 'block_states' | 'command'; optional: boolean; }[]} 
 	 */
-	addCommand(client, name, description) {
+	addCommand(client, name, description, args) {
 		if (name === getKey("commands.help.name") || name === "?") return; // Ignore /help and /? because they are overridden by the client
 
 		client.commands.command_data.push({
@@ -80,12 +81,12 @@ module.exports = {
 			overloads: [
 				{
 					chaining: false,
-					parameters: [
-						{
-							parameter_name: "args",
-							value_type: "string",
+					parameters: args?.map((v) => {
+						return {
+							parameter_name: v.name,
+							value_type: v.type,
 							enum_type: "valid",
-							optional: false,
+							optional: v.optional,
 							options: {
 								unused: 0,
 								collapse_enum: 0,
@@ -93,8 +94,8 @@ module.exports = {
 								as_chained_command: 0,
 								unknown2: 0
 							}
-						}
-					]
+						};
+					}) || [],
 				}
 			],
 		});

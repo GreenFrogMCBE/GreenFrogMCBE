@@ -28,6 +28,18 @@ class CommandGamemode extends Command {
 	maxArg = 1;
 	minArg = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "player",
+			type: "target",
+			optional: false,
+		},
+		{
+			name: "mode",
+			type: "string",
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player
