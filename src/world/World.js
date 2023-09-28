@@ -115,7 +115,7 @@ class World {
 
 		const tickingFunctions = [
 			{ enabled: tickingConfig.event, function: this.tickEvent },
-			{ enabled: tickingConfig.worldTime, function: this.tickWorldTime },
+			{ enabled: tickingConfig.time, function: this.tickTime },
 			{ enabled: tickingConfig.void, function: this.tickVoidDamage },
 			{ enabled: tickingConfig.regeneration, function: this.tickRegeneration },
 			{ enabled: tickingConfig.starvationDamage, function: this.tickStarvationDamage },
@@ -167,7 +167,7 @@ class World {
 	/**
 	 * Updates the world time
 	 */
-	tickWorldTime = () => {
+	tickTime = () => {
 		time += 10;
 
 		this.emitServerEvent("serverTimeTick");

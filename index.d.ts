@@ -123,7 +123,7 @@ declare module "Frog" {
 			};
 			ticking: {
 				event: boolean;
-				worldTime: boolean;
+				time: boolean;
 				void: boolean;
 				regeneration: boolean;
 				starvationDamage: boolean;
