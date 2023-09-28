@@ -201,7 +201,9 @@ async function listen() {
 		offlineMode,
 	} = Frog.config.serverInfo;
 
-	const offline = process.env.TEST || offlineMode;
+	const offline =
+		process.env.TEST ||
+		offlineMode;
 
 	try {
 		server = frogProtocol.createServer({
@@ -225,11 +227,12 @@ async function listen() {
 		Frog.server = server;
 		Frog.eventEmitter.emit("serverListen");
 
-		Language.getKey("network.server.listening.success"
-			.replace(
-				"%s",
-				`/${host}:${port}`
-			)
+		Logger.info(
+			Language.getKey("network.server.listening.success")
+				.replace(
+					"%s",
+					`/${host}:${port}`
+				)
 		);
 	} catch (error) {
 		Logger.error(
