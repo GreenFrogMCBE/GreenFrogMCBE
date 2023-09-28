@@ -20,7 +20,7 @@ const LoggingException = require("./exceptions/LoggingException");
 
 module.exports = {
 	/**
-	 * This array contains all logged messages
+	 * This array contains all the logged messages
 	 * @type {import("Frog").LogMessage[]}
 	 */
 	messages: [],
@@ -38,10 +38,16 @@ module.exports = {
 	log(levelName, color, message, consoleLoggingLevel) {
 		const Frog = require("../Frog");
 
-		const date = new Date().toLocaleString().replace(",", "").toUpperCase();
+		const date = new Date()
+			.toLocaleString()
+			.replace(",", "")
+			.toUpperCase();
 
 		if (!console[consoleLoggingLevel]) {
-			throw new LoggingException(getKey("exceptions.logger.invalidType").replace("%s", consoleLoggingLevel));
+			throw new LoggingException(
+				getKey("exceptions.logger.invalidType")
+					.replace("%s", consoleLoggingLevel)
+			);
 		}
 
 		let shouldLogMessage = true;
@@ -65,13 +71,15 @@ module.exports = {
 			color,
 		});
 
-		console[consoleLoggingLevel](convertConsoleColor(`${date} \x1b[${color}m${levelName}\x1b[0m | ${message}`));
+		console[consoleLoggingLevel](
+			convertConsoleColor(`${date} \x1b[${color}m${levelName}\x1b[0m | ${message}`)
+		);
 	},
 
 	/**
 	 * Logs a message to the console as info.
 	 *
-	 * @param {string} message Log message.
+	 * @param {string} message- The log message.
 	 */
 	info(message) {
 		this.log(getKey("logger.info"), 32, message, "info");
@@ -80,7 +88,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as a warning.
 	 *
-	 * @param {string} message Log message.
+	 * @param {string} message- The log message.
 	 */
 	warning(message) {
 		this.log(getKey("logger.warn"), 33, message, "warn");
@@ -89,7 +97,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as an error.
 	 *
-	 * @param {string} message Log message.
+	 * @param {string} message- The log message.
 	 */
 	error(message) {
 		this.log(getKey("logger.error"), 31, message, "error");
@@ -99,7 +107,7 @@ module.exports = {
 	 * Logs a message to the console as debug.
 	 * Requires debug to be enabled in the server settings.
 	 *
-	 * @param {string} message Log message.
+	 * @param {string} message- The log message.
 	 */
 	debug(message) {
 		const Frog = require("../Frog");

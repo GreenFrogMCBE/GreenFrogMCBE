@@ -23,50 +23,38 @@ const { getKey } = require("./utils/Language");
 const Logger = require("./utils/Logger");
 
 const langParser = require("@kotinash/lang-parser");
-const eventEmitter = require("events");
 const yaml = require("js-yaml");
+const events = require("events");
 const path = require("path");
 const fs = require("fs");
 
-/** @returns {import("frog-protocol").Server} */
-let _server;
-
-/** @returns {EventEmitter} */
-const _eventEmitter = new eventEmitter();
-
-/** @returns {import("Frog").Config} */
+/**
+ * Returns the configuration file
+ *
+ * @returns {import("Frog").Config}
+ */
 function getConfig() {
 	const configData = yaml.load(fs.readFileSync("config.yml", "utf8"));
 
 	return configData;
 }
 
-/** @returns {import("Frog").Language} */
+/**
+ * Returns the language file
+ *
+ * @returns {import("Frog").Language}
+ */
 function getLang() {
-	const config = getConfig();
-
-	const langFilePath = path.join(__dirname, `lang/${config.chat.lang}.lang`);
+	const langFilePath = path.join(__dirname, `lang/${getConfig().chat.lang}.lang`);
 	const langFileContent = fs.readFileSync(langFilePath, "utf8");
 	const lang = langParser.parseRaw(langFileContent);
-
+	
 	return lang;
 }
 
+let server;
+
 module.exports = {
-	/**
-	 * Returns if the server is in debug mode
-	 *
-	 * @returns {boolean}
-	 */
-	isDebug: process.env.DEBUG || process.argv.includes("--debug") || getConfig().dev.debug,
-
-	/**
-	 * Returns the server object
-	 *
-	 * @returns {import("frog-protocol").Server}
-	 */
-	server: _server,
-
 	/**
 	 * Returns the configuration file
 	 *
@@ -82,13 +70,27 @@ module.exports = {
 	lang: getLang(),
 
 	/**
+	 * Returns if the server is in debug mode
+	 *
+	 * @returns {boolean}
+	 */
+	isDebug: process.env.DEBUG || process.argv.includes("--debug") || getConfig().dev.debug,
+
+	/**
+	 * Returns the server object
+	 *
+	 * @returns {import("frog-protocol").Server}
+	 */
+	server,
+
+	/**
 	 * Returns the event emitter for plugins
 	 * to listen for, and for server to execute
 	 * events
 	 *
 	 * @type {import("Frog").EventEmitter}
 	 */
-	eventEmitter: _eventEmitter,
+	eventEmitter: new events(),
 
 	/**
 	 * Returns the release data
@@ -96,10 +98,37 @@ module.exports = {
 	 * @type {import("Frog").ReleaseData}
 	 */
 	releaseData: {
-		minorServerVersion: "3.7.1",
+		minorServerVersion: "3.8",
 		majorServerVersion: "3.0",
-		versionDescription: "Code improvements",
+		versionDescription: "Updated to 1.20.30",
 		apiVersion: "3.0",
+	},
+
+	/**
+	 * Returns the server as a player object
+	 *
+	 * @returns {import("Frog").Player}
+	 */
+	asPlayer: {
+		username: "Server",
+		network: {
+			address: getConfig().network.host,
+			port: getConfig().network.port,
+		},
+		permissions: {
+			op: true,
+			isConsole: true,
+		},
+		sendMessage: (message) => {
+			Logger.info(message);
+		},
+	},
+
+	directories: {
+		opFile: "./ops.yml",
+		worldFolder: "./world",
+		pluginsFolder: "./plugins",
+		pluginDataFolders: "./pluginData"
 	},
 
 	/**
@@ -116,11 +145,10 @@ module.exports = {
 	},
 
 	/**
-	 * Shutdowns the server correctly
-	 * Also it calls `onShutdown()` in every
-	 * single plugin that is loaded
+	 * Shutdowns the server
 	 *
 	 * @param {string} shutdownMessage
+	 * @async
 	 */
 	async shutdownServer(shutdownMessage = getKey("kickMessages.serverClosed")) {
 		let shouldShutdown = true;
@@ -135,10 +163,23 @@ module.exports = {
 
 		Logger.info(getKey("server.shuttingDown"));
 
+		// Shutdown the bedrock-protocol server and disconnect all clients
 		this.server.close(shutdownMessage);
-		ConsoleCommandSender.closeConsole();
-		PluginLoader.unloadPlugins();
 
+		// Prevent the usage of the console when the server is shutting down
+		ConsoleCommandSender.closed = true;
+
+		// Unload (disable) all plugins
+		await PluginLoader.unloadPlugins();
+
+		// And finally, exit the process
 		process.exit(this.config.dev.exitCodes.successful);
+	},
+
+	/**
+	 * Crashes the server
+	 */
+	crash() {
+		process.exit(this.config.dev.exitCodes.crash);
 	},
 };

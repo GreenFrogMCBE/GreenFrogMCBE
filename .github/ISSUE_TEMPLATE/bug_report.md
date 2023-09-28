@@ -1,18 +1,14 @@
 ---
 name: Bug report
-about: Report a bug/issue or something broken
-title: ""
+about: Report a bug, issue or something broken
+title: "Bug"
 labels: Bug
 assignees: ""
 ---
 
--   [ ] I checked if the bug still happens in the latest version of Greenfrog
--   [ ] I am sure that this isn't caused by other plugins
+- [ ] I can confirm that this bug still persists in the most recent release of GreenFrogMCBE.
+- [ ] I can confirm that this bug isn't caused by plugins
 
-## What is broken
+## What's the issue?
 
-[Enter your answer]
-
-## Error (if it is logged in the server's console)
-
-[Enter your error, leave blank if it isn't logged]
+[Please provide a detailed description of the problem]

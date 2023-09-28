@@ -24,15 +24,15 @@ module.exports = {
 	 * Returns the content of a language file.
 	 *
 	 * @param {string} lang - The language code
-	 * @returns {import("Frog").Language | string}  The content of the language file
-	 * @throws {LanguageException} If the language file is not found or is not valid JSON
+	 * @returns {import("Frog").Language} - The content of the language file
+	 * @throws {LanguageException} - If the language file is not found or is not valid JSON
 	 */
 	getLanguage(lang) {
 		const langPath = path.resolve(__dirname, "../lang");
 		const langFile = path.join(langPath, `${lang}.lang`);
 
 		if (!fs.existsSync(langFile)) {
-			throw new LanguageException("Language file does not exist");
+			throw new LanguageException("Language file doesn't exist");
 		}
 
 		const langContent = fs.readFileSync(langFile, "utf8");
@@ -44,14 +44,16 @@ module.exports = {
 	 * Returns a specific key from the current language file
 	 *
 	 * @param {string} key - The key to retrieve
-	 * @returns {string} The value associated with the key
+	 * @returns {string} The value of the key
 	 */
 	getKey(key) {
-		const langConfig = require("../Frog").config.chat.lang;
+		const Frog = require("../Frog");
+
+		const langConfig = Frog.config.chat.lang;
 		const langContent = module.exports.getLanguage(langConfig);
-		const langParsed = langParser.parseRaw(langContent.toString());
+		const langParsed = langParser.parseRaw(langContent);
 		const langKey = langParser.getKey(key, langParsed);
 
-		return langKey.toString();
-	},
+		return langKey;
+	}
 };

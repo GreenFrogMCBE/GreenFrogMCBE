@@ -76,6 +76,7 @@ class CommandGamemode extends Command {
 
 		if (!gamemode) {
 			player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s", args[0]));
+
 			return;
 		}
 

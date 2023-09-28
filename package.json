@@ -11,7 +11,7 @@
     "dev": "nodemon --signal SIGINT index.js --debug",
     "generate-license-headers": "node tools/generate-license-headers.js",
     "test": "cd test && npx mocha main.test.js",
-    "plugin-structure": "node tools/generate-base-plugin.js"
+    "make-plugin": "node tools/generate-base-plugin.js"
   },
   "dependencies": {
     "@harmonytf/smart-buffer": "4.2.4",
