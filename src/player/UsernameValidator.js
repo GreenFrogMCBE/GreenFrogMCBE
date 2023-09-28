@@ -23,7 +23,8 @@ module.exports = {
 	 * @returns {boolean} Returns true if the username is a duplicate, false otherwise.
 	 */
 	doesUsernameMatchRegex(username) {
-		const regex = /^[a-zA-Z0-9 ]+$/; // Regular expression to match only English letters, spaces and numbers
+		// Regex to match only English letters, spaces and numbers
+		const regex = /^[a-zA-Z0-9 ]+$/;
 
 		return regex.test(username);
 	},
@@ -35,7 +36,12 @@ module.exports = {
 	 * @returns {boolean} Returns true if the username is a duplicate, false otherwise.
 	 */
 	isDuplicate(username) {
-		return PlayerInfo.playersOnline.filter((player) => player.username && player.username == username).length > 0;
+		return PlayerInfo.playersOnline
+			.filter(
+				(player) => player.username &&
+				player.username == username
+			)
+			.length > 0;
 	},
 
 	/**
@@ -45,7 +51,10 @@ module.exports = {
 	 * @returns {boolean} Returns true if the username length is valid, false otherwise.
 	 */
 	isUsernameLengthValid(username) {
-		return !(username.length > 16 || username.length < 3);
+		return !(
+			username.length > 16 ||
+			username.length < 3
+		);
 	},
 
 	/**
@@ -55,6 +64,8 @@ module.exports = {
 	 * @returns {boolean} Returns true if the username is valid, false otherwise.
 	 */
 	isUsernameValid(username) {
-		return !this.isDuplicate(username) && this.isUsernameLengthValid(username) && this.doesUsernameMatchRegex(username);
+		return !this.isDuplicate(username)
+			&& this.isUsernameLengthValid(username)
+			&& this.doesUsernameMatchRegex(username);
 	},
 };
