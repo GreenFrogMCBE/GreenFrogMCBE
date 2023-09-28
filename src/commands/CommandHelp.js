@@ -30,6 +30,7 @@ class CommandHelp extends Command {
 	];
 	minArgs = 0;
 	maxArgs = 0;
+	args = [];
 
 	/**
 	 * @param {import("Frog").Player} player

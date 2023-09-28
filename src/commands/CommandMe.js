@@ -26,6 +26,13 @@ class CommandMe extends Command {
 	name = getKey("commands.me.name");
 	description = getKey("commands.me.description");
 	minArgs = 1;
+	args = [
+		{
+			name: "player",
+			type: "target",
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

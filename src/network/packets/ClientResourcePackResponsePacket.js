@@ -54,14 +54,14 @@ const World = require("../../world/World");
 
 const Biome = require("../../world/types/Biome");
 
-const biomeDefinitions = require("../../resources/biomeDefinitions.json").raw_payload;
-const creativeContentItems = require("../../resources/creativeContent.json").items;
-const availableEntities = require("../../resources/availableEntities.json").nbt;
-const features = require("../../resources/featureRegistry.json").features;
-const entityData = require("../../resources/entityData.json").entityData;
-const trimMaterials = require("../../resources/trimData.json").materials;
-const itemStates = require("../../resources/itemStates.json").itemStates;
-const trimPatterns = require("../../resources/trimData.json").patterns;
+const biomeDefinitions = require("../../resources/json/biomeDefinitions.json").raw_payload;
+const creativeContentItems = require("../../resources/json/creativeContent.json").items;
+const availableEntities = require("../../resources/json/availableEntities.json").nbt;
+const features = require("../../resources/json/featureRegistry.json").features;
+const entityData = require("../../resources/json/entityData.json").entityData;
+const trimMaterials = require("../../resources/json/trimData.json").materials;
+const itemStates = require("../../resources/json/itemStates.json").itemStates;
+const trimPatterns = require("../../resources/json/trimData.json").patterns;
 const customItems = require("../../../world/custom_items.json").items;
 const gamerules = require("../../../world/gamerules.json").gamerules;
 
@@ -172,14 +172,14 @@ class ClientResourcePackResponsePacket extends Packet {
 				ClientCommandManager.init(player);
 
 				for (const command of ServerCommandManager.commands) {
-					const { requiresOp, name, description, aliases } = command;
+					const { requiresOp, name, description, aliases, args } = command;
 
 					if (!Frog.config.chat.features.commands && (!requiresOp || player.permissions.op)) {
-						ClientCommandManager.addCommand(player, name, description);
+						ClientCommandManager.addCommand(player, name, description, args);
 
 						if (aliases) {
 							for (const alias of aliases) {
-								ClientCommandManager.addCommand(player, alias, description);
+								ClientCommandManager.addCommand(player, alias, description, args);
 							}
 						}
 					}

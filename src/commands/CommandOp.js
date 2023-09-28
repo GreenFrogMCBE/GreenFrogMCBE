@@ -28,6 +28,13 @@ class CommandOp extends Command {
 	minArgs = 1;
 	maxArgs = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "player",
+			type: "target",
+			optional: true
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

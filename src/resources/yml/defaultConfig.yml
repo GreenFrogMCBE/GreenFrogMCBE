@@ -20,7 +20,7 @@ chat:
         chat: false # Should chat be disabled?
         commands: false # Should commands be disabled? This will won't affect console commands
     blockInvalidPackets:
-        messages: true # Prevents playersOnline.from using colors in chat or spam the chat with messages that are longer than 256 chars
+        messages: true # Prevents players from using invalid characters or messages with invalid length
         commands: true # Same as "messages" but for commands
 query: # Query is a UDP protocol for querying server properties. More info at https://wiki.vg/Query
     enabled: true
@@ -55,7 +55,7 @@ world:
         clientSide: 64
     ticking:
         event: true # Should ServerTickEvent be enabled?
-        worldTime: true # Should time update be server side?
+        time: true # Should time update be server side?
         void: true # Should people that are in void take damage?
         regeneration: true # Should people in survival mode regenerate their health?
         starvationDamage: true # Should people take damage if their food level is 0?

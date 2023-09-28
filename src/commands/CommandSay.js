@@ -25,8 +25,15 @@ const Frog = require("../Frog");
 class CommandSay extends Command {
 	name = getKey("commands.say.name");
 	description = getKey("commands.say.description");
-	minArgs = 0;
+	minArgs = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "message",
+			type: "string",
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

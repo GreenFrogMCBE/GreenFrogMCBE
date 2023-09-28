@@ -20,7 +20,7 @@ class ServerSetEntityMotion extends Packet {
 
 	/** @type {number | undefined} */
 	runtime_entity_id;
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {import("Frog").Vec3 | undefined} */
 	velocity;
 
 	/**

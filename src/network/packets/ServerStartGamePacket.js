@@ -26,9 +26,9 @@ class ServerStartGamePacket extends Packet {
 	runtime_entity_id;
 	/** @type {string | undefined} */
 	player_gamemode;
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {import("Frog").Vec3 | undefined} */
 	player_position;
-	/** @type {import("Frog").Rotation | undefined} */
+	/** @type {import("Frog").Vec2 | undefined} */
 	rotation;
 	/** @type {import("Frog").WorldSeed | undefined} */
 	seed;
@@ -44,7 +44,7 @@ class ServerStartGamePacket extends Packet {
 	world_gamemode;
 	/** @type {import("Frog").Difficulty | undefined} */
 	difficulty;
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {import("Frog").Vec3 | undefined} */
 	spawn_position;
 	/** @type {any[] | undefined} */
 	gamerules;

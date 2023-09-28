@@ -27,6 +27,13 @@ class CommandDeop extends Command {
 	description = getKey("commands.deop.description");
 	minArgs = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "player",
+			type: "target",
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

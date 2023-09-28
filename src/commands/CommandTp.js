@@ -41,6 +41,28 @@ class CommandTp extends Command {
 	minArgs = 1;
 	maxArgs = 4;
 	requiresOp = true;
+	args = [
+		{
+			name: "player",
+			type: "target",
+			optional: false,
+		},
+		{
+			name: "x",
+			type: "string",
+			optional: false,
+		},
+		{
+			name: "y",
+			type: "string",
+			optional: false,
+		},
+		{
+			name: "z",
+			type: "string",
+			optional: false,
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player
