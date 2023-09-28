@@ -18,7 +18,7 @@ const Packet = require("./Packet");
 class ServerNetworkChunkPublisherUpdatePacket extends Packet {
 	name = "network_chunk_publisher_update";
 
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {import("Frog").Vec3 | undefined} */
 	coordinates;
 	/** @type {number | undefined} */
 	radius;

@@ -20,7 +20,7 @@ class ServerChangeDimensionPacket extends Packet {
 
 	/** @type {import("Frog").DimensionLegacy | undefined} */
 	dimension;
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {import("Frog").Vec3 | undefined} */
 	position;
 	/** @type {boolean | undefined} */
 	respawn;

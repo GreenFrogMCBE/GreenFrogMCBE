@@ -20,7 +20,7 @@ class ServerContainerOpenPacket extends Packet {
 
 	/** @type {import("Frog").WindowId | undefined} */
 	window_id;
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {import("Frog").Vec3 | undefined} */
 	coordinates;
 	/** @type {import("Frog").WindowType | undefined} */
 	window_type;

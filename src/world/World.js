@@ -37,7 +37,7 @@ class World {
 		this.name = "World";
 
 		/**
-		 * @type {import("Frog").Coordinate}
+		 * @type {import("Frog").Vec3}
 		 */
 		this.spawnCoordinates = { x: 0, y: 0, z: 0 };
 
@@ -241,7 +241,7 @@ class World {
 	 * NOTE: This can be spoofed by a hacked client.
 	 *
 	 * @param {import("Frog").Player} player - The player object.
-	 * @param {import("Frog").Coordinate} position - The position where the fall occurred.
+	 * @param {import("Frog").Vec3} position - The position where the fall occurred.
 	 * @async
 	 */
 	async handleFallDamage(player, position) {

@@ -18,13 +18,13 @@ const Packet = require("./Packet");
 class ServerMoveEntityDataPacket extends Packet {
 	name = "move_entity_delta";
 
-	/** @type {import("Frog").Coordinate } */
+	/** @type {import("Frog").Vec3 } */
 	coordinates = { x: 0, y: 0, z: 0 };
 	/** @type {number | undefined} */
 	runtime_entity_id;
 	/** @type {import("Frog").EntityMovementFlags | undefined} */
 	flags;
-	/** @type {import("Frog").Coordinate} */
+	/** @type {import("Frog").Vec3 } */
 	coordinatesRotation = { x: 0, y: 0, z: 0 };
 
 	/**
