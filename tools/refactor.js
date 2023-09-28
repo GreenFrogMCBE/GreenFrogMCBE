@@ -61,13 +61,25 @@ async function traverseDirectory(dirPath, replacements) {
 
 		if (entry.isDirectory()) {
 			await traverseDirectory(entryPath, replacements);
-		} else if (entry.isFile() && (entry.name.includes(".js") || entry.name.includes(".ts") || entry.name.includes(".json") || entry.name.includes(".yml"))) {
+		} else if (
+			entry.isFile() &&
+			(
+				entry.name.includes(".js") ||
+				entry.name.includes(".ts") ||
+				entry.name.includes(".json") ||
+				entry.name.includes(".yml")
+			)
+		) {
 			await replaceInFile(entryPath, replacements);
 		}
 	}));
 }
 
-const replacements = [[process.argv[2], process.argv[3]]];
+const replacements = [
+	[
+		process.argv[2], process.argv[3]
+	]
+];
 
 traverseDirectory(rootDir, replacements);
 
