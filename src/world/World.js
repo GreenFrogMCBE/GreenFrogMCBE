@@ -15,10 +15,14 @@
  */
 const ServerNetworkChunkPublisherUpdatePacket = require("../network/packets/ServerNetworkChunkPublisherUpdatePacket");
 const ServerUpdateBlockPacket = require("../network/packets/ServerUpdateBlockPacket");
+const ServerAddEntityPacket = require("../network/packets/ServerAddEntityPacket");
 
 const DamageCause = require("../player/types/DamageCause");
 const WorldGenerator = require("./types/WorldGenerator");
 const Gamemode = require("../player/types/Gamemode");
+
+const entityAttributes = require("../../src/resources/json/entityAttributes.json");
+const entityMetadata = require("../../src/resources/json/entityMetadata.json");
 
 const PlayerInfo = require("../player/PlayerInfo");
 
@@ -225,8 +229,8 @@ class World {
 			}
 
 			if (typeof min === "number" && posY <= min) {
-				const invulnerable = 
-					client.gamemode === Gamemode.CREATIVE || 
+				const invulnerable =
+					client.gamemode === Gamemode.CREATIVE ||
 					client.gamemode === Gamemode.SPECTATOR;
 
 				if (!invulnerable) {
@@ -281,6 +285,40 @@ class World {
 		Frog.eventEmitter.emit(eventName, {
 			world: this.getWorldData()
 		});
+	}
+
+	/**
+	 * Spawns an entity in the world
+	 * 
+	 * @param {string} entityName 
+	 * @param {number} x 
+	 * @param {number} y 
+	 * @param {number} z 
+	 * @param {number} yaw 
+	 * @param {number} pitch 
+	 */
+	spawnEntity(entityName, x, y, z, yaw = 0, pitch = 0) {
+		const entityId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
+			.toString();
+
+		const addEntityPacket = new ServerAddEntityPacket();
+		addEntityPacket.unique_id = entityId;
+		addEntityPacket.runtime_id = entityId;
+		addEntityPacket.entity_type = entityName;
+		addEntityPacket.position = { x, y, z };
+		addEntityPacket.velocity = { x: 0, y: 0, z: 0 };
+		addEntityPacket.pitch = pitch;
+		addEntityPacket.yaw = yaw;
+		addEntityPacket.head_yaw = 0;
+		addEntityPacket.body_yaw = 0;
+		addEntityPacket.attributes = entityAttributes;
+		addEntityPacket.metadata = entityMetadata;
+		addEntityPacket.properties = { ints: [], floats: [] };
+		addEntityPacket.links = [];
+
+		for (const player of PlayerInfo.playersOnline) {
+			addEntityPacket.writePacket(player);
+		}
 	}
 
 	/**

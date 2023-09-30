@@ -456,7 +456,7 @@ declare module "Frog" {
 	export type Item = {
 		network_id: number;
 		count?: number;
-		metadata?: any;
+		EntityMetadata?: any;
 		has_stack_id?: boolean;
 		stack_id?: number;
 		block_runtime_id?: number;
@@ -572,11 +572,22 @@ declare module "Frog" {
 		spawnCoordinates: Vec3;
 		generator: string;
 		time: number;
-		handleFallDamage(player: Player, coordinates: Vec3): void;
 
-		// Passing undefined as a parameter will result in it being converted to 0
-		breakBlock(x: number | undefined, y: number | undefined, z: number | undefined): void;
-		placeBlock(x: number | undefined, y: number | undefined, z: number | undefined, runtime_id: number | undefined): void;
+		placeBlock(x: number, y: number, z: number, id: number): void;
+		sendBlockUpdatePacket(player: Player, x: number, y: number, z: number, id: number): void;
+		breakBlock(x: number, y: number, z: number): void;
+		tick(): void;
+		startHungerLossLoop(): void;
+		startNetworkChunkPublisherPacketSendingLoop(): void;
+		tickEvent: () => void;
+		tickTime: () => void;
+		tickRegeneration: () => void;
+		tickStarvationDamage: () => void;
+		tickVoidDamage: () => void;
+		handleFallDamage(player: Player, position: Vec3): Promise<void>;
+		emitServerEvent(eventName: string): void;
+		spawnEntity(entityName: string, x: number, y: number, z: number, yaw?: number, pitch?: number): void;
+		getWorldData(): World;
 	};
 
 	export type NBTType = "compoud";
@@ -819,6 +830,105 @@ declare module "Frog" {
 		"info" |
 		"warn" |
 		"error"
+
+	export type EntityAttributeName =
+		"minecraft:luck" |
+		"minecraft:health" |
+		"minecraft:absorption" |
+		"minecraft:movement" |
+		"minecraft:underwater_movement" |
+		"minecraft:lava_movement"
+
+	export type EntityAttribute = {
+		name: EntityAttributeName;
+		min: number;
+		value: number;
+		max: number;
+	}
+
+	export type EntityMetadataKey =
+		"flags" |
+		"health" |
+		"variant" |
+		"color" |
+		"nametag" |
+		"owner_eid" |
+		"target_eid" |
+		"air" |
+		"potion_color" |
+		"potion_ambient" |
+		"jump_duration" |
+		"charge_amount" |
+		"lead_holder_eid" |
+		"scale" |
+		"interactive_tag" |
+		"max_airdata_max_air" |
+		"mark_variant" |
+		"container_type" |
+		"container_base_size" |
+		"container_extra_slots_per_strength" |
+		"boundingbox_width" |
+		"boundingbox_height" |
+		"rider_seat_position" |
+		"rider_rotation_locked" |
+		"rider_max_rotation" |
+		"rider_min_rotation" |
+		"rider_rotation_offset" |
+		"has_command_block" |
+		"command_block_command" |
+		"command_block_last_output" |
+		"command_block_track_output" |
+		"controlling_rider_seat_number" |
+		"strength" |
+		"max_strength" |
+		"spell_casting_color" |
+		"limited_life" |
+		"always_show_nametag" |
+		"color_2" |
+		"eating_counter" |
+		"flags_extended" |
+		"trade_tier" |
+		"max_trade_tier" |
+		"trade_experience" |
+		"skin_id" |
+		"command_block_tick_delay" |
+		"command_block_execute_on_first_tick" |
+		"ambient_sound_interval" |
+		"ambient_sound_interval_range" |
+		"ambient_sound_event_name" |
+		"fall_damage_multiplier" |
+		"can_ride_target" |
+		"low_tier_cured_discount" |
+		"high_tier_cured_discount" |
+		"nearby_cured_discount" |
+		"nearby_cured_discount_timestamp" |
+		"hitbox" |
+		"is_buoyant" |
+		"base_runtime_id" |
+		"update_properties" |
+		"movement_sound_distance_offset" |
+		"heartbeat_interval_ticks"
+
+	export type EntityMetadataType =
+		"long" |
+		"int" |
+		"byte" |
+		"string" |
+		"short" |
+		"float" |
+		"vec3f" |
+		"compound"
+
+	export type EntityMetadataValue =
+		string |
+		number |
+		object
+
+	export type EntityMetadata = {
+		key: EntityMetadataKey,
+		type: EntityMetadataType,
+		value: EntityMetadataValue
+	}
 
 	export type ValueOf<T> = T[keyof T];
 
@@ -1376,7 +1486,7 @@ declare module "Frog" {
 		setOp(status: boolean): void;
 		sendPlayStatus(playStatus: PlayStatus, terminateConnection?: boolean): void;
 		openContainer(): void;
-		setContainerItem(itemId: number, blockRuntimeId: number, slot?: number, hasMetadata?: boolean, hasStackId?: boolean, stackId?: number, count?: number, extra?: ItemExtraData): void;
+		setContainerItem(itemId: number, blockRuntimeId: number, slot?: number, hasEntityMetadata?: boolean, hasStackId?: boolean, stackId?: number, count?: number, extra?: ItemExtraData): void;
 		_queue(packetName: string, packetData: any): void;
 	}
 }
