@@ -50,8 +50,8 @@ class ServerAddEntityPacket extends Packet {
 	links;
 
 	/**
- * @param {import("Frog").Player} player
- */
+     * @param {import("Frog").Player} player
+     */
 	writePacket(player) {
 		player.queue(this.name, {
 			unique_id: this.unique_id,
