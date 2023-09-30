@@ -574,8 +574,8 @@ declare module "Frog" {
 		time: number;
 
 		placeBlock(x: number, y: number, z: number, id: number): void;
-		sendBlockUpdatePacket(player: Player, x: number, y: number, z: number, id: number): void;
 		breakBlock(x: number, y: number, z: number): void;
+		sendBlockUpdatePacket(player: Player, x: number, y: number, z: number, id: number): void;
 		tick(): void;
 		startHungerLossLoop(): void;
 		startNetworkChunkPublisherPacketSendingLoop(): void;
