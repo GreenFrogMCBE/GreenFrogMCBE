@@ -92,7 +92,8 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 	onShutdown() {
 		// ...
 	},
-};`;
+};
+`;
 
 	if (useTypeScript) {
 		try {
@@ -115,7 +116,8 @@ export function onLoad(): void {
  */
 export function onShutdown(): void {
     // ...
-}`;
+}
+`;
 		const tsConfig = {
 			compilerOptions: {
 				strict: true,
