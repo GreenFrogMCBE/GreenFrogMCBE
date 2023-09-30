@@ -586,7 +586,8 @@ declare module "Frog" {
 		tickVoidDamage: () => void;
 		handleFallDamage(player: Player, position: Vec3): Promise<void>;
 		emitServerEvent(eventName: string): void;
-		spawnEntity(entityName: string, x: number, y: number, z: number, yaw?: number, pitch?: number): void;
+		spawnEntity(entityName: string, entityId: number, x: number, y: number, z: number, yaw?: number, pitch?: number): void;
+		teleportEntity(entityId: number, x: number, y: number, z: number, rotation_x?: number, rotation_y?: number, rotation_z?: number): void;
 		getWorldData(): World;
 	};
 

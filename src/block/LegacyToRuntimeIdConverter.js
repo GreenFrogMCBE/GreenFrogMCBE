@@ -15,7 +15,7 @@
  */
 const InvalidBlockException = require("../utils/exceptions/InvalidBlockException");
 
-const items = require("../resources/creativeContent.json").items;
+const items = require("../resources/json/creativeContent.json").items;
 
 module.exports = {
 	/**

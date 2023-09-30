@@ -14,6 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerNetworkChunkPublisherUpdatePacket = require("../network/packets/ServerNetworkChunkPublisherUpdatePacket");
+const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
 const ServerUpdateBlockPacket = require("../network/packets/ServerUpdateBlockPacket");
 const ServerAddEntityPacket = require("../network/packets/ServerAddEntityPacket");
 
@@ -291,19 +292,17 @@ class World {
 	 * Spawns an entity in the world
 	 * 
 	 * @param {string} entityName 
+	 * @param {number} entityId
 	 * @param {number} x 
 	 * @param {number} y 
 	 * @param {number} z 
 	 * @param {number} yaw 
 	 * @param {number} pitch 
 	 */
-	spawnEntity(entityName, x, y, z, yaw = 0, pitch = 0) {
-		const entityId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
-			.toString();
-
+	spawnEntity(entityName, entityId, x, y, z, yaw = 0, pitch = 0) {
 		const addEntityPacket = new ServerAddEntityPacket();
-		addEntityPacket.unique_id = entityId;
-		addEntityPacket.runtime_id = entityId;
+		addEntityPacket.unique_id = String(entityId);
+		addEntityPacket.runtime_id = String(entityId);
 		addEntityPacket.entity_type = entityName;
 		addEntityPacket.position = { x, y, z };
 		addEntityPacket.velocity = { x: 0, y: 0, z: 0 };
@@ -318,6 +317,43 @@ class World {
 
 		for (const player of PlayerInfo.playersOnline) {
 			addEntityPacket.writePacket(player);
+		}
+	}
+
+	/**
+	 * Teleports an entity to specific coordinates
+	 * 
+	 * @param {number} entityId 
+	 * @param {number} x 
+	 * @param {number} y 
+	 * @param {number} z 
+	 * @param {number} [rotation_x] 
+	 * @param {number} [rotation_y]
+	 * @param {number} [rotation_z]
+	 */
+	teleportEntity(entityId, x, y, z, rotation_x = 0, rotation_y = 0, rotation_z = 0) {
+		const movePacket = new ServerMoveEntityDataPacket();
+		movePacket.flags = {
+			has_x: true,
+			has_y: true,
+			has_z: true,
+			has_rot_x: false,
+			has_rot_y: false,
+			has_rot_z: false,
+			on_ground: false,
+			teleport: true,
+			force_move: true,
+		};
+		movePacket.runtime_entity_id = String(entityId);
+		movePacket.coordinates.x = x;
+		movePacket.coordinates.y = y;
+		movePacket.coordinates.z = z;
+		movePacket.coordinatesRotation.x = Number(rotation_x);
+		movePacket.coordinatesRotation.y = Number(rotation_y);
+		movePacket.coordinatesRotation.z = Number(rotation_z);
+
+		for (const player of PlayerInfo.playersOnline) {
+			movePacket.writePacket(player);
 		}
 	}
 
