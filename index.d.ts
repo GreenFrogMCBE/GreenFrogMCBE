@@ -50,27 +50,27 @@ declare module "Frog" {
 	export type CommandParameters = {
 		name: string
 		type: 'int' |
-			'float' |
-			'value' |
-			'wildcard_int' |
-			'operator' |
-			'command_operator' |
-			'target' |
-			'wildcard_target' |
-			'file_path' |
-			'integer_range' |
-			'equipment_slot' |
-			'string' |
-			'block_position' |
-			'position' |
-			'message' |
-			'raw_text' |
-			'json' |
-			'block_states' |
-			'command'
+		'float' |
+		'value' |
+		'wildcard_int' |
+		'operator' |
+		'command_operator' |
+		'target' |
+		'wildcard_target' |
+		'file_path' |
+		'integer_range' |
+		'equipment_slot' |
+		'string' |
+		'block_position' |
+		'position' |
+		'message' |
+		'raw_text' |
+		'json' |
+		'block_states' |
+		'command'
 		optional: boolean
 	}[]
-	
+
 	export type RaknetBackend =
 		"raknet-native" |
 		"jsp-raknet" |
@@ -548,16 +548,18 @@ declare module "Frog" {
 		force_move: boolean;
 	};
 
-	export type ResourcePackLink = { // Only used in the resource_packs_info packet
+	// Only used in the resource_packs_info packet
+	export type ResourcePackLink = {
 		id: string,
 		url: string,
 	}
 
-	export type WorldSeed = [number, number]; // Only used in the start_game packet
+	// Only used in the start_game packet
+	export type WorldSeed = [number, number];
 
 	export type PacketData = {
 		name: string;
-		params: *;
+		params: object;
 	};
 
 	export type Packet = {
@@ -1317,7 +1319,7 @@ declare module "Frog" {
 		emit(eventName: Event, listener?: any): void;
 	}
 
-	export interface Player extends Client, OnlinePlayer {
+	export type Player = Client & OnlinePlayer & {
 		username: string;
 		gamemode: string;
 		health: number;
@@ -1366,7 +1368,7 @@ declare module "Frog" {
 		setDifficulty(difficulty: Difficulty): void;
 		setEntityData(data: EntityData): void;
 		setChunkRadius(chunkRadius: number): void;
-		setAttribute(setAttribute: Attribute): void;
+		setAttribute(setAttribute: any): void;
 		setHealth(health: number, cause?: DamageCause): void;
 		setHunger(health: number, cause?: HungerCause): void;
 		setDimension(x: number, y: number, z: number, dimension: DimensionId, respawn?: boolean | undefined): void;
