@@ -456,7 +456,7 @@ declare module "Frog" {
 	export type Item = {
 		network_id: number;
 		count?: number;
-		EntityMetadata?: any;
+		metadata?: any;
 		has_stack_id?: boolean;
 		stack_id?: number;
 		block_runtime_id?: number;
@@ -1486,7 +1486,7 @@ declare module "Frog" {
 		setOp(status: boolean): void;
 		sendPlayStatus(playStatus: PlayStatus, terminateConnection?: boolean): void;
 		openContainer(): void;
-		setContainerItem(itemId: number, blockRuntimeId: number, slot?: number, hasEntityMetadata?: boolean, hasStackId?: boolean, stackId?: number, count?: number, extra?: ItemExtraData): void;
+		setContainerItem(itemId: number, blockRuntimeId: number, slot?: number, hasMetadata?: boolean, hasStackId?: boolean, stackId?: number, count?: number, extra?: ItemExtraData): void;
 		_queue(packetName: string, packetData: any): void;
 	}
 }
