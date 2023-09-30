@@ -903,7 +903,7 @@ declare module "Frog" {
 	export type PacketReadEvent = {
 		player: Player;
 		packet: {
-			packet: PacketParams;
+			packet: PacketData;
 			instance: Packet;
 		};
 		cancel(): void;
@@ -915,7 +915,7 @@ declare module "Frog" {
 
 	export type PlayerAttributeEvent = {
 		player: Player;
-		attribute: Attribute;
+		attribute: any;
 		cancel(): void;
 	};
 
@@ -1035,7 +1035,7 @@ declare module "Frog" {
 
 	export type PlayerSetAttributeEvent = {
 		player: Player;
-		attribute: Attribute;
+		attribute: any;
 		cancel(): void;
 	};
 
