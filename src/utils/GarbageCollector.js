@@ -14,6 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../Frog");
+
 const Logger = require("../utils/Logger");
 
 const PlayerInfo = require("../player/PlayerInfo");
@@ -21,6 +22,24 @@ const PlayerInfo = require("../player/PlayerInfo");
 const Language = require("./Language");
 
 module.exports = {
+	/** @type {boolean} */
+	exposeGCEnabled: false,
+
+	/**
+	 * Starts the garbage collector
+	 */
+	start() {
+		if (global.gc) {
+			this.exposeGCEnabled = true;
+		} else {
+			Logger.warning(Language.getKey("garbagecollector.exposeGCNotEnabled"));
+		}
+
+		setInterval(() => {
+			this.gc();
+		}, Frog.config.performance.garbageCollectorDelay);
+	},
+
 	/**
 	 * Removes data of offline players
 	 */
@@ -30,9 +49,9 @@ module.exports = {
 		const onlinePlayers = PlayerInfo.playersOnline;
 		const playersToRemove = [];
 
-		for (let i = 0; i < onlinePlayers.length; i++) {
-			if (onlinePlayers[i].offline) {
-				playersToRemove.push(onlinePlayers[i]);
+		for (const player of onlinePlayers) {
+			if (player.offline) {
+				playersToRemove.push(player);
 			}
 		}
 
@@ -52,6 +71,10 @@ module.exports = {
 	 */
 	async gc() {
 		Logger.debug(Language.getKey("garbageCollector.started"));
+
+		if (this.exposeGCEnabled) {
+			global.gc();
+		}
 
 		await this.clearOfflinePlayers();
 

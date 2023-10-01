@@ -59,6 +59,7 @@ async function initializeServer() {
 
 	setupHandlers();
 
+	GarbageCollector.start();
 	await PluginLoader.loadPlugins();
 	await CommandManager.loadCommands();
 	await ConsoleCommandSender.start();
@@ -246,17 +247,6 @@ async function listen() {
 }
 
 /**
- * Starts the garbage collector
- *
- * @private
- */
-function startGarbageCollector() {
-	setInterval(() => {
-		GarbageCollector.gc();
-	}, Frog.config.performance.garbageCollectorDelay);
-}
-
-/**
  * Starts the world ticker
  *
  * @private
@@ -327,7 +317,6 @@ module.exports = {
 			startQueryServer();
 		}
 
-		startGarbageCollector();
 		startWorldTicking();
 	},
 };
