@@ -9,7 +9,7 @@ serverInfo:
     motd: "§aGreenFrog server"
     levelName: "GreenFrog"
     version: "1.20.30"
-    offlineMode: false
+    of0flineMode: false
     maxPlayers: 20
 chat:
     lang: "en_US" # Can be "en_US", "ca_ES", "es_ES", "ru_RU", "uk_UA" or "vi_VN"
@@ -62,3 +62,6 @@ world:
         speed: 1000 # The tick speed
 performance:
     garbageCollectorDelay: 60000
+logger:
+    message: "%date %type | %msg"
+    date: "DD/MM/YYYY hh:mm:ss A"
