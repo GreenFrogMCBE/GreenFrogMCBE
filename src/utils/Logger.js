@@ -15,6 +15,7 @@
  */
 const { convertConsoleColor } = require("./ConsoleColorConvertor");
 const { getKey } = require("./Language");
+const moment = require("moment");
 
 const LoggingException = require("./exceptions/LoggingException");
 
@@ -38,10 +39,7 @@ module.exports = {
 	log(levelName, color, message, consoleLoggingLevel) {
 		const Frog = require("../Frog");
 
-		const date = new Date()
-			.toLocaleString()
-			.replace(",", "")
-			.toUpperCase();
+		const date = moment().format(Frog.config.logger.date);
 
 		if (!console[consoleLoggingLevel]) {
 			throw new LoggingException(
@@ -72,7 +70,12 @@ module.exports = {
 		});
 
 		console[consoleLoggingLevel](
-			convertConsoleColor(`${date} \x1b[${color}m${levelName}\x1b[0m | ${message}`)
+			convertConsoleColor(
+				Frog.config.logger.message
+					.replace("%date", date)
+					.replace("%type", `\x1b[${color}m${levelName}\x1b[0m`)
+					.replace("%msg", message)
+			)
 		);
 	},
 
