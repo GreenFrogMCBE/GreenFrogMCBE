@@ -292,7 +292,7 @@ class World {
 	/**
 	 * Spawns an entity in the world
 	 * 
-	 * @param {string} entityName 
+	 * @param {string | import("Frog").EntityType} entityName 
 	 * @param {number} entityId
 	 * @param {number} x 
 	 * @param {number} y 
@@ -361,7 +361,7 @@ class World {
 	/**
 	 * Removes an entity from the world
 	 * 
-	 * @param {numer} entityId 
+	 * @param {number} entityId 
 	 */
 	removeEntity(entityId) {
 		const removePacket = new ServerRemoveEntityPacket();

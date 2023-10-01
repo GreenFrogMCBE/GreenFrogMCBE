@@ -585,8 +585,8 @@ declare module "Frog" {
 		tickStarvationDamage: () => void;
 		tickVoidDamage: () => void;
 		handleFallDamage(player: Player, position: Vec3): Promise<void>;
-		emitServerEvent(eventName: string): void;
-		spawnEntity(entityName: string, entityId: number, x: number, y: number, z: number, yaw?: number, pitch?: number): void;
+		emitServerEvent(eventName: string | EntityType): void;
+		spawnEntity(entityName: string | EntityType, entityId: number, x: number, y: number, z: number, yaw?: number, pitch?: number): void;
 		teleportEntity(entityId: number, x: number, y: number, z: number, rotation_x?: number, rotation_y?: number, rotation_z?: number): void;
 		getWorldData(): World;
 	};
@@ -947,6 +947,8 @@ declare module "Frog" {
 
 	export type Action = ValueOf<typeof import("./src/forms/types/Action")>;
 	export type Form = ValueOf<typeof import("./src/forms/types/Form")>;
+
+	export type EntityType = ValueOf<typeof import("./src/entity/types/EntityType")>;
 
 	export type CreteriaName = ValueOf<typeof import("./src/scoreboard/types/CreteriaName")>;
 	export type DisplaySlot = ValueOf<typeof import("./src/scoreboard/types/DisplaySlot")>;
