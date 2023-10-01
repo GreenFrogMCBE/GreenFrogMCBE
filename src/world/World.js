@@ -28,6 +28,7 @@ const entityMetadata = require("../../src/resources/json/entityMetadata.json");
 const PlayerInfo = require("../player/PlayerInfo");
 
 const Frog = require("../Frog");
+const ServerRemoveEntityPacket = require("../network/packets/ServerRemoveEntityPacket");
 
 let time = 0;
 
@@ -354,6 +355,20 @@ class World {
 
 		for (const player of PlayerInfo.playersOnline) {
 			movePacket.writePacket(player);
+		}
+	}
+
+	/**
+	 * Removes an entity from the world
+	 * 
+	 * @param {numer} entityId 
+	 */
+	removeEntity(entityId) {
+		const removePacket = new ServerRemoveEntityPacket();
+		removePacket.entity_id_self = String(entityId);
+
+		for (const player of PlayerInfo.playersOnline) {
+			removePacket.writePacket(player);
 		}
 	}
 
