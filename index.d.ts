@@ -157,6 +157,10 @@ declare module "Frog" {
 		performance: {
 			garbageCollectorDelay: number;
 		};
+		logger: {
+			dateFormat: string;
+			messageFormat: string;
+		}
 	};
 
 	export type Language = {

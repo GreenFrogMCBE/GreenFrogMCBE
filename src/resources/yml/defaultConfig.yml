@@ -63,5 +63,5 @@ world:
 performance:
     garbageCollectorDelay: 60000
 logger:
-    message: "%date %type | %msg"
-    date: "DD/MM/YYYY hh:mm:ss A"
+    messageFormat: "%date% %type% | %message%"
+    dateFormat: "DD/MM/YYYY hh:mm:ss A"

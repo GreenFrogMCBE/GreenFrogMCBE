@@ -18,7 +18,8 @@
     "@kotinash/lang-parser": "1.0.3",
     "frog-protocol": "github:GreenFrogMCBE/protocol",
     "js-yaml": "4.1.0",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "node-addon-api": "^7.0.0"
   },
   "devDependencies": {
     "eslint": "8.49.0",
