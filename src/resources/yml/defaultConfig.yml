@@ -1,7 +1,7 @@
 network:
     host: "0.0.0.0"
     port: 19132
-    raknet: "raknet-node" # Can be raknet-native, jsp-raknet or raknet-node (default)
+    raknet: "raknet-native" # Can be raknet-native, jsp-raknet or raknet-node 
     packetRateLimiting: # Limits how many packets can be sent per second
         enabled: true # Recommended to enable. It can prevent bad actors from crashing your server
         maxPackets: 2500
