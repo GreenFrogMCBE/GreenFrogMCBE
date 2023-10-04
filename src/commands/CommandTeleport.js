@@ -39,7 +39,9 @@ function areCoordinatesValid(x, y, z) {
 class CommandTeleport extends Command {
 	name = getKey("commands.teleport.name");
 	description = getKey("commands.teleport.description");
-	aliases = [getKey("commands.teleport.aliases.tp")];
+	aliases = [
+		getKey("commands.teleport.aliases.tp")
+	];
 	minArgs = 1;
 	maxArgs = 4;
 	requiresOp = true;
@@ -83,9 +85,16 @@ class CommandTeleport extends Command {
 			if (target && areCoordinatesValid(x, y, z)) {
 				player.teleport(x, y, z);
 
-				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
+				player.sendMessage(
+					getKey("commands.teleport.execution.success")
+						.replace("%s", `${x}, ${y}, ${z}`)
+				);
 
-				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
+				player.sendMessage(
+					getKey("commands.teleport.execution.success.teleported")
+						.replace("%s", player.username)
+						.replace("%d", `${x}, ${y}, ${z}`)
+				);
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
@@ -103,9 +112,16 @@ class CommandTeleport extends Command {
 
 				player.teleport(x, y, z);
 
-				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
+				player.sendMessage(
+					getKey("commands.teleport.execution.success")
+						.replace("%s", `${x}, ${y}, ${z}`)
+				);
 
-				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
+				player.sendMessage(
+					getKey("commands.teleport.execution.success.teleported")
+						.replace("%s", player.username)
+						.replace("%d", `${x}, ${y}, ${z}`)
+				);
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
@@ -116,11 +132,19 @@ class CommandTeleport extends Command {
 
 			if (target && destinationPlayer && destinationPlayer.location) {
 				const { x, y, z } = destinationPlayer.location;
+
 				target.teleport(x, y, z);
 
-				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
+				player.sendMessage(
+					getKey("commands.teleport.execution.success")
+						.replace("%s", `${x}, ${y}, ${z}`)
+				);
 
-				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
+				player.sendMessage(
+					getKey("commands.teleport.execution.success.teleported")
+						.replace("%s", player.username)
+						.replace("%d", `${x}, ${y}, ${z}`)
+				);
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
@@ -138,9 +162,16 @@ class CommandTeleport extends Command {
 			if (areCoordinatesValid(x, y, z)) {
 				player.teleport(x, y, z);
 
-				player.sendMessage(getKey("commands.teleport.execution.success").replace("%s", `${x}, ${y}, ${z}`));
+				player.sendMessage(
+					getKey("commands.teleport.execution.success")
+						.replace("%s", `${x}, ${y}, ${z}`)
+				);
 
-				player.sendMessage(getKey("commands.teleport.execution.success.teleported").replace("%s", player.username).replace("%d", `${x}, ${y}, ${z}`));
+				player.sendMessage(
+					getKey("commands.teleport.execution.success.teleported")
+						.replace("%s", player.username)
+						.replace("%d", `${x}, ${y}, ${z}`)
+				);
 			} else {
 				player.sendMessage(getKey("commands.teleport.execution.failed.coordinates.invalid"));
 			}
