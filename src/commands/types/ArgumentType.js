@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-module.exports = /** @type {const} */ {
+module.exports = /** @type {const} */ ({
 	TARGET: "target",
 	STRING: "string",
 	INT: "int",
@@ -22,4 +22,4 @@ module.exports = /** @type {const} */ {
 	BLOCK_STATES: "block_states",
 	WILDCARD_TARGET: "wildcard_target",
 	OPERATOR: "operator"
-};
+});

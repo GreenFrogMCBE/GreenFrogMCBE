@@ -13,10 +13,10 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-module.exports = /** @type {const} */ {
+module.exports = /** @type {const} */ ({
 	NEAREST_PLAYER: "@p",
 	RANDOM_PLAYER: "@r",
 	ALL_PLAYERS: "@a",
 	ALL_ENTITIES: "@e",
 	SELF: "@s"
-};
+});
