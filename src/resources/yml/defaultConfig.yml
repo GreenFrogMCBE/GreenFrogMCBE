@@ -58,7 +58,8 @@ world:
         time: true # Should time update be server side?
         void: true # Should people that are in void take damage?
         regeneration: true # Should people in survival mode regenerate their health?
-        starvationDamage: true # Should people take damage if their food level is 0?
+        starvationDamage: true # Should people take starvation damage?
+        entities: true # Should the server tick entity spawning?
         speed: 1000 # The tick speed
 performance:
     garbageCollectorDelay: 60000

@@ -151,6 +151,7 @@ declare module "Frog" {
 				void: boolean;
 				regeneration: boolean;
 				starvationDamage: boolean;
+				entities: boolean;
 				speed: number;
 			};
 		};
@@ -360,7 +361,6 @@ declare module "Frog" {
 		};
 		chat: {
 			format: string;
-			formatPlugin: string;
 			formatMe: string;
 			formatSay: string;
 			broadcasts: {
@@ -580,9 +580,9 @@ declare module "Frog" {
 		placeBlock(x: number, y: number, z: number, id: number): void;
 		breakBlock(x: number, y: number, z: number): void;
 		sendBlockUpdatePacket(player: Player, x: number, y: number, z: number, id: number): void;
-		tick(): void;
 		startHungerLossLoop(): void;
 		startNetworkChunkPublisherPacketSendingLoop(): void;
+		tick(): void;
 		tickEvent: () => void;
 		tickTime: () => void;
 		tickRegeneration: () => void;
@@ -1375,10 +1375,6 @@ declare module "Frog" {
 		| "packetQueue"
 		| "serverShutdown"
 		| "serverTick"
-		| "serverTimeTick"
-		| "serverRegenerationTick"
-		| "serverStarvationDamageTick"
-		| "serverVoidDamageTick"
 		| "serverSetDimension"
 		| "serverGarbageCollection"
 		| "serverOfflinePlayersGarbageCollection"

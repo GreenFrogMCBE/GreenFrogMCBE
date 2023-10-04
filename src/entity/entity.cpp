@@ -45,6 +45,14 @@ Vec3 _getRandomSpawnCoordinate() {
     return spawnCoordinates[coordinate];
 }
 
+bool _shouldSpawnHostileEntity(int time) {
+    if (time > 16000 && rand() % 2 == 0) {
+        return true;
+    }
+
+    return false;
+}
+
 Value getRandomSpawnCoordinate(const CallbackInfo& info) {
     Env env = info.Env();
 
@@ -58,13 +66,22 @@ Value getRandomSpawnCoordinate(const CallbackInfo& info) {
     return result;
 }
 
+Value shouldSpawnHostileEntity(const CallbackInfo& info) {
+    Env env = info.Env();
+
+    int time = info[0].As<Number>().Int32Value();
+
+    return Boolean::New(env, _shouldSpawnHostileEntity(time));
+}
+
 Object init(Env env, Object exports) {
     debugLog("Initializing...");
 
     pregenerateRandomCoordinates();
 
     exports["getRandomSpawnCoordinate"] = Function::New(env, getRandomSpawnCoordinate);
-    
+    exports["shouldSpawnHostileEntity"] = Function::New(env, shouldSpawnHostileEntity);
+
     debugLog("Initialized!");
 
     return exports;

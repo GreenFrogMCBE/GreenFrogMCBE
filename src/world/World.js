@@ -15,6 +15,7 @@
  */
 const ServerNetworkChunkPublisherUpdatePacket = require("../network/packets/ServerNetworkChunkPublisherUpdatePacket");
 const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
+const ServerRemoveEntityPacket = require("../network/packets/ServerRemoveEntityPacket");
 const ServerUpdateBlockPacket = require("../network/packets/ServerUpdateBlockPacket");
 const ServerAddEntityPacket = require("../network/packets/ServerAddEntityPacket");
 
@@ -25,10 +26,11 @@ const Gamemode = require("../player/types/Gamemode");
 const entityAttributes = require("../../src/resources/json/entityAttributes.json");
 const entityMetadata = require("../../src/resources/json/entityMetadata.json");
 
+const entity = require("../entity/build/Release/entity.node");
+
 const PlayerInfo = require("../player/PlayerInfo");
 
 const Frog = require("../Frog");
-const ServerRemoveEntityPacket = require("../network/packets/ServerRemoveEntityPacket");
 
 let time = 0;
 
@@ -125,6 +127,7 @@ class World {
 			{ enabled: tickingConfig.void, function: this.tickVoidDamage },
 			{ enabled: tickingConfig.regeneration, function: this.tickRegeneration },
 			{ enabled: tickingConfig.starvationDamage, function: this.tickStarvationDamage },
+			{ enabled: tickingConfig.entities, function: this.tickEntities }
 		];
 
 		tickingFunctions.forEach((tickingFunction) => {
@@ -176,8 +179,6 @@ class World {
 	tickTime = () => {
 		time += 10;
 
-		this.emitServerEvent("serverTimeTick");
-
 		for (const player of PlayerInfo.playersOnline) {
 			player.setTime(time);
 		}
@@ -187,8 +188,6 @@ class World {
 	 * Performs regeneration on the player and emits the server regeneration tick event.
 	 */
 	tickRegeneration = () => {
-		this.emitServerEvent("serverRegenerationTick");
-
 		for (const player of PlayerInfo.playersOnline) {
 			if (!(
 				player.health > 20 ||
@@ -206,8 +205,6 @@ class World {
 	 * Performs starvation damage on the player and emits the server starvation damage tick event.
 	 */
 	tickStarvationDamage = () => {
-		this.emitServerEvent("serverStarvationDamageTick");
-
 		for (const player of PlayerInfo.playersOnline) {
 			if (player.hunger <= 0) {
 				player.setHealth(player.health--, DamageCause.STARVATION);
@@ -219,8 +216,6 @@ class World {
 	 * Performs void damage on players and emits the server void damage tick event.
 	 */
 	tickVoidDamage = () => {
-		this.emitServerEvent("serverVoidDamageTick");
-
 		for (const client of PlayerInfo.playersOnline) {
 			const posY = Math.floor(client.location.y);
 
@@ -239,6 +234,17 @@ class World {
 					client.setHealth(client.health - 3, DamageCause.VOID);
 				}
 			}
+		}
+	};
+
+	/**
+	 * Ticks entity spawning
+	 */
+	tickEntities = () => {
+		if (entity.shouldSpawnHostileEntity()) {
+			const coordinates = entity.getRandomSpawnCoordinate();
+
+			this.spawnEntity("minecraft:zombie", Math.random(), coordinates.x, coordinates.y, coordinates.z);
 		}
 	};
 
