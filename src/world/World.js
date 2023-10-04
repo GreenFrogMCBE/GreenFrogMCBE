@@ -174,7 +174,7 @@ class World {
 	};
 
 	/**
-	 * Updates the world time
+	 * Ticks the world time
 	 */
 	tickTime = () => {
 		time += 10;
@@ -185,7 +185,7 @@ class World {
 	};
 
 	/**
-	 * Performs regeneration on the player and emits the server regeneration tick event.
+	 * Performs regeneration on the player.
 	 */
 	tickRegeneration = () => {
 		for (const player of PlayerInfo.playersOnline) {
@@ -202,7 +202,7 @@ class World {
 	};
 
 	/**
-	 * Performs starvation damage on the player and emits the server starvation damage tick event.
+	 * Performs starvation damage on the player.
 	 */
 	tickStarvationDamage = () => {
 		for (const player of PlayerInfo.playersOnline) {
@@ -213,7 +213,7 @@ class World {
 	};
 
 	/**
-	 * Performs void damage on players and emits the server void damage tick event.
+	 * Performs void damage on players.
 	 */
 	tickVoidDamage = () => {
 		for (const client of PlayerInfo.playersOnline) {
@@ -238,7 +238,7 @@ class World {
 	};
 
 	/**
-	 * Ticks entity spawning
+	 * Ticks entity spawning.
 	 */
 	tickEntities = () => {
 		if (entity.shouldSpawnHostileEntity()) {
