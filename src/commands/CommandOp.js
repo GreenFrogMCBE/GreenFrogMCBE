@@ -17,6 +17,8 @@ const Command = require("./Command");
 
 const PermissionManager = require("../permission/PermissionManager");
 
+const ArgumentType = require("./types/ArgumentType");
+
 const { getKey } = require("../utils/Language");
 
 /**
@@ -31,7 +33,7 @@ class CommandOp extends Command {
 	args = [
 		{
 			name: "player",
-			type: "target",
+			type: ArgumentType.TARGET,
 			optional: true
 		}
 	];

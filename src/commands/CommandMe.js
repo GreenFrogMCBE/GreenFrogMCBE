@@ -28,8 +28,8 @@ class CommandMe extends Command {
 	minArgs = 1;
 	args = [
 		{
-			name: "player",
-			type: "target",
+			name: "message",
+			type: "string",
 			optional: false
 		}
 	];

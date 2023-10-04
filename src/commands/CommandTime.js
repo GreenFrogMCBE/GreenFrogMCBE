@@ -19,6 +19,8 @@ const { playersOnline } = require("../player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
 
+const ArgumentType = require("./types/ArgumentType");
+
 /**
  * A command that changes the time
  */
@@ -31,7 +33,7 @@ class CommandTime extends Command {
 	args = [
 		{
 			name: "time",
-			type: "int",
+			type: ArgumentType.INT,
 			optional: false,
 		}
 	];

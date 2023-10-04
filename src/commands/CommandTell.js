@@ -19,6 +19,8 @@ const { getPlayer } = require("../player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
 
+const ArgumentType = require("./types/ArgumentType");
+
 /**
  * A command that sends a private message to other players
  */
@@ -34,12 +36,12 @@ class CommandTell extends Command {
 	args = [
 		{
 			name: "player",
-			type: "target",
+			type: ArgumentType.TARGET,
 			optional: false,
 		},
 		{
 			name: "message",
-			type: "string",
+			type: ArgumentType.STRING,
 			optional: false
 		}
 	];

@@ -23,7 +23,9 @@ const PlayerInfo = require("../player/PlayerInfo");
 const { getPlayer } = require("../player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
+
 const Selector = require("./types/Selector");
+const ArgumentType = require("./types/ArgumentType");
 
 /**
  * Returns if the player can be killed
@@ -32,7 +34,11 @@ const Selector = require("./types/Selector");
  * @returns {boolean}
  */
 function canBeKilled(player) {
-	if (player.permissions.isConsole || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
+	if (
+		player.permissions.isConsole ||
+		player.gamemode === Gamemode.CREATIVE ||
+		player.gamemode === Gamemode.SPECTATOR
+	) {
 		return false;
 	}
 
@@ -49,8 +55,8 @@ class CommandKill extends Command {
 	requiresOp = true;
 	args = [
 		{
-			name: "which",
-			type: "string",
+			name: "target",
+			type: ArgumentType.TARGET,
 			optional: true
 		}
 	];

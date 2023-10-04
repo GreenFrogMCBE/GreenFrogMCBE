@@ -15,6 +15,8 @@
  */
 const Command = require("./Command");
 
+const ArgumentType = require("./types/ArgumentType");
+
 const { getPlayer } = require("../player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
@@ -44,22 +46,22 @@ class CommandTeleport extends Command {
 	args = [
 		{
 			name: "player",
-			type: "target",
+			type: ArgumentType.TARGET,
 			optional: false,
 		},
 		{
 			name: "x",
-			type: "string",
+			type: ArgumentType.INT,
 			optional: false,
 		},
 		{
 			name: "y",
-			type: "string",
+			type: ArgumentType.INT,
 			optional: false,
 		},
 		{
 			name: "z",
-			type: "string",
+			type: ArgumentType.INT,
 			optional: false,
 		}
 	];
@@ -71,6 +73,7 @@ class CommandTeleport extends Command {
 	 */
 	async execute(player, server, args) {
 		const target = getPlayer(args[0]);
+
 		const x = Number(args[1]);
 		const y = Number(args[2]);
 		const z = Number(args[3]);

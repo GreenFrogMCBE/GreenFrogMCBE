@@ -18,6 +18,7 @@ const Command = require("./Command");
 const { getKey } = require("../utils/Language");
 
 const Gamemode = require("../player/types/Gamemode");
+const ArgumentType = require("./types/ArgumentType");
 
 /**
  * A command to change the player's game mode.
@@ -31,12 +32,12 @@ class CommandGamemode extends Command {
 	args = [
 		{
 			name: "player",
-			type: "target",
+			type: ArgumentType.TARGET,
 			optional: false,
 		},
 		{
 			name: "mode",
-			type: "string",
+			type: ArgumentType.STRING,
 			optional: false
 		}
 	];

@@ -15,6 +15,8 @@
  */
 const Command = require("./Command");
 
+const ArgumentType = require("./types/ArgumentType");
+
 const { getKey } = require("../utils/Language");
 
 const Frog = require("../Frog");
@@ -30,7 +32,7 @@ class CommandSay extends Command {
 	args = [
 		{
 			name: "message",
-			type: "string",
+			type: ArgumentType.STRING,
 			optional: false
 		}
 	];
