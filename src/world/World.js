@@ -138,7 +138,10 @@ class World {
 	 */
 	startHungerLossLoop() {
 		for (const player of PlayerInfo.playersOnline) {
-			if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
+			if (
+				player.gamemode === Gamemode.CREATIVE ||
+				player.gamemode === Gamemode.SPECTATOR
+			) {
 				return;
 			}
 
@@ -241,10 +244,10 @@ class World {
 			const coordinates = entity.getRandomSpawnCoordinate();
 
 			this.spawnEntity(
-				"minecraft:zombie", 
-				entity.getRandomRuntimeId(), 
-				coordinates.x, 
-				coordinates.y, 
+				"minecraft:zombie",
+				entity.getRandomRuntimeId(),
+				coordinates.x,
+				coordinates.y,
 				coordinates.z
 			);
 		}
