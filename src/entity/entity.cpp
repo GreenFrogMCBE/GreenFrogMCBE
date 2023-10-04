@@ -12,6 +12,8 @@
 #define MAX_Z_COORDINATE 30
 #define MAX_RANDOM 5
 
+#define CHANCE 3
+
 #define NIGHT_TIME 1600
 
 using namespace std;
@@ -48,11 +50,11 @@ Vec3 _getRandomSpawnCoordinate() {
 }
 
 bool _shouldSpawnHostileEntity(int time) {
-    if (time > NIGHT_TIME && (rand() % MAX_RANDOM) > 3) {
-        return true;
-    }
+    return (time > NIGHT_TIME && (rand() % MAX_RANDOM) > CHANCE);
+}
 
-    return false;
+int _getRandomRuntimeId() {
+    return rand();
 }
 
 Value getRandomSpawnCoordinate(const CallbackInfo& info) {
@@ -61,6 +63,7 @@ Value getRandomSpawnCoordinate(const CallbackInfo& info) {
     Vec3 coordinate = _getRandomSpawnCoordinate();
     
     Object result = Object::New(env);
+
     result["x"] = Number::New(env, coordinate.x);
     result["y"] = Number::New(env, coordinate.y);
     result["z"] = Number::New(env, coordinate.z);
@@ -76,6 +79,12 @@ Value shouldSpawnHostileEntity(const CallbackInfo& info) {
     return Boolean::New(env, _shouldSpawnHostileEntity(time));
 }
 
+Value getRandomRuntimeId(const CallbackInfo& info) {
+    Env env = info.Env();
+
+    return Number::New(env, _getRandomRuntimeId());
+}
+
 Object init(Env env, Object exports) {
     debugLog("Initializing...");
 
@@ -85,6 +94,7 @@ Object init(Env env, Object exports) {
 
     exports["getRandomSpawnCoordinate"] = Function::New(env, getRandomSpawnCoordinate);
     exports["shouldSpawnHostileEntity"] = Function::New(env, shouldSpawnHostileEntity);
+    exports["getRandomRuntimeId"] = Function::New(env, getRandomRuntimeId);
 
     debugLog("Initialized!");
 

@@ -237,11 +237,16 @@ class World {
 	 * Ticks entity spawning.
 	 */
 	tickEntities = () => {
-		console.log(entity.shouldSpawnHostileEntity(time));
 		if (entity.shouldSpawnHostileEntity(time)) {
 			const coordinates = entity.getRandomSpawnCoordinate();
 
-			this.spawnEntity("minecraft:zombie", Math.random(), coordinates.x, coordinates.y, coordinates.z);
+			this.spawnEntity(
+				"minecraft:zombie", 
+				entity.getRandomRuntimeId(), 
+				coordinates.x, 
+				coordinates.y, 
+				coordinates.z
+			);
 		}
 	};
 
