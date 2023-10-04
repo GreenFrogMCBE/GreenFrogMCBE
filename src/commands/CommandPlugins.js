@@ -36,14 +36,14 @@ class CommandPlugins extends Command {
 	 */
 	execute(player) {
 		const pluginSet = new Set(PluginManager.plugins);
-		const pluginList = [...pluginSet]
-			.map((plugin) => `${Colors.RESET}${Colors.GREEN}${plugin.name} v${plugin.version}${Colors.RESET}`)
+		const pluginList = Array.from(pluginSet)
+			.map(plugin => `${Colors.RESET}${Colors.GREEN}${plugin.name} v${plugin.version}${Colors.RESET}`)
 			.join(", ") || "";
 
-		player.sendMessage(
-			getKey("commands.plugins.execution.success")
-				.replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`)
-		);
+		const message = getKey("commands.plugins.execution.success")
+			.replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`);
+
+		player.sendMessage(message);
 	}
 }
 

@@ -20,8 +20,6 @@ pluginData/
 # Napi output directory
 src/entity/build/*
 src/node_modules/node-addon-api/*
-!src/entity/build/Release/entity.node
-!src/entity/build/Release/entity.lib
 
 # Misc
 !src/*
