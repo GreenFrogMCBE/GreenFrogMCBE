@@ -115,10 +115,6 @@ class World {
 	 * Ticks the world.
 	 */
 	tick() {
-		if (!PlayerInfo.playersOnline.length) {
-			return;
-		}
-
 		const tickingConfig = Frog.config.world.ticking;
 
 		const tickingFunctions = [
@@ -241,7 +237,8 @@ class World {
 	 * Ticks entity spawning.
 	 */
 	tickEntities = () => {
-		if (entity.shouldSpawnHostileEntity()) {
+		console.log(entity.shouldSpawnHostileEntity(time));
+		if (entity.shouldSpawnHostileEntity(time)) {
 			const coordinates = entity.getRandomSpawnCoordinate();
 
 			this.spawnEntity("minecraft:zombie", Math.random(), coordinates.x, coordinates.y, coordinates.z);

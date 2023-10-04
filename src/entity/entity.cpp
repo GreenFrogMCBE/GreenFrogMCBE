@@ -3,12 +3,16 @@
 #include <vector>
 #include <ctime>
 
+// Remove this if you don't need debug
 #define DEBUG
 
 #define MAX_POSSIBLE_SPAWN_COORDINATES 15
 #define MAX_X_COORDINATE 30
 #define MAX_Y_COORDINATE 10
 #define MAX_Z_COORDINATE 30
+#define MAX_RANDOM 5
+
+#define NIGHT_TIME 1600
 
 using namespace std;
 using namespace Napi;
@@ -28,8 +32,6 @@ void debugLog(string message) {
 }
 
 void pregenerateRandomCoordinates() {
-    srand(time(NULL));
-
     for (int coordinate = 0; coordinate < MAX_POSSIBLE_SPAWN_COORDINATES; coordinate++) {
         debugLog("Pregenerated a random Vec3");
 
@@ -46,7 +48,7 @@ Vec3 _getRandomSpawnCoordinate() {
 }
 
 bool _shouldSpawnHostileEntity(int time) {
-    if (time > 16000 && rand() % 2 == 0) {
+    if (time > NIGHT_TIME && (rand() % MAX_RANDOM) > 3) {
         return true;
     }
 
@@ -76,6 +78,8 @@ Value shouldSpawnHostileEntity(const CallbackInfo& info) {
 
 Object init(Env env, Object exports) {
     debugLog("Initializing...");
+
+    srand(time(NULL));
 
     pregenerateRandomCoordinates();
 
