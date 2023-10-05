@@ -3,20 +3,23 @@
 #include <vector>
 #include <ctime>
 
-// Remove this if you don't need debug
 #define DEBUG
 
 #define MAX_POSSIBLE_SPAWN_COORDINATES 15
-#define MAX_X_COORDINATE 30
-#define SPAWN_Y_COORDINATE -50
-#define MAX_Z_COORDINATE 30
 #define MAX_RANDOM 5
+#define MAX_ENTITIES 10
+
+#define MAX_X_COORDINATE 60
+#define SPAWN_Y_COORDINATE -50
+#define MAX_Z_COORDINATE 60
 
 #define CHANCE 3
 #define NIGHT_TIME 1600
 
 using namespace std;
 using namespace Napi;
+
+int entitiesSpawned = 0;
 
 struct Vec2 {
     int x;
@@ -46,12 +49,20 @@ Vec2 _getRandomSpawnCoordinate() {
     return spawnCoordinates[coordinate];
 }
 
+bool _isEntityLimitReached() {
+    entitiesSpawned = entitiesSpawned + 1;
+
+    return (entitiesSpawned > MAX_ENTITIES);
+}
+
 bool _shouldSpawnHostileEntity(int time) {
     #ifdef DEBUG
-        return true;
+       bool shouldSpawn = true;
     #else 
-        return (time > NIGHT_TIME && (rand() % MAX_RANDOM) > CHANCE);
+       bool shouldSpawn = (time > NIGHT_TIME && (rand() % MAX_RANDOM) > CHANCE);
     #endif
+
+    return shouldSpawn && !_isEntityLimitReached();
 }
 
 int _getRandomRuntimeId() {
