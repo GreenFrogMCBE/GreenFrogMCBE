@@ -115,6 +115,10 @@ class World {
 	 * Ticks the world.
 	 */
 	tick() {
+		if (!PlayerInfo.playersOnline.length) {
+			return;
+		}
+
 		const tickingConfig = Frog.config.world.ticking;
 
 		const tickingFunctions = [

@@ -7,7 +7,7 @@
 
 #define MAX_RANDOM 5
 #define MAX_ENTITIES 15
-#define MAX_ROTATIONS_AMOUNT 4
+#define MAX_ROTATIONS_AMOUNT 2
 
 #define MAX_X_COORDINATE 60
 #define SPAWN_Y_COORDINATE -50
@@ -20,12 +20,6 @@ using namespace std;
 using namespace Napi;
 
 int entitiesSpawned = 0;
-int yawRotations[4] = {
-    45,
-    90,
-    120,
-    180
-};
 
 struct Vec2 {
     int x;
@@ -41,7 +35,7 @@ void debugLog(string message) {
 int _getRandomYawRotation() {
     int rotation = rand() % MAX_ROTATIONS_AMOUNT;
 
-    return yawRotations[MAX_ROTATIONS_AMOUNT];
+    return yawRotations[rotation];
 }
 
 bool _isEntityLimitReached() {
@@ -65,7 +59,7 @@ int _getRandomRuntimeId() {
 }
 
 Vec2 _getRandomCoordinates() {
-    return { rand(), rand() };
+    return { rand() % MAX_X_COORDINATE, rand() % MAX_Z_COORDINATE };
 }
 
 Value getRandomSpawnCoordinates(const CallbackInfo& info) {
