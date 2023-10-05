@@ -8,24 +8,22 @@
 
 #define MAX_POSSIBLE_SPAWN_COORDINATES 15
 #define MAX_X_COORDINATE 30
-#define MAX_Y_COORDINATE 10
+#define SPAWN_Y_COORDINATE -50
 #define MAX_Z_COORDINATE 30
 #define MAX_RANDOM 5
 
 #define CHANCE 3
-
 #define NIGHT_TIME 1600
 
 using namespace std;
 using namespace Napi;
 
-struct Vec3 {
+struct Vec2 {
     int x;
-    int y;
     int z;
 };
 
-vector<Vec3> spawnCoordinates(MAX_POSSIBLE_SPAWN_COORDINATES);
+vector<Vec2> spawnCoordinates(MAX_POSSIBLE_SPAWN_COORDINATES);
 
 void debugLog(string message) {
     #ifdef DEBUG
@@ -35,23 +33,25 @@ void debugLog(string message) {
 
 void pregenerateRandomCoordinates() {
     for (int coordinate = 0; coordinate < MAX_POSSIBLE_SPAWN_COORDINATES; coordinate++) {
-        debugLog("Pregenerated a random Vec3");
+        debugLog("Pregenerated a random Vec2");
 
         spawnCoordinates[coordinate].x = rand() % MAX_X_COORDINATE;
-        spawnCoordinates[coordinate].y = rand() % MAX_Y_COORDINATE;
         spawnCoordinates[coordinate].z = rand() % MAX_Z_COORDINATE;
     }
 }
 
-Vec3 _getRandomSpawnCoordinate() {
+Vec2 _getRandomSpawnCoordinate() {
     int coordinate = rand() % MAX_POSSIBLE_SPAWN_COORDINATES;
 
     return spawnCoordinates[coordinate];
 }
 
 bool _shouldSpawnHostileEntity(int time) {
-    //return (time > NIGHT_TIME && (rand() % MAX_RANDOM) > CHANCE);
-    return true;
+    #ifdef DEBUG
+        return true;
+    #else 
+        return (time > NIGHT_TIME && (rand() % MAX_RANDOM) > CHANCE);
+    #endif
 }
 
 int _getRandomRuntimeId() {
@@ -61,12 +61,12 @@ int _getRandomRuntimeId() {
 Value getRandomSpawnCoordinate(const CallbackInfo& info) {
     Env env = info.Env();
 
-    Vec3 coordinate = _getRandomSpawnCoordinate();
+    Vec2 coordinate = _getRandomSpawnCoordinate();
     
     Object result = Object::New(env);
 
     result["x"] = Number::New(env, coordinate.x);
-    result["y"] = Number::New(env, coordinate.y);
+    result["y"] = Number::New(env, SPAWN_Y_COORDINATE);
     result["z"] = Number::New(env, coordinate.z);
 
     return result;
