@@ -32,7 +32,7 @@ module.exports = {
 		if (global.gc) {
 			this.exposeGCEnabled = true;
 		} else {
-			Logger.warning(Language.getKey("garbagecollector.exposeGCNotEnabled"));
+			Logger.warning(Language.getKey("garbageCollector.exposeGCNotEnabled"));
 		}
 
 		setInterval(() => {
