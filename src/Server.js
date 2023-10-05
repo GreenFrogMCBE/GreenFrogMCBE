@@ -110,7 +110,7 @@ function initDebug() {
 	}
 
 	if (Frog.isDebug) {
-		Logger.debug(Language.getKey("debug.debugEnabled"));
+		Logger.warning(Language.getKey("debug.debugEnabled"));
 	}
 }
 

@@ -50,7 +50,8 @@ Vec3 _getRandomSpawnCoordinate() {
 }
 
 bool _shouldSpawnHostileEntity(int time) {
-    return (time > NIGHT_TIME && (rand() % MAX_RANDOM) > CHANCE);
+    //return (time > NIGHT_TIME && (rand() % MAX_RANDOM) > CHANCE);
+    return true;
 }
 
 int _getRandomRuntimeId() {
