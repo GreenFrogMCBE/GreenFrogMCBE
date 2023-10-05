@@ -47,11 +47,12 @@ async function initializeServer() {
 	}
 
 	Frog = require("./src/Frog");
-	Server = require("./src/Server");
 
 	if (Frog.isDebug) {
 		process.env.DEBUG = "minecraft-protocol";
 	}
+
+	Server = require("./src/Server");
 }
 
 /**
