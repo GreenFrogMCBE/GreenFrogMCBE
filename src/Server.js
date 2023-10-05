@@ -111,6 +111,8 @@ function initDebug() {
 
 	if (Frog.isDebug) {
 		Logger.warning(Language.getKey("debug.debugEnabled"));
+
+		process.env.DEBUG = true;
 	}
 }
 
