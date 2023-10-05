@@ -39,6 +39,7 @@ const rl = readline.createInterface({
 function handleError(message) {
 	console.clear();
 	console.error(convertConsoleColor(`${Colors.RED}${message}${Colors.RESET}`));
+
 	process.exit(1);
 }
 
