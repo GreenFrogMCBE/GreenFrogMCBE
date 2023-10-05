@@ -9,7 +9,7 @@
     {
       "name": "dodaylightcycle",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": false
     },
     {
