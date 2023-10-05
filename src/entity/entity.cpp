@@ -5,9 +5,9 @@
 
 #define DEBUG
 
-#define MAX_POSSIBLE_SPAWN_COORDINATES 15
 #define MAX_RANDOM 5
-#define MAX_ENTITIES 10
+#define MAX_ENTITIES 15
+#define MAX_ROTATIONS_AMOUNT 4
 
 #define MAX_X_COORDINATE 60
 #define SPAWN_Y_COORDINATE -50
@@ -20,13 +20,17 @@ using namespace std;
 using namespace Napi;
 
 int entitiesSpawned = 0;
+int yawRotations[4] = {
+    45,
+    90,
+    120,
+    180
+};
 
 struct Vec2 {
     int x;
     int z;
 };
-
-vector<Vec2> spawnCoordinates(MAX_POSSIBLE_SPAWN_COORDINATES);
 
 void debugLog(string message) {
     #ifdef DEBUG
@@ -34,19 +38,10 @@ void debugLog(string message) {
     #endif
 }
 
-void pregenerateRandomCoordinates() {
-    for (int coordinate = 0; coordinate < MAX_POSSIBLE_SPAWN_COORDINATES; coordinate++) {
-        debugLog("Pregenerated a random Vec2");
+int _getRandomYawRotation() {
+    int rotation = rand() % MAX_ROTATIONS_AMOUNT;
 
-        spawnCoordinates[coordinate].x = rand() % MAX_X_COORDINATE;
-        spawnCoordinates[coordinate].z = rand() % MAX_Z_COORDINATE;
-    }
-}
-
-Vec2 _getRandomSpawnCoordinate() {
-    int coordinate = rand() % MAX_POSSIBLE_SPAWN_COORDINATES;
-
-    return spawnCoordinates[coordinate];
+    return yawRotations[MAX_ROTATIONS_AMOUNT];
 }
 
 bool _isEntityLimitReached() {
@@ -69,16 +64,20 @@ int _getRandomRuntimeId() {
     return rand();
 }
 
-Value getRandomSpawnCoordinate(const CallbackInfo& info) {
-    Env env = info.Env();
+Vec2 _getRandomCoordinates() {
+    return { rand(), rand() };
+}
 
-    Vec2 coordinate = _getRandomSpawnCoordinate();
+Value getRandomSpawnCoordinates(const CallbackInfo& info) {
+    Env env = info.Env();
     
+    Vec2 spawnCoordinates = _getRandomCoordinates();
+
     Object result = Object::New(env);
 
-    result["x"] = Number::New(env, coordinate.x);
+    result["x"] = Number::New(env, spawnCoordinates.x);
     result["y"] = Number::New(env, SPAWN_Y_COORDINATE);
-    result["z"] = Number::New(env, coordinate.z);
+    result["z"] = Number::New(env, spawnCoordinates.z);
 
     return result;
 }
@@ -97,15 +96,20 @@ Value getRandomRuntimeId(const CallbackInfo& info) {
     return Number::New(env, _getRandomRuntimeId());
 }
 
+Value getRandomYawRotation(const CallbackInfo& info) {
+    Env env = info.Env();
+
+    return Number::New(env, _getRandomYawRotation());
+}
+
 Object init(Env env, Object exports) {
     debugLog("Initializing...");
 
     srand(time(NULL));
 
-    pregenerateRandomCoordinates();
-
-    exports["getRandomSpawnCoordinate"] = Function::New(env, getRandomSpawnCoordinate);
+    exports["getRandomSpawnCoordinates"] = Function::New(env, getRandomSpawnCoordinates);
     exports["shouldSpawnHostileEntity"] = Function::New(env, shouldSpawnHostileEntity);
+    exports["getRandomYawRotation"] = Function::New(env, getRandomYawRotation);
     exports["getRandomRuntimeId"] = Function::New(env, getRandomRuntimeId);
 
     debugLog("Initialized!");

@@ -241,14 +241,15 @@ class World {
 	 */
 	tickEntities = () => {
 		if (entity.shouldSpawnHostileEntity(time)) {
-			const coordinates = entity.getRandomSpawnCoordinate();
+			const coordinates = entity.getRandomSpawnCoordinates();
 
 			this.spawnEntity(
 				"minecraft:zombie",
 				entity.getRandomRuntimeId(),
 				coordinates.x,
 				coordinates.y,
-				coordinates.z
+				coordinates.z,
+				entity.getRandomYawRotation()
 			);
 		}
 	};
