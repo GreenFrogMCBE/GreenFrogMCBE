@@ -145,6 +145,8 @@ class PacketHandler {
 			.replace("%s", player.username)
 			.replace("%d", player.network.packetCount);
 
+		player.network.packetCount = 0;
+
 		return new PacketHandlingException(exceptionMessage);
 	}
 
