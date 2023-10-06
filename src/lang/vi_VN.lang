@@ -100,7 +100,7 @@ plugin.loading.loading=Đang tải plugin %s v%d
 plugin.loading.loaded=Đã tải plugin %s v%d
 plugin.loading.warning.invalidJson=Dữ liệu JSON không hợp lệ được cung cấp cho %s. Lỗi: %d
 
-plugin.unloading.failed=Không thể gỡ bỏ %s. Lỗi=%d
+plugin.unloading.failed=Không thể gỡ bỏ %s. Lỗi: %d
 plugin.unloading.success=Đã gỡ bỏ %s
 plugin.unloading.unloading=Đang gỡ bỏ %s...
 
@@ -132,15 +132,15 @@ status.resourcePacks.joined=%s đã tham gia
 status.resourcePacks.spawned=%s đã xuất hiện
 status.resourcePacks.disconnected=%s đã ngắt kết nối
 
-warning.customItems.loading.failed=Không tải được các mục tùy chỉnh! Lỗi=%s
+warning.customItems.loading.failed=Không tải được các mục tùy chỉnh! Lỗi: %s
 
 debug.debugEnabled=Chế độ gỡ lỗi được kích hoạt. Điều này có thể gây ra giật lag khi gửi các gói lớn
 
 debug.unstable=Chế độ không ổn định được kích hoạt. Điều này sẽ khôi phục máy chủ từ các lỗi nghiêm trọng nhưng có thể gây ra hỏng hóc dữ liệu plugin
 debug.unstable.unsupported=Ngoài ra, chế độ không ổn định không được hỗ trợ bởi các nhà phát triển GreenFrog và bạn là người phản hồi cho sự hỏng hóc dữ liệu nếu xảy ra
 
-debug.player.unsupportedAction.id=ID hành động không được hỗ trợ từ %s=%d
-debug.player.unsupportedAction.block=ID hành động khối không được hỗ trợ từ %s=%d
+debug.player.unsupportedAction.id=ID hành động không được hỗ trợ từ %s: %d
+debug.player.unsupportedAction.block=ID hành động khối không được hỗ trợ từ %s: %d
 
 chat.format=<%s> %d
 chat.format.me=* %s %d
@@ -168,7 +168,7 @@ exceptions.plugin.noVersion=Không có phiên bản plugin!
 
 exceptions.console.alreadyClosed=Bàn phím đã đóng!
 
-exceptions.logger.invalidType=Các loại nhật ký không hợp lệ=%s. Các loại hợp lệ là thông tin cảnh báo lỗi gỡ lỗi
+exceptions.logger.invalidType=Các loại nhật ký không hợp lệ: %s. Các loại hợp lệ là thông tin cảnh báo lỗi gỡ lỗi
 
 query.server.listening.success=Máy chủ truy vấn đang lắng nghe trên %s
 query.server.listening.failed=Máy chủ truy vấn không thể lắng nghe trên %s

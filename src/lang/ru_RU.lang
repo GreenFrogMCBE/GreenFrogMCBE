@@ -100,7 +100,7 @@ plugin.loading.loading=Загрузка плагина %s версии %d
 plugin.loading.loaded=Плагин %s версии %d загружен
 plugin.loading.warning.invalidJson=Недопустимые данные JSON для %s. Ошибка: %d
 
-plugin.unloading.failed=Не удалось выгрузить %s. Ошибка=%d
+plugin.unloading.failed=Не удалось выгрузить %s. Ошибка: %d
 plugin.unloading.success=Выгружен %s
 plugin.unloading.unloading=Выгрузка %s...
 
@@ -132,15 +132,15 @@ status.resourcePacks.joined=%s присоединился
 status.resourcePacks.spawned=%s появился
 status.resourcePacks.disconnected=%s отключился
 
-warning.customItems.loading.failed=Не удалось загрузить пользовательские предметы! Ошибка=%s
+warning.customItems.loading.failed=Не удалось загрузить пользовательские предметы! Ошибка: %s
 
 debug.debugEnabled=Включен режим отладки. Это может вызвать задержки при отправке больших пакетов
 
 debug.unstable=Включен режим нестабильности. Это позволит восстановить сервер после критических ошибок, но может привести к повреждению данных плагинов
 debug.unstable.unsupported=Также следует отметить, что режим нестабильности не поддерживается разработчиками GreenFrog, и вы будете отвечать за повреждение данных, если такое произойдет
 
-debug.player.unsupportedAction.id=Неподдерживаемый идентификатор действия от %s=%d
-debug.player.unsupportedAction.block=Неподдерживаемый идентификатор действия блока от %s=%d
+debug.player.unsupportedAction.id=Неподдерживаемый идентификатор действия от %s: %d
+debug.player.unsupportedAction.block=Неподдерживаемый идентификатор действия блока от %s: %d
 
 chat.format=<%s> %d
 chat.format.me=* %s %d

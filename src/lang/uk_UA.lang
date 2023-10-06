@@ -100,7 +100,7 @@ plugin.loading.loading=Завантаження плагіна %s версії %
 plugin.loading.loaded=Плагін %s версії %d завантажений
 plugin.loading.warning.invalidJson=Недійсні дані JSON для %s. Помилка: %d
 
-plugin.unloading.failed=Не вдалося відключити %s. Помилка=%d
+plugin.unloading.failed=Не вдалося відключити %s. Помилка: %d
 plugin.unloading.success=Плагін %s відключено
 plugin.unloading.unloading=Відключення %s...
 
@@ -132,15 +132,15 @@ status.resourcePacks.joined=%s приєднався
 status.resourcePacks.spawned=%s з'явився
 status.resourcePacks.disconnected=%s вийшов з гри
 
-warning.customItems.loading.failed=Не вдалося завантажити власні предмети! Помилка=%s
+warning.customItems.loading.failed=Не вдалося завантажити власні предмети! Помилка: %s
 
 debug.debugEnabled=Режим відладки увімкнено. Це може спричинити лаги при відправці великих пакетів
 
 debug.unstable=Увімкнено нестабільний режим. Це дозволяє відновлювати сервер після критичних помилок, але це може призвести до порушення даних плагінів
 debug.unstable.unsupported=Також, нестабільний режим не підтримується розробниками GreenFrog і ви самі несете відповідальність за пошкодження даних у разі виникнення помилок
 
-debug.player.unsupportedAction.id=Непідтримуваний ідентифікатор дії від %s=%d
-debug.player.unsupportedAction.block=Непідтримуваний ідентифікатор дії блока від %s=%d
+debug.player.unsupportedAction.id=Непідтримуваний ідентифікатор дії від %s: %d
+debug.player.unsupportedAction.block=Непідтримуваний ідентифікатор дії блока від %s: %d
 
 chat.format=<%s> %d
 chat.format.me=* %s %d
@@ -168,12 +168,12 @@ exceptions.plugin.noVersion=Немає версії плагіна!
 
 exceptions.console.alreadyClosed=Консоль вже закрита!
 
-exceptions.logger.invalidType=Недійсні типи журналу=%s. Припустимі типи: info warn error debug
+exceptions.logger.invalidType=Недійсні типи журналу: %s. Припустимі типи: info, warn, error, debug,
 
 query.listening.success=Сервер запитів прослуховує на %s
 query.listening.failed=Не вдалося прослухати сервер запитів на %s
 
-query.server.error=Помилка запиту=%s
+query.server.error=Помилка пакету: %s
 
 query.server.network.generatingToken=Генеруємо токен запиту для %s
 query.server.network.invalidPacket=Отриманий недійсний пакет запиту від %s

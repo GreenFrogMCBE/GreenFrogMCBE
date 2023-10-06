@@ -100,7 +100,7 @@ plugin.loading.loading=Loading plugin %s v%d
 plugin.loading.loaded=Loaded plugin %s v%d
 plugin.loading.warning.invalidJson=Invalid JSON data provided for %s. Error: %d
 
-plugin.unloading.failed=Failed to unload %s. Error=%d
+plugin.unloading.failed=Failed to unload %s. Error: %d
 plugin.unloading.success=Unloaded %s
 plugin.unloading.unloading=Unloading %s...
 
@@ -130,15 +130,15 @@ status.resourcePacks.joined=%s joined
 status.resourcePacks.spawned=%s spawned
 status.resourcePacks.disconnected=%s disconnected
 
-warning.customItems.loading.failed=Failed to load custom items! Error=%s
+warning.customItems.loading.failed=Failed to load custom items! Error: %s
 
 debug.debugEnabled=Debug mode is enabled. This may cause lag when sending large packets
 
 debug.unstable=Unstable mode is enabled. This will recover server from critical errors but it may cause plugin data corruption
 debug.unstable.unsupported=Also unstable mode is not supported by GreenFrog developers and you are the responsive for the data corruption if it occurs
 
-debug.player.unsupportedAction.id=Unsupported action ID from %s=%d
-debug.player.unsupportedAction.block=Unsupported block action ID from %s=%d
+debug.player.unsupportedAction.id=Unsupported action ID from %s: %d
+debug.player.unsupportedAction.block=Unsupported block action ID from %s: %d
 
 chat.format=<%s> %d
 chat.format.me=* %s %d
