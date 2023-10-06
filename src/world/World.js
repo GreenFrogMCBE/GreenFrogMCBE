@@ -142,10 +142,7 @@ class World {
 	 */
 	startHungerLossLoop() {
 		for (const player of PlayerInfo.playersOnline) {
-			if (
-				player.gamemode === Gamemode.CREATIVE ||
-				player.gamemode === Gamemode.SPECTATOR
-			) {
+			if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
 				return;
 			}
 
@@ -255,6 +252,17 @@ class World {
 				coordinates.z,
 				entity.getRandomYawRotation()
 			);
+
+			for (const player of PlayerInfo.playersOnline) {
+				if (
+					entity.shouldFollowPlayer(
+						player.gamemode || Gamemode.FALLBACK,
+						player.dead || false
+					)
+				) {
+					player.sendMessage(String(coordinates.x - player.location.x));
+				}
+			}
 		}
 	};
 

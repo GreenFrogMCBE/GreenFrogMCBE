@@ -12,7 +12,7 @@ garbageCollector.finished=[Garbage collector] Finished
 commands.unknown=§cUnknown command %s. Please check that the command exists and that you have permission to use it.
 commands.errors.internalError=Failed to execute command! Error: %s
 commands.errors.internalError.player=Failed to execute command from %s. Error: %d
-commands.errors.internalError.badSender=§cThis types of sender does not support this command
+commands.errors.internalError.badSender=§cThis type of sender does not support this command
 commands.errors.syntaxError.minArg=§cSyntaxError: Minimum arguments required for this command is %s but you provided %d
 commands.errors.syntaxError.maxArg=§cSyntaxError: Maximum arguments required for this command is %s but you provided %d
 commands.errors.targetError.targetsNotFound=§cNo targets matched selector
@@ -166,7 +166,7 @@ exceptions.plugin.noVersion=No plugin version!
 
 exceptions.console.alreadyClosed=Console is already closed!
 
-exceptions.logger.invalidType=Invalid log types=%s. Valid types are info warn error debug
+exceptions.logger.invalidType=Invalid log type: %s. Valid types are info warn error debug
 
 query.server.listening.success=Query server listening on %s
 query.server.listening.failed=Query server failed to listen on %s

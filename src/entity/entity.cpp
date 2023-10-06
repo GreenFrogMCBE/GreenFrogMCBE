@@ -20,6 +20,10 @@ using namespace std;
 using namespace Napi;
 
 int entitiesSpawned = 0;
+int yawRotations[MAX_ROTATIONS_AMOUNT] = {
+    -90,
+    90
+};
 
 struct Vec2 {
     int x;
@@ -58,8 +62,24 @@ int _getRandomRuntimeId() {
     return rand();
 }
 
+bool _shouldFollowPlayer(string playerGamemode, bool isPlayerDead) {
+    return ((playerGamemode == "survival" || playerGamemode == "adventure") && !isPlayerDead);
+}
+
 Vec2 _getRandomCoordinates() {
     return { rand() % MAX_X_COORDINATE, rand() % MAX_Z_COORDINATE };
+}
+
+Value shouldFollowPlayer(const CallbackInfo& info) {
+    Env env = info.Env();
+
+    string gamemode = info[0].As<String>().Utf8Value();
+    std::cout << gamemode;
+    bool isDead = info[1].As<Boolean>().Value();
+    
+    bool shouldFollow = _shouldFollowPlayer(gamemode, isDead);
+ 
+    return Boolean::New(env, shouldFollow);
 }
 
 Value getRandomSpawnCoordinates(const CallbackInfo& info) {
@@ -104,6 +124,7 @@ Object init(Env env, Object exports) {
     exports["getRandomSpawnCoordinates"] = Function::New(env, getRandomSpawnCoordinates);
     exports["shouldSpawnHostileEntity"] = Function::New(env, shouldSpawnHostileEntity);
     exports["getRandomYawRotation"] = Function::New(env, getRandomYawRotation);
+    exports["shouldFollowPlayer"] = Function::New(env, shouldFollowPlayer);
     exports["getRandomRuntimeId"] = Function::New(env, getRandomRuntimeId);
 
     debugLog("Initialized!");
