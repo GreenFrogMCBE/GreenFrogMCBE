@@ -141,7 +141,9 @@ class PacketHandler {
 	 * @returns {PacketHandlingException} - The rate limit exception.
 	 */
 	createRateLimitException(player) {
-		const exceptionMessage = getKey("exceptions.network.rateLimited").replace("%s", player.username).replace("%d", player.network.packetCount.toString());
+		const exceptionMessage = getKey("exceptions.network.rateLimited")
+			.replace("%s", player.username)
+			.replace("%d", player.network.packetCount);
 
 		return new PacketHandlingException(exceptionMessage);
 	}
@@ -232,7 +234,10 @@ class PacketHandler {
 	 * @param {Error} error
 	 */
 	handlePacketError(player, error) {
-		Logger.error(getKey("exceptions.network.packetHandlingError").replace("%s", player.username).replace("%d", error.stack || ""));
+		Logger.error(
+			getKey("exceptions.network.packetHandlingError")
+				.replace("%s", player.username)
+				.replace("%d", error.stack));
 
 		try {
 			player.kick(getKey("kickMessages.invalidPacket"));
