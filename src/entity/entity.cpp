@@ -7,7 +7,6 @@
 
 #define MAX_RANDOM 5
 #define MAX_ENTITIES 15
-#define MAX_ROTATIONS_AMOUNT 2
 
 #define MAX_X_COORDINATE 60
 #define SPAWN_Y_COORDINATE -50
@@ -16,13 +15,21 @@
 #define CHANCE 3
 #define NIGHT_TIME 1600
 
+#define randof(array) array[rand() % (sizeof(array) / sizeof(array[0]))]
+
 using namespace std;
 using namespace Napi;
 
 int entitiesSpawned = 0;
-int yawRotations[MAX_ROTATIONS_AMOUNT] = {
+int yawRotations[2] = {
     -90,
     90
+};
+string entities[4] = {
+    "minecraft:skeleton",
+    "minecraft:creeper",
+    "minecraft:spider",
+    "minecraft:zombie"
 };
 
 struct Vec2 {
@@ -37,15 +44,17 @@ void debugLog(string message) {
 }
 
 int _getRandomYawRotation() {
-    int rotation = rand() % MAX_ROTATIONS_AMOUNT;
-
-    return yawRotations[rotation];
+    return randof(yawRotations);
 }
 
 bool _isEntityLimitReached() {
     entitiesSpawned = entitiesSpawned + 1;
 
     return (entitiesSpawned > MAX_ENTITIES);
+}
+
+string _getRandomEntity() {
+    return randof(entities);
 }
 
 bool _shouldSpawnHostileEntity(int time) {
@@ -63,7 +72,7 @@ int _getRandomRuntimeId() {
 }
 
 bool _shouldFollowPlayer(string playerGamemode, bool isPlayerDead, int entityX, int playerX) {
-    return ((playerGamemode == "survival" || playerGamemode == "adventure") && ((playerX - entityX) < 50) && !isPlayerDead);
+    return ((playerGamemode == "survival" || playerGamemode == "adventure") && ((playerX - entityX) < 20) && !isPlayerDead);
 }
 
 Vec2 _getRandomCoordinates() {
@@ -97,6 +106,14 @@ Value getRandomSpawnCoordinates(const CallbackInfo& info) {
     return result;
 }
 
+Value getRandomEntity(const CallbackInfo& info) {
+    Env env = info.Env();
+    
+    string entityName = _getRandomEntity();
+
+    return String::New(env, entityName);
+}
+
 Value shouldSpawnHostileEntity(const CallbackInfo& info) {
     Env env = info.Env();
 
@@ -127,6 +144,7 @@ Object init(Env env, Object exports) {
     exports["getRandomYawRotation"] = Function::New(env, getRandomYawRotation);
     exports["shouldFollowPlayer"] = Function::New(env, shouldFollowPlayer);
     exports["getRandomRuntimeId"] = Function::New(env, getRandomRuntimeId);
+    exports["getRandomEntity"] = Function::New(env, getRandomEntity);
 
     debugLog("Initialized!");
 

@@ -244,14 +244,14 @@ class World {
 		if (entity.shouldSpawnHostileEntity(time)) {
 			const coordinates = entity.getRandomSpawnCoordinates();
 			const runtimeId = entity.getRandomRuntimeId();
+			const entityName = entity.getRandomEntity();
 
 			this.spawnEntity(
-				"minecraft:zombie",
+				entityName,
 				runtimeId,
 				coordinates.x,
 				coordinates.y,
 				coordinates.z,
-				entity.getRandomYawRotation()
 			);
 
 			for (const player of PlayerInfo.playersOnline) {
@@ -263,12 +263,7 @@ class World {
 						player.location.x
 					)
 				) {
-					this.teleportEntity(
-						runtimeId,
-						player.location.x,
-						player.location.y,
-						player.location.z
-					);
+					// TODO
 				}
 			}
 		}
