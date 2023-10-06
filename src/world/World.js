@@ -265,9 +265,9 @@ class World {
 				) {
 					this.teleportEntity(
 						runtimeId,
-						coordinates.x,
-						coordinates.y,
-						coordinates.z
+						player.location.x,
+						player.location.y,
+						player.location.z
 					);
 				}
 			}
