@@ -243,10 +243,11 @@ class World {
 	tickEntities = () => {
 		if (entity.shouldSpawnHostileEntity(time)) {
 			const coordinates = entity.getRandomSpawnCoordinates();
+			const runtimeId = entity.getRandomRuntimeId();
 
 			this.spawnEntity(
 				"minecraft:zombie",
-				entity.getRandomRuntimeId(),
+				runtimeId,
 				coordinates.x,
 				coordinates.y,
 				coordinates.z,
@@ -257,10 +258,17 @@ class World {
 				if (
 					entity.shouldFollowPlayer(
 						player.gamemode || Gamemode.FALLBACK,
-						player.dead || false
+						player.dead || false,
+						coordinates.x,
+						player.location.x
 					)
 				) {
-					player.sendMessage(String(coordinates.x - player.location.x));
+					this.teleportEntity(
+						runtimeId,
+						coordinates.x,
+						coordinates.y,
+						coordinates.z
+					);
 				}
 			}
 		}

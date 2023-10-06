@@ -62,8 +62,8 @@ int _getRandomRuntimeId() {
     return rand();
 }
 
-bool _shouldFollowPlayer(string playerGamemode, bool isPlayerDead) {
-    return ((playerGamemode == "survival" || playerGamemode == "adventure") && !isPlayerDead);
+bool _shouldFollowPlayer(string playerGamemode, bool isPlayerDead, int entityX, int playerX) {
+    return ((playerGamemode == "survival" || playerGamemode == "adventure") && ((playerX - entityX) < 50) && !isPlayerDead);
 }
 
 Vec2 _getRandomCoordinates() {
@@ -74,11 +74,12 @@ Value shouldFollowPlayer(const CallbackInfo& info) {
     Env env = info.Env();
 
     string gamemode = info[0].As<String>().Utf8Value();
-    std::cout << gamemode;
     bool isDead = info[1].As<Boolean>().Value();
-    
-    bool shouldFollow = _shouldFollowPlayer(gamemode, isDead);
- 
+    int entityX = info[2].As<Number>().Int32Value();
+    int playerX = info[3].As<Number>().Int32Value();
+
+    bool shouldFollow = _shouldFollowPlayer(gamemode, isDead, entityX, playerX);
+
     return Boolean::New(env, shouldFollow);
 }
 
