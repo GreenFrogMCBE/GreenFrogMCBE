@@ -1,6 +1,22 @@
+/**
+ * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
+ * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
+ * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
+ * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
+ *
+ * The content of this file is licensed using the CC-BY-4.0 license
+ * which requires you to agree to its terms if you wish to use or make any changes to it.
+ *
+ * @license CC-BY-4.0
+ * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
+ * @link Discord - https://discord.gg/UFqrnAbqjP
+ */
 #include <napi.h>
 #include <iostream>
 #include <vector>
+#include <chrono>
 #include <ctime>
 
 #define DEBUG
@@ -19,6 +35,7 @@
 
 using namespace std;
 using namespace Napi;
+using namespace chrono;
 
 int entitiesSpawned = 0;
 int yawRotations[2] = {
@@ -79,6 +96,15 @@ Vec2 _getRandomCoordinates() {
     return { rand() % MAX_X_COORDINATE, rand() % MAX_Z_COORDINATE };
 }
 
+string _moveRandomly(int runtimeId, float coordinateX, float coordinateZ) {
+    coordinateX = coordinateX + 0.5;
+    
+    // TODO: Threading
+    this_thread::sleep_for(chrono::milliseconds(100));
+
+    return "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(coordinateX) + ", -50, " + to_string(coordinateZ) + ")";
+}
+
 Value shouldFollowPlayer(const CallbackInfo& info) {
     Env env = info.Env();
 
@@ -114,6 +140,18 @@ Value getRandomEntity(const CallbackInfo& info) {
     return String::New(env, entityName);
 }
 
+Value moveRandomly(const CallbackInfo& info) {
+    Env env = info.Env();
+
+    int runtimeId = info[0].As<Number>().Int32Value();    
+    float coordinateX = info[1].As<Number>().FloatValue();
+    float coordinateZ = info[2].As<Number>().FloatValue();
+
+    string codeToExecute = _moveRandomly(runtimeId, coordinateX, coordinateZ);
+
+    return String::New(env, codeToExecute);
+}
+
 Value shouldSpawnHostileEntity(const CallbackInfo& info) {
     Env env = info.Env();
 
@@ -145,6 +183,7 @@ Object init(Env env, Object exports) {
     exports["shouldFollowPlayer"] = Function::New(env, shouldFollowPlayer);
     exports["getRandomRuntimeId"] = Function::New(env, getRandomRuntimeId);
     exports["getRandomEntity"] = Function::New(env, getRandomEntity);
+    exports["moveRandomly"] = Function::New(env, moveRandomly);
 
     debugLog("Initialized!");
 
