@@ -36,13 +36,17 @@ function areCoordinatesValid(x, y, z) {
 /**
  * Teleport the player to specific coordinates
  *
- * @param {Player} player
+ * @param {import("Frog").Player} player
  * @param {number} x
  * @param {number} y
  * @param {number} z
  */
 function teleportPlayerToCoordinates(player, x, y, z) {
-	player.teleport(x, y, z);
+	player.teleport(
+		x,
+		y,
+		z
+	);
 
 	player.sendMessage(
 		getKey("commands.teleport.execution.success")
@@ -59,8 +63,8 @@ function teleportPlayerToCoordinates(player, x, y, z) {
 /**
  * Teleport the player to another player
  *
- * @param {Player} player
- * @param {Player} targetPlayer
+ * @param {import("Frog").Player} player
+ * @param {import("Frog").Player} targetPlayer
  */
 function teleportPlayerToPlayer(player, targetPlayer) {
 	if (targetPlayer && targetPlayer.location) {
@@ -115,32 +119,31 @@ class CommandTeleport extends Command {
 	async execute(player, server, args) {
 		const target = getPlayer(args[0]);
 
-		if (args.length >= 4) {
-			// Teleport player to coordinates
+		if (args.length >= 4) {	// Teleport player to coordinates
 			const x = Number(args[1]);
 			const y = Number(args[2]);
 			const z = Number(args[3]);
 
 			if (target && areCoordinatesValid(x, y, z)) {
 				teleportPlayerToCoordinates(player, x, y, z);
-			} else {
-				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+				return;
 			}
-		} else if (args.length > 0 && args.length < 2) {
-			// Teleport self to player
+
+			player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+		} else if (args.length > 0 && args.length < 2) { // Teleport self to player
 			if (player.permissions.isConsole) {
 				player.sendMessage(getKey("commands.errors.internalError.badSender"));
 				return;
 			}
 
 			const destinationPlayer = getPlayer(args[0]);
+
 			teleportPlayerToPlayer(player, destinationPlayer);
-		} else if (args.length > 0 && args.length < 3) {
-			// Teleport player to player
+		} else if (args.length > 0 && args.length < 3) { // Teleport player to player
 			const destinationPlayer = getPlayer(args[1]);
+
 			teleportPlayerToPlayer(target, destinationPlayer);
-		} else if (args.length >= 3) {
-			// Teleport self to coords
+		} else if (args.length >= 3) { // Teleport self to coordinates
 			if (player.permissions.isConsole) {
 				player.sendMessage(getKey("commands.errors.internalError.badSender"));
 				return;
@@ -152,9 +155,10 @@ class CommandTeleport extends Command {
 
 			if (areCoordinatesValid(x, y, z)) {
 				teleportPlayerToCoordinates(player, x, y, z);
-			} else {
-				player.sendMessage(getKey("commands.teleport.execution.failed.coordinates.invalid"));
+				return;
 			}
+
+			player.sendMessage(getKey("commands.teleport.execution.failed.coordinates.invalid"));
 		}
 	}
 }
