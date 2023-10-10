@@ -67,6 +67,16 @@ string entities[4] = {
 };
 
 /**
+ * All possible directions that the entity can go
+ */
+enum Direction {
+    North,
+    West,
+    East,
+    South
+}
+
+/**
  * Vector2 structure
  * 
  * @struct
