@@ -34,6 +34,45 @@ function areCoordinatesValid(x, y, z) {
 }
 
 /**
+ * Teleport the player to specific coordinates
+ *
+ * @param {Player} player
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
+ */
+function teleportPlayerToCoordinates(player, x, y, z) {
+	player.teleport(x, y, z);
+
+	player.sendMessage(
+		getKey("commands.teleport.execution.success")
+			.replace("%s", `${x}, ${y}, ${z}`)
+	);
+
+	player.sendMessage(
+		getKey("commands.teleport.execution.success.teleported")
+			.replace("%s", player.username)
+			.replace("%d", `${x}, ${y}, ${z}`)
+	);
+}
+
+/**
+ * Teleport the player to another player
+ *
+ * @param {Player} player
+ * @param {Player} targetPlayer
+ */
+function teleportPlayerToPlayer(player, targetPlayer) {
+	if (targetPlayer && targetPlayer.location) {
+		const { x, y, z } = targetPlayer.location;
+
+		teleportPlayerToCoordinates(player, x, y, z);
+	} else {
+		player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
+	}
+}
+
+/**
  * A command that shows the sender to other players
  */
 class CommandTeleport extends Command {
@@ -76,25 +115,14 @@ class CommandTeleport extends Command {
 	async execute(player, server, args) {
 		const target = getPlayer(args[0]);
 
-		const x = Number(args[1]);
-		const y = Number(args[2]);
-		const z = Number(args[3]);
-
 		if (args.length >= 4) {
 			// Teleport player to coordinates
+			const x = Number(args[1]);
+			const y = Number(args[2]);
+			const z = Number(args[3]);
+
 			if (target && areCoordinatesValid(x, y, z)) {
-				player.teleport(x, y, z);
-
-				player.sendMessage(
-					getKey("commands.teleport.execution.success")
-						.replace("%s", `${x}, ${y}, ${z}`)
-				);
-
-				player.sendMessage(
-					getKey("commands.teleport.execution.success.teleported")
-						.replace("%s", player.username)
-						.replace("%d", `${x}, ${y}, ${z}`)
-				);
+				teleportPlayerToCoordinates(player, x, y, z);
 			} else {
 				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
 			}
@@ -106,48 +134,11 @@ class CommandTeleport extends Command {
 			}
 
 			const destinationPlayer = getPlayer(args[0]);
-
-			if (destinationPlayer && destinationPlayer.location) {
-				const { x, y, z } = destinationPlayer.location;
-
-				player.teleport(x, y, z);
-
-				player.sendMessage(
-					getKey("commands.teleport.execution.success")
-						.replace("%s", `${x}, ${y}, ${z}`)
-				);
-
-				player.sendMessage(
-					getKey("commands.teleport.execution.success.teleported")
-						.replace("%s", player.username)
-						.replace("%d", `${x}, ${y}, ${z}`)
-				);
-			} else {
-				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
-			}
+			teleportPlayerToPlayer(player, destinationPlayer);
 		} else if (args.length > 0 && args.length < 3) {
 			// Teleport player to player
-			const target = getPlayer(args[0]);
 			const destinationPlayer = getPlayer(args[1]);
-
-			if (target && destinationPlayer && destinationPlayer.location) {
-				const { x, y, z } = destinationPlayer.location;
-
-				target.teleport(x, y, z);
-
-				player.sendMessage(
-					getKey("commands.teleport.execution.success")
-						.replace("%s", `${x}, ${y}, ${z}`)
-				);
-
-				player.sendMessage(
-					getKey("commands.teleport.execution.success.teleported")
-						.replace("%s", player.username)
-						.replace("%d", `${x}, ${y}, ${z}`)
-				);
-			} else {
-				player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"));
-			}
+			teleportPlayerToPlayer(target, destinationPlayer);
 		} else if (args.length >= 3) {
 			// Teleport self to coords
 			if (player.permissions.isConsole) {
@@ -160,18 +151,7 @@ class CommandTeleport extends Command {
 			const z = Number(args[2]);
 
 			if (areCoordinatesValid(x, y, z)) {
-				player.teleport(x, y, z);
-
-				player.sendMessage(
-					getKey("commands.teleport.execution.success")
-						.replace("%s", `${x}, ${y}, ${z}`)
-				);
-
-				player.sendMessage(
-					getKey("commands.teleport.execution.success.teleported")
-						.replace("%s", player.username)
-						.replace("%d", `${x}, ${y}, ${z}`)
-				);
+				teleportPlayerToCoordinates(player, x, y, z);
 			} else {
 				player.sendMessage(getKey("commands.teleport.execution.failed.coordinates.invalid"));
 			}
