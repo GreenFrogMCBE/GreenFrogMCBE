@@ -1,18 +1,3 @@
-/**
- * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
- * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
- * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
- * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
- * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
- *
- * The content of this file is licensed using the CC-BY-4.0 license
- * which requires you to agree to its terms if you wish to use or make any changes to it.
- *
- * @license CC-BY-4.0
- * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
- * @link Discord - https://discord.gg/UFqrnAbqjP
- */
 #include <napi.h>
 #include <iostream>
 #include <vector>
@@ -24,18 +9,45 @@
  */
 #define DEBUG
 
+/**
+ * Maximum random number for various calculations
+ */
 #define MAX_RANDOM 5
+
+
+/**
+ * Maximum number of entities that can be spawned
+ */
 #define MAX_ENTITIES 15
 
+/**
+ * Maximum X coordinate for entity spawning
+ */
 #define MAX_X_COORDINATE 60
+
+/**
+ * Y coordinate for entity spawning
+ */
 #define SPAWN_Y_COORDINATE -50
+
+/**
+ * Maximum Z coordinate for entity spawning
+ */
 #define MAX_Z_COORDINATE 60
 
+
+/**
+ * Chance for spawning an entity
+ */
 #define CHANCE 3
+
+/**
+ * The night time. Used for spawning entities
+ */
 #define NIGHT_TIME 1600
 
 /**
- * This macro returns a random element from an array
+ * A macro returns a random element from an array
  */
 #define randof(array) array[rand() % (sizeof(array) / sizeof(array[0]))]
 
@@ -74,7 +86,7 @@ enum Direction {
     West,
     East,
     South
-}
+};
 
 /**
  * Vector2 structure
@@ -106,16 +118,35 @@ int _getRandomYawRotation() {
     return randof(yawRotations);
 }
 
+/**
+ * An internal function that checks if the entity limit has been reached
+ * 
+ * @return True if the entity limit has been reached, false otherwise
+ */
 bool _isEntityLimitReached() {
     entitiesSpawned = entitiesSpawned + 1;
 
     return (entitiesSpawned > MAX_ENTITIES);
 }
 
+/**
+ *  An internal function that returns a random entity from the entities array
+ * 
+ * @return A random entity
+ */
 string _getRandomEntity() {
     return randof(entities);
 }
 
+/**
+ * An internal function that determines if a hostile entity should be
+ * spawned based on the time
+ * 
+ * @attention Always returns true in debug mode
+ * 
+ * @param time The current time
+ * @return True if a hostile entity should be spawned, false otherwise
+ */
 bool _shouldSpawnHostileEntity(int time) {
     #ifdef DEBUG
        bool shouldSpawn = true;
@@ -126,18 +157,47 @@ bool _shouldSpawnHostileEntity(int time) {
     return shouldSpawn && !_isEntityLimitReached();
 }
 
+/**
+ * An internal function that returns a random runtime ID
+ * 
+ * @return A random runtime ID
+ */
 int _getRandomRuntimeId() {
     return rand();
 }
 
+/**
+ * An internal function that determines if an entity 
+ * should follow a player based on the player's gamemode, 
+ * whether the player is dead, and the distance between the entity and the player
+ * 
+ * @param playerGamemode The player's gamemode
+ * @param isPlayerDead Whether the player is dead
+ * @param entityX The entity's X coordinate
+ * @param playerX The player's X coordinate
+ * @return True if the entity should follow the player, false otherwise
+ */
 bool _shouldFollowPlayer(string playerGamemode, bool isPlayerDead, int entityX, int playerX) {
     return ((playerGamemode == "survival" || playerGamemode == "adventure") && ((playerX - entityX) < 20) && !isPlayerDead);
 }
 
+/**
+ * An internal function that returns random coordinates
+ * 
+ * @return A Vec2 structure containing the random coordinates
+ */
 Vec2 _getRandomCoordinates() {
     return { rand() % MAX_X_COORDINATE, rand() % MAX_Z_COORDINATE };
 }
 
+/**
+ * An internal function that moves an entity in random directions
+ * 
+ * @param runtimeId The runtime ID of the entity
+ * @param originalX The original X coordinate of the entity
+ * @param originalZ The original Z coordinate of the entity
+ * @return A string containing the code to execute for moving the entity
+ */
 string _moveRandomly(int runtimeId, float originalX, float originalZ) {
     string result;
 
@@ -150,6 +210,13 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
     return result;
 }
 
+/**
+ * Determines if an entity should follow a player based on the player's gamemode, 
+ * whether the player is dead, and the distance between the entity and the player
+ * 
+ * @param info The callback info
+ * @return A boolean value indicating whether the entity should follow the player
+ */
 Value shouldFollowPlayer(const CallbackInfo& info) {
     Env env = info.Env();
 
@@ -163,6 +230,12 @@ Value shouldFollowPlayer(const CallbackInfo& info) {
     return Boolean::New(env, shouldFollow);
 }
 
+/**
+ * Returns random coordinates for entity spawning
+ * 
+ * @param info The callback info
+ * @return An object containing the random coordinates
+ */
 Value getRandomSpawnCoordinates(const CallbackInfo& info) {
     Env env = info.Env();
     
@@ -177,6 +250,12 @@ Value getRandomSpawnCoordinates(const CallbackInfo& info) {
     return result;
 }
 
+/**
+ * Returns a random entity from the entities array
+ * 
+ * @param info The callback info
+ * @return A string containing the name of the random entity
+ */
 Value getRandomEntity(const CallbackInfo& info) {
     Env env = info.Env();
     
@@ -185,6 +264,12 @@ Value getRandomEntity(const CallbackInfo& info) {
     return String::New(env, entityName);
 }
 
+/**
+ * Moves an entity randomly
+ * 
+ * @param info The callback info
+ * @return A string containing the code to execute for moving the entity
+ */
 Value moveRandomly(const CallbackInfo& info) {
     Env env = info.Env();
 
@@ -197,6 +282,12 @@ Value moveRandomly(const CallbackInfo& info) {
     return String::New(env, codeToExecute);
 }
 
+/**
+ * Determines whether a hostile entity should be spawned based on the current time.
+ * 
+ * @param info The callback info. It should contain the current time.
+ * @return A boolean value indicating whether a hostile entity should be spawned.
+ */
 Value shouldSpawnHostileEntity(const CallbackInfo& info) {
     Env env = info.Env();
 
@@ -205,18 +296,37 @@ Value shouldSpawnHostileEntity(const CallbackInfo& info) {
     return Boolean::New(env, _shouldSpawnHostileEntity(time));
 }
 
+/**
+ * Generates a random runtime ID.
+ * 
+ * @param info The callback info. 
+ * @return A random runtime ID.
+ */
 Value getRandomRuntimeId(const CallbackInfo& info) {
     Env env = info.Env();
 
     return Number::New(env, _getRandomRuntimeId());
 }
 
+/**
+ * Generates a random yaw rotation.
+ * 
+ * @param info The callback info. 
+ * @return A random yaw rotation.
+ */
 Value getRandomYawRotation(const CallbackInfo& info) {
     Env env = info.Env();
 
     return Number::New(env, _getRandomYawRotation());
 }
 
+/**
+ * Initializes the module.
+ * 
+ * @param env The environment in which the module is being initialized.
+ * @param exports The object to which the module's exports will be attached.
+ * @return The exports object with the module's exports attached.
+ */
 Object init(Env env, Object exports) {
     debugLog("Initializing...");
 
