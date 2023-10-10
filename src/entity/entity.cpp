@@ -19,6 +19,9 @@
 #include <chrono>
 #include <ctime>
 
+/**
+ * This macro determines if debugging is enabled
+ */
 #define DEBUG
 
 #define MAX_RANDOM 5
@@ -31,17 +34,31 @@
 #define CHANCE 3
 #define NIGHT_TIME 1600
 
+/**
+ * This macro returns a random element from an array
+ */
 #define randof(array) array[rand() % (sizeof(array) / sizeof(array[0]))]
 
 using namespace std;
 using namespace Napi;
 using namespace chrono;
 
+/**
+ * The amount of entities spawned
+ */
 int entitiesSpawned = 0;
+
+/**
+ * An array of all possible rotations of entities 
+ */
 int yawRotations[2] = {
     -90,
     90
 };
+
+/**
+ * An array of all possible entities to spawn
+ */
 string entities[4] = {
     "minecraft:skeleton",
     "minecraft:creeper",
@@ -49,17 +66,32 @@ string entities[4] = {
     "minecraft:zombie"
 };
 
+/**
+ * Vector2 structure
+ * 
+ * @struct
+ */
 struct Vec2 {
     int x;
     int z;
 };
 
+/**
+ * Prints a message to the console.
+ * 
+ * @attention Only available if debugging is enabled, otherwise does nothing
+ */
 void debugLog(string message) {
     #ifdef DEBUG
         cout << "EntityDebug | " << message << endl;
     #endif
 }
 
+/**
+ * An internal function that returns a random yaw rotation
+ * 
+ * @return A random yaw rotation
+ */
 int _getRandomYawRotation() {
     return randof(yawRotations);
 }
@@ -96,13 +128,16 @@ Vec2 _getRandomCoordinates() {
     return { rand() % MAX_X_COORDINATE, rand() % MAX_Z_COORDINATE };
 }
 
-string _moveRandomly(int runtimeId, float coordinateX, float coordinateZ) {
-    coordinateX = coordinateX + 0.5;
-    
-    // TODO: Threading
-    this_thread::sleep_for(chrono::milliseconds(100));
+string _moveRandomly(int runtimeId, float originalX, float originalZ) {
+    string result;
 
-    return "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(coordinateX) + ", -50, " + to_string(coordinateZ) + ")";
+    for (int x = 0; x < 15; x++) {
+        originalX = originalX + (x / 10);        
+
+        result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ");";
+    }
+
+    return result;
 }
 
 Value shouldFollowPlayer(const CallbackInfo& info) {

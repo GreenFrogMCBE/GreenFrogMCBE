@@ -117,6 +117,10 @@ class World {
 	 * Ticks the world.
 	 */
 	tick() {
+		if (!PlayerInfo.playersOnline.length) {
+			return;
+		}
+
 		const tickingConfig = Frog.config.world.ticking;
 
 		const tickingFunctions = [
@@ -252,7 +256,7 @@ class World {
 				coordinates.z,
 			);
 
-			setInterval(() => {
+			setTimeout(() => {
 				vm.runInContext(
 					entity.moveRandomly(
 						runtimeId,
@@ -261,20 +265,7 @@ class World {
 					),
 					vm.createContext(this)
 				);
-			}, 5000);
-
-			// for (const player of PlayerInfo.playersOnline) {
-			// 	if (
-			// 		entity.shouldFollowPlayer(
-			// 			player.gamemode || Gamemode.FALLBACK,
-			// 			player.dead || false,
-			// 			coordinates.x,
-			// 			player.location.x
-			// 		)
-			// 	) {
-			// 		// TODO
-			// 	}
-			// }
+			}, 30000);
 		}
 	};
 
