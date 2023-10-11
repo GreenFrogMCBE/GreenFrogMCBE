@@ -213,7 +213,9 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
         }
     }
 
-    for (int yaw = 0; yaw < 40; yaw++) {
+    result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ");";
+
+    for (int yaw = 0; yaw < 15; yaw++) {
         result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ", " + to_string(yaw) + ");";
     }
 
