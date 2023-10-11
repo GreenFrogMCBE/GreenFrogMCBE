@@ -1375,6 +1375,11 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
+	export type EntityRemoveEvent = {
+		entityId: number;
+		cancel(): void;
+	}
+
 	export type Event =
 		| "blockBreak"
 		| "queryListen"
@@ -1448,6 +1453,7 @@ declare module "Frog" {
 		| "playerKill"
 		| "entitySpawnEvent"
 		| "entityTeleportEvent"
+		| "entityRemoveEvent";
 
 	export interface EventEmitter {
 		on(eventName: Event, listener?: any): void;

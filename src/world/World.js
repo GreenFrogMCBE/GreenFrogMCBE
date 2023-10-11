@@ -341,7 +341,7 @@ class World {
 			cancel() {
 				shouldSpawnEntity = true;
 			}
-		})
+		});
 
 		if (!shouldSpawnEntity) return;
 
@@ -390,7 +390,7 @@ class World {
 			cancel() {
 				shouldTeleportEntity = true;
 			}
-		})
+		});
 
 		if (!shouldTeleportEntity) return;
 
@@ -425,6 +425,17 @@ class World {
 	 * @param {number} entityId 
 	 */
 	removeEntity(entityId) {
+		let shouldRemoveEntity = false;
+		
+		Frog.eventEmitter.emit("entityRemoveEvent", {
+			entityId,
+			cancel() {
+				shouldRemoveEntity = true;
+			}
+		});
+
+		if (!shouldRemoveEntity) return;
+
 		const removePacket = new ServerRemoveEntityPacket();
 		removePacket.entity_id_self = String(entityId);
 
