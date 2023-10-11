@@ -18,7 +18,7 @@
 /**
  * Maximum number of entities that can be spawned
  */
-#define MAX_ENTITIES 15
+#define MAX_ENTITIES 80
 
 /**
  * Maximum X coordinate for entity spawning
@@ -34,7 +34,6 @@
  * Maximum Z coordinate for entity spawning
  */
 #define MAX_Z_COORDINATE 60
-
 
 /**
  * Chance for spawning an entity
@@ -82,10 +81,10 @@ string entities[4] = {
  * All possible directions that the entity can go
  */
 enum Direction {
-    North,
-    West,
-    East,
-    South
+    Forward,
+    Backward,
+    Left,
+    Right
 };
 
 /**
@@ -201,11 +200,20 @@ Vec2 _getRandomCoordinates() {
 string _moveRandomly(int runtimeId, float originalX, float originalZ) {
     string result;
 
-    for (int x = 0; x < 15; x++) {
-        originalX = originalX + (x / 10);        
+    int direction = rand() % 4;
 
-        result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ");";
+    for (int x = 0; x < 15; x++) {
+        switch (direction) {
+            case Direction::Forward:
+                originalX = originalX + (x / 10);        
+                break;
+            case Direction::Backward:
+                originalX = originalX - (x / 10);        
+                break;
+        }
     }
+
+    result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ");";
 
     return result;
 }
