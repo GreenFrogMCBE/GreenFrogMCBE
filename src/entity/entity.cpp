@@ -198,11 +198,13 @@ Vec2 _getRandomCoordinates() {
  * @return A string containing the code to execute for moving the entity
  */
 string _moveRandomly(int runtimeId, float originalX, float originalZ) {
+    // TODO: Rotations
+
     string result;
 
     int direction = rand() % 4;
 
-    for (int x = 0; x < 10; x++) {
+    for (int x = 0; x < 20; x++) {
         switch (direction) {
             case Direction::Forward:
                 originalX = originalX + 0.1;        
@@ -211,12 +213,10 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
                 originalX = originalX - 0.1;        
                 break;
         }
-    }
 
-    result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ");";
+        result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ");";
 
-    for (int yaw = 0; yaw < 15; yaw++) {
-        result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ", " + to_string(yaw) + ");";
+        this_thread::sleep_for(milliseconds(25));
     }
 
     return result;
