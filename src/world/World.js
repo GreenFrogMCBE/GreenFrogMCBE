@@ -328,6 +328,23 @@ class World {
 	 * @param {number} pitch 
 	 */
 	spawnEntity(entityName, entityId, x, y, z, yaw = 0, pitch = 0) {
+		let shouldSpawnEntity = false;
+		
+		Frog.eventEmitter.emit("entitySpawnEvent", {
+			entityName,
+			entityId,
+			x,
+			y,
+			z,
+			yaw,
+			pitch,
+			cancel() {
+				shouldSpawnEntity = true;
+			}
+		})
+
+		if (!shouldSpawnEntity) return;
+
 		const addEntityPacket = new ServerAddEntityPacket();
 		addEntityPacket.unique_id = String(entityId);
 		addEntityPacket.runtime_id = String(entityId);
