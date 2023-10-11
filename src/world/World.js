@@ -377,6 +377,23 @@ class World {
 	 * @param {number} [rotation_z]
 	 */
 	teleportEntity(entityId, x, y, z, rotation_x = 0, rotation_y = 0, rotation_z = 0) {
+		let shouldTeleportEntity = false;
+		
+		Frog.eventEmitter.emit("entityTeleportEvent", {
+			entityId,
+			x,
+			y,
+			z,
+			rotation_x,
+			rotation_y,
+			rotation_z,
+			cancel() {
+				shouldTeleportEntity = true;
+			}
+		})
+
+		if (!shouldTeleportEntity) return;
+
 		const movePacket = new ServerMoveEntityDataPacket();
 		movePacket.flags = {
 			has_x: true,

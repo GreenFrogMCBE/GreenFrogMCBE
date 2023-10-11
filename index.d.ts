@@ -1364,6 +1364,17 @@ declare module "Frog" {
 		cancel(): void;
 	};
 
+	export type EntityTeleportEvent = {
+		entityId: number;
+		x: number;
+		y: number;
+		z: number;
+		rotation_x: number;
+		rotation_y: number;
+		rotation_z: number;
+		cancel(): void;
+	};
+
 	export type Event =
 		| "blockBreak"
 		| "queryListen"
@@ -1436,6 +1447,7 @@ declare module "Frog" {
 		| "playerTeleport"
 		| "playerKill"
 		| "entitySpawnEvent"
+		| "entityTeleportEvent"
 
 	export interface EventEmitter {
 		on(eventName: Event, listener?: any): void;
