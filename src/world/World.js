@@ -256,7 +256,7 @@ class World {
 				coordinates.z,
 			);
 
-			setTimeout(() => {
+			setInterval(() => {
 				vm.runInContext(
 					entity.moveRandomly(
 						runtimeId,
@@ -265,7 +265,7 @@ class World {
 					),
 					vm.createContext(this)
 				);
-			}, 30000);
+			}, 15000);
 		}
 	};
 
