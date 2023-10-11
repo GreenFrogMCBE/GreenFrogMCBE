@@ -205,10 +205,10 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
     for (int x = 0; x < 15; x++) {
         switch (direction) {
             case Direction::Forward:
-                originalX = originalX + (x / 10);        
+                originalX = originalX + 0.1;        
                 break;
             case Direction::Backward:
-                originalX = originalX - (x / 10);        
+                originalX = originalX - 0.1;        
                 break;
         }
     }
