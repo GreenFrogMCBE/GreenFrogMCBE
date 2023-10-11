@@ -202,7 +202,7 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
 
     string result;
 
-    int direction = rand() % 4;
+    const int direction = rand() % 4;
 
     for (int x = 0; x < 20; x++) {
         switch (direction) {
