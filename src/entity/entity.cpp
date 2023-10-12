@@ -215,9 +215,9 @@ Vec2 _getRandomCoordinates() {
 string _moveRandomly(int runtimeId, float originalX, float originalZ) {
     // TODO: Rotations
 
-    string result;
+    string result = "";
 
-    const int direction = rand() % 4;
+    int direction = rand() % 4;
 
     for (int x = 0; x < 60; x++) {
         switch (direction) {

@@ -117,6 +117,10 @@ class World {
 	 * Ticks the world.
 	 */
 	tick() {
+		if (!PlayerInfo.playersOnline.length) {
+			return;
+		}
+
 		const tickingConfig = Frog.config.world.ticking;
 
 		const tickingFunctions = [
@@ -252,9 +256,9 @@ class World {
 				coordinates.z,
 			);
 
-			setInterval(async () => {
+			setInterval(() => {
 				vm.runInContext(
-					await entity.moveRandomly(
+					entity.moveRandomly(
 						runtimeId,
 						coordinates.x,
 						coordinates.z
@@ -324,7 +328,7 @@ class World {
 	 * @param {number} pitch 
 	 */
 	spawnEntity(entityName, entityId, x, y, z, yaw = 0, pitch = 0) {
-		let shouldSpawnEntity = false;
+		let shouldSpawnEntity = true;
 		
 		Frog.eventEmitter.emit("entitySpawnEvent", {
 			entityName,
@@ -335,7 +339,7 @@ class World {
 			yaw,
 			pitch,
 			cancel() {
-				shouldSpawnEntity = true;
+				shouldSpawnEntity = false;
 			}
 		});
 
@@ -373,7 +377,7 @@ class World {
 	 * @param {number} [rotation_z]
 	 */
 	teleportEntity(entityId, x, y, z, rotation_x = 0, rotation_y = 0, rotation_z = 0) {
-		let shouldTeleportEntity = false;
+		let shouldTeleportEntity = true;
 		
 		Frog.eventEmitter.emit("entityTeleportEvent", {
 			entityId,
@@ -384,7 +388,7 @@ class World {
 			rotation_y,
 			rotation_z,
 			cancel() {
-				shouldTeleportEntity = true;
+				shouldTeleportEntity = false;
 			}
 		});
 
@@ -421,12 +425,12 @@ class World {
 	 * @param {number} entityId 
 	 */
 	removeEntity(entityId) {
-		let shouldRemoveEntity = false;
+		let shouldRemoveEntity = true;
 		
 		Frog.eventEmitter.emit("entityRemoveEvent", {
 			entityId,
 			cancel() {
-				shouldRemoveEntity = true;
+				shouldRemoveEntity = false;
 			}
 		});
 
