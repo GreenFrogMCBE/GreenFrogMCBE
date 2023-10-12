@@ -230,8 +230,6 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
         }
 
         result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ");";
-
-        this_thread::sleep_for(milliseconds(25));
     }
 
     return result;

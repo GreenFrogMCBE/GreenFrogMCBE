@@ -117,10 +117,6 @@ class World {
 	 * Ticks the world.
 	 */
 	tick() {
-		if (!PlayerInfo.playersOnline.length) {
-			return;
-		}
-
 		const tickingConfig = Frog.config.world.ticking;
 
 		const tickingFunctions = [
@@ -256,9 +252,9 @@ class World {
 				coordinates.z,
 			);
 
-			setInterval(() => {
+			setInterval(async () => {
 				vm.runInContext(
-					entity.moveRandomly(
+					await entity.moveRandomly(
 						runtimeId,
 						coordinates.x,
 						coordinates.z
