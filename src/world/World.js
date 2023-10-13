@@ -256,16 +256,48 @@ class World {
 				coordinates.z,
 			);
 
-			setInterval(() => {
-				vm.runInContext(
-					entity.moveRandomly(
-						runtimeId,
-						coordinates.x,
-						coordinates.z
-					),
-					vm.createContext(this)
-				);
-			}, 15000);
+			for (const player of PlayerInfo.playersOnline) {
+				if (
+					entity.shouldFollowPlayer(
+						player.gamemode || "creative",
+						player.isDead || false,
+						coordinates.x || 0,
+						player.location.x || 0,
+						player.entities.isFollowing
+					)
+				) {
+					player.entities.isFollowing = true;
+
+					for (let i = 0; i < coordinates.x; i++) {
+						this.teleportEntity(
+							runtimeId,
+							player.location.x - i,
+							coordinates.y,
+							player.location.z + (coordinates.z / 50),
+						);
+					}
+
+					setInterval(() => {
+						this.teleportEntity(
+							runtimeId,
+							player.location.x + (coordinates.x / 50),
+							coordinates.y,
+							player.location.z + (coordinates.z / 50),
+						);
+					}, 100);
+				} else {
+					setInterval(() => {
+						vm.runInContext(
+							entity.moveRandomly(
+								runtimeId,
+								coordinates.x,
+								coordinates.z
+							),
+							vm.createContext(this)
+						);
+					}, 15000);
+				}
+			}
 		}
 	};
 
@@ -329,7 +361,7 @@ class World {
 	 */
 	spawnEntity(entityName, entityId, x, y, z, yaw = 0, pitch = 0) {
 		let shouldSpawnEntity = true;
-		
+
 		Frog.eventEmitter.emit("entitySpawnEvent", {
 			entityName,
 			entityId,
@@ -378,7 +410,7 @@ class World {
 	 */
 	teleportEntity(entityId, x, y, z, rotation_x = 0, rotation_y = 0, rotation_z = 0) {
 		let shouldTeleportEntity = true;
-		
+
 		Frog.eventEmitter.emit("entityTeleportEvent", {
 			entityId,
 			x,
@@ -426,7 +458,7 @@ class World {
 	 */
 	removeEntity(entityId) {
 		let shouldRemoveEntity = true;
-		
+
 		Frog.eventEmitter.emit("entityRemoveEvent", {
 			entityId,
 			cancel() {

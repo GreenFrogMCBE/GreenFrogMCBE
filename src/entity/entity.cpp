@@ -189,10 +189,16 @@ int _getRandomRuntimeId() {
  * @param isPlayerDead Whether the player is dead
  * @param entityX The entity's X coordinate
  * @param playerX The player's X coordinate
+ * @param isFollowing True if an entity is already following the player, false otherwise
  * @return True if the entity should follow the player, false otherwise
  */
-bool _shouldFollowPlayer(string playerGamemode, bool isPlayerDead, int entityX, int playerX) {
-    return ((playerGamemode == "survival" || playerGamemode == "adventure") && ((playerX - entityX) < 20) && !isPlayerDead);
+bool _shouldFollowPlayer(string playerGamemode, bool isPlayerDead, int entityX, int playerX, bool isFollowing) {
+    return (
+        (playerGamemode == "survival" || playerGamemode == "adventure") && 
+        ((playerX - entityX) < 7) && 
+        !isPlayerDead &&
+        !isFollowing
+    );
 }
 
 /**
@@ -249,8 +255,9 @@ Value shouldFollowPlayer(const CallbackInfo& info) {
     bool isDead = info[1].As<Boolean>().Value();
     int entityX = info[2].As<Number>().Int32Value();
     int playerX = info[3].As<Number>().Int32Value();
+    bool isFollowing = info[4].As<Boolean>().Value();
 
-    bool shouldFollow = _shouldFollowPlayer(gamemode, isDead, entityX, playerX);
+    bool shouldFollow = _shouldFollowPlayer(gamemode, isDead, entityX, playerX, isFollowing);
 
     return Boolean::New(env, shouldFollow);
 }
