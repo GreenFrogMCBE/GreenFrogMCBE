@@ -263,10 +263,10 @@ class World {
 						player.isDead || false,
 						coordinates.x || 0,
 						player.location.x || 0,
-						player.entities.isFollowing
+						player.entity.isFollowing
 					)
 				) {
-					player.entities.isFollowing = true;
+					player.entity.isFollowing = true;
 
 					for (let i = 0; i < coordinates.x; i++) {
 						this.teleportEntity(

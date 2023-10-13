@@ -167,6 +167,9 @@ class PlayerJoinHandler {
 				op: null,
 				permissionLevel: null,
 			},
+			entity: {
+				isFollowing: false,
+			},
 			_damage: {
 				fall: {
 					queue: null,
