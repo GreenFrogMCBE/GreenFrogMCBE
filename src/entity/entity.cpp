@@ -239,7 +239,25 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
     return result;
 }
 
+string _smoothTeleportToPlayer(int runtimeId, float playerX, float playerZ, float entityX, float entityY, float entityZ) {
+    string result = "";
+    
+    for (int x = 0; x < entityX; x++) {
+        int movementX = playerX - entityX;
+        int movementZ = playerZ + (entityZ / 50);
+        
+        result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(movementX) + ", " + to_string(entityY) + ", " + to_string(movementZ) + ");";
+    }
 
+    return result;
+}
+
+string _followPlayer(int runtimeId, float playerX, float playerZ, float entityX, float entityY, float entityZ) {
+    int movementX = playerX + (entityX / 50);
+    int movementZ = playerZ + (entityZ / 50);
+
+    return "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(movementX) + ", " + to_string(entityY) + ", " + to_string(movementZ) + ");";
+}
 
 /**
  * Determines if an entity should follow a player based on the player's gamemode, 

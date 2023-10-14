@@ -268,16 +268,8 @@ class World {
 				) {
 					player.entity.isFollowing = true;
 
-					
-
-					for (let i = 0; i < coordinates.x; i++) {
-						this.teleportEntity(
-							runtimeId,
-							player.location.x - i,
-							coordinates.y,
-							player.location.z + (coordinates.z / 50),
-						);
-					}
+					// _smoothTeleportToPlayer
+					// _followPlayer
 
 					setInterval(() => {
 						this.teleportEntity(

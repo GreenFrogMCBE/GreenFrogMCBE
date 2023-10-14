@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "thread": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "xstring": "cpp"
     }
 }
