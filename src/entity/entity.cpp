@@ -189,8 +189,8 @@ int _getRandomRuntimeId() {
  * @param isPlayerDead Whether the player is dead
  * @param entityX The entity's X coordinate
  * @param playerX The player's X coordinate
- * @param isFollowing True if an entity is already following the player, false otherwise
- * @return True if the entity should follow the player, false otherwise
+ * @param isFollowing A boolean indicating if an entity is already following the player, false otherwise
+ * @return A boolean indicating if the entity should follow the player, false otherwise
  */
 bool _shouldFollowPlayer(string playerGamemode, bool isPlayerDead, int entityX, int playerX, bool isFollowing) {
     return (
@@ -216,9 +216,12 @@ Vec2 _getRandomCoordinates() {
  * @param runtimeId The runtime ID of the entity
  * @param originalX The original X coordinate of the entity
  * @param originalZ The original Z coordinate of the entity
- * @return A string containing the code to execute for moving the entity
  */
-string _moveRandomly(int runtimeId, float originalX, float originalZ) {
+string _moveRandomly(
+    int runtimeId, 
+    float originalX, 
+    float originalZ
+) {
     string result = "";
 
     int direction = rand() % 4;
@@ -250,7 +253,14 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
  * @param entityZ The Z coordinate of the entity.
  * @return A string containing the code to execute for teleporting the entity.
  */
-string _smoothTeleportToPlayer(int runtimeId, float playerX, float playerZ, float entityX, float entityY, float entityZ) {
+string _smoothTeleportToPlayer(
+    int runtimeId, 
+    float playerX, 
+    float playerZ, 
+    float entityX, 
+    float entityY, 
+    float entityZ
+) {
     string result = "";
     
     for (int x = 0; x < entityX; x++) {
@@ -272,9 +282,15 @@ string _smoothTeleportToPlayer(int runtimeId, float playerX, float playerZ, floa
  * @param entityX The X coordinate of the entity.
  * @param entityY The Y coordinate of the entity.
  * @param entityZ The Z coordinate of the entity.
- * @return A string containing the code to execute for making the entity follow the player.
  */
-string _followPlayer(int runtimeId, float playerX, float playerZ, float entityX, float entityY, float entityZ) {
+string _followPlayer(
+    int runtimeId, 
+    float playerX, 
+    float playerZ, 
+    float entityX, 
+    float entityY, 
+    float entityZ
+) {
     int movementX = playerX + (entityX / 50);
     int movementZ = playerZ + (entityZ / 50);
 
@@ -286,7 +302,7 @@ string _followPlayer(int runtimeId, float playerX, float playerZ, float entityX,
  * whether the player is dead, and the distance between the entity and the player
  * 
  * @param info The callback info
- * @return A boolean value indicating whether the entity should follow the player
+ * @return A boolean indicating whether the entity should follow the player
  */
 Value shouldFollowPlayer(const CallbackInfo& info) {
     Env env = info.Env();
@@ -297,7 +313,13 @@ Value shouldFollowPlayer(const CallbackInfo& info) {
     int playerX = info[3].As<Number>().Int32Value();
     bool isFollowing = info[4].As<Boolean>().Value();
 
-    bool shouldFollow = _shouldFollowPlayer(gamemode, isDead, entityX, playerX, isFollowing);
+    bool shouldFollow = _shouldFollowPlayer(
+        gamemode, 
+        isDead, 
+        entityX, 
+        playerX, 
+        isFollowing
+    );
 
     return Boolean::New(env, shouldFollow);
 }
@@ -349,7 +371,11 @@ Value moveRandomly(const CallbackInfo& info) {
     float coordinateX = info[1].As<Number>().FloatValue();
     float coordinateZ = info[2].As<Number>().FloatValue();
 
-    string codeToExecute = _moveRandomly(runtimeId, coordinateX, coordinateZ);
+    string codeToExecute = _moveRandomly(
+        runtimeId, 
+        coordinateX, 
+        coordinateZ
+    );
 
     return String::New(env, codeToExecute);
 }
@@ -407,7 +433,14 @@ Value smoothTeleportToPlayer(const CallbackInfo& info) {
     float entityY = info[4].As<Number>().FloatValue();
     float entityZ = info[5].As<Number>().FloatValue();
 
-    string codeToExecute = _smoothTeleportToPlayer(runtimeId, playerX, playerZ, entityX, entityY, entityZ);
+    string codeToExecute = _smoothTeleportToPlayer(
+        runtimeId, 
+        playerX, 
+        playerZ, 
+        entityX, 
+        entityY, 
+        entityZ
+    );
 
     return String::New(env, codeToExecute);
 }
@@ -427,7 +460,14 @@ Value followPlayer(const CallbackInfo& info) {
     float entityY = info[4].As<Number>().FloatValue();
     float entityZ = info[5].As<Number>().FloatValue();
 
-    string codeToExecute = _followPlayer(runtimeId, playerX, playerZ, entityX, entityY, entityZ);
+    string codeToExecute = _followPlayer(
+        runtimeId, 
+        playerX, 
+        playerZ, 
+        entityX, 
+        entityY, 
+        entityZ
+    );
 
     return String::New(env, codeToExecute);
 }
