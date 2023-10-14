@@ -100,7 +100,7 @@ module.exports = {
 	releaseData: {
 		minorServerVersion: "3.8",
 		majorServerVersion: "3.0",
-		versionDescription: "Updated to 1.20.30",
+		versionDescription: "Updated to 1.20.30 and added entities",
 		apiVersion: "3.0",
 	},
 
