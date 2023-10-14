@@ -25,14 +25,9 @@
 #define DEBUG
 
 /**
- * Maximum random number for various calculations
+ * Maximum number of entities that can be spawned at once
  */
-#define MAX_RANDOM 5
-
-/**
- * Maximum number of entities that can be spawned
- */
-#define MAX_ENTITIES 80
+#define MAX_ENTITIES 15
 
 /**
  * Maximum X coordinate for entity spawning
@@ -50,12 +45,7 @@
 #define MAX_Z_COORDINATE 60
 
 /**
- * Chance for spawning an entity
- */
-#define CHANCE 3
-
-/**
- * The night time. Used for spawning entities
+ * The night time as a number in ticks
  */
 #define NIGHT_TIME 1600
 
@@ -164,7 +154,7 @@ bool _shouldSpawnHostileEntity(int time) {
     #ifdef DEBUG
        bool shouldSpawn = true;
     #else 
-       bool shouldSpawn = (time > NIGHT_TIME && (rand() % MAX_RANDOM) > CHANCE);
+       bool shouldSpawn = (time > NIGHT_TIME && (rand() % 5) > 3);
     #endif
 
     return shouldSpawn && !_isEntityLimitReached();
