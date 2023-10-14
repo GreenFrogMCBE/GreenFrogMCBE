@@ -175,8 +175,6 @@ query.server.error=Query error: %s
 
 query.server.network.packets.invalidPacket=Invalid query packet from %s
 
-garbageCollector.exposeGCNotEnabled=For better performance, run GreenFrog with the `--expose-gc` flag
-
 logger.info=INFO
 logger.warn=WARNING
 logger.error=ERROR

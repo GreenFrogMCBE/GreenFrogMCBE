@@ -22,18 +22,11 @@ const PlayerInfo = require("../player/PlayerInfo");
 const Language = require("./Language");
 
 module.exports = {
-	/** @type {boolean} */
-	exposeGCEnabled: false,
-
 	/**
 	 * Starts the garbage collector
 	 */
 	start() {
-		if (global.gc) {
-			this.exposeGCEnabled = true;
-		} else {
-			Logger.warning(Language.getKey("garbageCollector.exposeGCNotEnabled"));
-		}
+		this.exposeGCEnabled = true;
 
 		setInterval(() => {
 			this.gc();
@@ -67,14 +60,10 @@ module.exports = {
 	},
 
 	/**
-	 * Clears RAM from useless entries
+	 * Clears RAM from unused entries
 	 */
 	async gc() {
 		Logger.debug(Language.getKey("garbageCollector.started"));
-
-		if (this.exposeGCEnabled) {
-			global.gc();
-		}
 
 		await this.clearOfflinePlayers();
 
