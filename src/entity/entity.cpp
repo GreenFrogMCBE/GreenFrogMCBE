@@ -239,6 +239,17 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
     return result;
 }
 
+/**
+ * An internal function that smoothly teleports an entity to a player.
+ * 
+ * @param runtimeId The runtime ID of the entity.
+ * @param playerX The X coordinate of the player.
+ * @param playerZ The Z coordinate of the player.
+ * @param entityX The X coordinate of the entity.
+ * @param entityY The Y coordinate of the entity.
+ * @param entityZ The Z coordinate of the entity.
+ * @return A string containing the code to execute for teleporting the entity.
+ */
 string _smoothTeleportToPlayer(int runtimeId, float playerX, float playerZ, float entityX, float entityY, float entityZ) {
     string result = "";
     
@@ -252,6 +263,17 @@ string _smoothTeleportToPlayer(int runtimeId, float playerX, float playerZ, floa
     return result;
 }
 
+/**
+ * An internal function that makes an entity follow a player.
+ * 
+ * @param runtimeId The runtime ID of the entity.
+ * @param playerX The X coordinate of the player.
+ * @param playerZ The Z coordinate of the player.
+ * @param entityX The X coordinate of the entity.
+ * @param entityY The Y coordinate of the entity.
+ * @param entityZ The Z coordinate of the entity.
+ * @return A string containing the code to execute for making the entity follow the player.
+ */
 string _followPlayer(int runtimeId, float playerX, float playerZ, float entityX, float entityY, float entityZ) {
     int movementX = playerX + (entityX / 50);
     int movementZ = playerZ + (entityZ / 50);
@@ -371,6 +393,46 @@ Value getRandomYawRotation(const CallbackInfo& info) {
 }
 
 /**
+ * Smoothly teleports an entity to the player
+ * 
+ * @param info The callback info. 
+ */
+Value smoothTeleportToPlayer(const CallbackInfo& info) {
+    Env env = info.Env();
+
+    int runtimeId = info[0].As<Number>().Int32Value();    
+    float playerX = info[1].As<Number>().FloatValue();
+    float playerZ = info[2].As<Number>().FloatValue();
+    float entityX = info[3].As<Number>().FloatValue();
+    float entityY = info[4].As<Number>().FloatValue();
+    float entityZ = info[5].As<Number>().FloatValue();
+
+    string codeToExecute = _smoothTeleportToPlayer(runtimeId, playerX, playerZ, entityX, entityY, entityZ);
+
+    return String::New(env, codeToExecute);
+}
+
+/**
+ * Makes an entity follow a player.
+ * 
+ * @param info The callback info. 
+ */
+Value followPlayer(const CallbackInfo& info) {
+    Env env = info.Env();
+
+    int runtimeId = info[0].As<Number>().Int32Value();    
+    float playerX = info[1].As<Number>().FloatValue();
+    float playerZ = info[2].As<Number>().FloatValue();
+    float entityX = info[3].As<Number>().FloatValue();
+    float entityY = info[4].As<Number>().FloatValue();
+    float entityZ = info[5].As<Number>().FloatValue();
+
+    string codeToExecute = _followPlayer(runtimeId, playerX, playerZ, entityX, entityY, entityZ);
+
+    return String::New(env, codeToExecute);
+}
+
+/**
  * Initializes the module.
  * 
  * @param env The environment in which the module is being initialized.
@@ -384,10 +446,12 @@ Object init(Env env, Object exports) {
 
     exports["getRandomSpawnCoordinates"] = Function::New(env, getRandomSpawnCoordinates);
     exports["shouldSpawnHostileEntity"] = Function::New(env, shouldSpawnHostileEntity);
+    exports["smoothTeleportToPlayer"] = Function::New(env, smoothTeleportToPlayer);
     exports["getRandomYawRotation"] = Function::New(env, getRandomYawRotation);
     exports["shouldFollowPlayer"] = Function::New(env, shouldFollowPlayer);
     exports["getRandomRuntimeId"] = Function::New(env, getRandomRuntimeId);
     exports["getRandomEntity"] = Function::New(env, getRandomEntity);
+    exports["followPlayer"] = Function::New(env, followPlayer);
     exports["moveRandomly"] = Function::New(env, moveRandomly);
 
     debugLog("Initialized!");

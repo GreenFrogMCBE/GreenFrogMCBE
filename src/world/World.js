@@ -268,21 +268,43 @@ class World {
 				) {
 					player.entity.isFollowing = true;
 
-					// _smoothTeleportToPlayer
-					// _followPlayer
-					return;
-				}
-
-				setInterval(() => {
 					vm.runInContext(
-						entity.moveRandomly(
+						entity.smoothTeleportToPlayer(
 							runtimeId,
+							player.location.x,
+							player.location.z,
 							coordinates.x,
-							coordinates.z
+							coordinates.y,
+							coordinates.z,
 						),
 						vm.createContext(this)
 					);
-				}, 15000);
+
+					setInterval(() => {
+						vm.runInContext(
+							entity.followPlayer(
+								runtimeId,
+								player.location.x,
+								player.location.z,
+								coordinates.x,
+								coordinates.y,
+								coordinates.z,
+							),
+							vm.createContext(this)
+						);
+					}, 100);
+				} else {
+					setInterval(() => {
+						vm.runInContext(
+							entity.moveRandomly(
+								runtimeId,
+								coordinates.x,
+								coordinates.z
+							),
+							vm.createContext(this)
+						);
+					}, 15000);
+				}
 			}
 		}
 	};
