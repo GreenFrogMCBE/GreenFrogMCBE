@@ -219,8 +219,6 @@ Vec2 _getRandomCoordinates() {
  * @return A string containing the code to execute for moving the entity
  */
 string _moveRandomly(int runtimeId, float originalX, float originalZ) {
-    // TODO: Rotations
-
     string result = "";
 
     int direction = rand() % 4;
@@ -240,6 +238,8 @@ string _moveRandomly(int runtimeId, float originalX, float originalZ) {
 
     return result;
 }
+
+
 
 /**
  * Determines if an entity should follow a player based on the player's gamemode, 

@@ -268,6 +268,8 @@ class World {
 				) {
 					player.entity.isFollowing = true;
 
+					
+
 					for (let i = 0; i < coordinates.x; i++) {
 						this.teleportEntity(
 							runtimeId,
