@@ -29,7 +29,6 @@
  */
 #define MAX_RANDOM 5
 
-
 /**
  * Maximum number of entities that can be spawned
  */
@@ -421,7 +420,7 @@ Value getRandomYawRotation(const CallbackInfo& info) {
 /**
  * Smoothly teleports an entity to the player
  * 
- * @param info The callback info. 
+ * @param info The callback info
  */
 Value smoothTeleportToPlayer(const CallbackInfo& info) {
     Env env = info.Env();
@@ -446,9 +445,9 @@ Value smoothTeleportToPlayer(const CallbackInfo& info) {
 }
 
 /**
- * Makes an entity follow a player.
+ * Makes an entity follow the player.
  * 
- * @param info The callback info. 
+ * @param info The callback info.
  */
 Value followPlayer(const CallbackInfo& info) {
     Env env = info.Env();
