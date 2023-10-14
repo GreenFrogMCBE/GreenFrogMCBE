@@ -126,6 +126,8 @@ module.exports = {
 
 	/**
 	 * Paths to files and folders
+	 * 
+	 * @type {import("Frog").Directories}
 	 */
 	directories: {
 		opFile: "./ops.yml",
