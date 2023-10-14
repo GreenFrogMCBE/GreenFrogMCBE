@@ -270,15 +270,6 @@ class World {
 
 					// _smoothTeleportToPlayer
 					// _followPlayer
-
-					setInterval(() => {
-						this.teleportEntity(
-							runtimeId,
-							player.location.x + (coordinates.x / 50),
-							coordinates.y,
-							player.location.z + (coordinates.z / 50),
-						);
-					}, 100);
 				} else {
 					setInterval(() => {
 						vm.runInContext(
