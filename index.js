@@ -78,10 +78,10 @@ ${Colors.RESET}`,
 			),
 		);
 
-		fs.mkdirSync("crash-reports", { recursive: true });
+		fs.mkdirSync(Frog.directories.crashReportsFolder, { recursive: true });
 		fs.writeFileSync(crashFile, `Error: ${error.stack}`);
 
-		process.exit(-1);
+		process.exit(Frog.config.dev.exitCodes.crash);
 	}
 }
 

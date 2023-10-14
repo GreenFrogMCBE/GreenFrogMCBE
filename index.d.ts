@@ -23,6 +23,7 @@ declare module "Frog" {
 		worldFolder: string,
 		pluginsFolder: string,
 		pluginDataFolders: string
+		crashReportsFolder: string,
 	}
 
 	export type ReleaseData = {

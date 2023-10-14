@@ -134,7 +134,8 @@ module.exports = {
 		worldFolder: "./world",
 		configFile: "./config.yml",
 		pluginsFolder: "./plugins",
-		pluginDataFolders: "./pluginData"
+		pluginDataFolders: "./pluginData",
+		crashReportsFolder: "./crash-reports",
 	},
 
 	/**

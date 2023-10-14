@@ -77,7 +77,7 @@ function setupHandlers() {
 		handleCriticalError(error);
 	});
 
-	process.on("SIGINT", async () => {
+	process.on("SIGINT", () => {
 		Frog.shutdownServer();
 	});
 }
