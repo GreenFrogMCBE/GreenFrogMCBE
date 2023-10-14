@@ -270,18 +270,19 @@ class World {
 
 					// _smoothTeleportToPlayer
 					// _followPlayer
-				} else {
-					setInterval(() => {
-						vm.runInContext(
-							entity.moveRandomly(
-								runtimeId,
-								coordinates.x,
-								coordinates.z
-							),
-							vm.createContext(this)
-						);
-					}, 15000);
+					return;
 				}
+
+				setInterval(() => {
+					vm.runInContext(
+						entity.moveRandomly(
+							runtimeId,
+							coordinates.x,
+							coordinates.z
+						),
+						vm.createContext(this)
+					);
+				}, 15000);
 			}
 		}
 	};
