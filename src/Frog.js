@@ -132,6 +132,7 @@ module.exports = {
 	directories: {
 		opFile: "./ops.yml",
 		worldFolder: "./world",
+		configFile: "./config.yml",
 		pluginsFolder: "./plugins",
 		pluginDataFolders: "./pluginData"
 	},

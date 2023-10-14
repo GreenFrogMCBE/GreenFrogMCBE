@@ -19,6 +19,7 @@ declare module "Frog" {
 
 	export type Directories = {	
 		opFile: string,
+		configFile: string,
 		worldFolder: string,
 		pluginsFolder: string,
 		pluginDataFolders: string
