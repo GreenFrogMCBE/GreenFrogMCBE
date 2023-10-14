@@ -124,6 +124,9 @@ module.exports = {
 		},
 	},
 
+	/**
+	 * Paths to files and folders
+	 */
 	directories: {
 		opFile: "./ops.yml",
 		worldFolder: "./world",

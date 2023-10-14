@@ -17,6 +17,13 @@ declare module "Frog" {
 	import { Client, Player as OnlinePlayer, Server } from "frog-protocol";
 	import { Socket, RemoteInfo } from "dgram";
 
+	export type Directories = {	
+		opFile: string,
+		worldFolder: string,
+		pluginsFolder: string,
+		pluginDataFolders: string
+	}
+
 	export type ReleaseData = {
 		minorServerVersion: string;
 		majorServerVersion: string;
