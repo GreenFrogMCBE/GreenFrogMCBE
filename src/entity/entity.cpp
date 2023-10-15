@@ -154,14 +154,15 @@ string _getRandomEntity() {
  * 
  * @attention Always returns true in debug mode
  * 
- * @param time The current time
+ * @param time The time
+ * @param worldType The world type
  * @return True if a hostile entity should be spawned, false otherwise
  */
-bool _shouldSpawnHostileEntity(int time) {
+bool _shouldSpawnHostileEntity(int time, string worldType) {
     #ifdef DEBUG
        bool shouldSpawn = true;
     #else 
-       bool shouldSpawn = (time > NIGHT_TIME && (rand() % 5) > 3);
+       bool shouldSpawn = (time > NIGHT_TIME && (rand() % 5) > 3 && !worldType == "void");
     #endif
 
     return shouldSpawn && !_isEntityLimitReached();
@@ -401,8 +402,9 @@ Value shouldSpawnHostileEntity(const CallbackInfo& info) {
     Env env = info.Env();
 
     int time = info[0].As<Number>().Int32Value();
+    string worldType = info[1].As<String>().Utf8Value();
 
-    return Boolean::New(env, _shouldSpawnHostileEntity(time));
+    return Boolean::New(env, _shouldSpawnHostileEntity(time, worldType));
 }
 
 /**

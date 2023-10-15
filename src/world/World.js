@@ -243,7 +243,7 @@ class World {
 	 * Ticks entity spawning.
 	 */
 	tickEntities = () => {
-		if (entity.shouldSpawnHostileEntity(time)) {
+		if (entity.shouldSpawnHostileEntity(time, this.generator)) {
 			const coordinates = entity.getRandomSpawnCoordinates();
 			const runtimeId = entity.getRandomRuntimeId();
 			const entityName = entity.getRandomEntity();
