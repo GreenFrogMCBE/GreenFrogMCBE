@@ -52,7 +52,10 @@ const Logger = require("../../utils/Logger");
 
 const World = require("../../world/World");
 
+const WorldGenerator = require("../../world/types/WorldGenerator");
 const Biome = require("../../world/types/Biome");
+
+const entity = require("../../entity/build/Release/entity.node");
 
 const biomeDefinitions = require("../../resources/json/biomeDefinitions.json").raw_payload;
 const creativeContentItems = require("../../resources/json/creativeContent.json").items;
@@ -105,6 +108,14 @@ class ClientResourcePackResponsePacket extends Packet {
 				player.world.name = config.world.name;
 				player.world.generator = config.world.generators.type.toLowerCase();
 
+				player.world.spawnCoordinates = { x: 0, y: -48, z: 0 };
+
+				if (player.world.generator == WorldGenerator.FLAT) {
+					player.world.spawnCoordinates.y = -47;
+				}
+
+				entity.setSpawnYCoordinate(player.world.spawnCoordinates.y - 2);
+
 				player.permissions.op = false;
 				player.permissions.permissionLevel = config.dev.defaultPermissionLevel;
 
@@ -121,7 +132,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				startGame.entity_id = 0;
 				startGame.runtime_entity_id = 1;
 				startGame.player_gamemode = player.gamemode;
-				startGame.player_position = { x: 0, y: -47, z: 0 };
+				startGame.player_position = player.world.spawnCoordinates;
 				startGame.rotation = { x: 0, z: 0 };
 				startGame.seed = [0, 0];
 				startGame.biome_type = 0;
@@ -217,7 +228,7 @@ class ClientResourcePackResponsePacket extends Packet {
 
 					Frog.eventEmitter.emit("playerSpawn", { player });
 
-					player.setEntityData(/** @type {import("Frog").EntityData} */ (entityData));
+					player.setEntityData(/** @type {import("Frog").EntityData} */(entityData));
 					player.setSpeed(0.1);
 
 					for (const onlinePlayer of PlayerInfo.playersOnline) {

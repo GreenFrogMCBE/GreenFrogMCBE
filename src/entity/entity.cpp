@@ -27,27 +27,27 @@
 /**
  * Maximum number of entities that can be spawned at once
  */
-#define MAX_ENTITIES 15
+constexpr int MAX_ENTITIES = 15;
 
 /**
  * Maximum X coordinate for entity spawning
  */
-#define MAX_X_COORDINATE 60
+constexpr int MAX_X_COORDINATE = 60;
 
 /**
- * Y coordinate for entity spawning
+ * The Y coordinate for entity spawning
  */
-#define SPAWN_Y_COORDINATE -50
+int SPAWN_Y_COORDINATE = NULL;
 
 /**
  * Maximum Z coordinate for entity spawning
  */
-#define MAX_Z_COORDINATE 60
+constexpr int MAX_Z_COORDINATE = 60;
 
 /**
  * The night time as a number in ticks
  */
-#define NIGHT_TIME 1600
+constexpr int NIGHT_TIME = 1600;
 
 /**
  * A macro returns a random element from an array
@@ -110,6 +110,13 @@ void debugLog(string message) {
     #ifdef DEBUG
         cout << "EntityDebug | " << message << endl;
     #endif
+}
+
+void _setSpawnYCoordinate(int coordinate) {
+    debugLog("before: " + to_string(SPAWN_Y_COORDINATE));
+    debugLog("changeto: " + to_string(coordinate));
+    SPAWN_Y_COORDINATE = coordinate;
+    debugLog("after: " + to_string(SPAWN_Y_COORDINATE));
 }
 
 /**
@@ -181,7 +188,13 @@ int _getRandomRuntimeId() {
  * @param isFollowing A boolean indicating if an entity is already following the player, false otherwise
  * @return A boolean indicating if the entity should follow the player, false otherwise
  */
-bool _shouldFollowPlayer(string playerGamemode, bool isPlayerDead, int entityX, int playerX, bool isFollowing) {
+bool _shouldFollowPlayer(
+    string playerGamemode, 
+    bool isPlayerDead, 
+    int entityX, 
+    int playerX, 
+    bool isFollowing
+) {
     return (
         (playerGamemode == "survival" || playerGamemode == "adventure") && 
         ((playerX - entityX) < 7) && 
@@ -206,11 +219,7 @@ Vec2 _getRandomCoordinates() {
  * @param originalX The original X coordinate of the entity
  * @param originalZ The original Z coordinate of the entity
  */
-string _moveRandomly(
-    int runtimeId, 
-    float originalX, 
-    float originalZ
-) {
+string _moveRandomly(int runtimeId, float originalX, float originalZ) {
     string result = "";
 
     int direction = rand() % 4;
@@ -225,7 +234,7 @@ string _moveRandomly(
                 break;
         }
 
-        result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", -50, " + to_string(originalZ) + ");";
+        result = result + "this.teleportEntity(" + to_string(runtimeId) + ", " + to_string(originalX) + ", " + to_string(SPAWN_Y_COORDINATE) + ", " + to_string(originalZ) + ");";
     }
 
     return result;
@@ -313,6 +322,16 @@ Value shouldFollowPlayer(const CallbackInfo& info) {
     return Boolean::New(env, shouldFollow);
 }
 
+Value setSpawnYCoordinate(const CallbackInfo& info) {
+    Env env = info.Env();
+
+    int spawnY = info[0].As<Number>().Int32Value();
+
+    _setSpawnYCoordinate(spawnY);
+
+    return Boolean::New(env, true);
+}
+
 /**
  * Returns random coordinates for entity spawning
  * 
@@ -325,7 +344,7 @@ Value getRandomSpawnCoordinates(const CallbackInfo& info) {
     Vec2 spawnCoordinates = _getRandomCoordinates();
 
     Object result = Object::New(env);
-
+    debugLog(to_string(SPAWN_Y_COORDINATE));
     result["x"] = Number::New(env, spawnCoordinates.x);
     result["y"] = Number::New(env, SPAWN_Y_COORDINATE);
     result["z"] = Number::New(env, spawnCoordinates.z);
@@ -477,6 +496,7 @@ Object init(Env env, Object exports) {
     exports["shouldSpawnHostileEntity"] = Function::New(env, shouldSpawnHostileEntity);
     exports["smoothTeleportToPlayer"] = Function::New(env, smoothTeleportToPlayer);
     exports["getRandomYawRotation"] = Function::New(env, getRandomYawRotation);
+    exports["setSpawnYCoordinate"] = Function::New(env, setSpawnYCoordinate);
     exports["shouldFollowPlayer"] = Function::New(env, shouldFollowPlayer);
     exports["getRandomRuntimeId"] = Function::New(env, getRandomRuntimeId);
     exports["getRandomEntity"] = Function::New(env, getRandomEntity);
