@@ -22,7 +22,7 @@
 /**
  * This macro determines if debugging is enabled
  */
-#define DEBUG
+//#define DEBUG
 
 /**
  * Maximum number of entities that can be spawned at once
@@ -162,7 +162,7 @@ bool _shouldSpawnHostileEntity(int time, string worldType) {
     #ifdef DEBUG
        bool shouldSpawn = true;
     #else 
-       bool shouldSpawn = (time > NIGHT_TIME && (rand() % 5) > 3 && !worldType == "void");
+       bool shouldSpawn = (time > NIGHT_TIME && (rand() % 5) > 3 && !(worldType == "void"));
     #endif
 
     return shouldSpawn && !_isEntityLimitReached();
