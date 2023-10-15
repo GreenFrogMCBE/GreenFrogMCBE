@@ -112,11 +112,11 @@ void debugLog(string message) {
     #endif
 }
 
+/**
+ * An internal that sets the Y-coordinate where entities should spawn.
+ */
 void _setSpawnYCoordinate(int coordinate) {
-    debugLog("before: " + to_string(SPAWN_Y_COORDINATE));
-    debugLog("changeto: " + to_string(coordinate));
     SPAWN_Y_COORDINATE = coordinate;
-    debugLog("after: " + to_string(SPAWN_Y_COORDINATE));
 }
 
 /**
@@ -322,6 +322,9 @@ Value shouldFollowPlayer(const CallbackInfo& info) {
     return Boolean::New(env, shouldFollow);
 }
 
+/**
+ * Sets the Y-coordinate where entities should spawn.
+ */
 Value setSpawnYCoordinate(const CallbackInfo& info) {
     Env env = info.Env();
 
@@ -344,7 +347,7 @@ Value getRandomSpawnCoordinates(const CallbackInfo& info) {
     Vec2 spawnCoordinates = _getRandomCoordinates();
 
     Object result = Object::New(env);
-    debugLog(to_string(SPAWN_Y_COORDINATE));
+
     result["x"] = Number::New(env, spawnCoordinates.x);
     result["y"] = Number::New(env, SPAWN_Y_COORDINATE);
     result["z"] = Number::New(env, spawnCoordinates.z);
