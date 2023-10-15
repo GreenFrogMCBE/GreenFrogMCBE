@@ -22,7 +22,7 @@
 /**
  * This macro determines if debugging is enabled
  */
-//#define DEBUG
+#define DEBUG
 
 /**
  * Maximum number of entities that can be spawned at once
