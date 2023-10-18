@@ -59,7 +59,7 @@ class World {
 		/**
 		 * @type {import("Frog").WorldGenerator | undefined}
 		 */
-		this.generator;
+		this.generator = WorldGenerator.DEFAULT;
 
 		/**
 		 * @type {number}
