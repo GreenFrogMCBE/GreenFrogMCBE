@@ -19,8 +19,8 @@
 
 > [!WARNING]
 > Contributions below are outdated <br>
-> For adding in-game argument support for commands (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/311)
-> For making the logger customizable (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/313)
+> For adding in-game argument support for commands (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/311) <br>
+> For making the logger customizable (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/313) <br>
 > For adding `BasePlugin.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/20 and https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/243) <br>
 > For updating language files (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/19) <br>
 > For rewriting some parts of command system (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/109) <br>
