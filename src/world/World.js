@@ -57,7 +57,7 @@ class World {
 		this.renderDistance = 4;
 
 		/**
-		 * @type {import("Frog").WorldGenerator | undefined}
+		 * @type {import("Frog").WorldGenerator}
 		 */
 		this.generator = WorldGenerator.DEFAULT;
 
