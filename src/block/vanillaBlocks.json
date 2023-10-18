@@ -25,5 +25,461 @@
     },
     "water": {
         "legacy_id": 9
+    },
+    "gravel": {
+        "legacy_id": 13
+    },
+    "gold_ore": {
+        "legacy_id": 14
+    },
+    "iron_ore": {
+        "legacy_id": 15
+    },
+    "sponge": {
+        "legacy_id": 19
+    },
+    "glass": {
+        "legacy_id": 20
+    },
+    "lapis_ore": {
+        "legacy_id": 21
+    },
+    "lapis_block": {
+        "legacy_id": 22
+    },
+    "sandstone": {
+        "legacy_id": 24
+    },
+    "note_block": {
+        "legacy_id": 25
+    },
+    "sticky_piston": {
+        "legacy_id": 29
+    },
+    "cobweb": {
+        "legacy_id": 30
+    },
+    "piston": {
+        "legacy_id": 33
+    },
+    "wool": {
+        "legacy_id": 35
+    },
+    "yellow_flower": {
+        "legacy_id": 37
+    },
+    "red_flower": {
+        "legacy_id": 38
+    },
+    "brown_mushroom": {
+        "legacy_id": 39
+    },
+    "red_mushroom": {
+        "legacy_id": 40
+    },
+    "gold_block": {
+        "legacy_id": 41
+    },
+    "iron_block": {
+        "legacy_id": 42
+    },
+    "stone_slab2": {
+        "legacy_id": 182
+    },
+    "bricks": {
+        "legacy_id": 45
+    },
+    "tnt": {
+        "legacy_id": 46
+    },
+    "bookshelf": {
+        "legacy_id": 47
+    },
+    "mossy_cobblestone": {
+        "legacy_id": 48
+    },
+    "obsidian": {
+        "legacy_id": 49
+    },
+    "torch": {
+        "legacy_id": 50
+    },
+    "end_rod": {
+        "legacy_id": 198
+    },
+    "chorus_plant": {
+        "legacy_id": 199
+    },
+    "chorus_flower": {
+        "legacy_id": 200
+    },
+    "purpur_block": {
+        "legacy_id": 201
+    },
+    "purpur_pillar": {
+        "legacy_id": 202
+    },
+    "purpur_stairs": {
+        "legacy_id": 203
+    },
+    "spawner": {
+        "legacy_id": 52
+    },
+    "oak_stairs": {
+        "legacy_id": 53
+    },
+    "diamond_ore": {
+        "legacy_id": 56
+    },
+    "diamond_block": {
+        "legacy_id": 57
+    },
+    "crafting_table": {
+        "legacy_id": 58
+    },
+    "farmland": {
+        "legacy_id": 60
+    },
+    "furnace": {
+        "legacy_id": 61
+    },
+    "ladder": {
+        "legacy_id": 65
+    },
+    "rail": {
+        "legacy_id": 66
+    },
+    "cobblestone_stairs": {
+        "legacy_id": 67
+    },
+    "redstone_torch": {
+        "legacy_id": 76
+    },
+    "snow": {
+        "legacy_id": 78
+    },
+    "snow_block": {
+        "legacy_id": 80
+    },
+    "cactus": {
+        "legacy_id": 81
+    },
+    "clay": {
+        "legacy_id": 337
+    },
+    "jukebox": {
+        "legacy_id": 84
+    },
+    "oak_fence": {
+        "legacy_id": 85
+    },
+    "spruce_fence": {
+        "legacy_id": 188
+    },
+    "birch_fence": {
+        "legacy_id": 189
+    },
+    "jungle_fence": {
+        "legacy_id": 190
+    },
+    "acacia_fence": {
+        "legacy_id": 192
+    },
+    "dark_oak_fence": {
+        "legacy_id": 191
+    },
+    "pumpkin": {
+        "legacy_id": 86
+    },
+    "lever": {
+        "legacy_id": 69
+    },
+    "stone_pressure_plate": {
+        "legacy_id": 70
+    },
+    "oak_pressure_plate": {
+        "legacy_id": 72
+    },
+    "netherrack": {
+        "legacy_id": 87
+    },
+    "soul_sand": {
+        "legacy_id": 88
+    },
+    "glowstone": {
+        "legacy_id": 89
+    },
+    "jack_o_lantern": {
+        "legacy_id": 91
+    },
+    "oak_trapdoor": {
+        "legacy_id": 96
+    },
+    "infested_stone": {
+        "legacy_id": 97
+    },
+    "brown_mushroom_block": {
+        "legacy_id": 99
+    },
+    "red_mushroom_block": {
+        "legacy_id": 100
+    },
+    "iron_bars": {
+        "legacy_id": 101
+    },
+    "glass_pane": {
+        "legacy_id": 102
+    },
+    "melon_block": {
+        "legacy_id": 103
+    },
+    "fence_gate": {
+        "legacy_id": 107
+    },
+    "lily_pad": {
+        "legacy_id": 111
+    },
+    "nether_bricks": {
+        "legacy_id": 112
+    },
+    "end_stone_bricks": {
+        "legacy_id": 206
+    },
+    "dragon_egg": {
+        "legacy_id": 122
+    },
+    "redstone_lamp": {
+        "legacy_id": 123
+    },
+    "sandstone_stairs": {
+        "legacy_id": 128
+    },
+    "emerald_ore": {
+        "legacy_id": 129
+    },
+    "ender_chest": {
+        "legacy_id": 130
+    },
+    "tripwire_hook": {
+        "legacy_id": 131
+    },
+    "emerald_block": {
+        "legacy_id": 133
+    },
+    "spruce_stairs": {
+        "legacy_id": 134
+    },
+    "birch_stairs": {
+        "legacy_id": 135
+    },
+    "jungle_stairs": {
+        "legacy_id": 136
+    },
+    "command_block": {
+        "legacy_id": 137
+    },
+    "beacon": {
+        "legacy_id": 138
+    },
+    "cobblestone_wall": {
+        "legacy_id": 139
+    },
+    "oak_button": {
+        "legacy_id": 143
+    },
+    "anvil": {
+        "legacy_id": 145
+    },
+    "trapped_chest": {
+        "legacy_id": 146
+    },
+    "light_weighted_pressure_plate": {
+        "legacy_id": 147
+    },
+    "heavy_weighted_pressure_plate": {
+        "legacy_id": 148
+    },
+    "daylight_detector": {
+        "legacy_id": 151
+    },
+    "redstone_block": {
+        "legacy_id": 152
+    },
+    "nether_quartz_ore": {
+        "legacy_id": 153
+    },
+    "quartz_stairs": {
+        "legacy_id": 156
+    },
+    "activator_rail": {
+        "legacy_id": 157
+    },
+    "dropper": {
+        "legacy_id": 158
+    },
+    "barrier": {
+        "legacy_id": 166
+    },
+    "iron_trapdoor": {
+        "legacy_id": 167
+    },
+    "hay_bale": {
+        "legacy_id": 170
+    },
+    "white_carpet": {
+        "legacy_id": 171
+    },
+    "coal_block": {
+        "legacy_id": 173
+    },
+    "packed_ice": {
+        "legacy_id": 174
+    },
+    "acacia_stairs": {
+        "legacy_id": 163
+    },
+    "dark_oak_stairs": {
+        "legacy_id": 164
+    },
+    "slime_block": {
+        "legacy_id": 165
+    },
+    "grass_path": {
+        "legacy_id": 208
+    },
+    "sunflower": {
+        "legacy_id": 175
+    },
+    "white_stained_glass": {
+        "legacy_id": 95
+    },
+    "prismarine": {
+        "legacy_id": 168
+    },
+    "sea_lantern": {
+        "legacy_id": 169
+    },
+    "red_sandstone": {
+        "legacy_id": 179
+    },
+    "magma_block": {
+        "legacy_id": 213
+    },
+    "red_nether_bricks": {
+        "legacy_id": 215
+    },
+    "bone_block": {
+        "legacy_id": 216
+    },
+    "structure_void": {
+        "legacy_id": 217
+    },
+    "observer": {
+        "legacy_id": 218
+    },
+    "shulker_box": {
+        "legacy_id": 219
+    },
+    "white_shulker_box": {
+        "legacy_id": 219
+    },
+    "orange_shulker_box": {
+        "legacy_id": 220
+    },
+    "magenta_shulker_box": {
+        "legacy_id": 221
+    },
+    "light_blue_shulker_box": {
+        "legacy_id": 222
+    },
+    "yellow_shulker_box": {
+        "legacy_id": 223
+    },
+    "lime_shulker_box": {
+        "legacy_id": 224
+    },
+    "pink_shulker_box": {
+        "legacy_id": 225
+    },
+    "gray_shulker_box": {
+        "legacy_id": 226
+    },
+    "light_gray_shulker_box": {
+        "legacy_id": 227
+    },
+    "cyan_shulker_box": {
+        "legacy_id": 228
+    },
+    "purple_shulker_box": {
+        "legacy_id": 229
+    },
+    "blue_shulker_box": {
+        "legacy_id": 230
+    },
+    "brown_shulker box": {
+        "legacy_id": 231
+    },
+    "green_shulker_box": {
+        "legacy_id": 232
+    },
+    "red_shulker_box": {
+        "legacy_id": 233
+    },
+    "black_shulker_box": {
+        "legacy_id": 234
+    },
+    "white_glazed_terracotta": {
+        "legacy_id": 235
+    },
+    "orange_glazed_terracotta": {
+        "legacy_id": 236
+    },
+    "magenta_glazed_terracotta": {
+        "legacy_id": 237
+    },
+    "light_blue_glazed_terracotta": {
+        "legacy_id": 238
+    },
+    "yellow_glazed_terracotta": {
+        "legacy_id": 239
+    },
+    "lime_glazed_terracotta": {
+        "legacy_id": 240
+    },
+    "pink_glazed_terracotta": {
+        "legacy_id": 241
+    },
+    "gray_glazed_terracotta": {
+        "legacy_id": 242
+    },
+    "light_gray_glazed_terracotta": {
+        "legacy_id": 243
+    },
+    "cyan_glazed_terracotta": {
+        "legacy_id": 244
+    },
+    "purple_glazed_terracotta": {
+        "legacy_id": 245
+    },
+    "blue_glazed_terracotta": {
+        "legacy_id": 246
+    },
+    "brown_glazed_terracotta": {
+        "legacy_id": 247
+    },
+    "green_glazed_terracotta": {
+        "legacy_id": 248
+    },
+    "red_glazed_terracotta": {
+        "legacy_id": 249
+    },
+    "black_glazed_terracotta": {
+        "legacy_id": 250
+    },
+    "white_concrete": {
+        "legacy_id": 251
+    },
+    "white_concrete_powder": {
+        "legacy_id": 252
     }
 }
