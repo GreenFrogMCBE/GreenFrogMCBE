@@ -50,15 +50,18 @@ describe("config files", () => {
 		it(`can parse ${file}`, () => {
 			if (file.endsWith(".json")) {
 				require(file);
-			} else if (file.endsWith(".yml")) {
-				yaml.load(fs.readFileSync(file, "utf8"));
+
+				return;
 			}
+
+			yaml.load(fs.readFileSync(file, "utf8"));
 		});
 	}
 });
 
 describe("server", () => {
 	it("can start", async () => {
+		// Start the server
 		await require("../index");
 
 		describe("commands", () => {
@@ -79,12 +82,20 @@ describe("server", () => {
 
 		describe("query", () => {
 			it("can respond with basic info", async () => {
-				const basicInfo = await util.queryBasic("0.0.0.0", 19133);
+				const basicInfo = await util.queryBasic(
+					"0.0.0.0",
+					19133
+				);
+
 				console.log(`Basic info: ${JSON.stringify(basicInfo)}`);
 			});
 
 			it("can respond with full info", async () => {
-				const fullInfo = await util.queryFull("0.0.0.0", 19133);
+				const fullInfo = await util.queryFull(
+					"0.0.0.0",
+					19133
+				);
+
 				console.log(`Full info: ${JSON.stringify(fullInfo)}`);
 			});
 		});
