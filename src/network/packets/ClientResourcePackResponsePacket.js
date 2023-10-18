@@ -55,7 +55,7 @@ const World = require("../../world/World");
 const WorldGenerator = require("../../world/types/WorldGenerator");
 const Biome = require("../../world/types/Biome");
 
-const entity = require("../../entity/build/Release/entity.node");
+const entity = require("../../entity/EntityModule").getModule();
 
 const biomeDefinitions = require("../../resources/json/biomeDefinitions.json").raw_payload;
 const creativeContentItems = require("../../resources/json/creativeContent.json").items;

@@ -26,7 +26,7 @@ const Gamemode = require("../player/types/Gamemode");
 const entityAttributes = require("../../src/resources/json/entityAttributes.json");
 const entityMetadata = require("../../src/resources/json/entityMetadata.json");
 
-const entity = require("../entity/build/Release/entity.node");
+const entity = require("../entity/EntityModule").getModule();
 
 const PlayerInfo = require("../player/PlayerInfo");
 

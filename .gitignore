@@ -18,7 +18,7 @@ pluginData/
 .idea/
 
 # Napi output directory
-src/entity/build/*
+#src/entity/build/*
 src/node_modules/node-addon-api/*
 
 # Misc
