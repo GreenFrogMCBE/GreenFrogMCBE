@@ -39,7 +39,7 @@ describe("config files", () => {
 		"../src/resources/json/trimData.json",
 
 		// Config
-		"../src/resources/defaultConfig.yml",
+		"../src/resources/yml/defaultConfig.yml",
 
 		// Misc
 		"../.eslintrc.json",
