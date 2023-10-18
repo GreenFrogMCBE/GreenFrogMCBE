@@ -19,6 +19,8 @@
 
 > [!WARNING]
 > Contributions below are outdated <br>
+> For adding in-game argument support for commands (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/311) <br>
+> For making the logger customizable (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/313) <br>
 > For adding `BasePlugin.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/20 and https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/243) <br>
 > For updating language files (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/19) <br>
 > For rewriting some parts of command system (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/109) <br>
@@ -30,12 +32,11 @@
 
 3. @NhanAZ
 
-> For fixing paths (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/77) <br> 
 > For reporting a bug that server cannot be stopped when at least 1 plugin failed to unload <br> 
 > For reporting a bug that /help wasn't working <br> 
 > For making the code better in some commands (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/104, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/103, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/102, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/101, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/100, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/99, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/98, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/97) <br> 
 > For making the logger use default parameter (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/4) <br> 
-> For adding Vietnamese language (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/295) <br>
+> For adding the Vietnamese language (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/295) <br>
 > For optimizing `generateRandomString()` in `src/utils/Random.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/294) <br>
 > For optimizing the `listen()` function in `src/Server.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/105) <br>
 > For optimizing `tools/refactor.js` (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/296) <br> 
@@ -43,6 +44,7 @@
 
 > [!WARNING]
 > Contributions below are outdated <br> 
+> For fixing paths (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/77) <br> 
 > For sorting lang strings (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/22, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/23, https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/24) <br>
 > For making `PluginManager.getPlugins()` better (https://github.com/GreenFrogMCBE/GreenFrogMCBE/pull/82)
 
