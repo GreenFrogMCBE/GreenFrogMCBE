@@ -15,6 +15,8 @@
  */
 const Command = require("./Command");
 
+const ArgumentType = require("./types/ArgumentType");
+
 const { getKey } = require("../utils/Language");
 
 const Frog = require("../Frog");
@@ -25,8 +27,15 @@ const Frog = require("../Frog");
 class CommandSay extends Command {
 	name = getKey("commands.say.name");
 	description = getKey("commands.say.description");
-	minArgs = 0;
+	minArgs = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "message",
+			type: ArgumentType.STRING,
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

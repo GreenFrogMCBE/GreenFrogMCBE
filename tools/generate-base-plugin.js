@@ -39,6 +39,7 @@ const rl = readline.createInterface({
 function handleError(message) {
 	console.clear();
 	console.error(convertConsoleColor(`${Colors.RED}${message}${Colors.RESET}`));
+
 	process.exit(1);
 }
 
@@ -79,14 +80,21 @@ function writePackageJson(directoryPath, pluginName) {
  */
 function writePluginFile(directoryPath, pluginName, useTypeScript) {
 	let pluginJs = `module.exports = {
+	/**
+     * This executes when the plugin loads
+	 */
 	onLoad() {
 		// ...
 	},
 
+	/**
+     * This executes when the plugin shutdowns
+     */
 	onShutdown() {
 		// ...
 	},
-};`;
+};
+`;
 
 	if (useTypeScript) {
 		try {
@@ -97,13 +105,20 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 			);
 		}
 
-		pluginJs = `export function onLoad(): void {
+		pluginJs = `/**
+ * This executes when the plugin loads
+ */
+export function onLoad(): void {
     // ...
 }
 
+/**
+ * This executes when the plugin shutdowns
+ */
 export function onShutdown(): void {
     // ...
-}`;
+}
+`;
 		const tsConfig = {
 			compilerOptions: {
 				strict: true,

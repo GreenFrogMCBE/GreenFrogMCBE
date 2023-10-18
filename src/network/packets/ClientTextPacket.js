@@ -33,7 +33,11 @@ class ClientTextPacket extends Packet {
 	async readPacket(player, packet) {
 		const message = packet.data.params.message;
 
-		if (Frog.config.chat.features.chat || !message.trim() || message.startsWith("/")) {
+		if (
+			Frog.config.chat.features.chat || 
+			!message.trim() || 
+			message.startsWith("/")
+		) {
 			return;
 		}
 
@@ -49,7 +53,8 @@ class ClientTextPacket extends Packet {
 
 		if (!shouldChat) return;
 
-		const formattedMessage = getKey("chat.format").replace("%s", player.username).replace("%d", message.replace(/§/g, ""));
+		const formattedMessage = 
+			getKey("chat.format").replace("%s", player.username).replace("%d", message.replace(/§/g, ""));
 
 		Logger.info(formattedMessage);
 

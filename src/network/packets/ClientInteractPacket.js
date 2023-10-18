@@ -53,7 +53,7 @@ class ClientInteractPacket extends Packet {
 			case Interact.INVENTORY_OPEN:
 				let shouldOpenInventory = true;
 
-				/** @type {import("Frog").Coordinate} */
+				/** @type {import("Frog").Vec3} */
 				const containerCoordinates = {
 					x: 0,
 					y: 0,

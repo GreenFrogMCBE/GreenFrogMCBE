@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const fs = require("fs");
+const fs = require("fs").promises;
 const path = require("path");
 
 if (process.argv.length < 4) {
@@ -38,36 +38,48 @@ async function replaceInFile(filePath, replacements) {
 		return;
 	}
 
-	let fileContent = fs.readFileSync(filePath, "utf8");
+	let fileContent = await fs.readFile(filePath, "utf8");
 
-	for (const [searchValue, replaceValue] of replacements) {
+	await Promise.all(replacements.map(([searchValue, replaceValue]) => {
 		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
-	}
+	}));
 
-	fs.writeFile(filePath, fileContent, {}, () => { });
+	await fs.writeFile(filePath, fileContent);
 }
 
 /**
  * Walks through the directory
- * 
- * @param {string} dirPath 
- * @param {string[][]} replacements 
+ *
+ * @param {string} dirPath
+ * @param {string[][]} replacements
  */
 async function traverseDirectory(dirPath, replacements) {
-	const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+	const entries = await fs.readdir(dirPath, { withFileTypes: true });
 
-	for (const entry of entries) {
+	await Promise.all(entries.map(async (entry) => {
 		const entryPath = path.join(dirPath, entry.name);
 
 		if (entry.isDirectory()) {
-			traverseDirectory(entryPath, replacements);
-		} else if (entry.isFile() && (entry.name.includes(".js") || entry.name.includes(".ts") || entry.name.includes(".json") || entry.name.includes(".yml"))) {
-			replaceInFile(entryPath, replacements);
+			await traverseDirectory(entryPath, replacements);
+		} else if (
+			entry.isFile() &&
+			(
+				entry.name.includes(".js") ||
+				entry.name.includes(".ts") ||
+				entry.name.includes(".json") ||
+				entry.name.includes(".yml")
+			)
+		) {
+			await replaceInFile(entryPath, replacements);
 		}
-	}
+	}));
 }
 
-const replacements = [[process.argv[2], process.argv[3]]];
+const replacements = [
+	[
+		process.argv[2], process.argv[3]
+	]
+];
 
 traverseDirectory(rootDir, replacements);
 

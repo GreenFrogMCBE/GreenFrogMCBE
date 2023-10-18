@@ -28,17 +28,22 @@ before(() => {
 
 describe("config files", () => {
 	const configFiles = [
+		// Resources
+		"../src/resources/json/availableEntities.json",
+		"../src/resources/json/biomeDefinitions.json",
+		"../src/resources/json/creativeContent.json",
+		"../src/resources/json/entityData.json",
+		"../src/resources/json/featureRegistry.json",
+		"../src/resources/json/itemStates.json",
+		"../src/resources/json/skinData.json",
+		"../src/resources/json/trimData.json",
+
+		// Config
+		"../src/resources/defaultConfig.yml",
+
+		// Misc
 		"../.eslintrc.json",
-		"../renovate.json",
-		"../src/resources/availableEntities.json",
-		"../src/resources/biomeDefinitions.json",
-		"../src/resources/creativeContent.json",
-		"../src/resources/entityData.json",
-		"../src/resources/featureRegistry.json",
-		"../src/resources/itemStates.json",
-		"../src/resources/skinData.json",
-		"../src/resources/trimData.json",
-		"../src/resources/defaultConfig.yml"
+		"../renovate.json"
 	];
 
 	for (const file of configFiles) {

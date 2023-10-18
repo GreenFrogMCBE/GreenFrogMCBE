@@ -26,6 +26,13 @@ class CommandMe extends Command {
 	name = getKey("commands.me.name");
 	description = getKey("commands.me.description");
 	minArgs = 1;
+	args = [
+		{
+			name: "message",
+			type: "string",
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -33,7 +40,9 @@ class CommandMe extends Command {
 	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
-		const message = getKey("chat.format.me").replace("%s", player.username).replace("%d", args.join(" "));
+		const message = getKey("chat.format.me")
+			.replace("%s", player.username)
+			.replace("%d", args.join(" "));
 
 		Frog.broadcastMessage(message);
 	}

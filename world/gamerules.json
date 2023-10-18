@@ -3,182 +3,200 @@
     {
       "name": "commandblockoutput",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "dodaylightcycle",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": false
     },
     {
       "name": "doentitydrops",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "dofiretick",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
+    },
+    {
+      "name": "recipesunlock",
+      "editable": true,
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "dolimitedcrafting",
+      "editable": true,
+      "type": "bool",
+      "value": false
     },
     {
       "name": "domobloot",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "domobspawning",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "dotiledrops",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "doweathercycle",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "drowningdamage",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "falldamage",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "firedamage",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "keepinventory",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": false
     },
     {
       "name": "mobgriefing",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "pvp",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "showcoordinates",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "naturalregeneration",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "tntexplodes",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "sendcommandfeedback",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "maxcommandchainlength",
       "editable": true,
-      "types": "int",
+      "type": "int",
       "value": 65535
     },
     {
       "name": "doinsomnia",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "commandblocksenabled",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "randomtickspeed",
       "editable": true,
-      "types": "int",
+      "type": "int",
       "value": 1
     },
     {
       "name": "doimmediaterespawn",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": false
     },
     {
       "name": "showdeathmessages",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "functioncommandlimit",
       "editable": true,
-      "types": "int",
+      "type": "int",
       "value": 10000
     },
     {
       "name": "spawnradius",
       "editable": true,
-      "types": "int",
+      "type": "int",
       "value": 5
     },
     {
       "name": "showtags",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "freezedamage",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "respawnblocksexplode",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
     },
     {
       "name": "showbordereffect",
       "editable": true,
-      "types": "bool",
+      "type": "bool",
       "value": true
+    },
+    {
+      "name": "playerssleepingpercentage",
+      "editable": true,
+      "type": "int",
+      "value": 100
     }
   ]
 }

@@ -6,8 +6,8 @@ labels: Feature request
 assignees: ""
 ---
 
--   [ ] I checked if the feature isn't implemented in the latest version of Greenfrog
--   [ ] I checked if the feature was suggested before
+- [ ] I can confirm that this feature has not been suggested previously.
+- [ ] I can confirm that this feature is not present in the latest version of GreenFrog.
 
 ## What feature should we add?
 

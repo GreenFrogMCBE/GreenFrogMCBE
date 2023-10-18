@@ -19,6 +19,8 @@ const { playersOnline } = require("../player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
 
+const ArgumentType = require("./types/ArgumentType");
+
 /**
  * A command that changes the time
  */
@@ -28,6 +30,13 @@ class CommandTime extends Command {
 	minArgs = 1;
 	maxArgs = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "time",
+			type: ArgumentType.INT,
+			optional: false,
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

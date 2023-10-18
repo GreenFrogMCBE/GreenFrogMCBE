@@ -18,6 +18,7 @@ const Command = require("./Command");
 const { getKey } = require("../utils/Language");
 
 const Gamemode = require("../player/types/Gamemode");
+const ArgumentType = require("./types/ArgumentType");
 
 /**
  * A command to change the player's game mode.
@@ -28,6 +29,18 @@ class CommandGamemode extends Command {
 	maxArg = 1;
 	minArg = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "player",
+			type: ArgumentType.TARGET,
+			optional: false,
+		},
+		{
+			name: "mode",
+			type: ArgumentType.STRING,
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -64,6 +77,7 @@ class CommandGamemode extends Command {
 
 		if (!gamemode) {
 			player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s", args[0]));
+
 			return;
 		}
 

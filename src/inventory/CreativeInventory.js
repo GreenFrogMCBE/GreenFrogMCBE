@@ -14,6 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Frog = require("../Frog");
+
 const Logger = require("../utils/Logger");
 
 const { getKey } = require("../utils/Language");

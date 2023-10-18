@@ -16,15 +16,15 @@
 /* eslint-disable no-case-declarations */
 const Frog = require("../../Frog");
 
-const Biome = require("../../world/types/Biome");
-const PlayStatus = require("./types/PlayStatus");
-const PlayerList = require("./types/PlayerListAction");
-const Dimension = require("../../world/types/Dimension");
-const Difficulty = require("../../server/types/Difficulty");
+const PermissionLevel = require("../../permission/types/PermissionLevel");
+const ResourcePackStatus = require("./types/ResourcePackStatus");
 const MovementAuthority = require("./types/MovementAuthority");
 const GeneratorType = require("../../world/types/Generator");
-const ResourcePackStatus = require("./types/ResourcePackStatus");
-const PermissionLevel = require("../../permission/types/PermissionLevel");
+const Difficulty = require("../../server/types/Difficulty");
+const EditorLevelType = require("./types/EditorLevelType");
+const Dimension = require("../../world/types/Dimension");
+const PlayerList = require("./types/PlayerListAction");
+const PlayStatus = require("./types/PlayStatus");
 
 const PlayerInfo = require("../../player/PlayerInfo");
 
@@ -49,16 +49,22 @@ const ClientCommandManager = require("../../player/CommandManager");
 const ServerCommandManager = require("../../server/CommandManager");
 
 const Logger = require("../../utils/Logger");
+
 const World = require("../../world/World");
 
-const biomeDefinitions = require("../../resources/biomeDefinitions.json").raw_payload;
-const availableEntities = require("../../resources/availableEntities.json").nbt;
-const creativeContentItems = require("../../resources/creativeContent.json").items;
-const entityData = require("../../resources/entityData.json").entityData;
-const features = require("../../resources/featureRegistry.json").features;
-const trimMaterials = require("../../resources/trimData.json").materials;
-const itemStates = require("../../resources/itemStates.json").itemStates;
-const trimPatterns = require("../../resources/trimData.json").patterns;
+const WorldGenerator = require("../../world/types/WorldGenerator");
+const Biome = require("../../world/types/Biome");
+
+const entity = require("../../entity/build/Release/entity.node");
+
+const biomeDefinitions = require("../../resources/json/biomeDefinitions.json").raw_payload;
+const creativeContentItems = require("../../resources/json/creativeContent.json").items;
+const availableEntities = require("../../resources/json/availableEntities.json").nbt;
+const features = require("../../resources/json/featureRegistry.json").features;
+const entityData = require("../../resources/json/entityData.json").entityData;
+const trimMaterials = require("../../resources/json/trimData.json").materials;
+const itemStates = require("../../resources/json/itemStates.json").itemStates;
+const trimPatterns = require("../../resources/json/trimData.json").patterns;
 const customItems = require("../../../world/custom_items.json").items;
 const gamerules = require("../../../world/gamerules.json").gamerules;
 
@@ -102,6 +108,14 @@ class ClientResourcePackResponsePacket extends Packet {
 				player.world.name = config.world.name;
 				player.world.generator = config.world.generators.type.toLowerCase();
 
+				player.world.spawnCoordinates = { x: 0, y: -48, z: 0 };
+
+				if (player.world.generator == WorldGenerator.FLAT) {
+					player.world.spawnCoordinates.y = -47;
+				}
+
+				entity.setSpawnYCoordinate(player.world.spawnCoordinates.y - 2);
+
 				player.permissions.op = false;
 				player.permissions.permissionLevel = config.dev.defaultPermissionLevel;
 
@@ -118,7 +132,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				startGame.entity_id = 0;
 				startGame.runtime_entity_id = 1;
 				startGame.player_gamemode = player.gamemode;
-				startGame.player_position = { x: 0, y: -47, z: 0 };
+				startGame.player_position = player.world.spawnCoordinates;
 				startGame.rotation = { x: 0, z: 0 };
 				startGame.seed = [0, 0];
 				startGame.biome_type = 0;
@@ -128,7 +142,8 @@ class ClientResourcePackResponsePacket extends Packet {
 				startGame.world_gamemode = config.world.gamemode.world;
 				startGame.difficulty = Difficulty.NORMAL;
 				startGame.spawn_position = { x: 0, y: 0, z: 0 };
-				startGame.permission_level = /** @type {import("Frog").PermissionLevel} */ (player.permissions.permissionLevel);
+				startGame.editor_world_type = EditorLevelType.NOT_EDITOR;
+				startGame.permission_level = player.permissions.permissionLevel;
 				startGame.world_name = player.world.name;
 				startGame.game_version = "*";
 				startGame.movement_authority = MovementAuthority.SERVER;
@@ -168,14 +183,14 @@ class ClientResourcePackResponsePacket extends Packet {
 				ClientCommandManager.init(player);
 
 				for (const command of ServerCommandManager.commands) {
-					const { requiresOp, name, description, aliases } = command;
+					const { requiresOp, name, description, aliases, args } = command;
 
 					if (!Frog.config.chat.features.commands && (!requiresOp || player.permissions.op)) {
-						ClientCommandManager.addCommand(player, name, description);
+						ClientCommandManager.addCommand(player, name, description, args);
 
 						if (aliases) {
 							for (const alias of aliases) {
-								ClientCommandManager.addCommand(player, alias, description);
+								ClientCommandManager.addCommand(player, alias, description, args);
 							}
 						}
 					}
@@ -192,7 +207,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				itemComponent.writePacket(player);
 
 				// player.renderChunks is true by default but can be disabled by plugins
-				if (player.renderChunks) { 
+				if (player.renderChunks) {
 					player.setChunkRadius(player.world.renderDistance);
 
 					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
@@ -201,7 +216,8 @@ class ClientResourcePackResponsePacket extends Packet {
 					networkChunkPublisher.saved_chunks = [];
 					networkChunkPublisher.writePacket(player);
 
-					const generatorFile = require("../../world/generator/" + player.world.generator);
+					const generatorFileName = player.world.generator[0].toUpperCase() + player.world.generator.substring(1);
+					const generatorFile = require("../../world/generator/" + generatorFileName);
 					new generatorFile().generate(player);
 				}
 
@@ -212,7 +228,7 @@ class ClientResourcePackResponsePacket extends Packet {
 
 					Frog.eventEmitter.emit("playerSpawn", { player });
 
-					player.setEntityData(/** @type {import("Frog").EntityData} */ (entityData));
+					player.setEntityData(/** @type {import("Frog").EntityData} */(entityData));
 					player.setSpeed(0.1);
 
 					for (const onlinePlayer of PlayerInfo.playersOnline) {

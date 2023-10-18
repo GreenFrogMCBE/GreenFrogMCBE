@@ -13,12 +13,22 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-class InvalidItemStackException extends Error {
-	/** @param {string} message */
-	constructor(message) {
-		super(message);
-		this.name = "InvalidItemStackException";
+const Packet = require("./Packet");
+
+class ServerRemoveEntityPacket extends Packet {
+	name = "remove_entity";
+
+	/** @type {string | undefined} */
+	entity_id_self;
+
+	/**
+	 * @param {import("Frog").Player} player
+	 */
+	writePacket(player) {
+		player.queue(this.name, {
+			entity_id_self: this.entity_id_self,
+		});
 	}
 }
 
-module.exports = InvalidItemStackException;
+module.exports = ServerRemoveEntityPacket;

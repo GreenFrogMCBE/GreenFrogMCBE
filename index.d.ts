@@ -17,6 +17,15 @@ declare module "Frog" {
 	import { Client, Player as OnlinePlayer, Server } from "frog-protocol";
 	import { Socket, RemoteInfo } from "dgram";
 
+	export type Directories = {	
+		opFile: string,
+		configFile: string,
+		worldFolder: string,
+		pluginsFolder: string,
+		pluginDataFolders: string
+		crashReportsFolder: string,
+	}
+
 	export type ReleaseData = {
 		minorServerVersion: string;
 		majorServerVersion: string;
@@ -24,22 +33,15 @@ declare module "Frog" {
 		apiVersion: string;
 	};
 
-	export type Coordinate = {
+	export type Vec3 = {
 		x: number;
 		y: number;
 		z: number;
 	};
 
-	export type Rotation = {
+	export type Vec2 = {
 		x: number;
 		z: number;
-	};
-
-	export type Directories = {
-		plugins: string;
-		pluginData: string;
-		fullPluginPath: string;
-		getFile: (file: string) => string;
 	};
 
 	export type QuerySettings = {
@@ -53,7 +55,31 @@ declare module "Frog" {
 		version: string;
 		plugins: Plugin[] | string[];
 	};
-	
+
+	export type CommandParameters = {
+		name: string
+		type: 'int' |
+		'float' |
+		'value' |
+		'wildcard_int' |
+		'operator' |
+		'command_operator' |
+		'target' |
+		'wildcard_target' |
+		'file_path' |
+		'integer_range' |
+		'equipment_slot' |
+		'string' |
+		'block_position' |
+		'position' |
+		'message' |
+		'raw_text' |
+		'json' |
+		'block_states' |
+		'command'
+		optional: boolean
+	}[]
+
 	export type RaknetBackend =
 		"raknet-native" |
 		"jsp-raknet" |
@@ -130,19 +156,24 @@ declare module "Frog" {
 			};
 			ticking: {
 				event: boolean;
-				worldTime: boolean;
+				time: boolean;
 				void: boolean;
 				regeneration: boolean;
 				starvationDamage: boolean;
+				entities: boolean;
 				speed: number;
 			};
 		};
 		performance: {
 			garbageCollectorDelay: number;
 		};
+		logger: {
+			dateFormat: string;
+			messageFormat: string;
+		}
 	};
 
-	export interface Language extends String {
+	export type Language = {
 		server: {
 			loading: string;
 			license: string;
@@ -339,7 +370,6 @@ declare module "Frog" {
 		};
 		chat: {
 			format: string;
-			formatPlugin: string;
 			formatMe: string;
 			formatSay: string;
 			broadcasts: {
@@ -531,32 +561,47 @@ declare module "Frog" {
 		force_move: boolean;
 	};
 
-	export type Attribute = any; // Temp
+	// Only used in the resource_packs_info packet
+	export type ResourcePackLink = {
+		id: string,
+		url: string,
+	}
 
-	export type PacketParams = any;
+	// Only used in the start_game packet
+	export type WorldSeed = [number, number];
 
 	export type PacketData = {
 		name: string;
-		params: PacketParams;
+		params: object;
 	};
 
 	export type Packet = {
 		data: PacketData;
 	};
 
-	export type WorldSeed = [number, number]; // Only used in the start_game packet
-
 	export type World = {
 		name: string;
 		renderDistance: number;
-		spawnCoordinates: Coordinate;
+		spawnCoordinates: Vec3;
 		generator: string;
 		time: number;
-		handleFallDamage(player: Player, coordinates: Coordinate): void;
 
-		// Actually passing undefined as a parameter will result in it being converted to 0
-		breakBlock(x: number | undefined, y: number | undefined, z: number | undefined): void;
-		placeBlock(x: number | undefined, y: number | undefined, z: number | undefined, runtime_id: number | undefined): void;
+		placeBlock(x: number, y: number, z: number, id: number): void;
+		breakBlock(x: number, y: number, z: number): void;
+		sendBlockUpdatePacket(player: Player, x: number, y: number, z: number, id: number): void;
+		startHungerLossLoop(): void;
+		startNetworkChunkPublisherPacketSendingLoop(): void;
+		tick(): void;
+		tickEvent: () => void;
+		tickTime: () => void;
+		tickRegeneration: () => void;
+		tickStarvationDamage: () => void;
+		tickVoidDamage: () => void;
+		handleFallDamage(player: Player, position: Vec3): Promise<void>;
+		emitServerEvent(eventName: string | EntityType): void;
+		spawnEntity(entityName: string | EntityType, entityId: number, x: number, y: number, z: number, yaw?: number, pitch?: number): void;
+		teleportEntity(entityId: number, x: number, y: number, z: number, rotation_x?: number, rotation_y?: number, rotation_z?: number): void;
+		getWorldData(): World;
 	};
 
 	export type NBTType = "compoud";
@@ -636,7 +681,7 @@ declare module "Frog" {
 	};
 
 	export type Container = {
-		blockPosition: Partial<Coordinate>;
+		blockPosition: Partial<Vec3>;
 		isOpen: boolean;
 		window: Partial<ContainerWindow>;
 	};
@@ -768,7 +813,7 @@ declare module "Frog" {
 		color: number;
 	};
 
-	export interface FormAction {
+	export type FormAction = {
 		type: string;
 		text: string;
 		placeholder?: string;
@@ -800,6 +845,105 @@ declare module "Frog" {
 		"warn" |
 		"error"
 
+	export type EntityAttributeName =
+		"minecraft:luck" |
+		"minecraft:health" |
+		"minecraft:absorption" |
+		"minecraft:movement" |
+		"minecraft:underwater_movement" |
+		"minecraft:lava_movement"
+
+	export type EntityAttribute = {
+		name: EntityAttributeName;
+		min: number;
+		value: number;
+		max: number;
+	}
+
+	export type EntityMetadataKey =
+		"flags" |
+		"health" |
+		"variant" |
+		"color" |
+		"nametag" |
+		"owner_eid" |
+		"target_eid" |
+		"air" |
+		"potion_color" |
+		"potion_ambient" |
+		"jump_duration" |
+		"charge_amount" |
+		"lead_holder_eid" |
+		"scale" |
+		"interactive_tag" |
+		"max_airdata_max_air" |
+		"mark_variant" |
+		"container_type" |
+		"container_base_size" |
+		"container_extra_slots_per_strength" |
+		"boundingbox_width" |
+		"boundingbox_height" |
+		"rider_seat_position" |
+		"rider_rotation_locked" |
+		"rider_max_rotation" |
+		"rider_min_rotation" |
+		"rider_rotation_offset" |
+		"has_command_block" |
+		"command_block_command" |
+		"command_block_last_output" |
+		"command_block_track_output" |
+		"controlling_rider_seat_number" |
+		"strength" |
+		"max_strength" |
+		"spell_casting_color" |
+		"limited_life" |
+		"always_show_nametag" |
+		"color_2" |
+		"eating_counter" |
+		"flags_extended" |
+		"trade_tier" |
+		"max_trade_tier" |
+		"trade_experience" |
+		"skin_id" |
+		"command_block_tick_delay" |
+		"command_block_execute_on_first_tick" |
+		"ambient_sound_interval" |
+		"ambient_sound_interval_range" |
+		"ambient_sound_event_name" |
+		"fall_damage_multiplier" |
+		"can_ride_target" |
+		"low_tier_cured_discount" |
+		"high_tier_cured_discount" |
+		"nearby_cured_discount" |
+		"nearby_cured_discount_timestamp" |
+		"hitbox" |
+		"is_buoyant" |
+		"base_runtime_id" |
+		"update_properties" |
+		"movement_sound_distance_offset" |
+		"heartbeat_interval_ticks"
+
+	export type EntityMetadataType =
+		"long" |
+		"int" |
+		"byte" |
+		"string" |
+		"short" |
+		"float" |
+		"vec3f" |
+		"compound"
+
+	export type EntityMetadataValue =
+		string |
+		number |
+		object
+
+	export type EntityMetadata = {
+		key: EntityMetadataKey,
+		type: EntityMetadataType,
+		value: EntityMetadataValue
+	}
+
 	export type ValueOf<T> = T[keyof T];
 
 	export type WorldGenerator = ValueOf<typeof import("./src/world/types/WorldGenerator")>;
@@ -817,10 +961,13 @@ declare module "Frog" {
 	export type Action = ValueOf<typeof import("./src/forms/types/Action")>;
 	export type Form = ValueOf<typeof import("./src/forms/types/Form")>;
 
+	export type EntityType = ValueOf<typeof import("./src/entity/types/EntityType")>;
+
 	export type CreteriaName = ValueOf<typeof import("./src/scoreboard/types/CreteriaName")>;
 	export type DisplaySlot = ValueOf<typeof import("./src/scoreboard/types/DisplaySlot")>;
 	export type ScoreAction = ValueOf<typeof import("./src/scoreboard/types/ScoreAction")>;
 	export type EntryType = ValueOf<typeof import("./src/scoreboard/types/EntryType")>;
+	export type Scoreboard = ValueOf<import("./src/scoreboard/Scoreboard")>;
 
 	export type DamageCause = ValueOf<typeof import("./src/player/types/DamageCause")>;
 	export type HungerCause = ValueOf<typeof import("./src/player/types/HungerCause")>;
@@ -832,12 +979,12 @@ declare module "Frog" {
 
 	export type MovementAuthority = ValueOf<typeof import("./src/network/packets/types/MovementAuthority")>;
 	export type PlayListAction = ValueOf<typeof import("./src/network/packets/types/PlayerListAction")>;
+	export type EditorLevelType = ValueOf<typeof import("./src/network/packets/types/EditorLevelType")>;
 	export type PlayStatus = ValueOf<typeof import("./src/network/packets/types/PlayStatus")>;
+
 	export type DimensionId = ValueOf<typeof import("./src/world/types/DimensionId")>;
 
 	export type PermissionLevel = ValueOf<typeof import("./src/permission/types/PermissionLevel")>;
-
-	export type Scoreboard = import("./src/scoreboard/Scoreboard");
 
 	export type BlockBreakEvent = {
 		player: Player;
@@ -882,7 +1029,7 @@ declare module "Frog" {
 	export type PacketReadEvent = {
 		player: Player;
 		packet: {
-			packet: PacketParams;
+			packet: PacketData;
 			instance: Packet;
 		};
 		cancel(): void;
@@ -894,7 +1041,7 @@ declare module "Frog" {
 
 	export type PlayerAttributeEvent = {
 		player: Player;
-		attribute: Attribute;
+		attribute: any;
 		cancel(): void;
 	};
 
@@ -925,7 +1072,7 @@ declare module "Frog" {
 		windowType: WindowType;
 		sentByServer: boolean;
 		runtimeId: number;
-		containerCoordinates: Coordinate;
+		containerCoordinates: Vec3;
 		cancel(): void;
 	};
 
@@ -1014,7 +1161,7 @@ declare module "Frog" {
 
 	export type PlayerSetAttributeEvent = {
 		player: Player;
-		attribute: Attribute;
+		attribute: any;
 		cancel(): void;
 	};
 
@@ -1136,7 +1283,7 @@ declare module "Frog" {
 	export type ServerSetDimensionEvent = {
 		player: Player;
 		dimension: Dimension;
-		coordinates: Coordinate;
+		coordinates: Vec3;
 		respawn: boolean;
 		cancel(): void;
 	};
@@ -1196,7 +1343,7 @@ declare module "Frog" {
 
 	export type ServerVelocityUpdateEvent = {
 		player: Player;
-		coordinates: Coordinate;
+		coordinates: Vec3;
 		cancel(): void;
 	};
 
@@ -1214,6 +1361,33 @@ declare module "Frog" {
 		player: Player;
 		cancel(): void;
 	};
+
+	export type EntitySpawnEvent = {
+		entityName: string | EntityType;
+		entityId: number;
+		x: number;
+		y: number;
+		z: number;
+		yaw: number;
+		pitch: number;
+		cancel(): void;
+	};
+
+	export type EntityTeleportEvent = {
+		entityId: number;
+		x: number;
+		y: number;
+		z: number;
+		rotation_x: number;
+		rotation_y: number;
+		rotation_z: number;
+		cancel(): void;
+	};
+
+	export type EntityRemoveEvent = {
+		entityId: number;
+		cancel(): void;
+	}
 
 	export type Event =
 		| "blockBreak"
@@ -1237,10 +1411,6 @@ declare module "Frog" {
 		| "packetQueue"
 		| "serverShutdown"
 		| "serverTick"
-		| "serverTimeTick"
-		| "serverRegenerationTick"
-		| "serverStarvationDamageTick"
-		| "serverVoidDamageTick"
 		| "serverSetDimension"
 		| "serverGarbageCollection"
 		| "serverOfflinePlayersGarbageCollection"
@@ -1286,12 +1456,13 @@ declare module "Frog" {
 		| "playerSpawn"
 		| "playerChat"
 		| "playerMove"
-		| "playerRegenerate"
-		| "playerFallDamage"
 		| "playerCommand"
 		| "playerPlayStatus"
 		| "playerTeleport"
-		| "playerKill";
+		| "playerKill"
+		| "entitySpawnEvent"
+		| "entityTeleportEvent"
+		| "entityRemoveEvent";
 
 	export interface EventEmitter {
 		on(eventName: Event, listener?: any): void;
@@ -1300,11 +1471,7 @@ declare module "Frog" {
 		emit(eventName: Event, listener?: any): void;
 	}
 
-	export interface Messagable {
-		sendMessage(message: string): void;
-	}
-
-	export type Player = Client & OnlinePlayer & Messagable & {
+	export type Player = Client & OnlinePlayer & {
 		username: string;
 		gamemode: string;
 		health: number;
@@ -1353,7 +1520,7 @@ declare module "Frog" {
 		setDifficulty(difficulty: Difficulty): void;
 		setEntityData(data: EntityData): void;
 		setChunkRadius(chunkRadius: number): void;
-		setAttribute(setAttribute: Attribute): void;
+		setAttribute(setAttribute: any): void;
 		setHealth(health: number, cause?: DamageCause): void;
 		setHunger(health: number, cause?: HungerCause): void;
 		setDimension(x: number, y: number, z: number, dimension: DimensionId, respawn?: boolean | undefined): void;

@@ -17,6 +17,8 @@ const Command = require("./Command");
 
 const PermissionManager = require("../permission/PermissionManager");
 
+const ArgumentType = require("./types/ArgumentType");
+
 const { getKey } = require("../utils/Language");
 
 /**
@@ -27,17 +29,25 @@ class CommandDeop extends Command {
 	description = getKey("commands.deop.description");
 	minArgs = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "player",
+			type: ArgumentType.TARGET,
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player
 	 * @param {import("frog-protocol").Server} server
 	 * @param {string[]} args
+	 * @async
 	 */
 	async execute(player, server, args) {
 		const playerName = args[0];
 
 		try {
-			PermissionManager.setOpStatus(playerName, false);
+			await PermissionManager.deop(playerName);
 
 			player.sendMessage(getKey("commands.deop.execution.success").replace("%s", playerName));
 		} catch {

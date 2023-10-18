@@ -28,6 +28,8 @@ class Command {
 	requiresOp;
 	/** @type {string[] | undefined} */
 	aliases;
+	/** @type {import('Frog').CommandParameters} */
+	args;
 
 	/**
 	 * @param {import("Frog").Player} player

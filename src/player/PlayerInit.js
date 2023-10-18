@@ -21,7 +21,7 @@ const GarbageCollector = require("../utils/GarbageCollector");
 
 const { getKey } = require("../utils/Language");
 
-const vanillaBlocks = require("../block/vanillaBlocks.json");
+const LegacyToRuntimeIdConverter = require("../block/LegacyToRuntimeIdConverter");
 
 const ServerTextPacket = require("../network/packets/ServerTextPacket");
 const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket");
@@ -46,9 +46,9 @@ const TextType = require("./types/Text");
 const Gamemode = require("./types/Gamemode");
 const DamageCause = require("./types/DamageCause");
 const HungerCause = require("./types/HungerCause");
+const PlayerAttribute = require("./types/Attribute");
 const WindowId = require("../inventory/types/WindowId");
 const WindowType = require("../inventory/types/WindowType");
-const PlayerAttribute = require("./types/Attribute");
 const PlayerListAction = require("../network/packets/types/PlayerListAction");
 
 const PlayerInfo = require("./PlayerInfo");
@@ -100,7 +100,11 @@ module.exports = {
 
 			if (!shouldSendMessage) return;
 
-			Frog.broadcastMessage(getKey("chat.format").replace("%s", player.username).replace("%d", message));
+			Frog.broadcastMessage(
+				getKey("chat.format")
+					.replace("%s", player.username)
+					.replace("%d", message)
+			);
 		};
 
 		/**
@@ -247,7 +251,7 @@ module.exports = {
 		/**
 		 * Sets player's velocity
 		 * NOTE: This is handled by the client-side
-		 * 
+		 *
 		 * @param {number} x
 		 * @param {number} y
 		 * @param {number} z
@@ -302,7 +306,7 @@ module.exports = {
 			if (terminateConnection) {
 				const kickMessageConsole = getKey("kickMessages.playStatus.console").replace("%s", player.username);
 				const kickMessagePlayer = getKey("kickMessages.playStatus").replace("%s", playStatus);
-			
+
 				Logger.info(kickMessageConsole);
 
 				setTimeout(() => {
@@ -451,7 +455,7 @@ module.exports = {
 
 			if (shouldSetAttribute) {
 				const updateAttributesPacket = new ServerUpdateAttributesPacket();
-				updateAttributesPacket.runtime_entity_id = 1; // 1 - Local player
+				updateAttributesPacket.runtime_entity_id = 1; // local player
 				updateAttributesPacket.tick = 0;
 				updateAttributesPacket.attributes = [attribute];
 				updateAttributesPacket.writePacket(player);
@@ -612,9 +616,11 @@ module.exports = {
 		 * Changes the OP status for the player
 		 *
 		 * @param {boolean} status
+		 * @returns {Promise<void>}
+		 * @async
 		 */
-		player.setOp = function (status) {
-			return PermissionManager.setOpStatus(player.username, status);
+		player.setOp = async function (status) {
+			return await PermissionManager.setOp(player.username, status);
 		};
 
 		/**
@@ -647,13 +653,22 @@ module.exports = {
 
 			if (!shouldCreateInventoryContainer) return;
 
-			player.world.placeBlock(player.inventory.container.blockPosition.x, player.inventory.container.blockPosition.y, player.inventory.container.blockPosition.z, vanillaBlocks.chest.runtime_id);
+			player.world.placeBlock(
+				player.inventory.container.blockPosition.x,
+				player.inventory.container.blockPosition.y,
+				player.inventory.container.blockPosition.z,
+				LegacyToRuntimeIdConverter.convert(54)
+			);
 
 			const containerOpen = new ServerContainerOpenPacket();
-			containerOpen.window_id = /** @type {import("Frog").WindowId} */ (player.inventory.container.window.id);
-			containerOpen.window_type = /** @type {import("Frog").WindowType} */ (player.inventory.container.window.type);
+			containerOpen.window_id = player.inventory.container.window.id;
+			containerOpen.window_type = player.inventory.container.window.type;
 			containerOpen.runtime_entity_id = -1;
-			containerOpen.coordinates = { x: player.inventory.container.blockPosition.x || 0, y: player.inventory.container.blockPosition.y || 0, z: player.inventory.container.blockPosition.z || 0 };
+			containerOpen.coordinates = {
+				x: player.inventory.container.blockPosition.x,
+				y: player.inventory.container.blockPosition.y,
+				z: player.inventory.container.blockPosition.z
+			};
 			containerOpen.writePacket(player);
 
 			player.inventory.container.isOpen = true;
@@ -734,11 +749,16 @@ module.exports = {
 			player.offline = true;
 			GarbageCollector.clearOfflinePlayers();
 
-			Frog.eventEmitter.emit("playerLeave", { player });
+			Frog.eventEmitter.emit("playerLeave", {
+				player
+			});
 
 			Logger.info(getKey("status.resourcePacks.disconnected").replace("%s", player.username));
 
-			if (player.network.initialised && Frog.config.chat.systemMessages.left) {
+			if (
+				player.network.initialised &&
+				Frog.config.chat.systemMessages.left
+			) {
 				Frog.broadcastMessage(getKey("chat.broadcasts.left").replace("%s", player.username));
 			}
 		});

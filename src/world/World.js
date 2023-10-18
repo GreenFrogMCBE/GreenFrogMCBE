@@ -14,19 +14,25 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const ServerNetworkChunkPublisherUpdatePacket = require("../network/packets/ServerNetworkChunkPublisherUpdatePacket");
+const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
+const ServerRemoveEntityPacket = require("../network/packets/ServerRemoveEntityPacket");
 const ServerUpdateBlockPacket = require("../network/packets/ServerUpdateBlockPacket");
+const ServerAddEntityPacket = require("../network/packets/ServerAddEntityPacket");
 
 const DamageCause = require("../player/types/DamageCause");
 const WorldGenerator = require("./types/WorldGenerator");
 const Gamemode = require("../player/types/Gamemode");
 
-const PlayerInfo = require("../player/PlayerInfo");
+const entityAttributes = require("../../src/resources/json/entityAttributes.json");
+const entityMetadata = require("../../src/resources/json/entityMetadata.json");
 
-const vanillaBlocks = require("../block/vanillaBlocks.json");
+const entity = require("../entity/build/Release/entity.node");
+
+const PlayerInfo = require("../player/PlayerInfo");
 
 const Frog = require("../Frog");
 
-const config = Frog.config;
+const vm = require("vm");
 
 let time = 0;
 
@@ -38,20 +44,20 @@ class World {
 		/**
 		 * @type {string}
 		 */
-		this.name;
+		this.name = "World";
 
 		/**
-		 * @type {import("Frog").Coordinate}
+		 * @type {import("Frog").Vec3}
 		 */
-		this.spawnCoordinates;
+		this.spawnCoordinates = { x: 0, y: 0, z: 0 };
 
 		/**
 		 * @type {number}
 		 */
-		this.renderDistance;
+		this.renderDistance = 4;
 
 		/**
-		 * @type {keyof import('./types/WorldGenerator')}
+		 * @type {import("Frog").WorldGenerator | undefined}
 		 */
 		this.generator;
 
@@ -104,20 +110,33 @@ class World {
 	 * @param {number} z - The Z-coordinate of the block.
 	 */
 	breakBlock(x, y, z) {
-		this.placeBlock(x, y, z, vanillaBlocks.air.runtime_id);
+		this.placeBlock(x, y, z, 0);
 	}
 
 	/**
 	 * Ticks the world.
 	 */
 	tick() {
-		if (!PlayerInfo.playersOnline.length) return;
+		if (!PlayerInfo.playersOnline.length) {
+			return;
+		}
 
-		this.tickEvent();
-		this.tickWorldTime();
-		this.tickVoidDamage();
-		this.tickRegeneration();
-		this.tickStarvationDamage();
+		const tickingConfig = Frog.config.world.ticking;
+
+		const tickingFunctions = [
+			{ enabled: tickingConfig.event, function: this.tickEvent },
+			{ enabled: tickingConfig.time, function: this.tickTime },
+			{ enabled: tickingConfig.void, function: this.tickVoidDamage },
+			{ enabled: tickingConfig.regeneration, function: this.tickRegeneration },
+			{ enabled: tickingConfig.starvationDamage, function: this.tickStarvationDamage },
+			{ enabled: tickingConfig.entities, function: this.tickEntities }
+		];
+
+		tickingFunctions.forEach((tickingFunction) => {
+			if (tickingFunction.enabled) {
+				tickingFunction.function();
+			}
+		});
 	}
 
 	/**
@@ -125,7 +144,9 @@ class World {
 	 */
 	startHungerLossLoop() {
 		for (const player of PlayerInfo.playersOnline) {
-			if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) return;
+			if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
+				return;
+			}
 
 			player.setHunger(player.hunger - 0.5);
 		}
@@ -138,8 +159,9 @@ class World {
 		setInterval(() => {
 			const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
 			networkChunkPublisher.coordinates = { x: 0, y: 0, z: 0 };
-			networkChunkPublisher.radius = config.world.renderDistance.clientSide;
+			networkChunkPublisher.radius = Frog.config.world.renderDistance.clientSide;
 			networkChunkPublisher.saved_chunks = [];
+
 			for (const player of PlayerInfo.playersOnline) {
 				networkChunkPublisher.writePacket(player);
 			}
@@ -149,97 +171,166 @@ class World {
 	/**
 	 * Emits the server tick event.
 	 */
-	tickEvent() {
-		Frog.eventEmitter.emit("serverTick", { world: this.getWorldData() });
-	}
+	tickEvent = () => {
+		this.emitServerEvent("serverTick");
+	};
 
 	/**
-	 * Advances the world time and emits the server time tick event.
+	 * Ticks the world time
 	 */
-	tickWorldTime() {
-		if (!config.world.tickWorldTime) return;
-
-		Frog.eventEmitter.emit("serverTimeTick", { world: this.getWorldData() });
-
+	tickTime = () => {
 		time += 10;
 
 		for (const player of PlayerInfo.playersOnline) {
 			player.setTime(time);
 		}
-	}
+	};
 
 	/**
-	 * Performs regeneration on the player and emits the server regeneration tick event.
+	 * Performs regeneration on the player.
 	 */
-	tickRegeneration() {
-		if (!config.world.tickRegeneration) return;
-
-		Frog.eventEmitter.emit("serverRegenerationTick", { world: this.getWorldData() });
-
+	tickRegeneration = () => {
 		for (const player of PlayerInfo.playersOnline) {
-			if (!(player.health > 20 || player.hunger < 20 || player.offline || player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR)) {
-				player.setHealth(player.health + 1, DamageCause.REGENERATION);
+			if (!(
+				player.health > 20 ||
+				player.hunger < 20 ||
+				player.offline ||
+				player.gamemode === Gamemode.CREATIVE ||
+				player.gamemode === Gamemode.SPECTATOR
+			)) {
+				player.setHealth(player.health++, DamageCause.REGENERATION);
 			}
 		}
-	}
+	};
 
 	/**
-	 * Performs starvation damage on the player and emits the server starvation damage tick event.
+	 * Performs starvation damage on the player.
 	 */
-	tickStarvationDamage() {
-		if (!config.world.tickStarvationDamage) return;
-
-		Frog.eventEmitter.emit("serverStarvationDamageTick", { world: this.getWorldData() });
-
+	tickStarvationDamage = () => {
 		for (const player of PlayerInfo.playersOnline) {
 			if (player.hunger <= 0) {
-				player.setHealth(player.health - 1, DamageCause.STARVATION);
+				player.setHealth(player.health--, DamageCause.STARVATION);
 			}
 		}
-	}
+	};
 
 	/**
-	 * Performs void damage on players and emits the server void damage tick event.
+	 * Performs void damage on players.
 	 */
-	tickVoidDamage() {
-		if (!config.world.ticking.void) return;
-
-		Frog.eventEmitter.emit("serverVoidDamageTick", { world: this.getWorldData() });
-
+	tickVoidDamage = () => {
 		for (const client of PlayerInfo.playersOnline) {
 			const posY = Math.floor(client.location.y);
 
-			/** @type {number | undefined} */
 			let min = -65;
 
-			if (config.world.generators.type === WorldGenerator.VOID) {
+			if (Frog.config.world.generators.type === WorldGenerator.VOID) {
 				min = undefined;
 			}
 
 			if (typeof min === "number" && posY <= min) {
-				const invulnerable = client.gamemode === Gamemode.CREATIVE || client.gamemode === Gamemode.SPECTATOR;
+				const invulnerable =
+					client.gamemode === Gamemode.CREATIVE ||
+					client.gamemode === Gamemode.SPECTATOR;
 
 				if (!invulnerable) {
 					client.setHealth(client.health - 3, DamageCause.VOID);
 				}
 			}
 		}
-	}
+	};
+
+	/**
+	 * Ticks entity spawning.
+	 */
+	tickEntities = () => {
+		if (entity.shouldSpawnHostileEntity(time, this.generator)) {
+			const coordinates = entity.getRandomSpawnCoordinates();
+			const runtimeId = entity.getRandomRuntimeId();
+			const entityName = entity.getRandomEntity();
+
+			this.spawnEntity(
+				entityName,
+				runtimeId,
+				coordinates.x,
+				coordinates.y,
+				coordinates.z,
+			);
+
+			for (const player of PlayerInfo.playersOnline) {
+				if (
+					entity.shouldFollowPlayer(
+						player.gamemode || "creative",
+						player.isDead || false,
+						coordinates.x || 0,
+						player.location.x || 0,
+						player.entity.isFollowing
+					)
+				) {
+					player.entity.isFollowing = true;
+
+					vm.runInContext(
+						entity.smoothTeleportToPlayer(
+							runtimeId,
+							player.location.x,
+							player.location.z,
+							coordinates.x,
+							coordinates.y,
+							coordinates.z,
+						),
+						vm.createContext(this)
+					);
+
+					setInterval(() => {
+						vm.runInContext(
+							entity.followPlayer(
+								runtimeId,
+								player.location.x,
+								player.location.z,
+								coordinates.x,
+								coordinates.y,
+								coordinates.z,
+							),
+							vm.createContext(this)
+						);
+					}, 100);
+				} else {
+					setInterval(() => {
+						vm.runInContext(
+							entity.moveRandomly(
+								runtimeId,
+								coordinates.x,
+								coordinates.z
+							),
+							vm.createContext(this)
+						);
+					}, 15000);
+				}
+			}
+		}
+	};
 
 	/**
 	 * Calculates and handles fall damage.
 	 * NOTE: This can be spoofed by a hacked client.
 	 *
 	 * @param {import("Frog").Player} player - The player object.
-	 * @param {import("Frog").Coordinate} position - The position where the fall occurred.
+	 * @param {import("Frog").Vec3} position - The position where the fall occurred.
+	 * @async
 	 */
 	async handleFallDamage(player, position) {
-		if (player.gamemode !== Gamemode.CREATIVE && player.gamemode !== Gamemode.SPECTATOR) {
+		if (
+			player.gamemode !== Gamemode.CREATIVE &&
+			player.gamemode !== Gamemode.SPECTATOR
+		) {
 			const fallDistanceY = player.location.y - position.y;
 
-			if (fallDistanceY > 0.56 && player._damage.fall.queue && !player._damage.fall.invulnerable) {
+			if (
+				fallDistanceY > 0.56 &&
+				player._damage.fall.queue &&
+				!player._damage.fall.invulnerable
+			) {
 				const damageAmount = Math.floor(player.health - player._damage.fall.queue);
-		
+
 				player.setHealth(damageAmount, DamageCause.FALL);
 
 				player._damage.fall.invulnerable = true;
@@ -251,6 +342,145 @@ class World {
 			}
 
 			player._damage.fall.queue = (fallDistanceY + 0.5) * 2;
+		}
+	}
+
+	/**
+	 * Emits a world event
+	 *
+	 * @param {string} eventName - The name of the event to emit.
+	 */
+	emitServerEvent(eventName) {
+		Frog.eventEmitter.emit(eventName, {
+			world: this.getWorldData()
+		});
+	}
+
+	/**
+	 * Spawns an entity in the world
+	 * 
+	 * @param {string | import("Frog").EntityType} entityName 
+	 * @param {number} entityId
+	 * @param {number} x 
+	 * @param {number} y 
+	 * @param {number} z 
+	 * @param {number} yaw 
+	 * @param {number} pitch 
+	 */
+	spawnEntity(entityName, entityId, x, y, z, yaw = 0, pitch = 0) {
+		let shouldSpawnEntity = true;
+
+		Frog.eventEmitter.emit("entitySpawnEvent", {
+			entityName,
+			entityId,
+			x,
+			y,
+			z,
+			yaw,
+			pitch,
+			cancel() {
+				shouldSpawnEntity = false;
+			}
+		});
+
+		if (!shouldSpawnEntity) return;
+
+		const addEntityPacket = new ServerAddEntityPacket();
+		addEntityPacket.unique_id = String(entityId);
+		addEntityPacket.runtime_id = String(entityId);
+		addEntityPacket.entity_type = entityName;
+		addEntityPacket.position = { x, y, z };
+		addEntityPacket.velocity = { x: 0, y: 0, z: 0 };
+		addEntityPacket.pitch = pitch;
+		addEntityPacket.yaw = yaw;
+		addEntityPacket.head_yaw = 0;
+		addEntityPacket.body_yaw = 0;
+		addEntityPacket.attributes = entityAttributes;
+		addEntityPacket.metadata = entityMetadata;
+		addEntityPacket.properties = { ints: [], floats: [] };
+		addEntityPacket.links = [];
+
+		for (const player of PlayerInfo.playersOnline) {
+			addEntityPacket.writePacket(player);
+		}
+	}
+
+	/**
+	 * Teleports an entity to specific coordinates
+	 * 
+	 * @param {number} entityId 
+	 * @param {number} x 
+	 * @param {number} y 
+	 * @param {number} z 
+	 * @param {number} [rotation_x] 
+	 * @param {number} [rotation_y]
+	 * @param {number} [rotation_z]
+	 */
+	teleportEntity(entityId, x, y, z, rotation_x = 0, rotation_y = 0, rotation_z = 0) {
+		let shouldTeleportEntity = true;
+
+		Frog.eventEmitter.emit("entityTeleportEvent", {
+			entityId,
+			x,
+			y,
+			z,
+			rotation_x,
+			rotation_y,
+			rotation_z,
+			cancel() {
+				shouldTeleportEntity = false;
+			}
+		});
+
+		if (!shouldTeleportEntity) return;
+
+		const movePacket = new ServerMoveEntityDataPacket();
+		movePacket.flags = {
+			has_x: true,
+			has_y: true,
+			has_z: true,
+			has_rot_x: false,
+			has_rot_y: false,
+			has_rot_z: false,
+			on_ground: false,
+			teleport: true,
+			force_move: true,
+		};
+		movePacket.runtime_entity_id = String(entityId);
+		movePacket.coordinates.x = x;
+		movePacket.coordinates.y = y;
+		movePacket.coordinates.z = z;
+		movePacket.coordinatesRotation.x = Number(rotation_x);
+		movePacket.coordinatesRotation.y = Number(rotation_y);
+		movePacket.coordinatesRotation.z = Number(rotation_z);
+
+		for (const player of PlayerInfo.playersOnline) {
+			movePacket.writePacket(player);
+		}
+	}
+
+	/**
+	 * Removes an entity from the world
+	 * 
+	 * @param {number} entityId 
+	 */
+	removeEntity(entityId) {
+		let shouldRemoveEntity = true;
+
+		Frog.eventEmitter.emit("entityRemoveEvent", {
+			entityId,
+			cancel() {
+				shouldRemoveEntity = false;
+			}
+		});
+
+		if (!shouldRemoveEntity) return;
+
+		const removePacket = new ServerRemoveEntityPacket();
+		removePacket.entity_id_self = String(entityId);
+
+		for (const player of PlayerInfo.playersOnline) {
+			removePacket.writePacket(player);
 		}
 	}
 

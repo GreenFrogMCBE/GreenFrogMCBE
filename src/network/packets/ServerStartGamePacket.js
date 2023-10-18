@@ -26,9 +26,9 @@ class ServerStartGamePacket extends Packet {
 	runtime_entity_id;
 	/** @type {string | undefined} */
 	player_gamemode;
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {import("Frog").Vec3 | undefined} */
 	player_position;
-	/** @type {import("Frog").Rotation | undefined} */
+	/** @type {import("Frog").Vec2 | undefined} */
 	rotation;
 	/** @type {import("Frog").WorldSeed | undefined} */
 	seed;
@@ -44,7 +44,7 @@ class ServerStartGamePacket extends Packet {
 	world_gamemode;
 	/** @type {import("Frog").Difficulty | undefined} */
 	difficulty;
-	/** @type {import("Frog").Coordinate | undefined} */
+	/** @type {import("Frog").Vec3 | undefined} */
 	spawn_position;
 	/** @type {any[] | undefined} */
 	gamerules;
@@ -58,6 +58,8 @@ class ServerStartGamePacket extends Packet {
 	movement_authority;
 	/** @type {import("Frog").PermissionLevel | undefined} */
 	permission_level;
+	/** @type {import("Frog").EditorLevelType | undefined} */
+	editor_world_type;
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -78,7 +80,7 @@ class ServerStartGamePacket extends Packet {
 			difficulty: this.difficulty,
 			spawn_position: this.spawn_position,
 			achievements_disabled: true,
-			editor_world: false,
+			editor_world_type: this.editor_world_type,
 			created_in_editor: false,
 			exported_from_editor: false,
 			day_cycle_stop_time: 18,

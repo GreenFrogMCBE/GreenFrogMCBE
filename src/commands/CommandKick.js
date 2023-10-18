@@ -27,6 +27,13 @@ class CommandKick extends Command {
 	description = getKey("commands.kick.description");
 	minArgs = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "player",
+			type: "target",
+			optional: false,
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

@@ -19,14 +19,32 @@ const { getPlayer } = require("../player/PlayerInfo");
 
 const { getKey } = require("../utils/Language");
 
+const ArgumentType = require("./types/ArgumentType");
+
 /**
  * A command that sends a private message to other players
  */
 class CommandTell extends Command {
 	name = getKey("commands.tell.name");
 	description = getKey("commands.tell.description");
-	aliases = [getKey("commands.tell.aliases.w"), getKey("commands.tell.aliases.whisper"), getKey("commands.tell.aliases.msg")];
+	aliases = [
+		getKey("commands.tell.aliases.w"), 
+		getKey("commands.tell.aliases.whisper"), 
+		getKey("commands.tell.aliases.msg")
+	];
 	minArgs = 2;
+	args = [
+		{
+			name: "player",
+			type: ArgumentType.TARGET,
+			optional: false,
+		},
+		{
+			name: "message",
+			type: ArgumentType.STRING,
+			optional: false
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player

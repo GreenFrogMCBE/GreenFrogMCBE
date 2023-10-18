@@ -17,6 +17,8 @@ const Command = require("./Command");
 
 const PermissionManager = require("../permission/PermissionManager");
 
+const ArgumentType = require("./types/ArgumentType");
+
 const { getKey } = require("../utils/Language");
 
 /**
@@ -28,17 +30,25 @@ class CommandOp extends Command {
 	minArgs = 1;
 	maxArgs = 1;
 	requiresOp = true;
+	args = [
+		{
+			name: "player",
+			type: ArgumentType.TARGET,
+			optional: true
+		}
+	];
 
 	/**
 	 * @param {import("Frog").Player} player
 	 * @param {import("frog-protocol").Server} server
 	 * @param {string[]} args
+	 * @async
 	 */
 	async execute(player, server, args) {
 		const playerName = args[0];
 
 		try {
-			PermissionManager.setOpStatus(playerName, true);
+			await PermissionManager.op(playerName);
 
 			player.sendMessage(getKey("commands.op.execution.success").replace("%s", playerName));
 		} catch {

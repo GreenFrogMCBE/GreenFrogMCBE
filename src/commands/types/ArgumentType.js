@@ -13,12 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-class InvalidPositionException extends Error {
-	/** @param {string} message */
-	constructor(message) {
-		super("Invalid position: " + message);
-		this.name = "InvalidPositionException";
-	}
-}
-
-module.exports = InvalidPositionException;
+module.exports = /** @type {const} */ ({
+	TARGET: "target",
+	STRING: "string",
+	INT: "int",
+	FLOAT: "float",
+	POSITION: "position",
+	BLOCK_STATES: "block_states",
+	WILDCARD_TARGET: "wildcard_target",
+	OPERATOR: "operator"
+});

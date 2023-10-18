@@ -24,10 +24,10 @@ const { getKey } = require("../utils/Language");
 /**
  * A command that all the plugin this server uses
  */
-class CommandPl extends Command {
+class CommandPlugins extends Command {
 	name = getKey("commands.plugins.name");
 	description = getKey("commands.plugins.description");
-	aliases = [getKey("commands.plugins.aliases.pl")];
+	aliases = getKey("commands.plugins.aliases.pl");
 	minArgs = 0;
 	maxArgs = 0;
 
@@ -36,10 +36,15 @@ class CommandPl extends Command {
 	 */
 	execute(player) {
 		const pluginSet = new Set(PluginManager.plugins);
-		const pluginList = [...pluginSet].map((plugin) => `§r§a${plugin.name} v${plugin.version}§r`).join(", ") || "";
+		const pluginList = Array.from(pluginSet)
+			.map(plugin => `${Colors.RESET}${Colors.GREEN}${plugin.name} v${plugin.version}${Colors.RESET}`)
+			.join(", ") || "";
 
-		player.sendMessage(getKey("commands.plugins.execution.success").replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`));
+		const message = getKey("commands.plugins.execution.success")
+			.replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`);
+
+		player.sendMessage(message);
 	}
 }
 
-module.exports = CommandPl;
+module.exports = CommandPlugins;

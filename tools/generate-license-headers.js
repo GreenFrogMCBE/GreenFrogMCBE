@@ -47,9 +47,10 @@ async function addHeader(filePath) {
 
 	try {
 		const data = await fs.readFile(filePath);
+
 		let contents = data.toString();
 
-		if (!contents.includes("CC-BY-4.0")) {
+		if (!contents.includes("@link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE")) {
 			contents = LICENSE_HEADER + contents;
 			await fs.writeFile(filePath, contents);
 
@@ -75,7 +76,11 @@ async function walk(dir) {
 
 			if (stats.isDirectory()) {
 				await walk(filePath);
-			} else if (path.extname(filePath) === ".js" || path.extname(filePath) === ".ts") {
+			} else if (
+				path.extname(filePath) === ".js" || 
+				path.extname(filePath) === ".ts" || 
+				path.extname(filePath) === ".cpp"
+			) {
 				await addHeader(filePath);
 			}
 		}

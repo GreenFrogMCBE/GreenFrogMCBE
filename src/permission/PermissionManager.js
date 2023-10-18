@@ -19,61 +19,95 @@ const Frog = require("../Frog");
 
 const fs = require("fs");
 
+/**
+ * Emits the `playerOpStatusChange` event
+ *
+ * @param {string} username
+ * @param {boolean} opped
+ * @returns {boolean} - Was the event executed successfully?
+ * @private
+ */
+function emitPlayerOpStatusChange(username, opped) {
+	let shouldOp = true;
+
+	Frog.eventEmitter.emit("playerOpStatusChange", {
+		username,
+		opped,
+		cancel: () => {
+			shouldOp = false;
+		},
+	});
+
+	return shouldOp;
+}
+
 module.exports = {
 	/**
 	 * Checks if a user is opped.
 	 *
 	 * @param {string} username - The username to check.
 	 * @returns {Promise<boolean>} - Whether the user is opped.
+	 * @async
 	 */
 	async isOpped(username) {
-		const oppedPlayers = fs.readFileSync("ops.yml", "utf8").split("\n");
+		const oppedPlayers = fs.readFileSync(Frog.directories.opFile, "utf8")
+			.split("\n");
 
-		for (const oppedPlayer of oppedPlayers) {
-			if (oppedPlayer === username) {
-				return true;
-			}
-		}
-
-		return false;
+		return oppedPlayers.includes(username);
 	},
 
 	/**
-	 * Changes the op status of a player.
+	 * Gives operator permissions to a player.
 	 *
-	 * @param {string} username - The username of the player.
-	 * @param {boolean} status - The new op status (true for op, false for deop).
+	 * @param {string} username - The username of the player to give the operator permissions to.
 	 * @returns {Promise<void>}
+	 * @async
 	 */
-	async setOpStatus(username, status) {
-		let shouldOp = true;
+	async op(username) {
+		if (!emitPlayerOpStatusChange(username, true)) return;
 
-		Frog.eventEmitter.emit("playerOpStatusChange", {
-			username,
-			status,
-			cancel: () => {
-				shouldOp = false;
-			},
-		});
-
-		if (!shouldOp) return;
-
-		if (status) {
-			fs.appendFileSync("ops.yml", username + "\n");
-		} else {
-			const ops = fs.readFileSync("ops.yml", "utf-8");
-			const updatedOps = ops
-				.split("\n")
-				.filter((op) => op !== username)
-				.join("\n");
-
-			fs.writeFileSync("ops.yml", updatedOps);
-		}
+		fs.appendFileSync(Frog.directories.opFile, username + "\n");
 
 		const target = PlayerInfo.getPlayer(username);
 
 		if (target) {
-			target.permissions.op = status;
+			target.permissions.op = true;
 		}
+	},
+
+	/**
+	 * Revokes the operator permissions from a player.
+	 *
+	 * @param {string} username - The username of the player to remove the operator permissions from.
+	 * @returns {Promise<void>}
+	 * @async
+	 */
+	async deop(username) {
+		if (!emitPlayerOpStatusChange(username, false)) return;
+
+		const ops = fs.readFileSync(Frog.directories.opFile, "utf-8");
+		const updatedOps = ops
+			.split("\n")
+			.filter((op) => op !== username)
+			.join("\n");
+
+		fs.writeFileSync(Frog.directories.opFile, updatedOps);
+
+		const target = PlayerInfo.getPlayer(username);
+
+		if (target) {
+			target.permissions.op = false;
+		}
+	},
+
+	/**
+	 * Gives or revokes operator permissions from a player
+	 *
+	 * @param {string} username - The username to give or remove the operator status from
+	 * @param {boolean} status - The operator status. true to give the operator permissions, false to remove them
+	 * @returns {Promise<void>}
+	 */
+	async setOp(username, status) {
+		status ? await this.op(username) : await this.deop(username);
 	},
 };
