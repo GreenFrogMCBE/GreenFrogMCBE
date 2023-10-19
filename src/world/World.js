@@ -26,7 +26,7 @@ const Gamemode = require("../player/types/Gamemode");
 const entityAttributes = require("../../src/resources/json/entityAttributes.json");
 const entityMetadata = require("../../src/resources/json/entityMetadata.json");
 
-const entity = require("../entity/build/Release/entity.node");
+const entity = require("../entity/EntityModule").getModule();
 
 const PlayerInfo = require("../player/PlayerInfo");
 
@@ -57,9 +57,9 @@ class World {
 		this.renderDistance = 4;
 
 		/**
-		 * @type {import("Frog").WorldGenerator | undefined}
+		 * @type {import("Frog").WorldGenerator}
 		 */
-		this.generator;
+		this.generator = WorldGenerator.DEFAULT;
 
 		/**
 		 * @type {number}
