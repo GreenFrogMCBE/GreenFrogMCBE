@@ -65,15 +65,13 @@ async function start() {
 
 		Server.start();
 	} catch (error) {
-		console.clear();
-
 		console.error(
 			convertConsoleColor(
-				`${Colors.RED}Failed to start server
+				`${Colors.RED}Failed to start the server
 ${error.stack}
 
 Make sure that you have the required libraries. Run "npm i" to install them
-If you are sure that this is a bug please report it here: https://github.com/GreenFrogMCBE/GreenFrogMCBE
+If you are sure that this is a bug, please report it here: https://github.com/GreenFrogMCBE/GreenFrogMCBE
 ${Colors.RESET}`,
 			),
 		);
