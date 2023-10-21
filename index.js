@@ -26,8 +26,7 @@ let Frog;
 let Server;
 
 const Colors = require("./src/utils/types/Colors");
-
-const { convertConsoleColor } = require("./src/utils/ConsoleColorConvertor");
+const ConsoleColorConvertor = require("./src/utils/ConsoleColorConvertor");
 
 /**
  * @type {string}
@@ -66,7 +65,7 @@ async function start() {
 		Server.start();
 	} catch (error) {
 		console.error(
-			convertConsoleColor(
+			ConsoleColorConvertor.convertConsoleColor(
 				`${Colors.RED}Failed to start the server
 ${error.stack}
 
@@ -82,7 +81,8 @@ ${Colors.RESET}`,
 
 			process.exit(Frog.config.dev.exitCodes.crash);
 		} catch {
-			// This can only happen if the `Frog` module failed to load
+			// This can only happen if the `Frog` module failed to load.
+			// Usually, this is caused if one of the dependencies is missing.
 		}
 	}
 }
