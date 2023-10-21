@@ -15,13 +15,11 @@
  */
 const fs = require("fs");
 
-const Frog = require("../Frog");
-
-const PluginManager = require("./PluginManager");
-
 const Logger = require("../utils/Logger");
 
 const { getKey } = require("../utils/Language");
+
+const PluginManager = require("./PluginManager");
 
 /**
  * @type {number}
@@ -32,7 +30,7 @@ let pluginCount = 0;
  * @param {string} file
  */
 function getFile(file) {
-	path.join(path.join(__dirname, "..", "..", "./plugins"), file)
+	return path.join(path.join(__dirname, "..", "..", "./plugins"), file)
 }
 
 module.exports = {
@@ -42,12 +40,13 @@ module.exports = {
 	pluginCount,
 
 	/**
-	 * Loads all the plugins
-	 * 
+	 * Loads all the plugins.
 	 * @async
 	 */
 	async loadPlugins() {
-		const files = fs.readdirSync(Frog.directories.pluginsDirectory);
+		const Frog = require("../Frog");
+
+		const files = fs.readdirSync(Frog.directories.pluginsFolder);
 
 		for (const file of files) {
 			const stats = fs.statSync(getFile(file));
@@ -101,14 +100,15 @@ module.exports = {
 	},
 
 	/**
-	 * Kills the server
+	 * Kills the server.
+	 * @async
 	 */
 	async killServer() {
 		process.exit(require("../Frog").config.dev.exitCodes.crash);
 	},
 
 	/**
-	 * Decrements the plugin count
+	 * Decrements the plugin count.
 	 */
 	decrementPluginCount() {
 		pluginCount--;
@@ -117,9 +117,12 @@ module.exports = {
 	},
 
 	/**
-	 * Unloads the plugins
+	 * Unloads the plugins.
+	 * @async
 	 */
 	async unloadPlugins() {
+		const Frog = require("../Frog");
+
 		try {
 			const files = await fs.promises.readdir(Frog.directories.pluginsDirectory);
 
@@ -137,11 +140,15 @@ module.exports = {
 
 					try {
 						const packageJson = require(`${__dirname}/../../plugins/${file}/package.json`);
+
 						name = packageJson.displayName;
 						main = packageJson.main;
 
-						Logger.info(getKey("plugin.unloading.unloading").replace("%s", name));
-					} catch (error) {
+						Logger.info(
+							getKey("plugin.unloading.unloading")
+								.replace("%s", name)
+						);
+					} catch {
 						continue;
 					}
 
@@ -151,17 +158,27 @@ module.exports = {
 						if (typeof plugin.onShutdown === "function") {
 							await plugin.onShutdown();
 
-							Logger.info(getKey("plugin.unloading.success").replace("%s", name));
+							Logger.info(
+								getKey("plugin.unloading.success")
+									.replace("%s", name)
+							);
 						}
 					} catch (error) {
-						Logger.error(getKey("plugin.unloading.failed").replace("%s", name).replace("%d", error.stack));
+						Logger.error(
+							getKey("plugin.unloading.failed")
+								.replace("%s", name)
+								.replace("%d", error.stack)
+						);
 					}
 
 					this.decrementPluginCount();
 				}
 			}
 		} catch (error) {
-			Logger.error(getKey("plugin.unloading.error").replace("%d", error.stack));
+			Logger.error(
+				getKey("plugin.unloading.error")
+					.replace("%d", error.stack)
+			);
 		}
 	},
 };
