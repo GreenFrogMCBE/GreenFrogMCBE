@@ -78,10 +78,14 @@ ${Colors.RESET}`,
 			),
 		);
 
-		fs.mkdirSync(Frog.directories.crashReportsFolder, { recursive: true });
-		fs.writeFileSync(crashFile, `Error: ${error.stack}`);
+		try {
+			fs.mkdirSync(Frog.directories.crashReportsFolder, { recursive: true });
+			fs.writeFileSync(crashFile, `Error: ${error.stack}`);
 
-		process.exit(Frog.config.dev.exitCodes.crash);
+			process.exit(Frog.config.dev.exitCodes.crash);
+		} catch {
+			// This can only happen if the `Frog` module failed to load
+		}
 	}
 }
 
