@@ -14,6 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const fs = require("fs");
+const path = require("path");
 
 const Logger = require("../utils/Logger");
 
