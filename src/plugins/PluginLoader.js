@@ -14,7 +14,8 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const fs = require("fs");
-const path = require("path");
+
+const Frog = require("../Frog");
 
 const PluginManager = require("./PluginManager");
 
@@ -27,17 +28,12 @@ const { getKey } = require("../utils/Language");
  */
 let pluginCount = 0;
 
-const directories = {
-	plugins: "./plugins",
-	pluginData: "./pluginData",
-	fullPluginPath: path.join(__dirname, "..", "..", "./plugins"),
-
-	/**
-	 * @example `getFile("Example")` will return `pathToProject/plugins/Example`
-	 * @param {string} file
-	 */
-	getFile: (file) => path.join(path.join(__dirname, "..", "..", "./plugins"), file),
-};
+/**
+ * @param {string} file
+ */
+function getFile(file) {
+	path.join(path.join(__dirname, "..", "..", "./plugins"), file)
+}
 
 module.exports = {
 	/**
@@ -46,46 +42,59 @@ module.exports = {
 	pluginCount,
 
 	/**
-	 * Plugin-related directory info
-	 *
-	 * @type {import("Frog").Directories}
-	 */
-	directories,
-
-	/**
-	 * Loads all plugins
+	 * Loads all the plugins
+	 * 
+	 * @async
 	 */
 	async loadPlugins() {
-		const files = fs.readdirSync(directories.plugins);
+		const files = fs.readdirSync(Frog.directories.pluginsDirectory);
 
 		for (const file of files) {
-			const stats = fs.statSync(directories.getFile(file));
+			const stats = fs.statSync(getFile(file));
 
 			if (stats.isDirectory()) {
 				let name, version, main;
 
 				try {
-					const packageJson = require(directories.getFile(`${file}/package.json`));
+					const packageJson = require(getFile(`${file}/package.json`));
 
 					name = packageJson.displayName;
 					version = packageJson.version;
 					main = packageJson.main;
 
-					Logger.info(getKey("plugin.loading.loading").replace("%s", name).replace("%d", version));
+					Logger.info(
+						getKey("plugin.loading.loading")
+							.replace("%s", name)
+							.replace("%d", version)
+					);
 				} catch (error) {
-					Logger.warning(getKey("plugin.loading.warning.invalidJson").replace("%s", file).replace("%d", error.stack));
+					Logger.warning(
+						getKey("plugin.loading.warning.invalidJson")
+							.replace("%s", file)
+							.replace("%d", error.stack)
+					);
+
 					continue;
 				}
 
 				try {
-					const plugin = require(directories.getFile(`${file}/${main}`));
+					const plugin = require(getFile(`${file}/${main}`));
 
 					await plugin.onLoad();
 
 					PluginManager.addPlugin(name, version);
-					Logger.info(getKey("plugin.loading.loaded").replace("%s", name).replace("%d", version));
+
+					Logger.info(
+						getKey("plugin.loading.loaded")
+							.replace("%s", name)
+							.replace("%d", version)
+					);
 				} catch (error) {
-					Logger.error(getKey("plugin.loading.failed").replace("%s", name).replace("%d", error.stack));
+					Logger.error(
+						getKey("plugin.loading.failed")
+							.replace("%s", name)
+							.replace("%d", error.stack)
+					);
 				}
 			}
 		}
@@ -112,7 +121,7 @@ module.exports = {
 	 */
 	async unloadPlugins() {
 		try {
-			const files = await fs.promises.readdir("./plugins");
+			const files = await fs.promises.readdir(Frog.directories.pluginsDirectory);
 
 			if (!files) {
 				this.killServer();
