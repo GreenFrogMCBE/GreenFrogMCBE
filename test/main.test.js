@@ -109,7 +109,9 @@ describe("server", () => {
 					offline: true
 				});
 
-				client.on("disconnect", () => {
+				client.on("close", (reason) => {
+					if (!reason) return;
+
 					throw new Error("Connection closed");
 				});
 			});
@@ -122,7 +124,9 @@ describe("server", () => {
 					offline: true
 				});
 
-				client.on("close", () => {
+				client.on("close", (reason) => {
+					if (!reason) return;
+
 					throw new Error("Connection closed");
 				});
 
@@ -135,6 +139,8 @@ describe("server", () => {
 						platform_chat_id: "",
 						message: "hi"
 					});
+
+					client.disconnect();
 				});
 			});
 
@@ -164,9 +170,11 @@ describe("server", () => {
 						});
 
 						setTimeout(() => {
+							client.disconnect();
+
 							const Frog = require("../src/Frog");
 							Frog.shutdownServer();
-						}, 1000);
+						}, 5000);
 					}
 				});
 			});
