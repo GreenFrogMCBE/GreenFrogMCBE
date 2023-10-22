@@ -177,7 +177,7 @@ module.exports = {
 			}
 		} catch (error) {
 			Logger.error(
-				getKey("plugin.unloading.error")
+				getKey("plugin.unloading.failed")
 					.replace("%d", error.stack)
 			);
 		}
