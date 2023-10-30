@@ -114,7 +114,6 @@ class ClientResourcePackResponsePacket extends Packet {
 					player.world.spawnCoordinates.y = -47;
 				}
 
-				console.log(player.world.spawnCoordinates.y)
 				entity.setSpawnYCoordinate(player.world.spawnCoordinates.y - 2);
 
 				player.permissions.op = false;
