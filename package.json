@@ -15,7 +15,7 @@
     "compile": "cd ./src/entity/ && npx node-gyp configure && npx node-gyp build && cd ../../ && node index.js"
   },
   "dependencies": {
-    "@greenfrog/lang-parser": "1.0.5",
+    "@greenfrog/lang-parser": "1.0.6",
     "@harmonytf/smart-buffer": "4.2.4",
     "frog-protocol": "github:GreenFrogMCBE/protocol",
     "js-yaml": "4.1.0",
