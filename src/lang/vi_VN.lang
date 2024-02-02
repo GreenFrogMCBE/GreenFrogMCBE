@@ -5,10 +5,6 @@ server.shuttingDown=Đang tắt máy chủ...
 
 server.version=Server này đang chạy GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Phiên bản: %s
 
-garbageCollector.started=[Bộ thu gom rác] Bắt đầu thu gom rác...
-garbageCollector.deleted=[Bộ thu gom rác] Đã xóa %s
-garbageCollector.finished=[Bộ thu gom rác] Đã hoàn thành
-
 commands.unknown=§cLệnh không xác định %s. Vui lòng kiểm tra xem lệnh có tồn tại và bạn có quyền sử dụng nó không.
 commands.errors.internalError=Không thể thực hiện lệnh! Lỗi: %s
 commands.errors.internalError.player=Không thể thực hiện lệnh từ %s. Lỗi: %d

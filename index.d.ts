@@ -17,7 +17,7 @@ declare module "Frog" {
 	import { Client, Player as OnlinePlayer, Server } from "frog-protocol";
 	import { Socket, RemoteInfo } from "dgram";
 
-	export type Directories = {	
+	export type Directories = {
 		opFile: string,
 		configFile: string,
 		worldFolder: string,
@@ -58,7 +58,8 @@ declare module "Frog" {
 
 	export type CommandParameters = {
 		name: string
-		type: 'int' |
+		type:
+		'int' |
 		'float' |
 		'value' |
 		'wildcard_int' |

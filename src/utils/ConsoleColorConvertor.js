@@ -20,7 +20,7 @@ module.exports = {
 	 * @param {string} string The string with Minecraft color codes to convert
 	 * @returns {string} The converted string with NodeJS console color codes
 	 */
-	convertConsoleColor(string) {
+	convert_console_color(string) {
 		/** @type {import("Frog").ConsoleColors} */
 		const colors = {
 			"§0": "\x1b[30m", // black
