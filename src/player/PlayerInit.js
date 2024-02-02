@@ -13,47 +13,45 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Logger = require("../utils/Logger");
+const Logger = require("../utils/Logger")
 
-const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException");
+const InvalidGamemodeException = require("../utils/exceptions/InvalidGamemodeException")
 
-const GarbageCollector = require("../utils/GarbageCollector");
+const { getKey } = require("../utils/Language")
 
-const { getKey } = require("../utils/Language");
+const LegacyToRuntimeIdConverter = require("../block/LegacyToRuntimeIdConverter")
 
-const LegacyToRuntimeIdConverter = require("../block/LegacyToRuntimeIdConverter");
+const ServerTextPacket = require("../network/packets/ServerTextPacket")
+const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket")
+const ServerTransferPacket = require("../network/packets/ServerTransferPacket")
+const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket")
+const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion")
+const ServerPlayStatusPacket = require("../network/packets/ServerPlayStatusPacket")
+const ServerPlayerListPacket = require("../network/packets/ServerPlayerListPacket")
+const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket")
+const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket")
+const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket")
+const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket")
+const ServerChangeDimensionPacket = require("../network/packets/ServerChangeDimensionPacket")
+const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket")
+const ServerInventoryContentPacket = require("../network/packets/ServerInventoryContentPacket")
+const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket")
+const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket")
 
-const ServerTextPacket = require("../network/packets/ServerTextPacket");
-const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket");
-const ServerTransferPacket = require("../network/packets/ServerTransferPacket");
-const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket");
-const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion");
-const ServerPlayStatusPacket = require("../network/packets/ServerPlayStatusPacket");
-const ServerPlayerListPacket = require("../network/packets/ServerPlayerListPacket");
-const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket");
-const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket");
-const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket");
-const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
-const ServerChangeDimensionPacket = require("../network/packets/ServerChangeDimensionPacket");
-const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket");
-const ServerInventoryContentPacket = require("../network/packets/ServerInventoryContentPacket");
-const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket");
-const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket");
+const PermissionManager = require("../permission/PermissionManager")
 
-const PermissionManager = require("../permission/PermissionManager");
+const TextType = require("./types/Text")
+const Gamemode = require("./types/Gamemode")
+const DamageCause = require("./types/DamageCause")
+const HungerCause = require("./types/HungerCause")
+const PlayerAttribute = require("./types/Attribute")
+const WindowId = require("../inventory/types/WindowId")
+const WindowType = require("../inventory/types/WindowType")
+const PlayerListAction = require("../network/packets/types/PlayerListAction")
 
-const TextType = require("./types/Text");
-const Gamemode = require("./types/Gamemode");
-const DamageCause = require("./types/DamageCause");
-const HungerCause = require("./types/HungerCause");
-const PlayerAttribute = require("./types/Attribute");
-const WindowId = require("../inventory/types/WindowId");
-const WindowType = require("../inventory/types/WindowType");
-const PlayerListAction = require("../network/packets/types/PlayerListAction");
+const PlayerInfo = require("./PlayerInfo")
 
-const PlayerInfo = require("./PlayerInfo");
-
-const Frog = require("../Frog");
+const Frog = require("../Frog")
 
 module.exports = {
 	/**
@@ -68,19 +66,19 @@ module.exports = {
 		 * @param {import("Frog").DamageCause} cause
 		 */
 		player.kill = function (cause = DamageCause.UNKNOWN) {
-			let shouldKillPlayer = true;
+			let shouldKillPlayer = true
 
 			Frog.eventEmitter.emit("playerKill", {
 				player,
 				cancel: () => {
-					shouldKillPlayer = false;
+					shouldKillPlayer = false
 				},
-			});
+			})
 
-			if (!shouldKillPlayer) return;
+			if (!shouldKillPlayer) return
 
-			player.setHealth(0, cause);
-		};
+			player.setHealth(0, cause)
+		}
 
 		/**
 		 * Sends a chat message as the player
@@ -88,24 +86,24 @@ module.exports = {
 		 * @param {string} message
 		 */
 		player.chat = function (message) {
-			let shouldSendMessage = true;
+			let shouldSendMessage = true
 
 			Frog.eventEmitter.emit("serverChat", {
 				player,
 				message,
 				cancel: () => {
-					shouldSendMessage = false;
+					shouldSendMessage = false
 				},
-			});
+			})
 
-			if (!shouldSendMessage) return;
+			if (!shouldSendMessage) return
 
 			Frog.broadcastMessage(
 				getKey("chat.format")
 					.replace("%s", player.username)
 					.replace("%d", message)
-			);
-		};
+			)
+		}
 
 		/**
 		 * Teleports the player
@@ -118,7 +116,7 @@ module.exports = {
 		 * @param {number | undefined} rotation_z
 		 */
 		player.teleport = function (x, y, z, rotation_x = undefined, rotation_y = undefined, rotation_z = undefined) {
-			let shouldTeleport = true;
+			let shouldTeleport = true
 
 			Frog.eventEmitter.emit("playerTeleport", {
 				player,
@@ -129,13 +127,13 @@ module.exports = {
 				rotation_y,
 				rotation_z,
 				cancel: () => {
-					shouldTeleport = false;
+					shouldTeleport = false
 				},
-			});
+			})
 
-			if (!shouldTeleport) return;
+			if (!shouldTeleport) return
 
-			const movePacket = new ServerMoveEntityDataPacket();
+			const movePacket = new ServerMoveEntityDataPacket()
 			movePacket.flags = {
 				has_x: true,
 				has_y: true,
@@ -146,16 +144,16 @@ module.exports = {
 				on_ground: false,
 				teleport: true,
 				force_move: true,
-			};
-			movePacket.runtime_entity_id = 1;
-			movePacket.coordinates.x = x;
-			movePacket.coordinates.y = y;
-			movePacket.coordinates.z = z;
-			movePacket.coordinatesRotation.x = Number(rotation_x);
-			movePacket.coordinatesRotation.y = Number(rotation_y);
-			movePacket.coordinatesRotation.z = Number(rotation_z);
-			movePacket.writePacket(player);
-		};
+			}
+			movePacket.runtime_entity_id = 1
+			movePacket.coordinates.x = x
+			movePacket.coordinates.y = y
+			movePacket.coordinates.z = z
+			movePacket.coordinatesRotation.x = Number(rotation_x)
+			movePacket.coordinatesRotation.y = Number(rotation_y)
+			movePacket.coordinatesRotation.z = Number(rotation_z)
+			movePacket.writePacket(player)
+		}
 
 		/**
 		 * Transfers the player to a different server
@@ -164,24 +162,24 @@ module.exports = {
 		 * @param {number} port - The port of the server to transfer to
 		 */
 		player.transfer = function (address, port) {
-			let shouldTransfer = true;
+			let shouldTransfer = true
 
 			Frog.eventEmitter.emit("playerTransfer", {
 				player,
 				port,
 				address,
 				cancel: () => {
-					shouldTransfer = false;
+					shouldTransfer = false
 				},
-			});
+			})
 
-			if (!shouldTransfer) return;
+			if (!shouldTransfer) return
 
-			const transferPacket = new ServerTransferPacket();
-			transferPacket.server_address = address;
-			transferPacket.port = port;
-			transferPacket.writePacket(player);
-		};
+			const transferPacket = new ServerTransferPacket()
+			transferPacket.server_address = address
+			transferPacket.port = port
+			transferPacket.writePacket(player)
+		}
 
 		/**
 		 * Sends a chat message to the player
@@ -189,27 +187,27 @@ module.exports = {
 		 * @param {string} message
 		 */
 		player.sendMessage = function (message) {
-			let shouldSendMessage = true;
+			let shouldSendMessage = true
 
 			Frog.eventEmitter.emit("serverMessage", {
 				player,
 				message,
 				cancel: () => {
-					shouldSendMessage = false;
+					shouldSendMessage = false
 				},
-			});
+			})
 
-			if (!shouldSendMessage) return;
+			if (!shouldSendMessage) return
 
-			const textPacket = new ServerTextPacket();
-			textPacket.message = message;
-			textPacket.needs_translation = false;
-			textPacket.type = TextType.ANNOUNCEMENT;
-			textPacket.platform_chat_id = "";
-			textPacket.source_name = "";
-			textPacket.xuid = "";
-			textPacket.writePacket(player);
-		};
+			const textPacket = new ServerTextPacket()
+			textPacket.message = message
+			textPacket.needs_translation = false
+			textPacket.type = TextType.ANNOUNCEMENT
+			textPacket.platform_chat_id = ""
+			textPacket.source_name = ""
+			textPacket.xuid = ""
+			textPacket.writePacket(player)
+		}
 
 		/**
 		 * Sets player's gamemode
@@ -223,30 +221,30 @@ module.exports = {
 				Gamemode.ADVENTURE,
 				Gamemode.SPECTATOR,
 				Gamemode.FALLBACK
-			];
+			]
 
 			if (!allowedGamemodes.includes(gamemode)) {
-				throw new InvalidGamemodeException(gamemode);
+				throw new InvalidGamemodeException(gamemode)
 			}
 
-			let shouldChangeGamemode = true;
+			let shouldChangeGamemode = true
 
 			Frog.eventEmitter.emit("serverGamemodeChange", {
 				player,
 				gamemode,
 				cancel: () => {
-					shouldChangeGamemode = false;
+					shouldChangeGamemode = false
 				},
-			});
+			})
 
-			if (!shouldChangeGamemode) return;
+			if (!shouldChangeGamemode) return
 
-			player.gamemode = gamemode;
+			player.gamemode = gamemode
 
-			const playerGamemode = new ServerSetPlayerGameTypePacket();
-			playerGamemode.gamemode = gamemode;
-			playerGamemode.writePacket(player);
-		};
+			const playerGamemode = new ServerSetPlayerGameTypePacket()
+			playerGamemode.gamemode = gamemode
+			playerGamemode.writePacket(player)
+		}
 
 		/**
 		 * Sets player's velocity
@@ -257,7 +255,7 @@ module.exports = {
 		 * @param {number} z
 		 */
 		player.setVelocity = function (x, y, z) {
-			let shouldSetVelocity = true;
+			let shouldSetVelocity = true
 
 			Frog.eventEmitter.emit("serverVelocityUpdate", {
 				player,
@@ -267,17 +265,17 @@ module.exports = {
 					z,
 				},
 				cancel: () => {
-					shouldSetVelocity = false;
+					shouldSetVelocity = false
 				},
-			});
+			})
 
-			if (!shouldSetVelocity) return;
+			if (!shouldSetVelocity) return
 
-			const setEntityMotionPacket = new ServerSetEntityMotion();
-			setEntityMotionPacket.runtime_entity_id = 1;
-			setEntityMotionPacket.velocity = { x, y, z };
-			setEntityMotionPacket.writePacket(player);
-		};
+			const setEntityMotionPacket = new ServerSetEntityMotion()
+			setEntityMotionPacket.runtime_entity_id = 1
+			setEntityMotionPacket.velocity = { x, y, z }
+			setEntityMotionPacket.writePacket(player)
+		}
 
 		/**
 		 * Sends play status to the player
@@ -286,36 +284,36 @@ module.exports = {
 		 * @param {boolean} [terminateConnection]
 		 */
 		player.sendPlayStatus = function (playStatus, terminateConnection = false) {
-			let sendPlayStatus = true;
+			let sendPlayStatus = true
 
 			Frog.eventEmitter.emit("playerPlayStatus", {
 				player,
 				playStatus,
 				terminateConnection,
 				cancel: () => {
-					sendPlayStatus = false;
+					sendPlayStatus = false
 				},
-			});
+			})
 
-			if (!sendPlayStatus) return;
+			if (!sendPlayStatus) return
 
-			const playStatusPacket = new ServerPlayStatusPacket();
-			playStatusPacket.status = playStatus;
-			playStatusPacket.writePacket(player);
+			const playStatusPacket = new ServerPlayStatusPacket()
+			playStatusPacket.status = playStatus
+			playStatusPacket.writePacket(player)
 
 			if (terminateConnection) {
-				const kickMessageConsole = getKey("kickMessages.playStatus.console").replace("%s", player.username);
-				const kickMessagePlayer = getKey("kickMessages.playStatus").replace("%s", playStatus);
+				const kickMessageConsole = getKey("kickMessages.playStatus.console").replace("%s", player.username)
+				const kickMessagePlayer = getKey("kickMessages.playStatus").replace("%s", playStatus)
 
-				Logger.info(kickMessageConsole);
+				Logger.info(kickMessageConsole)
 
 				setTimeout(() => {
 					if (!player.network.offline) {
-						player.kick(kickMessagePlayer);
+						player.kick(kickMessagePlayer)
 					}
-				}, 5000);
+				}, 5000)
 			}
-		};
+		}
 
 		/**
 		 * Sets player's local difficulty
@@ -323,22 +321,22 @@ module.exports = {
 		 * @param {import("Frog").Difficulty} difficulty
 		 */
 		player.setDifficulty = function (difficulty) {
-			let shouldChangeDifficulty = true;
+			let shouldChangeDifficulty = true
 
 			Frog.eventEmitter.emit("serverSetDifficulty", {
 				player,
 				difficulty,
 				cancel: () => {
-					shouldChangeDifficulty = false;
+					shouldChangeDifficulty = false
 				},
-			});
+			})
 
-			if (!shouldChangeDifficulty) return;
+			if (!shouldChangeDifficulty) return
 
-			const difficultyPacket = new ServerSetDifficultyPacket();
-			difficultyPacket.difficulty = difficulty;
-			difficultyPacket.writePacket(player);
-		};
+			const difficultyPacket = new ServerSetDifficultyPacket()
+			difficultyPacket.difficulty = difficulty
+			difficultyPacket.writePacket(player)
+		}
 
 		/**
 		 * Sets the data of the player (eg on_fire, etc)
@@ -346,28 +344,28 @@ module.exports = {
 		 * @param {import("Frog").EntityData} data
 		 */
 		player.setEntityData = function (data) {
-			let shouldSetEntityData = true;
+			let shouldSetEntityData = true
 
 			Frog.eventEmitter.emit("serverSetEntityData", {
 				player,
 				data,
 				cancel: () => {
-					shouldSetEntityData = false;
+					shouldSetEntityData = false
 				},
-			});
+			})
 
-			if (!shouldSetEntityData) return;
+			if (!shouldSetEntityData) return
 
-			const playerSetEntityDataPacket = new ServerSetEntityDataPacket();
+			const playerSetEntityDataPacket = new ServerSetEntityDataPacket()
 			playerSetEntityDataPacket.properties = {
 				ints: [],
 				floats: [],
-			};
-			playerSetEntityDataPacket.runtime_entity_id = "1"; // Local player
-			playerSetEntityDataPacket.tick = "0";
-			playerSetEntityDataPacket.value = data;
-			playerSetEntityDataPacket.writePacket(player);
-		};
+			}
+			playerSetEntityDataPacket.runtime_entity_id = "1" // Local player
+			playerSetEntityDataPacket.tick = "0"
+			playerSetEntityDataPacket.value = data
+			playerSetEntityDataPacket.writePacket(player)
+		}
 
 		/**
 		 * Disconnects the player from the server
@@ -379,17 +377,17 @@ module.exports = {
 			Frog.eventEmitter.emit("playerKick", {
 				player,
 				message,
-			});
+			})
 
 			if (message === "disconnectionScreen.serverFull") {
-				message = "Wow this server is popular! Check back later to see if space opens up.";
+				message = "Wow this server is popular! Check back later to see if space opens up."
 			} else if (message === "disconnectionScreen.noReason") {
-				message = "You were disconnected";
+				message = "You were disconnected"
 			}
 
-			Logger.info(getKey("player.kicked").replace("%s", player.username).replace("%d", message));
-			player.disconnect(message, hideDisconnectionScreen);
-		};
+			Logger.info(getKey("player.kicked").replace("%s", player.username).replace("%d", message))
+			player.disconnect(message, hideDisconnectionScreen)
+		}
 
 		/**
 		 * Updates the player chunk render radius
@@ -397,22 +395,22 @@ module.exports = {
 		 * @param {number} radius
 		 */
 		player.setChunkRadius = function (radius) {
-			let shouldUpdateRadius = true;
+			let shouldUpdateRadius = true
 
 			Frog.eventEmitter.emit("serverUpdateChunkRadius", {
 				player,
 				radius,
 				cancel: () => {
-					shouldUpdateRadius = false;
+					shouldUpdateRadius = false
 				},
-			});
+			})
 
-			if (!shouldUpdateRadius) return;
+			if (!shouldUpdateRadius) return
 
-			const chunkRadiusUpdate = new ServerChunkRadiusUpdatePacket();
-			chunkRadiusUpdate.chunk_radius = radius;
-			chunkRadiusUpdate.writePacket(player);
-		};
+			const chunkRadiusUpdate = new ServerChunkRadiusUpdatePacket()
+			chunkRadiusUpdate.chunk_radius = radius
+			chunkRadiusUpdate.writePacket(player)
+		}
 
 		/**
 		 * Sets the player side time
@@ -420,22 +418,22 @@ module.exports = {
 		 * @param {number} time - The time to set the player to
 		 */
 		player.setTime = function (time) {
-			let shouldUpdateTime = true;
+			let shouldUpdateTime = true
 
 			Frog.eventEmitter.emit("serverTimeUpdate", {
 				player,
 				time,
 				cancel: () => {
-					shouldUpdateTime = false;
+					shouldUpdateTime = false
 				},
-			});
+			})
 
-			if (!shouldUpdateTime) return;
+			if (!shouldUpdateTime) return
 
-			const timePacket = new ServerSetTimePacket();
-			timePacket.time = time;
-			timePacket.writePacket(player);
-		};
+			const timePacket = new ServerSetTimePacket()
+			timePacket.time = time
+			timePacket.writePacket(player)
+		}
 
 		/**
 		 * Sets an attribute for the player
@@ -443,24 +441,24 @@ module.exports = {
 		 * @param {import("Frog").Attribute} attribute
 		 */
 		player.setAttribute = function (attribute) {
-			let shouldSetAttribute = true;
+			let shouldSetAttribute = true
 
 			Frog.eventEmitter.emit("playerSetAttribute", {
 				player,
 				attribute,
 				cancel: () => {
-					shouldSetAttribute = false;
+					shouldSetAttribute = false
 				},
-			});
+			})
 
 			if (shouldSetAttribute) {
-				const updateAttributesPacket = new ServerUpdateAttributesPacket();
-				updateAttributesPacket.runtime_entity_id = 1; // local player
-				updateAttributesPacket.tick = 0;
-				updateAttributesPacket.attributes = [attribute];
-				updateAttributesPacket.writePacket(player);
+				const updateAttributesPacket = new ServerUpdateAttributesPacket()
+				updateAttributesPacket.runtime_entity_id = 1 // local player
+				updateAttributesPacket.tick = 0
+				updateAttributesPacket.attributes = [attribute]
+				updateAttributesPacket.writePacket(player)
 			}
-		};
+		}
 
 		/**
 		 * Sets the health of the player
@@ -469,24 +467,24 @@ module.exports = {
 		 * @param {import("Frog").DamageCause} cause
 		 */
 		player.setHealth = function (health, cause = DamageCause.UNKNOWN) {
-			if (player.dead) return;
+			if (player.dead) return
 
-			let shouldSetHealth = true;
+			let shouldSetHealth = true
 
 			Frog.eventEmitter.emit("serverSetHealth", {
 				player,
 				health,
 				cause,
 				cancel: () => {
-					shouldSetHealth = false;
+					shouldSetHealth = false
 				},
-			});
+			})
 
-			if (!shouldSetHealth) return;
+			if (!shouldSetHealth) return
 
-			const setHealthPacket = new ServerSetHealthPacket();
-			setHealthPacket.health = health;
-			setHealthPacket.writePacket(player);
+			const setHealthPacket = new ServerSetHealthPacket()
+			setHealthPacket.health = health
+			setHealthPacket.writePacket(player)
 
 			player.setAttribute({
 				name: PlayerAttribute.HEALTH,
@@ -495,16 +493,16 @@ module.exports = {
 				current: health,
 				default: 0,
 				modifiers: [],
-			});
+			})
 
-			player.health = health;
+			player.health = health
 
 			if (cause === DamageCause.FALL) {
 				Frog.eventEmitter.emit("playerFallDamage", {
 					player,
 					health,
 					cause,
-				});
+				})
 			}
 
 			if (cause === DamageCause.REGENERATION) {
@@ -512,15 +510,15 @@ module.exports = {
 					player,
 					health,
 					cause,
-				});
+				})
 			}
 
 			if (player.health <= 0) {
-				Frog.eventEmitter.emit("playerDeath", { player });
+				Frog.eventEmitter.emit("playerDeath", { player })
 
-				player.dead = true;
+				player.dead = true
 			}
-		};
+		}
 
 		/**
 		 * Sets the hunger of the player
@@ -529,18 +527,18 @@ module.exports = {
 		 * @param {import("Frog").HungerCause} cause
 		 */
 		player.setHunger = function (hunger, cause = HungerCause.UNKNOWN) {
-			let shouldUpdateHunger = true;
+			let shouldUpdateHunger = true
 
 			Frog.eventEmitter.emit("playerHungerUpdate", {
 				player,
 				hunger,
 				cause,
 				cancel: () => {
-					shouldUpdateHunger = false;
+					shouldUpdateHunger = false
 				},
-			});
+			})
 
-			if (!shouldUpdateHunger) return;
+			if (!shouldUpdateHunger) return
 
 			player.setAttribute({
 				name: PlayerAttribute.HUNGER,
@@ -549,10 +547,10 @@ module.exports = {
 				current: hunger,
 				default: 0,
 				modifiers: [],
-			});
+			})
 
-			player.hunger = hunger;
-		};
+			player.hunger = hunger
+		}
 
 		/**
 		 * Changes the dimension for the player
@@ -564,7 +562,7 @@ module.exports = {
 		 * @param {boolean} [respawn]
 		 */
 		player.setDimension = function (x, y, z, dimension, respawn = false) {
-			let shouldChangeDimension = true;
+			let shouldChangeDimension = true
 
 			Frog.eventEmitter.emit("serverSetDimension", {
 				player,
@@ -572,18 +570,18 @@ module.exports = {
 				coordinates: { x, y, z },
 				respawn,
 				cancel: () => {
-					shouldChangeDimension = false;
+					shouldChangeDimension = false
 				},
-			});
+			})
 
-			if (!shouldChangeDimension) return;
+			if (!shouldChangeDimension) return
 
-			const dimensionPacket = new ServerChangeDimensionPacket();
-			dimensionPacket.position = { x, y, z };
-			dimensionPacket.dimension = dimension;
-			dimensionPacket.respawn = respawn;
-			dimensionPacket.writePacket(player);
-		};
+			const dimensionPacket = new ServerChangeDimensionPacket()
+			dimensionPacket.position = { x, y, z }
+			dimensionPacket.dimension = dimension
+			dimensionPacket.respawn = respawn
+			dimensionPacket.writePacket(player)
+		}
 
 		/**
 		 * Sets the speed for the player
@@ -591,16 +589,16 @@ module.exports = {
 		 * @param {number} speed
 		 */
 		player.setSpeed = async function (speed) {
-			let shouldUpdateSpeed = true;
+			let shouldUpdateSpeed = true
 
 			Frog.eventEmitter.emit("serverSpeedUpdate", {
 				speed,
 				cancel: () => {
-					shouldUpdateSpeed = false;
+					shouldUpdateSpeed = false
 				},
-			});
+			})
 
-			if (!shouldUpdateSpeed) return;
+			if (!shouldUpdateSpeed) return
 
 			player.setAttribute({
 				min: 0,
@@ -609,8 +607,8 @@ module.exports = {
 				default: speed,
 				name: PlayerAttribute.MOVEMENT_SPEED,
 				modifiers: [],
-			});
-		};
+			})
+		}
 
 		/**
 		 * Changes the OP status for the player
@@ -620,59 +618,59 @@ module.exports = {
 		 * @async
 		 */
 		player.setOp = async function (status) {
-			return await PermissionManager.setOp(player.username, status);
-		};
+			return await PermissionManager.setOp(player.username, status)
+		}
 
 		/**
 		 * Opens a container for the player
 		 */
 		player.openContainer = function () {
-			let shouldPreCreateInventoryContainer = true;
+			let shouldPreCreateInventoryContainer = true
 
 			Frog.eventEmitter.emit("inventoryContainerPreCreate", {
 				player: player,
 				cancel: () => {
-					shouldPreCreateInventoryContainer = false;
+					shouldPreCreateInventoryContainer = false
 				},
-			});
+			})
 
-			if (!shouldPreCreateInventoryContainer) return;
+			if (!shouldPreCreateInventoryContainer) return
 
-			player.inventory.container.blockPosition = { x: Math.floor(player.location.x - 1), y: player.location.y + 2, z: Math.floor(player.location.z - 1) };
-			player.inventory.container.window = { id: WindowId.CHEST, type: WindowType.CONTAINER };
+			player.inventory.container.blockPosition = { x: Math.floor(player.location.x - 1), y: player.location.y + 2, z: Math.floor(player.location.z - 1) }
+			player.inventory.container.window = { id: WindowId.CHEST, type: WindowType.CONTAINER }
 
-			let shouldCreateInventoryContainer = true;
+			let shouldCreateInventoryContainer = true
 
 			Frog.eventEmitter.emit("inventoryContainerCreate", {
 				player: player,
 				inventory: player.inventory,
 				cancel: () => {
-					shouldCreateInventoryContainer = false;
+					shouldCreateInventoryContainer = false
 				},
-			});
+			})
 
-			if (!shouldCreateInventoryContainer) return;
+			if (!shouldCreateInventoryContainer) return
 
 			player.world.placeBlock(
 				player.inventory.container.blockPosition.x,
 				player.inventory.container.blockPosition.y,
 				player.inventory.container.blockPosition.z,
 				LegacyToRuntimeIdConverter.convert(54)
-			);
+			)
 
-			const containerOpen = new ServerContainerOpenPacket();
-			containerOpen.window_id = player.inventory.container.window.id;
-			containerOpen.window_type = player.inventory.container.window.type;
-			containerOpen.runtime_entity_id = -1;
+			const containerOpen = new ServerContainerOpenPacket()
+			containerOpen.window_id = player.inventory.container.window.id
+			containerOpen.window_type = player.inventory.container.window.type
+			containerOpen.runtime_entity_id = -1
 			containerOpen.coordinates = {
 				x: player.inventory.container.blockPosition.x,
 				y: player.inventory.container.blockPosition.y,
 				z: player.inventory.container.blockPosition.z
-			};
-			containerOpen.writePacket(player);
+			}
+			containerOpen.writePacket(player)
 
-			player.inventory.container.isOpen = true;
-		};
+			player.inventory.container.isOpen = true
+		}
 
 		/**
 		 * Updates an item in a container (if open)
@@ -687,7 +685,7 @@ module.exports = {
 		 * @param {import("Frog").ItemExtraData} extra - Extra data
 		 */
 		player.setContainerItem = function (itemId, blockRuntimeId, slot = 0, hasMetadata = false, hasStackId = true, stackId = 1, count = 1, extra = { has_nbt: false, can_place_on: [], can_destroy: [] }) {
-			let shouldGiveContainerItem = true;
+			let shouldGiveContainerItem = true
 
 			Frog.eventEmitter.emit("inventoryContainerGiveItem", {
 				player,
@@ -702,17 +700,17 @@ module.exports = {
 					extra,
 				},
 				cancel: () => {
-					shouldGiveContainerItem = false;
+					shouldGiveContainerItem = false
 				},
-			});
+			})
 
-			if (!shouldGiveContainerItem) return;
+			if (!shouldGiveContainerItem) return
 
 			/** @type {import("Frog").Item[]} */
-			const input = [];
+			const input = []
 
 			for (let i = 0; i < 27; i++) {
-				input.push({ network_id: 0 });
+				input.push({ network_id: 0 })
 			}
 
 			input[slot] = {
@@ -723,13 +721,13 @@ module.exports = {
 				stack_id: stackId,
 				block_runtime_id: blockRuntimeId,
 				extra,
-			};
+			}
 
-			const inventoryContent = new ServerInventoryContentPacket();
-			inventoryContent.window_id = WindowId.CHEST;
-			inventoryContent.input = input;
-			inventoryContent.writePacket(player);
-		};
+			const inventoryContent = new ServerInventoryContentPacket()
+			inventoryContent.window_id = WindowId.CHEST
+			inventoryContent.input = input
+			inventoryContent.writePacket(player)
+		}
 
 		/**
 		 * Listens when a player leaves the server
@@ -737,30 +735,27 @@ module.exports = {
 		player.on("close", () => {
 			for (const currentPlayer of PlayerInfo.playersOnline) {
 				if (currentPlayer.username === player.username) {
-					continue;
+					continue
 				}
 
-				const playerList = new ServerPlayerListPacket();
-				playerList.type = PlayerListAction.REMOVE;
-				playerList.uuid = player.profile.uuid;
-				playerList.writePacket(currentPlayer);
+				const playerList = new ServerPlayerListPacket()
+				playerList.type = PlayerListAction.REMOVE
+				playerList.uuid = player.profile.uuid
+				playerList.writePacket(currentPlayer)
 			}
 
-			player.offline = true;
-			GarbageCollector.clearOfflinePlayers();
+			player.offline = true
 
-			Frog.eventEmitter.emit("playerLeave", {
-				player
-			});
+			Frog.eventEmitter.emit("playerLeave", { player })
 
-			Logger.info(getKey("status.resourcePacks.disconnected").replace("%s", player.username));
+			Logger.info(getKey("status.resourcePacks.disconnected").replace("%s", player.username))
 
 			if (
 				player.network.initialised &&
 				Frog.config.chat.systemMessages.left
 			) {
-				Frog.broadcastMessage(getKey("chat.broadcasts.left").replace("%s", player.username));
+				Frog.broadcastMessage(getKey("chat.broadcasts.left").replace("%s", player.username))
 			}
-		});
+		})
 	},
-};
+}

@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const { convertConsoleColor } = require("./ConsoleColorConvertor");
+const { convert_console_color } = require("./ConsoleColorConvertor");
 const { getKey } = require("./Language");
 const moment = require("moment");
 
@@ -70,7 +70,7 @@ module.exports = {
 		});
 
 		console[consoleLoggingLevel](
-			convertConsoleColor(
+			convert_console_color(
 				Frog.config.logger.messageFormat
 					.replace("%date%", date)
 					.replace("%type%", `\x1b[${color}m${levelName}\x1b[0m`)
@@ -115,7 +115,7 @@ module.exports = {
 	debug(message) {
 		const Frog = require("../Frog");
 
-		if (!Frog.isDebug) return;
+		if (!Frog.is_debug) return;
 
 		this.log(getKey("logger.debug"), 35, message, "info");
 	},

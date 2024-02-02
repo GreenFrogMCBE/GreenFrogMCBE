@@ -13,30 +13,30 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PluginLoader = require("./plugins/PluginLoader");
-const PlayerInfo = require("./player/PlayerInfo");
+const PluginLoader = require("./plugins/PluginLoader")
+const PlayerInfo = require("./player/PlayerInfo")
 
-const ConsoleCommandSender = require("./server/ConsoleCommandSender");
+const ConsoleCommandSender = require("./server/ConsoleCommandSender")
 
-const { getKey } = require("./utils/Language");
+const { getKey } = require("./utils/Language")
 
-const Logger = require("./utils/Logger");
+const Logger = require("./utils/Logger")
 
-const langParser = require("@kotinash/lang-parser");
-const yaml = require("js-yaml");
-const events = require("events");
-const path = require("path");
-const fs = require("fs");
+const langParser = require("@kotinash/lang-parser")
+const events = require("events")
+const yaml = require("js-yaml")
+const path = require("path")
+const fs = require("fs")
 
 /**
  * Returns the configuration file
  *
  * @returns {import("Frog").Config}
  */
-function getConfig() {
-	const configData = yaml.load(fs.readFileSync("config.yml", "utf8"));
+function get_config() {
+	const config_data = yaml.load(fs.readFileSync("config.yml", "utf8"))
 
-	return configData;
+	return config_data
 }
 
 /**
@@ -44,15 +44,15 @@ function getConfig() {
  *
  * @returns {import("Frog").Language}
  */
-function getLang() {
-	const langFilePath = path.join(__dirname, `lang/${getConfig().chat.lang}.lang`);
-	const langFileContent = fs.readFileSync(langFilePath, "utf8");
-	const lang = langParser.parseRaw(langFileContent);
+function get_lang() {
+	const langFilePath = path.join(__dirname, `lang/${get_config().chat.lang}.lang`)
+	const langFileContent = fs.readFileSync(langFilePath, "utf8")
+	const lang = langParser.parseRaw(langFileContent)
 	
-	return lang;
+	return lang
 }
 
-let server;
+let server
 
 module.exports = {
 	/**
@@ -60,21 +60,21 @@ module.exports = {
 	 *
 	 * @returns {import("Frog").Config}
 	 */
-	config: getConfig(),
+	config: get_config(),
 
 	/**
 	 * Returns the language file
 	 *
 	 * @returns {import("Frog").Language}
 	 */
-	lang: getLang(),
+	lang: get_lang(),
 
 	/**
 	 * Returns if the server is in debug mode
 	 *
 	 * @returns {boolean}
 	 */
-	isDebug: process.env.DEBUG || process.argv.includes("--debug") || getConfig().dev.debug,
+	is_debug: process.env.DEBUG || process.argv.includes("--debug") || get_config().dev.debug,
 
 	/**
 	 * Returns the server object
@@ -98,9 +98,9 @@ module.exports = {
 	 * @type {import("Frog").ReleaseData}
 	 */
 	releaseData: {
-		minorServerVersion: "3.8",
+		minorServerVersion: "3.9",
 		majorServerVersion: "3.0",
-		versionDescription: "Updated to 1.20.30 and added entities",
+		versionDescription: "Updated to 1.20.50",
 		apiVersion: "3.0",
 	},
 
@@ -112,15 +112,15 @@ module.exports = {
 	asPlayer: {
 		username: "Server",
 		network: {
-			address: getConfig().network.host,
-			port: getConfig().network.port,
+			address: get_config().network.host,
+			port: get_config().network.port,
 		},
 		permissions: {
 			op: true,
 			isConsole: true,
 		},
 		sendMessage: (message) => {
-			Logger.info(message);
+			Logger.info(message)
 		},
 	},
 
@@ -145,10 +145,10 @@ module.exports = {
 	 */
 	broadcastMessage(message) {
 		for (const player of PlayerInfo.playersOnline) {
-			player.sendMessage(message);
+			player.sendMessage(message)
 		}
 
-		Logger.info(message);
+		Logger.info(message)
 	},
 
 	/**
@@ -158,35 +158,35 @@ module.exports = {
 	 * @async
 	 */
 	async shutdownServer(shutdownMessage = getKey("kickMessages.serverClosed")) {
-		let shouldShutdown = true;
+		let shouldShutdown = true
 
 		this.eventEmitter.emit("serverShutdown", {
 			cancel: () => {
-				shouldShutdown = false;
+				shouldShutdown = false
 			},
-		});
+		})
 
-		if (!shouldShutdown) return;
+		if (!shouldShutdown) return
 
-		Logger.info(getKey("server.shuttingDown"));
+		Logger.info(getKey("server.shuttingDown"))
 
 		// Shutdown the bedrock-protocol server and disconnect all clients
-		this.server.close(shutdownMessage);
+		this.server.close(shutdownMessage)
 
 		// Prevent the usage of the console when the server is shutting down
-		ConsoleCommandSender.closed = true;
+		ConsoleCommandSender.closed = true
 
 		// Unload (disable) all plugins
-		await PluginLoader.unloadPlugins();
+		await PluginLoader.unloadPlugins()
 
 		// And finally, exit the process
-		process.exit(this.config.dev.exitCodes.successful);
+		process.exit(this.config.dev.exitCodes.successful)
 	},
 
 	/**
 	 * Crashes the server
 	 */
 	crash() {
-		process.exit(this.config.dev.exitCodes.crash);
+		process.exit(this.config.dev.exitCodes.crash)
 	},
-};
+}

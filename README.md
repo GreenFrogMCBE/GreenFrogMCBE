@@ -3,12 +3,14 @@
 ```diff
 @@ GreenFrog is a server software for Minecraft: Bedrock Edition @@
 
-It's written in Node.js and currently supports 1.20.30 - 1.20.32
+It's written in Node.js and currently supports 1.20.50
 This software is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
 
 + Discord: https://discord.gg/UFqrnAbqjP
-+ Example plugin: https://github.com/GreenFrogMCBE/ExamplePlugin
++ Example plugin (JS): https://github.com/GreenFrogMCBE/ExamplePluginJS
++ Example plugin (TS): https://github.com/GreenFrogMCBE/ExamplePluginTS
+
 
 + Generate plugin structure: "npm run plugin-structure"
 

@@ -5,10 +5,6 @@ server.shuttingDown=Вимкнення...
 
 server.version=Цей сервер працює на GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версія: %s
 
-garbageCollector.started=[Сбірщик сміття] Початок збору сміття...
-garbageCollector.deleted=[Сбірщик сміття] Видалено %s
-garbageCollector.finished=[Сбірщик сміття] Закінчено
-
 commands.unknown=§cНевідома команда %s. Перевірте, чи існує така команда та чи у вас є права на її використання.
 commands.errors.internalError=Не вдалося виконати команду! Помилка: %s
 commands.errors.internalError.player=Не вдалося виконати команду від %s. Помилка: %d

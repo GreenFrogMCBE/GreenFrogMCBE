@@ -5,10 +5,6 @@ server.shuttingDown=Завершение работы сервера...
 
 server.version=Этот сервер работает на GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версия: %s
 
-garbageCollector.started=[Сборщик мусора] Начало сборки мусора...
-garbageCollector.deleted=[Сборщик мусора] Удалено %s
-garbageCollector.finished=[Сборщик мусора] Завершено
-
 commands.unknown=§cНеизвестная команда %s. Проверьте, существует ли команда, и у вас есть ли права на её использование.
 commands.errors.internalError=Не удалось выполнить команду! Ошибка: %s
 commands.errors.internalError.player=Не удалось выполнить команду от %s. Ошибка: %d

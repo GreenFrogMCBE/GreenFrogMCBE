@@ -5,10 +5,6 @@ server.shuttingDown=Apagando...
 
 server.version=Este servidor está ejecutando GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versión: %s
 
-garbageCollector.started=[Recolector] Empezando recolección...
-garbageCollector.deleted=[Recolector] Eliminado %s
-garbageCollector.finished=[Recolector] Acabado
-
 commands.unknown=§cComando desconocido: %s. Por favor comprueba que el comando existe y tienes permisos para usarlo.
 commands.errors.internalError=No se pudo ejecutar el comando! Error: %s
 commands.errors.internalError.player=No se pudo ejecutar el comando desde %s! Error: %d

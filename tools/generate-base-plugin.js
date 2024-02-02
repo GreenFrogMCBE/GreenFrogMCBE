@@ -17,7 +17,7 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 
-const { convertConsoleColor } = require("../src/utils/ConsoleColorConvertor");
+const { convert_console_color } = require("../src/utils/ConsoleColorConvertor");
 
 const Colors = require("../src/utils/types/Colors");
 
@@ -38,7 +38,7 @@ const rl = readline.createInterface({
  */
 function handleError(message) {
 	console.clear();
-	console.error(convertConsoleColor(`${Colors.RED}${message}${Colors.RESET}`));
+	console.error(convert_console_color(`${Colors.RED}${message}${Colors.RESET}`));
 
 	process.exit(1);
 }
@@ -168,7 +168,7 @@ async function handleUserInputForTypeScript(ts) {
 	writePluginFile(pluginDirPath, pluginName, useTypeScript);
 
 	console.clear();
-	console.info(convertConsoleColor(`${Colors.GREEN}Plugin created!${useTypeScript ? ` (Hint: To compile it, run "npx tsc ${pluginName.toLowerCase()}.ts")` : ""}${Colors.RESET}`));
+	console.info(convert_console_color(`${Colors.GREEN}Plugin created!${useTypeScript ? ` (Hint: To compile it, run "npx tsc ${pluginName.toLowerCase()}.ts")` : ""}${Colors.RESET}`));
 	process.exit(0);
 }
 
@@ -185,7 +185,7 @@ async function handleUserInputForPluginName(pluginNameInput) {
 	pluginName = pluginNameInput;
 
 	rl.question(
-		convertConsoleColor(
+		convert_console_color(
 			`${Colors.GREEN}Do you want to use TypeScript [Y/N]? (Hint: "Y" stands for yes and "N" stands for no) ${Colors.RESET}`
 		),
 		(input) => {
@@ -199,7 +199,7 @@ async function handleUserInputForPluginName(pluginNameInput) {
  */
 async function start() {
 	rl.question(
-		convertConsoleColor(
+		convert_console_color(
 			`${Colors.GREEN}Please enter the name of your plugin... ${Colors.RESET}`
 		),
 		(input) => {
