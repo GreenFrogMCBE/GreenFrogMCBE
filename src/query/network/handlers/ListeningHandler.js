@@ -13,13 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ConnectionHandler = require("./ConnectionHandler");
+const ConnectionHandler = require("./ConnectionHandler")
 
-const { getKey } = require("../../../utils/Language");
+const { getKey } = require("../../../utils/Language")
 
-const Logger = require("../../../utils/Logger");
+const Logger = require("../../../utils/Logger")
 
-const Frog = require("../../../Frog");
+const Frog = require("../../../Frog")
 
 class ListeningHandler {
 	/**
@@ -28,48 +28,48 @@ class ListeningHandler {
 	 */
 	handleListening(socket, settings) {
 		// Get the query address
-		const address = `/${Frog.config.network.host}:${Frog.config.query.port}`;
+		const address = `/${Frog.config.network.host}:${Frog.config.query.port}`
 
 		try {
-			let shouldListen = true;
+			let shouldListen = true
 
 			Frog.eventEmitter.emit("queryListen", {
 				socket,
 				querySettings: settings,
 				cancel: () => {
-					shouldListen = false;
+					shouldListen = false
 				},
-			});
+			})
 
-			if (!shouldListen) return;
+			if (!shouldListen) return
 
-			socket.bind(settings.port, settings.host);
+			socket.bind(settings.port, settings.host)
 
-			socket.on("message", (message, client) => new ConnectionHandler().handleConnection(socket, settings, message, client));
+			socket.on("message", (message, client) => new ConnectionHandler().handleConnection(socket, settings, message, client))
 
-			Logger.info(getKey("query.server.listening.success").replace("%s", address));
+			Logger.info(getKey("query.server.listening.success").replace("%s", address))
 		} catch (error) {
-			let shouldCancelError = false;
+			let shouldCancelError = false
 
 			Frog.eventEmitter.emit("queryError", {
 				socket,
 				querySettings: settings,
 				error,
 				cancel: () => {
-					shouldCancelError = true;
+					shouldCancelError = true
 				},
-			});
+			})
 
-			if (!shouldCancelError) return;
+			if (!shouldCancelError) return
 
 			if (error.code === "ERRADDRINUSE") {
-				Logger.error(getKey("query.server.listening.failed").replace("%s", address));
-				return;
+				Logger.error(getKey("query.server.listening.failed").replace("%s", address))
+				return
 			}
 
-			Logger.error(getKey("query.server.error").replace("%s", error.stack));
+			Logger.error(getKey("query.server.error").replace("%s", error.stack))
 		}
 	}
 }
 
-module.exports = ListeningHandler;
+module.exports = ListeningHandler

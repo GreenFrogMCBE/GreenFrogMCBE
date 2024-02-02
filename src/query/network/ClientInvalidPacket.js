@@ -14,18 +14,18 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /* eslint-disable no-unused-vars */
-const Frog = require("../../Frog");
+const Frog = require("../../Frog")
 
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
-const { getKey } = require("../../utils/Language");
+const { getKey } = require("../../utils/Language")
 
-const QueryLogger = require("../utils/QueryLogger");
+const QueryLogger = require("../utils/QueryLogger")
 
-const QueryPacket = require("./types/QueryPacket");
+const QueryPacket = require("./types/QueryPacket")
 
 class ClientInvalidPacket extends Packet {
-	packetId = QueryPacket.INVALID;
+	packetId = QueryPacket.INVALID
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client
@@ -35,10 +35,10 @@ class ClientInvalidPacket extends Packet {
 		Frog.eventEmitter.emit("queryInvalidPacket", {
 			client,
 			packet,
-		});
+		})
 
-		QueryLogger.logPacket(getKey("query.server.network.packets.invalidPacket").replace("%s", client.address.toString()), true);
+		QueryLogger.logPacket(getKey("query.server.network.packets.invalidPacket").replace("%s", client.address.toString()), true)
 	}
 }
 
-module.exports = ClientInvalidPacket;
+module.exports = ClientInvalidPacket

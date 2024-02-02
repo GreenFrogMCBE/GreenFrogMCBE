@@ -19,10 +19,10 @@ class CommandProcessException extends Error {
 	 * @param {string} message
 	 */
 	constructor(message) {
-		super(message);
+		super(message)
 
-		this.name = "CommandProcessException";
+		this.name = "CommandProcessException"
 	}
 }
 
-module.exports = CommandProcessException;
+module.exports = CommandProcessException

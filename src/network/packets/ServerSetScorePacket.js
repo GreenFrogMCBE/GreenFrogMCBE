@@ -13,15 +13,15 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerSetScorePacket extends Packet {
-	name = "set_score";
+	name = "set_score"
 
 	/** @type {import("Frog").ScoreAction | undefined} */
-	action;
+	action
 	/** @type {any[] | undefined} */
-	entries;
+	entries
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -30,8 +30,8 @@ class ServerSetScorePacket extends Packet {
 		player.queue(this.name, {
 			action: this.action,
 			entries: this.entries,
-		});
+		})
 	}
 }
 
-module.exports = ServerSetScorePacket;
+module.exports = ServerSetScorePacket

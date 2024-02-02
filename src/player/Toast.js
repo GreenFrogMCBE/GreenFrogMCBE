@@ -13,16 +13,16 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../Frog");
+const Frog = require("../Frog")
 
-const ServerToastRequestPacket = require("../network/packets/ServerToastRequestPacket");
+const ServerToastRequestPacket = require("../network/packets/ServerToastRequestPacket")
 
 class Toast {
 	constructor() {
 		/** @type {string} */
-		this.title;
+		this.title
 		/** @type {string} */
-		this.message;
+		this.message
 	}
 
 	/**
@@ -31,24 +31,24 @@ class Toast {
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
-		let shouldSendToast = true;
+		let shouldSendToast = true
 
 		Frog.eventEmitter.emit("serverToast", {
 			player,
 			title: this.title,
 			message: this.message,
 			cancel() {
-				shouldSendToast = false;
+				shouldSendToast = false
 			},
-		});
+		})
 
-		if (!shouldSendToast) return;
+		if (!shouldSendToast) return
 
-		const toast = new ServerToastRequestPacket();
-		toast.message = this.message;
-		toast.title = this.title;
-		toast.writePacket(player);
+		const toast = new ServerToastRequestPacket()
+		toast.message = this.message
+		toast.title = this.title
+		toast.writePacket(player)
 	}
 }
 
-module.exports = Toast;
+module.exports = Toast

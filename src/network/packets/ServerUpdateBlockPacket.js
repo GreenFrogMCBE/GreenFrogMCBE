@@ -13,33 +13,33 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerUpdateBlockPacket extends Packet {
-	name = "update_block";
+	name = "update_block"
 
 	/** @type {number | undefined} */
-	x;
+	x
 	/** @type {number | undefined} */
-	y;
+	y
 	/** @type {number | undefined} */
-	z;
+	z
 	/** @type {number | undefined} */
-	block_runtime_id;
+	block_runtime_id
 	/** @type {boolean | undefined} */
-	neighbors;
+	neighbors
 	/** @type {boolean | undefined} */
-	network;
+	network
 	/** @type {boolean | undefined} */
-	no_graphic;
+	no_graphic
 	/** @type {boolean | undefined} */
-	unused;
+	unused
 	/** @type {boolean | undefined} */
-	priority;
+	priority
 	/** @type {number | undefined} */
-	layer;
+	layer
 	/** @type {number | undefined} */
-	flags_value;
+	flags_value
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -61,8 +61,8 @@ class ServerUpdateBlockPacket extends Packet {
 				priority: this.priority,
 			},
 			layer: this.layer,
-		});
+		})
 	}
 }
 
-module.exports = ServerUpdateBlockPacket;
+module.exports = ServerUpdateBlockPacket

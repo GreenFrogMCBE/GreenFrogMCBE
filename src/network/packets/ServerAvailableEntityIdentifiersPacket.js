@@ -13,13 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerAvailableEntityIdentifiersPacket extends Packet {
-	name = "available_entity_identifiers";
+	name = "available_entity_identifiers"
 
 	/** @type {import("Frog").NBT | undefined} */
-	nbt;
+	nbt
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -27,8 +27,8 @@ class ServerAvailableEntityIdentifiersPacket extends Packet {
 	writePacket(player) {
 		player.queue(this.name, {
 			nbt: this.nbt,
-		});
+		})
 	}
 }
 
-module.exports = ServerAvailableEntityIdentifiersPacket;
+module.exports = ServerAvailableEntityIdentifiersPacket

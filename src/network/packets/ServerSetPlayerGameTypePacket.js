@@ -13,13 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerSetPlayerGameTypePacket extends Packet {
-	name = "set_player_game_type";
+	name = "set_player_game_type"
 
 	/** @type {import("Frog").Gamemode | undefined} */
-	gamemode;
+	gamemode
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -27,8 +27,8 @@ class ServerSetPlayerGameTypePacket extends Packet {
 	writePacket(player) {
 		player.queue(this.name, {
 			gamemode: this.gamemode,
-		});
+		})
 	}
 }
 
-module.exports = ServerSetPlayerGameTypePacket;
+module.exports = ServerSetPlayerGameTypePacket

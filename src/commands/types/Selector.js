@@ -19,4 +19,4 @@ module.exports = /** @type {const} */ ({
 	ALL_PLAYERS: "@a",
 	ALL_ENTITIES: "@e",
 	SELF: "@s"
-});
+})

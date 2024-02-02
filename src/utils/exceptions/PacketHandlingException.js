@@ -19,10 +19,10 @@ class PacketHandlingException extends Error {
 	 * @param {string} message
 	 */
 	constructor(message) {
-		super(message);
+		super(message)
 
-		this.name = "PacketHandlingException";
+		this.name = "PacketHandlingException"
 	}
 }
 
-module.exports = PacketHandlingException;
+module.exports = PacketHandlingException

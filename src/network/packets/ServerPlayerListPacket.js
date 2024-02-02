@@ -13,25 +13,25 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerListAction = require("./types/PlayerListAction");
+const PlayerListAction = require("./types/PlayerListAction")
 
-const skinData = require("../../resources/json/skinData.json");
+const skinData = require("../../resources/json/skinData.json")
 
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerPlayerListPacket extends Packet {
-	name = "player_list";
+	name = "player_list"
 
 	/** @type {string | undefined} */
-	username;
+	username
 	/** @type {string | undefined} */
-	uuid;
+	uuid
 	/** @type {number | undefined} */
-	id;
+	id
 	/** @type {import("Frog").PlayListAction | undefined} */
-	type;
+	type
 	/** @type {string | undefined} */
-	xbox_id;
+	xbox_id
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -54,18 +54,18 @@ class ServerPlayerListPacket extends Packet {
 				}],
 				verified: [true]
 			}
-		};
+		}
 
 		if (this.type === PlayerListAction.REMOVE) {
 			data = {
 				type: PlayerListAction.REMOVE,
 				records_count: 1,
 				records: [{ uuid: this.uuid }],
-			};
+			}
 		}
 
-		player.queue(this.name, data);
+		player.queue(this.name, data)
 	}
 }
 
-module.exports = ServerPlayerListPacket;
+module.exports = ServerPlayerListPacket

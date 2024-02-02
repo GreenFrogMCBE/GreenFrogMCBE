@@ -13,20 +13,20 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerAvailableCommandsPacket extends Packet {
-	name = "available_commands";
+	name = "available_commands"
 
 	/** @type {import("Frog").CommandPacket | undefined} */
-	data;
+	data
 
 	/**
 	 * @param {import("Frog").Player} player
 	 */
 	writePacket(player) {
-		player.queue(this.name, this.data);
+		player.queue(this.name, this.data)
 	}
 }
 
-module.exports = ServerAvailableCommandsPacket;
+module.exports = ServerAvailableCommandsPacket

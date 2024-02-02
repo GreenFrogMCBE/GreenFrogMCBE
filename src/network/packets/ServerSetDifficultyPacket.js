@@ -13,20 +13,20 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerSetDifficultyPacket extends Packet {
-	name = "set_difficulty";
+	name = "set_difficulty"
 
 	/** @type {import("Frog").Difficulty | undefined} */
-	difficulty;
+	difficulty
 
 	/**
 	 * @param {import("Frog").Player} player
 	 */
 	writePacket(player) {
-		player.queue(this.name, { difficulty: this.difficulty });
+		player.queue(this.name, { difficulty: this.difficulty })
 	}
 }
 
-module.exports = ServerSetDifficultyPacket;
+module.exports = ServerSetDifficultyPacket

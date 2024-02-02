@@ -13,13 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../../Frog");
+const Frog = require("../../../Frog")
 
-const ClientHandshakeRequestPacket = require("../ClientHandshakeRequestPacket");
-const ClientInfoRequestPacket = require("../ClientInfoRequestPacket");
-const ClientInvalidPacket = require("../ClientInvalidPacket");
+const ClientHandshakeRequestPacket = require("../ClientHandshakeRequestPacket")
+const ClientInfoRequestPacket = require("../ClientInfoRequestPacket")
+const ClientInvalidPacket = require("../ClientInvalidPacket")
 
-const QueryPacket = require("../types/QueryPacket");
+const QueryPacket = require("../types/QueryPacket")
 
 class ConnectionHandler {
 	/**
@@ -29,9 +29,9 @@ class ConnectionHandler {
 	 * @param {import("dgram").RemoteInfo} client
 	 */
 	handleConnection(socket, settings, packet, client) {
-		const packetType = packet.readUInt8(2);
+		const packetType = packet.readUInt8(2)
 
-		let shouldCancelPacket = true;
+		let shouldCancelPacket = true
 
 		Frog.eventEmitter.emit("queryPacket", {
 			socket,
@@ -39,24 +39,24 @@ class ConnectionHandler {
 			packet,
 			client,
 			cancel: () => {
-				shouldCancelPacket = false;
+				shouldCancelPacket = false
 			},
-		});
+		})
 
-		if (!shouldCancelPacket) return;
+		if (!shouldCancelPacket) return
 
 		switch (packetType) {
 			case QueryPacket.HANDSHAKE:
-				new ClientHandshakeRequestPacket().readPacket(client, packet, socket);
-				break;
+				new ClientHandshakeRequestPacket().readPacket(client, packet, socket)
+				break
 			case QueryPacket.INFO:
-				new ClientInfoRequestPacket().readPacket(client, packet, socket, settings);
-				break;
+				new ClientInfoRequestPacket().readPacket(client, packet, socket, settings)
+				break
 			default:
-				new ClientInvalidPacket().readPacket(client, packet);
-				break;
+				new ClientInvalidPacket().readPacket(client, packet)
+				break
 		}
 	}
 }
 
-module.exports = ConnectionHandler;
+module.exports = ConnectionHandler

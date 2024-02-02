@@ -13,19 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerMoveEntityDataPacket extends Packet {
-	name = "move_entity_delta";
+	name = "move_entity_delta"
 
 	/** @type {import("Frog").Vec3 } */
-	coordinates = { x: 0, y: 0, z: 0 };
+	coordinates = { x: 0, y: 0, z: 0 }
 	/** @type {number | undefined} */
-	runtime_entity_id;
+	runtime_entity_id
 	/** @type {import("Frog").EntityMovementFlags | undefined} */
-	flags;
+	flags
 	/** @type {import("Frog").Vec3 } */
-	coordinatesRotation = { x: 0, y: 0, z: 0 };
+	coordinatesRotation = { x: 0, y: 0, z: 0 }
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -40,8 +40,8 @@ class ServerMoveEntityDataPacket extends Packet {
 			rotation_x: this.coordinatesRotation.x,
 			rotation_y: this.coordinatesRotation.y,
 			rotation_z: this.coordinatesRotation.z,
-		});
+		})
 	}
 }
 
-module.exports = ServerMoveEntityDataPacket;
+module.exports = ServerMoveEntityDataPacket

@@ -19,10 +19,10 @@ class TransferException extends Error {
 	 * @param {string} message
 	 */
 	constructor(message) {
-		super(message);
+		super(message)
 
-		this.name = "TransferException";
+		this.name = "TransferException"
 	}
 }
 
-module.exports = TransferException;
+module.exports = TransferException

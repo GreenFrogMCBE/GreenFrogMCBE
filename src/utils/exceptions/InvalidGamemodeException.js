@@ -19,10 +19,10 @@ class InvalidGamemodeException extends Error {
 	 * @param {string} gamemode
 	 */
 	constructor(gamemode) {
-		super(gamemode);
+		super(gamemode)
 
-		this.name = "InvalidGamemodeException";
+		this.name = "InvalidGamemodeException"
 	}
 }
 
-module.exports = InvalidGamemodeException;
+module.exports = InvalidGamemodeException

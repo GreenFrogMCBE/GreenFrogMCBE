@@ -51,4 +51,4 @@ module.exports = /** @type {const} */ ({
 	EXTREME_HILLS_PLAINS_TREES: "extreme_hills_plains_trees",
 	SAVANNA: "savanna",
 	MESA: "mesa",
-});
+})

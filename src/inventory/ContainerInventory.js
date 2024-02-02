@@ -13,9 +13,9 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../Frog");
+const Frog = require("../Frog")
 
-const Inventory = require("./Inventory");
+const Inventory = require("./Inventory")
 
 class ContainerInventory extends Inventory {
 	/**
@@ -26,8 +26,8 @@ class ContainerInventory extends Inventory {
 		Frog.eventEmitter.emit("inventoryContainerItemRequest", {
 			player,
 			packet,
-		});
+		})
 	}
 }
 
-module.exports = ContainerInventory;
+module.exports = ContainerInventory

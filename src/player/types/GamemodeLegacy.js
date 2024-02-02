@@ -23,4 +23,4 @@ module.exports = /** @type {const} */ ({
 	DEFAULT: 5,
 	/** 1.19.50+ */
 	SPECTATOR: 6,
-});
+})

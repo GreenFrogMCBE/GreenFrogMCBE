@@ -19,4 +19,4 @@ module.exports = /** @type {const} */ ({
 	FLAT: 2,
 	NETHER: 3,
 	END: 4,
-});
+})

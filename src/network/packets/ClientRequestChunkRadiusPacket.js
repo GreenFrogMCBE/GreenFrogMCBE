@@ -13,32 +13,32 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
-const Frog = require("../../Frog");
+const Frog = require("../../Frog")
 
 class ClientRequestChunkRadiusPacket extends Packet {
-	name = "request_chunk_radius";
+	name = "request_chunk_radius"
 
 	/**
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
 	async readPacket(player, packet) {
-		let shouldChange = true;
+		let shouldChange = true
 
 		Frog.eventEmitter.emit("playerRequestChunkRadius", {
 			radius: packet.data.params.radius,
 			player,
 			cancel: () => {
-				shouldChange = false;
+				shouldChange = false
 			},
-		});
+		})
 
-		if (!shouldChange) return;
+		if (!shouldChange) return
 
-		player.setChunkRadius(32);
+		player.setChunkRadius(32)
 	}
 }
 
-module.exports = ClientRequestChunkRadiusPacket;
+module.exports = ClientRequestChunkRadiusPacket

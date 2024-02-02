@@ -18,4 +18,4 @@ module.exports = /** @type {const} */ ({
 	CLIENT: "client",
 	SERVER: "server",
 	SERVER_WITH_REWIND: "server_with_rewind",
-});
+})

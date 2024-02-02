@@ -13,19 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
-const { SmartBuffer } = require("@harmonytf/smart-buffer");
+const { SmartBuffer } = require("@harmonytf/smart-buffer")
 
-const QueryPacket = require("./types/QueryPacket");
+const QueryPacket = require("./types/QueryPacket")
 
 class ServerHandshakeResponsePacket extends Packet {
-	packetId = QueryPacket.HANDSHAKE;
+	packetId = QueryPacket.HANDSHAKE
 
 	/** @type {number | undefined} */
-	sessionId;
+	sessionId
 	/** @type {string | undefined} */
-	payload;
+	payload
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client
@@ -40,8 +40,8 @@ class ServerHandshakeResponsePacket extends Packet {
 				.toBuffer(),
 			client.port,
 			client.address,
-		);
+		)
 	}
 }
 
-module.exports = ServerHandshakeResponsePacket;
+module.exports = ServerHandshakeResponsePacket

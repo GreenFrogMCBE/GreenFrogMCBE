@@ -13,15 +13,15 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerToastRequestPacket extends Packet {
-	name = "toast_request";
+	name = "toast_request"
 
 	/** @type {string | undefined} */
-	title;
+	title
 	/** @type {string | undefined} */
-	message;
+	message
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -30,8 +30,8 @@ class ServerToastRequestPacket extends Packet {
 		player.queue(this.name, {
 			title: this.title,
 			message: this.message,
-		});
+		})
 	}
 }
 
-module.exports = ServerToastRequestPacket;
+module.exports = ServerToastRequestPacket

@@ -13,21 +13,21 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerLevelChunkPacket extends Packet {
-	name = "level_chunk";
+	name = "level_chunk"
 
 	/** @type {number | undefined} */
-	x;
+	x
 	/** @type {number | undefined} */
-	z;
+	z
 	/** @type {number | undefined} */
-	sub_chunk_count;
+	sub_chunk_count
 	/** @type {boolean | undefined} */
-	cache_enabled;
+	cache_enabled
 	/** @type {Buffer | null | undefined} */
-	payload;
+	payload
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -39,8 +39,8 @@ class ServerLevelChunkPacket extends Packet {
 			sub_chunk_count: this.sub_chunk_count,
 			cache_enabled: this.cache_enabled,
 			payload: this.payload,
-		});
+		})
 	}
 }
 
-module.exports = ServerLevelChunkPacket;
+module.exports = ServerLevelChunkPacket

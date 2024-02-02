@@ -13,16 +13,16 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const os = require("os");
+const os = require("os")
 
 module.exports = {
 	getModule() {
-		const platform = os.platform();
+		const platform = os.platform()
 
 		try {
-			return require(`./build/Release/entity-${platform}.node`);
+			return require(`./build/Release/entity-${platform}.node`)
 		} catch {
-			throw new Error("OS not supported: " + platform);
+			throw new Error("OS not supported: " + platform)
 		}
 	}
-};
+}

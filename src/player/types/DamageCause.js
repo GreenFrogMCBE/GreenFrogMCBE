@@ -21,4 +21,4 @@ module.exports = /** @type {const} */ ({
 	STARVATION: "starvation",
 	PLUGIN: "plugin",
 	KILL_COMMAND: "kill_command",
-});
+})

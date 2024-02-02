@@ -13,28 +13,28 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Command = require("./Command")
 
-const Frog = require("../Frog");
+const Frog = require("../Frog")
 
-const Colors = require("../utils/types/Colors");
+const Colors = require("../utils/types/Colors")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
-const { version } = Frog.config.serverInfo;
+const { version } = Frog.config.serverInfo
 
 /**
  * A command that shows the server's version
  */
 class CommandVersion extends Command {
-	name = getKey("commands.version.name");
-	description = getKey("commands.version.description");
+	name = getKey("commands.version.name")
+	description = getKey("commands.version.description")
 	aliases = [
 		getKey("commands.version.aliases.ver"), 
 		getKey("commands.version.aliases.about")
-	];
-	minArgs = 0;
-	maxArgs = 0;
+	]
+	minArgs = 0
+	maxArgs = 0
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -42,10 +42,10 @@ class CommandVersion extends Command {
 	async execute(player) {
 		const message = getKey("server.version")
 			.replace("%s", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`)
-			.replace("%d", version);
+			.replace("%d", version)
 
-		player.sendMessage(`${Colors.GRAY}${message}`);
+		player.sendMessage(`${Colors.GRAY}${message}`)
 	}
 }
 
-module.exports = CommandVersion;
+module.exports = CommandVersion

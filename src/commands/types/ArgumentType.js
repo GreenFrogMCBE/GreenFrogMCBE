@@ -22,4 +22,4 @@ module.exports = /** @type {const} */ ({
 	BLOCK_STATES: "block_states",
 	WILDCARD_TARGET: "wildcard_target",
 	OPERATOR: "operator"
-});
+})

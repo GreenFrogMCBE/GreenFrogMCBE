@@ -13,30 +13,30 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Command = require("./Command")
 
-const PermissionManager = require("../permission/PermissionManager");
+const PermissionManager = require("../permission/PermissionManager")
 
-const ArgumentType = require("./types/ArgumentType");
+const ArgumentType = require("./types/ArgumentType")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
 /**
  * A command that makes the specified player opped
  */
 class CommandOp extends Command {
-	name = getKey("commands.op.name");
-	description = getKey("commands.op.description");
-	minArgs = 1;
-	maxArgs = 1;
-	requiresOp = true;
+	name = getKey("commands.op.name")
+	description = getKey("commands.op.description")
+	minArgs = 1
+	maxArgs = 1
+	requiresOp = true
 	args = [
 		{
 			name: "player",
 			type: ArgumentType.TARGET,
 			optional: true
 		}
-	];
+	]
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -45,16 +45,16 @@ class CommandOp extends Command {
 	 * @async
 	 */
 	async execute(player, server, args) {
-		const playerName = args[0];
+		const playerName = args[0]
 
 		try {
-			await PermissionManager.op(playerName);
+			await PermissionManager.op(playerName)
 
-			player.sendMessage(getKey("commands.op.execution.success").replace("%s", playerName));
+			player.sendMessage(getKey("commands.op.execution.success").replace("%s", playerName))
 		} catch {
-			player.sendMessage(getKey("commands.op.execution.failed").replace("%s", playerName));
+			player.sendMessage(getKey("commands.op.execution.failed").replace("%s", playerName))
 		}
 	}
 }
 
-module.exports = CommandOp;
+module.exports = CommandOp

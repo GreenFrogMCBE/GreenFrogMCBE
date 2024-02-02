@@ -13,38 +13,38 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Command = require("./Command")
 
-const PluginManager = require("../plugins/PluginManager");
+const PluginManager = require("../plugins/PluginManager")
 
-const Colors = require("../utils/types/Colors");
+const Colors = require("../utils/types/Colors")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
 /**
  * A command that all the plugin this server uses
  */
 class CommandPlugins extends Command {
-	name = getKey("commands.plugins.name");
-	description = getKey("commands.plugins.description");
-	aliases = getKey("commands.plugins.aliases.pl");
-	minArgs = 0;
-	maxArgs = 0;
+	name = getKey("commands.plugins.name")
+	description = getKey("commands.plugins.description")
+	aliases = getKey("commands.plugins.aliases.pl")
+	minArgs = 0
+	maxArgs = 0
 
 	/**
 	 * @param {import("Frog").Player} player
 	 */
 	execute(player) {
-		const pluginSet = new Set(PluginManager.plugins);
+		const pluginSet = new Set(PluginManager.plugins)
 		const pluginList = Array.from(pluginSet)
 			.map(plugin => `${Colors.RESET}${Colors.GREEN}${plugin.name} v${plugin.version}${Colors.RESET}`)
-			.join(", ") || "";
+			.join(", ") || ""
 
 		const message = getKey("commands.plugins.execution.success")
-			.replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`);
+			.replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`)
 
-		player.sendMessage(message);
+		player.sendMessage(message)
 	}
 }
 
-module.exports = CommandPlugins;
+module.exports = CommandPlugins

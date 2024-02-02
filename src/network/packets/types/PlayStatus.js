@@ -30,4 +30,4 @@ module.exports = /** @type {const} */ ({
 	FAILED_VANILLA_BEDROCK_REQUIRED: "failed_edu_vanilla",
 	/** Displays "Wow this server is popular! Check back later to see if space opens up." */
 	FAILED_SERVER_FULL: "failed_server_full",
-});
+})

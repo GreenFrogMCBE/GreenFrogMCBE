@@ -13,41 +13,41 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerAddEntityPacket extends Packet {
-	name = "add_entity";
+	name = "add_entity"
 
 	/** @type {number | undefined} */
-	unique_id;
+	unique_id
 	/** @type {number | undefined} */
-	runtime_id;
+	runtime_id
 	/** @type {string | undefined} */
-	entity_type;
+	entity_type
 	/** @type {import("Frog").Vec3 | undefined} */
-	position;
+	position
 	/** @type {import("Frog").Vec3 | undefined} */
-	velocity;
+	velocity
 	/** @type {number | undefined} */
-	pitch;
+	pitch
 	/** @type {number | undefined} */
-	yaw;
+	yaw
 	/** @type {number | undefined} */
-	head_pitch;
+	head_pitch
 	/** @type {number | undefined} */
-	head_yaw;
+	head_yaw
 	/** @type {number | undefined} */
-	body_pitch;
+	body_pitch
 	/** @type {number | undefined} */
-	body_yaw;
+	body_yaw
 	/** @type {import("Frog").EntityAttribute[] | undefined} */
-	attributes;
+	attributes
 	/** @type {import("Frog").EntityMetadata[] | undefined} */
-	metadata;
+	metadata
 	/** @type {import("Frog").EntityDataProperties | undefined} */
-	properties;
+	properties
 	/** @type {any} */
-	links;
+	links
 
 	/**
      * @param {import("Frog").Player} player
@@ -67,8 +67,8 @@ class ServerAddEntityPacket extends Packet {
 			metadata: this.metadata,
 			properties: this.properties,
 			links: this.links
-		});
+		})
 	}
 }
 
-module.exports = ServerAddEntityPacket;
+module.exports = ServerAddEntityPacket

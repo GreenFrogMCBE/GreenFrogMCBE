@@ -13,22 +13,22 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog");
+const Frog = require("../../Frog")
 
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
-const InvalidGamemodeException = require("../../utils/exceptions/InvalidGamemodeException");
+const InvalidGamemodeException = require("../../utils/exceptions/InvalidGamemodeException")
 
-const { getKey } = require("../../utils/Language");
+const { getKey } = require("../../utils/Language")
 
 class ClientSetPlayerGameTypePacket extends Packet {
-	name = "set_player_game_types";
+	name = "set_player_game_types"
 
 	/**
 	 * @param {import("Frog").Player} player
 	 */
 	validatePacket(player) {
-		if (!player.permissions.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"));
+		if (!player.permissions.op) throw new InvalidGamemodeException(getKey("exceptions.network.invalidGamemodePacket"))
 	}
 
 	/**
@@ -36,24 +36,24 @@ class ClientSetPlayerGameTypePacket extends Packet {
 	 * @param {import("Frog").Packet} packet
 	 */
 	async readPacket(player, packet) {
-		this.validatePacket(player);
+		this.validatePacket(player)
 
-		const gamemode = packet.data.params.gamemode;
+		const gamemode = packet.data.params.gamemode
 
-		let shouldChange = true;
+		let shouldChange = true
 
 		Frog.eventEmitter.emit("playerGamemodeChangeRequest", {
 			player,
 			gamemode,
 			cancel: () => {
-				shouldChange = false;
+				shouldChange = false
 			},
-		});
+		})
 
-		if (!shouldChange) return;
+		if (!shouldChange) return
 
-		player.setGamemode(gamemode);
+		player.setGamemode(gamemode)
 	}
 }
 
-module.exports = ClientSetPlayerGameTypePacket;
+module.exports = ClientSetPlayerGameTypePacket

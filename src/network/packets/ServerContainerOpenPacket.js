@@ -13,19 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerContainerOpenPacket extends Packet {
-	name = "container_open";
+	name = "container_open"
 
 	/** @type {import("Frog").WindowId | undefined} */
-	window_id;
+	window_id
 	/** @type {import("Frog").Vec3 | undefined} */
-	coordinates;
+	coordinates
 	/** @type {import("Frog").WindowType | undefined} */
-	window_type;
+	window_type
 	/** @type {number | undefined} */
-	runtime_entity_id;
+	runtime_entity_id
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -36,8 +36,8 @@ class ServerContainerOpenPacket extends Packet {
 			window_type: this.window_type,
 			coordinates: this.coordinates,
 			runtime_entity_id: this.runtime_entity_id,
-		});
+		})
 	}
 }
 
-module.exports = ServerContainerOpenPacket;
+module.exports = ServerContainerOpenPacket

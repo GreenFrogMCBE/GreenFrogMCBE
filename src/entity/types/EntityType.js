@@ -108,4 +108,4 @@ module.exports = /** @type {const} */ ({
 	ZOMBIE_HORSE: "minecraft:zombie_horse",
 	ZOMBIE_PIGMAN: "minecraft:zombie_pigman",
 	ZOMBIE_VILLAGER: "minecraft:zombie_villager"
-});
+})

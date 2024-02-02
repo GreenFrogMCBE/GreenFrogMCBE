@@ -13,24 +13,24 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../Frog");
+const Frog = require("../Frog")
 
-const ServerSetTitlePacket = require("../network/packets/ServerSetTitlePacket");
+const ServerSetTitlePacket = require("../network/packets/ServerSetTitlePacket")
 
-const TitleType = require("./types/Title");
+const TitleType = require("./types/Title")
 
 class Title {
 	constructor() {
 		/** @type {import("Frog").Title} */
-		this.type = TitleType.TITLE;
+		this.type = TitleType.TITLE
 		/** @type {string} */
-		this.text;
+		this.text
 		/** @type {number} */
-		this.fadeInTime = 20;
+		this.fadeInTime = 20
 		/** @type {number} */
-		this.stayTime = 20;
+		this.stayTime = 20
 		/** @type {number} */
-		this.fadeOutTime = 20;
+		this.fadeOutTime = 20
 	}
 
 	/**
@@ -39,7 +39,7 @@ class Title {
 	 * @param {import("Frog").Player} client The client to send the title to
 	 */
 	send(client) {
-		let shouldSendTitle = true;
+		let shouldSendTitle = true
 
 		Frog.eventEmitter.emit("serverTitle", {
 			fadeInTime: this.fadeInTime,
@@ -48,22 +48,22 @@ class Title {
 			text: this.text,
 			type: this.type,
 			cancel: () => {
-				shouldSendTitle = false;
+				shouldSendTitle = false
 			},
-		});
+		})
 
-		if (!shouldSendTitle) return;
+		if (!shouldSendTitle) return
 
-		const titlePacket = new ServerSetTitlePacket();
-		titlePacket.fade_in_time = this.fadeInTime;
-		titlePacket.stay_time = this.stayTime;
-		titlePacket.text = this.text;
-		titlePacket.type = this.type;
-		titlePacket.fade_out_time = this.fadeOutTime;
-		titlePacket.xuid = "";
-		titlePacket.platform_online_id = "";
-		titlePacket.writePacket(client);
+		const titlePacket = new ServerSetTitlePacket()
+		titlePacket.fade_in_time = this.fadeInTime
+		titlePacket.stay_time = this.stayTime
+		titlePacket.text = this.text
+		titlePacket.type = this.type
+		titlePacket.fade_out_time = this.fadeOutTime
+		titlePacket.xuid = ""
+		titlePacket.platform_online_id = ""
+		titlePacket.writePacket(client)
 	}
 }
 
-module.exports = Title;
+module.exports = Title

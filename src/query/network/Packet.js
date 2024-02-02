@@ -18,7 +18,7 @@ class Packet {
 	constructor() {}
 
 	/** @type {number | unknown} */
-	packetId;
+	packetId
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client
@@ -35,4 +35,4 @@ class Packet {
 	writePacket(client, socket) {}
 }
 
-module.exports = Packet;
+module.exports = Packet

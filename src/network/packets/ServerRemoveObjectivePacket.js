@@ -13,13 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerRemoveObjectivePacket extends Packet {
-	name = "remove_objective";
+	name = "remove_objective"
 
 	/** @type {string | undefined} */
-	objective_name;
+	objective_name
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -27,8 +27,8 @@ class ServerRemoveObjectivePacket extends Packet {
 	writePacket(player) {
 		player.queue(this.name, {
 			objective_name: this.objective_name,
-		});
+		})
 	}
 }
 
-module.exports = ServerRemoveObjectivePacket;
+module.exports = ServerRemoveObjectivePacket

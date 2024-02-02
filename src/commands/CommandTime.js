@@ -13,30 +13,30 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Command = require("./Command")
 
-const { playersOnline } = require("../player/PlayerInfo");
+const { playersOnline } = require("../player/PlayerInfo")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
-const ArgumentType = require("./types/ArgumentType");
+const ArgumentType = require("./types/ArgumentType")
 
 /**
  * A command that changes the time
  */
 class CommandTime extends Command {
-	name = getKey("commands.time.name");
-	description = getKey("commands.time.description");
-	minArgs = 1;
-	maxArgs = 1;
-	requiresOp = true;
+	name = getKey("commands.time.name")
+	description = getKey("commands.time.description")
+	minArgs = 1
+	maxArgs = 1
+	requiresOp = true
 	args = [
 		{
 			name: "time",
 			type: ArgumentType.INT,
 			optional: false,
 		}
-	];
+	]
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -44,24 +44,24 @@ class CommandTime extends Command {
 	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
-		const time = args[0];
+		const time = args[0]
 
-		const setTime = time === getKey("commands.time.times.day") ? 1000 : time === getKey("commands.time.times.night") ? 17000 : parseInt(time, 10);
+		const setTime = time === getKey("commands.time.times.day") ? 1000 : time === getKey("commands.time.times.night") ? 17000 : parseInt(time, 10)
 
 		if (isNaN(Number(setTime))) {
-			player.sendMessage(getKey("commands.time.execution.failed"));
-			return;
+			player.sendMessage(getKey("commands.time.execution.failed"))
+			return
 		}
 
-		const parsedTime = parseInt(time);
+		const parsedTime = parseInt(time)
 
 		for (const player of playersOnline) {
-			player.world.time = parsedTime;
-			player.setTime(parsedTime);
+			player.world.time = parsedTime
+			player.setTime(parsedTime)
 		}
 
-		player.sendMessage(getKey("commands.time.execution.success").replace("%s", time));
+		player.sendMessage(getKey("commands.time.execution.success").replace("%s", time))
 	}
 }
 
-module.exports = CommandTime;
+module.exports = CommandTime

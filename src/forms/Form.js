@@ -13,9 +13,9 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
+const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket")
 
-const FormVariant = require("./types/Form");
+const FormVariant = require("./types/Form")
 
 class Form {
 	constructor() {
@@ -23,13 +23,13 @@ class Form {
 		 * The title of the form.
 		 * @type {string}
 		 */
-		this.title = "";
+		this.title = ""
 
 		/**
 		 * The buttons in the form.
 		 * @type {import("Frog").FormButton[]}
 		 */
-		this.buttons = [];
+		this.buttons = []
 
 		/**
 		 * @type {function}
@@ -38,19 +38,19 @@ class Form {
 		 * @param {import("Frog").Player} client
 		 */
 		// eslint-disable-next-line no-unused-vars
-		this.onSend = (form, client) => { };
+		this.onSend = (form, client) => { }
 
 		/**
 		 * The ID of the form.
 		 * @type {number}
 		 */
-		this.id = 0;
+		this.id = 0
 
 		/**
 		 * The text in the form.
 		 * @type {string}
 		 */
-		this.content;
+		this.content
 	}
 
 	/**
@@ -59,16 +59,16 @@ class Form {
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
-		const formRequestPacket = new ServerFormRequestPacket();
-		formRequestPacket.id = this.id;
-		formRequestPacket.title = this.title;
-		formRequestPacket.content = this.content;
-		formRequestPacket.buttons = this.buttons;
-		formRequestPacket.type = FormVariant.FORM;
-		formRequestPacket.writePacket(player);
+		const formRequestPacket = new ServerFormRequestPacket()
+		formRequestPacket.id = this.id
+		formRequestPacket.title = this.title
+		formRequestPacket.content = this.content
+		formRequestPacket.buttons = this.buttons
+		formRequestPacket.type = FormVariant.FORM
+		formRequestPacket.writePacket(player)
 
-		this.onSend(this, player);
+		this.onSend(this, player)
 	}
 }
 
-module.exports = Form;
+module.exports = Form

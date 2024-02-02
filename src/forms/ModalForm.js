@@ -13,41 +13,41 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
+const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket")
 
-const Form = require("./types/Form");
+const Form = require("./types/Form")
 
 class ModalForm {
 	constructor() {
 		/**
 		 * @type {string}
 		 */
-		this.title = "";
+		this.title = ""
 
 		/**
 		 * @type {string}
 		 */
-		this.text = "";
+		this.text = ""
 
 		/**
 		 * @type {string}
 		 */
-		this.button1 = "";
+		this.button1 = ""
 
 		/**
 		 * @type {string}
 		 */
-		this.button2 = "";
+		this.button2 = ""
 
 		/**
 		 * @type {number}
 		 */
-		this.id = 0;
+		this.id = 0
 
 		/**
 		 * @type {function}
 		 */
-		this.onSend = () => {};
+		this.onSend = () => {}
 	}
 
 	/**
@@ -56,17 +56,17 @@ class ModalForm {
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
-		this.onSend(this, player);
+		this.onSend(this, player)
 
-		const formRequestPacket = new ServerFormRequestPacket();
-		formRequestPacket.type = Form.MODAL_FORM;
-		formRequestPacket.id = this.id;
-		formRequestPacket.title = this.title;
-		formRequestPacket.content = this.text;
-		formRequestPacket.button1 = this.button1;
-		formRequestPacket.button2 = this.button2;
-		formRequestPacket.writePacket(player);
+		const formRequestPacket = new ServerFormRequestPacket()
+		formRequestPacket.type = Form.MODAL_FORM
+		formRequestPacket.id = this.id
+		formRequestPacket.title = this.title
+		formRequestPacket.content = this.text
+		formRequestPacket.button1 = this.button1
+		formRequestPacket.button2 = this.button2
+		formRequestPacket.writePacket(player)
 	}
 }
 
-module.exports = ModalForm;
+module.exports = ModalForm

@@ -13,17 +13,17 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerNetworkChunkPublisherUpdatePacket extends Packet {
-	name = "network_chunk_publisher_update";
+	name = "network_chunk_publisher_update"
 
 	/** @type {import("Frog").Vec3 | undefined} */
-	coordinates;
+	coordinates
 	/** @type {number | undefined} */
-	radius;
+	radius
 	/** @type {any[] | undefined} */
-	saved_chunks;
+	saved_chunks
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -33,8 +33,8 @@ class ServerNetworkChunkPublisherUpdatePacket extends Packet {
 			coordinates: this.coordinates,
 			radius: this.radius,
 			saved_chunks: this.saved_chunks,
-		});
+		})
 	}
 }
 
-module.exports = ServerNetworkChunkPublisherUpdatePacket;
+module.exports = ServerNetworkChunkPublisherUpdatePacket

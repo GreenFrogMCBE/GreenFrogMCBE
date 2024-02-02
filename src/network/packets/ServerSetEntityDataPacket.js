@@ -13,19 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerSetEntityDataPacket extends Packet {
-	name = "set_entity_data";
+	name = "set_entity_data"
 
 	/** @type {import("Frog").EntityDataProperties | undefined} */
-	properties;
+	properties
 	/** @type {string | undefined} */
-	tick;
+	tick
 	/** @type {import("Frog").EntityData | undefined} */
-	value;
+	value
 	/** @type {string | undefined} */
-	runtime_entity_id;
+	runtime_entity_id
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -42,8 +42,8 @@ class ServerSetEntityDataPacket extends Packet {
 			],
 			properties: this.properties,
 			tick: this.tick,
-		});
+		})
 	}
 }
 
-module.exports = ServerSetEntityDataPacket;
+module.exports = ServerSetEntityDataPacket

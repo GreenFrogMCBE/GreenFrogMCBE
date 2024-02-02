@@ -15,4 +15,4 @@
  */
 module.exports = /** @type {const} */ ({
 	CREATIVE_PLAYER_BREAK_BLOCK: "creative_player_destroy_block",
-});
+})

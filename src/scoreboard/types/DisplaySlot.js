@@ -17,4 +17,4 @@ module.exports = {
 	LIST: "list",
 	SIDEBAR: "sidebar",
 	BELOW_NAME: "belowname",
-};
+}

@@ -13,12 +13,12 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ServerAvailableCommandsPacket = require("../network/packets/ServerAvailableCommandsPacket");
+const ServerAvailableCommandsPacket = require("../network/packets/ServerAvailableCommandsPacket")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
 /** @type {import("Frog").CommandInfo[]} */
-const commands = [];
+const commands = []
 
 module.exports = {
 	/**
@@ -28,7 +28,7 @@ module.exports = {
 	 * @returns {import("Frog").CommandPacket}
 	 */
 	getPacket(client) {
-		return client.commands;
+		return client.commands
 	},
 
 	/**
@@ -48,7 +48,7 @@ module.exports = {
 			command_data: [],
 			dynamic_enums: [],
 			enum_constraints: [],
-		};
+		}
 	},
 
 	/**
@@ -57,7 +57,7 @@ module.exports = {
 	 * @returns {import("Frog").CommandInfo[]}
 	 */
 	getCommands() {
-		return commands;
+		return commands
 	},
 
 	/**
@@ -69,7 +69,7 @@ module.exports = {
 	 * @param {{ name: string; type: 'int' | 'float' | 'value' | 'wildcard_int' | 'operator' | 'command_operator' | 'target' | 'wildcard_target' | 'file_path' | 'integer_range' | 'equipment_slot' | 'string' | 'block_position' | 'position' | 'message' | 'raw_text' | 'json' | 'block_states' | 'command'; optional: boolean; }[]} 
 	 */
 	addCommand(client, name, description, args) {
-		if (name === getKey("commands.help.name") || name === "?") return; // Ignore /help and /? because they are overridden by the client
+		if (name === getKey("commands.help.name") || name === "?") return // Ignore /help and /? because they are overridden by the client
 
 		client.commands.command_data.push({
 			name,
@@ -94,19 +94,19 @@ module.exports = {
 								as_chained_command: 0,
 								unknown2: 0
 							}
-						};
+						}
 					}) || [],
 				}
 			],
-		});
+		})
 
 		commands.push({
 			name,
 			description,
-		});
+		})
 
-		const availableCommandsPacket = new ServerAvailableCommandsPacket();
-		availableCommandsPacket.data = client.commands;
-		availableCommandsPacket.writePacket(client);
+		const availableCommandsPacket = new ServerAvailableCommandsPacket()
+		availableCommandsPacket.data = client.commands
+		availableCommandsPacket.writePacket(client)
 	},
-};
+}

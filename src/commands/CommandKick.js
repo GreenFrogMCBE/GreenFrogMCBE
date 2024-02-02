@@ -13,27 +13,27 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Command = require("./Command")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
-const PlayerInfo = require("../player/PlayerInfo");
+const PlayerInfo = require("../player/PlayerInfo")
 
 /**
  * A command to disconnect a player from the server
  */
 class CommandKick extends Command {
-	name = getKey("commands.kick.name");
-	description = getKey("commands.kick.description");
-	minArgs = 1;
-	requiresOp = true;
+	name = getKey("commands.kick.name")
+	description = getKey("commands.kick.description")
+	minArgs = 1
+	requiresOp = true
 	args = [
 		{
 			name: "player",
 			type: "target",
 			optional: false,
 		}
-	];
+	]
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -41,18 +41,18 @@ class CommandKick extends Command {
 	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
-		const playerName = args[0];
-		const reason = args.slice(1).join(" ");
+		const playerName = args[0]
+		const reason = args.slice(1).join(" ")
 
-		const target = PlayerInfo.getPlayer(playerName);
+		const target = PlayerInfo.getPlayer(playerName)
 
 		if (!target) {
-			player.sendMessage(getKey("commands.kick.execution.failed.notOnline").replace("%s", playerName));
-			return;
+			player.sendMessage(getKey("commands.kick.execution.failed.notOnline").replace("%s", playerName))
+			return
 		}
 
-		target.kick(getKey("kickMessages.wereKicked").replace("%s", reason));
+		target.kick(getKey("kickMessages.wereKicked").replace("%s", reason))
 	}
 }
 
-module.exports = CommandKick;
+module.exports = CommandKick

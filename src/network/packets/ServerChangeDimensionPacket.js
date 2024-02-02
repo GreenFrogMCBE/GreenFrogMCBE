@@ -13,17 +13,17 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerChangeDimensionPacket extends Packet {
-	name = "change_dimension";
+	name = "change_dimension"
 
 	/** @type {import("Frog").DimensionLegacy | undefined} */
-	dimension;
+	dimension
 	/** @type {import("Frog").Vec3 | undefined} */
-	position;
+	position
 	/** @type {boolean | undefined} */
-	respawn;
+	respawn
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -33,8 +33,8 @@ class ServerChangeDimensionPacket extends Packet {
 			dimension: this.dimension,
 			position: this.position,
 			respawn: this.respawn,
-		});
+		})
 	}
 }
 
-module.exports = ServerChangeDimensionPacket;
+module.exports = ServerChangeDimensionPacket

@@ -40,12 +40,12 @@ module.exports = {
 			"§e": "\x1b[93m", // yellow
 			"§f": "\x1b[97m", // white
 			"§r": "\x1b[0m", // reset
-		};
-
-		for (const color in colors) {
-			string = string.replace(new RegExp(color, "g"), colors[color]);
 		}
 
-		return string + "\x1b[0m";
+		for (const color in colors) {
+			string = string.replace(new RegExp(color, "g"), colors[color])
+		}
+
+		return string + "\x1b[0m"
 	},
-};
+}

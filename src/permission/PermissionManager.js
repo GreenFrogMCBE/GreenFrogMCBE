@@ -13,11 +13,11 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerInfo = require("../player/PlayerInfo");
+const PlayerInfo = require("../player/PlayerInfo")
 
-const Frog = require("../Frog");
+const Frog = require("../Frog")
 
-const fs = require("fs");
+const fs = require("fs")
 
 /**
  * Emits the `playerOpStatusChange` event
@@ -28,17 +28,17 @@ const fs = require("fs");
  * @private
  */
 function emitPlayerOpStatusChange(username, opped) {
-	let shouldOp = true;
+	let shouldOp = true
 
 	Frog.eventEmitter.emit("playerOpStatusChange", {
 		username,
 		opped,
 		cancel: () => {
-			shouldOp = false;
+			shouldOp = false
 		},
-	});
+	})
 
-	return shouldOp;
+	return shouldOp
 }
 
 module.exports = {
@@ -51,9 +51,9 @@ module.exports = {
 	 */
 	async isOpped(username) {
 		const oppedPlayers = fs.readFileSync(Frog.directories.opFile, "utf8")
-			.split("\n");
+			.split("\n")
 
-		return oppedPlayers.includes(username);
+		return oppedPlayers.includes(username)
 	},
 
 	/**
@@ -64,14 +64,14 @@ module.exports = {
 	 * @async
 	 */
 	async op(username) {
-		if (!emitPlayerOpStatusChange(username, true)) return;
+		if (!emitPlayerOpStatusChange(username, true)) return
 
-		fs.appendFileSync(Frog.directories.opFile, username + "\n");
+		fs.appendFileSync(Frog.directories.opFile, username + "\n")
 
-		const target = PlayerInfo.getPlayer(username);
+		const target = PlayerInfo.getPlayer(username)
 
 		if (target) {
-			target.permissions.op = true;
+			target.permissions.op = true
 		}
 	},
 
@@ -83,20 +83,20 @@ module.exports = {
 	 * @async
 	 */
 	async deop(username) {
-		if (!emitPlayerOpStatusChange(username, false)) return;
+		if (!emitPlayerOpStatusChange(username, false)) return
 
-		const ops = fs.readFileSync(Frog.directories.opFile, "utf-8");
+		const ops = fs.readFileSync(Frog.directories.opFile, "utf-8")
 		const updatedOps = ops
 			.split("\n")
 			.filter((op) => op !== username)
-			.join("\n");
+			.join("\n")
 
-		fs.writeFileSync(Frog.directories.opFile, updatedOps);
+		fs.writeFileSync(Frog.directories.opFile, updatedOps)
 
-		const target = PlayerInfo.getPlayer(username);
+		const target = PlayerInfo.getPlayer(username)
 
 		if (target) {
-			target.permissions.op = false;
+			target.permissions.op = false
 		}
 	},
 
@@ -108,6 +108,6 @@ module.exports = {
 	 * @returns {Promise<void>}
 	 */
 	async setOp(username, status) {
-		status ? await this.op(username) : await this.deop(username);
+		status ? await this.op(username) : await this.deop(username)
 	},
-};
+}

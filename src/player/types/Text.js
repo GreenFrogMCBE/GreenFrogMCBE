@@ -25,4 +25,4 @@ module.exports = /** @type {const} */ ({
 	ANNOUNCEMENT: "announcement",
 	OBJECT: "object",
 	OBJECT_WISPHER: "object_whisper",
-});
+})

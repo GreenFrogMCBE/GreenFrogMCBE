@@ -13,16 +13,16 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const fs = require("fs");
-const path = require("path");
+const fs = require("fs")
+const path = require("path")
 
-const Frog = require("../../Frog");
+const Frog = require("../../Frog")
 
-const Logger = require("../../utils/Logger");
+const Logger = require("../../utils/Logger")
 
-const { getKey } = require("../../utils/Language");
+const { getKey } = require("../../utils/Language")
 
-const PacketHandlingException = require("../../utils/exceptions/PacketHandlingException");
+const PacketHandlingException = require("../../utils/exceptions/PacketHandlingException")
 
 class PacketHandler {
 	/**
@@ -32,14 +32,14 @@ class PacketHandler {
 	 */
 	handlePacket(player, packet) {
 		try {
-			const packetsDir = this.getPacketsDirectory();
-			const exists = this.checkForMatchingPackets(player, packet, packetsDir);
+			const packetsDir = this.getPacketsDirectory()
+			const exists = this.checkForMatchingPackets(player, packet, packetsDir)
 
 			if (!exists && this.shouldLogUnhandledPackets()) {
-				this.handleUnhandledPacket(packet);
+				this.handleUnhandledPacket(packet)
 			}
 		} catch (error) {
-			this.handlePacketError(player, error);
+			this.handlePacketError(player, error)
 		}
 	}
 
@@ -49,7 +49,7 @@ class PacketHandler {
 	 * @returns {string}
 	 */
 	getPacketsDirectory() {
-		return path.join(__dirname, "..", "packets");
+		return path.join(__dirname, "..", "packets")
 	}
 
 	/**
@@ -61,27 +61,27 @@ class PacketHandler {
 	 * @returns {boolean}
 	 */
 	checkForMatchingPackets(player, packet, packetsDir) {
-		let exists = false;
+		let exists = false
 
 		this.iteratePacketFiles(packetsDir, (/** @type {string} */ filename) => {
 			if (this.isClientPacket(filename)) {
-				const packetPath = this.getPacketPath(packetsDir, filename);
+				const packetPath = this.getPacketPath(packetsDir, filename)
 
 				if (this.exceedsPacketCountLimit(player) && Frog.config) {
-					this.handlePacketRatelimit(player);
-					throw this.createRateLimitException(player);
+					this.handlePacketRatelimit(player)
+					throw this.createRateLimitException(player)
 				}
 
-				const packetInstance = this.createPacketInstance(packetPath);
+				const packetInstance = this.createPacketInstance(packetPath)
 
 				if (this.isMatchingPacket(packetInstance, packet)) {
-					this.processMatchingPacket(player, packetInstance, packet);
-					exists = true;
+					this.processMatchingPacket(player, packetInstance, packet)
+					exists = true
 				}
 			}
-		});
+		})
 
-		return exists;
+		return exists
 	}
 
 	/**
@@ -91,7 +91,7 @@ class PacketHandler {
 	 * @param {any} callback
 	 */
 	iteratePacketFiles(directory, callback) {
-		fs.readdirSync(directory).forEach(callback);
+		fs.readdirSync(directory).forEach(callback)
 	}
 
 	/**
@@ -101,7 +101,7 @@ class PacketHandler {
 	 * @returns {boolean}
 	 */
 	isClientPacket(filename) {
-		return filename.startsWith("Client") && filename.endsWith(".js");
+		return filename.startsWith("Client") && filename.endsWith(".js")
 	}
 
 	/**
@@ -112,7 +112,7 @@ class PacketHandler {
 	 * @returns {string}
 	 */
 	getPacketPath(directory, filename) {
-		return path.join(directory, "..", "packets", filename);
+		return path.join(directory, "..", "packets", filename)
 	}
 
 	/**
@@ -122,7 +122,7 @@ class PacketHandler {
 	 * @returns {boolean}
 	 */
 	exceedsPacketCountLimit(player) {
-		return ++player.network.packetCount > 2500;
+		return ++player.network.packetCount > 2500
 	}
 
 	/**
@@ -131,7 +131,7 @@ class PacketHandler {
 	 * @param {import("Frog").Player} player
 	 */
 	handlePacketRatelimit(player) {
-		Frog.eventEmitter.emit("packetRateLimit", { player });
+		Frog.eventEmitter.emit("packetRateLimit", { player })
 	}
 
 	/**
@@ -143,11 +143,11 @@ class PacketHandler {
 	createRateLimitException(player) {
 		const exceptionMessage = getKey("exceptions.network.rateLimited")
 			.replace("%s", player.username)
-			.replace("%d", player.network.packetCount);
+			.replace("%d", player.network.packetCount)
 
-		player.network.packetCount = 0;
+		player.network.packetCount = 0
 
-		return new PacketHandlingException(exceptionMessage);
+		return new PacketHandlingException(exceptionMessage)
 	}
 
 	/**
@@ -157,8 +157,8 @@ class PacketHandler {
 	 * @returns {import("../packets/Packet")}
 	 */
 	createPacketInstance(packetPath) {
-		const PacketClass = require(packetPath);
-		return new PacketClass();
+		const PacketClass = require(packetPath)
+		return new PacketClass()
 	}
 
 	/**
@@ -169,7 +169,7 @@ class PacketHandler {
 	 * @returns {boolean}
 	 */
 	isMatchingPacket(packetClass, packet) {
-		return packetClass.name === packet.data.name;
+		return packetClass.name === packet.data.name
 	}
 
 	/**
@@ -180,7 +180,7 @@ class PacketHandler {
 	 * @param {import("Frog").PacketParams} packetParams
 	 */
 	processMatchingPacket(player, packetInstance, packetParams) {
-		let shouldReadPacket = true;
+		let shouldReadPacket = true
 
 		Frog.eventEmitter.emit("packetRead", {
 			player,
@@ -189,12 +189,12 @@ class PacketHandler {
 				instance: packetInstance,
 			},
 			cancel: () => {
-				shouldReadPacket = false;
+				shouldReadPacket = false
 			},
-		});
+		})
 
 		if (shouldReadPacket) {
-			this.readPacket(packetInstance, player, Frog.server, packetParams);
+			this.readPacket(packetInstance, player, Frog.server, packetParams)
 		}
 	}
 
@@ -207,7 +207,7 @@ class PacketHandler {
 	 * @param {import("Frog").PacketParams} packetParams
 	 */
 	readPacket(packet, player, server, packetParams) {
-		packet.readPacket(player, packetParams, server);
+		packet.readPacket(player, packetParams, server)
 	}
 
 	/**
@@ -216,7 +216,7 @@ class PacketHandler {
 	 * @returns {boolean}
 	 */
 	shouldLogUnhandledPackets() {
-		return Frog.config.dev.logUnhandledPackets;
+		return Frog.config.dev.logUnhandledPackets
 	}
 
 	/**
@@ -225,8 +225,8 @@ class PacketHandler {
 	 * @param {import("Frog").Packet} packet
 	 */
 	handleUnhandledPacket(packet) {
-		Logger.warning(getKey("network.packet.unhandledPacket"));
-		console.warn("%o", packet);
+		Logger.warning(getKey("network.packet.unhandledPacket"))
+		console.warn("%o", packet)
 	}
 
 	/**
@@ -239,19 +239,19 @@ class PacketHandler {
 		Logger.error(
 			getKey("exceptions.network.packetHandlingError")
 				.replace("%s", player.username)
-				.replace("%d", error.stack));
+				.replace("%d", error.stack))
 
 		try {
-			player.kick(getKey("kickMessages.invalidPacket"));
+			player.kick(getKey("kickMessages.invalidPacket"))
 		} catch {
-			player.disconnect(getKey("kickMessages.invalidPacket"));
+			player.disconnect(getKey("kickMessages.invalidPacket"))
 		}
 
 		Frog.eventEmitter.emit("packetReadError", {
 			player,
 			error,
-		});
+		})
 	}
 }
 
-module.exports = PacketHandler;
+module.exports = PacketHandler

@@ -19,10 +19,10 @@ class BlockBreakException extends Error {
 	 * @param {string} message
 	 */
 	constructor(message) {
-		super(message);
+		super(message)
 
-		this.name = "BlockBreakException";
+		this.name = "BlockBreakException"
 	}
 }
 
-module.exports = BlockBreakException;
+module.exports = BlockBreakException

@@ -13,21 +13,21 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerScoreboardObjectivePacket extends Packet {
-	name = "set_display_objective";
+	name = "set_display_objective"
 
 	/** @type {import("Frog").DisplaySlot | undefined} */
-	display_slot;
+	display_slot
 	/** @type {string | undefined} */
-	objective_name;
+	objective_name
 	/** @type {string | undefined} */
-	display_name;
+	display_name
 	/** @type {import("Frog").CreteriaName | undefined} */
-	criteria_name;
+	criteria_name
 	/** @type {number | undefined} */
-	sort_order;
+	sort_order
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -39,8 +39,8 @@ class ServerScoreboardObjectivePacket extends Packet {
 			display_name: this.display_name,
 			criteria_name: this.criteria_name,
 			sort_order: this.sort_order,
-		});
+		})
 	}
 }
 
-module.exports = ServerScoreboardObjectivePacket;
+module.exports = ServerScoreboardObjectivePacket

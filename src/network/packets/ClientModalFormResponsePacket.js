@@ -13,12 +13,12 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog");
+const Frog = require("../../Frog")
 
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ClientModalFormResponsePacket extends Packet {
-	name = "modal_form_response";
+	name = "modal_form_response"
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -28,8 +28,8 @@ class ClientModalFormResponsePacket extends Packet {
 		Frog.eventEmitter.emit("playerFormResponse", {
 			player,
 			packet,
-		});
+		})
 	}
 }
 
-module.exports = ClientModalFormResponsePacket;
+module.exports = ClientModalFormResponsePacket

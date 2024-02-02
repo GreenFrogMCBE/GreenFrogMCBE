@@ -13,17 +13,17 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerUpdateAttributesPacket extends Packet {
-	name = "update_attributes";
+	name = "update_attributes"
 
 	/** @type {number | undefined} */
-	runtime_entity_id;
+	runtime_entity_id
 	/** @type {import("Frog").Attribute | undefined} */
-	attributes;
+	attributes
 	/** @type {number | undefined} */
-	tick;
+	tick
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -33,8 +33,8 @@ class ServerUpdateAttributesPacket extends Packet {
 			runtime_entity_id: this.runtime_entity_id.toString(),
 			attributes: this.attributes,
 			tick: this.tick,
-		});
+		})
 	}
 }
 
-module.exports = ServerUpdateAttributesPacket;
+module.exports = ServerUpdateAttributesPacket

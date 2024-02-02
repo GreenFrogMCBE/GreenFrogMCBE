@@ -13,13 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerCompressedBiomeDefinitionListPacket extends Packet {
-	name = "compressed_biome_definitions";
+	name = "compressed_biome_definitions"
 
 	/** @type {string | undefined} */
-	raw_payload;
+	raw_payload
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -27,8 +27,8 @@ class ServerCompressedBiomeDefinitionListPacket extends Packet {
 	writePacket(player) {
 		player.queue(this.name, {
 			raw_payload: this.raw_payload,
-		});
+		})
 	}
 }
 
-module.exports = ServerCompressedBiomeDefinitionListPacket;
+module.exports = ServerCompressedBiomeDefinitionListPacket

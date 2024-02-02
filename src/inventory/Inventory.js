@@ -27,4 +27,4 @@ class Inventory {
 	handle(player, packet) {}
 }
 
-module.exports = Inventory;
+module.exports = Inventory

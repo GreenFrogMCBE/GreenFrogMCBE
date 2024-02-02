@@ -19,10 +19,10 @@ class ServerStartupException extends Error {
 	 * @param {string} message
 	 */
 	constructor(message) {
-		super(message);
+		super(message)
 
-		this.name = "ServerStartupException";
+		this.name = "ServerStartupException"
 	}
 }
 
-module.exports = ServerStartupException;
+module.exports = ServerStartupException

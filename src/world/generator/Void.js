@@ -13,18 +13,18 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const vanillaBlocks = require("../../block/vanillaBlocks.json");
+const vanillaBlocks = require("../../block/vanillaBlocks.json")
 
-const WorldGenerator = require("../types/WorldGenerator");
+const WorldGenerator = require("../types/WorldGenerator")
 
-const Generator = require("./Generator");
+const Generator = require("./Generator")
 
 class Void extends Generator {
-	name = WorldGenerator.VOID;
+	name = WorldGenerator.VOID
 
 	getChunkData() {
-		return Buffer.alloc(16 * 256 * 16).fill(vanillaBlocks.air.legacy_id);
+		return Buffer.alloc(16 * 256 * 16).fill(vanillaBlocks.air.legacy_id)
 	}
 }
 
-module.exports = Void;
+module.exports = Void

@@ -19,10 +19,10 @@ class InvalidBlockException extends Error {
 	 * @param {string} message
 	 */
 	constructor(message) {
-		super(message);
+		super(message)
 
-		this.name = "InvalidBlockException";
+		this.name = "InvalidBlockException"
 	}
 }
 
-module.exports = InvalidBlockException;
+module.exports = InvalidBlockException

@@ -17,19 +17,19 @@
 
 class Command {
 	/** @type {string | undefined} */
-	name;
+	name
 	/** @type {string | undefined} */
-	description;
+	description
 	/** @type {number | undefined} */
-	minArgs;
+	minArgs
 	/** @type {number | undefined} */
-	maxArgs;
+	maxArgs
 	/** @type {boolean | undefined} */
-	requiresOp;
+	requiresOp
 	/** @type {string[] | undefined} */
-	aliases;
+	aliases
 	/** @type {import('Frog').CommandParameters} */
-	args;
+	args
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -39,4 +39,4 @@ class Command {
 	execute(player, server, args) {}
 }
 
-module.exports = Command;
+module.exports = Command

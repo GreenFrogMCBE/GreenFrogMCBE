@@ -13,15 +13,15 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerTransferPacket extends Packet {
-	name = "transfer";
+	name = "transfer"
 
 	/** @type {string | undefined} */
-	server_address;
+	server_address
 	/** @type {number | undefined} */
-	port;
+	port
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -30,8 +30,8 @@ class ServerTransferPacket extends Packet {
 		player.queue(this.name, {
 			server_address: this.server_address,
 			port: this.port,
-		});
+		})
 	}
 }
 
-module.exports = ServerTransferPacket;
+module.exports = ServerTransferPacket

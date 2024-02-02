@@ -20,4 +20,4 @@ module.exports = {
 
 	ADD: "change",
 	CHANGE: "change",
-};
+}

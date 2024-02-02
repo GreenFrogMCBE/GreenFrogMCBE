@@ -13,13 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerFeatureRegistryPacket extends Packet {
-	name = "feature_registry";
+	name = "feature_registry"
 
 	/** @type {import("Frog").Feature[] | undefined} */
-	features;
+	features
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -27,8 +27,8 @@ class ServerFeatureRegistryPacket extends Packet {
 	writePacket(player) {
 		player.queue(this.name, {
 			features: this.features,
-		});
+		})
 	}
 }
 
-module.exports = ServerFeatureRegistryPacket;
+module.exports = ServerFeatureRegistryPacket

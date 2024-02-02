@@ -13,13 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerSetTimePacket extends Packet {
-	name = "set_time";
+	name = "set_time"
 
 	/** @type {number | undefined} */
-	time;
+	time
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -27,8 +27,8 @@ class ServerSetTimePacket extends Packet {
 	writePacket(player) {
 		player.queue(this.name, {
 			time: this.time,
-		});
+		})
 	}
 }
 
-module.exports = ServerSetTimePacket;
+module.exports = ServerSetTimePacket

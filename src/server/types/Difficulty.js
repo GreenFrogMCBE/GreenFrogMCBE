@@ -18,4 +18,4 @@ module.exports = /** @type {const} */ ({
 	EASY: "easy",
 	NORMAL: "normal",
 	HARD: "hard",
-});
+})

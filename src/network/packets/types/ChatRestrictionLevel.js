@@ -17,4 +17,4 @@ module.exports = /** @type {const} */ ({
 	NONE: "none",
 	DROPPED: "dropped",
 	DISABLED: "disabled",
-});
+})

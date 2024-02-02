@@ -13,16 +13,16 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
-const ClientTokens = require("../utils/ClientTokens");
+const ClientTokens = require("../utils/ClientTokens")
 
-const QueryPacket = require("./types/QueryPacket");
+const QueryPacket = require("./types/QueryPacket")
 
-const ServerHandshakeResponsePacket = require("./ServerHandshakeResponsePacket");
+const ServerHandshakeResponsePacket = require("./ServerHandshakeResponsePacket")
 
 class ClientHandshakeRequestPacket extends Packet {
-	packetId = QueryPacket.HANDSHAKE;
+	packetId = QueryPacket.HANDSHAKE
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client
@@ -30,15 +30,15 @@ class ClientHandshakeRequestPacket extends Packet {
 	 * @param {import("dgram").Socket} socket
 	 */
 	readPacket(client, packet, socket) {
-		const sessionID = packet.readInt32BE(3);
+		const sessionID = packet.readInt32BE(3)
 
-		ClientTokens.clientTokens.set(`${client.address},${client.port}`, sessionID);
+		ClientTokens.clientTokens.set(`${client.address},${client.port}`, sessionID)
 
-		const handshakeResponsePacket = new ServerHandshakeResponsePacket();
-		handshakeResponsePacket.sessionId = sessionID;
-		handshakeResponsePacket.payload = sessionID.toString();
-		handshakeResponsePacket.writePacket(client, socket);
+		const handshakeResponsePacket = new ServerHandshakeResponsePacket()
+		handshakeResponsePacket.sessionId = sessionID
+		handshakeResponsePacket.payload = sessionID.toString()
+		handshakeResponsePacket.writePacket(client, socket)
 	}
 }
 
-module.exports = ClientHandshakeRequestPacket;
+module.exports = ClientHandshakeRequestPacket

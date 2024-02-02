@@ -13,29 +13,29 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Command = require("./Command")
 
-const PermissionManager = require("../permission/PermissionManager");
+const PermissionManager = require("../permission/PermissionManager")
 
-const ArgumentType = require("./types/ArgumentType");
+const ArgumentType = require("./types/ArgumentType")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
 /**
  * A command that removes the op of the player
  */
 class CommandDeop extends Command {
-	name = getKey("commands.deop.name");
-	description = getKey("commands.deop.description");
-	minArgs = 1;
-	requiresOp = true;
+	name = getKey("commands.deop.name")
+	description = getKey("commands.deop.description")
+	minArgs = 1
+	requiresOp = true
 	args = [
 		{
 			name: "player",
 			type: ArgumentType.TARGET,
 			optional: false
 		}
-	];
+	]
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -44,16 +44,16 @@ class CommandDeop extends Command {
 	 * @async
 	 */
 	async execute(player, server, args) {
-		const playerName = args[0];
+		const playerName = args[0]
 
 		try {
-			await PermissionManager.deop(playerName);
+			await PermissionManager.deop(playerName)
 
-			player.sendMessage(getKey("commands.deop.execution.success").replace("%s", playerName));
+			player.sendMessage(getKey("commands.deop.execution.success").replace("%s", playerName))
 		} catch {
-			player.sendMessage(getKey("commands.deop.execution.fail").replace("%s", playerName));
+			player.sendMessage(getKey("commands.deop.execution.fail").replace("%s", playerName))
 		}
 	}
 }
 
-module.exports = CommandDeop;
+module.exports = CommandDeop

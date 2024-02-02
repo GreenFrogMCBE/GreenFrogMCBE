@@ -19,4 +19,4 @@ module.exports = /** @type {const} */ ({
 	MEMBER: 2,
 	UNKNOWN2: 3,
 	OPERATOR: 4,
-});
+})

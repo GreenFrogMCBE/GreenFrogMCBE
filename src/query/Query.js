@@ -13,15 +13,15 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const dgram = require("dgram");
+const dgram = require("dgram")
 
-const ListeningHandler = require("./network/handlers/ListeningHandler");
+const ListeningHandler = require("./network/handlers/ListeningHandler")
 
 class Query {
 	/** @type {dgram.Socket} */
-	socket = dgram.createSocket("udp4");
+	socket = dgram.createSocket("udp4")
 	/** @type {import("Frog").QuerySettings | undefined} */
-	settings;
+	settings
 
 	/**
 	 * Starts the query server.
@@ -30,10 +30,10 @@ class Query {
 	 */
 	start(settings) {
 		new ListeningHandler()
-			.handleListening(this.socket, settings);
+			.handleListening(this.socket, settings)
 
-		this.settings = settings;
+		this.settings = settings
 	}
 }
 
-module.exports = Query;
+module.exports = Query

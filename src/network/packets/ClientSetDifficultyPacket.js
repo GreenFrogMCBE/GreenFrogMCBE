@@ -13,38 +13,38 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog");
+const Frog = require("../../Frog")
 
-const PlayerInfo = require("../../player/PlayerInfo");
+const PlayerInfo = require("../../player/PlayerInfo")
 
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ClientSetDifficultyPacket extends Packet {
-	name = "set_difficulty";
+	name = "set_difficulty"
 
 	/**
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
 	async readPacket(player, packet) {
-		const difficulty = packet.data.params.difficulty;
+		const difficulty = packet.data.params.difficulty
 
-		let shouldUpdateDifficulty = false;
+		let shouldUpdateDifficulty = false
 
 		Frog.eventEmitter.emit("playerSetDifficulty", {
 			player,
 			difficulty,
 			cancel() {
-				shouldUpdateDifficulty = true;
+				shouldUpdateDifficulty = true
 			},
-		});
+		})
 
-		if (!shouldUpdateDifficulty) return;
+		if (!shouldUpdateDifficulty) return
 
 		for (const player of PlayerInfo.playersOnline) {
-			player.setDifficulty(difficulty);
+			player.setDifficulty(difficulty)
 		}
 	}
 }
 
-module.exports = ClientSetDifficultyPacket;
+module.exports = ClientSetDifficultyPacket

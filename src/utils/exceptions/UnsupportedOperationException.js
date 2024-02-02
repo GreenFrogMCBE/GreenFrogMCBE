@@ -19,10 +19,10 @@ class UnsupportedOperationException extends Error {
 	 * @param {string} message
 	 */
 	constructor(message) {
-		super(message);
+		super(message)
 
-		this.name = "UnsupportedOperationException";
+		this.name = "UnsupportedOperationException"
 	}
 }
 
-module.exports = UnsupportedOperationException;
+module.exports = UnsupportedOperationException

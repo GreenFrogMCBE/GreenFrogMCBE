@@ -16,4 +16,4 @@
 module.exports = /** @type {const} */ ({
 	CREATIVE_INVENTORY: "inventory",
 	CONTAINER: "container",
-});
+})

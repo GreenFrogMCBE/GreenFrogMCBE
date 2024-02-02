@@ -13,22 +13,22 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog");
+const Frog = require("../../Frog")
 
-const PlayerInfo = require("../../player/PlayerInfo");
-const PlayerInit = require("../../player/PlayerInit");
+const PlayerInfo = require("../../player/PlayerInfo")
+const PlayerInit = require("../../player/PlayerInit")
 
-const Language = require("../../utils/Language");
+const Language = require("../../utils/Language")
 
-const ResourcePackInfo = require("../packets/ServerResourcePackInfoPacket");
-const PlayStatus = require("../../network/packets/types/PlayStatus");
+const ResourcePackInfo = require("../packets/ServerResourcePackInfoPacket")
+const PlayStatus = require("../../network/packets/types/PlayStatus")
 
-const VersionToProtocol = require("../../utils/VersionToProtocol");
-const UsernameValidator = require("../../player/UsernameValidator");
+const VersionToProtocol = require("../../utils/VersionToProtocol")
+const UsernameValidator = require("../../player/UsernameValidator")
 
-const PacketHandler = require("./PacketHandler");
+const PacketHandler = require("./PacketHandler")
 
-const config = Frog.config;
+const config = Frog.config
 
 class PlayerJoinHandler {
 	/**
@@ -37,17 +37,17 @@ class PlayerJoinHandler {
 	 * @param {import("Frog").Player} player - The player joining the server.
 	 */
 	async onPlayerJoin(player) {
-		await this.initPlayer(player);
+		await this.initPlayer(player)
 
-		this.setupPlayerProperties(player);
-		this.setupPlayerIntervals(player);
-		this.validateUsername(player);
-		this.addPlayer(player);
-		this.handleMaxPlayers(player);
-		this.handleVersionMismatch(player);
-		this.sendResponsePackInfo(player);
-		this.emitPlayerJoinEvent(player);
-		this.setupEvents(player);
+		this.setupPlayerProperties(player)
+		this.setupPlayerIntervals(player)
+		this.validateUsername(player)
+		this.addPlayer(player)
+		this.handleMaxPlayers(player)
+		this.handleVersionMismatch(player)
+		this.sendResponsePackInfo(player)
+		this.emitPlayerJoinEvent(player)
+		this.setupEvents(player)
 	}
 
 	/**
@@ -57,8 +57,8 @@ class PlayerJoinHandler {
 	 */
 	validateUsername(player) {
 		if (!UsernameValidator.isUsernameValid(player.username) && config.dev.validateUsernames) {
-			player.kick(Language.getKey("kickMessages.invalidUsername"));
-			return;
+			player.kick(Language.getKey("kickMessages.invalidUsername"))
+			return
 		}
 	}
 
@@ -71,13 +71,13 @@ class PlayerJoinHandler {
 		Frog.eventEmitter.emit("playerPreConnect", {
 			player,
 			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
-				player.kick(reason);
+				player.kick(reason)
 			},
-		});
+		})
 
-		player._queue = player.queue;
+		player._queue = player.queue
 		player.queue = (name, params) => {
-			let shouldQueue = true;
+			let shouldQueue = true
 
 			Frog.eventEmitter.emit("packetQueue", {
 				player,
@@ -88,18 +88,18 @@ class PlayerJoinHandler {
 					},
 				},
 				cancel: () => {
-					shouldQueue = false;
+					shouldQueue = false
 				},
-			});
+			})
 
 			if (shouldQueue) {
-				player._queue(name, params);
+				player._queue(name, params)
 			}
-		};
+		}
 
 		player.on("packet", (packet) => {
-			new PacketHandler().handlePacket(player, packet);
-		});
+			new PacketHandler().handlePacket(player, packet)
+		})
 	}
 
 	/**
@@ -109,7 +109,7 @@ class PlayerJoinHandler {
 	 * @returns {Promise<void>}
 	 */
 	async initPlayer(player) {
-		await PlayerInit.initPlayer(player);
+		await PlayerInit.initPlayer(player)
 	}
 
 	/**
@@ -178,7 +178,7 @@ class PlayerJoinHandler {
 					invulnerable: null,
 				},
 			},
-		});
+		})
 	}
 
 	/**
@@ -188,8 +188,8 @@ class PlayerJoinHandler {
 	 */
 	setupPlayerIntervals(player) {
 		setInterval(() => {
-			player.network.packetCount = 0;
-		}, 1000);
+			player.network.packetCount = 0
+		}, 1000)
 	}
 
 	/**
@@ -198,7 +198,7 @@ class PlayerJoinHandler {
 	 * @param {import("Frog").Player} player - The player to add to the player list.
 	 */
 	addPlayer(player) {
-		PlayerInfo.addPlayer(player);
+		PlayerInfo.addPlayer(player)
 	}
 
 	/**
@@ -208,9 +208,9 @@ class PlayerJoinHandler {
 	 */
 	handleMaxPlayers(player) {
 		if (PlayerInfo.playersOnline.length > config.serverInfo.maxPlayers) {
-			const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.getKey("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL;
-			player.kick(kickMessage);
-			return;
+			const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.getKey("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL
+			player.kick(kickMessage)
+			return
 		}
 	}
 
@@ -220,22 +220,22 @@ class PlayerJoinHandler {
 	 * @param {import("Frog").Player} player - The player to check the version for.
 	 */
 	handleVersionMismatch(player) {
-		const serverProtocol = VersionToProtocol.get_protocol(config.serverInfo.version);
+		const serverProtocol = VersionToProtocol.get_protocol(config.serverInfo.version)
 
 		if (config.dev.multiProtocol) {
 			if (config.dev.useLegacyVersionMismatchKickMessage) {
 				if (player.network.protocolVersion !== serverProtocol) {
-					const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s", config.serverInfo.version);
-					player.kick(kickMessage);
-					return;
+					const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s", config.serverInfo.version)
+					player.kick(kickMessage)
+					return
 				}
 			} else {
 				if (player.network.protocolVersion > serverProtocol) {
-					player.sendPlayStatus(PlayStatus.FAILED_SERVER, true);
-					return;
+					player.sendPlayStatus(PlayStatus.FAILED_SERVER, true)
+					return
 				} else if (player.network.protocolVersion < serverProtocol) {
-					player.sendPlayStatus(PlayStatus.FAILED_CLIENT, true);
-					return;
+					player.sendPlayStatus(PlayStatus.FAILED_CLIENT, true)
+					return
 				}
 			}
 		}
@@ -247,13 +247,13 @@ class PlayerJoinHandler {
 	 * @param {import("Frog").Player} player - The player to send the response pack info to.
 	 */
 	sendResponsePackInfo(player) {
-		const responsePackInfo = new ResourcePackInfo();
-		responsePackInfo.must_accept = false;
-		responsePackInfo.has_scripts = false;
-		responsePackInfo.behavior_packs = [];
-		responsePackInfo.texture_packs = [];
-		responsePackInfo.resource_pack_links = [];
-		responsePackInfo.writePacket(player);
+		const responsePackInfo = new ResourcePackInfo()
+		responsePackInfo.must_accept = false
+		responsePackInfo.has_scripts = false
+		responsePackInfo.behavior_packs = []
+		responsePackInfo.texture_packs = []
+		responsePackInfo.resource_pack_links = []
+		responsePackInfo.writePacket(player)
 	}
 
 	/**
@@ -265,10 +265,10 @@ class PlayerJoinHandler {
 		Frog.eventEmitter.emit("playerJoin", {
 			player,
 			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
-				player.kick(reason);
+				player.kick(reason)
 			},
-		});
+		})
 	}
 }
 
-module.exports = PlayerJoinHandler;
+module.exports = PlayerJoinHandler

@@ -13,8 +13,8 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const fs = require("fs");
-const path = require("path");
+const fs = require("fs")
+const path = require("path")
 
 module.exports = {
 	/**
@@ -28,27 +28,27 @@ module.exports = {
 	 * Loads all commands
 	 */
 	async loadCommands() {
-		const Frog = require("../Frog");
-		const commandsPath = path.join(__dirname, "..", "commands");
+		const Frog = require("../Frog")
+		const commandsPath = path.join(__dirname, "..", "commands")
 
 		fs.readdir(commandsPath, (err, files) => {
 			for (const file of files) {
-				const filePath = path.join(commandsPath, file);
-				const stats = fs.statSync(filePath);
+				const filePath = path.join(commandsPath, file)
+				const stats = fs.statSync(filePath)
 
 				if (!stats.isFile()) {
-					continue;
+					continue
 				}
 
-				const command = require(filePath);
-				const commandClass = new command();
+				const command = require(filePath)
+				const commandClass = new command()
 
 				if (commandClass.name) {
-					this.commands.push(commandClass);
+					this.commands.push(commandClass)
 				}
 			}
 
-			Frog.eventEmitter.emit("serverCommandsInitialize");
-		});
+			Frog.eventEmitter.emit("serverCommandsInitialize")
+		})
 	},
-};
+}

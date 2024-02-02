@@ -19,7 +19,7 @@ class Packet {
 	constructor() {}
 
 	/** @type {string} */
-	name = "";
+	name = ""
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -40,4 +40,4 @@ class Packet {
 	readPacket(player, packet, server) {}
 }
 
-module.exports = Packet;
+module.exports = Packet

@@ -13,43 +13,43 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
-const { SmartBuffer } = require("@harmonytf/smart-buffer");
+const { SmartBuffer } = require("@harmonytf/smart-buffer")
 
-const QueryPacket = require("./types/QueryPacket");
+const QueryPacket = require("./types/QueryPacket")
 
 class ServerInfoResponsePacket extends Packet {
-	packetId = QueryPacket.INFO;
+	packetId = QueryPacket.INFO
 
 	/** @type {number | undefined} */
-	sessionId;
+	sessionId
 	/** @type {string | undefined} */
-	serverName;
+	serverName
 	/** @type {string | undefined} */
-	levelName;
+	levelName
 	/** @type {string | undefined} */
-	game;
+	game
 	/** @type {string | undefined} */
-	version;
+	version
 	/** @type {string | undefined} */
-	plugins;
+	plugins
 	/** @type {string[] | undefined} */
-	players;
+	players
 	/** @type {import("Frog").Gamemode | undefined} */
-	gamemode;
+	gamemode
 	/** @type {number | undefined} */
-	numPlayers;
+	numPlayers
 	/** @type {number | undefined} */
-	maxPlayers;
+	maxPlayers
 	/** @type {number | undefined} */
-	serverPort;
+	serverPort
 	/** @type {string | undefined} */
-	serverAddress;
+	serverAddress
 	/** @type {boolean | undefined} */
-	whitelist;
+	whitelist
 	/** @type {boolean | undefined} */
-	isFullPacket;
+	isFullPacket
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client
@@ -62,7 +62,7 @@ class ServerInfoResponsePacket extends Packet {
 				.writeInt32BE(/** @type {number} */ (this.sessionId))
 				.writeStringNT("splitnum")
 				.writeUInt8(0x80)
-				.writeUInt8(0x00);
+				.writeUInt8(0x00)
 
 			const kvData = [
 				{ key: "hostname", value: this.serverName },
@@ -76,24 +76,24 @@ class ServerInfoResponsePacket extends Packet {
 				{ key: "whitelist", value: this.whitelist },
 				{ key: "hostip", value: this.serverAddress },
 				{ key: "hostport", value: this.serverPort },
-			];
+			]
 
 			kvData.forEach(({ key, value }) => {
-				buffer.writeStringNT(String(key));
-				buffer.writeStringNT(String(value));
-			});
+				buffer.writeStringNT(String(key))
+				buffer.writeStringNT(String(value))
+			})
 
-			buffer.writeUInt8(0x00).writeUInt8(0x01).writeStringNT("player_").writeUInt8(0x00);
+			buffer.writeUInt8(0x00).writeUInt8(0x01).writeStringNT("player_").writeUInt8(0x00)
 
 			if (this.players) {
 				this.players.forEach((playerName) => {
-					buffer.writeStringNT(playerName);
-				});
+					buffer.writeStringNT(playerName)
+				})
 			}
 
-			buffer.writeUInt8(0x00);
+			buffer.writeUInt8(0x00)
 
-			socket.send(buffer.toBuffer(), client.port, client.address);
+			socket.send(buffer.toBuffer(), client.port, client.address)
 		} else {
 			socket.send(
 				new SmartBuffer()
@@ -109,9 +109,9 @@ class ServerInfoResponsePacket extends Packet {
 					.toBuffer(),
 				client.port,
 				client.address,
-			);
+			)
 		}
 	}
 }
 
-module.exports = ServerInfoResponsePacket;
+module.exports = ServerInfoResponsePacket

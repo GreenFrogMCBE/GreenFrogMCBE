@@ -13,23 +13,23 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerTextPacket extends Packet {
-	name = "text";
+	name = "text"
 
 	/** @type {string | undefined} */
-	message;
+	message
 	/** @type {import("Frog").Text | undefined} */
-	type;
+	type
 	/** @type {boolean | undefined} */
-	needs_translation;
+	needs_translation
 	/** @type {string | undefined} */
-	source_name;
+	source_name
 	/** @type {string | undefined} */
-	xuid;
+	xuid
 	/** @type {string | undefined} */
-	platform_chat_id;
+	platform_chat_id
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -42,8 +42,8 @@ class ServerTextPacket extends Packet {
 			message: this.message,
 			xuid: this.xuid,
 			platform_chat_id: this.platform_chat_id,
-		});
+		})
 	}
 }
 
-module.exports = ServerTextPacket;
+module.exports = ServerTextPacket

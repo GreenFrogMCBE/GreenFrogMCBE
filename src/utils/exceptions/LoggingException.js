@@ -19,10 +19,10 @@ class LoggingException extends Error {
 	 * @param {string} message
 	 */
 	constructor(message) {
-		super(message);
+		super(message)
 
-		this.name = "LoggingException";
+		this.name = "LoggingException"
 	}
 }
 
-module.exports = LoggingException;
+module.exports = LoggingException

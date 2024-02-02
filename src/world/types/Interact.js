@@ -16,4 +16,4 @@
 module.exports = /** @type {const} */ ({
 	INVENTORY_OPEN: "open_inventory",
 	MOUSE_OVER_ENTITY: "mouse_over_entity",
-});
+})

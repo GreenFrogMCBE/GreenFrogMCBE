@@ -13,21 +13,21 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerResponsePackInfoPacket extends Packet {
-	name = "resource_packs_info";
+	name = "resource_packs_info"
 
 	/** @type {boolean | undefined} */
-	must_accept;
+	must_accept
 	/** @type {boolean | undefined} */
-	has_scripts;
+	has_scripts
 	/** @type {any[] | undefined} */
-	behavior_packs;
+	behavior_packs
 	/** @type {any[] | undefined} */
-	texture_packs;
+	texture_packs
 	/** @type {import("Frog").ResourcePackLink[] | [] | undefined} */
-	resource_pack_links;
+	resource_pack_links
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -39,8 +39,8 @@ class ServerResponsePackInfoPacket extends Packet {
 			behaviour_packs: this.behavior_packs,
 			texture_packs: this.texture_packs,
 			resource_pack_links: this.resource_pack_links,
-		});
+		})
 	}
 }
 
-module.exports = ServerResponsePackInfoPacket;
+module.exports = ServerResponsePackInfoPacket

@@ -13,34 +13,34 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Command = require("./Command")
 
-const CommandManager = require("../server/CommandManager");
+const CommandManager = require("../server/CommandManager")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
 /**
  * A command that shows a list of all other commands
  */
 class CommandHelp extends Command {
-	name = getKey("commands.help.name");
-	description = getKey("commands.help.description");
+	name = getKey("commands.help.name")
+	description = getKey("commands.help.description")
 	aliases = [
 		"?"
-	];
-	minArgs = 0;
-	maxArgs = 0;
+	]
+	minArgs = 0
+	maxArgs = 0
 
 	/**
 	 * @param {import("Frog").Player} player
 	 */
 	execute(player) {
-		player.sendMessage(getKey("commands.help.execution.success"));
+		player.sendMessage(getKey("commands.help.execution.success"))
 
 		for (const command of CommandManager.commands) {
-			player.sendMessage(getKey("commands.help.execution.command").replace("%s", command.name).replace("%d", command.description));
+			player.sendMessage(getKey("commands.help.execution.command").replace("%s", command.name).replace("%d", command.description))
 		}
 	}
 }
 
-module.exports = CommandHelp;
+module.exports = CommandHelp

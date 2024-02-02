@@ -13,17 +13,17 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerInventorySlotPacket extends Packet {
-	name = "inventory_slot";
+	name = "inventory_slot"
 
 	/** @type {import("Frog").WindowId | import("Frog").WindowType | undefined} */
-	window_id;
+	window_id
 	/** @type {number | undefined} */
-	slot;
+	slot
 	/** @type {import("Frog").Item | undefined} */
-	item;
+	item
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -33,8 +33,8 @@ class ServerInventorySlotPacket extends Packet {
 			window_id: this.window_id,
 			slot: this.slot,
 			item: this.item,
-		});
+		})
 	}
 }
 
-module.exports = ServerInventorySlotPacket;
+module.exports = ServerInventorySlotPacket

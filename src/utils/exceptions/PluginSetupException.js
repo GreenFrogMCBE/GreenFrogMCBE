@@ -20,10 +20,10 @@ class PluginSetupException extends Error {
 	 * @param {string} message
 	 */
 	constructor(plugin, message) {
-		super(`Failed to load ${plugin.name} v${plugin.version}, error: ${message}`);
+		super(`Failed to load ${plugin.name} v${plugin.version}, error: ${message}`)
 
-		this.name = "PluginSetupException";
+		this.name = "PluginSetupException"
 	}
 }
 
-module.exports = PluginSetupException;
+module.exports = PluginSetupException

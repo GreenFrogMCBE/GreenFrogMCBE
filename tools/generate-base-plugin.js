@@ -13,23 +13,23 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const fs = require("fs");
-const path = require("path");
-const readline = require("readline");
+const fs = require("fs")
+const path = require("path")
+const readline = require("readline")
 
-const { convert_console_color } = require("../src/utils/ConsoleColorConvertor");
+const { convert_console_color } = require("../src/utils/ConsoleColorConvertor")
 
-const Colors = require("../src/utils/types/Colors");
+const Colors = require("../src/utils/types/Colors")
 
 /** @type {string} */
-let pluginName;
+let pluginName
 
-const pluginsFolderPath = path.join(__dirname, "..", "plugins");
+const pluginsFolderPath = path.join(__dirname, "..", "plugins")
 
 const rl = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout,
-});
+})
 
 /**
  * Handles errors and displays them in red color.
@@ -37,10 +37,10 @@ const rl = readline.createInterface({
  * @param {string} message - The error message.
  */
 function handleError(message) {
-	console.clear();
-	console.error(convert_console_color(`${Colors.RED}${message}${Colors.RESET}`));
+	console.clear()
+	console.error(convert_console_color(`${Colors.RED}${message}${Colors.RESET}`))
 
-	process.exit(1);
+	process.exit(1)
 }
 
 /**
@@ -50,7 +50,7 @@ function handleError(message) {
  */
 function createDirectoryIfNotExists(directoryPath) {
 	if (!fs.existsSync(directoryPath)) {
-		fs.mkdirSync(directoryPath);
+		fs.mkdirSync(directoryPath)
 	}
 }
 
@@ -66,9 +66,9 @@ function writePackageJson(directoryPath, pluginName) {
 		main: `${pluginName.toLowerCase()}.js`,
 		version: "1.0.0",
 		displayName: pluginName,
-	};
+	}
 
-	fs.writeFileSync(`${directoryPath}/package.json`, JSON.stringify(packageJson, null, 4));
+	fs.writeFileSync(`${directoryPath}/package.json`, JSON.stringify(packageJson, null, 4))
 }
 
 /**
@@ -94,15 +94,15 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 		// ...
 	},
 };
-`;
+`
 
 	if (useTypeScript) {
 		try {
-			require("typescript");
+			require("typescript")
 		} catch {
 			handleError(
 				"TypeScript is not installed. Please install it to create TypeScript plugins (Hint: To install it, run \"npm i typescript\")"
-			);
+			)
 		}
 
 		pluginJs = `/**
@@ -118,7 +118,7 @@ export function onLoad(): void {
 export function onShutdown(): void {
     // ...
 }
-`;
+`
 		const tsConfig = {
 			compilerOptions: {
 				strict: true,
@@ -127,15 +127,15 @@ export function onShutdown(): void {
 				allowJs: true,
 			},
 			include: ["../../**/*", "../../index.d.ts"],
-		};
+		}
 
 		fs.writeFileSync(
 			`${directoryPath}/tsconfig.json`,
 			JSON.stringify(tsConfig, null, 4)
-		);
+		)
 	}
 
-	fs.writeFileSync(`${directoryPath}/${pluginName.toLowerCase()}.${useTypeScript ? "ts" : "js"}`, pluginJs);
+	fs.writeFileSync(`${directoryPath}/${pluginName.toLowerCase()}.${useTypeScript ? "ts" : "js"}`, pluginJs)
 }
 
 /**
@@ -144,32 +144,32 @@ export function onShutdown(): void {
  * @param {string} ts - User input for TypeScript (Y/N).
  */
 async function handleUserInputForTypeScript(ts) {
-	const useTypeScript = ts.toLowerCase() === "y";
+	const useTypeScript = ts.toLowerCase() === "y"
 
 	if (!["y", "n"].includes(ts.toLowerCase())) {
-		handleError("Please enter \"Y\" for yes or \"N\" for no");
+		handleError("Please enter \"Y\" for yes or \"N\" for no")
 	}
 
-	const pluginDirPath = path.join(pluginsFolderPath, pluginName);
+	const pluginDirPath = path.join(pluginsFolderPath, pluginName)
 
-	createDirectoryIfNotExists(pluginsFolderPath);
+	createDirectoryIfNotExists(pluginsFolderPath)
 
 	try {
-		createDirectoryIfNotExists(pluginDirPath);
+		createDirectoryIfNotExists(pluginDirPath)
 	} catch (error) {
 		if (error.message.includes("file already exists")) {
-			handleError("Plugin directory already exists");
+			handleError("Plugin directory already exists")
 		} else {
-			handleError(`There was an error when creating a plugin! ${error}`);
+			handleError(`There was an error when creating a plugin! ${error}`)
 		}
 	}
 
-	writePackageJson(pluginDirPath, pluginName);
-	writePluginFile(pluginDirPath, pluginName, useTypeScript);
+	writePackageJson(pluginDirPath, pluginName)
+	writePluginFile(pluginDirPath, pluginName, useTypeScript)
 
-	console.clear();
-	console.info(convert_console_color(`${Colors.GREEN}Plugin created!${useTypeScript ? ` (Hint: To compile it, run "npx tsc ${pluginName.toLowerCase()}.ts")` : ""}${Colors.RESET}`));
-	process.exit(0);
+	console.clear()
+	console.info(convert_console_color(`${Colors.GREEN}Plugin created!${useTypeScript ? ` (Hint: To compile it, run "npx tsc ${pluginName.toLowerCase()}.ts")` : ""}${Colors.RESET}`))
+	process.exit(0)
 }
 
 /**
@@ -179,19 +179,19 @@ async function handleUserInputForTypeScript(ts) {
  */
 async function handleUserInputForPluginName(pluginNameInput) {
 	if (!pluginNameInput) {
-		handleError("Please enter a plugin name");
+		handleError("Please enter a plugin name")
 	}
 
-	pluginName = pluginNameInput;
+	pluginName = pluginNameInput
 
 	rl.question(
 		convert_console_color(
 			`${Colors.GREEN}Do you want to use TypeScript [Y/N]? (Hint: "Y" stands for yes and "N" stands for no) ${Colors.RESET}`
 		),
 		(input) => {
-			handleUserInputForTypeScript(input);
+			handleUserInputForTypeScript(input)
 		}
-	);
+	)
 }
 
 /**
@@ -203,9 +203,9 @@ async function start() {
 			`${Colors.GREEN}Please enter the name of your plugin... ${Colors.RESET}`
 		),
 		(input) => {
-			handleUserInputForPluginName(input);
+			handleUserInputForPluginName(input)
 		}
-	);
+	)
 }
 
-start();
+start()

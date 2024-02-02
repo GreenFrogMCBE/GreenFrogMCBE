@@ -13,53 +13,53 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
-const ChatRestrictionLevel = require("./types/ChatRestrictionLevel");
+const ChatRestrictionLevel = require("./types/ChatRestrictionLevel")
 
 class ServerStartGamePacket extends Packet {
-	name = "start_game";
+	name = "start_game"
 
 	/** @type {number | undefined} */
-	entity_id;
+	entity_id
 	/** @type {number | undefined} */
-	runtime_entity_id;
+	runtime_entity_id
 	/** @type {string | undefined} */
-	player_gamemode;
+	player_gamemode
 	/** @type {import("Frog").Vec3 | undefined} */
-	player_position;
+	player_position
 	/** @type {import("Frog").Vec2 | undefined} */
-	rotation;
+	rotation
 	/** @type {import("Frog").WorldSeed | undefined} */
-	seed;
+	seed
 	/** @type {number | undefined} */
-	biome_type;
+	biome_type
 	/** @type {string | undefined} */
-	biome_name;
+	biome_name
 	/** @type {import("Frog").Dimension | undefined} */
-	dimension;
+	dimension
 	/** @type {import("Frog").Generator | undefined} */
-	generator;
+	generator
 	/** @type {import("Frog").Gamemode | undefined} */
-	world_gamemode;
+	world_gamemode
 	/** @type {import("Frog").Difficulty | undefined} */
-	difficulty;
+	difficulty
 	/** @type {import("Frog").Vec3 | undefined} */
-	spawn_position;
+	spawn_position
 	/** @type {any[] | undefined} */
-	gamerules;
+	gamerules
 	/** @type {any[] | undefined} */
-	itemstates;
+	itemstates
 	/** @type {string | undefined} */
-	world_name;
+	world_name
 	/** @type {string | undefined} */
-	game_version;
+	game_version
 	/** @type {import("Frog").MovementAuthority | undefined} */
-	movement_authority;
+	movement_authority
 	/** @type {import("Frog").PermissionLevel | undefined} */
-	permission_level;
+	permission_level
 	/** @type {import("Frog").EditorLevelType | undefined} */
-	editor_world_type;
+	editor_world_type
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -148,8 +148,8 @@ class ServerStartGamePacket extends Packet {
 			client_side_generation: false,
 			block_network_ids_are_hashes: true,
 			server_controlled_sound: false,
-		});
+		})
 	}
 }
 
-module.exports = ServerStartGamePacket;
+module.exports = ServerStartGamePacket

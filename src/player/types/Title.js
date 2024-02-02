@@ -20,4 +20,4 @@ module.exports = /** @type {const} */ ({
 	RESET: "reset",
 	ACTIONBAR: "action_bar_message",
 	CLEAR: "clear",
-});
+})

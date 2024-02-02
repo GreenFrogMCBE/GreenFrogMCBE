@@ -13,15 +13,15 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerContainerClosePacket extends Packet {
-	name = "container_close";
+	name = "container_close"
 
 	/** @type {number | undefined} */
-	window_id;
+	window_id
 	/** @type {boolean | undefined} */
-	server;
+	server
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -30,8 +30,8 @@ class ServerContainerClosePacket extends Packet {
 		player.queue(this.name, {
 			window_id: this.window_id,
 			server: this.server,
-		});
+		})
 	}
 }
 
-module.exports = ServerContainerClosePacket;
+module.exports = ServerContainerClosePacket

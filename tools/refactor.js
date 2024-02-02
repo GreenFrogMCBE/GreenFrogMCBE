@@ -13,19 +13,19 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const fs = require("fs").promises;
-const path = require("path");
+const fs = require("fs").promises
+const path = require("path")
 
 if (process.argv.length < 4) {
-	console.error("Usage: node refactor.js [old code] [new code]");
+	console.error("Usage: node refactor.js [old code] [new code]")
 
-	process.exit(-1);
+	process.exit(-1)
 }
 
-const rootDir = path.join(__dirname, "..");
+const rootDir = path.join(__dirname, "..")
 
-console.info("Started refactoring");
-console.time("Finished refactoring in");
+console.info("Started refactoring")
+console.time("Finished refactoring in")
 
 /**
  * Replace specified strings in a file
@@ -35,16 +35,16 @@ console.time("Finished refactoring in");
  */
 async function replaceInFile(filePath, replacements) {
 	if (filePath.includes("node_modules")) {
-		return;
+		return
 	}
 
-	let fileContent = await fs.readFile(filePath, "utf8");
+	let fileContent = await fs.readFile(filePath, "utf8")
 
 	await Promise.all(replacements.map(([searchValue, replaceValue]) => {
-		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue);
-	}));
+		fileContent = fileContent.replace(new RegExp(searchValue, "g"), replaceValue)
+	}))
 
-	await fs.writeFile(filePath, fileContent);
+	await fs.writeFile(filePath, fileContent)
 }
 
 /**
@@ -54,13 +54,13 @@ async function replaceInFile(filePath, replacements) {
  * @param {string[][]} replacements
  */
 async function traverseDirectory(dirPath, replacements) {
-	const entries = await fs.readdir(dirPath, { withFileTypes: true });
+	const entries = await fs.readdir(dirPath, { withFileTypes: true })
 
 	await Promise.all(entries.map(async (entry) => {
-		const entryPath = path.join(dirPath, entry.name);
+		const entryPath = path.join(dirPath, entry.name)
 
 		if (entry.isDirectory()) {
-			await traverseDirectory(entryPath, replacements);
+			await traverseDirectory(entryPath, replacements)
 		} else if (
 			entry.isFile() &&
 			(
@@ -70,17 +70,17 @@ async function traverseDirectory(dirPath, replacements) {
 				entry.name.includes(".yml")
 			)
 		) {
-			await replaceInFile(entryPath, replacements);
+			await replaceInFile(entryPath, replacements)
 		}
-	}));
+	}))
 }
 
 const replacements = [
 	[
 		process.argv[2], process.argv[3]
 	]
-];
+]
 
-traverseDirectory(rootDir, replacements);
+traverseDirectory(rootDir, replacements)
 
-console.timeEnd("Finished refactoring in");
+console.timeEnd("Finished refactoring in")

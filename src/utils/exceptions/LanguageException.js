@@ -19,10 +19,10 @@ class LanguageException extends Error {
 	 * @param {string} message
 	 */
 	constructor(message) {
-		super(message);
+		super(message)
 
-		this.name = "LanguageException";
+		this.name = "LanguageException"
 	}
 }
 
-module.exports = LanguageException;
+module.exports = LanguageException

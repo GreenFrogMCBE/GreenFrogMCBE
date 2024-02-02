@@ -17,4 +17,4 @@ module.exports = /** @type {const} */ ({
 	FORM: "form",
 	CUSTOM_FORM: "custom_form",
 	MODAL_FORM: "modal",
-});
+})

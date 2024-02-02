@@ -13,22 +13,22 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Command = require("./Command")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
-const Gamemode = require("../player/types/Gamemode");
-const ArgumentType = require("./types/ArgumentType");
+const Gamemode = require("../player/types/Gamemode")
+const ArgumentType = require("./types/ArgumentType")
 
 /**
  * A command to change the player's game mode.
  */
 class CommandGamemode extends Command {
-	name = getKey("commands.gamemode.name");
-	description = getKey("commands.gamemode.description");
-	maxArg = 1;
-	minArg = 1;
-	requiresOp = true;
+	name = getKey("commands.gamemode.name")
+	description = getKey("commands.gamemode.description")
+	maxArg = 1
+	minArg = 1
+	requiresOp = true
 	args = [
 		{
 			name: "player",
@@ -40,7 +40,7 @@ class CommandGamemode extends Command {
 			type: ArgumentType.STRING,
 			optional: false
 		}
-	];
+	]
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -49,8 +49,8 @@ class CommandGamemode extends Command {
 	 */
 	execute(player, server, args) {
 		if (player.permissions.isConsole) {
-			player.sendMessage(getKey("commands.errors.internalError.badSender"));
-			return;
+			player.sendMessage(getKey("commands.errors.internalError.badSender"))
+			return
 		}
 
 		const gamemodeMap = {
@@ -71,23 +71,23 @@ class CommandGamemode extends Command {
 			adventure: Gamemode.ADVENTURE,
 			spectator: Gamemode.SPECTATOR,
 			default: Gamemode.FALLBACK,
-		};
-
-		const gamemode = gamemodeMap[args[0]];
-
-		if (!gamemode) {
-			player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s", args[0]));
-
-			return;
 		}
 
-		player.setGamemode(gamemode);
+		const gamemode = gamemodeMap[args[0]]
 
-		const gmStr = gamemode.charAt(0).toUpperCase() + gamemode.slice(1);
+		if (!gamemode) {
+			player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s", args[0]))
 
-		player.sendMessage(getKey("commands.gamemode.execution.success.updated").replace("%s", gmStr));
-		player.sendMessage(getKey("commands.gamemode.execution.success.set").replace("%s", gmStr));
+			return
+		}
+
+		player.setGamemode(gamemode)
+
+		const gmStr = gamemode.charAt(0).toUpperCase() + gamemode.slice(1)
+
+		player.sendMessage(getKey("commands.gamemode.execution.success.updated").replace("%s", gmStr))
+		player.sendMessage(getKey("commands.gamemode.execution.success.set").replace("%s", gmStr))
 	}
 }
 
-module.exports = CommandGamemode;
+module.exports = CommandGamemode

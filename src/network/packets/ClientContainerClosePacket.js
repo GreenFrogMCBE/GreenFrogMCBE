@@ -13,25 +13,25 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ServerContainerClosePacket = require("./ServerContainerClosePacket");
+const ServerContainerClosePacket = require("./ServerContainerClosePacket")
 
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
-const vanillaBlocks = require("../../block/vanillaBlocks.json");
+const vanillaBlocks = require("../../block/vanillaBlocks.json")
 
-const WindowId = require("../../inventory/types/WindowId");
+const WindowId = require("../../inventory/types/WindowId")
 
-const Frog = require("../../Frog");
+const Frog = require("../../Frog")
 
 class ClientContainerClosePacket extends Packet {
-	name = "container_close";
+	name = "container_close"
 
 	/**
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
 	async readPacket(player, packet) {
-		let shouldClose = true;
+		let shouldClose = true
 
 		Frog.eventEmitter.emit("playerContainerClose", {
 			player,
@@ -39,38 +39,38 @@ class ClientContainerClosePacket extends Packet {
 			sentByServer: false,
 			packet,
 			cancel: () => {
-				shouldClose = false;
+				shouldClose = false
 			},
-		});
+		})
 
-		if (!shouldClose) return;
+		if (!shouldClose) return
 
 		if (player.inventory.container.isOpen) {
-			let shouldRemoveTheChest = true;
+			let shouldRemoveTheChest = true
 
 			Frog.eventEmitter.emit("inventoryContainerChestRemove", {
 				player,
 				cancel: () => {
-					shouldRemoveTheChest = false;
+					shouldRemoveTheChest = false
 				},
-			});
+			})
 
-			if (!shouldRemoveTheChest) return;
+			if (!shouldRemoveTheChest) return
 
-			const { x, y, z } = player.inventory.container.blockPosition;
+			const { x, y, z } = player.inventory.container.blockPosition
 
-			player.world.placeBlock(x, y, z, vanillaBlocks.air.legacy_id);
+			player.world.placeBlock(x, y, z, vanillaBlocks.air.legacy_id)
 
-			player.inventory.container.isOpen = false;
-			player.inventory.container.blockPosition = { x: undefined, y: undefined, z: undefined };
-			player.inventory.container.window = { id: undefined, type: undefined };
+			player.inventory.container.isOpen = false
+			player.inventory.container.blockPosition = { x: undefined, y: undefined, z: undefined }
+			player.inventory.container.window = { id: undefined, type: undefined }
 		}
 
-		const containerClose = new ServerContainerClosePacket();
-		containerClose.server = false;
-		containerClose.window_id = WindowId.CREATIVE;
-		containerClose.writePacket(player);
+		const containerClose = new ServerContainerClosePacket()
+		containerClose.server = false
+		containerClose.window_id = WindowId.CREATIVE
+		containerClose.writePacket(player)
 	}
 }
 
-module.exports = ClientContainerClosePacket;
+module.exports = ClientContainerClosePacket

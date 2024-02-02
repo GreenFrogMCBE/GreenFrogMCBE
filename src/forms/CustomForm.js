@@ -13,37 +13,37 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket");
+const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket")
 
-const Action = require("./types/Action");
-const Form = require("./types/Form");
+const Action = require("./types/Action")
+const Form = require("./types/Form")
 
 class CustomForm {
 	constructor() {
 		/**
 		 * @type {string}
 		 */
-		this.title = "";
+		this.title = ""
 
 		/**
 		 * @type {import("Frog").FormAction[]}
 		 */
-		this.actions = [];
+		this.actions = []
 
 		/**
 		 * @type {import("Frog").FormButton[]}
 		 */
-		this.buttons = [];
+		this.buttons = []
 
 		/**
 		 * @type {number}
 		 */
-		this.id = 0;
+		this.id = 0
 
 		/**
 		 * @type {function}
 		 */
-		this.onSend = () => { };
+		this.onSend = () => { }
 	}
 
 	/**
@@ -52,7 +52,7 @@ class CustomForm {
 	 * @param {import("Frog").FormAction} action
 	 */
 	addAction(action) {
-		this.actions.push(action);
+		this.actions.push(action)
 	}
 
 	/**
@@ -62,7 +62,7 @@ class CustomForm {
 	 * @param {string} [placeholder]
 	 */
 	addInput(text, placeholder = "") {
-		this.addAction({ type: Action.INPUT, text, placeholder });
+		this.addAction({ type: Action.INPUT, text, placeholder })
 	}
 
 	/**
@@ -71,7 +71,7 @@ class CustomForm {
 	 * @param {string} text
 	 */
 	addText(text) {
-		this.addAction({ type: Action.LABEL, text });
+		this.addAction({ type: Action.LABEL, text })
 	}
 
 	/**
@@ -81,7 +81,7 @@ class CustomForm {
 	 * @param {string[]} options
 	 */
 	addDropdown(text, options) {
-		this.addAction({ type: Action.DROPDOWN, text, options });
+		this.addAction({ type: Action.DROPDOWN, text, options })
 	}
 
 	/**
@@ -90,7 +90,7 @@ class CustomForm {
 	 * @param {string} text
 	 */
 	addToggle(text) {
-		this.addAction({ type: Action.TOGGLE, text });
+		this.addAction({ type: Action.TOGGLE, text })
 	}
 
 	/**
@@ -102,7 +102,7 @@ class CustomForm {
 	 * @param {number} [step]
 	 */
 	addSlider(text, min, max, step = -1) {
-		this.addAction({ type: Action.SLIDER, text, min, max, step });
+		this.addAction({ type: Action.SLIDER, text, min, max, step })
 	}
 
 	/**
@@ -111,16 +111,16 @@ class CustomForm {
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
-		const formRequestPacket = new ServerFormRequestPacket();
-		formRequestPacket.id = this.id;
-		formRequestPacket.title = this.title;
-		formRequestPacket.content = this.actions;
-		formRequestPacket.buttons = this.buttons;
-		formRequestPacket.type = Form.CUSTOM_FORM;
-		formRequestPacket.writePacket(player);
+		const formRequestPacket = new ServerFormRequestPacket()
+		formRequestPacket.id = this.id
+		formRequestPacket.title = this.title
+		formRequestPacket.content = this.actions
+		formRequestPacket.buttons = this.buttons
+		formRequestPacket.type = Form.CUSTOM_FORM
+		formRequestPacket.writePacket(player)
 
-		this.onSend(this, player);
+		this.onSend(this, player)
 	}
 }
 
-module.exports = CustomForm;
+module.exports = CustomForm

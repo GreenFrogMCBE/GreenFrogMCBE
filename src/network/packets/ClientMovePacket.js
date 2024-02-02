@@ -13,25 +13,25 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog");
+const Frog = require("../../Frog")
 
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ClientMovePacket extends Packet {
-	name = "move_player";
+	name = "move_player"
 
 	/**
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
 	async readPacket(player, packet) {
-		const { x, y, z } = packet.data.params.position;
-		const { pitch, yaw, on_ground } = packet.data.params;
-		const fixedY = y - 2;
+		const { x, y, z } = packet.data.params.position
+		const { pitch, yaw, on_ground } = packet.data.params
+		const fixedY = y - 2
 
-		if (player.location.x === x && player.location.y === fixedY && player.location.z === z && player.location.yaw === yaw && player.location.pitch === pitch) return;
+		if (player.location.x === x && player.location.y === fixedY && player.location.z === z && player.location.yaw === yaw && player.location.pitch === pitch) return
 
-		let shouldSetPosition = true;
+		let shouldSetPosition = true
 
 		Frog.eventEmitter.emit("playerMove", {
 			player,
@@ -42,23 +42,23 @@ class ClientMovePacket extends Packet {
 			yaw,
 			onGround: player.location.onGround,
 			cancel: () => {
-				player.teleport(player.location.x, y, player.location.z);
+				player.teleport(player.location.x, y, player.location.z)
 
-				shouldSetPosition = false;
+				shouldSetPosition = false
 			},
-		});
+		})
 
-		if (!shouldSetPosition) return;
+		if (!shouldSetPosition) return
 
-		player.world.handleFallDamage(player, { x, y, z });
+		player.world.handleFallDamage(player, { x, y, z })
 
-		player.location.x = x;
-		player.location.y = fixedY;
-		player.location.z = z;
-		player.location.yaw = yaw;
-		player.location.pitch = pitch;
-		player.location.onGround = on_ground;
+		player.location.x = x
+		player.location.y = fixedY
+		player.location.z = z
+		player.location.yaw = yaw
+		player.location.pitch = pitch
+		player.location.onGround = on_ground
 	}
 }
 
-module.exports = ClientMovePacket;
+module.exports = ClientMovePacket

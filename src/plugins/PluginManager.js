@@ -13,12 +13,12 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
-const PluginSetupException = require("../utils/exceptions/PluginSetupException");
+const PluginSetupException = require("../utils/exceptions/PluginSetupException")
 
 /** @type {import("Frog").Plugin[]} */
-const plugins = [];
+const plugins = []
 
 module.exports = {
 	/**
@@ -40,16 +40,16 @@ module.exports = {
 		const pluginObject = {
 			name,
 			version,
-		};
+		}
 
 		if (!name) {
-			throw new PluginSetupException(pluginObject, getKey("exceptions.plugin.noName"));
+			throw new PluginSetupException(pluginObject, getKey("exceptions.plugin.noName"))
 		}
 
 		if (!version) {
-			throw new PluginSetupException(pluginObject, getKey("exceptions.plugin.noVersion"));
+			throw new PluginSetupException(pluginObject, getKey("exceptions.plugin.noVersion"))
 		}
 
-		plugins.push(pluginObject);
+		plugins.push(pluginObject)
 	},
-};
+}

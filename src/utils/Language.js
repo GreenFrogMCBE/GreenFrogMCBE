@@ -13,11 +13,11 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const LanguageException = require("./exceptions/LanguageException");
+const LanguageException = require("./exceptions/LanguageException")
 
-const langParser = require("@kotinash/lang-parser");
-const path = require("path");
-const fs = require("fs");
+const langParser = require("@kotinash/lang-parser")
+const path = require("path")
+const fs = require("fs")
 
 module.exports = {
 	/**
@@ -28,16 +28,16 @@ module.exports = {
 	 * @throws {LanguageException} - If the language file is not found or is not valid JSON
 	 */
 	getLanguage(lang) {
-		const langPath = path.resolve(__dirname, "../lang");
-		const langFile = path.join(langPath, `${lang}.lang`);
+		const langPath = path.resolve(__dirname, "../lang")
+		const langFile = path.join(langPath, `${lang}.lang`)
 
 		if (!fs.existsSync(langFile)) {
-			throw new LanguageException("Language file doesn't exist");
+			throw new LanguageException("Language file doesn't exist")
 		}
 
-		const langContent = fs.readFileSync(langFile, "utf8");
+		const langContent = fs.readFileSync(langFile, "utf8")
 
-		return langContent;
+		return langContent
 	},
 
 	/**
@@ -47,13 +47,13 @@ module.exports = {
 	 * @returns {string} The value of the key
 	 */
 	getKey(key) {
-		const Frog = require("../Frog");
+		const Frog = require("../Frog")
 
-		const langConfig = Frog.config.chat.lang;
-		const langContent = module.exports.getLanguage(langConfig);
-		const langParsed = langParser.parseRaw(langContent);
-		const langKey = langParser.getKey(key, langParsed);
+		const langConfig = Frog.config.chat.lang
+		const langContent = module.exports.getLanguage(langConfig)
+		const langParsed = langParser.parseRaw(langContent)
+		const langKey = langParser.getKey(key, langParsed)
 
-		return langKey;
+		return langKey
 	}
-};
+}

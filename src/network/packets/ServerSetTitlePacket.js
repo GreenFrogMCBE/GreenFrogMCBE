@@ -13,27 +13,27 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Title = require("../../player/types/Title");
+const Title = require("../../player/types/Title")
 
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerSetTitlePacket extends Packet {
-	name = "set_title";
+	name = "set_title"
 
 	/** @type {string | undefined} */
-	type;
+	type
 	/** @type {string | undefined} */
-	text;
+	text
 	/** @type {number | undefined} */
-	fade_in_time;
+	fade_in_time
 	/** @type {number | undefined} */
-	stay_time;
+	stay_time
 	/** @type {number | undefined} */
-	fade_out_time;
+	fade_out_time
 	/** @type {string | undefined} */
-	xuid;
+	xuid
 	/** @type {string | undefined} */
-	platform_online_id;
+	platform_online_id
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -47,8 +47,8 @@ class ServerSetTitlePacket extends Packet {
 			fade_out_time: this.fade_out_time,
 			xuid: this.xuid,
 			platform_online_id: this.platform_online_id,
-		});
+		})
 	}
 }
 
-module.exports = ServerSetTitlePacket;
+module.exports = ServerSetTitlePacket

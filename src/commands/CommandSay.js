@@ -13,29 +13,29 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Command = require("./Command");
+const Command = require("./Command")
 
-const ArgumentType = require("./types/ArgumentType");
+const ArgumentType = require("./types/ArgumentType")
 
-const { getKey } = require("../utils/Language");
+const { getKey } = require("../utils/Language")
 
-const Frog = require("../Frog");
+const Frog = require("../Frog")
 
 /**
  * A command to send a message in the chat to other players
  */
 class CommandSay extends Command {
-	name = getKey("commands.say.name");
-	description = getKey("commands.say.description");
-	minArgs = 1;
-	requiresOp = true;
+	name = getKey("commands.say.name")
+	description = getKey("commands.say.description")
+	minArgs = 1
+	requiresOp = true
 	args = [
 		{
 			name: "message",
 			type: ArgumentType.STRING,
 			optional: false
 		}
-	];
+	]
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -43,10 +43,10 @@ class CommandSay extends Command {
 	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
-		const message = getKey("chat.format.say").replace("%s", player.username).replace("%d", args.join(" "));
+		const message = getKey("chat.format.say").replace("%s", player.username).replace("%d", args.join(" "))
 
-		Frog.broadcastMessage(message);
+		Frog.broadcastMessage(message)
 	}
 }
 
-module.exports = CommandSay;
+module.exports = CommandSay

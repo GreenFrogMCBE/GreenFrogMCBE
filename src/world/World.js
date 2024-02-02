@@ -13,28 +13,28 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const ServerNetworkChunkPublisherUpdatePacket = require("../network/packets/ServerNetworkChunkPublisherUpdatePacket");
-const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket");
-const ServerRemoveEntityPacket = require("../network/packets/ServerRemoveEntityPacket");
-const ServerUpdateBlockPacket = require("../network/packets/ServerUpdateBlockPacket");
-const ServerAddEntityPacket = require("../network/packets/ServerAddEntityPacket");
+const ServerNetworkChunkPublisherUpdatePacket = require("../network/packets/ServerNetworkChunkPublisherUpdatePacket")
+const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket")
+const ServerRemoveEntityPacket = require("../network/packets/ServerRemoveEntityPacket")
+const ServerUpdateBlockPacket = require("../network/packets/ServerUpdateBlockPacket")
+const ServerAddEntityPacket = require("../network/packets/ServerAddEntityPacket")
 
-const DamageCause = require("../player/types/DamageCause");
-const WorldGenerator = require("./types/WorldGenerator");
-const Gamemode = require("../player/types/Gamemode");
+const DamageCause = require("../player/types/DamageCause")
+const WorldGenerator = require("./types/WorldGenerator")
+const Gamemode = require("../player/types/Gamemode")
 
-const entityAttributes = require("../../src/resources/json/entityAttributes.json");
-const entityMetadata = require("../../src/resources/json/entityMetadata.json");
+const entityAttributes = require("../../src/resources/json/entityAttributes.json")
+const entityMetadata = require("../../src/resources/json/entityMetadata.json")
 
-const entity = require("../entity/EntityModule").getModule();
+const entity = require("../entity/EntityModule").getModule()
 
-const PlayerInfo = require("../player/PlayerInfo");
+const PlayerInfo = require("../player/PlayerInfo")
 
-const Frog = require("../Frog");
+const Frog = require("../Frog")
 
-const vm = require("vm");
+const vm = require("vm")
 
-let time = 0;
+let time = 0
 
 class World {
 	/**
@@ -44,27 +44,27 @@ class World {
 		/**
 		 * @type {string}
 		 */
-		this.name = "World";
+		this.name = "World"
 
 		/**
 		 * @type {import("Frog").Vec3}
 		 */
-		this.spawnCoordinates = { x: 0, y: 0, z: 0 };
+		this.spawnCoordinates = { x: 0, y: 0, z: 0 }
 
 		/**
 		 * @type {number}
 		 */
-		this.renderDistance = 4;
+		this.renderDistance = 4
 
 		/**
 		 * @type {import("Frog").WorldGenerator}
 		 */
-		this.generator = WorldGenerator.DEFAULT;
+		this.generator = WorldGenerator.DEFAULT
 
 		/**
 		 * @type {number}
 		 */
-		this.time = time;
+		this.time = time
 	}
 
 	/**
@@ -77,7 +77,7 @@ class World {
 	 */
 	placeBlock(x, y, z, id) {
 		for (const player of PlayerInfo.playersOnline) {
-			this.sendBlockUpdatePacket(player, x, y, z, id);
+			this.sendBlockUpdatePacket(player, x, y, z, id)
 		}
 	}
 
@@ -91,15 +91,15 @@ class World {
 	 * @param {number} id - The runtime ID of the block to place.
 	 */
 	sendBlockUpdatePacket(player, x, y, z, id) {
-		const updateBlockPacket = new ServerUpdateBlockPacket();
-		updateBlockPacket.block_runtime_id = id;
-		updateBlockPacket.x = x;
-		updateBlockPacket.y = y;
-		updateBlockPacket.z = z;
-		updateBlockPacket.neighbors = true;
-		updateBlockPacket.network = true;
-		updateBlockPacket.flags_value = 3;
-		updateBlockPacket.writePacket(player);
+		const updateBlockPacket = new ServerUpdateBlockPacket()
+		updateBlockPacket.block_runtime_id = id
+		updateBlockPacket.x = x
+		updateBlockPacket.y = y
+		updateBlockPacket.z = z
+		updateBlockPacket.neighbors = true
+		updateBlockPacket.network = true
+		updateBlockPacket.flags_value = 3
+		updateBlockPacket.writePacket(player)
 	}
 
 	/**
@@ -110,7 +110,7 @@ class World {
 	 * @param {number} z - The Z-coordinate of the block.
 	 */
 	breakBlock(x, y, z) {
-		this.placeBlock(x, y, z, 0);
+		this.placeBlock(x, y, z, 0)
 	}
 
 	/**
@@ -118,10 +118,10 @@ class World {
 	 */
 	tick() {
 		if (!PlayerInfo.playersOnline.length) {
-			return;
+			return
 		}
 
-		const tickingConfig = Frog.config.world.ticking;
+		const tickingConfig = Frog.config.world.ticking
 
 		const tickingFunctions = [
 			{ enabled: tickingConfig.event, function: this.tickEvent },
@@ -130,13 +130,13 @@ class World {
 			{ enabled: tickingConfig.regeneration, function: this.tickRegeneration },
 			{ enabled: tickingConfig.starvationDamage, function: this.tickStarvationDamage },
 			{ enabled: tickingConfig.entities, function: this.tickEntities }
-		];
+		]
 
 		tickingFunctions.forEach((tickingFunction) => {
 			if (tickingFunction.enabled) {
-				tickingFunction.function();
+				tickingFunction.function()
 			}
-		});
+		})
 	}
 
 	/**
@@ -145,10 +145,10 @@ class World {
 	startHungerLossLoop() {
 		for (const player of PlayerInfo.playersOnline) {
 			if (player.gamemode === Gamemode.CREATIVE || player.gamemode === Gamemode.SPECTATOR) {
-				return;
+				return
 			}
 
-			player.setHunger(player.hunger - 0.5);
+			player.setHunger(player.hunger - 0.5)
 		}
 	}
 
@@ -157,34 +157,34 @@ class World {
 	 */
 	startNetworkChunkPublisherPacketSendingLoop() {
 		setInterval(() => {
-			const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket();
-			networkChunkPublisher.coordinates = { x: 0, y: 0, z: 0 };
-			networkChunkPublisher.radius = Frog.config.world.renderDistance.clientSide;
-			networkChunkPublisher.saved_chunks = [];
+			const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket()
+			networkChunkPublisher.coordinates = { x: 0, y: 0, z: 0 }
+			networkChunkPublisher.radius = Frog.config.world.renderDistance.clientSide
+			networkChunkPublisher.saved_chunks = []
 
 			for (const player of PlayerInfo.playersOnline) {
-				networkChunkPublisher.writePacket(player);
+				networkChunkPublisher.writePacket(player)
 			}
-		}, 4500);
+		}, 4500)
 	}
 
 	/**
 	 * Emits the server tick event.
 	 */
 	tickEvent = () => {
-		this.emitServerEvent("serverTick");
-	};
+		this.emitServerEvent("serverTick")
+	}
 
 	/**
 	 * Ticks the world time
 	 */
 	tickTime = () => {
-		time += 10;
+		time += 10
 
 		for (const player of PlayerInfo.playersOnline) {
-			player.setTime(time);
+			player.setTime(time)
 		}
-	};
+	}
 
 	/**
 	 * Performs regeneration on the player.
@@ -198,10 +198,10 @@ class World {
 				player.gamemode === Gamemode.CREATIVE ||
 				player.gamemode === Gamemode.SPECTATOR
 			)) {
-				player.setHealth(player.health++, DamageCause.REGENERATION);
+				player.setHealth(player.health++, DamageCause.REGENERATION)
 			}
 		}
-	};
+	}
 
 	/**
 	 * Performs starvation damage on the player.
@@ -209,44 +209,44 @@ class World {
 	tickStarvationDamage = () => {
 		for (const player of PlayerInfo.playersOnline) {
 			if (player.hunger <= 0) {
-				player.setHealth(player.health--, DamageCause.STARVATION);
+				player.setHealth(player.health--, DamageCause.STARVATION)
 			}
 		}
-	};
+	}
 
 	/**
 	 * Performs void damage on players.
 	 */
 	tickVoidDamage = () => {
 		for (const client of PlayerInfo.playersOnline) {
-			const posY = Math.floor(client.location.y);
+			const posY = Math.floor(client.location.y)
 
-			let min = -65;
+			let min = -65
 
 			if (Frog.config.world.generators.type === WorldGenerator.VOID) {
-				min = undefined;
+				min = undefined
 			}
 
 			if (typeof min === "number" && posY <= min) {
 				const invulnerable =
 					client.gamemode === Gamemode.CREATIVE ||
-					client.gamemode === Gamemode.SPECTATOR;
+					client.gamemode === Gamemode.SPECTATOR
 
 				if (!invulnerable) {
-					client.setHealth(client.health - 3, DamageCause.VOID);
+					client.setHealth(client.health - 3, DamageCause.VOID)
 				}
 			}
 		}
-	};
+	}
 
 	/**
 	 * Ticks entity spawning.
 	 */
 	tickEntities = () => {
 		if (entity.shouldSpawnHostileEntity(time, this.generator)) {
-			const coordinates = entity.getRandomSpawnCoordinates();
-			const runtimeId = entity.getRandomRuntimeId();
-			const entityName = entity.getRandomEntity();
+			const coordinates = entity.getRandomSpawnCoordinates()
+			const runtimeId = entity.getRandomRuntimeId()
+			const entityName = entity.getRandomEntity()
 
 			this.spawnEntity(
 				entityName,
@@ -254,7 +254,7 @@ class World {
 				coordinates.x,
 				coordinates.y,
 				coordinates.z,
-			);
+			)
 
 			for (const player of PlayerInfo.playersOnline) {
 				if (
@@ -266,7 +266,7 @@ class World {
 						player.entity.isFollowing
 					)
 				) {
-					player.entity.isFollowing = true;
+					player.entity.isFollowing = true
 
 					vm.runInContext(
 						entity.smoothTeleportToPlayer(
@@ -278,7 +278,7 @@ class World {
 							coordinates.z,
 						),
 						vm.createContext(this)
-					);
+					)
 
 					setInterval(() => {
 						vm.runInContext(
@@ -291,8 +291,8 @@ class World {
 								coordinates.z,
 							),
 							vm.createContext(this)
-						);
-					}, 100);
+						)
+					}, 100)
 				} else {
 					setInterval(() => {
 						vm.runInContext(
@@ -302,12 +302,12 @@ class World {
 								coordinates.z
 							),
 							vm.createContext(this)
-						);
-					}, 15000);
+						)
+					}, 15000)
 				}
 			}
 		}
-	};
+	}
 
 	/**
 	 * Calculates and handles fall damage.
@@ -322,26 +322,26 @@ class World {
 			player.gamemode !== Gamemode.CREATIVE &&
 			player.gamemode !== Gamemode.SPECTATOR
 		) {
-			const fallDistanceY = player.location.y - position.y;
+			const fallDistanceY = player.location.y - position.y
 
 			if (
 				fallDistanceY > 0.56 &&
 				player._damage.fall.queue &&
 				!player._damage.fall.invulnerable
 			) {
-				const damageAmount = Math.floor(player.health - player._damage.fall.queue);
+				const damageAmount = Math.floor(player.health - player._damage.fall.queue)
 
-				player.setHealth(damageAmount, DamageCause.FALL);
+				player.setHealth(damageAmount, DamageCause.FALL)
 
-				player._damage.fall.invulnerable = true;
-				player._damage.fall.queue = 0;
+				player._damage.fall.invulnerable = true
+				player._damage.fall.queue = 0
 
 				setTimeout(() => {
-					player._damage.fall.invulnerable = false;
-				}, 50);
+					player._damage.fall.invulnerable = false
+				}, 50)
 			}
 
-			player._damage.fall.queue = (fallDistanceY + 0.5) * 2;
+			player._damage.fall.queue = (fallDistanceY + 0.5) * 2
 		}
 	}
 
@@ -353,7 +353,7 @@ class World {
 	emitServerEvent(eventName) {
 		Frog.eventEmitter.emit(eventName, {
 			world: this.getWorldData()
-		});
+		})
 	}
 
 	/**
@@ -368,7 +368,7 @@ class World {
 	 * @param {number} pitch 
 	 */
 	spawnEntity(entityName, entityId, x, y, z, yaw = 0, pitch = 0) {
-		let shouldSpawnEntity = true;
+		let shouldSpawnEntity = true
 
 		Frog.eventEmitter.emit("entitySpawnEvent", {
 			entityName,
@@ -379,29 +379,29 @@ class World {
 			yaw,
 			pitch,
 			cancel() {
-				shouldSpawnEntity = false;
+				shouldSpawnEntity = false
 			}
-		});
+		})
 
-		if (!shouldSpawnEntity) return;
+		if (!shouldSpawnEntity) return
 
-		const addEntityPacket = new ServerAddEntityPacket();
-		addEntityPacket.unique_id = String(entityId);
-		addEntityPacket.runtime_id = String(entityId);
-		addEntityPacket.entity_type = entityName;
-		addEntityPacket.position = { x, y, z };
-		addEntityPacket.velocity = { x: 0, y: 0, z: 0 };
-		addEntityPacket.pitch = pitch;
-		addEntityPacket.yaw = yaw;
-		addEntityPacket.head_yaw = 0;
-		addEntityPacket.body_yaw = 0;
-		addEntityPacket.attributes = entityAttributes;
-		addEntityPacket.metadata = entityMetadata;
-		addEntityPacket.properties = { ints: [], floats: [] };
-		addEntityPacket.links = [];
+		const addEntityPacket = new ServerAddEntityPacket()
+		addEntityPacket.unique_id = String(entityId)
+		addEntityPacket.runtime_id = String(entityId)
+		addEntityPacket.entity_type = entityName
+		addEntityPacket.position = { x, y, z }
+		addEntityPacket.velocity = { x: 0, y: 0, z: 0 }
+		addEntityPacket.pitch = pitch
+		addEntityPacket.yaw = yaw
+		addEntityPacket.head_yaw = 0
+		addEntityPacket.body_yaw = 0
+		addEntityPacket.attributes = entityAttributes
+		addEntityPacket.metadata = entityMetadata
+		addEntityPacket.properties = { ints: [], floats: [] }
+		addEntityPacket.links = []
 
 		for (const player of PlayerInfo.playersOnline) {
-			addEntityPacket.writePacket(player);
+			addEntityPacket.writePacket(player)
 		}
 	}
 
@@ -417,7 +417,7 @@ class World {
 	 * @param {number} [rotation_z]
 	 */
 	teleportEntity(entityId, x, y, z, rotation_x = 0, rotation_y = 0, rotation_z = 0) {
-		let shouldTeleportEntity = true;
+		let shouldTeleportEntity = true
 
 		Frog.eventEmitter.emit("entityTeleportEvent", {
 			entityId,
@@ -428,13 +428,13 @@ class World {
 			rotation_y,
 			rotation_z,
 			cancel() {
-				shouldTeleportEntity = false;
+				shouldTeleportEntity = false
 			}
-		});
+		})
 
-		if (!shouldTeleportEntity) return;
+		if (!shouldTeleportEntity) return
 
-		const movePacket = new ServerMoveEntityDataPacket();
+		const movePacket = new ServerMoveEntityDataPacket()
 		movePacket.flags = {
 			has_x: true,
 			has_y: true,
@@ -445,17 +445,17 @@ class World {
 			on_ground: false,
 			teleport: true,
 			force_move: true,
-		};
-		movePacket.runtime_entity_id = String(entityId);
-		movePacket.coordinates.x = x;
-		movePacket.coordinates.y = y;
-		movePacket.coordinates.z = z;
-		movePacket.coordinatesRotation.x = Number(rotation_x);
-		movePacket.coordinatesRotation.y = Number(rotation_y);
-		movePacket.coordinatesRotation.z = Number(rotation_z);
+		}
+		movePacket.runtime_entity_id = String(entityId)
+		movePacket.coordinates.x = x
+		movePacket.coordinates.y = y
+		movePacket.coordinates.z = z
+		movePacket.coordinatesRotation.x = Number(rotation_x)
+		movePacket.coordinatesRotation.y = Number(rotation_y)
+		movePacket.coordinatesRotation.z = Number(rotation_z)
 
 		for (const player of PlayerInfo.playersOnline) {
-			movePacket.writePacket(player);
+			movePacket.writePacket(player)
 		}
 	}
 
@@ -465,22 +465,22 @@ class World {
 	 * @param {number} entityId 
 	 */
 	removeEntity(entityId) {
-		let shouldRemoveEntity = true;
+		let shouldRemoveEntity = true
 
 		Frog.eventEmitter.emit("entityRemoveEvent", {
 			entityId,
 			cancel() {
-				shouldRemoveEntity = false;
+				shouldRemoveEntity = false
 			}
-		});
+		})
 
-		if (!shouldRemoveEntity) return;
+		if (!shouldRemoveEntity) return
 
-		const removePacket = new ServerRemoveEntityPacket();
-		removePacket.entity_id_self = String(entityId);
+		const removePacket = new ServerRemoveEntityPacket()
+		removePacket.entity_id_self = String(entityId)
 
 		for (const player of PlayerInfo.playersOnline) {
-			removePacket.writePacket(player);
+			removePacket.writePacket(player)
 		}
 	}
 
@@ -496,8 +496,8 @@ class World {
 			spawnCoordinates: this.spawnCoordinates,
 			generator: this.generator,
 			time,
-		};
+		}
 	}
 }
 
-module.exports = World;
+module.exports = World

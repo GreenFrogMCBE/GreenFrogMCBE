@@ -22,4 +22,4 @@ module.exports = /** @type {const} */ ({
 	/** Fallbacks to the world gamemode */
 	FALLBACK: "fallback",
 	DEFAULT: "fallback",
-});
+})

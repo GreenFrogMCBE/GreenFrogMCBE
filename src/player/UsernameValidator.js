@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerInfo = require("./PlayerInfo");
+const PlayerInfo = require("./PlayerInfo")
 
 module.exports = {
 	/**
@@ -24,9 +24,9 @@ module.exports = {
 	 */
 	doesUsernameMatchRegex(username) {
 		// Regex to match only English letters, spaces and numbers
-		const regex = /^[a-zA-Z0-9 ]+$/;
+		const regex = /^[a-zA-Z0-9 ]+$/
 
-		return regex.test(username);
+		return regex.test(username)
 	},
 
 	/**
@@ -41,7 +41,7 @@ module.exports = {
 				(player) => player.username &&
 				player.username == username
 			)
-			.length > 0;
+			.length > 0
 	},
 
 	/**
@@ -54,7 +54,7 @@ module.exports = {
 		return !(
 			username.length > 16 ||
 			username.length < 3
-		);
+		)
 	},
 
 	/**
@@ -66,6 +66,6 @@ module.exports = {
 	isUsernameValid(username) {
 		return !this.isDuplicate(username)
 			&& this.isUsernameLengthValid(username)
-			&& this.doesUsernameMatchRegex(username);
+			&& this.doesUsernameMatchRegex(username)
 	},
-};
+}

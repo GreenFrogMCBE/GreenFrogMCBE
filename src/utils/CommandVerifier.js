@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Language = require("./Language");
+const Language = require("./Language")
 
 module.exports = {
 	/**
@@ -23,6 +23,6 @@ module.exports = {
 	 * @param {string} command
 	 */
 	throwError(commandExecutor, command) {
-		commandExecutor.sendMessage(Language.getKey("commands.unknown").replace("%s", command));
+		commandExecutor.sendMessage(Language.getKey("commands.unknown").replace("%s", command))
 	},
-};
+}

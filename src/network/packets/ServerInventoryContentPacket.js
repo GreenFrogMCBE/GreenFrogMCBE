@@ -13,15 +13,15 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerInventoryContentPacket extends Packet {
-	name = "inventory_content";
+	name = "inventory_content"
 
 	/** @type {any[] | undefined} */
-	input;
+	input
 	/** @type {number | undefined} */
-	window_id;
+	window_id
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -30,8 +30,8 @@ class ServerInventoryContentPacket extends Packet {
 		player.queue(this.name, {
 			window_id: this.window_id,
 			input: this.input,
-		});
+		})
 	}
 }
 
-module.exports = ServerInventoryContentPacket;
+module.exports = ServerInventoryContentPacket

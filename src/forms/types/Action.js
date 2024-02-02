@@ -19,4 +19,4 @@ module.exports = /** @type {const} */ ({
 	DROPDOWN: "dropdown",
 	TOGGLE: "toggle",
 	SLIDER: "slider",
-});
+})

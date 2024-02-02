@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 /** @type {import("Frog").Player[]} */
-const playersOnline = [];
+const playersOnline = []
 
 module.exports = {
 	/**
@@ -23,7 +23,7 @@ module.exports = {
 	 * @param {import("Frog").Player} player
 	 */
 	addPlayer(player) {
-		playersOnline.push(player);
+		playersOnline.push(player)
 	},
 
 	/**
@@ -33,11 +33,11 @@ module.exports = {
 	 * @returns {import("Frog").Player | undefined} The player if the player is online, null if not.
 	 */
 	getPlayer(username) {
-		return playersOnline.find((player) => player.username.toLowerCase() == username.toLowerCase());
+		return playersOnline.find((player) => player.username.toLowerCase() == username.toLowerCase())
 	},
 
 	/**
 	 * @returns {import("Frog").Player[]}
 	 */
 	playersOnline,
-};
+}

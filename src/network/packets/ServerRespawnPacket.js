@@ -13,17 +13,17 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerRespawnPacket extends Packet {
-	name = "respawn";
+	name = "respawn"
 
 	/** @type {import("Frog").Vec3 | undefined} */
-	position;
+	position
 	/** @type {number | undefined} */
-	state;
+	state
 	/** @type {number | undefined} */
-	runtime_entity_id;
+	runtime_entity_id
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -33,8 +33,8 @@ class ServerRespawnPacket extends Packet {
 			position: this.position,
 			state: this.state,
 			runtime_entity_id: this.runtime_entity_id,
-		});
+		})
 	}
 }
 
-module.exports = ServerRespawnPacket;
+module.exports = ServerRespawnPacket

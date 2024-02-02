@@ -34,4 +34,4 @@ module.exports = /** @type {const} */ ({
 	BOLD: "§l",
 	ITALIC: "§o",
 	RESET: "§r",
-});
+})

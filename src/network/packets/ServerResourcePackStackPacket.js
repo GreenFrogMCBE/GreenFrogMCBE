@@ -13,23 +13,23 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerResourcePackStackPacket extends Packet {
-	name = "resource_pack_stack";
+	name = "resource_pack_stack"
 
 	/** @type {any[] | undefined} */
-	behavior_packs;
+	behavior_packs
 	/** @type {any[] | undefined} */
-	resource_packs;
+	resource_packs
 	/** @type {string | undefined} */
-	game_version;
+	game_version
 	/** @type {boolean | undefined} */
-	must_accept;
+	must_accept
 	/** @type {any[] | undefined} */
-	experiments;
+	experiments
 	/** @type {boolean | undefined} */
-	experiments_previously_used;
+	experiments_previously_used
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -42,8 +42,8 @@ class ServerResourcePackStackPacket extends Packet {
 			game_version: this.game_version,
 			experiments: this.experiments,
 			experiments_previously_used: this.experiments_previously_used,
-		});
+		})
 	}
 }
 
-module.exports = ServerResourcePackStackPacket;
+module.exports = ServerResourcePackStackPacket

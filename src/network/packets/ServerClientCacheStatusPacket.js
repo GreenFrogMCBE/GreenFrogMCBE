@@ -13,13 +13,13 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerClientCacheStatusPacket extends Packet {
-	name = "client_cache_status";
+	name = "client_cache_status"
 
 	/** @type {boolean | undefined} */
-	enabled;
+	enabled
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -27,8 +27,8 @@ class ServerClientCacheStatusPacket extends Packet {
 	writePacket(player) {
 		player.queue(this.name, {
 			enabled: this.enabled,
-		});
+		})
 	}
 }
 
-module.exports = ServerClientCacheStatusPacket;
+module.exports = ServerClientCacheStatusPacket

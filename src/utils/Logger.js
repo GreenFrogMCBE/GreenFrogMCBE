@@ -13,11 +13,11 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const { convert_console_color } = require("./ConsoleColorConvertor");
-const { getKey } = require("./Language");
-const moment = require("moment");
+const { convert_console_color } = require("./ConsoleColorConvertor")
+const { getKey } = require("./Language")
+const moment = require("moment")
 
-const LoggingException = require("./exceptions/LoggingException");
+const LoggingException = require("./exceptions/LoggingException")
 
 module.exports = {
 	/**
@@ -37,18 +37,18 @@ module.exports = {
 	 * @param {import("Frog").LogLevel} consoleLoggingLevel The logging level for the console output (e.g info, warn, error, debug)
 	 */
 	log(levelName, color, message, consoleLoggingLevel) {
-		const Frog = require("../Frog");
+		const Frog = require("../Frog")
 
-		const date = moment().format(Frog.config.logger.dateFormat);
+		const date = moment().format(Frog.config.logger.dateFormat)
 
 		if (!console[consoleLoggingLevel]) {
 			throw new LoggingException(
 				getKey("exceptions.logger.invalidType")
 					.replace("%s", consoleLoggingLevel)
-			);
+			)
 		}
 
-		let shouldLogMessage = true;
+		let shouldLogMessage = true
 
 		Frog.eventEmitter.emit("serverLogMessage", {
 			consoleLoggingLevel,
@@ -56,18 +56,18 @@ module.exports = {
 			message,
 			color,
 			cancel: () => {
-				shouldLogMessage = false;
+				shouldLogMessage = false
 			},
-		});
+		})
 
-		if (!shouldLogMessage) return;
+		if (!shouldLogMessage) return
 
 		this.messages.push({
 			consoleLoggingLevel,
 			levelName,
 			message,
 			color,
-		});
+		})
 
 		console[consoleLoggingLevel](
 			convert_console_color(
@@ -76,7 +76,7 @@ module.exports = {
 					.replace("%type%", `\x1b[${color}m${levelName}\x1b[0m`)
 					.replace("%message%", message)
 			)
-		);
+		)
 	},
 
 	/**
@@ -85,7 +85,7 @@ module.exports = {
 	 * @param {string} message- The log message.
 	 */
 	info(message) {
-		this.log(getKey("logger.info"), 32, message, "info");
+		this.log(getKey("logger.info"), 32, message, "info")
 	},
 
 	/**
@@ -94,7 +94,7 @@ module.exports = {
 	 * @param {string} message- The log message.
 	 */
 	warning(message) {
-		this.log(getKey("logger.warn"), 33, message, "warn");
+		this.log(getKey("logger.warn"), 33, message, "warn")
 	},
 
 	/**
@@ -103,7 +103,7 @@ module.exports = {
 	 * @param {string} message- The log message.
 	 */
 	error(message) {
-		this.log(getKey("logger.error"), 31, message, "error");
+		this.log(getKey("logger.error"), 31, message, "error")
 	},
 
 	/**
@@ -113,10 +113,10 @@ module.exports = {
 	 * @param {string} message- The log message.
 	 */
 	debug(message) {
-		const Frog = require("../Frog");
+		const Frog = require("../Frog")
 
-		if (!Frog.is_debug) return;
+		if (!Frog.is_debug) return
 
-		this.log(getKey("logger.debug"), 35, message, "info");
+		this.log(getKey("logger.debug"), 35, message, "info")
 	},
-};
+}

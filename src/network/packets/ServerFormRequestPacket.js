@@ -13,35 +13,35 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Form = require("../../forms/types/Form");
+const Form = require("../../forms/types/Form")
 
-const Packet = require("./Packet");
+const Packet = require("./Packet")
 
 class ServerFormRequestPacket extends Packet {
-	name = "modal_form_request";
+	name = "modal_form_request"
 
 	/** @type {number | undefined} */
-	id;
+	id
 	/** @type {string | undefined} */
-	content;
+	content
 	/** @type {string | undefined} */
-	buttons;
+	buttons
 	/** @type {string | undefined} */
-	title;
+	title
 	/** @type {import("Frog").Form | undefined} */
-	type;
+	type
 	/** @type {string[] | undefined} */
-	text;
+	text
 	/** @type {string | undefined} */
-	button1;
+	button1
 	/** @type {string | undefined} */
-	button2;
+	button2
 
 	/**
 	 * @param {import("Frog").Player} player
 	 */
 	writePacket(player) {
-		let data;
+		let data
 
 		if (this.type === Form.MODAL_FORM) {
 			data = {
@@ -50,21 +50,21 @@ class ServerFormRequestPacket extends Packet {
 				button2: this.button2,
 				title: this.title,
 				type: this.type,
-			};
+			}
 		} else {
 			data = {
 				content: this.content,
 				buttons: this.buttons,
 				title: this.title,
 				type: this.type,
-			};
+			}
 		}
 
 		player.queue(this.name, {
 			form_id: this.id,
 			data: JSON.stringify(data),
-		});
+		})
 	}
 }
 
-module.exports = ServerFormRequestPacket;
+module.exports = ServerFormRequestPacket
