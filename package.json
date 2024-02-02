@@ -20,7 +20,7 @@
     "frog-protocol": "github:GreenFrogMCBE/protocol",
     "js-yaml": "4.1.0",
     "moment": "2.29.4",
-    "node-addon-api": "7.0.0"
+    "node-addon-api": "7.1.0"
   },
   "devDependencies": {
     "eslint": "8.56.0",
