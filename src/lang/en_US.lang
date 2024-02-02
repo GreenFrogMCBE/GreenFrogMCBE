@@ -5,10 +5,6 @@ server.shuttingDown=Shutting down...
 
 server.version=This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %s
 
-garbageCollector.started=[Garbage collector] Started garbage collection...
-garbageCollector.deleted=[Garbage collector] Deleted %s
-garbageCollector.finished=[Garbage collector] Finished
-
 commands.unknown=§cUnknown command %s. Please check that the command exists and that you have permission to use it.
 commands.errors.internalError=Failed to execute command! Error: %s
 commands.errors.internalError.player=Failed to execute command from %s. Error: %d

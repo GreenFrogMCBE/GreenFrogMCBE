@@ -220,7 +220,7 @@ class PlayerJoinHandler {
 	 * @param {import("Frog").Player} player - The player to check the version for.
 	 */
 	handleVersionMismatch(player) {
-		const serverProtocol = VersionToProtocol.getProtocol(config.serverInfo.version);
+		const serverProtocol = VersionToProtocol.get_protocol(config.serverInfo.version);
 
 		if (config.dev.multiProtocol) {
 			if (config.dev.useLegacyVersionMismatchKickMessage) {
