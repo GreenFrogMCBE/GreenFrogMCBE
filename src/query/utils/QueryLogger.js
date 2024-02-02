@@ -26,7 +26,7 @@ module.exports = {
 	 * @param {boolean} [warning] Log the packet with a warning log level?
 	 */
 	logPacket(packet, warning = true) {
-		if (Frog.config.query.log.packets || Frog.isDebug) {
+		if (Frog.config.query.log.packets || Frog.is_debug) {
 			if (warning) {
 				Logger.warning(packet);
 			} else {
@@ -42,7 +42,7 @@ module.exports = {
 	 * @param {string} packet
 	 */
 	logConnection(packet) {
-		if (Frog.config.query.log.connections || Frog.isDebug) {
+		if (Frog.config.query.log.connections || Frog.is_debug) {
 			Logger.info(packet);
 		}
 	},

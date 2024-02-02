@@ -109,7 +109,7 @@ function initDebug() {
 		Logger.warning(Language.getKey("debug.unstable.unsupported"));
 	}
 
-	if (Frog.isDebug) {
+	if (Frog.is_debug) {
 		Logger.warning(Language.getKey("debug.debugEnabled"));
 
 		process.env.DEBUG = true;
