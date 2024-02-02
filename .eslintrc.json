@@ -24,10 +24,6 @@
             "error",
             "double"
         ],
-        "semi": [
-            "error",
-            "always"
-        ],
         "no-multiple-empty-lines": [
             "error",
             {

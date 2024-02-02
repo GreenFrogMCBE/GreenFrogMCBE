@@ -25,10 +25,30 @@ const path = require("path")
 let Frog
 let Server
 
-const Colors = require("./src/utils/types/Colors")
 const ConsoleColorConvertor = require("./src/utils/ConsoleColorConvertor")
+const Colors = require("./src/utils/types/Colors")
 
+/**
+ * @type {string}
+ */
 const DEFAULT_CONFIG_NAME = "config.yml"
+
+/**
+ * @type {Error} error
+ * @returns {string}
+ */
+function generate_fail_message(error) {
+	const message = `${Colors.RED}Failed to start the server
+			${error.stack}
+
+			Make sure that you have the required libraries. Run "npm i" to install them
+			If you are sure that this is a bug, please report it here: https://github.com/GreenFrogMCBE/GreenFrogMCBE
+			${Colors.RESET}
+			`
+
+	return message
+		.replaceAll("	", "")
+}
 
 /**
  * @type {string}
@@ -63,24 +83,12 @@ async function initialize_server() {
 		Server.start()
 	} catch (error) {
 		console.error(
-			ConsoleColorConvertor.convert_console_color(
-				`${Colors.RED}Failed to start the server
-${error.stack}
-
-Make sure that you have the required libraries. Run "npm i" to install them
-If you are sure that this is a bug, please report it here: https://github.com/GreenFrogMCBE/GreenFrogMCBE
-${Colors.RESET}`,
-			),
+			ConsoleColorConvertor.convert_console_color(generate_fail_message(error)),
 		)
 
-		try {
-			fs.mkdirSync(Frog.directories.crashReportsFolder, { recursive: true })
-			fs.writeFileSync(crashFile, `Error: ${error.stack}`)
+		fs.mkdirSync(Frog.directories.crashReportsFolder, { recursive: true })
+		fs.writeFileSync(crashFile, `Error: ${error.stack}`)
 
-			process.exit(Frog.config.dev.exitCodes.crash)
-		} catch {
-			// This can only happen if the `Frog` module failed to load.
-			// Usually, this is caused if one of the dependencies is missing.
-		}
+		process.exit(Frog.config.dev.exitCodes.crash)
 	}
 })()
