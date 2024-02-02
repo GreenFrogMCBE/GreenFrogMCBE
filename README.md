@@ -8,13 +8,13 @@ This software is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
 
 + Discord: https://discord.gg/UFqrnAbqjP
+
 + Example plugin (JS): https://github.com/GreenFrogMCBE/ExamplePluginJS
 + Example plugin (TS): https://github.com/GreenFrogMCBE/ExamplePluginTS
 
-
 + Generate plugin structure: "npm run plugin-structure"
 
-+ Credits: /docs/CREDITS.md
++ Credits: /docs/CONTRIBUTIONS.md
 + Human-readable license: /docs/READABLE LICENSE.md
 + How to connect via localhost: /docs/LOCAL CONNECTIONS.md
 + How to install: /docs/INSTALLATION.md
