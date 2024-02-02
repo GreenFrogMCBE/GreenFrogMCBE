@@ -22,7 +22,7 @@ const Generator = require("./Generator")
 class Void extends Generator {
 	name = WorldGenerator.VOID
 
-	getChunkData() {
+	get_chunk_data() {
 		return Buffer.alloc(16 * 256 * 16).fill(vanillaBlocks.air.legacy_id)
 	}
 }

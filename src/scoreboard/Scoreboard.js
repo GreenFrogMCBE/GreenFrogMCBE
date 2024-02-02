@@ -26,7 +26,7 @@ const ServerRemoveObjectivePacket = require("../network/packets/ServerRemoveObje
 
 const Frog = require("../Frog")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 /**
  * Represents a scoreboard that can be displayed to a player.
@@ -34,7 +34,7 @@ const { getKey } = require("../utils/Language")
 class Scoreboard {
 	constructor() {
 		/** @type {string} */
-		this.displayName = getKey("scoreboard.name.default")
+		this.displayName = get_key("scoreboard.name.default")
 
 		/** @type {import("Frog").DisplaySlot} */
 		this.displaySlot = DisplaySlot.SIDEBAR
@@ -61,7 +61,7 @@ class Scoreboard {
 	send() {
 		let shouldCreateScoreboard = true
 
-		Frog.eventEmitter.emit("scoreboardCreate", {
+		Frog.event_emitter.emit("scoreboardCreate", {
 			scoreboard: this,
 			cancel: () => {
 				shouldCreateScoreboard = false
@@ -76,7 +76,7 @@ class Scoreboard {
 		scoreboard.display_slot = this.displaySlot
 		scoreboard.objective_name = this.objectiveName
 		scoreboard.sort_order = this.sortOrder
-		scoreboard.writePacket(this.player)
+		scoreboard.write_packet(this.player)
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Scoreboard {
 	setScore(score, text, entry_type = EntryType.TEXT, entity_unique_id = undefined) {
 		let shouldSetScore = true
 
-		Frog.eventEmitter.emit("scoreboardSetScore", {
+		Frog.event_emitter.emit("scoreboardSetScore", {
 			scoreboard: this,
 			cancel: () => {
 				shouldSetScore = false
@@ -111,7 +111,7 @@ class Scoreboard {
 				custom_name: text,
 			},
 		]
-		setScorePacket.writePacket(this.player)
+		setScorePacket.write_packet(this.player)
 	}
 
 	/**
@@ -122,7 +122,7 @@ class Scoreboard {
 	deleteScore(score) {
 		let shouldDeleteScore = true
 
-		Frog.eventEmitter.emit("scoreboardScoreDelete", {
+		Frog.event_emitter.emit("scoreboardScoreDelete", {
 			scoreboard: this,
 			cancel: () => {
 				shouldDeleteScore = false
@@ -143,7 +143,7 @@ class Scoreboard {
 				custom_name: "",
 			},
 		]
-		setScorePacket.writePacket(this.player)
+		setScorePacket.write_packet(this.player)
 	}
 
 	/**
@@ -152,7 +152,7 @@ class Scoreboard {
 	delete() {
 		let shouldDelete = true
 
-		Frog.eventEmitter.emit("scoreboardDelete", {
+		Frog.event_emitter.emit("scoreboardDelete", {
 			scoreboard: this,
 			cancel: () => {
 				shouldDelete = false
@@ -163,7 +163,7 @@ class Scoreboard {
 
 		const removeScoreboard = new ServerRemoveObjectivePacket()
 		removeScoreboard.objective_name = this.objectiveName
-		removeScoreboard.writePacket(this.player)
+		removeScoreboard.write_packet(this.player)
 	}
 }
 

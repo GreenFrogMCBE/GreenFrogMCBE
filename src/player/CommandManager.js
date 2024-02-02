@@ -15,7 +15,7 @@
  */
 const ServerAvailableCommandsPacket = require("../network/packets/ServerAvailableCommandsPacket")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 /** @type {import("Frog").CommandInfo[]} */
 const commands = []
@@ -69,7 +69,7 @@ module.exports = {
 	 * @param {{ name: string; type: 'int' | 'float' | 'value' | 'wildcard_int' | 'operator' | 'command_operator' | 'target' | 'wildcard_target' | 'file_path' | 'integer_range' | 'equipment_slot' | 'string' | 'block_position' | 'position' | 'message' | 'raw_text' | 'json' | 'block_states' | 'command'; optional: boolean; }[]} 
 	 */
 	addCommand(client, name, description, args) {
-		if (name === getKey("commands.help.name") || name === "?") return // Ignore /help and /? because they are overridden by the client
+		if (name === get_key("commands.help.name") || name === "?") return // Ignore /help and /? because they are overridden by the client
 
 		client.commands.command_data.push({
 			name,
@@ -107,6 +107,6 @@ module.exports = {
 
 		const availableCommandsPacket = new ServerAvailableCommandsPacket()
 		availableCommandsPacket.data = client.commands
-		availableCommandsPacket.writePacket(client)
+		availableCommandsPacket.write_packet(client)
 	},
 }

@@ -22,7 +22,7 @@ const PlayerInfo = require("../player/PlayerInfo")
 
 const { getPlayer } = require("../player/PlayerInfo")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 const Selector = require("./types/Selector")
 const ArgumentType = require("./types/ArgumentType")
@@ -35,7 +35,7 @@ const ArgumentType = require("./types/ArgumentType")
  */
 function canBeKilled(player) {
 	if (
-		player.permissions.isConsole ||
+		player.permissions.is_console ||
 		player.gamemode === Gamemode.CREATIVE ||
 		player.gamemode === Gamemode.SPECTATOR
 	) {
@@ -49,8 +49,8 @@ function canBeKilled(player) {
  * Kills the specified player
  */
 class CommandKill extends Command {
-	name = getKey("commands.kill.name")
-	description = getKey("commands.kill.description")
+	name = get_key("commands.kill.name")
+	description = get_key("commands.kill.description")
 	minArgs = 0
 	requiresOp = true
 	args = [
@@ -71,32 +71,32 @@ class CommandKill extends Command {
 			case Selector.SELF:
 			case undefined: {
 				if (!canBeKilled(player)) {
-					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
+					player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
 					return
 				}
 
-				player.setHealth(0, DamageCause.KILL_COMMAND)
+				player.set_health(0, DamageCause.KILL_COMMAND)
 				break
 			}
 			case Selector.ALL_ENTITIES:
 			case Selector.ALL_PLAYERS: {
-				PlayerInfo.playersOnline.forEach((player) => {
+				PlayerInfo.players_online.forEach((player) => {
 					if (canBeKilled(player)) {
-						player.setHealth(0, DamageCause.KILL_COMMAND)
+						player.set_health(0, DamageCause.KILL_COMMAND)
 					}
 				})
 				break
 			}
 			case Selector.RANDOM_PLAYER: {
-				const randomPlayer = Math.floor(Math.random() * PlayerInfo.playersOnline.length)
-				const subject = PlayerInfo.playersOnline[randomPlayer]
+				const randomPlayer = Math.floor(Math.random() * PlayerInfo.players_online.length)
+				const subject = PlayerInfo.players_online[randomPlayer]
 
 				if (!canBeKilled(subject)) {
-					player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
+					player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
 					return
 				}
 
-				subject.setHealth(0, DamageCause.KILL_COMMAND)
+				subject.set_health(0, DamageCause.KILL_COMMAND)
 				break
 			}
 			default: {
@@ -104,13 +104,13 @@ class CommandKill extends Command {
 					const subject = getPlayer(args[0])
 
 					if (!subject || !canBeKilled(subject)) {
-						player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
+						player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
 						return
 					}
 
-					subject.setHealth(0, DamageCause.KILL_COMMAND)
+					subject.set_health(0, DamageCause.KILL_COMMAND)
 				} catch {
-					player.sendMessage(getKey("commands.kill.execution.failed.notOnline").replace("%s", args[0]))
+					player.send_message(get_key("commands.kill.execution.failed.notOnline").replace("%s", args[0]))
 				}
 				break
 			}

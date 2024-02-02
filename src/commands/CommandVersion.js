@@ -19,7 +19,7 @@ const Frog = require("../Frog")
 
 const Colors = require("../utils/types/Colors")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 const { version } = Frog.config.serverInfo
 
@@ -27,11 +27,11 @@ const { version } = Frog.config.serverInfo
  * A command that shows the server's version
  */
 class CommandVersion extends Command {
-	name = getKey("commands.version.name")
-	description = getKey("commands.version.description")
+	name = get_key("commands.version.name")
+	description = get_key("commands.version.description")
 	aliases = [
-		getKey("commands.version.aliases.ver"), 
-		getKey("commands.version.aliases.about")
+		get_key("commands.version.aliases.ver"), 
+		get_key("commands.version.aliases.about")
 	]
 	minArgs = 0
 	maxArgs = 0
@@ -40,11 +40,11 @@ class CommandVersion extends Command {
 	 * @param {import("Frog").Player} player
 	 */
 	async execute(player) {
-		const message = getKey("server.version")
+		const message = get_key("server.version")
 			.replace("%s", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`)
 			.replace("%d", version)
 
-		player.sendMessage(`${Colors.GRAY}${message}`)
+		player.send_message(`${Colors.GRAY}${message}`)
 	}
 }
 

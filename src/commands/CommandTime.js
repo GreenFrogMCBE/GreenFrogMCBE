@@ -15,9 +15,9 @@
  */
 const Command = require("./Command")
 
-const { playersOnline } = require("../player/PlayerInfo")
+const { players_online } = require("../player/PlayerInfo")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 const ArgumentType = require("./types/ArgumentType")
 
@@ -25,8 +25,8 @@ const ArgumentType = require("./types/ArgumentType")
  * A command that changes the time
  */
 class CommandTime extends Command {
-	name = getKey("commands.time.name")
-	description = getKey("commands.time.description")
+	name = get_key("commands.time.name")
+	description = get_key("commands.time.description")
 	minArgs = 1
 	maxArgs = 1
 	requiresOp = true
@@ -46,21 +46,21 @@ class CommandTime extends Command {
 	async execute(player, server, args) {
 		const time = args[0]
 
-		const setTime = time === getKey("commands.time.times.day") ? 1000 : time === getKey("commands.time.times.night") ? 17000 : parseInt(time, 10)
+		const setTime = time === get_key("commands.time.times.day") ? 1000 : time === get_key("commands.time.times.night") ? 17000 : parseInt(time, 10)
 
 		if (isNaN(Number(setTime))) {
-			player.sendMessage(getKey("commands.time.execution.failed"))
+			player.send_message(get_key("commands.time.execution.failed"))
 			return
 		}
 
 		const parsedTime = parseInt(time)
 
-		for (const player of playersOnline) {
+		for (const player of players_online) {
 			player.world.time = parsedTime
 			player.setTime(parsedTime)
 		}
 
-		player.sendMessage(getKey("commands.time.execution.success").replace("%s", time))
+		player.send_message(get_key("commands.time.execution.success").replace("%s", time))
 	}
 }
 

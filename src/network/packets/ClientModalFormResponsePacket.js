@@ -24,8 +24,8 @@ class ClientModalFormResponsePacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
-		Frog.eventEmitter.emit("playerFormResponse", {
+	async read_packet(player, packet) {
+		Frog.event_emitter.emit("playerFormResponse", {
 			player,
 			packet,
 		})

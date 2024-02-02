@@ -34,7 +34,7 @@ class ServerResourcePackStackPacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			must_accept: this.must_accept,
 			behavior_packs: this.behavior_packs,

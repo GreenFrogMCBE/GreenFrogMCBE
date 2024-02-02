@@ -24,7 +24,7 @@ const Logger = require("../../utils/Logger")
 
 const Frog = require("../../Frog")
 
-const { getKey } = require("../../utils/Language")
+const { get_key } = require("../../utils/Language")
 
 class ClientPlayerActionPacket extends Packet {
 	name = "player_action"
@@ -33,16 +33,16 @@ class ClientPlayerActionPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
+	async read_packet(player, packet) {
 		const { action, position, result_position, face } = packet.data.params
 
 		switch (action) {
 			case BlockAction.CREATIVE_PLAYER_BREAK_BLOCK:
 				if (player.gamemode == Gamemode.SURVIVAL || player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
-					throw new BlockBreakException(getKey("exceptions.network.inventoryTransaction.invalid").replace("%s", player.username))
+					throw new BlockBreakException(get_key("exceptions.network.inventoryTransaction.invalid").replace("%s", player.username))
 				}
 
-				Frog.eventEmitter.emit("blockBreak", {
+				Frog.event_emitter.emit("blockBreak", {
 					player,
 					action,
 					position,
@@ -50,10 +50,10 @@ class ClientPlayerActionPacket extends Packet {
 					face,
 				})
 
-				player.world.breakBlock(position.x, position.y, position.z)
+				player.world.break_block(position.x, position.y, position.z)
 				break
 			default:
-				Logger.debug(getKey("debug.player.unsupportedAction.block").replace("%s", player.username).replace("%d", action))
+				Logger.debug(get_key("debug.player.unsupportedAction.block").replace("%s", player.username).replace("%d", action))
 		}
 	}
 }

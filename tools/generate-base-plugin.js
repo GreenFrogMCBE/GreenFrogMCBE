@@ -24,7 +24,7 @@ const Colors = require("../src/utils/types/Colors")
 /** @type {string} */
 let pluginName
 
-const pluginsFolderPath = path.join(__dirname, "..", "plugins")
+const plugins_folderPath = path.join(__dirname, "..", "plugins")
 
 const rl = readline.createInterface({
 	input: process.stdin,
@@ -150,9 +150,9 @@ async function handleUserInputForTypeScript(ts) {
 		handleError("Please enter \"Y\" for yes or \"N\" for no")
 	}
 
-	const pluginDirPath = path.join(pluginsFolderPath, pluginName)
+	const pluginDirPath = path.join(plugins_folderPath, pluginName)
 
-	createDirectoryIfNotExists(pluginsFolderPath)
+	createDirectoryIfNotExists(plugins_folderPath)
 
 	try {
 		createDirectoryIfNotExists(pluginDirPath)

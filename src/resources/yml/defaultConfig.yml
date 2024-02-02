@@ -19,7 +19,7 @@ chat:
     features:
         chat: false # Should chat be disabled?
         commands: false # Should commands be disabled? This will won't affect console commands
-    blockInvalidPackets:
+    block_invalid_packets:
         messages: true # Prevents players from using invalid characters or messages with invalid length
         commands: true # Same as "messages" but for commands
 query: # Query is a UDP protocol for querying server properties. More info at https://wiki.vg/Query
@@ -50,9 +50,9 @@ world:
         world: "creative"
     generators:
         type: "default" # The world type. Can be "default" (for a normal world), "flat" (for a superflat world), or "void" (for an empty world)
-    renderDistance:
+    render_distance:
         serverSide: 4
-        clientSide: 64
+        client_side: 64
     ticking:
         event: true # Should ServerTickEvent be enabled?
         time: true # Should time update be server side?

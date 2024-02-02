@@ -24,7 +24,7 @@ class ServerCompressedBiomeDefinitionListPacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			raw_payload: this.raw_payload,
 		})

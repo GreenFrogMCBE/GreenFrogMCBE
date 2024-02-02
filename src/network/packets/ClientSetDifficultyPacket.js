@@ -26,12 +26,12 @@ class ClientSetDifficultyPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
+	async read_packet(player, packet) {
 		const difficulty = packet.data.params.difficulty
 
 		let shouldUpdateDifficulty = false
 
-		Frog.eventEmitter.emit("playerSetDifficulty", {
+		Frog.event_emitter.emit("playerSetDifficulty", {
 			player,
 			difficulty,
 			cancel() {
@@ -41,7 +41,7 @@ class ClientSetDifficultyPacket extends Packet {
 
 		if (!shouldUpdateDifficulty) return
 
-		for (const player of PlayerInfo.playersOnline) {
+		for (const player of PlayerInfo.players_online) {
 			player.setDifficulty(difficulty)
 		}
 	}

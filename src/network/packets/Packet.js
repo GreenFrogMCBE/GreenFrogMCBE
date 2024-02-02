@@ -30,14 +30,14 @@ class Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {}
+	write_packet(player) {}
 
 	/**
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 * @param {import("frog-protocol").Server} [server]
 	 */
-	readPacket(player, packet, server) {}
+	read_packet(player, packet, server) {}
 }
 
 module.exports = Packet

@@ -18,7 +18,7 @@ const PlayerInfo = require("./player/PlayerInfo")
 
 const ConsoleCommandSender = require("./server/ConsoleCommandSender")
 
-const { getKey } = require("./utils/Language")
+const { get_key } = require("./utils/Language")
 
 const Logger = require("./utils/Logger")
 
@@ -90,7 +90,7 @@ module.exports = {
 	 *
 	 * @type {import("Frog").EventEmitter}
 	 */
-	eventEmitter: new events(),
+	event_emitter: new events(),
 
 	/**
 	 * Returns the release data
@@ -109,7 +109,7 @@ module.exports = {
 	 *
 	 * @returns {import("Frog").Player}
 	 */
-	asPlayer: {
+	as_player: {
 		username: "Server",
 		network: {
 			address: get_config().network.host,
@@ -117,9 +117,9 @@ module.exports = {
 		},
 		permissions: {
 			op: true,
-			isConsole: true,
+			is_console: true,
 		},
-		sendMessage: (message) => {
+		send_message: (message) => {
 			Logger.info(message)
 		},
 	},
@@ -130,12 +130,12 @@ module.exports = {
 	 * @type {import("Frog").Directories}
 	 */
 	directories: {
-		opFile: "./ops.yml",
-		worldFolder: "./world",
-		configFile: "./config.yml",
-		pluginsFolder: "./plugins",
-		pluginDataFolders: "./pluginData",
-		crashReportsFolder: "./crash-reports",
+		op_file: "./ops.yml",
+		world_folder: "./world",
+		config_file: "./config.yml",
+		plugins_folder: "./plugins",
+		plugin_data_folders: "./plugin-data",
+		crash_reports_folder: "./crash-reports",
 	},
 
 	/**
@@ -143,9 +143,9 @@ module.exports = {
 	 *
 	 * @param {string} message
 	 */
-	broadcastMessage(message) {
-		for (const player of PlayerInfo.playersOnline) {
-			player.sendMessage(message)
+	broadcast_message(message) {
+		for (const player of PlayerInfo.players_online) {
+			player.send_message(message)
 		}
 
 		Logger.info(message)
@@ -157,10 +157,10 @@ module.exports = {
 	 * @param {string} shutdownMessage
 	 * @async
 	 */
-	async shutdownServer(shutdownMessage = getKey("kickMessages.serverClosed")) {
+	async shutdown_server(shutdownMessage = get_key("kickMessages.serverClosed")) {
 		let shouldShutdown = true
 
-		this.eventEmitter.emit("serverShutdown", {
+		this.event_emitter.emit("serverShutdown", {
 			cancel: () => {
 				shouldShutdown = false
 			},
@@ -168,7 +168,7 @@ module.exports = {
 
 		if (!shouldShutdown) return
 
-		Logger.info(getKey("server.shuttingDown"))
+		Logger.info(get_key("server.shuttingDown"))
 
 		// Shutdown the bedrock-protocol server and disconnect all clients
 		this.server.close(shutdownMessage)

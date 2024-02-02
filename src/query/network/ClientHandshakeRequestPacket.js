@@ -29,7 +29,7 @@ class ClientHandshakeRequestPacket extends Packet {
 	 * @param {Buffer} packet
 	 * @param {import("dgram").Socket} socket
 	 */
-	readPacket(client, packet, socket) {
+	read_packet(client, packet, socket) {
 		const sessionID = packet.readInt32BE(3)
 
 		ClientTokens.clientTokens.set(`${client.address},${client.port}`, sessionID)
@@ -37,7 +37,7 @@ class ClientHandshakeRequestPacket extends Packet {
 		const handshakeResponsePacket = new ServerHandshakeResponsePacket()
 		handshakeResponsePacket.sessionId = sessionID
 		handshakeResponsePacket.payload = sessionID.toString()
-		handshakeResponsePacket.writePacket(client, socket)
+		handshakeResponsePacket.write_packet(client, socket)
 	}
 }
 

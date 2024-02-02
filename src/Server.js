@@ -59,7 +59,7 @@ async function initializeServer() {
 	setupHandlers()
 
 	await PluginLoader.loadPlugins()
-	await CommandManager.loadCommands()
+	await CommandManager.load_commands()
 	await ConsoleCommandSender.start()
 
 	initDebug()
@@ -76,7 +76,7 @@ function setupHandlers() {
 	})
 
 	process.on("SIGINT", () => {
-		Frog.shutdownServer()
+		Frog.shutdown_server()
 	})
 }
 
@@ -86,13 +86,13 @@ function setupHandlers() {
  * @private
  */
 function createDirectories() {
-	fs.mkdirSync(Frog.directories.worldFolder, { recursive: true })
+	fs.mkdirSync(Frog.directories.world_folder, { recursive: true })
 
-	fs.mkdirSync(Frog.directories.pluginsFolder, { recursive: true })
-	fs.mkdirSync(Frog.directories.pluginDataFolders, { recursive: true })
+	fs.mkdirSync(Frog.directories.plugins_folder, { recursive: true })
+	fs.mkdirSync(Frog.directories.plugin_data_folders, { recursive: true })
 
-	if (!fs.existsSync(Frog.directories.opFile)) {
-		fs.writeFileSync(Frog.directories.opFile, "")
+	if (!fs.existsSync(Frog.directories.op_file)) {
+		fs.writeFileSync(Frog.directories.op_file, "")
 	}
 }
 
@@ -103,12 +103,12 @@ function createDirectories() {
  */
 function initDebug() {
 	if (Frog.config.dev.unstable) {
-		Logger.warning(Language.getKey("debug.unstable"))
-		Logger.warning(Language.getKey("debug.unstable.unsupported"))
+		Logger.warning(Language.get_key("debug.unstable"))
+		Logger.warning(Language.get_key("debug.unstable.unsupported"))
 	}
 
 	if (Frog.is_debug) {
-		Logger.warning(Language.getKey("debug.debugEnabled"))
+		Logger.warning(Language.get_key("debug.debugEnabled"))
 
 		process.env.DEBUG = true
 	}
@@ -121,8 +121,8 @@ function initDebug() {
  */
 function checkNodeJSVersion() {
 	if (parseInt(process.versions.node.split(".")[0]) < 14) {
-		Logger.error(Language.getKey("errors.nodeJS.tooOld"))
-		Logger.error(Language.getKey("errors.nodeJS.tooOld.update"))
+		Logger.error(Language.get_key("errors.nodeJS.tooOld"))
+		Logger.error(Language.get_key("errors.nodeJS.tooOld.update"))
 
 		process.exit(-1)
 	}
@@ -134,8 +134,8 @@ function checkNodeJSVersion() {
  * @private
  */
 function checkRenderDistance() {
-	if (Frog.config.world.renderDistance.serverSide > 16) {
-		Logger.warning(Language.getKey("world.chunks.renderDistance.tooHigh"))
+	if (Frog.config.world.render_distance.serverSide > 16) {
+		Logger.warning(Language.get_key("world.chunks.render_distance.tooHigh"))
 	}
 }
 
@@ -145,12 +145,12 @@ function checkRenderDistance() {
  * @private
  */
 function logStartupMessages() {
-	Logger.info(Language.getKey("server.loading"))
-	Logger.info(Language.getKey("server.license"))
+	Logger.info(Language.get_key("server.loading"))
+	Logger.info(Language.get_key("server.license"))
 
 	// Executes `/version` as the console
 	new CommandVersion()
-		.execute(Frog.asPlayer)
+		.execute(Frog.as_player)
 }
 
 /**
@@ -162,16 +162,16 @@ function logStartupMessages() {
 function handleCriticalError(error) {
 	const { host, port } = Frog.config.network
 
-	Frog.eventEmitter.emit("serverCriticalError", { error })
+	Frog.event_emitter.emit("serverCriticalError", { error })
 
 	if (error.message.includes("Server failed to start")) {
 		Logger.error(
-			Language.getKey("network.server.listening.failed")
+			Language.get_key("network.server.listening.failed")
 				.replace("%s", `${host}:${port}`)
 				.replace("%d", error.message)
 		)
 
-		Logger.error(Language.getKey("network.server.listening.failed.otherServerRunning"))
+		Logger.error(Language.get_key("network.server.listening.failed.otherServerRunning"))
 	}
 
 	Logger.error(`Server error: ${error.stack}`)
@@ -226,10 +226,10 @@ async function listen() {
 		})
 
 		Frog.server = server
-		Frog.eventEmitter.emit("serverListen")
+		Frog.event_emitter.emit("serverListen")
 
 		Logger.info(
-			Language.getKey("network.server.listening.success")
+			Language.get_key("network.server.listening.success")
 				.replace(
 					"%s",
 					`/${host}:${port}`
@@ -237,7 +237,7 @@ async function listen() {
 		)
 	} catch (error) {
 		Logger.error(
-			Language.getKey("network.server.listening.failed")
+			Language.get_key("network.server.listening.failed")
 				.replace("%s", `/${host}:${port}`)
 				.replace("%d", error.stack)
 		)
@@ -254,8 +254,8 @@ async function listen() {
 function startWorldTicking() {
 	const world = new World()
 
-	world.startHungerLossLoop()
-	world.startNetworkChunkPublisherPacketSendingLoop()
+	world.tick_hunfer_loss()
+	world.start_network_chunk_publisher_packet_sending_loop()
 
 	setInterval(() => {
 		world.tick()
@@ -274,7 +274,7 @@ function getQuerySettings() {
 		port: Frog.config.query.port,
 		motd: Frog.config.serverInfo.motd,
 		levelName: Frog.config.serverInfo.levelName,
-		players: PlayerInfo.playersOnline,
+		players: PlayerInfo.players_online,
 		maxPlayers: Frog.config.serverInfo.maxPlayers,
 		gamemode: Frog.config.world.gamemode.world,
 		version: Frog.config.serverInfo.version.toString(),
@@ -291,10 +291,10 @@ function startQueryServer() {
 	try {
 		query.start(getQuerySettings())
 	} catch (error) {
-		Frog.eventEmitter.emit("queryError", { error })
+		Frog.event_emitter.emit("queryError", { error })
 
 		Logger.error(
-			Language.getKey("query.listening.failed")
+			Language.get_key("query.listening.failed")
 				.replace(
 					"%s",
 					error.stack

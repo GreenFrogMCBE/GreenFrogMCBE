@@ -24,10 +24,10 @@ class ClientRequestChunkRadiusPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
+	async read_packet(player, packet) {
 		let shouldChange = true
 
-		Frog.eventEmitter.emit("playerRequestChunkRadius", {
+		Frog.event_emitter.emit("playerRequestChunkRadius", {
 			radius: packet.data.params.radius,
 			player,
 			cancel: () => {

@@ -22,7 +22,7 @@ module.exports = {
 	 * @param {import("Frog").Messagable} commandExecutor
 	 * @param {string} command
 	 */
-	throwError(commandExecutor, command) {
-		commandExecutor.sendMessage(Language.getKey("commands.unknown").replace("%s", command))
+	throw_error(commandExecutor, command) {
+		commandExecutor.send_message(Language.get_key("commands.unknown").replace("%s", command))
 	},
 }

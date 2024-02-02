@@ -57,7 +57,7 @@ class PlayerJoinHandler {
 	 */
 	validateUsername(player) {
 		if (!UsernameValidator.isUsernameValid(player.username) && config.dev.validateUsernames) {
-			player.kick(Language.getKey("kickMessages.invalidUsername"))
+			player.kick(Language.get_key("kickMessages.invalidUsername"))
 			return
 		}
 	}
@@ -68,9 +68,9 @@ class PlayerJoinHandler {
 	 * @param {import("Frog").Player} player
 	 */
 	async setupEvents(player) {
-		Frog.eventEmitter.emit("playerPreConnect", {
+		Frog.event_emitter.emit("playerPreConnect", {
 			player,
-			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
+			cancel: (reason = Language.get_key("kickMessages.serverDisconnect")) => {
 				player.kick(reason)
 			},
 		})
@@ -79,7 +79,7 @@ class PlayerJoinHandler {
 		player.queue = (name, params) => {
 			let shouldQueue = true
 
-			Frog.eventEmitter.emit("packetQueue", {
+			Frog.event_emitter.emit("packetQueue", {
 				player,
 				packet: {
 					data: {
@@ -161,7 +161,7 @@ class PlayerJoinHandler {
 				initialised: false,
 				version: null,
 				protocolVersion: null,
-				isConsole: false,
+				is_console: false,
 			},
 			permissions: {
 				op: null,
@@ -202,13 +202,13 @@ class PlayerJoinHandler {
 	}
 
 	/**
-	 * Handles the case when the maximum number of playersOnline.is reached.
+	 * Handles the case when the maximum number of players_online.is reached.
 	 *
 	 * @param {import("Frog").Player} player - The player to check against the maximum player count.
 	 */
 	handleMaxPlayers(player) {
-		if (PlayerInfo.playersOnline.length > config.serverInfo.maxPlayers) {
-			const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.getKey("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL
+		if (PlayerInfo.players_online.length > config.serverInfo.maxPlayers) {
+			const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.get_key("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL
 			player.kick(kickMessage)
 			return
 		}
@@ -225,7 +225,7 @@ class PlayerJoinHandler {
 		if (config.dev.multiProtocol) {
 			if (config.dev.useLegacyVersionMismatchKickMessage) {
 				if (player.network.protocolVersion !== serverProtocol) {
-					const kickMessage = Language.getKey("kickMessages.versionMismatch").replace("%s", config.serverInfo.version)
+					const kickMessage = Language.get_key("kickMessages.versionMismatch").replace("%s", config.serverInfo.version)
 					player.kick(kickMessage)
 					return
 				}
@@ -253,7 +253,7 @@ class PlayerJoinHandler {
 		responsePackInfo.behavior_packs = []
 		responsePackInfo.texture_packs = []
 		responsePackInfo.resource_pack_links = []
-		responsePackInfo.writePacket(player)
+		responsePackInfo.write_packet(player)
 	}
 
 	/**
@@ -262,9 +262,9 @@ class PlayerJoinHandler {
 	 * @param {import("Frog").Player} player - The player that joined the server.
 	 */
 	emitPlayerJoinEvent(player) {
-		Frog.eventEmitter.emit("playerJoin", {
+		Frog.event_emitter.emit("playerJoin", {
 			player,
-			cancel: (reason = Language.getKey("kickMessages.serverDisconnect")) => {
+			cancel: (reason = Language.get_key("kickMessages.serverDisconnect")) => {
 				player.kick(reason)
 			},
 		})

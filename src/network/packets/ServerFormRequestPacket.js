@@ -40,7 +40,7 @@ class ServerFormRequestPacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		let data
 
 		if (this.type === Form.MODAL_FORM) {

@@ -117,7 +117,7 @@ class CustomForm {
 		formRequestPacket.content = this.actions
 		formRequestPacket.buttons = this.buttons
 		formRequestPacket.type = Form.CUSTOM_FORM
-		formRequestPacket.writePacket(player)
+		formRequestPacket.write_packet(player)
 
 		this.onSend(this, player)
 	}

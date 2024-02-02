@@ -41,7 +41,7 @@ class Title {
 	send(client) {
 		let shouldSendTitle = true
 
-		Frog.eventEmitter.emit("serverTitle", {
+		Frog.event_emitter.emit("serverTitle", {
 			fadeInTime: this.fadeInTime,
 			fadeOutTime: this.fadeOutTime,
 			stayTime: this.stayTime,
@@ -62,7 +62,7 @@ class Title {
 		titlePacket.fade_out_time = this.fadeOutTime
 		titlePacket.xuid = ""
 		titlePacket.platform_online_id = ""
-		titlePacket.writePacket(client)
+		titlePacket.write_packet(client)
 	}
 }
 

@@ -33,7 +33,7 @@ class ConnectionHandler {
 
 		let shouldCancelPacket = true
 
-		Frog.eventEmitter.emit("queryPacket", {
+		Frog.event_emitter.emit("queryPacket", {
 			socket,
 			settings,
 			packet,
@@ -47,13 +47,13 @@ class ConnectionHandler {
 
 		switch (packetType) {
 			case QueryPacket.HANDSHAKE:
-				new ClientHandshakeRequestPacket().readPacket(client, packet, socket)
+				new ClientHandshakeRequestPacket().read_packet(client, packet, socket)
 				break
 			case QueryPacket.INFO:
-				new ClientInfoRequestPacket().readPacket(client, packet, socket, settings)
+				new ClientInfoRequestPacket().read_packet(client, packet, socket, settings)
 				break
 			default:
-				new ClientInvalidPacket().readPacket(client, packet)
+				new ClientInvalidPacket().read_packet(client, packet)
 				break
 		}
 	}

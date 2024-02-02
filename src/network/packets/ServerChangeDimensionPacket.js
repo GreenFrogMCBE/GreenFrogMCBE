@@ -28,7 +28,7 @@ class ServerChangeDimensionPacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			dimension: this.dimension,
 			position: this.position,

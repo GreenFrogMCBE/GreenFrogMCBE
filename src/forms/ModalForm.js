@@ -65,7 +65,7 @@ class ModalForm {
 		formRequestPacket.content = this.text
 		formRequestPacket.button1 = this.button1
 		formRequestPacket.button2 = this.button2
-		formRequestPacket.writePacket(player)
+		formRequestPacket.write_packet(player)
 	}
 }
 

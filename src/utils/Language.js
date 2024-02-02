@@ -15,7 +15,7 @@
  */
 const LanguageException = require("./exceptions/LanguageException")
 
-const langParser = require("@kotinash/lang-parser")
+const { LanguageParser } = require("@greenfrog/lang-parser")
 const path = require("path")
 const fs = require("fs")
 
@@ -27,33 +27,34 @@ module.exports = {
 	 * @returns {import("Frog").Language} - The content of the language file
 	 * @throws {LanguageException} - If the language file is not found or is not valid JSON
 	 */
-	getLanguage(lang) {
-		const langPath = path.resolve(__dirname, "../lang")
-		const langFile = path.join(langPath, `${lang}.lang`)
+	get_language(lang) {
+		const lang_path = path.resolve(__dirname, "../lang")
+		const lang_file = path.join(lang_path, `${lang}.lang`)
 
-		if (!fs.existsSync(langFile)) {
+		if (!fs.existsSync(lang_file)) {
 			throw new LanguageException("Language file doesn't exist")
 		}
 
-		const langContent = fs.readFileSync(langFile, "utf8")
+		const lang_content = fs.readFileSync(lang_file, "utf8")
 
-		return langContent
+		return lang_content
 	},
 
 	/**
 	 * Returns a specific key from the current language file
 	 *
 	 * @param {string} key - The key to retrieve
+	 * @param {string[]} placeholders - The placeholders
 	 * @returns {string} The value of the key
 	 */
-	getKey(key) {
+	get_key(key, placeholders = []) {
 		const Frog = require("../Frog")
 
-		const langConfig = Frog.config.chat.lang
-		const langContent = module.exports.getLanguage(langConfig)
-		const langParsed = langParser.parseRaw(langContent)
-		const langKey = langParser.getKey(key, langParsed)
+		const lang_config = Frog.config.chat.lang
+		const lang_content = module.exports.get_language(lang_config)
+		const lang_parsed = LanguageParser.parse_raw(lang_content)
+		const lang_key = LanguageParser.get_key(key, lang_parsed, placeholders)
 
-		return langKey
+		return lang_key
 	}
 }

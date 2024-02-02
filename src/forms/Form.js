@@ -65,7 +65,7 @@ class Form {
 		formRequestPacket.content = this.content
 		formRequestPacket.buttons = this.buttons
 		formRequestPacket.type = FormVariant.FORM
-		formRequestPacket.writePacket(player)
+		formRequestPacket.write_packet(player)
 
 		this.onSend(this, player)
 	}

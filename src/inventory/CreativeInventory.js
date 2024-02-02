@@ -17,7 +17,7 @@ const Frog = require("../Frog")
 
 const Logger = require("../utils/Logger")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 const ServerInventorySlotPacket = require("../network/packets/ServerInventorySlotPacket")
 
@@ -41,7 +41,7 @@ class CreativeInventory extends Inventory {
 			if (firstAction && secondAction && secondAction.type_id === TypeId.RESULTS) {
 				let shouldGiveItem = true
 
-				Frog.eventEmitter.emit("inventoryPreItemRequest", {
+				Frog.event_emitter.emit("inventoryPreItemRequest", {
 					count: firstAction.count,
 					network_id: secondAction.result_items[0].network_id,
 					block_runtime_id: secondAction.result_items[0].block_runtime_id,
@@ -61,7 +61,7 @@ class CreativeInventory extends Inventory {
 					block_runtime_id: secondAction.result_items[0].block_runtime_id,
 				})
 
-				Frog.eventEmitter.emit("inventoryPostItemRequest", {
+				Frog.event_emitter.emit("inventoryPostItemRequest", {
 					count: firstAction.count,
 					network_id: secondAction.result_items[0].network_id,
 					block_runtime_id: secondAction.result_items[0].block_runtime_id,
@@ -86,10 +86,10 @@ class CreativeInventory extends Inventory {
 						can_destroy: [],
 					},
 				}
-				inventorySlotPacket.writePacket(player)
+				inventorySlotPacket.write_packet(player)
 			}
 		} catch (error) {
-			Logger.error(getKey("creativemenu.badPacket").replace("%s", player.username).replace("%d", error.stack))
+			Logger.error(get_key("creativemenu.badPacket").replace("%s", player.username).replace("%d", error.stack))
 		}
 	}
 }

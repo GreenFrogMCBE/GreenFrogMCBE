@@ -28,7 +28,7 @@ class ServerNetworkChunkPublisherUpdatePacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			coordinates: this.coordinates,
 			radius: this.radius,

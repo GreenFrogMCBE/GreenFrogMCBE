@@ -27,7 +27,7 @@ before(() => {
 })
 
 describe("config files", () => {
-	const configFiles = [
+	const config_files = [
 		// Resources
 		"../src/resources/json/availableEntities.json",
 		"../src/resources/json/biomeDefinitions.json",
@@ -46,7 +46,7 @@ describe("config files", () => {
 		"../renovate.json"
 	]
 
-	for (const file of configFiles) {
+	for (const file of config_files) {
 		it(`can parse ${file}`, () => {
 			if (file.endsWith(".json")) {
 				require(file)
@@ -74,7 +74,7 @@ describe("server", () => {
 					if (command.name == "stop" || !command.name) continue
 
 					it(`can execute /${command.name}`, () => {
-						ConsoleCommandSender.executeCommand(command.name)
+						ConsoleCommandSender.execute_command(command.name)
 					})
 				}
 			}
@@ -173,7 +173,7 @@ describe("server", () => {
 							client.disconnect()
 
 							const Frog = require("../src/Frog")
-							Frog.shutdownServer()
+							Frog.shutdown_server()
 						}, 5000)
 					}
 				})

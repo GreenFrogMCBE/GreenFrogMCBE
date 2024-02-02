@@ -33,7 +33,7 @@ class Toast {
 	send(player) {
 		let shouldSendToast = true
 
-		Frog.eventEmitter.emit("serverToast", {
+		Frog.event_emitter.emit("serverToast", {
 			player,
 			title: this.title,
 			message: this.message,
@@ -47,7 +47,7 @@ class Toast {
 		const toast = new ServerToastRequestPacket()
 		toast.message = this.message
 		toast.title = this.title
-		toast.writePacket(player)
+		toast.write_packet(player)
 	}
 }
 

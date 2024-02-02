@@ -19,15 +19,15 @@ const PluginManager = require("../plugins/PluginManager")
 
 const Colors = require("../utils/types/Colors")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 /**
  * A command that all the plugin this server uses
  */
 class CommandPlugins extends Command {
-	name = getKey("commands.plugins.name")
-	description = getKey("commands.plugins.description")
-	aliases = getKey("commands.plugins.aliases.pl")
+	name = get_key("commands.plugins.name")
+	description = get_key("commands.plugins.description")
+	aliases = get_key("commands.plugins.aliases.pl")
 	minArgs = 0
 	maxArgs = 0
 
@@ -40,10 +40,10 @@ class CommandPlugins extends Command {
 			.map(plugin => `${Colors.RESET}${Colors.GREEN}${plugin.name} v${plugin.version}${Colors.RESET}`)
 			.join(", ") || ""
 
-		const message = getKey("commands.plugins.execution.success")
+		const message = get_key("commands.plugins.execution.success")
 			.replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`)
 
-		player.sendMessage(message)
+		player.send_message(message)
 	}
 }
 

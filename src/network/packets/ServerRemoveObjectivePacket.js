@@ -24,7 +24,7 @@ class ServerRemoveObjectivePacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			objective_name: this.objective_name,
 		})

@@ -18,12 +18,12 @@ declare module "Frog" {
 	import { Socket, RemoteInfo } from "dgram";
 
 	export type Directories = {
-		opFile: string,
-		configFile: string,
-		worldFolder: string,
-		pluginsFolder: string,
-		pluginDataFolders: string
-		crashReportsFolder: string,
+		op_file: string,
+		config_file: string,
+		world_folder: string,
+		plugins_folder: string,
+		plugin_data_folders: string
+		crash_reports_folder: string,
 	}
 
 	export type ReleaseData = {
@@ -107,7 +107,7 @@ declare module "Frog" {
 			lang: string;
 			disable: boolean;
 			commandsDisabled: boolean;
-			blockInvalidPackets: {
+			block_invalid_packets: {
 				messages: boolean;
 				commands: boolean;
 			};
@@ -144,15 +144,15 @@ declare module "Frog" {
 				player: string;
 				world: string;
 			};
-			renderDistance: {
-				clientSide: number;
+			render_distance: {
+				client_side: number;
 				serverSide: number;
 			};
 			generators: {
 				type: string;
-				renderDistance: {
+				render_distance: {
 					serverSide: number;
-					clientSide: number;
+					client_side: number;
 				};
 			};
 			ticking: {
@@ -385,7 +385,7 @@ declare module "Frog" {
 			packet: {
 				unhandledPacket: string;
 				failed: {
-					clientSide: string;
+					client_side: string;
 					serverSide: string;
 				};
 			};
@@ -582,27 +582,27 @@ declare module "Frog" {
 
 	export type World = {
 		name: string;
-		renderDistance: number;
+		render_distance: number;
 		spawnCoordinates: Vec3;
 		generator: string;
 		time: number;
 
-		placeBlock(x: number, y: number, z: number, id: number): void;
-		breakBlock(x: number, y: number, z: number): void;
-		sendBlockUpdatePacket(player: Player, x: number, y: number, z: number, id: number): void;
-		startHungerLossLoop(): void;
-		startNetworkChunkPublisherPacketSendingLoop(): void;
+		place_block(x: number, y: number, z: number, id: number): void;
+		break_block(x: number, y: number, z: number): void;
+		send_block_update_packet(player: Player, x: number, y: number, z: number, id: number): void;
+		tick_hunfer_loss(): void;
+		start_network_chunk_publisher_packet_sending_loop(): void;
 		tick(): void;
 		tickEvent: () => void;
-		tickTime: () => void;
-		tickRegeneration: () => void;
-		tickStarvationDamage: () => void;
-		tickVoidDamage: () => void;
-		handleFallDamage(player: Player, position: Vec3): Promise<void>;
-		emitServerEvent(eventName: string | EntityType): void;
-		spawnEntity(entityName: string | EntityType, entityId: number, x: number, y: number, z: number, yaw?: number, pitch?: number): void;
-		teleportEntity(entityId: number, x: number, y: number, z: number, rotation_x?: number, rotation_y?: number, rotation_z?: number): void;
-		getWorldData(): World;
+		tick_time: () => void;
+		tick_regeneration: () => void;
+		tick_starvation_damage: () => void;
+		tick_void_damage: () => void;
+		handle_fall_damage(player: Player, position: Vec3): Promise<void>;
+		emit_event(eventName: string | EntityType): void;
+		spawn_entity(entity_name: string | EntityType, entity_id: number, x: number, y: number, z: number, yaw?: number, pitch?: number): void;
+		teleport_entity(entity_id: number, x: number, y: number, z: number, rotation_x?: number, rotation_y?: number, rotation_z?: number): void;
+		get_world_data(): World;
 	};
 
 	export type NBTType = "compoud";
@@ -1061,17 +1061,17 @@ declare module "Frog" {
 
 	export type PlayerContainerCloseEvent = {
 		player: Player;
-		windowId: WindowId;
-		sentByServer: boolean;
+		window_id: WindowId;
+		sent_by_server: boolean;
 		packet: Packet;
 		cancel(): void;
 	};
 
 	export type PlayerContainerOpenEvent = {
 		player: Player;
-		windowId: WindowId;
+		window_id: WindowId;
 		windowType: WindowType;
-		sentByServer: boolean;
+		sent_by_server: boolean;
 		runtimeId: number;
 		containerCoordinates: Vec3;
 		cancel(): void;
@@ -1364,8 +1364,8 @@ declare module "Frog" {
 	};
 
 	export type EntitySpawnEvent = {
-		entityName: string | EntityType;
-		entityId: number;
+		entity_name: string | EntityType;
+		entity_id: number;
 		x: number;
 		y: number;
 		z: number;
@@ -1375,7 +1375,7 @@ declare module "Frog" {
 	};
 
 	export type EntityTeleportEvent = {
-		entityId: number;
+		entity_id: number;
 		x: number;
 		y: number;
 		z: number;
@@ -1386,7 +1386,7 @@ declare module "Frog" {
 	};
 
 	export type EntityRemoveEvent = {
-		entityId: number;
+		entity_id: number;
 		cancel(): void;
 	}
 
@@ -1498,7 +1498,7 @@ declare module "Frog" {
 		permissions: {
 			op: boolean;
 			permissionLevel: number;
-			isConsole: boolean;
+			is_console: boolean;
 		};
 		_damage: {
 			fall: {
@@ -1520,9 +1520,9 @@ declare module "Frog" {
 		setVelocity(x: number, y: number, z: number): void;
 		setDifficulty(difficulty: Difficulty): void;
 		setEntityData(data: EntityData): void;
-		setChunkRadius(chunkRadius: number): void;
+		setChunkRadius(chunk_radius: number): void;
 		setAttribute(setAttribute: any): void;
-		setHealth(health: number, cause?: DamageCause): void;
+		set_health(health: number, cause?: DamageCause): void;
 		setHunger(health: number, cause?: HungerCause): void;
 		setDimension(x: number, y: number, z: number, dimension: DimensionId, respawn?: boolean | undefined): void;
 		setSpeed(speed: number): void;

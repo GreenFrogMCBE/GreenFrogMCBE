@@ -20,7 +20,7 @@ const Frog = require("../../Frog")
 
 const Logger = require("../../utils/Logger")
 
-const { getKey } = require("../../utils/Language")
+const { get_key } = require("../../utils/Language")
 
 const PacketHandlingException = require("../../utils/exceptions/PacketHandlingException")
 
@@ -131,7 +131,7 @@ class PacketHandler {
 	 * @param {import("Frog").Player} player
 	 */
 	handlePacketRatelimit(player) {
-		Frog.eventEmitter.emit("packetRateLimit", { player })
+		Frog.event_emitter.emit("packetRateLimit", { player })
 	}
 
 	/**
@@ -141,7 +141,7 @@ class PacketHandler {
 	 * @returns {PacketHandlingException} - The rate limit exception.
 	 */
 	createRateLimitException(player) {
-		const exceptionMessage = getKey("exceptions.network.rateLimited")
+		const exceptionMessage = get_key("exceptions.network.rateLimited")
 			.replace("%s", player.username)
 			.replace("%d", player.network.packetCount)
 
@@ -182,7 +182,7 @@ class PacketHandler {
 	processMatchingPacket(player, packetInstance, packetParams) {
 		let shouldReadPacket = true
 
-		Frog.eventEmitter.emit("packetRead", {
+		Frog.event_emitter.emit("packetRead", {
 			player,
 			packet: {
 				packet: packetParams,
@@ -194,7 +194,7 @@ class PacketHandler {
 		})
 
 		if (shouldReadPacket) {
-			this.readPacket(packetInstance, player, Frog.server, packetParams)
+			this.read_packet(packetInstance, player, Frog.server, packetParams)
 		}
 	}
 
@@ -206,8 +206,8 @@ class PacketHandler {
 	 * @param {import("frog-protocol").Server} server
 	 * @param {import("Frog").PacketParams} packetParams
 	 */
-	readPacket(packet, player, server, packetParams) {
-		packet.readPacket(player, packetParams, server)
+	read_packet(packet, player, server, packetParams) {
+		packet.read_packet(player, packetParams, server)
 	}
 
 	/**
@@ -225,7 +225,7 @@ class PacketHandler {
 	 * @param {import("Frog").Packet} packet
 	 */
 	handleUnhandledPacket(packet) {
-		Logger.warning(getKey("network.packet.unhandledPacket"))
+		Logger.warning(get_key("network.packet.unhandledPacket"))
 		console.warn("%o", packet)
 	}
 
@@ -237,17 +237,17 @@ class PacketHandler {
 	 */
 	handlePacketError(player, error) {
 		Logger.error(
-			getKey("exceptions.network.packetHandlingError")
+			get_key("exceptions.network.packetHandlingError")
 				.replace("%s", player.username)
 				.replace("%d", error.stack))
 
 		try {
-			player.kick(getKey("kickMessages.invalidPacket"))
+			player.kick(get_key("kickMessages.invalidPacket"))
 		} catch {
-			player.disconnect(getKey("kickMessages.invalidPacket"))
+			player.disconnect(get_key("kickMessages.invalidPacket"))
 		}
 
-		Frog.eventEmitter.emit("packetReadError", {
+		Frog.event_emitter.emit("packetReadError", {
 			player,
 			error,
 		})

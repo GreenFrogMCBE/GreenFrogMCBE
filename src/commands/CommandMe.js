@@ -17,14 +17,14 @@ const Command = require("./Command")
 
 const Frog = require("../Frog")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 /**
  * A command to perform an action in the chat as the player
  */
 class CommandMe extends Command {
-	name = getKey("commands.me.name")
-	description = getKey("commands.me.description")
+	name = get_key("commands.me.name")
+	description = get_key("commands.me.description")
 	minArgs = 1
 	args = [
 		{
@@ -40,11 +40,11 @@ class CommandMe extends Command {
 	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
-		const message = getKey("chat.format.me")
+		const message = get_key("chat.format.me")
 			.replace("%s", player.username)
 			.replace("%d", args.join(" "))
 
-		Frog.broadcastMessage(message)
+		Frog.broadcast_message(message)
 	}
 }
 

@@ -19,14 +19,14 @@ const PermissionManager = require("../permission/PermissionManager")
 
 const ArgumentType = require("./types/ArgumentType")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 /**
  * A command that makes the specified player opped
  */
 class CommandOp extends Command {
-	name = getKey("commands.op.name")
-	description = getKey("commands.op.description")
+	name = get_key("commands.op.name")
+	description = get_key("commands.op.description")
 	minArgs = 1
 	maxArgs = 1
 	requiresOp = true
@@ -50,9 +50,9 @@ class CommandOp extends Command {
 		try {
 			await PermissionManager.op(playerName)
 
-			player.sendMessage(getKey("commands.op.execution.success").replace("%s", playerName))
+			player.send_message(get_key("commands.op.execution.success").replace("%s", playerName))
 		} catch {
-			player.sendMessage(getKey("commands.op.execution.failed").replace("%s", playerName))
+			player.send_message(get_key("commands.op.execution.failed").replace("%s", playerName))
 		}
 	}
 }

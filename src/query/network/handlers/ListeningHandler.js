@@ -15,7 +15,7 @@
  */
 const ConnectionHandler = require("./ConnectionHandler")
 
-const { getKey } = require("../../../utils/Language")
+const { get_key } = require("../../../utils/Language")
 
 const Logger = require("../../../utils/Logger")
 
@@ -33,7 +33,7 @@ class ListeningHandler {
 		try {
 			let shouldListen = true
 
-			Frog.eventEmitter.emit("queryListen", {
+			Frog.event_emitter.emit("queryListen", {
 				socket,
 				querySettings: settings,
 				cancel: () => {
@@ -47,11 +47,11 @@ class ListeningHandler {
 
 			socket.on("message", (message, client) => new ConnectionHandler().handleConnection(socket, settings, message, client))
 
-			Logger.info(getKey("query.server.listening.success").replace("%s", address))
+			Logger.info(get_key("query.server.listening.success").replace("%s", address))
 		} catch (error) {
 			let shouldCancelError = false
 
-			Frog.eventEmitter.emit("queryError", {
+			Frog.event_emitter.emit("queryError", {
 				socket,
 				querySettings: settings,
 				error,
@@ -63,11 +63,11 @@ class ListeningHandler {
 			if (!shouldCancelError) return
 
 			if (error.code === "ERRADDRINUSE") {
-				Logger.error(getKey("query.server.listening.failed").replace("%s", address))
+				Logger.error(get_key("query.server.listening.failed").replace("%s", address))
 				return
 			}
 
-			Logger.error(getKey("query.server.error").replace("%s", error.stack))
+			Logger.error(get_key("query.server.error").replace("%s", error.stack))
 		}
 	}
 }

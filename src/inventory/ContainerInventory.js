@@ -23,7 +23,7 @@ class ContainerInventory extends Inventory {
 	 * @param {import("Frog").Packet} packet
 	 */
 	handle(player, packet) {
-		Frog.eventEmitter.emit("inventoryContainerItemRequest", {
+		Frog.event_emitter.emit("inventoryContainerItemRequest", {
 			player,
 			packet,
 		})

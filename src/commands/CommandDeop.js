@@ -19,14 +19,14 @@ const PermissionManager = require("../permission/PermissionManager")
 
 const ArgumentType = require("./types/ArgumentType")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 /**
  * A command that removes the op of the player
  */
 class CommandDeop extends Command {
-	name = getKey("commands.deop.name")
-	description = getKey("commands.deop.description")
+	name = get_key("commands.deop.name")
+	description = get_key("commands.deop.description")
 	minArgs = 1
 	requiresOp = true
 	args = [
@@ -49,9 +49,9 @@ class CommandDeop extends Command {
 		try {
 			await PermissionManager.deop(playerName)
 
-			player.sendMessage(getKey("commands.deop.execution.success").replace("%s", playerName))
+			player.send_message(get_key("commands.deop.execution.success").replace("%s", playerName))
 		} catch {
-			player.sendMessage(getKey("commands.deop.execution.fail").replace("%s", playerName))
+			player.send_message(get_key("commands.deop.execution.fail").replace("%s", playerName))
 		}
 	}
 }

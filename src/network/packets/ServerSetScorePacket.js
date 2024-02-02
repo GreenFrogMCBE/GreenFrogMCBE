@@ -26,7 +26,7 @@ class ServerSetScorePacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			action: this.action,
 			entries: this.entries,

@@ -19,7 +19,7 @@ const ArgumentType = require("./types/ArgumentType")
 
 const { getPlayer } = require("../player/PlayerInfo")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 /**
  * Returns if the coordinates are valid
@@ -48,13 +48,13 @@ function teleportPlayerToCoordinates(player, x, y, z) {
 		z
 	)
 
-	player.sendMessage(
-		getKey("commands.teleport.execution.success")
+	player.send_message(
+		get_key("commands.teleport.execution.success")
 			.replace("%s", `${x}, ${y}, ${z}`)
 	)
 
-	player.sendMessage(
-		getKey("commands.teleport.execution.success.teleported")
+	player.send_message(
+		get_key("commands.teleport.execution.success.teleported")
 			.replace("%s", player.username)
 			.replace("%d", `${x}, ${y}, ${z}`)
 	)
@@ -72,7 +72,7 @@ function teleportPlayerToPlayer(player, targetPlayer) {
 
 		teleportPlayerToCoordinates(player, x, y, z)
 	} else {
-		player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
+		player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
 	}
 }
 
@@ -80,10 +80,10 @@ function teleportPlayerToPlayer(player, targetPlayer) {
  * A command that shows the sender to other players
  */
 class CommandTeleport extends Command {
-	name = getKey("commands.teleport.name")
-	description = getKey("commands.teleport.description")
+	name = get_key("commands.teleport.name")
+	description = get_key("commands.teleport.description")
 	aliases = [
-		getKey("commands.teleport.aliases.tp")
+		get_key("commands.teleport.aliases.tp")
 	]
 	minArgs = 1
 	maxArgs = 4
@@ -129,10 +129,10 @@ class CommandTeleport extends Command {
 				return
 			}
 
-			player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
+			player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
 		} else if (args.length > 0 && args.length < 2) { // Teleport self to player
-			if (player.permissions.isConsole) {
-				player.sendMessage(getKey("commands.errors.internalError.badSender"))
+			if (player.permissions.is_console) {
+				player.send_message(get_key("commands.errors.internalError.badSender"))
 				return
 			}
 
@@ -144,8 +144,8 @@ class CommandTeleport extends Command {
 
 			teleportPlayerToPlayer(target, destinationPlayer)
 		} else if (args.length >= 3) { // Teleport self to coordinates
-			if (player.permissions.isConsole) {
-				player.sendMessage(getKey("commands.errors.internalError.badSender"))
+			if (player.permissions.is_console) {
+				player.send_message(get_key("commands.errors.internalError.badSender"))
 				return
 			}
 
@@ -158,7 +158,7 @@ class CommandTeleport extends Command {
 				return
 			}
 
-			player.sendMessage(getKey("commands.teleport.execution.failed.coordinates.invalid"))
+			player.send_message(get_key("commands.teleport.execution.failed.coordinates.invalid"))
 		}
 	}
 }

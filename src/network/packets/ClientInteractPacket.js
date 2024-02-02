@@ -25,7 +25,7 @@ const Interact = require("../../world/types/Interact")
 const Logger = require("../../utils/Logger")
 const Frog = require("../../Frog")
 
-const { getKey } = require("../../utils/Language")
+const { get_key } = require("../../utils/Language")
 
 class ClientInteractPacket extends Packet {
 	name = "interact"
@@ -34,12 +34,12 @@ class ClientInteractPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
+	async read_packet(player, packet) {
 		const actionID = packet.data.params.action_id
 
 		let shouldInteract = true
 
-		Frog.eventEmitter.emit("playerInteract", {
+		Frog.event_emitter.emit("playerInteract", {
 			player,
 			actionID,
 			cancel: () => {
@@ -60,11 +60,11 @@ class ClientInteractPacket extends Packet {
 					z: 0,
 				}
 
-				Frog.eventEmitter.emit("playerContainerOpen", {
+				Frog.event_emitter.emit("playerContainerOpen", {
 					player,
-					windowId: WindowId.CREATIVE,
+					window_id: WindowId.CREATIVE,
 					windowType: WindowType.CREATIVE_INVENTORY,
-					sentByServer: false,
+					sent_by_server: false,
 					runtimeId: 1,
 					containerCoordinates,
 					cancel: () => {
@@ -79,10 +79,10 @@ class ClientInteractPacket extends Packet {
 				containerOpen.window_type = WindowType.CREATIVE_INVENTORY
 				containerOpen.runtime_entity_id = 1
 				containerOpen.coordinates = { x: containerCoordinates.x, y: containerCoordinates.y, z: containerCoordinates.z }
-				containerOpen.writePacket(player)
+				containerOpen.write_packet(player)
 				break
 			default:
-				Logger.debug(getKey("debug.player.unsupportedAction.id").replace("%s", actionID).replace("%d", player.username))
+				Logger.debug(get_key("debug.player.unsupportedAction.id").replace("%s", actionID).replace("%d", player.username))
 		}
 	}
 }

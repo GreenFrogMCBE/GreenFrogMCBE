@@ -17,14 +17,14 @@ const Command = require("./Command")
 
 const CommandManager = require("../server/CommandManager")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 /**
  * A command that shows a list of all other commands
  */
 class CommandHelp extends Command {
-	name = getKey("commands.help.name")
-	description = getKey("commands.help.description")
+	name = get_key("commands.help.name")
+	description = get_key("commands.help.description")
 	aliases = [
 		"?"
 	]
@@ -35,10 +35,10 @@ class CommandHelp extends Command {
 	 * @param {import("Frog").Player} player
 	 */
 	execute(player) {
-		player.sendMessage(getKey("commands.help.execution.success"))
+		player.send_message(get_key("commands.help.execution.success"))
 
 		for (const command of CommandManager.commands) {
-			player.sendMessage(getKey("commands.help.execution.command").replace("%s", command.name).replace("%d", command.description))
+			player.send_message(get_key("commands.help.execution.command").replace("%s", command.name).replace("%d", command.description))
 		}
 	}
 }

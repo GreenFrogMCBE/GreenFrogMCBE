@@ -36,7 +36,7 @@ class ServerPlayerListPacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		let data = {
 			records: {
 				type: PlayerListAction.ADD,

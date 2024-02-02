@@ -30,46 +30,46 @@ class ClientContainerClosePacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
-		let shouldClose = true
+	async read_packet(player, packet) {
+		let should_close = true
 
-		Frog.eventEmitter.emit("playerContainerClose", {
+		Frog.event_emitter.emit("playerContainerClose", {
 			player,
-			windowId: WindowId.CREATIVE,
-			sentByServer: false,
+			window_id: WindowId.CREATIVE,
+			sent_by_server: false,
 			packet,
 			cancel: () => {
-				shouldClose = false
+				should_close = false
 			},
 		})
 
-		if (!shouldClose) return
+		if (!should_close) return
 
 		if (player.inventory.container.isOpen) {
-			let shouldRemoveTheChest = true
+			let should_remove_the_chest = true
 
-			Frog.eventEmitter.emit("inventoryContainerChestRemove", {
+			Frog.event_emitter.emit("inventoryContainerChestRemove", {
 				player,
 				cancel: () => {
-					shouldRemoveTheChest = false
+					should_remove_the_chest = false
 				},
 			})
 
-			if (!shouldRemoveTheChest) return
+			if (!should_remove_the_chest) return
 
 			const { x, y, z } = player.inventory.container.blockPosition
 
-			player.world.placeBlock(x, y, z, vanillaBlocks.air.legacy_id)
+			player.world.place_block(x, y, z, vanillaBlocks.air.legacy_id)
 
 			player.inventory.container.isOpen = false
 			player.inventory.container.blockPosition = { x: undefined, y: undefined, z: undefined }
 			player.inventory.container.window = { id: undefined, type: undefined }
 		}
 
-		const containerClose = new ServerContainerClosePacket()
-		containerClose.server = false
-		containerClose.window_id = WindowId.CREATIVE
-		containerClose.writePacket(player)
+		const container_close = new ServerContainerClosePacket()
+		container_close.server = false
+		container_close.window_id = WindowId.CREATIVE
+		container_close.write_packet(player)
 	}
 }
 

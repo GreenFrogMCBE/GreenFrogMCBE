@@ -52,7 +52,7 @@ class ServerAddEntityPacket extends Packet {
 	/**
      * @param {import("Frog").Player} player
      */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			unique_id: this.unique_id,
 			runtime_id: this.runtime_id,

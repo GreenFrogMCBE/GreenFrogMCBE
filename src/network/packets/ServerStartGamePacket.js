@@ -64,7 +64,7 @@ class ServerStartGamePacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			entity_id: this.entity_id,
 			runtime_entity_id: this.runtime_entity_id,

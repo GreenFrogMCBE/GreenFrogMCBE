@@ -27,7 +27,7 @@ module.exports = {
 	/**
 	 * Loads all commands
 	 */
-	async loadCommands() {
+	async load_commands() {
 		const Frog = require("../Frog")
 		const commandsPath = path.join(__dirname, "..", "commands")
 
@@ -41,14 +41,14 @@ module.exports = {
 				}
 
 				const command = require(filePath)
-				const commandClass = new command()
+				const command_class = new command()
 
-				if (commandClass.name) {
-					this.commands.push(commandClass)
+				if (command_class.name) {
+					this.commands.push(command_class)
 				}
 			}
 
-			Frog.eventEmitter.emit("serverCommandsInitialize")
+			Frog.event_emitter.emit("serverCommandsInitialize")
 		})
 	},
 }

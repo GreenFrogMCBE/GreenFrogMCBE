@@ -18,7 +18,7 @@ const path = require("path")
 
 const Logger = require("../utils/Logger")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 const PluginManager = require("./PluginManager")
 
@@ -47,7 +47,7 @@ module.exports = {
 	async loadPlugins() {
 		const Frog = require("../Frog")
 
-		const files = fs.readdirSync(Frog.directories.pluginsFolder)
+		const files = fs.readdirSync(Frog.directories.plugins_folder)
 
 		for (const file of files) {
 			const stats = fs.statSync(getFile(file))
@@ -63,13 +63,13 @@ module.exports = {
 					main = packageJson.main
 
 					Logger.info(
-						getKey("plugin.loading.loading")
+						get_key("plugin.loading.loading")
 							.replace("%s", name)
 							.replace("%d", version)
 					)
 				} catch (error) {
 					Logger.warning(
-						getKey("plugin.loading.warning.invalidJson")
+						get_key("plugin.loading.warning.invalidJson")
 							.replace("%s", file)
 							.replace("%d", error.stack)
 					)
@@ -85,13 +85,13 @@ module.exports = {
 					PluginManager.addPlugin(name, version)
 
 					Logger.info(
-						getKey("plugin.loading.loaded")
+						get_key("plugin.loading.loaded")
 							.replace("%s", name)
 							.replace("%d", version)
 					)
 				} catch (error) {
 					Logger.error(
-						getKey("plugin.loading.failed")
+						get_key("plugin.loading.failed")
 							.replace("%s", name)
 							.replace("%d", error.stack)
 					)
@@ -146,7 +146,7 @@ module.exports = {
 						main = packageJson.main
 
 						Logger.info(
-							getKey("plugin.unloading.unloading")
+							get_key("plugin.unloading.unloading")
 								.replace("%s", name)
 						)
 					} catch {
@@ -160,13 +160,13 @@ module.exports = {
 							await plugin.onShutdown()
 
 							Logger.info(
-								getKey("plugin.unloading.success")
+								get_key("plugin.unloading.success")
 									.replace("%s", name)
 							)
 						}
 					} catch (error) {
 						Logger.error(
-							getKey("plugin.unloading.failed")
+							get_key("plugin.unloading.failed")
 								.replace("%s", name)
 								.replace("%d", error.stack)
 						)
@@ -177,7 +177,7 @@ module.exports = {
 			}
 		} catch (error) {
 			Logger.error(
-				getKey("plugin.unloading.failed")
+				get_key("plugin.unloading.failed")
 					.replace("%d", error.stack)
 			)
 		}

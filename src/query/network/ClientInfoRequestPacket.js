@@ -37,7 +37,7 @@ class ClientInfoRequestPacket extends Packet {
 	 * @param {import("dgram").Socket} socket
 	 * @param {import("Frog").QuerySettings} querySettings
 	 */
-	readPacket(client, packet, socket, querySettings) {
+	read_packet(client, packet, socket, querySettings) {
 		const sessionId = ClientTokens.clientTokens.get(`${client.address},${client.port}`)
 
 		switch (packet.length) {
@@ -45,13 +45,13 @@ class ClientInfoRequestPacket extends Packet {
 				const basicInfoResponsePacket = new ServerInfoResponsePacket()
 				basicInfoResponsePacket.game = "MINECRAFTBE"
 				basicInfoResponsePacket.levelName = querySettings.levelName
-				basicInfoResponsePacket.numPlayers = PlayerInfo.playersOnline.length
+				basicInfoResponsePacket.numPlayers = PlayerInfo.players_online.length
 				basicInfoResponsePacket.maxPlayers = querySettings.maxPlayers
 				basicInfoResponsePacket.serverName = querySettings.motd
 				basicInfoResponsePacket.serverAddress = querySettings.host
 				basicInfoResponsePacket.serverPort = querySettings.port
 				basicInfoResponsePacket.sessionId = sessionId
-				basicInfoResponsePacket.writePacket(client, socket)
+				basicInfoResponsePacket.write_packet(client, socket)
 				break
 			case InfoRequest.FULL:
 				const fullInfoResponsePacket = new ServerInfoResponsePacket()
@@ -59,7 +59,7 @@ class ClientInfoRequestPacket extends Packet {
 				fullInfoResponsePacket.game = "MINECRAFTBE"
 				fullInfoResponsePacket.levelName = querySettings.levelName
 				fullInfoResponsePacket.serverName = querySettings.motd
-				fullInfoResponsePacket.numPlayers = PlayerInfo.playersOnline.length
+				fullInfoResponsePacket.numPlayers = PlayerInfo.players_online.length
 				fullInfoResponsePacket.maxPlayers = querySettings.maxPlayers
 				fullInfoResponsePacket.version = querySettings.version
 				fullInfoResponsePacket.serverAddress = querySettings.host
@@ -68,7 +68,7 @@ class ClientInfoRequestPacket extends Packet {
 				fullInfoResponsePacket.plugins = Frog.config.query.showPlugins ? "GreenFrogMCBE: " + PluginManager.plugins.toString() : "GreenFrogMCBE: "
 				fullInfoResponsePacket.sessionId = sessionId
 				fullInfoResponsePacket.whitelist = false // TODO: Implement whitelist
-				fullInfoResponsePacket.writePacket(client, socket)
+				fullInfoResponsePacket.write_packet(client, socket)
 				break
 		}
 	}

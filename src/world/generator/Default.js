@@ -49,7 +49,7 @@ class Default extends Generator {
 	/** @type {number} */
 	blockCount = 0
 
-	getChunkData() {
+	get_chunk_data() {
 		const airThreshold = 1 / 3000
 		const hillThreshold = 5 / 600
 

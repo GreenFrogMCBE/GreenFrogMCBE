@@ -30,30 +30,6 @@ const CommandManager = require("./CommandManager")
  */
 const closed = false
 
-/**
- * Emits the `serverCommand` event
- *
- * @param {string[]} args
- * @param {string} command
- * @returns {boolean}
- * @private
- */
-function emitServerCommandEvent(args, command) {
-	const Frog = require("../Frog")
-
-	let shouldExecuteCommand = true
-
-	Frog.eventEmitter.emit("serverCommand", {
-		args,
-		command,
-		cancel: () => {
-			shouldExecuteCommand = false
-		}
-	})
-
-	return shouldExecuteCommand
-}
-
 module.exports = {
 	/**
 	 * Returns true if the console is closed, false otherwise.
@@ -68,7 +44,7 @@ module.exports = {
 	 * @param {string} string - The string to check
 	 * @returns {boolean} If the string is empty
 	 */
-	isEmpty(string) {
+	is_empty(string) {
 		return !string.trim()
 	},
 
@@ -78,7 +54,7 @@ module.exports = {
 	 * @param {string} string - The string that you want to remove slash from
 	 * @returns {string} - The string without the / character
 	 */
-	removeSlash(string) {
+	remove_slash(string) {
 		return string.replace("/", "")
 	},
 
@@ -88,15 +64,15 @@ module.exports = {
 	 * @param {Error} error
 	 * @param {string} command
 	 */
-	handleCommandError(error, command) {
+	handle_command_error(error, command) {
 		const Frog = require("../Frog")
 
-		Frog.eventEmitter.emit("serverCommandProcessError", {
+		Frog.event_emitter.emit("serverCommandProcessError", {
 			command,
 			error,
 		})
 
-		Logger.error(Language.getKey("commands.errors.internalError").replace("%s", error.stack))
+		Logger.error(Language.get_key("commands.errors.internalError").replace("%s", error.stack))
 	},
 
 	/**
@@ -106,7 +82,7 @@ module.exports = {
 	 * @param {string[]} args
 	 * @returns {boolean}
 	 */
-	findCommand(inputCommand, args) {
+	find_command(inputCommand, args) {
 		const Frog = require("../Frog")
 
 		for (const command of CommandManager.commands) {
@@ -119,7 +95,7 @@ module.exports = {
 			) {
 				if (command.minArgs !== undefined && command.minArgs > args.length) {
 					Logger.info(
-						Language.getKey("commands.errors.syntaxError.minArg")
+						Language.get_key("commands.errors.syntaxError.minArg")
 							.replace("%s", command.minArgs)
 							.replace("%d", args.length.toString())
 					)
@@ -129,7 +105,7 @@ module.exports = {
 
 				if (command.maxArgs !== undefined && command.maxArgs < args.length) {
 					Logger.info(
-						Language.getKey("commands.errors.syntaxError.maxArg")
+						Language.get_key("commands.errors.syntaxError.maxArg")
 							.replace("%s", command.maxArgs)
 							.replace("%d", args.length.toString())
 					)
@@ -137,7 +113,7 @@ module.exports = {
 					return true
 				}
 
-				command.execute(Frog.asPlayer, Frog, args)
+				command.execute(Frog.as_player, Frog, args)
 				return true
 			}
 		}
@@ -150,23 +126,35 @@ module.exports = {
 	 *
 	 * @param {string} command
 	 */
-	executeCommand(command) {
+	execute_command(command) {
 		const args = command?.split(" ")?.slice(1)
 
 		if (this.closed) {
 			throw new CommandProcessException("Cannot execute a command when the console is closed")
 		}
 
-		if (!emitServerCommandEvent(args, command)) return
+		const Frog = require("../Frog")
+
+		let should_execute_command = true
+	
+		Frog.event_emitter.emit("serverCommand", {
+			args,
+			command,
+			cancel: () => {
+				should_execute_command = false
+			}
+		})
+	
+		if (!should_execute_command) return
 
 		try {
-			const commandFound = this.findCommand(command, args)
+			const command_found = this.find_command(command, args)
 
-			if (!commandFound) {
-				this.handleErrorForInvalidCommand(command)
+			if (!command_found) {
+				this.handle_invalid_command_error(command)
 			}
 		} catch (error) {
-			this.handleCommandError(error, command)
+			this.handle_command_error(error, command)
 		}
 	},
 
@@ -175,10 +163,10 @@ module.exports = {
 	 *
 	 * @param {string} command
 	 */
-	handleErrorForInvalidCommand(command) {
-		CommandVerifier.throwError(
+	handle_invalid_command_error(command) {
+		CommandVerifier.throw_error(
 			{
-				sendMessage: (message) => {
+				send_message: (message) => {
 					Logger.info(message)
 				},
 			},
@@ -192,20 +180,20 @@ module.exports = {
 	 * @async
 	 */
 	async start() {
-		const commandHandler = readline.createInterface({
+		const command_handler = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout
 		})
 
-		commandHandler
+		command_handler
 			.setPrompt("")
 
-		commandHandler.on("line", (line) => {
-			const command = this.removeSlash(line)
+		command_handler.on("line", (line) => {
+			const command = this.remove_slash(line)
 
-			if (this.isEmpty(command)) return
+			if (this.is_empty(command)) return
 
-			this.executeCommand(command)
+			this.execute_command(command)
 		})
 	}
 }

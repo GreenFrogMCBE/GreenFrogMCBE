@@ -38,7 +38,7 @@ class ServerSetTitlePacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			type: this.type,
 			text: this.type === Title.CLEAR ? "" : this.text,

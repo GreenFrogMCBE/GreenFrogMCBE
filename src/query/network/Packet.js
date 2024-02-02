@@ -26,13 +26,13 @@ class Packet {
 	 * @param {import("dgram").Socket} socket
 	 * @param {import("Frog").QuerySettings} [querySettings]
 	 */
-	readPacket(client, packet, socket, querySettings) {}
+	read_packet(client, packet, socket, querySettings) {}
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client
 	 * @param {import("dgram").Socket} socket
 	 */
-	writePacket(client, socket) {}
+	write_packet(client, socket) {}
 }
 
 module.exports = Packet

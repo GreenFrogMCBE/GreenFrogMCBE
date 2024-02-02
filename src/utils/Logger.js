@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const { convert_console_color } = require("./ConsoleColorConvertor")
-const { getKey } = require("./Language")
+const { get_key } = require("./Language")
 const moment = require("moment")
 
 const LoggingException = require("./exceptions/LoggingException")
@@ -43,14 +43,14 @@ module.exports = {
 
 		if (!console[consoleLoggingLevel]) {
 			throw new LoggingException(
-				getKey("exceptions.logger.invalidType")
+				get_key("exceptions.logger.invalidType")
 					.replace("%s", consoleLoggingLevel)
 			)
 		}
 
 		let shouldLogMessage = true
 
-		Frog.eventEmitter.emit("serverLogMessage", {
+		Frog.event_emitter.emit("serverLogMessage", {
 			consoleLoggingLevel,
 			levelName,
 			message,
@@ -85,7 +85,7 @@ module.exports = {
 	 * @param {string} message- The log message.
 	 */
 	info(message) {
-		this.log(getKey("logger.info"), 32, message, "info")
+		this.log(get_key("logger.info"), 32, message, "info")
 	},
 
 	/**
@@ -94,7 +94,7 @@ module.exports = {
 	 * @param {string} message- The log message.
 	 */
 	warning(message) {
-		this.log(getKey("logger.warn"), 33, message, "warn")
+		this.log(get_key("logger.warn"), 33, message, "warn")
 	},
 
 	/**
@@ -103,7 +103,7 @@ module.exports = {
 	 * @param {string} message- The log message.
 	 */
 	error(message) {
-		this.log(getKey("logger.error"), 31, message, "error")
+		this.log(get_key("logger.error"), 31, message, "error")
 	},
 
 	/**
@@ -117,6 +117,6 @@ module.exports = {
 
 		if (!Frog.is_debug) return
 
-		this.log(getKey("logger.debug"), 35, message, "info")
+		this.log(get_key("logger.debug"), 35, message, "info")
 	},
 }

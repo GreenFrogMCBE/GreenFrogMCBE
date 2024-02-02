@@ -31,7 +31,7 @@ class ServerHandshakeResponsePacket extends Packet {
 	 * @param {import("dgram").RemoteInfo} client
 	 * @param {import("dgram").Socket} socket
 	 */
-	writePacket(client, socket) {
+	write_packet(client, socket) {
 		socket.send(
 			new SmartBuffer()
 				.writeUInt8(QueryPacket.HANDSHAKE)

@@ -15,7 +15,7 @@
  */
 const Command = require("./Command")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 const PlayerInfo = require("../player/PlayerInfo")
 
@@ -23,8 +23,8 @@ const PlayerInfo = require("../player/PlayerInfo")
  * A command to disconnect a player from the server
  */
 class CommandKick extends Command {
-	name = getKey("commands.kick.name")
-	description = getKey("commands.kick.description")
+	name = get_key("commands.kick.name")
+	description = get_key("commands.kick.description")
 	minArgs = 1
 	requiresOp = true
 	args = [
@@ -47,11 +47,11 @@ class CommandKick extends Command {
 		const target = PlayerInfo.getPlayer(playerName)
 
 		if (!target) {
-			player.sendMessage(getKey("commands.kick.execution.failed.notOnline").replace("%s", playerName))
+			player.send_message(get_key("commands.kick.execution.failed.notOnline").replace("%s", playerName))
 			return
 		}
 
-		target.kick(getKey("kickMessages.wereKicked").replace("%s", reason))
+		target.kick(get_key("kickMessages.wereKicked").replace("%s", reason))
 	}
 }
 

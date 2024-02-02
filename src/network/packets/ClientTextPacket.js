@@ -19,7 +19,7 @@ const PlayerInfo = require("../../player/PlayerInfo")
 
 const Logger = require("../../utils/Logger")
 
-const { getKey } = require("../../utils/Language")
+const { get_key } = require("../../utils/Language")
 
 const Packet = require("./Packet")
 
@@ -30,7 +30,7 @@ class ClientTextPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
+	async read_packet(player, packet) {
 		const message = packet.data.params.message
 
 		if (
@@ -43,7 +43,7 @@ class ClientTextPacket extends Packet {
 
 		let shouldChat = true
 
-		Frog.eventEmitter.emit("playerChat", {
+		Frog.event_emitter.emit("playerChat", {
 			player,
 			message,
 			cancel: () => {
@@ -54,12 +54,12 @@ class ClientTextPacket extends Packet {
 		if (!shouldChat) return
 
 		const formattedMessage = 
-			getKey("chat.format").replace("%s", player.username).replace("%d", message.replace(/§/g, ""))
+			get_key("chat.format").replace("%s", player.username).replace("%d", message.replace(/§/g, ""))
 
 		Logger.info(formattedMessage)
 
-		for (const recipient of PlayerInfo.playersOnline) {
-			recipient.sendMessage(formattedMessage)
+		for (const recipient of PlayerInfo.players_online) {
+			recipient.send_message(formattedMessage)
 		}
 	}
 }

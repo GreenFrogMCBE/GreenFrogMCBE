@@ -15,7 +15,7 @@
  */
 const Command = require("./Command")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 const Frog = require("../Frog")
 
@@ -23,14 +23,14 @@ const Frog = require("../Frog")
  * A command to shutdown the server.
  */
 class CommandStop extends Command {
-	name = getKey("commands.stop.name")
-	description = getKey("commands.stop.description")
+	name = get_key("commands.stop.name")
+	description = get_key("commands.stop.description")
 	minArgs = 0
 	maxArgs = 0
 	requiresOp = true
 
 	execute() {
-		Frog.shutdownServer()
+		Frog.shutdown_server()
 	}
 }
 

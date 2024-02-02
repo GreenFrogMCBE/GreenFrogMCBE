@@ -26,7 +26,7 @@ class ServerTrimDataPacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			patterns: this.patterns,
 			materials: this.materials,

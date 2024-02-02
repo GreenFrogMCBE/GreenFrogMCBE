@@ -26,7 +26,7 @@ class ServerSetEntityMotion extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	writePacket(player) {
+	write_packet(player) {
 		player.queue(this.name, {
 			runtime_entity_id: this.runtime_entity_id,
 			velocity: this.velocity,

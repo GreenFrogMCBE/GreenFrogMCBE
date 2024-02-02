@@ -20,7 +20,7 @@ module.exports = {
 	 * @param {string} string
 	 * @returns {string}
 	 */
-	capitalizeFirstLetter(string) {
+	capitalize_first_letter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1)
 	},
 }

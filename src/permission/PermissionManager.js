@@ -30,7 +30,7 @@ const fs = require("fs")
 function emitPlayerOpStatusChange(username, opped) {
 	let shouldOp = true
 
-	Frog.eventEmitter.emit("playerOpStatusChange", {
+	Frog.event_emitter.emit("playerOpStatusChange", {
 		username,
 		opped,
 		cancel: () => {
@@ -50,7 +50,7 @@ module.exports = {
 	 * @async
 	 */
 	async isOpped(username) {
-		const oppedPlayers = fs.readFileSync(Frog.directories.opFile, "utf8")
+		const oppedPlayers = fs.readFileSync(Frog.directories.op_file, "utf8")
 			.split("\n")
 
 		return oppedPlayers.includes(username)
@@ -66,7 +66,7 @@ module.exports = {
 	async op(username) {
 		if (!emitPlayerOpStatusChange(username, true)) return
 
-		fs.appendFileSync(Frog.directories.opFile, username + "\n")
+		fs.appendFileSync(Frog.directories.op_file, username + "\n")
 
 		const target = PlayerInfo.getPlayer(username)
 
@@ -85,13 +85,13 @@ module.exports = {
 	async deop(username) {
 		if (!emitPlayerOpStatusChange(username, false)) return
 
-		const ops = fs.readFileSync(Frog.directories.opFile, "utf-8")
+		const ops = fs.readFileSync(Frog.directories.op_file, "utf-8")
 		const updatedOps = ops
 			.split("\n")
 			.filter((op) => op !== username)
 			.join("\n")
 
-		fs.writeFileSync(Frog.directories.opFile, updatedOps)
+		fs.writeFileSync(Frog.directories.op_file, updatedOps)
 
 		const target = PlayerInfo.getPlayer(username)
 

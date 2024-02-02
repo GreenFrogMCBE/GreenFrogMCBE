@@ -26,7 +26,7 @@ class Generator {
 	/**
 	 * @returns {Buffer | null}
 	 */
-	getChunkData() {
+	get_chunk_data() {
 		return null
 	}
 
@@ -34,28 +34,28 @@ class Generator {
 	 * @param {import("Frog").Player} player
 	 */
 	generate(player) {
-		let shouldGenerateWorld = true
+		let should_generate_world = true
 
-		Frog.eventEmitter.emit("worldGenerate", {
+		Frog.event_emitter.emit("worldGenerate", {
 			player,
 			cancel() {
-				shouldGenerateWorld = false
+				should_generate_world = false
 			}
 		})
 
-		if (!shouldGenerateWorld) return
+		if (!should_generate_world) return
 
-		const chunkRadius = player.world.renderDistance
+		const chunk_radius = player.world.render_distance
 
-		for (let x = player.location.x - chunkRadius; x <= player.location.x + chunkRadius; x++) {
-			for (let z = player.location.z - chunkRadius; z <= player.location.z + chunkRadius; z++) {
-				const levelChunk = new ServerLevelChunkPacket()
-				levelChunk.x = x
-				levelChunk.z = z
-				levelChunk.sub_chunk_count = 1
-				levelChunk.cache_enabled = false
-				levelChunk.payload = this.getChunkData()
-				levelChunk.writePacket(player)
+		for (let x = player.location.x - chunk_radius; x <= player.location.x + chunk_radius; x++) {
+			for (let z = player.location.z - chunk_radius; z <= player.location.z + chunk_radius; z++) {
+				const level_chunk = new ServerLevelChunkPacket()
+				level_chunk.x = x
+				level_chunk.z = z
+				level_chunk.sub_chunk_count = 1
+				level_chunk.cache_enabled = false
+				level_chunk.payload = this.get_chunk_data()
+				level_chunk.write_packet(player)
 			}
 		}
 	}

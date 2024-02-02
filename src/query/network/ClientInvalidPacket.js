@@ -18,7 +18,7 @@ const Frog = require("../../Frog")
 
 const Packet = require("./Packet")
 
-const { getKey } = require("../../utils/Language")
+const { get_key } = require("../../utils/Language")
 
 const QueryLogger = require("../utils/QueryLogger")
 
@@ -31,13 +31,13 @@ class ClientInvalidPacket extends Packet {
 	 * @param {import("dgram").RemoteInfo} client
 	 * @param {Buffer} packet
 	 */
-	readPacket(client, packet) {
-		Frog.eventEmitter.emit("queryInvalidPacket", {
+	read_packet(client, packet) {
+		Frog.event_emitter.emit("queryInvalidPacket", {
 			client,
 			packet,
 		})
 
-		QueryLogger.logPacket(getKey("query.server.network.packets.invalidPacket").replace("%s", client.address.toString()), true)
+		QueryLogger.logPacket(get_key("query.server.network.packets.invalidPacket").replace("%s", client.address.toString()), true)
 	}
 }
 

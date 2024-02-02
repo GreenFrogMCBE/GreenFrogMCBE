@@ -17,7 +17,7 @@ const Command = require("./Command")
 
 const { getPlayer } = require("../player/PlayerInfo")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 const ArgumentType = require("./types/ArgumentType")
 
@@ -25,12 +25,12 @@ const ArgumentType = require("./types/ArgumentType")
  * A command that sends a private message to other players
  */
 class CommandTell extends Command {
-	name = getKey("commands.tell.name")
-	description = getKey("commands.tell.description")
+	name = get_key("commands.tell.name")
+	description = get_key("commands.tell.description")
 	aliases = [
-		getKey("commands.tell.aliases.w"), 
-		getKey("commands.tell.aliases.whisper"), 
-		getKey("commands.tell.aliases.msg")
+		get_key("commands.tell.aliases.w"), 
+		get_key("commands.tell.aliases.whisper"), 
+		get_key("commands.tell.aliases.msg")
 	]
 	minArgs = 2
 	args = [
@@ -55,15 +55,15 @@ class CommandTell extends Command {
 		const target = getPlayer(args[0])
 
 		if (!target) {
-			player.sendMessage(getKey("commands.errors.targetError.targetsNotFound"))
+			player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
 			return
 		}
 
 		const message = args.slice(1).join(" ")
 
-		target.sendMessage(getKey("commands.tell.execution.success").replace("%s", player.username).replace("%d", player.username).replace("%f", message))
+		target.send_message(get_key("commands.tell.execution.success").replace("%s", player.username).replace("%d", player.username).replace("%f", message))
 
-		player.sendMessage(getKey("commands.tell.execution.success.whisper").replace("%s", target.username).replace("%d", message))
+		player.send_message(get_key("commands.tell.execution.success.whisper").replace("%s", target.username).replace("%d", message))
 	}
 }
 

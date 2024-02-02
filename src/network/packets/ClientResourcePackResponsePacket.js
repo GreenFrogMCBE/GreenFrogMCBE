@@ -68,7 +68,7 @@ const trimPatterns = require("../../resources/json/trimData.json").patterns
 const customItems = require("../../../world/custom_items.json").items
 const gamerules = require("../../../world/gamerules.json").gamerules
 
-const { getKey } = require("../../utils/Language")
+const { get_key } = require("../../utils/Language")
 
 const config = Frog.config
 
@@ -79,19 +79,19 @@ class ClientResourcePackResponsePacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
+	async read_packet(player, packet) {
 		const responseStatus = packet.data.params.response_status
 
 		switch (responseStatus) {
 			case ResourcePackStatus.NONE:
-				Logger.info(getKey("status.resourcePacks.none").replace("%s", player.username))
+				Logger.info(get_key("status.resourcePacks.none").replace("%s", player.username))
 				break
 			case ResourcePackStatus.REFUSED:
-				Logger.info(getKey("status.resourcePacks.refused").replace("%s", player.username))
-				player.kick(getKey("kickMessages.resourcePacksRefused"))
+				Logger.info(get_key("status.resourcePacks.refused").replace("%s", player.username))
+				player.kick(get_key("kickMessages.resourcePacksRefused"))
 				break
 			case ResourcePackStatus.HAVE_ALL_PACKS:
-				Logger.info(getKey("status.resourcePacks.installed").replace("%s", player.username))
+				Logger.info(get_key("status.resourcePacks.installed").replace("%s", player.username))
 
 				const resourcePackStack = new ServerResourcePackStackPacket()
 				resourcePackStack.must_accept = false
@@ -100,11 +100,11 @@ class ClientResourcePackResponsePacket extends Packet {
 				resourcePackStack.game_version = ""
 				resourcePackStack.experiments = []
 				resourcePackStack.experiments_previously_used = false
-				resourcePackStack.writePacket(player)
+				resourcePackStack.write_packet(player)
 				break
 			case ResourcePackStatus.COMPLETED:
 				player.world = new World()
-				player.world.renderDistance = config.world.renderDistance.serverSide
+				player.world.render_distance = config.world.render_distance.serverSide
 				player.world.name = config.world.name
 				player.world.generator = config.world.generators.type.toLowerCase()
 
@@ -126,7 +126,7 @@ class ClientResourcePackResponsePacket extends Packet {
 
 				player.gamemode = config.world.gamemode.player
 
-				Logger.info(getKey("status.resourcePacks.joined").replace("%s", player.username))
+				Logger.info(get_key("status.resourcePacks.joined").replace("%s", player.username))
 
 				const startGame = new ServerStartGamePacket()
 				startGame.entity_id = 0
@@ -149,36 +149,36 @@ class ClientResourcePackResponsePacket extends Packet {
 				startGame.movement_authority = MovementAuthority.SERVER
 				startGame.gamerules = gamerules
 				startGame.itemstates = itemStates
-				startGame.writePacket(player)
+				startGame.write_packet(player)
 
 				const compressedBiomeDefinitions = new ServerCompressedBiomeDefinitionListPacket()
 				compressedBiomeDefinitions.raw_payload = biomeDefinitions
-				compressedBiomeDefinitions.writePacket(player)
+				compressedBiomeDefinitions.write_packet(player)
 
 				const availableEntityIds = new ServerAvailableEntityIdentifiersPacket()
 				availableEntityIds.nbt = availableEntities
-				availableEntityIds.writePacket(player)
+				availableEntityIds.write_packet(player)
 
 				const creativeContent = new ServerCreativeContentPacket()
 				creativeContent.items = creativeContentItems
-				creativeContent.writePacket(player)
+				creativeContent.write_packet(player)
 
 				const commandsEnabled = new ServerSetCommandsEnabledPacket()
 				commandsEnabled.enabled = true
-				commandsEnabled.writePacket(player)
+				commandsEnabled.write_packet(player)
 
 				const trimData = new ServerTrimDataPacket()
 				trimData.patterns = trimPatterns
 				trimData.materials = trimMaterials
-				trimData.writePacket(player)
+				trimData.write_packet(player)
 
 				const featureRegistry = new ServerFeatureRegistryPacket()
 				featureRegistry.features = features
-				featureRegistry.writePacket(player)
+				featureRegistry.write_packet(player)
 
 				const clientCacheStatus = new ServerClientCacheStatusPacket()
 				clientCacheStatus.enabled = true
-				clientCacheStatus.writePacket(player)
+				clientCacheStatus.write_packet(player)
 
 				ClientCommandManager.init(player)
 
@@ -201,43 +201,43 @@ class ClientResourcePackResponsePacket extends Packet {
 				try {
 					itemComponent.entries = customItems
 				} catch (error) {
-					Logger.warning(getKey("warning.customItems.loading.failed").replace("%s", error.stack))
+					Logger.warning(get_key("warning.customItems.loading.failed").replace("%s", error.stack))
 					itemComponent.entries = []
 				}
-				itemComponent.writePacket(player)
+				itemComponent.write_packet(player)
 
 				// player.renderChunks is true by default but can be disabled by plugins
 				if (player.renderChunks) {
-					player.setChunkRadius(player.world.renderDistance)
+					player.setChunkRadius(player.world.render_distance)
 
-					const networkChunkPublisher = new ServerNetworkChunkPublisherUpdatePacket()
-					networkChunkPublisher.coordinates = { x: 0, y: 0, z: 0 }
-					networkChunkPublisher.radius = config.world.renderDistance.clientSide
-					networkChunkPublisher.saved_chunks = []
-					networkChunkPublisher.writePacket(player)
+					const network_chunk_publisher = new ServerNetworkChunkPublisherUpdatePacket()
+					network_chunk_publisher.coordinates = { x: 0, y: 0, z: 0 }
+					network_chunk_publisher.radius = config.world.render_distance.client_side
+					network_chunk_publisher.saved_chunks = []
+					network_chunk_publisher.write_packet(player)
 
 					const generatorFileName = player.world.generator[0].toUpperCase() + player.world.generator.substring(1)
 					const generatorFile = require("../../world/generator/" + generatorFileName)
 					new generatorFile().generate(player)
 				}
 
-				Logger.info(getKey("status.resourcePacks.spawned").replace("%s", player.username))
+				Logger.info(get_key("status.resourcePacks.spawned").replace("%s", player.username))
 
 				setTimeout(() => {
 					player.sendPlayStatus(PlayStatus.PLAYER_SPAWN)
 
-					Frog.eventEmitter.emit("playerSpawn", { player })
+					Frog.event_emitter.emit("playerSpawn", { player })
 
 					player.setEntityData(/** @type {import("Frog").EntityData} */(entityData))
 					player.setSpeed(0.1)
 
-					for (const onlinePlayer of PlayerInfo.playersOnline) {
+					for (const onlinePlayer of PlayerInfo.players_online) {
 						if (onlinePlayer.username === player.username) {
 							return // Vanilla behaviour
 						}
 
 						if (Frog.config.chat.systemMessages.join) {
-							onlinePlayer.sendMessage(getKey("chat.broadcasts.joined").replace("%s", player.username))
+							onlinePlayer.send_message(get_key("chat.broadcasts.joined").replace("%s", player.username))
 						}
 
 						const { xuid, uuid } = player.profile
@@ -248,7 +248,7 @@ class ClientResourcePackResponsePacket extends Packet {
 						playerList.xbox_id = xuid
 						playerList.id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
 						playerList.uuid = uuid
-						playerList.writePacket(onlinePlayer)
+						playerList.write_packet(onlinePlayer)
 					}
 				}, 2000)
 		}

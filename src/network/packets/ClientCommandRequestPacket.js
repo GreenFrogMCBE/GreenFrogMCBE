@@ -21,7 +21,7 @@ const CommandVerifier = require("../../utils/CommandVerifier")
 
 const Packet = require("./Packet")
 
-const { getKey } = require("../../utils/Language")
+const { get_key } = require("../../utils/Language")
 
 const config = Frog.config
 
@@ -32,72 +32,72 @@ class ClientCommandRequestPacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
+	async read_packet(player, packet) {
 		if (Frog.config.chat.features.commands) return
 
-		let executedCommand = packet.data.params.command.replace("/", "")
+		let executed_command = packet.data.params.command.replace("/", "")
 
-		const args = executedCommand.split(" ").slice(1)
+		const args = executed_command.split(" ").slice(1)
 
-		let shouldExecuteCommand = true
+		let should_execute_command = true
 
-		Frog.eventEmitter.emit("playerCommand", {
+		Frog.event_emitter.emit("playerCommand", {
 			player,
 			args,
-			command: executedCommand,
+			command: executed_command,
 			cancel: () => {
-				shouldExecuteCommand = false
+				should_execute_command = false
 			},
 		})
 
-		if (!shouldExecuteCommand) return
+		if (!should_execute_command) return
 
-		if (config.chat.blockInvalidPackets.commands) {
-			executedCommand = executedCommand.replace("%d", executedCommand.replace("§", ""))
+		if (config.chat.block_invalid_packets.commands) {
+			executed_command = executed_command
+				.replace("%d", executed_command.replace("§", ""))
 
-			if (executedCommand > 256) {
-				Frog.eventEmitter.emit("playerMalformatedChatCommand", {
+			if (executed_command > 256) {
+				return Frog.event_emitter.emit("playerMalformatedChatCommand", {
 					player,
-					command: executedCommand,
+					command: executed_command,
 				})
-				return
 			}
 		}
 
-		Logger.info(getKey("commands.ingame.executed").replace("%s", player.username).replace("%d", executedCommand))
+		Logger.info(get_key("commands.ingame.executed").replace("%s", player.username).replace("%d", executed_command))
 
 		try {
-			let commandFound = false
+			let command_found = false
 
 			for (const command of CommandManager.commands) {
-				if (command.name === executedCommand.split(" ")[0] || (command.aliases && command.aliases.includes(executedCommand.split(" ")[0]))) {
+				if (command.name === executed_command.split(" ")[0] || (command.aliases && command.aliases.includes(executed_command.split(" ")[0]))) {
 					if (command.requiresOp && !player.permissions.op) {
-						CommandVerifier.throwError(player, executedCommand.split(" ")[0])
+						CommandVerifier.throw_error(player, executed_command.split(" ")[0])
 						return
 					}
 
 					if (command.minArgs !== undefined && command.minArgs > args.length) {
-						player.sendMessage(getKey("commands.errors.syntaxError.minArg").replace("%s", command.minArgs).replace("%d", args.length))
+						player.send_message(get_key("commands.errors.syntaxError.minArg").replace("%s", command.minArgs).replace("%d", args.length))
 						return
 					}
 
 					if (command.maxArgs !== undefined && command.maxArgs < args.length) {
-						player.sendMessage(getKey("commands.errors.syntaxError.maxArg").replace("%s", command.maxArgs).replace("%d", args.length))
+						player.send_message(get_key("commands.errors.syntaxError.maxArg").replace("%s", command.maxArgs).replace("%d", args.length))
 						return
 					}
 
 					command.execute(player, Frog, args)
 
-					commandFound = true
+					command_found = true
 					break
 				}
 			}
 
-			if (!commandFound) {
-				CommandVerifier.throwError(player, executedCommand.split(" ")[0])
+			if (!command_found) {
+				CommandVerifier.throw_error(player, executed_command.split(" ")[0])
 			}
 		} catch (error) {
-			Logger.error(getKey("commands.errors.internalError.player").replace("%s", player.username).replace("%d", error.stack))
+			Logger.error(get_key("commands.errors.internalError.player").replace("%s", player.username).replace("%d", error.stack))
 		}
 	}
 }

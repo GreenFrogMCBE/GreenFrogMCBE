@@ -24,7 +24,7 @@ class ClientMovePacket extends Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	async readPacket(player, packet) {
+	async read_packet(player, packet) {
 		const { x, y, z } = packet.data.params.position
 		const { pitch, yaw, on_ground } = packet.data.params
 		const fixedY = y - 2
@@ -33,7 +33,7 @@ class ClientMovePacket extends Packet {
 
 		let shouldSetPosition = true
 
-		Frog.eventEmitter.emit("playerMove", {
+		Frog.event_emitter.emit("playerMove", {
 			player,
 			x,
 			y: fixedY,
@@ -50,7 +50,7 @@ class ClientMovePacket extends Packet {
 
 		if (!shouldSetPosition) return
 
-		player.world.handleFallDamage(player, { x, y, z })
+		player.world.handle_fall_damage(player, { x, y, z })
 
 		player.location.x = x
 		player.location.y = fixedY

@@ -86,7 +86,7 @@ async function initialize_server() {
 			ConsoleColorConvertor.convert_console_color(generate_fail_message(error)),
 		)
 
-		fs.mkdirSync(Frog.directories.crashReportsFolder, { recursive: true })
+		fs.mkdirSync(Frog.directories.crash_reports_folder, { recursive: true })
 		fs.writeFileSync(crashFile, `Error: ${error.stack}`)
 
 		process.exit(Frog.config.dev.exitCodes.crash)

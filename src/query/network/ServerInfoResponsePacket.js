@@ -55,7 +55,7 @@ class ServerInfoResponsePacket extends Packet {
 	 * @param {import("dgram").RemoteInfo} client
 	 * @param {import("dgram").Socket} socket
 	 */
-	writePacket(client, socket) {
+	write_packet(client, socket) {
 		if (this.isFullPacket) {
 			const buffer = new SmartBuffer()
 				.writeUInt8(0x00)

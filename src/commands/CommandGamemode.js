@@ -15,7 +15,7 @@
  */
 const Command = require("./Command")
 
-const { getKey } = require("../utils/Language")
+const { get_key } = require("../utils/Language")
 
 const Gamemode = require("../player/types/Gamemode")
 const ArgumentType = require("./types/ArgumentType")
@@ -24,8 +24,8 @@ const ArgumentType = require("./types/ArgumentType")
  * A command to change the player's game mode.
  */
 class CommandGamemode extends Command {
-	name = getKey("commands.gamemode.name")
-	description = getKey("commands.gamemode.description")
+	name = get_key("commands.gamemode.name")
+	description = get_key("commands.gamemode.description")
 	maxArg = 1
 	minArg = 1
 	requiresOp = true
@@ -48,8 +48,8 @@ class CommandGamemode extends Command {
 	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
-		if (player.permissions.isConsole) {
-			player.sendMessage(getKey("commands.errors.internalError.badSender"))
+		if (player.permissions.is_console) {
+			player.send_message(get_key("commands.errors.internalError.badSender"))
 			return
 		}
 
@@ -76,7 +76,7 @@ class CommandGamemode extends Command {
 		const gamemode = gamemodeMap[args[0]]
 
 		if (!gamemode) {
-			player.sendMessage(getKey("commands.gamemode.execution.failed").replace("%s", args[0]))
+			player.send_message(get_key("commands.gamemode.execution.failed").replace("%s", args[0]))
 
 			return
 		}
@@ -85,8 +85,8 @@ class CommandGamemode extends Command {
 
 		const gmStr = gamemode.charAt(0).toUpperCase() + gamemode.slice(1)
 
-		player.sendMessage(getKey("commands.gamemode.execution.success.updated").replace("%s", gmStr))
-		player.sendMessage(getKey("commands.gamemode.execution.success.set").replace("%s", gmStr))
+		player.send_message(get_key("commands.gamemode.execution.success.updated").replace("%s", gmStr))
+		player.send_message(get_key("commands.gamemode.execution.success.set").replace("%s", gmStr))
 	}
 }
 
