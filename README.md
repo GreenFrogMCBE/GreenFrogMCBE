@@ -7,7 +7,7 @@ It's written in Node.js and currently supports 1.20.50
 This software is under active development
 Please note that this software is still in beta, so do not stare directly at the bugs!
 
-+ Discord: https://discord.gg/UFqrnAbqjP
++ Discord: https://discord.gg/6szuKkv7pu
 
 + Example plugin (JS): https://github.com/GreenFrogMCBE/ExamplePluginJS
 + Example plugin (TS): https://github.com/GreenFrogMCBE/ExamplePluginTS
