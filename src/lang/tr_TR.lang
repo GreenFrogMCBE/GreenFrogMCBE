@@ -1,0 +1,177 @@
+server.loading=Sunucu hazırlanıyor...
+server.license=GreenFrog, Creative Commons Attribution 4.0 International lisansı altında lisanslanmıştır. Daha fazla bilgi için: https://creativecommons.org
+
+server.shuttingDown=Sunucu kapatılıyor...
+
+server.version=Bu sunucu GreenFrogMCBE tarafından yönetiliyor (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versiyon: %s
+
+commands.unknown=§cBilinmeyen komut %s. Lütfen komutun mevcut olduğunu ve kullanma izninizin olduğunu kontrol edin.
+commands.errors.internalError=Komut yürütülemedi! Hata: %s
+commands.errors.internalError.player=%s tarafından komut yürütülemedi. Hata: %d
+commands.errors.internalError.badSender=§cBuradan bu komutu kullanamazsın!
+commands.errors.syntaxError.minArg=§cSyntax Hatası: Bu komut için gereken minimum argüman sayısı %s, sizin argüman sayınız %d.
+commands.errors.syntaxError.maxArg=§cSyntax Hatası: Bu komut için gereken maksimum argüman sayısı %s, sizin argüman sayınız %d.
+commands.errors.targetError.targetsNotFound=§cHedefle eşleşen öğe yok.
+commands.errors.targetError.notOnline=§c%s adında hedef bulunamadı.
+
+commands.ingame.executed=%s, /%d komutunu çalıştırdı
+
+commands.deop.name=deop
+commands.deop.description=Bir oyuncunun operatör yetkisini kaldırır.
+commands.deop.execution.success=%s oyuncusu için operatör yetkisini kaldırma başarılı oldu.
+commands.deop.execution.fail=%s oyuncusu için operatör yetkisini kaldırma başarısız oldu
+
+commands.gamemode.name=gamemode
+commands.gamemode.description=Bir oyuncunun oyun modunu ayarlar
+commands.gamemode.execution.failed=§cOyun modu '%s' geçersiz
+commands.gamemode.execution.success.updated=Oyun modunuz %s olarak güncellendi.
+commands.gamemode.execution.success.set=Kendi oyun modunuz %s olarak ayarlandı.
+
+commands.me.name=me
+commands.me.description=Kendinizle ilgili mesajlar gönderir.
+
+commands.help.name=help
+commands.help.description=Komut listesi.
+commands.help.execution.success=Komut listesi:
+commands.help.execution.command=%s - %d
+
+commands.kick.name=kick
+commands.kick.description=Bir oyuncuyu sunucudan atar.
+commands.kick.execution.failed.notOnline=§c%s şuanda çevrimdışı
+
+commands.kill.name=kill
+commands.kill.description=Hedefleri öldür (Oyuncular, moblar vb.)
+
+commands.list.name=list
+commands.list.description=Sunucudaki oyuncuları listeler.
+commands.list.execution.success.commands=Şu anda %s oyuncu çevrimiçi. Oyuncular: %d
+
+commands.op.name=op
+commands.op.description=Bir oyuncuya operatör yetkisi verir.
+commands.op.execution.success=%s oyuncusu için operatör yetkisi ayarlama başarılı oldu
+commands.op.execution.failed=§c%s için operatör yetkisi ayarlama başarısız oldu
+
+commands.plugins.name=plugins
+commands.plugins.aliases.pl=pl
+commands.plugins.description=Sunucunun çalıştırdığı eklentilerin listesini gösterir.
+commands.plugins.execution.success=Eklentiler: %s
+
+commands.say.name=say
+commands.say.description=Diğer çevrimiçi oyunculara mesaj gönderir.
+
+commands.stop.name=stop
+commands.stop.description=Sunucuyu kapatır.
+
+commands.time.name=time
+commands.time.description=Dünyanın zamanını değiştirir
+commands.time.execution.success=Zaman %s olarak ayarlandı
+commands.time.execution.failed=§cZaman bir sayı olmalı
+commands.time.times.day=gün
+commands.time.times.night=gece
+
+commands.version.name=version
+commands.version.description=Sunucu sürümünü gösterir.
+commands.version.aliases.ver=ver
+commands.version.aliases.about=Sunucu hakkında
+
+commands.teleport.name=teleport
+commands.teleport.description=Çevrimiçi oyuncuları ışınlar.
+commands.teleport.aliases.tp=tp
+commands.teleport.execution.success=%s konumuna ışınlandınız
+commands.teleport.execution.success.teleported=Teleported %s to %d
+commands.teleport.execution.failed.coordinates.invalid=§cSyntax Hatası: Kordinatlar geçerli değil
+
+commands.tell.name=tell
+commands.tell.description=Çevrimiçi bir oyuncuya özel bir mesaj gönderir.
+commands.tell.aliases.w=w
+commands.tell.aliases.whisper=whisper
+commands.tell.aliases.msg=msg
+commands.tell.execution.success=<%s> §7§o%d size fısıldadı: %f
+commands.tell.execution.success.whisper=Siz %s'ye fısıldadınız: %d
+
+scoreboard.name.default=Scoreboard
+
+plugin.loading.failed=%s eklentisi yüklenemedi. Hata: %d
+plugin.loading.loading=%s eklentisi yükleniyor... v%d
+plugin.loading.loaded=%s eklentisi yüklendi v%d
+plugin.loading.warning.invalidJson=%s için geçersiz JSON verisi algılandı. Hata: %d
+
+plugin.unloading.failed=%s eklentisi kapatılamadı. Hata: %d
+plugin.unloading.success=%s eklentisi kapatıldı.
+plugin.unloading.unloading=%s eklentisi kapatılıyor...
+
+world.chunks.renderDistance.tooHigh=Ayarlarınızdaki Render Distance (Görüş Alanı) sınırı çok yüksek! Bu, gecikmelere neden olabilir
+
+errors.nodeJS.tooOld=GreenFrogMCBE'nin çalıştırılması için kullandığınız NodeJS sürümü çok eski
+errors.nodeJS.tooOld.update=Lütfen 14.0.0+'a güncelleyin: https://nodejs.org/
+
+kickMessages.serverDisconnect=kickMessages.serverDisconnect
+kickMessages.serverClosed=Sunucu kapandı
+kickMessages.serverFull=Sunucu şuanda dolu
+kickMessages.invalidPacket=Geçersiz paket / Sunucu hatası
+kickMessages.invalidUsername=Geçersiz veya yinelenen kullanıcı adı
+kickMessages.versionMismatch=Oyun sürümünüz sunucu sürümüyle eşleşmiyor! Sunucu şu anda %s üzerinde çalışıyor
+kickMessages.resourcePacksRefused=Bu sunucuya katılmak için kaynak paketlerini kabul etmelisiniz
+kickMessages.wereKicked=Oyundan atıldınız%s
+
+kickMessages.playStatus=Kicked because a plugin sent play status: %s
+kickMessages.playStatus.console=Kicked %s because plugin/server sent a play status with terminateConnection field set to true. Usually this means that the client version is older than the server version
+
+player.kicked=%s kullanıcısı sunucudan atıldı. Sebep: %d
+
+status.resourcePacks.refused=%s sunucu kaynak paketlerini reddetti
+status.resourcePacks.none=%s hiçbir kaynak pakete sahip değil
+status.resourcePacks.installed=%s tüm kaynak paketlerini yükledi
+status.resourcePacks.joined=%s katıldı
+status.resourcePacks.spawned=%s doğdu
+status.resourcePacks.disconnected=%s bağlantısı kesildi
+
+warning.customItems.loading.failed=Özel öğeler yüklenemedi! Hata: %s
+
+debug.debugEnabled=Hata ayıklama modu etkin. Bu, büyük paketler gönderirken gecikmelere neden olabilir
+
+debug.unstable=Unstable modu etkin. Bu, sunucuyu kritik hatalardan kurtarır, ancak eklenti veri bozulmasına neden olabilir
+debug.unstable.unsupported=Ayrıca, kararlı olmayan mod GreenFrog geliştiricileri tarafından desteklenmez ve eğer oluşursa, veri bozulması sizin sorumluluğunuzdadır
+
+debug.player.unsupportedAction.id=%s tarafından desteklenmeyen action ID'si: %d
+debug.player.unsupportedAction.block=%s tarafından desteklenmeyen block action ID'si: %d
+
+chat.format=<%s> %d
+chat.format.me=* %s %d
+chat.format.say=[%s] %d
+
+chat.broadcasts.joined=§e%s oyuna katıldı
+chat.broadcasts.left=§e%s oyundan ayrıldı
+
+creativemenu.badPacket=%s tarafından ItemStackRequest işlenemedi. Hata: %d
+
+network.packet.unhandledPacket=İşlenmemiş paket
+
+network.server.listening.success=%s üzerinde dinleniyor
+network.server.listening.failed=%s üzerinde dinleme başarısız oldu. Hata: %d
+network.server.listening.failed.otherServerRunning=Belki de aynı portta başka bir sunucu çalışıyor?
+
+exceptions.network.rateLimited=%s tarafından çok fazla paket (%d)
+exceptions.network.packetHandlingError=%s tarafından paket işlenemedi! Hata: %d
+exceptions.network.itemStackRequest.badGamemode=Yaratıcı modda değilken bir öğe alınamaz
+exceptions.network.inventoryTransaction.invalid=Geçersiz InventoryTransaction paketi %s
+exceptions.network.invalidGamemodePacket=Geçersiz oyun modu paketi - operatör değilken oyun modu değiştirilmeye çalışıldı
+
+exceptions.plugin.noName=Eklenti adı yok!
+exceptions.plugin.noVersion=Eklenti sürümü yok!
+
+exceptions.console.alreadyClosed=Konsol zaten kapalı!
+
+exceptions.logger.invalidType=Geçersiz günlük türü: %s. Geçerli türler bilgi uyarı hata hata ayıklama
+
+query.server.listening.success=%s üzerinde sorgu sunucusu dinleniyor
+query.server.listening.failed=%s üzerinde sorgu sunucusu dinleme başarısız oldu
+
+query.server.error=Sorgu hatası: %s
+
+query.server.network.packets.invalidPacket=%s tarafından geçersiz sorgu paketi
+
+logger.info=BİLGİ
+logger.warn=UYARI
+logger.error=HATA
+logger.debug=HATA AYIKLAMA
