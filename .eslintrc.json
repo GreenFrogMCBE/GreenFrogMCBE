@@ -1,0 +1,53 @@
+{
+    "env": {
+        "node": true,
+        "commonjs": true,
+        "es2021": true,
+        "mocha": true
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            "tab",
+            {
+                "SwitchCase": 1,
+                "MemberExpression": 1
+            }
+        ],
+        "semi": [
+            "error", 
+            "never"
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 2,
+                "maxBOF": 1,
+                "maxEOF": 1
+            }
+        ],
+        "eol-last": [
+            "error",
+            "always"
+        ],
+        "no-unused-vars": [
+            "error"
+        ],
+        "prefer-const": [
+            "error"
+        ],
+        "arrow-spacing": [
+            "error"
+        ]
+    }
+}
