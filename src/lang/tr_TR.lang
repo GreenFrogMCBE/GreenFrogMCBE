@@ -105,7 +105,7 @@ world.chunks.renderDistance.tooHigh=Ayarlarınızdaki Render Distance (Görüş 
 errors.nodeJS.tooOld=GreenFrogMCBE'nin çalıştırılması için kullandığınız NodeJS sürümü çok eski
 errors.nodeJS.tooOld.update=Lütfen 14.0.0+'a güncelleyin: https://nodejs.org/
 
-kickMessages.serverDisconnect=kickMessages.serverDisconnect
+kickMessages.serverDisconnect="serverDisconnect" sebebiyle atıldın.
 kickMessages.serverClosed=Sunucu kapandı
 kickMessages.serverFull=Sunucu şuanda dolu
 kickMessages.invalidPacket=Geçersiz paket / Sunucu hatası
@@ -126,7 +126,7 @@ status.resourcePacks.joined=%s katıldı
 status.resourcePacks.spawned=%s doğdu
 status.resourcePacks.disconnected=%s bağlantısı kesildi
 
-warning.customItems.loading.failed=Özel öğeler yüklenemedi! Hata: %s
+warning.customItems.loading.failed=CustomItem'ler yüklenemedi! Hata: %s
 
 debug.debugEnabled=Hata ayıklama modu etkin. Bu, büyük paketler gönderirken gecikmelere neden olabilir
 
@@ -145,16 +145,16 @@ chat.broadcasts.left=§e%s oyundan ayrıldı
 
 creativemenu.badPacket=%s tarafından ItemStackRequest işlenemedi. Hata: %d
 
-network.packet.unhandledPacket=İşlenmemiş paket
+network.packet.unhandledPacket=Ayıklanamamış Paket (Unhandled Packet)
 
-network.server.listening.success=%s üzerinde dinleniyor
-network.server.listening.failed=%s üzerinde dinleme başarısız oldu. Hata: %d
-network.server.listening.failed.otherServerRunning=Belki de aynı portta başka bir sunucu çalışıyor?
+network.server.listening.success=Sunucu %s üzerinde oluşturuldu.
+network.server.listening.failed=%s üzerinde sunucu oluşturma başarısız oldu. Hata: %d
+network.server.listening.failed.otherServerRunning=Sanırım aynı portta başka bir sunucu çalışıyor?
 
-exceptions.network.rateLimited=%s tarafından çok fazla paket (%d)
+exceptions.network.rateLimited=%s tarafından çok fazla paket işleme alındı (%d)
 exceptions.network.packetHandlingError=%s tarafından paket işlenemedi! Hata: %d
 exceptions.network.itemStackRequest.badGamemode=Yaratıcı modda değilken bir öğe alınamaz
-exceptions.network.inventoryTransaction.invalid=Geçersiz InventoryTransaction paketi %s
+exceptions.network.inventoryTransaction.invalid=%s tarafından geçersiz InventoryTransaction paketi
 exceptions.network.invalidGamemodePacket=Geçersiz oyun modu paketi - operatör değilken oyun modu değiştirilmeye çalışıldı
 
 exceptions.plugin.noName=Eklenti adı yok!
@@ -162,16 +162,16 @@ exceptions.plugin.noVersion=Eklenti sürümü yok!
 
 exceptions.console.alreadyClosed=Konsol zaten kapalı!
 
-exceptions.logger.invalidType=Geçersiz günlük türü: %s. Geçerli türler bilgi uyarı hata hata ayıklama
+exceptions.logger.invalidType=Geçersiz logger türü: %s. Geçerli türler: info warn error debug
 
-query.server.listening.success=%s üzerinde sorgu sunucusu dinleniyor
-query.server.listening.failed=%s üzerinde sorgu sunucusu dinleme başarısız oldu
+query.server.listening.success=%s üzerinden query sunucusu dinleniyor
+query.server.listening.failed=%s üzerinden query sunucusu dinleme başarısız oldu
 
-query.server.error=Sorgu hatası: %s
+query.server.error=Query hatası: %s
 
-query.server.network.packets.invalidPacket=%s tarafından geçersiz sorgu paketi
+query.server.network.packets.invalidPacket=%s tarafından geçersiz query paketi
 
-logger.info=BİLGİ
+logger.info=BILGI
 logger.warn=UYARI
 logger.error=HATA
-logger.debug=HATA AYIKLAMA
+logger.debug=DEBUG
