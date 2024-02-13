@@ -164,8 +164,8 @@ exceptions.console.alreadyClosed=Konsol zaten kapalı!
 
 exceptions.logger.invalidType=Geçersiz logger türü: %s. Geçerli türler: info warn error debug
 
-query.server.listening.success=%s üzerinden query sunucusu dinleniyor
-query.server.listening.failed=%s üzerinden query sunucusu dinleme başarısız oldu
+query.server.listening.success=Query %s üzerinden dinleniyor.
+query.server.listening.failed=Query %s üzerinden dinleme başarısız oldu
 
 query.server.error=Query hatası: %s
 
