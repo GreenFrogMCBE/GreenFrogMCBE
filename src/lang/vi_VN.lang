@@ -1,0 +1,179 @@
+server.loading=Đang tải máy chủ...
+server.license=GreenFrog được cấp phép theo giấy phép Quốc tế Creative Commons Attribution 4.0. Thông tin thêm: https://creativecommons.org
+
+server.shuttingDown=Đang tắt máy chủ...
+
+server.version=Server này đang chạy GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Phiên bản: %0
+
+commands.unknown=§cLệnh không xác định %0. Vui lòng kiểm tra xem lệnh có tồn tại và bạn có quyền sử dụng nó không.
+commands.errors.internalError=Không thể thực hiện lệnh! Lỗi: %0
+commands.errors.internalError.player=Không thể thực hiện lệnh từ %0. Lỗi: %1
+commands.errors.internalError.badSender=§cLoại người gửi này không hỗ trợ lệnh này
+commands.errors.syntaxError.minArg=§cSyntaxError: Số lượng đối số tối thiểu yêu cầu cho lệnh này là %0 nhưng bạn đã cung cấp %1
+commands.errors.syntaxError.maxArg=§cSyntaxError: Số lượng đối số tối đa yêu cầu cho lệnh này là %0 nhưng bạn đã cung cấp %1
+commands.errors.targetError.targetsNotFound=§cKhông có mục tiêu nào phù hợp với bộ chọn
+commands.errors.targetError.notOnline=§cKhông có mục tiêu nào phù hợp với %0
+
+commands.ingame.executed=%0 đã thực hiện lệnh máy chủ /%1
+
+commands.deop.name=deop
+commands.deop.description=Rút lại trạng thái điều hành của một người chơi.
+commands.deop.execution.success=Thành công trong việc rút lại cấp độ điều hành cho người chơi %0
+commands.deop.execution.fail=Thất bại trong việc rút lại cấp độ điều hành cho người chơi %0
+
+commands.gamemode.name=gamemode
+commands.gamemode.description=Đặt chế độ chơi của một người chơi
+commands.gamemode.execution.failed=§cChế độ chơi '%0' không hợp lệ
+commands.gamemode.execution.success.updated=Chế độ chơi của bạn đã được cập nhật thành %0.
+commands.gamemode.execution.success.set=Đặt chế độ chơi của riêng bạn thành %0.
+
+commands.me.name=me
+commands.me.description=Hiển thị thông điệp về bản thân.
+
+commands.help.name=help
+commands.help.description=Danh sách lệnh.
+commands.help.execution.success=Danh sách lệnh:
+commands.help.execution.command=%0 - %1
+
+commands.kick.name=kick
+commands.kick.description=Đá một người chơi khỏi máy chủ.
+commands.kick.execution.failed.notOnline=§c%0 không trực tuyến
+
+commands.kill.name=kill
+commands.kill.description=Gây tử vong cho các thực thể (người chơi, quái vật, v.v.).
+
+commands.list.name=list
+commands.list.description=Danh sách người chơi trên máy chủ.
+commands.list.execution.success.commands=Có %0 người chơi trực tuyến %1
+
+commands.op.name=op
+commands.op.description=Cấp quyền điều hành cho một người chơi.
+commands.op.execution.success=Thành công trong việc đặt cấp độ điều hành cho người chơi %0
+commands.op.execution.failed=§cKhông thành công trong việc OP %0
+
+commands.plugins.name=plugins
+commands.plugins.aliases.pl=pl
+commands.plugins.description=Hiển thị danh sách các plugin mà máy chủ đang chạy.
+commands.plugins.execution.success=Các plugin %0
+
+commands.say.name=say
+commands.say.description=Gửi một tin nhắn trong trò chuyện cho các người chơi trực tuyến khác.
+
+commands.stop.name=stop
+commands.stop.description=Tắt máy chủ.
+
+commands.time.name=time
+commands.time.description=Thay đổi thời gian của thế giới
+commands.time.execution.success=Đã đặt thời gian thành %0
+commands.time.execution.failed=§cThời gian phải là một số
+commands.time.times.day=ngày
+commands.time.times.night=đêm
+
+commands.version.name=version
+commands.version.description=Hiển thị phiên bản máy chủ.
+commands.version.aliases.ver=ver
+commands.version.aliases.about=about
+
+commands.teleport.name=teleport
+commands.teleport.description=Dịch chuyển người chơi trực tuyến.
+commands.teleport.aliases.tp=tp
+commands.teleport.execution.success=Bạn đã được dịch chuyển đến %0
+commands.teleport.execution.success.teleported=Dịch chuyển %0 đến %1
+commands.teleport.execution.failed.coordinates.invalid=§cSyntaxError: Tọa độ không hợp lệ
+
+commands.tell.name=tell
+commands.tell.description=Gửi một tin nhắn riêng tư cho một hoặc nhiều người chơi trực tuyến.
+commands.tell.aliases.w=w
+commands.tell.aliases.whisper=whisper
+commands.tell.aliases.msg=msg
+commands.tell.execution.success=<%0> §7§o%1 thì thầm với bạn: %2 
+commands.tell.execution.success.whisper=Bạn thì thầm với %0: %1
+
+scoreboard.name.default=Bảng điểm
+
+plugin.loading.failed=Không tải được %0. Lỗi: %1
+plugin.loading.loading=Đang tải plugin %0 v%1
+plugin.loading.loaded=Đã tải plugin %0 v%1
+plugin.loading.warning.invalidJson=Dữ liệu JSON không hợp lệ được cung cấp cho %0. Lỗi: %1
+
+plugin.unloading.failed=Không thể gỡ bỏ %0. Lỗi: %1
+plugin.unloading.success=Đã gỡ bỏ %0
+plugin.unloading.unloading=Đang gỡ bỏ %0...
+
+frog.version=Máy chủ này đang chạy GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Phiên bản: %0
+
+world.chunks.renderDistance.tooHigh=Giới hạn máy phát sinh khối trong config.yml của bạn quá cao! Nó có thể gây ra giật lag
+
+errors.nodeJS.tooOld=Bạn đang chạy phiên bản nodeJS quá cũ để chạy GreenFrogMCBE
+errors.nodeJS.tooOld.update=Vui lòng cập nhật lên 14.0.0+ từ https://nodejs.org/
+
+kickMessages.serverDisconnect=disconnectionScreen.noReason
+kickMessages.serverClosed=Máy chủ đã đóng
+kickMessages.serverFull=disconnectionScreen.serverFull
+kickMessages.invalidPacket=Gói không hợp lệ / Lỗi máy chủ nội bộ
+kickMessages.invalidUsername=Tên người dùng không hợp lệ hoặc trùng lặp
+kickMessages.versionMismatch=Phiên bản máy khách của bạn không khớp với phiên bản máy chủ! Máy chủ hiện đang chạy trên %0
+kickMessages.resourcePacksRefused=Bạn phải chấp nhận gói tài nguyên để tham gia máy chủ này
+kickMessages.wereKicked=Bạn đã bị đá khỏi trò chơi%0
+
+kickMessages.playStatus=Bị đá vì một plugin đã gửi trạng thái phát: %0
+kickMessages.playStatus.console=Đã đá %0 vì plugin/máy chủ đã gửi một trạng thái phát với trường terminateConnection được đặt thành true. Thông thường điều này có nghĩa là phiên bản máy khách cũ hơn phiên bản máy chủ
+
+player.kicked=Đã đá %0 cho %1
+
+status.resourcePacks.refused=%0 từ chối gói tài nguyên máy chủ
+status.resourcePacks.none=%0 không có gói tài nguyên nào
+status.resourcePacks.installed=%0 đã cài đặt tất cả các gói tài nguyên
+status.resourcePacks.joined=%0 đã tham gia
+status.resourcePacks.spawned=%0 đã xuất hiện
+status.resourcePacks.disconnected=%0 đã ngắt kết nối
+
+warning.customItems.loading.failed=Không tải được các mục tùy chỉnh! Lỗi: %0
+
+debug.debugEnabled=Chế độ gỡ lỗi được kích hoạt. Điều này có thể gây ra giật lag khi gửi các gói lớn
+
+debug.unstable=Chế độ không ổn định được kích hoạt. Điều này sẽ khôi phục máy chủ từ các lỗi nghiêm trọng nhưng có thể gây ra hỏng hóc dữ liệu plugin
+debug.unstable.unsupported=Ngoài ra, chế độ không ổn định không được hỗ trợ bởi các nhà phát triển GreenFrog và bạn là người phản hồi cho sự hỏng hóc dữ liệu nếu xảy ra
+
+debug.player.unsupportedAction.id=ID hành động không được hỗ trợ từ %0: %1
+debug.player.unsupportedAction.block=ID hành động khối không được hỗ trợ từ %0: %1
+
+chat.format=<%0> %1
+chat.format.me=* %0 %1
+chat.format.say=[%0] %1
+
+chat.broadcasts.joined=§e%0 đã tham gia trò chơi
+chat.broadcasts.left=§e%0 đã rời khỏi trò chơi
+
+creativemenu.badPacket=Không xử lý được ItemStackRequest từ %0. Lỗi: %1
+
+network.packet.unhandledPacket=Gói không được xử lý!
+
+network.server.listening.success=Đang lắng nghe trên %0
+network.server.listening.failed=Không thể lắng nghe trên %0. Lỗi: %1
+network.server.listening.failed.otherServerRunning=Có thể có một máy chủ khác đang chạy trên cùng một cổng?
+
+exceptions.network.rateLimited=Quá nhiều gói từ %0 (%1)
+exceptions.network.packetHandlingError=Không xử lý được gói từ %0! Lỗi: %1
+exceptions.network.itemStackRequest.badGamemode=Không thể lấy một mục từ menu sáng tạo trong khi không ở chế độ sáng tạo
+exceptions.network.inventoryTransaction.invalid=Gói InventoryTransaction xấu từ %0
+exceptions.network.invalidGamemodePacket=Gói gamemode xấu - Đã thử chuyển đổi gamemode trong khi không được opped
+
+exceptions.plugin.noName=Không có tên plugin!
+exceptions.plugin.noVersion=Không có phiên bản plugin!
+
+exceptions.console.alreadyClosed=Bàn phím đã đóng!
+
+exceptions.logger.invalidType=Các loại nhật ký không hợp lệ: %0. Các loại hợp lệ là thông tin cảnh báo lỗi gỡ lỗi
+
+query.server.listening.success=Máy chủ truy vấn đang lắng nghe trên %0
+query.server.listening.failed=Máy chủ truy vấn không thể lắng nghe trên %0
+
+query.server.error=Lỗi truy vấn: %0
+
+query.server.network.packets.invalidPacket=Gói truy vấn không hợp lệ từ %0
+
+logger.info=THÔNG TIN
+logger.warn=CẢNH BÁO
+logger.error=LỖI
+logger.debug=GỠ LỖI

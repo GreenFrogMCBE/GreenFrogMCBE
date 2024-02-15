@@ -1,0 +1,184 @@
+server.loading=Завантаження сервера...
+server.license=GreenFrog ліцензується за ліцензією Creative Commons Attribution 4.0 International. Детальніше: https://creativecommons.org
+
+server.shuttingDown=Вимкнення...
+
+server.version=Цей сервер працює на GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версія: %0
+
+commands.unknown=§cНевідома команда %0. Перевірте, чи існує така команда та чи у вас є права на її використання.
+commands.errors.internalError=Не вдалося виконати команду! Помилка: %0
+commands.errors.internalError.player=Не вдалося виконати команду від %0. Помилка: %1
+commands.errors.internalError.badSender=§cТип відправника не підтримує цю команду
+commands.errors.syntaxError.minArg=§cСинтаксична помилка: Мінімальна кількість аргументів для цієї команди - %0, але ви вказали %1
+commands.errors.syntaxError.maxArg=§cСинтаксична помилка: Максимальна кількість аргументів для цієї команди - %0, але ви вказали %1
+commands.errors.targetError.targetsNotFound=§cНе знайдено цільові об'єкти за селектором
+commands.errors.targetError.notOnline=§cНе знайдено цільові об'єкти за %0
+
+commands.ingame.executed=%0 виконав серверну команду /%1
+
+commands.deop.name=deop
+commands.deop.description=Позбавляє гравця статусу оператора.
+commands.deop.execution.success=Гравець %0 втратив рівень оператора
+commands.deop.execution.fail=Не вдалося позбавити гравця %0 рівня оператора
+
+commands.gamemode.name=gamemode
+commands.gamemode.description=Встановлює режим гри гравця
+commands.gamemode.execution.failed=§cРежим гри '%0' недійсний
+commands.gamemode.execution.success.updated=Ваш режим гри було оновлено на %0.
+commands.gamemode.execution.success.set=Встановлений власний режим гри %0.
+
+commands.me.name=me
+commands.me.description=Відображає повідомлення про вас.
+
+commands.help.name=help
+commands.help.description=Список команд.
+commands.help.execution.success=Список команд:
+commands.help.execution.command=%0 - %1
+
+commands.kick.name=kick
+commands.kick.description=Виключає гравця з сервера.
+commands.kick.execution.failed.notOnline=§c%0 не в мережі
+
+commands.kill.name=kill
+commands.kill.description=Вбиває сутності (гравців, мобів тощо).
+
+commands.list.name=list
+commands.list.description=Показує список гравців на сервері.
+commands.list.execution.success.commands=На сервері %0 гравців %1
+
+commands.op.name=op
+commands.op.description=Додає гравцеві статус оператора.
+commands.op.execution.success=Гравець %0 отримав рівень оператора
+commands.op.execution.failed=§cНе вдалося додати статус оператора гравцю %0
+
+commands.plugins.name=plugins
+commands.plugins.aliases.pl=pl
+commands.plugins.description=Показує список плагінів, які працюють на сервері.
+commands.plugins.execution.success=Плагіни %0
+
+commands.say.name=say
+commands.say.description=Відправляє повідомлення в чат іншим гравцям.
+
+commands.stop.name=stop
+commands.stop.description=Вимикає сервер.
+
+commands.time.name=time
+commands.time.description=Змінює час у світі
+commands.time.execution.success=Час встановлено на %0
+commands.time.execution.failed=§cЧас повинен бути числом
+commands.time.times.day=день
+commands.time.times.night=ноч
+
+commands.version.name=version
+commands.version.description=Показує версію сервера.
+commands.version.aliases.ver=ver
+commands.version.aliases.about=about
+
+commands.teleport.name=teleport
+commands.teleport.description=Телепортує гравців.
+commands.teleport.aliases.tp=tp
+commands.teleport.execution.success=Ви були телепортовані до %0
+commands.teleport.execution.success.teleported=Телепортований %0 до %1
+commands.teleport.execution.failed.coordinates.invalid=§cСинтаксична помилка: Недопустимі координати
+
+commands.tell.name=tell
+commands.tell.description=Відправляє приватне повідомлення одному або декільком гравцям.
+commands.tell.aliases.w=w
+commands.tell.aliases.whisper=whisper
+commands.tell.aliases.msg=msg
+commands.tell.execution.success=<%0> §7§o%1 шепче вам: %2
+commands.tell.execution.success.whisper=Ви шепчете гравцю %0: %1
+
+scoreboard.name.default=Табло
+
+plugin.loading.failed=Не вдалося завантажити %0. Помилка: %1
+plugin.loading.loading=Завантаження плагіна %0 версії %1
+plugin.loading.loaded=Плагін %0 версії %1 завантажений
+plugin.loading.warning.invalidJson=Недійсні дані JSON для %0. Помилка: %1
+
+plugin.unloading.failed=Не вдалося відключити %0. Помилка: %1
+plugin.unloading.success=Плагін %0 відключено
+plugin.unloading.unloading=Відключення %0...
+
+frog.version=Цей сервер працює на GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версія: %0
+
+world.chunks.renderDistance.tooHigh=Обмеження генератора чанків у вашому config.yml занадто велике! Це може спричинити лаги
+
+errors.nodeJS.tooOld=Ви використовуєте застарілу версію NodeJS, яка не підходить для роботи GreenFrogMCBE
+errors.nodeJS.tooOld.update=Будь ласка, оновіть його до версії 14.0.0+ з https://nodejs.org/
+
+kickMessages.serverDisconnect=disconnectionScreen.noReason
+kickMessages.serverClosed=Сервер закрито
+kickMessages.serverFull=disconnectionScreen.serverFull
+kickMessages.invalidPacket=Недійсний пакет / Внутрішня помилка сервера
+kickMessages.invalidUsername=Недійсне або дубльоване ім'я користувача
+kickMessages.versionMismatch=Ваша версія клієнта не відповідає версії сервера! Сервер працює на %0
+kickMessages.resourcePacksRefused=Ви повинні прийняти ресурсні пакети для підключення до цього сервера
+kickMessages.wereKicked=Ви були вигнані з гри%0
+
+kickMessages.playStatus=Вигнаний з причини надсилання плагіном статусу play: %0
+kickMessages.playStatus.console=Вигнаний %0, тому що плагін/сервер відправив статус play з полем terminateConnection, встановленим на true. Зазвичай це означає, що версія клієнта старіша за версію сервера
+
+player.kicked=Гравця %0 вигнано за %1
+
+status.resourcePacks.refused=%0 відхилив ресурсні пакети сервера
+status.resourcePacks.none=%0 не має ресурсних пакетів
+status.resourcePacks.installed=%0 має всі встановлені ресурсні пакети
+status.resourcePacks.joined=%0 приєднався
+status.resourcePacks.spawned=%0 з'явився
+status.resourcePacks.disconnected=%0 вийшов з гри
+
+warning.customItems.loading.failed=Не вдалося завантажити власні предмети! Помилка: %0
+
+debug.debugEnabled=Режим відладки увімкнено. Це може спричинити лаги при відправці великих пакетів
+
+debug.unstable=Увімкнено нестабільний режим. Це дозволяє відновлювати сервер після критичних помилок, але це може призвести до порушення даних плагінів
+debug.unstable.unsupported=Також, нестабільний режим не підтримується розробниками GreenFrog і ви самі несете відповідальність за пошкодження даних у разі виникнення помилок
+
+debug.player.unsupportedAction.id=Непідтримуваний ідентифікатор дії від %0: %1
+debug.player.unsupportedAction.block=Непідтримуваний ідентифікатор дії блока від %0: %1
+
+chat.format=<%0> %1
+chat.format.me=* %0 %1
+chat.format.say=[%0] %1
+
+chat.broadcasts.joined=§e%0 приєднався до гри
+chat.broadcasts.left=§e%0 покинув гру
+
+creativemenu.badPacket=Не вдалося обробити запит ItemStackRequest від %0. Помилка: %1
+
+network.packet.unhandledPacket=Непідтримуваний пакет!
+
+network.server.listening.success=Запущено на %0
+network.server.listening.failed=Не вдалося прослухати %0. Помилка: %1
+network.server.listening.failed.otherServerRunning=Можливо, на цьому порті вже працює інший сервер?
+
+exceptions.network.rateLimited=Забагато пакетів від %0 (%1)
+exceptions.network.packetHandlingError=Не вдалося обробити пакет від %0! Помилка: %1
+exceptions.network.itemStackRequest.badGamemode=Неможливо отримати предмет із творчого меню, коли ви не знаходитесь у творчому режимі
+exceptions.network.inventoryTransaction.invalid=Неприпустимий пакет InventoryTransaction від %0
+exceptions.network.invalidGamemodePacket=Пакет недійсного режиму гри - спроба змінити режим гри без прав оператора
+
+exceptions.plugin.noName=Немає імені плагіна!
+exceptions.plugin.noVersion=Немає версії плагіна!
+
+exceptions.console.alreadyClosed=Консоль вже закрита!
+
+exceptions.logger.invalidType=Недійсні типи журналу: %0. Припустимі типи: info, warn, error, debug,
+
+query.listening.success=Сервер запитів прослуховує на %0
+query.listening.failed=Не вдалося прослухати сервер запитів на %0
+
+query.server.error=Помилка пакету: %0
+
+query.server.network.generatingToken=Генеруємо токен запиту для %0
+query.server.network.invalidPacket=Отриманий недійсний пакет запиту від %0
+
+query.server.network.packets.handshake=Відповіли пакетом запиту handshake %0
+query.server.network.packets.fullInfo=Відповіли пакетом повної інформації запиту %0
+query.server.network.packets.basicInfo=Відповіли пакетом основної інформації запиту %0
+
+logger.info=ІНФОРМАЦІЯ
+logger.warn=ПОПЕРЕДЖЕННЯ
+logger.error=ПОМИЛКА
+logger.debug=НАЛАГОДЖЕННЯ

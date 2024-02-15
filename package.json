@@ -1,0 +1,33 @@
+{
+  "name": "@greenfrog/greenfrogmcbe",
+  "description": "A server software for MCBE",
+  "main": "index.js",
+  "author": "GreenFrogMCBE",
+  "license": "CC-BY-4.0",
+  "version": "3.9.0",
+  "scripts": {
+    "format": "npm run generate-license-headers && npx eslint . --fix",
+    "start": "node index.js",
+    "dev": "nodemon --signal SIGINT index.js --debug",
+    "generate-license-headers": "node tools/generate-license-headers.js",
+    "test": "cd test && npx mocha main.test.js",
+    "make-plugin": "node tools/generate-base-plugin.js",
+    "compile": "cd ./src/entity/ && npx node-gyp configure && npx node-gyp build && cd ../../ && node index.js"
+  },
+  "dependencies": {
+    "@greenfrog/lang-parser": "1.0.6",
+    "@greenfrog/mc-enums": "^0.1.1",
+    "@harmonytf/smart-buffer": "4.2.4",
+    "@kotinash/better-events": "^1.0.3",
+    "frog-protocol": "github:GreenFrogMCBE/protocol",
+    "js-yaml": "4.1.0",
+    "moment": "2.30.1",
+    "node-addon-api": "7.1.0"
+  },
+  "devDependencies": {
+    "eslint": "8.56.0",
+    "minecraft-server-util": "github:GreenFrogMCBE/minecraft-server-util-compiled",
+    "mocha": "10.2.0",
+    "nodemon": "3.0.2"
+  }
+}
