@@ -16,17 +16,20 @@
 const Frog = require("../../Frog")
 
 const PlayerInfo = require("../../player/PlayerInfo")
-const PlayerInit = require("../../player/PlayerInit")
 
-const Language = require("../../utils/Language")
+const { get_key } = require("../../utils/Language")
 
-const ResourcePackInfo = require("../packets/ServerResourcePackInfoPacket")
-const PlayStatus = require("../../network/packets/types/PlayStatus")
+const ServerResourcePackInfo = require("../packets/ServerResourcePackInfoPacket")
+
+const { PlayStatus } = require("@greenfrog/mc-enums")
 
 const VersionToProtocol = require("../../utils/VersionToProtocol")
-const UsernameValidator = require("../../player/UsernameValidator")
 
 const PacketHandler = require("./PacketHandler")
+
+const { EventEmitter, Event } = require("@kotinash/better-events")
+
+const PlayerInit = require("../../player/PlayerInit")
 
 const config = Frog.config
 
@@ -36,30 +39,23 @@ class PlayerJoinHandler {
 	 *
 	 * @param {import("Frog").Player} player - The player joining the server.
 	 */
-	async onPlayerJoin(player) {
-		await this.initPlayer(player)
+	async on_player_join(player) {
+		await PlayerInit.initPlayer(player)
 
-		this.setupPlayerProperties(player)
-		this.setupPlayerIntervals(player)
-		this.validateUsername(player)
-		this.addPlayer(player)
-		this.handleMaxPlayers(player)
-		this.handleVersionMismatch(player)
-		this.sendResponsePackInfo(player)
-		this.emitPlayerJoinEvent(player)
-		this.setupEvents(player)
-	}
+		this.setup_intervals(player)
 
-	/**
-	 * Validates the username of the player
-	 *
-	 * @param {import("Frog").Player} player
-	 */
-	validateUsername(player) {
-		if (!UsernameValidator.isUsernameValid(player.username) && config.dev.validateUsernames) {
-			player.kick(Language.get_key("kickMessages.invalidUsername"))
-			return
+		if (!player.is_username_valid()) {
+			player.kick(get_key("kickMessages.invalidUsername"))
 		}
+
+		PlayerInfo.add_player(player)
+
+		this.handle_max_players(player)
+		this.handle_version_mismatch(player)
+		this.send_response_pack_info(player)
+		this.emit_player_join_event(player)
+
+		await this.setup_events(player)
 	}
 
 	/**
@@ -67,117 +63,41 @@ class PlayerJoinHandler {
 	 *
 	 * @param {import("Frog").Player} player
 	 */
-	async setupEvents(player) {
-		Frog.event_emitter.emit("playerPreConnect", {
-			player,
-			cancel: (reason = Language.get_key("kickMessages.serverDisconnect")) => {
-				player.kick(reason)
-			},
-		})
+	async setup_events(player) {
+		EventEmitter.emit(
+			new Event(
+				"playerPreConnect",
+				{
+					player,
+				}
+			),
+			false
+		)
 
 		player._queue = player.queue
 		player.queue = (name, params) => {
-			let shouldQueue = true
-
-			Frog.event_emitter.emit("packetQueue", {
-				player,
-				packet: {
-					data: {
-						name,
-						params,
+			EventEmitter.emit(
+				new Event(
+					"packetQueue",
+					{
+						player,
+						packet: {
+							data: {
+								name,
+								params,
+							},
+						},
 					},
-				},
-				cancel: () => {
-					shouldQueue = false
-				},
-			})
-
-			if (shouldQueue) {
-				player._queue(name, params)
-			}
+					(() => {
+						player._queue(name, params)
+					})
+				)
+			)
 		}
 
 		player.on("packet", (packet) => {
-			new PacketHandler().handlePacket(player, packet)
-		})
-	}
-
-	/**
-	 * Initialises the player.
-	 *
-	 * @param {import("Frog").Player} player - The player to initialize.
-	 * @returns {Promise<void>}
-	 */
-	async initPlayer(player) {
-		await PlayerInit.initPlayer(player)
-	}
-
-	/**
-	 * Sets up the player properties.
-	 *
-	 * @param {import("Frog").Player} player - The player to set up properties for.
-	 */
-	setupPlayerProperties(player) {
-		Object.assign(player, {
-			username: player.profile.name,
-			gamemode: null,
-			dead: null,
-			health: 20,
-			hunger: 20,
-			world: null,
-			renderChunks: true,
-			inventory: {
-				container: {
-					blockPosition: {
-						x: null,
-						y: null,
-						z: null,
-					},
-					isOpen: false,
-					window: {
-						id: null,
-						type: null,
-					},
-				},
-				items: [],
-				lastUsedItem: {
-					networkId: null,
-					runtimeId: null,
-				},
-			},
-			location: {
-				onGround: false,
-				x: 0,
-				y: -47,
-				z: 0,
-				yaw: 0,
-				pitch: 0,
-			},
-			network: {
-				address: player.connection.address.split("/")[0],
-				port: player.connection.address.split("/")[1],
-				packetCount: 0,
-				offline: false,
-				initialised: false,
-				version: null,
-				protocolVersion: null,
-				is_console: false,
-			},
-			permissions: {
-				op: null,
-				permissionLevel: null,
-			},
-			entity: {
-				isFollowing: false,
-			},
-			_damage: {
-				fall: {
-					queue: null,
-				},
-				void: {
-					invulnerable: null,
-				},
-			},
+			new PacketHandler()
+				.handle_packet(player, packet)
 		})
 	}
 
@@ -186,19 +106,10 @@ class PlayerJoinHandler {
 	 *
 	 * @param {import("Frog").Player} player - The player to set up intervals for.
 	 */
-	setupPlayerIntervals(player) {
+	setup_intervals(player) {
 		setInterval(() => {
-			player.network.packetCount = 0
+			player.network_data.pps = 0
 		}, 1000)
-	}
-
-	/**
-	 * Adds the player to the player list.
-	 *
-	 * @param {import("Frog").Player} player - The player to add to the player list.
-	 */
-	addPlayer(player) {
-		PlayerInfo.addPlayer(player)
 	}
 
 	/**
@@ -206,11 +117,9 @@ class PlayerJoinHandler {
 	 *
 	 * @param {import("Frog").Player} player - The player to check against the maximum player count.
 	 */
-	handleMaxPlayers(player) {
-		if (PlayerInfo.players_online.length > config.serverInfo.maxPlayers) {
-			const kickMessage = config.dev.useLegacyServerFullKickMessage ? Language.get_key("kickMessages.serverFull") : PlayStatus.FAILED_SERVER_FULL
-			player.kick(kickMessage)
-			return
+	handle_max_players(player) {
+		if (PlayerInfo.players_online.length > config.server_info.max_players) {
+			player.kick(config.dev.use_legacy_server_full_kick_message ? get_key("kickMessages.serverFull") : PlayStatus.FailedServerFull)
 		}
 	}
 
@@ -219,25 +128,19 @@ class PlayerJoinHandler {
 	 *
 	 * @param {import("Frog").Player} player - The player to check the version for.
 	 */
-	handleVersionMismatch(player) {
-		const serverProtocol = VersionToProtocol.get_protocol(config.serverInfo.version)
+	handle_version_mismatch(player) {
+		const server_protocol = VersionToProtocol.get_protocol(config.server_info.version)
 
-		if (config.dev.multiProtocol) {
-			if (config.dev.useLegacyVersionMismatchKickMessage) {
-				if (player.network.protocolVersion !== serverProtocol) {
-					const kickMessage = Language.get_key("kickMessages.versionMismatch").replace("%s", config.serverInfo.version)
-					player.kick(kickMessage)
-					return
-				}
-			} else {
-				if (player.network.protocolVersion > serverProtocol) {
-					player.sendPlayStatus(PlayStatus.FAILED_SERVER, true)
-					return
-				} else if (player.network.protocolVersion < serverProtocol) {
-					player.sendPlayStatus(PlayStatus.FAILED_CLIENT, true)
-					return
-				}
+		if (config.dev.multi_protocol) {
+			if (config.dev.use_legacy_version_mismatch_kick_message && player.network.protocol_version !== server_protocol) {
+				return player.kick(get_key("kickMessages.versionMismatch", [config.server_info.version]))
 			}
+
+			if (player.network.protocol_version > server_protocol) {
+				return player.send_play_status(PlayStatus.FailedServer, true)
+			}
+
+			player.send_play_status(PlayStatus.FailedClient, true)
 		}
 	}
 
@@ -246,14 +149,14 @@ class PlayerJoinHandler {
 	 *
 	 * @param {import("Frog").Player} player - The player to send the response pack info to.
 	 */
-	sendResponsePackInfo(player) {
-		const responsePackInfo = new ResourcePackInfo()
-		responsePackInfo.must_accept = false
-		responsePackInfo.has_scripts = false
-		responsePackInfo.behavior_packs = []
-		responsePackInfo.texture_packs = []
-		responsePackInfo.resource_pack_links = []
-		responsePackInfo.write_packet(player)
+	send_response_pack_info(player) {
+		const response_pack_info = new ServerResourcePackInfo()
+		response_pack_info.must_accept = false
+		response_pack_info.has_scripts = false
+		response_pack_info.behavior_packs = []
+		response_pack_info.texture_packs = []
+		response_pack_info.resource_pack_links = []
+		response_pack_info.write_packet(player)
 	}
 
 	/**
@@ -261,13 +164,16 @@ class PlayerJoinHandler {
 	 *
 	 * @param {import("Frog").Player} player - The player that joined the server.
 	 */
-	emitPlayerJoinEvent(player) {
-		Frog.event_emitter.emit("playerJoin", {
-			player,
-			cancel: (reason = Language.get_key("kickMessages.serverDisconnect")) => {
-				player.kick(reason)
-			},
-		})
+	emit_player_join_event(player) {
+		EventEmitter.emit(
+			new Event(
+				"playerJoin",
+				{
+					player,
+				}
+			),
+			false
+		)
 	}
 }
 

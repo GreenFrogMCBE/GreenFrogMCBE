@@ -17,11 +17,11 @@ const Command = require("./Command")
 
 const Frog = require("../Frog")
 
-const Colors = require("../utils/types/Colors")
+const { ChatColors } = require("@greenfrog/mc-enums")
 
 const { get_key } = require("../utils/Language")
 
-const { version } = Frog.config.serverInfo
+const { version } = Frog.config.server_info
 
 /**
  * A command that shows the server's version
@@ -30,21 +30,24 @@ class CommandVersion extends Command {
 	name = get_key("commands.version.name")
 	description = get_key("commands.version.description")
 	aliases = [
-		get_key("commands.version.aliases.ver"), 
+		get_key("commands.version.aliases.ver"),
 		get_key("commands.version.aliases.about")
 	]
-	minArgs = 0
-	maxArgs = 0
+	min_args = 0
+	max_args = 0
 
 	/**
 	 * @param {import("Frog").Player} player
 	 */
 	async execute(player) {
-		const message = get_key("server.version")
-			.replace("%s", `${Frog.releaseData.minorServerVersion} (${Frog.releaseData.versionDescription})`)
-			.replace("%d", version)
+		const message = get_key("server.version",
+			[
+				`${Frog.release_data.minor_server_version} (${Frog.release_data.version_description})`,
+				version
+			]
+		)
 
-		player.send_message(`${Colors.GRAY}${message}`)
+		player.send_message(`${ChatColors.Gray}${message}`)
 	}
 }
 

@@ -2,7 +2,7 @@
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
- * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░██║██║░░╚██╗
+ * ██║░░╚██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██║░░��█║██║░░╚██╗
  * ╚██████╔╝██║░░██║███████╗███████╗██║░╚███║██║░░░░░██║░░██║╚█████╔╝╚██████╔╝
  * ░╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░╚═════╝░
  *
@@ -22,24 +22,28 @@ const Logger = require("../../utils/Logger")
 
 const { get_key } = require("../../utils/Language")
 
+const { EventEmitter, Event } = require("@kotinash/better-events")
+
 const PacketHandlingException = require("../../utils/exceptions/PacketHandlingException")
+
+const Player = require("../../player/Player")
 
 class PacketHandler {
 	/**
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
+	 * @param {Player} player
+	 * @param {Packet} packet
 	 * @throws {PacketHandlingException} - If the player is rate-limited.
 	 */
-	handlePacket(player, packet) {
+	handle_packet(player, packet) {
 		try {
-			const packetsDir = this.getPacketsDirectory()
-			const exists = this.checkForMatchingPackets(player, packet, packetsDir)
+			const packets_dir = this.get_packets_directory()
+			const exists = this.check_for_matching_packets(player, packet, packets_dir)
 
-			if (!exists && this.shouldLogUnhandledPackets()) {
-				this.handleUnhandledPacket(packet)
+			if (!exists && this.should_log_unhandled_packets()) {
+				this.handle_unhandled_packet(packet)
 			}
 		} catch (error) {
-			this.handlePacketError(player, error)
+			this.handle_packet_error(player, error)
 		}
 	}
 
@@ -48,34 +52,36 @@ class PacketHandler {
 	 *
 	 * @returns {string}
 	 */
-	getPacketsDirectory() {
+	get_packets_directory() {
 		return path.join(__dirname, "..", "packets")
 	}
 
 	/**
 	 * Checks for matching packets in the directory.
 	 *
-	 * @param {import("Frog").Player} player
-	 * @param {import("Frog").Packet} packet
-	 * @param {string} packetsDir
+	 * @param {Player} player
+	 * @param {Packet} packet
+	 * @param {string} packets_dir
 	 * @returns {boolean}
 	 */
-	checkForMatchingPackets(player, packet, packetsDir) {
+	check_for_matching_packets(player, packet, packets_dir) {
 		let exists = false
 
-		this.iteratePacketFiles(packetsDir, (/** @type {string} */ filename) => {
-			if (this.isClientPacket(filename)) {
-				const packetPath = this.getPacketPath(packetsDir, filename)
+		this.iterate_packet_files(packets_dir, (/** @type {string} */ filename) => {
+			if (this.is_client_packet(filename)) {
+				const packet_path = this.get_packet_path(packets_dir, filename)
 
-				if (this.exceedsPacketCountLimit(player) && Frog.config) {
-					this.handlePacketRatelimit(player)
-					throw this.createRateLimitException(player)
+				if (this.exceeds_packet_count_limit(player) && Frog.config.packet_rate_limiting.enabled) {
+					this.handle_packet_ratelimit(player)
+
+					throw this.create_rate_limit_exception(player)
 				}
 
-				const packetInstance = this.createPacketInstance(packetPath)
+				const packet_instance = this.create_packet_instance(packet_path)
 
-				if (this.isMatchingPacket(packetInstance, packet)) {
-					this.processMatchingPacket(player, packetInstance, packet)
+				if (this.is_matching_packet(packet_instance, packet)) {
+					this.process_matching_packet(player, packet_instance, packet)
+
 					exists = true
 				}
 			}
@@ -90,8 +96,10 @@ class PacketHandler {
 	 * @param {string} directory
 	 * @param {any} callback
 	 */
-	iteratePacketFiles(directory, callback) {
-		fs.readdirSync(directory).forEach(callback)
+	iterate_packet_files(directory, callback) {
+		fs
+			.readdirSync(directory)
+			.forEach(callback)
 	}
 
 	/**
@@ -100,7 +108,7 @@ class PacketHandler {
 	 * @param {string} filename
 	 * @returns {boolean}
 	 */
-	isClientPacket(filename) {
+	is_client_packet(filename) {
 		return filename.startsWith("Client") && filename.endsWith(".js")
 	}
 
@@ -111,43 +119,53 @@ class PacketHandler {
 	 * @param {string} filename
 	 * @returns {string}
 	 */
-	getPacketPath(directory, filename) {
+	get_packet_path(directory, filename) {
 		return path.join(directory, "..", "packets", filename)
 	}
 
 	/**
 	 * Checks if the packet count exceeds the limit.
 	 *
-	 * @param {import("Frog").Player} player
+	 * @param {Player} player
 	 * @returns {boolean}
 	 */
-	exceedsPacketCountLimit(player) {
-		return ++player.network.packetCount > 2500
+	exceeds_packet_count_limit(player) {
+		return ++player.network_data.pps > 2500
 	}
 
 	/**
 	 * Handles the packet ratelimit event.
 	 *
-	 * @param {import("Frog").Player} player
+	 * @param {Player} player
 	 */
-	handlePacketRatelimit(player) {
-		Frog.event_emitter.emit("packetRateLimit", { player })
+	handle_packet_ratelimit(player) {
+		EventEmitter.emit(
+			new Event(
+				"packetRateLimit",
+				{
+					player
+				}
+			)
+		)
 	}
 
 	/**
 	 * Creates a packet handling exception for rate limiting.
 	 *
-	 * @param {import("Frog").Player} player
+	 * @param {Player} player
 	 * @returns {PacketHandlingException} - The rate limit exception.
 	 */
-	createRateLimitException(player) {
-		const exceptionMessage = get_key("exceptions.network.rateLimited")
-			.replace("%s", player.username)
-			.replace("%d", player.network.packetCount)
+	create_rate_limit_exception(player) {
+		player.network_data.pps = 0
 
-		player.network.packetCount = 0
-
-		return new PacketHandlingException(exceptionMessage)
+		return new PacketHandlingException(
+			get_key("exceptions.network.rateLimited",
+				[
+					player.username, 
+					player.network_data.pps
+				]
+			)
+		)
 	}
 
 	/**
@@ -156,55 +174,55 @@ class PacketHandler {
 	 * @param {string} packetPath
 	 * @returns {import("../packets/Packet")}
 	 */
-	createPacketInstance(packetPath) {
-		const PacketClass = require(packetPath)
-		return new PacketClass()
+	create_packet_instance(packetPath) {
+		const packet_сlass = require(packetPath)
+
+		return new packet_сlass()
 	}
 
 	/**
 	 * Checks if the packet matches the packet parameters.
 	 *
-	 * @param {import("../packets/Packet")} packetClass
-	 * @param {import("Frog").Packet} packet
+	 * @param {import("../packets/Packet")} packet_class
+	 * @param {Packet} packet
 	 * @returns {boolean}
 	 */
-	isMatchingPacket(packetClass, packet) {
-		return packetClass.name === packet.data.name
+	is_matching_packet(packet_class, packet) {
+		return packet_class.name === packet.data.name
 	}
 
 	/**
 	 * Processes a matching packet.
 	 *
-	 * @param {import("Frog").Player} player
-	 * @param {import("../packets/Packet")} packetInstance
-	 * @param {import("Frog").PacketParams} packetParams
+	 * @param {Player} player
+	 * @param {import("../packets/Packet")} packet_instance
+	 * @param {PacketParams} packet_params
 	 */
-	processMatchingPacket(player, packetInstance, packetParams) {
-		let shouldReadPacket = true
-
-		Frog.event_emitter.emit("packetRead", {
-			player,
-			packet: {
-				packet: packetParams,
-				instance: packetInstance,
-			},
-			cancel: () => {
-				shouldReadPacket = false
-			},
-		})
-
-		if (shouldReadPacket) {
-			this.read_packet(packetInstance, player, Frog.server, packetParams)
-		}
+	process_matching_packet(player, packet_instance, packet_params) {
+		EventEmitter.emit(
+			new Event(
+				"packetRead",
+				{
+					player,
+					packet: {
+						packet: packet_params,
+						instance: packet_instance,
+					},
+				},
+				(() => {
+					this.read_packet(packet_instance, player, Frog.server, packet_params)
+				})
+			)
+		)
 	}
 
 	/**
 	 * Reads the packet.
 	 *
 	 * @param {import("../packets/Packet")} packet
-	 * @param {import("Frog").Player} player
+	 * @param {Player} player
 	 * @param {import("frog-protocol").Server} server
-	 * @param {import("Frog").PacketParams} packetParams
+	 * @param {PacketParams} packetParams
 	 */
 	read_packet(packet, player, server, packetParams) {
 		packet.read_packet(player, packetParams, server)
@@ -215,37 +233,38 @@ class PacketHandler {
 	 *
 	 * @returns {boolean}
 	 */
-	shouldLogUnhandledPackets() {
-		return Frog.config.dev.logUnhandledPackets
+	should_log_unhandled_packets() {
+		return Frog.config.dev.log_unhandled_packets
 	}
 
 	/**
 	 * Handles an unhandled packet.
 	 *
-	 * @param {import("Frog").Packet} packet
+	 * @param {Packet} packet
 	 */
-	handleUnhandledPacket(packet) {
+	handle_unhandled_packet(packet) {
 		Logger.warning(get_key("network.packet.unhandledPacket"))
+
 		console.warn("%o", packet)
 	}
 
 	/**
 	 * Handles an error that occurred during packet handling.
 	 *
-	 * @param {import("Frog").Player} player
+	 * @param {Player} player
 	 * @param {Error} error
 	 */
-	handlePacketError(player, error) {
+	handle_packet_error(player, error) {
 		Logger.error(
-			get_key("exceptions.network.packetHandlingError")
-				.replace("%s", player.username)
-				.replace("%d", error.stack))
+			get_key("exceptions.network.packetHandlingError",
+				[
+					player.username,
+					error.stack
+				]
+			)
+		)
 
-		try {
-			player.kick(get_key("kickMessages.invalidPacket"))
-		} catch {
-			player.disconnect(get_key("kickMessages.invalidPacket"))
-		}
+		player.kick(get_key("kickMessages.invalidPacket")) || player.disconnect(get_key("kickMessages.invalidPacket"))
 
 		Frog.event_emitter.emit("packetReadError", {
 			player,

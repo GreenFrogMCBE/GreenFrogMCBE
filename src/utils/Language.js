@@ -16,6 +16,7 @@
 const LanguageException = require("./exceptions/LanguageException")
 
 const { LanguageParser } = require("@greenfrog/lang-parser")
+
 const path = require("path")
 const fs = require("fs")
 

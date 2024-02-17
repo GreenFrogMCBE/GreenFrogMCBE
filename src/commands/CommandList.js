@@ -27,18 +27,22 @@ const Command = require("./Command")
 class CommandList extends Command {
 	name = get_key("commands.list.name")
 	description = get_key("commands.list.description")
-	minArgs = 0
-	maxArgs = 0
+	min_args = 0
+	max_args = 0
 
-	/**
-	 * @param {import("Frog").Player} player
-	 */
 	execute(player) {
-		const playerCount = players_online.length
-		const playerSet = new Set(players_online.map((p) => p.username))
-		const playerList = [...playerSet].join(", ") || ""
+		const player_count = players_online.length
+		const player_set = new Set(players_online.map((p) => p.username))
+		const player_list = [...player_set].join(", ") || ""
 
-		player.send_message(get_key("commands.list.execution.success.commands").replace("%s", `${playerCount}/${Frog.config.serverInfo.maxPlayers}`).replace("%d", playerList))
+		player.send_message(
+			get_key("commands.list.execution.success.commands",
+				[
+					`${player_count}/${Frog.config.server_info.max_players}`,
+					player_list
+				]
+			)
+		)
 	}
 }
 

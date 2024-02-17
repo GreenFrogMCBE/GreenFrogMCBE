@@ -21,8 +21,9 @@ const { get_key } = require("../utils/Language")
 
 const ServerInventorySlotPacket = require("../network/packets/ServerInventorySlotPacket")
 
-const WindowType = require("../inventory/types/WindowType")
-const TypeId = require("./types/Transaction")
+const { EventEmitter, Event } = require("@kotinash/better-events")
+
+const { WindowType, Transaction } = require("@greenfrog/mc-enums")
 
 const Inventory = require("./Inventory")
 
@@ -34,62 +35,68 @@ class CreativeInventory extends Inventory {
 	handle(player, packet) {
 		try {
 			const requests = packet.data.params.requests
-			const firstRequest = requests[0]
-			const firstAction = firstRequest.actions[0]
-			const secondAction = firstRequest.actions[1]
+			const request = requests[0]
+			const first_action = request.actions[0]
+			const second_action = request.actions[1]
 
-			if (firstAction && secondAction && secondAction.type_id === TypeId.RESULTS) {
-				let shouldGiveItem = true
+			if (first_action && second_action && second_action.type_id === Transaction.Results) {
+				EventEmitter.emit(
+					new Event(
+						"inventoryPreItemRequest",
+						{
+							count: first_action.count,
+							network_id: second_action.result_items[0].network_id,
+							block_runtime_id: second_action.result_items[0].block_runtime_id,
+						},
+						(() => {
+							player.inventory.last_used_item.runtimeId = second_action.result_items[0].block_runtime_id
+							player.inventory.last_used_item.networkId = second_action.result_items[0].network_id
 
-				Frog.event_emitter.emit("inventoryPreItemRequest", {
-					count: firstAction.count,
-					network_id: secondAction.result_items[0].network_id,
-					block_runtime_id: secondAction.result_items[0].block_runtime_id,
-					cancel: () => {
-						shouldGiveItem = true
-					},
-				})
+							player.inventory.items.push({
+								count: first_action.count,
+								network_id: second_action.result_items[0].network_id,
+								block_runtime_id: second_action.result_items[0].block_runtime_id,
+							})
 
-				if (!shouldGiveItem) return
+							Frog.event_emitter.emit(
+								new Event(
+									"inventoryPostItemRequest",
+									{
+										count: first_action.count,
+										network_id: second_action.result_items[0].network_id,
+										block_runtime_id: second_action.result_items[0].block_runtime_id,
+										inventoryItems: player.inventory.items,
+									}
+								),
+								false
+							)
 
-				player.inventory.lastUsedItem.runtimeId = secondAction.result_items[0].block_runtime_id
-				player.inventory.lastUsedItem.networkId = secondAction.result_items[0].network_id
-
-				player.inventory.items.push({
-					count: firstAction.count,
-					network_id: secondAction.result_items[0].network_id,
-					block_runtime_id: secondAction.result_items[0].block_runtime_id,
-				})
-
-				Frog.event_emitter.emit("inventoryPostItemRequest", {
-					count: firstAction.count,
-					network_id: secondAction.result_items[0].network_id,
-					block_runtime_id: secondAction.result_items[0].block_runtime_id,
-					inventoryItems: player.inventory.items,
-				})
-			}
-
-			if (firstAction.type_id === TypeId.PLACE) {
-				const inventorySlotPacket = new ServerInventorySlotPacket()
-				inventorySlotPacket.window_id = WindowType.CREATIVE_INVENTORY
-				inventorySlotPacket.slot = firstAction.destination.slot
-				inventorySlotPacket.item = {
-					network_id: player.inventory.lastUsedItem.networkId,
-					count: firstAction.count,
-					metadata: 0,
-					has_stack_id: true,
-					stack_id: 1,
-					block_runtime_id: player.inventory.lastUsedItem.runtimeId,
-					extra: {
-						has_nbt: false,
-						can_place_on: [],
-						can_destroy: [],
-					},
-				}
-				inventorySlotPacket.write_packet(player)
+							if (first_action.type_id === Transaction.Place) {
+								const inventory_slot_packet = new ServerInventorySlotPacket()
+								inventory_slot_packet.window_id = WindowType.Creative
+								inventory_slot_packet.slot = first_action.destination.slot
+								inventory_slot_packet.item = {
+									network_id: player.inventory.last_used_item.networkId,
+									count: first_action.count,
+									metadata: 0,
+									has_stack_id: true,
+									stack_id: 1,
+									block_runtime_id: player.inventory.last_used_item.runtimeId,
+									extra: {
+										has_nbt: false,
+										can_place_on: [],
+										can_destroy: [],
+									},
+								}
+								inventory_slot_packet.write_packet(player)
+							}
+						})
+					),
+					true
+				)
 			}
 		} catch (error) {
-			Logger.error(get_key("creativemenu.badPacket").replace("%s", player.username).replace("%d", error.stack))
+			Logger.error(get_key("creativemenu.badPacket", [player.username, error.stack]))
 		}
 	}
 }

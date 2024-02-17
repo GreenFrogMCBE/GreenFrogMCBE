@@ -15,17 +15,14 @@
  */
 const Command = require("./Command")
 
-const Gamemode = require("../player/types/Gamemode")
+const { Gamemode, Selector, ArgumentType } = require("@greenfrog/mc-enums")
 const DamageCause = require("../player/types/DamageCause")
 
 const PlayerInfo = require("../player/PlayerInfo")
 
-const { getPlayer } = require("../player/PlayerInfo")
+const { get_player } = require("../player/PlayerInfo")
 
 const { get_key } = require("../utils/Language")
-
-const Selector = require("./types/Selector")
-const ArgumentType = require("./types/ArgumentType")
 
 /**
  * Returns if the player can be killed
@@ -33,11 +30,11 @@ const ArgumentType = require("./types/ArgumentType")
  * @param {import("Frog").Player} player
  * @returns {boolean}
  */
-function canBeKilled(player) {
+function can_be_killed(player) {
 	if (
 		player.permissions.is_console ||
-		player.gamemode === Gamemode.CREATIVE ||
-		player.gamemode === Gamemode.SPECTATOR
+		player.gamemode === Gamemode.Creative ||
+		player.gamemode === Gamemode.Spectator
 	) {
 		return false
 	}
@@ -46,17 +43,30 @@ function canBeKilled(player) {
 }
 
 /**
+ * Attempts to kill the specified player.
+ *
+ * @param {import("Frog").Player} target - The player to be killed.
+ */
+const kill_player = (target) => {
+	if (can_be_killed(target)) {
+		return target.set_health(0, DamageCause.KillCommand)
+	}
+
+	target.send_message(get_key("commands.errors.targetError.targetsNotFound", [target.name]))
+}
+
+/**
  * Kills the specified player
  */
 class CommandKill extends Command {
 	name = get_key("commands.kill.name")
 	description = get_key("commands.kill.description")
-	minArgs = 0
-	requiresOp = true
+	min_args = 0
+	requires_op = true
 	args = [
 		{
 			name: "target",
-			type: ArgumentType.TARGET,
+			type: ArgumentType.Target,
 			optional: true
 		}
 	]
@@ -68,52 +78,25 @@ class CommandKill extends Command {
 	 */
 	execute(player, server, args) {
 		switch (args[0]) {
-			case Selector.SELF:
-			case undefined: {
-				if (!canBeKilled(player)) {
-					player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
-					return
-				}
+			case Selector.Self:
+			case undefined:
+				return can_be_killed(player) && player.set_health(0, DamageCause.KillCommand)
+			case Selector.AllEntities:
+			case Selector.AllPlayers:
+				return PlayerInfo.players_online.forEach(kill_player)
+			case Selector.RandomPlayer:
+				const random_player = Math.floor(Math.random() * PlayerInfo.players_online.length)
 
-				player.set_health(0, DamageCause.KILL_COMMAND)
-				break
-			}
-			case Selector.ALL_ENTITIES:
-			case Selector.ALL_PLAYERS: {
-				PlayerInfo.players_online.forEach((player) => {
-					if (canBeKilled(player)) {
-						player.set_health(0, DamageCause.KILL_COMMAND)
-					}
-				})
-				break
-			}
-			case Selector.RANDOM_PLAYER: {
-				const randomPlayer = Math.floor(Math.random() * PlayerInfo.players_online.length)
-				const subject = PlayerInfo.players_online[randomPlayer]
-
-				if (!canBeKilled(subject)) {
-					player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
-					return
-				}
-
-				subject.set_health(0, DamageCause.KILL_COMMAND)
-				break
-			}
-			default: {
+				return kill_player(PlayerInfo.players_online[random_player])
+			default:
 				try {
-					const subject = getPlayer(args[0])
+					const subject = get_player(args[0])
 
-					if (!subject || !canBeKilled(subject)) {
-						player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
-						return
-					}
-
-					subject.set_health(0, DamageCause.KILL_COMMAND)
+					subject && kill_player(subject)
 				} catch {
 					player.send_message(get_key("commands.kill.execution.failed.notOnline").replace("%s", args[0]))
 				}
 				break
-			}
 		}
 	}
 }

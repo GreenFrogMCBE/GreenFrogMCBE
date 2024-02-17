@@ -17,11 +17,15 @@ const ServerContainerClosePacket = require("./ServerContainerClosePacket")
 
 const Packet = require("./Packet")
 
-const vanillaBlocks = require("../../block/vanillaBlocks.json")
+const {
+	EventEmitter,
+	Event
+} = require("@kotinash/better-events")
 
-const WindowId = require("../../inventory/types/WindowId")
-
-const Frog = require("../../Frog")
+const {
+	WindowId,
+	Air
+} = require("@greenfrog/mc-enums")
 
 class ClientContainerClosePacket extends Packet {
 	name = "container_close"
@@ -31,45 +35,44 @@ class ClientContainerClosePacket extends Packet {
 	 * @param {import("Frog").Packet} packet
 	 */
 	async read_packet(player, packet) {
-		let should_close = true
-
-		Frog.event_emitter.emit("playerContainerClose", {
-			player,
-			window_id: WindowId.CREATIVE,
-			sent_by_server: false,
-			packet,
-			cancel: () => {
-				should_close = false
-			},
-		})
-
-		if (!should_close) return
-
-		if (player.inventory.container.isOpen) {
-			let should_remove_the_chest = true
-
-			Frog.event_emitter.emit("inventoryContainerChestRemove", {
-				player,
-				cancel: () => {
-					should_remove_the_chest = false
+		EventEmitter.emit(
+			new Event(
+				"playerContainerClose",
+				{
+					player,
+					window_id: WindowId.Creative,
+					sent_by_server: false,
+					packet
 				},
-			})
+				(() => {
+					if (player.inventory.container.isOpen) {
+						EventEmitter.emit(
+							new Event(
+								"inventoryContainerChestRemove",
+								{
+									player
+								},
+								(() => {
+									const { x, y, z } = player.inventory.container.block_position
 
-			if (!should_remove_the_chest) return
+									player.world.place_block(x, y, z, new Air())
 
-			const { x, y, z } = player.inventory.container.blockPosition
+									player.inventory.container.isOpen = false
+									player.inventory.container.block_position = { x: undefined, y: undefined, z: undefined }
+									player.inventory.container.window = { id: undefined, type: undefined }
 
-			player.world.place_block(x, y, z, vanillaBlocks.air.legacy_id)
-
-			player.inventory.container.isOpen = false
-			player.inventory.container.blockPosition = { x: undefined, y: undefined, z: undefined }
-			player.inventory.container.window = { id: undefined, type: undefined }
-		}
-
-		const container_close = new ServerContainerClosePacket()
-		container_close.server = false
-		container_close.window_id = WindowId.CREATIVE
-		container_close.write_packet(player)
+									const container_close = new ServerContainerClosePacket()
+									container_close.server = false
+									container_close.window_id = WindowId.Creative
+									container_close.write_packet(player)
+								})
+							),
+						)
+					}
+				})
+			),
+			false
+		)
 	}
 }
 

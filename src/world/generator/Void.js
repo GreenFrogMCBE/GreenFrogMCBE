@@ -13,17 +13,17 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const vanillaBlocks = require("../../block/vanillaBlocks.json")
-
-const WorldGenerator = require("../types/WorldGenerator")
+const { WorldGenerationType, Air} = require("@greenfrog/mc-enums")
 
 const Generator = require("./Generator")
 
 class Void extends Generator {
-	name = WorldGenerator.VOID
+	name = WorldGenerationType.Void
 
 	get_chunk_data() {
-		return Buffer.alloc(16 * 256 * 16).fill(vanillaBlocks.air.legacy_id)
+		return Buffer
+			.alloc(16 * 256 * 16)
+			.fill(new Air().get_id())
 	}
 }
 

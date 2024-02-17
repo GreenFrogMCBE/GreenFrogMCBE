@@ -15,7 +15,7 @@
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket")
 
-const Form = require("./types/Form")
+const { FormVariant } = require("@greenfrog/mc-enums")
 
 class ModalForm {
 	constructor() {
@@ -47,7 +47,7 @@ class ModalForm {
 		/**
 		 * @type {function}
 		 */
-		this.onSend = () => {}
+		this.on_send = () => {}
 	}
 
 	/**
@@ -56,16 +56,16 @@ class ModalForm {
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
-		this.onSend(this, player)
+		this.on_send(this, player)
 
-		const formRequestPacket = new ServerFormRequestPacket()
-		formRequestPacket.type = Form.MODAL_FORM
-		formRequestPacket.id = this.id
-		formRequestPacket.title = this.title
-		formRequestPacket.content = this.text
-		formRequestPacket.button1 = this.button1
-		formRequestPacket.button2 = this.button2
-		formRequestPacket.write_packet(player)
+		const form_request_packet = new ServerFormRequestPacket()
+		form_request_packet.type = FormVariant.Modal
+		form_request_packet.id = this.id
+		form_request_packet.title = this.title
+		form_request_packet.content = this.text
+		form_request_packet.button1 = this.button1
+		form_request_packet.button2 = this.button2
+		form_request_packet.write_packet(player)
 	}
 }
 

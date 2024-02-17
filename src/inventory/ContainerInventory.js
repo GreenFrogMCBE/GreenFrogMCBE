@@ -1,4 +1,4 @@
-/**
+	/**
  * ░██████╗░██████╗░███████╗███████╗███╗░░██╗███████╗██████╗░░█████╗░░██████╗░
  * ██╔════╝░██╔══██╗██╔════╝██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗██╔════╝░
  * ██║░░██╗░██████╔╝█████╗░░█████╗░░██╔██╗██║█████╗░░██████╔╝██║░░██║██║░░██╗░
@@ -15,6 +15,8 @@
  */
 const Frog = require("../Frog")
 
+const {EventEmitter,Event} = require("@kotinash/better-events")
+
 const Inventory = require("./Inventory")
 
 class ContainerInventory extends Inventory {
@@ -23,10 +25,16 @@ class ContainerInventory extends Inventory {
 	 * @param {import("Frog").Packet} packet
 	 */
 	handle(player, packet) {
-		Frog.event_emitter.emit("inventoryContainerItemRequest", {
-			player,
-			packet,
-		})
+		EventEmitter.emit(
+			new Event(
+				"inventoryContainerItemRequest",
+				{
+					player,
+					transaction: packet
+				}
+			),
+			false
+		)
 	}
 }
 

@@ -18,7 +18,7 @@ class Packet {
 	constructor() {}
 
 	/** @type {number | unknown} */
-	packetId
+	packet_id
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client

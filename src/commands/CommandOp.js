@@ -17,7 +17,7 @@ const Command = require("./Command")
 
 const PermissionManager = require("../permission/PermissionManager")
 
-const ArgumentType = require("./types/ArgumentType")
+const { ArgumentType } = require("@greenfrog/mc-enums")
 
 const { get_key } = require("../utils/Language")
 
@@ -27,13 +27,13 @@ const { get_key } = require("../utils/Language")
 class CommandOp extends Command {
 	name = get_key("commands.op.name")
 	description = get_key("commands.op.description")
-	minArgs = 1
-	maxArgs = 1
-	requiresOp = true
+	min_args = 1
+	max_args = 1
+	requires_op = true
 	args = [
 		{
 			name: "player",
-			type: ArgumentType.TARGET,
+			type: ArgumentType.Target,
 			optional: true
 		}
 	]
@@ -45,15 +45,12 @@ class CommandOp extends Command {
 	 * @async
 	 */
 	async execute(player, server, args) {
-		const playerName = args[0]
+		const player_name = args[0]
 
-		try {
-			await PermissionManager.op(playerName)
-
-			player.send_message(get_key("commands.op.execution.success").replace("%s", playerName))
-		} catch {
-			player.send_message(get_key("commands.op.execution.failed").replace("%s", playerName))
-		}
+		await PermissionManager
+			.op(player_name)
+			.then(() => player.send_message(get_key("commands.op.execution.success", [player_name])))
+			.catch(() => player.send_message(get_key("commands.op.execution.failed", [player_name])))
 	}
 }
 

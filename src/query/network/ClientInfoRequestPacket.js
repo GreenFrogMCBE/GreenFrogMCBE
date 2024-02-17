@@ -29,7 +29,7 @@ const Frog = require("../../Frog")
 const PluginManager = require("../../plugins/PluginManager")
 
 class ClientInfoRequestPacket extends Packet {
-	packetId = QueryPacket.INFO
+	packet_id = QueryPacket.INFO
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client
@@ -38,35 +38,35 @@ class ClientInfoRequestPacket extends Packet {
 	 * @param {import("Frog").QuerySettings} querySettings
 	 */
 	read_packet(client, packet, socket, querySettings) {
-		const sessionId = ClientTokens.clientTokens.get(`${client.address},${client.port}`)
+		const session_id = ClientTokens.clientTokens.get(`${client.address},${client.port}`)
 
 		switch (packet.length) {
 			case InfoRequest.BASIC:
 				const basicInfoResponsePacket = new ServerInfoResponsePacket()
 				basicInfoResponsePacket.game = "MINECRAFTBE"
-				basicInfoResponsePacket.levelName = querySettings.levelName
+				basicInfoResponsePacket.level_name = querySettings.level_name
 				basicInfoResponsePacket.numPlayers = PlayerInfo.players_online.length
-				basicInfoResponsePacket.maxPlayers = querySettings.maxPlayers
+				basicInfoResponsePacket.max_players = querySettings.max_players
 				basicInfoResponsePacket.serverName = querySettings.motd
 				basicInfoResponsePacket.serverAddress = querySettings.host
 				basicInfoResponsePacket.serverPort = querySettings.port
-				basicInfoResponsePacket.sessionId = sessionId
+				basicInfoResponsePacket.session_id = session_id
 				basicInfoResponsePacket.write_packet(client, socket)
 				break
 			case InfoRequest.FULL:
 				const fullInfoResponsePacket = new ServerInfoResponsePacket()
 				fullInfoResponsePacket.isFullPacket = true
 				fullInfoResponsePacket.game = "MINECRAFTBE"
-				fullInfoResponsePacket.levelName = querySettings.levelName
+				fullInfoResponsePacket.level_name = querySettings.level_name
 				fullInfoResponsePacket.serverName = querySettings.motd
 				fullInfoResponsePacket.numPlayers = PlayerInfo.players_online.length
-				fullInfoResponsePacket.maxPlayers = querySettings.maxPlayers
+				fullInfoResponsePacket.max_players = querySettings.max_players
 				fullInfoResponsePacket.version = querySettings.version
 				fullInfoResponsePacket.serverAddress = querySettings.host
 				fullInfoResponsePacket.serverPort = querySettings.port
 				fullInfoResponsePacket.gamemode = Frog.config.world.gamemode.world
-				fullInfoResponsePacket.plugins = Frog.config.query.showPlugins ? "GreenFrogMCBE: " + PluginManager.plugins.toString() : "GreenFrogMCBE: "
-				fullInfoResponsePacket.sessionId = sessionId
+				fullInfoResponsePacket.plugins = Frog.config.query.show_plugins ? "GreenFrogMCBE: " + PluginManager.plugins.toString() : "GreenFrogMCBE: "
+				fullInfoResponsePacket.session_id = session_id
 				fullInfoResponsePacket.whitelist = false // TODO: Implement whitelist
 				fullInfoResponsePacket.write_packet(client, socket)
 				break

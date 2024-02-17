@@ -15,11 +15,11 @@
  */
 const Command = require("./Command")
 
+const { ArgumentType } = require("@greenfrog/mc-enums")
+
 const { players_online } = require("../player/PlayerInfo")
 
 const { get_key } = require("../utils/Language")
-
-const ArgumentType = require("./types/ArgumentType")
 
 /**
  * A command that changes the time
@@ -27,40 +27,48 @@ const ArgumentType = require("./types/ArgumentType")
 class CommandTime extends Command {
 	name = get_key("commands.time.name")
 	description = get_key("commands.time.description")
-	minArgs = 1
-	maxArgs = 1
-	requiresOp = true
+	min_args = 1
+	max_args = 1
+	requires_op = true
 	args = [
 		{
 			name: "time",
-			type: ArgumentType.INT,
+			type: ArgumentType.Int,
 			optional: false,
 		}
 	]
 
 	/**
 	 * @param {import("Frog").Player} player
-	 * @param {import("frog-protocol").Server} server
 	 * @param {string[]} args
 	 */
-	async execute(player, server, args) {
-		const time = args[0]
+	async execute(player, args) {
+		const time_arg = args[0]
 
-		const setTime = time === get_key("commands.time.times.day") ? 1000 : time === get_key("commands.time.times.night") ? 17000 : parseInt(time, 10)
+		let time = 0
 
-		if (isNaN(Number(setTime))) {
-			player.send_message(get_key("commands.time.execution.failed"))
-			return
+		switch (time_arg) {
+			case get_key("commands.time.times.day"):
+				time = 1000
+				break
+			case get_key("commands.time.times.night"):
+				time = 17000
+				break
+			default:
+				time = parseInt(time_arg, 10)
+
+				if (isNaN(time)) {
+					return player.send_message(get_key("commands.time.execution.failed"))
+				}
 		}
 
-		const parsedTime = parseInt(time)
+		for (const online_player of players_online) {
+			online_player.world.time = time
 
-		for (const player of players_online) {
-			player.world.time = parsedTime
-			player.setTime(parsedTime)
+			online_player.time(time)
 		}
 
-		player.send_message(get_key("commands.time.execution.success").replace("%s", time))
+		player.send_message(get_key("commands.time.execution.success", [time_arg]))
 	}
 }
 

@@ -34,32 +34,37 @@ class ClientTextPacket extends Packet {
 		const message = packet.data.params.message
 
 		if (
-			Frog.config.chat.features.chat || 
-			!message.trim() || 
+			Frog.config.chat.features.chat ||
+			!message.trim() ||
 			message.startsWith("/")
 		) {
 			return
 		}
 
-		let shouldChat = true
+		let should_chat = true
 
 		Frog.event_emitter.emit("playerChat", {
 			player,
 			message,
 			cancel: () => {
-				shouldChat = false
+				should_chat = false
 			},
 		})
 
-		if (!shouldChat) return
+		if (!should_chat) return
 
-		const formattedMessage = 
-			get_key("chat.format").replace("%s", player.username).replace("%d", message.replace(/§/g, ""))
+		const formatted_message =
+			get_key("chat.format",
+				[
+					player.username,
+					message.replace(/§/g, "")
+				]
+			)
 
-		Logger.info(formattedMessage)
+		Logger.info(formatted_message)
 
 		for (const recipient of PlayerInfo.players_online) {
-			recipient.send_message(formattedMessage)
+			recipient.send_message(formatted_message)
 		}
 	}
 }

@@ -20,10 +20,10 @@ const { SmartBuffer } = require("@harmonytf/smart-buffer")
 const QueryPacket = require("./types/QueryPacket")
 
 class ServerHandshakeResponsePacket extends Packet {
-	packetId = QueryPacket.HANDSHAKE
+	packet_id = QueryPacket.HANDSHAKE
 
 	/** @type {number | undefined} */
-	sessionId
+	session_id
 	/** @type {string | undefined} */
 	payload
 
@@ -35,7 +35,7 @@ class ServerHandshakeResponsePacket extends Packet {
 		socket.send(
 			new SmartBuffer()
 				.writeUInt8(QueryPacket.HANDSHAKE)
-				.writeInt32BE(/** @type {number} */ (this.sessionId))
+				.writeInt32BE(/** @type {number} */ (this.session_id))
 				.writeStringNT(/** @type {string} */ (this.payload))
 				.toBuffer(),
 			client.port,

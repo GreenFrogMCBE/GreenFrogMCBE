@@ -19,6 +19,8 @@ const Packet = require("./Packet")
 
 const InvalidGamemodeException = require("../../utils/exceptions/InvalidGamemodeException")
 
+const {EventEmitter,Event} = require("@kotinash/better-events")
+
 const { get_key } = require("../../utils/Language")
 
 class ClientSetPlayerGameTypePacket extends Packet {
@@ -27,7 +29,7 @@ class ClientSetPlayerGameTypePacket extends Packet {
 	/**
 	 * @param {import("Frog").Player} player
 	 */
-	validatePacket(player) {
+	validate_packet(player) {
 		if (!player.permissions.op) throw new InvalidGamemodeException(get_key("exceptions.network.invalidGamemodePacket"))
 	}
 
@@ -36,23 +38,22 @@ class ClientSetPlayerGameTypePacket extends Packet {
 	 * @param {import("Frog").Packet} packet
 	 */
 	async read_packet(player, packet) {
-		this.validatePacket(player)
+		this.validate_packet(player)
 
 		const gamemode = packet.data.params.gamemode
 
-		let shouldChange = true
-
-		Frog.event_emitter.emit("playerGamemodeChangeRequest", {
-			player,
-			gamemode,
-			cancel: () => {
-				shouldChange = false
-			},
-		})
-
-		if (!shouldChange) return
-
-		player.setGamemode(gamemode)
+		EventEmitter.emit(
+			new Event(
+				"playerGamemodeChangeRequest",
+				{
+					player,
+					gamemode
+				},
+				(() => {
+					player.set_gamemode(gamemode)
+				})
+			)
+		)
 	}
 }
 

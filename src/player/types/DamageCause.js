@@ -13,12 +13,12 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-module.exports = /** @type {const} */ ({
-	UNKNOWN: "unknown",
-	FALL: "fall_damage",
-	REGENERATION: "regeneration",
-	VOID: "void",
-	STARVATION: "starvation",
-	PLUGIN: "plugin",
-	KILL_COMMAND: "kill_command",
-})
+module.exports = {
+	Unknown: "unknown",
+	Fall: "fall_damage",
+	Regeneration: "regeneration",
+	Void: "void",
+	Starvation: "starvation",
+	Plugin: "plugin",
+	KillCommand: "kill_command",
+}

@@ -26,19 +26,19 @@ class CommandHelp extends Command {
 	name = get_key("commands.help.name")
 	description = get_key("commands.help.description")
 	aliases = [
-		"?"
+		"?",
 	]
 	minArgs = 0
-	maxArgs = 0
+	max_args = 0
 
 	/**
-	 * @param {import("Frog").Player} player
-	 */
+ 	 * @param {import("Frog").Player} player
+ 	 */
 	execute(player) {
 		player.send_message(get_key("commands.help.execution.success"))
 
 		for (const command of CommandManager.commands) {
-			player.send_message(get_key("commands.help.execution.command").replace("%s", command.name).replace("%d", command.description))
+			player.send_message(get_key("commands.help.execution.command", [command.name, command.description]))
 		}
 	}
 }

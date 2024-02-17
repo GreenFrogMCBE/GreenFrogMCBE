@@ -15,7 +15,7 @@
  */
 const Command = require("./Command")
 
-const ArgumentType = require("./types/ArgumentType")
+const { ArgumentType } = require("@greenfrog/mc-enums")
 
 const { get_key } = require("../utils/Language")
 
@@ -27,12 +27,12 @@ const Frog = require("../Frog")
 class CommandSay extends Command {
 	name = get_key("commands.say.name")
 	description = get_key("commands.say.description")
-	minArgs = 1
-	requiresOp = true
+	min_args = 1
+	requires_op = true
 	args = [
 		{
 			name: "message",
-			type: ArgumentType.STRING,
+			type: ArgumentType.String,
 			optional: false
 		}
 	]
@@ -43,9 +43,7 @@ class CommandSay extends Command {
 	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
-		const message = get_key("chat.format.say").replace("%s", player.username).replace("%d", args.join(" "))
-
-		Frog.broadcast_message(message)
+		Frog.broadcast_message(get_key("chat.format.say", [player.username,args.join(" ")]))
 	}
 }
 

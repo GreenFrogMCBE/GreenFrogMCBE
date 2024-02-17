@@ -17,7 +17,7 @@ const Command = require("./Command")
 
 const PluginManager = require("../plugins/PluginManager")
 
-const Colors = require("../utils/types/Colors")
+const { ChatColors } = require("@greenfrog/mc-enums")
 
 const { get_key } = require("../utils/Language")
 
@@ -27,21 +27,22 @@ const { get_key } = require("../utils/Language")
 class CommandPlugins extends Command {
 	name = get_key("commands.plugins.name")
 	description = get_key("commands.plugins.description")
-	aliases = get_key("commands.plugins.aliases.pl")
-	minArgs = 0
-	maxArgs = 0
+	aliases = [ get_key("commands.plugins.aliases.pl") ]
+	min_args = 0
+	max_args = 0
 
 	/**
 	 * @param {import("Frog").Player} player
 	 */
 	execute(player) {
-		const pluginSet = new Set(PluginManager.plugins)
-		const pluginList = Array.from(pluginSet)
-			.map(plugin => `${Colors.RESET}${Colors.GREEN}${plugin.name} v${plugin.version}${Colors.RESET}`)
-			.join(", ") || ""
+		const plugin_set = new Set(PluginManager.plugins)
+		const plugin_list = Array.from(plugin_set)
+			.map(({ name, version }) => `${ChatColors.Reset}${ChatColors.Green}${name} v${version}${ChatColors.Reset}`)
+			.join(", ")
 
-		const message = get_key("commands.plugins.execution.success")
-			.replace("%s", `(${pluginSet.size}): ${pluginList || ""} ${Colors.RESET}`)
+		const message = get_key("commands.plugins.execution.success", [
+			`(${plugin_set.size}): ${plugin_list || ""} ${ChatColors.Reset}`
+		])
 
 		player.send_message(message)
 	}

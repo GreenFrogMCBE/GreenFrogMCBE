@@ -20,14 +20,14 @@ const { SmartBuffer } = require("@harmonytf/smart-buffer")
 const QueryPacket = require("./types/QueryPacket")
 
 class ServerInfoResponsePacket extends Packet {
-	packetId = QueryPacket.INFO
+	packet_id = QueryPacket.INFO
 
 	/** @type {number | undefined} */
-	sessionId
+	session_id
 	/** @type {string | undefined} */
 	serverName
 	/** @type {string | undefined} */
-	levelName
+	level_name
 	/** @type {string | undefined} */
 	game
 	/** @type {string | undefined} */
@@ -41,7 +41,7 @@ class ServerInfoResponsePacket extends Packet {
 	/** @type {number | undefined} */
 	numPlayers
 	/** @type {number | undefined} */
-	maxPlayers
+	max_players
 	/** @type {number | undefined} */
 	serverPort
 	/** @type {string | undefined} */
@@ -59,7 +59,7 @@ class ServerInfoResponsePacket extends Packet {
 		if (this.isFullPacket) {
 			const buffer = new SmartBuffer()
 				.writeUInt8(0x00)
-				.writeInt32BE(/** @type {number} */ (this.sessionId))
+				.writeInt32BE(/** @type {number} */ (this.session_id))
 				.writeStringNT("splitnum")
 				.writeUInt8(0x80)
 				.writeUInt8(0x00)
@@ -70,9 +70,9 @@ class ServerInfoResponsePacket extends Packet {
 				{ key: "game_id", value: this.game },
 				{ key: "version", value: this.version },
 				{ key: "plugins", value: this.plugins },
-				{ key: "map", value: this.levelName },
+				{ key: "map", value: this.level_name },
 				{ key: "numplayers", value: this.numPlayers },
-				{ key: "maxplayers", value: this.maxPlayers },
+				{ key: "maxplayers", value: this.max_players },
 				{ key: "whitelist", value: this.whitelist },
 				{ key: "hostip", value: this.serverAddress },
 				{ key: "hostport", value: this.serverPort },
@@ -86,8 +86,8 @@ class ServerInfoResponsePacket extends Packet {
 			buffer.writeUInt8(0x00).writeUInt8(0x01).writeStringNT("player_").writeUInt8(0x00)
 
 			if (this.players) {
-				this.players.forEach((playerName) => {
-					buffer.writeStringNT(playerName)
+				this.players.forEach((player_name) => {
+					buffer.writeStringNT(player_name)
 				})
 			}
 
@@ -97,13 +97,13 @@ class ServerInfoResponsePacket extends Packet {
 		} else {
 			socket.send(
 				new SmartBuffer()
-					.writeUInt8(this.packetId)
-					.writeInt32BE(/** @type {number} */ (this.sessionId))
+					.writeUInt8(this.packet_id)
+					.writeInt32BE(/** @type {number} */ (this.session_id))
 					.writeStringNT(/** @type {string} */ (this.serverName))
 					.writeStringNT(/** @type {string} */ (this.game))
-					.writeStringNT(/** @type {string} */ (this.levelName))
+					.writeStringNT(/** @type {string} */ (this.level_name))
 					.writeStringNT(/** @type {string} */ (this.players?.toString() || ""))
-					.writeStringNT(/** @type {string} */ (this.maxPlayers?.toString()))
+					.writeStringNT(/** @type {string} */ (this.max_players?.toString()))
 					.writeUInt16LE(/** @type {number} */ (this.serverPort))
 					.writeStringNT(/** @type {string} */ (this.serverAddress))
 					.toBuffer(),

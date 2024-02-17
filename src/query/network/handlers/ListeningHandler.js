@@ -15,6 +15,8 @@
  */
 const ConnectionHandler = require("./ConnectionHandler")
 
+const { EventEmitter, Event } = require("@kotinash/better-events")
+
 const { get_key } = require("../../../utils/Language")
 
 const Logger = require("../../../utils/Logger")
@@ -26,48 +28,43 @@ class ListeningHandler {
 	 * @param {import("dgram").Socket} socket
 	 * @param {import("Frog").QuerySettings} settings
 	 */
-	handleListening(socket, settings) {
+	handle_listening(socket, settings) {
 		// Get the query address
 		const address = `/${Frog.config.network.host}:${Frog.config.query.port}`
 
 		try {
-			let shouldListen = true
+			EventEmitter.emit(
+				new Event(
+					"queryListen",
+					(() => {
+						socket.bind(settings.port, settings.host)
 
-			Frog.event_emitter.emit("queryListen", {
-				socket,
-				querySettings: settings,
-				cancel: () => {
-					shouldListen = false
-				},
-			})
+						socket.on("message", (message, client) =>
+							new ConnectionHandler()
+								.handle_connection(socket, settings, message, client)
+						)
 
-			if (!shouldListen) return
-
-			socket.bind(settings.port, settings.host)
-
-			socket.on("message", (message, client) => new ConnectionHandler().handleConnection(socket, settings, message, client))
-
-			Logger.info(get_key("query.server.listening.success").replace("%s", address))
+						Logger.info(get_key("query.server.listening.success", [address]))
+					})
+				)
+			)
 		} catch (error) {
-			let shouldCancelError = false
-
-			Frog.event_emitter.emit("queryError", {
-				socket,
-				querySettings: settings,
-				error,
-				cancel: () => {
-					shouldCancelError = true
-				},
-			})
-
-			if (!shouldCancelError) return
+			EventEmitter.emit(
+				new Event(
+					"queryError",
+					{
+						socket,
+						settings,
+						error,
+					}
+				)
+			)
 
 			if (error.code === "ERRADDRINUSE") {
-				Logger.error(get_key("query.server.listening.failed").replace("%s", address))
-				return
+				return Logger.error(get_key("query.server.listening.failed", [address]))
 			}
 
-			Logger.error(get_key("query.server.error").replace("%s", error.stack))
+			Logger.error(get_key("query.server.error", [error.stack]))
 		}
 	}
 }

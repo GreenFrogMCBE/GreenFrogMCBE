@@ -17,20 +17,19 @@ const Command = require("./Command")
 
 const { get_key } = require("../utils/Language")
 
+const { ArgumentType } = require("@greenfrog/mc-enums")
+
 const PlayerInfo = require("../player/PlayerInfo")
 
-/**
- * A command to disconnect a player from the server
- */
 class CommandKick extends Command {
 	name = get_key("commands.kick.name")
 	description = get_key("commands.kick.description")
-	minArgs = 1
-	requiresOp = true
+	min_args = 1
+	requires_op = true
 	args = [
 		{
 			name: "player",
-			type: "target",
+			type: ArgumentType.Target,
 			optional: false,
 		}
 	]
@@ -41,17 +40,16 @@ class CommandKick extends Command {
 	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
-		const playerName = args[0]
+		const player_name = args[0]
 		const reason = args.slice(1).join(" ")
 
-		const target = PlayerInfo.getPlayer(playerName)
+		const target = PlayerInfo.get_player(player_name)
 
 		if (!target) {
-			player.send_message(get_key("commands.kick.execution.failed.notOnline").replace("%s", playerName))
-			return
+			return player.send_message(get_key("commands.kick.execution.failed.notOnline", [player_name]))
 		}
 
-		target.kick(get_key("kickMessages.wereKicked").replace("%s", reason))
+		target.kick(get_key("kickMessages.wereKicked", [reason]))
 	}
 }
 

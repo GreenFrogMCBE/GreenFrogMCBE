@@ -17,7 +17,7 @@ const Command = require("./Command")
 
 const PermissionManager = require("../permission/PermissionManager")
 
-const ArgumentType = require("./types/ArgumentType")
+const { ArgumentType } = require("@greenfrog/mc-enums")
 
 const { get_key } = require("../utils/Language")
 
@@ -27,12 +27,12 @@ const { get_key } = require("../utils/Language")
 class CommandDeop extends Command {
 	name = get_key("commands.deop.name")
 	description = get_key("commands.deop.description")
-	minArgs = 1
-	requiresOp = true
+	min_args = 1
+	requires_op = true
 	args = [
 		{
 			name: "player",
-			type: ArgumentType.TARGET,
+			type: ArgumentType.Target,
 			optional: false
 		}
 	]
@@ -44,14 +44,14 @@ class CommandDeop extends Command {
 	 * @async
 	 */
 	async execute(player, server, args) {
-		const playerName = args[0]
+		const player_name = args[0]
 
 		try {
-			await PermissionManager.deop(playerName)
+			await PermissionManager.deop(player_name)
 
-			player.send_message(get_key("commands.deop.execution.success").replace("%s", playerName))
+			player.send_message(get_key("commands.deop.execution.success", [player_name]))
 		} catch {
-			player.send_message(get_key("commands.deop.execution.fail").replace("%s", playerName))
+			player.send_message(get_key("commands.deop.execution.fail", [player_name]))
 		}
 	}
 }

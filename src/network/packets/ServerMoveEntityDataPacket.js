@@ -14,18 +14,22 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Packet = require("./Packet")
+const {Vec3} = require("@greenfrog/mc-enums")
 
 class ServerMoveEntityDataPacket extends Packet {
 	name = "move_entity_delta"
 
-	/** @type {import("Frog").Vec3 } */
-	coordinates = { x: 0, y: 0, z: 0 }
-	/** @type {number | undefined} */
+	/** @type {Vec3} */
+	coordinates = new Vec3(0,0,0)
+
+	/** @type {string} */
 	runtime_entity_id
+
 	/** @type {import("Frog").EntityMovementFlags | undefined} */
 	flags
+
 	/** @type {import("Frog").Vec3 } */
-	coordinatesRotation = { x: 0, y: 0, z: 0 }
+	coordinates_rotation = { x: 0, y: 0, z: 0 }
 
 	/**
 	 * @param {import("Frog").Player} player
@@ -37,9 +41,9 @@ class ServerMoveEntityDataPacket extends Packet {
 			x: this.coordinates.x,
 			y: this.coordinates.y,
 			z: this.coordinates.z,
-			rotation_x: this.coordinatesRotation.x,
-			rotation_y: this.coordinatesRotation.y,
-			rotation_z: this.coordinatesRotation.z,
+			rotation_x: this.coordinates_rotation.x,
+			rotation_y: this.coordinates_rotation.y,
+			rotation_z: this.coordinates_rotation.z,
 		})
 	}
 }

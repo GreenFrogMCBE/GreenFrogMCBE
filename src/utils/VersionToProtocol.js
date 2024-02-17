@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 module.exports = {
-	PROTOCOL_LIST: {
+	PROTOCOL_List: {
 		"1.20.50": 630,
 		"1.20.40": 622,
 		"1.20.30": 618,
@@ -35,7 +35,7 @@ module.exports = {
 		"1.19.20": 544,
 	},
 
-	DEFAULT_PROTOCOL: 0,
+	Default_PROTOCOL: 0,
 
 	/**
 	 * Returns the version as a protocol number
@@ -44,6 +44,6 @@ module.exports = {
 	 * @returns {number} The version as a protocol number
 	 */
 	get_protocol(version) {
-		return this.PROTOCOL_LIST[version] || this.DEFAULT_PROTOCOL
+		return this.PROTOCOL_List[version] || this.Default_PROTOCOL
 	}
 }

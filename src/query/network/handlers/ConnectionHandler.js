@@ -28,10 +28,10 @@ class ConnectionHandler {
 	 * @param {Buffer} packet
 	 * @param {import("dgram").RemoteInfo} client
 	 */
-	handleConnection(socket, settings, packet, client) {
-		const packetType = packet.readUInt8(2)
+	handle_connection(socket, settings, packet, client) {
+		const packet_type = packet.readUInt8(2)
 
-		let shouldCancelPacket = true
+		let should_cancel_packet = true
 
 		Frog.event_emitter.emit("queryPacket", {
 			socket,
@@ -39,22 +39,22 @@ class ConnectionHandler {
 			packet,
 			client,
 			cancel: () => {
-				shouldCancelPacket = false
+				should_cancel_packet = false
 			},
 		})
 
-		if (!shouldCancelPacket) return
+		if (!should_cancel_packet) return
 
-		switch (packetType) {
+		switch (packet_type) {
 			case QueryPacket.HANDSHAKE:
-				new ClientHandshakeRequestPacket().read_packet(client, packet, socket)
-				break
+				return new ClientHandshakeRequestPacket()
+					.read_packet(client, packet, socket)
 			case QueryPacket.INFO:
-				new ClientInfoRequestPacket().read_packet(client, packet, socket, settings)
-				break
+				return new ClientInfoRequestPacket()
+					.read_packet(client, packet, socket, settings)
 			default:
-				new ClientInvalidPacket().read_packet(client, packet)
-				break
+				return new ClientInvalidPacket()
+					.read_packet(client, packet)
 		}
 	}
 }

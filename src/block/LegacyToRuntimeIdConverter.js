@@ -15,7 +15,7 @@
  */
 const InvalidBlockException = require("../utils/exceptions/InvalidBlockException")
 
-const items = require("../resources/json/creativeContent.json").items
+const { items: creative_content } = require("../resources/json/creative_content.json")
 
 module.exports = {
 	/**
@@ -25,12 +25,12 @@ module.exports = {
 	 * @returns {number}
 	 */
 	convert(legacyId) {
-		for (const item of items) {
+		for (const item of creative_content) {
 			if (legacyId === item.item.network_id) {
 				return item.item.block_runtime_id
 			}
 		}
 
 		throw new InvalidBlockException("Invalid legacy ID was provided")
-	},
+	}
 }

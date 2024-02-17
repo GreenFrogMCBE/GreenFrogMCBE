@@ -15,13 +15,15 @@
  */
 const readline = require("readline")
 
+const { Event, EventEmitter } = require("@kotinash/better-events")
+
 const CommandProcessException = require("../utils/exceptions/CommandHandlingException")
+
+const CommandManager = require("./CommandManager")
 
 const CommandVerifier = require("../utils/CommandVerifier")
 const Language = require("../utils/Language")
 const Logger = require("../utils/Logger")
-
-const CommandManager = require("./CommandManager")
 
 /**
  * Returns true if the console is closed, false otherwise.
@@ -65,14 +67,20 @@ module.exports = {
 	 * @param {string} command
 	 */
 	handle_command_error(error, command) {
-		const Frog = require("../Frog")
-
-		Frog.event_emitter.emit("serverCommandProcessError", {
-			command,
-			error,
-		})
-
-		Logger.error(Language.get_key("commands.errors.internalError").replace("%s", error.stack))
+		EventEmitter.emit(
+			new Event(
+				"serverCommandProcessError",
+				{
+					command,
+					error,
+				},
+				(() => {
+					Logger.error(
+						Language.get_key("commands.errors.internalError", [error.stack])
+					)
+				})
+			),
+		)
 	},
 
 	/**
@@ -93,27 +101,30 @@ module.exports = {
 					command.aliases.includes(inputCommand.split(" ")[0])
 				)
 			) {
-				if (command.minArgs !== undefined && command.minArgs > args.length) {
+				if (command.min_args !== undefined && command.min_args > args.length) {
 					Logger.info(
-						Language.get_key("commands.errors.syntaxError.minArg")
-							.replace("%s", command.minArgs)
-							.replace("%d", args.length.toString())
+						Language.get_key("commands.errors.syntaxError.minArg", [
+							command.min_args,
+							args.length
+						])
 					)
 
 					return true
 				}
 
-				if (command.maxArgs !== undefined && command.maxArgs < args.length) {
+				if (command.max_args !== undefined && command.max_args < args.length) {
 					Logger.info(
-						Language.get_key("commands.errors.syntaxError.maxArg")
-							.replace("%s", command.maxArgs)
-							.replace("%d", args.length.toString())
+						Language.get_key("commands.errors.syntaxError.maxArg", [
+							command.max_args,
+							args.length
+						])
 					)
 
 					return true
 				}
 
 				command.execute(Frog.as_player, Frog, args)
+
 				return true
 			}
 		}
@@ -133,29 +144,25 @@ module.exports = {
 			throw new CommandProcessException("Cannot execute a command when the console is closed")
 		}
 
-		const Frog = require("../Frog")
+		EventEmitter.emit(
+			new Event(
+				"serverCommand",
+				{
+					command
+				},
+				(() => {
+					try {
+						const command_found = this.find_command(command, args)
 
-		let should_execute_command = true
-	
-		Frog.event_emitter.emit("serverCommand", {
-			args,
-			command,
-			cancel: () => {
-				should_execute_command = false
-			}
-		})
-	
-		if (!should_execute_command) return
-
-		try {
-			const command_found = this.find_command(command, args)
-
-			if (!command_found) {
-				this.handle_invalid_command_error(command)
-			}
-		} catch (error) {
-			this.handle_command_error(error, command)
-		}
+						if (!command_found) {
+							this.handle_invalid_command_error(command)
+						}
+					} catch (error) {
+						this.handle_command_error(error, command)
+					}
+				})
+			)
+		)
 	},
 
 	/**

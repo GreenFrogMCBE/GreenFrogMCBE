@@ -40,7 +40,7 @@ class ClientMovePacket extends Packet {
 			z,
 			pitch,
 			yaw,
-			onGround: player.location.onGround,
+			on_ground: player.location.on_ground,
 			cancel: () => {
 				player.teleport(player.location.x, y, player.location.z)
 
@@ -57,7 +57,7 @@ class ClientMovePacket extends Packet {
 		player.location.z = z
 		player.location.yaw = yaw
 		player.location.pitch = pitch
-		player.location.onGround = on_ground
+		player.location.on_ground = on_ground
 	}
 }
 

@@ -3,28 +3,28 @@ server.license=GreenFrog esta lincenciado bajo la licencia Creative Commons Attr
 
 server.shuttingDown=Apagando...
 
-server.version=Este servidor está ejecutando GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versión: %s
+server.version=Este servidor está ejecutando GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versión: %0
 
-commands.unknown=§cComando desconocido: %s. Por favor comprueba que el comando existe y tienes permisos para usarlo.
-commands.errors.internalError=No se pudo ejecutar el comando! Error: %s
-commands.errors.internalError.player=No se pudo ejecutar el comando desde %s! Error: %d
+commands.unknown=§cComando desconocido: %0. Por favor comprueba que el comando existe y tienes permisos para usarlo.
+commands.errors.internalError=No se pudo ejecutar el comando! Error: %0
+commands.errors.internalError.player=No se pudo ejecutar el comando desde %0! Error: %1
 commands.errors.internalError.badSender=§cEste tipo de ejecutor no soporta este comando.
-commands.errors.syntaxError.minArg=§cError de sintaxis: Los argumentos mínimos para este comando son %s pero has proveído %d
-commands.errors.syntaxError.maxArg=§cError de sintaxis: Los argumentos máximos requeridos para este comando son %s pero has proveído %d
+commands.errors.syntaxError.minArg=§cError de sintaxis: Los argumentos mínimos para este comando son %0 pero has proveído %1
+commands.errors.syntaxError.maxArg=§cError de sintaxis: Los argumentos máximos requeridos para este comando son %0 pero has proveído %1
 commands.errors.targetError.targetsNotFound=§cNo se encontraron objetivos que coincidan con el selector
 
-commands.ingame.executed=%s ejecutó el comando: /%d
+commands.ingame.executed=%0 ejecutó el comando: /%1
 
 commands.deop.name=deop
 commands.deop.description=Elimina el estatus de operador de un jugador.
-commands.deop.execution.success=Se eliminó el nivel de operador para el jugador %s
-commands.deop.execution.fail=No se pudo quitar el nivel de operador para %s
+commands.deop.execution.success=Se eliminó el nivel de operador para el jugador %0
+commands.deop.execution.fail=No se pudo quitar el nivel de operador para %0
 
 commands.gamemode.name=gamemode
 commands.gamemode.description=Cambia el modo de juego de un jugador.
-commands.gamemode.execution.failed=§cModo de juego '%s' es inválido
-commands.gamemode.execution.success.updated=Tu modo de juego fue actualizado a %s
-commands.gamemode.execution.success.set=Has cambiado tu modo de juego a %s
+commands.gamemode.execution.failed=§cModo de juego '%0' es inválido
+commands.gamemode.execution.success.updated=Tu modo de juego fue actualizado a %0
+commands.gamemode.execution.success.set=Has cambiado tu modo de juego a %0
 
 commands.me.name=me
 commands.me.description=Muestra un mensaje sobre ti mismo.
@@ -32,29 +32,29 @@ commands.me.description=Muestra un mensaje sobre ti mismo.
 commands.help.name=help
 commands.help.description=Lista de comandos.
 commands.help.execution.success=Lista de comandos=
-commands.help.execution.command=%s - %d
+commands.help.execution.command=%0 - %1
 
 commands.kick.name=kick
 commands.kick.description=Echa a un jugador del servidor.
-commands.kick.execution.failed.notOnline=§c%s no está en línea.
+commands.kick.execution.failed.notOnline=§c%0 no está en línea.
 
 commands.kill.name=kill
 commands.kill.description=Mata entidades (jugadores mobs etc.).
-commands.kill.execution.failed.notOnline=§cNingún objectivo apunta a %s
+commands.kill.execution.failed.notOnline=§cNingún objectivo apunta a %0
 
 commands.list.name=list
 commands.list.description=Lista a todos los jugadores en el servidor.
-commands.list.execution.success.commands=Hay %s jugadores en línea: %d
+commands.list.execution.success.commands=Hay %0 jugadores en línea: %1
 
 commands.op.name=op
 commands.op.description=Concede el estatus de operador a un jugador.
-commands.op.execution.success=Se cambió correctamente el nivel de operador para el jugador %s
-commands.op.execution.failed=§cNo se pudo dar OP a %s
+commands.op.execution.success=Se cambió correctamente el nivel de operador para el jugador %0
+commands.op.execution.failed=§cNo se pudo dar OP a %0
 
 commands.plugins.name=plugins
 commands.plugins.aliases.pl=pl
 commands.plugins.description=Muestra una lista de los plugins en el servidor.
-commands.plugins.execution.success=Plugins: %s
+commands.plugins.execution.success=Plugins: %0
 
 commands.say.name=say
 commands.say.description=Manda un mensaje en el chat a otros jugadores.
@@ -64,7 +64,7 @@ commands.stop.description=Apaga el servidor.
 
 commands.time.name=time
 commands.time.description=Cambia el tiempo del mundo.
-commands.time.execution.success=El tiempo cambió a %s.
+commands.time.execution.success=El tiempo cambió a %0.
 commands.time.execution.failed=§cEl tiempo debe ser un número.
 commands.time.times.day=day
 commands.time.times.night=night
@@ -77,8 +77,8 @@ commands.version.aliases.about=about
 commands.teleport.name=teleport
 commands.teleport.description=Teletransporta a los jugadores.
 commands.teleport.aliases.tp=tp
-commands.teleport.execution.success=Has sido teleportado/a a %s.
-commands.teleport.execution.success.teleported=Teletransportado/a %s a %d.
+commands.teleport.execution.success=Has sido teleportado/a a %0.
+commands.teleport.execution.success.teleported=Teletransportado/a %0 a %1.
 commands.teleport.execution.failed.coordinates.invalid=§cError de sintaxis=Coordenadas inválidas.
 
 commands.tell.name=tell
@@ -86,21 +86,21 @@ commands.tell.description=Envía un mensaje privado a uno o más jugadores.
 commands.tell.aliases.w=w
 commands.tell.aliases.whisper=whisper
 commands.tell.aliases.msg=msg
-commands.tell.execution.success=<%s> §7§o%d te susurra: %f.
-commands.tell.execution.success.whisper=Susurras a %s: %d.
+commands.tell.execution.success=<%0> §7§o%1 te susurra: %2.
+commands.tell.execution.success.whisper=Susurras a %0: %1.
 
 scoreboard.name.default=Scoreboard
 
-plugin.loading.failed=No se pudo cargar %s. Error: %d
-plugin.loading.loading=Cargando el plugin %s v%d
-plugin.loading.loaded=Cargó el plugin %s v%d
-plugin.loading.warning.invalidJson=Datos JSON inválidos proveídos para %s. Error %d
+plugin.loading.failed=No se pudo cargar %0. Error: %1
+plugin.loading.loading=Cargando el plugin %0 v%1
+plugin.loading.loaded=Cargó el plugin %0 v%1
+plugin.loading.warning.invalidJson=Datos JSON inválidos proveídos para %0. Error %1
 
-plugin.unloading.failed=No se pudo descargar %s. Error: %d
-plugin.unloading.success=Descargado %s
-plugin.unloading.unloading=Descargando %s...
+plugin.unloading.failed=No se pudo descargar %0. Error: %1
+plugin.unloading.success=Descargado %0
+plugin.unloading.unloading=Descargando %0...
 
-frog.version=Este servidor utiliza GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versión %s
+frog.version=Este servidor utiliza GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versión %0
 
 world.chunks.renderDistance.tooHigh=El limite del generador de chunks en tu config.yml es demasiado alto! Puede llegar a causar lag.
 
@@ -112,23 +112,23 @@ kickMessages.serverClosed=Servidor cerrado
 kickMessages.serverFull=disconnectionScreen.serverFull
 kickMessages.invalidPacket=Paquete inválido / Error interno del servidor
 kickMessages.invalidUsername=Inválido o duplicado nombre de usuario
-kickMessages.versionMismatch=La versión de tu Minecraft no concuerda con la del servidor. Este servidor solo está disponible para la %s
+kickMessages.versionMismatch=La versión de tu Minecraft no concuerda con la del servidor. Este servidor solo está disponible para la %0
 kickMessages.resourcePacksRefused=Debes aceptar los paquetes de recursos para unirte a este servidor.
-kickMessages.wereKicked=Fuíste expulsado del juego%s
+kickMessages.wereKicked=Fuíste expulsado del juego%0
 
-kickMessages.playStatus=Expulsado porque un plugin envió un estatus de juego: %s
-kickMessages.playStatus.console=Expulsado %s porque un plugin o el servidor enviaron un estatus de juego con el campo terminate_connection en verdadero (true). Esto suele querer decir que la versión del cliente es más antigua que la del servidor.
+kickMessages.playStatus=Expulsado porque un plugin envió un estatus de juego: %0
+kickMessages.playStatus.console=Expulsado %0 porque un plugin o el servidor enviaron un estatus de juego con el campo terminate_connection en verdadero (true). Esto suele querer decir que la versión del cliente es más antigua que la del servidor.
 
-player.kicked=Expulsado %s por %d
+player.kicked=Expulsado %0 por %1
 
-status.resourcePacks.refused=%s denegó los paquetes de recursos del servidor.
-status.resourcePacks.none=%s no tiene paquetes de recursos
-status.resourcePacks.installed=%s tiene todos los paquetes de recursos instalados
-status.resourcePacks.joined=%s se unió
-status.resourcePacks.spawned=%s apareció
-status.resourcePacks.disconnected=%s se desconectó
+status.resourcePacks.refused=%0 denegó los paquetes de recursos del servidor.
+status.resourcePacks.none=%0 no tiene paquetes de recursos
+status.resourcePacks.installed=%0 tiene todos los paquetes de recursos instalados
+status.resourcePacks.joined=%0 se unió
+status.resourcePacks.spawned=%0 apareció
+status.resourcePacks.disconnected=%0 se desconectó
 
-warning.customItems.loading.failed=No se pudieron cargar los items personalizados! Error: %s
+warning.customItems.loading.failed=No se pudieron cargar los items personalizados! Error: %0
 
 debug.debugEnabled=El modo debug está activado. Esto puede causar lag cuando envíes grandes paquetes.
 
@@ -137,31 +137,31 @@ debug.unstable.unsupported=Además el modo inestable no está soportado por los 
 
 debug.playerlist.invalid=Se ingoró un paquete PlayerList inválido.
 
-debug.player.unsupportedAction.id=ID de acción no soportada de %s: %d.
-debug.player.unsupportedAction.block=ID de acción de bloque no soportada de %s: %d
+debug.player.unsupportedAction.id=ID de acción no soportada de %0: %1.
+debug.player.unsupportedAction.block=ID de acción de bloque no soportada de %0: %1
 
-chat.format=<%s> %d
-chat.format.me=* %s %d
-chat.format.say=[%s] %d
+chat.format=<%0> %1
+chat.format.me=* %0 %1
+chat.format.say=[%0] %1
 
-chat.broadcasts.joined=§e%s se unió al juego.
-chat.broadcasts.left=§e%s salió del juego.
+chat.broadcasts.joined=§e%0 se unió al juego.
+chat.broadcasts.left=§e%0 salió del juego.
 
-creativemenu.badPacket=No se pudo manejar ItemStackRequest de %s. Error: %d
+creativemenu.badPacket=No se pudo manejar ItemStackRequest de %0. Error: %1
 
 network.packet.unhandledPacket=Paquete no manejado!
 
-network.server.listening.success=Escuchando en %s
-network.server.listening.failed=No se pudo escuchar en %s. Error: %d
+network.server.listening.success=Escuchando en %0
+network.server.listening.failed=No se pudo escuchar en %0. Error: %1
 network.server.listening.failed.otherServerRunning=Quizá otro servidor está siendo ejecutando en el mismo puerto?
 
 network.packet.failed.clientSide=No se puede escribir un paquete del lado del cliente.
 network.packet.failed.serverSide=No se puede leer un paquete del lado del servidor.
 
-exceptions.network.rateLimited=Demasiados paquetes de %s (%d)
-exceptions.network.packetHandlingError=No se pudieron manejar los paquetes de %s! Error %d
+exceptions.network.rateLimited=Demasiados paquetes de %0 (%1)
+exceptions.network.packetHandlingError=No se pudieron manejar los paquetes de %0! Error %1
 exceptions.network.itemStackRequest.badGamemode=No se puede obtener un item del menú creativo sin estar en creativo.
-exceptions.network.inventoryTransaction.invalid=Mal paquete InventoryTransaction de %s
+exceptions.network.inventoryTransaction.invalid=Mal paquete InventoryTransaction de %0
 exceptions.network.invalidGamemodePacket=Mal paquete de modo de juego - Se intentó cambiar el modo de juego sin tener permisos de operador
 
 exceptions.plugin.noName=Plugin sin nombre!
@@ -171,19 +171,19 @@ exceptions.generator.invalid=La generación del mundo es inváida!
 
 exceptions.console.alreadyClosed=La consola ya está cerrada!
 
-exceptions.logger.invalidType=Inválido tipo de log: %s. Tipos válidos son info warn error debug
+exceptions.logger.invalidType=Inválido tipo de log: %0. Tipos válidos son info warn error debug
 
-query.server.listening=Consulta el servidor escuchando en %s
-query.server.listening.failed=Consulta el servidor fallo en escuchar en %s
+query.server.listening=Consulta el servidor escuchando en %0
+query.server.listening.failed=Consulta el servidor fallo en escuchar en %0
 
-query.server.error=Error de consulta: %s
+query.server.error=Error de consulta: %0
 
-query.server.network.generatingToken=Generando un token de consulta para %s
-query.server.network.invalidPacket=Paquete inválido recivido de %s
+query.server.network.generatingToken=Generando un token de consulta para %0
+query.server.network.invalidPacket=Paquete inválido recivido de %0
 
-query.server.network.packets.handshake=Respondió con un paquete de query handshake a %s
-query.server.network.packets.fullInfo=Respondió con un paquete query full info a %s
-query.server.network.packets.basicInfo=Respondió con un paquete query basic info a %s
+query.server.network.packets.handshake=Respondió con un paquete de query handshake a %0
+query.server.network.packets.fullInfo=Respondió con un paquete query full info a %0
+query.server.network.packets.basicInfo=Respondió con un paquete query basic info a %0
 
 logger.info=INFO
 logger.warn=WARNING

@@ -13,18 +13,16 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const vanillaBlocks = require("../../block/vanillaBlocks.json")
-
-const WorldGenerator = require("../types/WorldGenerator")
+const { WorldGenerationType, Dirt, Grass, Air, Bedrock, CoalOre} = require("@greenfrog/mc-enums")
 
 const Generator = require("./Generator")
 
-const dirt = vanillaBlocks.dirt.legacy_id
-const grass = vanillaBlocks.grass.legacy_id
-const air = vanillaBlocks.air.legacy_id
-const bedrock = vanillaBlocks.bedrock.legacy_id
-const stone = vanillaBlocks.stone.legacy_id
-const coalOre = vanillaBlocks.coal_ore.legacy_id
+const dirt = new Dirt().id
+const grass = new Grass().id
+const air = new Air().id
+const bedrock = new Bedrock().id
+const stone = new Bedrock().id
+const coal_ore = new CoalOre().id
 
 /**
  * @private
@@ -33,7 +31,7 @@ function _generateOre() {
 	let blockType
 
 	if (Math.floor(Math.random() * 100) < 30) {
-		blockType = coalOre
+		blockType = coal_ore
 	} else {
 		blockType = stone
 	}
@@ -42,10 +40,10 @@ function _generateOre() {
 }
 
 class Default extends Generator {
-	name = WorldGenerator.DEFAULT
+	name = WorldGenerationType.Default
 
 	/** @type {Buffer} */
-	chunkData = Buffer.alloc(16 * 256 * 16)
+	chunk_data = Buffer.alloc(16 * 256 * 16)
 	/** @type {number} */
 	blockCount = 0
 
@@ -65,46 +63,46 @@ class Default extends Generator {
 
 					if (x > 14 && y > -1 && y < 16) {
 						// Holes
-						this.chunkData[index - 1] = randomNumbers[index - 1] < airThreshold ? air : grass
+						this.chunk_data[index - 1] = randomNumbers[index - 1] < airThreshold ? air : grass
 					} else {
 						// Hills
-						if (randomNumbers[index] < hillThreshold && this.blockCount > 4161319 && !this.chunkData[index]) {
+						if (randomNumbers[index] < hillThreshold && this.blockCount > 4161319 && !this.chunk_data[index]) {
 							for (let i = 0; i < 1200; i++) {
 								if ((index - i) % 2 === 0 && y > 15) {
-									if (!this.chunkData[index - i]) {
-										this.chunkData[index - i] = grass
+									if (!this.chunk_data[index - i]) {
+										this.chunk_data[index - i] = grass
 									}
 
-									if (!this.chunkData[index - magicOffset - i]) {
-										this.chunkData[index - magicOffset - i] = grass
+									if (!this.chunk_data[index - magicOffset - i]) {
+										this.chunk_data[index - magicOffset - i] = grass
 									}
 								}
 							}
 						} else {
-							this.chunkData[index] = stone
+							this.chunk_data[index] = stone
 						}
 
 						// Generate ores
 						for (let i = 1; i <= 5; i++) {
-							this.chunkData[index - i] = _generateOre()
+							this.chunk_data[index - i] = _generateOre()
 						}
 
 						// Dirt generator
-						this.chunkData[index - 1] = dirt
+						this.chunk_data[index - 1] = dirt
 
 						// Bedrock generator
-						if (this.chunkData[index + 1] === bedrock || this.chunkData[index + 2] === bedrock) {
-							this.chunkData[index + 1] = air
-							this.chunkData[index + 2] = air
+						if (this.chunk_data[index + 1] === bedrock || this.chunk_data[index + 2] === bedrock) {
+							this.chunk_data[index + 1] = air
+							this.chunk_data[index + 2] = air
 						}
 
-						this.chunkData[index - 13] = bedrock
+						this.chunk_data[index - 13] = bedrock
 					}
 				}
 			}
 		}
 
-		return this.chunkData
+		return this.chunk_data
 	}
 }
 

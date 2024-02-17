@@ -3,28 +3,28 @@ server.license=GreenFrog està licensiat sota la licencia Creative Commons Attri
 
 server.shuttingDown=Apagant...
 
-server.version=Aquest servidor està executant GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versió: %s
+server.version=Aquest servidor està executant GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versió: %0
 
-commands.unknown=§cComanda desconeguda: %s. Per favor comproba que la comanda existeix i tens permis per utilitzar-ho
-commands.errors.internalError=No s'ha pogut executar la comanda! Error: %s
-commands.errors.internalError.player=No s'ha pogut executar la comanda des de %s! Error: %d
+commands.unknown=§cComanda desconeguda: %0. Per favor comproba que la comanda existeix i tens permis per utilitzar-ho
+commands.errors.internalError=No s'ha pogut executar la comanda! Error: %0
+commands.errors.internalError.player=No s'ha pogut executar la comanda des de %0! Error: %1
 commands.errors.internalError.badSender=§cAquest tipus d'executor no suporta aquesta comanda.
-commands.errors.syntaxError.minArg=§cError de sintaxi: Els arguments mínims per aquesta comanda son %s, però has provegut %d
-commands.errors.syntaxError.maxArg=§cError de sintaxi: Els arguments màxims requerits per aquesta comanda son %s, però has provegut %d
+commands.errors.syntaxError.minArg=§cError de sintaxi: Els arguments mínims per aquesta comanda son %0, però has provegut %1
+commands.errors.syntaxError.maxArg=§cError de sintaxi: Els arguments màxims requerits per aquesta comanda son %0, però has provegut %1
 commands.errors.targetError.targetsNotFound=§cCap objectiu coincideix amb el selector
 
-commands.ingame.executed=%s ha executat la comanda: /%d
+commands.ingame.executed=%0 ha executat la comanda: /%1
 
 commands.deop.name=deop
 commands.deop.description=Treu el estatus d'operador d'un jugador.
-commands.deop.execution.success=S'ha remogut el nivell d'operador pel jugador %s
-commands.deop.execution.fail=No es va poder treure el nivell d'operador per %s
+commands.deop.execution.success=S'ha remogut el nivell d'operador pel jugador %0
+commands.deop.execution.fail=No es va poder treure el nivell d'operador per %0
 
 commands.gamemode.name=gamemode
 commands.gamemode.description=Canvia el mode de joc d'un jugador.
-commands.gamemode.execution.failed=§cMode de joc '%s' es invàlid.
-commands.gamemode.execution.success.updated=El teu mode de joc va ser actualitzat a %s
-commands.gamemode.execution.success.set=Has canviat el teu mode de joc a %s
+commands.gamemode.execution.failed=§cMode de joc '%0' es invàlid.
+commands.gamemode.execution.success.updated=El teu mode de joc va ser actualitzat a %0
+commands.gamemode.execution.success.set=Has canviat el teu mode de joc a %0
 
 commands.me.name=me
 commands.me.description=Mostra un missatge sobre ti mateix.
@@ -32,29 +32,29 @@ commands.me.description=Mostra un missatge sobre ti mateix.
 commands.help.name=help
 commands.help.description=Llista de comandes.
 commands.help.execution.success=Llista de comandes:
-commands.help.execution.command=%s - %d
+commands.help.execution.command=%0 - %1
 
 commands.kick.name=kick
 commands.kick.description=Expulsa a un jugador del servidor.
-commands.kick.execution.failed.notOnline=§c%s no està en línea
+commands.kick.execution.failed.notOnline=§c%0 no està en línea
 
 commands.kill.name=kill
 commands.kill.description=Mata entitats (jugadors, mobs, etc.).
-commands.kill.execution.failed.notOnline=§cCap objectiu apunta a %s
+commands.kill.execution.failed.notOnline=§cCap objectiu apunta a %0
 
 commands.list.name=list
 commands.list.description=Llista a tots els jugadors en el servidor.
-commands.list.execution.success.commands=N'hi ha %s jugadors en línea: %d
+commands.list.execution.success.commands=N'hi ha %0 jugadors en línea: %1
 
 commands.op.name=op
 commands.op.description=Concedeix l'estatus d'operador a un jugador.
-commands.op.execution.success=S'ha canviat correctament el nivell d'operador pel jugador %s
-commands.op.execution.failed=§cNo s'ha pogut donar OP a %s
+commands.op.execution.success=S'ha canviat correctament el nivell d'operador pel jugador %0
+commands.op.execution.failed=§cNo s'ha pogut donar OP a %0
 
 commands.plugins.name=plugins
 commands.plugins.aliases.pl=pl
 commands.plugins.description=Mostra una llista dels plugins en el servidor.
-commands.plugins.execution.success=Plugins %s
+commands.plugins.execution.success=Plugins %0
 
 commands.say.name=say
 commands.say.description=Mana missatges en el chat a altres jugadors.
@@ -64,7 +64,7 @@ commands.stop.description=Apaga el servidor.
 
 commands.time.name=time
 commands.time.description=Canvia el temps del mon.
-commands.time.execution.success=El temps ha canviat a %s
+commands.time.execution.success=El temps ha canviat a %0
 commands.time.execution.failed=§cEl temps ha de ser un número
 commands.time.times.day=day
 commands.time.times.night=night
@@ -77,8 +77,8 @@ commands.version.aliases.about=about
 commands.teleport.name=teleport
 commands.teleport.description=Teleporta jugadors.
 commands.teleport.aliases.tp=tp
-commands.teleport.execution.success=Has estat teleportat a %s.
-commands.teleport.execution.success.teleported=Teleportat %s a %d.
+commands.teleport.execution.success=Has estat teleportat a %0.
+commands.teleport.execution.success.teleported=Teleportat %0 a %1.
 commands.teleport.execution.failed.coordinates.invalid=§cError de sintaxi: Coordenades invàlides.
 
 commands.tell.name=tell
@@ -86,21 +86,21 @@ commands.tell.description=Envia un missatge privat a un o més jugadors.
 commands.tell.aliases.w=w
 commands.tell.aliases.whisper=whisper
 commands.tell.aliases.msg=msg
-commands.tell.execution.success=<%s> §7§o%d et xiuxiueja: %f.
-commands.tell.execution.success.whisper=Xiuxiuejes a %s: %d.
+commands.tell.execution.success=<%0> §7§o%1 et xiuxiueja: %2.
+commands.tell.execution.success.whisper=Xiuxiuejes a %0: %1.
 
 scoreboard.name.default=Scoreboard
 
-plugin.loading.failed=No s'ha pogut carregar %s. Error: %d
-plugin.loading.loading=Cargant el plugin %s v%d
-plugin.loading.loaded=Ha cargat el plugin %s v%d
-plugin.loading.warning.invalidJson=Dades JSON invàlids proveídos para %s. Error %d
+plugin.loading.failed=No s'ha pogut carregar %0. Error: %1
+plugin.loading.loading=Cargant el plugin %0 v%1
+plugin.loading.loaded=Ha cargat el plugin %0 v%1
+plugin.loading.warning.invalidJson=Dades JSON invàlids proveídos para %0. Error %1
 
-plugin.unloading.failed=No s'ha pogut descarregar %s. Error: %d
-plugin.unloading.success=Descarregat %s
-plugin.unloading.unloading=Descarregant %s...
+plugin.unloading.failed=No s'ha pogut descarregar %0. Error: %1
+plugin.unloading.success=Descarregat %0
+plugin.unloading.unloading=Descarregant %0...
 
-frog.version=Aquest servidor utilitza GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versió %s | versió del joc: %d | protocol: %f
+frog.version=Aquest servidor utilitza GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Versió %0 | versió del joc: %1 | protocol: %2
 
 world.chunks.renderDistance.tooHigh=El limit del generador de chunks en la config.yml es massa alt! Pot causar lag.
 
@@ -112,51 +112,51 @@ kickMessages.serverClosed=Servidor tancat
 kickMessages.serverFull=disconnectionScreen.serverFull
 kickMessages.invalidPacket=Paquet invàlid / Error intern del servidor
 kickMessages.invalidUsername=Invàlid o duplicat nombre d'usuari
-kickMessages.versionMismatch=La versió del teu Minecraft no concorda amb la del servidor. Aquest servidor sol està disponible per la versió %s.
+kickMessages.versionMismatch=La versió del teu Minecraft no concorda amb la del servidor. Aquest servidor sol està disponible per la versió %0.
 kickMessages.resourcePacksRefused=Has d'acceptar els paquets de recursos per unir-te a aquest servidor.
-kickMessages.wereKicked=Has sigut expulsat del lloc%s
+kickMessages.wereKicked=Has sigut expulsat del lloc%0
 
-kickMessages.playStatus=Expulsat perquè un plugin ha enviat un estatus de lloc %s
-kickMessages.playStatus.console=Expulsat %s perquè un plugin o el servidor van enviar un estatus de lloc amb el camp terminate_connection en veritable (true). Això sol voler dir que la versió del client es massa antiga que la del servidor.
+kickMessages.playStatus=Expulsat perquè un plugin ha enviat un estatus de lloc %0
+kickMessages.playStatus.console=Expulsat %0 perquè un plugin o el servidor van enviar un estatus de lloc amb el camp terminate_connection en veritable (true). Això sol voler dir que la versió del client es massa antiga que la del servidor.
 
-player.kicked=Expulsat %s per %d
+player.kicked=Expulsat %0 per %1
 
-status.resourcePacks.refused=%s ha denegat els paquets de recursos del servidor.
-status.resourcePacks.none=%s no té els paquets de recursos.
-status.resourcePacks.installed=%s té tots els paquets de recursos instalats
-status.resourcePacks.joined=%s s'ha unit
-status.resourcePacks.spawned=%s ha aparegut
-status.resourcePacks.disconnected=%s s'ha desconectat
+status.resourcePacks.refused=%0 ha denegat els paquets de recursos del servidor.
+status.resourcePacks.none=%0 no té els paquets de recursos.
+status.resourcePacks.installed=%0 té tots els paquets de recursos instalats
+status.resourcePacks.joined=%0 s'ha unit
+status.resourcePacks.spawned=%0 ha aparegut
+status.resourcePacks.disconnected=%0 s'ha desconectat
 
-warning.customItems.loading.failed=No es van poder carregar els items personalitzats! Error: %s
+warning.customItems.loading.failed=No es van poder carregar els items personalitzats! Error: %0
 
 debug.debugEnabled=El mode debug està activat. Això pot causar lag quan enviïs paquets molt grans
 
 debug.unstable=El mode inestable està activat. Això cobrera el servidor d'errors crítics però, pot causar corrupció de dades en plugins.
 debug.unstable.unsupported=A més, el mode inestable no està suportada pels desarolladors de GreenFrog i ets responsable de corrupció de dades si ocurreix.
 
-debug.player.unsupportedAction.id=ID de l'acció no suportada de %s: %d
-debug.player.unsupportedAction.block=ID de l'acció del bloc no suportada de %s: %d
+debug.player.unsupportedAction.id=ID de l'acció no suportada de %0: %1
+debug.player.unsupportedAction.block=ID de l'acció del bloc no suportada de %0: %1
 
-chat.format=<%s> %d
-chat.format.me=* %s %d
-chat.format.say=[%s] %d
+chat.format=<%0> %1
+chat.format.me=* %0 %1
+chat.format.say=[%0] %1
 
-chat.broadcasts.joined=§e%s s'ha unit al joc.
-chat.broadcasts.left=§e%s ha sortit del joc.
+chat.broadcasts.joined=§e%0 s'ha unit al joc.
+chat.broadcasts.left=§e%0 ha sortit del joc.
 
-creativemenu.badPacket=No s'ha pogut manejar ItemStackRequest de %s. Error: %d
+creativemenu.badPacket=No s'ha pogut manejar ItemStackRequest de %0. Error: %1
 
 network.packet.unhandledPacket=Paquet no manejat!
 
-network.server.listening.success=Escoltant en %s
-network.server.listening.failed=No s'ha pogut escoltar en %s. Error: %d
+network.server.listening.success=Escoltant en %0
+network.server.listening.failed=No s'ha pogut escoltar en %0. Error: %1
 network.server.listening.failed.otherServerRunning=Pot ser que un altre servidor està sent executat en el mateix port?
 
-exceptions.network.rateLimited=Massa paquets de %s (%d)
-exceptions.network.packetHandlingError=No s'han pogut manejar els paquets de %s! Error %d
+exceptions.network.rateLimited=Massa paquets de %0 (%1)
+exceptions.network.packetHandlingError=No s'han pogut manejar els paquets de %0! Error %1
 exceptions.network.itemStackRequest.badGamemode=No es pot obtenir un item del menú del creatiu sin estar en creatiu
-exceptions.network.inventoryTransaction.invalid=Mal paquet InventoryTransaction de %s
+exceptions.network.inventoryTransaction.invalid=Mal paquet InventoryTransaction de %0
 exceptions.network.invalidGamemodePacket=Mal paquet de mode de joc - S'ha intentat canviar el mode de joc sense tenir permisos d'operador
 
 exceptions.plugin.noName=Plugin sense nom!
@@ -166,19 +166,19 @@ exceptions.generator.invalid=La generació del mon es invàida!
 
 exceptions.console.alreadyClosed=La consola ja està tancada!
 
-exceptions.logger.invalidType=Invàlido tipus de log: %s. Tipus vàlids són info, warn, error, debug
+exceptions.logger.invalidType=Invàlido tipus de log: %0. Tipus vàlids són info, warn, error, debug
 
-query.server.listening=Consulta el servidor escoltant en %s
-query.server.listening.failed=Consulta el servidor va fallir en escoltar en %s
+query.server.listening=Consulta el servidor escoltant en %0
+query.server.listening.failed=Consulta el servidor va fallir en escoltar en %0
 
-query.server.error=Error de consulta: %s
+query.server.error=Error de consulta: %0
 
-query.server.network.generatingToken=Generant un token de consulta per %s
-query.server.network.invalidPacket=Paquet invàlid regut de %s
+query.server.network.generatingToken=Generant un token de consulta per %0
+query.server.network.invalidPacket=Paquet invàlid regut de %0
 
-query.server.network.packets.handshake=Va respondre amb un paquete de query handshake a %s
-query.server.network.packets.fullInfo=Va respondre amb un paquet query full info a %s
-query.server.network.packets.basicInfo=Va respondre amb un paquet query basic info a %s
+query.server.network.packets.handshake=Va respondre amb un paquete de query handshake a %0
+query.server.network.packets.fullInfo=Va respondre amb un paquet query full info a %0
+query.server.network.packets.basicInfo=Va respondre amb un paquet query basic info a %0
 
 logger.info=INFO
 logger.warn=WARNING

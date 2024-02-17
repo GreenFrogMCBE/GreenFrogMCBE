@@ -45,11 +45,11 @@ module.exports = {
 	/**
 	 * Checks if a user is opped.
 	 *
-	 * @param {string} username - The username to check.
+	 * @param {import("@greenfrog/mc-enums").PossiblyUndefined<string>} username - The username to check.
 	 * @returns {Promise<boolean>} - Whether the user is opped.
 	 * @async
 	 */
-	async isOpped(username) {
+	async is_opped(username) {
 		const oppedPlayers = fs.readFileSync(Frog.directories.op_file, "utf8")
 			.split("\n")
 
@@ -68,7 +68,7 @@ module.exports = {
 
 		fs.appendFileSync(Frog.directories.op_file, username + "\n")
 
-		const target = PlayerInfo.getPlayer(username)
+		const target = PlayerInfo.get_player(username)
 
 		if (target) {
 			target.permissions.op = true
@@ -93,7 +93,7 @@ module.exports = {
 
 		fs.writeFileSync(Frog.directories.op_file, updatedOps)
 
-		const target = PlayerInfo.getPlayer(username)
+		const target = PlayerInfo.get_player(username)
 
 		if (target) {
 			target.permissions.op = false
@@ -107,7 +107,7 @@ module.exports = {
 	 * @param {boolean} status - The operator status. true to give the operator permissions, false to remove them
 	 * @returns {Promise<void>}
 	 */
-	async setOp(username, status) {
+	async set_op(username, status) {
 		status ? await this.op(username) : await this.deop(username)
 	},
 }

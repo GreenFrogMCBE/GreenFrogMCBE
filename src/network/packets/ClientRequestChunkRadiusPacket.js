@@ -15,7 +15,7 @@
  */
 const Packet = require("./Packet")
 
-const Frog = require("../../Frog")
+const {EventEmitter,Event} = require("@kotinash/better-events")
 
 class ClientRequestChunkRadiusPacket extends Packet {
 	name = "request_chunk_radius"
@@ -25,19 +25,18 @@ class ClientRequestChunkRadiusPacket extends Packet {
 	 * @param {import("Frog").Packet} packet
 	 */
 	async read_packet(player, packet) {
-		let shouldChange = true
-
-		Frog.event_emitter.emit("playerRequestChunkRadius", {
-			radius: packet.data.params.radius,
-			player,
-			cancel: () => {
-				shouldChange = false
-			},
-		})
-
-		if (!shouldChange) return
-
-		player.setChunkRadius(32)
+		EventEmitter.emit(
+			new Event(
+				"playerRequestChunkRadius",
+				{
+					radius: packet.data.params.radius,
+					player
+				},
+				(() => {
+					player.set_chunk_radius(32)
+				})
+			)
+		)
 	}
 }
 

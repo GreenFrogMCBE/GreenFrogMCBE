@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Title = require("../../player/types/Title")
+const { TitleType } = require("@greenfrog/mc-enums")
 
 const Packet = require("./Packet")
 
@@ -41,7 +41,7 @@ class ServerSetTitlePacket extends Packet {
 	write_packet(player) {
 		player.queue(this.name, {
 			type: this.type,
-			text: this.type === Title.CLEAR ? "" : this.text,
+			text: this.type === TitleType.Clear ? "" : this.text,
 			fade_in_time: this.fade_in_time,
 			stay_time: this.stay_time,
 			fade_out_time: this.fade_out_time,

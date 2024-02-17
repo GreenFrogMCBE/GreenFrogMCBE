@@ -17,25 +17,27 @@ const PlayerInfo = require("./PlayerInfo")
 
 module.exports = {
 	/**
+	 * @type {RegExp}
+	 */
+	regex: /^[a-zA-Z0-9 ]+$/,
+
+	/**
 	 * Checks if the usernames matches the regex. The regex is `/^[a-zA-Z0-9 ]+$/`
 	 *
 	 * @param {string} username - The username to check for duplicates.
 	 * @returns {boolean} Returns true if the username is a duplicate, false otherwise.
 	 */
-	doesUsernameMatchRegex(username) {
-		// Regex to match only English letters, spaces and numbers
-		const regex = /^[a-zA-Z0-9 ]+$/
-
-		return regex.test(username)
+	does_username_match_regex(username) {
+		return this.regex.test(username)
 	},
 
 	/**
 	 * Checks if a player with the same username is online on the server.
 	 *
-	 * @param {string} username - The username to check for duplicates.
-	 * @returns {boolean} Returns true if the username is a duplicate, false otherwise.
+	 * @param {string} username - The username to check.
+	 * @returns {boolean}
 	 */
-	isDuplicate(username) {
+	is_duplicate(username) {
 		return PlayerInfo.players_online
 			.filter(
 				(player) => player.username &&
@@ -47,10 +49,10 @@ module.exports = {
 	/**
 	 * Returns `true` if the username is longer than 16 characters or shorter than 3 characters
 	 *
-	 * @param {string} username - The username to check the length for.
-	 * @returns {boolean} Returns true if the username length is valid, false otherwise.
+	 * @param {string} username - The username to check.
+	 * @returns {boolean}
 	 */
-	isUsernameLengthValid(username) {
+	is_username_length_valid(username) {
 		return !(
 			username.length > 16 ||
 			username.length < 3
@@ -58,14 +60,14 @@ module.exports = {
 	},
 
 	/**
-	 * isDuplicate(username: string), doesUsernameMatchRegex(username: string), isUsernameLengthValid(username: string) combined
+	 * is_duplicate(username: string), does_username_match_regex(username: string), is_username_length_valid(username: string) combined
 	 *
-	 * @param {string} username - The username to check for validity.
-	 * @returns {boolean} Returns true if the username is valid, false otherwise.
+	 * @param {string} username - The username to check.
+	 * @returns {boolean}
 	 */
-	isUsernameValid(username) {
-		return !this.isDuplicate(username)
-			&& this.isUsernameLengthValid(username)
-			&& this.doesUsernameMatchRegex(username)
+	is_username_valid(username) {
+		return !this.is_duplicate(username)
+			&& this.is_username_length_valid(username)
+			&& this.does_username_match_regex(username)
 	},
 }

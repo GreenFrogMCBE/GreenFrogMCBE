@@ -22,7 +22,7 @@ module.exports = {
 	 *
 	 * @param {import("Frog").Player} player
 	 */
-	addPlayer(player) {
+	add_player(player) {
 		players_online.push(player)
 	},
 
@@ -32,7 +32,7 @@ module.exports = {
 	 * @param {string} username
 	 * @returns {import("Frog").Player | undefined} The player if the player is online, null if not.
 	 */
-	getPlayer(username) {
+	get_player(username) {
 		return players_online.find((player) => player.username.toLowerCase() == username.toLowerCase())
 	},
 

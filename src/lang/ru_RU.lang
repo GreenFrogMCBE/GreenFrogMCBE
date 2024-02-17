@@ -3,29 +3,29 @@ server.license=GreenFrog лицензировано по лицензии Creati
 
 server.shuttingDown=Завершение работы сервера...
 
-server.version=Этот сервер работает на GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версия: %s
+server.version=Этот сервер работает на GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версия: %0
 
-commands.unknown=§cНеизвестная команда %s. Проверьте, существует ли команда, и у вас есть ли права на её использование.
-commands.errors.internalError=Не удалось выполнить команду! Ошибка: %s
-commands.errors.internalError.player=Не удалось выполнить команду от %s. Ошибка: %d
+commands.unknown=§cНеизвестная команда %0. Проверьте, существует ли команда, и у вас есть ли права на её использование.
+commands.errors.internalError=Не удалось выполнить команду! Ошибка: %0
+commands.errors.internalError.player=Не удалось выполнить команду от %0. Ошибка: %1
 commands.errors.internalError.badSender=§cЭтот тип отправителя не поддерживает данную команду
-commands.errors.syntaxError.minArg=§cСинтаксическая ошибка: Требуется минимум %s аргументов, но предоставлено %d
-commands.errors.syntaxError.maxArg=§cСинтаксическая ошибка: Требуется максимум %s аргументов, но предоставлено %d
+commands.errors.syntaxError.minArg=§cСинтаксическая ошибка: Требуется минимум %0 аргументов, но предоставлено %1
+commands.errors.syntaxError.maxArg=§cСинтаксическая ошибка: Требуется максимум %0 аргументов, но предоставлено %1
 commands.errors.targetError.targetsNotFound=§cЦели, соответствующие селектору, не найдены
-commands.errors.targetError.notOnline=§c%s не в сети
+commands.errors.targetError.notOnline=§c%0 не в сети
 
-commands.ingame.executed=%s выполнил серверную команду /%d
+commands.ingame.executed=%0 выполнил серверную команду /%1
 
 commands.deop.name=deop
 commands.deop.description=Отменяет статус оператора для игрока.
-commands.deop.execution.success=Успешно отозван статус оператора для игрока %s
-commands.deop.execution.fail=Не удалось отозвать статус оператора для игрока %s
+commands.deop.execution.success=Успешно отозван статус оператора для игрока %0
+commands.deop.execution.fail=Не удалось отозвать статус оператора для игрока %0
 
 commands.gamemode.name=gamemode
 commands.gamemode.description=Устанавливает игровой режим игрока
-commands.gamemode.execution.failed=§cНедопустимый игровой режим '%s'
-commands.gamemode.execution.success.updated=Ваш игровой режим был обновлен до %s.
-commands.gamemode.execution.success.set=Установлен собственный игровой режим %s.
+commands.gamemode.execution.failed=§cНедопустимый игровой режим '%0'
+commands.gamemode.execution.success.updated=Ваш игровой режим был обновлен до %0.
+commands.gamemode.execution.success.set=Установлен собственный игровой режим %0.
 
 commands.me.name=me
 commands.me.description=Отображает сообщение о себе.
@@ -33,28 +33,28 @@ commands.me.description=Отображает сообщение о себе.
 commands.help.name=help
 commands.help.description=Список команд.
 commands.help.execution.success=Список команд:
-commands.help.execution.command=%s - %d
+commands.help.execution.command=%0 - %1
 
 commands.kick.name=kick
 commands.kick.description=Выгоняет игрока с сервера.
-commands.kick.execution.failed.notOnline=§c%s не в сети
+commands.kick.execution.failed.notOnline=§c%0 не в сети
 
 commands.kill.name=kill
 commands.kill.description=Убивает сущности (игроков, мобов и т. д.).
 
 commands.list.name=list
 commands.list.description=Показывает список игроков на сервере.
-commands.list.execution.success.commands=На сервере %s игроков %d
+commands.list.execution.success.commands=На сервере %0 игроков %1
 
 commands.op.name=op
 commands.op.description=Предоставляет статус оператора игроку.
-commands.op.execution.success=Успешно установлен статус оператора для игрока %s
-commands.op.execution.failed=§cНе удалось установить статус оператора для игрока %s
+commands.op.execution.success=Успешно установлен статус оператора для игрока %0
+commands.op.execution.failed=§cНе удалось установить статус оператора для игрока %0
 
 commands.plugins.name=plugins
 commands.plugins.aliases.pl=pl
 commands.plugins.description=Показывает список плагинов, которые работают на сервере.
-commands.plugins.execution.success=Плагины %s
+commands.plugins.execution.success=Плагины %0
 
 commands.say.name=say
 commands.say.description=Отправляет сообщение в чат другим игрокам.
@@ -64,7 +64,7 @@ commands.stop.description=Останавливает сервер.
 
 commands.time.name=time
 commands.time.description=Изменяет время в мире
-commands.time.execution.success=Время установлено на %s
+commands.time.execution.success=Время установлено на %0
 commands.time.execution.failed=§cВремя должно быть числом
 commands.time.times.day=день
 commands.time.times.night=ночь
@@ -77,8 +77,8 @@ commands.version.aliases.about=about
 commands.teleport.name=teleport
 commands.teleport.description=Телепортирует игроков.
 commands.teleport.aliases.tp=tp
-commands.teleport.execution.success=Вы были телепортированы к %s
-commands.teleport.execution.success.teleported=Телепортирован %s к %d
+commands.teleport.execution.success=Вы были телепортированы к %0
+commands.teleport.execution.success.teleported=Телепортирован %0 к %1
 commands.teleport.execution.failed.coordinates.invalid=§cСинтаксическая ошибка: Недопустимые координаты
 
 commands.tell.name=tell
@@ -86,21 +86,21 @@ commands.tell.description=Отправляет личное сообщение �
 commands.tell.aliases.w=w
 commands.tell.aliases.whisper=whisper
 commands.tell.aliases.msg=msg
-commands.tell.execution.success=<%s> §7§o%d шепчет вам: %f
-commands.tell.execution.success.whisper=Вы шепчете %s: %d
+commands.tell.execution.success=<%0> §7§o%1 шепчет вам: %2
+commands.tell.execution.success.whisper=Вы шепчете %0: %1
 
 scoreboard.name.default=Табличка
 
-plugin.loading.failed=Не удалось загрузить %s. Ошибка: %d
-plugin.loading.loading=Загрузка плагина %s версии %d
-plugin.loading.loaded=Плагин %s версии %d загружен
-plugin.loading.warning.invalidJson=Недопустимые данные JSON для %s. Ошибка: %d
+plugin.loading.failed=Не удалось загрузить %0. Ошибка: %1
+plugin.loading.loading=Загрузка плагина %0 версии %1
+plugin.loading.loaded=Плагин %0 версии %1 загружен
+plugin.loading.warning.invalidJson=Недопустимые данные JSON для %0. Ошибка: %1
 
-plugin.unloading.failed=Не удалось выгрузить %s. Ошибка: %d
-plugin.unloading.success=Выгружен %s
-plugin.unloading.unloading=Выгрузка %s...
+plugin.unloading.failed=Не удалось выгрузить %0. Ошибка: %1
+plugin.unloading.success=Выгружен %0
+plugin.unloading.unloading=Выгрузка %0...
 
-frog.version=Этот сервер работает на GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версия: %s
+frog.version=Этот сервер работает на GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Версия: %0
 
 world.chunks.renderDistance.tooHigh=Предел генератора чанков в вашем файле конфигурации слишком высокий! Это может вызвать задержки
 
@@ -112,51 +112,51 @@ kickMessages.serverClosed=Сервер закрыт
 kickMessages.serverFull=disconnectionScreen.serverFull
 kickMessages.invalidPacket=Недопустимый пакет / Внутренняя ошибка сервера
 kickMessages.invalidUsername=Недопустимое или повторяющееся имя пользователя
-kickMessages.versionMismatch=Версия вашего клиента не совпадает с версией сервера! Сервер в данный момент работает на версии %s
+kickMessages.versionMismatch=Версия вашего клиента не совпадает с версией сервера! Сервер в данный момент работает на версии %0
 kickMessages.resourcePacksRefused=Вы должны принять ресурс-паки, чтобы присоединиться к этому серверу
-kickMessages.wereKicked=Вас кикнули из игры%s
+kickMessages.wereKicked=Вас кикнули из игры%0
 
-kickMessages.playStatus=Кикнуты из-за передачи плагина состояния игры: %s
-kickMessages.playStatus.console=Кикнут %s, потому что плагин/сервер отправил состояние игры с установленным полем terminateConnection в true. Обычно это означает, что версия клиента устарела по сравнению с версией сервера
+kickMessages.playStatus=Кикнуты из-за передачи плагина состояния игры: %0
+kickMessages.playStatus.console=Кикнут %0, потому что плагин/сервер отправил состояние игры с установленным полем terminateConnection в true. Обычно это означает, что версия клиента устарела по сравнению с версией сервера
 
-player.kicked=Кикнут %s по причине %d
+player.kicked=Кикнут %0 по причине %1
 
-status.resourcePacks.refused=%s отклонил серверные ресурс-паки
-status.resourcePacks.none=%s не имеет ресурс-паков
-status.resourcePacks.installed=%s установил все ресурс-паки
-status.resourcePacks.joined=%s присоединился
-status.resourcePacks.spawned=%s появился
-status.resourcePacks.disconnected=%s отключился
+status.resourcePacks.refused=%0 отклонил серверные ресурс-паки
+status.resourcePacks.none=%0 не имеет ресурс-паков
+status.resourcePacks.installed=%0 установил все ресурс-паки
+status.resourcePacks.joined=%0 присоединился
+status.resourcePacks.spawned=%0 появился
+status.resourcePacks.disconnected=%0 отключился
 
-warning.customItems.loading.failed=Не удалось загрузить пользовательские предметы! Ошибка: %s
+warning.customItems.loading.failed=Не удалось загрузить пользовательские предметы! Ошибка: %0
 
 debug.debugEnabled=Включен режим отладки. Это может вызвать задержки при отправке больших пакетов
 
 debug.unstable=Включен режим нестабильности. Это позволит восстановить сервер после критических ошибок, но может привести к повреждению данных плагинов
 debug.unstable.unsupported=Также следует отметить, что режим нестабильности не поддерживается разработчиками GreenFrog, и вы будете отвечать за повреждение данных, если такое произойдет
 
-debug.player.unsupportedAction.id=Неподдерживаемый идентификатор действия от %s: %d
-debug.player.unsupportedAction.block=Неподдерживаемый идентификатор действия блока от %s: %d
+debug.player.unsupportedAction.id=Неподдерживаемый идентификатор действия от %0: %1
+debug.player.unsupportedAction.block=Неподдерживаемый идентификатор действия блока от %0: %1
 
-chat.format=<%s> %d
-chat.format.me=* %s %d
-chat.format.say=[%s] %d
+chat.format=<%0> %1
+chat.format.me=* %0 %1
+chat.format.say=[%0] %1
 
-chat.broadcasts.joined=§e%s присоединился к игре
-chat.broadcasts.left=§e%s вышел из игры
+chat.broadcasts.joined=§e%0 присоединился к игре
+chat.broadcasts.left=§e%0 вышел из игры
 
-creativemenu.badPacket=Не удалось обработать ItemStackRequest от %s. Ошибка: %d
+creativemenu.badPacket=Не удалось обработать ItemStackRequest от %0. Ошибка: %1
 
 network.packet.unhandledPacket=Неподдерживаемый пакет!
 
-network.server.listening.success=Слушаем на %s
-network.server.listening.failed=Не удалось прослушать %s. Ошибка: %d
+network.server.listening.success=Слушаем на %0
+network.server.listening.failed=Не удалось прослушать %0. Ошибка: %1
 network.server.listening.failed.otherServerRunning=Возможно, на том же порту работает другой сервер?
 
-exceptions.network.rateLimited=Слишком много пакетов от %s (%d)
-exceptions.network.packetHandlingError=Не удалось обработать пакет от %s! Ошибка: %d
+exceptions.network.rateLimited=Слишком много пакетов от %0 (%1)
+exceptions.network.packetHandlingError=Не удалось обработать пакет от %0! Ошибка: %1
 exceptions.network.itemStackRequest.badGamemode=Невозможно получить предмет из креативного меню, находясь не в креативном режиме
-exceptions.network.inventoryTransaction.invalid=Недопустимый пакет InventoryTransaction от %s
+exceptions.network.inventoryTransaction.invalid=Недопустимый пакет InventoryTransaction от %0
 exceptions.network.invalidGamemodePacket=Недопустимый пакет игрового режима - Попытка сменить игровой режим без прав администратора
 
 exceptions.plugin.noName=Отсутствует имя плагина!
@@ -164,19 +164,19 @@ exceptions.plugin.noVersion=Отсутствует версия плагина!
 
 exceptions.console.alreadyClosed=Консоль уже закрыта!
 
-exceptions.logger.invalidType=Недопустимые типы журнала=%s. Допустимые типы: info warn error debug
+exceptions.logger.invalidType=Недопустимые типы журнала=%0. Допустимые типы: info warn error debug
 
-query.listening.success=Запрос сервера слушает на %s
-query.listening.failed=Не удалось прослушать запрос на %s
+query.listening.success=Запрос сервера слушает на %0
+query.listening.failed=Не удалось прослушать запрос на %0
 
-query.server.error=Ошибка запроса=%s
+query.server.error=Ошибка запроса=%0
 
-query.server.network.generatingToken=Генерация токена запроса для %s
-query.server.network.invalidPacket=Получен недопустимый пакет запроса от %s
+query.server.network.generatingToken=Генерация токена запроса для %0
+query.server.network.invalidPacket=Получен недопустимый пакет запроса от %0
 
-query.server.network.packets.handshake=Ответил пакетом запроса handshake для %s
-query.server.network.packets.fullInfo=Ответил пакетом запроса полной информации для %s
-query.server.network.packets.basicInfo=Ответил пакетом запроса базовой информации для %s
+query.server.network.packets.handshake=Ответил пакетом запроса handshake для %0
+query.server.network.packets.fullInfo=Ответил пакетом запроса полной информации для %0
+query.server.network.packets.basicInfo=Ответил пакетом запроса базовой информации для %0
 
 logger.info=ИНФО
 logger.warn=ПРЕДУПРЕЖДЕНИЕ

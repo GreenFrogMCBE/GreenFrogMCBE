@@ -13,9 +13,9 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const PlayerListAction = require("./types/PlayerListAction")
+const { PlayerListAction } = require("@greenfrog/mc-enums")
 
-const skinData = require("../../resources/json/skinData.json")
+const skin_data = require("../../resources/json/skin_data.json")
 
 const Packet = require("./Packet")
 
@@ -49,7 +49,7 @@ class ServerPlayerListPacket extends Packet {
 						xbox_user_id: this.xbox_id,
 						platform_chat_id: "",
 						build_platform: 7,
-						skin_data: skinData,
+						skin_data,
 						is_teacher: false,
 						is_host: false,
 					}
