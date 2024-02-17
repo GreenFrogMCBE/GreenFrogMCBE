@@ -89,17 +89,21 @@ async function initialize_server() {
 
 		Server.start()
 	} catch (error) {
-		try {
-			console.error(
-				ConsoleColorConvertor.convert_console_color(generate_fail_message(error)),
-			)
+		console.error(
+			ConsoleColorConvertor.convert_console_color(generate_fail_message(error)),
+		)
 
-			fs.mkdirSync(Frog.directories.crash_reports_folder, { recursive: true })
+		try {
+			fs.mkdirSync(Frog.directories.crash_reports_folder, {recursive: true})
 			fs.writeFileSync(crashFile, `Error: ${error.stack}`)
 
 			process.exit(Frog.config.dev.exit_codes.crash)
 		} catch (error) {
-			console.error(error.stack)
+			console.error(
+				ConsoleColorConvertor.convert_console_color(
+					`${ChatColors.Yellow}Failed to save a crash log file: ${error.stack}`
+				)
+			)
 		}
 	}
 })()
