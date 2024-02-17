@@ -103,7 +103,7 @@ class ClientResourcePackResponsePacket extends Packet {
 				Logger.info(get_key("status.resourcePacks.joined", [player.name]))
 
 				const start_game = new ServerStartGamePacket()
-				start_game.entity_id = 0
+				start_game.entity_id = 1
 				start_game.runtime_entity_id = 1
 				start_game.player_gamemode = player.gamemode
 				start_game.player_position = player.world.spawn_coordinates

@@ -459,19 +459,19 @@ class Player {
 				{
 					player: this,
 					data,
-				}
-			),
-			(() => {
-				const player_set_entity_data_packet = new ServerSetEntityDataPacket()
-				player_set_entity_data_packet.properties = {
-					ints: [],
-					floats: [],
-				}
-				player_set_entity_data_packet.runtime_entity_id = "1" // Local player
-				player_set_entity_data_packet.tick = "0"
-				player_set_entity_data_packet.value = data
-				player_set_entity_data_packet.write_packet(this)
-			})
+				},
+				(() => {
+					const set_entity_data_packet = new ServerSetEntityDataPacket()
+					set_entity_data_packet.properties = {
+						ints: [],
+						floats: [],
+					}
+					set_entity_data_packet.runtime_entity_id = "1" // Local player
+					set_entity_data_packet.tick = "0"
+					set_entity_data_packet.value = data
+					set_entity_data_packet.write_packet(this)
+				})
+			)
 		)
 	}
 

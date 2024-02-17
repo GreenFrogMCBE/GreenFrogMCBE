@@ -117,34 +117,6 @@ module.exports = {
 		}
 
 		/**
-		 * Sets the data of the player (e.g. on_fire, etc.)
-		 *
-		 * @param {import("Frog").EntityData} data
-		 */
-		player.set_entity_data = function (data) {
-			EventEmitter.emit(
-				new Event(
-					"serverSetEntityData",
-					{
-						player,
-						data,
-					}
-				),
-				(() => {
-					const player_set_entity_data_packet = new ServerSetEntityDataPacket()
-					player_set_entity_data_packet.properties = {
-						ints: [],
-						floats: [],
-					}
-					player_set_entity_data_packet.runtime_entity_id = "1" // Local player
-					player_set_entity_data_packet.tick = "0"
-					player_set_entity_data_packet.value = data
-					player_set_entity_data_packet.write_packet(player)
-				})
-			)
-		}
-
-		/**
 		 * Updates the player chunk render radius
 		 *
 		 * @param {number} radius
