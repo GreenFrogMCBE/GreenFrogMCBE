@@ -83,7 +83,7 @@ class World {
 	 */
 	place_block(x, y, z, block) {
 		for (const player of PlayerInfo.players_online) {
-			this.send_block_update_packet(player, x, y, z, block.get_id())
+			this.send_block_update_packet(player, x, y, z, block.id)
 		}
 	}
 

@@ -14,15 +14,16 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const Packet = require("./Packet")
+
 const {Vec3} = require("@greenfrog/mc-enums")
 
 class ServerMoveEntityDataPacket extends Packet {
 	name = "move_entity_delta"
 
 	/** @type {Vec3} */
-	coordinates = new Vec3(0,0,0)
+	coordinates = new Vec3(0, 0, 0)
 
-	/** @type {string} */
+	/** @type {number} */
 	runtime_entity_id
 
 	/** @type {import("Frog").EntityMovementFlags | undefined} */

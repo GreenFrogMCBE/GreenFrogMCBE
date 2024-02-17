@@ -29,8 +29,6 @@ const PacketHandler = require("./PacketHandler")
 
 const { EventEmitter, Event } = require("@kotinash/better-events")
 
-const PlayerInit = require("../../player/PlayerInit")
-
 const config = Frog.config
 
 class PlayerJoinHandler {
@@ -40,8 +38,6 @@ class PlayerJoinHandler {
 	 * @param {import("Frog").Player} player - The player joining the server.
 	 */
 	async on_player_join(player) {
-		await PlayerInit.initPlayer(player)
-
 		this.setup_intervals(player)
 
 		if (!player.is_username_valid()) {

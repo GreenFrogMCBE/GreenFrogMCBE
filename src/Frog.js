@@ -33,11 +33,8 @@ const fs = require("fs")
  * @returns {import("Frog").Config}
  */
 function get_config() {
-	return yaml.load(fs.readFileSync("config.yml", "utf8"))
+	return yaml.load(fs.readFileSync("config.yml"), "utf8")
 }
-
-const config = yaml.load(fs.readFileSync("config.yml", "utf8"))
-const lang = Language.get_language(config.chat.lang)
 
 let server
 
@@ -47,14 +44,14 @@ module.exports = {
 	 *
 	 * @returns {import("Frog").Config}
 	 */
-	config,
+	config: get_config(),
 
 	/**
 	 * Returns the language file
 	 *
 	 * @returns {import("Frog").Language}
 	 */
-	lang,
+	lang: Language.get_language(get_config().chat.lang),
 
 	/**
 	 * Returns if the server is in debug mode
@@ -69,15 +66,6 @@ module.exports = {
 	 * @returns {import("frog-protocol").Server}
 	 */
 	server,
-
-	/**
-	 * Returns the event emitter for plugins
-	 * to listen for, and for server to execute
-	 * events
-	 *
-	 * @type {EventEmitter}
-	 */
-	event_emitter: new EventEmitter(),
 
 	/**
 	 * Returns the release data

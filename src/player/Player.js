@@ -4,7 +4,7 @@ const {
 	PermissionLevel,
 	DisconnectionMessage,
 	Attribute,
-	PlayerListAction, Text,
+	PlayerListAction, Text, WindowId, WindowType, Air,
 } = require("@greenfrog/mc-enums")
 
 const entity = require("../entity/EntityModule").get_module()
@@ -27,6 +27,8 @@ const PlayerInfo = require("./PlayerInfo")
 
 const UsernameValidator = require("./UsernameValidator")
 
+const HungerCause = require("./types/HungerCause")
+
 const ServerTextPacket = require("../network/packets/ServerTextPacket")
 const ServerSetTimePacket = require("../network/packets/ServerSetTimePacket")
 const ServerTransferPacket = require("../network/packets/ServerTransferPacket")
@@ -34,9 +36,13 @@ const ServerSetEntityMotion = require("../network/packets/ServerSetEntityMotion"
 const ServerSetHealthPacket = require("../network/packets/ServerSetHealthPacket")
 const ServerPlayerListPacket = require("../network/packets/ServerPlayerListPacket")
 const ServerPlayStatusPacket = require("../network/packets/ServerPlayStatusPacket")
+const ServerSetDifficultyPacket = require("../network/packets/ServerSetDifficultyPacket")
 const ServerSetEntityDataPacket = require("../network/packets/ServerSetEntityDataPacket")
+const ServerContainerOpenPacket = require("../network/packets/ServerContainerOpenPacket")
+const ServerMoveEntityDataPacket = require("../network/packets/ServerMoveEntityDataPacket")
 const ServerChangeDimensionPacket = require("../network/packets/ServerChangeDimensionPacket")
 const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAttributesPacket")
+const ServerInventoryContentPacket = require("../network/packets/ServerInventoryContentPacket")
 const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket")
 const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket")
 
@@ -91,6 +97,17 @@ class Player {
 		fall_damage: {
 			queue: 0,
 			invulnerable: false
+		}
+	}
+
+	inventory = {
+		container: {
+			block_position: new Vec3(null, null, null),
+			window: {
+				id: null,
+				type: null
+			},
+			is_open: false
 		}
 	}
 
@@ -514,7 +531,7 @@ class Player {
 				},
 				(() => {
 					const dimension_packet = new ServerChangeDimensionPacket()
-					dimension_packet.position = {x, y, z}
+					dimension_packet.position = { x, y, z }
 					dimension_packet.dimension = dimension
 					dimension_packet.respawn = respawn
 					dimension_packet.write_packet(this)
@@ -637,6 +654,208 @@ class Player {
 								this.name,
 								message
 							]
+						)
+					)
+				})
+			)
+		)
+	}
+
+	/**
+	 * @param {Vec3} location
+	 * @param {Vec3} rotation
+	 */
+	teleport(location, rotation) {
+		EventEmitter.emit(
+			new Event(
+				"playerTeleport",
+				{
+					player: this,
+					location,
+					rotation,
+				},
+				(() => {
+					const move_packet = new ServerMoveEntityDataPacket()
+					move_packet.flags = {
+						has_x: true,
+						has_y: true,
+						has_z: true,
+						has_rot_x: false,
+						has_rot_y: false,
+						has_rot_z: false,
+						on_ground: false,
+						teleport: true,
+						force_move: true,
+					}
+					move_packet.runtime_entity_id = 1
+					move_packet.coordinates = location
+					move_packet.coordinates_rotation = rotation
+					move_packet.write_packet(this)
+				})
+			)
+		)
+	}
+
+	/**
+	 * @param {import("@greenfrog/mc-enums").Difficulty} difficulty
+	 */
+	setDifficulty = function (difficulty) {
+		EventEmitter.emit(
+			new Event(
+				"serverSetDifficulty",
+				{
+					player: this,
+					difficulty,
+				},
+				(() => {
+					const difficultyPacket = new ServerSetDifficultyPacket()
+					difficultyPacket.difficulty = difficulty
+					difficultyPacket.write_packet(this)
+				})
+			)
+		)
+	}
+
+	/**
+	 * @param {number} hunger
+	 * @param {HungerCause} cause
+	 */
+	set_hunger(hunger, cause = HungerCause.Unknown) {
+		EventEmitter.emit(
+			new Event(
+				"playerHungerUpdate",
+				{
+					player: this,
+					hunger,
+					cause,
+				},
+				(() => {
+					this.set_attribute({
+						name: Attribute.Hunger,
+						min: 0,
+						max: 20,
+						current: hunger,
+						default: 0,
+						modifiers: [],
+					})
+
+					this.hunger = hunger
+				})
+			)
+		)
+	}
+
+	/**
+	 * @param {number} item_id
+	 * @param {number} block_runtime_id - You can convert the item ID to a block runtime ID using https://github.com/GreenFrogMCBE/GreenFrogMCBE/blob/main/src/block/LegacyToRuntimeIdConverter.js
+	 * @param {number} [slot=0]
+	 * @param {boolean} [has_metadata=false]
+	 * @param {boolean} has_stack_id
+	 * @param {number} stack_id
+	 * @param {number} [count=1]
+	 * @param {import("Frog").ItemExtraData} extra - Extra data
+	 */
+	set_container_item(
+		item_id,
+		block_runtime_id,
+		slot = 0,
+		has_metadata = false,
+		has_stack_id = true,
+		stack_id = 1,
+		count = 1,
+		extra = {
+			has_nbt: false,
+			can_place_on: [],
+			can_destroy: []
+		}
+	) {
+		EventEmitter.emit(
+			new Event(
+				"inventoryContainerGiveItem",
+				{
+					player: this,
+					item_data: {
+						item_id,
+						block_runtime_id,
+						slot,
+						has_metadata,
+						has_stack_id,
+						stack_id,
+						count,
+						extra,
+					}
+				},
+				(() => {
+					/** @type {import("Frog").Item[]} */
+					const input = []
+
+					for (let i = 0; i < 27; i++) {
+						input.push({ network_id: 0 })
+					}
+
+					input[slot] = {
+						network_id: item_id,
+						count,
+						metadata: has_metadata,
+						has_stack_id,
+						stack_id,
+						block_runtime_id,
+						extra,
+					}
+
+					const inventory_content = new ServerInventoryContentPacket()
+					inventory_content.window_id = WindowId.CHEST
+					inventory_content.input = input
+					inventory_content.write_packet(this)
+				})
+			)
+		)
+	}
+
+	open_container() {
+		EventEmitter.emit(
+			new Event(
+				"inventoryContainerPreCreate",
+				{
+					player: this,
+				},
+				(() => {
+					this.inventory.container.block_position = new Vec3(
+						Math.floor(this.location.x - 1),
+						this.location.y + 2,
+						Math.floor(this.location.z - 1)
+					)
+
+					this.inventory.container.window = { id: WindowId.Chest, type: WindowType.Container }
+
+					EventEmitter.emit(
+						new Event(
+							"inventoryContainerCreate",
+							{
+								player: this,
+								inventory: this.inventory,
+							},
+							(() => {
+								this.world.place_block(
+									this.inventory.container.block_position.x,
+									this.inventory.container.block_position.y,
+									this.inventory.container.block_position.z,
+									new Air()
+								)
+
+								const container_open = new ServerContainerOpenPacket()
+								container_open.window_id = this.inventory.container.window.id
+								container_open.window_type = this.inventory.container.window.type
+								container_open.runtime_entity_id = -1
+								container_open.coordinates = new Vec3(
+									this.inventory.container.block_position.x,
+									this.inventory.container.block_position.y,
+									this.inventory.container.block_position.z
+								)
+								container_open.write_packet(this)
+
+								this.inventory.container.is_open = true
+							})
 						)
 					)
 				})

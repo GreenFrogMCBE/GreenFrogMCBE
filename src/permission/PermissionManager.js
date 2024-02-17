@@ -18,6 +18,7 @@ const PlayerInfo = require("../player/PlayerInfo")
 const Frog = require("../Frog")
 
 const fs = require("fs")
+const {EventEmitter} = require("@kotinash/better-events");
 
 /**
  * Emits the `playerOpStatusChange` event
@@ -27,18 +28,24 @@ const fs = require("fs")
  * @returns {boolean} - Was the event executed successfully?
  * @private
  */
-function emitPlayerOpStatusChange(username, opped) {
-	let shouldOp = true
+function emit_op_status_change_event(username, opped) {
+	let cancelled = false
 
-	Frog.event_emitter.emit("playerOpStatusChange", {
-		username,
-		opped,
-		cancel: () => {
-			shouldOp = false
-		},
-	})
+	EventEmitter.emit(
+		new Event(
+			"playerOpStatusChange",
+			{
+				username,
+				opped,
+			}
+		),
+		(() => {}),
+		(() => {
+			cancelled = true
+		})
+	)
 
-	return shouldOp
+	return cancelled
 }
 
 module.exports = {
@@ -50,10 +57,10 @@ module.exports = {
 	 * @async
 	 */
 	async is_opped(username) {
-		const oppedPlayers = fs.readFileSync(Frog.directories.op_file, "utf8")
+		const opped_players = fs.readFileSync(Frog.directories.op_file, "utf8")
 			.split("\n")
 
-		return oppedPlayers.includes(username)
+		return opped_players.includes(username)
 	},
 
 	/**
@@ -64,7 +71,7 @@ module.exports = {
 	 * @async
 	 */
 	async op(username) {
-		if (!emitPlayerOpStatusChange(username, true)) return
+		if (!emit_op_status_change_event(username, true)) return
 
 		fs.appendFileSync(Frog.directories.op_file, username + "\n")
 
@@ -83,7 +90,7 @@ module.exports = {
 	 * @async
 	 */
 	async deop(username) {
-		if (!emitPlayerOpStatusChange(username, false)) return
+		if (!emit_op_status_change_event(username, false)) return
 
 		const ops = fs.readFileSync(Frog.directories.op_file, "utf-8")
 		const updatedOps = ops
