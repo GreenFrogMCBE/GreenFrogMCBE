@@ -23,7 +23,7 @@ class Void extends Generator {
 	get_chunk_data() {
 		return Buffer
 			.alloc(16 * 256 * 16)
-			.fill(new Air().get_id())
+			.fill(new Air().id)
 	}
 }
 
