@@ -113,42 +113,42 @@ class CommandTeleport extends Command {
 
 		switch (args.length) {
 			case 4: // Teleport player to coordinates
-				const [x, y, z] = args.slice(1, 4).map(Number);
+				const [x, y, z] = args.slice(1, 4).map(Number)
 
 				if (target) {
-					teleport_to_coordinates(player, x, y, z);
+					teleport_to_coordinates(player, x, y, z)
 				} else {
-					player.send_message(get_key("commands.errors.targetError.targetsNotFound"));
+					player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
 				}
 
-				break;
+				break
 			case 1: // Teleport self to player
 				if (player.permissions.is_console) {
-					player.send_message(get_key("commands.errors.internalError.badSender"));
+					player.send_message(get_key("commands.errors.internalError.badSender"))
 				} else {
-					const destination_player = get_player(args[0]);
-					teleport_player_to_player(player, destination_player);
+					const destination_player = get_player(args[0])
+					teleport_player_to_player(player, destination_player)
 				}
-				break;
+				break
 
 			case 2: // Teleport player to player
-				const target_player = get_player(args[1]);
+				const target_player = get_player(args[1])
 
-				teleport_player_to_player(target, target_player);
+				teleport_player_to_player(target, target_player)
 
-				break;
+				break
 			case 3: // Teleport self to coordinates
 				if (player.permissions.is_console) {
-					player.send_message(get_key("commands.errors.internalError.badSender"));
+					player.send_message(get_key("commands.errors.internalError.badSender"))
 				} else {
-					const [x, y, z] = args.map(Number);
+					const [x, y, z] = args.map(Number)
 
-					teleport_to_coordinates(player, x, y, z);
+					teleport_to_coordinates(player, x, y, z)
 				}
-				break;
+				break
 
 			default:
-				break;
+				break
 		}
 	}
 }

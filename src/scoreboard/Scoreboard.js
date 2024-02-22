@@ -16,7 +16,7 @@
 const Random = require("../utils/Random")
 
 const {
-	CriterinaName,
+	CriteriaName,
 	DisplaySlot,
 	ScoreAction,
 	EntryType,
@@ -42,7 +42,7 @@ class Scoreboard {
 		this.display_slot = DisplaySlot.Sidebar
 
 		/** @type {import("Frog").CreteriaName} */
-		this.criteria_name = CreteriaName.Dummy
+		this.criteria_name = CriteriaName.Dummy
 
 		/**
 		 * @type {string} - The name of the scoreboard

@@ -183,23 +183,6 @@ class ClientResourcePackResponsePacket extends Packet {
 
 				item_component.write_packet(player)
 
-				// player.render_chunks is true by default but can be disabled by plugins
-				if (player.render_chunks) {
-					player.set_chunk_radius(player.world.render_distance)
-
-					const network_chunk_publisher = new ServerNetworkChunkPublisherUpdatePacket()
-					network_chunk_publisher.coordinates = { x: 0, y: 0, z: 0 }
-					network_chunk_publisher.radius = config.world.render_distance.client_side
-					network_chunk_publisher.saved_chunks = []
-					network_chunk_publisher.write_packet(player)
-
-					const generator_file_name = player.world.generator[0].toUpperCase() + player.world.generator.substring(1)
-					const generator_file = require("../../world/generator/" + generator_file_name)
-
-					new generator_file()
-						.generate(player)
-				}
-
 				Logger.info(
 					get_key("status.resourcePacks.spawned",
 						[

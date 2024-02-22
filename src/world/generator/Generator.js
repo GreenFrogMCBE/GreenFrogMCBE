@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const {EventEmitter,Event} = require("@kotinash/better-events")
+const { EventEmitter, Event } = require("@kotinash/better-events")
 
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket")
 
@@ -22,6 +22,11 @@ class Generator {
 	 * @type {import("Frog").WorldGenerator | undefined}
 	 */
 	name
+
+    /**
+	 * @type {World}
+     */
+	world
 
 	/**
 	 * @returns {Buffer | null}

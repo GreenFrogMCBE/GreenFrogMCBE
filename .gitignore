@@ -20,6 +20,9 @@ pluginData/
 # Node-API output directory
 src/node_modules/
 
+# World
+world/chunks.json
+
 # Misc
 !src/*
 !types/*

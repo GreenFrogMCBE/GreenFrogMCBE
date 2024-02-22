@@ -18,7 +18,7 @@ const PlayerInfo = require("../player/PlayerInfo")
 const Frog = require("../Frog")
 
 const fs = require("fs")
-const {EventEmitter} = require("@kotinash/better-events");
+const {EventEmitter} = require("@kotinash/better-events")
 
 /**
  * Emits the `playerOpStatusChange` event

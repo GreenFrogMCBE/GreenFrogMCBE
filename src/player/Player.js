@@ -45,6 +45,9 @@ const ServerUpdateAttributesPacket = require("../network/packets/ServerUpdateAtt
 const ServerInventoryContentPacket = require("../network/packets/ServerInventoryContentPacket")
 const ServerChunkRadiusUpdatePacket = require("../network/packets/ServerChunkRadiusUpdatePacket")
 const ServerSetPlayerGameTypePacket = require("../network/packets/ServerSetPlayerGameTypePacket")
+const ServerNetworkChunkPublisherUpdatePacket = require("../network/packets/ServerNetworkChunkPublisherUpdatePacket")
+const fs = require("fs")
+const path = require("path")
 
 class Player {
 	/** @type {import("@greenfrog/mc-enums").PossiblyUndefined<string>} */
@@ -131,13 +134,17 @@ class Player {
 		/** @private */
 		const { config } = Frog
 
+		/** @private */
+		const chunks_path = path.join("..", "..", "world", "chunk.json")
+
 		Object.assign(
 			this.world,
 			{
 				render_distance: config.world.render_distance.server_side,
 				name: config.world.name,
 				generator: config.world.generators.type.toLowerCase(),
-				spawn_coordinates: new Vec3(0, (this.world.generator === WorldGenerationType.Flat) ? 47 : 48, 0)
+				spawn_coordinates: new Vec3(0, (this.world.generator === WorldGenerationType.Flat) ? 47 : 48, 0),
+				chunk_data: fs.existsSync(chunks_path) ? fs.readdirSync(chunks_path) : []
 			}
 		)
 
@@ -158,6 +165,29 @@ class Player {
 
 		if (this.world.generator === WorldGenerationType.Default) {
 			entity.set_spawn_y_coordinate(this.world.spawn_coordinates.y - 34)
+		}
+
+		// player.render_chunks is true by default but can be disabled by plugins
+		if (this.render_chunks) {
+			this.set_chunk_radius(this.world.render_distance)
+
+			const network_chunk_publisher = new ServerNetworkChunkPublisherUpdatePacket()
+			network_chunk_publisher.coordinates = { x: 0, y: 0, z: 0 }
+			network_chunk_publisher.radius = config.world.render_distance.client_side
+			network_chunk_publisher.saved_chunks = []
+			network_chunk_publisher.write_packet(this)
+
+			if (this.world.chunks ===! []) {
+				const generator_file_name = this.world.generator[0].toUpperCase() + this.world.generator.substring(1)
+				const generator_file = require("../../world/generator/" + generator_file_name)
+
+				Logger.info(get_key("world.generating"))
+
+				new generator_file()
+					.generate(this)
+
+				Logger.info(get_key("world.generated"))
+			}
 		}
 
 		// TODO: Flat & void

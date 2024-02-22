@@ -5,6 +5,9 @@ server.shuttingDown=Shutting down...
 
 server.version=This server is running GreenFrogMCBE (https://github.com/GreenFrogMCBE/GreenFrogMCBE). Version: %0
 
+world.generating=Generating world...
+world.generated=World successfully generated!
+
 commands.unknown=§cUnknown command %0. Please check that the command exists and that you have permission to use it.
 commands.errors.internalError=Failed to execute command! Error: %0
 commands.errors.internalError.player=Failed to execute command from %0. Error: %1

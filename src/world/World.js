@@ -39,6 +39,9 @@ const PlayerInfo = require("../player/PlayerInfo")
 const Frog = require("../Frog")
 
 const vm = require("vm")
+const {Chunk} = require("./Chunk")
+const fs = require("fs")
+const path = require("path")
 
 let time = 0
 
@@ -71,6 +74,17 @@ class World {
 		 * @type {number}
 		 */
 		this.time = time
+
+		/**
+		 * @type {Chunk[]}
+		 */
+		this.chunks = [
+			new Chunk(
+				0,
+				0,
+				[]
+			)
+		]
 	}
 
 	/**
@@ -494,6 +508,15 @@ class World {
 	}
 
 	/**
+	 * Saves the world.
+	 */
+	save() {
+		const chunks_path = path.join(__dirname, "..", "..", "world", "chunks.json")
+
+		fs.writeFileSync(chunks_path, JSON.stringify(this.chunks))
+	}
+
+	/**
 	 * Returns the world data.
 	 *
 	 * @returns {import("Frog").World}
@@ -504,6 +527,7 @@ class World {
 			render_distance: this.render_distance,
 			spawn_coordinates: this.spawn_coordinates,
 			generator: this.generator,
+			chunks: this.chunks,
 			time,
 		}
 	}

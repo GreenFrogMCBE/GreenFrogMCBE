@@ -13,13 +13,11 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog")
-
 const Packet = require("./Packet")
 
 const InvalidGamemodeException = require("../../utils/exceptions/InvalidGamemodeException")
 
-const {EventEmitter,Event} = require("@kotinash/better-events")
+const { EventEmitter, Event } = require("@kotinash/better-events")
 
 const { get_key } = require("../../utils/Language")
 
