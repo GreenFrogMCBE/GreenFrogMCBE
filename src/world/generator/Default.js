@@ -55,7 +55,7 @@ class Default extends Generator {
 
 		const magicOffset = 351
 
-		let placed = false;
+		let placed = false
 
 		const randomNumbers = new Array(16 * 256 * 16).fill(0).map(() => Math.random())
 
