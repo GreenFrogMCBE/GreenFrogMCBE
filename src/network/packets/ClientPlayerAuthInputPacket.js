@@ -15,7 +15,7 @@
  */
 const Packet = require("./Packet")
 
-const {EventEmitter,Event} = require("@kotinash/better-events")
+const { EventEmitter, Event } = require("@kotinash/better-events")
 
 class ClientPlayerAuthInputPacket extends Packet {
 	name = "player_auth_input"

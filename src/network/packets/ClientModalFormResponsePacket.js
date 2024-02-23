@@ -13,9 +13,9 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog")
-
 const Packet = require("./Packet")
+
+const { EventEmitter, Event } = require("@kotinash/better-events");
 
 class ClientModalFormResponsePacket extends Packet {
 	name = "modal_form_response"
@@ -25,10 +25,15 @@ class ClientModalFormResponsePacket extends Packet {
 	 * @param {import("Frog").Packet} packet
 	 */
 	async read_packet(player, packet) {
-		Frog.event_emitter.emit("playerFormResponse", {
-			player,
-			packet,
-		})
+		EventEmitter.emit(
+			new Event(
+				"playerFormResponse",
+				{
+					player,
+					packet,
+				}
+			)
+		)
 	}
 }
 

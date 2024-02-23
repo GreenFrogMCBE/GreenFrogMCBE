@@ -17,7 +17,7 @@ const Packet = require("./Packet")
 
 const BlockBreakException = require("../../utils/exceptions/BlockBreakException")
 
-const { Event } = require("@kotinash/better-events")
+const { Event, EventEmitter } = require("@kotinash/better-events")
 
 const {
 	Gamemode,
@@ -46,7 +46,7 @@ class ClientPlayerActionPacket extends Packet {
 					throw new BlockBreakException(get_key("exceptions.network.inventoryTransaction.invalid", [player.name]))
 				}
 
-				Frog.event_emitter.emit(
+				EventEmitter.emit(
 					new Event(
 						"blockBreak",
 						{

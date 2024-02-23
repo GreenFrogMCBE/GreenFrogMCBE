@@ -69,7 +69,7 @@ class Default extends Generator {
 						this.chunk_data[index - 1] = randomNumbers[index - 1] < airThreshold ? air : grass
 					} else {
 						// Hills
-						if (!placed && this.chunk_id > 75 && !this.chunk_data[index]) {
+						if (this.chunk_id > 10) {
 							for (let i = 0; i < 1200; i++) {
 								if ((index - i) % 2 === 0 && y > 15) {
 									if (!this.chunk_data[index - i]) {
@@ -79,8 +79,6 @@ class Default extends Generator {
 									if (!this.chunk_data[index - magicOffset - i]) {
 										this.chunk_data[index - magicOffset - i] = grass
 									}
-
-									placed = true
 								}
 							}
 						} else {

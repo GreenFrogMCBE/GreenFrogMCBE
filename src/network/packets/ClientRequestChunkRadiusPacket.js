@@ -15,7 +15,7 @@
  */
 const Packet = require("./Packet")
 
-const {EventEmitter,Event} = require("@kotinash/better-events")
+const { EventEmitter, Event } = require("@kotinash/better-events")
 
 class ClientRequestChunkRadiusPacket extends Packet {
 	name = "request_chunk_radius"
