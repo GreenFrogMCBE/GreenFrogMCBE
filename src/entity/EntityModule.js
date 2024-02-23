@@ -16,7 +16,7 @@
 const os = require("os")
 
 module.exports = {
-	getModule() {
+	get_module() {
 		const platform = os.platform()
 
 		try {

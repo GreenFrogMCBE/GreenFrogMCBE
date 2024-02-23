@@ -169,7 +169,7 @@ describe("server", () => {
 							}
 						})
 
-						setTimeout(() => {
+						timeout(() => {
 							client.disconnect()
 
 							const Frog = require("../src/Frog")

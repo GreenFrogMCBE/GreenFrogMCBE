@@ -26,9 +26,9 @@ class ClientItemStackRequestPacket extends Packet {
 	 * @param {import("Frog").Packet} packet
 	 */
 	async read_packet(player, packet) {
-		const inventoryToOpen = player.inventory.container.isOpen ? new ContainerInventory() : new CreativeInventory()
+		const inventory = player.inventory.container.isOpen ? new ContainerInventory() : new CreativeInventory()
 
-		inventoryToOpen.handle(player, packet)
+		inventory.handle(player, packet)
 	}
 }
 

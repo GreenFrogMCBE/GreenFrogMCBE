@@ -61,14 +61,14 @@ function createDirectoryIfNotExists(directoryPath) {
  * @param {string} pluginName - The name of the plugin.
  */
 function writePackageJson(directoryPath, pluginName) {
-	const packageJson = {
+	const package_json = {
 		name: pluginName.toLowerCase(),
 		main: `${pluginName.toLowerCase()}.js`,
 		version: "1.0.0",
-		displayName: pluginName,
+		display_name: pluginName,
 	}
 
-	fs.writeFileSync(`${directoryPath}/package.json`, JSON.stringify(packageJson, null, 4))
+	fs.writeFileSync(`${directoryPath}/package.json`, JSON.stringify(package_json, null, 4))
 }
 
 /**
@@ -83,14 +83,14 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 	/**
      * This executes when the plugin loads
 	 */
-	onLoad() {
+	on_load() {
 		// ...
 	},
 
 	/**
      * This executes when the plugin shutdowns
      */
-	onShutdown() {
+	on_shutdown() {
 		// ...
 	},
 };
@@ -108,14 +108,14 @@ function writePluginFile(directoryPath, pluginName, useTypeScript) {
 		pluginJs = `/**
  * This executes when the plugin loads
  */
-export function onLoad(): void {
+export function on_load(): void {
     // ...
 }
 
 /**
  * This executes when the plugin shutdowns
  */
-export function onShutdown(): void {
+export function on_shutdown(): void {
     // ...
 }
 `

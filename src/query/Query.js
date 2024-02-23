@@ -30,7 +30,7 @@ class Query {
 	 */
 	start(settings) {
 		new ListeningHandler()
-			.handleListening(this.socket, settings)
+			.handle_listening(this.socket, settings)
 
 		this.settings = settings
 	}

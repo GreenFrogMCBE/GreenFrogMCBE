@@ -15,7 +15,7 @@
  */
 const Packet = require("./Packet")
 
-class ServerResponsePackInfoPacket extends Packet {
+class ServerResourcePackInfoPacket extends Packet {
 	name = "resource_packs_info"
 
 	/** @type {boolean | undefined} */
@@ -43,4 +43,4 @@ class ServerResponsePackInfoPacket extends Packet {
 	}
 }
 
-module.exports = ServerResponsePackInfoPacket
+module.exports = ServerResourcePackInfoPacket

@@ -22,7 +22,7 @@ const QueryPacket = require("./types/QueryPacket")
 const ServerHandshakeResponsePacket = require("./ServerHandshakeResponsePacket")
 
 class ClientHandshakeRequestPacket extends Packet {
-	packetId = QueryPacket.HANDSHAKE
+	packet_id = QueryPacket.HANDSHAKE
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client
@@ -35,7 +35,7 @@ class ClientHandshakeRequestPacket extends Packet {
 		ClientTokens.clientTokens.set(`${client.address},${client.port}`, sessionID)
 
 		const handshakeResponsePacket = new ServerHandshakeResponsePacket()
-		handshakeResponsePacket.sessionId = sessionID
+		handshakeResponsePacket.session_id = sessionID
 		handshakeResponsePacket.payload = sessionID.toString()
 		handshakeResponsePacket.write_packet(client, socket)
 	}

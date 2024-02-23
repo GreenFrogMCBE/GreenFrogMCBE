@@ -25,7 +25,7 @@ class Packet {
 	 * @param {import("Frog").Player} player
 	 * @param {import("Frog").Packet} packet
 	 */
-	validatePacket(player, packet) {}
+	validate_packet(player, packet) {}
 
 	/**
 	 * @param {import("Frog").Player} player

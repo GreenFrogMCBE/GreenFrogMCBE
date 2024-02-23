@@ -15,23 +15,11 @@
  */
 const Command = require("./Command")
 
-const ArgumentType = require("./types/ArgumentType")
+const { ArgumentType } = require("@greenfrog/mc-enums")
 
-const { getPlayer } = require("../player/PlayerInfo")
+const { get_player } = require("../player/PlayerInfo")
 
 const { get_key } = require("../utils/Language")
-
-/**
- * Returns if the coordinates are valid
- *
- * @param {number} x
- * @param {number} y
- * @param {number} z
- * @private
- */
-function areCoordinatesValid(x, y, z) {
-	return !isNaN(x) && !isNaN(y) && !isNaN(z)
-}
 
 /**
  * Teleport the player to specific coordinates
@@ -41,7 +29,7 @@ function areCoordinatesValid(x, y, z) {
  * @param {number} y
  * @param {number} z
  */
-function teleportPlayerToCoordinates(player, x, y, z) {
+function teleport_to_coordinates(player, x, y, z) {
 	player.teleport(
 		x,
 		y,
@@ -49,14 +37,18 @@ function teleportPlayerToCoordinates(player, x, y, z) {
 	)
 
 	player.send_message(
-		get_key("commands.teleport.execution.success")
-			.replace("%s", `${x}, ${y}, ${z}`)
+		get_key("commands.teleport.execution.success", [
+			`${x}, ${y}, ${z}`
+		])
 	)
 
 	player.send_message(
-		get_key("commands.teleport.execution.success.teleported")
-			.replace("%s", player.username)
-			.replace("%d", `${x}, ${y}, ${z}`)
+		get_key("commands.teleport.execution.success.teleported",
+			[
+				player.username,
+				`${x}, ${y}, ${z}`
+			]
+		)
 	)
 }
 
@@ -64,16 +56,16 @@ function teleportPlayerToCoordinates(player, x, y, z) {
  * Teleport the player to another player
  *
  * @param {import("Frog").Player} player
- * @param {import("Frog").Player} targetPlayer
+ * @param {import("Frog").Player} target_player
  */
-function teleportPlayerToPlayer(player, targetPlayer) {
-	if (targetPlayer && targetPlayer.location) {
-		const { x, y, z } = targetPlayer.location
+function teleport_player_to_player(player, target_player) {
+	if (target_player && target_player.location) {
+		const { x, y, z } = target_player.location
 
-		teleportPlayerToCoordinates(player, x, y, z)
-	} else {
-		player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
+		return teleport_to_coordinates(player, x, y, z)
 	}
+
+	player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
 }
 
 /**
@@ -85,28 +77,28 @@ class CommandTeleport extends Command {
 	aliases = [
 		get_key("commands.teleport.aliases.tp")
 	]
-	minArgs = 1
-	maxArgs = 4
-	requiresOp = true
+	min_args = 1
+	max_args = 4
+	requires_op = true
 	args = [
 		{
 			name: "player",
-			type: ArgumentType.TARGET,
+			type: ArgumentType.Target,
 			optional: false,
 		},
 		{
 			name: "x",
-			type: ArgumentType.INT,
+			type: ArgumentType.Integer,
 			optional: false,
 		},
 		{
 			name: "y",
-			type: ArgumentType.INT,
+			type: ArgumentType.Integer,
 			optional: false,
 		},
 		{
 			name: "z",
-			type: ArgumentType.INT,
+			type: ArgumentType.Integer,
 			optional: false,
 		}
 	]
@@ -117,48 +109,46 @@ class CommandTeleport extends Command {
 	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
-		const target = getPlayer(args[0])
+		const target = get_player(args[0])
 
-		if (args.length >= 4) {	// Teleport player to coordinates
-			const x = Number(args[1])
-			const y = Number(args[2])
-			const z = Number(args[3])
+		switch (args.length) {
+			case 4: // Teleport player to coordinates
+				const [x, y, z] = args.slice(1, 4).map(Number)
 
-			if (target && areCoordinatesValid(x, y, z)) {
-				teleportPlayerToCoordinates(player, x, y, z)
-				return
-			}
+				if (target) {
+					teleport_to_coordinates(player, x, y, z)
+				} else {
+					player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
+				}
 
-			player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
-		} else if (args.length > 0 && args.length < 2) { // Teleport self to player
-			if (player.permissions.is_console) {
-				player.send_message(get_key("commands.errors.internalError.badSender"))
-				return
-			}
+				break
+			case 1: // Teleport self to player
+				if (player.permissions.is_console) {
+					player.send_message(get_key("commands.errors.internalError.badSender"))
+				} else {
+					const destination_player = get_player(args[0])
+					teleport_player_to_player(player, destination_player)
+				}
+				break
 
-			const destinationPlayer = getPlayer(args[0])
+			case 2: // Teleport player to player
+				const target_player = get_player(args[1])
 
-			teleportPlayerToPlayer(player, destinationPlayer)
-		} else if (args.length > 0 && args.length < 3) { // Teleport player to player
-			const destinationPlayer = getPlayer(args[1])
+				teleport_player_to_player(target, target_player)
 
-			teleportPlayerToPlayer(target, destinationPlayer)
-		} else if (args.length >= 3) { // Teleport self to coordinates
-			if (player.permissions.is_console) {
-				player.send_message(get_key("commands.errors.internalError.badSender"))
-				return
-			}
+				break
+			case 3: // Teleport self to coordinates
+				if (player.permissions.is_console) {
+					player.send_message(get_key("commands.errors.internalError.badSender"))
+				} else {
+					const [x, y, z] = args.map(Number)
 
-			const x = Number(args[0])
-			const y = Number(args[1])
-			const z = Number(args[2])
+					teleport_to_coordinates(player, x, y, z)
+				}
+				break
 
-			if (areCoordinatesValid(x, y, z)) {
-				teleportPlayerToCoordinates(player, x, y, z)
-				return
-			}
-
-			player.send_message(get_key("commands.teleport.execution.failed.coordinates.invalid"))
+			default:
+				break
 		}
 	}
 }

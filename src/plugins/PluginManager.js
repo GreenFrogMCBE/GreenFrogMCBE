@@ -35,21 +35,21 @@ module.exports = {
 	 * @param {string} name
 	 * @param {string} version
 	 */
-	addPlugin: (name, version) => {
+	add_plugin: (name, version) => {
 		/** @type {import("Frog").Plugin} */
-		const pluginObject = {
+		const plugin = {
 			name,
 			version,
 		}
 
 		if (!name) {
-			throw new PluginSetupException(pluginObject, get_key("exceptions.plugin.noName"))
+			throw new PluginSetupException(plugin, get_key("exceptions.plugin.noName"))
 		}
 
 		if (!version) {
-			throw new PluginSetupException(pluginObject, get_key("exceptions.plugin.noVersion"))
+			throw new PluginSetupException(plugin, get_key("exceptions.plugin.noVersion"))
 		}
 
-		plugins.push(pluginObject)
+		plugins.push(plugin)
 	},
 }

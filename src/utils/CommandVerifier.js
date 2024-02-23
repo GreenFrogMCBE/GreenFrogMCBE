@@ -13,16 +13,16 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Language = require("./Language")
+const { get_key } = require("./Language")
 
 module.exports = {
 	/**
-	 * Sends a unknown command (or no permission) error to the command executor.
+	 * Sends an unknown command (or no permission) error to the command executor.
 	 *
-	 * @param {import("Frog").Messagable} commandExecutor
+	 * @param {import("Frog").Messagable} command_executor
 	 * @param {string} command
 	 */
-	throw_error(commandExecutor, command) {
-		commandExecutor.send_message(Language.get_key("commands.unknown").replace("%s", command))
+	throw_error(command_executor, command) {
+		command_executor.send_message(get_key("commands.unknown", [ command ]))
 	},
 }

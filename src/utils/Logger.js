@@ -21,7 +21,6 @@ const LoggingException = require("./exceptions/LoggingException")
 
 module.exports = {
 	/**
-	 * This array contains all the logged messages
 	 * @type {import("Frog").LogMessage[]}
 	 */
 	messages: [],
@@ -29,51 +28,37 @@ module.exports = {
 	/**
 	 * Logs a message.
 	 *
-	 * @throws {LoggingException} If the `consoleLoggingLevel` is invalid
+	 * @throws {LoggingException} If the `console_logging_level` is invalid
 	 *
-	 * @param {string} levelName The name of the logging level 
+	 * @param {string} level_name The name of the logging level
 	 * @param {number} color The color ID for formatting
 	 * @param {string} message The message
-	 * @param {import("Frog").LogLevel} consoleLoggingLevel The logging level for the console output (e.g info, warn, error, debug)
+	 * @param {import("Frog").LogLevel} console_logging_level The logging level for the console output (e.g info, warn, error, debug)
 	 */
-	log(levelName, color, message, consoleLoggingLevel) {
+	log(level_name, color, message, console_logging_level) {
 		const Frog = require("../Frog")
 
-		const date = moment().format(Frog.config.logger.dateFormat)
+		const date = moment()
+			.format(Frog.config.logger.dateFormat)
 
-		if (!console[consoleLoggingLevel]) {
+		if (!["log", "info", "warn", "error"].includes(console_logging_level)) {
 			throw new LoggingException(
-				get_key("exceptions.logger.invalidType")
-					.replace("%s", consoleLoggingLevel)
+				get_key("exceptions.logger.invalidType", [console_logging_level])
 			)
 		}
 
-		let shouldLogMessage = true
-
-		Frog.event_emitter.emit("serverLogMessage", {
-			consoleLoggingLevel,
-			levelName,
-			message,
-			color,
-			cancel: () => {
-				shouldLogMessage = false
-			},
-		})
-
-		if (!shouldLogMessage) return
-
 		this.messages.push({
-			consoleLoggingLevel,
-			levelName,
+			console_logging_level,
+			level_name,
 			message,
 			color,
 		})
 
-		console[consoleLoggingLevel](
+		console[console_logging_level](
 			convert_console_color(
-				Frog.config.logger.messageFormat
+				Frog.config.logger.message_format
 					.replace("%date%", date)
-					.replace("%type%", `\x1b[${color}m${levelName}\x1b[0m`)
+					.replace("%type%", `\x1b[${color}m${level_name}\x1b[0m`)
 					.replace("%message%", message)
 			)
 		)
@@ -82,7 +67,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as info.
 	 *
-	 * @param {string} message- The log message.
+	 * @param {string} message - The log message.
 	 */
 	info(message) {
 		this.log(get_key("logger.info"), 32, message, "info")
@@ -91,7 +76,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as a warning.
 	 *
-	 * @param {string} message- The log message.
+	 * @param {string} message - The log message.
 	 */
 	warning(message) {
 		this.log(get_key("logger.warn"), 33, message, "warn")
@@ -100,7 +85,7 @@ module.exports = {
 	/**
 	 * Logs a message to the console as an error.
 	 *
-	 * @param {string} message- The log message.
+	 * @param {string} message - The log message.
 	 */
 	error(message) {
 		this.log(get_key("logger.error"), 31, message, "error")

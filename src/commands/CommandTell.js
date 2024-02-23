@@ -15,11 +15,10 @@
  */
 const Command = require("./Command")
 
-const { getPlayer } = require("../player/PlayerInfo")
+const { ArgumentType } = require("@greenfrog/mc-enums")
 
+const { get_player } = require("../player/PlayerInfo")
 const { get_key } = require("../utils/Language")
-
-const ArgumentType = require("./types/ArgumentType")
 
 /**
  * A command that sends a private message to other players
@@ -28,20 +27,20 @@ class CommandTell extends Command {
 	name = get_key("commands.tell.name")
 	description = get_key("commands.tell.description")
 	aliases = [
-		get_key("commands.tell.aliases.w"), 
-		get_key("commands.tell.aliases.whisper"), 
+		get_key("commands.tell.aliases.w"),
+		get_key("commands.tell.aliases.whisper"),
 		get_key("commands.tell.aliases.msg")
 	]
-	minArgs = 2
+	min_args = 2
 	args = [
 		{
 			name: "player",
-			type: ArgumentType.TARGET,
+			type: ArgumentType.Target,
 			optional: false,
 		},
 		{
 			name: "message",
-			type: ArgumentType.STRING,
+			type: ArgumentType.String,
 			optional: false
 		}
 	]
@@ -52,18 +51,34 @@ class CommandTell extends Command {
 	 * @param {string[]} args
 	 */
 	async execute(player, server, args) {
-		const target = getPlayer(args[0])
+		const target = get_player(args[0])
 
 		if (!target) {
-			player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
-			return
+			return player.send_message(get_key("commands.errors.targetError.targetsNotFound"))
 		}
 
-		const message = args.slice(1).join(" ")
+		const message = args
+			.slice(1)
+			.join(" ")
 
-		target.send_message(get_key("commands.tell.execution.success").replace("%s", player.username).replace("%d", player.username).replace("%f", message))
+		target.send_message(
+			get_key("commands.tell.execution.success",
+				[
+					player.username,
+					player.username,
+					message
+				]
+			)
+		)
 
-		player.send_message(get_key("commands.tell.execution.success.whisper").replace("%s", target.username).replace("%d", message))
+		player.send_message(
+			get_key("commands.tell.execution.success.whisper",
+				[
+					target.username,
+					message
+				]
+			)
+		)
 	}
 }
 

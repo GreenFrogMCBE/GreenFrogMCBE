@@ -15,16 +15,20 @@
  */
 const Packet = require("./Packet")
 
-const BlockBreakException = require("../../utils/exceptions//BlockBreakException")
+const BlockBreakException = require("../../utils/exceptions/BlockBreakException")
 
-const Gamemode = require("../../player/types/Gamemode")
-const BlockAction = require("../../world/types/BlockAction")
+const { Event, EventEmitter } = require("@kotinash/better-events")
+
+const {
+	Gamemode,
+	BlockAction
+} = require("@greenfrog/mc-enums")
 
 const Logger = require("../../utils/Logger")
 
-const Frog = require("../../Frog")
-
 const { get_key } = require("../../utils/Language")
+
+const Frog = require("../../Frog")
 
 class ClientPlayerActionPacket extends Packet {
 	name = "player_action"
@@ -37,23 +41,31 @@ class ClientPlayerActionPacket extends Packet {
 		const { action, position, result_position, face } = packet.data.params
 
 		switch (action) {
-			case BlockAction.CREATIVE_PLAYER_BREAK_BLOCK:
-				if (player.gamemode == Gamemode.SURVIVAL || player.gamemode == Gamemode.ADVENTURE || player.gamemode == Gamemode.SPECTATOR) {
-					throw new BlockBreakException(get_key("exceptions.network.inventoryTransaction.invalid").replace("%s", player.username))
+			case BlockAction.CreativePlayerBreakBlock:
+				if (player.gamemode === !Gamemode.CREATIVE) {
+					throw new BlockBreakException(get_key("exceptions.network.inventoryTransaction.invalid", [player.name]))
 				}
 
-				Frog.event_emitter.emit("blockBreak", {
-					player,
-					action,
-					position,
-					result_position,
-					face,
-				})
+				EventEmitter.emit(
+					new Event(
+						"blockBreak",
+						{
+							player,
+							action,
+							position,
+							result_position,
+							face
+						},
+						(() => {
+							player.world.break_block(position.x, position.y, position.z)
+						})
+					),
+					true
+				)
 
-				player.world.break_block(position.x, position.y, position.z)
 				break
 			default:
-				Logger.debug(get_key("debug.player.unsupportedAction.block").replace("%s", player.username).replace("%d", action))
+				Logger.debug(get_key("debug.player.unsupportedAction.block", [player.name, action]))
 		}
 	}
 }

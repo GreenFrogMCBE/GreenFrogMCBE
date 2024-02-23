@@ -18,7 +18,7 @@ const Packet = require("./Packet")
 class ServerUpdateBlockPacket extends Packet {
 	name = "update_block"
 
-	/** @type {number | undefined} */
+	/** @type {Possibl} */
 	x
 	/** @type {number | undefined} */
 	y

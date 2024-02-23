@@ -18,8 +18,7 @@ pluginData/
 .idea/
 
 # Node-API output directory
-src/entity/build/*
-src/node_modules/node-addon-api/*
+src/node_modules/
 
 # Misc
 !src/*

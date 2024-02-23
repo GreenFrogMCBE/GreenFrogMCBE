@@ -14,7 +14,7 @@
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
 const fs = require("fs")
-const frogProtocol = require("frog-protocol")
+const frog_protocol = require("frog-protocol")
 
 const Frog = require("./Frog")
 
@@ -38,7 +38,10 @@ const PlayerJoinHandler = require("./network/handlers/PlayerJoinHandler")
 
 const World = require("./world/World")
 
+const { EventEmitter, Event } = require("@kotinash/better-events")
+
 const Query = require("./query/Query")
+const Player = require("./player/Player")
 
 let server = null
 
@@ -47,22 +50,22 @@ let server = null
  *
  * @private
  */
-async function initializeServer() {
+async function initialize_server() {
 	console.clear()
 
-	createDirectories()
-	logStartupMessages()
+	create_directories()
+	log_startup_messages()
 
-	checkNodeJSVersion()
-	checkRenderDistance()
+	check_node_js_version()
+	check_render_distance()
 
-	setupHandlers()
+	setup_handlers()
 
-	await PluginLoader.loadPlugins()
+	await PluginLoader.load_plugins()
 	await CommandManager.load_commands()
 	await ConsoleCommandSender.start()
 
-	initDebug()
+	init_debug()
 }
 
 /**
@@ -70,13 +73,16 @@ async function initializeServer() {
  *
  * @private
  */
-function setupHandlers() {
+function setup_handlers() {
 	process.on("uncaughtException", (error) => {
-		handleCriticalError(error)
+		handle_critical_error(error)
 	})
 
 	process.on("SIGINT", () => {
 		Frog.shutdown_server()
+			.catch((error) => {
+				Logger.error(`Failed to shutdown the server: ${error.stack}`)
+			})
 	})
 }
 
@@ -85,7 +91,7 @@ function setupHandlers() {
  *
  * @private
  */
-function createDirectories() {
+function create_directories() {
 	fs.mkdirSync(Frog.directories.world_folder, { recursive: true })
 
 	fs.mkdirSync(Frog.directories.plugins_folder, { recursive: true })
@@ -101,7 +107,7 @@ function createDirectories() {
  *
  * @private
  */
-function initDebug() {
+function init_debug() {
 	if (Frog.config.dev.unstable) {
 		Logger.warning(Language.get_key("debug.unstable"))
 		Logger.warning(Language.get_key("debug.unstable.unsupported"))
@@ -119,8 +125,8 @@ function initDebug() {
  *
  * @private
  */
-function checkNodeJSVersion() {
-	if (parseInt(process.versions.node.split(".")[0]) < 14) {
+function check_node_js_version() {
+	if (Number(process.versions.node.split(".")[0]) < 14) {
 		Logger.error(Language.get_key("errors.nodeJS.tooOld"))
 		Logger.error(Language.get_key("errors.nodeJS.tooOld.update"))
 
@@ -133,8 +139,8 @@ function checkNodeJSVersion() {
  *
  * @private
  */
-function checkRenderDistance() {
-	if (Frog.config.world.render_distance.serverSide > 16) {
+function check_render_distance() {
+	if (Frog.config.world.render_distance.server_side > 16) {
 		Logger.warning(Language.get_key("world.chunks.render_distance.tooHigh"))
 	}
 }
@@ -144,7 +150,7 @@ function checkRenderDistance() {
  *
  * @private
  */
-function logStartupMessages() {
+function log_startup_messages() {
 	Logger.info(Language.get_key("server.loading"))
 	Logger.info(Language.get_key("server.license"))
 
@@ -159,16 +165,15 @@ function logStartupMessages() {
  * @private
  * @param {Error} error
  */
-function handleCriticalError(error) {
+function handle_critical_error(error) {
 	const { host, port } = Frog.config.network
-
-	Frog.event_emitter.emit("serverCriticalError", { error })
 
 	if (error.message.includes("Server failed to start")) {
 		Logger.error(
-			Language.get_key("network.server.listening.failed")
-				.replace("%s", `${host}:${port}`)
-				.replace("%d", error.message)
+			Language.get_key("network.server.listening.failed", [
+				`${host}:${port}`,
+				error.message
+			])
 		)
 
 		Logger.error(Language.get_key("network.server.listening.failed.otherServerRunning"))
@@ -177,7 +182,7 @@ function handleCriticalError(error) {
 	Logger.error(`Server error: ${error.stack}`)
 
 	if (!Frog.config.dev.unstable) {
-		process.exit(Frog.config.dev.exitCodes.crash)
+		process.exit(Frog.config.dev.exit_codes.crash)
 	}
 }
 
@@ -191,58 +196,62 @@ async function listen() {
 	const {
 		host,
 		port,
-		raknet: raknetBackend
+		raknet: raknet_backend
 	} = Frog.config.network
 
 	const {
-		levelName,
+		level_name,
 		motd,
-		maxPlayers,
+		max_players,
 		version,
-		offlineMode,
-	} = Frog.config.serverInfo
+		offline_mode,
+	} = Frog.config.server_info
 
 	const offline =
 		process.env.TEST ||
-		offlineMode
+		offline_mode
 
 	try {
-		server = frogProtocol.createServer({
+		server = frog_protocol.createServer({
 			host,
 			port,
 			version,
 			offline,
-			raknetBackend,
-			maxPlayers,
+			raknetBackend: raknet_backend,
+			maxPlayers: max_players,
 			motd: {
 				motd,
-				levelName,
+				level_name,
 			},
-		}).on("connect", (client) => {
-			client.on("join", () => {
+		}).on("connect", (connection) => {
+			connection.on("join", () => {
+				const player = new Player(connection.profile.name, connection)
+
 				new PlayerJoinHandler()
-					.onPlayerJoin(client)
+					.on_player_join(player)
 			})
 		})
 
 		Frog.server = server
-		Frog.event_emitter.emit("serverListen")
+
+		EventEmitter.emit(
+			new Event(
+				"serverListen"
+			)
+		)
 
 		Logger.info(
-			Language.get_key("network.server.listening.success")
-				.replace(
-					"%s",
-					`/${host}:${port}`
-				)
+			Language.get_key("network.server.listening.success", [`/${host}:${port}`])
 		)
 	} catch (error) {
-		Logger.error(
-			Language.get_key("network.server.listening.failed")
-				.replace("%s", `/${host}:${port}`)
-				.replace("%d", error.stack)
+		throw new ServerStartupException(
+			Language.get_key("network.server.listening.failed",
+				[
+					`/${host}:${port}`,
+					error.stack
+				]
+			)
 		)
-
-		throw new ServerStartupException("Server failed to start")
 	}
 }
 
@@ -251,10 +260,10 @@ async function listen() {
  *
  * @private
  */
-function startWorldTicking() {
+function start_world_ticking() {
 	const world = new World()
 
-	world.tick_hunfer_loss()
+	world.tick_hunger_loss()
 	world.start_network_chunk_publisher_packet_sending_loop()
 
 	setInterval(() => {
@@ -268,37 +277,37 @@ function startWorldTicking() {
  * @private
  * @returns {import("Frog").QuerySettings}
  */
-function getQuerySettings() {
+function get_query_settings() {
 	return {
 		host: Frog.config.network.host,
 		port: Frog.config.query.port,
-		motd: Frog.config.serverInfo.motd,
-		levelName: Frog.config.serverInfo.levelName,
+		motd: Frog.config.server_info.motd,
+		level_name: Frog.config.server_info.level_name,
 		players: PlayerInfo.players_online,
-		maxPlayers: Frog.config.serverInfo.maxPlayers,
+		max_players: Frog.config.server_info.max_players,
 		gamemode: Frog.config.world.gamemode.world,
-		version: Frog.config.serverInfo.version.toString(),
-		plugins: Frog.config.query.showPlugins ? [""] : PluginManager.plugins,
+		version: Frog.config.server_info.version.toString(),
+		plugins: Frog.config.query.show_plugins ? [""] : PluginManager.plugins,
 	}
 }
 
 /**
  * Starts the query server.
  */
-function startQueryServer() {
+function start_query_server() {
 	const query = new Query()
 
 	try {
-		query.start(getQuerySettings())
+		query.start(get_query_settings())
 	} catch (error) {
-		Frog.event_emitter.emit("queryError", { error })
+		EventEmitter.emit(
+			new Event(
+				"queryError"
+			)
+		)
 
 		Logger.error(
-			Language.get_key("query.listening.failed")
-				.replace(
-					"%s",
-					error.stack
-				)
+			Language.get_key("query.server.listening.failed", [ error.stack ])
 		)
 	}
 }
@@ -310,13 +319,13 @@ module.exports = {
 	 * @async
 	 */
 	async start() {
-		await initializeServer()
+		await initialize_server()
 		await listen()
 
 		if (Frog.config.query.enabled) {
-			startQueryServer()
+			start_query_server()
 		}
 
-		startWorldTicking()
+		start_world_ticking()
 	},
 }

@@ -16,7 +16,10 @@
   },
   "dependencies": {
     "@greenfrog/lang-parser": "1.0.6",
+    "@greenfrog/mc-enums": "^0.1.1",
     "@harmonytf/smart-buffer": "4.2.4",
+    "@kotinash/better-events": "^1.0.3",
+    "perlin-noise": "github:kotinash/perlin-noise",
     "frog-protocol": "github:GreenFrogMCBE/protocol",
     "js-yaml": "4.1.0",
     "moment": "2.30.1",
@@ -25,7 +28,7 @@
   "devDependencies": {
     "eslint": "8.56.0",
     "minecraft-server-util": "github:GreenFrogMCBE/minecraft-server-util-compiled",
-    "mocha": "10.3.0",
+    "mocha": "10.2.0",
     "nodemon": "3.0.2"
   }
 }

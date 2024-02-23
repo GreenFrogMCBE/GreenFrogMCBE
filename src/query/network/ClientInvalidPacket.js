@@ -25,7 +25,7 @@ const QueryLogger = require("../utils/QueryLogger")
 const QueryPacket = require("./types/QueryPacket")
 
 class ClientInvalidPacket extends Packet {
-	packetId = QueryPacket.INVALID
+	packet_id = QueryPacket.INVALID
 
 	/**
 	 * @param {import("dgram").RemoteInfo} client

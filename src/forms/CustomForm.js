@@ -15,8 +15,7 @@
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket")
 
-const Action = require("./types/Action")
-const Form = require("./types/Form")
+const { Action, FormType } = require("@greenfrog/mc-enums")
 
 class CustomForm {
 	constructor() {
@@ -43,7 +42,7 @@ class CustomForm {
 		/**
 		 * @type {function}
 		 */
-		this.onSend = () => { }
+		this.on_send = () => { }
 	}
 
 	/**
@@ -51,7 +50,7 @@ class CustomForm {
 	 *
 	 * @param {import("Frog").FormAction} action
 	 */
-	addAction(action) {
+	add_action(action) {
 		this.actions.push(action)
 	}
 
@@ -61,8 +60,8 @@ class CustomForm {
 	 * @param {string} text
 	 * @param {string} [placeholder]
 	 */
-	addInput(text, placeholder = "") {
-		this.addAction({ type: Action.INPUT, text, placeholder })
+	add_input(text, placeholder = "") {
+		this.add_action({ type: Action.Input, text, placeholder })
 	}
 
 	/**
@@ -70,8 +69,8 @@ class CustomForm {
 	 *
 	 * @param {string} text
 	 */
-	addText(text) {
-		this.addAction({ type: Action.LABEL, text })
+	add_text(text) {
+		this.add_action({ type: Action.Label, text })
 	}
 
 	/**
@@ -80,8 +79,8 @@ class CustomForm {
 	 * @param {string} text
 	 * @param {string[]} options
 	 */
-	addDropdown(text, options) {
-		this.addAction({ type: Action.DROPDOWN, text, options })
+	add_dropdown(text, options) {
+		this.add_action({ type: Action.Dropdown, text, options })
 	}
 
 	/**
@@ -89,8 +88,8 @@ class CustomForm {
 	 *
 	 * @param {string} text
 	 */
-	addToggle(text) {
-		this.addAction({ type: Action.TOGGLE, text })
+	add_toggle(text) {
+		this.add_action({ type: Action.Toggle, text })
 	}
 
 	/**
@@ -101,8 +100,8 @@ class CustomForm {
 	 * @param {number} max
 	 * @param {number} [step]
 	 */
-	addSlider(text, min, max, step = -1) {
-		this.addAction({ type: Action.SLIDER, text, min, max, step })
+	add_slider(text, min, max, step = -1) {
+		this.add_action({ type: Action.Slider, text, min, max, step })
 	}
 
 	/**
@@ -111,15 +110,15 @@ class CustomForm {
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
-		const formRequestPacket = new ServerFormRequestPacket()
-		formRequestPacket.id = this.id
-		formRequestPacket.title = this.title
-		formRequestPacket.content = this.actions
-		formRequestPacket.buttons = this.buttons
-		formRequestPacket.type = Form.CUSTOM_FORM
-		formRequestPacket.write_packet(player)
+		const form_request_packet = new ServerFormRequestPacket()
+		form_request_packet.id = this.id
+		form_request_packet.title = this.title
+		form_request_packet.content = this.actions
+		form_request_packet.buttons = this.buttons
+		form_request_packet.type = FormType.Custom
+		form_request_packet.write_packet(player)
 
-		this.onSend(this, player)
+		this.on_send(this, player)
 	}
 }
 

@@ -20,12 +20,11 @@ const ConsoleCommandSender = require("./server/ConsoleCommandSender")
 
 const { get_key } = require("./utils/Language")
 
+const Language = require("./utils/Language")
 const Logger = require("./utils/Logger")
 
-const langParser = require("@kotinash/lang-parser")
-const events = require("events")
+const { EventEmitter, Event } = require("@kotinash/better-events")
 const yaml = require("js-yaml")
-const path = require("path")
 const fs = require("fs")
 
 /**
@@ -34,22 +33,7 @@ const fs = require("fs")
  * @returns {import("Frog").Config}
  */
 function get_config() {
-	const config_data = yaml.load(fs.readFileSync("config.yml", "utf8"))
-
-	return config_data
-}
-
-/**
- * Returns the language file
- *
- * @returns {import("Frog").Language}
- */
-function get_lang() {
-	const langFilePath = path.join(__dirname, `lang/${get_config().chat.lang}.lang`)
-	const langFileContent = fs.readFileSync(langFilePath, "utf8")
-	const lang = langParser.parseRaw(langFileContent)
-	
-	return lang
+	return yaml.load(fs.readFileSync("config.yml"), "utf8")
 }
 
 let server
@@ -67,7 +51,7 @@ module.exports = {
 	 *
 	 * @returns {import("Frog").Language}
 	 */
-	lang: get_lang(),
+	lang: Language.get_language(get_config().chat.lang),
 
 	/**
 	 * Returns if the server is in debug mode
@@ -84,24 +68,15 @@ module.exports = {
 	server,
 
 	/**
-	 * Returns the event emitter for plugins
-	 * to listen for, and for server to execute
-	 * events
-	 *
-	 * @type {import("Frog").EventEmitter}
-	 */
-	event_emitter: new events(),
-
-	/**
 	 * Returns the release data
 	 *
 	 * @type {import("Frog").ReleaseData}
 	 */
-	releaseData: {
-		minorServerVersion: "3.9",
-		majorServerVersion: "3.0",
-		versionDescription: "Updated to 1.20.50",
-		apiVersion: "3.0",
+	release_data: {
+		minor_server_version: "3.9",
+		major_server_version: "3.0",
+		version_description: "Updated to 1.20.50",
+		api_version: "3.0",
 	},
 
 	/**
@@ -126,7 +101,7 @@ module.exports = {
 
 	/**
 	 * Paths to files and folders
-	 * 
+	 *
 	 * @type {import("Frog").Directories}
 	 */
 	directories: {
@@ -154,39 +129,30 @@ module.exports = {
 	/**
 	 * Shutdowns the server
 	 *
-	 * @param {string} shutdownMessage
+	 * @param {string} shutdown_message
 	 * @async
 	 */
-	async shutdown_server(shutdownMessage = get_key("kickMessages.serverClosed")) {
-		let shouldShutdown = true
-
-		this.event_emitter.emit("serverShutdown", {
-			cancel: () => {
-				shouldShutdown = false
-			},
-		})
-
-		if (!shouldShutdown) return
-
-		Logger.info(get_key("server.shuttingDown"))
+	async shutdown_server(shutdown_message = get_key("kickMessages.serverClosed")) {
+		EventEmitter.emit(
+			new Event(
+				"serverShutdown",
+				{
+					shutdown_message
+				}
+			),
+			false
+		)
 
 		// Shutdown the bedrock-protocol server and disconnect all clients
-		this.server.close(shutdownMessage)
+		this.server.close(shutdown_message)
 
 		// Prevent the usage of the console when the server is shutting down
 		ConsoleCommandSender.closed = true
 
 		// Unload (disable) all plugins
-		await PluginLoader.unloadPlugins()
+		await PluginLoader.unload_plugins()
 
 		// And finally, exit the process
-		process.exit(this.config.dev.exitCodes.successful)
-	},
-
-	/**
-	 * Crashes the server
-	 */
-	crash() {
-		process.exit(this.config.dev.exitCodes.crash)
-	},
+		process.exit(this.config.dev.exit_codes.successful)
+	}
 }

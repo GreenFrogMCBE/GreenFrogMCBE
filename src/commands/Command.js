@@ -21,11 +21,11 @@ class Command {
 	/** @type {string | undefined} */
 	description
 	/** @type {number | undefined} */
-	minArgs
+	min_args
 	/** @type {number | undefined} */
-	maxArgs
+	max_args
 	/** @type {boolean | undefined} */
-	requiresOp
+	requires_op
 	/** @type {string[] | undefined} */
 	aliases
 	/** @type {import('Frog').CommandParameters} */

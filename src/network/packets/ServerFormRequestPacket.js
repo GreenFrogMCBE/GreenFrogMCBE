@@ -24,7 +24,7 @@ class ServerFormRequestPacket extends Packet {
 	id
 	/** @type {string | undefined} */
 	content
-	/** @type {string | undefined} */
+	/** @type {import("Frog").FormButton[]} */
 	buttons
 	/** @type {string | undefined} */
 	title

@@ -13,9 +13,9 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog")
-
 const Packet = require("./Packet")
+
+const { EventEmitter, Event } = require("@kotinash/better-events")
 
 class ClientPlayerAuthInputPacket extends Packet {
 	name = "player_auth_input"
@@ -31,33 +31,33 @@ class ClientPlayerAuthInputPacket extends Packet {
 
 		if (player.location.x === x && player.location.y === fixedY && player.location.z === z) return
 
-		let shouldSetPosition = true
+		EventEmitter.emit(
+			new Event(
+				"playerMove",
+				{
+					player,
+					x,
+					y: fixedY,
+					z,
+					pitch,
+					yaw,
+					on_ground: player.location.on_ground,
+				},
+				(() => {
+					player.world.handle_fall_damage(player, { x, y, z })
 
-		Frog.event_emitter.emit("playerMove", {
-			player,
-			x,
-			y: fixedY,
-			z,
-			pitch,
-			yaw,
-			onGround: player.location.onGround,
-			cancel: () => {
-				player.teleport(player.location.x, y, player.location.z)
-
-				shouldSetPosition = false
-			},
-		})
-
-		if (!shouldSetPosition) return
-
-		player.world.handle_fall_damage(player, { x, y, z })
-
-		player.location.x = x
-		player.location.y = fixedY
-		player.location.z = z
-		player.location.yaw = yaw
-		player.location.pitch = pitch
-		player.location.onGround = false
+					player.location.x = x
+					player.location.y = fixedY
+					player.location.z = z
+					player.location.yaw = yaw
+					player.location.pitch = pitch
+					player.location.on_ground = false
+				}),
+				(() => {
+					player.teleport(player.location.x, y, player.location.z)
+				})
+			)
+		)
 	}
 }
 

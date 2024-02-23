@@ -15,6 +15,6 @@
  */
 module.exports = /** @type {const} */ ({
 	NORMAL: "normal",
-	PLUGIN: "plugin",
-	UNKNOWN: "unknown",
+	Plugin: "plugin",
+	Unknown: "unknown",
 })

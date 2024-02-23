@@ -13,17 +13,15 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const vanillaBlocks = require("../../block/vanillaBlocks.json")
-
-const WorldGenerator = require("../types/WorldGenerator")
+const { WorldGenerationType, Grass, Air, Bedrock, Dirt} = require("@greenfrog/mc-enums")
 
 const Generator = require("./Generator")
 
 class Flat extends Generator {
-	name = WorldGenerator.FLAT
+	name = WorldGenerationType.Flat
 
 	get_chunk_data() {
-		const chunkData = Buffer.alloc(16 * 256 * 16)
+		const chunk_data = Buffer.alloc(16 * 256 * 16)
 
 		for (let x = 0; x < 16; x++) {
 			for (let y = 0; y < 256; y++) {
@@ -31,19 +29,19 @@ class Flat extends Generator {
 					const index = y * 16 * 16 + z * 16 + x
 
 					if (x > 14 && y > -1 && y < 16) {
-						chunkData[index] = vanillaBlocks.grass.legacy_id
+						chunk_data[index] = new Grass().id
 					} else if (y < 18 && x < 11) {
-						chunkData[index] = vanillaBlocks.air.legacy_id
+						chunk_data[index] = new Air().id
 					} else if (y < 17 && x < 12) {
-						chunkData[index] = vanillaBlocks.bedrock.legacy_id
+						chunk_data[index] = new Bedrock().id
 					} else {
-						chunkData[index] = vanillaBlocks.dirt.legacy_id
+						chunk_data[index] = new Dirt().id
 					}
 				}
 			}
 		}
 
-		return chunkData
+		return chunk_data
 	}
 }
 

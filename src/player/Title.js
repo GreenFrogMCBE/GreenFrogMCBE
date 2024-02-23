@@ -26,11 +26,11 @@ class Title {
 		/** @type {string} */
 		this.text
 		/** @type {number} */
-		this.fadeInTime = 20
+		this.fade_in_time = 20
 		/** @type {number} */
-		this.stayTime = 20
+		this.stay_time = 20
 		/** @type {number} */
-		this.fadeOutTime = 20
+		this.fade_out_time = 20
 	}
 
 	/**
@@ -39,27 +39,27 @@ class Title {
 	 * @param {import("Frog").Player} client The client to send the title to
 	 */
 	send(client) {
-		let shouldSendTitle = true
+		let should_send_title = true
 
 		Frog.event_emitter.emit("serverTitle", {
-			fadeInTime: this.fadeInTime,
-			fadeOutTime: this.fadeOutTime,
-			stayTime: this.stayTime,
+			fade_in_time: this.fade_in_time,
+			fade_out_time: this.fade_out_time,
+			stay_time: this.stay_time,
 			text: this.text,
 			type: this.type,
 			cancel: () => {
-				shouldSendTitle = false
+				should_send_title = false
 			},
 		})
 
-		if (!shouldSendTitle) return
+		if (!should_send_title) return
 
 		const titlePacket = new ServerSetTitlePacket()
-		titlePacket.fade_in_time = this.fadeInTime
-		titlePacket.stay_time = this.stayTime
+		titlePacket.fade_in_time = this.fade_in_time
+		titlePacket.stay_time = this.stay_time
 		titlePacket.text = this.text
 		titlePacket.type = this.type
-		titlePacket.fade_out_time = this.fadeOutTime
+		titlePacket.fade_out_time = this.fade_out_time
 		titlePacket.xuid = ""
 		titlePacket.platform_online_id = ""
 		titlePacket.write_packet(client)

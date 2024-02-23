@@ -15,7 +15,7 @@
  */
 const ServerFormRequestPacket = require("../network/packets/ServerFormRequestPacket")
 
-const FormVariant = require("./types/Form")
+const { FormVariant } = require("@greenfrog/mc-enums")
 
 class Form {
 	constructor() {
@@ -38,7 +38,7 @@ class Form {
 		 * @param {import("Frog").Player} client
 		 */
 		// eslint-disable-next-line no-unused-vars
-		this.onSend = (form, client) => { }
+		this.on_send = (form, client) => { }
 
 		/**
 		 * The ID of the form.
@@ -55,19 +55,19 @@ class Form {
 
 	/**
 	 * Sends the form to the player.
-	 * 
+	 *
 	 * @param {import("Frog").Player} player
 	 */
 	send(player) {
-		const formRequestPacket = new ServerFormRequestPacket()
-		formRequestPacket.id = this.id
-		formRequestPacket.title = this.title
-		formRequestPacket.content = this.content
-		formRequestPacket.buttons = this.buttons
-		formRequestPacket.type = FormVariant.FORM
-		formRequestPacket.write_packet(player)
+		const form_request_packet = new ServerFormRequestPacket()
+		form_request_packet.id = this.id
+		form_request_packet.title = this.title
+		form_request_packet.content = this.content
+		form_request_packet.buttons = this.buttons
+		form_request_packet.type = FormVariant.Default
+		form_request_packet.write_packet(player)
 
-		this.onSend(this, player)
+		this.on_send(this, player)
 	}
 }
 

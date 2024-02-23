@@ -28,7 +28,7 @@
       "name": "recipesunlock",
       "editable": true,
       "type": "bool",
-      "value": false
+      "value": true
     },
     {
       "name": "dolimitedcrafting",
@@ -100,7 +100,7 @@
       "name": "showcoordinates",
       "editable": true,
       "type": "bool",
-      "value": true
+      "value": false
     },
     {
       "name": "naturalregeneration",
@@ -166,7 +166,7 @@
       "name": "spawnradius",
       "editable": true,
       "type": "int",
-      "value": 5
+      "value": 10
     },
     {
       "name": "showtags",
@@ -193,10 +193,22 @@
       "value": true
     },
     {
+      "name": "showrecipemessages",
+      "editable": true,
+      "type": "bool",
+      "value": true
+    },
+    {
       "name": "playerssleepingpercentage",
       "editable": true,
       "type": "int",
       "value": 100
+    },
+    {
+      "name": "projectilescanbreakblocks",
+      "editable": true,
+      "type": "bool",
+      "value": true
     }
   ]
 }

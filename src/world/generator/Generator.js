@@ -13,7 +13,7 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog")
+const {EventEmitter,Event} = require("@kotinash/better-events")
 
 const ServerLevelChunkPacket = require("../../network/packets/ServerLevelChunkPacket")
 
@@ -34,16 +34,14 @@ class Generator {
 	 * @param {import("Frog").Player} player
 	 */
 	generate(player) {
-		let should_generate_world = true
-
-		Frog.event_emitter.emit("worldGenerate", {
-			player,
-			cancel() {
-				should_generate_world = false
-			}
-		})
-
-		if (!should_generate_world) return
+		EventEmitter.emit(
+			new Event(
+				"worldGenerate",
+				{
+					world: this
+				}
+			)
+		)
 
 		const chunk_radius = player.world.render_distance
 

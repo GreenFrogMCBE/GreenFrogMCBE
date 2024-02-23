@@ -13,9 +13,9 @@
  * @link Github - https://github.com/GreenFrogMCBE/GreenFrogMCBE
  * @link Discord - https://discord.gg/UFqrnAbqjP
  */
-const Frog = require("../../Frog")
-
 const Packet = require("./Packet")
+
+const { EventEmitter, Event } = require("@kotinash/better-events");
 
 class ClientMovePacket extends Packet {
 	name = "move_player"
@@ -27,28 +27,24 @@ class ClientMovePacket extends Packet {
 	async read_packet(player, packet) {
 		const { x, y, z } = packet.data.params.position
 		const { pitch, yaw, on_ground } = packet.data.params
-		const fixedY = y - 2
 
-		if (player.location.x === x && player.location.y === fixedY && player.location.z === z && player.location.yaw === yaw && player.location.pitch === pitch) return
-
-		let shouldSetPosition = true
-
-		Frog.event_emitter.emit("playerMove", {
-			player,
-			x,
-			y: fixedY,
-			z,
-			pitch,
-			yaw,
-			onGround: player.location.onGround,
-			cancel: () => {
-				player.teleport(player.location.x, y, player.location.z)
-
-				shouldSetPosition = false
-			},
-		})
-
-		if (!shouldSetPosition) return
+		EventEmitter.emit(
+			new Event(
+				"playerMove",
+				{
+					player,
+					x,
+					y,
+					z,
+					pitch,
+					yaw,
+					on_ground: player.location.on_ground,
+				},
+				() => {
+					player.teleport(player.location.x, y, player.location.z)
+				}
+			)
+		)
 
 		player.world.handle_fall_damage(player, { x, y, z })
 
@@ -57,7 +53,7 @@ class ClientMovePacket extends Packet {
 		player.location.z = z
 		player.location.yaw = yaw
 		player.location.pitch = pitch
-		player.location.onGround = on_ground
+		player.location.on_ground = on_ground
 	}
 }
 

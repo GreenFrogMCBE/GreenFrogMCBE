@@ -16,6 +16,8 @@
 const fs = require("fs")
 const path = require("path")
 
+const {EventEmitter,Event} = require("@kotinash/better-events")
+
 module.exports = {
 	/**
 	 * The array list of commands
@@ -28,19 +30,18 @@ module.exports = {
 	 * Loads all commands
 	 */
 	async load_commands() {
-		const Frog = require("../Frog")
-		const commandsPath = path.join(__dirname, "..", "commands")
+		const folder_path = path.join(__dirname, "..", "commands")
 
-		fs.readdir(commandsPath, (err, files) => {
+		fs.readdir(folder_path, (err, files) => {
 			for (const file of files) {
-				const filePath = path.join(commandsPath, file)
-				const stats = fs.statSync(filePath)
+				const file_path = path.join(folder_path, file)
+				const stats = fs.statSync(file_path)
 
 				if (!stats.isFile()) {
 					continue
 				}
 
-				const command = require(filePath)
+				const command = require(file_path)
 				const command_class = new command()
 
 				if (command_class.name) {
@@ -48,7 +49,7 @@ module.exports = {
 				}
 			}
 
-			Frog.event_emitter.emit("serverCommandsInitialize")
+			EventEmitter.emit(new Event("serverCommandsInitialized"))
 		})
 	},
 }

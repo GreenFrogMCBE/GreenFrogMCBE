@@ -17,6 +17,8 @@ const Command = require("./Command")
 
 const Frog = require("../Frog")
 
+const {ArgumentType} = require("@greenfrog/mc-enums")
+
 const { get_key } = require("../utils/Language")
 
 /**
@@ -25,11 +27,11 @@ const { get_key } = require("../utils/Language")
 class CommandMe extends Command {
 	name = get_key("commands.me.name")
 	description = get_key("commands.me.description")
-	minArgs = 1
+	min_args = 1
 	args = [
 		{
 			name: "message",
-			type: "string",
+			type: ArgumentType.String,
 			optional: false
 		}
 	]
@@ -40,11 +42,14 @@ class CommandMe extends Command {
 	 * @param {string[]} args
 	 */
 	execute(player, server, args) {
-		const message = get_key("chat.format.me")
-			.replace("%s", player.username)
-			.replace("%d", args.join(" "))
-
-		Frog.broadcast_message(message)
+		Frog.broadcast_message(
+			get_key("chat.format.me",
+				[
+					player.username,
+					args.join(" ")
+				]
+			)
+		)
 	}
 }
 

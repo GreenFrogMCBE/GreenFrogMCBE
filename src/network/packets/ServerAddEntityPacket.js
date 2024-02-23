@@ -18,9 +18,9 @@ const Packet = require("./Packet")
 class ServerAddEntityPacket extends Packet {
 	name = "add_entity"
 
-	/** @type {number | undefined} */
+	/** @type {string} */
 	unique_id
-	/** @type {number | undefined} */
+	/** @type {string} */
 	runtime_id
 	/** @type {string | undefined} */
 	entity_type

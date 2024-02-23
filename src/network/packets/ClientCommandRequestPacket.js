@@ -16,7 +16,9 @@
 const Frog = require("../../Frog")
 
 const Logger = require("../../utils/Logger")
+
 const CommandManager = require("../../server/CommandManager")
+
 const CommandVerifier = require("../../utils/CommandVerifier")
 
 const Packet = require("./Packet")
@@ -71,18 +73,18 @@ class ClientCommandRequestPacket extends Packet {
 
 			for (const command of CommandManager.commands) {
 				if (command.name === executed_command.split(" ")[0] || (command.aliases && command.aliases.includes(executed_command.split(" ")[0]))) {
-					if (command.requiresOp && !player.permissions.op) {
+					if (command.requires_op && !player.permissions.op) {
 						CommandVerifier.throw_error(player, executed_command.split(" ")[0])
 						return
 					}
 
-					if (command.minArgs !== undefined && command.minArgs > args.length) {
-						player.send_message(get_key("commands.errors.syntaxError.minArg").replace("%s", command.minArgs).replace("%d", args.length))
+					if (command.min_args !== undefined && command.min_args > args.length) {
+						player.send_message(get_key("commands.errors.syntaxError.minArg").replace("%s", command.min_args).replace("%d", args.length))
 						return
 					}
 
-					if (command.maxArgs !== undefined && command.maxArgs < args.length) {
-						player.send_message(get_key("commands.errors.syntaxError.maxArg").replace("%s", command.maxArgs).replace("%d", args.length))
+					if (command.max_args !== undefined && command.max_args < args.length) {
+						player.send_message(get_key("commands.errors.syntaxError.maxArg").replace("%s", command.max_args).replace("%d", args.length))
 						return
 					}
 
