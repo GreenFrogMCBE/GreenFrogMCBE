@@ -18,11 +18,9 @@ const Frog = require("../Frog")
 const ServerToastRequestPacket = require("../network/packets/ServerToastRequestPacket")
 
 class Toast {
-	constructor() {
-		/** @type {string} */
-		this.title
-		/** @type {string} */
-		this.message
+	constructor(title, message) {
+		this.title = title
+		this.message = message
 	}
 
 	/**
